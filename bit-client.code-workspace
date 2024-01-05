@@ -1,0 +1,21 @@
+{
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        "files.exclude": {
+            "**/*.meta": true,
+            "library": true,
+            "extensions": true
+        },
+        "prettier.tabWidth": 4,
+        "prettier.printWidth": 100,
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "[jsonc]": {
+            "editor.defaultFormatter": "vscode.json-language-features"
+        }
+    }
+}

@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package bag;
+
+message Item {
+    uint32 id = 1; // 物品表id
+    uint32 uid = 2; // 物品唯一id
+    uint32 num = 3; // 数量
+    uint32 expire_ts = 4; // 过期时间戳(秒)
+}
+
+// 加载背包
+message c2s_load {
+    uint32 bag_id = 1;
+} 
+message s2c_load {
+    uint32 err = 1; // OK, INVALID_ID
+    repeated Item items = 2;
+}
+
+// 使用物品
+message c2s_use_item {
+    uint32 item_id = 1;
+    uint32 num = 2;
+}
+message s2c_use_item {
+    uint32 err = 1; // OK, INVALID_ID, ITEM_NOT_ENOUGH
+}
+
+// 合成物品
+message c2s_composite_item {
+    uint32 item_id = 1;
+    uint32 num = 2;
+}
+message s2c_composite_item {
+    uint32 err = 1; // OK, INVALID_ID, ITEM_NOT_ENOUGH
+}
+
+// 丢弃物品(优先取item_uid)
+message c2s_discard_item {
+    uint32 item_id = 1;
+    uint32 item_uid = 2;
+}
+message s2c_discard_item {
+    uint32 err = 1; // OK, INVALID_ID
+}
+
+// 通知物品变化, 如果uid是不存在表示这是个新物品, 如果num是0则表示删除这个物品
+message notify_items {
+    uint32 bag_id = 1;
+    repeated Item items = 2;
+}

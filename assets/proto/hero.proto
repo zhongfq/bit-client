@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package hero;
+
+message Hero {
+    uint32 uid = 1; // 英雄唯一id
+    uint32 id = 2; // 英雄id
+}
+
+message c2s_load {
+} 
+message s2c_load {
+    uint32 err = 1; // OK, INVALID_ID
+    repeated Hero hero_list = 2;
+}

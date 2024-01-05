@@ -1,0 +1,195 @@
+syntax = "proto3";
+
+// 大地图协议
+package world;
+
+// 约定结构
+// id 特指单位的唯一id
+
+// 玩家基本信息
+message Role {
+    uint32 rid = 1;
+    string name = 2;
+    uint32 aid = 3;
+}
+
+// 同盟基本信息
+message Alliance {
+  uint32 aid = 1;
+  string name = 3;
+}
+
+message ComponentTeam {
+    uint32 soldier_id = 1; // 士兵id
+    uint32 cmd = 2; // 当前执行指令
+    uint32 stay_eid = 4; // 当前所处建筑
+    uint32 home_eid = 5; // 归属建筑
+};
+
+message ComponentOwner {
+    uint32 rid = 1;
+    uint32 aid = 2;
+    uint32 eid = 4;
+}
+
+message Timer {
+    uint32 type = 1;
+    uint32 start = 2; // 开始时间戳(ms)
+    uint32 expire = 3; // 结束时间戳(ms)
+}
+message ComponentTimer {
+    map<uint32, Timer> timers = 1;
+}
+
+message ComponentMove {
+    uint32 start_ms = 1;
+    repeated uint32 path = 2;
+    float speed = 3; // 每秒多少格
+}
+
+message ComponentBuilding {
+    uint32 bid = 1; // 建筑id
+    uint32 hp = 2; // 当前耐久
+    uint32 max_hp = 3; // 最大耐久
+    uint32 auto_hp_ms = 4; // 上次自动回复时间戳
+    int32 auto_hp = 5; // 自动回复耐久值(可以为负)
+    uint32 auto_hp_inr = 6; // 自动回复耐久间隔
+    string name = 9; // 自定义名字
+}
+
+// 单位定义
+message Entity {
+    uint32 eid = 1;
+    uint32 etype = 2;
+
+    uint32 pos = 3;
+    uint32 state = 4;
+    uint32 order = 5; // 层级
+    ComponentTimer timer = 12;
+    ComponentMove move = 13;
+    ComponentBuilding building = 14;
+    ComponentOwner owner = 15;
+    ComponentTeam team = 16;
+}
+
+// 大地图基础信息
+message c2s_load {
+}
+message s2c_load {
+    uint32 err = 1;
+    uint32 my_castle_eid = 2; // 我的主城id
+    uint32 my_castle_pos = 3; // 我的主城位置
+}
+
+// 客户端视口变更
+message c2s_change_viewport {
+    uint32 pos = 2; // 视口中心点坐标，每格的大小在config/world.lua中配置
+}
+message s2c_change_viewport {
+    uint32 err = 1;
+}
+
+message c2s_giveup {
+    uint32 eid = 1;
+}
+message s2c_giveup {
+    uint32 err = 1;
+}
+
+message c2s_cancel_giveup {
+    int64 eid = 1;
+}
+message s2c_cancel_giveup {
+    uint32 err = 1;
+}
+
+message c2s_load_detect_info {
+    uint32 pos = 1;
+}
+message s2c_load_detect_info {
+    uint32 err = 1;
+    uint32 dungeon_id = 2; // 副本id
+    uint32 alive_count = 3; // 存活队伍数量
+}
+
+message c2s_team_move {
+    uint32 team_eid = 1;
+    uint32 dst_pos = 2;
+}
+message s2c_team_move {
+    uint32 err = 1;
+}
+
+message c2s_team_stop {
+    uint32 team_eid = 1;
+}
+message s2c_team_stop {
+    uint32 err = 1;
+}
+
+message c2s_team_retreat {
+    uint32 team_eid = 1;
+}
+message s2c_team_retreat {
+    uint32 err = 1;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 服务主动推送
+// 同一帧内，发送的顺序为: notify_alliances -> notify_roles -> notify_entities
+
+message notify_alliances {
+    repeated Alliance alliances = 1;
+}
+
+message notify_roles {
+    repeated Role roles = 1;
+}
+
+message AddEntityAction {
+    Entity entity = 1;
+}
+message DelEntityAction {
+    int64 eid = 1;
+}
+message MoveAction {
+    int64 eid = 1;
+    repeated uint32 path = 2;
+    uint32 speed = 3;
+    uint32 start_ms = 4;
+}
+message EntityAction {
+    uint32 action = 1;
+
+    AddEntityAction add_entity = 10;
+    DelEntityAction del_entity = 11;
+    MoveAction move = 12;
+}
+
+// 单位同步(最基层)
+message notify_entities {
+    repeated Entity enter_list = 3; // 进入视野
+    repeated uint32 leave_list = 4; // 离开视野
+}
+
+// 同步单位行动
+message notify_actions {
+    repeated EntityAction actions = 1;    
+}
+
+
+// 同步战斗结果
+message notify_war_result {
+    uint32 src_eid = 1; // 进攻方id
+    uint32 dst_eid = 2; // 防守方id
+    uint32 result = 3; // config/world.lua WarResult
+}
+
+// 同步占据结果
+message notify_occupy_result {
+    uint32 type = 1; // config/world.lua OccupyType
+    uint32 aid = 2; // 同盟id
+    uint32 bid = 3; // 建筑id
+    uint32 eid = 4; // 系统城eid
+}
+

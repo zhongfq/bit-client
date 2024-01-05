@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+
+package notify;
+
+// 道具变更通知
+// message bag {
+//     uint32 err = 1;
+//     repeated bag.Item items = 2;
+// }

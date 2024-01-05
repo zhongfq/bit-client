@@ -1,0 +1,217 @@
+{
+    "10101": {
+        "args": [
+            [
+                10201,
+                10
+            ],
+            [
+                10202,
+                5
+            ]
+        ],
+        "bag_type": 1,
+        "desc": "这是宝箱1",
+        "discard": 1,
+        "icon": "icon1",
+        "id": 10101,
+        "main_type": 1,
+        "name": "宝箱1",
+        "quality": 1,
+        "stack": 1,
+        "sub_type": 1,
+        "use": 1
+    },
+    "10102": {
+        "args": [
+            [
+                10201,
+                10
+            ],
+            [
+                10202,
+                6
+            ]
+        ],
+        "bag_type": 1,
+        "desc": "这是宝箱2",
+        "discard": 1,
+        "icon": "icon2",
+        "id": 10102,
+        "main_type": 1,
+        "name": "宝箱2",
+        "quality": 2,
+        "stack": 1,
+        "sub_type": 1,
+        "use": 1
+    },
+    "10103": {
+        "args": [
+            [
+                10201,
+                10
+            ],
+            [
+                10202,
+                7
+            ]
+        ],
+        "bag_type": 1,
+        "desc": "这是宝箱3",
+        "discard": 1,
+        "icon": "icon3",
+        "id": 10103,
+        "main_type": 1,
+        "name": "宝箱3",
+        "quality": 3,
+        "stack": 1,
+        "sub_type": 1,
+        "use": 1
+    },
+    "10104": {
+        "args": [
+            [
+                10201,
+                10
+            ],
+            [
+                10202,
+                8
+            ]
+        ],
+        "bag_type": 1,
+        "desc": "这是宝箱4",
+        "discard": 1,
+        "expired": 10,
+        "icon": "icon4",
+        "id": 10104,
+        "main_type": 1,
+        "name": "宝箱4",
+        "quality": 4,
+        "stack": 1,
+        "sub_type": 1,
+        "use": 1
+    },
+    "10201": {
+        "args": {
+            "exp": 100
+        },
+        "bag_type": 1,
+        "desc": "这是初级经验丹",
+        "discard": 1,
+        "icon": "icon5",
+        "id": 10201,
+        "main_type": 1,
+        "name": "初级经验丹",
+        "quality": 1,
+        "stack": 1,
+        "sub_type": 2,
+        "use": 1
+    },
+    "10202": {
+        "args": {
+            "exp": 101
+        },
+        "bag_type": 1,
+        "desc": "这是中级经验丹",
+        "discard": 1,
+        "icon": "icon6",
+        "id": 10202,
+        "main_type": 1,
+        "name": "中级经验丹",
+        "quality": 2,
+        "stack": 1,
+        "sub_type": 2,
+        "use": 1
+    },
+    "10203": {
+        "args": {
+            "exp": 102
+        },
+        "bag_type": 1,
+        "desc": "这是高级经验丹",
+        "discard": 1,
+        "icon": "icon7",
+        "id": 10203,
+        "main_type": 1,
+        "name": "高级经验丹",
+        "quality": 3,
+        "stack": 1,
+        "sub_type": 2,
+        "use": 1
+    },
+    "20501": {
+        "bag_type": 1,
+        "desc": "这是改名卡",
+        "discard": 1,
+        "icon": "icon10",
+        "id": 20501,
+        "main_type": 2,
+        "name": "改名卡",
+        "quality": 1,
+        "stack": 1,
+        "sub_type": 5,
+        "use": 1
+    },
+    "20601": {
+        "bag_type": 1,
+        "composite": 1,
+        "desc": "这是初级材料",
+        "discard": 1,
+        "icon": "icon11",
+        "id": 20601,
+        "main_type": 2,
+        "name": "初级材料",
+        "quality": 1,
+        "stack": 1,
+        "sub_type": 6
+    },
+    "20602": {
+        "bag_type": 1,
+        "composite": 1,
+        "desc": "这是中级材料",
+        "discard": 1,
+        "icon": "icon12",
+        "id": 20602,
+        "main_type": 2,
+        "name": "中级材料",
+        "quality": 2,
+        "stack": 1,
+        "sub_type": 6
+    },
+    "20603": {
+        "bag_type": 1,
+        "composite": 1,
+        "desc": "这是高级材料",
+        "discard": 1,
+        "icon": "icon13",
+        "id": 20603,
+        "main_type": 2,
+        "name": "高级材料",
+        "quality": 3,
+        "stack": 1,
+        "sub_type": 6
+    },
+    "30301": {
+        "bag_type": 1,
+        "desc": "这是金币",
+        "icon": "icon8",
+        "id": 30301,
+        "main_type": 3,
+        "name": "金币",
+        "quality": 1,
+        "sub_type": 3,
+        "use": 1
+    },
+    "30401": {
+        "bag_type": 1,
+        "desc": "这是钻石",
+        "icon": "icon9",
+        "id": 30401,
+        "main_type": 3,
+        "name": "钻石",
+        "quality": 1,
+        "sub_type": 4,
+        "use": 1
+    }
+}

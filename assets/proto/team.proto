@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package team;
+
+message TeamSlot {
+    uint32 hero_uid = 1; // 英雄唯一id
+    uint32 army = 2; // 兵力
+}
+
+message Team {
+    uint32 idx = 1; // 队伍编号
+    uint32 eid = 2;
+    repeated TeamSlot slots = 3; // 英雄uid，没上阵为0
+    uint32 soldier_id = 4; // 兵种
+}
+
+message c2s_load {
+} 
+message s2c_load {
+    uint32 err = 1; // OK
+    repeated Team team_list = 2;
+}

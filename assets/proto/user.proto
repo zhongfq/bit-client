@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package user;
+
+message UserInfo {
+    string uid = 1;
+}
+
+message RoleInfo {
+    int64 rid = 1; // role unique id 2 ^ 50 以内
+}
+
+message c2s_login {
+    string uid = 1;
+}
+message s2c_login {
+    uint32 err = 1;
+    UserInfo info = 2;
+    RoleInfo role = 3;
+}
+
+message c2s_random_name {
+}
+message s2c_random_name {
+    uint32 err = 1;
+    string name = 2;
+}
+
+message c2s_create_role {
+    string name = 1;
+}
+message s2c_create_role {
+    uint32 err = 1;
+    RoleInfo role = 2;
+}
+
+message c2s_ping {
+}
+message s2c_ping {
+    uint32 err = 1;
+}
+
+message c2s_gm {
+    string cmd = 1;
+}
+message s2c_gm {
+    uint32 err = 1;
+    string msg = 2;
+}
+
+message c2s_rename {
+    string name = 1;
+}
+message s2c_rename {
+    uint32 err = 1; // OK, ITEM_NOT_ENOUGH, ILLEGAL_NAME, DAILY_RENAME_NOT_ENOUGH
+}

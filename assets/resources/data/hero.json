@@ -1,0 +1,127 @@
+{
+    "101": {
+        "attack_range": 100,
+        "enable": 1,
+        "id": 101,
+        "job": 1,
+        "name": "肉盾(徐晃)",
+        "type": 1
+    },
+    "102": {
+        "attack_range": 500,
+        "enable": 1,
+        "id": 102,
+        "job": 2,
+        "name": "法师(周瑜)",
+        "type": 1
+    },
+    "103": {
+        "attack_range": 450,
+        "enable": 1,
+        "id": 103,
+        "job": 3,
+        "name": "辅助(小乔)",
+        "type": 1
+    },
+    "104": {
+        "attack_range": 500,
+        "enable": 1,
+        "id": 104,
+        "job": 4,
+        "name": "远程(夏候渊)",
+        "type": 1
+    },
+    "105": {
+        "attack_range": 120,
+        "enable": 1,
+        "id": 105,
+        "job": 5,
+        "name": "战士(关羽)",
+        "type": 1
+    },
+    "106": {
+        "attack_range": 100,
+        "enable": 1,
+        "id": 106,
+        "job": 1,
+        "name": "战士(周泰)",
+        "type": 1
+    },
+    "107": {
+        "attack_range": 110,
+        "enable": 1,
+        "id": 107,
+        "job": 5,
+        "name": "战士(孙策)",
+        "type": 1
+    },
+    "108": {
+        "attack_range": 450,
+        "enable": 1,
+        "id": 108,
+        "job": 2,
+        "name": "法师(诸葛亮)",
+        "type": 1
+    },
+    "109": {
+        "attack_range": 500,
+        "enable": 1,
+        "id": 109,
+        "job": 4,
+        "name": "远程(黄忠)",
+        "type": 1
+    },
+    "110": {
+        "attack_range": 120,
+        "enable": 1,
+        "id": 110,
+        "job": 2,
+        "name": "战士(魏延)",
+        "type": 1
+    },
+    "111": {
+        "attack_range": 100,
+        "enable": 1,
+        "id": 111,
+        "job": 1,
+        "name": "战士(曹仁)",
+        "type": 1
+    },
+    "112": {
+        "attack_range": 500,
+        "enable": 1,
+        "id": 112,
+        "job": 4,
+        "name": "远程(孙尚香)",
+        "type": 1
+    },
+    "113": {
+        "attack_range": 450,
+        "enable": 1,
+        "id": 113,
+        "job": 3,
+        "name": "远程(蔡文姬)",
+        "type": 1
+    },
+    "301": {
+        "attack_range": 100,
+        "id": 301,
+        "job": 1,
+        "name": "兔子",
+        "type": 2
+    },
+    "302": {
+        "attack_range": 100,
+        "id": 302,
+        "job": 1,
+        "name": "蟹",
+        "type": 2
+    },
+    "401": {
+        "attack_range": 100,
+        "id": 401,
+        "job": 1,
+        "name": "树",
+        "type": 3
+    }
+}

@@ -1,0 +1,68 @@
+{
+    "cmd": {
+        "MOVE_TO": {
+            "cmd": "MOVE_TO",
+            "cost_energy": 15,
+            "icon": "Assets/GameAssets/UI/land_function/land_action/texture/icon/icon_act_move.png",
+            "name": "移动",
+            "priority": 100,
+            "rsp_color_name": "green"
+        },
+        "RETREAT": {
+            "cmd": "RETREAT",
+            "name": "撤退"
+        },
+        "STOP": {
+            "cmd": "STOP",
+            "name": "中止"
+        }
+    },
+    "state": {
+        "FIGHTING": {
+            "state": "FIGHTING"
+        },
+        "IDLE": {
+            "state": "IDLE"
+        },
+        "MOVE": {
+            "state": "MOVE"
+        },
+        "RETREAT": {
+            "peace": 1,
+            "state": "RETREAT"
+        },
+        "STANDBY": {
+            "state": "STANDBY"
+        },
+        "WAITLIST": {
+            "state": "WAITLIST"
+        }
+    },
+    "state2cmd": {
+        "FIGHTING": {
+            "state": "FIGHTING"
+        },
+        "IDLE": {
+            "MOVE_TO": 1,
+            "RETREAT": 1,
+            "state": "IDLE"
+        },
+        "MOVE": {
+            "MOVE_TO": 1,
+            "STOP": 1,
+            "state": "MOVE"
+        },
+        "RETREAT": {
+            "state": "RETREAT"
+        },
+        "STANDBY": {
+            "MOVE_TO": 1,
+            "state": "STANDBY"
+        },
+        "WAITLIST": {
+            "MOVE_TO": 1,
+            "RETREAT": 1,
+            "state": "WAITLIST"
+        }
+    }
+}

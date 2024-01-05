@@ -1,0 +1,491 @@
+{
+    "color": [
+        {
+            "id": 1,
+            "name": "白色"
+        },
+        {
+            "id": 2,
+            "name": "绿色"
+        },
+        {
+            "id": 3,
+            "name": "蓝色"
+        },
+        {
+            "id": 4,
+            "name": "橙色"
+        }
+    ],
+    "conf": {
+        "max_color": 4,
+        "max_level": 4,
+        "max_slot": 12
+    },
+    "items": [
+        {
+            "color": 1,
+            "icon": "equip1",
+            "id": 1,
+            "lv": 1,
+            "name": "装备1",
+            "slot": 1
+        },
+        {
+            "color": 2,
+            "icon": "equip2",
+            "id": 2,
+            "lv": 2,
+            "name": "装备2",
+            "slot": 1
+        },
+        {
+            "color": 3,
+            "icon": "equip1",
+            "id": 3,
+            "lv": 3,
+            "name": "装备3",
+            "slot": 1
+        },
+        {
+            "color": 4,
+            "icon": "equip2",
+            "id": 4,
+            "lv": 4,
+            "name": "装备4",
+            "slot": 1
+        },
+        {
+            "color": 1,
+            "icon": "equip1",
+            "id": 5,
+            "lv": 1,
+            "name": "装备5",
+            "slot": 2
+        },
+        {
+            "color": 2,
+            "icon": "equip2",
+            "id": 6,
+            "lv": 2,
+            "name": "装备6",
+            "slot": 2
+        },
+        {
+            "color": 3,
+            "icon": "equip1",
+            "id": 7,
+            "lv": 3,
+            "name": "装备7",
+            "slot": 2
+        },
+        {
+            "color": 4,
+            "icon": "equip2",
+            "id": 8,
+            "lv": 4,
+            "name": "装备8",
+            "slot": 2
+        },
+        {
+            "color": 1,
+            "icon": "equip1",
+            "id": 9,
+            "lv": 1,
+            "name": "装备9",
+            "slot": 3
+        },
+        {
+            "color": 2,
+            "icon": "equip2",
+            "id": 10,
+            "lv": 2,
+            "name": "装备10",
+            "slot": 3
+        },
+        {
+            "color": 3,
+            "icon": "equip1",
+            "id": 11,
+            "lv": 3,
+            "name": "装备11",
+            "slot": 3
+        },
+        {
+            "color": 4,
+            "icon": "equip2",
+            "id": 12,
+            "lv": 4,
+            "name": "装备12",
+            "slot": 3
+        },
+        {
+            "color": 1,
+            "icon": "equip1",
+            "id": 13,
+            "lv": 1,
+            "name": "装备13",
+            "slot": 4
+        },
+        {
+            "color": 2,
+            "icon": "equip2",
+            "id": 14,
+            "lv": 2,
+            "name": "装备14",
+            "slot": 4
+        },
+        {
+            "color": 3,
+            "icon": "equip1",
+            "id": 15,
+            "lv": 3,
+            "name": "装备15",
+            "slot": 4
+        },
+        {
+            "color": 4,
+            "icon": "equip2",
+            "id": 16,
+            "lv": 4,
+            "name": "装备16",
+            "slot": 4
+        },
+        {
+            "color": 1,
+            "icon": "equip1",
+            "id": 17,
+            "lv": 1,
+            "name": "装备17",
+            "slot": 5
+        },
+        {
+            "color": 2,
+            "icon": "equip2",
+            "id": 18,
+            "lv": 2,
+            "name": "装备18",
+            "slot": 5
+        },
+        {
+            "color": 3,
+            "icon": "equip1",
+            "id": 19,
+            "lv": 3,
+            "name": "装备19",
+            "slot": 5
+        },
+        {
+            "color": 4,
+            "icon": "equip2",
+            "id": 20,
+            "lv": 4,
+            "name": "装备20",
+            "slot": 5
+        },
+        {
+            "color": 1,
+            "icon": "equip1",
+            "id": 21,
+            "lv": 1,
+            "name": "装备21",
+            "slot": 6
+        },
+        {
+            "color": 2,
+            "icon": "equip2",
+            "id": 22,
+            "lv": 2,
+            "name": "装备22",
+            "slot": 6
+        },
+        {
+            "color": 3,
+            "icon": "equip1",
+            "id": 23,
+            "lv": 3,
+            "name": "装备23",
+            "slot": 6
+        },
+        {
+            "color": 4,
+            "icon": "equip2",
+            "id": 24,
+            "lv": 4,
+            "name": "装备24",
+            "slot": 6
+        },
+        {
+            "color": 1,
+            "icon": "equip1",
+            "id": 25,
+            "lv": 1,
+            "name": "装备25",
+            "slot": 7
+        },
+        {
+            "color": 2,
+            "icon": "equip2",
+            "id": 26,
+            "lv": 2,
+            "name": "装备26",
+            "slot": 7
+        },
+        {
+            "color": 3,
+            "icon": "equip1",
+            "id": 27,
+            "lv": 3,
+            "name": "装备27",
+            "slot": 7
+        },
+        {
+            "color": 4,
+            "icon": "equip2",
+            "id": 28,
+            "lv": 4,
+            "name": "装备28",
+            "slot": 7
+        },
+        {
+            "color": 1,
+            "icon": "equip1",
+            "id": 29,
+            "lv": 1,
+            "name": "装备29",
+            "slot": 8
+        },
+        {
+            "color": 2,
+            "icon": "equip2",
+            "id": 30,
+            "lv": 2,
+            "name": "装备30",
+            "slot": 8
+        },
+        {
+            "color": 3,
+            "icon": "equip1",
+            "id": 31,
+            "lv": 3,
+            "name": "装备31",
+            "slot": 8
+        },
+        {
+            "color": 4,
+            "icon": "equip2",
+            "id": 32,
+            "lv": 4,
+            "name": "装备32",
+            "slot": 8
+        },
+        {
+            "color": 1,
+            "icon": "equip1",
+            "id": 33,
+            "lv": 1,
+            "name": "装备33",
+            "slot": 9
+        },
+        {
+            "color": 2,
+            "icon": "equip2",
+            "id": 34,
+            "lv": 2,
+            "name": "装备34",
+            "slot": 9
+        },
+        {
+            "color": 3,
+            "icon": "equip1",
+            "id": 35,
+            "lv": 3,
+            "name": "装备35",
+            "slot": 9
+        },
+        {
+            "color": 4,
+            "icon": "equip2",
+            "id": 36,
+            "lv": 4,
+            "name": "装备36",
+            "slot": 9
+        },
+        {
+            "color": 1,
+            "icon": "equip1",
+            "id": 37,
+            "lv": 1,
+            "name": "装备37",
+            "slot": 10
+        },
+        {
+            "color": 2,
+            "icon": "equip2",
+            "id": 38,
+            "lv": 2,
+            "name": "装备38",
+            "slot": 10
+        },
+        {
+            "color": 3,
+            "icon": "equip1",
+            "id": 39,
+            "lv": 3,
+            "name": "装备39",
+            "slot": 10
+        },
+        {
+            "color": 4,
+            "icon": "equip2",
+            "id": 40,
+            "lv": 4,
+            "name": "装备40",
+            "slot": 10
+        },
+        {
+            "color": 1,
+            "icon": "equip1",
+            "id": 41,
+            "lv": 1,
+            "name": "装备41",
+            "slot": 11
+        },
+        {
+            "color": 2,
+            "icon": "equip2",
+            "id": 42,
+            "lv": 2,
+            "name": "装备42",
+            "slot": 11
+        },
+        {
+            "color": 3,
+            "icon": "equip1",
+            "id": 43,
+            "lv": 3,
+            "name": "装备43",
+            "slot": 11
+        },
+        {
+            "color": 4,
+            "icon": "equip2",
+            "id": 44,
+            "lv": 4,
+            "name": "装备44",
+            "slot": 11
+        },
+        {
+            "color": 1,
+            "icon": "equip1",
+            "id": 45,
+            "lv": 1,
+            "name": "装备45",
+            "slot": 12
+        },
+        {
+            "color": 2,
+            "icon": "equip2",
+            "id": 46,
+            "lv": 2,
+            "name": "装备46",
+            "slot": 12
+        },
+        {
+            "color": 3,
+            "icon": "equip1",
+            "id": 47,
+            "lv": 3,
+            "name": "装备47",
+            "slot": 12
+        },
+        {
+            "color": 4,
+            "icon": "equip2",
+            "id": 48,
+            "lv": 4,
+            "name": "装备48",
+            "slot": 12
+        }
+    ],
+    "level": [
+        {
+            "lv": 1,
+            "name": "1级"
+        },
+        {
+            "lv": 2,
+            "name": "2级"
+        },
+        {
+            "lv": 3,
+            "name": "3级"
+        },
+        {
+            "lv": 4,
+            "name": "4级"
+        }
+    ],
+    "slot": [
+        {
+            "icon": "slot1",
+            "idx": 1,
+            "name": "槽位1"
+        },
+        {
+            "icon": "slot2",
+            "idx": 2,
+            "name": "槽位2"
+        },
+        {
+            "icon": "slot3",
+            "idx": 3,
+            "name": "槽位3"
+        },
+        {
+            "icon": "slot4",
+            "idx": 4,
+            "name": "槽位4"
+        },
+        {
+            "icon": "slot5",
+            "idx": 5,
+            "name": "槽位5"
+        },
+        {
+            "icon": "slot6",
+            "idx": 6,
+            "name": "槽位6"
+        },
+        {
+            "icon": "slot7",
+            "idx": 7,
+            "name": "槽位7"
+        },
+        {
+            "icon": "slot8",
+            "idx": 8,
+            "name": "槽位8"
+        },
+        {
+            "icon": "slot9",
+            "idx": 9,
+            "name": "槽位9"
+        },
+        {
+            "icon": "slot10",
+            "idx": 10,
+            "name": "槽位10"
+        },
+        {
+            "icon": "slot11",
+            "idx": 11,
+            "name": "槽位11"
+        },
+        {
+            "icon": "slot12",
+            "idx": 12,
+            "name": "槽位12"
+        }
+    ]
+}

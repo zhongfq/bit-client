@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package dungeon;
+
+message Dungeon {
+    uint32 star = 1;
+}
+
+message c2s_load {
+    uint32 dungeon_type = 1;
+}
+message s2c_load {
+    uint32 err = 1;
+    repeated Dungeon dungeon_list = 2;
+}

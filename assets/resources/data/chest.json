@@ -1,0 +1,50 @@
+{
+    "chests": [
+        {
+            "lv": 1,
+            "name": "1级宝箱",
+            "open_exp": 20,
+            "upgrade_exp": 100
+        },
+        {
+            "lv": 2,
+            "name": "2级宝箱",
+            "open_exp": 40,
+            "upgrade_exp": 200
+        },
+        {
+            "lv": 3,
+            "name": "3级宝箱",
+            "open_exp": 60,
+            "upgrade_exp": 300
+        },
+        {
+            "lv": 4,
+            "name": "4级宝箱",
+            "open_exp": 80,
+            "upgrade_exp": 400
+        }
+    ],
+    "dungeon": [
+        {
+            "id": 1,
+            "name": "宝箱副本1-1",
+            "war_id": 102
+        },
+        {
+            "id": 2,
+            "name": "宝箱副本1-2",
+            "war_id": 103
+        },
+        {
+            "id": 3,
+            "name": "宝箱副本1-3",
+            "war_id": 104
+        },
+        {
+            "id": 4,
+            "name": "宝箱副本BOSS",
+            "war_id": 105
+        }
+    ]
+}
