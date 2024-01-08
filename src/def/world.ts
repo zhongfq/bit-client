@@ -53,4 +53,4 @@ export const world = {
     },
     LOGIC_FPS: 10,
     VISUAL_FPS: 60,
-}
+};

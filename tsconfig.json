@@ -5,11 +5,10 @@
     "strict": true,
     "strictNullChecks": true,
     "noEmitHelpers": true,
-    "sourceMap": false,
+    "sourceMap": true,
     "experimentalDecorators": true,
     "skipLibCheck": true,
     "moduleResolution": "node",
-    "baseUrl": ".",
     "allowSyntheticDefaultImports": true
   },
   "include": [

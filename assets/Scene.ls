@@ -12,5 +12,16 @@
       "_$type": "7bad1742-6eed-4d8d-81c0-501dc5bf03d6",
       "scriptPath": "../src/Main.ts"
     }
+  ],
+  "_$child": [
+    {
+      "_$id": "lxc3xuuk",
+      "_$type": "Panel",
+      "name": "Panel",
+      "x": 271,
+      "y": 135,
+      "width": 200,
+      "height": 200
+    }
   ]
 }

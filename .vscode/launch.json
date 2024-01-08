@@ -1,0 +1,24 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Chrome",
+            "request": "launch",
+            "type": "chrome",
+            "url": "http://localhost:18090",
+            "webRoot": "${workspaceFolder}/src",
+            "sourceMaps": true,
+            "sourceMapPathOverrides": {
+                "webpack:///src/*": "${webRoot}/*"
+            }
+        },
+        {
+            "name": "attach to Chrome",
+            "request": "attach",
+            "type": "chrome",
+            "port": 18091,
+            "webRoot": "${workspaceRoot}",
+            "urlFilter": "http://localhost:18090/*"
+        }
+    ]
+}
