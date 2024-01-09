@@ -4,7 +4,6 @@
 /**
  * scenes/app.ls
  */
-export class AppBase extends Laya.Scene {
-    public Panel!: Laya.Panel;
+export class appBase extends Laya.Scene {
 }
 

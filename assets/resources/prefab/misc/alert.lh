@@ -1,0 +1,102 @@
+{
+  "_$ver": 1,
+  "_$id": "2xdpsh9f",
+  "_$runtime": "res://fcf24cfd-fc0a-4af5-ae54-65ef27112dfb",
+  "_$type": "Dialog",
+  "name": "alert",
+  "width": 466,
+  "height": 300,
+  "_mouseState": 2,
+  "autoDestroyAtClosed": true,
+  "isModal": true,
+  "_$comp": [
+    {
+      "_$type": "b054187c-99c8-460d-a2f0-10cda22ac720",
+      "scriptPath": "../src/misc/alert.ts"
+    }
+  ],
+  "_$child": [
+    {
+      "_$id": "vdawf5qx",
+      "_$type": "Image",
+      "name": "bg",
+      "width": 466,
+      "height": 300,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "bottom": 0,
+      "skin": "res://3225dc27-5bcb-446e-8b66-27df87624835",
+      "sizeGrid": "59,21,21,28,0",
+      "color": "#ffffff"
+    },
+    {
+      "_$id": "d313uutx",
+      "_$var": true,
+      "_$type": "Label",
+      "name": "title",
+      "y": 14,
+      "width": 466,
+      "height": 28,
+      "left": 0,
+      "right": 0,
+      "text": "这是标题",
+      "font": "ArialMT",
+      "fontSize": 25,
+      "color": "rgba(11, 0, 0, 1)",
+      "align": "center",
+      "padding": "0,0,0,0"
+    },
+    {
+      "_$id": "4776dx3m",
+      "_$var": true,
+      "_$type": "Label",
+      "name": "content",
+      "x": 20,
+      "y": 82,
+      "width": 426,
+      "height": 60,
+      "left": 20,
+      "right": 20,
+      "text": "Hello，这是一个提示框，真的，是真的提示框，不想杠！",
+      "font": "ArialMT",
+      "fontSize": 20,
+      "color": "rgba(10, 0, 0, 1)",
+      "align": "center",
+      "wordWrap": true,
+      "padding": "0,0,0,0"
+    },
+    {
+      "_$id": "nplcg0xa",
+      "_$var": true,
+      "_$type": "Button",
+      "name": "btnOK",
+      "x": 66,
+      "y": 216,
+      "width": 120,
+      "height": 40,
+      "_mouseState": 2,
+      "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
+      "label": "确定",
+      "labelFont": "ArialMT",
+      "labelSize": 23,
+      "labelPadding": "0,0,-3,0"
+    },
+    {
+      "_$id": "fm8lm4md",
+      "_$var": true,
+      "_$type": "Button",
+      "name": "btnNO",
+      "x": 254,
+      "y": 217,
+      "width": 120,
+      "height": 40,
+      "_mouseState": 2,
+      "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
+      "label": "取消",
+      "labelFont": "ArialMT",
+      "labelSize": 23,
+      "labelPadding": "0,0,-3,0"
+    }
+  ]
+}

@@ -1,4 +1,8 @@
 {
+  "resolution": {
+    "designWidth": 750,
+    "designHeight": 1334
+  },
   "3D": {
     "lightClusterCount": {
       "x": 12,
@@ -15,5 +19,6 @@
     "laya.d3": true,
     "laya.ui": true
   },
+  "stat": true,
   "alertGlobalError": true
 }

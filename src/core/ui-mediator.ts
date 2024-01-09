@@ -10,7 +10,6 @@ type Listener = {
 
 export class Mediator extends Laya.Script {
     private _timer: Timer;
-    private _args: any;
 
     constructor() {
         super();
@@ -39,21 +38,6 @@ export class Mediator extends Laya.Script {
 
     get timer() {
         return this._timer;
-    }
-
-    __initArgs(args: any) {
-        this._args = args;
-    }
-
-    protected close() {
-        this.owner.removeSelf();
-    }
-
-    protected start() {}
-
-    onStart(): void {
-        super.onStart?.();
-        this.onCreate?.(this._args);
     }
 
     onCreate?(args?: any): void;

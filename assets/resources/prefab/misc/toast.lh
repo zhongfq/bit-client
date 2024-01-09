@@ -1,0 +1,50 @@
+{
+  "_$ver": 1,
+  "_$id": "chhtm1qq",
+  "_$runtime": "res://6670aa88-97f8-4ec7-85e8-89dab4979da5",
+  "_$type": "Dialog",
+  "name": "toast",
+  "width": 220,
+  "height": 40,
+  "_mouseState": 2,
+  "isShowEffect": false,
+  "_$comp": [
+    {
+      "_$type": "c4483dc5-91f1-4228-94d8-6e14097f9fde",
+      "scriptPath": "../src/misc/toast.ts"
+    }
+  ],
+  "_$child": [
+    {
+      "_$id": "5gi5moqf",
+      "_$type": "Image",
+      "name": "bg",
+      "width": 220,
+      "height": 40,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "bottom": 0,
+      "skin": "res://1fc7a268-7071-4e5d-88be-a125afa0e2c8",
+      "sizeGrid": "11,21,12,18,0",
+      "color": "#ffffff"
+    },
+    {
+      "_$id": "ifbp612x",
+      "_$var": true,
+      "_$type": "Label",
+      "name": "content",
+      "x": 22,
+      "y": 11,
+      "width": 173,
+      "height": 19,
+      "centerY": 0,
+      "text": "这是一个Toast提示框",
+      "font": "ArialMT",
+      "fontSize": 18,
+      "color": "rgba(0, 12, 4, 1)",
+      "valign": "top",
+      "padding": "0,0,0,0"
+    }
+  ]
+}

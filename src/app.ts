@@ -1,9 +1,10 @@
-import { AppBase } from "./app.generated";
+import { appBase as AppBase } from "./app.generated";
 import { Constructor } from "./core/dispatcher";
 import { Loader } from "./core/loader";
 import { Service } from "./core/service";
 import { UIManager } from "./core/ui-manager";
 import { opcode } from "./def/protocol";
+import { ui } from "./misc/ui";
 import { BagService } from "./system/bag/bag-service";
 import { ChestService } from "./system/chest/chest-service";
 import { DataService } from "./system/data/data-service";
@@ -16,7 +17,11 @@ const { regClass, property } = Laya;
 @regClass()
 export class Main extends AppBase {
     onAwake(): void {
+        ui.register();
         app.init();
+
+        // app.ui.toast("这是一个油菜测试是不是...");
+        // app.ui.alert("xx", "xxdafdfa", () => {});
     }
 }
 
