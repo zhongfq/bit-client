@@ -1,0 +1,49 @@
+{
+  "_$ver": 1,
+  "_$id": "s8372ero",
+  "_$type": "Panel",
+  "name": "Panel",
+  "x": 134,
+  "y": 54,
+  "width": 455,
+  "height": 384,
+  "_mouseState": 2,
+  "_$child": [
+    {
+      "_$id": "up8rka4e",
+      "_$type": "Image",
+      "name": "Image",
+      "x": 7,
+      "y": 7.5,
+      "width": 256,
+      "height": 152,
+      "skin": "res://3225dc27-5bcb-446e-8b66-27df87624835",
+      "useSourceSize": true,
+      "color": "#ffffff"
+    },
+    {
+      "_$id": "m4v2ht3l",
+      "_$type": "Image",
+      "name": "Image(1)",
+      "x": 5,
+      "y": 248.5,
+      "width": 128,
+      "height": 32,
+      "_mouseState": 2,
+      "skin": "res://b86ab1e4-4348-47f0-96e7-771387714bfc",
+      "useSourceSize": true,
+      "color": "#ffffff"
+    },
+    {
+      "_$id": "vaw1m315",
+      "_$type": "HSlider",
+      "name": "HSlider",
+      "x": 155,
+      "y": 263.5,
+      "width": 200,
+      "height": 32,
+      "_mouseState": 2,
+      "skin": "res://051feaa7-15db-4143-958c-161475961a6b"
+    }
+  ]
+}
