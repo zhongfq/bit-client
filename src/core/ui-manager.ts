@@ -19,7 +19,7 @@ export interface UIDescriptor {
     blockInput?: boolean;
     autoClose?: boolean;
     capture?: boolean;
-    popup?: boolean;
+    autoDestroy?: boolean;
 }
 
 export interface UIAlertArgs {
@@ -41,14 +41,22 @@ export interface UIToastArgs {
 export class UIManager {
     private _descriptors: { [key: number]: UIDescriptor } = {};
 
-    private _checkDescriptor(id: number) {
-        const descriptor = this._descriptors[id];
-        if (!descriptor) {
-            console.log(`ui with id '${id}' is not registered`);
-            return null;
+    private _checkDescriptor(id: number | string) {
+        if (typeof id === "number") {
+            const descriptor = this._descriptors[id];
+            if (descriptor) {
+                return descriptor;
+            }
         } else {
-            return descriptor;
+            for (const k in this._descriptors) {
+                const descriptor = this._descriptors[k];
+                if (descriptor.url === id) {
+                    return descriptor;
+                }
+            }
         }
+        console.log(`ui with id '${id}' is not registered`);
+        return null;
     }
 
     register(descriptor: UIDescriptor) {
@@ -68,22 +76,37 @@ export class UIManager {
 
     private _activeScene(scene: Laya.Scene | null, active: boolean) {
         if (scene) {
-            scene.active = active;
-            scene.visible = active;
+            if (scene.active !== active) {
+                scene.active = active;
+            }
+            if (scene.visible !== active) {
+                scene.visible = active;
+            }
         }
     }
 
     private _doOpenScene(scene: Laya.Scene, args?: any) {
+        if (scene instanceof Laya.Dialog || !(scene instanceof Laya.Scene)) {
+            console.error(`open scene: ${scene.url} is not a scene`);
+        }
         scene.open(false, args);
         scene.once(Laya.Event.REMOVED, this, () => {
+            this._doCloseScene(scene);
             this._activeScene(this.top, true);
-            Laya.Scene.gc();
         });
     }
 
     private _doCloseScene(scene: Laya.Scene) {
         scene.offAllCaller(this);
+
         scene.removeSelf();
+
+        const descriptor = this._checkDescriptor(scene.url);
+        if (descriptor?.autoClose) {
+            scene.destroy(true);
+        }
+
+        Laya.Scene.gc();
     }
 
     open(id: number, args?: any) {
@@ -121,12 +144,21 @@ export class UIManager {
         const descriptor = this._checkDescriptor(id);
         if (descriptor) {
             const root = Laya.Scene.root;
+            let index = -1;
             for (let i = root.numChildren - 1; i >= 0; i--) {
                 const scene = root.getChildAt(i);
                 if (scene instanceof Laya.Scene) {
-                    this._doCloseScene(scene);
                     if (scene.url === descriptor.url) {
+                        index = i;
                         break;
+                    }
+                }
+            }
+            if (index >= 0) {
+                for (let i = index + 1; i < root.numChildren; i++) {
+                    const scene = root.getChildAt(i);
+                    if (scene instanceof Laya.Scene) {
+                        this._doCloseScene(scene);
                     }
                 }
             }
@@ -138,10 +170,13 @@ export class UIManager {
         this.top?.close();
     }
 
-    show(id: number, args?: any) {
+    async show(id: number, args?: any) {
         const descriptor = this._checkDescriptor(id);
         if (descriptor) {
-            Laya.Dialog.open(descriptor.url, false, args);
+            const dialog = Laya.Dialog.open(descriptor.url, false, args);
+            if (!(dialog instanceof Laya.Dialog)) {
+                console.error(`show error: ${descriptor.url} is not a dialog`);
+            }
         }
     }
 

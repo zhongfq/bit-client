@@ -20,9 +20,6 @@ export class Main extends AppBase {
     onAwake(): void {
         ui.register();
         app.init();
-
-        app.ui.toast("这是一个油菜测试是不是...");
-        // app.ui.alert("xx", "xxdafdfa", () => {});
     }
 }
 
@@ -75,10 +72,6 @@ class App {
         // this.ui.openDialog(ui.bagDialog);
 
         app.ui.open(ui.login);
-
-        Laya.timer.once(1000, Laya.timer, () => {
-            app.ui.closeTo(ui.login);
-        });
     }
 
     private _createService() {

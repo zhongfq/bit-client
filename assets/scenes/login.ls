@@ -1,12 +1,19 @@
 {
   "_$ver": 1,
   "_$id": "k8cmqj6y",
+  "_$runtime": "res://4efb9c99-6d10-446e-96f7-31b716748d3b",
   "_$type": "Scene",
   "left": 0,
   "right": 0,
   "top": 0,
   "bottom": 0,
   "name": "Scene2D",
+  "_$comp": [
+    {
+      "_$type": "b9429c97-06d5-4a93-854c-b7cd2ecffb3c",
+      "scriptPath": "../src/system/login/login-mediator.ts"
+    }
+  ],
   "_$child": [
     {
       "_$id": "g61802xw",

@@ -9,20 +9,24 @@ export class ui {
     static readonly alert = UIALERT_ID;
     static readonly toast = UITOAST_ID;
 
-    static readonly loading = 0;
-    static readonly login = 1;
-    static readonly home = 2;
-    static readonly chest = 3;
+    static readonly app = 0;
+    static readonly loading = 1;
+    static readonly login = 2;
+    static readonly home = 3;
+    static readonly chest = 4;
 
-    static readonly test1 = 4;
-    static readonly test2 = 5;
-    static readonly bagDialog = 6;
+    static readonly test1 = 5;
+    static readonly test2 = 6;
+    static readonly bagDialog = 7;
 
     static register() {
         app.ui.register({
+            id: ui.app,
+            url: "scenes/app.ls",
+        });
+        app.ui.register({
             id: ui.alert,
             url: "resources/prefab/misc/alert.lh",
-            blockInput: true,
         });
         app.ui.register({
             id: ui.toast,
@@ -30,6 +34,7 @@ export class ui {
         });
         app.ui.register({
             id: ui.login,
+            autoClose: true,
             url: "scenes/login.ls",
         });
         app.ui.register({
