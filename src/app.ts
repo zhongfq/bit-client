@@ -8,7 +8,7 @@ import { ui } from "./misc/ui";
 import { BagService } from "./system/bag/bag-service";
 import { ChestService } from "./system/chest/chest-service";
 import { DataService } from "./system/data/data-service";
-import { NetworkService } from "./system/network/network-service";
+import { NetworkService, register } from "./system/network/network-service";
 import { UserService } from "./system/user/user-service";
 import { WarService } from "./system/war/war-service";
 
@@ -19,9 +19,6 @@ export class Main extends AppBase {
     onAwake(): void {
         ui.register();
         app.init();
-
-        // app.ui.toast("这是一个油菜测试是不是...");
-        // app.ui.alert("xx", "xxdafdfa", () => {});
     }
 }
 

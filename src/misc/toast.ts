@@ -1,4 +1,4 @@
-import { tween } from "../core/tween";
+import { LayaExt } from "../core/laya";
 import { Mediator } from "../core/ui-mediator";
 import { ToastUI } from "../prefab/misc/ToastUI";
 
@@ -14,6 +14,6 @@ export class ToastMediator extends Mediator {
         owner.width += newWidth - oldWidth;
 
         owner.alpha = 0;
-        tween.to(owner, { alpha: 1 }, 500, Laya.Ease.sineIn);
+        LayaExt.Tween.to(owner, { alpha: 1 }, 500, Laya.Ease.sineIn);
     }
 }

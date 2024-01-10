@@ -1,5 +1,9 @@
 export type Constructor<T = unknown> = new (...args: any[]) => T;
 
+export type ConstructorType<T> = {
+    [K in keyof T]?: T[K];
+};
+
 export interface Callback {
     (...any: any[]): void;
 }
