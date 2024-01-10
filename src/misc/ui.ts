@@ -16,6 +16,7 @@ export class ui {
 
     static readonly test1 = 4;
     static readonly test2 = 5;
+    static readonly bagDialog = 6;
 
     static register() {
         app.ui.register({
@@ -26,6 +27,11 @@ export class ui {
         app.ui.register({
             id: ui.toast,
             prefab: "resources/prefab/misc/toast.lh",
+        });
+        app.ui.register({
+            id: ui.bagDialog,
+            prefab: "resources/prefab/bag/bag-dialog.lh",
+            blockInput: true,
         });
     }
 }

@@ -4,7 +4,8 @@ import { ItemVo } from "./item-vo";
 import proto from "../../../../def/proto.js";
 import { app } from "../../../../app";
 import { DataUtil } from "../../../data/data-util";
-import { Constructor } from "cc";
+import { Constructor } from "../../../../core/dispatcher";
+
 /**
  * ItemBag 道具
  */

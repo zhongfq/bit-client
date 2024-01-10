@@ -1,0 +1,103 @@
+{
+  "_$ver": 1,
+  "_$id": "sxpq9fzh",
+  "_$runtime": "res://2f6bc1ba-8572-4d69-b2fb-82f322b9cd15",
+  "_$type": "Dialog",
+  "name": "Dialog",
+  "width": 400,
+  "height": 600,
+  "_mouseState": 2,
+  "_$child": [
+    {
+      "_$id": "2kdo09if",
+      "_$type": "Image",
+      "name": "Image",
+      "width": 400,
+      "height": 600,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "bottom": 0,
+      "skin": "res://3225dc27-5bcb-446e-8b66-27df87624835",
+      "sizeGrid": "50,30,50,30,0",
+      "color": "#ffffff"
+    },
+    {
+      "_$id": "pldb6cos",
+      "_$var": true,
+      "_$type": "Tab",
+      "name": "menuTab",
+      "x": 143,
+      "y": 598,
+      "width": 257,
+      "height": 50,
+      "_mouseState": 2,
+      "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
+      "labels": "tab1,tab2",
+      "space": 0,
+      "selectedIndex": 0,
+      "labelFont": null,
+      "labelStroke": null,
+      "labelStrokeColor": null,
+      "labelAlign": null,
+      "strokeColors": null
+    },
+    {
+      "_$id": "yccd3eik",
+      "_$var": true,
+      "_$type": "List",
+      "name": "itemList",
+      "x": 5,
+      "y": 53,
+      "width": 388.54682958707184,
+      "height": 536.9123776982448,
+      "_mouseState": 2,
+      "itemTemplate": {
+        "_$ref": "2inskcaa",
+        "_$tmpl": "itemRender"
+      },
+      "repeatX": 4,
+      "repeatY": 6,
+      "scrollType": 2,
+      "_$child": [
+        {
+          "_$id": "2inskcaa",
+          "_$prefab": "296a5627-8151-43ef-8283-ced0d50d81a8",
+          "name": "icon-node",
+          "active": true,
+          "x": 0,
+          "y": 0
+        }
+      ]
+    },
+    {
+      "_$id": "6ee7kogk",
+      "_$var": true,
+      "_$type": "Button",
+      "name": "Button",
+      "x": 358,
+      "y": 7,
+      "width": 32,
+      "height": 32,
+      "_mouseState": 2,
+      "skin": "res://60a9086c-a9c2-4e01-a563-355c117b509e",
+      "label": "",
+      "labelSize": 20
+    },
+    {
+      "_$id": "vyoq14nb",
+      "_$type": "Label",
+      "name": "Label",
+      "x": 144,
+      "y": 11,
+      "width": 120,
+      "height": 28,
+      "text": "背包",
+      "fontSize": 20,
+      "color": "#FFFFFF",
+      "align": "center",
+      "valign": "middle",
+      "padding": "0,0,0,0"
+    }
+  ]
+}

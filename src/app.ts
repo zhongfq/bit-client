@@ -1,5 +1,5 @@
 import { appBase as AppBase } from "./app.generated";
-import { Constructor } from "./core/dispatcher";
+import { Constructor, toEventType } from "./core/dispatcher";
 import { Loader } from "./core/loader";
 import { Service } from "./core/service";
 import { TweenSystem } from "./core/tween/tween-system";
@@ -62,6 +62,14 @@ class App {
         this._createService();
 
         await app.datad.load();
+        app.networkd.connect("ws://games.bitserver.wang:10001");
+        app.userd.username = "zxp";
+        this.networkd.on(toEventType(opcode.user.s2c_login),async ()=>{
+            await app.bagd.load();
+            app.ui.openDialog(ui.bagDialog)
+        })
+        // await this.bagd.load();
+        // this.ui.openDialog(ui.bagDialog);
     }
 
     private _createService() {
