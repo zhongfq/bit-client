@@ -21,16 +21,20 @@ export class ui {
     static register() {
         app.ui.register({
             id: ui.alert,
-            prefab: "resources/prefab/misc/alert.lh",
+            url: "resources/prefab/misc/alert.lh",
             blockInput: true,
         });
         app.ui.register({
             id: ui.toast,
-            prefab: "resources/prefab/misc/toast.lh",
+            url: "resources/prefab/misc/toast.lh",
+        });
+        app.ui.register({
+            id: ui.login,
+            url: "scenes/login.ls",
         });
         app.ui.register({
             id: ui.bagDialog,
-            prefab: "resources/prefab/bag/bag-dialog.lh",
+            url: "resources/prefab/bag/bag-dialog.lh",
             blockInput: true,
         });
     }

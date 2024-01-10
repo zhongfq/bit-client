@@ -1,5 +1,4 @@
-import { ui } from "../misc/ui";
-import { Callback, Constructor } from "./dispatcher";
+import { Callback } from "./dispatcher";
 import { Mediator } from "./ui-mediator";
 
 export const UIALERT_ID = -1;
@@ -16,7 +15,7 @@ export interface UIRuntimeInfo {
 
 export interface UIDescriptor {
     id: number;
-    prefab: string;
+    url: string;
     blockInput?: boolean;
     autoClose?: boolean;
     capture?: boolean;
@@ -41,7 +40,6 @@ export interface UIToastArgs {
 
 export class UIManager {
     private _descriptors: { [key: number]: UIDescriptor } = {};
-    private _uiStack: UIRuntimeInfo[] = [];
 
     private _checkDescriptor(id: number) {
         const descriptor = this._descriptors[id];
@@ -57,10 +55,93 @@ export class UIManager {
         this._descriptors[descriptor.id] = descriptor;
     }
 
+    get top() {
+        const root = Laya.Scene.root;
+        for (let i = root.numChildren - 1; i >= 0; i--) {
+            const scene = root.getChildAt(i);
+            if (scene instanceof Laya.Scene) {
+                return scene;
+            }
+        }
+        return null;
+    }
+
+    private _activeScene(scene: Laya.Scene | null, active: boolean) {
+        if (scene) {
+            scene.active = active;
+            scene.visible = active;
+        }
+    }
+
+    private _doOpenScene(scene: Laya.Scene, args?: any) {
+        scene.open(false, args);
+        scene.once(Laya.Event.REMOVED, this, () => {
+            this._activeScene(this.top, true);
+            Laya.Scene.gc();
+        });
+    }
+
+    private _doCloseScene(scene: Laya.Scene) {
+        scene.offAllCaller(this);
+        scene.removeSelf();
+    }
+
     open(id: number, args?: any) {
         const descriptor = this._checkDescriptor(id);
         if (descriptor) {
-            Laya.Scene.open(descriptor.prefab, false, args);
+            Laya.Scene.load(descriptor.url)
+                .then((scene) => {
+                    this._activeScene(this.top, false);
+                    this._doOpenScene(scene, args);
+                })
+                .catch((e) => {
+                    console.error("todo");
+                });
+        }
+    }
+
+    replace(id: number, args?: any) {
+        const descriptor = this._checkDescriptor(id);
+        if (descriptor) {
+            Laya.Scene.load(descriptor.url)
+                .then((scene) => {
+                    const topScene = this.top;
+                    if (topScene) {
+                        this._doCloseScene(topScene);
+                    }
+                    this._doOpenScene(scene, args);
+                })
+                .catch((e) => {
+                    console.error("todo");
+                });
+        }
+    }
+
+    closeTo(id: number) {
+        const descriptor = this._checkDescriptor(id);
+        if (descriptor) {
+            const root = Laya.Scene.root;
+            for (let i = root.numChildren - 1; i >= 0; i--) {
+                const scene = root.getChildAt(i);
+                if (scene instanceof Laya.Scene) {
+                    this._doCloseScene(scene);
+                    if (scene.url === descriptor.url) {
+                        break;
+                    }
+                }
+            }
+            this._activeScene(this.top, true);
+        }
+    }
+
+    closeTop() {
+        this.top?.close();
+    }
+
+    show(id: number, args?: any) {
+        const descriptor = this._checkDescriptor(id);
+        if (descriptor) {
+            Laya.Dialog.open(descriptor.url, false, args);
         }
     }
 
@@ -68,14 +149,14 @@ export class UIManager {
     alert(title: string, message: string, yes: Callback, no?: Callback): void;
     alert(titleOrArgs: string | UIAlertArgs, message?: string, yes?: Callback, no?: Callback) {
         if (typeof titleOrArgs == "string") {
-            this.open(UIALERT_ID, {
+            this.show(UIALERT_ID, {
                 title: titleOrArgs,
                 content: message,
                 yes: yes,
                 no: no,
             } as UIAlertArgs);
         } else {
-            this.open(UIALERT_ID, titleOrArgs);
+            this.show(UIALERT_ID, titleOrArgs);
         }
     }
 
@@ -83,7 +164,7 @@ export class UIManager {
     toast(message: string, duration?: number, x?: number, y?: number): void;
     toast(messageOrArgs: string | UIAlertArgs, duration?: number, x?: number, y?: number) {
         if (typeof messageOrArgs == "string") {
-            this.open(UITOAST_ID, {
+            this.show(UITOAST_ID, {
                 title: messageOrArgs,
                 content: messageOrArgs,
                 duration: duration,
@@ -91,7 +172,7 @@ export class UIManager {
                 y: y,
             } as UIToastArgs);
         } else {
-            this.open(UITOAST_ID, messageOrArgs);
+            this.show(UITOAST_ID, messageOrArgs);
         }
     }
 }

@@ -8,5 +8,20 @@
   "top": 0,
   "bottom": 0,
   "name": "Scene2D",
-  "autoDestroyAtClosed": true
+  "autoDestroyAtClosed": true,
+  "_$child": [
+    {
+      "_$id": "33dcailo",
+      "_$type": "Button",
+      "name": "Button",
+      "x": 30.5,
+      "y": 589.5,
+      "width": 120,
+      "height": 47,
+      "_mouseState": 2,
+      "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
+      "label": "Title",
+      "labelSize": 20
+    }
+  ]
 }

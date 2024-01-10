@@ -5,7 +5,7 @@ import { Service } from "./core/service";
 import { TweenSystem } from "./core/tween/tween-system";
 import { UIManager } from "./core/ui-manager";
 import { opcode } from "./def/protocol";
-import { ui } from "./misc/ui";
+import { AlertArgs, ui } from "./misc/ui";
 import { BagService } from "./system/bag/bag-service";
 import { ChestService } from "./system/chest/chest-service";
 import { DataService } from "./system/data/data-service";
@@ -56,20 +56,29 @@ class App {
             return;
         }
         App._inited = true;
+
+        // 更新缓动
         Laya.timer.frameLoop(1, this, () => {
             TweenSystem.update(Laya.timer.delta / 1000);
         });
+
         this._createService();
 
         await app.datad.load();
         app.networkd.connect("ws://games.bitserver.wang:10001");
         app.userd.username = "zxp";
-        this.networkd.on(toEventType(opcode.user.s2c_login),async ()=>{
+        this.networkd.on(toEventType(opcode.user.s2c_login), async () => {
             await app.bagd.load();
-            app.ui.openDialog(ui.bagDialog)
-        })
+            // app.ui.show(ui.bagDialog);
+        });
         // await this.bagd.load();
         // this.ui.openDialog(ui.bagDialog);
+
+        app.ui.open(ui.login);
+
+        Laya.timer.once(1000, Laya.timer, () => {
+            app.ui.closeTo(ui.login);
+        });
     }
 
     private _createService() {
