@@ -2,13 +2,14 @@ import { appBase as AppBase } from "./app.generated";
 import { Constructor } from "./core/dispatcher";
 import { Loader } from "./core/loader";
 import { Service } from "./core/service";
+import { TweenSystem } from "./core/tween/tween-system";
 import { UIManager } from "./core/ui-manager";
 import { opcode } from "./def/protocol";
 import { ui } from "./misc/ui";
 import { BagService } from "./system/bag/bag-service";
 import { ChestService } from "./system/chest/chest-service";
 import { DataService } from "./system/data/data-service";
-import { NetworkService, register } from "./system/network/network-service";
+import { NetworkService } from "./system/network/network-service";
 import { UserService } from "./system/user/user-service";
 import { WarService } from "./system/war/war-service";
 
@@ -19,6 +20,9 @@ export class Main extends AppBase {
     onAwake(): void {
         ui.register();
         app.init();
+
+        app.ui.toast("这是一个油菜测试是不是...");
+        // app.ui.alert("xx", "xxdafdfa", () => {});
     }
 }
 
@@ -52,6 +56,9 @@ class App {
             return;
         }
         App._inited = true;
+        Laya.timer.frameLoop(1, this, () => {
+            TweenSystem.update(Laya.timer.delta / 1000);
+        });
         this._createService();
 
         await app.datad.load();

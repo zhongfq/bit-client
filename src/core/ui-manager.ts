@@ -57,10 +57,10 @@ export class UIManager {
         this._descriptors[descriptor.id] = descriptor;
     }
 
-    openDialog(id: number, args?: any) {
+    open(id: number, args?: any) {
         const descriptor = this._checkDescriptor(id);
         if (descriptor) {
-            Laya.Dialog.open(descriptor.prefab, false, args);
+            Laya.Scene.open(descriptor.prefab, false, args);
         }
     }
 
@@ -68,14 +68,14 @@ export class UIManager {
     alert(title: string, message: string, yes: Callback, no?: Callback): void;
     alert(titleOrArgs: string | UIAlertArgs, message?: string, yes?: Callback, no?: Callback) {
         if (typeof titleOrArgs == "string") {
-            this.openDialog(UIALERT_ID, {
+            this.open(UIALERT_ID, {
                 title: titleOrArgs,
                 content: message,
                 yes: yes,
                 no: no,
             } as UIAlertArgs);
         } else {
-            this.openDialog(UIALERT_ID, titleOrArgs);
+            this.open(UIALERT_ID, titleOrArgs);
         }
     }
 
@@ -83,7 +83,7 @@ export class UIManager {
     toast(message: string, duration?: number, x?: number, y?: number): void;
     toast(messageOrArgs: string | UIAlertArgs, duration?: number, x?: number, y?: number) {
         if (typeof messageOrArgs == "string") {
-            this.openDialog(UITOAST_ID, {
+            this.open(UITOAST_ID, {
                 title: messageOrArgs,
                 content: messageOrArgs,
                 duration: duration,
@@ -91,7 +91,7 @@ export class UIManager {
                 y: y,
             } as UIToastArgs);
         } else {
-            this.openDialog(UITOAST_ID, messageOrArgs);
+            this.open(UITOAST_ID, messageOrArgs);
         }
     }
 }

@@ -1,4 +1,5 @@
 import { LayaExt } from "../core/laya";
+import { tween } from "../core/tween/tween";
 import { Mediator } from "../core/ui-mediator";
 import { ToastUI } from "../prefab/misc/ToastUI";
 
@@ -14,6 +15,18 @@ export class ToastMediator extends Mediator {
         owner.width += newWidth - oldWidth;
 
         owner.alpha = 0;
-        LayaExt.Tween.to(owner, { alpha: 1 }, 500, Laya.Ease.sineIn);
+        tween(owner)
+            .to(0.5, { alpha: 1 }, { easing: "fade" })
+            .delay(args.duration ?? 1.5)
+            .call(() => {
+                tween(owner)
+                    .to(0.5, { y: owner.y - 100 }, { easing: "sineOut" })
+                    .call(() => {
+                        owner.destroy();
+                    })
+                    .start();
+            })
+            .to(0.4, { alpha: 0 }, { easing: "fade" })
+            .start();
     }
 }
