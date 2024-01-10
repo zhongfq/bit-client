@@ -82,6 +82,16 @@ export class UIManager {
             if (scene.visible !== active) {
                 scene.visible = active;
             }
+
+            const scene3D: Laya.Scene3D | null = scene.scene3D;
+            if (scene3D) {
+                if (scene3D.active !== active) {
+                    scene3D.active = active;
+                }
+                if (scene3D.visible !== active) {
+                    scene3D.visible = active;
+                }
+            }
         }
     }
 
