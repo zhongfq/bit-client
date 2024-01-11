@@ -1,5 +1,5 @@
 const { regClass } = Laya;
-import { AlertArgs } from "../../misc/ui";
+import { AlertArgs } from "../../../misc/ui";
 import { AlertUIBase } from "./AlertUI.generated";
 
 @regClass()

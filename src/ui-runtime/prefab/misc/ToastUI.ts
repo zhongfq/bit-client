@@ -1,5 +1,5 @@
 const { regClass } = Laya;
-import { ToastArgs } from "../../misc/ui";
+import { ToastArgs } from "../../../misc/ui";
 import { ToastUIBase } from "./ToastUI.generated";
 
 @regClass()
