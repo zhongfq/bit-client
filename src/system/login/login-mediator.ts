@@ -27,7 +27,7 @@ export class LoginMediator extends Mediator {
 
     onStart(): void {
         this.timer.delay(3, () => {
-            app.ui.closeTo(ui.login);
+            app.ui.closeTop();
 
             Laya.timer.once(1000, Laya.timer, () => {
                 const map = Laya.Loader.loadedMap;

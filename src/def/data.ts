@@ -79,6 +79,10 @@ export type Item = {
     color: number;
     slot: number;
     icon: string;
+    desc: string;
+    composite:number;
+    sub_type:number;
+    use:number;
 };
 export type ItemTable = {
     [k: number]: Item;

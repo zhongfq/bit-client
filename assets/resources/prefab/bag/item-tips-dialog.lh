@@ -1,0 +1,121 @@
+{
+  "_$ver": 1,
+  "_$id": "sxpq9fzh",
+  "_$runtime": "res://99752eaf-fb1b-484f-a92f-9b58cd916428",
+  "_$type": "Dialog",
+  "name": "Dialog",
+  "width": 750,
+  "height": 1334,
+  "_mouseState": 2,
+  "left": 0,
+  "right": 0,
+  "top": 0,
+  "bottom": 0,
+  "_$child": [
+    {
+      "_$id": "0lwgpe0h",
+      "_$var": true,
+      "_$type": "Sprite",
+      "name": "Sprite",
+      "width": 100,
+      "height": 100,
+      "_mouseState": 2
+    },
+    {
+      "_$id": "2kdo09if",
+      "_$var": true,
+      "_$type": "Image",
+      "name": "Image",
+      "width": 391,
+      "height": 278,
+      "_mouseState": 2,
+      "skin": "res://b86ab1e4-4348-47f0-96e7-771387714bfc",
+      "sizeGrid": "9,30,11,30,0",
+      "color": "#ffffff",
+      "_$child": [
+        {
+          "_$id": "3vzyglho",
+          "_$prefab": "296a5627-8151-43ef-8283-ced0d50d81a8",
+          "_$var": true,
+          "name": "icon",
+          "active": true,
+          "x": 12,
+          "y": 6,
+          "visible": true
+        },
+        {
+          "_$id": "18frd5ii",
+          "_$var": true,
+          "_$type": "Label",
+          "name": "ItemName",
+          "x": 117,
+          "y": 13,
+          "width": 120,
+          "height": 28,
+          "text": "灵石",
+          "fontSize": 20,
+          "color": "#FFFFFF",
+          "valign": "top",
+          "padding": "0,0,0,0"
+        },
+        {
+          "_$id": "xl6lb2xg",
+          "_$var": true,
+          "_$type": "Label",
+          "name": "itemNumber",
+          "x": 116,
+          "y": 57,
+          "width": 120,
+          "height": 28,
+          "text": "拥有 1000",
+          "fontSize": 20,
+          "color": "#FFFFFF",
+          "valign": "top",
+          "padding": "0,0,0,0"
+        },
+        {
+          "_$id": "yidhfpa4",
+          "_$var": true,
+          "_$type": "TextArea",
+          "name": "itemDesc",
+          "x": 11,
+          "y": 132,
+          "width": 351,
+          "height": 125,
+          "_mouseState": 2,
+          "text": "水电费根深蒂固 鬼地方个电饭锅电饭锅电饭锅地方地方地方地方地方地方 地方地方地方地方地方地方地方电饭锅电饭锅 鬼地方个电饭锅电饭锅地方给对方地方地方地方地方地方地方地方地方地方的鬼地方个电饭锅电饭锅",
+          "fontSize": 20,
+          "color": "#FFFFFF",
+          "valign": "top",
+          "overflow": "scroll",
+          "padding": "6,6,6,6",
+          "type": "text",
+          "maxChars": 0,
+          "prompt": "",
+          "promptColor": "#A9A9A9"
+        },
+        {
+          "_$id": "ft56ewyj",
+          "_$type": "Sprite",
+          "name": "Sprite",
+          "x": 6,
+          "y": 113,
+          "width": 368,
+          "height": 16,
+          "_gcmds": [
+            {
+              "_$type": "DrawLineCmd",
+              "fromX": 0,
+              "fromY": 0.5,
+              "toX": 1,
+              "toY": 0.5,
+              "percent": true,
+              "lineWidth": 1,
+              "lineColor": "rgba(0, 0, 0, 1)"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

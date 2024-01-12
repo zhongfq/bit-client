@@ -18,6 +18,8 @@ export class ui {
     static readonly test1 = 5;
     static readonly test2 = 6;
     static readonly bagDialog = 7;
+    static readonly itemTipsDialog = 8;
+    static readonly itemSynthesisDialog = 9;
 
     static register() {
         app.ui.register({
@@ -40,6 +42,16 @@ export class ui {
         app.ui.register({
             id: ui.bagDialog,
             url: "resources/prefab/bag/bag-dialog.lh",
+            blockInput: true,
+        });
+        app.ui.register({
+            id: ui.itemTipsDialog,
+            url: "resources/prefab/bag/item-tips-dialog.lh",
+            blockInput: false,
+        });
+        app.ui.register({
+            id: ui.itemSynthesisDialog,
+            url: "resources/prefab/bag/item-synthesis-dialog.lh",
             blockInput: true,
         });
     }

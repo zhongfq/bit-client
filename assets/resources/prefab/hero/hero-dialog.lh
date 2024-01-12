@@ -1,0 +1,21 @@
+{
+  "_$ver": 1,
+  "_$id": "o73svw1b",
+  "_$type": "Dialog",
+  "name": "Dialog",
+  "width": 400,
+  "height": 400,
+  "_mouseState": 2,
+  "_$child": [
+    {
+      "_$id": "k0d5qf77",
+      "_$type": "Panel",
+      "name": "Panel",
+      "x": 106,
+      "y": 106,
+      "width": 200,
+      "height": 200,
+      "bgColor": "rgba(34, 155, 90, 1)"
+    }
+  ]
+}

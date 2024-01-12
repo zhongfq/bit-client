@@ -7,6 +7,13 @@
   "width": 100,
   "height": 100,
   "_mouseState": 2,
+  "_$comp": [
+    {
+      "_$type": "d0248154-482a-4749-b95a-337759868f51",
+      "scriptPath": "../src/system/icon/icon-node-mediator.ts",
+      "isNoShowTips": false
+    }
+  ],
   "_$child": [
     {
       "_$id": "2al8ymhd",

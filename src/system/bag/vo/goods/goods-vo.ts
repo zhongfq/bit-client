@@ -40,7 +40,7 @@ export abstract class GoodsVo<IRef = any, Cmd = any> extends VO<IRef, Cmd> {
             this.goodsNum = num;
         }
     }
-    get goodsNumber(): number | null {
+    get goodsNumber(): number{
         if (this.goodsNum != null) {
             return this.goodsNum;
         }
