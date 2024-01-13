@@ -5,5 +5,7 @@
  * scenes/app.ls
  */
 export class appBase extends Laya.Scene {
+    public Button!: Laya.Button;
+    public Button2!: Laya.Button;
 }
 

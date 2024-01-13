@@ -1,0 +1,110 @@
+{
+  "_$ver": 1,
+  "_$id": "hcl1xwm9",
+  "_$runtime": "res://cc673694-6cf7-4c0e-b3fa-850f6008f15f",
+  "_$type": "Dialog",
+  "name": "Dialog",
+  "width": 365,
+  "height": 521,
+  "isModal": true,
+  "_$comp": [
+    {
+      "_$type": "860eb74c-9f74-4610-9a44-3670d056e3a8",
+      "scriptPath": "../src/system/login/login-server-mediator.ts"
+    }
+  ],
+  "_$child": [
+    {
+      "_$id": "vaxk1kjq",
+      "_$type": "Image",
+      "name": "Image",
+      "width": 365,
+      "height": 521,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "bottom": 0,
+      "skin": "res://3225dc27-5bcb-446e-8b66-27df87624835",
+      "sizeGrid": "50,30,50,30,0",
+      "color": "#ffffff"
+    },
+    {
+      "_$id": "43f9cphd",
+      "_$var": true,
+      "_$type": "List",
+      "name": "itemList",
+      "x": 5,
+      "y": 57,
+      "width": 350,
+      "height": 457,
+      "_mouseState": 2,
+      "itemTemplate": {
+        "_$ref": "gzhvazl0",
+        "_$tmpl": "itemRender"
+      },
+      "repeatX": 1,
+      "repeatY": 9,
+      "spaceY": 3,
+      "scrollType": 2,
+      "_$child": [
+        {
+          "_$id": "gzhvazl0",
+          "_$var": true,
+          "_$type": "Box",
+          "name": "listItemBox",
+          "width": 348,
+          "height": 49,
+          "bgColor": "rgba(27, 27, 27, 1)",
+          "_$child": [
+            {
+              "_$id": "hdfp169q",
+              "_$type": "Label",
+              "name": "labelName",
+              "width": 349,
+              "height": 47,
+              "text": "serverName",
+              "fontSize": 22,
+              "color": "#FFFFFF",
+              "align": "center",
+              "valign": "middle",
+              "padding": "0,0,0,0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "ao0wkcwl",
+      "_$var": true,
+      "_$type": "Button",
+      "name": "Button",
+      "x": 324,
+      "y": 7,
+      "width": 32,
+      "height": 32,
+      "_mouseState": 2,
+      "right": 9,
+      "top": 7,
+      "skin": "res://60a9086c-a9c2-4e01-a563-355c117b509e",
+      "label": "",
+      "labelSize": 20
+    },
+    {
+      "_$id": "zjf9g4rt",
+      "_$type": "Label",
+      "name": "Label",
+      "x": 123,
+      "y": 10,
+      "width": 120,
+      "height": 28,
+      "top": 10,
+      "centerX": 0,
+      "text": "服务器列表",
+      "fontSize": 20,
+      "color": "#FFFFFF",
+      "align": "center",
+      "valign": "middle",
+      "padding": "0,0,0,0"
+    }
+  ]
+}

@@ -1,0 +1,167 @@
+{
+  "_$ver": 1,
+  "_$id": "sxpq9fzh",
+  "_$runtime": "res://cadfb664-eed9-43e1-bcc4-07a6b49d674d",
+  "_$type": "Dialog",
+  "name": "Dialog",
+  "width": 511,
+  "height": 753,
+  "_mouseState": 2,
+  "isModal": true,
+  "_$comp": [
+    {
+      "_$type": "a4089cd2-ad35-4484-9413-d1df9225249a",
+      "scriptPath": "../src/system/gm/gm-mediator.ts"
+    }
+  ],
+  "_$child": [
+    {
+      "_$id": "2kdo09if",
+      "_$type": "Image",
+      "name": "Image",
+      "width": 511,
+      "height": 753,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "bottom": 0,
+      "skin": "res://3225dc27-5bcb-446e-8b66-27df87624835",
+      "sizeGrid": "50,30,50,30,0",
+      "color": "#ffffff"
+    },
+    {
+      "_$id": "6ee7kogk",
+      "_$var": true,
+      "_$type": "Button",
+      "name": "closeBtn",
+      "x": 470,
+      "y": 7,
+      "width": 32,
+      "height": 32,
+      "_mouseState": 2,
+      "right": 9,
+      "top": 7,
+      "skin": "res://60a9086c-a9c2-4e01-a563-355c117b509e",
+      "label": "",
+      "labelSize": 20
+    },
+    {
+      "_$id": "vyoq14nb",
+      "_$type": "Label",
+      "name": "GM",
+      "x": 196,
+      "y": 10,
+      "width": 120,
+      "height": 28,
+      "top": 10,
+      "centerX": 0,
+      "text": "GM",
+      "fontSize": 20,
+      "color": "#FFFFFF",
+      "align": "center",
+      "valign": "middle",
+      "padding": "0,0,0,0"
+    },
+    {
+      "_$id": "9t150qvs",
+      "_$var": true,
+      "_$type": "TextInput",
+      "name": "textInput",
+      "x": 20,
+      "y": 78,
+      "width": 336,
+      "height": 52,
+      "_mouseState": 2,
+      "text": "",
+      "fontSize": 25,
+      "color": "rgba(44, 145, 53, 1)",
+      "bold": true,
+      "valign": "middle",
+      "overflow": "scroll",
+      "padding": "2,6,2,6",
+      "skin": "res://87262606-4dfe-490e-8644-7fd6496c2be7",
+      "type": "text",
+      "maxChars": 0,
+      "prompt": "输入GM指令",
+      "promptColor": "#A9A9A9"
+    },
+    {
+      "_$id": "sgvsv70b",
+      "_$var": true,
+      "_$type": "Button",
+      "name": "useBtn",
+      "x": 384,
+      "y": 81,
+      "width": 120,
+      "height": 40,
+      "_mouseState": 2,
+      "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
+      "label": "发送",
+      "labelSize": 20
+    },
+    {
+      "_$id": "b47bk0gr",
+      "_$var": true,
+      "_$type": "List",
+      "name": "List",
+      "x": 28,
+      "y": 146,
+      "width": 456,
+      "height": 445,
+      "_mouseState": 2,
+      "itemTemplate": {
+        "_$ref": "vqf7ka0n",
+        "_$tmpl": "itemRender"
+      },
+      "repeatX": 1,
+      "repeatY": 10,
+      "spaceY": 5,
+      "selectEnable": true,
+      "_$child": [
+        {
+          "_$id": "vqf7ka0n",
+          "_$type": "Box",
+          "name": "Box",
+          "width": 458,
+          "height": 43,
+          "bgColor": "rgba(0, 0, 0, 1)",
+          "_$child": [
+            {
+              "_$id": "xqi6cb3q",
+              "_$var": true,
+              "_$type": "Label",
+              "name": "Label",
+              "x": 195,
+              "y": 10,
+              "width": 69,
+              "height": 24,
+              "centerX": 0,
+              "centerY": 0,
+              "text": "啊啊啊",
+              "fontSize": 23,
+              "color": "#FFFFFF",
+              "fitContent": "yes",
+              "align": "center",
+              "valign": "middle",
+              "padding": "0,0,0,0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "dvvmi0h9",
+      "_$var": true,
+      "_$type": "Button",
+      "name": "resetBtn",
+      "x": 198,
+      "y": 704,
+      "width": 120,
+      "height": 40,
+      "_mouseState": 2,
+      "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
+      "label": "重置账号",
+      "labelSize": 20
+    }
+  ]
+}

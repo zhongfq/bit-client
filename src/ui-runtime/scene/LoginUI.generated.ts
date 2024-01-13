@@ -5,5 +5,10 @@
  * scenes/login.ls
  */
 export class LoginUIBase extends Laya.Scene {
+    public imgBg!: Laya.Image;
+    public btnLogin!: Laya.Button;
+    public btnServer!: Laya.Button;
+    public labelServerName!: Laya.Label;
+    public inputAccount!: Laya.TextInput;
 }
 

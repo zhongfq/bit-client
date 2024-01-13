@@ -21,9 +21,6 @@ export class Main extends AppBase {
     onAwake(): void {
         ui.register();
         app.init();
-        this.Button2.on(Laya.Event.CLICK,()=>{
-            app.ui.show(ui.bagDialog)
-        })
     }
     
     
@@ -69,21 +66,15 @@ class App {
         this._createService();
 
         await app.datad.load();
-        app.networkd.connect("ws://games.bitserver.wang:10001");
-        app.userd.username = "zxp";
+        // app.networkd.connect("ws://games.bitserver.wang:10001");
+        // app.userd.username = "zxp";
         this.networkd.on(toEventType(opcode.user.s2c_login), async () => {
             
-            // app.ui.show(ui.bagDialog);
         });
         // await this.bagd.load();
         // this.ui.openDialog(ui.bagDialog);
 
-        // app.ui.open(ui.login);
-        let Http = new Laya.HttpRequest()
-        Http.once(Laya.Event.COMPLETE,(data:any)=>{
-            let a =data;
-        });
-        Http.send("http://games.bitserver.wang/public/serverlist")
+        app.ui.open(ui.login);
     }
     
     private _createService() {

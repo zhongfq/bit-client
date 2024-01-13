@@ -20,6 +20,8 @@ export class ui {
     static readonly bagDialog = 7;
     static readonly itemTipsDialog = 8;
     static readonly itemSynthesisDialog = 9;
+    static readonly loginServerDialog = 10;
+    static readonly gmDialog = 9999;
 
     static register() {
         app.ui.register({
@@ -54,5 +56,17 @@ export class ui {
             url: "resources/prefab/bag/item-synthesis-dialog.lh",
             blockInput: true,
         });
+        
+        app.ui.register({
+            id: ui.loginServerDialog,
+            url: "resources/prefab/login/login-server-dialog.lh",
+            blockInput: true,
+        });
+        app.ui.register({
+            id: ui.gmDialog,
+            url: "resources/prefab/gm/gm-dialog.lh",
+            blockInput: true,
+        });
+        
     }
 }

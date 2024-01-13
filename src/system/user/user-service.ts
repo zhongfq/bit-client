@@ -29,8 +29,9 @@ export class UserService extends Service<NetworkService> {
     private async onConnected() {
         const data = await this.login(this.username);
         if (data.err === errcode.ROLE_NOT_EXIST) {
-            // app.ui.toast(errmsg[data.err]);
+        //     // app.ui.toast(errmsg[data.err]);
         }
+        
     }
 
     get username() {

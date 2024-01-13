@@ -1,40 +1,52 @@
 import { app } from "../../app";
 import { Mediator } from "../../core/ui-mediator";
 import { ui } from "../../misc/ui";
+import { LoginUI } from "../../ui-runtime/scene/LoginUI";
 
 const { regClass, property } = Laya;
-
+type ServerData = {
+    port:number;
+    host:string;
+    server_name:string;
+    server_id:number;
+    state_desc:string;
+    state:number
+}
 @regClass()
 export class LoginMediator extends Mediator {
-    //declare owner : Laya.Sprite3D;
-    //declare owner : Laya.Sprite;
-    //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
-    //onAwake(): void {}
-    //组件被启用后执行，例如节点被添加到舞台后
-    //onEnable(): void {}
-    //组件被禁用时执行，例如从节点从舞台移除后
-    //onDisable(): void {}
-    //第一次执行update之前执行，只会执行一次
-    //onStart(): void {}
-    //手动调用节点销毁时执行
-    //onDestroy(): void {}
-    //每帧更新时执行，尽量不要在这里写大循环逻辑或者使用getComponent方法
-    //onUpdate(): void {}
-    //每帧更新时执行，在update之后执行，尽量不要在这里写大循环逻辑或者使用getComponent方法
-    //onLateUpdate(): void {}
-    //鼠标点击后执行。与交互相关的还有onMouseDown等十多个函数，具体请参阅文档。
-    //onMouseClick(): void {}
-
+    _tlServerList!:any[];
+    owner!:LoginUI;
+    serverData!:ServerData;
     onStart(): void {
-        this.timer.delay(3, () => {
-            app.ui.closeTop();
-
-            Laya.timer.once(1000, Laya.timer, () => {
-                const map = Laya.Loader.loadedMap;
-                for (const k in map) {
-                    console.log("assets:", k, map[k]);
-                }
-            });
+        
+        let Http = new Laya.HttpRequest()
+        Http.once(Laya.Event.COMPLETE,(data:any)=>{
+            this._tlServerList = JSON.parse(data)
+            this.serverData = this._tlServerList[0];
+            this.updateInfo()
         });
+        Http.send("http://games.bitserver.wang/public/serverlist",null,"get","text")
+        this.owner.btnLogin.on(Laya.Event.CLICK,this,this.onBtnLogin);
+        this.owner.btnServer.on(Laya.Event.CLICK,this,this.onBtnServer)
+        
+        // this.handle(opcode.connection.connected, this.onConnected);
+        
+    }
+    onBtnLogin(){
+        if(this.owner.inputAccount.text!=""){
+            app.networkd.connect("ws://"+this.serverData.host+":"+this.serverData.port);
+            app.userd.username = this.owner.inputAccount.text;
+        }
+    }
+    onBtnServer(){
+        //打开服务器列表
+        app.ui.show(ui.loginServerDialog,{back:new Laya.Handler(this, this.onServerDialogClick),serverList:this._tlServerList})
+    }
+    onServerDialogClick(data:ServerData){
+        this.serverData = data;
+        this.updateInfo()
+    }
+    updateInfo(){
+        this.owner.labelServerName.text = "· "+this.serverData.state_desc+"  "+this.serverData.server_name
     }
 }
