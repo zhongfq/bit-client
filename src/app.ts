@@ -9,6 +9,7 @@ import { AlertArgs, ui } from "./misc/ui";
 import { BagService } from "./system/bag/bag-service";
 import { ChestService } from "./system/chest/chest-service";
 import { DataService } from "./system/data/data-service";
+import { GmService } from "./system/gm/gm-service";
 import { NetworkService } from "./system/network/network-service";
 import { UserService } from "./system/user/user-service";
 import { WarService } from "./system/war/war-service";
@@ -20,7 +21,12 @@ export class Main extends AppBase {
     onAwake(): void {
         ui.register();
         app.init();
+        this.Button2.on(Laya.Event.CLICK,()=>{
+            app.ui.show(ui.bagDialog)
+        })
     }
+    
+    
 }
 
 class App {
@@ -37,6 +43,7 @@ class App {
     userd!: UserService;
     ward!: WarService;
     bagd!: BagService;
+    gmd!: GmService;
 
     constructor() {}
 
@@ -65,15 +72,20 @@ class App {
         app.networkd.connect("ws://games.bitserver.wang:10001");
         app.userd.username = "zxp";
         this.networkd.on(toEventType(opcode.user.s2c_login), async () => {
-            await app.bagd.load();
+            
             // app.ui.show(ui.bagDialog);
         });
         // await this.bagd.load();
         // this.ui.openDialog(ui.bagDialog);
 
-        app.ui.open(ui.login);
+        // app.ui.open(ui.login);
+        let Http = new Laya.HttpRequest()
+        Http.once(Laya.Event.COMPLETE,(data:any)=>{
+            let a =data;
+        });
+        Http.send("http://games.bitserver.wang/public/serverlist")
     }
-
+    
     private _createService() {
         this.networkd = this.newService(NetworkService);
         this.userd = this.newService(UserService);
@@ -81,6 +93,8 @@ class App {
         this.ward = this.newService(WarService);
         this.datad = this.newService(DataService);
         this.bagd = this.newService(BagService);
+        this.gmd = this.newService(GmService);
+        
 
         // ignore log
         this.networkd.ignoreLog(opcode.user.c2s_ping);
@@ -92,6 +106,8 @@ class App {
         this._services.push(service);
         return service;
     }
+    
+    
 }
 
 export const app = new App();
