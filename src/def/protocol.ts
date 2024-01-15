@@ -69,7 +69,7 @@ export const opcode = {
         notify_tasks: 0x1B90,
         notify_remove_tasks: 0x1B91,
     },
-    team: {
+    troop: {
         c2s_load: 0x1400,
         s2c_load: 0x1401,
     },
@@ -114,10 +114,10 @@ export const opcode = {
         s2c_cancel_giveup: 0x1507,
         c2s_load_detect_info: 0x1508,
         s2c_load_detect_info: 0x1509,
-        c2s_player_move: 0x150A,
-        s2c_player_move: 0x150B,
-        c2s_player_stop: 0x150C,
-        s2c_player_stop: 0x150D,
+        c2s_troop_move: 0x150A,
+        s2c_troop_move: 0x150B,
+        c2s_troop_stop: 0x150C,
+        s2c_troop_stop: 0x150D,
         notify_alliances: 0x1590,
         notify_roles: 0x1591,
         notify_entities: 0x1592,
@@ -464,16 +464,16 @@ export const registerProtocols = () => {
         decode: proto.task.notify_remove_tasks.decode,
     });
     register({
-        op: opcode.team.c2s_load,
-        typeURL: proto.team.c2s_load.getTypeUrl(),
-        encode: proto.team.c2s_load.encode,
-        decode: proto.team.c2s_load.decode,
+        op: opcode.troop.c2s_load,
+        typeURL: proto.troop.c2s_load.getTypeUrl(),
+        encode: proto.troop.c2s_load.encode,
+        decode: proto.troop.c2s_load.decode,
     });
     register({
-        op: opcode.team.s2c_load,
-        typeURL: proto.team.s2c_load.getTypeUrl(),
-        encode: proto.team.s2c_load.encode,
-        decode: proto.team.s2c_load.decode,
+        op: opcode.troop.s2c_load,
+        typeURL: proto.troop.s2c_load.getTypeUrl(),
+        encode: proto.troop.s2c_load.encode,
+        decode: proto.troop.s2c_load.decode,
     });
     register({
         op: opcode.user.c2s_login,
@@ -692,28 +692,28 @@ export const registerProtocols = () => {
         decode: proto.world.s2c_load_detect_info.decode,
     });
     register({
-        op: opcode.world.c2s_player_move,
-        typeURL: proto.world.c2s_player_move.getTypeUrl(),
-        encode: proto.world.c2s_player_move.encode,
-        decode: proto.world.c2s_player_move.decode,
+        op: opcode.world.c2s_troop_move,
+        typeURL: proto.world.c2s_troop_move.getTypeUrl(),
+        encode: proto.world.c2s_troop_move.encode,
+        decode: proto.world.c2s_troop_move.decode,
     });
     register({
-        op: opcode.world.s2c_player_move,
-        typeURL: proto.world.s2c_player_move.getTypeUrl(),
-        encode: proto.world.s2c_player_move.encode,
-        decode: proto.world.s2c_player_move.decode,
+        op: opcode.world.s2c_troop_move,
+        typeURL: proto.world.s2c_troop_move.getTypeUrl(),
+        encode: proto.world.s2c_troop_move.encode,
+        decode: proto.world.s2c_troop_move.decode,
     });
     register({
-        op: opcode.world.c2s_player_stop,
-        typeURL: proto.world.c2s_player_stop.getTypeUrl(),
-        encode: proto.world.c2s_player_stop.encode,
-        decode: proto.world.c2s_player_stop.decode,
+        op: opcode.world.c2s_troop_stop,
+        typeURL: proto.world.c2s_troop_stop.getTypeUrl(),
+        encode: proto.world.c2s_troop_stop.encode,
+        decode: proto.world.c2s_troop_stop.decode,
     });
     register({
-        op: opcode.world.s2c_player_stop,
-        typeURL: proto.world.s2c_player_stop.getTypeUrl(),
-        encode: proto.world.s2c_player_stop.encode,
-        decode: proto.world.s2c_player_stop.decode,
+        op: opcode.world.s2c_troop_stop,
+        typeURL: proto.world.s2c_troop_stop.getTypeUrl(),
+        encode: proto.world.s2c_troop_stop.encode,
+        decode: proto.world.s2c_troop_stop.decode,
     });
     register({
         op: opcode.world.notify_alliances,

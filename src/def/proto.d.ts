@@ -5775,6 +5775,422 @@ export namespace team {
     }
 }
 
+/** Namespace troop. */
+export namespace troop {
+
+    /** Properties of a TroopSlot. */
+    interface ITroopSlot {
+
+        /** TroopSlot heroUid */
+        heroUid?: (number|null);
+
+        /** TroopSlot army */
+        army?: (number|null);
+    }
+
+    /** Represents a TroopSlot. */
+    class TroopSlot implements ITroopSlot {
+
+        /**
+         * Constructs a new TroopSlot.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: troop.ITroopSlot);
+
+        /** TroopSlot heroUid. */
+        public heroUid: number;
+
+        /** TroopSlot army. */
+        public army: number;
+
+        /**
+         * Creates a new TroopSlot instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns TroopSlot instance
+         */
+        public static create(properties?: troop.ITroopSlot): troop.TroopSlot;
+
+        /**
+         * Encodes the specified TroopSlot message. Does not implicitly {@link troop.TroopSlot.verify|verify} messages.
+         * @param message TroopSlot message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: troop.ITroopSlot, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified TroopSlot message, length delimited. Does not implicitly {@link troop.TroopSlot.verify|verify} messages.
+         * @param message TroopSlot message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: troop.ITroopSlot, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a TroopSlot message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns TroopSlot
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): troop.TroopSlot;
+
+        /**
+         * Decodes a TroopSlot message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns TroopSlot
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): troop.TroopSlot;
+
+        /**
+         * Verifies a TroopSlot message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a TroopSlot message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns TroopSlot
+         */
+        public static fromObject(object: { [k: string]: any }): troop.TroopSlot;
+
+        /**
+         * Creates a plain object from a TroopSlot message. Also converts values to other types if specified.
+         * @param message TroopSlot
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: troop.TroopSlot, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this TroopSlot to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for TroopSlot
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a Troop. */
+    interface ITroop {
+
+        /** Troop idx */
+        idx?: (number|null);
+
+        /** Troop eid */
+        eid?: (number|null);
+
+        /** Troop slots */
+        slots?: (troop.ITroopSlot[]|null);
+
+        /** Troop soldierId */
+        soldierId?: (number|null);
+    }
+
+    /** Represents a Troop. */
+    class Troop implements ITroop {
+
+        /**
+         * Constructs a new Troop.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: troop.ITroop);
+
+        /** Troop idx. */
+        public idx: number;
+
+        /** Troop eid. */
+        public eid: number;
+
+        /** Troop slots. */
+        public slots: troop.ITroopSlot[];
+
+        /** Troop soldierId. */
+        public soldierId: number;
+
+        /**
+         * Creates a new Troop instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns Troop instance
+         */
+        public static create(properties?: troop.ITroop): troop.Troop;
+
+        /**
+         * Encodes the specified Troop message. Does not implicitly {@link troop.Troop.verify|verify} messages.
+         * @param message Troop message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: troop.ITroop, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified Troop message, length delimited. Does not implicitly {@link troop.Troop.verify|verify} messages.
+         * @param message Troop message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: troop.ITroop, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a Troop message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns Troop
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): troop.Troop;
+
+        /**
+         * Decodes a Troop message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns Troop
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): troop.Troop;
+
+        /**
+         * Verifies a Troop message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a Troop message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns Troop
+         */
+        public static fromObject(object: { [k: string]: any }): troop.Troop;
+
+        /**
+         * Creates a plain object from a Troop message. Also converts values to other types if specified.
+         * @param message Troop
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: troop.Troop, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this Troop to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for Troop
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a c2s_load. */
+    interface Ic2s_load {
+    }
+
+    /** Represents a c2s_load. */
+    class c2s_load implements Ic2s_load {
+
+        /**
+         * Constructs a new c2s_load.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: troop.Ic2s_load);
+
+        /**
+         * Creates a new c2s_load instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns c2s_load instance
+         */
+        public static create(properties?: troop.Ic2s_load): troop.c2s_load;
+
+        /**
+         * Encodes the specified c2s_load message. Does not implicitly {@link troop.c2s_load.verify|verify} messages.
+         * @param message c2s_load message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: troop.Ic2s_load, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified c2s_load message, length delimited. Does not implicitly {@link troop.c2s_load.verify|verify} messages.
+         * @param message c2s_load message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: troop.Ic2s_load, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a c2s_load message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns c2s_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): troop.c2s_load;
+
+        /**
+         * Decodes a c2s_load message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns c2s_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): troop.c2s_load;
+
+        /**
+         * Verifies a c2s_load message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a c2s_load message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns c2s_load
+         */
+        public static fromObject(object: { [k: string]: any }): troop.c2s_load;
+
+        /**
+         * Creates a plain object from a c2s_load message. Also converts values to other types if specified.
+         * @param message c2s_load
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: troop.c2s_load, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this c2s_load to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for c2s_load
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a s2c_load. */
+    interface Is2c_load {
+
+        /** s2c_load err */
+        err?: (number|null);
+
+        /** s2c_load troopList */
+        troopList?: (troop.ITroop[]|null);
+    }
+
+    /** Represents a s2c_load. */
+    class s2c_load implements Is2c_load {
+
+        /**
+         * Constructs a new s2c_load.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: troop.Is2c_load);
+
+        /** s2c_load err. */
+        public err: number;
+
+        /** s2c_load troopList. */
+        public troopList: troop.ITroop[];
+
+        /**
+         * Creates a new s2c_load instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns s2c_load instance
+         */
+        public static create(properties?: troop.Is2c_load): troop.s2c_load;
+
+        /**
+         * Encodes the specified s2c_load message. Does not implicitly {@link troop.s2c_load.verify|verify} messages.
+         * @param message s2c_load message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: troop.Is2c_load, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified s2c_load message, length delimited. Does not implicitly {@link troop.s2c_load.verify|verify} messages.
+         * @param message s2c_load message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: troop.Is2c_load, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a s2c_load message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns s2c_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): troop.s2c_load;
+
+        /**
+         * Decodes a s2c_load message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns s2c_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): troop.s2c_load;
+
+        /**
+         * Verifies a s2c_load message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a s2c_load message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns s2c_load
+         */
+        public static fromObject(object: { [k: string]: any }): troop.s2c_load;
+
+        /**
+         * Creates a plain object from a s2c_load message. Also converts values to other types if specified.
+         * @param message s2c_load
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: troop.s2c_load, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this s2c_load to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for s2c_load
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+}
+
 /** Namespace user. */
 export namespace user {
 
@@ -7158,6 +7574,109 @@ export namespace user {
 /** Namespace war. */
 export namespace war {
 
+    /** Properties of a Position. */
+    interface IPosition {
+
+        /** Position x */
+        x?: (number|null);
+
+        /** Position y */
+        y?: (number|null);
+    }
+
+    /** Represents a Position. */
+    class Position implements IPosition {
+
+        /**
+         * Constructs a new Position.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: war.IPosition);
+
+        /** Position x. */
+        public x: number;
+
+        /** Position y. */
+        public y: number;
+
+        /**
+         * Creates a new Position instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns Position instance
+         */
+        public static create(properties?: war.IPosition): war.Position;
+
+        /**
+         * Encodes the specified Position message. Does not implicitly {@link war.Position.verify|verify} messages.
+         * @param message Position message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: war.IPosition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified Position message, length delimited. Does not implicitly {@link war.Position.verify|verify} messages.
+         * @param message Position message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: war.IPosition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a Position message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns Position
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): war.Position;
+
+        /**
+         * Decodes a Position message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns Position
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): war.Position;
+
+        /**
+         * Verifies a Position message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a Position message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns Position
+         */
+        public static fromObject(object: { [k: string]: any }): war.Position;
+
+        /**
+         * Creates a plain object from a Position message. Also converts values to other types if specified.
+         * @param message Position
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: war.Position, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this Position to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for Position
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
     /** Properties of a WarHero. */
     interface IWarHero {
 
@@ -7391,14 +7910,8 @@ export namespace war {
         /** cmd_add_entity face */
         face?: (number|null);
 
-        /** cmd_add_entity x */
-        x?: (number|null);
-
-        /** cmd_add_entity y */
-        y?: (number|null);
-
-        /** cmd_add_entity z */
-        z?: (number|null);
+        /** cmd_add_entity pos */
+        pos?: (war.IPosition|null);
 
         /** cmd_add_entity maxMp */
         maxMp?: (number|null);
@@ -7434,14 +7947,8 @@ export namespace war {
         /** cmd_add_entity face. */
         public face: number;
 
-        /** cmd_add_entity x. */
-        public x: number;
-
-        /** cmd_add_entity y. */
-        public y: number;
-
-        /** cmd_add_entity z. */
-        public z: number;
+        /** cmd_add_entity pos. */
+        public pos?: (war.IPosition|null);
 
         /** cmd_add_entity maxMp. */
         public maxMp: number;
@@ -7539,14 +8046,8 @@ export namespace war {
         /** cmd_update_entity hp */
         hp?: (number|null);
 
-        /** cmd_update_entity x */
-        x?: (number|null);
-
-        /** cmd_update_entity y */
-        y?: (number|null);
-
-        /** cmd_update_entity z */
-        z?: (number|null);
+        /** cmd_update_entity pos */
+        pos?: (war.IPosition|null);
     }
 
     /** Represents a cmd_update_entity. */
@@ -7567,14 +8068,8 @@ export namespace war {
         /** cmd_update_entity hp. */
         public hp: number;
 
-        /** cmd_update_entity x. */
-        public x: number;
-
-        /** cmd_update_entity y. */
-        public y: number;
-
-        /** cmd_update_entity z. */
-        public z: number;
+        /** cmd_update_entity pos. */
+        public pos?: (war.IPosition|null);
 
         /**
          * Creates a new cmd_update_entity instance using the specified properties.
@@ -7760,14 +8255,8 @@ export namespace war {
         /** cmd_move_to speed */
         speed?: (number|null);
 
-        /** cmd_move_to targetX */
-        targetX?: (number|null);
-
-        /** cmd_move_to targetY */
-        targetY?: (number|null);
-
-        /** cmd_move_to targetZ */
-        targetZ?: (number|null);
+        /** cmd_move_to targetPos */
+        targetPos?: (war.IPosition|null);
     }
 
     /** Represents a cmd_move_to. */
@@ -7785,14 +8274,8 @@ export namespace war {
         /** cmd_move_to speed. */
         public speed: number;
 
-        /** cmd_move_to targetX. */
-        public targetX: number;
-
-        /** cmd_move_to targetY. */
-        public targetY: number;
-
-        /** cmd_move_to targetZ. */
-        public targetZ: number;
+        /** cmd_move_to targetPos. */
+        public targetPos?: (war.IPosition|null);
 
         /**
          * Creates a new cmd_move_to instance using the specified properties.
@@ -7881,14 +8364,8 @@ export namespace war {
         /** cmd_force_to speed */
         speed?: (number|null);
 
-        /** cmd_force_to targetX */
-        targetX?: (number|null);
-
-        /** cmd_force_to targetY */
-        targetY?: (number|null);
-
-        /** cmd_force_to targetZ */
-        targetZ?: (number|null);
+        /** cmd_force_to targetPos */
+        targetPos?: (war.IPosition|null);
     }
 
     /** Represents a cmd_force_to. */
@@ -7906,14 +8383,8 @@ export namespace war {
         /** cmd_force_to speed. */
         public speed: number;
 
-        /** cmd_force_to targetX. */
-        public targetX: number;
-
-        /** cmd_force_to targetY. */
-        public targetY: number;
-
-        /** cmd_force_to targetZ. */
-        public targetZ: number;
+        /** cmd_force_to targetPos. */
+        public targetPos?: (war.IPosition|null);
 
         /**
          * Creates a new cmd_force_to instance using the specified properties.
@@ -8108,17 +8579,8 @@ export namespace war {
         /** cmd_move_stop eid */
         eid?: (number|null);
 
-        /** cmd_move_stop face */
-        face?: (number|null);
-
-        /** cmd_move_stop x */
-        x?: (number|null);
-
-        /** cmd_move_stop y */
-        y?: (number|null);
-
-        /** cmd_move_stop z */
-        z?: (number|null);
+        /** cmd_move_stop pos */
+        pos?: (war.IPosition|null);
     }
 
     /** Represents a cmd_move_stop. */
@@ -8133,17 +8595,8 @@ export namespace war {
         /** cmd_move_stop eid. */
         public eid: number;
 
-        /** cmd_move_stop face. */
-        public face: number;
-
-        /** cmd_move_stop x. */
-        public x: number;
-
-        /** cmd_move_stop y. */
-        public y: number;
-
-        /** cmd_move_stop z. */
-        public z: number;
+        /** cmd_move_stop pos. */
+        public pos?: (war.IPosition|null);
 
         /**
          * Creates a new cmd_move_stop instance using the specified properties.
@@ -10667,14 +11120,8 @@ export namespace war {
     /** Properties of a DebugInfo. */
     interface IDebugInfo {
 
-        /** DebugInfo x */
-        x?: (number|null);
-
-        /** DebugInfo y */
-        y?: (number|null);
-
-        /** DebugInfo z */
-        z?: (number|null);
+        /** DebugInfo pos */
+        pos?: (war.IPosition|null);
 
         /** DebugInfo color */
         color?: (number|null);
@@ -10692,14 +11139,8 @@ export namespace war {
          */
         constructor(properties?: war.IDebugInfo);
 
-        /** DebugInfo x. */
-        public x: number;
-
-        /** DebugInfo y. */
-        public y: number;
-
-        /** DebugInfo z. */
-        public z: number;
+        /** DebugInfo pos. */
+        public pos?: (war.IPosition|null);
 
         /** DebugInfo color. */
         public color: number;
@@ -11001,6 +11442,109 @@ export namespace world {
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
+    /** Properties of a Position. */
+    interface IPosition {
+
+        /** Position x */
+        x?: (number|null);
+
+        /** Position y */
+        y?: (number|null);
+    }
+
+    /** Represents a Position. */
+    class Position implements IPosition {
+
+        /**
+         * Constructs a new Position.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: world.IPosition);
+
+        /** Position x. */
+        public x: number;
+
+        /** Position y. */
+        public y: number;
+
+        /**
+         * Creates a new Position instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns Position instance
+         */
+        public static create(properties?: world.IPosition): world.Position;
+
+        /**
+         * Encodes the specified Position message. Does not implicitly {@link world.Position.verify|verify} messages.
+         * @param message Position message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: world.IPosition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified Position message, length delimited. Does not implicitly {@link world.Position.verify|verify} messages.
+         * @param message Position message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: world.IPosition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a Position message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns Position
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.Position;
+
+        /**
+         * Decodes a Position message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns Position
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.Position;
+
+        /**
+         * Verifies a Position message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a Position message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns Position
+         */
+        public static fromObject(object: { [k: string]: any }): world.Position;
+
+        /**
+         * Creates a plain object from a Position message. Also converts values to other types if specified.
+         * @param message Position
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: world.Position, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this Position to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for Position
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
     /** Properties of an Alliance. */
     interface IAlliance {
 
@@ -11104,115 +11648,115 @@ export namespace world {
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
-    /** Properties of a ComponentPlayer. */
-    interface IComponentPlayer {
+    /** Properties of a ComponentTroop. */
+    interface IComponentTroop {
 
-        /** ComponentPlayer soldierId */
+        /** ComponentTroop soldierId */
         soldierId?: (number|null);
 
-        /** ComponentPlayer cmd */
+        /** ComponentTroop cmd */
         cmd?: (number|null);
 
-        /** ComponentPlayer stayEid */
+        /** ComponentTroop stayEid */
         stayEid?: (number|null);
 
-        /** ComponentPlayer homeEid */
+        /** ComponentTroop homeEid */
         homeEid?: (number|null);
     }
 
-    /** Represents a ComponentPlayer. */
-    class ComponentPlayer implements IComponentPlayer {
+    /** Represents a ComponentTroop. */
+    class ComponentTroop implements IComponentTroop {
 
         /**
-         * Constructs a new ComponentPlayer.
+         * Constructs a new ComponentTroop.
          * @param [properties] Properties to set
          */
-        constructor(properties?: world.IComponentPlayer);
+        constructor(properties?: world.IComponentTroop);
 
-        /** ComponentPlayer soldierId. */
+        /** ComponentTroop soldierId. */
         public soldierId: number;
 
-        /** ComponentPlayer cmd. */
+        /** ComponentTroop cmd. */
         public cmd: number;
 
-        /** ComponentPlayer stayEid. */
+        /** ComponentTroop stayEid. */
         public stayEid: number;
 
-        /** ComponentPlayer homeEid. */
+        /** ComponentTroop homeEid. */
         public homeEid: number;
 
         /**
-         * Creates a new ComponentPlayer instance using the specified properties.
+         * Creates a new ComponentTroop instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns ComponentPlayer instance
+         * @returns ComponentTroop instance
          */
-        public static create(properties?: world.IComponentPlayer): world.ComponentPlayer;
+        public static create(properties?: world.IComponentTroop): world.ComponentTroop;
 
         /**
-         * Encodes the specified ComponentPlayer message. Does not implicitly {@link world.ComponentPlayer.verify|verify} messages.
-         * @param message ComponentPlayer message or plain object to encode
+         * Encodes the specified ComponentTroop message. Does not implicitly {@link world.ComponentTroop.verify|verify} messages.
+         * @param message ComponentTroop message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: world.IComponentPlayer, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: world.IComponentTroop, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified ComponentPlayer message, length delimited. Does not implicitly {@link world.ComponentPlayer.verify|verify} messages.
-         * @param message ComponentPlayer message or plain object to encode
+         * Encodes the specified ComponentTroop message, length delimited. Does not implicitly {@link world.ComponentTroop.verify|verify} messages.
+         * @param message ComponentTroop message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: world.IComponentPlayer, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: world.IComponentTroop, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a ComponentPlayer message from the specified reader or buffer.
+         * Decodes a ComponentTroop message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns ComponentPlayer
+         * @returns ComponentTroop
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.ComponentPlayer;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.ComponentTroop;
 
         /**
-         * Decodes a ComponentPlayer message from the specified reader or buffer, length delimited.
+         * Decodes a ComponentTroop message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns ComponentPlayer
+         * @returns ComponentTroop
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.ComponentPlayer;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.ComponentTroop;
 
         /**
-         * Verifies a ComponentPlayer message.
+         * Verifies a ComponentTroop message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a ComponentPlayer message from a plain object. Also converts values to their respective internal types.
+         * Creates a ComponentTroop message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns ComponentPlayer
+         * @returns ComponentTroop
          */
-        public static fromObject(object: { [k: string]: any }): world.ComponentPlayer;
+        public static fromObject(object: { [k: string]: any }): world.ComponentTroop;
 
         /**
-         * Creates a plain object from a ComponentPlayer message. Also converts values to other types if specified.
-         * @param message ComponentPlayer
+         * Creates a plain object from a ComponentTroop message. Also converts values to other types if specified.
+         * @param message ComponentTroop
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: world.ComponentPlayer, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: world.ComponentTroop, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this ComponentPlayer to JSON.
+         * Converts this ComponentTroop to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
 
         /**
-         * Gets the default type url for ComponentPlayer
+         * Gets the default type url for ComponentTroop
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */
@@ -11895,7 +12439,7 @@ export namespace world {
         etype?: (number|null);
 
         /** Entity pos */
-        pos?: (number|null);
+        pos?: (world.IPosition|null);
 
         /** Entity state */
         state?: (number|null);
@@ -11912,8 +12456,8 @@ export namespace world {
         /** Entity owner */
         owner?: (world.IComponentOwner|null);
 
-        /** Entity player */
-        player?: (world.IComponentPlayer|null);
+        /** Entity troop */
+        troop?: (world.IComponentTroop|null);
 
         /** Entity war */
         war?: (world.IComponentWar|null);
@@ -11935,7 +12479,7 @@ export namespace world {
         public etype: number;
 
         /** Entity pos. */
-        public pos: number;
+        public pos?: (world.IPosition|null);
 
         /** Entity state. */
         public state: number;
@@ -11952,8 +12496,8 @@ export namespace world {
         /** Entity owner. */
         public owner?: (world.IComponentOwner|null);
 
-        /** Entity player. */
-        public player?: (world.IComponentPlayer|null);
+        /** Entity troop. */
+        public troop?: (world.IComponentTroop|null);
 
         /** Entity war. */
         public war?: (world.IComponentWar|null);
@@ -12137,7 +12681,7 @@ export namespace world {
         myCastleEid?: (number|null);
 
         /** s2c_load myCastlePos */
-        myCastlePos?: (number|null);
+        myCastlePos?: (world.IPosition|null);
     }
 
     /** Represents a s2c_load. */
@@ -12156,7 +12700,7 @@ export namespace world {
         public myCastleEid: number;
 
         /** s2c_load myCastlePos. */
-        public myCastlePos: number;
+        public myCastlePos?: (world.IPosition|null);
 
         /**
          * Creates a new s2c_load instance using the specified properties.
@@ -12240,7 +12784,7 @@ export namespace world {
     interface Ic2s_change_viewport {
 
         /** c2s_change_viewport pos */
-        pos?: (number|null);
+        pos?: (world.IPosition|null);
     }
 
     /** Represents a c2s_change_viewport. */
@@ -12253,7 +12797,7 @@ export namespace world {
         constructor(properties?: world.Ic2s_change_viewport);
 
         /** c2s_change_viewport pos. */
-        public pos: number;
+        public pos?: (world.IPosition|null);
 
         /**
          * Creates a new c2s_change_viewport instance using the specified properties.
@@ -12822,7 +13366,7 @@ export namespace world {
     interface Ic2s_load_detect_info {
 
         /** c2s_load_detect_info pos */
-        pos?: (number|null);
+        pos?: (world.IPosition|null);
     }
 
     /** Represents a c2s_load_detect_info. */
@@ -12835,7 +13379,7 @@ export namespace world {
         constructor(properties?: world.Ic2s_load_detect_info);
 
         /** c2s_load_detect_info pos. */
-        public pos: number;
+        public pos?: (world.IPosition|null);
 
         /**
          * Creates a new c2s_load_detect_info instance using the specified properties.
@@ -13024,394 +13568,394 @@ export namespace world {
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
-    /** Properties of a c2s_player_move. */
-    interface Ic2s_player_move {
+    /** Properties of a c2s_troop_move. */
+    interface Ic2s_troop_move {
 
-        /** c2s_player_move playerEid */
-        playerEid?: (number|null);
+        /** c2s_troop_move troopEid */
+        troopEid?: (number|null);
 
-        /** c2s_player_move dstPos */
-        dstPos?: (number|null);
+        /** c2s_troop_move dstPos */
+        dstPos?: (world.IPosition|null);
     }
 
-    /** Represents a c2s_player_move. */
-    class c2s_player_move implements Ic2s_player_move {
+    /** Represents a c2s_troop_move. */
+    class c2s_troop_move implements Ic2s_troop_move {
 
         /**
-         * Constructs a new c2s_player_move.
+         * Constructs a new c2s_troop_move.
          * @param [properties] Properties to set
          */
-        constructor(properties?: world.Ic2s_player_move);
+        constructor(properties?: world.Ic2s_troop_move);
 
-        /** c2s_player_move playerEid. */
-        public playerEid: number;
+        /** c2s_troop_move troopEid. */
+        public troopEid: number;
 
-        /** c2s_player_move dstPos. */
-        public dstPos: number;
+        /** c2s_troop_move dstPos. */
+        public dstPos?: (world.IPosition|null);
 
         /**
-         * Creates a new c2s_player_move instance using the specified properties.
+         * Creates a new c2s_troop_move instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns c2s_player_move instance
+         * @returns c2s_troop_move instance
          */
-        public static create(properties?: world.Ic2s_player_move): world.c2s_player_move;
+        public static create(properties?: world.Ic2s_troop_move): world.c2s_troop_move;
 
         /**
-         * Encodes the specified c2s_player_move message. Does not implicitly {@link world.c2s_player_move.verify|verify} messages.
-         * @param message c2s_player_move message or plain object to encode
+         * Encodes the specified c2s_troop_move message. Does not implicitly {@link world.c2s_troop_move.verify|verify} messages.
+         * @param message c2s_troop_move message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: world.Ic2s_player_move, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: world.Ic2s_troop_move, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified c2s_player_move message, length delimited. Does not implicitly {@link world.c2s_player_move.verify|verify} messages.
-         * @param message c2s_player_move message or plain object to encode
+         * Encodes the specified c2s_troop_move message, length delimited. Does not implicitly {@link world.c2s_troop_move.verify|verify} messages.
+         * @param message c2s_troop_move message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: world.Ic2s_player_move, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: world.Ic2s_troop_move, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a c2s_player_move message from the specified reader or buffer.
+         * Decodes a c2s_troop_move message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns c2s_player_move
+         * @returns c2s_troop_move
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.c2s_player_move;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.c2s_troop_move;
 
         /**
-         * Decodes a c2s_player_move message from the specified reader or buffer, length delimited.
+         * Decodes a c2s_troop_move message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns c2s_player_move
+         * @returns c2s_troop_move
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.c2s_player_move;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.c2s_troop_move;
 
         /**
-         * Verifies a c2s_player_move message.
+         * Verifies a c2s_troop_move message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a c2s_player_move message from a plain object. Also converts values to their respective internal types.
+         * Creates a c2s_troop_move message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns c2s_player_move
+         * @returns c2s_troop_move
          */
-        public static fromObject(object: { [k: string]: any }): world.c2s_player_move;
+        public static fromObject(object: { [k: string]: any }): world.c2s_troop_move;
 
         /**
-         * Creates a plain object from a c2s_player_move message. Also converts values to other types if specified.
-         * @param message c2s_player_move
+         * Creates a plain object from a c2s_troop_move message. Also converts values to other types if specified.
+         * @param message c2s_troop_move
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: world.c2s_player_move, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: world.c2s_troop_move, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this c2s_player_move to JSON.
+         * Converts this c2s_troop_move to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
 
         /**
-         * Gets the default type url for c2s_player_move
+         * Gets the default type url for c2s_troop_move
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
-    /** Properties of a s2c_player_move. */
-    interface Is2c_player_move {
+    /** Properties of a s2c_troop_move. */
+    interface Is2c_troop_move {
 
-        /** s2c_player_move err */
+        /** s2c_troop_move err */
         err?: (number|null);
     }
 
-    /** Represents a s2c_player_move. */
-    class s2c_player_move implements Is2c_player_move {
+    /** Represents a s2c_troop_move. */
+    class s2c_troop_move implements Is2c_troop_move {
 
         /**
-         * Constructs a new s2c_player_move.
+         * Constructs a new s2c_troop_move.
          * @param [properties] Properties to set
          */
-        constructor(properties?: world.Is2c_player_move);
+        constructor(properties?: world.Is2c_troop_move);
 
-        /** s2c_player_move err. */
+        /** s2c_troop_move err. */
         public err: number;
 
         /**
-         * Creates a new s2c_player_move instance using the specified properties.
+         * Creates a new s2c_troop_move instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns s2c_player_move instance
+         * @returns s2c_troop_move instance
          */
-        public static create(properties?: world.Is2c_player_move): world.s2c_player_move;
+        public static create(properties?: world.Is2c_troop_move): world.s2c_troop_move;
 
         /**
-         * Encodes the specified s2c_player_move message. Does not implicitly {@link world.s2c_player_move.verify|verify} messages.
-         * @param message s2c_player_move message or plain object to encode
+         * Encodes the specified s2c_troop_move message. Does not implicitly {@link world.s2c_troop_move.verify|verify} messages.
+         * @param message s2c_troop_move message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: world.Is2c_player_move, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: world.Is2c_troop_move, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified s2c_player_move message, length delimited. Does not implicitly {@link world.s2c_player_move.verify|verify} messages.
-         * @param message s2c_player_move message or plain object to encode
+         * Encodes the specified s2c_troop_move message, length delimited. Does not implicitly {@link world.s2c_troop_move.verify|verify} messages.
+         * @param message s2c_troop_move message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: world.Is2c_player_move, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: world.Is2c_troop_move, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a s2c_player_move message from the specified reader or buffer.
+         * Decodes a s2c_troop_move message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns s2c_player_move
+         * @returns s2c_troop_move
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.s2c_player_move;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.s2c_troop_move;
 
         /**
-         * Decodes a s2c_player_move message from the specified reader or buffer, length delimited.
+         * Decodes a s2c_troop_move message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns s2c_player_move
+         * @returns s2c_troop_move
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.s2c_player_move;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.s2c_troop_move;
 
         /**
-         * Verifies a s2c_player_move message.
+         * Verifies a s2c_troop_move message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a s2c_player_move message from a plain object. Also converts values to their respective internal types.
+         * Creates a s2c_troop_move message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns s2c_player_move
+         * @returns s2c_troop_move
          */
-        public static fromObject(object: { [k: string]: any }): world.s2c_player_move;
+        public static fromObject(object: { [k: string]: any }): world.s2c_troop_move;
 
         /**
-         * Creates a plain object from a s2c_player_move message. Also converts values to other types if specified.
-         * @param message s2c_player_move
+         * Creates a plain object from a s2c_troop_move message. Also converts values to other types if specified.
+         * @param message s2c_troop_move
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: world.s2c_player_move, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: world.s2c_troop_move, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this s2c_player_move to JSON.
+         * Converts this s2c_troop_move to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
 
         /**
-         * Gets the default type url for s2c_player_move
+         * Gets the default type url for s2c_troop_move
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
-    /** Properties of a c2s_player_stop. */
-    interface Ic2s_player_stop {
+    /** Properties of a c2s_troop_stop. */
+    interface Ic2s_troop_stop {
 
-        /** c2s_player_stop playerEid */
-        playerEid?: (number|null);
+        /** c2s_troop_stop troopEid */
+        troopEid?: (number|null);
     }
 
-    /** Represents a c2s_player_stop. */
-    class c2s_player_stop implements Ic2s_player_stop {
+    /** Represents a c2s_troop_stop. */
+    class c2s_troop_stop implements Ic2s_troop_stop {
 
         /**
-         * Constructs a new c2s_player_stop.
+         * Constructs a new c2s_troop_stop.
          * @param [properties] Properties to set
          */
-        constructor(properties?: world.Ic2s_player_stop);
+        constructor(properties?: world.Ic2s_troop_stop);
 
-        /** c2s_player_stop playerEid. */
-        public playerEid: number;
+        /** c2s_troop_stop troopEid. */
+        public troopEid: number;
 
         /**
-         * Creates a new c2s_player_stop instance using the specified properties.
+         * Creates a new c2s_troop_stop instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns c2s_player_stop instance
+         * @returns c2s_troop_stop instance
          */
-        public static create(properties?: world.Ic2s_player_stop): world.c2s_player_stop;
+        public static create(properties?: world.Ic2s_troop_stop): world.c2s_troop_stop;
 
         /**
-         * Encodes the specified c2s_player_stop message. Does not implicitly {@link world.c2s_player_stop.verify|verify} messages.
-         * @param message c2s_player_stop message or plain object to encode
+         * Encodes the specified c2s_troop_stop message. Does not implicitly {@link world.c2s_troop_stop.verify|verify} messages.
+         * @param message c2s_troop_stop message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: world.Ic2s_player_stop, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: world.Ic2s_troop_stop, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified c2s_player_stop message, length delimited. Does not implicitly {@link world.c2s_player_stop.verify|verify} messages.
-         * @param message c2s_player_stop message or plain object to encode
+         * Encodes the specified c2s_troop_stop message, length delimited. Does not implicitly {@link world.c2s_troop_stop.verify|verify} messages.
+         * @param message c2s_troop_stop message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: world.Ic2s_player_stop, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: world.Ic2s_troop_stop, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a c2s_player_stop message from the specified reader or buffer.
+         * Decodes a c2s_troop_stop message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns c2s_player_stop
+         * @returns c2s_troop_stop
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.c2s_player_stop;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.c2s_troop_stop;
 
         /**
-         * Decodes a c2s_player_stop message from the specified reader or buffer, length delimited.
+         * Decodes a c2s_troop_stop message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns c2s_player_stop
+         * @returns c2s_troop_stop
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.c2s_player_stop;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.c2s_troop_stop;
 
         /**
-         * Verifies a c2s_player_stop message.
+         * Verifies a c2s_troop_stop message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a c2s_player_stop message from a plain object. Also converts values to their respective internal types.
+         * Creates a c2s_troop_stop message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns c2s_player_stop
+         * @returns c2s_troop_stop
          */
-        public static fromObject(object: { [k: string]: any }): world.c2s_player_stop;
+        public static fromObject(object: { [k: string]: any }): world.c2s_troop_stop;
 
         /**
-         * Creates a plain object from a c2s_player_stop message. Also converts values to other types if specified.
-         * @param message c2s_player_stop
+         * Creates a plain object from a c2s_troop_stop message. Also converts values to other types if specified.
+         * @param message c2s_troop_stop
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: world.c2s_player_stop, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: world.c2s_troop_stop, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this c2s_player_stop to JSON.
+         * Converts this c2s_troop_stop to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
 
         /**
-         * Gets the default type url for c2s_player_stop
+         * Gets the default type url for c2s_troop_stop
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
-    /** Properties of a s2c_player_stop. */
-    interface Is2c_player_stop {
+    /** Properties of a s2c_troop_stop. */
+    interface Is2c_troop_stop {
 
-        /** s2c_player_stop err */
+        /** s2c_troop_stop err */
         err?: (number|null);
     }
 
-    /** Represents a s2c_player_stop. */
-    class s2c_player_stop implements Is2c_player_stop {
+    /** Represents a s2c_troop_stop. */
+    class s2c_troop_stop implements Is2c_troop_stop {
 
         /**
-         * Constructs a new s2c_player_stop.
+         * Constructs a new s2c_troop_stop.
          * @param [properties] Properties to set
          */
-        constructor(properties?: world.Is2c_player_stop);
+        constructor(properties?: world.Is2c_troop_stop);
 
-        /** s2c_player_stop err. */
+        /** s2c_troop_stop err. */
         public err: number;
 
         /**
-         * Creates a new s2c_player_stop instance using the specified properties.
+         * Creates a new s2c_troop_stop instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns s2c_player_stop instance
+         * @returns s2c_troop_stop instance
          */
-        public static create(properties?: world.Is2c_player_stop): world.s2c_player_stop;
+        public static create(properties?: world.Is2c_troop_stop): world.s2c_troop_stop;
 
         /**
-         * Encodes the specified s2c_player_stop message. Does not implicitly {@link world.s2c_player_stop.verify|verify} messages.
-         * @param message s2c_player_stop message or plain object to encode
+         * Encodes the specified s2c_troop_stop message. Does not implicitly {@link world.s2c_troop_stop.verify|verify} messages.
+         * @param message s2c_troop_stop message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: world.Is2c_player_stop, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: world.Is2c_troop_stop, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified s2c_player_stop message, length delimited. Does not implicitly {@link world.s2c_player_stop.verify|verify} messages.
-         * @param message s2c_player_stop message or plain object to encode
+         * Encodes the specified s2c_troop_stop message, length delimited. Does not implicitly {@link world.s2c_troop_stop.verify|verify} messages.
+         * @param message s2c_troop_stop message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: world.Is2c_player_stop, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: world.Is2c_troop_stop, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a s2c_player_stop message from the specified reader or buffer.
+         * Decodes a s2c_troop_stop message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns s2c_player_stop
+         * @returns s2c_troop_stop
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.s2c_player_stop;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.s2c_troop_stop;
 
         /**
-         * Decodes a s2c_player_stop message from the specified reader or buffer, length delimited.
+         * Decodes a s2c_troop_stop message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns s2c_player_stop
+         * @returns s2c_troop_stop
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.s2c_player_stop;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.s2c_troop_stop;
 
         /**
-         * Verifies a s2c_player_stop message.
+         * Verifies a s2c_troop_stop message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a s2c_player_stop message from a plain object. Also converts values to their respective internal types.
+         * Creates a s2c_troop_stop message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns s2c_player_stop
+         * @returns s2c_troop_stop
          */
-        public static fromObject(object: { [k: string]: any }): world.s2c_player_stop;
+        public static fromObject(object: { [k: string]: any }): world.s2c_troop_stop;
 
         /**
-         * Creates a plain object from a s2c_player_stop message. Also converts values to other types if specified.
-         * @param message s2c_player_stop
+         * Creates a plain object from a s2c_troop_stop message. Also converts values to other types if specified.
+         * @param message s2c_troop_stop
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: world.s2c_player_stop, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: world.s2c_troop_stop, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this s2c_player_stop to JSON.
+         * Converts this s2c_troop_stop to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
 
         /**
-         * Gets the default type url for s2c_player_stop
+         * Gets the default type url for s2c_troop_stop
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */

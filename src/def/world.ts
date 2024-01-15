@@ -7,7 +7,7 @@ export const world = {
         PLAYER: "player",
         POS: "pos",
         STATE: "state",
-        TEAM: "team",
+        TROOP: "troop",
     },
     ENTITY_ACTION: {
         ADD_ENTITY: 1,
@@ -31,7 +31,7 @@ export const world = {
             3: "state",
             4: "move",
             5: "owner",
-            6: "team",
+            6: "troop",
         },
         4: {
             1: "player",
@@ -49,7 +49,7 @@ export const world = {
         CASTLE: 1,
         CITY: 3,
         PLAYER: 4,
-        TEAM: 2,
+        TROOP: 2,
     },
     LOGIC_FPS: 10,
     VISUAL_FPS: 60,

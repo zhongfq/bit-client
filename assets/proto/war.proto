@@ -2,6 +2,11 @@ syntax = "proto3";
 
 package war;
 
+message Position {
+    float x = 1;
+    float y = 2;
+}
+
 message WarHero {
     uint32 hero_id = 1;
     uint32 eid = 2;
@@ -21,9 +26,7 @@ message cmd_add_entity {
     uint32 max_hp = 5;
     uint32 hp = 6;
     int32 face = 7; // 朝向
-    uint32 x = 10;
-    uint32 y = 11;
-    uint32 z = 12;
+    Position pos = 8;
     uint32 max_mp = 13;
     uint32 mp = 14;
 }
@@ -32,9 +35,7 @@ message cmd_update_entity {
     uint32 eid = 1;
     uint32 max_hp = 3;
     uint32 hp = 4;
-    uint32 x = 5;
-    uint32 y = 6;
-    uint32 z = 7;
+    Position pos = 5;
 }
 
 message cmd_del_entity {
@@ -44,17 +45,14 @@ message cmd_del_entity {
 message cmd_move_to {
     uint32 eid = 1;
     uint32 speed = 2;
-    uint32 target_x = 10;
-    uint32 target_y = 11;
-    uint32 target_z = 12;
+    Position target_pos = 3;
 }
 
 message cmd_force_to {
     uint32 eid = 1;
     uint32 speed = 2;
-    uint32 target_x = 10;
-    uint32 target_y = 11;
-    uint32 target_z = 12;
+    Position target_pos = 3;
+
 }
 
 message cmd_move_start {
@@ -65,10 +63,7 @@ message cmd_move_start {
 
 message cmd_move_stop {
     uint32 eid = 1;
-    int32 face = 3;
-    uint32 x = 10;
-    uint32 y = 11;
-    uint32 z = 12;
+    Position pos = 2;
 }
 
 message cmd_add_buff {
@@ -196,11 +191,9 @@ message notify_end {
 }
 
 message DebugInfo {
-    uint32 x = 1;
-    uint32 y = 2;
-    uint32 z = 3;
-    uint32 color = 4;
-    uint32 size = 5;
+    Position pos = 1;
+    uint32 color = 2;
+    uint32 size = 3;
 }
 message notify_debug {
     repeated DebugInfo infos = 1;

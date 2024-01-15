@@ -13033,6 +13033,963 @@ $root.team = (function() {
     return team;
 })();
 
+$root.troop = (function() {
+
+    /**
+     * Namespace troop.
+     * @exports troop
+     * @namespace
+     */
+    var troop = {};
+
+    troop.TroopSlot = (function() {
+
+        /**
+         * Properties of a TroopSlot.
+         * @memberof troop
+         * @interface ITroopSlot
+         * @property {number|null} [heroUid] TroopSlot heroUid
+         * @property {number|null} [army] TroopSlot army
+         */
+
+        /**
+         * Constructs a new TroopSlot.
+         * @memberof troop
+         * @classdesc Represents a TroopSlot.
+         * @implements ITroopSlot
+         * @constructor
+         * @param {troop.ITroopSlot=} [properties] Properties to set
+         */
+        function TroopSlot(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * TroopSlot heroUid.
+         * @member {number} heroUid
+         * @memberof troop.TroopSlot
+         * @instance
+         */
+        TroopSlot.prototype.heroUid = 0;
+
+        /**
+         * TroopSlot army.
+         * @member {number} army
+         * @memberof troop.TroopSlot
+         * @instance
+         */
+        TroopSlot.prototype.army = 0;
+
+        /**
+         * Creates a new TroopSlot instance using the specified properties.
+         * @function create
+         * @memberof troop.TroopSlot
+         * @static
+         * @param {troop.ITroopSlot=} [properties] Properties to set
+         * @returns {troop.TroopSlot} TroopSlot instance
+         */
+        TroopSlot.create = function create(properties) {
+            return new TroopSlot(properties);
+        };
+
+        /**
+         * Encodes the specified TroopSlot message. Does not implicitly {@link troop.TroopSlot.verify|verify} messages.
+         * @function encode
+         * @memberof troop.TroopSlot
+         * @static
+         * @param {troop.ITroopSlot} message TroopSlot message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        TroopSlot.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.heroUid != null && Object.hasOwnProperty.call(message, "heroUid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.heroUid);
+            if (message.army != null && Object.hasOwnProperty.call(message, "army"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.army);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified TroopSlot message, length delimited. Does not implicitly {@link troop.TroopSlot.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof troop.TroopSlot
+         * @static
+         * @param {troop.ITroopSlot} message TroopSlot message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        TroopSlot.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a TroopSlot message from the specified reader or buffer.
+         * @function decode
+         * @memberof troop.TroopSlot
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {troop.TroopSlot} TroopSlot
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        TroopSlot.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.troop.TroopSlot();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.heroUid = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.army = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a TroopSlot message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof troop.TroopSlot
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {troop.TroopSlot} TroopSlot
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        TroopSlot.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a TroopSlot message.
+         * @function verify
+         * @memberof troop.TroopSlot
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        TroopSlot.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.heroUid != null && message.hasOwnProperty("heroUid"))
+                if (!$util.isInteger(message.heroUid))
+                    return "heroUid: integer expected";
+            if (message.army != null && message.hasOwnProperty("army"))
+                if (!$util.isInteger(message.army))
+                    return "army: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a TroopSlot message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof troop.TroopSlot
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {troop.TroopSlot} TroopSlot
+         */
+        TroopSlot.fromObject = function fromObject(object) {
+            if (object instanceof $root.troop.TroopSlot)
+                return object;
+            var message = new $root.troop.TroopSlot();
+            if (object.heroUid != null)
+                message.heroUid = object.heroUid >>> 0;
+            if (object.army != null)
+                message.army = object.army >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a TroopSlot message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof troop.TroopSlot
+         * @static
+         * @param {troop.TroopSlot} message TroopSlot
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        TroopSlot.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.heroUid = 0;
+                object.army = 0;
+            }
+            if (message.heroUid != null && message.hasOwnProperty("heroUid"))
+                object.heroUid = message.heroUid;
+            if (message.army != null && message.hasOwnProperty("army"))
+                object.army = message.army;
+            return object;
+        };
+
+        /**
+         * Converts this TroopSlot to JSON.
+         * @function toJSON
+         * @memberof troop.TroopSlot
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        TroopSlot.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for TroopSlot
+         * @function getTypeUrl
+         * @memberof troop.TroopSlot
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        TroopSlot.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/troop.TroopSlot";
+        };
+
+        return TroopSlot;
+    })();
+
+    troop.Troop = (function() {
+
+        /**
+         * Properties of a Troop.
+         * @memberof troop
+         * @interface ITroop
+         * @property {number|null} [idx] Troop idx
+         * @property {number|null} [eid] Troop eid
+         * @property {Array.<troop.ITroopSlot>|null} [slots] Troop slots
+         * @property {number|null} [soldierId] Troop soldierId
+         */
+
+        /**
+         * Constructs a new Troop.
+         * @memberof troop
+         * @classdesc Represents a Troop.
+         * @implements ITroop
+         * @constructor
+         * @param {troop.ITroop=} [properties] Properties to set
+         */
+        function Troop(properties) {
+            this.slots = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Troop idx.
+         * @member {number} idx
+         * @memberof troop.Troop
+         * @instance
+         */
+        Troop.prototype.idx = 0;
+
+        /**
+         * Troop eid.
+         * @member {number} eid
+         * @memberof troop.Troop
+         * @instance
+         */
+        Troop.prototype.eid = 0;
+
+        /**
+         * Troop slots.
+         * @member {Array.<troop.ITroopSlot>} slots
+         * @memberof troop.Troop
+         * @instance
+         */
+        Troop.prototype.slots = $util.emptyArray;
+
+        /**
+         * Troop soldierId.
+         * @member {number} soldierId
+         * @memberof troop.Troop
+         * @instance
+         */
+        Troop.prototype.soldierId = 0;
+
+        /**
+         * Creates a new Troop instance using the specified properties.
+         * @function create
+         * @memberof troop.Troop
+         * @static
+         * @param {troop.ITroop=} [properties] Properties to set
+         * @returns {troop.Troop} Troop instance
+         */
+        Troop.create = function create(properties) {
+            return new Troop(properties);
+        };
+
+        /**
+         * Encodes the specified Troop message. Does not implicitly {@link troop.Troop.verify|verify} messages.
+         * @function encode
+         * @memberof troop.Troop
+         * @static
+         * @param {troop.ITroop} message Troop message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Troop.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.idx != null && Object.hasOwnProperty.call(message, "idx"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.idx);
+            if (message.eid != null && Object.hasOwnProperty.call(message, "eid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.eid);
+            if (message.slots != null && message.slots.length)
+                for (var i = 0; i < message.slots.length; ++i)
+                    $root.troop.TroopSlot.encode(message.slots[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            if (message.soldierId != null && Object.hasOwnProperty.call(message, "soldierId"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.soldierId);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified Troop message, length delimited. Does not implicitly {@link troop.Troop.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof troop.Troop
+         * @static
+         * @param {troop.ITroop} message Troop message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Troop.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a Troop message from the specified reader or buffer.
+         * @function decode
+         * @memberof troop.Troop
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {troop.Troop} Troop
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Troop.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.troop.Troop();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.idx = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.eid = reader.uint32();
+                        break;
+                    }
+                case 3: {
+                        if (!(message.slots && message.slots.length))
+                            message.slots = [];
+                        message.slots.push($root.troop.TroopSlot.decode(reader, reader.uint32()));
+                        break;
+                    }
+                case 4: {
+                        message.soldierId = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a Troop message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof troop.Troop
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {troop.Troop} Troop
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Troop.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a Troop message.
+         * @function verify
+         * @memberof troop.Troop
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        Troop.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.idx != null && message.hasOwnProperty("idx"))
+                if (!$util.isInteger(message.idx))
+                    return "idx: integer expected";
+            if (message.eid != null && message.hasOwnProperty("eid"))
+                if (!$util.isInteger(message.eid))
+                    return "eid: integer expected";
+            if (message.slots != null && message.hasOwnProperty("slots")) {
+                if (!Array.isArray(message.slots))
+                    return "slots: array expected";
+                for (var i = 0; i < message.slots.length; ++i) {
+                    var error = $root.troop.TroopSlot.verify(message.slots[i]);
+                    if (error)
+                        return "slots." + error;
+                }
+            }
+            if (message.soldierId != null && message.hasOwnProperty("soldierId"))
+                if (!$util.isInteger(message.soldierId))
+                    return "soldierId: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a Troop message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof troop.Troop
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {troop.Troop} Troop
+         */
+        Troop.fromObject = function fromObject(object) {
+            if (object instanceof $root.troop.Troop)
+                return object;
+            var message = new $root.troop.Troop();
+            if (object.idx != null)
+                message.idx = object.idx >>> 0;
+            if (object.eid != null)
+                message.eid = object.eid >>> 0;
+            if (object.slots) {
+                if (!Array.isArray(object.slots))
+                    throw TypeError(".troop.Troop.slots: array expected");
+                message.slots = [];
+                for (var i = 0; i < object.slots.length; ++i) {
+                    if (typeof object.slots[i] !== "object")
+                        throw TypeError(".troop.Troop.slots: object expected");
+                    message.slots[i] = $root.troop.TroopSlot.fromObject(object.slots[i]);
+                }
+            }
+            if (object.soldierId != null)
+                message.soldierId = object.soldierId >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a Troop message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof troop.Troop
+         * @static
+         * @param {troop.Troop} message Troop
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        Troop.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.slots = [];
+            if (options.defaults) {
+                object.idx = 0;
+                object.eid = 0;
+                object.soldierId = 0;
+            }
+            if (message.idx != null && message.hasOwnProperty("idx"))
+                object.idx = message.idx;
+            if (message.eid != null && message.hasOwnProperty("eid"))
+                object.eid = message.eid;
+            if (message.slots && message.slots.length) {
+                object.slots = [];
+                for (var j = 0; j < message.slots.length; ++j)
+                    object.slots[j] = $root.troop.TroopSlot.toObject(message.slots[j], options);
+            }
+            if (message.soldierId != null && message.hasOwnProperty("soldierId"))
+                object.soldierId = message.soldierId;
+            return object;
+        };
+
+        /**
+         * Converts this Troop to JSON.
+         * @function toJSON
+         * @memberof troop.Troop
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        Troop.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for Troop
+         * @function getTypeUrl
+         * @memberof troop.Troop
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        Troop.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/troop.Troop";
+        };
+
+        return Troop;
+    })();
+
+    troop.c2s_load = (function() {
+
+        /**
+         * Properties of a c2s_load.
+         * @memberof troop
+         * @interface Ic2s_load
+         */
+
+        /**
+         * Constructs a new c2s_load.
+         * @memberof troop
+         * @classdesc Represents a c2s_load.
+         * @implements Ic2s_load
+         * @constructor
+         * @param {troop.Ic2s_load=} [properties] Properties to set
+         */
+        function c2s_load(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Creates a new c2s_load instance using the specified properties.
+         * @function create
+         * @memberof troop.c2s_load
+         * @static
+         * @param {troop.Ic2s_load=} [properties] Properties to set
+         * @returns {troop.c2s_load} c2s_load instance
+         */
+        c2s_load.create = function create(properties) {
+            return new c2s_load(properties);
+        };
+
+        /**
+         * Encodes the specified c2s_load message. Does not implicitly {@link troop.c2s_load.verify|verify} messages.
+         * @function encode
+         * @memberof troop.c2s_load
+         * @static
+         * @param {troop.Ic2s_load} message c2s_load message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_load.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified c2s_load message, length delimited. Does not implicitly {@link troop.c2s_load.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof troop.c2s_load
+         * @static
+         * @param {troop.Ic2s_load} message c2s_load message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_load.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a c2s_load message from the specified reader or buffer.
+         * @function decode
+         * @memberof troop.c2s_load
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {troop.c2s_load} c2s_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_load.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.troop.c2s_load();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a c2s_load message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof troop.c2s_load
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {troop.c2s_load} c2s_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_load.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a c2s_load message.
+         * @function verify
+         * @memberof troop.c2s_load
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        c2s_load.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+
+        /**
+         * Creates a c2s_load message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof troop.c2s_load
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {troop.c2s_load} c2s_load
+         */
+        c2s_load.fromObject = function fromObject(object) {
+            if (object instanceof $root.troop.c2s_load)
+                return object;
+            return new $root.troop.c2s_load();
+        };
+
+        /**
+         * Creates a plain object from a c2s_load message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof troop.c2s_load
+         * @static
+         * @param {troop.c2s_load} message c2s_load
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        c2s_load.toObject = function toObject() {
+            return {};
+        };
+
+        /**
+         * Converts this c2s_load to JSON.
+         * @function toJSON
+         * @memberof troop.c2s_load
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        c2s_load.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for c2s_load
+         * @function getTypeUrl
+         * @memberof troop.c2s_load
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        c2s_load.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/troop.c2s_load";
+        };
+
+        return c2s_load;
+    })();
+
+    troop.s2c_load = (function() {
+
+        /**
+         * Properties of a s2c_load.
+         * @memberof troop
+         * @interface Is2c_load
+         * @property {number|null} [err] s2c_load err
+         * @property {Array.<troop.ITroop>|null} [troopList] s2c_load troopList
+         */
+
+        /**
+         * Constructs a new s2c_load.
+         * @memberof troop
+         * @classdesc Represents a s2c_load.
+         * @implements Is2c_load
+         * @constructor
+         * @param {troop.Is2c_load=} [properties] Properties to set
+         */
+        function s2c_load(properties) {
+            this.troopList = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * s2c_load err.
+         * @member {number} err
+         * @memberof troop.s2c_load
+         * @instance
+         */
+        s2c_load.prototype.err = 0;
+
+        /**
+         * s2c_load troopList.
+         * @member {Array.<troop.ITroop>} troopList
+         * @memberof troop.s2c_load
+         * @instance
+         */
+        s2c_load.prototype.troopList = $util.emptyArray;
+
+        /**
+         * Creates a new s2c_load instance using the specified properties.
+         * @function create
+         * @memberof troop.s2c_load
+         * @static
+         * @param {troop.Is2c_load=} [properties] Properties to set
+         * @returns {troop.s2c_load} s2c_load instance
+         */
+        s2c_load.create = function create(properties) {
+            return new s2c_load(properties);
+        };
+
+        /**
+         * Encodes the specified s2c_load message. Does not implicitly {@link troop.s2c_load.verify|verify} messages.
+         * @function encode
+         * @memberof troop.s2c_load
+         * @static
+         * @param {troop.Is2c_load} message s2c_load message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_load.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
+            if (message.troopList != null && message.troopList.length)
+                for (var i = 0; i < message.troopList.length; ++i)
+                    $root.troop.Troop.encode(message.troopList[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified s2c_load message, length delimited. Does not implicitly {@link troop.s2c_load.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof troop.s2c_load
+         * @static
+         * @param {troop.Is2c_load} message s2c_load message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_load.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a s2c_load message from the specified reader or buffer.
+         * @function decode
+         * @memberof troop.s2c_load
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {troop.s2c_load} s2c_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_load.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.troop.s2c_load();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.err = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        if (!(message.troopList && message.troopList.length))
+                            message.troopList = [];
+                        message.troopList.push($root.troop.Troop.decode(reader, reader.uint32()));
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a s2c_load message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof troop.s2c_load
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {troop.s2c_load} s2c_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_load.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a s2c_load message.
+         * @function verify
+         * @memberof troop.s2c_load
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        s2c_load.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.err != null && message.hasOwnProperty("err"))
+                if (!$util.isInteger(message.err))
+                    return "err: integer expected";
+            if (message.troopList != null && message.hasOwnProperty("troopList")) {
+                if (!Array.isArray(message.troopList))
+                    return "troopList: array expected";
+                for (var i = 0; i < message.troopList.length; ++i) {
+                    var error = $root.troop.Troop.verify(message.troopList[i]);
+                    if (error)
+                        return "troopList." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a s2c_load message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof troop.s2c_load
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {troop.s2c_load} s2c_load
+         */
+        s2c_load.fromObject = function fromObject(object) {
+            if (object instanceof $root.troop.s2c_load)
+                return object;
+            var message = new $root.troop.s2c_load();
+            if (object.err != null)
+                message.err = object.err >>> 0;
+            if (object.troopList) {
+                if (!Array.isArray(object.troopList))
+                    throw TypeError(".troop.s2c_load.troopList: array expected");
+                message.troopList = [];
+                for (var i = 0; i < object.troopList.length; ++i) {
+                    if (typeof object.troopList[i] !== "object")
+                        throw TypeError(".troop.s2c_load.troopList: object expected");
+                    message.troopList[i] = $root.troop.Troop.fromObject(object.troopList[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a s2c_load message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof troop.s2c_load
+         * @static
+         * @param {troop.s2c_load} message s2c_load
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        s2c_load.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.troopList = [];
+            if (options.defaults)
+                object.err = 0;
+            if (message.err != null && message.hasOwnProperty("err"))
+                object.err = message.err;
+            if (message.troopList && message.troopList.length) {
+                object.troopList = [];
+                for (var j = 0; j < message.troopList.length; ++j)
+                    object.troopList[j] = $root.troop.Troop.toObject(message.troopList[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this s2c_load to JSON.
+         * @function toJSON
+         * @memberof troop.s2c_load
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        s2c_load.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for s2c_load
+         * @function getTypeUrl
+         * @memberof troop.s2c_load
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        s2c_load.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/troop.s2c_load";
+        };
+
+        return s2c_load;
+    })();
+
+    return troop;
+})();
+
 $root.user = (function() {
 
     /**
@@ -15988,6 +16945,233 @@ $root.war = (function() {
      */
     var war = {};
 
+    war.Position = (function() {
+
+        /**
+         * Properties of a Position.
+         * @memberof war
+         * @interface IPosition
+         * @property {number|null} [x] Position x
+         * @property {number|null} [y] Position y
+         */
+
+        /**
+         * Constructs a new Position.
+         * @memberof war
+         * @classdesc Represents a Position.
+         * @implements IPosition
+         * @constructor
+         * @param {war.IPosition=} [properties] Properties to set
+         */
+        function Position(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Position x.
+         * @member {number} x
+         * @memberof war.Position
+         * @instance
+         */
+        Position.prototype.x = 0;
+
+        /**
+         * Position y.
+         * @member {number} y
+         * @memberof war.Position
+         * @instance
+         */
+        Position.prototype.y = 0;
+
+        /**
+         * Creates a new Position instance using the specified properties.
+         * @function create
+         * @memberof war.Position
+         * @static
+         * @param {war.IPosition=} [properties] Properties to set
+         * @returns {war.Position} Position instance
+         */
+        Position.create = function create(properties) {
+            return new Position(properties);
+        };
+
+        /**
+         * Encodes the specified Position message. Does not implicitly {@link war.Position.verify|verify} messages.
+         * @function encode
+         * @memberof war.Position
+         * @static
+         * @param {war.IPosition} message Position message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Position.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.x != null && Object.hasOwnProperty.call(message, "x"))
+                writer.uint32(/* id 1, wireType 5 =*/13).float(message.x);
+            if (message.y != null && Object.hasOwnProperty.call(message, "y"))
+                writer.uint32(/* id 2, wireType 5 =*/21).float(message.y);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified Position message, length delimited. Does not implicitly {@link war.Position.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof war.Position
+         * @static
+         * @param {war.IPosition} message Position message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Position.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a Position message from the specified reader or buffer.
+         * @function decode
+         * @memberof war.Position
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {war.Position} Position
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Position.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.war.Position();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.x = reader.float();
+                        break;
+                    }
+                case 2: {
+                        message.y = reader.float();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a Position message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof war.Position
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {war.Position} Position
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Position.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a Position message.
+         * @function verify
+         * @memberof war.Position
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        Position.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.x != null && message.hasOwnProperty("x"))
+                if (typeof message.x !== "number")
+                    return "x: number expected";
+            if (message.y != null && message.hasOwnProperty("y"))
+                if (typeof message.y !== "number")
+                    return "y: number expected";
+            return null;
+        };
+
+        /**
+         * Creates a Position message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof war.Position
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {war.Position} Position
+         */
+        Position.fromObject = function fromObject(object) {
+            if (object instanceof $root.war.Position)
+                return object;
+            var message = new $root.war.Position();
+            if (object.x != null)
+                message.x = Number(object.x);
+            if (object.y != null)
+                message.y = Number(object.y);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a Position message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof war.Position
+         * @static
+         * @param {war.Position} message Position
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        Position.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.x = 0;
+                object.y = 0;
+            }
+            if (message.x != null && message.hasOwnProperty("x"))
+                object.x = options.json && !isFinite(message.x) ? String(message.x) : message.x;
+            if (message.y != null && message.hasOwnProperty("y"))
+                object.y = options.json && !isFinite(message.y) ? String(message.y) : message.y;
+            return object;
+        };
+
+        /**
+         * Converts this Position to JSON.
+         * @function toJSON
+         * @memberof war.Position
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        Position.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for Position
+         * @function getTypeUrl
+         * @memberof war.Position
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        Position.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/war.Position";
+        };
+
+        return Position;
+    })();
+
     war.WarHero = (function() {
 
         /**
@@ -16513,9 +17697,7 @@ $root.war = (function() {
          * @property {number|null} [maxHp] cmd_add_entity maxHp
          * @property {number|null} [hp] cmd_add_entity hp
          * @property {number|null} [face] cmd_add_entity face
-         * @property {number|null} [x] cmd_add_entity x
-         * @property {number|null} [y] cmd_add_entity y
-         * @property {number|null} [z] cmd_add_entity z
+         * @property {war.IPosition|null} [pos] cmd_add_entity pos
          * @property {number|null} [maxMp] cmd_add_entity maxMp
          * @property {number|null} [mp] cmd_add_entity mp
          */
@@ -16584,28 +17766,12 @@ $root.war = (function() {
         cmd_add_entity.prototype.face = 0;
 
         /**
-         * cmd_add_entity x.
-         * @member {number} x
+         * cmd_add_entity pos.
+         * @member {war.IPosition|null|undefined} pos
          * @memberof war.cmd_add_entity
          * @instance
          */
-        cmd_add_entity.prototype.x = 0;
-
-        /**
-         * cmd_add_entity y.
-         * @member {number} y
-         * @memberof war.cmd_add_entity
-         * @instance
-         */
-        cmd_add_entity.prototype.y = 0;
-
-        /**
-         * cmd_add_entity z.
-         * @member {number} z
-         * @memberof war.cmd_add_entity
-         * @instance
-         */
-        cmd_add_entity.prototype.z = 0;
+        cmd_add_entity.prototype.pos = null;
 
         /**
          * cmd_add_entity maxMp.
@@ -16659,12 +17825,8 @@ $root.war = (function() {
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.hp);
             if (message.face != null && Object.hasOwnProperty.call(message, "face"))
                 writer.uint32(/* id 7, wireType 0 =*/56).int32(message.face);
-            if (message.x != null && Object.hasOwnProperty.call(message, "x"))
-                writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.x);
-            if (message.y != null && Object.hasOwnProperty.call(message, "y"))
-                writer.uint32(/* id 11, wireType 0 =*/88).uint32(message.y);
-            if (message.z != null && Object.hasOwnProperty.call(message, "z"))
-                writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.z);
+            if (message.pos != null && Object.hasOwnProperty.call(message, "pos"))
+                $root.war.Position.encode(message.pos, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
             if (message.maxMp != null && Object.hasOwnProperty.call(message, "maxMp"))
                 writer.uint32(/* id 13, wireType 0 =*/104).uint32(message.maxMp);
             if (message.mp != null && Object.hasOwnProperty.call(message, "mp"))
@@ -16727,16 +17889,8 @@ $root.war = (function() {
                         message.face = reader.int32();
                         break;
                     }
-                case 10: {
-                        message.x = reader.uint32();
-                        break;
-                    }
-                case 11: {
-                        message.y = reader.uint32();
-                        break;
-                    }
-                case 12: {
-                        message.z = reader.uint32();
+                case 8: {
+                        message.pos = $root.war.Position.decode(reader, reader.uint32());
                         break;
                     }
                 case 13: {
@@ -16800,15 +17954,11 @@ $root.war = (function() {
             if (message.face != null && message.hasOwnProperty("face"))
                 if (!$util.isInteger(message.face))
                     return "face: integer expected";
-            if (message.x != null && message.hasOwnProperty("x"))
-                if (!$util.isInteger(message.x))
-                    return "x: integer expected";
-            if (message.y != null && message.hasOwnProperty("y"))
-                if (!$util.isInteger(message.y))
-                    return "y: integer expected";
-            if (message.z != null && message.hasOwnProperty("z"))
-                if (!$util.isInteger(message.z))
-                    return "z: integer expected";
+            if (message.pos != null && message.hasOwnProperty("pos")) {
+                var error = $root.war.Position.verify(message.pos);
+                if (error)
+                    return "pos." + error;
+            }
             if (message.maxMp != null && message.hasOwnProperty("maxMp"))
                 if (!$util.isInteger(message.maxMp))
                     return "maxMp: integer expected";
@@ -16849,12 +17999,11 @@ $root.war = (function() {
                 message.hp = object.hp >>> 0;
             if (object.face != null)
                 message.face = object.face | 0;
-            if (object.x != null)
-                message.x = object.x >>> 0;
-            if (object.y != null)
-                message.y = object.y >>> 0;
-            if (object.z != null)
-                message.z = object.z >>> 0;
+            if (object.pos != null) {
+                if (typeof object.pos !== "object")
+                    throw TypeError(".war.cmd_add_entity.pos: object expected");
+                message.pos = $root.war.Position.fromObject(object.pos);
+            }
             if (object.maxMp != null)
                 message.maxMp = object.maxMp >>> 0;
             if (object.mp != null)
@@ -16886,9 +18035,7 @@ $root.war = (function() {
                 object.maxHp = 0;
                 object.hp = 0;
                 object.face = 0;
-                object.x = 0;
-                object.y = 0;
-                object.z = 0;
+                object.pos = null;
                 object.maxMp = 0;
                 object.mp = 0;
             }
@@ -16907,12 +18054,8 @@ $root.war = (function() {
                 object.hp = message.hp;
             if (message.face != null && message.hasOwnProperty("face"))
                 object.face = message.face;
-            if (message.x != null && message.hasOwnProperty("x"))
-                object.x = message.x;
-            if (message.y != null && message.hasOwnProperty("y"))
-                object.y = message.y;
-            if (message.z != null && message.hasOwnProperty("z"))
-                object.z = message.z;
+            if (message.pos != null && message.hasOwnProperty("pos"))
+                object.pos = $root.war.Position.toObject(message.pos, options);
             if (message.maxMp != null && message.hasOwnProperty("maxMp"))
                 object.maxMp = message.maxMp;
             if (message.mp != null && message.hasOwnProperty("mp"))
@@ -16958,9 +18101,7 @@ $root.war = (function() {
          * @property {number|null} [eid] cmd_update_entity eid
          * @property {number|null} [maxHp] cmd_update_entity maxHp
          * @property {number|null} [hp] cmd_update_entity hp
-         * @property {number|null} [x] cmd_update_entity x
-         * @property {number|null} [y] cmd_update_entity y
-         * @property {number|null} [z] cmd_update_entity z
+         * @property {war.IPosition|null} [pos] cmd_update_entity pos
          */
 
         /**
@@ -17003,28 +18144,12 @@ $root.war = (function() {
         cmd_update_entity.prototype.hp = 0;
 
         /**
-         * cmd_update_entity x.
-         * @member {number} x
+         * cmd_update_entity pos.
+         * @member {war.IPosition|null|undefined} pos
          * @memberof war.cmd_update_entity
          * @instance
          */
-        cmd_update_entity.prototype.x = 0;
-
-        /**
-         * cmd_update_entity y.
-         * @member {number} y
-         * @memberof war.cmd_update_entity
-         * @instance
-         */
-        cmd_update_entity.prototype.y = 0;
-
-        /**
-         * cmd_update_entity z.
-         * @member {number} z
-         * @memberof war.cmd_update_entity
-         * @instance
-         */
-        cmd_update_entity.prototype.z = 0;
+        cmd_update_entity.prototype.pos = null;
 
         /**
          * Creates a new cmd_update_entity instance using the specified properties.
@@ -17056,12 +18181,8 @@ $root.war = (function() {
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.maxHp);
             if (message.hp != null && Object.hasOwnProperty.call(message, "hp"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.hp);
-            if (message.x != null && Object.hasOwnProperty.call(message, "x"))
-                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.x);
-            if (message.y != null && Object.hasOwnProperty.call(message, "y"))
-                writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.y);
-            if (message.z != null && Object.hasOwnProperty.call(message, "z"))
-                writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.z);
+            if (message.pos != null && Object.hasOwnProperty.call(message, "pos"))
+                $root.war.Position.encode(message.pos, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
             return writer;
         };
 
@@ -17109,15 +18230,7 @@ $root.war = (function() {
                         break;
                     }
                 case 5: {
-                        message.x = reader.uint32();
-                        break;
-                    }
-                case 6: {
-                        message.y = reader.uint32();
-                        break;
-                    }
-                case 7: {
-                        message.z = reader.uint32();
+                        message.pos = $root.war.Position.decode(reader, reader.uint32());
                         break;
                     }
                 default:
@@ -17164,15 +18277,11 @@ $root.war = (function() {
             if (message.hp != null && message.hasOwnProperty("hp"))
                 if (!$util.isInteger(message.hp))
                     return "hp: integer expected";
-            if (message.x != null && message.hasOwnProperty("x"))
-                if (!$util.isInteger(message.x))
-                    return "x: integer expected";
-            if (message.y != null && message.hasOwnProperty("y"))
-                if (!$util.isInteger(message.y))
-                    return "y: integer expected";
-            if (message.z != null && message.hasOwnProperty("z"))
-                if (!$util.isInteger(message.z))
-                    return "z: integer expected";
+            if (message.pos != null && message.hasOwnProperty("pos")) {
+                var error = $root.war.Position.verify(message.pos);
+                if (error)
+                    return "pos." + error;
+            }
             return null;
         };
 
@@ -17194,12 +18303,11 @@ $root.war = (function() {
                 message.maxHp = object.maxHp >>> 0;
             if (object.hp != null)
                 message.hp = object.hp >>> 0;
-            if (object.x != null)
-                message.x = object.x >>> 0;
-            if (object.y != null)
-                message.y = object.y >>> 0;
-            if (object.z != null)
-                message.z = object.z >>> 0;
+            if (object.pos != null) {
+                if (typeof object.pos !== "object")
+                    throw TypeError(".war.cmd_update_entity.pos: object expected");
+                message.pos = $root.war.Position.fromObject(object.pos);
+            }
             return message;
         };
 
@@ -17220,9 +18328,7 @@ $root.war = (function() {
                 object.eid = 0;
                 object.maxHp = 0;
                 object.hp = 0;
-                object.x = 0;
-                object.y = 0;
-                object.z = 0;
+                object.pos = null;
             }
             if (message.eid != null && message.hasOwnProperty("eid"))
                 object.eid = message.eid;
@@ -17230,12 +18336,8 @@ $root.war = (function() {
                 object.maxHp = message.maxHp;
             if (message.hp != null && message.hasOwnProperty("hp"))
                 object.hp = message.hp;
-            if (message.x != null && message.hasOwnProperty("x"))
-                object.x = message.x;
-            if (message.y != null && message.hasOwnProperty("y"))
-                object.y = message.y;
-            if (message.z != null && message.hasOwnProperty("z"))
-                object.z = message.z;
+            if (message.pos != null && message.hasOwnProperty("pos"))
+                object.pos = $root.war.Position.toObject(message.pos, options);
             return object;
         };
 
@@ -17479,9 +18581,7 @@ $root.war = (function() {
          * @interface Icmd_move_to
          * @property {number|null} [eid] cmd_move_to eid
          * @property {number|null} [speed] cmd_move_to speed
-         * @property {number|null} [targetX] cmd_move_to targetX
-         * @property {number|null} [targetY] cmd_move_to targetY
-         * @property {number|null} [targetZ] cmd_move_to targetZ
+         * @property {war.IPosition|null} [targetPos] cmd_move_to targetPos
          */
 
         /**
@@ -17516,28 +18616,12 @@ $root.war = (function() {
         cmd_move_to.prototype.speed = 0;
 
         /**
-         * cmd_move_to targetX.
-         * @member {number} targetX
+         * cmd_move_to targetPos.
+         * @member {war.IPosition|null|undefined} targetPos
          * @memberof war.cmd_move_to
          * @instance
          */
-        cmd_move_to.prototype.targetX = 0;
-
-        /**
-         * cmd_move_to targetY.
-         * @member {number} targetY
-         * @memberof war.cmd_move_to
-         * @instance
-         */
-        cmd_move_to.prototype.targetY = 0;
-
-        /**
-         * cmd_move_to targetZ.
-         * @member {number} targetZ
-         * @memberof war.cmd_move_to
-         * @instance
-         */
-        cmd_move_to.prototype.targetZ = 0;
+        cmd_move_to.prototype.targetPos = null;
 
         /**
          * Creates a new cmd_move_to instance using the specified properties.
@@ -17567,12 +18651,8 @@ $root.war = (function() {
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.eid);
             if (message.speed != null && Object.hasOwnProperty.call(message, "speed"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.speed);
-            if (message.targetX != null && Object.hasOwnProperty.call(message, "targetX"))
-                writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.targetX);
-            if (message.targetY != null && Object.hasOwnProperty.call(message, "targetY"))
-                writer.uint32(/* id 11, wireType 0 =*/88).uint32(message.targetY);
-            if (message.targetZ != null && Object.hasOwnProperty.call(message, "targetZ"))
-                writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.targetZ);
+            if (message.targetPos != null && Object.hasOwnProperty.call(message, "targetPos"))
+                $root.war.Position.encode(message.targetPos, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
             return writer;
         };
 
@@ -17615,16 +18695,8 @@ $root.war = (function() {
                         message.speed = reader.uint32();
                         break;
                     }
-                case 10: {
-                        message.targetX = reader.uint32();
-                        break;
-                    }
-                case 11: {
-                        message.targetY = reader.uint32();
-                        break;
-                    }
-                case 12: {
-                        message.targetZ = reader.uint32();
+                case 3: {
+                        message.targetPos = $root.war.Position.decode(reader, reader.uint32());
                         break;
                     }
                 default:
@@ -17668,15 +18740,11 @@ $root.war = (function() {
             if (message.speed != null && message.hasOwnProperty("speed"))
                 if (!$util.isInteger(message.speed))
                     return "speed: integer expected";
-            if (message.targetX != null && message.hasOwnProperty("targetX"))
-                if (!$util.isInteger(message.targetX))
-                    return "targetX: integer expected";
-            if (message.targetY != null && message.hasOwnProperty("targetY"))
-                if (!$util.isInteger(message.targetY))
-                    return "targetY: integer expected";
-            if (message.targetZ != null && message.hasOwnProperty("targetZ"))
-                if (!$util.isInteger(message.targetZ))
-                    return "targetZ: integer expected";
+            if (message.targetPos != null && message.hasOwnProperty("targetPos")) {
+                var error = $root.war.Position.verify(message.targetPos);
+                if (error)
+                    return "targetPos." + error;
+            }
             return null;
         };
 
@@ -17696,12 +18764,11 @@ $root.war = (function() {
                 message.eid = object.eid >>> 0;
             if (object.speed != null)
                 message.speed = object.speed >>> 0;
-            if (object.targetX != null)
-                message.targetX = object.targetX >>> 0;
-            if (object.targetY != null)
-                message.targetY = object.targetY >>> 0;
-            if (object.targetZ != null)
-                message.targetZ = object.targetZ >>> 0;
+            if (object.targetPos != null) {
+                if (typeof object.targetPos !== "object")
+                    throw TypeError(".war.cmd_move_to.targetPos: object expected");
+                message.targetPos = $root.war.Position.fromObject(object.targetPos);
+            }
             return message;
         };
 
@@ -17721,20 +18788,14 @@ $root.war = (function() {
             if (options.defaults) {
                 object.eid = 0;
                 object.speed = 0;
-                object.targetX = 0;
-                object.targetY = 0;
-                object.targetZ = 0;
+                object.targetPos = null;
             }
             if (message.eid != null && message.hasOwnProperty("eid"))
                 object.eid = message.eid;
             if (message.speed != null && message.hasOwnProperty("speed"))
                 object.speed = message.speed;
-            if (message.targetX != null && message.hasOwnProperty("targetX"))
-                object.targetX = message.targetX;
-            if (message.targetY != null && message.hasOwnProperty("targetY"))
-                object.targetY = message.targetY;
-            if (message.targetZ != null && message.hasOwnProperty("targetZ"))
-                object.targetZ = message.targetZ;
+            if (message.targetPos != null && message.hasOwnProperty("targetPos"))
+                object.targetPos = $root.war.Position.toObject(message.targetPos, options);
             return object;
         };
 
@@ -17775,9 +18836,7 @@ $root.war = (function() {
          * @interface Icmd_force_to
          * @property {number|null} [eid] cmd_force_to eid
          * @property {number|null} [speed] cmd_force_to speed
-         * @property {number|null} [targetX] cmd_force_to targetX
-         * @property {number|null} [targetY] cmd_force_to targetY
-         * @property {number|null} [targetZ] cmd_force_to targetZ
+         * @property {war.IPosition|null} [targetPos] cmd_force_to targetPos
          */
 
         /**
@@ -17812,28 +18871,12 @@ $root.war = (function() {
         cmd_force_to.prototype.speed = 0;
 
         /**
-         * cmd_force_to targetX.
-         * @member {number} targetX
+         * cmd_force_to targetPos.
+         * @member {war.IPosition|null|undefined} targetPos
          * @memberof war.cmd_force_to
          * @instance
          */
-        cmd_force_to.prototype.targetX = 0;
-
-        /**
-         * cmd_force_to targetY.
-         * @member {number} targetY
-         * @memberof war.cmd_force_to
-         * @instance
-         */
-        cmd_force_to.prototype.targetY = 0;
-
-        /**
-         * cmd_force_to targetZ.
-         * @member {number} targetZ
-         * @memberof war.cmd_force_to
-         * @instance
-         */
-        cmd_force_to.prototype.targetZ = 0;
+        cmd_force_to.prototype.targetPos = null;
 
         /**
          * Creates a new cmd_force_to instance using the specified properties.
@@ -17863,12 +18906,8 @@ $root.war = (function() {
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.eid);
             if (message.speed != null && Object.hasOwnProperty.call(message, "speed"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.speed);
-            if (message.targetX != null && Object.hasOwnProperty.call(message, "targetX"))
-                writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.targetX);
-            if (message.targetY != null && Object.hasOwnProperty.call(message, "targetY"))
-                writer.uint32(/* id 11, wireType 0 =*/88).uint32(message.targetY);
-            if (message.targetZ != null && Object.hasOwnProperty.call(message, "targetZ"))
-                writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.targetZ);
+            if (message.targetPos != null && Object.hasOwnProperty.call(message, "targetPos"))
+                $root.war.Position.encode(message.targetPos, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
             return writer;
         };
 
@@ -17911,16 +18950,8 @@ $root.war = (function() {
                         message.speed = reader.uint32();
                         break;
                     }
-                case 10: {
-                        message.targetX = reader.uint32();
-                        break;
-                    }
-                case 11: {
-                        message.targetY = reader.uint32();
-                        break;
-                    }
-                case 12: {
-                        message.targetZ = reader.uint32();
+                case 3: {
+                        message.targetPos = $root.war.Position.decode(reader, reader.uint32());
                         break;
                     }
                 default:
@@ -17964,15 +18995,11 @@ $root.war = (function() {
             if (message.speed != null && message.hasOwnProperty("speed"))
                 if (!$util.isInteger(message.speed))
                     return "speed: integer expected";
-            if (message.targetX != null && message.hasOwnProperty("targetX"))
-                if (!$util.isInteger(message.targetX))
-                    return "targetX: integer expected";
-            if (message.targetY != null && message.hasOwnProperty("targetY"))
-                if (!$util.isInteger(message.targetY))
-                    return "targetY: integer expected";
-            if (message.targetZ != null && message.hasOwnProperty("targetZ"))
-                if (!$util.isInteger(message.targetZ))
-                    return "targetZ: integer expected";
+            if (message.targetPos != null && message.hasOwnProperty("targetPos")) {
+                var error = $root.war.Position.verify(message.targetPos);
+                if (error)
+                    return "targetPos." + error;
+            }
             return null;
         };
 
@@ -17992,12 +19019,11 @@ $root.war = (function() {
                 message.eid = object.eid >>> 0;
             if (object.speed != null)
                 message.speed = object.speed >>> 0;
-            if (object.targetX != null)
-                message.targetX = object.targetX >>> 0;
-            if (object.targetY != null)
-                message.targetY = object.targetY >>> 0;
-            if (object.targetZ != null)
-                message.targetZ = object.targetZ >>> 0;
+            if (object.targetPos != null) {
+                if (typeof object.targetPos !== "object")
+                    throw TypeError(".war.cmd_force_to.targetPos: object expected");
+                message.targetPos = $root.war.Position.fromObject(object.targetPos);
+            }
             return message;
         };
 
@@ -18017,20 +19043,14 @@ $root.war = (function() {
             if (options.defaults) {
                 object.eid = 0;
                 object.speed = 0;
-                object.targetX = 0;
-                object.targetY = 0;
-                object.targetZ = 0;
+                object.targetPos = null;
             }
             if (message.eid != null && message.hasOwnProperty("eid"))
                 object.eid = message.eid;
             if (message.speed != null && message.hasOwnProperty("speed"))
                 object.speed = message.speed;
-            if (message.targetX != null && message.hasOwnProperty("targetX"))
-                object.targetX = message.targetX;
-            if (message.targetY != null && message.hasOwnProperty("targetY"))
-                object.targetY = message.targetY;
-            if (message.targetZ != null && message.hasOwnProperty("targetZ"))
-                object.targetZ = message.targetZ;
+            if (message.targetPos != null && message.hasOwnProperty("targetPos"))
+                object.targetPos = $root.war.Position.toObject(message.targetPos, options);
             return object;
         };
 
@@ -18320,10 +19340,7 @@ $root.war = (function() {
          * @memberof war
          * @interface Icmd_move_stop
          * @property {number|null} [eid] cmd_move_stop eid
-         * @property {number|null} [face] cmd_move_stop face
-         * @property {number|null} [x] cmd_move_stop x
-         * @property {number|null} [y] cmd_move_stop y
-         * @property {number|null} [z] cmd_move_stop z
+         * @property {war.IPosition|null} [pos] cmd_move_stop pos
          */
 
         /**
@@ -18350,36 +19367,12 @@ $root.war = (function() {
         cmd_move_stop.prototype.eid = 0;
 
         /**
-         * cmd_move_stop face.
-         * @member {number} face
+         * cmd_move_stop pos.
+         * @member {war.IPosition|null|undefined} pos
          * @memberof war.cmd_move_stop
          * @instance
          */
-        cmd_move_stop.prototype.face = 0;
-
-        /**
-         * cmd_move_stop x.
-         * @member {number} x
-         * @memberof war.cmd_move_stop
-         * @instance
-         */
-        cmd_move_stop.prototype.x = 0;
-
-        /**
-         * cmd_move_stop y.
-         * @member {number} y
-         * @memberof war.cmd_move_stop
-         * @instance
-         */
-        cmd_move_stop.prototype.y = 0;
-
-        /**
-         * cmd_move_stop z.
-         * @member {number} z
-         * @memberof war.cmd_move_stop
-         * @instance
-         */
-        cmd_move_stop.prototype.z = 0;
+        cmd_move_stop.prototype.pos = null;
 
         /**
          * Creates a new cmd_move_stop instance using the specified properties.
@@ -18407,14 +19400,8 @@ $root.war = (function() {
                 writer = $Writer.create();
             if (message.eid != null && Object.hasOwnProperty.call(message, "eid"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.eid);
-            if (message.face != null && Object.hasOwnProperty.call(message, "face"))
-                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.face);
-            if (message.x != null && Object.hasOwnProperty.call(message, "x"))
-                writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.x);
-            if (message.y != null && Object.hasOwnProperty.call(message, "y"))
-                writer.uint32(/* id 11, wireType 0 =*/88).uint32(message.y);
-            if (message.z != null && Object.hasOwnProperty.call(message, "z"))
-                writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.z);
+            if (message.pos != null && Object.hasOwnProperty.call(message, "pos"))
+                $root.war.Position.encode(message.pos, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
             return writer;
         };
 
@@ -18453,20 +19440,8 @@ $root.war = (function() {
                         message.eid = reader.uint32();
                         break;
                     }
-                case 3: {
-                        message.face = reader.int32();
-                        break;
-                    }
-                case 10: {
-                        message.x = reader.uint32();
-                        break;
-                    }
-                case 11: {
-                        message.y = reader.uint32();
-                        break;
-                    }
-                case 12: {
-                        message.z = reader.uint32();
+                case 2: {
+                        message.pos = $root.war.Position.decode(reader, reader.uint32());
                         break;
                     }
                 default:
@@ -18507,18 +19482,11 @@ $root.war = (function() {
             if (message.eid != null && message.hasOwnProperty("eid"))
                 if (!$util.isInteger(message.eid))
                     return "eid: integer expected";
-            if (message.face != null && message.hasOwnProperty("face"))
-                if (!$util.isInteger(message.face))
-                    return "face: integer expected";
-            if (message.x != null && message.hasOwnProperty("x"))
-                if (!$util.isInteger(message.x))
-                    return "x: integer expected";
-            if (message.y != null && message.hasOwnProperty("y"))
-                if (!$util.isInteger(message.y))
-                    return "y: integer expected";
-            if (message.z != null && message.hasOwnProperty("z"))
-                if (!$util.isInteger(message.z))
-                    return "z: integer expected";
+            if (message.pos != null && message.hasOwnProperty("pos")) {
+                var error = $root.war.Position.verify(message.pos);
+                if (error)
+                    return "pos." + error;
+            }
             return null;
         };
 
@@ -18536,14 +19504,11 @@ $root.war = (function() {
             var message = new $root.war.cmd_move_stop();
             if (object.eid != null)
                 message.eid = object.eid >>> 0;
-            if (object.face != null)
-                message.face = object.face | 0;
-            if (object.x != null)
-                message.x = object.x >>> 0;
-            if (object.y != null)
-                message.y = object.y >>> 0;
-            if (object.z != null)
-                message.z = object.z >>> 0;
+            if (object.pos != null) {
+                if (typeof object.pos !== "object")
+                    throw TypeError(".war.cmd_move_stop.pos: object expected");
+                message.pos = $root.war.Position.fromObject(object.pos);
+            }
             return message;
         };
 
@@ -18562,21 +19527,12 @@ $root.war = (function() {
             var object = {};
             if (options.defaults) {
                 object.eid = 0;
-                object.face = 0;
-                object.x = 0;
-                object.y = 0;
-                object.z = 0;
+                object.pos = null;
             }
             if (message.eid != null && message.hasOwnProperty("eid"))
                 object.eid = message.eid;
-            if (message.face != null && message.hasOwnProperty("face"))
-                object.face = message.face;
-            if (message.x != null && message.hasOwnProperty("x"))
-                object.x = message.x;
-            if (message.y != null && message.hasOwnProperty("y"))
-                object.y = message.y;
-            if (message.z != null && message.hasOwnProperty("z"))
-                object.z = message.z;
+            if (message.pos != null && message.hasOwnProperty("pos"))
+                object.pos = $root.war.Position.toObject(message.pos, options);
             return object;
         };
 
@@ -24246,9 +25202,7 @@ $root.war = (function() {
          * Properties of a DebugInfo.
          * @memberof war
          * @interface IDebugInfo
-         * @property {number|null} [x] DebugInfo x
-         * @property {number|null} [y] DebugInfo y
-         * @property {number|null} [z] DebugInfo z
+         * @property {war.IPosition|null} [pos] DebugInfo pos
          * @property {number|null} [color] DebugInfo color
          * @property {number|null} [size] DebugInfo size
          */
@@ -24269,28 +25223,12 @@ $root.war = (function() {
         }
 
         /**
-         * DebugInfo x.
-         * @member {number} x
+         * DebugInfo pos.
+         * @member {war.IPosition|null|undefined} pos
          * @memberof war.DebugInfo
          * @instance
          */
-        DebugInfo.prototype.x = 0;
-
-        /**
-         * DebugInfo y.
-         * @member {number} y
-         * @memberof war.DebugInfo
-         * @instance
-         */
-        DebugInfo.prototype.y = 0;
-
-        /**
-         * DebugInfo z.
-         * @member {number} z
-         * @memberof war.DebugInfo
-         * @instance
-         */
-        DebugInfo.prototype.z = 0;
+        DebugInfo.prototype.pos = null;
 
         /**
          * DebugInfo color.
@@ -24332,16 +25270,12 @@ $root.war = (function() {
         DebugInfo.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.x != null && Object.hasOwnProperty.call(message, "x"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.x);
-            if (message.y != null && Object.hasOwnProperty.call(message, "y"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.y);
-            if (message.z != null && Object.hasOwnProperty.call(message, "z"))
-                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.z);
+            if (message.pos != null && Object.hasOwnProperty.call(message, "pos"))
+                $root.war.Position.encode(message.pos, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
             if (message.color != null && Object.hasOwnProperty.call(message, "color"))
-                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.color);
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.color);
             if (message.size != null && Object.hasOwnProperty.call(message, "size"))
-                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.size);
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.size);
             return writer;
         };
 
@@ -24377,22 +25311,14 @@ $root.war = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1: {
-                        message.x = reader.uint32();
+                        message.pos = $root.war.Position.decode(reader, reader.uint32());
                         break;
                     }
                 case 2: {
-                        message.y = reader.uint32();
-                        break;
-                    }
-                case 3: {
-                        message.z = reader.uint32();
-                        break;
-                    }
-                case 4: {
                         message.color = reader.uint32();
                         break;
                     }
-                case 5: {
+                case 3: {
                         message.size = reader.uint32();
                         break;
                     }
@@ -24431,15 +25357,11 @@ $root.war = (function() {
         DebugInfo.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.x != null && message.hasOwnProperty("x"))
-                if (!$util.isInteger(message.x))
-                    return "x: integer expected";
-            if (message.y != null && message.hasOwnProperty("y"))
-                if (!$util.isInteger(message.y))
-                    return "y: integer expected";
-            if (message.z != null && message.hasOwnProperty("z"))
-                if (!$util.isInteger(message.z))
-                    return "z: integer expected";
+            if (message.pos != null && message.hasOwnProperty("pos")) {
+                var error = $root.war.Position.verify(message.pos);
+                if (error)
+                    return "pos." + error;
+            }
             if (message.color != null && message.hasOwnProperty("color"))
                 if (!$util.isInteger(message.color))
                     return "color: integer expected";
@@ -24461,12 +25383,11 @@ $root.war = (function() {
             if (object instanceof $root.war.DebugInfo)
                 return object;
             var message = new $root.war.DebugInfo();
-            if (object.x != null)
-                message.x = object.x >>> 0;
-            if (object.y != null)
-                message.y = object.y >>> 0;
-            if (object.z != null)
-                message.z = object.z >>> 0;
+            if (object.pos != null) {
+                if (typeof object.pos !== "object")
+                    throw TypeError(".war.DebugInfo.pos: object expected");
+                message.pos = $root.war.Position.fromObject(object.pos);
+            }
             if (object.color != null)
                 message.color = object.color >>> 0;
             if (object.size != null)
@@ -24488,18 +25409,12 @@ $root.war = (function() {
                 options = {};
             var object = {};
             if (options.defaults) {
-                object.x = 0;
-                object.y = 0;
-                object.z = 0;
+                object.pos = null;
                 object.color = 0;
                 object.size = 0;
             }
-            if (message.x != null && message.hasOwnProperty("x"))
-                object.x = message.x;
-            if (message.y != null && message.hasOwnProperty("y"))
-                object.y = message.y;
-            if (message.z != null && message.hasOwnProperty("z"))
-                object.z = message.z;
+            if (message.pos != null && message.hasOwnProperty("pos"))
+                object.pos = $root.war.Position.toObject(message.pos, options);
             if (message.color != null && message.hasOwnProperty("color"))
                 object.color = message.color;
             if (message.size != null && message.hasOwnProperty("size"))
@@ -25062,6 +25977,233 @@ $root.world = (function() {
         return Role;
     })();
 
+    world.Position = (function() {
+
+        /**
+         * Properties of a Position.
+         * @memberof world
+         * @interface IPosition
+         * @property {number|null} [x] Position x
+         * @property {number|null} [y] Position y
+         */
+
+        /**
+         * Constructs a new Position.
+         * @memberof world
+         * @classdesc Represents a Position.
+         * @implements IPosition
+         * @constructor
+         * @param {world.IPosition=} [properties] Properties to set
+         */
+        function Position(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Position x.
+         * @member {number} x
+         * @memberof world.Position
+         * @instance
+         */
+        Position.prototype.x = 0;
+
+        /**
+         * Position y.
+         * @member {number} y
+         * @memberof world.Position
+         * @instance
+         */
+        Position.prototype.y = 0;
+
+        /**
+         * Creates a new Position instance using the specified properties.
+         * @function create
+         * @memberof world.Position
+         * @static
+         * @param {world.IPosition=} [properties] Properties to set
+         * @returns {world.Position} Position instance
+         */
+        Position.create = function create(properties) {
+            return new Position(properties);
+        };
+
+        /**
+         * Encodes the specified Position message. Does not implicitly {@link world.Position.verify|verify} messages.
+         * @function encode
+         * @memberof world.Position
+         * @static
+         * @param {world.IPosition} message Position message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Position.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.x != null && Object.hasOwnProperty.call(message, "x"))
+                writer.uint32(/* id 1, wireType 5 =*/13).float(message.x);
+            if (message.y != null && Object.hasOwnProperty.call(message, "y"))
+                writer.uint32(/* id 2, wireType 5 =*/21).float(message.y);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified Position message, length delimited. Does not implicitly {@link world.Position.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof world.Position
+         * @static
+         * @param {world.IPosition} message Position message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Position.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a Position message from the specified reader or buffer.
+         * @function decode
+         * @memberof world.Position
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {world.Position} Position
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Position.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.Position();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.x = reader.float();
+                        break;
+                    }
+                case 2: {
+                        message.y = reader.float();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a Position message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof world.Position
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {world.Position} Position
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Position.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a Position message.
+         * @function verify
+         * @memberof world.Position
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        Position.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.x != null && message.hasOwnProperty("x"))
+                if (typeof message.x !== "number")
+                    return "x: number expected";
+            if (message.y != null && message.hasOwnProperty("y"))
+                if (typeof message.y !== "number")
+                    return "y: number expected";
+            return null;
+        };
+
+        /**
+         * Creates a Position message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof world.Position
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {world.Position} Position
+         */
+        Position.fromObject = function fromObject(object) {
+            if (object instanceof $root.world.Position)
+                return object;
+            var message = new $root.world.Position();
+            if (object.x != null)
+                message.x = Number(object.x);
+            if (object.y != null)
+                message.y = Number(object.y);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a Position message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof world.Position
+         * @static
+         * @param {world.Position} message Position
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        Position.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.x = 0;
+                object.y = 0;
+            }
+            if (message.x != null && message.hasOwnProperty("x"))
+                object.x = options.json && !isFinite(message.x) ? String(message.x) : message.x;
+            if (message.y != null && message.hasOwnProperty("y"))
+                object.y = options.json && !isFinite(message.y) ? String(message.y) : message.y;
+            return object;
+        };
+
+        /**
+         * Converts this Position to JSON.
+         * @function toJSON
+         * @memberof world.Position
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        Position.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for Position
+         * @function getTypeUrl
+         * @memberof world.Position
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        Position.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/world.Position";
+        };
+
+        return Position;
+    })();
+
     world.Alliance = (function() {
 
         /**
@@ -25289,27 +26431,27 @@ $root.world = (function() {
         return Alliance;
     })();
 
-    world.ComponentPlayer = (function() {
+    world.ComponentTroop = (function() {
 
         /**
-         * Properties of a ComponentPlayer.
+         * Properties of a ComponentTroop.
          * @memberof world
-         * @interface IComponentPlayer
-         * @property {number|null} [soldierId] ComponentPlayer soldierId
-         * @property {number|null} [cmd] ComponentPlayer cmd
-         * @property {number|null} [stayEid] ComponentPlayer stayEid
-         * @property {number|null} [homeEid] ComponentPlayer homeEid
+         * @interface IComponentTroop
+         * @property {number|null} [soldierId] ComponentTroop soldierId
+         * @property {number|null} [cmd] ComponentTroop cmd
+         * @property {number|null} [stayEid] ComponentTroop stayEid
+         * @property {number|null} [homeEid] ComponentTroop homeEid
          */
 
         /**
-         * Constructs a new ComponentPlayer.
+         * Constructs a new ComponentTroop.
          * @memberof world
-         * @classdesc Represents a ComponentPlayer.
-         * @implements IComponentPlayer
+         * @classdesc Represents a ComponentTroop.
+         * @implements IComponentTroop
          * @constructor
-         * @param {world.IComponentPlayer=} [properties] Properties to set
+         * @param {world.IComponentTroop=} [properties] Properties to set
          */
-        function ComponentPlayer(properties) {
+        function ComponentTroop(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -25317,59 +26459,59 @@ $root.world = (function() {
         }
 
         /**
-         * ComponentPlayer soldierId.
+         * ComponentTroop soldierId.
          * @member {number} soldierId
-         * @memberof world.ComponentPlayer
+         * @memberof world.ComponentTroop
          * @instance
          */
-        ComponentPlayer.prototype.soldierId = 0;
+        ComponentTroop.prototype.soldierId = 0;
 
         /**
-         * ComponentPlayer cmd.
+         * ComponentTroop cmd.
          * @member {number} cmd
-         * @memberof world.ComponentPlayer
+         * @memberof world.ComponentTroop
          * @instance
          */
-        ComponentPlayer.prototype.cmd = 0;
+        ComponentTroop.prototype.cmd = 0;
 
         /**
-         * ComponentPlayer stayEid.
+         * ComponentTroop stayEid.
          * @member {number} stayEid
-         * @memberof world.ComponentPlayer
+         * @memberof world.ComponentTroop
          * @instance
          */
-        ComponentPlayer.prototype.stayEid = 0;
+        ComponentTroop.prototype.stayEid = 0;
 
         /**
-         * ComponentPlayer homeEid.
+         * ComponentTroop homeEid.
          * @member {number} homeEid
-         * @memberof world.ComponentPlayer
+         * @memberof world.ComponentTroop
          * @instance
          */
-        ComponentPlayer.prototype.homeEid = 0;
+        ComponentTroop.prototype.homeEid = 0;
 
         /**
-         * Creates a new ComponentPlayer instance using the specified properties.
+         * Creates a new ComponentTroop instance using the specified properties.
          * @function create
-         * @memberof world.ComponentPlayer
+         * @memberof world.ComponentTroop
          * @static
-         * @param {world.IComponentPlayer=} [properties] Properties to set
-         * @returns {world.ComponentPlayer} ComponentPlayer instance
+         * @param {world.IComponentTroop=} [properties] Properties to set
+         * @returns {world.ComponentTroop} ComponentTroop instance
          */
-        ComponentPlayer.create = function create(properties) {
-            return new ComponentPlayer(properties);
+        ComponentTroop.create = function create(properties) {
+            return new ComponentTroop(properties);
         };
 
         /**
-         * Encodes the specified ComponentPlayer message. Does not implicitly {@link world.ComponentPlayer.verify|verify} messages.
+         * Encodes the specified ComponentTroop message. Does not implicitly {@link world.ComponentTroop.verify|verify} messages.
          * @function encode
-         * @memberof world.ComponentPlayer
+         * @memberof world.ComponentTroop
          * @static
-         * @param {world.IComponentPlayer} message ComponentPlayer message or plain object to encode
+         * @param {world.IComponentTroop} message ComponentTroop message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        ComponentPlayer.encode = function encode(message, writer) {
+        ComponentTroop.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.soldierId != null && Object.hasOwnProperty.call(message, "soldierId"))
@@ -25384,33 +26526,33 @@ $root.world = (function() {
         };
 
         /**
-         * Encodes the specified ComponentPlayer message, length delimited. Does not implicitly {@link world.ComponentPlayer.verify|verify} messages.
+         * Encodes the specified ComponentTroop message, length delimited. Does not implicitly {@link world.ComponentTroop.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof world.ComponentPlayer
+         * @memberof world.ComponentTroop
          * @static
-         * @param {world.IComponentPlayer} message ComponentPlayer message or plain object to encode
+         * @param {world.IComponentTroop} message ComponentTroop message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        ComponentPlayer.encodeDelimited = function encodeDelimited(message, writer) {
+        ComponentTroop.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
         /**
-         * Decodes a ComponentPlayer message from the specified reader or buffer.
+         * Decodes a ComponentTroop message from the specified reader or buffer.
          * @function decode
-         * @memberof world.ComponentPlayer
+         * @memberof world.ComponentTroop
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {world.ComponentPlayer} ComponentPlayer
+         * @returns {world.ComponentTroop} ComponentTroop
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        ComponentPlayer.decode = function decode(reader, length) {
+        ComponentTroop.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.ComponentPlayer();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.ComponentTroop();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -25439,30 +26581,30 @@ $root.world = (function() {
         };
 
         /**
-         * Decodes a ComponentPlayer message from the specified reader or buffer, length delimited.
+         * Decodes a ComponentTroop message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof world.ComponentPlayer
+         * @memberof world.ComponentTroop
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {world.ComponentPlayer} ComponentPlayer
+         * @returns {world.ComponentTroop} ComponentTroop
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        ComponentPlayer.decodeDelimited = function decodeDelimited(reader) {
+        ComponentTroop.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
         /**
-         * Verifies a ComponentPlayer message.
+         * Verifies a ComponentTroop message.
          * @function verify
-         * @memberof world.ComponentPlayer
+         * @memberof world.ComponentTroop
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        ComponentPlayer.verify = function verify(message) {
+        ComponentTroop.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.soldierId != null && message.hasOwnProperty("soldierId"))
@@ -25481,17 +26623,17 @@ $root.world = (function() {
         };
 
         /**
-         * Creates a ComponentPlayer message from a plain object. Also converts values to their respective internal types.
+         * Creates a ComponentTroop message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof world.ComponentPlayer
+         * @memberof world.ComponentTroop
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {world.ComponentPlayer} ComponentPlayer
+         * @returns {world.ComponentTroop} ComponentTroop
          */
-        ComponentPlayer.fromObject = function fromObject(object) {
-            if (object instanceof $root.world.ComponentPlayer)
+        ComponentTroop.fromObject = function fromObject(object) {
+            if (object instanceof $root.world.ComponentTroop)
                 return object;
-            var message = new $root.world.ComponentPlayer();
+            var message = new $root.world.ComponentTroop();
             if (object.soldierId != null)
                 message.soldierId = object.soldierId >>> 0;
             if (object.cmd != null)
@@ -25504,15 +26646,15 @@ $root.world = (function() {
         };
 
         /**
-         * Creates a plain object from a ComponentPlayer message. Also converts values to other types if specified.
+         * Creates a plain object from a ComponentTroop message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof world.ComponentPlayer
+         * @memberof world.ComponentTroop
          * @static
-         * @param {world.ComponentPlayer} message ComponentPlayer
+         * @param {world.ComponentTroop} message ComponentTroop
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        ComponentPlayer.toObject = function toObject(message, options) {
+        ComponentTroop.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -25534,32 +26676,32 @@ $root.world = (function() {
         };
 
         /**
-         * Converts this ComponentPlayer to JSON.
+         * Converts this ComponentTroop to JSON.
          * @function toJSON
-         * @memberof world.ComponentPlayer
+         * @memberof world.ComponentTroop
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        ComponentPlayer.prototype.toJSON = function toJSON() {
+        ComponentTroop.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
         /**
-         * Gets the default type url for ComponentPlayer
+         * Gets the default type url for ComponentTroop
          * @function getTypeUrl
-         * @memberof world.ComponentPlayer
+         * @memberof world.ComponentTroop
          * @static
          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns {string} The default type url
          */
-        ComponentPlayer.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        ComponentTroop.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/world.ComponentPlayer";
+            return typeUrlPrefix + "/world.ComponentTroop";
         };
 
-        return ComponentPlayer;
+        return ComponentTroop;
     })();
 
     world.ComponentOwner = (function() {
@@ -27211,13 +28353,13 @@ $root.world = (function() {
          * @interface IEntity
          * @property {number|null} [eid] Entity eid
          * @property {number|null} [etype] Entity etype
-         * @property {number|null} [pos] Entity pos
+         * @property {world.IPosition|null} [pos] Entity pos
          * @property {number|null} [state] Entity state
          * @property {world.IComponentTimer|null} [timer] Entity timer
          * @property {world.IComponentMove|null} [move] Entity move
          * @property {world.IComponentBuilding|null} [building] Entity building
          * @property {world.IComponentOwner|null} [owner] Entity owner
-         * @property {world.IComponentPlayer|null} [player] Entity player
+         * @property {world.IComponentTroop|null} [troop] Entity troop
          * @property {world.IComponentWar|null} [war] Entity war
          */
 
@@ -27254,11 +28396,11 @@ $root.world = (function() {
 
         /**
          * Entity pos.
-         * @member {number} pos
+         * @member {world.IPosition|null|undefined} pos
          * @memberof world.Entity
          * @instance
          */
-        Entity.prototype.pos = 0;
+        Entity.prototype.pos = null;
 
         /**
          * Entity state.
@@ -27301,12 +28443,12 @@ $root.world = (function() {
         Entity.prototype.owner = null;
 
         /**
-         * Entity player.
-         * @member {world.IComponentPlayer|null|undefined} player
+         * Entity troop.
+         * @member {world.IComponentTroop|null|undefined} troop
          * @memberof world.Entity
          * @instance
          */
-        Entity.prototype.player = null;
+        Entity.prototype.troop = null;
 
         /**
          * Entity war.
@@ -27345,7 +28487,7 @@ $root.world = (function() {
             if (message.etype != null && Object.hasOwnProperty.call(message, "etype"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.etype);
             if (message.pos != null && Object.hasOwnProperty.call(message, "pos"))
-                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.pos);
+                $root.world.Position.encode(message.pos, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
             if (message.state != null && Object.hasOwnProperty.call(message, "state"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.state);
             if (message.timer != null && Object.hasOwnProperty.call(message, "timer"))
@@ -27356,8 +28498,8 @@ $root.world = (function() {
                 $root.world.ComponentBuilding.encode(message.building, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
             if (message.owner != null && Object.hasOwnProperty.call(message, "owner"))
                 $root.world.ComponentOwner.encode(message.owner, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
-            if (message.player != null && Object.hasOwnProperty.call(message, "player"))
-                $root.world.ComponentPlayer.encode(message.player, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
+            if (message.troop != null && Object.hasOwnProperty.call(message, "troop"))
+                $root.world.ComponentTroop.encode(message.troop, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
             if (message.war != null && Object.hasOwnProperty.call(message, "war"))
                 $root.world.ComponentWar.encode(message.war, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
             return writer;
@@ -27403,7 +28545,7 @@ $root.world = (function() {
                         break;
                     }
                 case 3: {
-                        message.pos = reader.uint32();
+                        message.pos = $root.world.Position.decode(reader, reader.uint32());
                         break;
                     }
                 case 4: {
@@ -27427,7 +28569,7 @@ $root.world = (function() {
                         break;
                     }
                 case 16: {
-                        message.player = $root.world.ComponentPlayer.decode(reader, reader.uint32());
+                        message.troop = $root.world.ComponentTroop.decode(reader, reader.uint32());
                         break;
                     }
                 case 17: {
@@ -27475,9 +28617,11 @@ $root.world = (function() {
             if (message.etype != null && message.hasOwnProperty("etype"))
                 if (!$util.isInteger(message.etype))
                     return "etype: integer expected";
-            if (message.pos != null && message.hasOwnProperty("pos"))
-                if (!$util.isInteger(message.pos))
-                    return "pos: integer expected";
+            if (message.pos != null && message.hasOwnProperty("pos")) {
+                var error = $root.world.Position.verify(message.pos);
+                if (error)
+                    return "pos." + error;
+            }
             if (message.state != null && message.hasOwnProperty("state"))
                 if (!$util.isInteger(message.state))
                     return "state: integer expected";
@@ -27501,10 +28645,10 @@ $root.world = (function() {
                 if (error)
                     return "owner." + error;
             }
-            if (message.player != null && message.hasOwnProperty("player")) {
-                var error = $root.world.ComponentPlayer.verify(message.player);
+            if (message.troop != null && message.hasOwnProperty("troop")) {
+                var error = $root.world.ComponentTroop.verify(message.troop);
                 if (error)
-                    return "player." + error;
+                    return "troop." + error;
             }
             if (message.war != null && message.hasOwnProperty("war")) {
                 var error = $root.world.ComponentWar.verify(message.war);
@@ -27530,8 +28674,11 @@ $root.world = (function() {
                 message.eid = object.eid >>> 0;
             if (object.etype != null)
                 message.etype = object.etype >>> 0;
-            if (object.pos != null)
-                message.pos = object.pos >>> 0;
+            if (object.pos != null) {
+                if (typeof object.pos !== "object")
+                    throw TypeError(".world.Entity.pos: object expected");
+                message.pos = $root.world.Position.fromObject(object.pos);
+            }
             if (object.state != null)
                 message.state = object.state >>> 0;
             if (object.timer != null) {
@@ -27554,10 +28701,10 @@ $root.world = (function() {
                     throw TypeError(".world.Entity.owner: object expected");
                 message.owner = $root.world.ComponentOwner.fromObject(object.owner);
             }
-            if (object.player != null) {
-                if (typeof object.player !== "object")
-                    throw TypeError(".world.Entity.player: object expected");
-                message.player = $root.world.ComponentPlayer.fromObject(object.player);
+            if (object.troop != null) {
+                if (typeof object.troop !== "object")
+                    throw TypeError(".world.Entity.troop: object expected");
+                message.troop = $root.world.ComponentTroop.fromObject(object.troop);
             }
             if (object.war != null) {
                 if (typeof object.war !== "object")
@@ -27583,13 +28730,13 @@ $root.world = (function() {
             if (options.defaults) {
                 object.eid = 0;
                 object.etype = 0;
-                object.pos = 0;
+                object.pos = null;
                 object.state = 0;
                 object.timer = null;
                 object.move = null;
                 object.building = null;
                 object.owner = null;
-                object.player = null;
+                object.troop = null;
                 object.war = null;
             }
             if (message.eid != null && message.hasOwnProperty("eid"))
@@ -27597,7 +28744,7 @@ $root.world = (function() {
             if (message.etype != null && message.hasOwnProperty("etype"))
                 object.etype = message.etype;
             if (message.pos != null && message.hasOwnProperty("pos"))
-                object.pos = message.pos;
+                object.pos = $root.world.Position.toObject(message.pos, options);
             if (message.state != null && message.hasOwnProperty("state"))
                 object.state = message.state;
             if (message.timer != null && message.hasOwnProperty("timer"))
@@ -27608,8 +28755,8 @@ $root.world = (function() {
                 object.building = $root.world.ComponentBuilding.toObject(message.building, options);
             if (message.owner != null && message.hasOwnProperty("owner"))
                 object.owner = $root.world.ComponentOwner.toObject(message.owner, options);
-            if (message.player != null && message.hasOwnProperty("player"))
-                object.player = $root.world.ComponentPlayer.toObject(message.player, options);
+            if (message.troop != null && message.hasOwnProperty("troop"))
+                object.troop = $root.world.ComponentTroop.toObject(message.troop, options);
             if (message.war != null && message.hasOwnProperty("war"))
                 object.war = $root.world.ComponentWar.toObject(message.war, options);
             return object;
@@ -27827,7 +28974,7 @@ $root.world = (function() {
          * @interface Is2c_load
          * @property {number|null} [err] s2c_load err
          * @property {number|null} [myCastleEid] s2c_load myCastleEid
-         * @property {number|null} [myCastlePos] s2c_load myCastlePos
+         * @property {world.IPosition|null} [myCastlePos] s2c_load myCastlePos
          */
 
         /**
@@ -27863,11 +29010,11 @@ $root.world = (function() {
 
         /**
          * s2c_load myCastlePos.
-         * @member {number} myCastlePos
+         * @member {world.IPosition|null|undefined} myCastlePos
          * @memberof world.s2c_load
          * @instance
          */
-        s2c_load.prototype.myCastlePos = 0;
+        s2c_load.prototype.myCastlePos = null;
 
         /**
          * Creates a new s2c_load instance using the specified properties.
@@ -27898,7 +29045,7 @@ $root.world = (function() {
             if (message.myCastleEid != null && Object.hasOwnProperty.call(message, "myCastleEid"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.myCastleEid);
             if (message.myCastlePos != null && Object.hasOwnProperty.call(message, "myCastlePos"))
-                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.myCastlePos);
+                $root.world.Position.encode(message.myCastlePos, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
             return writer;
         };
 
@@ -27942,7 +29089,7 @@ $root.world = (function() {
                         break;
                     }
                 case 3: {
-                        message.myCastlePos = reader.uint32();
+                        message.myCastlePos = $root.world.Position.decode(reader, reader.uint32());
                         break;
                     }
                 default:
@@ -27986,9 +29133,11 @@ $root.world = (function() {
             if (message.myCastleEid != null && message.hasOwnProperty("myCastleEid"))
                 if (!$util.isInteger(message.myCastleEid))
                     return "myCastleEid: integer expected";
-            if (message.myCastlePos != null && message.hasOwnProperty("myCastlePos"))
-                if (!$util.isInteger(message.myCastlePos))
-                    return "myCastlePos: integer expected";
+            if (message.myCastlePos != null && message.hasOwnProperty("myCastlePos")) {
+                var error = $root.world.Position.verify(message.myCastlePos);
+                if (error)
+                    return "myCastlePos." + error;
+            }
             return null;
         };
 
@@ -28008,8 +29157,11 @@ $root.world = (function() {
                 message.err = object.err >>> 0;
             if (object.myCastleEid != null)
                 message.myCastleEid = object.myCastleEid >>> 0;
-            if (object.myCastlePos != null)
-                message.myCastlePos = object.myCastlePos >>> 0;
+            if (object.myCastlePos != null) {
+                if (typeof object.myCastlePos !== "object")
+                    throw TypeError(".world.s2c_load.myCastlePos: object expected");
+                message.myCastlePos = $root.world.Position.fromObject(object.myCastlePos);
+            }
             return message;
         };
 
@@ -28029,14 +29181,14 @@ $root.world = (function() {
             if (options.defaults) {
                 object.err = 0;
                 object.myCastleEid = 0;
-                object.myCastlePos = 0;
+                object.myCastlePos = null;
             }
             if (message.err != null && message.hasOwnProperty("err"))
                 object.err = message.err;
             if (message.myCastleEid != null && message.hasOwnProperty("myCastleEid"))
                 object.myCastleEid = message.myCastleEid;
             if (message.myCastlePos != null && message.hasOwnProperty("myCastlePos"))
-                object.myCastlePos = message.myCastlePos;
+                object.myCastlePos = $root.world.Position.toObject(message.myCastlePos, options);
             return object;
         };
 
@@ -28075,7 +29227,7 @@ $root.world = (function() {
          * Properties of a c2s_change_viewport.
          * @memberof world
          * @interface Ic2s_change_viewport
-         * @property {number|null} [pos] c2s_change_viewport pos
+         * @property {world.IPosition|null} [pos] c2s_change_viewport pos
          */
 
         /**
@@ -28095,11 +29247,11 @@ $root.world = (function() {
 
         /**
          * c2s_change_viewport pos.
-         * @member {number} pos
+         * @member {world.IPosition|null|undefined} pos
          * @memberof world.c2s_change_viewport
          * @instance
          */
-        c2s_change_viewport.prototype.pos = 0;
+        c2s_change_viewport.prototype.pos = null;
 
         /**
          * Creates a new c2s_change_viewport instance using the specified properties.
@@ -28126,7 +29278,7 @@ $root.world = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.pos != null && Object.hasOwnProperty.call(message, "pos"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.pos);
+                $root.world.Position.encode(message.pos, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
             return writer;
         };
 
@@ -28162,7 +29314,7 @@ $root.world = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 2: {
-                        message.pos = reader.uint32();
+                        message.pos = $root.world.Position.decode(reader, reader.uint32());
                         break;
                     }
                 default:
@@ -28200,9 +29352,11 @@ $root.world = (function() {
         c2s_change_viewport.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.pos != null && message.hasOwnProperty("pos"))
-                if (!$util.isInteger(message.pos))
-                    return "pos: integer expected";
+            if (message.pos != null && message.hasOwnProperty("pos")) {
+                var error = $root.world.Position.verify(message.pos);
+                if (error)
+                    return "pos." + error;
+            }
             return null;
         };
 
@@ -28218,8 +29372,11 @@ $root.world = (function() {
             if (object instanceof $root.world.c2s_change_viewport)
                 return object;
             var message = new $root.world.c2s_change_viewport();
-            if (object.pos != null)
-                message.pos = object.pos >>> 0;
+            if (object.pos != null) {
+                if (typeof object.pos !== "object")
+                    throw TypeError(".world.c2s_change_viewport.pos: object expected");
+                message.pos = $root.world.Position.fromObject(object.pos);
+            }
             return message;
         };
 
@@ -28237,9 +29394,9 @@ $root.world = (function() {
                 options = {};
             var object = {};
             if (options.defaults)
-                object.pos = 0;
+                object.pos = null;
             if (message.pos != null && message.hasOwnProperty("pos"))
-                object.pos = message.pos;
+                object.pos = $root.world.Position.toObject(message.pos, options);
             return object;
         };
 
@@ -29307,7 +30464,7 @@ $root.world = (function() {
          * Properties of a c2s_load_detect_info.
          * @memberof world
          * @interface Ic2s_load_detect_info
-         * @property {number|null} [pos] c2s_load_detect_info pos
+         * @property {world.IPosition|null} [pos] c2s_load_detect_info pos
          */
 
         /**
@@ -29327,11 +30484,11 @@ $root.world = (function() {
 
         /**
          * c2s_load_detect_info pos.
-         * @member {number} pos
+         * @member {world.IPosition|null|undefined} pos
          * @memberof world.c2s_load_detect_info
          * @instance
          */
-        c2s_load_detect_info.prototype.pos = 0;
+        c2s_load_detect_info.prototype.pos = null;
 
         /**
          * Creates a new c2s_load_detect_info instance using the specified properties.
@@ -29358,7 +30515,7 @@ $root.world = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.pos != null && Object.hasOwnProperty.call(message, "pos"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.pos);
+                $root.world.Position.encode(message.pos, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
             return writer;
         };
 
@@ -29394,7 +30551,7 @@ $root.world = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1: {
-                        message.pos = reader.uint32();
+                        message.pos = $root.world.Position.decode(reader, reader.uint32());
                         break;
                     }
                 default:
@@ -29432,9 +30589,11 @@ $root.world = (function() {
         c2s_load_detect_info.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.pos != null && message.hasOwnProperty("pos"))
-                if (!$util.isInteger(message.pos))
-                    return "pos: integer expected";
+            if (message.pos != null && message.hasOwnProperty("pos")) {
+                var error = $root.world.Position.verify(message.pos);
+                if (error)
+                    return "pos." + error;
+            }
             return null;
         };
 
@@ -29450,8 +30609,11 @@ $root.world = (function() {
             if (object instanceof $root.world.c2s_load_detect_info)
                 return object;
             var message = new $root.world.c2s_load_detect_info();
-            if (object.pos != null)
-                message.pos = object.pos >>> 0;
+            if (object.pos != null) {
+                if (typeof object.pos !== "object")
+                    throw TypeError(".world.c2s_load_detect_info.pos: object expected");
+                message.pos = $root.world.Position.fromObject(object.pos);
+            }
             return message;
         };
 
@@ -29469,9 +30631,9 @@ $root.world = (function() {
                 options = {};
             var object = {};
             if (options.defaults)
-                object.pos = 0;
+                object.pos = null;
             if (message.pos != null && message.hasOwnProperty("pos"))
-                object.pos = message.pos;
+                object.pos = $root.world.Position.toObject(message.pos, options);
             return object;
         };
 
@@ -29754,25 +30916,25 @@ $root.world = (function() {
         return s2c_load_detect_info;
     })();
 
-    world.c2s_player_move = (function() {
+    world.c2s_troop_move = (function() {
 
         /**
-         * Properties of a c2s_player_move.
+         * Properties of a c2s_troop_move.
          * @memberof world
-         * @interface Ic2s_player_move
-         * @property {number|null} [playerEid] c2s_player_move playerEid
-         * @property {number|null} [dstPos] c2s_player_move dstPos
+         * @interface Ic2s_troop_move
+         * @property {number|null} [troopEid] c2s_troop_move troopEid
+         * @property {world.IPosition|null} [dstPos] c2s_troop_move dstPos
          */
 
         /**
-         * Constructs a new c2s_player_move.
+         * Constructs a new c2s_troop_move.
          * @memberof world
-         * @classdesc Represents a c2s_player_move.
-         * @implements Ic2s_player_move
+         * @classdesc Represents a c2s_troop_move.
+         * @implements Ic2s_troop_move
          * @constructor
-         * @param {world.Ic2s_player_move=} [properties] Properties to set
+         * @param {world.Ic2s_troop_move=} [properties] Properties to set
          */
-        function c2s_player_move(properties) {
+        function c2s_troop_move(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -29780,89 +30942,89 @@ $root.world = (function() {
         }
 
         /**
-         * c2s_player_move playerEid.
-         * @member {number} playerEid
-         * @memberof world.c2s_player_move
+         * c2s_troop_move troopEid.
+         * @member {number} troopEid
+         * @memberof world.c2s_troop_move
          * @instance
          */
-        c2s_player_move.prototype.playerEid = 0;
+        c2s_troop_move.prototype.troopEid = 0;
 
         /**
-         * c2s_player_move dstPos.
-         * @member {number} dstPos
-         * @memberof world.c2s_player_move
+         * c2s_troop_move dstPos.
+         * @member {world.IPosition|null|undefined} dstPos
+         * @memberof world.c2s_troop_move
          * @instance
          */
-        c2s_player_move.prototype.dstPos = 0;
+        c2s_troop_move.prototype.dstPos = null;
 
         /**
-         * Creates a new c2s_player_move instance using the specified properties.
+         * Creates a new c2s_troop_move instance using the specified properties.
          * @function create
-         * @memberof world.c2s_player_move
+         * @memberof world.c2s_troop_move
          * @static
-         * @param {world.Ic2s_player_move=} [properties] Properties to set
-         * @returns {world.c2s_player_move} c2s_player_move instance
+         * @param {world.Ic2s_troop_move=} [properties] Properties to set
+         * @returns {world.c2s_troop_move} c2s_troop_move instance
          */
-        c2s_player_move.create = function create(properties) {
-            return new c2s_player_move(properties);
+        c2s_troop_move.create = function create(properties) {
+            return new c2s_troop_move(properties);
         };
 
         /**
-         * Encodes the specified c2s_player_move message. Does not implicitly {@link world.c2s_player_move.verify|verify} messages.
+         * Encodes the specified c2s_troop_move message. Does not implicitly {@link world.c2s_troop_move.verify|verify} messages.
          * @function encode
-         * @memberof world.c2s_player_move
+         * @memberof world.c2s_troop_move
          * @static
-         * @param {world.Ic2s_player_move} message c2s_player_move message or plain object to encode
+         * @param {world.Ic2s_troop_move} message c2s_troop_move message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        c2s_player_move.encode = function encode(message, writer) {
+        c2s_troop_move.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.playerEid != null && Object.hasOwnProperty.call(message, "playerEid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.playerEid);
+            if (message.troopEid != null && Object.hasOwnProperty.call(message, "troopEid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.troopEid);
             if (message.dstPos != null && Object.hasOwnProperty.call(message, "dstPos"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.dstPos);
+                $root.world.Position.encode(message.dstPos, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
             return writer;
         };
 
         /**
-         * Encodes the specified c2s_player_move message, length delimited. Does not implicitly {@link world.c2s_player_move.verify|verify} messages.
+         * Encodes the specified c2s_troop_move message, length delimited. Does not implicitly {@link world.c2s_troop_move.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof world.c2s_player_move
+         * @memberof world.c2s_troop_move
          * @static
-         * @param {world.Ic2s_player_move} message c2s_player_move message or plain object to encode
+         * @param {world.Ic2s_troop_move} message c2s_troop_move message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        c2s_player_move.encodeDelimited = function encodeDelimited(message, writer) {
+        c2s_troop_move.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
         /**
-         * Decodes a c2s_player_move message from the specified reader or buffer.
+         * Decodes a c2s_troop_move message from the specified reader or buffer.
          * @function decode
-         * @memberof world.c2s_player_move
+         * @memberof world.c2s_troop_move
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {world.c2s_player_move} c2s_player_move
+         * @returns {world.c2s_troop_move} c2s_troop_move
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        c2s_player_move.decode = function decode(reader, length) {
+        c2s_troop_move.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.c2s_player_move();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.c2s_troop_move();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1: {
-                        message.playerEid = reader.uint32();
+                        message.troopEid = reader.uint32();
                         break;
                     }
                 case 2: {
-                        message.dstPos = reader.uint32();
+                        message.dstPos = $root.world.Position.decode(reader, reader.uint32());
                         break;
                     }
                 default:
@@ -29874,131 +31036,136 @@ $root.world = (function() {
         };
 
         /**
-         * Decodes a c2s_player_move message from the specified reader or buffer, length delimited.
+         * Decodes a c2s_troop_move message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof world.c2s_player_move
+         * @memberof world.c2s_troop_move
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {world.c2s_player_move} c2s_player_move
+         * @returns {world.c2s_troop_move} c2s_troop_move
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        c2s_player_move.decodeDelimited = function decodeDelimited(reader) {
+        c2s_troop_move.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
         /**
-         * Verifies a c2s_player_move message.
+         * Verifies a c2s_troop_move message.
          * @function verify
-         * @memberof world.c2s_player_move
+         * @memberof world.c2s_troop_move
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        c2s_player_move.verify = function verify(message) {
+        c2s_troop_move.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.playerEid != null && message.hasOwnProperty("playerEid"))
-                if (!$util.isInteger(message.playerEid))
-                    return "playerEid: integer expected";
-            if (message.dstPos != null && message.hasOwnProperty("dstPos"))
-                if (!$util.isInteger(message.dstPos))
-                    return "dstPos: integer expected";
+            if (message.troopEid != null && message.hasOwnProperty("troopEid"))
+                if (!$util.isInteger(message.troopEid))
+                    return "troopEid: integer expected";
+            if (message.dstPos != null && message.hasOwnProperty("dstPos")) {
+                var error = $root.world.Position.verify(message.dstPos);
+                if (error)
+                    return "dstPos." + error;
+            }
             return null;
         };
 
         /**
-         * Creates a c2s_player_move message from a plain object. Also converts values to their respective internal types.
+         * Creates a c2s_troop_move message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof world.c2s_player_move
+         * @memberof world.c2s_troop_move
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {world.c2s_player_move} c2s_player_move
+         * @returns {world.c2s_troop_move} c2s_troop_move
          */
-        c2s_player_move.fromObject = function fromObject(object) {
-            if (object instanceof $root.world.c2s_player_move)
+        c2s_troop_move.fromObject = function fromObject(object) {
+            if (object instanceof $root.world.c2s_troop_move)
                 return object;
-            var message = new $root.world.c2s_player_move();
-            if (object.playerEid != null)
-                message.playerEid = object.playerEid >>> 0;
-            if (object.dstPos != null)
-                message.dstPos = object.dstPos >>> 0;
+            var message = new $root.world.c2s_troop_move();
+            if (object.troopEid != null)
+                message.troopEid = object.troopEid >>> 0;
+            if (object.dstPos != null) {
+                if (typeof object.dstPos !== "object")
+                    throw TypeError(".world.c2s_troop_move.dstPos: object expected");
+                message.dstPos = $root.world.Position.fromObject(object.dstPos);
+            }
             return message;
         };
 
         /**
-         * Creates a plain object from a c2s_player_move message. Also converts values to other types if specified.
+         * Creates a plain object from a c2s_troop_move message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof world.c2s_player_move
+         * @memberof world.c2s_troop_move
          * @static
-         * @param {world.c2s_player_move} message c2s_player_move
+         * @param {world.c2s_troop_move} message c2s_troop_move
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        c2s_player_move.toObject = function toObject(message, options) {
+        c2s_troop_move.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.defaults) {
-                object.playerEid = 0;
-                object.dstPos = 0;
+                object.troopEid = 0;
+                object.dstPos = null;
             }
-            if (message.playerEid != null && message.hasOwnProperty("playerEid"))
-                object.playerEid = message.playerEid;
+            if (message.troopEid != null && message.hasOwnProperty("troopEid"))
+                object.troopEid = message.troopEid;
             if (message.dstPos != null && message.hasOwnProperty("dstPos"))
-                object.dstPos = message.dstPos;
+                object.dstPos = $root.world.Position.toObject(message.dstPos, options);
             return object;
         };
 
         /**
-         * Converts this c2s_player_move to JSON.
+         * Converts this c2s_troop_move to JSON.
          * @function toJSON
-         * @memberof world.c2s_player_move
+         * @memberof world.c2s_troop_move
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        c2s_player_move.prototype.toJSON = function toJSON() {
+        c2s_troop_move.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
         /**
-         * Gets the default type url for c2s_player_move
+         * Gets the default type url for c2s_troop_move
          * @function getTypeUrl
-         * @memberof world.c2s_player_move
+         * @memberof world.c2s_troop_move
          * @static
          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns {string} The default type url
          */
-        c2s_player_move.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        c2s_troop_move.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/world.c2s_player_move";
+            return typeUrlPrefix + "/world.c2s_troop_move";
         };
 
-        return c2s_player_move;
+        return c2s_troop_move;
     })();
 
-    world.s2c_player_move = (function() {
+    world.s2c_troop_move = (function() {
 
         /**
-         * Properties of a s2c_player_move.
+         * Properties of a s2c_troop_move.
          * @memberof world
-         * @interface Is2c_player_move
-         * @property {number|null} [err] s2c_player_move err
+         * @interface Is2c_troop_move
+         * @property {number|null} [err] s2c_troop_move err
          */
 
         /**
-         * Constructs a new s2c_player_move.
+         * Constructs a new s2c_troop_move.
          * @memberof world
-         * @classdesc Represents a s2c_player_move.
-         * @implements Is2c_player_move
+         * @classdesc Represents a s2c_troop_move.
+         * @implements Is2c_troop_move
          * @constructor
-         * @param {world.Is2c_player_move=} [properties] Properties to set
+         * @param {world.Is2c_troop_move=} [properties] Properties to set
          */
-        function s2c_player_move(properties) {
+        function s2c_troop_move(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -30006,35 +31173,35 @@ $root.world = (function() {
         }
 
         /**
-         * s2c_player_move err.
+         * s2c_troop_move err.
          * @member {number} err
-         * @memberof world.s2c_player_move
+         * @memberof world.s2c_troop_move
          * @instance
          */
-        s2c_player_move.prototype.err = 0;
+        s2c_troop_move.prototype.err = 0;
 
         /**
-         * Creates a new s2c_player_move instance using the specified properties.
+         * Creates a new s2c_troop_move instance using the specified properties.
          * @function create
-         * @memberof world.s2c_player_move
+         * @memberof world.s2c_troop_move
          * @static
-         * @param {world.Is2c_player_move=} [properties] Properties to set
-         * @returns {world.s2c_player_move} s2c_player_move instance
+         * @param {world.Is2c_troop_move=} [properties] Properties to set
+         * @returns {world.s2c_troop_move} s2c_troop_move instance
          */
-        s2c_player_move.create = function create(properties) {
-            return new s2c_player_move(properties);
+        s2c_troop_move.create = function create(properties) {
+            return new s2c_troop_move(properties);
         };
 
         /**
-         * Encodes the specified s2c_player_move message. Does not implicitly {@link world.s2c_player_move.verify|verify} messages.
+         * Encodes the specified s2c_troop_move message. Does not implicitly {@link world.s2c_troop_move.verify|verify} messages.
          * @function encode
-         * @memberof world.s2c_player_move
+         * @memberof world.s2c_troop_move
          * @static
-         * @param {world.Is2c_player_move} message s2c_player_move message or plain object to encode
+         * @param {world.Is2c_troop_move} message s2c_troop_move message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        s2c_player_move.encode = function encode(message, writer) {
+        s2c_troop_move.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.err != null && Object.hasOwnProperty.call(message, "err"))
@@ -30043,33 +31210,33 @@ $root.world = (function() {
         };
 
         /**
-         * Encodes the specified s2c_player_move message, length delimited. Does not implicitly {@link world.s2c_player_move.verify|verify} messages.
+         * Encodes the specified s2c_troop_move message, length delimited. Does not implicitly {@link world.s2c_troop_move.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof world.s2c_player_move
+         * @memberof world.s2c_troop_move
          * @static
-         * @param {world.Is2c_player_move} message s2c_player_move message or plain object to encode
+         * @param {world.Is2c_troop_move} message s2c_troop_move message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        s2c_player_move.encodeDelimited = function encodeDelimited(message, writer) {
+        s2c_troop_move.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
         /**
-         * Decodes a s2c_player_move message from the specified reader or buffer.
+         * Decodes a s2c_troop_move message from the specified reader or buffer.
          * @function decode
-         * @memberof world.s2c_player_move
+         * @memberof world.s2c_troop_move
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {world.s2c_player_move} s2c_player_move
+         * @returns {world.s2c_troop_move} s2c_troop_move
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        s2c_player_move.decode = function decode(reader, length) {
+        s2c_troop_move.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.s2c_player_move();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.s2c_troop_move();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -30086,30 +31253,30 @@ $root.world = (function() {
         };
 
         /**
-         * Decodes a s2c_player_move message from the specified reader or buffer, length delimited.
+         * Decodes a s2c_troop_move message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof world.s2c_player_move
+         * @memberof world.s2c_troop_move
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {world.s2c_player_move} s2c_player_move
+         * @returns {world.s2c_troop_move} s2c_troop_move
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        s2c_player_move.decodeDelimited = function decodeDelimited(reader) {
+        s2c_troop_move.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
         /**
-         * Verifies a s2c_player_move message.
+         * Verifies a s2c_troop_move message.
          * @function verify
-         * @memberof world.s2c_player_move
+         * @memberof world.s2c_troop_move
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        s2c_player_move.verify = function verify(message) {
+        s2c_troop_move.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.err != null && message.hasOwnProperty("err"))
@@ -30119,32 +31286,32 @@ $root.world = (function() {
         };
 
         /**
-         * Creates a s2c_player_move message from a plain object. Also converts values to their respective internal types.
+         * Creates a s2c_troop_move message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof world.s2c_player_move
+         * @memberof world.s2c_troop_move
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {world.s2c_player_move} s2c_player_move
+         * @returns {world.s2c_troop_move} s2c_troop_move
          */
-        s2c_player_move.fromObject = function fromObject(object) {
-            if (object instanceof $root.world.s2c_player_move)
+        s2c_troop_move.fromObject = function fromObject(object) {
+            if (object instanceof $root.world.s2c_troop_move)
                 return object;
-            var message = new $root.world.s2c_player_move();
+            var message = new $root.world.s2c_troop_move();
             if (object.err != null)
                 message.err = object.err >>> 0;
             return message;
         };
 
         /**
-         * Creates a plain object from a s2c_player_move message. Also converts values to other types if specified.
+         * Creates a plain object from a s2c_troop_move message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof world.s2c_player_move
+         * @memberof world.s2c_troop_move
          * @static
-         * @param {world.s2c_player_move} message s2c_player_move
+         * @param {world.s2c_troop_move} message s2c_troop_move
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        s2c_player_move.toObject = function toObject(message, options) {
+        s2c_troop_move.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -30156,52 +31323,52 @@ $root.world = (function() {
         };
 
         /**
-         * Converts this s2c_player_move to JSON.
+         * Converts this s2c_troop_move to JSON.
          * @function toJSON
-         * @memberof world.s2c_player_move
+         * @memberof world.s2c_troop_move
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        s2c_player_move.prototype.toJSON = function toJSON() {
+        s2c_troop_move.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
         /**
-         * Gets the default type url for s2c_player_move
+         * Gets the default type url for s2c_troop_move
          * @function getTypeUrl
-         * @memberof world.s2c_player_move
+         * @memberof world.s2c_troop_move
          * @static
          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns {string} The default type url
          */
-        s2c_player_move.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        s2c_troop_move.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/world.s2c_player_move";
+            return typeUrlPrefix + "/world.s2c_troop_move";
         };
 
-        return s2c_player_move;
+        return s2c_troop_move;
     })();
 
-    world.c2s_player_stop = (function() {
+    world.c2s_troop_stop = (function() {
 
         /**
-         * Properties of a c2s_player_stop.
+         * Properties of a c2s_troop_stop.
          * @memberof world
-         * @interface Ic2s_player_stop
-         * @property {number|null} [playerEid] c2s_player_stop playerEid
+         * @interface Ic2s_troop_stop
+         * @property {number|null} [troopEid] c2s_troop_stop troopEid
          */
 
         /**
-         * Constructs a new c2s_player_stop.
+         * Constructs a new c2s_troop_stop.
          * @memberof world
-         * @classdesc Represents a c2s_player_stop.
-         * @implements Ic2s_player_stop
+         * @classdesc Represents a c2s_troop_stop.
+         * @implements Ic2s_troop_stop
          * @constructor
-         * @param {world.Ic2s_player_stop=} [properties] Properties to set
+         * @param {world.Ic2s_troop_stop=} [properties] Properties to set
          */
-        function c2s_player_stop(properties) {
+        function c2s_troop_stop(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -30209,75 +31376,75 @@ $root.world = (function() {
         }
 
         /**
-         * c2s_player_stop playerEid.
-         * @member {number} playerEid
-         * @memberof world.c2s_player_stop
+         * c2s_troop_stop troopEid.
+         * @member {number} troopEid
+         * @memberof world.c2s_troop_stop
          * @instance
          */
-        c2s_player_stop.prototype.playerEid = 0;
+        c2s_troop_stop.prototype.troopEid = 0;
 
         /**
-         * Creates a new c2s_player_stop instance using the specified properties.
+         * Creates a new c2s_troop_stop instance using the specified properties.
          * @function create
-         * @memberof world.c2s_player_stop
+         * @memberof world.c2s_troop_stop
          * @static
-         * @param {world.Ic2s_player_stop=} [properties] Properties to set
-         * @returns {world.c2s_player_stop} c2s_player_stop instance
+         * @param {world.Ic2s_troop_stop=} [properties] Properties to set
+         * @returns {world.c2s_troop_stop} c2s_troop_stop instance
          */
-        c2s_player_stop.create = function create(properties) {
-            return new c2s_player_stop(properties);
+        c2s_troop_stop.create = function create(properties) {
+            return new c2s_troop_stop(properties);
         };
 
         /**
-         * Encodes the specified c2s_player_stop message. Does not implicitly {@link world.c2s_player_stop.verify|verify} messages.
+         * Encodes the specified c2s_troop_stop message. Does not implicitly {@link world.c2s_troop_stop.verify|verify} messages.
          * @function encode
-         * @memberof world.c2s_player_stop
+         * @memberof world.c2s_troop_stop
          * @static
-         * @param {world.Ic2s_player_stop} message c2s_player_stop message or plain object to encode
+         * @param {world.Ic2s_troop_stop} message c2s_troop_stop message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        c2s_player_stop.encode = function encode(message, writer) {
+        c2s_troop_stop.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.playerEid != null && Object.hasOwnProperty.call(message, "playerEid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.playerEid);
+            if (message.troopEid != null && Object.hasOwnProperty.call(message, "troopEid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.troopEid);
             return writer;
         };
 
         /**
-         * Encodes the specified c2s_player_stop message, length delimited. Does not implicitly {@link world.c2s_player_stop.verify|verify} messages.
+         * Encodes the specified c2s_troop_stop message, length delimited. Does not implicitly {@link world.c2s_troop_stop.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof world.c2s_player_stop
+         * @memberof world.c2s_troop_stop
          * @static
-         * @param {world.Ic2s_player_stop} message c2s_player_stop message or plain object to encode
+         * @param {world.Ic2s_troop_stop} message c2s_troop_stop message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        c2s_player_stop.encodeDelimited = function encodeDelimited(message, writer) {
+        c2s_troop_stop.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
         /**
-         * Decodes a c2s_player_stop message from the specified reader or buffer.
+         * Decodes a c2s_troop_stop message from the specified reader or buffer.
          * @function decode
-         * @memberof world.c2s_player_stop
+         * @memberof world.c2s_troop_stop
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {world.c2s_player_stop} c2s_player_stop
+         * @returns {world.c2s_troop_stop} c2s_troop_stop
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        c2s_player_stop.decode = function decode(reader, length) {
+        c2s_troop_stop.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.c2s_player_stop();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.c2s_troop_stop();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1: {
-                        message.playerEid = reader.uint32();
+                        message.troopEid = reader.uint32();
                         break;
                     }
                 default:
@@ -30289,122 +31456,122 @@ $root.world = (function() {
         };
 
         /**
-         * Decodes a c2s_player_stop message from the specified reader or buffer, length delimited.
+         * Decodes a c2s_troop_stop message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof world.c2s_player_stop
+         * @memberof world.c2s_troop_stop
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {world.c2s_player_stop} c2s_player_stop
+         * @returns {world.c2s_troop_stop} c2s_troop_stop
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        c2s_player_stop.decodeDelimited = function decodeDelimited(reader) {
+        c2s_troop_stop.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
         /**
-         * Verifies a c2s_player_stop message.
+         * Verifies a c2s_troop_stop message.
          * @function verify
-         * @memberof world.c2s_player_stop
+         * @memberof world.c2s_troop_stop
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        c2s_player_stop.verify = function verify(message) {
+        c2s_troop_stop.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.playerEid != null && message.hasOwnProperty("playerEid"))
-                if (!$util.isInteger(message.playerEid))
-                    return "playerEid: integer expected";
+            if (message.troopEid != null && message.hasOwnProperty("troopEid"))
+                if (!$util.isInteger(message.troopEid))
+                    return "troopEid: integer expected";
             return null;
         };
 
         /**
-         * Creates a c2s_player_stop message from a plain object. Also converts values to their respective internal types.
+         * Creates a c2s_troop_stop message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof world.c2s_player_stop
+         * @memberof world.c2s_troop_stop
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {world.c2s_player_stop} c2s_player_stop
+         * @returns {world.c2s_troop_stop} c2s_troop_stop
          */
-        c2s_player_stop.fromObject = function fromObject(object) {
-            if (object instanceof $root.world.c2s_player_stop)
+        c2s_troop_stop.fromObject = function fromObject(object) {
+            if (object instanceof $root.world.c2s_troop_stop)
                 return object;
-            var message = new $root.world.c2s_player_stop();
-            if (object.playerEid != null)
-                message.playerEid = object.playerEid >>> 0;
+            var message = new $root.world.c2s_troop_stop();
+            if (object.troopEid != null)
+                message.troopEid = object.troopEid >>> 0;
             return message;
         };
 
         /**
-         * Creates a plain object from a c2s_player_stop message. Also converts values to other types if specified.
+         * Creates a plain object from a c2s_troop_stop message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof world.c2s_player_stop
+         * @memberof world.c2s_troop_stop
          * @static
-         * @param {world.c2s_player_stop} message c2s_player_stop
+         * @param {world.c2s_troop_stop} message c2s_troop_stop
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        c2s_player_stop.toObject = function toObject(message, options) {
+        c2s_troop_stop.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.defaults)
-                object.playerEid = 0;
-            if (message.playerEid != null && message.hasOwnProperty("playerEid"))
-                object.playerEid = message.playerEid;
+                object.troopEid = 0;
+            if (message.troopEid != null && message.hasOwnProperty("troopEid"))
+                object.troopEid = message.troopEid;
             return object;
         };
 
         /**
-         * Converts this c2s_player_stop to JSON.
+         * Converts this c2s_troop_stop to JSON.
          * @function toJSON
-         * @memberof world.c2s_player_stop
+         * @memberof world.c2s_troop_stop
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        c2s_player_stop.prototype.toJSON = function toJSON() {
+        c2s_troop_stop.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
         /**
-         * Gets the default type url for c2s_player_stop
+         * Gets the default type url for c2s_troop_stop
          * @function getTypeUrl
-         * @memberof world.c2s_player_stop
+         * @memberof world.c2s_troop_stop
          * @static
          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns {string} The default type url
          */
-        c2s_player_stop.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        c2s_troop_stop.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/world.c2s_player_stop";
+            return typeUrlPrefix + "/world.c2s_troop_stop";
         };
 
-        return c2s_player_stop;
+        return c2s_troop_stop;
     })();
 
-    world.s2c_player_stop = (function() {
+    world.s2c_troop_stop = (function() {
 
         /**
-         * Properties of a s2c_player_stop.
+         * Properties of a s2c_troop_stop.
          * @memberof world
-         * @interface Is2c_player_stop
-         * @property {number|null} [err] s2c_player_stop err
+         * @interface Is2c_troop_stop
+         * @property {number|null} [err] s2c_troop_stop err
          */
 
         /**
-         * Constructs a new s2c_player_stop.
+         * Constructs a new s2c_troop_stop.
          * @memberof world
-         * @classdesc Represents a s2c_player_stop.
-         * @implements Is2c_player_stop
+         * @classdesc Represents a s2c_troop_stop.
+         * @implements Is2c_troop_stop
          * @constructor
-         * @param {world.Is2c_player_stop=} [properties] Properties to set
+         * @param {world.Is2c_troop_stop=} [properties] Properties to set
          */
-        function s2c_player_stop(properties) {
+        function s2c_troop_stop(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -30412,35 +31579,35 @@ $root.world = (function() {
         }
 
         /**
-         * s2c_player_stop err.
+         * s2c_troop_stop err.
          * @member {number} err
-         * @memberof world.s2c_player_stop
+         * @memberof world.s2c_troop_stop
          * @instance
          */
-        s2c_player_stop.prototype.err = 0;
+        s2c_troop_stop.prototype.err = 0;
 
         /**
-         * Creates a new s2c_player_stop instance using the specified properties.
+         * Creates a new s2c_troop_stop instance using the specified properties.
          * @function create
-         * @memberof world.s2c_player_stop
+         * @memberof world.s2c_troop_stop
          * @static
-         * @param {world.Is2c_player_stop=} [properties] Properties to set
-         * @returns {world.s2c_player_stop} s2c_player_stop instance
+         * @param {world.Is2c_troop_stop=} [properties] Properties to set
+         * @returns {world.s2c_troop_stop} s2c_troop_stop instance
          */
-        s2c_player_stop.create = function create(properties) {
-            return new s2c_player_stop(properties);
+        s2c_troop_stop.create = function create(properties) {
+            return new s2c_troop_stop(properties);
         };
 
         /**
-         * Encodes the specified s2c_player_stop message. Does not implicitly {@link world.s2c_player_stop.verify|verify} messages.
+         * Encodes the specified s2c_troop_stop message. Does not implicitly {@link world.s2c_troop_stop.verify|verify} messages.
          * @function encode
-         * @memberof world.s2c_player_stop
+         * @memberof world.s2c_troop_stop
          * @static
-         * @param {world.Is2c_player_stop} message s2c_player_stop message or plain object to encode
+         * @param {world.Is2c_troop_stop} message s2c_troop_stop message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        s2c_player_stop.encode = function encode(message, writer) {
+        s2c_troop_stop.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.err != null && Object.hasOwnProperty.call(message, "err"))
@@ -30449,33 +31616,33 @@ $root.world = (function() {
         };
 
         /**
-         * Encodes the specified s2c_player_stop message, length delimited. Does not implicitly {@link world.s2c_player_stop.verify|verify} messages.
+         * Encodes the specified s2c_troop_stop message, length delimited. Does not implicitly {@link world.s2c_troop_stop.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof world.s2c_player_stop
+         * @memberof world.s2c_troop_stop
          * @static
-         * @param {world.Is2c_player_stop} message s2c_player_stop message or plain object to encode
+         * @param {world.Is2c_troop_stop} message s2c_troop_stop message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        s2c_player_stop.encodeDelimited = function encodeDelimited(message, writer) {
+        s2c_troop_stop.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
         /**
-         * Decodes a s2c_player_stop message from the specified reader or buffer.
+         * Decodes a s2c_troop_stop message from the specified reader or buffer.
          * @function decode
-         * @memberof world.s2c_player_stop
+         * @memberof world.s2c_troop_stop
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {world.s2c_player_stop} s2c_player_stop
+         * @returns {world.s2c_troop_stop} s2c_troop_stop
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        s2c_player_stop.decode = function decode(reader, length) {
+        s2c_troop_stop.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.s2c_player_stop();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.s2c_troop_stop();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -30492,30 +31659,30 @@ $root.world = (function() {
         };
 
         /**
-         * Decodes a s2c_player_stop message from the specified reader or buffer, length delimited.
+         * Decodes a s2c_troop_stop message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof world.s2c_player_stop
+         * @memberof world.s2c_troop_stop
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {world.s2c_player_stop} s2c_player_stop
+         * @returns {world.s2c_troop_stop} s2c_troop_stop
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        s2c_player_stop.decodeDelimited = function decodeDelimited(reader) {
+        s2c_troop_stop.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
         /**
-         * Verifies a s2c_player_stop message.
+         * Verifies a s2c_troop_stop message.
          * @function verify
-         * @memberof world.s2c_player_stop
+         * @memberof world.s2c_troop_stop
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        s2c_player_stop.verify = function verify(message) {
+        s2c_troop_stop.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.err != null && message.hasOwnProperty("err"))
@@ -30525,32 +31692,32 @@ $root.world = (function() {
         };
 
         /**
-         * Creates a s2c_player_stop message from a plain object. Also converts values to their respective internal types.
+         * Creates a s2c_troop_stop message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof world.s2c_player_stop
+         * @memberof world.s2c_troop_stop
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {world.s2c_player_stop} s2c_player_stop
+         * @returns {world.s2c_troop_stop} s2c_troop_stop
          */
-        s2c_player_stop.fromObject = function fromObject(object) {
-            if (object instanceof $root.world.s2c_player_stop)
+        s2c_troop_stop.fromObject = function fromObject(object) {
+            if (object instanceof $root.world.s2c_troop_stop)
                 return object;
-            var message = new $root.world.s2c_player_stop();
+            var message = new $root.world.s2c_troop_stop();
             if (object.err != null)
                 message.err = object.err >>> 0;
             return message;
         };
 
         /**
-         * Creates a plain object from a s2c_player_stop message. Also converts values to other types if specified.
+         * Creates a plain object from a s2c_troop_stop message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof world.s2c_player_stop
+         * @memberof world.s2c_troop_stop
          * @static
-         * @param {world.s2c_player_stop} message s2c_player_stop
+         * @param {world.s2c_troop_stop} message s2c_troop_stop
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        s2c_player_stop.toObject = function toObject(message, options) {
+        s2c_troop_stop.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -30562,32 +31729,32 @@ $root.world = (function() {
         };
 
         /**
-         * Converts this s2c_player_stop to JSON.
+         * Converts this s2c_troop_stop to JSON.
          * @function toJSON
-         * @memberof world.s2c_player_stop
+         * @memberof world.s2c_troop_stop
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        s2c_player_stop.prototype.toJSON = function toJSON() {
+        s2c_troop_stop.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
         /**
-         * Gets the default type url for s2c_player_stop
+         * Gets the default type url for s2c_troop_stop
          * @function getTypeUrl
-         * @memberof world.s2c_player_stop
+         * @memberof world.s2c_troop_stop
          * @static
          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns {string} The default type url
          */
-        s2c_player_stop.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        s2c_troop_stop.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/world.s2c_player_stop";
+            return typeUrlPrefix + "/world.s2c_troop_stop";
         };
 
-        return s2c_player_stop;
+        return s2c_troop_stop;
     })();
 
     world.notify_alliances = (function() {
