@@ -1,5 +1,5 @@
 import { Mediator } from "../core/ui-mediator";
-import { AlertUI } from "../prefab/misc/AlertUI";
+import { AlertUI } from "../ui-runtime/prefab/misc/AlertUI";
 
 @Laya.regClass()
 export class AlertMediator extends Mediator {

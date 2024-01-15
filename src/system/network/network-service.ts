@@ -57,7 +57,7 @@ export class NetworkService extends Service<NetworkService> {
         Laya.timer.loop(2000, this, this._pingPong);
     }
 
-    dispose() {
+    destroy() {
         Laya.timer.clear(this, this._pingPong);
         this.close();
     }

@@ -1,5 +1,4 @@
 // import { GameStateRunning } from "../../gamestate/state/GameStateRunning";
-import { BagService } from "../bag-service";
 import { VO } from "./vo";
 
 /**

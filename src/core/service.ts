@@ -9,7 +9,7 @@ export class Service<T extends Dispatcher> extends Dispatcher {
         this._network = network;
     }
 
-    dispose?(): void;
+    destroy?(): void;
 
     protected handle(type: string | number, callback: Callback) {
         if (!this._network) {

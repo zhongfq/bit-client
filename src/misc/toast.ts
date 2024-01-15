@@ -1,7 +1,7 @@
 import { LayaExt } from "../core/laya";
 import { tween } from "../core/tween/tween";
 import { Mediator } from "../core/ui-mediator";
-import { ToastUI } from "../prefab/misc/ToastUI";
+import { ToastUI } from "../ui-runtime/prefab/misc/ToastUI";
 
 @Laya.regClass()
 export class ToastMediator extends Mediator {

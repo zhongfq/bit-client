@@ -5,48 +5,52 @@ import { LoginUI } from "../../ui-runtime/scene/LoginUI";
 
 const { regClass, property } = Laya;
 type ServerData = {
-    port:number;
-    host:string;
-    server_name:string;
-    server_id:number;
-    state_desc:string;
-    state:number
-}
+    port: number;
+    host: string;
+    server_name: string;
+    server_id: number;
+    state_desc: string;
+    state: number;
+};
+
 @regClass()
 export class LoginMediator extends Mediator {
-    _tlServerList!:any[];
-    owner!:LoginUI;
-    serverData!:ServerData;
+    _tlServerList!: any[];
+    owner!: LoginUI;
+    serverData!: ServerData;
     onStart(): void {
-        
-        let Http = new Laya.HttpRequest()
-        Http.once(Laya.Event.COMPLETE,(data:any)=>{
-            this._tlServerList = JSON.parse(data)
+        let Http = new Laya.HttpRequest();
+        Http.once(Laya.Event.COMPLETE, (data: any) => {
+            this._tlServerList = JSON.parse(data);
             this.serverData = this._tlServerList[0];
-            this.updateInfo()
+            this.updateInfo();
         });
-        Http.send("http://games.bitserver.wang/public/serverlist",null,"get","text")
-        this.owner.btnLogin.on(Laya.Event.CLICK,this,this.onBtnLogin);
-        this.owner.btnServer.on(Laya.Event.CLICK,this,this.onBtnServer)
-        
+        Http.send("http://games.bitserver.wang/public/serverlist", null, "get", "text");
+        this.owner.btnLogin.on(Laya.Event.CLICK, this, this.onBtnLogin);
+        this.owner.btnServer.on(Laya.Event.CLICK, this, this.onBtnServer);
+
         // this.handle(opcode.connection.connected, this.onConnected);
-        
     }
-    onBtnLogin(){
-        if(this.owner.inputAccount.text!=""){
-            app.networkd.connect("ws://"+this.serverData.host+":"+this.serverData.port);
-            app.userd.username = this.owner.inputAccount.text;
+    onBtnLogin() {
+        if (this.owner.inputAccount.text != "") {
+            const { host, port } = this.serverData;
+            app.service.network.connect(`ws://${host}:${port}`);
+            app.service.user.username = this.owner.inputAccount.text;
         }
     }
-    onBtnServer(){
+    onBtnServer() {
         //打开服务器列表
-        app.ui.show(ui.loginServerDialog,{back:new Laya.Handler(this, this.onServerDialogClick),serverList:this._tlServerList})
+        app.ui.show(ui.loginServerDialog, {
+            back: new Laya.Handler(this, this.onServerDialogClick),
+            serverList: this._tlServerList,
+        });
     }
-    onServerDialogClick(data:ServerData){
+    onServerDialogClick(data: ServerData) {
         this.serverData = data;
-        this.updateInfo()
+        this.updateInfo();
     }
-    updateInfo(){
-        this.owner.labelServerName.text = "· "+this.serverData.state_desc+"  "+this.serverData.server_name
+    updateInfo() {
+        this.owner.labelServerName.text =
+            "· " + this.serverData.state_desc + "  " + this.serverData.server_name;
     }
 }

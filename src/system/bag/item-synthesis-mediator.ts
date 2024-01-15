@@ -10,33 +10,35 @@ export class ItemSynthesisMediator extends Mediator {
 
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
     onAwake(): void {
-        
         this.owner.slider.changeHandler = new Laya.Handler(this, this.onChange);
-        this.owner.addBtn.on(Laya.Event.CLICK,this,this.onAddBtn)
-        this.owner.closeBtn.on(Laya.Event.CLICK,this,this.onCloseBtn)
-        this.owner.synthesisBtn.on(Laya.Event.CLICK,this,this.onSynthesisBtn)
-        this.owner.minusBtn.on(Laya.Event.CLICK,this,this.onMinusBtn)
-        
-        this.owner.slider.min = 0
-        this.owner.slider.max = 100
+        this.owner.addBtn.on(Laya.Event.CLICK, this, this.onAddBtn);
+        this.owner.closeBtn.on(Laya.Event.CLICK, this, this.onCloseBtn);
+        this.owner.synthesisBtn.on(Laya.Event.CLICK, this, this.onSynthesisBtn);
+        this.owner.minusBtn.on(Laya.Event.CLICK, this, this.onMinusBtn);
+
+        this.owner.slider.min = 0;
+        this.owner.slider.max = 100;
         this.owner.slider.value = 110;
-        this.owner.iconNodeTop.updateGoods()
+        this.owner.iconNodeTop.updateGoods();
         // this.owner.slider.disabled = true;
         // this.owner.slider.bar.visible = false;
     }
-    onAddBtn(){
-        this.owner.slider.value++; 
+    onAddBtn() {
+        this.owner.slider.value++;
     }
-    onMinusBtn(){
+    onMinusBtn() {
         this.owner.slider.value--;
     }
-    onSynthesisBtn(){
-        app.bagd.callCompositeItem({itemId:this.owner.data.vo.id,num:this.owner.slider.value})
+    onSynthesisBtn() {
+        app.service.bag.callCompositeItem({
+            itemId: this.owner.data.vo.id,
+            num: this.owner.slider.value,
+        });
     }
-    onCloseBtn(){
-        this.owner.close()
+    onCloseBtn() {
+        this.owner.close();
     }
-    onChange(value: number){
+    onChange(value: number) {
         this.owner.selectNumber.text = value.toString();
     }
     //组件被启用后执行，例如节点被添加到舞台后

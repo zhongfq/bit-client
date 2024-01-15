@@ -28,7 +28,7 @@ export class ItemBag extends GoodsVoBag<ItemVo> {
     createByRef(refId: number) {
         let clazz = this.getVOClass();
         let vo = new clazz();
-        let ref = DataUtil.getRef(app.datad.itemTable, { id: refId });
+        let ref = DataUtil.getRef(app.service.data.itemTable, { id: refId });
         vo.initByRef(ref);
         return vo;
     }

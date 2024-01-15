@@ -1,5 +1,4 @@
 import { app } from "../../app";
-import { item } from "../../def/item";
 import { ui } from "../../misc/ui";
 import { IconUI } from "../../ui-runtime/prefab/icon/IconUI";
 import { ItemVo } from "../bag/vo/goods/item-vo";
@@ -9,48 +8,54 @@ const { regClass, property } = Laya;
 @regClass()
 export class IconNodeMediator extends Laya.Script {
     @property(Boolean)
-    isNoShowTips!:boolean;
-    private clickBack:Function|null = null;
-    owner!: IconUI
-
+    isNoShowTips!: boolean;
+    private clickBack: Function | null = null;
+    owner!: IconUI;
 
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
     onAwake(): void {
-        this.owner.on(Laya.Event.CLICK,(evn:Laya.Event)=>{
-            this.onIconClick(evn)
-        })
+        this.owner.on(Laya.Event.CLICK, (evn: Laya.Event) => {
+            this.onIconClick(evn);
+        });
         // if(this.isNoShowTips){
         //     this.owner.on(Laya.Event.CLICK,this.onIconClick)
         // }else{
         //     this.owner.offAll()
         //     // this.owner.setclick
         // }
-        
     }
-    onIconClick(evn:Laya.Event){
-        if(this.isNoShowTips && this.clickBack){
-            this.clickBack(evn)
+    onIconClick(evn: Laya.Event) {
+        if (this.isNoShowTips && this.clickBack) {
+            this.clickBack(evn);
             return;
         }
         let itemData = this.owner.dataSource as ItemVo;
-        if(!itemData.cmd){//没背包数据
-            if(itemData.ref?.composite==1){//可合成
+        if (!itemData.cmd) {
+            //没背包数据
+            if (itemData.ref?.composite == 1) {
+                //可合成
                 //打开合成弹窗
-                app.ui.show(ui.itemSynthesisDialog,{vo:itemData});
+                app.ui.show(ui.itemSynthesisDialog, { vo: itemData });
             }
-        }else if(itemData.cmd){//有背包数据
-            if(itemData.ref?.sub_type == 1){//宝箱类型
+        } else if (itemData.cmd) {
+            //有背包数据
+            if (itemData.ref?.sub_type == 1) {
+                //宝箱类型
                 //打开宝箱弹窗
-            }else if(itemData.ref?.use == 1){//可使用类型
+            } else if (itemData.ref?.use == 1) {
+                //可使用类型
                 //打开使用弹窗
-            }else{
-                app.ui.show(ui.itemTipsDialog,{x:evn.stageX, y:evn.stageY,itemTipsParam:this.owner.dataSource})
+            } else {
+                app.ui.show(ui.itemTipsDialog, {
+                    x: evn.stageX,
+                    y: evn.stageY,
+                    itemTipsParam: this.owner.dataSource,
+                });
             }
         }
     }
-    setClickHandler(func:Function|null){
+    setClickHandler(func: Function | null) {
         this.clickBack = func;
-        
     }
     //组件被启用后执行，例如节点被添加到舞台后
     //onEnable(): void {}

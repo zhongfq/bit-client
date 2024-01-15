@@ -25,7 +25,7 @@ export class ItemVo extends GoodsVo<Item, bag.Item> {
     }
 
     getRefByCmd(cmd: bag.Item): Item | undefined {
-        return DataUtil.getRef<Item>(app.datad.itemTable, {});
+        return DataUtil.getRef<Item>(app.service.data.itemTable, {});
     }
 
     get goodsType(): number {

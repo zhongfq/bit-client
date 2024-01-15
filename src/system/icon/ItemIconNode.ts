@@ -4,21 +4,21 @@ class ItemIconNode extends Laya.Box {
     /**
      *
      */
-    owner!:IconUI;
+    owner!: IconUI;
     constructor() {
         super();
         this.width = 100;
         this.height = 100;
-        this.init()
+        this.init();
     }
-    init(){
-        Laya.loader.load("resources/prefab/icon/icon-node.lh").then((pre:Laya.Prefab)=>{
+    init() {
+        Laya.loader.load("resources/prefab/icon/icon-node.lh").then((pre: Laya.Prefab) => {
             this.owner = pre.create() as IconUI;
             this.addChild(this.owner);
-            this.update()
-        })
+            this.update();
+        });
     }
-    update(){
+    update() {
         // this.owner.updateGoods()
     }
 }
