@@ -1,7 +1,9 @@
 {
   "resolution": {
     "designWidth": 750,
-    "designHeight": 1334
+    "designHeight": 1334,
+    "scaleMode": "fixedwidth",
+    "alignV": "middle"
   },
   "3D": {
     "lightClusterCount": {
@@ -10,14 +12,12 @@
       "z": 12
     }
   },
-  "physics2D": {
-    "gravity": {
-      "y": 9.8
-    }
-  },
   "modules": {
     "laya.d3": true,
     "laya.ui": true
+  },
+  "splash": {
+    "fit": "center"
   },
   "stat": true,
   "alertGlobalError": true
