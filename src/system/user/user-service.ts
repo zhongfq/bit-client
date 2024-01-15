@@ -2,6 +2,8 @@ import { Service } from "../../core/service";
 import { errcode, opcode } from "../../def/protocol";
 import proto from "../../def/proto.js";
 import { NetworkService } from "../network/network-service";
+import { app } from "../../app";
+import { ui } from "../../misc/ui";
 
 const LOGIN_USERNAME = "login:username";
 
@@ -23,9 +25,13 @@ export class UserService extends Service<NetworkService> {
             }
             const role = data.role as proto.user.RoleInfo;
             this.rid = role.rid as number;
+            this._goMainScen();
         }
     }
-
+    private async _goMainScen() {
+        await app.service.bag.load({ bagId: 1 });
+        app.ui.replace(ui.mainScene);
+    }
     private async onConnected() {
         const data = await this.login(this.username);
         if (data.err === errcode.ROLE_NOT_EXIST) {

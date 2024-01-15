@@ -3,6 +3,7 @@ export const item = {
         ITEM: 1,
         PET: 2,
     },
+    FIRST_ITEM_UID: 1000000,
     ITEM_SUB_TYPE: {
         CHEST: 1,
         COIN: 3,

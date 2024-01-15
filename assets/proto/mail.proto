@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+import "bag.proto";
+
+package mail;
+
+message MailInfo {
+    uint32 uid = 1; // 唯一id
+    uint32 id = 2; // 邮件配置表id(可为空)
+    uint32 time = 3; // 接收时间戳
+    uint32 state = 4; // 当前状态, 位运算参照config/mail MAIL_STATE_BIT
+    string title = 5; // 标题, 如有配id, 则title, content, reward为空
+    string content = 6; // 正文
+    repeated bag.Item reward = 7; // 奖励
+}
+
+// 加载邮件
+message c2s_load {
+} 
+message s2c_load {
+    uint32 err = 1; // OK, INVALID_ID
+    repeated MailInfo mails = 2;
+}
+
+message c2s_read {
+    repeated uint32 mail_uids = 1;
+}
+message s2c_read {
+    int32 err = 1; // OK, INVALID_ID
+}
+
+// 领取奖励
+message c2s_receive_reward {
+    repeated uint32 mail_uids = 1;
+}
+message s2c_receive_reward {
+    uint32 err = 1; // OK, INVALID_ID
+}
+
+// 删除
+message c2s_delete_mails {
+    repeated uint32 mail_uids = 1;
+}
+message s2c_delete_mails {
+    uint32 err = 1; // OK, INVALID_ID
+}
+
+// 通知新邮件
+message notify_new_mails {
+    repeated MailInfo mails = 1;
+}

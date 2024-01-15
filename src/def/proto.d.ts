@@ -921,9 +921,6 @@ export namespace bag {
     /** Properties of a notify_items. */
     interface Inotify_items {
 
-        /** notify_items bagId */
-        bagId?: (number|null);
-
         /** notify_items items */
         items?: (bag.IItem[]|null);
     }
@@ -936,9 +933,6 @@ export namespace bag {
          * @param [properties] Properties to set
          */
         constructor(properties?: bag.Inotify_items);
-
-        /** notify_items bagId. */
-        public bagId: number;
 
         /** notify_items items. */
         public items: bag.IItem[];
@@ -2827,6 +2821,2537 @@ export namespace hero {
 
         /**
          * Gets the default type url for s2c_load
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+}
+
+/** Namespace mail. */
+export namespace mail {
+
+    /** Properties of a MailInfo. */
+    interface IMailInfo {
+
+        /** MailInfo uid */
+        uid?: (number|null);
+
+        /** MailInfo id */
+        id?: (number|null);
+
+        /** MailInfo time */
+        time?: (number|null);
+
+        /** MailInfo state */
+        state?: (number|null);
+
+        /** MailInfo title */
+        title?: (string|null);
+
+        /** MailInfo content */
+        content?: (string|null);
+
+        /** MailInfo reward */
+        reward?: (bag.IItem[]|null);
+    }
+
+    /** Represents a MailInfo. */
+    class MailInfo implements IMailInfo {
+
+        /**
+         * Constructs a new MailInfo.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: mail.IMailInfo);
+
+        /** MailInfo uid. */
+        public uid: number;
+
+        /** MailInfo id. */
+        public id: number;
+
+        /** MailInfo time. */
+        public time: number;
+
+        /** MailInfo state. */
+        public state: number;
+
+        /** MailInfo title. */
+        public title: string;
+
+        /** MailInfo content. */
+        public content: string;
+
+        /** MailInfo reward. */
+        public reward: bag.IItem[];
+
+        /**
+         * Creates a new MailInfo instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns MailInfo instance
+         */
+        public static create(properties?: mail.IMailInfo): mail.MailInfo;
+
+        /**
+         * Encodes the specified MailInfo message. Does not implicitly {@link mail.MailInfo.verify|verify} messages.
+         * @param message MailInfo message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: mail.IMailInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified MailInfo message, length delimited. Does not implicitly {@link mail.MailInfo.verify|verify} messages.
+         * @param message MailInfo message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: mail.IMailInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a MailInfo message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns MailInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): mail.MailInfo;
+
+        /**
+         * Decodes a MailInfo message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns MailInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): mail.MailInfo;
+
+        /**
+         * Verifies a MailInfo message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a MailInfo message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns MailInfo
+         */
+        public static fromObject(object: { [k: string]: any }): mail.MailInfo;
+
+        /**
+         * Creates a plain object from a MailInfo message. Also converts values to other types if specified.
+         * @param message MailInfo
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: mail.MailInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this MailInfo to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for MailInfo
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a c2s_load. */
+    interface Ic2s_load {
+    }
+
+    /** Represents a c2s_load. */
+    class c2s_load implements Ic2s_load {
+
+        /**
+         * Constructs a new c2s_load.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: mail.Ic2s_load);
+
+        /**
+         * Creates a new c2s_load instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns c2s_load instance
+         */
+        public static create(properties?: mail.Ic2s_load): mail.c2s_load;
+
+        /**
+         * Encodes the specified c2s_load message. Does not implicitly {@link mail.c2s_load.verify|verify} messages.
+         * @param message c2s_load message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: mail.Ic2s_load, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified c2s_load message, length delimited. Does not implicitly {@link mail.c2s_load.verify|verify} messages.
+         * @param message c2s_load message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: mail.Ic2s_load, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a c2s_load message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns c2s_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): mail.c2s_load;
+
+        /**
+         * Decodes a c2s_load message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns c2s_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): mail.c2s_load;
+
+        /**
+         * Verifies a c2s_load message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a c2s_load message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns c2s_load
+         */
+        public static fromObject(object: { [k: string]: any }): mail.c2s_load;
+
+        /**
+         * Creates a plain object from a c2s_load message. Also converts values to other types if specified.
+         * @param message c2s_load
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: mail.c2s_load, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this c2s_load to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for c2s_load
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a s2c_load. */
+    interface Is2c_load {
+
+        /** s2c_load err */
+        err?: (number|null);
+
+        /** s2c_load mails */
+        mails?: (mail.IMailInfo[]|null);
+    }
+
+    /** Represents a s2c_load. */
+    class s2c_load implements Is2c_load {
+
+        /**
+         * Constructs a new s2c_load.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: mail.Is2c_load);
+
+        /** s2c_load err. */
+        public err: number;
+
+        /** s2c_load mails. */
+        public mails: mail.IMailInfo[];
+
+        /**
+         * Creates a new s2c_load instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns s2c_load instance
+         */
+        public static create(properties?: mail.Is2c_load): mail.s2c_load;
+
+        /**
+         * Encodes the specified s2c_load message. Does not implicitly {@link mail.s2c_load.verify|verify} messages.
+         * @param message s2c_load message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: mail.Is2c_load, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified s2c_load message, length delimited. Does not implicitly {@link mail.s2c_load.verify|verify} messages.
+         * @param message s2c_load message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: mail.Is2c_load, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a s2c_load message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns s2c_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): mail.s2c_load;
+
+        /**
+         * Decodes a s2c_load message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns s2c_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): mail.s2c_load;
+
+        /**
+         * Verifies a s2c_load message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a s2c_load message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns s2c_load
+         */
+        public static fromObject(object: { [k: string]: any }): mail.s2c_load;
+
+        /**
+         * Creates a plain object from a s2c_load message. Also converts values to other types if specified.
+         * @param message s2c_load
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: mail.s2c_load, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this s2c_load to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for s2c_load
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a c2s_read. */
+    interface Ic2s_read {
+
+        /** c2s_read mailUids */
+        mailUids?: (number[]|null);
+    }
+
+    /** Represents a c2s_read. */
+    class c2s_read implements Ic2s_read {
+
+        /**
+         * Constructs a new c2s_read.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: mail.Ic2s_read);
+
+        /** c2s_read mailUids. */
+        public mailUids: number[];
+
+        /**
+         * Creates a new c2s_read instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns c2s_read instance
+         */
+        public static create(properties?: mail.Ic2s_read): mail.c2s_read;
+
+        /**
+         * Encodes the specified c2s_read message. Does not implicitly {@link mail.c2s_read.verify|verify} messages.
+         * @param message c2s_read message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: mail.Ic2s_read, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified c2s_read message, length delimited. Does not implicitly {@link mail.c2s_read.verify|verify} messages.
+         * @param message c2s_read message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: mail.Ic2s_read, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a c2s_read message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns c2s_read
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): mail.c2s_read;
+
+        /**
+         * Decodes a c2s_read message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns c2s_read
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): mail.c2s_read;
+
+        /**
+         * Verifies a c2s_read message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a c2s_read message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns c2s_read
+         */
+        public static fromObject(object: { [k: string]: any }): mail.c2s_read;
+
+        /**
+         * Creates a plain object from a c2s_read message. Also converts values to other types if specified.
+         * @param message c2s_read
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: mail.c2s_read, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this c2s_read to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for c2s_read
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a s2c_read. */
+    interface Is2c_read {
+
+        /** s2c_read err */
+        err?: (number|null);
+    }
+
+    /** Represents a s2c_read. */
+    class s2c_read implements Is2c_read {
+
+        /**
+         * Constructs a new s2c_read.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: mail.Is2c_read);
+
+        /** s2c_read err. */
+        public err: number;
+
+        /**
+         * Creates a new s2c_read instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns s2c_read instance
+         */
+        public static create(properties?: mail.Is2c_read): mail.s2c_read;
+
+        /**
+         * Encodes the specified s2c_read message. Does not implicitly {@link mail.s2c_read.verify|verify} messages.
+         * @param message s2c_read message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: mail.Is2c_read, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified s2c_read message, length delimited. Does not implicitly {@link mail.s2c_read.verify|verify} messages.
+         * @param message s2c_read message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: mail.Is2c_read, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a s2c_read message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns s2c_read
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): mail.s2c_read;
+
+        /**
+         * Decodes a s2c_read message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns s2c_read
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): mail.s2c_read;
+
+        /**
+         * Verifies a s2c_read message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a s2c_read message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns s2c_read
+         */
+        public static fromObject(object: { [k: string]: any }): mail.s2c_read;
+
+        /**
+         * Creates a plain object from a s2c_read message. Also converts values to other types if specified.
+         * @param message s2c_read
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: mail.s2c_read, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this s2c_read to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for s2c_read
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a c2s_receive_reward. */
+    interface Ic2s_receive_reward {
+
+        /** c2s_receive_reward mailUids */
+        mailUids?: (number[]|null);
+    }
+
+    /** Represents a c2s_receive_reward. */
+    class c2s_receive_reward implements Ic2s_receive_reward {
+
+        /**
+         * Constructs a new c2s_receive_reward.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: mail.Ic2s_receive_reward);
+
+        /** c2s_receive_reward mailUids. */
+        public mailUids: number[];
+
+        /**
+         * Creates a new c2s_receive_reward instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns c2s_receive_reward instance
+         */
+        public static create(properties?: mail.Ic2s_receive_reward): mail.c2s_receive_reward;
+
+        /**
+         * Encodes the specified c2s_receive_reward message. Does not implicitly {@link mail.c2s_receive_reward.verify|verify} messages.
+         * @param message c2s_receive_reward message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: mail.Ic2s_receive_reward, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified c2s_receive_reward message, length delimited. Does not implicitly {@link mail.c2s_receive_reward.verify|verify} messages.
+         * @param message c2s_receive_reward message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: mail.Ic2s_receive_reward, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a c2s_receive_reward message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns c2s_receive_reward
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): mail.c2s_receive_reward;
+
+        /**
+         * Decodes a c2s_receive_reward message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns c2s_receive_reward
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): mail.c2s_receive_reward;
+
+        /**
+         * Verifies a c2s_receive_reward message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a c2s_receive_reward message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns c2s_receive_reward
+         */
+        public static fromObject(object: { [k: string]: any }): mail.c2s_receive_reward;
+
+        /**
+         * Creates a plain object from a c2s_receive_reward message. Also converts values to other types if specified.
+         * @param message c2s_receive_reward
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: mail.c2s_receive_reward, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this c2s_receive_reward to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for c2s_receive_reward
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a s2c_receive_reward. */
+    interface Is2c_receive_reward {
+
+        /** s2c_receive_reward err */
+        err?: (number|null);
+    }
+
+    /** Represents a s2c_receive_reward. */
+    class s2c_receive_reward implements Is2c_receive_reward {
+
+        /**
+         * Constructs a new s2c_receive_reward.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: mail.Is2c_receive_reward);
+
+        /** s2c_receive_reward err. */
+        public err: number;
+
+        /**
+         * Creates a new s2c_receive_reward instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns s2c_receive_reward instance
+         */
+        public static create(properties?: mail.Is2c_receive_reward): mail.s2c_receive_reward;
+
+        /**
+         * Encodes the specified s2c_receive_reward message. Does not implicitly {@link mail.s2c_receive_reward.verify|verify} messages.
+         * @param message s2c_receive_reward message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: mail.Is2c_receive_reward, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified s2c_receive_reward message, length delimited. Does not implicitly {@link mail.s2c_receive_reward.verify|verify} messages.
+         * @param message s2c_receive_reward message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: mail.Is2c_receive_reward, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a s2c_receive_reward message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns s2c_receive_reward
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): mail.s2c_receive_reward;
+
+        /**
+         * Decodes a s2c_receive_reward message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns s2c_receive_reward
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): mail.s2c_receive_reward;
+
+        /**
+         * Verifies a s2c_receive_reward message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a s2c_receive_reward message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns s2c_receive_reward
+         */
+        public static fromObject(object: { [k: string]: any }): mail.s2c_receive_reward;
+
+        /**
+         * Creates a plain object from a s2c_receive_reward message. Also converts values to other types if specified.
+         * @param message s2c_receive_reward
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: mail.s2c_receive_reward, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this s2c_receive_reward to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for s2c_receive_reward
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a c2s_delete_mails. */
+    interface Ic2s_delete_mails {
+
+        /** c2s_delete_mails mailUids */
+        mailUids?: (number[]|null);
+    }
+
+    /** Represents a c2s_delete_mails. */
+    class c2s_delete_mails implements Ic2s_delete_mails {
+
+        /**
+         * Constructs a new c2s_delete_mails.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: mail.Ic2s_delete_mails);
+
+        /** c2s_delete_mails mailUids. */
+        public mailUids: number[];
+
+        /**
+         * Creates a new c2s_delete_mails instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns c2s_delete_mails instance
+         */
+        public static create(properties?: mail.Ic2s_delete_mails): mail.c2s_delete_mails;
+
+        /**
+         * Encodes the specified c2s_delete_mails message. Does not implicitly {@link mail.c2s_delete_mails.verify|verify} messages.
+         * @param message c2s_delete_mails message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: mail.Ic2s_delete_mails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified c2s_delete_mails message, length delimited. Does not implicitly {@link mail.c2s_delete_mails.verify|verify} messages.
+         * @param message c2s_delete_mails message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: mail.Ic2s_delete_mails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a c2s_delete_mails message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns c2s_delete_mails
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): mail.c2s_delete_mails;
+
+        /**
+         * Decodes a c2s_delete_mails message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns c2s_delete_mails
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): mail.c2s_delete_mails;
+
+        /**
+         * Verifies a c2s_delete_mails message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a c2s_delete_mails message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns c2s_delete_mails
+         */
+        public static fromObject(object: { [k: string]: any }): mail.c2s_delete_mails;
+
+        /**
+         * Creates a plain object from a c2s_delete_mails message. Also converts values to other types if specified.
+         * @param message c2s_delete_mails
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: mail.c2s_delete_mails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this c2s_delete_mails to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for c2s_delete_mails
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a s2c_delete_mails. */
+    interface Is2c_delete_mails {
+
+        /** s2c_delete_mails err */
+        err?: (number|null);
+    }
+
+    /** Represents a s2c_delete_mails. */
+    class s2c_delete_mails implements Is2c_delete_mails {
+
+        /**
+         * Constructs a new s2c_delete_mails.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: mail.Is2c_delete_mails);
+
+        /** s2c_delete_mails err. */
+        public err: number;
+
+        /**
+         * Creates a new s2c_delete_mails instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns s2c_delete_mails instance
+         */
+        public static create(properties?: mail.Is2c_delete_mails): mail.s2c_delete_mails;
+
+        /**
+         * Encodes the specified s2c_delete_mails message. Does not implicitly {@link mail.s2c_delete_mails.verify|verify} messages.
+         * @param message s2c_delete_mails message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: mail.Is2c_delete_mails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified s2c_delete_mails message, length delimited. Does not implicitly {@link mail.s2c_delete_mails.verify|verify} messages.
+         * @param message s2c_delete_mails message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: mail.Is2c_delete_mails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a s2c_delete_mails message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns s2c_delete_mails
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): mail.s2c_delete_mails;
+
+        /**
+         * Decodes a s2c_delete_mails message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns s2c_delete_mails
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): mail.s2c_delete_mails;
+
+        /**
+         * Verifies a s2c_delete_mails message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a s2c_delete_mails message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns s2c_delete_mails
+         */
+        public static fromObject(object: { [k: string]: any }): mail.s2c_delete_mails;
+
+        /**
+         * Creates a plain object from a s2c_delete_mails message. Also converts values to other types if specified.
+         * @param message s2c_delete_mails
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: mail.s2c_delete_mails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this s2c_delete_mails to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for s2c_delete_mails
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a notify_new_mails. */
+    interface Inotify_new_mails {
+
+        /** notify_new_mails mails */
+        mails?: (mail.IMailInfo[]|null);
+    }
+
+    /** Represents a notify_new_mails. */
+    class notify_new_mails implements Inotify_new_mails {
+
+        /**
+         * Constructs a new notify_new_mails.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: mail.Inotify_new_mails);
+
+        /** notify_new_mails mails. */
+        public mails: mail.IMailInfo[];
+
+        /**
+         * Creates a new notify_new_mails instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns notify_new_mails instance
+         */
+        public static create(properties?: mail.Inotify_new_mails): mail.notify_new_mails;
+
+        /**
+         * Encodes the specified notify_new_mails message. Does not implicitly {@link mail.notify_new_mails.verify|verify} messages.
+         * @param message notify_new_mails message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: mail.Inotify_new_mails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified notify_new_mails message, length delimited. Does not implicitly {@link mail.notify_new_mails.verify|verify} messages.
+         * @param message notify_new_mails message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: mail.Inotify_new_mails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a notify_new_mails message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns notify_new_mails
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): mail.notify_new_mails;
+
+        /**
+         * Decodes a notify_new_mails message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns notify_new_mails
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): mail.notify_new_mails;
+
+        /**
+         * Verifies a notify_new_mails message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a notify_new_mails message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns notify_new_mails
+         */
+        public static fromObject(object: { [k: string]: any }): mail.notify_new_mails;
+
+        /**
+         * Creates a plain object from a notify_new_mails message. Also converts values to other types if specified.
+         * @param message notify_new_mails
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: mail.notify_new_mails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this notify_new_mails to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for notify_new_mails
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+}
+
+/** Namespace money. */
+export namespace money {
+
+    /** Properties of a MoneyItem. */
+    interface IMoneyItem {
+
+        /** MoneyItem id */
+        id?: (number|null);
+
+        /** MoneyItem num */
+        num?: (number|null);
+
+        /** MoneyItem recoverTs */
+        recoverTs?: (number|null);
+    }
+
+    /** Represents a MoneyItem. */
+    class MoneyItem implements IMoneyItem {
+
+        /**
+         * Constructs a new MoneyItem.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: money.IMoneyItem);
+
+        /** MoneyItem id. */
+        public id: number;
+
+        /** MoneyItem num. */
+        public num: number;
+
+        /** MoneyItem recoverTs. */
+        public recoverTs: number;
+
+        /**
+         * Creates a new MoneyItem instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns MoneyItem instance
+         */
+        public static create(properties?: money.IMoneyItem): money.MoneyItem;
+
+        /**
+         * Encodes the specified MoneyItem message. Does not implicitly {@link money.MoneyItem.verify|verify} messages.
+         * @param message MoneyItem message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: money.IMoneyItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified MoneyItem message, length delimited. Does not implicitly {@link money.MoneyItem.verify|verify} messages.
+         * @param message MoneyItem message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: money.IMoneyItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a MoneyItem message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns MoneyItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): money.MoneyItem;
+
+        /**
+         * Decodes a MoneyItem message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns MoneyItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): money.MoneyItem;
+
+        /**
+         * Verifies a MoneyItem message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a MoneyItem message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns MoneyItem
+         */
+        public static fromObject(object: { [k: string]: any }): money.MoneyItem;
+
+        /**
+         * Creates a plain object from a MoneyItem message. Also converts values to other types if specified.
+         * @param message MoneyItem
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: money.MoneyItem, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this MoneyItem to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for MoneyItem
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a c2s_load. */
+    interface Ic2s_load {
+    }
+
+    /** Represents a c2s_load. */
+    class c2s_load implements Ic2s_load {
+
+        /**
+         * Constructs a new c2s_load.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: money.Ic2s_load);
+
+        /**
+         * Creates a new c2s_load instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns c2s_load instance
+         */
+        public static create(properties?: money.Ic2s_load): money.c2s_load;
+
+        /**
+         * Encodes the specified c2s_load message. Does not implicitly {@link money.c2s_load.verify|verify} messages.
+         * @param message c2s_load message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: money.Ic2s_load, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified c2s_load message, length delimited. Does not implicitly {@link money.c2s_load.verify|verify} messages.
+         * @param message c2s_load message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: money.Ic2s_load, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a c2s_load message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns c2s_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): money.c2s_load;
+
+        /**
+         * Decodes a c2s_load message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns c2s_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): money.c2s_load;
+
+        /**
+         * Verifies a c2s_load message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a c2s_load message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns c2s_load
+         */
+        public static fromObject(object: { [k: string]: any }): money.c2s_load;
+
+        /**
+         * Creates a plain object from a c2s_load message. Also converts values to other types if specified.
+         * @param message c2s_load
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: money.c2s_load, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this c2s_load to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for c2s_load
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a s2c_load. */
+    interface Is2c_load {
+
+        /** s2c_load err */
+        err?: (number|null);
+
+        /** s2c_load items */
+        items?: (money.IMoneyItem[]|null);
+    }
+
+    /** Represents a s2c_load. */
+    class s2c_load implements Is2c_load {
+
+        /**
+         * Constructs a new s2c_load.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: money.Is2c_load);
+
+        /** s2c_load err. */
+        public err: number;
+
+        /** s2c_load items. */
+        public items: money.IMoneyItem[];
+
+        /**
+         * Creates a new s2c_load instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns s2c_load instance
+         */
+        public static create(properties?: money.Is2c_load): money.s2c_load;
+
+        /**
+         * Encodes the specified s2c_load message. Does not implicitly {@link money.s2c_load.verify|verify} messages.
+         * @param message s2c_load message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: money.Is2c_load, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified s2c_load message, length delimited. Does not implicitly {@link money.s2c_load.verify|verify} messages.
+         * @param message s2c_load message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: money.Is2c_load, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a s2c_load message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns s2c_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): money.s2c_load;
+
+        /**
+         * Decodes a s2c_load message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns s2c_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): money.s2c_load;
+
+        /**
+         * Verifies a s2c_load message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a s2c_load message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns s2c_load
+         */
+        public static fromObject(object: { [k: string]: any }): money.s2c_load;
+
+        /**
+         * Creates a plain object from a s2c_load message. Also converts values to other types if specified.
+         * @param message s2c_load
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: money.s2c_load, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this s2c_load to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for s2c_load
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a notify_items. */
+    interface Inotify_items {
+
+        /** notify_items items */
+        items?: (money.IMoneyItem[]|null);
+    }
+
+    /** Represents a notify_items. */
+    class notify_items implements Inotify_items {
+
+        /**
+         * Constructs a new notify_items.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: money.Inotify_items);
+
+        /** notify_items items. */
+        public items: money.IMoneyItem[];
+
+        /**
+         * Creates a new notify_items instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns notify_items instance
+         */
+        public static create(properties?: money.Inotify_items): money.notify_items;
+
+        /**
+         * Encodes the specified notify_items message. Does not implicitly {@link money.notify_items.verify|verify} messages.
+         * @param message notify_items message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: money.Inotify_items, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified notify_items message, length delimited. Does not implicitly {@link money.notify_items.verify|verify} messages.
+         * @param message notify_items message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: money.Inotify_items, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a notify_items message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns notify_items
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): money.notify_items;
+
+        /**
+         * Decodes a notify_items message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns notify_items
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): money.notify_items;
+
+        /**
+         * Verifies a notify_items message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a notify_items message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns notify_items
+         */
+        public static fromObject(object: { [k: string]: any }): money.notify_items;
+
+        /**
+         * Creates a plain object from a notify_items message. Also converts values to other types if specified.
+         * @param message notify_items
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: money.notify_items, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this notify_items to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for notify_items
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+}
+
+/** Namespace profile. */
+export namespace profile {
+
+    /** Properties of a ProfileInfo. */
+    interface IProfileInfo {
+
+        /** ProfileInfo name */
+        name?: (string|null);
+
+        /** ProfileInfo gender */
+        gender?: (number|null);
+
+        /** ProfileInfo exp */
+        exp?: (number|null);
+
+        /** ProfileInfo lv */
+        lv?: (number|null);
+    }
+
+    /** Represents a ProfileInfo. */
+    class ProfileInfo implements IProfileInfo {
+
+        /**
+         * Constructs a new ProfileInfo.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: profile.IProfileInfo);
+
+        /** ProfileInfo name. */
+        public name: string;
+
+        /** ProfileInfo gender. */
+        public gender: number;
+
+        /** ProfileInfo exp. */
+        public exp: number;
+
+        /** ProfileInfo lv. */
+        public lv: number;
+
+        /**
+         * Creates a new ProfileInfo instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns ProfileInfo instance
+         */
+        public static create(properties?: profile.IProfileInfo): profile.ProfileInfo;
+
+        /**
+         * Encodes the specified ProfileInfo message. Does not implicitly {@link profile.ProfileInfo.verify|verify} messages.
+         * @param message ProfileInfo message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: profile.IProfileInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified ProfileInfo message, length delimited. Does not implicitly {@link profile.ProfileInfo.verify|verify} messages.
+         * @param message ProfileInfo message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: profile.IProfileInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a ProfileInfo message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns ProfileInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): profile.ProfileInfo;
+
+        /**
+         * Decodes a ProfileInfo message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns ProfileInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): profile.ProfileInfo;
+
+        /**
+         * Verifies a ProfileInfo message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a ProfileInfo message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns ProfileInfo
+         */
+        public static fromObject(object: { [k: string]: any }): profile.ProfileInfo;
+
+        /**
+         * Creates a plain object from a ProfileInfo message. Also converts values to other types if specified.
+         * @param message ProfileInfo
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: profile.ProfileInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this ProfileInfo to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for ProfileInfo
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a c2s_load. */
+    interface Ic2s_load {
+    }
+
+    /** Represents a c2s_load. */
+    class c2s_load implements Ic2s_load {
+
+        /**
+         * Constructs a new c2s_load.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: profile.Ic2s_load);
+
+        /**
+         * Creates a new c2s_load instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns c2s_load instance
+         */
+        public static create(properties?: profile.Ic2s_load): profile.c2s_load;
+
+        /**
+         * Encodes the specified c2s_load message. Does not implicitly {@link profile.c2s_load.verify|verify} messages.
+         * @param message c2s_load message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: profile.Ic2s_load, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified c2s_load message, length delimited. Does not implicitly {@link profile.c2s_load.verify|verify} messages.
+         * @param message c2s_load message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: profile.Ic2s_load, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a c2s_load message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns c2s_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): profile.c2s_load;
+
+        /**
+         * Decodes a c2s_load message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns c2s_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): profile.c2s_load;
+
+        /**
+         * Verifies a c2s_load message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a c2s_load message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns c2s_load
+         */
+        public static fromObject(object: { [k: string]: any }): profile.c2s_load;
+
+        /**
+         * Creates a plain object from a c2s_load message. Also converts values to other types if specified.
+         * @param message c2s_load
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: profile.c2s_load, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this c2s_load to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for c2s_load
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a s2c_load. */
+    interface Is2c_load {
+
+        /** s2c_load err */
+        err?: (number|null);
+
+        /** s2c_load profile */
+        profile?: (profile.IProfileInfo|null);
+    }
+
+    /** Represents a s2c_load. */
+    class s2c_load implements Is2c_load {
+
+        /**
+         * Constructs a new s2c_load.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: profile.Is2c_load);
+
+        /** s2c_load err. */
+        public err: number;
+
+        /** s2c_load profile. */
+        public profile?: (profile.IProfileInfo|null);
+
+        /**
+         * Creates a new s2c_load instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns s2c_load instance
+         */
+        public static create(properties?: profile.Is2c_load): profile.s2c_load;
+
+        /**
+         * Encodes the specified s2c_load message. Does not implicitly {@link profile.s2c_load.verify|verify} messages.
+         * @param message s2c_load message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: profile.Is2c_load, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified s2c_load message, length delimited. Does not implicitly {@link profile.s2c_load.verify|verify} messages.
+         * @param message s2c_load message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: profile.Is2c_load, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a s2c_load message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns s2c_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): profile.s2c_load;
+
+        /**
+         * Decodes a s2c_load message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns s2c_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): profile.s2c_load;
+
+        /**
+         * Verifies a s2c_load message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a s2c_load message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns s2c_load
+         */
+        public static fromObject(object: { [k: string]: any }): profile.s2c_load;
+
+        /**
+         * Creates a plain object from a s2c_load message. Also converts values to other types if specified.
+         * @param message s2c_load
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: profile.s2c_load, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this s2c_load to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for s2c_load
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a notify_profile. */
+    interface Inotify_profile {
+
+        /** notify_profile profile */
+        profile?: (profile.IProfileInfo|null);
+    }
+
+    /** Represents a notify_profile. */
+    class notify_profile implements Inotify_profile {
+
+        /**
+         * Constructs a new notify_profile.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: profile.Inotify_profile);
+
+        /** notify_profile profile. */
+        public profile?: (profile.IProfileInfo|null);
+
+        /**
+         * Creates a new notify_profile instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns notify_profile instance
+         */
+        public static create(properties?: profile.Inotify_profile): profile.notify_profile;
+
+        /**
+         * Encodes the specified notify_profile message. Does not implicitly {@link profile.notify_profile.verify|verify} messages.
+         * @param message notify_profile message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: profile.Inotify_profile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified notify_profile message, length delimited. Does not implicitly {@link profile.notify_profile.verify|verify} messages.
+         * @param message notify_profile message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: profile.Inotify_profile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a notify_profile message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns notify_profile
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): profile.notify_profile;
+
+        /**
+         * Decodes a notify_profile message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns notify_profile
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): profile.notify_profile;
+
+        /**
+         * Verifies a notify_profile message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a notify_profile message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns notify_profile
+         */
+        public static fromObject(object: { [k: string]: any }): profile.notify_profile;
+
+        /**
+         * Creates a plain object from a notify_profile message. Also converts values to other types if specified.
+         * @param message notify_profile
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: profile.notify_profile, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this notify_profile to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for notify_profile
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+}
+
+/** Namespace task. */
+export namespace task {
+
+    /** Properties of a TaskInfo. */
+    interface ITaskInfo {
+
+        /** TaskInfo id */
+        id?: (number|null);
+
+        /** TaskInfo num */
+        num?: (number|null);
+
+        /** TaskInfo max */
+        max?: (number|null);
+
+        /** TaskInfo finish */
+        finish?: (boolean|null);
+    }
+
+    /** Represents a TaskInfo. */
+    class TaskInfo implements ITaskInfo {
+
+        /**
+         * Constructs a new TaskInfo.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: task.ITaskInfo);
+
+        /** TaskInfo id. */
+        public id: number;
+
+        /** TaskInfo num. */
+        public num: number;
+
+        /** TaskInfo max. */
+        public max: number;
+
+        /** TaskInfo finish. */
+        public finish: boolean;
+
+        /**
+         * Creates a new TaskInfo instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns TaskInfo instance
+         */
+        public static create(properties?: task.ITaskInfo): task.TaskInfo;
+
+        /**
+         * Encodes the specified TaskInfo message. Does not implicitly {@link task.TaskInfo.verify|verify} messages.
+         * @param message TaskInfo message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: task.ITaskInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified TaskInfo message, length delimited. Does not implicitly {@link task.TaskInfo.verify|verify} messages.
+         * @param message TaskInfo message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: task.ITaskInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a TaskInfo message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns TaskInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): task.TaskInfo;
+
+        /**
+         * Decodes a TaskInfo message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns TaskInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): task.TaskInfo;
+
+        /**
+         * Verifies a TaskInfo message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a TaskInfo message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns TaskInfo
+         */
+        public static fromObject(object: { [k: string]: any }): task.TaskInfo;
+
+        /**
+         * Creates a plain object from a TaskInfo message. Also converts values to other types if specified.
+         * @param message TaskInfo
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: task.TaskInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this TaskInfo to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for TaskInfo
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a c2s_load. */
+    interface Ic2s_load {
+
+        /** c2s_load taskType */
+        taskType?: (number|null);
+    }
+
+    /** Represents a c2s_load. */
+    class c2s_load implements Ic2s_load {
+
+        /**
+         * Constructs a new c2s_load.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: task.Ic2s_load);
+
+        /** c2s_load taskType. */
+        public taskType: number;
+
+        /**
+         * Creates a new c2s_load instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns c2s_load instance
+         */
+        public static create(properties?: task.Ic2s_load): task.c2s_load;
+
+        /**
+         * Encodes the specified c2s_load message. Does not implicitly {@link task.c2s_load.verify|verify} messages.
+         * @param message c2s_load message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: task.Ic2s_load, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified c2s_load message, length delimited. Does not implicitly {@link task.c2s_load.verify|verify} messages.
+         * @param message c2s_load message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: task.Ic2s_load, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a c2s_load message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns c2s_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): task.c2s_load;
+
+        /**
+         * Decodes a c2s_load message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns c2s_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): task.c2s_load;
+
+        /**
+         * Verifies a c2s_load message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a c2s_load message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns c2s_load
+         */
+        public static fromObject(object: { [k: string]: any }): task.c2s_load;
+
+        /**
+         * Creates a plain object from a c2s_load message. Also converts values to other types if specified.
+         * @param message c2s_load
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: task.c2s_load, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this c2s_load to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for c2s_load
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a s2c_load. */
+    interface Is2c_load {
+
+        /** s2c_load err */
+        err?: (number|null);
+
+        /** s2c_load tasks */
+        tasks?: (task.ITaskInfo[]|null);
+    }
+
+    /** Represents a s2c_load. */
+    class s2c_load implements Is2c_load {
+
+        /**
+         * Constructs a new s2c_load.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: task.Is2c_load);
+
+        /** s2c_load err. */
+        public err: number;
+
+        /** s2c_load tasks. */
+        public tasks: task.ITaskInfo[];
+
+        /**
+         * Creates a new s2c_load instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns s2c_load instance
+         */
+        public static create(properties?: task.Is2c_load): task.s2c_load;
+
+        /**
+         * Encodes the specified s2c_load message. Does not implicitly {@link task.s2c_load.verify|verify} messages.
+         * @param message s2c_load message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: task.Is2c_load, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified s2c_load message, length delimited. Does not implicitly {@link task.s2c_load.verify|verify} messages.
+         * @param message s2c_load message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: task.Is2c_load, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a s2c_load message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns s2c_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): task.s2c_load;
+
+        /**
+         * Decodes a s2c_load message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns s2c_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): task.s2c_load;
+
+        /**
+         * Verifies a s2c_load message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a s2c_load message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns s2c_load
+         */
+        public static fromObject(object: { [k: string]: any }): task.s2c_load;
+
+        /**
+         * Creates a plain object from a s2c_load message. Also converts values to other types if specified.
+         * @param message s2c_load
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: task.s2c_load, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this s2c_load to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for s2c_load
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a c2s_receive_reward. */
+    interface Ic2s_receive_reward {
+
+        /** c2s_receive_reward taskIds */
+        taskIds?: (number[]|null);
+    }
+
+    /** Represents a c2s_receive_reward. */
+    class c2s_receive_reward implements Ic2s_receive_reward {
+
+        /**
+         * Constructs a new c2s_receive_reward.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: task.Ic2s_receive_reward);
+
+        /** c2s_receive_reward taskIds. */
+        public taskIds: number[];
+
+        /**
+         * Creates a new c2s_receive_reward instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns c2s_receive_reward instance
+         */
+        public static create(properties?: task.Ic2s_receive_reward): task.c2s_receive_reward;
+
+        /**
+         * Encodes the specified c2s_receive_reward message. Does not implicitly {@link task.c2s_receive_reward.verify|verify} messages.
+         * @param message c2s_receive_reward message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: task.Ic2s_receive_reward, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified c2s_receive_reward message, length delimited. Does not implicitly {@link task.c2s_receive_reward.verify|verify} messages.
+         * @param message c2s_receive_reward message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: task.Ic2s_receive_reward, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a c2s_receive_reward message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns c2s_receive_reward
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): task.c2s_receive_reward;
+
+        /**
+         * Decodes a c2s_receive_reward message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns c2s_receive_reward
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): task.c2s_receive_reward;
+
+        /**
+         * Verifies a c2s_receive_reward message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a c2s_receive_reward message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns c2s_receive_reward
+         */
+        public static fromObject(object: { [k: string]: any }): task.c2s_receive_reward;
+
+        /**
+         * Creates a plain object from a c2s_receive_reward message. Also converts values to other types if specified.
+         * @param message c2s_receive_reward
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: task.c2s_receive_reward, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this c2s_receive_reward to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for c2s_receive_reward
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a s2c_receive_reward. */
+    interface Is2c_receive_reward {
+
+        /** s2c_receive_reward err */
+        err?: (number|null);
+    }
+
+    /** Represents a s2c_receive_reward. */
+    class s2c_receive_reward implements Is2c_receive_reward {
+
+        /**
+         * Constructs a new s2c_receive_reward.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: task.Is2c_receive_reward);
+
+        /** s2c_receive_reward err. */
+        public err: number;
+
+        /**
+         * Creates a new s2c_receive_reward instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns s2c_receive_reward instance
+         */
+        public static create(properties?: task.Is2c_receive_reward): task.s2c_receive_reward;
+
+        /**
+         * Encodes the specified s2c_receive_reward message. Does not implicitly {@link task.s2c_receive_reward.verify|verify} messages.
+         * @param message s2c_receive_reward message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: task.Is2c_receive_reward, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified s2c_receive_reward message, length delimited. Does not implicitly {@link task.s2c_receive_reward.verify|verify} messages.
+         * @param message s2c_receive_reward message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: task.Is2c_receive_reward, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a s2c_receive_reward message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns s2c_receive_reward
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): task.s2c_receive_reward;
+
+        /**
+         * Decodes a s2c_receive_reward message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns s2c_receive_reward
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): task.s2c_receive_reward;
+
+        /**
+         * Verifies a s2c_receive_reward message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a s2c_receive_reward message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns s2c_receive_reward
+         */
+        public static fromObject(object: { [k: string]: any }): task.s2c_receive_reward;
+
+        /**
+         * Creates a plain object from a s2c_receive_reward message. Also converts values to other types if specified.
+         * @param message s2c_receive_reward
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: task.s2c_receive_reward, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this s2c_receive_reward to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for s2c_receive_reward
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a notify_tasks. */
+    interface Inotify_tasks {
+
+        /** notify_tasks tasks */
+        tasks?: (task.ITaskInfo[]|null);
+    }
+
+    /** Represents a notify_tasks. */
+    class notify_tasks implements Inotify_tasks {
+
+        /**
+         * Constructs a new notify_tasks.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: task.Inotify_tasks);
+
+        /** notify_tasks tasks. */
+        public tasks: task.ITaskInfo[];
+
+        /**
+         * Creates a new notify_tasks instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns notify_tasks instance
+         */
+        public static create(properties?: task.Inotify_tasks): task.notify_tasks;
+
+        /**
+         * Encodes the specified notify_tasks message. Does not implicitly {@link task.notify_tasks.verify|verify} messages.
+         * @param message notify_tasks message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: task.Inotify_tasks, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified notify_tasks message, length delimited. Does not implicitly {@link task.notify_tasks.verify|verify} messages.
+         * @param message notify_tasks message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: task.Inotify_tasks, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a notify_tasks message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns notify_tasks
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): task.notify_tasks;
+
+        /**
+         * Decodes a notify_tasks message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns notify_tasks
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): task.notify_tasks;
+
+        /**
+         * Verifies a notify_tasks message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a notify_tasks message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns notify_tasks
+         */
+        public static fromObject(object: { [k: string]: any }): task.notify_tasks;
+
+        /**
+         * Creates a plain object from a notify_tasks message. Also converts values to other types if specified.
+         * @param message notify_tasks
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: task.notify_tasks, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this notify_tasks to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for notify_tasks
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a notify_remove_tasks. */
+    interface Inotify_remove_tasks {
+
+        /** notify_remove_tasks taskIds */
+        taskIds?: (number[]|null);
+    }
+
+    /** Represents a notify_remove_tasks. */
+    class notify_remove_tasks implements Inotify_remove_tasks {
+
+        /**
+         * Constructs a new notify_remove_tasks.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: task.Inotify_remove_tasks);
+
+        /** notify_remove_tasks taskIds. */
+        public taskIds: number[];
+
+        /**
+         * Creates a new notify_remove_tasks instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns notify_remove_tasks instance
+         */
+        public static create(properties?: task.Inotify_remove_tasks): task.notify_remove_tasks;
+
+        /**
+         * Encodes the specified notify_remove_tasks message. Does not implicitly {@link task.notify_remove_tasks.verify|verify} messages.
+         * @param message notify_remove_tasks message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: task.Inotify_remove_tasks, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified notify_remove_tasks message, length delimited. Does not implicitly {@link task.notify_remove_tasks.verify|verify} messages.
+         * @param message notify_remove_tasks message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: task.Inotify_remove_tasks, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a notify_remove_tasks message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns notify_remove_tasks
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): task.notify_remove_tasks;
+
+        /**
+         * Decodes a notify_remove_tasks message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns notify_remove_tasks
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): task.notify_remove_tasks;
+
+        /**
+         * Verifies a notify_remove_tasks message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a notify_remove_tasks message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns notify_remove_tasks
+         */
+        public static fromObject(object: { [k: string]: any }): task.notify_remove_tasks;
+
+        /**
+         * Creates a plain object from a notify_remove_tasks message. Also converts values to other types if specified.
+         * @param message notify_remove_tasks
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: task.notify_remove_tasks, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this notify_remove_tasks to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for notify_remove_tasks
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */
@@ -6848,382 +9373,6 @@ export namespace war {
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
-    /** Properties of a c2s_test_pvp. */
-    interface Ic2s_test_pvp {
-    }
-
-    /** Represents a c2s_test_pvp. */
-    class c2s_test_pvp implements Ic2s_test_pvp {
-
-        /**
-         * Constructs a new c2s_test_pvp.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: war.Ic2s_test_pvp);
-
-        /**
-         * Creates a new c2s_test_pvp instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns c2s_test_pvp instance
-         */
-        public static create(properties?: war.Ic2s_test_pvp): war.c2s_test_pvp;
-
-        /**
-         * Encodes the specified c2s_test_pvp message. Does not implicitly {@link war.c2s_test_pvp.verify|verify} messages.
-         * @param message c2s_test_pvp message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: war.Ic2s_test_pvp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified c2s_test_pvp message, length delimited. Does not implicitly {@link war.c2s_test_pvp.verify|verify} messages.
-         * @param message c2s_test_pvp message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: war.Ic2s_test_pvp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a c2s_test_pvp message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns c2s_test_pvp
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): war.c2s_test_pvp;
-
-        /**
-         * Decodes a c2s_test_pvp message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns c2s_test_pvp
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): war.c2s_test_pvp;
-
-        /**
-         * Verifies a c2s_test_pvp message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a c2s_test_pvp message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns c2s_test_pvp
-         */
-        public static fromObject(object: { [k: string]: any }): war.c2s_test_pvp;
-
-        /**
-         * Creates a plain object from a c2s_test_pvp message. Also converts values to other types if specified.
-         * @param message c2s_test_pvp
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: war.c2s_test_pvp, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this c2s_test_pvp to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-
-        /**
-         * Gets the default type url for c2s_test_pvp
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
-    }
-
-    /** Properties of a s2c_test_pvp. */
-    interface Is2c_test_pvp {
-
-        /** s2c_test_pvp err */
-        err?: (number|null);
-    }
-
-    /** Represents a s2c_test_pvp. */
-    class s2c_test_pvp implements Is2c_test_pvp {
-
-        /**
-         * Constructs a new s2c_test_pvp.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: war.Is2c_test_pvp);
-
-        /** s2c_test_pvp err. */
-        public err: number;
-
-        /**
-         * Creates a new s2c_test_pvp instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns s2c_test_pvp instance
-         */
-        public static create(properties?: war.Is2c_test_pvp): war.s2c_test_pvp;
-
-        /**
-         * Encodes the specified s2c_test_pvp message. Does not implicitly {@link war.s2c_test_pvp.verify|verify} messages.
-         * @param message s2c_test_pvp message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: war.Is2c_test_pvp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified s2c_test_pvp message, length delimited. Does not implicitly {@link war.s2c_test_pvp.verify|verify} messages.
-         * @param message s2c_test_pvp message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: war.Is2c_test_pvp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a s2c_test_pvp message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns s2c_test_pvp
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): war.s2c_test_pvp;
-
-        /**
-         * Decodes a s2c_test_pvp message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns s2c_test_pvp
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): war.s2c_test_pvp;
-
-        /**
-         * Verifies a s2c_test_pvp message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a s2c_test_pvp message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns s2c_test_pvp
-         */
-        public static fromObject(object: { [k: string]: any }): war.s2c_test_pvp;
-
-        /**
-         * Creates a plain object from a s2c_test_pvp message. Also converts values to other types if specified.
-         * @param message s2c_test_pvp
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: war.s2c_test_pvp, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this s2c_test_pvp to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-
-        /**
-         * Gets the default type url for s2c_test_pvp
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
-    }
-
-    /** Properties of a c2s_test_pve. */
-    interface Ic2s_test_pve {
-    }
-
-    /** Represents a c2s_test_pve. */
-    class c2s_test_pve implements Ic2s_test_pve {
-
-        /**
-         * Constructs a new c2s_test_pve.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: war.Ic2s_test_pve);
-
-        /**
-         * Creates a new c2s_test_pve instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns c2s_test_pve instance
-         */
-        public static create(properties?: war.Ic2s_test_pve): war.c2s_test_pve;
-
-        /**
-         * Encodes the specified c2s_test_pve message. Does not implicitly {@link war.c2s_test_pve.verify|verify} messages.
-         * @param message c2s_test_pve message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: war.Ic2s_test_pve, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified c2s_test_pve message, length delimited. Does not implicitly {@link war.c2s_test_pve.verify|verify} messages.
-         * @param message c2s_test_pve message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: war.Ic2s_test_pve, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a c2s_test_pve message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns c2s_test_pve
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): war.c2s_test_pve;
-
-        /**
-         * Decodes a c2s_test_pve message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns c2s_test_pve
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): war.c2s_test_pve;
-
-        /**
-         * Verifies a c2s_test_pve message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a c2s_test_pve message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns c2s_test_pve
-         */
-        public static fromObject(object: { [k: string]: any }): war.c2s_test_pve;
-
-        /**
-         * Creates a plain object from a c2s_test_pve message. Also converts values to other types if specified.
-         * @param message c2s_test_pve
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: war.c2s_test_pve, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this c2s_test_pve to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-
-        /**
-         * Gets the default type url for c2s_test_pve
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
-    }
-
-    /** Properties of a s2c_test_pve. */
-    interface Is2c_test_pve {
-
-        /** s2c_test_pve err */
-        err?: (number|null);
-    }
-
-    /** Represents a s2c_test_pve. */
-    class s2c_test_pve implements Is2c_test_pve {
-
-        /**
-         * Constructs a new s2c_test_pve.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: war.Is2c_test_pve);
-
-        /** s2c_test_pve err. */
-        public err: number;
-
-        /**
-         * Creates a new s2c_test_pve instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns s2c_test_pve instance
-         */
-        public static create(properties?: war.Is2c_test_pve): war.s2c_test_pve;
-
-        /**
-         * Encodes the specified s2c_test_pve message. Does not implicitly {@link war.s2c_test_pve.verify|verify} messages.
-         * @param message s2c_test_pve message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: war.Is2c_test_pve, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified s2c_test_pve message, length delimited. Does not implicitly {@link war.s2c_test_pve.verify|verify} messages.
-         * @param message s2c_test_pve message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: war.Is2c_test_pve, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a s2c_test_pve message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns s2c_test_pve
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): war.s2c_test_pve;
-
-        /**
-         * Decodes a s2c_test_pve message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns s2c_test_pve
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): war.s2c_test_pve;
-
-        /**
-         * Verifies a s2c_test_pve message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a s2c_test_pve message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns s2c_test_pve
-         */
-        public static fromObject(object: { [k: string]: any }): war.s2c_test_pve;
-
-        /**
-         * Creates a plain object from a s2c_test_pve message. Also converts values to other types if specified.
-         * @param message s2c_test_pve
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: war.s2c_test_pve, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this s2c_test_pve to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-
-        /**
-         * Gets the default type url for s2c_test_pve
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
-    }
-
     /** Properties of a c2s_load. */
     interface Ic2s_load {
 
@@ -8955,115 +11104,115 @@ export namespace world {
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
-    /** Properties of a ComponentTeam. */
-    interface IComponentTeam {
+    /** Properties of a ComponentPlayer. */
+    interface IComponentPlayer {
 
-        /** ComponentTeam soldierId */
+        /** ComponentPlayer soldierId */
         soldierId?: (number|null);
 
-        /** ComponentTeam cmd */
+        /** ComponentPlayer cmd */
         cmd?: (number|null);
 
-        /** ComponentTeam stayEid */
+        /** ComponentPlayer stayEid */
         stayEid?: (number|null);
 
-        /** ComponentTeam homeEid */
+        /** ComponentPlayer homeEid */
         homeEid?: (number|null);
     }
 
-    /** Represents a ComponentTeam. */
-    class ComponentTeam implements IComponentTeam {
+    /** Represents a ComponentPlayer. */
+    class ComponentPlayer implements IComponentPlayer {
 
         /**
-         * Constructs a new ComponentTeam.
+         * Constructs a new ComponentPlayer.
          * @param [properties] Properties to set
          */
-        constructor(properties?: world.IComponentTeam);
+        constructor(properties?: world.IComponentPlayer);
 
-        /** ComponentTeam soldierId. */
+        /** ComponentPlayer soldierId. */
         public soldierId: number;
 
-        /** ComponentTeam cmd. */
+        /** ComponentPlayer cmd. */
         public cmd: number;
 
-        /** ComponentTeam stayEid. */
+        /** ComponentPlayer stayEid. */
         public stayEid: number;
 
-        /** ComponentTeam homeEid. */
+        /** ComponentPlayer homeEid. */
         public homeEid: number;
 
         /**
-         * Creates a new ComponentTeam instance using the specified properties.
+         * Creates a new ComponentPlayer instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns ComponentTeam instance
+         * @returns ComponentPlayer instance
          */
-        public static create(properties?: world.IComponentTeam): world.ComponentTeam;
+        public static create(properties?: world.IComponentPlayer): world.ComponentPlayer;
 
         /**
-         * Encodes the specified ComponentTeam message. Does not implicitly {@link world.ComponentTeam.verify|verify} messages.
-         * @param message ComponentTeam message or plain object to encode
+         * Encodes the specified ComponentPlayer message. Does not implicitly {@link world.ComponentPlayer.verify|verify} messages.
+         * @param message ComponentPlayer message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: world.IComponentTeam, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: world.IComponentPlayer, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified ComponentTeam message, length delimited. Does not implicitly {@link world.ComponentTeam.verify|verify} messages.
-         * @param message ComponentTeam message or plain object to encode
+         * Encodes the specified ComponentPlayer message, length delimited. Does not implicitly {@link world.ComponentPlayer.verify|verify} messages.
+         * @param message ComponentPlayer message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: world.IComponentTeam, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: world.IComponentPlayer, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a ComponentTeam message from the specified reader or buffer.
+         * Decodes a ComponentPlayer message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns ComponentTeam
+         * @returns ComponentPlayer
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.ComponentTeam;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.ComponentPlayer;
 
         /**
-         * Decodes a ComponentTeam message from the specified reader or buffer, length delimited.
+         * Decodes a ComponentPlayer message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns ComponentTeam
+         * @returns ComponentPlayer
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.ComponentTeam;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.ComponentPlayer;
 
         /**
-         * Verifies a ComponentTeam message.
+         * Verifies a ComponentPlayer message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a ComponentTeam message from a plain object. Also converts values to their respective internal types.
+         * Creates a ComponentPlayer message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns ComponentTeam
+         * @returns ComponentPlayer
          */
-        public static fromObject(object: { [k: string]: any }): world.ComponentTeam;
+        public static fromObject(object: { [k: string]: any }): world.ComponentPlayer;
 
         /**
-         * Creates a plain object from a ComponentTeam message. Also converts values to other types if specified.
-         * @param message ComponentTeam
+         * Creates a plain object from a ComponentPlayer message. Also converts values to other types if specified.
+         * @param message ComponentPlayer
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: world.ComponentTeam, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: world.ComponentPlayer, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this ComponentTeam to JSON.
+         * Converts this ComponentPlayer to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
 
         /**
-         * Gets the default type url for ComponentTeam
+         * Gets the default type url for ComponentPlayer
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */
@@ -9627,6 +11776,115 @@ export namespace world {
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
+    /** Properties of a ComponentWar. */
+    interface IComponentWar {
+
+        /** ComponentWar warUid */
+        warUid?: (number|null);
+
+        /** ComponentWar fighterEids */
+        fighterEids?: (number[]|null);
+
+        /** ComponentWar startTs */
+        startTs?: (number|null);
+    }
+
+    /** Represents a ComponentWar. */
+    class ComponentWar implements IComponentWar {
+
+        /**
+         * Constructs a new ComponentWar.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: world.IComponentWar);
+
+        /** ComponentWar warUid. */
+        public warUid: number;
+
+        /** ComponentWar fighterEids. */
+        public fighterEids: number[];
+
+        /** ComponentWar startTs. */
+        public startTs: number;
+
+        /**
+         * Creates a new ComponentWar instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns ComponentWar instance
+         */
+        public static create(properties?: world.IComponentWar): world.ComponentWar;
+
+        /**
+         * Encodes the specified ComponentWar message. Does not implicitly {@link world.ComponentWar.verify|verify} messages.
+         * @param message ComponentWar message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: world.IComponentWar, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified ComponentWar message, length delimited. Does not implicitly {@link world.ComponentWar.verify|verify} messages.
+         * @param message ComponentWar message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: world.IComponentWar, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a ComponentWar message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns ComponentWar
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.ComponentWar;
+
+        /**
+         * Decodes a ComponentWar message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns ComponentWar
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.ComponentWar;
+
+        /**
+         * Verifies a ComponentWar message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a ComponentWar message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns ComponentWar
+         */
+        public static fromObject(object: { [k: string]: any }): world.ComponentWar;
+
+        /**
+         * Creates a plain object from a ComponentWar message. Also converts values to other types if specified.
+         * @param message ComponentWar
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: world.ComponentWar, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this ComponentWar to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for ComponentWar
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
     /** Properties of an Entity. */
     interface IEntity {
 
@@ -9642,9 +11900,6 @@ export namespace world {
         /** Entity state */
         state?: (number|null);
 
-        /** Entity order */
-        order?: (number|null);
-
         /** Entity timer */
         timer?: (world.IComponentTimer|null);
 
@@ -9657,8 +11912,11 @@ export namespace world {
         /** Entity owner */
         owner?: (world.IComponentOwner|null);
 
-        /** Entity team */
-        team?: (world.IComponentTeam|null);
+        /** Entity player */
+        player?: (world.IComponentPlayer|null);
+
+        /** Entity war */
+        war?: (world.IComponentWar|null);
     }
 
     /** Represents an Entity. */
@@ -9682,9 +11940,6 @@ export namespace world {
         /** Entity state. */
         public state: number;
 
-        /** Entity order. */
-        public order: number;
-
         /** Entity timer. */
         public timer?: (world.IComponentTimer|null);
 
@@ -9697,8 +11952,11 @@ export namespace world {
         /** Entity owner. */
         public owner?: (world.IComponentOwner|null);
 
-        /** Entity team. */
-        public team?: (world.IComponentTeam|null);
+        /** Entity player. */
+        public player?: (world.IComponentPlayer|null);
+
+        /** Entity war. */
+        public war?: (world.IComponentWar|null);
 
         /**
          * Creates a new Entity instance using the specified properties.
@@ -10766,588 +13024,394 @@ export namespace world {
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
-    /** Properties of a c2s_team_move. */
-    interface Ic2s_team_move {
+    /** Properties of a c2s_player_move. */
+    interface Ic2s_player_move {
 
-        /** c2s_team_move teamEid */
-        teamEid?: (number|null);
+        /** c2s_player_move playerEid */
+        playerEid?: (number|null);
 
-        /** c2s_team_move dstPos */
+        /** c2s_player_move dstPos */
         dstPos?: (number|null);
     }
 
-    /** Represents a c2s_team_move. */
-    class c2s_team_move implements Ic2s_team_move {
+    /** Represents a c2s_player_move. */
+    class c2s_player_move implements Ic2s_player_move {
 
         /**
-         * Constructs a new c2s_team_move.
+         * Constructs a new c2s_player_move.
          * @param [properties] Properties to set
          */
-        constructor(properties?: world.Ic2s_team_move);
+        constructor(properties?: world.Ic2s_player_move);
 
-        /** c2s_team_move teamEid. */
-        public teamEid: number;
+        /** c2s_player_move playerEid. */
+        public playerEid: number;
 
-        /** c2s_team_move dstPos. */
+        /** c2s_player_move dstPos. */
         public dstPos: number;
 
         /**
-         * Creates a new c2s_team_move instance using the specified properties.
+         * Creates a new c2s_player_move instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns c2s_team_move instance
+         * @returns c2s_player_move instance
          */
-        public static create(properties?: world.Ic2s_team_move): world.c2s_team_move;
+        public static create(properties?: world.Ic2s_player_move): world.c2s_player_move;
 
         /**
-         * Encodes the specified c2s_team_move message. Does not implicitly {@link world.c2s_team_move.verify|verify} messages.
-         * @param message c2s_team_move message or plain object to encode
+         * Encodes the specified c2s_player_move message. Does not implicitly {@link world.c2s_player_move.verify|verify} messages.
+         * @param message c2s_player_move message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: world.Ic2s_team_move, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: world.Ic2s_player_move, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified c2s_team_move message, length delimited. Does not implicitly {@link world.c2s_team_move.verify|verify} messages.
-         * @param message c2s_team_move message or plain object to encode
+         * Encodes the specified c2s_player_move message, length delimited. Does not implicitly {@link world.c2s_player_move.verify|verify} messages.
+         * @param message c2s_player_move message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: world.Ic2s_team_move, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: world.Ic2s_player_move, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a c2s_team_move message from the specified reader or buffer.
+         * Decodes a c2s_player_move message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns c2s_team_move
+         * @returns c2s_player_move
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.c2s_team_move;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.c2s_player_move;
 
         /**
-         * Decodes a c2s_team_move message from the specified reader or buffer, length delimited.
+         * Decodes a c2s_player_move message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns c2s_team_move
+         * @returns c2s_player_move
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.c2s_team_move;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.c2s_player_move;
 
         /**
-         * Verifies a c2s_team_move message.
+         * Verifies a c2s_player_move message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a c2s_team_move message from a plain object. Also converts values to their respective internal types.
+         * Creates a c2s_player_move message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns c2s_team_move
+         * @returns c2s_player_move
          */
-        public static fromObject(object: { [k: string]: any }): world.c2s_team_move;
+        public static fromObject(object: { [k: string]: any }): world.c2s_player_move;
 
         /**
-         * Creates a plain object from a c2s_team_move message. Also converts values to other types if specified.
-         * @param message c2s_team_move
+         * Creates a plain object from a c2s_player_move message. Also converts values to other types if specified.
+         * @param message c2s_player_move
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: world.c2s_team_move, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: world.c2s_player_move, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this c2s_team_move to JSON.
+         * Converts this c2s_player_move to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
 
         /**
-         * Gets the default type url for c2s_team_move
+         * Gets the default type url for c2s_player_move
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
-    /** Properties of a s2c_team_move. */
-    interface Is2c_team_move {
+    /** Properties of a s2c_player_move. */
+    interface Is2c_player_move {
 
-        /** s2c_team_move err */
+        /** s2c_player_move err */
         err?: (number|null);
     }
 
-    /** Represents a s2c_team_move. */
-    class s2c_team_move implements Is2c_team_move {
+    /** Represents a s2c_player_move. */
+    class s2c_player_move implements Is2c_player_move {
 
         /**
-         * Constructs a new s2c_team_move.
+         * Constructs a new s2c_player_move.
          * @param [properties] Properties to set
          */
-        constructor(properties?: world.Is2c_team_move);
+        constructor(properties?: world.Is2c_player_move);
 
-        /** s2c_team_move err. */
+        /** s2c_player_move err. */
         public err: number;
 
         /**
-         * Creates a new s2c_team_move instance using the specified properties.
+         * Creates a new s2c_player_move instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns s2c_team_move instance
+         * @returns s2c_player_move instance
          */
-        public static create(properties?: world.Is2c_team_move): world.s2c_team_move;
+        public static create(properties?: world.Is2c_player_move): world.s2c_player_move;
 
         /**
-         * Encodes the specified s2c_team_move message. Does not implicitly {@link world.s2c_team_move.verify|verify} messages.
-         * @param message s2c_team_move message or plain object to encode
+         * Encodes the specified s2c_player_move message. Does not implicitly {@link world.s2c_player_move.verify|verify} messages.
+         * @param message s2c_player_move message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: world.Is2c_team_move, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: world.Is2c_player_move, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified s2c_team_move message, length delimited. Does not implicitly {@link world.s2c_team_move.verify|verify} messages.
-         * @param message s2c_team_move message or plain object to encode
+         * Encodes the specified s2c_player_move message, length delimited. Does not implicitly {@link world.s2c_player_move.verify|verify} messages.
+         * @param message s2c_player_move message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: world.Is2c_team_move, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: world.Is2c_player_move, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a s2c_team_move message from the specified reader or buffer.
+         * Decodes a s2c_player_move message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns s2c_team_move
+         * @returns s2c_player_move
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.s2c_team_move;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.s2c_player_move;
 
         /**
-         * Decodes a s2c_team_move message from the specified reader or buffer, length delimited.
+         * Decodes a s2c_player_move message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns s2c_team_move
+         * @returns s2c_player_move
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.s2c_team_move;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.s2c_player_move;
 
         /**
-         * Verifies a s2c_team_move message.
+         * Verifies a s2c_player_move message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a s2c_team_move message from a plain object. Also converts values to their respective internal types.
+         * Creates a s2c_player_move message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns s2c_team_move
+         * @returns s2c_player_move
          */
-        public static fromObject(object: { [k: string]: any }): world.s2c_team_move;
+        public static fromObject(object: { [k: string]: any }): world.s2c_player_move;
 
         /**
-         * Creates a plain object from a s2c_team_move message. Also converts values to other types if specified.
-         * @param message s2c_team_move
+         * Creates a plain object from a s2c_player_move message. Also converts values to other types if specified.
+         * @param message s2c_player_move
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: world.s2c_team_move, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: world.s2c_player_move, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this s2c_team_move to JSON.
+         * Converts this s2c_player_move to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
 
         /**
-         * Gets the default type url for s2c_team_move
+         * Gets the default type url for s2c_player_move
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
-    /** Properties of a c2s_team_stop. */
-    interface Ic2s_team_stop {
+    /** Properties of a c2s_player_stop. */
+    interface Ic2s_player_stop {
 
-        /** c2s_team_stop teamEid */
-        teamEid?: (number|null);
+        /** c2s_player_stop playerEid */
+        playerEid?: (number|null);
     }
 
-    /** Represents a c2s_team_stop. */
-    class c2s_team_stop implements Ic2s_team_stop {
+    /** Represents a c2s_player_stop. */
+    class c2s_player_stop implements Ic2s_player_stop {
 
         /**
-         * Constructs a new c2s_team_stop.
+         * Constructs a new c2s_player_stop.
          * @param [properties] Properties to set
          */
-        constructor(properties?: world.Ic2s_team_stop);
+        constructor(properties?: world.Ic2s_player_stop);
 
-        /** c2s_team_stop teamEid. */
-        public teamEid: number;
+        /** c2s_player_stop playerEid. */
+        public playerEid: number;
 
         /**
-         * Creates a new c2s_team_stop instance using the specified properties.
+         * Creates a new c2s_player_stop instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns c2s_team_stop instance
+         * @returns c2s_player_stop instance
          */
-        public static create(properties?: world.Ic2s_team_stop): world.c2s_team_stop;
+        public static create(properties?: world.Ic2s_player_stop): world.c2s_player_stop;
 
         /**
-         * Encodes the specified c2s_team_stop message. Does not implicitly {@link world.c2s_team_stop.verify|verify} messages.
-         * @param message c2s_team_stop message or plain object to encode
+         * Encodes the specified c2s_player_stop message. Does not implicitly {@link world.c2s_player_stop.verify|verify} messages.
+         * @param message c2s_player_stop message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: world.Ic2s_team_stop, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: world.Ic2s_player_stop, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified c2s_team_stop message, length delimited. Does not implicitly {@link world.c2s_team_stop.verify|verify} messages.
-         * @param message c2s_team_stop message or plain object to encode
+         * Encodes the specified c2s_player_stop message, length delimited. Does not implicitly {@link world.c2s_player_stop.verify|verify} messages.
+         * @param message c2s_player_stop message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: world.Ic2s_team_stop, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: world.Ic2s_player_stop, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a c2s_team_stop message from the specified reader or buffer.
+         * Decodes a c2s_player_stop message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns c2s_team_stop
+         * @returns c2s_player_stop
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.c2s_team_stop;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.c2s_player_stop;
 
         /**
-         * Decodes a c2s_team_stop message from the specified reader or buffer, length delimited.
+         * Decodes a c2s_player_stop message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns c2s_team_stop
+         * @returns c2s_player_stop
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.c2s_team_stop;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.c2s_player_stop;
 
         /**
-         * Verifies a c2s_team_stop message.
+         * Verifies a c2s_player_stop message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a c2s_team_stop message from a plain object. Also converts values to their respective internal types.
+         * Creates a c2s_player_stop message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns c2s_team_stop
+         * @returns c2s_player_stop
          */
-        public static fromObject(object: { [k: string]: any }): world.c2s_team_stop;
+        public static fromObject(object: { [k: string]: any }): world.c2s_player_stop;
 
         /**
-         * Creates a plain object from a c2s_team_stop message. Also converts values to other types if specified.
-         * @param message c2s_team_stop
+         * Creates a plain object from a c2s_player_stop message. Also converts values to other types if specified.
+         * @param message c2s_player_stop
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: world.c2s_team_stop, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: world.c2s_player_stop, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this c2s_team_stop to JSON.
+         * Converts this c2s_player_stop to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
 
         /**
-         * Gets the default type url for c2s_team_stop
+         * Gets the default type url for c2s_player_stop
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
-    /** Properties of a s2c_team_stop. */
-    interface Is2c_team_stop {
+    /** Properties of a s2c_player_stop. */
+    interface Is2c_player_stop {
 
-        /** s2c_team_stop err */
+        /** s2c_player_stop err */
         err?: (number|null);
     }
 
-    /** Represents a s2c_team_stop. */
-    class s2c_team_stop implements Is2c_team_stop {
+    /** Represents a s2c_player_stop. */
+    class s2c_player_stop implements Is2c_player_stop {
 
         /**
-         * Constructs a new s2c_team_stop.
+         * Constructs a new s2c_player_stop.
          * @param [properties] Properties to set
          */
-        constructor(properties?: world.Is2c_team_stop);
+        constructor(properties?: world.Is2c_player_stop);
 
-        /** s2c_team_stop err. */
+        /** s2c_player_stop err. */
         public err: number;
 
         /**
-         * Creates a new s2c_team_stop instance using the specified properties.
+         * Creates a new s2c_player_stop instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns s2c_team_stop instance
+         * @returns s2c_player_stop instance
          */
-        public static create(properties?: world.Is2c_team_stop): world.s2c_team_stop;
+        public static create(properties?: world.Is2c_player_stop): world.s2c_player_stop;
 
         /**
-         * Encodes the specified s2c_team_stop message. Does not implicitly {@link world.s2c_team_stop.verify|verify} messages.
-         * @param message s2c_team_stop message or plain object to encode
+         * Encodes the specified s2c_player_stop message. Does not implicitly {@link world.s2c_player_stop.verify|verify} messages.
+         * @param message s2c_player_stop message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: world.Is2c_team_stop, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: world.Is2c_player_stop, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified s2c_team_stop message, length delimited. Does not implicitly {@link world.s2c_team_stop.verify|verify} messages.
-         * @param message s2c_team_stop message or plain object to encode
+         * Encodes the specified s2c_player_stop message, length delimited. Does not implicitly {@link world.s2c_player_stop.verify|verify} messages.
+         * @param message s2c_player_stop message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: world.Is2c_team_stop, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: world.Is2c_player_stop, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a s2c_team_stop message from the specified reader or buffer.
+         * Decodes a s2c_player_stop message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns s2c_team_stop
+         * @returns s2c_player_stop
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.s2c_team_stop;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.s2c_player_stop;
 
         /**
-         * Decodes a s2c_team_stop message from the specified reader or buffer, length delimited.
+         * Decodes a s2c_player_stop message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns s2c_team_stop
+         * @returns s2c_player_stop
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.s2c_team_stop;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.s2c_player_stop;
 
         /**
-         * Verifies a s2c_team_stop message.
+         * Verifies a s2c_player_stop message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a s2c_team_stop message from a plain object. Also converts values to their respective internal types.
+         * Creates a s2c_player_stop message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns s2c_team_stop
+         * @returns s2c_player_stop
          */
-        public static fromObject(object: { [k: string]: any }): world.s2c_team_stop;
+        public static fromObject(object: { [k: string]: any }): world.s2c_player_stop;
 
         /**
-         * Creates a plain object from a s2c_team_stop message. Also converts values to other types if specified.
-         * @param message s2c_team_stop
+         * Creates a plain object from a s2c_player_stop message. Also converts values to other types if specified.
+         * @param message s2c_player_stop
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: world.s2c_team_stop, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: world.s2c_player_stop, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this s2c_team_stop to JSON.
+         * Converts this s2c_player_stop to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
 
         /**
-         * Gets the default type url for s2c_team_stop
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
-    }
-
-    /** Properties of a c2s_team_retreat. */
-    interface Ic2s_team_retreat {
-
-        /** c2s_team_retreat teamEid */
-        teamEid?: (number|null);
-    }
-
-    /** Represents a c2s_team_retreat. */
-    class c2s_team_retreat implements Ic2s_team_retreat {
-
-        /**
-         * Constructs a new c2s_team_retreat.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: world.Ic2s_team_retreat);
-
-        /** c2s_team_retreat teamEid. */
-        public teamEid: number;
-
-        /**
-         * Creates a new c2s_team_retreat instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns c2s_team_retreat instance
-         */
-        public static create(properties?: world.Ic2s_team_retreat): world.c2s_team_retreat;
-
-        /**
-         * Encodes the specified c2s_team_retreat message. Does not implicitly {@link world.c2s_team_retreat.verify|verify} messages.
-         * @param message c2s_team_retreat message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: world.Ic2s_team_retreat, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified c2s_team_retreat message, length delimited. Does not implicitly {@link world.c2s_team_retreat.verify|verify} messages.
-         * @param message c2s_team_retreat message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: world.Ic2s_team_retreat, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a c2s_team_retreat message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns c2s_team_retreat
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.c2s_team_retreat;
-
-        /**
-         * Decodes a c2s_team_retreat message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns c2s_team_retreat
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.c2s_team_retreat;
-
-        /**
-         * Verifies a c2s_team_retreat message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a c2s_team_retreat message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns c2s_team_retreat
-         */
-        public static fromObject(object: { [k: string]: any }): world.c2s_team_retreat;
-
-        /**
-         * Creates a plain object from a c2s_team_retreat message. Also converts values to other types if specified.
-         * @param message c2s_team_retreat
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: world.c2s_team_retreat, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this c2s_team_retreat to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-
-        /**
-         * Gets the default type url for c2s_team_retreat
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
-    }
-
-    /** Properties of a s2c_team_retreat. */
-    interface Is2c_team_retreat {
-
-        /** s2c_team_retreat err */
-        err?: (number|null);
-    }
-
-    /** Represents a s2c_team_retreat. */
-    class s2c_team_retreat implements Is2c_team_retreat {
-
-        /**
-         * Constructs a new s2c_team_retreat.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: world.Is2c_team_retreat);
-
-        /** s2c_team_retreat err. */
-        public err: number;
-
-        /**
-         * Creates a new s2c_team_retreat instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns s2c_team_retreat instance
-         */
-        public static create(properties?: world.Is2c_team_retreat): world.s2c_team_retreat;
-
-        /**
-         * Encodes the specified s2c_team_retreat message. Does not implicitly {@link world.s2c_team_retreat.verify|verify} messages.
-         * @param message s2c_team_retreat message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: world.Is2c_team_retreat, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified s2c_team_retreat message, length delimited. Does not implicitly {@link world.s2c_team_retreat.verify|verify} messages.
-         * @param message s2c_team_retreat message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: world.Is2c_team_retreat, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a s2c_team_retreat message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns s2c_team_retreat
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.s2c_team_retreat;
-
-        /**
-         * Decodes a s2c_team_retreat message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns s2c_team_retreat
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.s2c_team_retreat;
-
-        /**
-         * Verifies a s2c_team_retreat message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a s2c_team_retreat message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns s2c_team_retreat
-         */
-        public static fromObject(object: { [k: string]: any }): world.s2c_team_retreat;
-
-        /**
-         * Creates a plain object from a s2c_team_retreat message. Also converts values to other types if specified.
-         * @param message s2c_team_retreat
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: world.s2c_team_retreat, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this s2c_team_retreat to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-
-        /**
-         * Gets the default type url for s2c_team_retreat
+         * Gets the default type url for s2c_player_stop
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */

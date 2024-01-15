@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package profile;
+
+message ProfileInfo {
+    string name = 1;
+    uint32 gender = 2;
+    uint32 exp = 3;
+    uint32 lv = 4;
+}
+
+message c2s_load {
+}
+message s2c_load {
+    int32 err = 1;
+    ProfileInfo profile = 2;
+}
+
+message notify_profile {
+    ProfileInfo profile = 1;
+}

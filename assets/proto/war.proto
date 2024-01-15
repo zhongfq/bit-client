@@ -141,17 +141,6 @@ message War {
     repeated WarFrame frames = 4;
 }
 
-message c2s_test_pvp {
-}
-message s2c_test_pvp {
-    uint32 err = 1;
-}
-message c2s_test_pve {
-}
-message s2c_test_pve {
-    uint32 err = 1;
-}
-
 message c2s_load {
     uint32 war_uid = 1;
 }
@@ -205,7 +194,6 @@ message notify_start {
 message notify_end {
     uint32 war_uid = 1;
 }
-
 
 message DebugInfo {
     uint32 x = 1;

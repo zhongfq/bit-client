@@ -80,9 +80,10 @@ export type Item = {
     slot: number;
     icon: string;
     desc: string;
-    composite:number;
-    sub_type:number;
-    use:number;
+    composite: number;
+    sub_type: number;
+    use: number;
+    quality: number;
 };
 export type ItemTable = {
     [k: number]: Item;

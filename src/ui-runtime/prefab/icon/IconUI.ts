@@ -5,17 +5,18 @@ import { IconUIBase } from "./IconUI.generated";
 
 @regClass()
 export class IconUI extends IconUIBase {
-    
-    onAwake(): void {
+    onAwake(): void {}
+    public updateGoods(vo?: GoodsVo) {
+        if (vo) {
+            this.iconImage.skin = vo.iconUrl;
+            this.iconQuality.skin = vo.qualitySkin;
+            this.iconNumber.text = vo.goodsNumber.toString();
+            // this.iconNumber.text = vo.goodsNumber?.toString();
+            // this.iconImage.text = vo.cmd?vo.cmd.num.toString():"0";
+        } else {
+        }
     }
-    public updateGoods(vo?:GoodsVo){
-        
-        // this.iconImage.skin = vo.iconUrl;
-        // this.iconQuality.skin = vo.quality;
-        // this.iconNumber.text = vo.goodsNumber?.toString();
-        // this.iconImage.text = vo.cmd?vo.cmd.num.toString():"0";
-    }
-    getMediator():IconNodeMediator{
+    getMediator(): IconNodeMediator {
         return this.getComponent(IconNodeMediator);
     }
 }

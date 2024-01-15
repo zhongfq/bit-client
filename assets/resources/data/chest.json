@@ -25,6 +25,9 @@
             "upgrade_exp": 400
         }
     ],
+    "conf": {
+        "first_dungon_id": 4
+    },
     "dungeon": [
         {
             "id": 1,

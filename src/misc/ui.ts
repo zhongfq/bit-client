@@ -21,6 +21,7 @@ export class ui {
     static readonly itemTipsDialog = 8;
     static readonly itemSynthesisDialog = 9;
     static readonly loginServerDialog = 10;
+    static readonly mainScene = 11;
     static readonly gmDialog = 9999;
 
     static register() {
@@ -60,6 +61,12 @@ export class ui {
         app.ui.register({
             id: ui.loginServerDialog,
             url: "resources/prefab/login/login-server-dialog.lh",
+            blockInput: true,
+        });
+        app.ui.register({
+            id: ui.mainScene,
+            autoClose: true,
+            url: "scenes/main.ls",
             blockInput: true,
         });
         app.ui.register({

@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package money;
+
+message MoneyItem {
+    uint32 id = 1; // 货币id
+    uint32 num = 2; // 数量
+    uint32 recover_ts = 3; // 上次恢复时间戳(秒)
+}
+
+// 加载货币数据
+message c2s_load {
+} 
+message s2c_load {
+    uint32 err = 1; // OK
+    repeated MoneyItem items = 2;
+}
+
+// 通知货币变化
+message notify_items {
+    repeated MoneyItem items = 1;
+}

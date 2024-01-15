@@ -28,9 +28,9 @@ export const opcode = {
         s2c_challenge_dungeon: 0x1609,
     },
     connection: {
-        connected: 0x00f1,
-        disconnected: 0x00f2,
-        ioerror: 0x00f3,
+        connected: 0x00F1,
+        disconnected: 0x00F2,
+        ioerror: 0x00F3,
     },
     dungeon: {
         c2s_load: 0x1100,
@@ -39,6 +39,35 @@ export const opcode = {
     hero: {
         c2s_load: 0x1300,
         s2c_load: 0x1301,
+    },
+    mail: {
+        c2s_load: 0x1900,
+        s2c_load: 0x1901,
+        c2s_read: 0x1902,
+        s2c_read: 0x1903,
+        c2s_receive_reward: 0x1904,
+        s2c_receive_reward: 0x1905,
+        c2s_delete_mails: 0x1906,
+        s2c_delete_mails: 0x1907,
+        notify_new_mails: 0x1990,
+    },
+    money: {
+        c2s_load: 0x1800,
+        s2c_load: 0x1801,
+        notify_items: 0x1890,
+    },
+    profile: {
+        c2s_load: 0x1A00,
+        s2c_load: 0x1A01,
+        notify_profile: 0x1A90,
+    },
+    task: {
+        c2s_load: 0x1B00,
+        s2c_load: 0x1B01,
+        c2s_receive_reward: 0x1B02,
+        s2c_receive_reward: 0x1B03,
+        notify_tasks: 0x1B90,
+        notify_remove_tasks: 0x1B91,
     },
     team: {
         c2s_load: 0x1400,
@@ -55,8 +84,8 @@ export const opcode = {
         s2c_ping: 0x1007,
         c2s_gm: 0x1008,
         s2c_gm: 0x1009,
-        c2s_rename: 0x100a,
-        s2c_rename: 0x100b,
+        c2s_rename: 0x100A,
+        s2c_rename: 0x100B,
     },
     war: {
         c2s_ready: 0x1200,
@@ -65,12 +94,8 @@ export const opcode = {
         s2c_launch_skill: 0x1207,
         c2s_ask_cmd: 0x1208,
         s2c_ask_cmd: 0x1209,
-        c2s_ask_fight: 0x120a,
-        s2c_ask_fight: 0x120b,
-        c2s_test_pve: 0x120c,
-        s2c_test_pve: 0x120d,
-        c2s_test_pvp: 0x120e,
-        s2c_test_pvp: 0x120f,
+        c2s_ask_fight: 0x120A,
+        s2c_ask_fight: 0x120B,
         c2s_load: 0x1210,
         s2c_load: 0x1211,
         notify_start: 0x1291,
@@ -89,12 +114,10 @@ export const opcode = {
         s2c_cancel_giveup: 0x1507,
         c2s_load_detect_info: 0x1508,
         s2c_load_detect_info: 0x1509,
-        c2s_team_move: 0x150a,
-        s2c_team_move: 0x150b,
-        c2s_team_stop: 0x150c,
-        s2c_team_stop: 0x150d,
-        c2s_team_retreat: 0x150e,
-        s2c_team_retreat: 0x150f,
+        c2s_player_move: 0x150A,
+        s2c_player_move: 0x150B,
+        c2s_player_stop: 0x150C,
+        s2c_player_stop: 0x150D,
         notify_alliances: 0x1590,
         notify_roles: 0x1591,
         notify_entities: 0x1592,
@@ -116,24 +139,27 @@ export const enum errcode {
     TEAM_STATE_ERROR = 0x1007,
     INVALID_EID = 0x1008,
     INVALID_RID = 0x1009,
-    RETREAT_CANNOT_LAUNCH = 0x100a,
-    MP_NOT_ENOUGH = 0x100b,
-    WAR_IS_END = 0x100c,
-    CHEST_AMOUNT_NOT_ENOUGH = 0x100d,
-    NO_NEW_EQUIP = 0x100e,
-    NEW_EQUIP_EXIST = 0x100f,
+    RETREAT_CANNOT_LAUNCH = 0x100A,
+    MP_NOT_ENOUGH = 0x100B,
+    WAR_IS_END = 0x100C,
+    CHEST_AMOUNT_NOT_ENOUGH = 0x100D,
+    NO_NEW_EQUIP = 0x100E,
+    NEW_EQUIP_EXIST = 0x100F,
     ALREADY_IN_WAR = 0x1010,
     CHEST_DUNGEON_ID_ERROR = 0x1011,
     ITEM_NOT_ENOUGH = 0x1012,
     ILLEGAL_NAME = 0x1013,
     DAILY_RENAME_NOT_ENOUGH = 0x1014,
-    ARGS_ERROR = 0xa000,
-    BODY_ERROR = 0xa001,
-    AUTH_FAIL = 0xa002,
-    TRACEBACK = 0xa003,
-    API_NOT_FOUND = 0xa004,
-    PASSWORD_ERROR = 0xa005,
-}
+    ITEM_CAN_NOT_USE = 0x1015,
+    REPEAT = 0x1016,
+    TASK_NOT_FINISH = 0x1017,
+    ARGS_ERROR = 0xA000,
+    BODY_ERROR = 0xA001,
+    AUTH_FAIL = 0xA002,
+    TRACEBACK = 0xA003,
+    API_NOT_FOUND = 0xA004,
+    PASSWORD_ERROR = 0xA005,
+};
 
 export const errmsg = {
     0x0000: "Message is ok",
@@ -149,23 +175,26 @@ export const errmsg = {
     0x1007: "队伍状态错误",
     0x1008: "非法eid",
     0x1009: "非法rid",
-    0x100a: "撤退过程不能放技能",
-    0x100b: "斗气值不足",
-    0x100c: "战斗已经结束",
-    0x100d: "宝箱次数不足",
-    0x100e: "没有新的装备",
-    0x100f: "新的装备已生成",
+    0x100A: "撤退过程不能放技能",
+    0x100B: "斗气值不足",
+    0x100C: "战斗已经结束",
+    0x100D: "宝箱次数不足",
+    0x100E: "没有新的装备",
+    0x100F: "新的装备已生成",
     0x1010: "已处于战斗中",
     0x1011: "宝箱关卡进度错误",
     0x1012: "物品不足",
     0x1013: "名字非法",
     0x1014: "每日改名次数不足",
-    0xa000: "参数错误",
-    0xa001: "body错误",
-    0xa002: "登录过期",
-    0xa003: "服务端报错",
-    0xa004: "API错误",
-    0xa005: "用户名或密码错误",
+    0x1015: "无法使用物品",
+    0x1016: "重复操作",
+    0x1017: "任务未完成",
+    0xA000: "参数错误",
+    0xA001: "body错误",
+    0xA002: "登录过期",
+    0xA003: "服务端报错",
+    0xA004: "API错误",
+    0xA005: "用户名或密码错误",
 };
 
 export const registerProtocols = () => {
@@ -309,6 +338,132 @@ export const registerProtocols = () => {
         decode: proto.hero.s2c_load.decode,
     });
     register({
+        op: opcode.mail.c2s_load,
+        typeURL: proto.mail.c2s_load.getTypeUrl(),
+        encode: proto.mail.c2s_load.encode,
+        decode: proto.mail.c2s_load.decode,
+    });
+    register({
+        op: opcode.mail.s2c_load,
+        typeURL: proto.mail.s2c_load.getTypeUrl(),
+        encode: proto.mail.s2c_load.encode,
+        decode: proto.mail.s2c_load.decode,
+    });
+    register({
+        op: opcode.mail.c2s_read,
+        typeURL: proto.mail.c2s_read.getTypeUrl(),
+        encode: proto.mail.c2s_read.encode,
+        decode: proto.mail.c2s_read.decode,
+    });
+    register({
+        op: opcode.mail.s2c_read,
+        typeURL: proto.mail.s2c_read.getTypeUrl(),
+        encode: proto.mail.s2c_read.encode,
+        decode: proto.mail.s2c_read.decode,
+    });
+    register({
+        op: opcode.mail.c2s_receive_reward,
+        typeURL: proto.mail.c2s_receive_reward.getTypeUrl(),
+        encode: proto.mail.c2s_receive_reward.encode,
+        decode: proto.mail.c2s_receive_reward.decode,
+    });
+    register({
+        op: opcode.mail.s2c_receive_reward,
+        typeURL: proto.mail.s2c_receive_reward.getTypeUrl(),
+        encode: proto.mail.s2c_receive_reward.encode,
+        decode: proto.mail.s2c_receive_reward.decode,
+    });
+    register({
+        op: opcode.mail.c2s_delete_mails,
+        typeURL: proto.mail.c2s_delete_mails.getTypeUrl(),
+        encode: proto.mail.c2s_delete_mails.encode,
+        decode: proto.mail.c2s_delete_mails.decode,
+    });
+    register({
+        op: opcode.mail.s2c_delete_mails,
+        typeURL: proto.mail.s2c_delete_mails.getTypeUrl(),
+        encode: proto.mail.s2c_delete_mails.encode,
+        decode: proto.mail.s2c_delete_mails.decode,
+    });
+    register({
+        op: opcode.mail.notify_new_mails,
+        typeURL: proto.mail.notify_new_mails.getTypeUrl(),
+        encode: proto.mail.notify_new_mails.encode,
+        decode: proto.mail.notify_new_mails.decode,
+    });
+    register({
+        op: opcode.money.c2s_load,
+        typeURL: proto.money.c2s_load.getTypeUrl(),
+        encode: proto.money.c2s_load.encode,
+        decode: proto.money.c2s_load.decode,
+    });
+    register({
+        op: opcode.money.s2c_load,
+        typeURL: proto.money.s2c_load.getTypeUrl(),
+        encode: proto.money.s2c_load.encode,
+        decode: proto.money.s2c_load.decode,
+    });
+    register({
+        op: opcode.money.notify_items,
+        typeURL: proto.money.notify_items.getTypeUrl(),
+        encode: proto.money.notify_items.encode,
+        decode: proto.money.notify_items.decode,
+    });
+    register({
+        op: opcode.profile.c2s_load,
+        typeURL: proto.profile.c2s_load.getTypeUrl(),
+        encode: proto.profile.c2s_load.encode,
+        decode: proto.profile.c2s_load.decode,
+    });
+    register({
+        op: opcode.profile.s2c_load,
+        typeURL: proto.profile.s2c_load.getTypeUrl(),
+        encode: proto.profile.s2c_load.encode,
+        decode: proto.profile.s2c_load.decode,
+    });
+    register({
+        op: opcode.profile.notify_profile,
+        typeURL: proto.profile.notify_profile.getTypeUrl(),
+        encode: proto.profile.notify_profile.encode,
+        decode: proto.profile.notify_profile.decode,
+    });
+    register({
+        op: opcode.task.c2s_load,
+        typeURL: proto.task.c2s_load.getTypeUrl(),
+        encode: proto.task.c2s_load.encode,
+        decode: proto.task.c2s_load.decode,
+    });
+    register({
+        op: opcode.task.s2c_load,
+        typeURL: proto.task.s2c_load.getTypeUrl(),
+        encode: proto.task.s2c_load.encode,
+        decode: proto.task.s2c_load.decode,
+    });
+    register({
+        op: opcode.task.c2s_receive_reward,
+        typeURL: proto.task.c2s_receive_reward.getTypeUrl(),
+        encode: proto.task.c2s_receive_reward.encode,
+        decode: proto.task.c2s_receive_reward.decode,
+    });
+    register({
+        op: opcode.task.s2c_receive_reward,
+        typeURL: proto.task.s2c_receive_reward.getTypeUrl(),
+        encode: proto.task.s2c_receive_reward.encode,
+        decode: proto.task.s2c_receive_reward.decode,
+    });
+    register({
+        op: opcode.task.notify_tasks,
+        typeURL: proto.task.notify_tasks.getTypeUrl(),
+        encode: proto.task.notify_tasks.encode,
+        decode: proto.task.notify_tasks.decode,
+    });
+    register({
+        op: opcode.task.notify_remove_tasks,
+        typeURL: proto.task.notify_remove_tasks.getTypeUrl(),
+        encode: proto.task.notify_remove_tasks.encode,
+        decode: proto.task.notify_remove_tasks.decode,
+    });
+    register({
         op: opcode.team.c2s_load,
         typeURL: proto.team.c2s_load.getTypeUrl(),
         encode: proto.team.c2s_load.encode,
@@ -441,30 +596,6 @@ export const registerProtocols = () => {
         decode: proto.war.s2c_ask_fight.decode,
     });
     register({
-        op: opcode.war.c2s_test_pve,
-        typeURL: proto.war.c2s_test_pve.getTypeUrl(),
-        encode: proto.war.c2s_test_pve.encode,
-        decode: proto.war.c2s_test_pve.decode,
-    });
-    register({
-        op: opcode.war.s2c_test_pve,
-        typeURL: proto.war.s2c_test_pve.getTypeUrl(),
-        encode: proto.war.s2c_test_pve.encode,
-        decode: proto.war.s2c_test_pve.decode,
-    });
-    register({
-        op: opcode.war.c2s_test_pvp,
-        typeURL: proto.war.c2s_test_pvp.getTypeUrl(),
-        encode: proto.war.c2s_test_pvp.encode,
-        decode: proto.war.c2s_test_pvp.decode,
-    });
-    register({
-        op: opcode.war.s2c_test_pvp,
-        typeURL: proto.war.s2c_test_pvp.getTypeUrl(),
-        encode: proto.war.s2c_test_pvp.encode,
-        decode: proto.war.s2c_test_pvp.decode,
-    });
-    register({
         op: opcode.war.c2s_load,
         typeURL: proto.war.c2s_load.getTypeUrl(),
         encode: proto.war.c2s_load.encode,
@@ -561,40 +692,28 @@ export const registerProtocols = () => {
         decode: proto.world.s2c_load_detect_info.decode,
     });
     register({
-        op: opcode.world.c2s_team_move,
-        typeURL: proto.world.c2s_team_move.getTypeUrl(),
-        encode: proto.world.c2s_team_move.encode,
-        decode: proto.world.c2s_team_move.decode,
+        op: opcode.world.c2s_player_move,
+        typeURL: proto.world.c2s_player_move.getTypeUrl(),
+        encode: proto.world.c2s_player_move.encode,
+        decode: proto.world.c2s_player_move.decode,
     });
     register({
-        op: opcode.world.s2c_team_move,
-        typeURL: proto.world.s2c_team_move.getTypeUrl(),
-        encode: proto.world.s2c_team_move.encode,
-        decode: proto.world.s2c_team_move.decode,
+        op: opcode.world.s2c_player_move,
+        typeURL: proto.world.s2c_player_move.getTypeUrl(),
+        encode: proto.world.s2c_player_move.encode,
+        decode: proto.world.s2c_player_move.decode,
     });
     register({
-        op: opcode.world.c2s_team_stop,
-        typeURL: proto.world.c2s_team_stop.getTypeUrl(),
-        encode: proto.world.c2s_team_stop.encode,
-        decode: proto.world.c2s_team_stop.decode,
+        op: opcode.world.c2s_player_stop,
+        typeURL: proto.world.c2s_player_stop.getTypeUrl(),
+        encode: proto.world.c2s_player_stop.encode,
+        decode: proto.world.c2s_player_stop.decode,
     });
     register({
-        op: opcode.world.s2c_team_stop,
-        typeURL: proto.world.s2c_team_stop.getTypeUrl(),
-        encode: proto.world.s2c_team_stop.encode,
-        decode: proto.world.s2c_team_stop.decode,
-    });
-    register({
-        op: opcode.world.c2s_team_retreat,
-        typeURL: proto.world.c2s_team_retreat.getTypeUrl(),
-        encode: proto.world.c2s_team_retreat.encode,
-        decode: proto.world.c2s_team_retreat.decode,
-    });
-    register({
-        op: opcode.world.s2c_team_retreat,
-        typeURL: proto.world.s2c_team_retreat.getTypeUrl(),
-        encode: proto.world.s2c_team_retreat.encode,
-        decode: proto.world.s2c_team_retreat.decode,
+        op: opcode.world.s2c_player_stop,
+        typeURL: proto.world.s2c_player_stop.getTypeUrl(),
+        encode: proto.world.s2c_player_stop.encode,
+        decode: proto.world.s2c_player_stop.decode,
     });
     register({
         op: opcode.world.notify_alliances,

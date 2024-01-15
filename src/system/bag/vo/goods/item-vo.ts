@@ -41,14 +41,16 @@ export class ItemVo extends GoodsVo<Item, bag.Item> {
     }
 
     get iconUrl() {
-        return this._ref ? "cards/g_not_compress/" + this._ref.icon : "";
+        return this._ref ? `resources/atlas/icon/${this._ref.icon}.png` : ""; // "atlas/icon/" + this._ref.icon : "";
     }
 
-    get quality() {
-        return 1; //this.ref.quality;
+    get quality(): number {
+        return this._ref ? this._ref.quality : 1;
     }
-
-    onGetNumber(): number {
+    get qualitySkin(): string {
+        return `resources/atlas/imgFrame/img_icon_frame_${this.quality}.png`;
+    }
+    protected onGetNumber(): number {
         if (this._cmd) {
             return this._cmd.num ? this._cmd.num : 0;
         }

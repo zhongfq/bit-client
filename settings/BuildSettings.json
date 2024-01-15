@@ -7,6 +7,8 @@
     "res://9b931ecf-fde9-44dd-acf3-15f8dc807965",
     "res://cbf6cc44-4848-4c09-a57b-4703e09bde09"
   ],
+  "enableVersion": true,
+  "enableSubpackages": true,
   "subpackages": [
     {}
   ]

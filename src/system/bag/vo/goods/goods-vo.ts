@@ -19,12 +19,14 @@ export abstract class GoodsVo<IRef = any, Cmd = any> extends VO<IRef, Cmd> {
     abstract get iconUrl(): string;
     //品质
     abstract get quality(): number;
+    //品质框资源路径
+    abstract get qualitySkin(): string;
     //名字
     abstract get name(): string;
 
     //#region 外部注入数量
     //获取物品数量
-    protected OnGetNumber(): number {
+    protected onGetNumber(): number {
         return 0;
     }
 
@@ -40,11 +42,11 @@ export abstract class GoodsVo<IRef = any, Cmd = any> extends VO<IRef, Cmd> {
             this.goodsNum = num;
         }
     }
-    get goodsNumber(): number{
+    get goodsNumber(): number {
         if (this.goodsNum != null) {
             return this.goodsNum;
         }
-        let number = this.OnGetNumber();
+        let number = this.onGetNumber();
         if (!isNaN(number)) {
             return number;
         }

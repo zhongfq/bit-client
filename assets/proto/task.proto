@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package task;
+
+message TaskInfo {
+    uint32 id = 1;
+    uint32 num = 2; // 当前计数
+    uint32 max = 3; // 总计数
+    bool finish = 4; // 已完成
+}
+
+message c2s_load {
+    uint32 task_type = 1;
+} 
+message s2c_load {
+    uint32 err = 1; // OK, INVALID_ID
+    repeated TaskInfo tasks = 2;
+}
+
+// 领取奖励
+message c2s_receive_reward {
+    repeated uint32 task_ids = 1;
+}
+message s2c_receive_reward {
+    uint32 err = 1; // OK, INVALID_ID
+}
+
+
+// 通知任务变化
+message notify_tasks {
+    repeated TaskInfo tasks = 1;
+}
+
+message notify_remove_tasks {
+    repeated int32 task_ids = 1;
+}

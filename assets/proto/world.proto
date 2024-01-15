@@ -19,7 +19,7 @@ message Alliance {
   string name = 3;
 }
 
-message ComponentTeam {
+message ComponentPlayer {
     uint32 soldier_id = 1; // 士兵id
     uint32 cmd = 2; // 当前执行指令
     uint32 stay_eid = 4; // 当前所处建筑
@@ -57,6 +57,12 @@ message ComponentBuilding {
     string name = 9; // 自定义名字
 }
 
+message ComponentWar {
+    uint32 war_uid = 1;
+    repeated uint32 fighter_eids = 2; // 参战方
+    uint32 start_ts = 3; // 开始时间戳
+}
+
 // 单位定义
 message Entity {
     uint32 eid = 1;
@@ -64,12 +70,12 @@ message Entity {
 
     uint32 pos = 3;
     uint32 state = 4;
-    uint32 order = 5; // 层级
     ComponentTimer timer = 12;
     ComponentMove move = 13;
     ComponentBuilding building = 14;
     ComponentOwner owner = 15;
-    ComponentTeam team = 16;
+    ComponentPlayer player = 16;
+    ComponentWar war = 17;
 }
 
 // 大地图基础信息
@@ -112,25 +118,18 @@ message s2c_load_detect_info {
     uint32 alive_count = 3; // 存活队伍数量
 }
 
-message c2s_team_move {
-    uint32 team_eid = 1;
+message c2s_player_move {
+    uint32 player_eid = 1;
     uint32 dst_pos = 2;
 }
-message s2c_team_move {
+message s2c_player_move {
     uint32 err = 1;
 }
 
-message c2s_team_stop {
-    uint32 team_eid = 1;
+message c2s_player_stop {
+    uint32 player_eid = 1;
 }
-message s2c_team_stop {
-    uint32 err = 1;
-}
-
-message c2s_team_retreat {
-    uint32 team_eid = 1;
-}
-message s2c_team_retreat {
+message s2c_player_stop {
     uint32 err = 1;
 }
 

@@ -30,27 +30,22 @@ export class BagMediator extends Mediator {
     }
     updateItem(cell: IconUI, index: number) {
         let cellData = cell.dataSource as ItemVo;
-        cell.iconNumber.text = cellData.goodsNumber?.toString() || "0";
+        // cell.iconNumber.text = cellData.goodsNumber?.toString() || "0";
+        cell.updateGoods(cellData);
     }
     updateList() {
         let tlData = [];
-        let tlRefId: any[] = [];
         if (this.owner.menuTab.selectedIndex == 0) {
-            tlRefId = [
-                10101, 10102, 10103, 10104, 10201, 10202, 10203, 30301, 30401, 20501, 20601, 20602,
-                20603,
-            ];
+            for (let item of app.service.bag.itemBag.getBagAsArray()) {
+                tlData.push(item);
+            }
         } else {
             let tlItem = DataUtil.getArrayRef(app.service.data.itemTable, { composite: 1 });
             for (let refItem of tlItem) {
-                tlRefId.push(refItem.id);
+                let itemvo = app.service.bag.itemBag.createByRef(refItem.id);
+                tlData.push(itemvo);
             }
             this.owner.iconNode.getComponent(IconNodeMediator).setClickHandler(this.onIconClick);
-        }
-        for (let i = 0; i < tlRefId.length; i++) {
-            let itemVo = app.service.bag.itemBag.createByRef(tlRefId[i]);
-            itemVo.goodsNumber = tlRefId[i];
-            tlData.push(itemVo);
         }
         this.owner.itemList.array = tlData;
     }

@@ -20,8 +20,6 @@ export class ItemSynthesisMediator extends Mediator {
         this.owner.slider.max = 100;
         this.owner.slider.value = 110;
         this.owner.iconNodeTop.updateGoods();
-        // this.owner.slider.disabled = true;
-        // this.owner.slider.bar.visible = false;
     }
     onAddBtn() {
         this.owner.slider.value++;

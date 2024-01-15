@@ -2038,7 +2038,6 @@ $root.bag = (function() {
          * Properties of a notify_items.
          * @memberof bag
          * @interface Inotify_items
-         * @property {number|null} [bagId] notify_items bagId
          * @property {Array.<bag.IItem>|null} [items] notify_items items
          */
 
@@ -2057,14 +2056,6 @@ $root.bag = (function() {
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
-
-        /**
-         * notify_items bagId.
-         * @member {number} bagId
-         * @memberof bag.notify_items
-         * @instance
-         */
-        notify_items.prototype.bagId = 0;
 
         /**
          * notify_items items.
@@ -2098,11 +2089,9 @@ $root.bag = (function() {
         notify_items.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.bagId != null && Object.hasOwnProperty.call(message, "bagId"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.bagId);
             if (message.items != null && message.items.length)
                 for (var i = 0; i < message.items.length; ++i)
-                    $root.bag.Item.encode(message.items[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    $root.bag.Item.encode(message.items[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
             return writer;
         };
 
@@ -2138,10 +2127,6 @@ $root.bag = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1: {
-                        message.bagId = reader.uint32();
-                        break;
-                    }
-                case 2: {
                         if (!(message.items && message.items.length))
                             message.items = [];
                         message.items.push($root.bag.Item.decode(reader, reader.uint32()));
@@ -2182,9 +2167,6 @@ $root.bag = (function() {
         notify_items.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.bagId != null && message.hasOwnProperty("bagId"))
-                if (!$util.isInteger(message.bagId))
-                    return "bagId: integer expected";
             if (message.items != null && message.hasOwnProperty("items")) {
                 if (!Array.isArray(message.items))
                     return "items: array expected";
@@ -2209,8 +2191,6 @@ $root.bag = (function() {
             if (object instanceof $root.bag.notify_items)
                 return object;
             var message = new $root.bag.notify_items();
-            if (object.bagId != null)
-                message.bagId = object.bagId >>> 0;
             if (object.items) {
                 if (!Array.isArray(object.items))
                     throw TypeError(".bag.notify_items.items: array expected");
@@ -2239,10 +2219,6 @@ $root.bag = (function() {
             var object = {};
             if (options.arrays || options.defaults)
                 object.items = [];
-            if (options.defaults)
-                object.bagId = 0;
-            if (message.bagId != null && message.hasOwnProperty("bagId"))
-                object.bagId = message.bagId;
             if (message.items && message.items.length) {
                 object.items = [];
                 for (var j = 0; j < message.items.length; ++j)
@@ -6349,6 +6325,3228 @@ $root.hero = (function() {
     return hero;
 })();
 
+$root.mail = (function() {
+
+    /**
+     * Namespace mail.
+     * @exports mail
+     * @namespace
+     */
+    var mail = {};
+
+    mail.MailInfo = (function() {
+
+        /**
+         * Properties of a MailInfo.
+         * @memberof mail
+         * @interface IMailInfo
+         * @property {number|null} [uid] MailInfo uid
+         * @property {number|null} [id] MailInfo id
+         * @property {number|null} [time] MailInfo time
+         * @property {number|null} [state] MailInfo state
+         * @property {string|null} [title] MailInfo title
+         * @property {string|null} [content] MailInfo content
+         * @property {Array.<bag.IItem>|null} [reward] MailInfo reward
+         */
+
+        /**
+         * Constructs a new MailInfo.
+         * @memberof mail
+         * @classdesc Represents a MailInfo.
+         * @implements IMailInfo
+         * @constructor
+         * @param {mail.IMailInfo=} [properties] Properties to set
+         */
+        function MailInfo(properties) {
+            this.reward = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * MailInfo uid.
+         * @member {number} uid
+         * @memberof mail.MailInfo
+         * @instance
+         */
+        MailInfo.prototype.uid = 0;
+
+        /**
+         * MailInfo id.
+         * @member {number} id
+         * @memberof mail.MailInfo
+         * @instance
+         */
+        MailInfo.prototype.id = 0;
+
+        /**
+         * MailInfo time.
+         * @member {number} time
+         * @memberof mail.MailInfo
+         * @instance
+         */
+        MailInfo.prototype.time = 0;
+
+        /**
+         * MailInfo state.
+         * @member {number} state
+         * @memberof mail.MailInfo
+         * @instance
+         */
+        MailInfo.prototype.state = 0;
+
+        /**
+         * MailInfo title.
+         * @member {string} title
+         * @memberof mail.MailInfo
+         * @instance
+         */
+        MailInfo.prototype.title = "";
+
+        /**
+         * MailInfo content.
+         * @member {string} content
+         * @memberof mail.MailInfo
+         * @instance
+         */
+        MailInfo.prototype.content = "";
+
+        /**
+         * MailInfo reward.
+         * @member {Array.<bag.IItem>} reward
+         * @memberof mail.MailInfo
+         * @instance
+         */
+        MailInfo.prototype.reward = $util.emptyArray;
+
+        /**
+         * Creates a new MailInfo instance using the specified properties.
+         * @function create
+         * @memberof mail.MailInfo
+         * @static
+         * @param {mail.IMailInfo=} [properties] Properties to set
+         * @returns {mail.MailInfo} MailInfo instance
+         */
+        MailInfo.create = function create(properties) {
+            return new MailInfo(properties);
+        };
+
+        /**
+         * Encodes the specified MailInfo message. Does not implicitly {@link mail.MailInfo.verify|verify} messages.
+         * @function encode
+         * @memberof mail.MailInfo
+         * @static
+         * @param {mail.IMailInfo} message MailInfo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        MailInfo.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.uid);
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.id);
+            if (message.time != null && Object.hasOwnProperty.call(message, "time"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.time);
+            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.state);
+            if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+                writer.uint32(/* id 5, wireType 2 =*/42).string(message.title);
+            if (message.content != null && Object.hasOwnProperty.call(message, "content"))
+                writer.uint32(/* id 6, wireType 2 =*/50).string(message.content);
+            if (message.reward != null && message.reward.length)
+                for (var i = 0; i < message.reward.length; ++i)
+                    $root.bag.Item.encode(message.reward[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified MailInfo message, length delimited. Does not implicitly {@link mail.MailInfo.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof mail.MailInfo
+         * @static
+         * @param {mail.IMailInfo} message MailInfo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        MailInfo.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a MailInfo message from the specified reader or buffer.
+         * @function decode
+         * @memberof mail.MailInfo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {mail.MailInfo} MailInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        MailInfo.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.mail.MailInfo();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.uid = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.id = reader.uint32();
+                        break;
+                    }
+                case 3: {
+                        message.time = reader.uint32();
+                        break;
+                    }
+                case 4: {
+                        message.state = reader.uint32();
+                        break;
+                    }
+                case 5: {
+                        message.title = reader.string();
+                        break;
+                    }
+                case 6: {
+                        message.content = reader.string();
+                        break;
+                    }
+                case 7: {
+                        if (!(message.reward && message.reward.length))
+                            message.reward = [];
+                        message.reward.push($root.bag.Item.decode(reader, reader.uint32()));
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a MailInfo message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof mail.MailInfo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {mail.MailInfo} MailInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        MailInfo.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a MailInfo message.
+         * @function verify
+         * @memberof mail.MailInfo
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        MailInfo.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                if (!$util.isInteger(message.uid))
+                    return "uid: integer expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isInteger(message.id))
+                    return "id: integer expected";
+            if (message.time != null && message.hasOwnProperty("time"))
+                if (!$util.isInteger(message.time))
+                    return "time: integer expected";
+            if (message.state != null && message.hasOwnProperty("state"))
+                if (!$util.isInteger(message.state))
+                    return "state: integer expected";
+            if (message.title != null && message.hasOwnProperty("title"))
+                if (!$util.isString(message.title))
+                    return "title: string expected";
+            if (message.content != null && message.hasOwnProperty("content"))
+                if (!$util.isString(message.content))
+                    return "content: string expected";
+            if (message.reward != null && message.hasOwnProperty("reward")) {
+                if (!Array.isArray(message.reward))
+                    return "reward: array expected";
+                for (var i = 0; i < message.reward.length; ++i) {
+                    var error = $root.bag.Item.verify(message.reward[i]);
+                    if (error)
+                        return "reward." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a MailInfo message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof mail.MailInfo
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {mail.MailInfo} MailInfo
+         */
+        MailInfo.fromObject = function fromObject(object) {
+            if (object instanceof $root.mail.MailInfo)
+                return object;
+            var message = new $root.mail.MailInfo();
+            if (object.uid != null)
+                message.uid = object.uid >>> 0;
+            if (object.id != null)
+                message.id = object.id >>> 0;
+            if (object.time != null)
+                message.time = object.time >>> 0;
+            if (object.state != null)
+                message.state = object.state >>> 0;
+            if (object.title != null)
+                message.title = String(object.title);
+            if (object.content != null)
+                message.content = String(object.content);
+            if (object.reward) {
+                if (!Array.isArray(object.reward))
+                    throw TypeError(".mail.MailInfo.reward: array expected");
+                message.reward = [];
+                for (var i = 0; i < object.reward.length; ++i) {
+                    if (typeof object.reward[i] !== "object")
+                        throw TypeError(".mail.MailInfo.reward: object expected");
+                    message.reward[i] = $root.bag.Item.fromObject(object.reward[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a MailInfo message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof mail.MailInfo
+         * @static
+         * @param {mail.MailInfo} message MailInfo
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        MailInfo.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.reward = [];
+            if (options.defaults) {
+                object.uid = 0;
+                object.id = 0;
+                object.time = 0;
+                object.state = 0;
+                object.title = "";
+                object.content = "";
+            }
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                object.uid = message.uid;
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            if (message.time != null && message.hasOwnProperty("time"))
+                object.time = message.time;
+            if (message.state != null && message.hasOwnProperty("state"))
+                object.state = message.state;
+            if (message.title != null && message.hasOwnProperty("title"))
+                object.title = message.title;
+            if (message.content != null && message.hasOwnProperty("content"))
+                object.content = message.content;
+            if (message.reward && message.reward.length) {
+                object.reward = [];
+                for (var j = 0; j < message.reward.length; ++j)
+                    object.reward[j] = $root.bag.Item.toObject(message.reward[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this MailInfo to JSON.
+         * @function toJSON
+         * @memberof mail.MailInfo
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        MailInfo.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for MailInfo
+         * @function getTypeUrl
+         * @memberof mail.MailInfo
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        MailInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/mail.MailInfo";
+        };
+
+        return MailInfo;
+    })();
+
+    mail.c2s_load = (function() {
+
+        /**
+         * Properties of a c2s_load.
+         * @memberof mail
+         * @interface Ic2s_load
+         */
+
+        /**
+         * Constructs a new c2s_load.
+         * @memberof mail
+         * @classdesc Represents a c2s_load.
+         * @implements Ic2s_load
+         * @constructor
+         * @param {mail.Ic2s_load=} [properties] Properties to set
+         */
+        function c2s_load(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Creates a new c2s_load instance using the specified properties.
+         * @function create
+         * @memberof mail.c2s_load
+         * @static
+         * @param {mail.Ic2s_load=} [properties] Properties to set
+         * @returns {mail.c2s_load} c2s_load instance
+         */
+        c2s_load.create = function create(properties) {
+            return new c2s_load(properties);
+        };
+
+        /**
+         * Encodes the specified c2s_load message. Does not implicitly {@link mail.c2s_load.verify|verify} messages.
+         * @function encode
+         * @memberof mail.c2s_load
+         * @static
+         * @param {mail.Ic2s_load} message c2s_load message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_load.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified c2s_load message, length delimited. Does not implicitly {@link mail.c2s_load.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof mail.c2s_load
+         * @static
+         * @param {mail.Ic2s_load} message c2s_load message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_load.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a c2s_load message from the specified reader or buffer.
+         * @function decode
+         * @memberof mail.c2s_load
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {mail.c2s_load} c2s_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_load.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.mail.c2s_load();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a c2s_load message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof mail.c2s_load
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {mail.c2s_load} c2s_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_load.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a c2s_load message.
+         * @function verify
+         * @memberof mail.c2s_load
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        c2s_load.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+
+        /**
+         * Creates a c2s_load message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof mail.c2s_load
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {mail.c2s_load} c2s_load
+         */
+        c2s_load.fromObject = function fromObject(object) {
+            if (object instanceof $root.mail.c2s_load)
+                return object;
+            return new $root.mail.c2s_load();
+        };
+
+        /**
+         * Creates a plain object from a c2s_load message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof mail.c2s_load
+         * @static
+         * @param {mail.c2s_load} message c2s_load
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        c2s_load.toObject = function toObject() {
+            return {};
+        };
+
+        /**
+         * Converts this c2s_load to JSON.
+         * @function toJSON
+         * @memberof mail.c2s_load
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        c2s_load.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for c2s_load
+         * @function getTypeUrl
+         * @memberof mail.c2s_load
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        c2s_load.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/mail.c2s_load";
+        };
+
+        return c2s_load;
+    })();
+
+    mail.s2c_load = (function() {
+
+        /**
+         * Properties of a s2c_load.
+         * @memberof mail
+         * @interface Is2c_load
+         * @property {number|null} [err] s2c_load err
+         * @property {Array.<mail.IMailInfo>|null} [mails] s2c_load mails
+         */
+
+        /**
+         * Constructs a new s2c_load.
+         * @memberof mail
+         * @classdesc Represents a s2c_load.
+         * @implements Is2c_load
+         * @constructor
+         * @param {mail.Is2c_load=} [properties] Properties to set
+         */
+        function s2c_load(properties) {
+            this.mails = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * s2c_load err.
+         * @member {number} err
+         * @memberof mail.s2c_load
+         * @instance
+         */
+        s2c_load.prototype.err = 0;
+
+        /**
+         * s2c_load mails.
+         * @member {Array.<mail.IMailInfo>} mails
+         * @memberof mail.s2c_load
+         * @instance
+         */
+        s2c_load.prototype.mails = $util.emptyArray;
+
+        /**
+         * Creates a new s2c_load instance using the specified properties.
+         * @function create
+         * @memberof mail.s2c_load
+         * @static
+         * @param {mail.Is2c_load=} [properties] Properties to set
+         * @returns {mail.s2c_load} s2c_load instance
+         */
+        s2c_load.create = function create(properties) {
+            return new s2c_load(properties);
+        };
+
+        /**
+         * Encodes the specified s2c_load message. Does not implicitly {@link mail.s2c_load.verify|verify} messages.
+         * @function encode
+         * @memberof mail.s2c_load
+         * @static
+         * @param {mail.Is2c_load} message s2c_load message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_load.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
+            if (message.mails != null && message.mails.length)
+                for (var i = 0; i < message.mails.length; ++i)
+                    $root.mail.MailInfo.encode(message.mails[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified s2c_load message, length delimited. Does not implicitly {@link mail.s2c_load.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof mail.s2c_load
+         * @static
+         * @param {mail.Is2c_load} message s2c_load message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_load.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a s2c_load message from the specified reader or buffer.
+         * @function decode
+         * @memberof mail.s2c_load
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {mail.s2c_load} s2c_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_load.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.mail.s2c_load();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.err = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        if (!(message.mails && message.mails.length))
+                            message.mails = [];
+                        message.mails.push($root.mail.MailInfo.decode(reader, reader.uint32()));
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a s2c_load message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof mail.s2c_load
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {mail.s2c_load} s2c_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_load.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a s2c_load message.
+         * @function verify
+         * @memberof mail.s2c_load
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        s2c_load.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.err != null && message.hasOwnProperty("err"))
+                if (!$util.isInteger(message.err))
+                    return "err: integer expected";
+            if (message.mails != null && message.hasOwnProperty("mails")) {
+                if (!Array.isArray(message.mails))
+                    return "mails: array expected";
+                for (var i = 0; i < message.mails.length; ++i) {
+                    var error = $root.mail.MailInfo.verify(message.mails[i]);
+                    if (error)
+                        return "mails." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a s2c_load message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof mail.s2c_load
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {mail.s2c_load} s2c_load
+         */
+        s2c_load.fromObject = function fromObject(object) {
+            if (object instanceof $root.mail.s2c_load)
+                return object;
+            var message = new $root.mail.s2c_load();
+            if (object.err != null)
+                message.err = object.err >>> 0;
+            if (object.mails) {
+                if (!Array.isArray(object.mails))
+                    throw TypeError(".mail.s2c_load.mails: array expected");
+                message.mails = [];
+                for (var i = 0; i < object.mails.length; ++i) {
+                    if (typeof object.mails[i] !== "object")
+                        throw TypeError(".mail.s2c_load.mails: object expected");
+                    message.mails[i] = $root.mail.MailInfo.fromObject(object.mails[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a s2c_load message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof mail.s2c_load
+         * @static
+         * @param {mail.s2c_load} message s2c_load
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        s2c_load.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.mails = [];
+            if (options.defaults)
+                object.err = 0;
+            if (message.err != null && message.hasOwnProperty("err"))
+                object.err = message.err;
+            if (message.mails && message.mails.length) {
+                object.mails = [];
+                for (var j = 0; j < message.mails.length; ++j)
+                    object.mails[j] = $root.mail.MailInfo.toObject(message.mails[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this s2c_load to JSON.
+         * @function toJSON
+         * @memberof mail.s2c_load
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        s2c_load.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for s2c_load
+         * @function getTypeUrl
+         * @memberof mail.s2c_load
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        s2c_load.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/mail.s2c_load";
+        };
+
+        return s2c_load;
+    })();
+
+    mail.c2s_read = (function() {
+
+        /**
+         * Properties of a c2s_read.
+         * @memberof mail
+         * @interface Ic2s_read
+         * @property {Array.<number>|null} [mailUids] c2s_read mailUids
+         */
+
+        /**
+         * Constructs a new c2s_read.
+         * @memberof mail
+         * @classdesc Represents a c2s_read.
+         * @implements Ic2s_read
+         * @constructor
+         * @param {mail.Ic2s_read=} [properties] Properties to set
+         */
+        function c2s_read(properties) {
+            this.mailUids = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * c2s_read mailUids.
+         * @member {Array.<number>} mailUids
+         * @memberof mail.c2s_read
+         * @instance
+         */
+        c2s_read.prototype.mailUids = $util.emptyArray;
+
+        /**
+         * Creates a new c2s_read instance using the specified properties.
+         * @function create
+         * @memberof mail.c2s_read
+         * @static
+         * @param {mail.Ic2s_read=} [properties] Properties to set
+         * @returns {mail.c2s_read} c2s_read instance
+         */
+        c2s_read.create = function create(properties) {
+            return new c2s_read(properties);
+        };
+
+        /**
+         * Encodes the specified c2s_read message. Does not implicitly {@link mail.c2s_read.verify|verify} messages.
+         * @function encode
+         * @memberof mail.c2s_read
+         * @static
+         * @param {mail.Ic2s_read} message c2s_read message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_read.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.mailUids != null && message.mailUids.length) {
+                writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                for (var i = 0; i < message.mailUids.length; ++i)
+                    writer.uint32(message.mailUids[i]);
+                writer.ldelim();
+            }
+            return writer;
+        };
+
+        /**
+         * Encodes the specified c2s_read message, length delimited. Does not implicitly {@link mail.c2s_read.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof mail.c2s_read
+         * @static
+         * @param {mail.Ic2s_read} message c2s_read message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_read.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a c2s_read message from the specified reader or buffer.
+         * @function decode
+         * @memberof mail.c2s_read
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {mail.c2s_read} c2s_read
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_read.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.mail.c2s_read();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        if (!(message.mailUids && message.mailUids.length))
+                            message.mailUids = [];
+                        if ((tag & 7) === 2) {
+                            var end2 = reader.uint32() + reader.pos;
+                            while (reader.pos < end2)
+                                message.mailUids.push(reader.uint32());
+                        } else
+                            message.mailUids.push(reader.uint32());
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a c2s_read message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof mail.c2s_read
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {mail.c2s_read} c2s_read
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_read.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a c2s_read message.
+         * @function verify
+         * @memberof mail.c2s_read
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        c2s_read.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.mailUids != null && message.hasOwnProperty("mailUids")) {
+                if (!Array.isArray(message.mailUids))
+                    return "mailUids: array expected";
+                for (var i = 0; i < message.mailUids.length; ++i)
+                    if (!$util.isInteger(message.mailUids[i]))
+                        return "mailUids: integer[] expected";
+            }
+            return null;
+        };
+
+        /**
+         * Creates a c2s_read message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof mail.c2s_read
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {mail.c2s_read} c2s_read
+         */
+        c2s_read.fromObject = function fromObject(object) {
+            if (object instanceof $root.mail.c2s_read)
+                return object;
+            var message = new $root.mail.c2s_read();
+            if (object.mailUids) {
+                if (!Array.isArray(object.mailUids))
+                    throw TypeError(".mail.c2s_read.mailUids: array expected");
+                message.mailUids = [];
+                for (var i = 0; i < object.mailUids.length; ++i)
+                    message.mailUids[i] = object.mailUids[i] >>> 0;
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a c2s_read message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof mail.c2s_read
+         * @static
+         * @param {mail.c2s_read} message c2s_read
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        c2s_read.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.mailUids = [];
+            if (message.mailUids && message.mailUids.length) {
+                object.mailUids = [];
+                for (var j = 0; j < message.mailUids.length; ++j)
+                    object.mailUids[j] = message.mailUids[j];
+            }
+            return object;
+        };
+
+        /**
+         * Converts this c2s_read to JSON.
+         * @function toJSON
+         * @memberof mail.c2s_read
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        c2s_read.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for c2s_read
+         * @function getTypeUrl
+         * @memberof mail.c2s_read
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        c2s_read.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/mail.c2s_read";
+        };
+
+        return c2s_read;
+    })();
+
+    mail.s2c_read = (function() {
+
+        /**
+         * Properties of a s2c_read.
+         * @memberof mail
+         * @interface Is2c_read
+         * @property {number|null} [err] s2c_read err
+         */
+
+        /**
+         * Constructs a new s2c_read.
+         * @memberof mail
+         * @classdesc Represents a s2c_read.
+         * @implements Is2c_read
+         * @constructor
+         * @param {mail.Is2c_read=} [properties] Properties to set
+         */
+        function s2c_read(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * s2c_read err.
+         * @member {number} err
+         * @memberof mail.s2c_read
+         * @instance
+         */
+        s2c_read.prototype.err = 0;
+
+        /**
+         * Creates a new s2c_read instance using the specified properties.
+         * @function create
+         * @memberof mail.s2c_read
+         * @static
+         * @param {mail.Is2c_read=} [properties] Properties to set
+         * @returns {mail.s2c_read} s2c_read instance
+         */
+        s2c_read.create = function create(properties) {
+            return new s2c_read(properties);
+        };
+
+        /**
+         * Encodes the specified s2c_read message. Does not implicitly {@link mail.s2c_read.verify|verify} messages.
+         * @function encode
+         * @memberof mail.s2c_read
+         * @static
+         * @param {mail.Is2c_read} message s2c_read message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_read.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.err);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified s2c_read message, length delimited. Does not implicitly {@link mail.s2c_read.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof mail.s2c_read
+         * @static
+         * @param {mail.Is2c_read} message s2c_read message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_read.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a s2c_read message from the specified reader or buffer.
+         * @function decode
+         * @memberof mail.s2c_read
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {mail.s2c_read} s2c_read
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_read.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.mail.s2c_read();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.err = reader.int32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a s2c_read message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof mail.s2c_read
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {mail.s2c_read} s2c_read
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_read.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a s2c_read message.
+         * @function verify
+         * @memberof mail.s2c_read
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        s2c_read.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.err != null && message.hasOwnProperty("err"))
+                if (!$util.isInteger(message.err))
+                    return "err: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a s2c_read message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof mail.s2c_read
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {mail.s2c_read} s2c_read
+         */
+        s2c_read.fromObject = function fromObject(object) {
+            if (object instanceof $root.mail.s2c_read)
+                return object;
+            var message = new $root.mail.s2c_read();
+            if (object.err != null)
+                message.err = object.err | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a s2c_read message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof mail.s2c_read
+         * @static
+         * @param {mail.s2c_read} message s2c_read
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        s2c_read.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.err = 0;
+            if (message.err != null && message.hasOwnProperty("err"))
+                object.err = message.err;
+            return object;
+        };
+
+        /**
+         * Converts this s2c_read to JSON.
+         * @function toJSON
+         * @memberof mail.s2c_read
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        s2c_read.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for s2c_read
+         * @function getTypeUrl
+         * @memberof mail.s2c_read
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        s2c_read.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/mail.s2c_read";
+        };
+
+        return s2c_read;
+    })();
+
+    mail.c2s_receive_reward = (function() {
+
+        /**
+         * Properties of a c2s_receive_reward.
+         * @memberof mail
+         * @interface Ic2s_receive_reward
+         * @property {Array.<number>|null} [mailUids] c2s_receive_reward mailUids
+         */
+
+        /**
+         * Constructs a new c2s_receive_reward.
+         * @memberof mail
+         * @classdesc Represents a c2s_receive_reward.
+         * @implements Ic2s_receive_reward
+         * @constructor
+         * @param {mail.Ic2s_receive_reward=} [properties] Properties to set
+         */
+        function c2s_receive_reward(properties) {
+            this.mailUids = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * c2s_receive_reward mailUids.
+         * @member {Array.<number>} mailUids
+         * @memberof mail.c2s_receive_reward
+         * @instance
+         */
+        c2s_receive_reward.prototype.mailUids = $util.emptyArray;
+
+        /**
+         * Creates a new c2s_receive_reward instance using the specified properties.
+         * @function create
+         * @memberof mail.c2s_receive_reward
+         * @static
+         * @param {mail.Ic2s_receive_reward=} [properties] Properties to set
+         * @returns {mail.c2s_receive_reward} c2s_receive_reward instance
+         */
+        c2s_receive_reward.create = function create(properties) {
+            return new c2s_receive_reward(properties);
+        };
+
+        /**
+         * Encodes the specified c2s_receive_reward message. Does not implicitly {@link mail.c2s_receive_reward.verify|verify} messages.
+         * @function encode
+         * @memberof mail.c2s_receive_reward
+         * @static
+         * @param {mail.Ic2s_receive_reward} message c2s_receive_reward message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_receive_reward.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.mailUids != null && message.mailUids.length) {
+                writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                for (var i = 0; i < message.mailUids.length; ++i)
+                    writer.uint32(message.mailUids[i]);
+                writer.ldelim();
+            }
+            return writer;
+        };
+
+        /**
+         * Encodes the specified c2s_receive_reward message, length delimited. Does not implicitly {@link mail.c2s_receive_reward.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof mail.c2s_receive_reward
+         * @static
+         * @param {mail.Ic2s_receive_reward} message c2s_receive_reward message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_receive_reward.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a c2s_receive_reward message from the specified reader or buffer.
+         * @function decode
+         * @memberof mail.c2s_receive_reward
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {mail.c2s_receive_reward} c2s_receive_reward
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_receive_reward.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.mail.c2s_receive_reward();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        if (!(message.mailUids && message.mailUids.length))
+                            message.mailUids = [];
+                        if ((tag & 7) === 2) {
+                            var end2 = reader.uint32() + reader.pos;
+                            while (reader.pos < end2)
+                                message.mailUids.push(reader.uint32());
+                        } else
+                            message.mailUids.push(reader.uint32());
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a c2s_receive_reward message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof mail.c2s_receive_reward
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {mail.c2s_receive_reward} c2s_receive_reward
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_receive_reward.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a c2s_receive_reward message.
+         * @function verify
+         * @memberof mail.c2s_receive_reward
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        c2s_receive_reward.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.mailUids != null && message.hasOwnProperty("mailUids")) {
+                if (!Array.isArray(message.mailUids))
+                    return "mailUids: array expected";
+                for (var i = 0; i < message.mailUids.length; ++i)
+                    if (!$util.isInteger(message.mailUids[i]))
+                        return "mailUids: integer[] expected";
+            }
+            return null;
+        };
+
+        /**
+         * Creates a c2s_receive_reward message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof mail.c2s_receive_reward
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {mail.c2s_receive_reward} c2s_receive_reward
+         */
+        c2s_receive_reward.fromObject = function fromObject(object) {
+            if (object instanceof $root.mail.c2s_receive_reward)
+                return object;
+            var message = new $root.mail.c2s_receive_reward();
+            if (object.mailUids) {
+                if (!Array.isArray(object.mailUids))
+                    throw TypeError(".mail.c2s_receive_reward.mailUids: array expected");
+                message.mailUids = [];
+                for (var i = 0; i < object.mailUids.length; ++i)
+                    message.mailUids[i] = object.mailUids[i] >>> 0;
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a c2s_receive_reward message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof mail.c2s_receive_reward
+         * @static
+         * @param {mail.c2s_receive_reward} message c2s_receive_reward
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        c2s_receive_reward.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.mailUids = [];
+            if (message.mailUids && message.mailUids.length) {
+                object.mailUids = [];
+                for (var j = 0; j < message.mailUids.length; ++j)
+                    object.mailUids[j] = message.mailUids[j];
+            }
+            return object;
+        };
+
+        /**
+         * Converts this c2s_receive_reward to JSON.
+         * @function toJSON
+         * @memberof mail.c2s_receive_reward
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        c2s_receive_reward.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for c2s_receive_reward
+         * @function getTypeUrl
+         * @memberof mail.c2s_receive_reward
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        c2s_receive_reward.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/mail.c2s_receive_reward";
+        };
+
+        return c2s_receive_reward;
+    })();
+
+    mail.s2c_receive_reward = (function() {
+
+        /**
+         * Properties of a s2c_receive_reward.
+         * @memberof mail
+         * @interface Is2c_receive_reward
+         * @property {number|null} [err] s2c_receive_reward err
+         */
+
+        /**
+         * Constructs a new s2c_receive_reward.
+         * @memberof mail
+         * @classdesc Represents a s2c_receive_reward.
+         * @implements Is2c_receive_reward
+         * @constructor
+         * @param {mail.Is2c_receive_reward=} [properties] Properties to set
+         */
+        function s2c_receive_reward(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * s2c_receive_reward err.
+         * @member {number} err
+         * @memberof mail.s2c_receive_reward
+         * @instance
+         */
+        s2c_receive_reward.prototype.err = 0;
+
+        /**
+         * Creates a new s2c_receive_reward instance using the specified properties.
+         * @function create
+         * @memberof mail.s2c_receive_reward
+         * @static
+         * @param {mail.Is2c_receive_reward=} [properties] Properties to set
+         * @returns {mail.s2c_receive_reward} s2c_receive_reward instance
+         */
+        s2c_receive_reward.create = function create(properties) {
+            return new s2c_receive_reward(properties);
+        };
+
+        /**
+         * Encodes the specified s2c_receive_reward message. Does not implicitly {@link mail.s2c_receive_reward.verify|verify} messages.
+         * @function encode
+         * @memberof mail.s2c_receive_reward
+         * @static
+         * @param {mail.Is2c_receive_reward} message s2c_receive_reward message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_receive_reward.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified s2c_receive_reward message, length delimited. Does not implicitly {@link mail.s2c_receive_reward.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof mail.s2c_receive_reward
+         * @static
+         * @param {mail.Is2c_receive_reward} message s2c_receive_reward message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_receive_reward.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a s2c_receive_reward message from the specified reader or buffer.
+         * @function decode
+         * @memberof mail.s2c_receive_reward
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {mail.s2c_receive_reward} s2c_receive_reward
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_receive_reward.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.mail.s2c_receive_reward();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.err = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a s2c_receive_reward message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof mail.s2c_receive_reward
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {mail.s2c_receive_reward} s2c_receive_reward
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_receive_reward.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a s2c_receive_reward message.
+         * @function verify
+         * @memberof mail.s2c_receive_reward
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        s2c_receive_reward.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.err != null && message.hasOwnProperty("err"))
+                if (!$util.isInteger(message.err))
+                    return "err: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a s2c_receive_reward message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof mail.s2c_receive_reward
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {mail.s2c_receive_reward} s2c_receive_reward
+         */
+        s2c_receive_reward.fromObject = function fromObject(object) {
+            if (object instanceof $root.mail.s2c_receive_reward)
+                return object;
+            var message = new $root.mail.s2c_receive_reward();
+            if (object.err != null)
+                message.err = object.err >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a s2c_receive_reward message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof mail.s2c_receive_reward
+         * @static
+         * @param {mail.s2c_receive_reward} message s2c_receive_reward
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        s2c_receive_reward.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.err = 0;
+            if (message.err != null && message.hasOwnProperty("err"))
+                object.err = message.err;
+            return object;
+        };
+
+        /**
+         * Converts this s2c_receive_reward to JSON.
+         * @function toJSON
+         * @memberof mail.s2c_receive_reward
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        s2c_receive_reward.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for s2c_receive_reward
+         * @function getTypeUrl
+         * @memberof mail.s2c_receive_reward
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        s2c_receive_reward.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/mail.s2c_receive_reward";
+        };
+
+        return s2c_receive_reward;
+    })();
+
+    mail.c2s_delete_mails = (function() {
+
+        /**
+         * Properties of a c2s_delete_mails.
+         * @memberof mail
+         * @interface Ic2s_delete_mails
+         * @property {Array.<number>|null} [mailUids] c2s_delete_mails mailUids
+         */
+
+        /**
+         * Constructs a new c2s_delete_mails.
+         * @memberof mail
+         * @classdesc Represents a c2s_delete_mails.
+         * @implements Ic2s_delete_mails
+         * @constructor
+         * @param {mail.Ic2s_delete_mails=} [properties] Properties to set
+         */
+        function c2s_delete_mails(properties) {
+            this.mailUids = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * c2s_delete_mails mailUids.
+         * @member {Array.<number>} mailUids
+         * @memberof mail.c2s_delete_mails
+         * @instance
+         */
+        c2s_delete_mails.prototype.mailUids = $util.emptyArray;
+
+        /**
+         * Creates a new c2s_delete_mails instance using the specified properties.
+         * @function create
+         * @memberof mail.c2s_delete_mails
+         * @static
+         * @param {mail.Ic2s_delete_mails=} [properties] Properties to set
+         * @returns {mail.c2s_delete_mails} c2s_delete_mails instance
+         */
+        c2s_delete_mails.create = function create(properties) {
+            return new c2s_delete_mails(properties);
+        };
+
+        /**
+         * Encodes the specified c2s_delete_mails message. Does not implicitly {@link mail.c2s_delete_mails.verify|verify} messages.
+         * @function encode
+         * @memberof mail.c2s_delete_mails
+         * @static
+         * @param {mail.Ic2s_delete_mails} message c2s_delete_mails message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_delete_mails.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.mailUids != null && message.mailUids.length) {
+                writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                for (var i = 0; i < message.mailUids.length; ++i)
+                    writer.uint32(message.mailUids[i]);
+                writer.ldelim();
+            }
+            return writer;
+        };
+
+        /**
+         * Encodes the specified c2s_delete_mails message, length delimited. Does not implicitly {@link mail.c2s_delete_mails.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof mail.c2s_delete_mails
+         * @static
+         * @param {mail.Ic2s_delete_mails} message c2s_delete_mails message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_delete_mails.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a c2s_delete_mails message from the specified reader or buffer.
+         * @function decode
+         * @memberof mail.c2s_delete_mails
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {mail.c2s_delete_mails} c2s_delete_mails
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_delete_mails.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.mail.c2s_delete_mails();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        if (!(message.mailUids && message.mailUids.length))
+                            message.mailUids = [];
+                        if ((tag & 7) === 2) {
+                            var end2 = reader.uint32() + reader.pos;
+                            while (reader.pos < end2)
+                                message.mailUids.push(reader.uint32());
+                        } else
+                            message.mailUids.push(reader.uint32());
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a c2s_delete_mails message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof mail.c2s_delete_mails
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {mail.c2s_delete_mails} c2s_delete_mails
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_delete_mails.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a c2s_delete_mails message.
+         * @function verify
+         * @memberof mail.c2s_delete_mails
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        c2s_delete_mails.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.mailUids != null && message.hasOwnProperty("mailUids")) {
+                if (!Array.isArray(message.mailUids))
+                    return "mailUids: array expected";
+                for (var i = 0; i < message.mailUids.length; ++i)
+                    if (!$util.isInteger(message.mailUids[i]))
+                        return "mailUids: integer[] expected";
+            }
+            return null;
+        };
+
+        /**
+         * Creates a c2s_delete_mails message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof mail.c2s_delete_mails
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {mail.c2s_delete_mails} c2s_delete_mails
+         */
+        c2s_delete_mails.fromObject = function fromObject(object) {
+            if (object instanceof $root.mail.c2s_delete_mails)
+                return object;
+            var message = new $root.mail.c2s_delete_mails();
+            if (object.mailUids) {
+                if (!Array.isArray(object.mailUids))
+                    throw TypeError(".mail.c2s_delete_mails.mailUids: array expected");
+                message.mailUids = [];
+                for (var i = 0; i < object.mailUids.length; ++i)
+                    message.mailUids[i] = object.mailUids[i] >>> 0;
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a c2s_delete_mails message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof mail.c2s_delete_mails
+         * @static
+         * @param {mail.c2s_delete_mails} message c2s_delete_mails
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        c2s_delete_mails.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.mailUids = [];
+            if (message.mailUids && message.mailUids.length) {
+                object.mailUids = [];
+                for (var j = 0; j < message.mailUids.length; ++j)
+                    object.mailUids[j] = message.mailUids[j];
+            }
+            return object;
+        };
+
+        /**
+         * Converts this c2s_delete_mails to JSON.
+         * @function toJSON
+         * @memberof mail.c2s_delete_mails
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        c2s_delete_mails.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for c2s_delete_mails
+         * @function getTypeUrl
+         * @memberof mail.c2s_delete_mails
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        c2s_delete_mails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/mail.c2s_delete_mails";
+        };
+
+        return c2s_delete_mails;
+    })();
+
+    mail.s2c_delete_mails = (function() {
+
+        /**
+         * Properties of a s2c_delete_mails.
+         * @memberof mail
+         * @interface Is2c_delete_mails
+         * @property {number|null} [err] s2c_delete_mails err
+         */
+
+        /**
+         * Constructs a new s2c_delete_mails.
+         * @memberof mail
+         * @classdesc Represents a s2c_delete_mails.
+         * @implements Is2c_delete_mails
+         * @constructor
+         * @param {mail.Is2c_delete_mails=} [properties] Properties to set
+         */
+        function s2c_delete_mails(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * s2c_delete_mails err.
+         * @member {number} err
+         * @memberof mail.s2c_delete_mails
+         * @instance
+         */
+        s2c_delete_mails.prototype.err = 0;
+
+        /**
+         * Creates a new s2c_delete_mails instance using the specified properties.
+         * @function create
+         * @memberof mail.s2c_delete_mails
+         * @static
+         * @param {mail.Is2c_delete_mails=} [properties] Properties to set
+         * @returns {mail.s2c_delete_mails} s2c_delete_mails instance
+         */
+        s2c_delete_mails.create = function create(properties) {
+            return new s2c_delete_mails(properties);
+        };
+
+        /**
+         * Encodes the specified s2c_delete_mails message. Does not implicitly {@link mail.s2c_delete_mails.verify|verify} messages.
+         * @function encode
+         * @memberof mail.s2c_delete_mails
+         * @static
+         * @param {mail.Is2c_delete_mails} message s2c_delete_mails message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_delete_mails.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified s2c_delete_mails message, length delimited. Does not implicitly {@link mail.s2c_delete_mails.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof mail.s2c_delete_mails
+         * @static
+         * @param {mail.Is2c_delete_mails} message s2c_delete_mails message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_delete_mails.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a s2c_delete_mails message from the specified reader or buffer.
+         * @function decode
+         * @memberof mail.s2c_delete_mails
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {mail.s2c_delete_mails} s2c_delete_mails
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_delete_mails.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.mail.s2c_delete_mails();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.err = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a s2c_delete_mails message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof mail.s2c_delete_mails
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {mail.s2c_delete_mails} s2c_delete_mails
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_delete_mails.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a s2c_delete_mails message.
+         * @function verify
+         * @memberof mail.s2c_delete_mails
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        s2c_delete_mails.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.err != null && message.hasOwnProperty("err"))
+                if (!$util.isInteger(message.err))
+                    return "err: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a s2c_delete_mails message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof mail.s2c_delete_mails
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {mail.s2c_delete_mails} s2c_delete_mails
+         */
+        s2c_delete_mails.fromObject = function fromObject(object) {
+            if (object instanceof $root.mail.s2c_delete_mails)
+                return object;
+            var message = new $root.mail.s2c_delete_mails();
+            if (object.err != null)
+                message.err = object.err >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a s2c_delete_mails message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof mail.s2c_delete_mails
+         * @static
+         * @param {mail.s2c_delete_mails} message s2c_delete_mails
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        s2c_delete_mails.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.err = 0;
+            if (message.err != null && message.hasOwnProperty("err"))
+                object.err = message.err;
+            return object;
+        };
+
+        /**
+         * Converts this s2c_delete_mails to JSON.
+         * @function toJSON
+         * @memberof mail.s2c_delete_mails
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        s2c_delete_mails.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for s2c_delete_mails
+         * @function getTypeUrl
+         * @memberof mail.s2c_delete_mails
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        s2c_delete_mails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/mail.s2c_delete_mails";
+        };
+
+        return s2c_delete_mails;
+    })();
+
+    mail.notify_new_mails = (function() {
+
+        /**
+         * Properties of a notify_new_mails.
+         * @memberof mail
+         * @interface Inotify_new_mails
+         * @property {Array.<mail.IMailInfo>|null} [mails] notify_new_mails mails
+         */
+
+        /**
+         * Constructs a new notify_new_mails.
+         * @memberof mail
+         * @classdesc Represents a notify_new_mails.
+         * @implements Inotify_new_mails
+         * @constructor
+         * @param {mail.Inotify_new_mails=} [properties] Properties to set
+         */
+        function notify_new_mails(properties) {
+            this.mails = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * notify_new_mails mails.
+         * @member {Array.<mail.IMailInfo>} mails
+         * @memberof mail.notify_new_mails
+         * @instance
+         */
+        notify_new_mails.prototype.mails = $util.emptyArray;
+
+        /**
+         * Creates a new notify_new_mails instance using the specified properties.
+         * @function create
+         * @memberof mail.notify_new_mails
+         * @static
+         * @param {mail.Inotify_new_mails=} [properties] Properties to set
+         * @returns {mail.notify_new_mails} notify_new_mails instance
+         */
+        notify_new_mails.create = function create(properties) {
+            return new notify_new_mails(properties);
+        };
+
+        /**
+         * Encodes the specified notify_new_mails message. Does not implicitly {@link mail.notify_new_mails.verify|verify} messages.
+         * @function encode
+         * @memberof mail.notify_new_mails
+         * @static
+         * @param {mail.Inotify_new_mails} message notify_new_mails message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        notify_new_mails.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.mails != null && message.mails.length)
+                for (var i = 0; i < message.mails.length; ++i)
+                    $root.mail.MailInfo.encode(message.mails[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified notify_new_mails message, length delimited. Does not implicitly {@link mail.notify_new_mails.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof mail.notify_new_mails
+         * @static
+         * @param {mail.Inotify_new_mails} message notify_new_mails message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        notify_new_mails.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a notify_new_mails message from the specified reader or buffer.
+         * @function decode
+         * @memberof mail.notify_new_mails
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {mail.notify_new_mails} notify_new_mails
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        notify_new_mails.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.mail.notify_new_mails();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        if (!(message.mails && message.mails.length))
+                            message.mails = [];
+                        message.mails.push($root.mail.MailInfo.decode(reader, reader.uint32()));
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a notify_new_mails message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof mail.notify_new_mails
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {mail.notify_new_mails} notify_new_mails
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        notify_new_mails.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a notify_new_mails message.
+         * @function verify
+         * @memberof mail.notify_new_mails
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        notify_new_mails.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.mails != null && message.hasOwnProperty("mails")) {
+                if (!Array.isArray(message.mails))
+                    return "mails: array expected";
+                for (var i = 0; i < message.mails.length; ++i) {
+                    var error = $root.mail.MailInfo.verify(message.mails[i]);
+                    if (error)
+                        return "mails." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a notify_new_mails message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof mail.notify_new_mails
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {mail.notify_new_mails} notify_new_mails
+         */
+        notify_new_mails.fromObject = function fromObject(object) {
+            if (object instanceof $root.mail.notify_new_mails)
+                return object;
+            var message = new $root.mail.notify_new_mails();
+            if (object.mails) {
+                if (!Array.isArray(object.mails))
+                    throw TypeError(".mail.notify_new_mails.mails: array expected");
+                message.mails = [];
+                for (var i = 0; i < object.mails.length; ++i) {
+                    if (typeof object.mails[i] !== "object")
+                        throw TypeError(".mail.notify_new_mails.mails: object expected");
+                    message.mails[i] = $root.mail.MailInfo.fromObject(object.mails[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a notify_new_mails message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof mail.notify_new_mails
+         * @static
+         * @param {mail.notify_new_mails} message notify_new_mails
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        notify_new_mails.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.mails = [];
+            if (message.mails && message.mails.length) {
+                object.mails = [];
+                for (var j = 0; j < message.mails.length; ++j)
+                    object.mails[j] = $root.mail.MailInfo.toObject(message.mails[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this notify_new_mails to JSON.
+         * @function toJSON
+         * @memberof mail.notify_new_mails
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        notify_new_mails.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for notify_new_mails
+         * @function getTypeUrl
+         * @memberof mail.notify_new_mails
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        notify_new_mails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/mail.notify_new_mails";
+        };
+
+        return notify_new_mails;
+    })();
+
+    return mail;
+})();
+
+$root.money = (function() {
+
+    /**
+     * Namespace money.
+     * @exports money
+     * @namespace
+     */
+    var money = {};
+
+    money.MoneyItem = (function() {
+
+        /**
+         * Properties of a MoneyItem.
+         * @memberof money
+         * @interface IMoneyItem
+         * @property {number|null} [id] MoneyItem id
+         * @property {number|null} [num] MoneyItem num
+         * @property {number|null} [recoverTs] MoneyItem recoverTs
+         */
+
+        /**
+         * Constructs a new MoneyItem.
+         * @memberof money
+         * @classdesc Represents a MoneyItem.
+         * @implements IMoneyItem
+         * @constructor
+         * @param {money.IMoneyItem=} [properties] Properties to set
+         */
+        function MoneyItem(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * MoneyItem id.
+         * @member {number} id
+         * @memberof money.MoneyItem
+         * @instance
+         */
+        MoneyItem.prototype.id = 0;
+
+        /**
+         * MoneyItem num.
+         * @member {number} num
+         * @memberof money.MoneyItem
+         * @instance
+         */
+        MoneyItem.prototype.num = 0;
+
+        /**
+         * MoneyItem recoverTs.
+         * @member {number} recoverTs
+         * @memberof money.MoneyItem
+         * @instance
+         */
+        MoneyItem.prototype.recoverTs = 0;
+
+        /**
+         * Creates a new MoneyItem instance using the specified properties.
+         * @function create
+         * @memberof money.MoneyItem
+         * @static
+         * @param {money.IMoneyItem=} [properties] Properties to set
+         * @returns {money.MoneyItem} MoneyItem instance
+         */
+        MoneyItem.create = function create(properties) {
+            return new MoneyItem(properties);
+        };
+
+        /**
+         * Encodes the specified MoneyItem message. Does not implicitly {@link money.MoneyItem.verify|verify} messages.
+         * @function encode
+         * @memberof money.MoneyItem
+         * @static
+         * @param {money.IMoneyItem} message MoneyItem message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        MoneyItem.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.id);
+            if (message.num != null && Object.hasOwnProperty.call(message, "num"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.num);
+            if (message.recoverTs != null && Object.hasOwnProperty.call(message, "recoverTs"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.recoverTs);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified MoneyItem message, length delimited. Does not implicitly {@link money.MoneyItem.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof money.MoneyItem
+         * @static
+         * @param {money.IMoneyItem} message MoneyItem message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        MoneyItem.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a MoneyItem message from the specified reader or buffer.
+         * @function decode
+         * @memberof money.MoneyItem
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {money.MoneyItem} MoneyItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        MoneyItem.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.money.MoneyItem();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.id = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.num = reader.uint32();
+                        break;
+                    }
+                case 3: {
+                        message.recoverTs = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a MoneyItem message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof money.MoneyItem
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {money.MoneyItem} MoneyItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        MoneyItem.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a MoneyItem message.
+         * @function verify
+         * @memberof money.MoneyItem
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        MoneyItem.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isInteger(message.id))
+                    return "id: integer expected";
+            if (message.num != null && message.hasOwnProperty("num"))
+                if (!$util.isInteger(message.num))
+                    return "num: integer expected";
+            if (message.recoverTs != null && message.hasOwnProperty("recoverTs"))
+                if (!$util.isInteger(message.recoverTs))
+                    return "recoverTs: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a MoneyItem message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof money.MoneyItem
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {money.MoneyItem} MoneyItem
+         */
+        MoneyItem.fromObject = function fromObject(object) {
+            if (object instanceof $root.money.MoneyItem)
+                return object;
+            var message = new $root.money.MoneyItem();
+            if (object.id != null)
+                message.id = object.id >>> 0;
+            if (object.num != null)
+                message.num = object.num >>> 0;
+            if (object.recoverTs != null)
+                message.recoverTs = object.recoverTs >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a MoneyItem message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof money.MoneyItem
+         * @static
+         * @param {money.MoneyItem} message MoneyItem
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        MoneyItem.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.id = 0;
+                object.num = 0;
+                object.recoverTs = 0;
+            }
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            if (message.num != null && message.hasOwnProperty("num"))
+                object.num = message.num;
+            if (message.recoverTs != null && message.hasOwnProperty("recoverTs"))
+                object.recoverTs = message.recoverTs;
+            return object;
+        };
+
+        /**
+         * Converts this MoneyItem to JSON.
+         * @function toJSON
+         * @memberof money.MoneyItem
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        MoneyItem.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for MoneyItem
+         * @function getTypeUrl
+         * @memberof money.MoneyItem
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        MoneyItem.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/money.MoneyItem";
+        };
+
+        return MoneyItem;
+    })();
+
+    money.c2s_load = (function() {
+
+        /**
+         * Properties of a c2s_load.
+         * @memberof money
+         * @interface Ic2s_load
+         */
+
+        /**
+         * Constructs a new c2s_load.
+         * @memberof money
+         * @classdesc Represents a c2s_load.
+         * @implements Ic2s_load
+         * @constructor
+         * @param {money.Ic2s_load=} [properties] Properties to set
+         */
+        function c2s_load(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Creates a new c2s_load instance using the specified properties.
+         * @function create
+         * @memberof money.c2s_load
+         * @static
+         * @param {money.Ic2s_load=} [properties] Properties to set
+         * @returns {money.c2s_load} c2s_load instance
+         */
+        c2s_load.create = function create(properties) {
+            return new c2s_load(properties);
+        };
+
+        /**
+         * Encodes the specified c2s_load message. Does not implicitly {@link money.c2s_load.verify|verify} messages.
+         * @function encode
+         * @memberof money.c2s_load
+         * @static
+         * @param {money.Ic2s_load} message c2s_load message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_load.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified c2s_load message, length delimited. Does not implicitly {@link money.c2s_load.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof money.c2s_load
+         * @static
+         * @param {money.Ic2s_load} message c2s_load message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_load.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a c2s_load message from the specified reader or buffer.
+         * @function decode
+         * @memberof money.c2s_load
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {money.c2s_load} c2s_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_load.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.money.c2s_load();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a c2s_load message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof money.c2s_load
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {money.c2s_load} c2s_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_load.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a c2s_load message.
+         * @function verify
+         * @memberof money.c2s_load
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        c2s_load.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+
+        /**
+         * Creates a c2s_load message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof money.c2s_load
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {money.c2s_load} c2s_load
+         */
+        c2s_load.fromObject = function fromObject(object) {
+            if (object instanceof $root.money.c2s_load)
+                return object;
+            return new $root.money.c2s_load();
+        };
+
+        /**
+         * Creates a plain object from a c2s_load message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof money.c2s_load
+         * @static
+         * @param {money.c2s_load} message c2s_load
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        c2s_load.toObject = function toObject() {
+            return {};
+        };
+
+        /**
+         * Converts this c2s_load to JSON.
+         * @function toJSON
+         * @memberof money.c2s_load
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        c2s_load.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for c2s_load
+         * @function getTypeUrl
+         * @memberof money.c2s_load
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        c2s_load.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/money.c2s_load";
+        };
+
+        return c2s_load;
+    })();
+
+    money.s2c_load = (function() {
+
+        /**
+         * Properties of a s2c_load.
+         * @memberof money
+         * @interface Is2c_load
+         * @property {number|null} [err] s2c_load err
+         * @property {Array.<money.IMoneyItem>|null} [items] s2c_load items
+         */
+
+        /**
+         * Constructs a new s2c_load.
+         * @memberof money
+         * @classdesc Represents a s2c_load.
+         * @implements Is2c_load
+         * @constructor
+         * @param {money.Is2c_load=} [properties] Properties to set
+         */
+        function s2c_load(properties) {
+            this.items = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * s2c_load err.
+         * @member {number} err
+         * @memberof money.s2c_load
+         * @instance
+         */
+        s2c_load.prototype.err = 0;
+
+        /**
+         * s2c_load items.
+         * @member {Array.<money.IMoneyItem>} items
+         * @memberof money.s2c_load
+         * @instance
+         */
+        s2c_load.prototype.items = $util.emptyArray;
+
+        /**
+         * Creates a new s2c_load instance using the specified properties.
+         * @function create
+         * @memberof money.s2c_load
+         * @static
+         * @param {money.Is2c_load=} [properties] Properties to set
+         * @returns {money.s2c_load} s2c_load instance
+         */
+        s2c_load.create = function create(properties) {
+            return new s2c_load(properties);
+        };
+
+        /**
+         * Encodes the specified s2c_load message. Does not implicitly {@link money.s2c_load.verify|verify} messages.
+         * @function encode
+         * @memberof money.s2c_load
+         * @static
+         * @param {money.Is2c_load} message s2c_load message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_load.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
+            if (message.items != null && message.items.length)
+                for (var i = 0; i < message.items.length; ++i)
+                    $root.money.MoneyItem.encode(message.items[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified s2c_load message, length delimited. Does not implicitly {@link money.s2c_load.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof money.s2c_load
+         * @static
+         * @param {money.Is2c_load} message s2c_load message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_load.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a s2c_load message from the specified reader or buffer.
+         * @function decode
+         * @memberof money.s2c_load
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {money.s2c_load} s2c_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_load.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.money.s2c_load();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.err = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        if (!(message.items && message.items.length))
+                            message.items = [];
+                        message.items.push($root.money.MoneyItem.decode(reader, reader.uint32()));
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a s2c_load message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof money.s2c_load
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {money.s2c_load} s2c_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_load.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a s2c_load message.
+         * @function verify
+         * @memberof money.s2c_load
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        s2c_load.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.err != null && message.hasOwnProperty("err"))
+                if (!$util.isInteger(message.err))
+                    return "err: integer expected";
+            if (message.items != null && message.hasOwnProperty("items")) {
+                if (!Array.isArray(message.items))
+                    return "items: array expected";
+                for (var i = 0; i < message.items.length; ++i) {
+                    var error = $root.money.MoneyItem.verify(message.items[i]);
+                    if (error)
+                        return "items." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a s2c_load message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof money.s2c_load
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {money.s2c_load} s2c_load
+         */
+        s2c_load.fromObject = function fromObject(object) {
+            if (object instanceof $root.money.s2c_load)
+                return object;
+            var message = new $root.money.s2c_load();
+            if (object.err != null)
+                message.err = object.err >>> 0;
+            if (object.items) {
+                if (!Array.isArray(object.items))
+                    throw TypeError(".money.s2c_load.items: array expected");
+                message.items = [];
+                for (var i = 0; i < object.items.length; ++i) {
+                    if (typeof object.items[i] !== "object")
+                        throw TypeError(".money.s2c_load.items: object expected");
+                    message.items[i] = $root.money.MoneyItem.fromObject(object.items[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a s2c_load message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof money.s2c_load
+         * @static
+         * @param {money.s2c_load} message s2c_load
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        s2c_load.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.items = [];
+            if (options.defaults)
+                object.err = 0;
+            if (message.err != null && message.hasOwnProperty("err"))
+                object.err = message.err;
+            if (message.items && message.items.length) {
+                object.items = [];
+                for (var j = 0; j < message.items.length; ++j)
+                    object.items[j] = $root.money.MoneyItem.toObject(message.items[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this s2c_load to JSON.
+         * @function toJSON
+         * @memberof money.s2c_load
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        s2c_load.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for s2c_load
+         * @function getTypeUrl
+         * @memberof money.s2c_load
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        s2c_load.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/money.s2c_load";
+        };
+
+        return s2c_load;
+    })();
+
+    money.notify_items = (function() {
+
+        /**
+         * Properties of a notify_items.
+         * @memberof money
+         * @interface Inotify_items
+         * @property {Array.<money.IMoneyItem>|null} [items] notify_items items
+         */
+
+        /**
+         * Constructs a new notify_items.
+         * @memberof money
+         * @classdesc Represents a notify_items.
+         * @implements Inotify_items
+         * @constructor
+         * @param {money.Inotify_items=} [properties] Properties to set
+         */
+        function notify_items(properties) {
+            this.items = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * notify_items items.
+         * @member {Array.<money.IMoneyItem>} items
+         * @memberof money.notify_items
+         * @instance
+         */
+        notify_items.prototype.items = $util.emptyArray;
+
+        /**
+         * Creates a new notify_items instance using the specified properties.
+         * @function create
+         * @memberof money.notify_items
+         * @static
+         * @param {money.Inotify_items=} [properties] Properties to set
+         * @returns {money.notify_items} notify_items instance
+         */
+        notify_items.create = function create(properties) {
+            return new notify_items(properties);
+        };
+
+        /**
+         * Encodes the specified notify_items message. Does not implicitly {@link money.notify_items.verify|verify} messages.
+         * @function encode
+         * @memberof money.notify_items
+         * @static
+         * @param {money.Inotify_items} message notify_items message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        notify_items.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.items != null && message.items.length)
+                for (var i = 0; i < message.items.length; ++i)
+                    $root.money.MoneyItem.encode(message.items[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified notify_items message, length delimited. Does not implicitly {@link money.notify_items.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof money.notify_items
+         * @static
+         * @param {money.Inotify_items} message notify_items message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        notify_items.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a notify_items message from the specified reader or buffer.
+         * @function decode
+         * @memberof money.notify_items
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {money.notify_items} notify_items
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        notify_items.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.money.notify_items();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        if (!(message.items && message.items.length))
+                            message.items = [];
+                        message.items.push($root.money.MoneyItem.decode(reader, reader.uint32()));
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a notify_items message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof money.notify_items
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {money.notify_items} notify_items
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        notify_items.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a notify_items message.
+         * @function verify
+         * @memberof money.notify_items
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        notify_items.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.items != null && message.hasOwnProperty("items")) {
+                if (!Array.isArray(message.items))
+                    return "items: array expected";
+                for (var i = 0; i < message.items.length; ++i) {
+                    var error = $root.money.MoneyItem.verify(message.items[i]);
+                    if (error)
+                        return "items." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a notify_items message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof money.notify_items
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {money.notify_items} notify_items
+         */
+        notify_items.fromObject = function fromObject(object) {
+            if (object instanceof $root.money.notify_items)
+                return object;
+            var message = new $root.money.notify_items();
+            if (object.items) {
+                if (!Array.isArray(object.items))
+                    throw TypeError(".money.notify_items.items: array expected");
+                message.items = [];
+                for (var i = 0; i < object.items.length; ++i) {
+                    if (typeof object.items[i] !== "object")
+                        throw TypeError(".money.notify_items.items: object expected");
+                    message.items[i] = $root.money.MoneyItem.fromObject(object.items[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a notify_items message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof money.notify_items
+         * @static
+         * @param {money.notify_items} message notify_items
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        notify_items.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.items = [];
+            if (message.items && message.items.length) {
+                object.items = [];
+                for (var j = 0; j < message.items.length; ++j)
+                    object.items[j] = $root.money.MoneyItem.toObject(message.items[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this notify_items to JSON.
+         * @function toJSON
+         * @memberof money.notify_items
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        notify_items.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for notify_items
+         * @function getTypeUrl
+         * @memberof money.notify_items
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        notify_items.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/money.notify_items";
+        };
+
+        return notify_items;
+    })();
+
+    return money;
+})();
+
 $root.notify = (function() {
 
     /**
@@ -6359,6 +9557,2523 @@ $root.notify = (function() {
     var notify = {};
 
     return notify;
+})();
+
+$root.profile = (function() {
+
+    /**
+     * Namespace profile.
+     * @exports profile
+     * @namespace
+     */
+    var profile = {};
+
+    profile.ProfileInfo = (function() {
+
+        /**
+         * Properties of a ProfileInfo.
+         * @memberof profile
+         * @interface IProfileInfo
+         * @property {string|null} [name] ProfileInfo name
+         * @property {number|null} [gender] ProfileInfo gender
+         * @property {number|null} [exp] ProfileInfo exp
+         * @property {number|null} [lv] ProfileInfo lv
+         */
+
+        /**
+         * Constructs a new ProfileInfo.
+         * @memberof profile
+         * @classdesc Represents a ProfileInfo.
+         * @implements IProfileInfo
+         * @constructor
+         * @param {profile.IProfileInfo=} [properties] Properties to set
+         */
+        function ProfileInfo(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * ProfileInfo name.
+         * @member {string} name
+         * @memberof profile.ProfileInfo
+         * @instance
+         */
+        ProfileInfo.prototype.name = "";
+
+        /**
+         * ProfileInfo gender.
+         * @member {number} gender
+         * @memberof profile.ProfileInfo
+         * @instance
+         */
+        ProfileInfo.prototype.gender = 0;
+
+        /**
+         * ProfileInfo exp.
+         * @member {number} exp
+         * @memberof profile.ProfileInfo
+         * @instance
+         */
+        ProfileInfo.prototype.exp = 0;
+
+        /**
+         * ProfileInfo lv.
+         * @member {number} lv
+         * @memberof profile.ProfileInfo
+         * @instance
+         */
+        ProfileInfo.prototype.lv = 0;
+
+        /**
+         * Creates a new ProfileInfo instance using the specified properties.
+         * @function create
+         * @memberof profile.ProfileInfo
+         * @static
+         * @param {profile.IProfileInfo=} [properties] Properties to set
+         * @returns {profile.ProfileInfo} ProfileInfo instance
+         */
+        ProfileInfo.create = function create(properties) {
+            return new ProfileInfo(properties);
+        };
+
+        /**
+         * Encodes the specified ProfileInfo message. Does not implicitly {@link profile.ProfileInfo.verify|verify} messages.
+         * @function encode
+         * @memberof profile.ProfileInfo
+         * @static
+         * @param {profile.IProfileInfo} message ProfileInfo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ProfileInfo.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+            if (message.gender != null && Object.hasOwnProperty.call(message, "gender"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.gender);
+            if (message.exp != null && Object.hasOwnProperty.call(message, "exp"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.exp);
+            if (message.lv != null && Object.hasOwnProperty.call(message, "lv"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.lv);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified ProfileInfo message, length delimited. Does not implicitly {@link profile.ProfileInfo.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof profile.ProfileInfo
+         * @static
+         * @param {profile.IProfileInfo} message ProfileInfo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ProfileInfo.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a ProfileInfo message from the specified reader or buffer.
+         * @function decode
+         * @memberof profile.ProfileInfo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {profile.ProfileInfo} ProfileInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ProfileInfo.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.profile.ProfileInfo();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.name = reader.string();
+                        break;
+                    }
+                case 2: {
+                        message.gender = reader.uint32();
+                        break;
+                    }
+                case 3: {
+                        message.exp = reader.uint32();
+                        break;
+                    }
+                case 4: {
+                        message.lv = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a ProfileInfo message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof profile.ProfileInfo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {profile.ProfileInfo} ProfileInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ProfileInfo.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a ProfileInfo message.
+         * @function verify
+         * @memberof profile.ProfileInfo
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        ProfileInfo.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.name != null && message.hasOwnProperty("name"))
+                if (!$util.isString(message.name))
+                    return "name: string expected";
+            if (message.gender != null && message.hasOwnProperty("gender"))
+                if (!$util.isInteger(message.gender))
+                    return "gender: integer expected";
+            if (message.exp != null && message.hasOwnProperty("exp"))
+                if (!$util.isInteger(message.exp))
+                    return "exp: integer expected";
+            if (message.lv != null && message.hasOwnProperty("lv"))
+                if (!$util.isInteger(message.lv))
+                    return "lv: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a ProfileInfo message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof profile.ProfileInfo
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {profile.ProfileInfo} ProfileInfo
+         */
+        ProfileInfo.fromObject = function fromObject(object) {
+            if (object instanceof $root.profile.ProfileInfo)
+                return object;
+            var message = new $root.profile.ProfileInfo();
+            if (object.name != null)
+                message.name = String(object.name);
+            if (object.gender != null)
+                message.gender = object.gender >>> 0;
+            if (object.exp != null)
+                message.exp = object.exp >>> 0;
+            if (object.lv != null)
+                message.lv = object.lv >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a ProfileInfo message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof profile.ProfileInfo
+         * @static
+         * @param {profile.ProfileInfo} message ProfileInfo
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        ProfileInfo.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.name = "";
+                object.gender = 0;
+                object.exp = 0;
+                object.lv = 0;
+            }
+            if (message.name != null && message.hasOwnProperty("name"))
+                object.name = message.name;
+            if (message.gender != null && message.hasOwnProperty("gender"))
+                object.gender = message.gender;
+            if (message.exp != null && message.hasOwnProperty("exp"))
+                object.exp = message.exp;
+            if (message.lv != null && message.hasOwnProperty("lv"))
+                object.lv = message.lv;
+            return object;
+        };
+
+        /**
+         * Converts this ProfileInfo to JSON.
+         * @function toJSON
+         * @memberof profile.ProfileInfo
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        ProfileInfo.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for ProfileInfo
+         * @function getTypeUrl
+         * @memberof profile.ProfileInfo
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        ProfileInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/profile.ProfileInfo";
+        };
+
+        return ProfileInfo;
+    })();
+
+    profile.c2s_load = (function() {
+
+        /**
+         * Properties of a c2s_load.
+         * @memberof profile
+         * @interface Ic2s_load
+         */
+
+        /**
+         * Constructs a new c2s_load.
+         * @memberof profile
+         * @classdesc Represents a c2s_load.
+         * @implements Ic2s_load
+         * @constructor
+         * @param {profile.Ic2s_load=} [properties] Properties to set
+         */
+        function c2s_load(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Creates a new c2s_load instance using the specified properties.
+         * @function create
+         * @memberof profile.c2s_load
+         * @static
+         * @param {profile.Ic2s_load=} [properties] Properties to set
+         * @returns {profile.c2s_load} c2s_load instance
+         */
+        c2s_load.create = function create(properties) {
+            return new c2s_load(properties);
+        };
+
+        /**
+         * Encodes the specified c2s_load message. Does not implicitly {@link profile.c2s_load.verify|verify} messages.
+         * @function encode
+         * @memberof profile.c2s_load
+         * @static
+         * @param {profile.Ic2s_load} message c2s_load message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_load.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified c2s_load message, length delimited. Does not implicitly {@link profile.c2s_load.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof profile.c2s_load
+         * @static
+         * @param {profile.Ic2s_load} message c2s_load message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_load.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a c2s_load message from the specified reader or buffer.
+         * @function decode
+         * @memberof profile.c2s_load
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {profile.c2s_load} c2s_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_load.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.profile.c2s_load();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a c2s_load message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof profile.c2s_load
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {profile.c2s_load} c2s_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_load.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a c2s_load message.
+         * @function verify
+         * @memberof profile.c2s_load
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        c2s_load.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+
+        /**
+         * Creates a c2s_load message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof profile.c2s_load
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {profile.c2s_load} c2s_load
+         */
+        c2s_load.fromObject = function fromObject(object) {
+            if (object instanceof $root.profile.c2s_load)
+                return object;
+            return new $root.profile.c2s_load();
+        };
+
+        /**
+         * Creates a plain object from a c2s_load message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof profile.c2s_load
+         * @static
+         * @param {profile.c2s_load} message c2s_load
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        c2s_load.toObject = function toObject() {
+            return {};
+        };
+
+        /**
+         * Converts this c2s_load to JSON.
+         * @function toJSON
+         * @memberof profile.c2s_load
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        c2s_load.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for c2s_load
+         * @function getTypeUrl
+         * @memberof profile.c2s_load
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        c2s_load.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/profile.c2s_load";
+        };
+
+        return c2s_load;
+    })();
+
+    profile.s2c_load = (function() {
+
+        /**
+         * Properties of a s2c_load.
+         * @memberof profile
+         * @interface Is2c_load
+         * @property {number|null} [err] s2c_load err
+         * @property {profile.IProfileInfo|null} [profile] s2c_load profile
+         */
+
+        /**
+         * Constructs a new s2c_load.
+         * @memberof profile
+         * @classdesc Represents a s2c_load.
+         * @implements Is2c_load
+         * @constructor
+         * @param {profile.Is2c_load=} [properties] Properties to set
+         */
+        function s2c_load(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * s2c_load err.
+         * @member {number} err
+         * @memberof profile.s2c_load
+         * @instance
+         */
+        s2c_load.prototype.err = 0;
+
+        /**
+         * s2c_load profile.
+         * @member {profile.IProfileInfo|null|undefined} profile
+         * @memberof profile.s2c_load
+         * @instance
+         */
+        s2c_load.prototype.profile = null;
+
+        /**
+         * Creates a new s2c_load instance using the specified properties.
+         * @function create
+         * @memberof profile.s2c_load
+         * @static
+         * @param {profile.Is2c_load=} [properties] Properties to set
+         * @returns {profile.s2c_load} s2c_load instance
+         */
+        s2c_load.create = function create(properties) {
+            return new s2c_load(properties);
+        };
+
+        /**
+         * Encodes the specified s2c_load message. Does not implicitly {@link profile.s2c_load.verify|verify} messages.
+         * @function encode
+         * @memberof profile.s2c_load
+         * @static
+         * @param {profile.Is2c_load} message s2c_load message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_load.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.err);
+            if (message.profile != null && Object.hasOwnProperty.call(message, "profile"))
+                $root.profile.ProfileInfo.encode(message.profile, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified s2c_load message, length delimited. Does not implicitly {@link profile.s2c_load.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof profile.s2c_load
+         * @static
+         * @param {profile.Is2c_load} message s2c_load message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_load.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a s2c_load message from the specified reader or buffer.
+         * @function decode
+         * @memberof profile.s2c_load
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {profile.s2c_load} s2c_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_load.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.profile.s2c_load();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.err = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.profile = $root.profile.ProfileInfo.decode(reader, reader.uint32());
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a s2c_load message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof profile.s2c_load
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {profile.s2c_load} s2c_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_load.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a s2c_load message.
+         * @function verify
+         * @memberof profile.s2c_load
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        s2c_load.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.err != null && message.hasOwnProperty("err"))
+                if (!$util.isInteger(message.err))
+                    return "err: integer expected";
+            if (message.profile != null && message.hasOwnProperty("profile")) {
+                var error = $root.profile.ProfileInfo.verify(message.profile);
+                if (error)
+                    return "profile." + error;
+            }
+            return null;
+        };
+
+        /**
+         * Creates a s2c_load message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof profile.s2c_load
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {profile.s2c_load} s2c_load
+         */
+        s2c_load.fromObject = function fromObject(object) {
+            if (object instanceof $root.profile.s2c_load)
+                return object;
+            var message = new $root.profile.s2c_load();
+            if (object.err != null)
+                message.err = object.err | 0;
+            if (object.profile != null) {
+                if (typeof object.profile !== "object")
+                    throw TypeError(".profile.s2c_load.profile: object expected");
+                message.profile = $root.profile.ProfileInfo.fromObject(object.profile);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a s2c_load message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof profile.s2c_load
+         * @static
+         * @param {profile.s2c_load} message s2c_load
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        s2c_load.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.err = 0;
+                object.profile = null;
+            }
+            if (message.err != null && message.hasOwnProperty("err"))
+                object.err = message.err;
+            if (message.profile != null && message.hasOwnProperty("profile"))
+                object.profile = $root.profile.ProfileInfo.toObject(message.profile, options);
+            return object;
+        };
+
+        /**
+         * Converts this s2c_load to JSON.
+         * @function toJSON
+         * @memberof profile.s2c_load
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        s2c_load.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for s2c_load
+         * @function getTypeUrl
+         * @memberof profile.s2c_load
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        s2c_load.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/profile.s2c_load";
+        };
+
+        return s2c_load;
+    })();
+
+    profile.notify_profile = (function() {
+
+        /**
+         * Properties of a notify_profile.
+         * @memberof profile
+         * @interface Inotify_profile
+         * @property {profile.IProfileInfo|null} [profile] notify_profile profile
+         */
+
+        /**
+         * Constructs a new notify_profile.
+         * @memberof profile
+         * @classdesc Represents a notify_profile.
+         * @implements Inotify_profile
+         * @constructor
+         * @param {profile.Inotify_profile=} [properties] Properties to set
+         */
+        function notify_profile(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * notify_profile profile.
+         * @member {profile.IProfileInfo|null|undefined} profile
+         * @memberof profile.notify_profile
+         * @instance
+         */
+        notify_profile.prototype.profile = null;
+
+        /**
+         * Creates a new notify_profile instance using the specified properties.
+         * @function create
+         * @memberof profile.notify_profile
+         * @static
+         * @param {profile.Inotify_profile=} [properties] Properties to set
+         * @returns {profile.notify_profile} notify_profile instance
+         */
+        notify_profile.create = function create(properties) {
+            return new notify_profile(properties);
+        };
+
+        /**
+         * Encodes the specified notify_profile message. Does not implicitly {@link profile.notify_profile.verify|verify} messages.
+         * @function encode
+         * @memberof profile.notify_profile
+         * @static
+         * @param {profile.Inotify_profile} message notify_profile message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        notify_profile.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.profile != null && Object.hasOwnProperty.call(message, "profile"))
+                $root.profile.ProfileInfo.encode(message.profile, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified notify_profile message, length delimited. Does not implicitly {@link profile.notify_profile.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof profile.notify_profile
+         * @static
+         * @param {profile.Inotify_profile} message notify_profile message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        notify_profile.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a notify_profile message from the specified reader or buffer.
+         * @function decode
+         * @memberof profile.notify_profile
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {profile.notify_profile} notify_profile
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        notify_profile.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.profile.notify_profile();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.profile = $root.profile.ProfileInfo.decode(reader, reader.uint32());
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a notify_profile message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof profile.notify_profile
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {profile.notify_profile} notify_profile
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        notify_profile.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a notify_profile message.
+         * @function verify
+         * @memberof profile.notify_profile
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        notify_profile.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.profile != null && message.hasOwnProperty("profile")) {
+                var error = $root.profile.ProfileInfo.verify(message.profile);
+                if (error)
+                    return "profile." + error;
+            }
+            return null;
+        };
+
+        /**
+         * Creates a notify_profile message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof profile.notify_profile
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {profile.notify_profile} notify_profile
+         */
+        notify_profile.fromObject = function fromObject(object) {
+            if (object instanceof $root.profile.notify_profile)
+                return object;
+            var message = new $root.profile.notify_profile();
+            if (object.profile != null) {
+                if (typeof object.profile !== "object")
+                    throw TypeError(".profile.notify_profile.profile: object expected");
+                message.profile = $root.profile.ProfileInfo.fromObject(object.profile);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a notify_profile message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof profile.notify_profile
+         * @static
+         * @param {profile.notify_profile} message notify_profile
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        notify_profile.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.profile = null;
+            if (message.profile != null && message.hasOwnProperty("profile"))
+                object.profile = $root.profile.ProfileInfo.toObject(message.profile, options);
+            return object;
+        };
+
+        /**
+         * Converts this notify_profile to JSON.
+         * @function toJSON
+         * @memberof profile.notify_profile
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        notify_profile.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for notify_profile
+         * @function getTypeUrl
+         * @memberof profile.notify_profile
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        notify_profile.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/profile.notify_profile";
+        };
+
+        return notify_profile;
+    })();
+
+    return profile;
+})();
+
+$root.task = (function() {
+
+    /**
+     * Namespace task.
+     * @exports task
+     * @namespace
+     */
+    var task = {};
+
+    task.TaskInfo = (function() {
+
+        /**
+         * Properties of a TaskInfo.
+         * @memberof task
+         * @interface ITaskInfo
+         * @property {number|null} [id] TaskInfo id
+         * @property {number|null} [num] TaskInfo num
+         * @property {number|null} [max] TaskInfo max
+         * @property {boolean|null} [finish] TaskInfo finish
+         */
+
+        /**
+         * Constructs a new TaskInfo.
+         * @memberof task
+         * @classdesc Represents a TaskInfo.
+         * @implements ITaskInfo
+         * @constructor
+         * @param {task.ITaskInfo=} [properties] Properties to set
+         */
+        function TaskInfo(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * TaskInfo id.
+         * @member {number} id
+         * @memberof task.TaskInfo
+         * @instance
+         */
+        TaskInfo.prototype.id = 0;
+
+        /**
+         * TaskInfo num.
+         * @member {number} num
+         * @memberof task.TaskInfo
+         * @instance
+         */
+        TaskInfo.prototype.num = 0;
+
+        /**
+         * TaskInfo max.
+         * @member {number} max
+         * @memberof task.TaskInfo
+         * @instance
+         */
+        TaskInfo.prototype.max = 0;
+
+        /**
+         * TaskInfo finish.
+         * @member {boolean} finish
+         * @memberof task.TaskInfo
+         * @instance
+         */
+        TaskInfo.prototype.finish = false;
+
+        /**
+         * Creates a new TaskInfo instance using the specified properties.
+         * @function create
+         * @memberof task.TaskInfo
+         * @static
+         * @param {task.ITaskInfo=} [properties] Properties to set
+         * @returns {task.TaskInfo} TaskInfo instance
+         */
+        TaskInfo.create = function create(properties) {
+            return new TaskInfo(properties);
+        };
+
+        /**
+         * Encodes the specified TaskInfo message. Does not implicitly {@link task.TaskInfo.verify|verify} messages.
+         * @function encode
+         * @memberof task.TaskInfo
+         * @static
+         * @param {task.ITaskInfo} message TaskInfo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        TaskInfo.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.id);
+            if (message.num != null && Object.hasOwnProperty.call(message, "num"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.num);
+            if (message.max != null && Object.hasOwnProperty.call(message, "max"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.max);
+            if (message.finish != null && Object.hasOwnProperty.call(message, "finish"))
+                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.finish);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified TaskInfo message, length delimited. Does not implicitly {@link task.TaskInfo.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof task.TaskInfo
+         * @static
+         * @param {task.ITaskInfo} message TaskInfo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        TaskInfo.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a TaskInfo message from the specified reader or buffer.
+         * @function decode
+         * @memberof task.TaskInfo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {task.TaskInfo} TaskInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        TaskInfo.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.task.TaskInfo();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.id = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.num = reader.uint32();
+                        break;
+                    }
+                case 3: {
+                        message.max = reader.uint32();
+                        break;
+                    }
+                case 4: {
+                        message.finish = reader.bool();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a TaskInfo message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof task.TaskInfo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {task.TaskInfo} TaskInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        TaskInfo.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a TaskInfo message.
+         * @function verify
+         * @memberof task.TaskInfo
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        TaskInfo.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isInteger(message.id))
+                    return "id: integer expected";
+            if (message.num != null && message.hasOwnProperty("num"))
+                if (!$util.isInteger(message.num))
+                    return "num: integer expected";
+            if (message.max != null && message.hasOwnProperty("max"))
+                if (!$util.isInteger(message.max))
+                    return "max: integer expected";
+            if (message.finish != null && message.hasOwnProperty("finish"))
+                if (typeof message.finish !== "boolean")
+                    return "finish: boolean expected";
+            return null;
+        };
+
+        /**
+         * Creates a TaskInfo message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof task.TaskInfo
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {task.TaskInfo} TaskInfo
+         */
+        TaskInfo.fromObject = function fromObject(object) {
+            if (object instanceof $root.task.TaskInfo)
+                return object;
+            var message = new $root.task.TaskInfo();
+            if (object.id != null)
+                message.id = object.id >>> 0;
+            if (object.num != null)
+                message.num = object.num >>> 0;
+            if (object.max != null)
+                message.max = object.max >>> 0;
+            if (object.finish != null)
+                message.finish = Boolean(object.finish);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a TaskInfo message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof task.TaskInfo
+         * @static
+         * @param {task.TaskInfo} message TaskInfo
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        TaskInfo.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.id = 0;
+                object.num = 0;
+                object.max = 0;
+                object.finish = false;
+            }
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            if (message.num != null && message.hasOwnProperty("num"))
+                object.num = message.num;
+            if (message.max != null && message.hasOwnProperty("max"))
+                object.max = message.max;
+            if (message.finish != null && message.hasOwnProperty("finish"))
+                object.finish = message.finish;
+            return object;
+        };
+
+        /**
+         * Converts this TaskInfo to JSON.
+         * @function toJSON
+         * @memberof task.TaskInfo
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        TaskInfo.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for TaskInfo
+         * @function getTypeUrl
+         * @memberof task.TaskInfo
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        TaskInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/task.TaskInfo";
+        };
+
+        return TaskInfo;
+    })();
+
+    task.c2s_load = (function() {
+
+        /**
+         * Properties of a c2s_load.
+         * @memberof task
+         * @interface Ic2s_load
+         * @property {number|null} [taskType] c2s_load taskType
+         */
+
+        /**
+         * Constructs a new c2s_load.
+         * @memberof task
+         * @classdesc Represents a c2s_load.
+         * @implements Ic2s_load
+         * @constructor
+         * @param {task.Ic2s_load=} [properties] Properties to set
+         */
+        function c2s_load(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * c2s_load taskType.
+         * @member {number} taskType
+         * @memberof task.c2s_load
+         * @instance
+         */
+        c2s_load.prototype.taskType = 0;
+
+        /**
+         * Creates a new c2s_load instance using the specified properties.
+         * @function create
+         * @memberof task.c2s_load
+         * @static
+         * @param {task.Ic2s_load=} [properties] Properties to set
+         * @returns {task.c2s_load} c2s_load instance
+         */
+        c2s_load.create = function create(properties) {
+            return new c2s_load(properties);
+        };
+
+        /**
+         * Encodes the specified c2s_load message. Does not implicitly {@link task.c2s_load.verify|verify} messages.
+         * @function encode
+         * @memberof task.c2s_load
+         * @static
+         * @param {task.Ic2s_load} message c2s_load message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_load.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.taskType != null && Object.hasOwnProperty.call(message, "taskType"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.taskType);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified c2s_load message, length delimited. Does not implicitly {@link task.c2s_load.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof task.c2s_load
+         * @static
+         * @param {task.Ic2s_load} message c2s_load message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_load.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a c2s_load message from the specified reader or buffer.
+         * @function decode
+         * @memberof task.c2s_load
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {task.c2s_load} c2s_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_load.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.task.c2s_load();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.taskType = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a c2s_load message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof task.c2s_load
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {task.c2s_load} c2s_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_load.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a c2s_load message.
+         * @function verify
+         * @memberof task.c2s_load
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        c2s_load.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.taskType != null && message.hasOwnProperty("taskType"))
+                if (!$util.isInteger(message.taskType))
+                    return "taskType: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a c2s_load message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof task.c2s_load
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {task.c2s_load} c2s_load
+         */
+        c2s_load.fromObject = function fromObject(object) {
+            if (object instanceof $root.task.c2s_load)
+                return object;
+            var message = new $root.task.c2s_load();
+            if (object.taskType != null)
+                message.taskType = object.taskType >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a c2s_load message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof task.c2s_load
+         * @static
+         * @param {task.c2s_load} message c2s_load
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        c2s_load.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.taskType = 0;
+            if (message.taskType != null && message.hasOwnProperty("taskType"))
+                object.taskType = message.taskType;
+            return object;
+        };
+
+        /**
+         * Converts this c2s_load to JSON.
+         * @function toJSON
+         * @memberof task.c2s_load
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        c2s_load.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for c2s_load
+         * @function getTypeUrl
+         * @memberof task.c2s_load
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        c2s_load.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/task.c2s_load";
+        };
+
+        return c2s_load;
+    })();
+
+    task.s2c_load = (function() {
+
+        /**
+         * Properties of a s2c_load.
+         * @memberof task
+         * @interface Is2c_load
+         * @property {number|null} [err] s2c_load err
+         * @property {Array.<task.ITaskInfo>|null} [tasks] s2c_load tasks
+         */
+
+        /**
+         * Constructs a new s2c_load.
+         * @memberof task
+         * @classdesc Represents a s2c_load.
+         * @implements Is2c_load
+         * @constructor
+         * @param {task.Is2c_load=} [properties] Properties to set
+         */
+        function s2c_load(properties) {
+            this.tasks = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * s2c_load err.
+         * @member {number} err
+         * @memberof task.s2c_load
+         * @instance
+         */
+        s2c_load.prototype.err = 0;
+
+        /**
+         * s2c_load tasks.
+         * @member {Array.<task.ITaskInfo>} tasks
+         * @memberof task.s2c_load
+         * @instance
+         */
+        s2c_load.prototype.tasks = $util.emptyArray;
+
+        /**
+         * Creates a new s2c_load instance using the specified properties.
+         * @function create
+         * @memberof task.s2c_load
+         * @static
+         * @param {task.Is2c_load=} [properties] Properties to set
+         * @returns {task.s2c_load} s2c_load instance
+         */
+        s2c_load.create = function create(properties) {
+            return new s2c_load(properties);
+        };
+
+        /**
+         * Encodes the specified s2c_load message. Does not implicitly {@link task.s2c_load.verify|verify} messages.
+         * @function encode
+         * @memberof task.s2c_load
+         * @static
+         * @param {task.Is2c_load} message s2c_load message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_load.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
+            if (message.tasks != null && message.tasks.length)
+                for (var i = 0; i < message.tasks.length; ++i)
+                    $root.task.TaskInfo.encode(message.tasks[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified s2c_load message, length delimited. Does not implicitly {@link task.s2c_load.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof task.s2c_load
+         * @static
+         * @param {task.Is2c_load} message s2c_load message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_load.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a s2c_load message from the specified reader or buffer.
+         * @function decode
+         * @memberof task.s2c_load
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {task.s2c_load} s2c_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_load.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.task.s2c_load();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.err = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        if (!(message.tasks && message.tasks.length))
+                            message.tasks = [];
+                        message.tasks.push($root.task.TaskInfo.decode(reader, reader.uint32()));
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a s2c_load message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof task.s2c_load
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {task.s2c_load} s2c_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_load.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a s2c_load message.
+         * @function verify
+         * @memberof task.s2c_load
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        s2c_load.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.err != null && message.hasOwnProperty("err"))
+                if (!$util.isInteger(message.err))
+                    return "err: integer expected";
+            if (message.tasks != null && message.hasOwnProperty("tasks")) {
+                if (!Array.isArray(message.tasks))
+                    return "tasks: array expected";
+                for (var i = 0; i < message.tasks.length; ++i) {
+                    var error = $root.task.TaskInfo.verify(message.tasks[i]);
+                    if (error)
+                        return "tasks." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a s2c_load message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof task.s2c_load
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {task.s2c_load} s2c_load
+         */
+        s2c_load.fromObject = function fromObject(object) {
+            if (object instanceof $root.task.s2c_load)
+                return object;
+            var message = new $root.task.s2c_load();
+            if (object.err != null)
+                message.err = object.err >>> 0;
+            if (object.tasks) {
+                if (!Array.isArray(object.tasks))
+                    throw TypeError(".task.s2c_load.tasks: array expected");
+                message.tasks = [];
+                for (var i = 0; i < object.tasks.length; ++i) {
+                    if (typeof object.tasks[i] !== "object")
+                        throw TypeError(".task.s2c_load.tasks: object expected");
+                    message.tasks[i] = $root.task.TaskInfo.fromObject(object.tasks[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a s2c_load message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof task.s2c_load
+         * @static
+         * @param {task.s2c_load} message s2c_load
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        s2c_load.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.tasks = [];
+            if (options.defaults)
+                object.err = 0;
+            if (message.err != null && message.hasOwnProperty("err"))
+                object.err = message.err;
+            if (message.tasks && message.tasks.length) {
+                object.tasks = [];
+                for (var j = 0; j < message.tasks.length; ++j)
+                    object.tasks[j] = $root.task.TaskInfo.toObject(message.tasks[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this s2c_load to JSON.
+         * @function toJSON
+         * @memberof task.s2c_load
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        s2c_load.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for s2c_load
+         * @function getTypeUrl
+         * @memberof task.s2c_load
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        s2c_load.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/task.s2c_load";
+        };
+
+        return s2c_load;
+    })();
+
+    task.c2s_receive_reward = (function() {
+
+        /**
+         * Properties of a c2s_receive_reward.
+         * @memberof task
+         * @interface Ic2s_receive_reward
+         * @property {Array.<number>|null} [taskIds] c2s_receive_reward taskIds
+         */
+
+        /**
+         * Constructs a new c2s_receive_reward.
+         * @memberof task
+         * @classdesc Represents a c2s_receive_reward.
+         * @implements Ic2s_receive_reward
+         * @constructor
+         * @param {task.Ic2s_receive_reward=} [properties] Properties to set
+         */
+        function c2s_receive_reward(properties) {
+            this.taskIds = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * c2s_receive_reward taskIds.
+         * @member {Array.<number>} taskIds
+         * @memberof task.c2s_receive_reward
+         * @instance
+         */
+        c2s_receive_reward.prototype.taskIds = $util.emptyArray;
+
+        /**
+         * Creates a new c2s_receive_reward instance using the specified properties.
+         * @function create
+         * @memberof task.c2s_receive_reward
+         * @static
+         * @param {task.Ic2s_receive_reward=} [properties] Properties to set
+         * @returns {task.c2s_receive_reward} c2s_receive_reward instance
+         */
+        c2s_receive_reward.create = function create(properties) {
+            return new c2s_receive_reward(properties);
+        };
+
+        /**
+         * Encodes the specified c2s_receive_reward message. Does not implicitly {@link task.c2s_receive_reward.verify|verify} messages.
+         * @function encode
+         * @memberof task.c2s_receive_reward
+         * @static
+         * @param {task.Ic2s_receive_reward} message c2s_receive_reward message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_receive_reward.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.taskIds != null && message.taskIds.length) {
+                writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                for (var i = 0; i < message.taskIds.length; ++i)
+                    writer.uint32(message.taskIds[i]);
+                writer.ldelim();
+            }
+            return writer;
+        };
+
+        /**
+         * Encodes the specified c2s_receive_reward message, length delimited. Does not implicitly {@link task.c2s_receive_reward.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof task.c2s_receive_reward
+         * @static
+         * @param {task.Ic2s_receive_reward} message c2s_receive_reward message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_receive_reward.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a c2s_receive_reward message from the specified reader or buffer.
+         * @function decode
+         * @memberof task.c2s_receive_reward
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {task.c2s_receive_reward} c2s_receive_reward
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_receive_reward.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.task.c2s_receive_reward();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        if (!(message.taskIds && message.taskIds.length))
+                            message.taskIds = [];
+                        if ((tag & 7) === 2) {
+                            var end2 = reader.uint32() + reader.pos;
+                            while (reader.pos < end2)
+                                message.taskIds.push(reader.uint32());
+                        } else
+                            message.taskIds.push(reader.uint32());
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a c2s_receive_reward message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof task.c2s_receive_reward
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {task.c2s_receive_reward} c2s_receive_reward
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_receive_reward.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a c2s_receive_reward message.
+         * @function verify
+         * @memberof task.c2s_receive_reward
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        c2s_receive_reward.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.taskIds != null && message.hasOwnProperty("taskIds")) {
+                if (!Array.isArray(message.taskIds))
+                    return "taskIds: array expected";
+                for (var i = 0; i < message.taskIds.length; ++i)
+                    if (!$util.isInteger(message.taskIds[i]))
+                        return "taskIds: integer[] expected";
+            }
+            return null;
+        };
+
+        /**
+         * Creates a c2s_receive_reward message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof task.c2s_receive_reward
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {task.c2s_receive_reward} c2s_receive_reward
+         */
+        c2s_receive_reward.fromObject = function fromObject(object) {
+            if (object instanceof $root.task.c2s_receive_reward)
+                return object;
+            var message = new $root.task.c2s_receive_reward();
+            if (object.taskIds) {
+                if (!Array.isArray(object.taskIds))
+                    throw TypeError(".task.c2s_receive_reward.taskIds: array expected");
+                message.taskIds = [];
+                for (var i = 0; i < object.taskIds.length; ++i)
+                    message.taskIds[i] = object.taskIds[i] >>> 0;
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a c2s_receive_reward message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof task.c2s_receive_reward
+         * @static
+         * @param {task.c2s_receive_reward} message c2s_receive_reward
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        c2s_receive_reward.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.taskIds = [];
+            if (message.taskIds && message.taskIds.length) {
+                object.taskIds = [];
+                for (var j = 0; j < message.taskIds.length; ++j)
+                    object.taskIds[j] = message.taskIds[j];
+            }
+            return object;
+        };
+
+        /**
+         * Converts this c2s_receive_reward to JSON.
+         * @function toJSON
+         * @memberof task.c2s_receive_reward
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        c2s_receive_reward.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for c2s_receive_reward
+         * @function getTypeUrl
+         * @memberof task.c2s_receive_reward
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        c2s_receive_reward.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/task.c2s_receive_reward";
+        };
+
+        return c2s_receive_reward;
+    })();
+
+    task.s2c_receive_reward = (function() {
+
+        /**
+         * Properties of a s2c_receive_reward.
+         * @memberof task
+         * @interface Is2c_receive_reward
+         * @property {number|null} [err] s2c_receive_reward err
+         */
+
+        /**
+         * Constructs a new s2c_receive_reward.
+         * @memberof task
+         * @classdesc Represents a s2c_receive_reward.
+         * @implements Is2c_receive_reward
+         * @constructor
+         * @param {task.Is2c_receive_reward=} [properties] Properties to set
+         */
+        function s2c_receive_reward(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * s2c_receive_reward err.
+         * @member {number} err
+         * @memberof task.s2c_receive_reward
+         * @instance
+         */
+        s2c_receive_reward.prototype.err = 0;
+
+        /**
+         * Creates a new s2c_receive_reward instance using the specified properties.
+         * @function create
+         * @memberof task.s2c_receive_reward
+         * @static
+         * @param {task.Is2c_receive_reward=} [properties] Properties to set
+         * @returns {task.s2c_receive_reward} s2c_receive_reward instance
+         */
+        s2c_receive_reward.create = function create(properties) {
+            return new s2c_receive_reward(properties);
+        };
+
+        /**
+         * Encodes the specified s2c_receive_reward message. Does not implicitly {@link task.s2c_receive_reward.verify|verify} messages.
+         * @function encode
+         * @memberof task.s2c_receive_reward
+         * @static
+         * @param {task.Is2c_receive_reward} message s2c_receive_reward message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_receive_reward.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified s2c_receive_reward message, length delimited. Does not implicitly {@link task.s2c_receive_reward.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof task.s2c_receive_reward
+         * @static
+         * @param {task.Is2c_receive_reward} message s2c_receive_reward message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_receive_reward.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a s2c_receive_reward message from the specified reader or buffer.
+         * @function decode
+         * @memberof task.s2c_receive_reward
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {task.s2c_receive_reward} s2c_receive_reward
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_receive_reward.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.task.s2c_receive_reward();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.err = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a s2c_receive_reward message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof task.s2c_receive_reward
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {task.s2c_receive_reward} s2c_receive_reward
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_receive_reward.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a s2c_receive_reward message.
+         * @function verify
+         * @memberof task.s2c_receive_reward
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        s2c_receive_reward.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.err != null && message.hasOwnProperty("err"))
+                if (!$util.isInteger(message.err))
+                    return "err: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a s2c_receive_reward message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof task.s2c_receive_reward
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {task.s2c_receive_reward} s2c_receive_reward
+         */
+        s2c_receive_reward.fromObject = function fromObject(object) {
+            if (object instanceof $root.task.s2c_receive_reward)
+                return object;
+            var message = new $root.task.s2c_receive_reward();
+            if (object.err != null)
+                message.err = object.err >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a s2c_receive_reward message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof task.s2c_receive_reward
+         * @static
+         * @param {task.s2c_receive_reward} message s2c_receive_reward
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        s2c_receive_reward.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.err = 0;
+            if (message.err != null && message.hasOwnProperty("err"))
+                object.err = message.err;
+            return object;
+        };
+
+        /**
+         * Converts this s2c_receive_reward to JSON.
+         * @function toJSON
+         * @memberof task.s2c_receive_reward
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        s2c_receive_reward.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for s2c_receive_reward
+         * @function getTypeUrl
+         * @memberof task.s2c_receive_reward
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        s2c_receive_reward.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/task.s2c_receive_reward";
+        };
+
+        return s2c_receive_reward;
+    })();
+
+    task.notify_tasks = (function() {
+
+        /**
+         * Properties of a notify_tasks.
+         * @memberof task
+         * @interface Inotify_tasks
+         * @property {Array.<task.ITaskInfo>|null} [tasks] notify_tasks tasks
+         */
+
+        /**
+         * Constructs a new notify_tasks.
+         * @memberof task
+         * @classdesc Represents a notify_tasks.
+         * @implements Inotify_tasks
+         * @constructor
+         * @param {task.Inotify_tasks=} [properties] Properties to set
+         */
+        function notify_tasks(properties) {
+            this.tasks = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * notify_tasks tasks.
+         * @member {Array.<task.ITaskInfo>} tasks
+         * @memberof task.notify_tasks
+         * @instance
+         */
+        notify_tasks.prototype.tasks = $util.emptyArray;
+
+        /**
+         * Creates a new notify_tasks instance using the specified properties.
+         * @function create
+         * @memberof task.notify_tasks
+         * @static
+         * @param {task.Inotify_tasks=} [properties] Properties to set
+         * @returns {task.notify_tasks} notify_tasks instance
+         */
+        notify_tasks.create = function create(properties) {
+            return new notify_tasks(properties);
+        };
+
+        /**
+         * Encodes the specified notify_tasks message. Does not implicitly {@link task.notify_tasks.verify|verify} messages.
+         * @function encode
+         * @memberof task.notify_tasks
+         * @static
+         * @param {task.Inotify_tasks} message notify_tasks message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        notify_tasks.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.tasks != null && message.tasks.length)
+                for (var i = 0; i < message.tasks.length; ++i)
+                    $root.task.TaskInfo.encode(message.tasks[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified notify_tasks message, length delimited. Does not implicitly {@link task.notify_tasks.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof task.notify_tasks
+         * @static
+         * @param {task.Inotify_tasks} message notify_tasks message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        notify_tasks.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a notify_tasks message from the specified reader or buffer.
+         * @function decode
+         * @memberof task.notify_tasks
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {task.notify_tasks} notify_tasks
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        notify_tasks.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.task.notify_tasks();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        if (!(message.tasks && message.tasks.length))
+                            message.tasks = [];
+                        message.tasks.push($root.task.TaskInfo.decode(reader, reader.uint32()));
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a notify_tasks message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof task.notify_tasks
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {task.notify_tasks} notify_tasks
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        notify_tasks.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a notify_tasks message.
+         * @function verify
+         * @memberof task.notify_tasks
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        notify_tasks.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.tasks != null && message.hasOwnProperty("tasks")) {
+                if (!Array.isArray(message.tasks))
+                    return "tasks: array expected";
+                for (var i = 0; i < message.tasks.length; ++i) {
+                    var error = $root.task.TaskInfo.verify(message.tasks[i]);
+                    if (error)
+                        return "tasks." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a notify_tasks message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof task.notify_tasks
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {task.notify_tasks} notify_tasks
+         */
+        notify_tasks.fromObject = function fromObject(object) {
+            if (object instanceof $root.task.notify_tasks)
+                return object;
+            var message = new $root.task.notify_tasks();
+            if (object.tasks) {
+                if (!Array.isArray(object.tasks))
+                    throw TypeError(".task.notify_tasks.tasks: array expected");
+                message.tasks = [];
+                for (var i = 0; i < object.tasks.length; ++i) {
+                    if (typeof object.tasks[i] !== "object")
+                        throw TypeError(".task.notify_tasks.tasks: object expected");
+                    message.tasks[i] = $root.task.TaskInfo.fromObject(object.tasks[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a notify_tasks message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof task.notify_tasks
+         * @static
+         * @param {task.notify_tasks} message notify_tasks
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        notify_tasks.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.tasks = [];
+            if (message.tasks && message.tasks.length) {
+                object.tasks = [];
+                for (var j = 0; j < message.tasks.length; ++j)
+                    object.tasks[j] = $root.task.TaskInfo.toObject(message.tasks[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this notify_tasks to JSON.
+         * @function toJSON
+         * @memberof task.notify_tasks
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        notify_tasks.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for notify_tasks
+         * @function getTypeUrl
+         * @memberof task.notify_tasks
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        notify_tasks.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/task.notify_tasks";
+        };
+
+        return notify_tasks;
+    })();
+
+    task.notify_remove_tasks = (function() {
+
+        /**
+         * Properties of a notify_remove_tasks.
+         * @memberof task
+         * @interface Inotify_remove_tasks
+         * @property {Array.<number>|null} [taskIds] notify_remove_tasks taskIds
+         */
+
+        /**
+         * Constructs a new notify_remove_tasks.
+         * @memberof task
+         * @classdesc Represents a notify_remove_tasks.
+         * @implements Inotify_remove_tasks
+         * @constructor
+         * @param {task.Inotify_remove_tasks=} [properties] Properties to set
+         */
+        function notify_remove_tasks(properties) {
+            this.taskIds = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * notify_remove_tasks taskIds.
+         * @member {Array.<number>} taskIds
+         * @memberof task.notify_remove_tasks
+         * @instance
+         */
+        notify_remove_tasks.prototype.taskIds = $util.emptyArray;
+
+        /**
+         * Creates a new notify_remove_tasks instance using the specified properties.
+         * @function create
+         * @memberof task.notify_remove_tasks
+         * @static
+         * @param {task.Inotify_remove_tasks=} [properties] Properties to set
+         * @returns {task.notify_remove_tasks} notify_remove_tasks instance
+         */
+        notify_remove_tasks.create = function create(properties) {
+            return new notify_remove_tasks(properties);
+        };
+
+        /**
+         * Encodes the specified notify_remove_tasks message. Does not implicitly {@link task.notify_remove_tasks.verify|verify} messages.
+         * @function encode
+         * @memberof task.notify_remove_tasks
+         * @static
+         * @param {task.Inotify_remove_tasks} message notify_remove_tasks message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        notify_remove_tasks.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.taskIds != null && message.taskIds.length) {
+                writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                for (var i = 0; i < message.taskIds.length; ++i)
+                    writer.int32(message.taskIds[i]);
+                writer.ldelim();
+            }
+            return writer;
+        };
+
+        /**
+         * Encodes the specified notify_remove_tasks message, length delimited. Does not implicitly {@link task.notify_remove_tasks.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof task.notify_remove_tasks
+         * @static
+         * @param {task.Inotify_remove_tasks} message notify_remove_tasks message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        notify_remove_tasks.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a notify_remove_tasks message from the specified reader or buffer.
+         * @function decode
+         * @memberof task.notify_remove_tasks
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {task.notify_remove_tasks} notify_remove_tasks
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        notify_remove_tasks.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.task.notify_remove_tasks();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        if (!(message.taskIds && message.taskIds.length))
+                            message.taskIds = [];
+                        if ((tag & 7) === 2) {
+                            var end2 = reader.uint32() + reader.pos;
+                            while (reader.pos < end2)
+                                message.taskIds.push(reader.int32());
+                        } else
+                            message.taskIds.push(reader.int32());
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a notify_remove_tasks message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof task.notify_remove_tasks
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {task.notify_remove_tasks} notify_remove_tasks
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        notify_remove_tasks.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a notify_remove_tasks message.
+         * @function verify
+         * @memberof task.notify_remove_tasks
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        notify_remove_tasks.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.taskIds != null && message.hasOwnProperty("taskIds")) {
+                if (!Array.isArray(message.taskIds))
+                    return "taskIds: array expected";
+                for (var i = 0; i < message.taskIds.length; ++i)
+                    if (!$util.isInteger(message.taskIds[i]))
+                        return "taskIds: integer[] expected";
+            }
+            return null;
+        };
+
+        /**
+         * Creates a notify_remove_tasks message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof task.notify_remove_tasks
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {task.notify_remove_tasks} notify_remove_tasks
+         */
+        notify_remove_tasks.fromObject = function fromObject(object) {
+            if (object instanceof $root.task.notify_remove_tasks)
+                return object;
+            var message = new $root.task.notify_remove_tasks();
+            if (object.taskIds) {
+                if (!Array.isArray(object.taskIds))
+                    throw TypeError(".task.notify_remove_tasks.taskIds: array expected");
+                message.taskIds = [];
+                for (var i = 0; i < object.taskIds.length; ++i)
+                    message.taskIds[i] = object.taskIds[i] | 0;
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a notify_remove_tasks message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof task.notify_remove_tasks
+         * @static
+         * @param {task.notify_remove_tasks} message notify_remove_tasks
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        notify_remove_tasks.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.taskIds = [];
+            if (message.taskIds && message.taskIds.length) {
+                object.taskIds = [];
+                for (var j = 0; j < message.taskIds.length; ++j)
+                    object.taskIds[j] = message.taskIds[j];
+            }
+            return object;
+        };
+
+        /**
+         * Converts this notify_remove_tasks to JSON.
+         * @function toJSON
+         * @memberof task.notify_remove_tasks
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        notify_remove_tasks.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for notify_remove_tasks
+         * @function getTypeUrl
+         * @memberof task.notify_remove_tasks
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        notify_remove_tasks.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/task.notify_remove_tasks";
+        };
+
+        return notify_remove_tasks;
+    })();
+
+    return task;
 })();
 
 $root.team = (function() {
@@ -15757,762 +21472,6 @@ $root.war = (function() {
         return War;
     })();
 
-    war.c2s_test_pvp = (function() {
-
-        /**
-         * Properties of a c2s_test_pvp.
-         * @memberof war
-         * @interface Ic2s_test_pvp
-         */
-
-        /**
-         * Constructs a new c2s_test_pvp.
-         * @memberof war
-         * @classdesc Represents a c2s_test_pvp.
-         * @implements Ic2s_test_pvp
-         * @constructor
-         * @param {war.Ic2s_test_pvp=} [properties] Properties to set
-         */
-        function c2s_test_pvp(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * Creates a new c2s_test_pvp instance using the specified properties.
-         * @function create
-         * @memberof war.c2s_test_pvp
-         * @static
-         * @param {war.Ic2s_test_pvp=} [properties] Properties to set
-         * @returns {war.c2s_test_pvp} c2s_test_pvp instance
-         */
-        c2s_test_pvp.create = function create(properties) {
-            return new c2s_test_pvp(properties);
-        };
-
-        /**
-         * Encodes the specified c2s_test_pvp message. Does not implicitly {@link war.c2s_test_pvp.verify|verify} messages.
-         * @function encode
-         * @memberof war.c2s_test_pvp
-         * @static
-         * @param {war.Ic2s_test_pvp} message c2s_test_pvp message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        c2s_test_pvp.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            return writer;
-        };
-
-        /**
-         * Encodes the specified c2s_test_pvp message, length delimited. Does not implicitly {@link war.c2s_test_pvp.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof war.c2s_test_pvp
-         * @static
-         * @param {war.Ic2s_test_pvp} message c2s_test_pvp message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        c2s_test_pvp.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a c2s_test_pvp message from the specified reader or buffer.
-         * @function decode
-         * @memberof war.c2s_test_pvp
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {war.c2s_test_pvp} c2s_test_pvp
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        c2s_test_pvp.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.war.c2s_test_pvp();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes a c2s_test_pvp message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof war.c2s_test_pvp
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {war.c2s_test_pvp} c2s_test_pvp
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        c2s_test_pvp.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a c2s_test_pvp message.
-         * @function verify
-         * @memberof war.c2s_test_pvp
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        c2s_test_pvp.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            return null;
-        };
-
-        /**
-         * Creates a c2s_test_pvp message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof war.c2s_test_pvp
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {war.c2s_test_pvp} c2s_test_pvp
-         */
-        c2s_test_pvp.fromObject = function fromObject(object) {
-            if (object instanceof $root.war.c2s_test_pvp)
-                return object;
-            return new $root.war.c2s_test_pvp();
-        };
-
-        /**
-         * Creates a plain object from a c2s_test_pvp message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof war.c2s_test_pvp
-         * @static
-         * @param {war.c2s_test_pvp} message c2s_test_pvp
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        c2s_test_pvp.toObject = function toObject() {
-            return {};
-        };
-
-        /**
-         * Converts this c2s_test_pvp to JSON.
-         * @function toJSON
-         * @memberof war.c2s_test_pvp
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        c2s_test_pvp.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        /**
-         * Gets the default type url for c2s_test_pvp
-         * @function getTypeUrl
-         * @memberof war.c2s_test_pvp
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        c2s_test_pvp.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/war.c2s_test_pvp";
-        };
-
-        return c2s_test_pvp;
-    })();
-
-    war.s2c_test_pvp = (function() {
-
-        /**
-         * Properties of a s2c_test_pvp.
-         * @memberof war
-         * @interface Is2c_test_pvp
-         * @property {number|null} [err] s2c_test_pvp err
-         */
-
-        /**
-         * Constructs a new s2c_test_pvp.
-         * @memberof war
-         * @classdesc Represents a s2c_test_pvp.
-         * @implements Is2c_test_pvp
-         * @constructor
-         * @param {war.Is2c_test_pvp=} [properties] Properties to set
-         */
-        function s2c_test_pvp(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * s2c_test_pvp err.
-         * @member {number} err
-         * @memberof war.s2c_test_pvp
-         * @instance
-         */
-        s2c_test_pvp.prototype.err = 0;
-
-        /**
-         * Creates a new s2c_test_pvp instance using the specified properties.
-         * @function create
-         * @memberof war.s2c_test_pvp
-         * @static
-         * @param {war.Is2c_test_pvp=} [properties] Properties to set
-         * @returns {war.s2c_test_pvp} s2c_test_pvp instance
-         */
-        s2c_test_pvp.create = function create(properties) {
-            return new s2c_test_pvp(properties);
-        };
-
-        /**
-         * Encodes the specified s2c_test_pvp message. Does not implicitly {@link war.s2c_test_pvp.verify|verify} messages.
-         * @function encode
-         * @memberof war.s2c_test_pvp
-         * @static
-         * @param {war.Is2c_test_pvp} message s2c_test_pvp message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        s2c_test_pvp.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
-            return writer;
-        };
-
-        /**
-         * Encodes the specified s2c_test_pvp message, length delimited. Does not implicitly {@link war.s2c_test_pvp.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof war.s2c_test_pvp
-         * @static
-         * @param {war.Is2c_test_pvp} message s2c_test_pvp message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        s2c_test_pvp.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a s2c_test_pvp message from the specified reader or buffer.
-         * @function decode
-         * @memberof war.s2c_test_pvp
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {war.s2c_test_pvp} s2c_test_pvp
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        s2c_test_pvp.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.war.s2c_test_pvp();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1: {
-                        message.err = reader.uint32();
-                        break;
-                    }
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes a s2c_test_pvp message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof war.s2c_test_pvp
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {war.s2c_test_pvp} s2c_test_pvp
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        s2c_test_pvp.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a s2c_test_pvp message.
-         * @function verify
-         * @memberof war.s2c_test_pvp
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        s2c_test_pvp.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.err != null && message.hasOwnProperty("err"))
-                if (!$util.isInteger(message.err))
-                    return "err: integer expected";
-            return null;
-        };
-
-        /**
-         * Creates a s2c_test_pvp message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof war.s2c_test_pvp
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {war.s2c_test_pvp} s2c_test_pvp
-         */
-        s2c_test_pvp.fromObject = function fromObject(object) {
-            if (object instanceof $root.war.s2c_test_pvp)
-                return object;
-            var message = new $root.war.s2c_test_pvp();
-            if (object.err != null)
-                message.err = object.err >>> 0;
-            return message;
-        };
-
-        /**
-         * Creates a plain object from a s2c_test_pvp message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof war.s2c_test_pvp
-         * @static
-         * @param {war.s2c_test_pvp} message s2c_test_pvp
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        s2c_test_pvp.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults)
-                object.err = 0;
-            if (message.err != null && message.hasOwnProperty("err"))
-                object.err = message.err;
-            return object;
-        };
-
-        /**
-         * Converts this s2c_test_pvp to JSON.
-         * @function toJSON
-         * @memberof war.s2c_test_pvp
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        s2c_test_pvp.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        /**
-         * Gets the default type url for s2c_test_pvp
-         * @function getTypeUrl
-         * @memberof war.s2c_test_pvp
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        s2c_test_pvp.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/war.s2c_test_pvp";
-        };
-
-        return s2c_test_pvp;
-    })();
-
-    war.c2s_test_pve = (function() {
-
-        /**
-         * Properties of a c2s_test_pve.
-         * @memberof war
-         * @interface Ic2s_test_pve
-         */
-
-        /**
-         * Constructs a new c2s_test_pve.
-         * @memberof war
-         * @classdesc Represents a c2s_test_pve.
-         * @implements Ic2s_test_pve
-         * @constructor
-         * @param {war.Ic2s_test_pve=} [properties] Properties to set
-         */
-        function c2s_test_pve(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * Creates a new c2s_test_pve instance using the specified properties.
-         * @function create
-         * @memberof war.c2s_test_pve
-         * @static
-         * @param {war.Ic2s_test_pve=} [properties] Properties to set
-         * @returns {war.c2s_test_pve} c2s_test_pve instance
-         */
-        c2s_test_pve.create = function create(properties) {
-            return new c2s_test_pve(properties);
-        };
-
-        /**
-         * Encodes the specified c2s_test_pve message. Does not implicitly {@link war.c2s_test_pve.verify|verify} messages.
-         * @function encode
-         * @memberof war.c2s_test_pve
-         * @static
-         * @param {war.Ic2s_test_pve} message c2s_test_pve message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        c2s_test_pve.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            return writer;
-        };
-
-        /**
-         * Encodes the specified c2s_test_pve message, length delimited. Does not implicitly {@link war.c2s_test_pve.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof war.c2s_test_pve
-         * @static
-         * @param {war.Ic2s_test_pve} message c2s_test_pve message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        c2s_test_pve.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a c2s_test_pve message from the specified reader or buffer.
-         * @function decode
-         * @memberof war.c2s_test_pve
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {war.c2s_test_pve} c2s_test_pve
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        c2s_test_pve.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.war.c2s_test_pve();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes a c2s_test_pve message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof war.c2s_test_pve
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {war.c2s_test_pve} c2s_test_pve
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        c2s_test_pve.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a c2s_test_pve message.
-         * @function verify
-         * @memberof war.c2s_test_pve
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        c2s_test_pve.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            return null;
-        };
-
-        /**
-         * Creates a c2s_test_pve message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof war.c2s_test_pve
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {war.c2s_test_pve} c2s_test_pve
-         */
-        c2s_test_pve.fromObject = function fromObject(object) {
-            if (object instanceof $root.war.c2s_test_pve)
-                return object;
-            return new $root.war.c2s_test_pve();
-        };
-
-        /**
-         * Creates a plain object from a c2s_test_pve message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof war.c2s_test_pve
-         * @static
-         * @param {war.c2s_test_pve} message c2s_test_pve
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        c2s_test_pve.toObject = function toObject() {
-            return {};
-        };
-
-        /**
-         * Converts this c2s_test_pve to JSON.
-         * @function toJSON
-         * @memberof war.c2s_test_pve
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        c2s_test_pve.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        /**
-         * Gets the default type url for c2s_test_pve
-         * @function getTypeUrl
-         * @memberof war.c2s_test_pve
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        c2s_test_pve.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/war.c2s_test_pve";
-        };
-
-        return c2s_test_pve;
-    })();
-
-    war.s2c_test_pve = (function() {
-
-        /**
-         * Properties of a s2c_test_pve.
-         * @memberof war
-         * @interface Is2c_test_pve
-         * @property {number|null} [err] s2c_test_pve err
-         */
-
-        /**
-         * Constructs a new s2c_test_pve.
-         * @memberof war
-         * @classdesc Represents a s2c_test_pve.
-         * @implements Is2c_test_pve
-         * @constructor
-         * @param {war.Is2c_test_pve=} [properties] Properties to set
-         */
-        function s2c_test_pve(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * s2c_test_pve err.
-         * @member {number} err
-         * @memberof war.s2c_test_pve
-         * @instance
-         */
-        s2c_test_pve.prototype.err = 0;
-
-        /**
-         * Creates a new s2c_test_pve instance using the specified properties.
-         * @function create
-         * @memberof war.s2c_test_pve
-         * @static
-         * @param {war.Is2c_test_pve=} [properties] Properties to set
-         * @returns {war.s2c_test_pve} s2c_test_pve instance
-         */
-        s2c_test_pve.create = function create(properties) {
-            return new s2c_test_pve(properties);
-        };
-
-        /**
-         * Encodes the specified s2c_test_pve message. Does not implicitly {@link war.s2c_test_pve.verify|verify} messages.
-         * @function encode
-         * @memberof war.s2c_test_pve
-         * @static
-         * @param {war.Is2c_test_pve} message s2c_test_pve message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        s2c_test_pve.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
-            return writer;
-        };
-
-        /**
-         * Encodes the specified s2c_test_pve message, length delimited. Does not implicitly {@link war.s2c_test_pve.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof war.s2c_test_pve
-         * @static
-         * @param {war.Is2c_test_pve} message s2c_test_pve message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        s2c_test_pve.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a s2c_test_pve message from the specified reader or buffer.
-         * @function decode
-         * @memberof war.s2c_test_pve
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {war.s2c_test_pve} s2c_test_pve
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        s2c_test_pve.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.war.s2c_test_pve();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1: {
-                        message.err = reader.uint32();
-                        break;
-                    }
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes a s2c_test_pve message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof war.s2c_test_pve
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {war.s2c_test_pve} s2c_test_pve
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        s2c_test_pve.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a s2c_test_pve message.
-         * @function verify
-         * @memberof war.s2c_test_pve
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        s2c_test_pve.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.err != null && message.hasOwnProperty("err"))
-                if (!$util.isInteger(message.err))
-                    return "err: integer expected";
-            return null;
-        };
-
-        /**
-         * Creates a s2c_test_pve message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof war.s2c_test_pve
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {war.s2c_test_pve} s2c_test_pve
-         */
-        s2c_test_pve.fromObject = function fromObject(object) {
-            if (object instanceof $root.war.s2c_test_pve)
-                return object;
-            var message = new $root.war.s2c_test_pve();
-            if (object.err != null)
-                message.err = object.err >>> 0;
-            return message;
-        };
-
-        /**
-         * Creates a plain object from a s2c_test_pve message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof war.s2c_test_pve
-         * @static
-         * @param {war.s2c_test_pve} message s2c_test_pve
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        s2c_test_pve.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults)
-                object.err = 0;
-            if (message.err != null && message.hasOwnProperty("err"))
-                object.err = message.err;
-            return object;
-        };
-
-        /**
-         * Converts this s2c_test_pve to JSON.
-         * @function toJSON
-         * @memberof war.s2c_test_pve
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        s2c_test_pve.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        /**
-         * Gets the default type url for s2c_test_pve
-         * @function getTypeUrl
-         * @memberof war.s2c_test_pve
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        s2c_test_pve.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/war.s2c_test_pve";
-        };
-
-        return s2c_test_pve;
-    })();
-
     war.c2s_load = (function() {
 
         /**
@@ -20330,27 +25289,27 @@ $root.world = (function() {
         return Alliance;
     })();
 
-    world.ComponentTeam = (function() {
+    world.ComponentPlayer = (function() {
 
         /**
-         * Properties of a ComponentTeam.
+         * Properties of a ComponentPlayer.
          * @memberof world
-         * @interface IComponentTeam
-         * @property {number|null} [soldierId] ComponentTeam soldierId
-         * @property {number|null} [cmd] ComponentTeam cmd
-         * @property {number|null} [stayEid] ComponentTeam stayEid
-         * @property {number|null} [homeEid] ComponentTeam homeEid
+         * @interface IComponentPlayer
+         * @property {number|null} [soldierId] ComponentPlayer soldierId
+         * @property {number|null} [cmd] ComponentPlayer cmd
+         * @property {number|null} [stayEid] ComponentPlayer stayEid
+         * @property {number|null} [homeEid] ComponentPlayer homeEid
          */
 
         /**
-         * Constructs a new ComponentTeam.
+         * Constructs a new ComponentPlayer.
          * @memberof world
-         * @classdesc Represents a ComponentTeam.
-         * @implements IComponentTeam
+         * @classdesc Represents a ComponentPlayer.
+         * @implements IComponentPlayer
          * @constructor
-         * @param {world.IComponentTeam=} [properties] Properties to set
+         * @param {world.IComponentPlayer=} [properties] Properties to set
          */
-        function ComponentTeam(properties) {
+        function ComponentPlayer(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -20358,59 +25317,59 @@ $root.world = (function() {
         }
 
         /**
-         * ComponentTeam soldierId.
+         * ComponentPlayer soldierId.
          * @member {number} soldierId
-         * @memberof world.ComponentTeam
+         * @memberof world.ComponentPlayer
          * @instance
          */
-        ComponentTeam.prototype.soldierId = 0;
+        ComponentPlayer.prototype.soldierId = 0;
 
         /**
-         * ComponentTeam cmd.
+         * ComponentPlayer cmd.
          * @member {number} cmd
-         * @memberof world.ComponentTeam
+         * @memberof world.ComponentPlayer
          * @instance
          */
-        ComponentTeam.prototype.cmd = 0;
+        ComponentPlayer.prototype.cmd = 0;
 
         /**
-         * ComponentTeam stayEid.
+         * ComponentPlayer stayEid.
          * @member {number} stayEid
-         * @memberof world.ComponentTeam
+         * @memberof world.ComponentPlayer
          * @instance
          */
-        ComponentTeam.prototype.stayEid = 0;
+        ComponentPlayer.prototype.stayEid = 0;
 
         /**
-         * ComponentTeam homeEid.
+         * ComponentPlayer homeEid.
          * @member {number} homeEid
-         * @memberof world.ComponentTeam
+         * @memberof world.ComponentPlayer
          * @instance
          */
-        ComponentTeam.prototype.homeEid = 0;
+        ComponentPlayer.prototype.homeEid = 0;
 
         /**
-         * Creates a new ComponentTeam instance using the specified properties.
+         * Creates a new ComponentPlayer instance using the specified properties.
          * @function create
-         * @memberof world.ComponentTeam
+         * @memberof world.ComponentPlayer
          * @static
-         * @param {world.IComponentTeam=} [properties] Properties to set
-         * @returns {world.ComponentTeam} ComponentTeam instance
+         * @param {world.IComponentPlayer=} [properties] Properties to set
+         * @returns {world.ComponentPlayer} ComponentPlayer instance
          */
-        ComponentTeam.create = function create(properties) {
-            return new ComponentTeam(properties);
+        ComponentPlayer.create = function create(properties) {
+            return new ComponentPlayer(properties);
         };
 
         /**
-         * Encodes the specified ComponentTeam message. Does not implicitly {@link world.ComponentTeam.verify|verify} messages.
+         * Encodes the specified ComponentPlayer message. Does not implicitly {@link world.ComponentPlayer.verify|verify} messages.
          * @function encode
-         * @memberof world.ComponentTeam
+         * @memberof world.ComponentPlayer
          * @static
-         * @param {world.IComponentTeam} message ComponentTeam message or plain object to encode
+         * @param {world.IComponentPlayer} message ComponentPlayer message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        ComponentTeam.encode = function encode(message, writer) {
+        ComponentPlayer.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.soldierId != null && Object.hasOwnProperty.call(message, "soldierId"))
@@ -20425,33 +25384,33 @@ $root.world = (function() {
         };
 
         /**
-         * Encodes the specified ComponentTeam message, length delimited. Does not implicitly {@link world.ComponentTeam.verify|verify} messages.
+         * Encodes the specified ComponentPlayer message, length delimited. Does not implicitly {@link world.ComponentPlayer.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof world.ComponentTeam
+         * @memberof world.ComponentPlayer
          * @static
-         * @param {world.IComponentTeam} message ComponentTeam message or plain object to encode
+         * @param {world.IComponentPlayer} message ComponentPlayer message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        ComponentTeam.encodeDelimited = function encodeDelimited(message, writer) {
+        ComponentPlayer.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
         /**
-         * Decodes a ComponentTeam message from the specified reader or buffer.
+         * Decodes a ComponentPlayer message from the specified reader or buffer.
          * @function decode
-         * @memberof world.ComponentTeam
+         * @memberof world.ComponentPlayer
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {world.ComponentTeam} ComponentTeam
+         * @returns {world.ComponentPlayer} ComponentPlayer
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        ComponentTeam.decode = function decode(reader, length) {
+        ComponentPlayer.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.ComponentTeam();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.ComponentPlayer();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -20480,30 +25439,30 @@ $root.world = (function() {
         };
 
         /**
-         * Decodes a ComponentTeam message from the specified reader or buffer, length delimited.
+         * Decodes a ComponentPlayer message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof world.ComponentTeam
+         * @memberof world.ComponentPlayer
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {world.ComponentTeam} ComponentTeam
+         * @returns {world.ComponentPlayer} ComponentPlayer
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        ComponentTeam.decodeDelimited = function decodeDelimited(reader) {
+        ComponentPlayer.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
         /**
-         * Verifies a ComponentTeam message.
+         * Verifies a ComponentPlayer message.
          * @function verify
-         * @memberof world.ComponentTeam
+         * @memberof world.ComponentPlayer
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        ComponentTeam.verify = function verify(message) {
+        ComponentPlayer.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.soldierId != null && message.hasOwnProperty("soldierId"))
@@ -20522,17 +25481,17 @@ $root.world = (function() {
         };
 
         /**
-         * Creates a ComponentTeam message from a plain object. Also converts values to their respective internal types.
+         * Creates a ComponentPlayer message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof world.ComponentTeam
+         * @memberof world.ComponentPlayer
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {world.ComponentTeam} ComponentTeam
+         * @returns {world.ComponentPlayer} ComponentPlayer
          */
-        ComponentTeam.fromObject = function fromObject(object) {
-            if (object instanceof $root.world.ComponentTeam)
+        ComponentPlayer.fromObject = function fromObject(object) {
+            if (object instanceof $root.world.ComponentPlayer)
                 return object;
-            var message = new $root.world.ComponentTeam();
+            var message = new $root.world.ComponentPlayer();
             if (object.soldierId != null)
                 message.soldierId = object.soldierId >>> 0;
             if (object.cmd != null)
@@ -20545,15 +25504,15 @@ $root.world = (function() {
         };
 
         /**
-         * Creates a plain object from a ComponentTeam message. Also converts values to other types if specified.
+         * Creates a plain object from a ComponentPlayer message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof world.ComponentTeam
+         * @memberof world.ComponentPlayer
          * @static
-         * @param {world.ComponentTeam} message ComponentTeam
+         * @param {world.ComponentPlayer} message ComponentPlayer
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        ComponentTeam.toObject = function toObject(message, options) {
+        ComponentPlayer.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -20575,32 +25534,32 @@ $root.world = (function() {
         };
 
         /**
-         * Converts this ComponentTeam to JSON.
+         * Converts this ComponentPlayer to JSON.
          * @function toJSON
-         * @memberof world.ComponentTeam
+         * @memberof world.ComponentPlayer
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        ComponentTeam.prototype.toJSON = function toJSON() {
+        ComponentPlayer.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
         /**
-         * Gets the default type url for ComponentTeam
+         * Gets the default type url for ComponentPlayer
          * @function getTypeUrl
-         * @memberof world.ComponentTeam
+         * @memberof world.ComponentPlayer
          * @static
          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns {string} The default type url
          */
-        ComponentTeam.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        ComponentPlayer.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/world.ComponentTeam";
+            return typeUrlPrefix + "/world.ComponentPlayer";
         };
 
-        return ComponentTeam;
+        return ComponentPlayer;
     })();
 
     world.ComponentOwner = (function() {
@@ -21969,6 +26928,281 @@ $root.world = (function() {
         return ComponentBuilding;
     })();
 
+    world.ComponentWar = (function() {
+
+        /**
+         * Properties of a ComponentWar.
+         * @memberof world
+         * @interface IComponentWar
+         * @property {number|null} [warUid] ComponentWar warUid
+         * @property {Array.<number>|null} [fighterEids] ComponentWar fighterEids
+         * @property {number|null} [startTs] ComponentWar startTs
+         */
+
+        /**
+         * Constructs a new ComponentWar.
+         * @memberof world
+         * @classdesc Represents a ComponentWar.
+         * @implements IComponentWar
+         * @constructor
+         * @param {world.IComponentWar=} [properties] Properties to set
+         */
+        function ComponentWar(properties) {
+            this.fighterEids = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * ComponentWar warUid.
+         * @member {number} warUid
+         * @memberof world.ComponentWar
+         * @instance
+         */
+        ComponentWar.prototype.warUid = 0;
+
+        /**
+         * ComponentWar fighterEids.
+         * @member {Array.<number>} fighterEids
+         * @memberof world.ComponentWar
+         * @instance
+         */
+        ComponentWar.prototype.fighterEids = $util.emptyArray;
+
+        /**
+         * ComponentWar startTs.
+         * @member {number} startTs
+         * @memberof world.ComponentWar
+         * @instance
+         */
+        ComponentWar.prototype.startTs = 0;
+
+        /**
+         * Creates a new ComponentWar instance using the specified properties.
+         * @function create
+         * @memberof world.ComponentWar
+         * @static
+         * @param {world.IComponentWar=} [properties] Properties to set
+         * @returns {world.ComponentWar} ComponentWar instance
+         */
+        ComponentWar.create = function create(properties) {
+            return new ComponentWar(properties);
+        };
+
+        /**
+         * Encodes the specified ComponentWar message. Does not implicitly {@link world.ComponentWar.verify|verify} messages.
+         * @function encode
+         * @memberof world.ComponentWar
+         * @static
+         * @param {world.IComponentWar} message ComponentWar message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ComponentWar.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.warUid != null && Object.hasOwnProperty.call(message, "warUid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.warUid);
+            if (message.fighterEids != null && message.fighterEids.length) {
+                writer.uint32(/* id 2, wireType 2 =*/18).fork();
+                for (var i = 0; i < message.fighterEids.length; ++i)
+                    writer.uint32(message.fighterEids[i]);
+                writer.ldelim();
+            }
+            if (message.startTs != null && Object.hasOwnProperty.call(message, "startTs"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.startTs);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified ComponentWar message, length delimited. Does not implicitly {@link world.ComponentWar.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof world.ComponentWar
+         * @static
+         * @param {world.IComponentWar} message ComponentWar message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ComponentWar.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a ComponentWar message from the specified reader or buffer.
+         * @function decode
+         * @memberof world.ComponentWar
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {world.ComponentWar} ComponentWar
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ComponentWar.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.ComponentWar();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.warUid = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        if (!(message.fighterEids && message.fighterEids.length))
+                            message.fighterEids = [];
+                        if ((tag & 7) === 2) {
+                            var end2 = reader.uint32() + reader.pos;
+                            while (reader.pos < end2)
+                                message.fighterEids.push(reader.uint32());
+                        } else
+                            message.fighterEids.push(reader.uint32());
+                        break;
+                    }
+                case 3: {
+                        message.startTs = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a ComponentWar message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof world.ComponentWar
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {world.ComponentWar} ComponentWar
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ComponentWar.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a ComponentWar message.
+         * @function verify
+         * @memberof world.ComponentWar
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        ComponentWar.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.warUid != null && message.hasOwnProperty("warUid"))
+                if (!$util.isInteger(message.warUid))
+                    return "warUid: integer expected";
+            if (message.fighterEids != null && message.hasOwnProperty("fighterEids")) {
+                if (!Array.isArray(message.fighterEids))
+                    return "fighterEids: array expected";
+                for (var i = 0; i < message.fighterEids.length; ++i)
+                    if (!$util.isInteger(message.fighterEids[i]))
+                        return "fighterEids: integer[] expected";
+            }
+            if (message.startTs != null && message.hasOwnProperty("startTs"))
+                if (!$util.isInteger(message.startTs))
+                    return "startTs: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a ComponentWar message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof world.ComponentWar
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {world.ComponentWar} ComponentWar
+         */
+        ComponentWar.fromObject = function fromObject(object) {
+            if (object instanceof $root.world.ComponentWar)
+                return object;
+            var message = new $root.world.ComponentWar();
+            if (object.warUid != null)
+                message.warUid = object.warUid >>> 0;
+            if (object.fighterEids) {
+                if (!Array.isArray(object.fighterEids))
+                    throw TypeError(".world.ComponentWar.fighterEids: array expected");
+                message.fighterEids = [];
+                for (var i = 0; i < object.fighterEids.length; ++i)
+                    message.fighterEids[i] = object.fighterEids[i] >>> 0;
+            }
+            if (object.startTs != null)
+                message.startTs = object.startTs >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a ComponentWar message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof world.ComponentWar
+         * @static
+         * @param {world.ComponentWar} message ComponentWar
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        ComponentWar.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.fighterEids = [];
+            if (options.defaults) {
+                object.warUid = 0;
+                object.startTs = 0;
+            }
+            if (message.warUid != null && message.hasOwnProperty("warUid"))
+                object.warUid = message.warUid;
+            if (message.fighterEids && message.fighterEids.length) {
+                object.fighterEids = [];
+                for (var j = 0; j < message.fighterEids.length; ++j)
+                    object.fighterEids[j] = message.fighterEids[j];
+            }
+            if (message.startTs != null && message.hasOwnProperty("startTs"))
+                object.startTs = message.startTs;
+            return object;
+        };
+
+        /**
+         * Converts this ComponentWar to JSON.
+         * @function toJSON
+         * @memberof world.ComponentWar
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        ComponentWar.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for ComponentWar
+         * @function getTypeUrl
+         * @memberof world.ComponentWar
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        ComponentWar.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/world.ComponentWar";
+        };
+
+        return ComponentWar;
+    })();
+
     world.Entity = (function() {
 
         /**
@@ -21979,12 +27213,12 @@ $root.world = (function() {
          * @property {number|null} [etype] Entity etype
          * @property {number|null} [pos] Entity pos
          * @property {number|null} [state] Entity state
-         * @property {number|null} [order] Entity order
          * @property {world.IComponentTimer|null} [timer] Entity timer
          * @property {world.IComponentMove|null} [move] Entity move
          * @property {world.IComponentBuilding|null} [building] Entity building
          * @property {world.IComponentOwner|null} [owner] Entity owner
-         * @property {world.IComponentTeam|null} [team] Entity team
+         * @property {world.IComponentPlayer|null} [player] Entity player
+         * @property {world.IComponentWar|null} [war] Entity war
          */
 
         /**
@@ -22035,14 +27269,6 @@ $root.world = (function() {
         Entity.prototype.state = 0;
 
         /**
-         * Entity order.
-         * @member {number} order
-         * @memberof world.Entity
-         * @instance
-         */
-        Entity.prototype.order = 0;
-
-        /**
          * Entity timer.
          * @member {world.IComponentTimer|null|undefined} timer
          * @memberof world.Entity
@@ -22075,12 +27301,20 @@ $root.world = (function() {
         Entity.prototype.owner = null;
 
         /**
-         * Entity team.
-         * @member {world.IComponentTeam|null|undefined} team
+         * Entity player.
+         * @member {world.IComponentPlayer|null|undefined} player
          * @memberof world.Entity
          * @instance
          */
-        Entity.prototype.team = null;
+        Entity.prototype.player = null;
+
+        /**
+         * Entity war.
+         * @member {world.IComponentWar|null|undefined} war
+         * @memberof world.Entity
+         * @instance
+         */
+        Entity.prototype.war = null;
 
         /**
          * Creates a new Entity instance using the specified properties.
@@ -22114,8 +27348,6 @@ $root.world = (function() {
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.pos);
             if (message.state != null && Object.hasOwnProperty.call(message, "state"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.state);
-            if (message.order != null && Object.hasOwnProperty.call(message, "order"))
-                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.order);
             if (message.timer != null && Object.hasOwnProperty.call(message, "timer"))
                 $root.world.ComponentTimer.encode(message.timer, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
             if (message.move != null && Object.hasOwnProperty.call(message, "move"))
@@ -22124,8 +27356,10 @@ $root.world = (function() {
                 $root.world.ComponentBuilding.encode(message.building, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
             if (message.owner != null && Object.hasOwnProperty.call(message, "owner"))
                 $root.world.ComponentOwner.encode(message.owner, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
-            if (message.team != null && Object.hasOwnProperty.call(message, "team"))
-                $root.world.ComponentTeam.encode(message.team, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
+            if (message.player != null && Object.hasOwnProperty.call(message, "player"))
+                $root.world.ComponentPlayer.encode(message.player, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
+            if (message.war != null && Object.hasOwnProperty.call(message, "war"))
+                $root.world.ComponentWar.encode(message.war, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
             return writer;
         };
 
@@ -22176,10 +27410,6 @@ $root.world = (function() {
                         message.state = reader.uint32();
                         break;
                     }
-                case 5: {
-                        message.order = reader.uint32();
-                        break;
-                    }
                 case 12: {
                         message.timer = $root.world.ComponentTimer.decode(reader, reader.uint32());
                         break;
@@ -22197,7 +27427,11 @@ $root.world = (function() {
                         break;
                     }
                 case 16: {
-                        message.team = $root.world.ComponentTeam.decode(reader, reader.uint32());
+                        message.player = $root.world.ComponentPlayer.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 17: {
+                        message.war = $root.world.ComponentWar.decode(reader, reader.uint32());
                         break;
                     }
                 default:
@@ -22247,9 +27481,6 @@ $root.world = (function() {
             if (message.state != null && message.hasOwnProperty("state"))
                 if (!$util.isInteger(message.state))
                     return "state: integer expected";
-            if (message.order != null && message.hasOwnProperty("order"))
-                if (!$util.isInteger(message.order))
-                    return "order: integer expected";
             if (message.timer != null && message.hasOwnProperty("timer")) {
                 var error = $root.world.ComponentTimer.verify(message.timer);
                 if (error)
@@ -22270,10 +27501,15 @@ $root.world = (function() {
                 if (error)
                     return "owner." + error;
             }
-            if (message.team != null && message.hasOwnProperty("team")) {
-                var error = $root.world.ComponentTeam.verify(message.team);
+            if (message.player != null && message.hasOwnProperty("player")) {
+                var error = $root.world.ComponentPlayer.verify(message.player);
                 if (error)
-                    return "team." + error;
+                    return "player." + error;
+            }
+            if (message.war != null && message.hasOwnProperty("war")) {
+                var error = $root.world.ComponentWar.verify(message.war);
+                if (error)
+                    return "war." + error;
             }
             return null;
         };
@@ -22298,8 +27534,6 @@ $root.world = (function() {
                 message.pos = object.pos >>> 0;
             if (object.state != null)
                 message.state = object.state >>> 0;
-            if (object.order != null)
-                message.order = object.order >>> 0;
             if (object.timer != null) {
                 if (typeof object.timer !== "object")
                     throw TypeError(".world.Entity.timer: object expected");
@@ -22320,10 +27554,15 @@ $root.world = (function() {
                     throw TypeError(".world.Entity.owner: object expected");
                 message.owner = $root.world.ComponentOwner.fromObject(object.owner);
             }
-            if (object.team != null) {
-                if (typeof object.team !== "object")
-                    throw TypeError(".world.Entity.team: object expected");
-                message.team = $root.world.ComponentTeam.fromObject(object.team);
+            if (object.player != null) {
+                if (typeof object.player !== "object")
+                    throw TypeError(".world.Entity.player: object expected");
+                message.player = $root.world.ComponentPlayer.fromObject(object.player);
+            }
+            if (object.war != null) {
+                if (typeof object.war !== "object")
+                    throw TypeError(".world.Entity.war: object expected");
+                message.war = $root.world.ComponentWar.fromObject(object.war);
             }
             return message;
         };
@@ -22346,12 +27585,12 @@ $root.world = (function() {
                 object.etype = 0;
                 object.pos = 0;
                 object.state = 0;
-                object.order = 0;
                 object.timer = null;
                 object.move = null;
                 object.building = null;
                 object.owner = null;
-                object.team = null;
+                object.player = null;
+                object.war = null;
             }
             if (message.eid != null && message.hasOwnProperty("eid"))
                 object.eid = message.eid;
@@ -22361,8 +27600,6 @@ $root.world = (function() {
                 object.pos = message.pos;
             if (message.state != null && message.hasOwnProperty("state"))
                 object.state = message.state;
-            if (message.order != null && message.hasOwnProperty("order"))
-                object.order = message.order;
             if (message.timer != null && message.hasOwnProperty("timer"))
                 object.timer = $root.world.ComponentTimer.toObject(message.timer, options);
             if (message.move != null && message.hasOwnProperty("move"))
@@ -22371,8 +27608,10 @@ $root.world = (function() {
                 object.building = $root.world.ComponentBuilding.toObject(message.building, options);
             if (message.owner != null && message.hasOwnProperty("owner"))
                 object.owner = $root.world.ComponentOwner.toObject(message.owner, options);
-            if (message.team != null && message.hasOwnProperty("team"))
-                object.team = $root.world.ComponentTeam.toObject(message.team, options);
+            if (message.player != null && message.hasOwnProperty("player"))
+                object.player = $root.world.ComponentPlayer.toObject(message.player, options);
+            if (message.war != null && message.hasOwnProperty("war"))
+                object.war = $root.world.ComponentWar.toObject(message.war, options);
             return object;
         };
 
@@ -24515,25 +29754,25 @@ $root.world = (function() {
         return s2c_load_detect_info;
     })();
 
-    world.c2s_team_move = (function() {
+    world.c2s_player_move = (function() {
 
         /**
-         * Properties of a c2s_team_move.
+         * Properties of a c2s_player_move.
          * @memberof world
-         * @interface Ic2s_team_move
-         * @property {number|null} [teamEid] c2s_team_move teamEid
-         * @property {number|null} [dstPos] c2s_team_move dstPos
+         * @interface Ic2s_player_move
+         * @property {number|null} [playerEid] c2s_player_move playerEid
+         * @property {number|null} [dstPos] c2s_player_move dstPos
          */
 
         /**
-         * Constructs a new c2s_team_move.
+         * Constructs a new c2s_player_move.
          * @memberof world
-         * @classdesc Represents a c2s_team_move.
-         * @implements Ic2s_team_move
+         * @classdesc Represents a c2s_player_move.
+         * @implements Ic2s_player_move
          * @constructor
-         * @param {world.Ic2s_team_move=} [properties] Properties to set
+         * @param {world.Ic2s_player_move=} [properties] Properties to set
          */
-        function c2s_team_move(properties) {
+        function c2s_player_move(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -24541,85 +29780,85 @@ $root.world = (function() {
         }
 
         /**
-         * c2s_team_move teamEid.
-         * @member {number} teamEid
-         * @memberof world.c2s_team_move
+         * c2s_player_move playerEid.
+         * @member {number} playerEid
+         * @memberof world.c2s_player_move
          * @instance
          */
-        c2s_team_move.prototype.teamEid = 0;
+        c2s_player_move.prototype.playerEid = 0;
 
         /**
-         * c2s_team_move dstPos.
+         * c2s_player_move dstPos.
          * @member {number} dstPos
-         * @memberof world.c2s_team_move
+         * @memberof world.c2s_player_move
          * @instance
          */
-        c2s_team_move.prototype.dstPos = 0;
+        c2s_player_move.prototype.dstPos = 0;
 
         /**
-         * Creates a new c2s_team_move instance using the specified properties.
+         * Creates a new c2s_player_move instance using the specified properties.
          * @function create
-         * @memberof world.c2s_team_move
+         * @memberof world.c2s_player_move
          * @static
-         * @param {world.Ic2s_team_move=} [properties] Properties to set
-         * @returns {world.c2s_team_move} c2s_team_move instance
+         * @param {world.Ic2s_player_move=} [properties] Properties to set
+         * @returns {world.c2s_player_move} c2s_player_move instance
          */
-        c2s_team_move.create = function create(properties) {
-            return new c2s_team_move(properties);
+        c2s_player_move.create = function create(properties) {
+            return new c2s_player_move(properties);
         };
 
         /**
-         * Encodes the specified c2s_team_move message. Does not implicitly {@link world.c2s_team_move.verify|verify} messages.
+         * Encodes the specified c2s_player_move message. Does not implicitly {@link world.c2s_player_move.verify|verify} messages.
          * @function encode
-         * @memberof world.c2s_team_move
+         * @memberof world.c2s_player_move
          * @static
-         * @param {world.Ic2s_team_move} message c2s_team_move message or plain object to encode
+         * @param {world.Ic2s_player_move} message c2s_player_move message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        c2s_team_move.encode = function encode(message, writer) {
+        c2s_player_move.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.teamEid != null && Object.hasOwnProperty.call(message, "teamEid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.teamEid);
+            if (message.playerEid != null && Object.hasOwnProperty.call(message, "playerEid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.playerEid);
             if (message.dstPos != null && Object.hasOwnProperty.call(message, "dstPos"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.dstPos);
             return writer;
         };
 
         /**
-         * Encodes the specified c2s_team_move message, length delimited. Does not implicitly {@link world.c2s_team_move.verify|verify} messages.
+         * Encodes the specified c2s_player_move message, length delimited. Does not implicitly {@link world.c2s_player_move.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof world.c2s_team_move
+         * @memberof world.c2s_player_move
          * @static
-         * @param {world.Ic2s_team_move} message c2s_team_move message or plain object to encode
+         * @param {world.Ic2s_player_move} message c2s_player_move message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        c2s_team_move.encodeDelimited = function encodeDelimited(message, writer) {
+        c2s_player_move.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
         /**
-         * Decodes a c2s_team_move message from the specified reader or buffer.
+         * Decodes a c2s_player_move message from the specified reader or buffer.
          * @function decode
-         * @memberof world.c2s_team_move
+         * @memberof world.c2s_player_move
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {world.c2s_team_move} c2s_team_move
+         * @returns {world.c2s_player_move} c2s_player_move
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        c2s_team_move.decode = function decode(reader, length) {
+        c2s_player_move.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.c2s_team_move();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.c2s_player_move();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1: {
-                        message.teamEid = reader.uint32();
+                        message.playerEid = reader.uint32();
                         break;
                     }
                 case 2: {
@@ -24635,35 +29874,35 @@ $root.world = (function() {
         };
 
         /**
-         * Decodes a c2s_team_move message from the specified reader or buffer, length delimited.
+         * Decodes a c2s_player_move message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof world.c2s_team_move
+         * @memberof world.c2s_player_move
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {world.c2s_team_move} c2s_team_move
+         * @returns {world.c2s_player_move} c2s_player_move
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        c2s_team_move.decodeDelimited = function decodeDelimited(reader) {
+        c2s_player_move.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
         /**
-         * Verifies a c2s_team_move message.
+         * Verifies a c2s_player_move message.
          * @function verify
-         * @memberof world.c2s_team_move
+         * @memberof world.c2s_player_move
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        c2s_team_move.verify = function verify(message) {
+        c2s_player_move.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.teamEid != null && message.hasOwnProperty("teamEid"))
-                if (!$util.isInteger(message.teamEid))
-                    return "teamEid: integer expected";
+            if (message.playerEid != null && message.hasOwnProperty("playerEid"))
+                if (!$util.isInteger(message.playerEid))
+                    return "playerEid: integer expected";
             if (message.dstPos != null && message.hasOwnProperty("dstPos"))
                 if (!$util.isInteger(message.dstPos))
                     return "dstPos: integer expected";
@@ -24671,95 +29910,95 @@ $root.world = (function() {
         };
 
         /**
-         * Creates a c2s_team_move message from a plain object. Also converts values to their respective internal types.
+         * Creates a c2s_player_move message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof world.c2s_team_move
+         * @memberof world.c2s_player_move
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {world.c2s_team_move} c2s_team_move
+         * @returns {world.c2s_player_move} c2s_player_move
          */
-        c2s_team_move.fromObject = function fromObject(object) {
-            if (object instanceof $root.world.c2s_team_move)
+        c2s_player_move.fromObject = function fromObject(object) {
+            if (object instanceof $root.world.c2s_player_move)
                 return object;
-            var message = new $root.world.c2s_team_move();
-            if (object.teamEid != null)
-                message.teamEid = object.teamEid >>> 0;
+            var message = new $root.world.c2s_player_move();
+            if (object.playerEid != null)
+                message.playerEid = object.playerEid >>> 0;
             if (object.dstPos != null)
                 message.dstPos = object.dstPos >>> 0;
             return message;
         };
 
         /**
-         * Creates a plain object from a c2s_team_move message. Also converts values to other types if specified.
+         * Creates a plain object from a c2s_player_move message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof world.c2s_team_move
+         * @memberof world.c2s_player_move
          * @static
-         * @param {world.c2s_team_move} message c2s_team_move
+         * @param {world.c2s_player_move} message c2s_player_move
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        c2s_team_move.toObject = function toObject(message, options) {
+        c2s_player_move.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.defaults) {
-                object.teamEid = 0;
+                object.playerEid = 0;
                 object.dstPos = 0;
             }
-            if (message.teamEid != null && message.hasOwnProperty("teamEid"))
-                object.teamEid = message.teamEid;
+            if (message.playerEid != null && message.hasOwnProperty("playerEid"))
+                object.playerEid = message.playerEid;
             if (message.dstPos != null && message.hasOwnProperty("dstPos"))
                 object.dstPos = message.dstPos;
             return object;
         };
 
         /**
-         * Converts this c2s_team_move to JSON.
+         * Converts this c2s_player_move to JSON.
          * @function toJSON
-         * @memberof world.c2s_team_move
+         * @memberof world.c2s_player_move
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        c2s_team_move.prototype.toJSON = function toJSON() {
+        c2s_player_move.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
         /**
-         * Gets the default type url for c2s_team_move
+         * Gets the default type url for c2s_player_move
          * @function getTypeUrl
-         * @memberof world.c2s_team_move
+         * @memberof world.c2s_player_move
          * @static
          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns {string} The default type url
          */
-        c2s_team_move.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        c2s_player_move.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/world.c2s_team_move";
+            return typeUrlPrefix + "/world.c2s_player_move";
         };
 
-        return c2s_team_move;
+        return c2s_player_move;
     })();
 
-    world.s2c_team_move = (function() {
+    world.s2c_player_move = (function() {
 
         /**
-         * Properties of a s2c_team_move.
+         * Properties of a s2c_player_move.
          * @memberof world
-         * @interface Is2c_team_move
-         * @property {number|null} [err] s2c_team_move err
+         * @interface Is2c_player_move
+         * @property {number|null} [err] s2c_player_move err
          */
 
         /**
-         * Constructs a new s2c_team_move.
+         * Constructs a new s2c_player_move.
          * @memberof world
-         * @classdesc Represents a s2c_team_move.
-         * @implements Is2c_team_move
+         * @classdesc Represents a s2c_player_move.
+         * @implements Is2c_player_move
          * @constructor
-         * @param {world.Is2c_team_move=} [properties] Properties to set
+         * @param {world.Is2c_player_move=} [properties] Properties to set
          */
-        function s2c_team_move(properties) {
+        function s2c_player_move(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -24767,35 +30006,35 @@ $root.world = (function() {
         }
 
         /**
-         * s2c_team_move err.
+         * s2c_player_move err.
          * @member {number} err
-         * @memberof world.s2c_team_move
+         * @memberof world.s2c_player_move
          * @instance
          */
-        s2c_team_move.prototype.err = 0;
+        s2c_player_move.prototype.err = 0;
 
         /**
-         * Creates a new s2c_team_move instance using the specified properties.
+         * Creates a new s2c_player_move instance using the specified properties.
          * @function create
-         * @memberof world.s2c_team_move
+         * @memberof world.s2c_player_move
          * @static
-         * @param {world.Is2c_team_move=} [properties] Properties to set
-         * @returns {world.s2c_team_move} s2c_team_move instance
+         * @param {world.Is2c_player_move=} [properties] Properties to set
+         * @returns {world.s2c_player_move} s2c_player_move instance
          */
-        s2c_team_move.create = function create(properties) {
-            return new s2c_team_move(properties);
+        s2c_player_move.create = function create(properties) {
+            return new s2c_player_move(properties);
         };
 
         /**
-         * Encodes the specified s2c_team_move message. Does not implicitly {@link world.s2c_team_move.verify|verify} messages.
+         * Encodes the specified s2c_player_move message. Does not implicitly {@link world.s2c_player_move.verify|verify} messages.
          * @function encode
-         * @memberof world.s2c_team_move
+         * @memberof world.s2c_player_move
          * @static
-         * @param {world.Is2c_team_move} message s2c_team_move message or plain object to encode
+         * @param {world.Is2c_player_move} message s2c_player_move message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        s2c_team_move.encode = function encode(message, writer) {
+        s2c_player_move.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.err != null && Object.hasOwnProperty.call(message, "err"))
@@ -24804,33 +30043,33 @@ $root.world = (function() {
         };
 
         /**
-         * Encodes the specified s2c_team_move message, length delimited. Does not implicitly {@link world.s2c_team_move.verify|verify} messages.
+         * Encodes the specified s2c_player_move message, length delimited. Does not implicitly {@link world.s2c_player_move.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof world.s2c_team_move
+         * @memberof world.s2c_player_move
          * @static
-         * @param {world.Is2c_team_move} message s2c_team_move message or plain object to encode
+         * @param {world.Is2c_player_move} message s2c_player_move message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        s2c_team_move.encodeDelimited = function encodeDelimited(message, writer) {
+        s2c_player_move.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
         /**
-         * Decodes a s2c_team_move message from the specified reader or buffer.
+         * Decodes a s2c_player_move message from the specified reader or buffer.
          * @function decode
-         * @memberof world.s2c_team_move
+         * @memberof world.s2c_player_move
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {world.s2c_team_move} s2c_team_move
+         * @returns {world.s2c_player_move} s2c_player_move
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        s2c_team_move.decode = function decode(reader, length) {
+        s2c_player_move.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.s2c_team_move();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.s2c_player_move();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -24847,30 +30086,30 @@ $root.world = (function() {
         };
 
         /**
-         * Decodes a s2c_team_move message from the specified reader or buffer, length delimited.
+         * Decodes a s2c_player_move message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof world.s2c_team_move
+         * @memberof world.s2c_player_move
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {world.s2c_team_move} s2c_team_move
+         * @returns {world.s2c_player_move} s2c_player_move
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        s2c_team_move.decodeDelimited = function decodeDelimited(reader) {
+        s2c_player_move.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
         /**
-         * Verifies a s2c_team_move message.
+         * Verifies a s2c_player_move message.
          * @function verify
-         * @memberof world.s2c_team_move
+         * @memberof world.s2c_player_move
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        s2c_team_move.verify = function verify(message) {
+        s2c_player_move.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.err != null && message.hasOwnProperty("err"))
@@ -24880,32 +30119,32 @@ $root.world = (function() {
         };
 
         /**
-         * Creates a s2c_team_move message from a plain object. Also converts values to their respective internal types.
+         * Creates a s2c_player_move message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof world.s2c_team_move
+         * @memberof world.s2c_player_move
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {world.s2c_team_move} s2c_team_move
+         * @returns {world.s2c_player_move} s2c_player_move
          */
-        s2c_team_move.fromObject = function fromObject(object) {
-            if (object instanceof $root.world.s2c_team_move)
+        s2c_player_move.fromObject = function fromObject(object) {
+            if (object instanceof $root.world.s2c_player_move)
                 return object;
-            var message = new $root.world.s2c_team_move();
+            var message = new $root.world.s2c_player_move();
             if (object.err != null)
                 message.err = object.err >>> 0;
             return message;
         };
 
         /**
-         * Creates a plain object from a s2c_team_move message. Also converts values to other types if specified.
+         * Creates a plain object from a s2c_player_move message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof world.s2c_team_move
+         * @memberof world.s2c_player_move
          * @static
-         * @param {world.s2c_team_move} message s2c_team_move
+         * @param {world.s2c_player_move} message s2c_player_move
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        s2c_team_move.toObject = function toObject(message, options) {
+        s2c_player_move.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -24917,52 +30156,52 @@ $root.world = (function() {
         };
 
         /**
-         * Converts this s2c_team_move to JSON.
+         * Converts this s2c_player_move to JSON.
          * @function toJSON
-         * @memberof world.s2c_team_move
+         * @memberof world.s2c_player_move
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        s2c_team_move.prototype.toJSON = function toJSON() {
+        s2c_player_move.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
         /**
-         * Gets the default type url for s2c_team_move
+         * Gets the default type url for s2c_player_move
          * @function getTypeUrl
-         * @memberof world.s2c_team_move
+         * @memberof world.s2c_player_move
          * @static
          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns {string} The default type url
          */
-        s2c_team_move.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        s2c_player_move.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/world.s2c_team_move";
+            return typeUrlPrefix + "/world.s2c_player_move";
         };
 
-        return s2c_team_move;
+        return s2c_player_move;
     })();
 
-    world.c2s_team_stop = (function() {
+    world.c2s_player_stop = (function() {
 
         /**
-         * Properties of a c2s_team_stop.
+         * Properties of a c2s_player_stop.
          * @memberof world
-         * @interface Ic2s_team_stop
-         * @property {number|null} [teamEid] c2s_team_stop teamEid
+         * @interface Ic2s_player_stop
+         * @property {number|null} [playerEid] c2s_player_stop playerEid
          */
 
         /**
-         * Constructs a new c2s_team_stop.
+         * Constructs a new c2s_player_stop.
          * @memberof world
-         * @classdesc Represents a c2s_team_stop.
-         * @implements Ic2s_team_stop
+         * @classdesc Represents a c2s_player_stop.
+         * @implements Ic2s_player_stop
          * @constructor
-         * @param {world.Ic2s_team_stop=} [properties] Properties to set
+         * @param {world.Ic2s_player_stop=} [properties] Properties to set
          */
-        function c2s_team_stop(properties) {
+        function c2s_player_stop(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -24970,75 +30209,75 @@ $root.world = (function() {
         }
 
         /**
-         * c2s_team_stop teamEid.
-         * @member {number} teamEid
-         * @memberof world.c2s_team_stop
+         * c2s_player_stop playerEid.
+         * @member {number} playerEid
+         * @memberof world.c2s_player_stop
          * @instance
          */
-        c2s_team_stop.prototype.teamEid = 0;
+        c2s_player_stop.prototype.playerEid = 0;
 
         /**
-         * Creates a new c2s_team_stop instance using the specified properties.
+         * Creates a new c2s_player_stop instance using the specified properties.
          * @function create
-         * @memberof world.c2s_team_stop
+         * @memberof world.c2s_player_stop
          * @static
-         * @param {world.Ic2s_team_stop=} [properties] Properties to set
-         * @returns {world.c2s_team_stop} c2s_team_stop instance
+         * @param {world.Ic2s_player_stop=} [properties] Properties to set
+         * @returns {world.c2s_player_stop} c2s_player_stop instance
          */
-        c2s_team_stop.create = function create(properties) {
-            return new c2s_team_stop(properties);
+        c2s_player_stop.create = function create(properties) {
+            return new c2s_player_stop(properties);
         };
 
         /**
-         * Encodes the specified c2s_team_stop message. Does not implicitly {@link world.c2s_team_stop.verify|verify} messages.
+         * Encodes the specified c2s_player_stop message. Does not implicitly {@link world.c2s_player_stop.verify|verify} messages.
          * @function encode
-         * @memberof world.c2s_team_stop
+         * @memberof world.c2s_player_stop
          * @static
-         * @param {world.Ic2s_team_stop} message c2s_team_stop message or plain object to encode
+         * @param {world.Ic2s_player_stop} message c2s_player_stop message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        c2s_team_stop.encode = function encode(message, writer) {
+        c2s_player_stop.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.teamEid != null && Object.hasOwnProperty.call(message, "teamEid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.teamEid);
+            if (message.playerEid != null && Object.hasOwnProperty.call(message, "playerEid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.playerEid);
             return writer;
         };
 
         /**
-         * Encodes the specified c2s_team_stop message, length delimited. Does not implicitly {@link world.c2s_team_stop.verify|verify} messages.
+         * Encodes the specified c2s_player_stop message, length delimited. Does not implicitly {@link world.c2s_player_stop.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof world.c2s_team_stop
+         * @memberof world.c2s_player_stop
          * @static
-         * @param {world.Ic2s_team_stop} message c2s_team_stop message or plain object to encode
+         * @param {world.Ic2s_player_stop} message c2s_player_stop message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        c2s_team_stop.encodeDelimited = function encodeDelimited(message, writer) {
+        c2s_player_stop.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
         /**
-         * Decodes a c2s_team_stop message from the specified reader or buffer.
+         * Decodes a c2s_player_stop message from the specified reader or buffer.
          * @function decode
-         * @memberof world.c2s_team_stop
+         * @memberof world.c2s_player_stop
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {world.c2s_team_stop} c2s_team_stop
+         * @returns {world.c2s_player_stop} c2s_player_stop
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        c2s_team_stop.decode = function decode(reader, length) {
+        c2s_player_stop.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.c2s_team_stop();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.c2s_player_stop();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1: {
-                        message.teamEid = reader.uint32();
+                        message.playerEid = reader.uint32();
                         break;
                     }
                 default:
@@ -25050,122 +30289,122 @@ $root.world = (function() {
         };
 
         /**
-         * Decodes a c2s_team_stop message from the specified reader or buffer, length delimited.
+         * Decodes a c2s_player_stop message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof world.c2s_team_stop
+         * @memberof world.c2s_player_stop
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {world.c2s_team_stop} c2s_team_stop
+         * @returns {world.c2s_player_stop} c2s_player_stop
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        c2s_team_stop.decodeDelimited = function decodeDelimited(reader) {
+        c2s_player_stop.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
         /**
-         * Verifies a c2s_team_stop message.
+         * Verifies a c2s_player_stop message.
          * @function verify
-         * @memberof world.c2s_team_stop
+         * @memberof world.c2s_player_stop
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        c2s_team_stop.verify = function verify(message) {
+        c2s_player_stop.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.teamEid != null && message.hasOwnProperty("teamEid"))
-                if (!$util.isInteger(message.teamEid))
-                    return "teamEid: integer expected";
+            if (message.playerEid != null && message.hasOwnProperty("playerEid"))
+                if (!$util.isInteger(message.playerEid))
+                    return "playerEid: integer expected";
             return null;
         };
 
         /**
-         * Creates a c2s_team_stop message from a plain object. Also converts values to their respective internal types.
+         * Creates a c2s_player_stop message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof world.c2s_team_stop
+         * @memberof world.c2s_player_stop
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {world.c2s_team_stop} c2s_team_stop
+         * @returns {world.c2s_player_stop} c2s_player_stop
          */
-        c2s_team_stop.fromObject = function fromObject(object) {
-            if (object instanceof $root.world.c2s_team_stop)
+        c2s_player_stop.fromObject = function fromObject(object) {
+            if (object instanceof $root.world.c2s_player_stop)
                 return object;
-            var message = new $root.world.c2s_team_stop();
-            if (object.teamEid != null)
-                message.teamEid = object.teamEid >>> 0;
+            var message = new $root.world.c2s_player_stop();
+            if (object.playerEid != null)
+                message.playerEid = object.playerEid >>> 0;
             return message;
         };
 
         /**
-         * Creates a plain object from a c2s_team_stop message. Also converts values to other types if specified.
+         * Creates a plain object from a c2s_player_stop message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof world.c2s_team_stop
+         * @memberof world.c2s_player_stop
          * @static
-         * @param {world.c2s_team_stop} message c2s_team_stop
+         * @param {world.c2s_player_stop} message c2s_player_stop
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        c2s_team_stop.toObject = function toObject(message, options) {
+        c2s_player_stop.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.defaults)
-                object.teamEid = 0;
-            if (message.teamEid != null && message.hasOwnProperty("teamEid"))
-                object.teamEid = message.teamEid;
+                object.playerEid = 0;
+            if (message.playerEid != null && message.hasOwnProperty("playerEid"))
+                object.playerEid = message.playerEid;
             return object;
         };
 
         /**
-         * Converts this c2s_team_stop to JSON.
+         * Converts this c2s_player_stop to JSON.
          * @function toJSON
-         * @memberof world.c2s_team_stop
+         * @memberof world.c2s_player_stop
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        c2s_team_stop.prototype.toJSON = function toJSON() {
+        c2s_player_stop.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
         /**
-         * Gets the default type url for c2s_team_stop
+         * Gets the default type url for c2s_player_stop
          * @function getTypeUrl
-         * @memberof world.c2s_team_stop
+         * @memberof world.c2s_player_stop
          * @static
          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns {string} The default type url
          */
-        c2s_team_stop.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        c2s_player_stop.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/world.c2s_team_stop";
+            return typeUrlPrefix + "/world.c2s_player_stop";
         };
 
-        return c2s_team_stop;
+        return c2s_player_stop;
     })();
 
-    world.s2c_team_stop = (function() {
+    world.s2c_player_stop = (function() {
 
         /**
-         * Properties of a s2c_team_stop.
+         * Properties of a s2c_player_stop.
          * @memberof world
-         * @interface Is2c_team_stop
-         * @property {number|null} [err] s2c_team_stop err
+         * @interface Is2c_player_stop
+         * @property {number|null} [err] s2c_player_stop err
          */
 
         /**
-         * Constructs a new s2c_team_stop.
+         * Constructs a new s2c_player_stop.
          * @memberof world
-         * @classdesc Represents a s2c_team_stop.
-         * @implements Is2c_team_stop
+         * @classdesc Represents a s2c_player_stop.
+         * @implements Is2c_player_stop
          * @constructor
-         * @param {world.Is2c_team_stop=} [properties] Properties to set
+         * @param {world.Is2c_player_stop=} [properties] Properties to set
          */
-        function s2c_team_stop(properties) {
+        function s2c_player_stop(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -25173,35 +30412,35 @@ $root.world = (function() {
         }
 
         /**
-         * s2c_team_stop err.
+         * s2c_player_stop err.
          * @member {number} err
-         * @memberof world.s2c_team_stop
+         * @memberof world.s2c_player_stop
          * @instance
          */
-        s2c_team_stop.prototype.err = 0;
+        s2c_player_stop.prototype.err = 0;
 
         /**
-         * Creates a new s2c_team_stop instance using the specified properties.
+         * Creates a new s2c_player_stop instance using the specified properties.
          * @function create
-         * @memberof world.s2c_team_stop
+         * @memberof world.s2c_player_stop
          * @static
-         * @param {world.Is2c_team_stop=} [properties] Properties to set
-         * @returns {world.s2c_team_stop} s2c_team_stop instance
+         * @param {world.Is2c_player_stop=} [properties] Properties to set
+         * @returns {world.s2c_player_stop} s2c_player_stop instance
          */
-        s2c_team_stop.create = function create(properties) {
-            return new s2c_team_stop(properties);
+        s2c_player_stop.create = function create(properties) {
+            return new s2c_player_stop(properties);
         };
 
         /**
-         * Encodes the specified s2c_team_stop message. Does not implicitly {@link world.s2c_team_stop.verify|verify} messages.
+         * Encodes the specified s2c_player_stop message. Does not implicitly {@link world.s2c_player_stop.verify|verify} messages.
          * @function encode
-         * @memberof world.s2c_team_stop
+         * @memberof world.s2c_player_stop
          * @static
-         * @param {world.Is2c_team_stop} message s2c_team_stop message or plain object to encode
+         * @param {world.Is2c_player_stop} message s2c_player_stop message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        s2c_team_stop.encode = function encode(message, writer) {
+        s2c_player_stop.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.err != null && Object.hasOwnProperty.call(message, "err"))
@@ -25210,33 +30449,33 @@ $root.world = (function() {
         };
 
         /**
-         * Encodes the specified s2c_team_stop message, length delimited. Does not implicitly {@link world.s2c_team_stop.verify|verify} messages.
+         * Encodes the specified s2c_player_stop message, length delimited. Does not implicitly {@link world.s2c_player_stop.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof world.s2c_team_stop
+         * @memberof world.s2c_player_stop
          * @static
-         * @param {world.Is2c_team_stop} message s2c_team_stop message or plain object to encode
+         * @param {world.Is2c_player_stop} message s2c_player_stop message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        s2c_team_stop.encodeDelimited = function encodeDelimited(message, writer) {
+        s2c_player_stop.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
         /**
-         * Decodes a s2c_team_stop message from the specified reader or buffer.
+         * Decodes a s2c_player_stop message from the specified reader or buffer.
          * @function decode
-         * @memberof world.s2c_team_stop
+         * @memberof world.s2c_player_stop
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {world.s2c_team_stop} s2c_team_stop
+         * @returns {world.s2c_player_stop} s2c_player_stop
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        s2c_team_stop.decode = function decode(reader, length) {
+        s2c_player_stop.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.s2c_team_stop();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.s2c_player_stop();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -25253,30 +30492,30 @@ $root.world = (function() {
         };
 
         /**
-         * Decodes a s2c_team_stop message from the specified reader or buffer, length delimited.
+         * Decodes a s2c_player_stop message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof world.s2c_team_stop
+         * @memberof world.s2c_player_stop
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {world.s2c_team_stop} s2c_team_stop
+         * @returns {world.s2c_player_stop} s2c_player_stop
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        s2c_team_stop.decodeDelimited = function decodeDelimited(reader) {
+        s2c_player_stop.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
         /**
-         * Verifies a s2c_team_stop message.
+         * Verifies a s2c_player_stop message.
          * @function verify
-         * @memberof world.s2c_team_stop
+         * @memberof world.s2c_player_stop
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        s2c_team_stop.verify = function verify(message) {
+        s2c_player_stop.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.err != null && message.hasOwnProperty("err"))
@@ -25286,32 +30525,32 @@ $root.world = (function() {
         };
 
         /**
-         * Creates a s2c_team_stop message from a plain object. Also converts values to their respective internal types.
+         * Creates a s2c_player_stop message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof world.s2c_team_stop
+         * @memberof world.s2c_player_stop
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {world.s2c_team_stop} s2c_team_stop
+         * @returns {world.s2c_player_stop} s2c_player_stop
          */
-        s2c_team_stop.fromObject = function fromObject(object) {
-            if (object instanceof $root.world.s2c_team_stop)
+        s2c_player_stop.fromObject = function fromObject(object) {
+            if (object instanceof $root.world.s2c_player_stop)
                 return object;
-            var message = new $root.world.s2c_team_stop();
+            var message = new $root.world.s2c_player_stop();
             if (object.err != null)
                 message.err = object.err >>> 0;
             return message;
         };
 
         /**
-         * Creates a plain object from a s2c_team_stop message. Also converts values to other types if specified.
+         * Creates a plain object from a s2c_player_stop message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof world.s2c_team_stop
+         * @memberof world.s2c_player_stop
          * @static
-         * @param {world.s2c_team_stop} message s2c_team_stop
+         * @param {world.s2c_player_stop} message s2c_player_stop
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        s2c_team_stop.toObject = function toObject(message, options) {
+        s2c_player_stop.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -25323,438 +30562,32 @@ $root.world = (function() {
         };
 
         /**
-         * Converts this s2c_team_stop to JSON.
+         * Converts this s2c_player_stop to JSON.
          * @function toJSON
-         * @memberof world.s2c_team_stop
+         * @memberof world.s2c_player_stop
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        s2c_team_stop.prototype.toJSON = function toJSON() {
+        s2c_player_stop.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
         /**
-         * Gets the default type url for s2c_team_stop
+         * Gets the default type url for s2c_player_stop
          * @function getTypeUrl
-         * @memberof world.s2c_team_stop
+         * @memberof world.s2c_player_stop
          * @static
          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns {string} The default type url
          */
-        s2c_team_stop.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        s2c_player_stop.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/world.s2c_team_stop";
+            return typeUrlPrefix + "/world.s2c_player_stop";
         };
 
-        return s2c_team_stop;
-    })();
-
-    world.c2s_team_retreat = (function() {
-
-        /**
-         * Properties of a c2s_team_retreat.
-         * @memberof world
-         * @interface Ic2s_team_retreat
-         * @property {number|null} [teamEid] c2s_team_retreat teamEid
-         */
-
-        /**
-         * Constructs a new c2s_team_retreat.
-         * @memberof world
-         * @classdesc Represents a c2s_team_retreat.
-         * @implements Ic2s_team_retreat
-         * @constructor
-         * @param {world.Ic2s_team_retreat=} [properties] Properties to set
-         */
-        function c2s_team_retreat(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * c2s_team_retreat teamEid.
-         * @member {number} teamEid
-         * @memberof world.c2s_team_retreat
-         * @instance
-         */
-        c2s_team_retreat.prototype.teamEid = 0;
-
-        /**
-         * Creates a new c2s_team_retreat instance using the specified properties.
-         * @function create
-         * @memberof world.c2s_team_retreat
-         * @static
-         * @param {world.Ic2s_team_retreat=} [properties] Properties to set
-         * @returns {world.c2s_team_retreat} c2s_team_retreat instance
-         */
-        c2s_team_retreat.create = function create(properties) {
-            return new c2s_team_retreat(properties);
-        };
-
-        /**
-         * Encodes the specified c2s_team_retreat message. Does not implicitly {@link world.c2s_team_retreat.verify|verify} messages.
-         * @function encode
-         * @memberof world.c2s_team_retreat
-         * @static
-         * @param {world.Ic2s_team_retreat} message c2s_team_retreat message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        c2s_team_retreat.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.teamEid != null && Object.hasOwnProperty.call(message, "teamEid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.teamEid);
-            return writer;
-        };
-
-        /**
-         * Encodes the specified c2s_team_retreat message, length delimited. Does not implicitly {@link world.c2s_team_retreat.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof world.c2s_team_retreat
-         * @static
-         * @param {world.Ic2s_team_retreat} message c2s_team_retreat message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        c2s_team_retreat.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a c2s_team_retreat message from the specified reader or buffer.
-         * @function decode
-         * @memberof world.c2s_team_retreat
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {world.c2s_team_retreat} c2s_team_retreat
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        c2s_team_retreat.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.c2s_team_retreat();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1: {
-                        message.teamEid = reader.uint32();
-                        break;
-                    }
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes a c2s_team_retreat message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof world.c2s_team_retreat
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {world.c2s_team_retreat} c2s_team_retreat
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        c2s_team_retreat.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a c2s_team_retreat message.
-         * @function verify
-         * @memberof world.c2s_team_retreat
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        c2s_team_retreat.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.teamEid != null && message.hasOwnProperty("teamEid"))
-                if (!$util.isInteger(message.teamEid))
-                    return "teamEid: integer expected";
-            return null;
-        };
-
-        /**
-         * Creates a c2s_team_retreat message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof world.c2s_team_retreat
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {world.c2s_team_retreat} c2s_team_retreat
-         */
-        c2s_team_retreat.fromObject = function fromObject(object) {
-            if (object instanceof $root.world.c2s_team_retreat)
-                return object;
-            var message = new $root.world.c2s_team_retreat();
-            if (object.teamEid != null)
-                message.teamEid = object.teamEid >>> 0;
-            return message;
-        };
-
-        /**
-         * Creates a plain object from a c2s_team_retreat message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof world.c2s_team_retreat
-         * @static
-         * @param {world.c2s_team_retreat} message c2s_team_retreat
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        c2s_team_retreat.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults)
-                object.teamEid = 0;
-            if (message.teamEid != null && message.hasOwnProperty("teamEid"))
-                object.teamEid = message.teamEid;
-            return object;
-        };
-
-        /**
-         * Converts this c2s_team_retreat to JSON.
-         * @function toJSON
-         * @memberof world.c2s_team_retreat
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        c2s_team_retreat.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        /**
-         * Gets the default type url for c2s_team_retreat
-         * @function getTypeUrl
-         * @memberof world.c2s_team_retreat
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        c2s_team_retreat.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/world.c2s_team_retreat";
-        };
-
-        return c2s_team_retreat;
-    })();
-
-    world.s2c_team_retreat = (function() {
-
-        /**
-         * Properties of a s2c_team_retreat.
-         * @memberof world
-         * @interface Is2c_team_retreat
-         * @property {number|null} [err] s2c_team_retreat err
-         */
-
-        /**
-         * Constructs a new s2c_team_retreat.
-         * @memberof world
-         * @classdesc Represents a s2c_team_retreat.
-         * @implements Is2c_team_retreat
-         * @constructor
-         * @param {world.Is2c_team_retreat=} [properties] Properties to set
-         */
-        function s2c_team_retreat(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * s2c_team_retreat err.
-         * @member {number} err
-         * @memberof world.s2c_team_retreat
-         * @instance
-         */
-        s2c_team_retreat.prototype.err = 0;
-
-        /**
-         * Creates a new s2c_team_retreat instance using the specified properties.
-         * @function create
-         * @memberof world.s2c_team_retreat
-         * @static
-         * @param {world.Is2c_team_retreat=} [properties] Properties to set
-         * @returns {world.s2c_team_retreat} s2c_team_retreat instance
-         */
-        s2c_team_retreat.create = function create(properties) {
-            return new s2c_team_retreat(properties);
-        };
-
-        /**
-         * Encodes the specified s2c_team_retreat message. Does not implicitly {@link world.s2c_team_retreat.verify|verify} messages.
-         * @function encode
-         * @memberof world.s2c_team_retreat
-         * @static
-         * @param {world.Is2c_team_retreat} message s2c_team_retreat message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        s2c_team_retreat.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
-            return writer;
-        };
-
-        /**
-         * Encodes the specified s2c_team_retreat message, length delimited. Does not implicitly {@link world.s2c_team_retreat.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof world.s2c_team_retreat
-         * @static
-         * @param {world.Is2c_team_retreat} message s2c_team_retreat message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        s2c_team_retreat.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a s2c_team_retreat message from the specified reader or buffer.
-         * @function decode
-         * @memberof world.s2c_team_retreat
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {world.s2c_team_retreat} s2c_team_retreat
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        s2c_team_retreat.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.s2c_team_retreat();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1: {
-                        message.err = reader.uint32();
-                        break;
-                    }
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes a s2c_team_retreat message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof world.s2c_team_retreat
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {world.s2c_team_retreat} s2c_team_retreat
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        s2c_team_retreat.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a s2c_team_retreat message.
-         * @function verify
-         * @memberof world.s2c_team_retreat
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        s2c_team_retreat.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.err != null && message.hasOwnProperty("err"))
-                if (!$util.isInteger(message.err))
-                    return "err: integer expected";
-            return null;
-        };
-
-        /**
-         * Creates a s2c_team_retreat message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof world.s2c_team_retreat
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {world.s2c_team_retreat} s2c_team_retreat
-         */
-        s2c_team_retreat.fromObject = function fromObject(object) {
-            if (object instanceof $root.world.s2c_team_retreat)
-                return object;
-            var message = new $root.world.s2c_team_retreat();
-            if (object.err != null)
-                message.err = object.err >>> 0;
-            return message;
-        };
-
-        /**
-         * Creates a plain object from a s2c_team_retreat message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof world.s2c_team_retreat
-         * @static
-         * @param {world.s2c_team_retreat} message s2c_team_retreat
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        s2c_team_retreat.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults)
-                object.err = 0;
-            if (message.err != null && message.hasOwnProperty("err"))
-                object.err = message.err;
-            return object;
-        };
-
-        /**
-         * Converts this s2c_team_retreat to JSON.
-         * @function toJSON
-         * @memberof world.s2c_team_retreat
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        s2c_team_retreat.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        /**
-         * Gets the default type url for s2c_team_retreat
-         * @function getTypeUrl
-         * @memberof world.s2c_team_retreat
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        s2c_team_retreat.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/world.s2c_team_retreat";
-        };
-
-        return s2c_team_retreat;
+        return s2c_player_stop;
     })();
 
     world.notify_alliances = (function() {

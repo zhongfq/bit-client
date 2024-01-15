@@ -1,18 +1,25 @@
 {
     "101": {
-        "define": "COIN",
-        "id": 101
+        "id": 101,
+        "name": "coin"
     },
     "102": {
-        "define": "GOLD",
-        "id": 102
+        "id": 102,
+        "name": "diamond"
+    },
+    "103": {
+        "id": 103,
+        "name": "energy",
+        "recover_inc": 10,
+        "recover_max": 120,
+        "recover_sec": 10
     },
     "201": {
-        "define": "WOOD",
-        "id": 201
+        "id": 201,
+        "name": "wood"
     },
     "202": {
-        "define": "FOOD",
-        "id": 202
+        "id": 202,
+        "name": "food"
     }
 }

@@ -24,15 +24,9 @@ export class BagService extends Service<NetworkService> {
             this.itemBag.init(data);
         }
     }
-    private _onUseItem(data: proto.bag.s2c_use_item){
-
-    }
-    private _onCompositeItem(data: proto.bag.s2c_composite_item){
-
-    }
-    private _onDiscardItem(data: proto.bag.s2c_discard_item){
-
-    }
+    private _onUseItem(data: proto.bag.s2c_use_item) {}
+    private _onCompositeItem(data: proto.bag.s2c_composite_item) {}
+    private _onDiscardItem(data: proto.bag.s2c_discard_item) {}
     private _noNotify(data: proto.bag.notify_items) {
         for (let item of data.items as proto.bag.Item[]) {
             let vo = new ItemVo();
@@ -67,17 +61,23 @@ export class BagService extends Service<NetworkService> {
     // ------------------------------------------------------------------------
     // rpc call
     // ------------------------------------------------------------------------
-    public async load() {
-        await this._network.call(proto.bag.c2s_load.create(), proto.bag.s2c_load);
+    public async load(data: proto.bag.Ic2s_load) {
+        await this._network.call(proto.bag.c2s_load.create(data), proto.bag.s2c_load);
     }
-    public async callUseItem(data:proto.bag.Ic2s_use_item) {
+    public async callUseItem(data: proto.bag.Ic2s_use_item) {
         await this._network.call(proto.bag.c2s_use_item.create(data), proto.bag.s2c_use_item);
     }
-    public async callCompositeItem(data:proto.bag.Ic2s_composite_item) {
-        await this._network.call(proto.bag.c2s_composite_item.create(data), proto.bag.s2c_composite_item);
+    public async callCompositeItem(data: proto.bag.Ic2s_composite_item) {
+        await this._network.call(
+            proto.bag.c2s_composite_item.create(data),
+            proto.bag.s2c_composite_item
+        );
     }
-    public async callDiscardItem(data:proto.bag.Ic2s_discard_item) {
-        await this._network.call(proto.bag.c2s_discard_item.create(data), proto.bag.s2c_discard_item);
+    public async callDiscardItem(data: proto.bag.Ic2s_discard_item) {
+        await this._network.call(
+            proto.bag.c2s_discard_item.create(data),
+            proto.bag.s2c_discard_item
+        );
     }
     /**道具背包*/
     itemBag = this.createGoodsBag(ItemBag);
