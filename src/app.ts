@@ -24,12 +24,12 @@ export class Main extends AppBase {
 }
 
 class ServiceManager {
-    network: NetworkService;
-    data: DataService;
-    user: UserService;
-    war: WarService;
-    bag: BagService;
-    gm: GmService;
+    readonly network: NetworkService;
+    readonly data: DataService;
+    readonly user: UserService;
+    readonly war: WarService;
+    readonly bag: BagService;
+    readonly gm: GmService;
 
     private _services: Service<NetworkService>[] = [];
 
@@ -65,7 +65,7 @@ class App {
     private _loader = new Loader();
 
     // services
-    service!: ServiceManager;
+    private _service!: ServiceManager;
 
     constructor() {}
 
@@ -75,6 +75,10 @@ class App {
 
     get loader() {
         return this._loader;
+    }
+
+    get service() {
+        return this._service;
     }
 
     async init() {
@@ -88,7 +92,7 @@ class App {
             TweenSystem.update(Laya.timer.delta / 1000);
         });
 
-        this.service = new ServiceManager();
+        this._service = new ServiceManager();
 
         await app.service.data.load();
         // app.networkd.connect("ws://games.bitserver.wang:10001");

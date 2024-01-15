@@ -183,7 +183,7 @@ export class UIManager {
     async show(id: number, args?: any) {
         const descriptor = this._checkDescriptor(id);
         if (descriptor) {
-            const dialog = Laya.Dialog.open(descriptor.url, false, args);
+            const dialog = await Laya.Dialog.open(descriptor.url, false, args);
             if (!(dialog instanceof Laya.Dialog)) {
                 console.error(`show error: ${descriptor.url} is not a dialog`);
             }
