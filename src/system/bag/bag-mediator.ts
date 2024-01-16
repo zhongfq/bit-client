@@ -1,9 +1,11 @@
 import { app } from "../../app";
+import { toEventType } from "../../core/dispatcher";
 import { Mediator } from "../../core/ui-mediator";
 import { BagUI } from "../../ui-runtime/prefab/bag/BagUI";
 import { IconUI } from "../../ui-runtime/prefab/icon/IconUI";
 import { DataUtil } from "../data/data-util";
 import { IconNodeMediator } from "../icon/icon-node-mediator";
+import { BagService } from "./bag-service";
 import { ItemVo } from "./vo/goods/item-vo";
 
 const { regClass, property } = Laya;
@@ -11,6 +13,7 @@ const { regClass, property } = Laya;
 @regClass()
 export class BagMediator extends Mediator {
     owner!: BagUI;
+    itemListData!: ItemVo[];
 
     onAwake(): void {
         let b = this.owner.itemList.itemRender;
@@ -19,6 +22,9 @@ export class BagMediator extends Mediator {
         this.owner.itemList.mouseHandler = new Laya.Handler(this, this.onListClick);
         this.owner.menuTab.selectHandler = new Laya.Handler(this, this.onTabSelect);
         this.updateList();
+        this.on(app.service.bag, BagService.ITEM_UPDATE, () => {
+            this.updateList();
+        });
     }
     onIconClick() {}
     onListClick(evn: Laya.Event, index: number) {
@@ -29,25 +35,24 @@ export class BagMediator extends Mediator {
         this.updateList();
     }
     updateItem(cell: IconUI, index: number) {
-        let cellData = cell.dataSource as ItemVo;
+        let cellData = this.itemListData[index];
         // cell.iconNumber.text = cellData.goodsNumber?.toString() || "0";
         cell.updateGoods(cellData);
     }
     updateList() {
-        let tlData = [];
+        this.itemListData = [];
         if (this.owner.menuTab.selectedIndex == 0) {
             for (let item of app.service.bag.itemBag.getBagAsArray()) {
-                tlData.push(item);
+                this.itemListData.push(item);
             }
         } else {
             let tlItem = DataUtil.getArrayRef(app.service.data.itemTable, { composite: 1 });
             for (let refItem of tlItem) {
                 let itemvo = app.service.bag.itemBag.createByRef(refItem.id);
-                tlData.push(itemvo);
+                this.itemListData.push(itemvo);
             }
-            this.owner.iconNode.getComponent(IconNodeMediator).setClickHandler(this.onIconClick);
         }
-        this.owner.itemList.array = tlData;
+        this.owner.itemList.array = this.itemListData;
     }
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
     //onAwake(): void {}

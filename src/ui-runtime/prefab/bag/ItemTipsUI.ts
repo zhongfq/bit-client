@@ -9,7 +9,7 @@ import { ItemTipsUIBase } from "./ItemTipsUI.generated";
 export interface Iitem_Tips_Param {
     isShowTips:boolean;
     touchBack:Function;
-    vo:GoodsVo;
+    vo:ItemVo;
 }
 @regClass()
 export class ItemTipsUI extends ItemTipsUIBase {

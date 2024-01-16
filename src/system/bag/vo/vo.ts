@@ -24,6 +24,9 @@ export abstract class VO<Ref = any, Cmd = any> {
         return this._cmd;
     }
 
+    get id(): number {
+        return 0;
+    }
     abstract getRefByCmd(cmd: Cmd): any;
     protected get voName(): string {
         return this.__cname;

@@ -84,7 +84,17 @@ export type Item = {
     sub_type: number;
     use: number;
     quality: number;
+    args: any[];
 };
 export type ItemTable = {
     [k: number]: Item;
+};
+export type Task = {
+    id: number;
+    comment: string;
+    type: number;
+    desc: string;
+};
+export type TaskTable = {
+    [k: number]: Task;
 };

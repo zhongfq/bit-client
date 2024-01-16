@@ -85,8 +85,12 @@ export abstract class VOBag<T extends VO<any, any>> {
     }
 
     public onAdd(t: T) {}
-    public onUpdate(t: T) {}
-    public onRemove(key: string | number) {}
+    public onUpdate(t: T) {
+        this.bag.set(t.id, t);
+    }
+    public onRemove(key: string | number) {
+        this.bag.delete(key);
+    }
     // protected abstract GetCacheName(): EnumProtoName | MessageProtoName
 
     //#endregion

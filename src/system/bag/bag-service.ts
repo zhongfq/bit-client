@@ -11,6 +11,7 @@ import { VO } from "./vo/vo";
 import { VOBag } from "./vo/vo-bag";
 
 export class BagService extends Service<NetworkService> {
+    static readonly ITEM_UPDATE = "item-update";
     constructor(network: NetworkService) {
         super(network);
         this.handle(opcode.bag.s2c_load, this._onLoad);
@@ -38,8 +39,8 @@ export class BagService extends Service<NetworkService> {
             } else {
                 this.itemBag.onUpdate(vo);
             }
-            item.uid;
         }
+        this.event(BagService.ITEM_UPDATE);
         // if(data.items)
     }
 

@@ -22,6 +22,8 @@ export class ui {
     static readonly itemSynthesisDialog = 9;
     static readonly loginServerDialog = 10;
     static readonly mainScene = 11;
+    static readonly bagBoxUseDialog = 12;
+    static readonly taskDialog = 13;
     static readonly gmDialog = 9999;
 
     static register() {
@@ -57,7 +59,7 @@ export class ui {
             url: "resources/prefab/bag/item-synthesis-dialog.lh",
             blockInput: true,
         });
-        
+
         app.ui.register({
             id: ui.loginServerDialog,
             url: "resources/prefab/login/login-server-dialog.lh",
@@ -70,10 +72,21 @@ export class ui {
             blockInput: true,
         });
         app.ui.register({
+            id: ui.bagBoxUseDialog,
+            autoClose: false,
+            url: "resources/prefab/bag/item-box-use-dialog.lh",
+            blockInput: true,
+        });
+        app.ui.register({
+            id: ui.taskDialog,
+            autoClose: false,
+            url: "resources/prefab/task/task-dialog.lh",
+            blockInput: true,
+        });
+        app.ui.register({
             id: ui.gmDialog,
             url: "resources/prefab/gm/gm-dialog.lh",
             blockInput: true,
         });
-        
     }
 }

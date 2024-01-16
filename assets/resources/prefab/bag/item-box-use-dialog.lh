@@ -1,12 +1,19 @@
 {
   "_$ver": 1,
   "_$id": "sxpq9fzh",
+  "_$runtime": "res://94db5ab0-3279-4238-9bec-323f91f08d53",
   "_$type": "Dialog",
   "name": "Dialog",
   "width": 608,
   "height": 688,
   "_mouseState": 2,
   "isModal": true,
+  "_$comp": [
+    {
+      "_$type": "6320eec1-4c5d-4789-a46d-1fbdb5699108",
+      "scriptPath": "../src/system/bag/item-box-use-mediator.ts"
+    }
+  ],
   "_$child": [
     {
       "_$id": "2kdo09if",
@@ -162,6 +169,7 @@
       "width": 303,
       "height": 51,
       "_mouseState": 2,
+      "min": 1,
       "showLabel": false,
       "showProgress": true,
       "skin": "res://051feaa7-15db-4143-958c-161475961a6b",
@@ -240,8 +248,25 @@
       "y": 255,
       "width": 572,
       "height": 222,
-      "repeatX": 1,
-      "repeatY": 1
+      "_mouseState": 2,
+      "itemTemplate": {
+        "_$ref": "80m3afqt",
+        "_$tmpl": "itemRender"
+      },
+      "repeatX": 5,
+      "repeatY": 2,
+      "spaceX": 7,
+      "spaceY": 6,
+      "_$child": [
+        {
+          "_$id": "80m3afqt",
+          "_$prefab": "296a5627-8151-43ef-8283-ced0d50d81a8",
+          "name": "icon-node",
+          "active": true,
+          "x": 237.99999999999994,
+          "y": 41
+        }
+      ]
     }
   ]
 }

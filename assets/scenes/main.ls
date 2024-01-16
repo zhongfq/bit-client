@@ -28,6 +28,20 @@
       "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
       "label": "背包",
       "labelSize": 20
+    },
+    {
+      "_$id": "flfvnq0t",
+      "_$var": true,
+      "_$type": "Button",
+      "name": "btnTask",
+      "x": 470,
+      "y": 1267,
+      "width": 120,
+      "height": 40,
+      "_mouseState": 2,
+      "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
+      "label": "任务",
+      "labelSize": 20
     }
   ]
 }

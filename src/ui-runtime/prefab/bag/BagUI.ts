@@ -15,4 +15,7 @@ export class BagUI extends BagUIBase {
     private onTabSelect(index:number){
         // this.
     }
+    onClosed(type?: string | undefined): void {
+        let a = 1
+    }
 }

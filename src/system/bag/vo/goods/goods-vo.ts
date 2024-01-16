@@ -1,3 +1,4 @@
+import { ItemTable } from "../../../../def/data";
 import { VO } from "../vo";
 
 /**
@@ -6,13 +7,13 @@ import { VO } from "../vo";
  */
 export abstract class GoodsVo<IRef = any, Cmd = any> extends VO<IRef, Cmd> {
     static __cname: string = "Goods";
-
+    refTable!: any;
     //获取物品refId
     abstract get refId(): number;
     //获取物品数据库id
     abstract get id(): number;
     //物品类型
-    // abstract GetGoodsType(): GoodsType
+    abstract get goodsType(): number;
     //获取描述
     abstract get desc(): string;
     //获取图标路径

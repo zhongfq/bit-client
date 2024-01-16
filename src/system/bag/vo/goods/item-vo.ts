@@ -25,7 +25,8 @@ export class ItemVo extends GoodsVo<Item, bag.Item> {
     }
 
     getRefByCmd(cmd: bag.Item): Item | undefined {
-        return DataUtil.getRef<Item>(app.service.data.itemTable, {});
+        let id = cmd.uid ? cmd.uid : cmd.id;
+        return DataUtil.getRef<Item>(app.service.data.itemTable, { id: id });
     }
 
     get goodsType(): number {
@@ -57,13 +58,4 @@ export class ItemVo extends GoodsVo<Item, bag.Item> {
         return 0;
     }
     //#endregion
-
-    //#region 道具接口
-    get order(): number {
-        return 1; //this.ref.order;
-    }
-
-    get price(): number {
-        return 1; //this.ref.price;
-    }
 }

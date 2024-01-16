@@ -16,6 +16,8 @@ export class IconNodeMediator extends Laya.Script {
     onAwake(): void {
         this.owner.on(Laya.Event.CLICK, (evn: Laya.Event) => {
             this.onIconClick(evn);
+
+            Laya.SoundManager.playSound("");
         });
         // if(this.isNoShowTips){
         //     this.owner.on(Laya.Event.CLICK,this.onIconClick)
@@ -42,6 +44,7 @@ export class IconNodeMediator extends Laya.Script {
             if (itemData.ref?.sub_type == 1) {
                 //宝箱类型
                 //打开宝箱弹窗
+                app.ui.show(ui.bagBoxUseDialog, { vo: itemData });
             } else if (itemData.ref?.use == 1) {
                 //可使用类型
                 //打开使用弹窗
