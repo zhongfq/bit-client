@@ -1,7 +1,7 @@
-import { app } from "../../../../app";
-import { Item, ItemTable } from "../../../../def/data";
-import { bag } from "../../../../def/proto";
-import { DataUtil } from "../../../data/data-util";
+import { app } from "../../../app";
+import { Item, ItemTable } from "../../../def/data";
+import { bag } from "../../../def/proto";
+import { DataUtil } from "../../data/data-util";
 import { GoodsVo } from "./goods-vo";
 
 /**

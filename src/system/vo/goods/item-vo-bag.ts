@@ -1,10 +1,10 @@
 import { GoodsVoBag } from "./goods-vo-bag";
 import { ItemVo } from "./item-vo";
 
-import proto from "../../../../def/proto.js";
-import { app } from "../../../../app";
-import { Constructor } from "../../../../core/dispatcher";
-import { DataUtil } from "../../../data/data-util";
+import proto from "../../../def/proto.js";
+import { app } from "../../../app";
+import { Constructor } from "../../../core/dispatcher";
+import { DataUtil } from "../../data/data-util";
 
 /**
  * ItemBag 道具

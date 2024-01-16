@@ -1,4 +1,4 @@
-import { VOBag } from "../vo-bag";
+import { VOBag } from "../vo-base/vo-bag";
 import { GoodsVo } from "./goods-vo";
 
 /**

@@ -8,6 +8,7 @@ import {
     HeroTable,
     ItemTable,
     SkillTable,
+    TaskTable,
 } from "../../def/data";
 import { NetworkService } from "../network/network-service";
 
@@ -17,7 +18,8 @@ const JSON_HERO_TABLE = "resources/data/hero.json";
 const JSON_SKILL_TABLE = "resources/data/skill.json";
 const JSON_EQUIP_TABLE = "resources/data/equip.json";
 const JSON_ATTR_TABLE = "resources/data/attr.json";
-const JSON_Item_TABLE = "resources/data/item.json";
+const JSON_ITEM_TABLE = "resources/data/item.json";
+const JSON_TASK_TABLE = "resources/data/task.json";
 
 export class DataService extends Service<NetworkService> {
     equipTable!: EquipTable;
@@ -27,6 +29,7 @@ export class DataService extends Service<NetworkService> {
     heroTable!: HeroTable;
     skillTable!: SkillTable;
     itemTable!: ItemTable;
+    taskTable!: TaskTable;
 
     constructor(network: NetworkService) {
         super(network);
@@ -40,6 +43,7 @@ export class DataService extends Service<NetworkService> {
         this.battleBuffTable = await app.loader.loadJson(JSON_BUFF_TABLE);
         this.skillTable = await app.loader.loadJson(JSON_SKILL_TABLE);
         this.heroTable = await app.loader.loadJson(JSON_HERO_TABLE);
-        this.itemTable = await app.loader.loadJson(JSON_Item_TABLE);
+        this.itemTable = await app.loader.loadJson(JSON_ITEM_TABLE);
+        this.taskTable = await app.loader.loadJson(JSON_TASK_TABLE);
     }
 }

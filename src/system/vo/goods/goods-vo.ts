@@ -1,5 +1,5 @@
-import { ItemTable } from "../../../../def/data";
-import { VO } from "../vo";
+import { ItemTable } from "../../../def/data";
+import { VO } from "../vo-base/vo";
 
 /**
  * Goods
