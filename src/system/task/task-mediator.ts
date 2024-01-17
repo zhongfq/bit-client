@@ -15,7 +15,7 @@ export class TaskMediator extends Mediator {
     onAwake(): void {
         this.initBtn();
         this.initEvent();
-        this.tlTaskData = app.service.task.taskBag.filter();
+        this.tlTaskData = app.service.task.taskBag.toArray();
         this.owner.List.renderHandler = new Laya.Handler(this, this.onListRender);
         this.owner.List.mouseHandler = new Laya.Handler(this, this.onListClick);
         this.updateList();

@@ -43,9 +43,7 @@ export class BagMediator extends Mediator {
         const bag = app.service.bag.itemBag;
         this.itemListData = [];
         if (this.owner.menuTab.selectedIndex == 0) {
-            for (let item of bag.filter()) {
-                this.itemListData.push(item);
-            }
+            this.itemListData = bag.toArray();
         } else {
             let tlItem = DataUtil.getArrayRef(app.service.data.itemTable, { composite: 1 });
             for (let refItem of tlItem) {

@@ -17,23 +17,43 @@ export abstract class VOBag<T extends VO<any, any>> {
     protected onDestroy(): void {}
 
     public abstract Hash(t: T): string | number;
+
     /**
      * 获取Map
      */
     getBag(): Map<string | number, T> {
+        const t: string[] = [];
         return this.bag;
     }
-    /**
-     * 以列表的形式获取背包
-     */
-    filter(filter?: (t: T) => boolean): Array<T> {
+
+    toArray() {
         let ret: Array<T> = [];
-        for (let [k, v] of this.bag) {
-            if (filter && !filter(v)) continue;
+        for (let [_, v] of this.bag) {
             ret.push(v);
         }
         return ret;
     }
+
+    /**
+     * 以列表的形式获取背包
+     */
+    filter(predicate: (value: T, key: string | number) => boolean): Array<T> {
+        let ret: Array<T> = [];
+        for (let [k, v] of this.bag) {
+            if (predicate && !predicate(v, k)) continue;
+            ret.push(v);
+        }
+        return ret;
+    }
+
+    find(predicate: (value: T, key: string | number) => boolean) {
+        for (let [k, v] of this.bag) {
+            if (predicate(v, k)) {
+                return v;
+            }
+        }
+    }
+
     /**
      * 获取一个Goods
      * @param key
@@ -41,6 +61,7 @@ export abstract class VOBag<T extends VO<any, any>> {
     get(key: string | number): T | any {
         return this.bag.get(key);
     }
+
     /**
      * 获取第一个
      */
@@ -52,6 +73,7 @@ export abstract class VOBag<T extends VO<any, any>> {
         }
         return null;
     }
+
     /**
      * 新增一个Goods
      */
@@ -62,6 +84,7 @@ export abstract class VOBag<T extends VO<any, any>> {
         }
         this.bag.set(k, t);
     }
+
     /**
      * 删除一个Goods
      * @param k
@@ -70,6 +93,7 @@ export abstract class VOBag<T extends VO<any, any>> {
         let t = this.get(key);
         this.bag.delete(key);
     }
+
     /**
      *更新vo
      * @param t
