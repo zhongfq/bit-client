@@ -4,7 +4,7 @@ import { ItemVo } from "./item-vo";
 import proto from "../../../def/proto.js";
 import { app } from "../../../app";
 import { Constructor } from "../../../core/dispatcher";
-import { DataUtil } from "../../data/data-util";
+import { DataUtil } from "../../../system/data/data-util";
 
 /**
  * ItemBag 道具
@@ -13,7 +13,6 @@ export class ItemBag extends GoodsVoBag<ItemVo> {
     public Hash(t: ItemVo): string | number {
         return t.id;
     }
-    static __cname: string = "ItemBag";
 
     init(data: proto.bag.s2c_load) {
         for (let cmdData of data.items) {
@@ -34,7 +33,7 @@ export class ItemBag extends GoodsVoBag<ItemVo> {
     }
 
     getByRef(refId: number): ItemVo | null {
-        let tlBag = this.getBagAsArray(this.getFilterOne(refId));
+        let tlBag = this.filter(this.getFilterOne(refId));
         if (tlBag) {
             return tlBag[0];
         }

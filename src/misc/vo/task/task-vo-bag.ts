@@ -1,9 +1,9 @@
 import proto from "../../../def/proto.js";
-import { app } from "../../../app";
-import { Constructor } from "../../../core/dispatcher";
-import { DataUtil } from "../../data/data-util";
+import { app } from "../../../app.js";
+import { Constructor } from "../../../core/dispatcher.js";
+import { DataUtil } from "../../../system/data/data-util.js";
 import { VOBag } from "../vo-base/vo-bag";
-import { TaskVo } from "./task-vo";
+import { TaskVo } from "./task-vo.js";
 
 /**
  * ItemBag 道具
@@ -31,7 +31,7 @@ export class TaskBag extends VOBag<TaskVo> {
     }
 
     getByRef(refId: number): TaskVo | null {
-        let tlBag = this.getBagAsArray(this.getFilterOne(refId));
+        let tlBag = this.filter(this.getFilterOne(refId));
         if (tlBag) {
             return tlBag[0];
         }

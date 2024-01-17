@@ -1,5 +1,5 @@
 const { regClass } = Laya;
-import { TaskVo } from "../../../system/vo/task/task-vo";
+import { TaskVo } from "../../../misc/vo/task/task-vo";
 import { TaskItemBoxBase } from "./TaskItemBox.generated";
 
 @regClass()

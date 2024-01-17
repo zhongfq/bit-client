@@ -26,18 +26,13 @@ export abstract class VOBag<T extends VO<any, any>> {
     /**
      * 以列表的形式获取背包
      */
-    getBagAsArray(filter?: (t: T) => boolean): Array<T> {
+    filter(filter?: (t: T) => boolean): Array<T> {
         let ret: Array<T> = [];
         for (let [k, v] of this.bag) {
             if (filter && !filter(v)) continue;
             ret.push(v);
         }
         return ret;
-    }
-    bagFilter(filter: (t: T) => boolean): void {
-        for (let [k, v] of this.bag) {
-            if (filter(v)) return;
-        }
     }
     /**
      * 获取一个Goods

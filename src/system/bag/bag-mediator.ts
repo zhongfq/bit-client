@@ -5,7 +5,7 @@ import { BagUI } from "../../ui-runtime/prefab/bag/BagUI";
 import { IconUI } from "../../ui-runtime/prefab/icon/IconUI";
 import { DataUtil } from "../data/data-util";
 import { IconNodeMediator } from "../icon/icon-node-mediator";
-import { ItemVo } from "../vo/goods/item-vo";
+import { ItemVo } from "../../misc/vo/goods/item-vo";
 import { BagService } from "./bag-service";
 
 const { regClass, property } = Laya;
@@ -40,15 +40,16 @@ export class BagMediator extends Mediator {
         cell.updateGoods(cellData);
     }
     updateList() {
+        const bag = app.service.bag.itemBag;
         this.itemListData = [];
         if (this.owner.menuTab.selectedIndex == 0) {
-            for (let item of app.vo.itemBag.getBagAsArray()) {
+            for (let item of bag.filter()) {
                 this.itemListData.push(item);
             }
         } else {
             let tlItem = DataUtil.getArrayRef(app.service.data.itemTable, { composite: 1 });
             for (let refItem of tlItem) {
-                let itemvo = app.vo.itemBag.createByRef(refItem.id);
+                let itemvo = bag.createByRef(refItem.id);
                 this.itemListData.push(itemvo);
             }
         }

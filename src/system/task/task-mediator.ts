@@ -3,7 +3,7 @@ import { Mediator } from "../../core/ui-mediator";
 import { ui } from "../../misc/ui";
 import { TaskItemBox } from "../../ui-runtime/prefab/task/TaskItemBox";
 import { TaskUI } from "../../ui-runtime/prefab/task/TaskUI";
-import { TaskVo } from "../vo/task/task-vo";
+import { TaskVo } from "../../misc/vo/task/task-vo";
 
 const { regClass, property } = Laya;
 
@@ -15,7 +15,7 @@ export class TaskMediator extends Mediator {
     onAwake(): void {
         this.initBtn();
         this.initEvent();
-        this.tlTaskData = app.vo.taskBag.getBagAsArray();
+        this.tlTaskData = app.service.task.taskBag.filter();
         this.owner.List.renderHandler = new Laya.Handler(this, this.onListRender);
         this.owner.List.mouseHandler = new Laya.Handler(this, this.onListClick);
         this.updateList();

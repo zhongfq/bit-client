@@ -3,10 +3,13 @@ import { Service } from "../../core/service";
 import proto from "../../def/proto.js";
 import { errcode, opcode } from "../../def/protocol";
 import { NetworkService } from "../network/network-service";
-import { ItemVo } from "../vo/goods/item-vo";
+import { ItemVo } from "../../misc/vo/goods/item-vo";
+import { VoUtil } from "../../misc/vo-util";
+import { ItemBag } from "../../misc/vo/goods/item-vo-bag";
 
 export class BagService extends Service<NetworkService> {
     static readonly ITEM_UPDATE = "item-update";
+    readonly itemBag = VoUtil.createGoodsBag(ItemBag);
     constructor(network: NetworkService) {
         super(network);
         this.handle(opcode.bag.s2c_load, this._onLoad);
@@ -17,7 +20,7 @@ export class BagService extends Service<NetworkService> {
     }
     private _onLoad(data: proto.bag.s2c_load) {
         if (data.err === errcode.OK) {
-            app.vo.itemBag.init(data);
+            this.itemBag.init(data);
         }
     }
     private _onUseItem(data: proto.bag.s2c_use_item) {}
@@ -27,12 +30,12 @@ export class BagService extends Service<NetworkService> {
         for (let item of data.items as proto.bag.Item[]) {
             let vo = new ItemVo();
             vo.initByCmd(item);
-            if (!app.vo.itemBag.get(item.id)) {
-                app.vo.itemBag.onAdd(vo);
+            if (!this.itemBag.get(item.id)) {
+                this.itemBag.onAdd(vo);
             } else if (item.num == 0) {
-                app.vo.itemBag.onRemove(item.id);
+                this.itemBag.onRemove(item.id);
             } else {
-                app.vo.itemBag.onUpdate(vo);
+                this.itemBag.onUpdate(vo);
             }
         }
         this.event(BagService.ITEM_UPDATE);

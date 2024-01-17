@@ -3,9 +3,12 @@ import { Constructor } from "../../core/dispatcher";
 import { Service } from "../../core/service";
 import proto from "../../def/proto.js";
 import { errcode, opcode } from "../../def/protocol";
+import { VoUtil } from "../../misc/vo-util";
+import { TaskBag } from "../../misc/vo/task/task-vo-bag";
 import { NetworkService } from "../network/network-service";
 
 export class TaskService extends Service<NetworkService> {
+    taskBag = VoUtil.createBag(TaskBag);
     constructor(network: NetworkService) {
         super(network);
         this.handle(opcode.task.s2c_load, this._onLoad);
@@ -15,7 +18,7 @@ export class TaskService extends Service<NetworkService> {
     }
     private _onLoad(data: proto.task.s2c_load) {
         if (data.err === errcode.OK) {
-            app.vo.taskBag.init(data);
+            this.taskBag.init(data);
         }
     }
     private _onreceiveReward(data: proto.bag.s2c_use_item) {}

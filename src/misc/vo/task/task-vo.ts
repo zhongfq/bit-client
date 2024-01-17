@@ -1,7 +1,7 @@
 import { app } from "../../../app";
 import { ItemTable, Task } from "../../../def/data";
 import { task } from "../../../def/proto";
-import { DataUtil } from "../../data/data-util";
+import { DataUtil } from "../../../system/data/data-util";
 import { VO } from "../vo-base/vo";
 
 /**
