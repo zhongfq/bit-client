@@ -8,12 +8,12 @@ import { TaskVo } from "./task-vo";
 /**
  * ItemBag 道具
  */
-export class ItemBag extends VOBag<TaskVo> {
+export class TaskBag extends VOBag<TaskVo> {
     public Hash(t: TaskVo): string | number {
         return t.id;
     }
-    init(data: proto.bag.s2c_load) {
-        for (let cmdData of data.items) {
+    init(data: proto.task.s2c_load) {
+        for (let cmdData of data.tasks) {
             let vo = new TaskVo();
             vo.initByCmd(cmdData as proto.task.TaskInfo);
             this.add(vo);

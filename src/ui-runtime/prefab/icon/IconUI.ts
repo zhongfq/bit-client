@@ -1,7 +1,6 @@
 const { regClass } = Laya;
-import { GoodsVo } from "../../../system/bag/vo/goods/goods-vo";
-import { ItemVo } from "../../../system/bag/vo/goods/item-vo";
 import { IconNodeMediator } from "../../../system/icon/icon-node-mediator";
+import { ItemVo } from "../../../system/vo/goods/item-vo";
 import { IconUIBase } from "./IconUI.generated";
 
 @regClass()

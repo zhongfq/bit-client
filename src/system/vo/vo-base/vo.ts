@@ -2,7 +2,6 @@
  * VO
  */
 export abstract class VO<Ref = any, Cmd = any> {
-    abstract __cname: string;
     protected _ref: Ref | undefined;
     protected _cmd: Cmd | null = null;
 
@@ -28,7 +27,4 @@ export abstract class VO<Ref = any, Cmd = any> {
         return 0;
     }
     abstract getRefByCmd(cmd: Cmd): any;
-    protected get voName(): string {
-        return this.__cname;
-    }
 }

@@ -4,6 +4,7 @@ import { NetworkService } from "../network/network-service";
 import { GoodsVo } from "./goods/goods-vo";
 import { GoodsVoBag } from "./goods/goods-vo-bag";
 import { ItemBag } from "./goods/item-vo-bag";
+import { TaskBag } from "./task/task-vo-bag";
 import { VO } from "./vo-base/vo";
 import { VOBag } from "./vo-base/vo-bag";
 
@@ -30,5 +31,5 @@ export class VoService extends Service<NetworkService> {
     /**道具背包*/
     itemBag = this.createGoodsBag(ItemBag);
     /**任务背包*/
-    taskBag = this.createGoodsBag(ItemBag);
+    taskBag = this.createBag(TaskBag);
 }

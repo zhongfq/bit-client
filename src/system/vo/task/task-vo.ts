@@ -9,7 +9,6 @@ import { VO } from "../vo-base/vo";
  * 道具
  */
 export class TaskVo extends VO<Task, task.TaskInfo> {
-    __cname: string = "ItemVo";
     refTable!: ItemTable;
 
     //#region 重载
@@ -33,7 +32,7 @@ export class TaskVo extends VO<Task, task.TaskInfo> {
     }
 
     get desc(): string {
-        return ""; //this.ref.desc;
+        return this.ref?.desc || ""; //this.ref.desc;
     }
 
     get name(): string {

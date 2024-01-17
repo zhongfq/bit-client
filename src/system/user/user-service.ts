@@ -30,6 +30,7 @@ export class UserService extends Service<NetworkService> {
     }
     private async _goMainScen() {
         await app.service.bag.load({ bagId: 1 });
+        await app.service.task.load({ taskType: 2 });
         app.ui.replace(ui.mainScene);
     }
     private async onConnected() {

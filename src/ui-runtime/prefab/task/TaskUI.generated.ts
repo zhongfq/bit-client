@@ -7,7 +7,5 @@
 export class TaskUIBase extends Laya.Dialog {
     public closeBtn!: Laya.Button;
     public List!: Laya.List;
-    public labelDesc!: Laya.Label;
-    public labelName!: Laya.Label;
 }
 
