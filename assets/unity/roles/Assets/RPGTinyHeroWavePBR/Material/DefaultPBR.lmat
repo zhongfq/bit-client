@@ -1,0 +1,103 @@
+{
+  "version": "LAYAMATERIAL:04",
+  "props": {
+    "type": "PBR",
+    "s_Cull": 2,
+    "s_Blend": 0,
+    "s_BlendSrc": 1,
+    "s_BlendDst": 0,
+    "alphaTest": false,
+    "alphaTestValue": 0.5,
+    "renderQueue": 2000,
+    "textures": [
+      {
+        "name": "u_AlbedoTexture",
+        "constructParams": [
+          512,
+          512,
+          1,
+          true,
+          false
+        ],
+        "propertyParams": {
+          "filterMode": 1,
+          "wrapModeU": 0,
+          "wrapModeV": 0,
+          "anisoLevel": 4
+        },
+        "path": "res://e7fd80ca-4e3c-4b60-b955-3e81c9d3b0c9"
+      },
+      {
+        "name": "u_MetallicGlossTexture",
+        "constructParams": [
+          512,
+          512,
+          1,
+          true,
+          false
+        ],
+        "propertyParams": {
+          "filterMode": 1,
+          "wrapModeU": 0,
+          "wrapModeV": 0,
+          "anisoLevel": 4
+        },
+        "path": "res://a366d2a2-742c-460d-aef3-fe6392419602"
+      },
+      {
+        "name": "u_EmissionTexture",
+        "constructParams": [
+          512,
+          512,
+          1,
+          true,
+          false
+        ],
+        "propertyParams": {
+          "filterMode": 1,
+          "wrapModeU": 0,
+          "wrapModeV": 0,
+          "anisoLevel": 4
+        },
+        "path": "res://ba7f6c15-c652-4bd9-b6d7-08ca901800db"
+      }
+    ],
+    "materialRenderMode": 0,
+    "u_AlbedoColor": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "u_EmissionIntensity": 1,
+    "u_EmissionColor": [
+      0.9245283,
+      0.9245283,
+      0.9245283,
+      1
+    ],
+    "u_TilingOffset": [
+      1,
+      1,
+      0,
+      0
+    ],
+    "u_DetailTillingOffset": [
+      1,
+      1,
+      0,
+      0
+    ],
+    "u_Metallic": 1,
+    "u_Smoothness": 1,
+    "u_NormalScale": 1,
+    "u_ParallaxScale": 0.02,
+    "u_DetailNormalScale": 1,
+    "defines": [
+      "ALBEDOTEXTURE",
+      "METALLICGLOSSTEXTURE",
+      "EMISSIONTEXTURE",
+      "EMISSION"
+    ]
+  }
+}

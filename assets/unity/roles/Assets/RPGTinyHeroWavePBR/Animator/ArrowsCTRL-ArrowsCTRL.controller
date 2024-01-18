@@ -1,0 +1,305 @@
+{
+  "_$type": "Animator",
+  "enabled": true,
+  "controller": "null",
+  "cullingMode": 0,
+  "controllerLayers": [
+    {
+      "_$type": "AnimatorControllerLayer",
+      "playOnWake": true,
+      "name": "Base Layer",
+      "defaultWeight": 1,
+      "blendingMode": 0,
+      "states": [
+        {
+          "_$type": "AnimatorState",
+          "name": "Attack01_Combo0102_Arrow",
+          "speed": 1,
+          "clipStart": 0,
+          "clipEnd": 1,
+          "x": 220,
+          "y": 150,
+          "clip": {
+            "_$type": "AnimationClip",
+            "_$uuid": "58f3bf1b-0710-4864-bf5d-25b41ce89db5"
+          },
+          "id": "0",
+          "soloTransitions": [
+            {
+              "id": "1",
+              "exitByTime": true,
+              "exitTime": 4,
+              "transduration": 0,
+              "transstartoffset": 0
+            }
+          ]
+        },
+        {
+          "_$type": "AnimatorState",
+          "name": "Attack02_Combo03_Arrow",
+          "speed": 1,
+          "clipStart": 0,
+          "clipEnd": 1,
+          "x": 220,
+          "y": 220,
+          "clip": {
+            "_$type": "AnimationClip",
+            "_$uuid": "88650273-7212-46c8-97ab-01c3af944dc1"
+          },
+          "id": "1",
+          "soloTransitions": [
+            {
+              "id": "2",
+              "exitByTime": true,
+              "exitTime": 4,
+              "transduration": 0,
+              "transstartoffset": 0
+            }
+          ]
+        },
+        {
+          "_$type": "AnimatorState",
+          "name": "Attack03_Combo05_Arrow",
+          "speed": 1,
+          "clipStart": 0,
+          "clipEnd": 1,
+          "x": 220,
+          "y": 290,
+          "clip": {
+            "_$type": "AnimationClip",
+            "_$uuid": "3503153c-49fd-4a21-a6dc-692e3edd5081"
+          },
+          "id": "2",
+          "soloTransitions": [
+            {
+              "id": "3",
+              "exitByTime": true,
+              "exitTime": 4,
+              "transduration": 0,
+              "transstartoffset": 0
+            }
+          ]
+        },
+        {
+          "_$type": "AnimatorState",
+          "name": "Attack04_Combo04_Arrow",
+          "speed": 1,
+          "clipStart": 0,
+          "clipEnd": 1,
+          "x": 220,
+          "y": 360,
+          "clip": {
+            "_$type": "AnimationClip",
+            "_$uuid": "542ba3ff-ccd4-456f-b23d-9ccd5ca32b40"
+          },
+          "id": "3",
+          "soloTransitions": [
+            {
+              "id": "10",
+              "exitByTime": true,
+              "exitTime": 4,
+              "transduration": 0,
+              "transstartoffset": 0
+            }
+          ]
+        },
+        {
+          "_$type": "AnimatorState",
+          "name": "Attack01_Combo0102_Arrow 0",
+          "speed": 1,
+          "clipStart": 0,
+          "clipEnd": 1,
+          "x": 480,
+          "y": 290,
+          "clip": {
+            "_$type": "AnimationClip",
+            "_$uuid": "58f3bf1b-0710-4864-bf5d-25b41ce89db5"
+          },
+          "id": "4",
+          "soloTransitions": [
+            {
+              "id": "5",
+              "exitByTime": true,
+              "exitTime": 1,
+              "transduration": 0,
+              "transstartoffset": 0
+            }
+          ]
+        },
+        {
+          "_$type": "AnimatorState",
+          "name": "Attack01_Combo0102_Arrow 1",
+          "speed": 1,
+          "clipStart": 0,
+          "clipEnd": 1,
+          "x": 480,
+          "y": 220,
+          "clip": {
+            "_$type": "AnimationClip",
+            "_$uuid": "58f3bf1b-0710-4864-bf5d-25b41ce89db5"
+          },
+          "id": "5",
+          "soloTransitions": [
+            {
+              "id": "6",
+              "exitByTime": true,
+              "exitTime": 1,
+              "transduration": 0,
+              "transstartoffset": 0
+            }
+          ]
+        },
+        {
+          "_$type": "AnimatorState",
+          "name": "Attack02_Combo03_Arrow 0",
+          "speed": 1,
+          "clipStart": 0,
+          "clipEnd": 1,
+          "x": 480,
+          "y": 150,
+          "clip": {
+            "_$type": "AnimationClip",
+            "_$uuid": "88650273-7212-46c8-97ab-01c3af944dc1"
+          },
+          "id": "6",
+          "soloTransitions": [
+            {
+              "id": "7",
+              "exitByTime": true,
+              "exitTime": 1,
+              "transduration": 0,
+              "transstartoffset": 0
+            }
+          ]
+        },
+        {
+          "_$type": "AnimatorState",
+          "name": "Attack04_Combo04_Arrow 0",
+          "speed": 1,
+          "clipStart": 0,
+          "clipEnd": 1,
+          "x": 480,
+          "y": 80,
+          "clip": {
+            "_$type": "AnimationClip",
+            "_$uuid": "542ba3ff-ccd4-456f-b23d-9ccd5ca32b40"
+          },
+          "id": "7",
+          "soloTransitions": [
+            {
+              "id": "8",
+              "exitByTime": true,
+              "exitTime": 1,
+              "transduration": 0,
+              "transstartoffset": 0
+            }
+          ]
+        },
+        {
+          "_$type": "AnimatorState",
+          "name": "Attack03_Combo05_Arrow 0",
+          "speed": 1,
+          "clipStart": 0,
+          "clipEnd": 1,
+          "x": 480,
+          "y": 10,
+          "clip": {
+            "_$type": "AnimationClip",
+            "_$uuid": "3503153c-49fd-4a21-a6dc-692e3edd5081"
+          },
+          "id": "8",
+          "soloTransitions": [
+            {
+              "id": "11",
+              "exitByTime": true,
+              "exitTime": 1,
+              "transduration": 0.1,
+              "transstartoffset": 0
+            }
+          ]
+        },
+        {
+          "_$type": "AnimatorState",
+          "name": "Idle_Arrow",
+          "speed": 1,
+          "clipStart": 0,
+          "clipEnd": 1,
+          "x": 220,
+          "y": 80,
+          "clip": {
+            "_$type": "AnimationClip",
+            "_$uuid": "498e929d-da13-4bb9-952d-3f78b94971e9"
+          },
+          "id": "9",
+          "soloTransitions": [
+            {
+              "id": "0",
+              "exitByTime": true,
+              "exitTime": 4,
+              "transduration": 0,
+              "transstartoffset": 0
+            }
+          ]
+        },
+        {
+          "_$type": "AnimatorState",
+          "name": "Idle_Arrow 0",
+          "speed": 1,
+          "clipStart": 0,
+          "clipEnd": 1,
+          "x": 480,
+          "y": 360,
+          "clip": {
+            "_$type": "AnimationClip",
+            "_$uuid": "498e929d-da13-4bb9-952d-3f78b94971e9"
+          },
+          "id": "10",
+          "soloTransitions": [
+            {
+              "id": "4",
+              "exitByTime": true,
+              "exitTime": 2,
+              "transduration": 0,
+              "transstartoffset": 0
+            }
+          ]
+        },
+        {
+          "_$type": "AnimatorState",
+          "name": "Idle_Arrow 1",
+          "speed": 1,
+          "clipStart": 0,
+          "clipEnd": 1,
+          "x": 740,
+          "y": 10,
+          "clip": {
+            "_$type": "AnimationClip",
+            "_$uuid": "498e929d-da13-4bb9-952d-3f78b94971e9"
+          },
+          "id": "11"
+        },
+        {
+          "id": "-1",
+          "name": "进入",
+          "speed": 1,
+          "clipEnd": 1,
+          "x": 20,
+          "y": 90,
+          "soloTransitions": [
+            {
+              "id": "9"
+            }
+          ]
+        },
+        {
+          "id": "-2",
+          "name": "任何状态",
+          "speed": 1,
+          "clipEnd": 1,
+          "x": 20,
+          "y": 40
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "uuid": "e7fd80ca-4e3c-4b60-b955-3e81c9d3b0c9",
+  "importer": {
+    "sRGB": true,
+    "npot": 1,
+    "platformPC": {
+      "format": "BC3",
+      "quality": 2
+    },
+    "generateMipmap": true,
+    "mipmapFilter": 1,
+    "anisoLevel": 4,
+    "alphaChannel": true
+  }
+}
