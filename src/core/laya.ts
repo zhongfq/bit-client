@@ -6,4 +6,20 @@ export namespace LayaExt {
             return Laya.Tween.to(target, props, duration, ease);
         }
     }
+
+    export interface IVector2Like {
+        x: number;
+        y: number;
+    }
+    export interface IVector3Like {
+        x: number;
+        y: number;
+        z: number;
+    }
+    export interface IVector4Like {
+        x: number;
+        y: number;
+        z: number;
+        w: number;
+    }
 }
