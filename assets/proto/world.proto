@@ -29,12 +29,16 @@ message ComponentTroop {
     uint32 cmd = 2; // 当前执行指令
     uint32 stay_eid = 4; // 当前所处建筑
     uint32 home_eid = 5; // 归属建筑
+    uint32 battle_eid = 6; // 正在参与的战斗
 };
 
 message ComponentOwner {
     uint32 rid = 1;
     uint32 aid = 2;
-    uint32 eid = 4;
+    uint32 eid = 3;
+    bool is_robot = 4;
+    string role_name = 5;
+    string alliance_name = 6;
 }
 
 message Timer {
@@ -50,6 +54,7 @@ message ComponentMove {
     uint32 start_ms = 1;
     repeated uint32 path = 2;
     float speed = 3; // 每秒多少格
+    int32 degree = 4;
 }
 
 message ComponentBuilding {
@@ -62,8 +67,8 @@ message ComponentBuilding {
     string name = 9; // 自定义名字
 }
 
-message ComponentWar {
-    uint32 war_uid = 1;
+message ComponentBattle {
+    uint32 battle_uid = 1;
     repeated uint32 fighter_eids = 2; // 参战方
     uint32 start_ts = 3; // 开始时间戳
 }
@@ -80,7 +85,7 @@ message Entity {
     ComponentBuilding building = 14;
     ComponentOwner owner = 15;
     ComponentTroop troop = 16;
-    ComponentWar war = 17;
+    ComponentBattle battle = 17;
 }
 
 // 大地图基础信息
@@ -123,18 +128,28 @@ message s2c_load_detect_info {
     uint32 alive_count = 3; // 存活队伍数量
 }
 
-message c2s_troop_move {
+// 点击移动
+message c2s_troop_move_to {
     uint32 troop_eid = 1;
     Position dst_pos = 2;
 }
-message s2c_troop_move {
+message s2c_troop_move_to {
     uint32 err = 1;
 }
 
-message c2s_troop_stop {
+// 摇杆移动
+message c2s_troop_move_by {
+    uint32 troop_eid = 1;
+    uint32 degree = 2; // 角度0-360
+}
+message s2c_troop_move_by {
+    uint32 err = 1;
+}
+
+message c2s_troop_move_stop {
     uint32 troop_eid = 1;
 }
-message s2c_troop_stop {
+message s2c_troop_move_stop {
     uint32 err = 1;
 }
 
@@ -161,6 +176,8 @@ message MoveAction {
     repeated uint32 path = 2;
     uint32 speed = 3;
     uint32 start_ms = 4;
+    Position cur_pos = 5;
+    uint32 degree = 6;
 }
 message EntityAction {
     uint32 action = 1;
@@ -183,10 +200,10 @@ message notify_actions {
 
 
 // 同步战斗结果
-message notify_war_result {
+message notify_battle_result {
     uint32 src_eid = 1; // 进攻方id
     uint32 dst_eid = 2; // 防守方id
-    uint32 result = 3; // config/world.lua WarResult
+    uint32 result = 3; // config/world.lua BattleResult
 }
 
 // 同步占据结果

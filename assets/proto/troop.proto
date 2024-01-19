@@ -2,16 +2,12 @@ syntax = "proto3";
 
 package troop;
 
-message TroopSlot {
-    uint32 hero_uid = 1; // 英雄唯一id
-    uint32 army = 2; // 兵力
-}
-
 message Troop {
     uint32 idx = 1; // 队伍编号
     uint32 eid = 2;
-    repeated TroopSlot slots = 3; // 英雄uid，没上阵为0
+    uint32 hero_uid = 3; // 英雄uid
     uint32 soldier_id = 4; // 兵种
+    uint32 soldier_amount = 5; // 士兵数量
 }
 
 message c2s_load {

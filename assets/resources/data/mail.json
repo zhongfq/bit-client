@@ -1,6 +1,7 @@
 {
     "1": {
         "content": "我不是人啊，我到底是不是人",
+        "expired_sec": 10,
         "id": 1,
         "reward": [
             [

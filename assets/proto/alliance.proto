@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package alliance;
+
+message c2s_load {
+}
+message s2c_load {
+    uint32 err = 1;
+    uint32 aid = 2;
+}

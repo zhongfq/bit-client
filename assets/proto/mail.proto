@@ -12,6 +12,7 @@ message MailInfo {
     string title = 5; // 标题, 如有配id, 则title, content, reward为空
     string content = 6; // 正文
     repeated bag.Item reward = 7; // 奖励
+    uint32 expired_sec = 8; // 有效期(秒)
 }
 
 // 加载邮件

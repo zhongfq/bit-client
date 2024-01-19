@@ -1,21 +1,21 @@
 syntax = "proto3";
 
-package war;
+package battle;
 
 message Position {
     float x = 1;
     float y = 2;
 }
 
-message WarHero {
+message BattleHero {
     uint32 hero_id = 1;
-    uint32 eid = 2;
+    uint32 eid = 2; // 如果是在沙盘地图则与world eid一致
 }
 
-message WarRole {
+message BattleRole {
     int64 rid = 1;
     string name = 2;
-    repeated WarHero heros = 3;
+    repeated BattleHero heros = 3;
 }
 
 // COMMAND
@@ -106,7 +106,7 @@ message cmd_forward {
     int32 eid = 1;
 }
 
-message WarCmd {
+message BattleCmd {
     uint32 cmd_type = 1;
     cmd_add_entity add_entity = 2;
     cmd_update_entity update_entity = 3;
@@ -124,40 +124,40 @@ message WarCmd {
     cmd_recover_hp recover_hp = 17;
 }
 
-message WarFrame {
+message BattleFrame {
     uint32 frame = 1;
-    repeated WarCmd cmds = 2;
+    repeated BattleCmd cmds = 2;
 }
 
-message War {
-    uint32 war_id = 1; // 配置id
-    uint32 war_uid = 2; // 唯一id
-    repeated WarRole roles = 3; // 服务器第一个在左，第二个在右，客户端转换为我方永远在左
-    repeated WarFrame frames = 4;
+message Battle {
+    uint32 battle_id = 1; // 配置id
+    uint32 battle_uid = 2; // 唯一id
+    repeated BattleRole roles = 3; // 服务器第一个在左，第二个在右，客户端转换为我方永远在左
+    repeated BattleFrame frames = 4;
 }
 
 message c2s_load {
-    uint32 war_uid = 1;
+    uint32 battle_uid = 1;
 }
 message s2c_load {
     uint32 err = 1;
-    War war = 2;
+    Battle battle = 2;
 }
 
 message c2s_ready {
-    uint32 war_uid = 1;
+    uint32 battle_uid = 1;
 }
 message s2c_ready {
     uint32 err = 1; // OK, NOT_IN_WAR
 }
 
 message notify_cmd {
-    uint32 war_uid = 1;
-    WarFrame frame = 2;
+    uint32 battle_uid = 1;
+    BattleFrame frame = 2;
 }
 
 message c2s_launch_skill {
-    uint32 war_uid = 1;
+    uint32 battle_uid = 1;
     uint32 eid = 2;
     uint32 skill_id = 3;
 }
@@ -167,7 +167,7 @@ message s2c_launch_skill {
 
 // 断线重连，服务器从第frame帧开始推送 notify_cmd
 message c2s_ask_cmd {
-    uint32 war_uid = 1;
+    uint32 battle_uid = 1;
     uint32 frame = 2;
 }
 message s2c_ask_cmd {
@@ -176,18 +176,18 @@ message s2c_ask_cmd {
 
 // 登录时发送, 如果处于战斗，服务器会推送 notify_enter，然后客户端发c2s_ready, 服务器从第0帧推送 notify_cmd
 message c2s_ask_fight {
-    uint32 war_uid = 1;
+    uint32 battle_uid = 1;
 }
 message s2c_ask_fight {
     uint32 err = 1;
 }
 
 message notify_start {
-    uint32 war_uid = 1;
+    uint32 battle_uid = 1;
 }
 
 message notify_end {
-    uint32 war_uid = 1;
+    uint32 battle_uid = 1;
 }
 
 message DebugInfo {

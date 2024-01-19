@@ -1,8 +1,8 @@
 export const world = {
     COM_ENUM: {
+        BATTLE: "battle",
         BUILDING: "building",
         MOVE: "move",
-        ORDER: "order",
         OWNER: "owner",
         PLAYER: "player",
         POS: "pos",
@@ -27,14 +27,17 @@ export const world = {
         },
         2: {
             1: "pos",
-            2: "order",
-            3: "state",
-            4: "move",
-            5: "owner",
-            6: "troop",
+            2: "state",
+            3: "move",
+            4: "owner",
+            5: "troop",
         },
         4: {
             1: "player",
+        },
+        5: {
+            1: "pos",
+            2: "battle",
         },
     },
     ENTITY_STATE: {
@@ -46,6 +49,7 @@ export const world = {
         WAITLIST: 4,
     },
     ENTITY_TYPE: {
+        BATTLE: 5,
         CASTLE: 1,
         CITY: 3,
         PLAYER: 4,
