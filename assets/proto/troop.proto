@@ -6,8 +6,6 @@ message Troop {
     uint32 idx = 1; // 队伍编号
     uint32 eid = 2;
     uint32 hero_uid = 3; // 英雄uid
-    uint32 soldier_id = 4; // 兵种
-    uint32 soldier_amount = 5; // 士兵数量
 }
 
 message c2s_load {

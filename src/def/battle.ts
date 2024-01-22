@@ -50,8 +50,6 @@ export const battle = {
         RIGHT: 1,
     },
     SIZE: {
-        HEIGHT: 460,
-        WIDTH: 1200,
     },
     SKILL_TYPE: {
         ATTACK: 0,

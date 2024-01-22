@@ -5,6 +5,10 @@ package hero;
 message Hero {
     uint32 uid = 1; // 英雄唯一id
     uint32 id = 2; // 英雄id
+    uint32 soldier_id = 3; // 小兵id
+    uint32 soldier_amount = 4; // 小兵数量
+    uint32 hp = 5; // 当前血量
+    map<uint32, uint32> attrs = 6; // 属性值
 }
 
 message c2s_load {

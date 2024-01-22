@@ -1,0 +1,14 @@
+{
+    "101": {
+        "battle_mode": 3,
+        "battle_type": 2,
+        "expired_sec": 120,
+        "id": 101
+    },
+    "102": {
+        "battle_mode": 1,
+        "battle_type": 2,
+        "expired_sec": 120,
+        "id": 102
+    }
+}

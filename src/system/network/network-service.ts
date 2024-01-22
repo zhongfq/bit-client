@@ -170,7 +170,7 @@ export class NetworkService extends Service<NetworkService> {
 
             // TODO: 发布版本中移除
             if (!this._ignoredLog[protocol.op]) {
-                console.log("Request:", message);
+                console.log(`Request: ${protocol.typeURL}`, message);
             }
 
             const session = ++this._session;
@@ -224,7 +224,7 @@ export class NetworkService extends Service<NetworkService> {
 
             // TODO: 发布版本中移除
             if (!this._ignoredLog[protocol.op]) {
-                console.log("Response:", message);
+                console.log(`Response: ${protocol.typeURL}`, message);
             }
 
             // dispatch to network service

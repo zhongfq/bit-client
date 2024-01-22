@@ -49,6 +49,10 @@ export const registerUI = () => {
         url: "scenes/login.ls",
     });
     app.ui.register({
+        id: ui.world,
+        url: "scenes/world.ls",
+    });
+    app.ui.register({
         id: ui.bagDialog,
         url: "resources/prefab/bag/bag-dialog.lh",
         blockInput: true,

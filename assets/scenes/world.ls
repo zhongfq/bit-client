@@ -12,6 +12,10 @@
     {
       "_$type": "ad2af7bd-34fb-4cdc-8643-865c9443bd14",
       "scriptPath": "../src/system/world/world-mediator.ts"
+    },
+    {
+      "_$type": "445a740f-55ae-4a44-9fa4-15ba95a48032",
+      "scriptPath": "../src/system/world/world.ts"
     }
   ],
   "_$child": [
@@ -57,8 +61,8 @@
           "transform": {
             "localPosition": {
               "_$type": "Vector3",
-              "y": 13,
-              "z": 12.51005
+              "y": 20,
+              "z": 20
             },
             "localRotation": {
               "_$type": "Quaternion",

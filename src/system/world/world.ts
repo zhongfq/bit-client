@@ -17,4 +17,8 @@ export class World extends Mediator {
         this._ecs.addSystem(new MovementSystem(this));
         this._ecs.addSystem(new RenderSystem(this));
     }
+
+    onUpdate(): void {
+        this._ecs.update(Laya.timer.delta / 1000);
+    }
 }

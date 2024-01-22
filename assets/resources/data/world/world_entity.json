@@ -1,4 +1,106 @@
 {
+    "models": {
+        "101": {
+            "id": 101,
+            "res": "prefab/war/role/lvbu"
+        },
+        "102": {
+            "id": 102,
+            "res": "prefab/war/role/lvbu"
+        },
+        "105": {
+            "id": 105,
+            "res": "prefab/war/role/lvbu"
+        },
+        "106": {
+            "id": 106,
+            "res": "prefab/war/role/lvbu"
+        },
+        "209": {
+            "id": 209,
+            "res": "prefab/war/role/lvbu"
+        },
+        "212": {
+            "id": 212,
+            "res": "prefab/war/role/lvbu"
+        },
+        "401": {
+            "id": 401,
+            "res": "prefab/war/role/lvbu"
+        },
+        "404": {
+            "id": 404,
+            "res": "prefab/war/role/lvbu"
+        },
+        "40001": {
+            "id": 40001,
+            "res": "prefab/war/role/xibing1"
+        },
+        "40002": {
+            "id": 40002,
+            "res": "prefab/war/role/xibing2"
+        },
+        "40003": {
+            "id": 40003,
+            "res": "prefab/battle/role/xb-qiangbing"
+        },
+        "40004": {
+            "id": 40004,
+            "res": "prefab/battle/role/xb-gongbing"
+        },
+        "40005": {
+            "id": 40005,
+            "res": "prefab/battle/role/jx-gongchengche"
+        },
+        "50001": {
+            "id": 50001,
+            "res": "prefab/battle/bullet/jiantou"
+        },
+        "50002": {
+            "id": 50002,
+            "res": "prefab/battle/bullet/fengniu"
+        },
+        "50003": {
+            "id": 50003,
+            "res": "prefab/battle/bullet/houjianpao"
+        },
+        "50004": {
+            "id": 50004,
+            "res": "prefab/battle/bullet/longjuanfeng"
+        },
+        "50005": {
+            "id": 50005,
+            "res": "prefab/battle/bullet/bailong"
+        },
+        "50006": {
+            "id": 50006,
+            "res": "prefab/battle/bullet/bishan"
+        },
+        "50007": {
+            "id": 50007,
+            "res": "prefab/battle/bullet/yunshi"
+        },
+        "50008": {
+            "id": 50008,
+            "res": "prefab/battle/bullet/lvbu-skill"
+        },
+        "50009": {
+            "id": 50009,
+            "res": "prefab/battle/bullet/zhouyu-attack"
+        },
+        "50010": {
+            "id": 50010,
+            "res": "prefab/battle/bullet/zhugeliang-attack"
+        },
+        "50011": {
+            "id": 50011,
+            "res": "prefab/battle/bullet/xiaoqiao-attack"
+        },
+        "50012": {
+            "id": 50012,
+            "res": "prefab/battle/bullet/guanyu-skill"
+        }
+    },
     "type_conf": [
         {
             "build_limit": 1,
@@ -10,7 +112,7 @@
             "sight_shared": 1
         },
         {
-            "define": "TEAM",
+            "define": "TROOP",
             "etype": 2,
             "sight_radius": 1,
             "sight_shared": 1
@@ -20,76 +122,6 @@
             "define": "CITY",
             "etype": 3,
             "sight_radius": 1,
-            "sight_shared": 1
-        },
-        {
-            "define": "EVENT_BOX",
-            "etype": 4,
-            "sight_radius": 1,
-            "view_limit": 1
-        },
-        {
-            "define": "FLAG_BASE",
-            "etype": 5,
-            "sight_radius": 3
-        },
-        {
-            "can_defend": 1,
-            "define": "FLAG",
-            "etype": 6,
-            "sight_radius": 3,
-            "sight_shared": 1
-        },
-        {
-            "define": "EVENT_MONSTER",
-            "etype": 7,
-            "sight_radius": 1
-        },
-        {
-            "build_limit": 1,
-            "define": "CASTLE_BASE",
-            "etype": 8,
-            "sight_radius": 3,
-            "sight_shared": 1
-        },
-        {
-            "define": "MONSTER",
-            "etype": 9,
-            "sight_radius": 1
-        },
-        {
-            "define": "EXPLORER",
-            "dispel_fog_size": 3,
-            "etype": 10,
-            "sight_radius": 1,
-            "view_limit": 1
-        },
-        {
-            "build_limit": 2,
-            "can_defend": 1,
-            "define": "TENT",
-            "etype": 11,
-            "sight_radius": 3,
-            "sight_shared": 1
-        },
-        {
-            "define": "EVENT_NPC",
-            "etype": 12,
-            "sight_radius": 1,
-            "view_limit": 1
-        },
-        {
-            "build_limit": 0,
-            "define": "MINE",
-            "etype": 13,
-            "sight_radius": 3,
-            "sight_shared": 1
-        },
-        {
-            "build_limit": 2,
-            "define": "COLLECT_POINT",
-            "etype": 14,
-            "sight_radius": 3,
             "sight_shared": 1
         }
     ]
