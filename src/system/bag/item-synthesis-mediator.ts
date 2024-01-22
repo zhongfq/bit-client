@@ -28,7 +28,7 @@ export class ItemSynthesisMediator extends Mediator {
         this.owner.slider.value--;
     }
     onSynthesisBtn() {
-        app.service.bag.callCompositeItem({
+        app.service.bag.requestCompositeItem({
             itemId: this.owner.data.vo.id,
             num: this.owner.slider.value,
         });

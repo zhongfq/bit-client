@@ -22,12 +22,12 @@ export class ItemBoxUseMediator extends Mediator {
         this.owner.slider.max = this.owner.data.goodsNumber;
         this.owner.slider.value = 1;
         this.owner.iconNodeTop.updateGoods(this.owner.data);
-        let tlData = []
-        
-        for (let data of this.owner.data.ref!.args){
+        let tlData = [];
+
+        for (let data of this.owner.data.ref!.args) {
             let vo = app.service.bag.itemBag.createByRef(data[0]);
             vo.goodsNumber = data[1];
-            tlData.push(vo)
+            tlData.push(vo);
         }
         this.owner.itemList.renderHandler = new Laya.Handler(this, this.updateItem);
         this.owner.itemList.array = tlData;
@@ -42,7 +42,10 @@ export class ItemBoxUseMediator extends Mediator {
         this.owner.slider.value--;
     }
     onSynthesisBtn() {
-        app.service.bag.callUseItem({itemId:this.owner.data.refId,num:this.owner.slider.value})
+        app.service.bag.requestUseItem({
+            itemId: this.owner.data.refId,
+            num: this.owner.slider.value,
+        });
     }
     onCloseBtn() {
         this.owner.close();

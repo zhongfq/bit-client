@@ -20,11 +20,11 @@ export class GmMediator extends Mediator {
             this.owner.close();
         });
         this.owner.useBtn.on(Laya.Event.CLICK, () => {
-            app.service.gm.call(this.owner.textInput.text);
+            app.service.gm.requestGM(this.owner.textInput.text);
         });
 
         this.owner.resetBtn.on(Laya.Event.CLICK, () => {
-            app.service.gm.call("reset");
+            app.service.gm.requestGM("reset");
         });
         this.updateList();
     }
