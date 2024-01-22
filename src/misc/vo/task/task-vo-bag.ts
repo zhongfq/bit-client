@@ -10,7 +10,7 @@ import { TaskVo } from "./task-vo.js";
  */
 export class TaskBag extends VOBag<TaskVo> {
     public Hash(t: TaskVo): string | number {
-        return t.id;
+        return t.cmd?.id || 0;
     }
     init(data: proto.task.s2c_load) {
         for (let cmdData of data.tasks) {

@@ -25,6 +25,8 @@ export const enum ui {
     mainScene,
     bagBoxUseDialog,
     taskDialog,
+    mailDialog,
+    mailInfoDialog,
     gmDialog,
 }
 
@@ -85,6 +87,21 @@ export const registerUI = () => {
         url: "resources/prefab/task/task-dialog.lh",
         blockInput: true,
     });
+
+    app.ui.register({
+        id: ui.mailDialog,
+        autoClose: false,
+        url: "resources/prefab/mail/mail-dialog.lh",
+        blockInput: true,
+    });
+
+    app.ui.register({
+        id: ui.mailInfoDialog,
+        autoClose: false,
+        url: "resources/prefab/mail/mail-info-dialog.lh",
+        blockInput: true,
+    });
+
     app.ui.register({
         id: ui.gmDialog,
         url: "resources/prefab/gm/gm-dialog.lh",

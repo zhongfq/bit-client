@@ -1,55 +1,54 @@
 import { app } from "../../app";
-import { toEventType } from "../../core/dispatcher";
 import { Mediator } from "../../core/ui-mediator";
-import { BagUI } from "../../ui-runtime/prefab/bag/BagUI";
 import { IconUI } from "../../ui-runtime/prefab/icon/IconUI";
 import { DataUtil } from "../data/data-util";
-import { IconNodeMediator } from "../icon/icon-node-mediator";
-import { ItemVo } from "../../misc/vo/goods/item-vo";
-import { BagService } from "./bag-service";
+import { MailUI } from "../../ui-runtime/prefab/mail/MailUI";
+import proto from "../../def/proto.js";
+import { Util } from "../../core/untils/Util";
 
 const { regClass, property } = Laya;
 
 @regClass()
-export class BagMediator extends Mediator {
-    owner!: BagUI;
-    itemListData!: ItemVo[];
+export class MailMediator extends Mediator {
+    owner!: MailUI;
+    itemListData!: proto.mail.IMailInfo[];
 
     onAwake(): void {
         this.owner.itemList.renderHandler = new Laya.Handler(this, this.updateItem);
         this.owner.itemList.mouseHandler = new Laya.Handler(this, this.onListClick);
         this.owner.menuTab.selectHandler = new Laya.Handler(this, this.onTabSelect);
+
         this.updateList();
-        this.on(app.service.bag, BagService.ITEM_UPDATE, () => {
-            this.updateList();
-        });
     }
     onIconClick() {}
     onListClick(evn: Laya.Event, index: number) {
         if (evn.type == Laya.Event.CLICK) {
+            // app.ui.show;()
         }
     }
     onTabSelect(index: number) {
         this.updateList();
     }
-    updateItem(cell: IconUI, index: number) {
-        let cellData = this.itemListData[index];
+    updateItem(cell: MailUI, index: number) {
+        cell.getChildByName("labelMailTips");
+        cell.getChildByName("labelTailTime");
+        cell.getChildByName("labelMailRemainder");
+        cell.getChildByName("labeliconDrward");
+        // let cellData = this.itemListData.get(index);
         // cell.iconNumber.text = cellData.goodsNumber?.toString() || "0";
-        cell.updateGoods(cellData);
+        // cell.updateGoods(cellData);
     }
     updateList() {
-        const bag = app.service.bag.itemBag;
-        this.itemListData = [];
         if (this.owner.menuTab.selectedIndex == 0) {
-            this.itemListData = bag.toArray();
+            this.itemListData = Util.toArray<proto.mail.IMailInfo>(app.service.mail.mails);
         } else {
-            let tlItem = DataUtil.getArrayRef(app.service.data.itemTable, { composite: 1 });
-            for (let refItem of tlItem) {
-                let itemvo = bag.createByRef(refItem.id);
-                this.itemListData.push(itemvo);
-            }
+            // let tlItem = DataUtil.getArrayRef(app.service.data.itemTable, { composite: 1 });
+            // for (let refItem of tlItem) {
+            //     let itemvo = bag.createByRef(refItem.id);
+            //     this.itemListData.push(itemvo);
+            // }
         }
-        this.owner.itemList.array = this.itemListData;
+        // this.owner.itemList.array = this.itemListData;
     }
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
     //onAwake(): void {}

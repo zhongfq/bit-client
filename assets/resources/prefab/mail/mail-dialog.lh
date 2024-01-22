@@ -1,0 +1,189 @@
+{
+  "_$ver": 1,
+  "_$id": "sxpq9fzh",
+  "_$runtime": "res://c7543732-76c5-4b5a-a38e-09b9d1fdde6b",
+  "_$type": "Dialog",
+  "name": "Dialog",
+  "width": 511,
+  "height": 753,
+  "_mouseState": 2,
+  "isModal": true,
+  "_$comp": [
+    {
+      "_$type": "6e0f6b6b-be3a-47a2-be0c-b7bf5205528d",
+      "scriptPath": "../src/system/mail/mail-mediator.ts"
+    }
+  ],
+  "_$child": [
+    {
+      "_$id": "2kdo09if",
+      "_$var": true,
+      "_$type": "Image",
+      "name": "Image",
+      "width": 511,
+      "height": 753,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "bottom": 0,
+      "skin": "res://3225dc27-5bcb-446e-8b66-27df87624835",
+      "sizeGrid": "50,30,50,30,0",
+      "color": "#ffffff"
+    },
+    {
+      "_$id": "pldb6cos",
+      "_$var": true,
+      "_$type": "Tab",
+      "name": "menuTab",
+      "x": -2,
+      "y": 752,
+      "width": 423,
+      "height": 50,
+      "_mouseState": 2,
+      "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
+      "labels": "tab1,tab2",
+      "space": 0,
+      "selectedIndex": 0,
+      "labelFont": null,
+      "labelStroke": null,
+      "labelStrokeColor": null,
+      "labelAlign": null,
+      "strokeColors": null
+    },
+    {
+      "_$id": "yccd3eik",
+      "_$var": true,
+      "_$type": "List",
+      "name": "itemList",
+      "x": 5,
+      "y": 53,
+      "width": 501,
+      "height": 689,
+      "_mouseState": 2,
+      "left": 5,
+      "right": 5,
+      "top": 53,
+      "bottom": 11,
+      "itemTemplate": {
+        "_$ref": "ee3dm4xh",
+        "_$tmpl": "itemRender"
+      },
+      "repeatX": 1,
+      "repeatY": 6,
+      "spaceY": 7,
+      "scrollType": 2,
+      "_$child": [
+        {
+          "_$id": "ee3dm4xh",
+          "_$type": "Box",
+          "name": "Box",
+          "width": 499,
+          "height": 125,
+          "bgColor": "rgba(93, 85, 85, 1)",
+          "_$child": [
+            {
+              "_$id": "64lqyhk5",
+              "_$type": "Image",
+              "name": "imgMialType",
+              "x": 7,
+              "y": 23,
+              "width": 55,
+              "height": 47,
+              "skin": "res://2570bae8-d6b9-40e9-8c20-5414e26b6329",
+              "color": "#ffffff"
+            },
+            {
+              "_$id": "s9yygi89",
+              "_$type": "Label",
+              "name": "labelMailTips",
+              "x": 72,
+              "y": 12.999999999999943,
+              "width": 406,
+              "height": 33,
+              "text": "维护补偿",
+              "fontSize": 24,
+              "color": "#FFFFFF",
+              "valign": "top",
+              "overflow": "ellipsis",
+              "padding": "0,0,0,0"
+            },
+            {
+              "_$id": "1mqydaid",
+              "_$type": "Label",
+              "name": "labelMailTime",
+              "x": 71,
+              "y": 62.99999999999994,
+              "width": 111,
+              "height": 33,
+              "text": "2024.1.1",
+              "fontSize": 20,
+              "color": "#FFFFFF",
+              "valign": "top",
+              "overflow": "ellipsis",
+              "padding": "0,0,0,0"
+            },
+            {
+              "_$id": "3yb82c4g",
+              "_$type": "Label",
+              "name": "labelMailRemainder",
+              "x": 377,
+              "y": 80.99999999999994,
+              "width": 111,
+              "height": 33,
+              "text": "2024.1.1",
+              "fontSize": 20,
+              "color": "#FFFFFF",
+              "valign": "top",
+              "overflow": "ellipsis",
+              "padding": "0,0,0,0"
+            },
+            {
+              "_$id": "mk6a3w9u",
+              "_$prefab": "296a5627-8151-43ef-8283-ced0d50d81a8",
+              "name": "iconDrward",
+              "active": true,
+              "x": 422,
+              "y": 15,
+              "visible": true,
+              "scaleX": 0.5,
+              "scaleY": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "6ee7kogk",
+      "_$var": true,
+      "_$type": "Button",
+      "name": "Button",
+      "x": 470,
+      "y": 7,
+      "width": 32,
+      "height": 32,
+      "_mouseState": 2,
+      "right": 9,
+      "top": 7,
+      "skin": "res://60a9086c-a9c2-4e01-a563-355c117b509e",
+      "label": "",
+      "labelSize": 20
+    },
+    {
+      "_$id": "vyoq14nb",
+      "_$type": "Label",
+      "name": "Label",
+      "x": 196,
+      "y": 10,
+      "width": 120,
+      "height": 28,
+      "top": 10,
+      "centerX": 0,
+      "text": "邮件",
+      "fontSize": 20,
+      "color": "#FFFFFF",
+      "align": "center",
+      "valign": "middle",
+      "padding": "0,0,0,0"
+    }
+  ]
+}
