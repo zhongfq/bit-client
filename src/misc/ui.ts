@@ -24,6 +24,8 @@ export class ui {
     static readonly mainScene = 11;
     static readonly bagBoxUseDialog = 12;
     static readonly taskDialog = 13;
+    static readonly mailDialog = 14;
+    static readonly mailInfoDialog = 15;
     static readonly gmDialog = 9999;
 
     static register() {
@@ -83,6 +85,21 @@ export class ui {
             url: "resources/prefab/task/task-dialog.lh",
             blockInput: true,
         });
+
+        app.ui.register({
+            id: ui.mailDialog,
+            autoClose: false,
+            url: "resources/prefab/mail/mail-dialog.lh",
+            blockInput: true,
+        });
+
+        app.ui.register({
+            id: ui.mailInfoDialog,
+            autoClose: false,
+            url: "resources/prefab/mail/mail-info-dialog.lh",
+            blockInput: true,
+        });
+
         app.ui.register({
             id: ui.gmDialog,
             url: "resources/prefab/gm/gm-dialog.lh",

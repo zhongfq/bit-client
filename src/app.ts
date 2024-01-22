@@ -11,9 +11,10 @@ import { DataService } from "./system/data/data-service";
 import { GmService } from "./system/gm/gm-service";
 import { NetworkService } from "./system/network/network-service";
 import { TaskService } from "./system/task/task-service";
-import { UserService } from "./system/user/user-service";
 import { VoUtil } from "./misc/vo-util";
 import { WarService } from "./system/war/war-service";
+import { UserService } from "./system/user/user-service";
+import { MailService } from "./system/mail/mail-service";
 
 const { regClass, property } = Laya;
 
@@ -33,6 +34,7 @@ class ServiceManager {
     readonly bag: BagService;
     readonly gm: GmService;
     readonly task: TaskService;
+    readonly mail: MailService;
 
     private _services: Service<NetworkService>[] = [];
 
@@ -44,6 +46,7 @@ class ServiceManager {
         this.bag = this.newService(BagService);
         this.gm = this.newService(GmService);
         this.task = this.newService(TaskService);
+        this.mail = this.newService(MailService);
 
         // ignore log
         this.network.ignoreLog(opcode.user.c2s_ping);

@@ -181,6 +181,7 @@ export class NetworkService extends Service<NetworkService> {
             packet.writeShort(protocol.op);
             packet.writeShort(session);
             packet.writeBytes(data);
+
             this._socket?.send(packet.buffer);
 
             this._callbacks[session] = { resolve, reject };

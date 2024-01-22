@@ -1,34 +1,27 @@
-import { app } from "../../app";
-import { Mediator } from "../../core/ui-mediator";
-import { ui } from "../../misc/ui";
-import { MainSceneUI } from "../../ui-runtime/scene/main-scene/MainSceneUI";
-
 const { regClass, property } = Laya;
 
 @regClass()
-export class MainMediator extends Mediator {
-    owner!: MainSceneUI;
+export class ButtonCommont extends Laya.Script {
+    declare owner: Laya.Button;
+
+    @property(Number)
+    public sclaeX: number = 0.8;
+    @property(Number)
+    public sclaeY: number = 0.8;
+    curScaleX!: number;
+    curScaleY!: number;
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
     onAwake(): void {
-        this.initBtn();
+        this.curScaleX = this.owner.scaleX;
+        this.curScaleY = this.owner.scaleY;
+        this.owner.on(Laya.Event.MOUSE_DOWN, () => {
+            Laya.Tween.to(this.owner, { scaleX: 0.8, scaleY: 0.8 }, 30);
+        });
+        this.owner.on(Laya.Event.MOUSE_UP, () => {
+            Laya.Tween.to(this.owner, { scaleX: this.curScaleX, scaleY: this.curScaleY }, 30);
+        });
     }
 
-    onKeyDown(evt: Laya.Event): void {
-        if (evt.ctrlKey && evt.keyCode == Laya.Keyboard.B) {
-            app.ui.show(ui.gmDialog);
-        }
-    }
-    initBtn() {
-        this.owner.btnBag.on(Laya.Event.CLICK, () => {
-            app.ui.show(ui.bagDialog);
-        });
-        this.owner.btnTask.on(Laya.Event.CLICK, () => {
-            app.ui.show(ui.taskDialog);
-        });
-        this.owner.btnMail.on(Laya.Event.CLICK, () => {
-            app.ui.show(ui.mailDialog);
-        });
-    }
     //组件被启用后执行，例如节点被添加到舞台后
     //onEnable(): void {}
 
