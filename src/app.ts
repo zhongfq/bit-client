@@ -5,22 +5,21 @@ import { Service } from "./core/service";
 import { TweenSystem } from "./core/tween/tween-system";
 import { UIManager } from "./core/ui-manager";
 import { opcode } from "./def/protocol";
-import { ui } from "./misc/ui";
+import { registerUI, ui } from "./misc/ui";
 import { BagService } from "./system/bag/bag-service";
 import { DataService } from "./system/data/data-service";
 import { GmService } from "./system/gm/gm-service";
 import { NetworkService } from "./system/network/network-service";
 import { TaskService } from "./system/task/task-service";
 import { UserService } from "./system/user/user-service";
-import { VoUtil } from "./misc/vo-util";
-import { WarService } from "./system/war/war-service";
+import { WorldService } from "./system/world/world-service";
 
 const { regClass, property } = Laya;
 
 @regClass()
 export class Main extends AppBase {
     onAwake(): void {
-        ui.register();
+        registerUI();
         app.init();
     }
 }
@@ -29,7 +28,7 @@ class ServiceManager {
     readonly network: NetworkService;
     readonly data: DataService;
     readonly user: UserService;
-    readonly war: WarService;
+    readonly world: WorldService;
     readonly bag: BagService;
     readonly gm: GmService;
     readonly task: TaskService;
@@ -39,7 +38,7 @@ class ServiceManager {
     constructor() {
         this.network = this.newService(NetworkService);
         this.user = this.newService(UserService);
-        this.war = this.newService(WarService);
+        this.world = this.newService(WorldService);
         this.data = this.newService(DataService);
         this.bag = this.newService(BagService);
         this.gm = this.newService(GmService);

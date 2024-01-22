@@ -107,7 +107,7 @@
           "_$comp": [
             {
               "_$type": "DirectionLightCom",
-              "intensity": 2.49,
+              "intensity": 1,
               "lightmapBakedType": 1,
               "shadowMode": 2,
               "shadowStrength": 0.506,

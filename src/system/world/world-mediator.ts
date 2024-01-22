@@ -1,21 +1,39 @@
+import { app } from "../../app";
+import { Mediator } from "../../core/ui-mediator";
+import { errcode, opcode } from "../../def/protocol";
+import proto from "../../def/proto.js";
 import { WorldUI } from "../../ui-runtime/scene/WorldUI";
 import { CameraController } from "./camera-controller";
 
 const { regClass, property } = Laya;
 
 @regClass()
-export class WorldMediator extends Laya.Script {
+export class WorldMediator extends Mediator {
     //declare owner : Laya.Sprite3D;
     declare owner: WorldUI;
 
     private _initPosition: Laya.Point = new Laya.Point();
     private _pressStart: Laya.Point | null = null;
 
-    onAwake(): void {
+    onAwake() {
         this._initPosition.setTo(this.owner.joystick.x, this.owner.joystick.y);
         this.owner.joystickGroup.on(Laya.Event.MOUSE_DOWN, this, this.onJoysticHandler);
         this.owner.joystickGroup.on(Laya.Event.MOUSE_MOVE, this, this.onJoysticHandler);
         this.owner.joystickGroup.on(Laya.Event.MOUSE_UP, this, this.onJoysticHandler);
+
+        this.on(app.service.network, opcode.user.s2c_login, this._onLogin, this);
+    }
+
+    async onStart() {}
+
+    private async _onLogin(data: proto.user.s2c_login) {
+        if (data.err === errcode.OK) {
+            await app.service.gm.requestGM("setup_troop 1 101 1 10");
+            await app.service.gm.requestGM("join_world");
+            await app.service.world.requestChangeViewport({ x: 0, y: 0 });
+
+            const troop = await app.service.world.requestTroopLoad();
+        }
     }
 
     onJoysticHandler(e: Laya.Event) {
