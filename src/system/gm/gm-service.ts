@@ -8,6 +8,7 @@ export class GmService extends Service<NetworkService> {
         super(network);
         this.handle(opcode.user.s2c_gm, this._onGm);
     }
+
     private _onGm(data: proto.user.Is2c_gm) {
         if (data.err) {
             console.log(data.err);
@@ -15,7 +16,11 @@ export class GmService extends Service<NetworkService> {
         }
         console.log(data.msg);
     }
-    public callGm(data: proto.user.Ic2s_gm) {
-        this._network.call(proto.user.c2s_gm.create(data), proto.user.c2s_gm);
+
+    //-------------------------------------------------------------------------
+    // RPC
+    //-------------------------------------------------------------------------
+    async call(cmd: string) {
+        return await this._network.call(proto.user.c2s_gm.create({ cmd: cmd }), proto.user.s2c_gm);
     }
 }
