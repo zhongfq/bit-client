@@ -205,12 +205,12 @@ message BattleSubHpAction {
     uint32 cur_hp = 4;
 }
 
+// 暂时保留
 message BattleAddBullet {
     uint32 src_eid = 1;
     uint32 dst_eid = 2;
     uint32 bullet_id = 3;
     uint32 duration = 4; // 毫秒
-    uint32 h = 5; // 相对地面高度
 }
 
 message BattleAddBuffAction {

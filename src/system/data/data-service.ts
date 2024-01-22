@@ -39,8 +39,8 @@ export class DataService extends Service<NetworkService> {
         // TODO: 处理加载错误
         this.equipTable = await app.loader.loadJson(JSON_EQUIP_TABLE);
         this.attrTable = await app.loader.loadJson(JSON_ATTR_TABLE);
-        this.battleEntityTable = await app.loader.loadJson(JSON_ENTITY_TABLE);
-        this.battleBuffTable = await app.loader.loadJson(JSON_BUFF_TABLE);
+        // this.battleEntityTable = await app.loader.loadJson(JSON_ENTITY_TABLE);
+        // this.battleBuffTable = await app.loader.loadJson(JSON_BUFF_TABLE);
         this.skillTable = await app.loader.loadJson(JSON_SKILL_TABLE);
         this.heroTable = await app.loader.loadJson(JSON_HERO_TABLE);
         this.itemTable = await app.loader.loadJson(JSON_ITEM_TABLE);

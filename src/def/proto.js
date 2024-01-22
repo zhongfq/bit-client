@@ -2673,2744 +2673,6 @@ $root.bag = (function() {
     return bag;
 })();
 
-$root.chest = (function() {
-
-    /**
-     * Namespace chest.
-     * @exports chest
-     * @namespace
-     */
-    var chest = {};
-
-    chest.EquipItem = (function() {
-
-        /**
-         * Properties of an EquipItem.
-         * @memberof chest
-         * @interface IEquipItem
-         * @property {number|null} [id] EquipItem id
-         * @property {Object.<string,number>|null} [attrs] EquipItem attrs
-         */
-
-        /**
-         * Constructs a new EquipItem.
-         * @memberof chest
-         * @classdesc Represents an EquipItem.
-         * @implements IEquipItem
-         * @constructor
-         * @param {chest.IEquipItem=} [properties] Properties to set
-         */
-        function EquipItem(properties) {
-            this.attrs = {};
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * EquipItem id.
-         * @member {number} id
-         * @memberof chest.EquipItem
-         * @instance
-         */
-        EquipItem.prototype.id = 0;
-
-        /**
-         * EquipItem attrs.
-         * @member {Object.<string,number>} attrs
-         * @memberof chest.EquipItem
-         * @instance
-         */
-        EquipItem.prototype.attrs = $util.emptyObject;
-
-        /**
-         * Creates a new EquipItem instance using the specified properties.
-         * @function create
-         * @memberof chest.EquipItem
-         * @static
-         * @param {chest.IEquipItem=} [properties] Properties to set
-         * @returns {chest.EquipItem} EquipItem instance
-         */
-        EquipItem.create = function create(properties) {
-            return new EquipItem(properties);
-        };
-
-        /**
-         * Encodes the specified EquipItem message. Does not implicitly {@link chest.EquipItem.verify|verify} messages.
-         * @function encode
-         * @memberof chest.EquipItem
-         * @static
-         * @param {chest.IEquipItem} message EquipItem message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        EquipItem.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.id);
-            if (message.attrs != null && Object.hasOwnProperty.call(message, "attrs"))
-                for (var keys = Object.keys(message.attrs), i = 0; i < keys.length; ++i)
-                    writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 0 =*/8).uint32(keys[i]).uint32(/* id 2, wireType 0 =*/16).int32(message.attrs[keys[i]]).ldelim();
-            return writer;
-        };
-
-        /**
-         * Encodes the specified EquipItem message, length delimited. Does not implicitly {@link chest.EquipItem.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof chest.EquipItem
-         * @static
-         * @param {chest.IEquipItem} message EquipItem message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        EquipItem.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes an EquipItem message from the specified reader or buffer.
-         * @function decode
-         * @memberof chest.EquipItem
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {chest.EquipItem} EquipItem
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        EquipItem.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chest.EquipItem(), key, value;
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1: {
-                        message.id = reader.uint32();
-                        break;
-                    }
-                case 2: {
-                        if (message.attrs === $util.emptyObject)
-                            message.attrs = {};
-                        var end2 = reader.uint32() + reader.pos;
-                        key = 0;
-                        value = 0;
-                        while (reader.pos < end2) {
-                            var tag2 = reader.uint32();
-                            switch (tag2 >>> 3) {
-                            case 1:
-                                key = reader.uint32();
-                                break;
-                            case 2:
-                                value = reader.int32();
-                                break;
-                            default:
-                                reader.skipType(tag2 & 7);
-                                break;
-                            }
-                        }
-                        message.attrs[key] = value;
-                        break;
-                    }
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes an EquipItem message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof chest.EquipItem
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {chest.EquipItem} EquipItem
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        EquipItem.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies an EquipItem message.
-         * @function verify
-         * @memberof chest.EquipItem
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        EquipItem.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.id != null && message.hasOwnProperty("id"))
-                if (!$util.isInteger(message.id))
-                    return "id: integer expected";
-            if (message.attrs != null && message.hasOwnProperty("attrs")) {
-                if (!$util.isObject(message.attrs))
-                    return "attrs: object expected";
-                var key = Object.keys(message.attrs);
-                for (var i = 0; i < key.length; ++i) {
-                    if (!$util.key32Re.test(key[i]))
-                        return "attrs: integer key{k:uint32} expected";
-                    if (!$util.isInteger(message.attrs[key[i]]))
-                        return "attrs: integer{k:uint32} expected";
-                }
-            }
-            return null;
-        };
-
-        /**
-         * Creates an EquipItem message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof chest.EquipItem
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {chest.EquipItem} EquipItem
-         */
-        EquipItem.fromObject = function fromObject(object) {
-            if (object instanceof $root.chest.EquipItem)
-                return object;
-            var message = new $root.chest.EquipItem();
-            if (object.id != null)
-                message.id = object.id >>> 0;
-            if (object.attrs) {
-                if (typeof object.attrs !== "object")
-                    throw TypeError(".chest.EquipItem.attrs: object expected");
-                message.attrs = {};
-                for (var keys = Object.keys(object.attrs), i = 0; i < keys.length; ++i)
-                    message.attrs[keys[i]] = object.attrs[keys[i]] | 0;
-            }
-            return message;
-        };
-
-        /**
-         * Creates a plain object from an EquipItem message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof chest.EquipItem
-         * @static
-         * @param {chest.EquipItem} message EquipItem
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        EquipItem.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.objects || options.defaults)
-                object.attrs = {};
-            if (options.defaults)
-                object.id = 0;
-            if (message.id != null && message.hasOwnProperty("id"))
-                object.id = message.id;
-            var keys2;
-            if (message.attrs && (keys2 = Object.keys(message.attrs)).length) {
-                object.attrs = {};
-                for (var j = 0; j < keys2.length; ++j)
-                    object.attrs[keys2[j]] = message.attrs[keys2[j]];
-            }
-            return object;
-        };
-
-        /**
-         * Converts this EquipItem to JSON.
-         * @function toJSON
-         * @memberof chest.EquipItem
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        EquipItem.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        /**
-         * Gets the default type url for EquipItem
-         * @function getTypeUrl
-         * @memberof chest.EquipItem
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        EquipItem.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/chest.EquipItem";
-        };
-
-        return EquipItem;
-    })();
-
-    chest.ChestInfo = (function() {
-
-        /**
-         * Properties of a ChestInfo.
-         * @memberof chest
-         * @interface IChestInfo
-         * @property {chest.IEquipItem|null} ["new"] ChestInfo new
-         * @property {Object.<string,chest.IEquipItem>|null} [equips] ChestInfo equips
-         * @property {Object.<string,number>|null} [fullAttrs] ChestInfo fullAttrs
-         * @property {number|null} [amount] ChestInfo amount
-         * @property {number|null} [lv] ChestInfo lv
-         * @property {number|null} [exp] ChestInfo exp
-         * @property {number|null} [dungeonId] ChestInfo dungeonId
-         */
-
-        /**
-         * Constructs a new ChestInfo.
-         * @memberof chest
-         * @classdesc Represents a ChestInfo.
-         * @implements IChestInfo
-         * @constructor
-         * @param {chest.IChestInfo=} [properties] Properties to set
-         */
-        function ChestInfo(properties) {
-            this.equips = {};
-            this.fullAttrs = {};
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * ChestInfo new.
-         * @member {chest.IEquipItem|null|undefined} new
-         * @memberof chest.ChestInfo
-         * @instance
-         */
-        ChestInfo.prototype["new"] = null;
-
-        /**
-         * ChestInfo equips.
-         * @member {Object.<string,chest.IEquipItem>} equips
-         * @memberof chest.ChestInfo
-         * @instance
-         */
-        ChestInfo.prototype.equips = $util.emptyObject;
-
-        /**
-         * ChestInfo fullAttrs.
-         * @member {Object.<string,number>} fullAttrs
-         * @memberof chest.ChestInfo
-         * @instance
-         */
-        ChestInfo.prototype.fullAttrs = $util.emptyObject;
-
-        /**
-         * ChestInfo amount.
-         * @member {number} amount
-         * @memberof chest.ChestInfo
-         * @instance
-         */
-        ChestInfo.prototype.amount = 0;
-
-        /**
-         * ChestInfo lv.
-         * @member {number} lv
-         * @memberof chest.ChestInfo
-         * @instance
-         */
-        ChestInfo.prototype.lv = 0;
-
-        /**
-         * ChestInfo exp.
-         * @member {number} exp
-         * @memberof chest.ChestInfo
-         * @instance
-         */
-        ChestInfo.prototype.exp = 0;
-
-        /**
-         * ChestInfo dungeonId.
-         * @member {number} dungeonId
-         * @memberof chest.ChestInfo
-         * @instance
-         */
-        ChestInfo.prototype.dungeonId = 0;
-
-        /**
-         * Creates a new ChestInfo instance using the specified properties.
-         * @function create
-         * @memberof chest.ChestInfo
-         * @static
-         * @param {chest.IChestInfo=} [properties] Properties to set
-         * @returns {chest.ChestInfo} ChestInfo instance
-         */
-        ChestInfo.create = function create(properties) {
-            return new ChestInfo(properties);
-        };
-
-        /**
-         * Encodes the specified ChestInfo message. Does not implicitly {@link chest.ChestInfo.verify|verify} messages.
-         * @function encode
-         * @memberof chest.ChestInfo
-         * @static
-         * @param {chest.IChestInfo} message ChestInfo message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        ChestInfo.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message["new"] != null && Object.hasOwnProperty.call(message, "new"))
-                $root.chest.EquipItem.encode(message["new"], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            if (message.equips != null && Object.hasOwnProperty.call(message, "equips"))
-                for (var keys = Object.keys(message.equips), i = 0; i < keys.length; ++i) {
-                    writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 0 =*/8).uint32(keys[i]);
-                    $root.chest.EquipItem.encode(message.equips[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
-                }
-            if (message.fullAttrs != null && Object.hasOwnProperty.call(message, "fullAttrs"))
-                for (var keys = Object.keys(message.fullAttrs), i = 0; i < keys.length; ++i)
-                    writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 0 =*/8).uint32(keys[i]).uint32(/* id 2, wireType 0 =*/16).int32(message.fullAttrs[keys[i]]).ldelim();
-            if (message.amount != null && Object.hasOwnProperty.call(message, "amount"))
-                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.amount);
-            if (message.lv != null && Object.hasOwnProperty.call(message, "lv"))
-                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.lv);
-            if (message.exp != null && Object.hasOwnProperty.call(message, "exp"))
-                writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.exp);
-            if (message.dungeonId != null && Object.hasOwnProperty.call(message, "dungeonId"))
-                writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.dungeonId);
-            return writer;
-        };
-
-        /**
-         * Encodes the specified ChestInfo message, length delimited. Does not implicitly {@link chest.ChestInfo.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof chest.ChestInfo
-         * @static
-         * @param {chest.IChestInfo} message ChestInfo message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        ChestInfo.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a ChestInfo message from the specified reader or buffer.
-         * @function decode
-         * @memberof chest.ChestInfo
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {chest.ChestInfo} ChestInfo
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        ChestInfo.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chest.ChestInfo(), key, value;
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1: {
-                        message["new"] = $root.chest.EquipItem.decode(reader, reader.uint32());
-                        break;
-                    }
-                case 2: {
-                        if (message.equips === $util.emptyObject)
-                            message.equips = {};
-                        var end2 = reader.uint32() + reader.pos;
-                        key = 0;
-                        value = null;
-                        while (reader.pos < end2) {
-                            var tag2 = reader.uint32();
-                            switch (tag2 >>> 3) {
-                            case 1:
-                                key = reader.uint32();
-                                break;
-                            case 2:
-                                value = $root.chest.EquipItem.decode(reader, reader.uint32());
-                                break;
-                            default:
-                                reader.skipType(tag2 & 7);
-                                break;
-                            }
-                        }
-                        message.equips[key] = value;
-                        break;
-                    }
-                case 3: {
-                        if (message.fullAttrs === $util.emptyObject)
-                            message.fullAttrs = {};
-                        var end2 = reader.uint32() + reader.pos;
-                        key = 0;
-                        value = 0;
-                        while (reader.pos < end2) {
-                            var tag2 = reader.uint32();
-                            switch (tag2 >>> 3) {
-                            case 1:
-                                key = reader.uint32();
-                                break;
-                            case 2:
-                                value = reader.int32();
-                                break;
-                            default:
-                                reader.skipType(tag2 & 7);
-                                break;
-                            }
-                        }
-                        message.fullAttrs[key] = value;
-                        break;
-                    }
-                case 4: {
-                        message.amount = reader.uint32();
-                        break;
-                    }
-                case 5: {
-                        message.lv = reader.uint32();
-                        break;
-                    }
-                case 6: {
-                        message.exp = reader.uint32();
-                        break;
-                    }
-                case 7: {
-                        message.dungeonId = reader.uint32();
-                        break;
-                    }
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes a ChestInfo message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof chest.ChestInfo
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {chest.ChestInfo} ChestInfo
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        ChestInfo.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a ChestInfo message.
-         * @function verify
-         * @memberof chest.ChestInfo
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        ChestInfo.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message["new"] != null && message.hasOwnProperty("new")) {
-                var error = $root.chest.EquipItem.verify(message["new"]);
-                if (error)
-                    return "new." + error;
-            }
-            if (message.equips != null && message.hasOwnProperty("equips")) {
-                if (!$util.isObject(message.equips))
-                    return "equips: object expected";
-                var key = Object.keys(message.equips);
-                for (var i = 0; i < key.length; ++i) {
-                    if (!$util.key32Re.test(key[i]))
-                        return "equips: integer key{k:uint32} expected";
-                    {
-                        var error = $root.chest.EquipItem.verify(message.equips[key[i]]);
-                        if (error)
-                            return "equips." + error;
-                    }
-                }
-            }
-            if (message.fullAttrs != null && message.hasOwnProperty("fullAttrs")) {
-                if (!$util.isObject(message.fullAttrs))
-                    return "fullAttrs: object expected";
-                var key = Object.keys(message.fullAttrs);
-                for (var i = 0; i < key.length; ++i) {
-                    if (!$util.key32Re.test(key[i]))
-                        return "fullAttrs: integer key{k:uint32} expected";
-                    if (!$util.isInteger(message.fullAttrs[key[i]]))
-                        return "fullAttrs: integer{k:uint32} expected";
-                }
-            }
-            if (message.amount != null && message.hasOwnProperty("amount"))
-                if (!$util.isInteger(message.amount))
-                    return "amount: integer expected";
-            if (message.lv != null && message.hasOwnProperty("lv"))
-                if (!$util.isInteger(message.lv))
-                    return "lv: integer expected";
-            if (message.exp != null && message.hasOwnProperty("exp"))
-                if (!$util.isInteger(message.exp))
-                    return "exp: integer expected";
-            if (message.dungeonId != null && message.hasOwnProperty("dungeonId"))
-                if (!$util.isInteger(message.dungeonId))
-                    return "dungeonId: integer expected";
-            return null;
-        };
-
-        /**
-         * Creates a ChestInfo message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof chest.ChestInfo
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {chest.ChestInfo} ChestInfo
-         */
-        ChestInfo.fromObject = function fromObject(object) {
-            if (object instanceof $root.chest.ChestInfo)
-                return object;
-            var message = new $root.chest.ChestInfo();
-            if (object["new"] != null) {
-                if (typeof object["new"] !== "object")
-                    throw TypeError(".chest.ChestInfo.new: object expected");
-                message["new"] = $root.chest.EquipItem.fromObject(object["new"]);
-            }
-            if (object.equips) {
-                if (typeof object.equips !== "object")
-                    throw TypeError(".chest.ChestInfo.equips: object expected");
-                message.equips = {};
-                for (var keys = Object.keys(object.equips), i = 0; i < keys.length; ++i) {
-                    if (typeof object.equips[keys[i]] !== "object")
-                        throw TypeError(".chest.ChestInfo.equips: object expected");
-                    message.equips[keys[i]] = $root.chest.EquipItem.fromObject(object.equips[keys[i]]);
-                }
-            }
-            if (object.fullAttrs) {
-                if (typeof object.fullAttrs !== "object")
-                    throw TypeError(".chest.ChestInfo.fullAttrs: object expected");
-                message.fullAttrs = {};
-                for (var keys = Object.keys(object.fullAttrs), i = 0; i < keys.length; ++i)
-                    message.fullAttrs[keys[i]] = object.fullAttrs[keys[i]] | 0;
-            }
-            if (object.amount != null)
-                message.amount = object.amount >>> 0;
-            if (object.lv != null)
-                message.lv = object.lv >>> 0;
-            if (object.exp != null)
-                message.exp = object.exp >>> 0;
-            if (object.dungeonId != null)
-                message.dungeonId = object.dungeonId >>> 0;
-            return message;
-        };
-
-        /**
-         * Creates a plain object from a ChestInfo message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof chest.ChestInfo
-         * @static
-         * @param {chest.ChestInfo} message ChestInfo
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        ChestInfo.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.objects || options.defaults) {
-                object.equips = {};
-                object.fullAttrs = {};
-            }
-            if (options.defaults) {
-                object["new"] = null;
-                object.amount = 0;
-                object.lv = 0;
-                object.exp = 0;
-                object.dungeonId = 0;
-            }
-            if (message["new"] != null && message.hasOwnProperty("new"))
-                object["new"] = $root.chest.EquipItem.toObject(message["new"], options);
-            var keys2;
-            if (message.equips && (keys2 = Object.keys(message.equips)).length) {
-                object.equips = {};
-                for (var j = 0; j < keys2.length; ++j)
-                    object.equips[keys2[j]] = $root.chest.EquipItem.toObject(message.equips[keys2[j]], options);
-            }
-            if (message.fullAttrs && (keys2 = Object.keys(message.fullAttrs)).length) {
-                object.fullAttrs = {};
-                for (var j = 0; j < keys2.length; ++j)
-                    object.fullAttrs[keys2[j]] = message.fullAttrs[keys2[j]];
-            }
-            if (message.amount != null && message.hasOwnProperty("amount"))
-                object.amount = message.amount;
-            if (message.lv != null && message.hasOwnProperty("lv"))
-                object.lv = message.lv;
-            if (message.exp != null && message.hasOwnProperty("exp"))
-                object.exp = message.exp;
-            if (message.dungeonId != null && message.hasOwnProperty("dungeonId"))
-                object.dungeonId = message.dungeonId;
-            return object;
-        };
-
-        /**
-         * Converts this ChestInfo to JSON.
-         * @function toJSON
-         * @memberof chest.ChestInfo
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        ChestInfo.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        /**
-         * Gets the default type url for ChestInfo
-         * @function getTypeUrl
-         * @memberof chest.ChestInfo
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        ChestInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/chest.ChestInfo";
-        };
-
-        return ChestInfo;
-    })();
-
-    chest.c2s_load = (function() {
-
-        /**
-         * Properties of a c2s_load.
-         * @memberof chest
-         * @interface Ic2s_load
-         */
-
-        /**
-         * Constructs a new c2s_load.
-         * @memberof chest
-         * @classdesc Represents a c2s_load.
-         * @implements Ic2s_load
-         * @constructor
-         * @param {chest.Ic2s_load=} [properties] Properties to set
-         */
-        function c2s_load(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * Creates a new c2s_load instance using the specified properties.
-         * @function create
-         * @memberof chest.c2s_load
-         * @static
-         * @param {chest.Ic2s_load=} [properties] Properties to set
-         * @returns {chest.c2s_load} c2s_load instance
-         */
-        c2s_load.create = function create(properties) {
-            return new c2s_load(properties);
-        };
-
-        /**
-         * Encodes the specified c2s_load message. Does not implicitly {@link chest.c2s_load.verify|verify} messages.
-         * @function encode
-         * @memberof chest.c2s_load
-         * @static
-         * @param {chest.Ic2s_load} message c2s_load message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        c2s_load.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            return writer;
-        };
-
-        /**
-         * Encodes the specified c2s_load message, length delimited. Does not implicitly {@link chest.c2s_load.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof chest.c2s_load
-         * @static
-         * @param {chest.Ic2s_load} message c2s_load message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        c2s_load.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a c2s_load message from the specified reader or buffer.
-         * @function decode
-         * @memberof chest.c2s_load
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {chest.c2s_load} c2s_load
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        c2s_load.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chest.c2s_load();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes a c2s_load message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof chest.c2s_load
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {chest.c2s_load} c2s_load
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        c2s_load.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a c2s_load message.
-         * @function verify
-         * @memberof chest.c2s_load
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        c2s_load.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            return null;
-        };
-
-        /**
-         * Creates a c2s_load message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof chest.c2s_load
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {chest.c2s_load} c2s_load
-         */
-        c2s_load.fromObject = function fromObject(object) {
-            if (object instanceof $root.chest.c2s_load)
-                return object;
-            return new $root.chest.c2s_load();
-        };
-
-        /**
-         * Creates a plain object from a c2s_load message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof chest.c2s_load
-         * @static
-         * @param {chest.c2s_load} message c2s_load
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        c2s_load.toObject = function toObject() {
-            return {};
-        };
-
-        /**
-         * Converts this c2s_load to JSON.
-         * @function toJSON
-         * @memberof chest.c2s_load
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        c2s_load.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        /**
-         * Gets the default type url for c2s_load
-         * @function getTypeUrl
-         * @memberof chest.c2s_load
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        c2s_load.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/chest.c2s_load";
-        };
-
-        return c2s_load;
-    })();
-
-    chest.s2c_load = (function() {
-
-        /**
-         * Properties of a s2c_load.
-         * @memberof chest
-         * @interface Is2c_load
-         * @property {number|null} [err] s2c_load err
-         * @property {chest.IChestInfo|null} [info] s2c_load info
-         */
-
-        /**
-         * Constructs a new s2c_load.
-         * @memberof chest
-         * @classdesc Represents a s2c_load.
-         * @implements Is2c_load
-         * @constructor
-         * @param {chest.Is2c_load=} [properties] Properties to set
-         */
-        function s2c_load(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * s2c_load err.
-         * @member {number} err
-         * @memberof chest.s2c_load
-         * @instance
-         */
-        s2c_load.prototype.err = 0;
-
-        /**
-         * s2c_load info.
-         * @member {chest.IChestInfo|null|undefined} info
-         * @memberof chest.s2c_load
-         * @instance
-         */
-        s2c_load.prototype.info = null;
-
-        /**
-         * Creates a new s2c_load instance using the specified properties.
-         * @function create
-         * @memberof chest.s2c_load
-         * @static
-         * @param {chest.Is2c_load=} [properties] Properties to set
-         * @returns {chest.s2c_load} s2c_load instance
-         */
-        s2c_load.create = function create(properties) {
-            return new s2c_load(properties);
-        };
-
-        /**
-         * Encodes the specified s2c_load message. Does not implicitly {@link chest.s2c_load.verify|verify} messages.
-         * @function encode
-         * @memberof chest.s2c_load
-         * @static
-         * @param {chest.Is2c_load} message s2c_load message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        s2c_load.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
-            if (message.info != null && Object.hasOwnProperty.call(message, "info"))
-                $root.chest.ChestInfo.encode(message.info, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-            return writer;
-        };
-
-        /**
-         * Encodes the specified s2c_load message, length delimited. Does not implicitly {@link chest.s2c_load.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof chest.s2c_load
-         * @static
-         * @param {chest.Is2c_load} message s2c_load message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        s2c_load.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a s2c_load message from the specified reader or buffer.
-         * @function decode
-         * @memberof chest.s2c_load
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {chest.s2c_load} s2c_load
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        s2c_load.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chest.s2c_load();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1: {
-                        message.err = reader.uint32();
-                        break;
-                    }
-                case 2: {
-                        message.info = $root.chest.ChestInfo.decode(reader, reader.uint32());
-                        break;
-                    }
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes a s2c_load message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof chest.s2c_load
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {chest.s2c_load} s2c_load
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        s2c_load.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a s2c_load message.
-         * @function verify
-         * @memberof chest.s2c_load
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        s2c_load.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.err != null && message.hasOwnProperty("err"))
-                if (!$util.isInteger(message.err))
-                    return "err: integer expected";
-            if (message.info != null && message.hasOwnProperty("info")) {
-                var error = $root.chest.ChestInfo.verify(message.info);
-                if (error)
-                    return "info." + error;
-            }
-            return null;
-        };
-
-        /**
-         * Creates a s2c_load message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof chest.s2c_load
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {chest.s2c_load} s2c_load
-         */
-        s2c_load.fromObject = function fromObject(object) {
-            if (object instanceof $root.chest.s2c_load)
-                return object;
-            var message = new $root.chest.s2c_load();
-            if (object.err != null)
-                message.err = object.err >>> 0;
-            if (object.info != null) {
-                if (typeof object.info !== "object")
-                    throw TypeError(".chest.s2c_load.info: object expected");
-                message.info = $root.chest.ChestInfo.fromObject(object.info);
-            }
-            return message;
-        };
-
-        /**
-         * Creates a plain object from a s2c_load message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof chest.s2c_load
-         * @static
-         * @param {chest.s2c_load} message s2c_load
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        s2c_load.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.err = 0;
-                object.info = null;
-            }
-            if (message.err != null && message.hasOwnProperty("err"))
-                object.err = message.err;
-            if (message.info != null && message.hasOwnProperty("info"))
-                object.info = $root.chest.ChestInfo.toObject(message.info, options);
-            return object;
-        };
-
-        /**
-         * Converts this s2c_load to JSON.
-         * @function toJSON
-         * @memberof chest.s2c_load
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        s2c_load.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        /**
-         * Gets the default type url for s2c_load
-         * @function getTypeUrl
-         * @memberof chest.s2c_load
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        s2c_load.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/chest.s2c_load";
-        };
-
-        return s2c_load;
-    })();
-
-    chest.c2s_open = (function() {
-
-        /**
-         * Properties of a c2s_open.
-         * @memberof chest
-         * @interface Ic2s_open
-         */
-
-        /**
-         * Constructs a new c2s_open.
-         * @memberof chest
-         * @classdesc Represents a c2s_open.
-         * @implements Ic2s_open
-         * @constructor
-         * @param {chest.Ic2s_open=} [properties] Properties to set
-         */
-        function c2s_open(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * Creates a new c2s_open instance using the specified properties.
-         * @function create
-         * @memberof chest.c2s_open
-         * @static
-         * @param {chest.Ic2s_open=} [properties] Properties to set
-         * @returns {chest.c2s_open} c2s_open instance
-         */
-        c2s_open.create = function create(properties) {
-            return new c2s_open(properties);
-        };
-
-        /**
-         * Encodes the specified c2s_open message. Does not implicitly {@link chest.c2s_open.verify|verify} messages.
-         * @function encode
-         * @memberof chest.c2s_open
-         * @static
-         * @param {chest.Ic2s_open} message c2s_open message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        c2s_open.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            return writer;
-        };
-
-        /**
-         * Encodes the specified c2s_open message, length delimited. Does not implicitly {@link chest.c2s_open.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof chest.c2s_open
-         * @static
-         * @param {chest.Ic2s_open} message c2s_open message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        c2s_open.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a c2s_open message from the specified reader or buffer.
-         * @function decode
-         * @memberof chest.c2s_open
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {chest.c2s_open} c2s_open
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        c2s_open.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chest.c2s_open();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes a c2s_open message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof chest.c2s_open
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {chest.c2s_open} c2s_open
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        c2s_open.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a c2s_open message.
-         * @function verify
-         * @memberof chest.c2s_open
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        c2s_open.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            return null;
-        };
-
-        /**
-         * Creates a c2s_open message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof chest.c2s_open
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {chest.c2s_open} c2s_open
-         */
-        c2s_open.fromObject = function fromObject(object) {
-            if (object instanceof $root.chest.c2s_open)
-                return object;
-            return new $root.chest.c2s_open();
-        };
-
-        /**
-         * Creates a plain object from a c2s_open message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof chest.c2s_open
-         * @static
-         * @param {chest.c2s_open} message c2s_open
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        c2s_open.toObject = function toObject() {
-            return {};
-        };
-
-        /**
-         * Converts this c2s_open to JSON.
-         * @function toJSON
-         * @memberof chest.c2s_open
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        c2s_open.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        /**
-         * Gets the default type url for c2s_open
-         * @function getTypeUrl
-         * @memberof chest.c2s_open
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        c2s_open.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/chest.c2s_open";
-        };
-
-        return c2s_open;
-    })();
-
-    chest.s2c_open = (function() {
-
-        /**
-         * Properties of a s2c_open.
-         * @memberof chest
-         * @interface Is2c_open
-         * @property {number|null} [err] s2c_open err
-         * @property {chest.IChestInfo|null} [info] s2c_open info
-         */
-
-        /**
-         * Constructs a new s2c_open.
-         * @memberof chest
-         * @classdesc Represents a s2c_open.
-         * @implements Is2c_open
-         * @constructor
-         * @param {chest.Is2c_open=} [properties] Properties to set
-         */
-        function s2c_open(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * s2c_open err.
-         * @member {number} err
-         * @memberof chest.s2c_open
-         * @instance
-         */
-        s2c_open.prototype.err = 0;
-
-        /**
-         * s2c_open info.
-         * @member {chest.IChestInfo|null|undefined} info
-         * @memberof chest.s2c_open
-         * @instance
-         */
-        s2c_open.prototype.info = null;
-
-        /**
-         * Creates a new s2c_open instance using the specified properties.
-         * @function create
-         * @memberof chest.s2c_open
-         * @static
-         * @param {chest.Is2c_open=} [properties] Properties to set
-         * @returns {chest.s2c_open} s2c_open instance
-         */
-        s2c_open.create = function create(properties) {
-            return new s2c_open(properties);
-        };
-
-        /**
-         * Encodes the specified s2c_open message. Does not implicitly {@link chest.s2c_open.verify|verify} messages.
-         * @function encode
-         * @memberof chest.s2c_open
-         * @static
-         * @param {chest.Is2c_open} message s2c_open message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        s2c_open.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
-            if (message.info != null && Object.hasOwnProperty.call(message, "info"))
-                $root.chest.ChestInfo.encode(message.info, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-            return writer;
-        };
-
-        /**
-         * Encodes the specified s2c_open message, length delimited. Does not implicitly {@link chest.s2c_open.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof chest.s2c_open
-         * @static
-         * @param {chest.Is2c_open} message s2c_open message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        s2c_open.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a s2c_open message from the specified reader or buffer.
-         * @function decode
-         * @memberof chest.s2c_open
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {chest.s2c_open} s2c_open
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        s2c_open.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chest.s2c_open();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1: {
-                        message.err = reader.uint32();
-                        break;
-                    }
-                case 2: {
-                        message.info = $root.chest.ChestInfo.decode(reader, reader.uint32());
-                        break;
-                    }
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes a s2c_open message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof chest.s2c_open
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {chest.s2c_open} s2c_open
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        s2c_open.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a s2c_open message.
-         * @function verify
-         * @memberof chest.s2c_open
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        s2c_open.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.err != null && message.hasOwnProperty("err"))
-                if (!$util.isInteger(message.err))
-                    return "err: integer expected";
-            if (message.info != null && message.hasOwnProperty("info")) {
-                var error = $root.chest.ChestInfo.verify(message.info);
-                if (error)
-                    return "info." + error;
-            }
-            return null;
-        };
-
-        /**
-         * Creates a s2c_open message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof chest.s2c_open
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {chest.s2c_open} s2c_open
-         */
-        s2c_open.fromObject = function fromObject(object) {
-            if (object instanceof $root.chest.s2c_open)
-                return object;
-            var message = new $root.chest.s2c_open();
-            if (object.err != null)
-                message.err = object.err >>> 0;
-            if (object.info != null) {
-                if (typeof object.info !== "object")
-                    throw TypeError(".chest.s2c_open.info: object expected");
-                message.info = $root.chest.ChestInfo.fromObject(object.info);
-            }
-            return message;
-        };
-
-        /**
-         * Creates a plain object from a s2c_open message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof chest.s2c_open
-         * @static
-         * @param {chest.s2c_open} message s2c_open
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        s2c_open.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.err = 0;
-                object.info = null;
-            }
-            if (message.err != null && message.hasOwnProperty("err"))
-                object.err = message.err;
-            if (message.info != null && message.hasOwnProperty("info"))
-                object.info = $root.chest.ChestInfo.toObject(message.info, options);
-            return object;
-        };
-
-        /**
-         * Converts this s2c_open to JSON.
-         * @function toJSON
-         * @memberof chest.s2c_open
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        s2c_open.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        /**
-         * Gets the default type url for s2c_open
-         * @function getTypeUrl
-         * @memberof chest.s2c_open
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        s2c_open.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/chest.s2c_open";
-        };
-
-        return s2c_open;
-    })();
-
-    chest.c2s_replace = (function() {
-
-        /**
-         * Properties of a c2s_replace.
-         * @memberof chest
-         * @interface Ic2s_replace
-         */
-
-        /**
-         * Constructs a new c2s_replace.
-         * @memberof chest
-         * @classdesc Represents a c2s_replace.
-         * @implements Ic2s_replace
-         * @constructor
-         * @param {chest.Ic2s_replace=} [properties] Properties to set
-         */
-        function c2s_replace(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * Creates a new c2s_replace instance using the specified properties.
-         * @function create
-         * @memberof chest.c2s_replace
-         * @static
-         * @param {chest.Ic2s_replace=} [properties] Properties to set
-         * @returns {chest.c2s_replace} c2s_replace instance
-         */
-        c2s_replace.create = function create(properties) {
-            return new c2s_replace(properties);
-        };
-
-        /**
-         * Encodes the specified c2s_replace message. Does not implicitly {@link chest.c2s_replace.verify|verify} messages.
-         * @function encode
-         * @memberof chest.c2s_replace
-         * @static
-         * @param {chest.Ic2s_replace} message c2s_replace message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        c2s_replace.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            return writer;
-        };
-
-        /**
-         * Encodes the specified c2s_replace message, length delimited. Does not implicitly {@link chest.c2s_replace.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof chest.c2s_replace
-         * @static
-         * @param {chest.Ic2s_replace} message c2s_replace message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        c2s_replace.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a c2s_replace message from the specified reader or buffer.
-         * @function decode
-         * @memberof chest.c2s_replace
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {chest.c2s_replace} c2s_replace
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        c2s_replace.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chest.c2s_replace();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes a c2s_replace message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof chest.c2s_replace
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {chest.c2s_replace} c2s_replace
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        c2s_replace.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a c2s_replace message.
-         * @function verify
-         * @memberof chest.c2s_replace
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        c2s_replace.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            return null;
-        };
-
-        /**
-         * Creates a c2s_replace message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof chest.c2s_replace
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {chest.c2s_replace} c2s_replace
-         */
-        c2s_replace.fromObject = function fromObject(object) {
-            if (object instanceof $root.chest.c2s_replace)
-                return object;
-            return new $root.chest.c2s_replace();
-        };
-
-        /**
-         * Creates a plain object from a c2s_replace message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof chest.c2s_replace
-         * @static
-         * @param {chest.c2s_replace} message c2s_replace
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        c2s_replace.toObject = function toObject() {
-            return {};
-        };
-
-        /**
-         * Converts this c2s_replace to JSON.
-         * @function toJSON
-         * @memberof chest.c2s_replace
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        c2s_replace.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        /**
-         * Gets the default type url for c2s_replace
-         * @function getTypeUrl
-         * @memberof chest.c2s_replace
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        c2s_replace.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/chest.c2s_replace";
-        };
-
-        return c2s_replace;
-    })();
-
-    chest.s2c_replace = (function() {
-
-        /**
-         * Properties of a s2c_replace.
-         * @memberof chest
-         * @interface Is2c_replace
-         * @property {number|null} [err] s2c_replace err
-         * @property {chest.IChestInfo|null} [info] s2c_replace info
-         */
-
-        /**
-         * Constructs a new s2c_replace.
-         * @memberof chest
-         * @classdesc Represents a s2c_replace.
-         * @implements Is2c_replace
-         * @constructor
-         * @param {chest.Is2c_replace=} [properties] Properties to set
-         */
-        function s2c_replace(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * s2c_replace err.
-         * @member {number} err
-         * @memberof chest.s2c_replace
-         * @instance
-         */
-        s2c_replace.prototype.err = 0;
-
-        /**
-         * s2c_replace info.
-         * @member {chest.IChestInfo|null|undefined} info
-         * @memberof chest.s2c_replace
-         * @instance
-         */
-        s2c_replace.prototype.info = null;
-
-        /**
-         * Creates a new s2c_replace instance using the specified properties.
-         * @function create
-         * @memberof chest.s2c_replace
-         * @static
-         * @param {chest.Is2c_replace=} [properties] Properties to set
-         * @returns {chest.s2c_replace} s2c_replace instance
-         */
-        s2c_replace.create = function create(properties) {
-            return new s2c_replace(properties);
-        };
-
-        /**
-         * Encodes the specified s2c_replace message. Does not implicitly {@link chest.s2c_replace.verify|verify} messages.
-         * @function encode
-         * @memberof chest.s2c_replace
-         * @static
-         * @param {chest.Is2c_replace} message s2c_replace message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        s2c_replace.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
-            if (message.info != null && Object.hasOwnProperty.call(message, "info"))
-                $root.chest.ChestInfo.encode(message.info, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-            return writer;
-        };
-
-        /**
-         * Encodes the specified s2c_replace message, length delimited. Does not implicitly {@link chest.s2c_replace.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof chest.s2c_replace
-         * @static
-         * @param {chest.Is2c_replace} message s2c_replace message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        s2c_replace.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a s2c_replace message from the specified reader or buffer.
-         * @function decode
-         * @memberof chest.s2c_replace
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {chest.s2c_replace} s2c_replace
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        s2c_replace.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chest.s2c_replace();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1: {
-                        message.err = reader.uint32();
-                        break;
-                    }
-                case 2: {
-                        message.info = $root.chest.ChestInfo.decode(reader, reader.uint32());
-                        break;
-                    }
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes a s2c_replace message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof chest.s2c_replace
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {chest.s2c_replace} s2c_replace
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        s2c_replace.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a s2c_replace message.
-         * @function verify
-         * @memberof chest.s2c_replace
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        s2c_replace.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.err != null && message.hasOwnProperty("err"))
-                if (!$util.isInteger(message.err))
-                    return "err: integer expected";
-            if (message.info != null && message.hasOwnProperty("info")) {
-                var error = $root.chest.ChestInfo.verify(message.info);
-                if (error)
-                    return "info." + error;
-            }
-            return null;
-        };
-
-        /**
-         * Creates a s2c_replace message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof chest.s2c_replace
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {chest.s2c_replace} s2c_replace
-         */
-        s2c_replace.fromObject = function fromObject(object) {
-            if (object instanceof $root.chest.s2c_replace)
-                return object;
-            var message = new $root.chest.s2c_replace();
-            if (object.err != null)
-                message.err = object.err >>> 0;
-            if (object.info != null) {
-                if (typeof object.info !== "object")
-                    throw TypeError(".chest.s2c_replace.info: object expected");
-                message.info = $root.chest.ChestInfo.fromObject(object.info);
-            }
-            return message;
-        };
-
-        /**
-         * Creates a plain object from a s2c_replace message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof chest.s2c_replace
-         * @static
-         * @param {chest.s2c_replace} message s2c_replace
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        s2c_replace.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.err = 0;
-                object.info = null;
-            }
-            if (message.err != null && message.hasOwnProperty("err"))
-                object.err = message.err;
-            if (message.info != null && message.hasOwnProperty("info"))
-                object.info = $root.chest.ChestInfo.toObject(message.info, options);
-            return object;
-        };
-
-        /**
-         * Converts this s2c_replace to JSON.
-         * @function toJSON
-         * @memberof chest.s2c_replace
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        s2c_replace.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        /**
-         * Gets the default type url for s2c_replace
-         * @function getTypeUrl
-         * @memberof chest.s2c_replace
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        s2c_replace.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/chest.s2c_replace";
-        };
-
-        return s2c_replace;
-    })();
-
-    chest.c2s_abandon = (function() {
-
-        /**
-         * Properties of a c2s_abandon.
-         * @memberof chest
-         * @interface Ic2s_abandon
-         */
-
-        /**
-         * Constructs a new c2s_abandon.
-         * @memberof chest
-         * @classdesc Represents a c2s_abandon.
-         * @implements Ic2s_abandon
-         * @constructor
-         * @param {chest.Ic2s_abandon=} [properties] Properties to set
-         */
-        function c2s_abandon(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * Creates a new c2s_abandon instance using the specified properties.
-         * @function create
-         * @memberof chest.c2s_abandon
-         * @static
-         * @param {chest.Ic2s_abandon=} [properties] Properties to set
-         * @returns {chest.c2s_abandon} c2s_abandon instance
-         */
-        c2s_abandon.create = function create(properties) {
-            return new c2s_abandon(properties);
-        };
-
-        /**
-         * Encodes the specified c2s_abandon message. Does not implicitly {@link chest.c2s_abandon.verify|verify} messages.
-         * @function encode
-         * @memberof chest.c2s_abandon
-         * @static
-         * @param {chest.Ic2s_abandon} message c2s_abandon message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        c2s_abandon.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            return writer;
-        };
-
-        /**
-         * Encodes the specified c2s_abandon message, length delimited. Does not implicitly {@link chest.c2s_abandon.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof chest.c2s_abandon
-         * @static
-         * @param {chest.Ic2s_abandon} message c2s_abandon message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        c2s_abandon.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a c2s_abandon message from the specified reader or buffer.
-         * @function decode
-         * @memberof chest.c2s_abandon
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {chest.c2s_abandon} c2s_abandon
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        c2s_abandon.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chest.c2s_abandon();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes a c2s_abandon message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof chest.c2s_abandon
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {chest.c2s_abandon} c2s_abandon
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        c2s_abandon.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a c2s_abandon message.
-         * @function verify
-         * @memberof chest.c2s_abandon
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        c2s_abandon.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            return null;
-        };
-
-        /**
-         * Creates a c2s_abandon message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof chest.c2s_abandon
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {chest.c2s_abandon} c2s_abandon
-         */
-        c2s_abandon.fromObject = function fromObject(object) {
-            if (object instanceof $root.chest.c2s_abandon)
-                return object;
-            return new $root.chest.c2s_abandon();
-        };
-
-        /**
-         * Creates a plain object from a c2s_abandon message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof chest.c2s_abandon
-         * @static
-         * @param {chest.c2s_abandon} message c2s_abandon
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        c2s_abandon.toObject = function toObject() {
-            return {};
-        };
-
-        /**
-         * Converts this c2s_abandon to JSON.
-         * @function toJSON
-         * @memberof chest.c2s_abandon
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        c2s_abandon.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        /**
-         * Gets the default type url for c2s_abandon
-         * @function getTypeUrl
-         * @memberof chest.c2s_abandon
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        c2s_abandon.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/chest.c2s_abandon";
-        };
-
-        return c2s_abandon;
-    })();
-
-    chest.s2c_abandon = (function() {
-
-        /**
-         * Properties of a s2c_abandon.
-         * @memberof chest
-         * @interface Is2c_abandon
-         * @property {number|null} [err] s2c_abandon err
-         */
-
-        /**
-         * Constructs a new s2c_abandon.
-         * @memberof chest
-         * @classdesc Represents a s2c_abandon.
-         * @implements Is2c_abandon
-         * @constructor
-         * @param {chest.Is2c_abandon=} [properties] Properties to set
-         */
-        function s2c_abandon(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * s2c_abandon err.
-         * @member {number} err
-         * @memberof chest.s2c_abandon
-         * @instance
-         */
-        s2c_abandon.prototype.err = 0;
-
-        /**
-         * Creates a new s2c_abandon instance using the specified properties.
-         * @function create
-         * @memberof chest.s2c_abandon
-         * @static
-         * @param {chest.Is2c_abandon=} [properties] Properties to set
-         * @returns {chest.s2c_abandon} s2c_abandon instance
-         */
-        s2c_abandon.create = function create(properties) {
-            return new s2c_abandon(properties);
-        };
-
-        /**
-         * Encodes the specified s2c_abandon message. Does not implicitly {@link chest.s2c_abandon.verify|verify} messages.
-         * @function encode
-         * @memberof chest.s2c_abandon
-         * @static
-         * @param {chest.Is2c_abandon} message s2c_abandon message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        s2c_abandon.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
-            return writer;
-        };
-
-        /**
-         * Encodes the specified s2c_abandon message, length delimited. Does not implicitly {@link chest.s2c_abandon.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof chest.s2c_abandon
-         * @static
-         * @param {chest.Is2c_abandon} message s2c_abandon message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        s2c_abandon.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a s2c_abandon message from the specified reader or buffer.
-         * @function decode
-         * @memberof chest.s2c_abandon
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {chest.s2c_abandon} s2c_abandon
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        s2c_abandon.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chest.s2c_abandon();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1: {
-                        message.err = reader.uint32();
-                        break;
-                    }
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes a s2c_abandon message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof chest.s2c_abandon
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {chest.s2c_abandon} s2c_abandon
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        s2c_abandon.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a s2c_abandon message.
-         * @function verify
-         * @memberof chest.s2c_abandon
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        s2c_abandon.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.err != null && message.hasOwnProperty("err"))
-                if (!$util.isInteger(message.err))
-                    return "err: integer expected";
-            return null;
-        };
-
-        /**
-         * Creates a s2c_abandon message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof chest.s2c_abandon
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {chest.s2c_abandon} s2c_abandon
-         */
-        s2c_abandon.fromObject = function fromObject(object) {
-            if (object instanceof $root.chest.s2c_abandon)
-                return object;
-            var message = new $root.chest.s2c_abandon();
-            if (object.err != null)
-                message.err = object.err >>> 0;
-            return message;
-        };
-
-        /**
-         * Creates a plain object from a s2c_abandon message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof chest.s2c_abandon
-         * @static
-         * @param {chest.s2c_abandon} message s2c_abandon
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        s2c_abandon.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults)
-                object.err = 0;
-            if (message.err != null && message.hasOwnProperty("err"))
-                object.err = message.err;
-            return object;
-        };
-
-        /**
-         * Converts this s2c_abandon to JSON.
-         * @function toJSON
-         * @memberof chest.s2c_abandon
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        s2c_abandon.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        /**
-         * Gets the default type url for s2c_abandon
-         * @function getTypeUrl
-         * @memberof chest.s2c_abandon
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        s2c_abandon.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/chest.s2c_abandon";
-        };
-
-        return s2c_abandon;
-    })();
-
-    chest.c2s_challenge_dungeon = (function() {
-
-        /**
-         * Properties of a c2s_challenge_dungeon.
-         * @memberof chest
-         * @interface Ic2s_challenge_dungeon
-         * @property {number|null} [dungeonId] c2s_challenge_dungeon dungeonId
-         */
-
-        /**
-         * Constructs a new c2s_challenge_dungeon.
-         * @memberof chest
-         * @classdesc Represents a c2s_challenge_dungeon.
-         * @implements Ic2s_challenge_dungeon
-         * @constructor
-         * @param {chest.Ic2s_challenge_dungeon=} [properties] Properties to set
-         */
-        function c2s_challenge_dungeon(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * c2s_challenge_dungeon dungeonId.
-         * @member {number} dungeonId
-         * @memberof chest.c2s_challenge_dungeon
-         * @instance
-         */
-        c2s_challenge_dungeon.prototype.dungeonId = 0;
-
-        /**
-         * Creates a new c2s_challenge_dungeon instance using the specified properties.
-         * @function create
-         * @memberof chest.c2s_challenge_dungeon
-         * @static
-         * @param {chest.Ic2s_challenge_dungeon=} [properties] Properties to set
-         * @returns {chest.c2s_challenge_dungeon} c2s_challenge_dungeon instance
-         */
-        c2s_challenge_dungeon.create = function create(properties) {
-            return new c2s_challenge_dungeon(properties);
-        };
-
-        /**
-         * Encodes the specified c2s_challenge_dungeon message. Does not implicitly {@link chest.c2s_challenge_dungeon.verify|verify} messages.
-         * @function encode
-         * @memberof chest.c2s_challenge_dungeon
-         * @static
-         * @param {chest.Ic2s_challenge_dungeon} message c2s_challenge_dungeon message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        c2s_challenge_dungeon.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.dungeonId != null && Object.hasOwnProperty.call(message, "dungeonId"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.dungeonId);
-            return writer;
-        };
-
-        /**
-         * Encodes the specified c2s_challenge_dungeon message, length delimited. Does not implicitly {@link chest.c2s_challenge_dungeon.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof chest.c2s_challenge_dungeon
-         * @static
-         * @param {chest.Ic2s_challenge_dungeon} message c2s_challenge_dungeon message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        c2s_challenge_dungeon.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a c2s_challenge_dungeon message from the specified reader or buffer.
-         * @function decode
-         * @memberof chest.c2s_challenge_dungeon
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {chest.c2s_challenge_dungeon} c2s_challenge_dungeon
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        c2s_challenge_dungeon.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chest.c2s_challenge_dungeon();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1: {
-                        message.dungeonId = reader.uint32();
-                        break;
-                    }
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes a c2s_challenge_dungeon message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof chest.c2s_challenge_dungeon
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {chest.c2s_challenge_dungeon} c2s_challenge_dungeon
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        c2s_challenge_dungeon.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a c2s_challenge_dungeon message.
-         * @function verify
-         * @memberof chest.c2s_challenge_dungeon
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        c2s_challenge_dungeon.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.dungeonId != null && message.hasOwnProperty("dungeonId"))
-                if (!$util.isInteger(message.dungeonId))
-                    return "dungeonId: integer expected";
-            return null;
-        };
-
-        /**
-         * Creates a c2s_challenge_dungeon message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof chest.c2s_challenge_dungeon
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {chest.c2s_challenge_dungeon} c2s_challenge_dungeon
-         */
-        c2s_challenge_dungeon.fromObject = function fromObject(object) {
-            if (object instanceof $root.chest.c2s_challenge_dungeon)
-                return object;
-            var message = new $root.chest.c2s_challenge_dungeon();
-            if (object.dungeonId != null)
-                message.dungeonId = object.dungeonId >>> 0;
-            return message;
-        };
-
-        /**
-         * Creates a plain object from a c2s_challenge_dungeon message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof chest.c2s_challenge_dungeon
-         * @static
-         * @param {chest.c2s_challenge_dungeon} message c2s_challenge_dungeon
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        c2s_challenge_dungeon.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults)
-                object.dungeonId = 0;
-            if (message.dungeonId != null && message.hasOwnProperty("dungeonId"))
-                object.dungeonId = message.dungeonId;
-            return object;
-        };
-
-        /**
-         * Converts this c2s_challenge_dungeon to JSON.
-         * @function toJSON
-         * @memberof chest.c2s_challenge_dungeon
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        c2s_challenge_dungeon.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        /**
-         * Gets the default type url for c2s_challenge_dungeon
-         * @function getTypeUrl
-         * @memberof chest.c2s_challenge_dungeon
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        c2s_challenge_dungeon.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/chest.c2s_challenge_dungeon";
-        };
-
-        return c2s_challenge_dungeon;
-    })();
-
-    chest.s2c_challenge_dungeon = (function() {
-
-        /**
-         * Properties of a s2c_challenge_dungeon.
-         * @memberof chest
-         * @interface Is2c_challenge_dungeon
-         * @property {number|null} [err] s2c_challenge_dungeon err
-         * @property {number|null} [warUid] s2c_challenge_dungeon warUid
-         */
-
-        /**
-         * Constructs a new s2c_challenge_dungeon.
-         * @memberof chest
-         * @classdesc Represents a s2c_challenge_dungeon.
-         * @implements Is2c_challenge_dungeon
-         * @constructor
-         * @param {chest.Is2c_challenge_dungeon=} [properties] Properties to set
-         */
-        function s2c_challenge_dungeon(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * s2c_challenge_dungeon err.
-         * @member {number} err
-         * @memberof chest.s2c_challenge_dungeon
-         * @instance
-         */
-        s2c_challenge_dungeon.prototype.err = 0;
-
-        /**
-         * s2c_challenge_dungeon warUid.
-         * @member {number} warUid
-         * @memberof chest.s2c_challenge_dungeon
-         * @instance
-         */
-        s2c_challenge_dungeon.prototype.warUid = 0;
-
-        /**
-         * Creates a new s2c_challenge_dungeon instance using the specified properties.
-         * @function create
-         * @memberof chest.s2c_challenge_dungeon
-         * @static
-         * @param {chest.Is2c_challenge_dungeon=} [properties] Properties to set
-         * @returns {chest.s2c_challenge_dungeon} s2c_challenge_dungeon instance
-         */
-        s2c_challenge_dungeon.create = function create(properties) {
-            return new s2c_challenge_dungeon(properties);
-        };
-
-        /**
-         * Encodes the specified s2c_challenge_dungeon message. Does not implicitly {@link chest.s2c_challenge_dungeon.verify|verify} messages.
-         * @function encode
-         * @memberof chest.s2c_challenge_dungeon
-         * @static
-         * @param {chest.Is2c_challenge_dungeon} message s2c_challenge_dungeon message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        s2c_challenge_dungeon.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
-            if (message.warUid != null && Object.hasOwnProperty.call(message, "warUid"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.warUid);
-            return writer;
-        };
-
-        /**
-         * Encodes the specified s2c_challenge_dungeon message, length delimited. Does not implicitly {@link chest.s2c_challenge_dungeon.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof chest.s2c_challenge_dungeon
-         * @static
-         * @param {chest.Is2c_challenge_dungeon} message s2c_challenge_dungeon message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        s2c_challenge_dungeon.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a s2c_challenge_dungeon message from the specified reader or buffer.
-         * @function decode
-         * @memberof chest.s2c_challenge_dungeon
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {chest.s2c_challenge_dungeon} s2c_challenge_dungeon
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        s2c_challenge_dungeon.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chest.s2c_challenge_dungeon();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1: {
-                        message.err = reader.uint32();
-                        break;
-                    }
-                case 2: {
-                        message.warUid = reader.uint32();
-                        break;
-                    }
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes a s2c_challenge_dungeon message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof chest.s2c_challenge_dungeon
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {chest.s2c_challenge_dungeon} s2c_challenge_dungeon
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        s2c_challenge_dungeon.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a s2c_challenge_dungeon message.
-         * @function verify
-         * @memberof chest.s2c_challenge_dungeon
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        s2c_challenge_dungeon.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.err != null && message.hasOwnProperty("err"))
-                if (!$util.isInteger(message.err))
-                    return "err: integer expected";
-            if (message.warUid != null && message.hasOwnProperty("warUid"))
-                if (!$util.isInteger(message.warUid))
-                    return "warUid: integer expected";
-            return null;
-        };
-
-        /**
-         * Creates a s2c_challenge_dungeon message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof chest.s2c_challenge_dungeon
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {chest.s2c_challenge_dungeon} s2c_challenge_dungeon
-         */
-        s2c_challenge_dungeon.fromObject = function fromObject(object) {
-            if (object instanceof $root.chest.s2c_challenge_dungeon)
-                return object;
-            var message = new $root.chest.s2c_challenge_dungeon();
-            if (object.err != null)
-                message.err = object.err >>> 0;
-            if (object.warUid != null)
-                message.warUid = object.warUid >>> 0;
-            return message;
-        };
-
-        /**
-         * Creates a plain object from a s2c_challenge_dungeon message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof chest.s2c_challenge_dungeon
-         * @static
-         * @param {chest.s2c_challenge_dungeon} message s2c_challenge_dungeon
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        s2c_challenge_dungeon.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.err = 0;
-                object.warUid = 0;
-            }
-            if (message.err != null && message.hasOwnProperty("err"))
-                object.err = message.err;
-            if (message.warUid != null && message.hasOwnProperty("warUid"))
-                object.warUid = message.warUid;
-            return object;
-        };
-
-        /**
-         * Converts this s2c_challenge_dungeon to JSON.
-         * @function toJSON
-         * @memberof chest.s2c_challenge_dungeon
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        s2c_challenge_dungeon.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        /**
-         * Gets the default type url for s2c_challenge_dungeon
-         * @function getTypeUrl
-         * @memberof chest.s2c_challenge_dungeon
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        s2c_challenge_dungeon.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/chest.s2c_challenge_dungeon";
-        };
-
-        return s2c_challenge_dungeon;
-    })();
-
-    return chest;
-})();
-
 $root.dungeon = (function() {
 
     /**
@@ -5426,6 +2688,7 @@ $root.dungeon = (function() {
          * Properties of a Dungeon.
          * @memberof dungeon
          * @interface IDungeon
+         * @property {number|null} [id] Dungeon id
          * @property {number|null} [star] Dungeon star
          */
 
@@ -5443,6 +2706,14 @@ $root.dungeon = (function() {
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
+
+        /**
+         * Dungeon id.
+         * @member {number} id
+         * @memberof dungeon.Dungeon
+         * @instance
+         */
+        Dungeon.prototype.id = 0;
 
         /**
          * Dungeon star.
@@ -5476,8 +2747,10 @@ $root.dungeon = (function() {
         Dungeon.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.id);
             if (message.star != null && Object.hasOwnProperty.call(message, "star"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.star);
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.star);
             return writer;
         };
 
@@ -5513,6 +2786,10 @@ $root.dungeon = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1: {
+                        message.id = reader.uint32();
+                        break;
+                    }
+                case 2: {
                         message.star = reader.uint32();
                         break;
                     }
@@ -5551,6 +2828,9 @@ $root.dungeon = (function() {
         Dungeon.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isInteger(message.id))
+                    return "id: integer expected";
             if (message.star != null && message.hasOwnProperty("star"))
                 if (!$util.isInteger(message.star))
                     return "star: integer expected";
@@ -5569,6 +2849,8 @@ $root.dungeon = (function() {
             if (object instanceof $root.dungeon.Dungeon)
                 return object;
             var message = new $root.dungeon.Dungeon();
+            if (object.id != null)
+                message.id = object.id >>> 0;
             if (object.star != null)
                 message.star = object.star >>> 0;
             return message;
@@ -5587,8 +2869,12 @@ $root.dungeon = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults)
+            if (options.defaults) {
+                object.id = 0;
                 object.star = 0;
+            }
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
             if (message.star != null && message.hasOwnProperty("star"))
                 object.star = message.star;
             return object;
@@ -6072,6 +3358,436 @@ $root.dungeon = (function() {
         };
 
         return s2c_load;
+    })();
+
+    dungeon.c2s_challenge = (function() {
+
+        /**
+         * Properties of a c2s_challenge.
+         * @memberof dungeon
+         * @interface Ic2s_challenge
+         * @property {number|null} [dungeonId] c2s_challenge dungeonId
+         */
+
+        /**
+         * Constructs a new c2s_challenge.
+         * @memberof dungeon
+         * @classdesc Represents a c2s_challenge.
+         * @implements Ic2s_challenge
+         * @constructor
+         * @param {dungeon.Ic2s_challenge=} [properties] Properties to set
+         */
+        function c2s_challenge(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * c2s_challenge dungeonId.
+         * @member {number} dungeonId
+         * @memberof dungeon.c2s_challenge
+         * @instance
+         */
+        c2s_challenge.prototype.dungeonId = 0;
+
+        /**
+         * Creates a new c2s_challenge instance using the specified properties.
+         * @function create
+         * @memberof dungeon.c2s_challenge
+         * @static
+         * @param {dungeon.Ic2s_challenge=} [properties] Properties to set
+         * @returns {dungeon.c2s_challenge} c2s_challenge instance
+         */
+        c2s_challenge.create = function create(properties) {
+            return new c2s_challenge(properties);
+        };
+
+        /**
+         * Encodes the specified c2s_challenge message. Does not implicitly {@link dungeon.c2s_challenge.verify|verify} messages.
+         * @function encode
+         * @memberof dungeon.c2s_challenge
+         * @static
+         * @param {dungeon.Ic2s_challenge} message c2s_challenge message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_challenge.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.dungeonId != null && Object.hasOwnProperty.call(message, "dungeonId"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.dungeonId);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified c2s_challenge message, length delimited. Does not implicitly {@link dungeon.c2s_challenge.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof dungeon.c2s_challenge
+         * @static
+         * @param {dungeon.Ic2s_challenge} message c2s_challenge message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_challenge.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a c2s_challenge message from the specified reader or buffer.
+         * @function decode
+         * @memberof dungeon.c2s_challenge
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {dungeon.c2s_challenge} c2s_challenge
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_challenge.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.dungeon.c2s_challenge();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.dungeonId = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a c2s_challenge message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof dungeon.c2s_challenge
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {dungeon.c2s_challenge} c2s_challenge
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_challenge.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a c2s_challenge message.
+         * @function verify
+         * @memberof dungeon.c2s_challenge
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        c2s_challenge.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.dungeonId != null && message.hasOwnProperty("dungeonId"))
+                if (!$util.isInteger(message.dungeonId))
+                    return "dungeonId: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a c2s_challenge message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof dungeon.c2s_challenge
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {dungeon.c2s_challenge} c2s_challenge
+         */
+        c2s_challenge.fromObject = function fromObject(object) {
+            if (object instanceof $root.dungeon.c2s_challenge)
+                return object;
+            var message = new $root.dungeon.c2s_challenge();
+            if (object.dungeonId != null)
+                message.dungeonId = object.dungeonId >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a c2s_challenge message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof dungeon.c2s_challenge
+         * @static
+         * @param {dungeon.c2s_challenge} message c2s_challenge
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        c2s_challenge.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.dungeonId = 0;
+            if (message.dungeonId != null && message.hasOwnProperty("dungeonId"))
+                object.dungeonId = message.dungeonId;
+            return object;
+        };
+
+        /**
+         * Converts this c2s_challenge to JSON.
+         * @function toJSON
+         * @memberof dungeon.c2s_challenge
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        c2s_challenge.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for c2s_challenge
+         * @function getTypeUrl
+         * @memberof dungeon.c2s_challenge
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        c2s_challenge.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/dungeon.c2s_challenge";
+        };
+
+        return c2s_challenge;
+    })();
+
+    dungeon.s2c_challenge = (function() {
+
+        /**
+         * Properties of a s2c_challenge.
+         * @memberof dungeon
+         * @interface Is2c_challenge
+         * @property {number|null} [err] s2c_challenge err
+         * @property {number|null} [worldUid] s2c_challenge worldUid
+         */
+
+        /**
+         * Constructs a new s2c_challenge.
+         * @memberof dungeon
+         * @classdesc Represents a s2c_challenge.
+         * @implements Is2c_challenge
+         * @constructor
+         * @param {dungeon.Is2c_challenge=} [properties] Properties to set
+         */
+        function s2c_challenge(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * s2c_challenge err.
+         * @member {number} err
+         * @memberof dungeon.s2c_challenge
+         * @instance
+         */
+        s2c_challenge.prototype.err = 0;
+
+        /**
+         * s2c_challenge worldUid.
+         * @member {number} worldUid
+         * @memberof dungeon.s2c_challenge
+         * @instance
+         */
+        s2c_challenge.prototype.worldUid = 0;
+
+        /**
+         * Creates a new s2c_challenge instance using the specified properties.
+         * @function create
+         * @memberof dungeon.s2c_challenge
+         * @static
+         * @param {dungeon.Is2c_challenge=} [properties] Properties to set
+         * @returns {dungeon.s2c_challenge} s2c_challenge instance
+         */
+        s2c_challenge.create = function create(properties) {
+            return new s2c_challenge(properties);
+        };
+
+        /**
+         * Encodes the specified s2c_challenge message. Does not implicitly {@link dungeon.s2c_challenge.verify|verify} messages.
+         * @function encode
+         * @memberof dungeon.s2c_challenge
+         * @static
+         * @param {dungeon.Is2c_challenge} message s2c_challenge message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_challenge.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
+            if (message.worldUid != null && Object.hasOwnProperty.call(message, "worldUid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.worldUid);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified s2c_challenge message, length delimited. Does not implicitly {@link dungeon.s2c_challenge.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof dungeon.s2c_challenge
+         * @static
+         * @param {dungeon.Is2c_challenge} message s2c_challenge message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_challenge.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a s2c_challenge message from the specified reader or buffer.
+         * @function decode
+         * @memberof dungeon.s2c_challenge
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {dungeon.s2c_challenge} s2c_challenge
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_challenge.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.dungeon.s2c_challenge();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.err = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.worldUid = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a s2c_challenge message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof dungeon.s2c_challenge
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {dungeon.s2c_challenge} s2c_challenge
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_challenge.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a s2c_challenge message.
+         * @function verify
+         * @memberof dungeon.s2c_challenge
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        s2c_challenge.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.err != null && message.hasOwnProperty("err"))
+                if (!$util.isInteger(message.err))
+                    return "err: integer expected";
+            if (message.worldUid != null && message.hasOwnProperty("worldUid"))
+                if (!$util.isInteger(message.worldUid))
+                    return "worldUid: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a s2c_challenge message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof dungeon.s2c_challenge
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {dungeon.s2c_challenge} s2c_challenge
+         */
+        s2c_challenge.fromObject = function fromObject(object) {
+            if (object instanceof $root.dungeon.s2c_challenge)
+                return object;
+            var message = new $root.dungeon.s2c_challenge();
+            if (object.err != null)
+                message.err = object.err >>> 0;
+            if (object.worldUid != null)
+                message.worldUid = object.worldUid >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a s2c_challenge message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof dungeon.s2c_challenge
+         * @static
+         * @param {dungeon.s2c_challenge} message s2c_challenge
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        s2c_challenge.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.err = 0;
+                object.worldUid = 0;
+            }
+            if (message.err != null && message.hasOwnProperty("err"))
+                object.err = message.err;
+            if (message.worldUid != null && message.hasOwnProperty("worldUid"))
+                object.worldUid = message.worldUid;
+            return object;
+        };
+
+        /**
+         * Converts this s2c_challenge to JSON.
+         * @function toJSON
+         * @memberof dungeon.s2c_challenge
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        s2c_challenge.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for s2c_challenge
+         * @function getTypeUrl
+         * @memberof dungeon.s2c_challenge
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        s2c_challenge.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/dungeon.s2c_challenge";
+        };
+
+        return s2c_challenge;
     })();
 
     return dungeon;
@@ -25093,7 +22809,6 @@ $root.world = (function() {
          * @property {number|null} [dstEid] BattleAddBullet dstEid
          * @property {number|null} [bulletId] BattleAddBullet bulletId
          * @property {number|null} [duration] BattleAddBullet duration
-         * @property {number|null} [h] BattleAddBullet h
          */
 
         /**
@@ -25144,14 +22859,6 @@ $root.world = (function() {
         BattleAddBullet.prototype.duration = 0;
 
         /**
-         * BattleAddBullet h.
-         * @member {number} h
-         * @memberof world.BattleAddBullet
-         * @instance
-         */
-        BattleAddBullet.prototype.h = 0;
-
-        /**
          * Creates a new BattleAddBullet instance using the specified properties.
          * @function create
          * @memberof world.BattleAddBullet
@@ -25183,8 +22890,6 @@ $root.world = (function() {
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.bulletId);
             if (message.duration != null && Object.hasOwnProperty.call(message, "duration"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.duration);
-            if (message.h != null && Object.hasOwnProperty.call(message, "h"))
-                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.h);
             return writer;
         };
 
@@ -25235,10 +22940,6 @@ $root.world = (function() {
                         message.duration = reader.uint32();
                         break;
                     }
-                case 5: {
-                        message.h = reader.uint32();
-                        break;
-                    }
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -25286,9 +22987,6 @@ $root.world = (function() {
             if (message.duration != null && message.hasOwnProperty("duration"))
                 if (!$util.isInteger(message.duration))
                     return "duration: integer expected";
-            if (message.h != null && message.hasOwnProperty("h"))
-                if (!$util.isInteger(message.h))
-                    return "h: integer expected";
             return null;
         };
 
@@ -25312,8 +23010,6 @@ $root.world = (function() {
                 message.bulletId = object.bulletId >>> 0;
             if (object.duration != null)
                 message.duration = object.duration >>> 0;
-            if (object.h != null)
-                message.h = object.h >>> 0;
             return message;
         };
 
@@ -25335,7 +23031,6 @@ $root.world = (function() {
                 object.dstEid = 0;
                 object.bulletId = 0;
                 object.duration = 0;
-                object.h = 0;
             }
             if (message.srcEid != null && message.hasOwnProperty("srcEid"))
                 object.srcEid = message.srcEid;
@@ -25345,8 +23040,6 @@ $root.world = (function() {
                 object.bulletId = message.bulletId;
             if (message.duration != null && message.hasOwnProperty("duration"))
                 object.duration = message.duration;
-            if (message.h != null && message.hasOwnProperty("h"))
-                object.h = message.h;
             return object;
         };
 

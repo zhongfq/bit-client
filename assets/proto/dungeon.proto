@@ -3,7 +3,8 @@ syntax = "proto3";
 package dungeon;
 
 message Dungeon {
-    uint32 star = 1;
+    uint32 id = 1;
+    uint32 star = 2;
 }
 
 message c2s_load {
@@ -12,4 +13,12 @@ message c2s_load {
 message s2c_load {
     uint32 err = 1;
     repeated Dungeon dungeon_list = 2;
+}
+
+message c2s_challenge {
+    uint32 dungeon_id = 1;
+}
+message s2c_challenge {
+    uint32 err = 1;
+    uint32 world_uid = 2;
 }

@@ -1214,1221 +1214,14 @@ export namespace bag {
     }
 }
 
-/** Namespace chest. */
-export namespace chest {
-
-    /** Properties of an EquipItem. */
-    interface IEquipItem {
-
-        /** EquipItem id */
-        id?: (number|null);
-
-        /** EquipItem attrs */
-        attrs?: ({ [k: string]: number }|null);
-    }
-
-    /** Represents an EquipItem. */
-    class EquipItem implements IEquipItem {
-
-        /**
-         * Constructs a new EquipItem.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: chest.IEquipItem);
-
-        /** EquipItem id. */
-        public id: number;
-
-        /** EquipItem attrs. */
-        public attrs: { [k: string]: number };
-
-        /**
-         * Creates a new EquipItem instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns EquipItem instance
-         */
-        public static create(properties?: chest.IEquipItem): chest.EquipItem;
-
-        /**
-         * Encodes the specified EquipItem message. Does not implicitly {@link chest.EquipItem.verify|verify} messages.
-         * @param message EquipItem message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: chest.IEquipItem, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified EquipItem message, length delimited. Does not implicitly {@link chest.EquipItem.verify|verify} messages.
-         * @param message EquipItem message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: chest.IEquipItem, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes an EquipItem message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns EquipItem
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): chest.EquipItem;
-
-        /**
-         * Decodes an EquipItem message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns EquipItem
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): chest.EquipItem;
-
-        /**
-         * Verifies an EquipItem message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates an EquipItem message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns EquipItem
-         */
-        public static fromObject(object: { [k: string]: any }): chest.EquipItem;
-
-        /**
-         * Creates a plain object from an EquipItem message. Also converts values to other types if specified.
-         * @param message EquipItem
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: chest.EquipItem, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this EquipItem to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-
-        /**
-         * Gets the default type url for EquipItem
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
-    }
-
-    /** Properties of a ChestInfo. */
-    interface IChestInfo {
-
-        /** ChestInfo new */
-        "new"?: (chest.IEquipItem|null);
-
-        /** ChestInfo equips */
-        equips?: ({ [k: string]: chest.IEquipItem }|null);
-
-        /** ChestInfo fullAttrs */
-        fullAttrs?: ({ [k: string]: number }|null);
-
-        /** ChestInfo amount */
-        amount?: (number|null);
-
-        /** ChestInfo lv */
-        lv?: (number|null);
-
-        /** ChestInfo exp */
-        exp?: (number|null);
-
-        /** ChestInfo dungeonId */
-        dungeonId?: (number|null);
-    }
-
-    /** Represents a ChestInfo. */
-    class ChestInfo implements IChestInfo {
-
-        /**
-         * Constructs a new ChestInfo.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: chest.IChestInfo);
-
-        /** ChestInfo new. */
-        public new?: (chest.IEquipItem|null);
-
-        /** ChestInfo equips. */
-        public equips: { [k: string]: chest.IEquipItem };
-
-        /** ChestInfo fullAttrs. */
-        public fullAttrs: { [k: string]: number };
-
-        /** ChestInfo amount. */
-        public amount: number;
-
-        /** ChestInfo lv. */
-        public lv: number;
-
-        /** ChestInfo exp. */
-        public exp: number;
-
-        /** ChestInfo dungeonId. */
-        public dungeonId: number;
-
-        /**
-         * Creates a new ChestInfo instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns ChestInfo instance
-         */
-        public static create(properties?: chest.IChestInfo): chest.ChestInfo;
-
-        /**
-         * Encodes the specified ChestInfo message. Does not implicitly {@link chest.ChestInfo.verify|verify} messages.
-         * @param message ChestInfo message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: chest.IChestInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified ChestInfo message, length delimited. Does not implicitly {@link chest.ChestInfo.verify|verify} messages.
-         * @param message ChestInfo message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: chest.IChestInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a ChestInfo message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns ChestInfo
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): chest.ChestInfo;
-
-        /**
-         * Decodes a ChestInfo message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns ChestInfo
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): chest.ChestInfo;
-
-        /**
-         * Verifies a ChestInfo message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a ChestInfo message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns ChestInfo
-         */
-        public static fromObject(object: { [k: string]: any }): chest.ChestInfo;
-
-        /**
-         * Creates a plain object from a ChestInfo message. Also converts values to other types if specified.
-         * @param message ChestInfo
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: chest.ChestInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this ChestInfo to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-
-        /**
-         * Gets the default type url for ChestInfo
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
-    }
-
-    /** Properties of a c2s_load. */
-    interface Ic2s_load {
-    }
-
-    /** Represents a c2s_load. */
-    class c2s_load implements Ic2s_load {
-
-        /**
-         * Constructs a new c2s_load.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: chest.Ic2s_load);
-
-        /**
-         * Creates a new c2s_load instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns c2s_load instance
-         */
-        public static create(properties?: chest.Ic2s_load): chest.c2s_load;
-
-        /**
-         * Encodes the specified c2s_load message. Does not implicitly {@link chest.c2s_load.verify|verify} messages.
-         * @param message c2s_load message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: chest.Ic2s_load, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified c2s_load message, length delimited. Does not implicitly {@link chest.c2s_load.verify|verify} messages.
-         * @param message c2s_load message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: chest.Ic2s_load, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a c2s_load message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns c2s_load
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): chest.c2s_load;
-
-        /**
-         * Decodes a c2s_load message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns c2s_load
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): chest.c2s_load;
-
-        /**
-         * Verifies a c2s_load message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a c2s_load message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns c2s_load
-         */
-        public static fromObject(object: { [k: string]: any }): chest.c2s_load;
-
-        /**
-         * Creates a plain object from a c2s_load message. Also converts values to other types if specified.
-         * @param message c2s_load
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: chest.c2s_load, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this c2s_load to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-
-        /**
-         * Gets the default type url for c2s_load
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
-    }
-
-    /** Properties of a s2c_load. */
-    interface Is2c_load {
-
-        /** s2c_load err */
-        err?: (number|null);
-
-        /** s2c_load info */
-        info?: (chest.IChestInfo|null);
-    }
-
-    /** Represents a s2c_load. */
-    class s2c_load implements Is2c_load {
-
-        /**
-         * Constructs a new s2c_load.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: chest.Is2c_load);
-
-        /** s2c_load err. */
-        public err: number;
-
-        /** s2c_load info. */
-        public info?: (chest.IChestInfo|null);
-
-        /**
-         * Creates a new s2c_load instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns s2c_load instance
-         */
-        public static create(properties?: chest.Is2c_load): chest.s2c_load;
-
-        /**
-         * Encodes the specified s2c_load message. Does not implicitly {@link chest.s2c_load.verify|verify} messages.
-         * @param message s2c_load message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: chest.Is2c_load, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified s2c_load message, length delimited. Does not implicitly {@link chest.s2c_load.verify|verify} messages.
-         * @param message s2c_load message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: chest.Is2c_load, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a s2c_load message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns s2c_load
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): chest.s2c_load;
-
-        /**
-         * Decodes a s2c_load message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns s2c_load
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): chest.s2c_load;
-
-        /**
-         * Verifies a s2c_load message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a s2c_load message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns s2c_load
-         */
-        public static fromObject(object: { [k: string]: any }): chest.s2c_load;
-
-        /**
-         * Creates a plain object from a s2c_load message. Also converts values to other types if specified.
-         * @param message s2c_load
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: chest.s2c_load, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this s2c_load to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-
-        /**
-         * Gets the default type url for s2c_load
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
-    }
-
-    /** Properties of a c2s_open. */
-    interface Ic2s_open {
-    }
-
-    /** Represents a c2s_open. */
-    class c2s_open implements Ic2s_open {
-
-        /**
-         * Constructs a new c2s_open.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: chest.Ic2s_open);
-
-        /**
-         * Creates a new c2s_open instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns c2s_open instance
-         */
-        public static create(properties?: chest.Ic2s_open): chest.c2s_open;
-
-        /**
-         * Encodes the specified c2s_open message. Does not implicitly {@link chest.c2s_open.verify|verify} messages.
-         * @param message c2s_open message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: chest.Ic2s_open, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified c2s_open message, length delimited. Does not implicitly {@link chest.c2s_open.verify|verify} messages.
-         * @param message c2s_open message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: chest.Ic2s_open, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a c2s_open message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns c2s_open
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): chest.c2s_open;
-
-        /**
-         * Decodes a c2s_open message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns c2s_open
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): chest.c2s_open;
-
-        /**
-         * Verifies a c2s_open message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a c2s_open message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns c2s_open
-         */
-        public static fromObject(object: { [k: string]: any }): chest.c2s_open;
-
-        /**
-         * Creates a plain object from a c2s_open message. Also converts values to other types if specified.
-         * @param message c2s_open
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: chest.c2s_open, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this c2s_open to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-
-        /**
-         * Gets the default type url for c2s_open
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
-    }
-
-    /** Properties of a s2c_open. */
-    interface Is2c_open {
-
-        /** s2c_open err */
-        err?: (number|null);
-
-        /** s2c_open info */
-        info?: (chest.IChestInfo|null);
-    }
-
-    /** Represents a s2c_open. */
-    class s2c_open implements Is2c_open {
-
-        /**
-         * Constructs a new s2c_open.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: chest.Is2c_open);
-
-        /** s2c_open err. */
-        public err: number;
-
-        /** s2c_open info. */
-        public info?: (chest.IChestInfo|null);
-
-        /**
-         * Creates a new s2c_open instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns s2c_open instance
-         */
-        public static create(properties?: chest.Is2c_open): chest.s2c_open;
-
-        /**
-         * Encodes the specified s2c_open message. Does not implicitly {@link chest.s2c_open.verify|verify} messages.
-         * @param message s2c_open message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: chest.Is2c_open, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified s2c_open message, length delimited. Does not implicitly {@link chest.s2c_open.verify|verify} messages.
-         * @param message s2c_open message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: chest.Is2c_open, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a s2c_open message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns s2c_open
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): chest.s2c_open;
-
-        /**
-         * Decodes a s2c_open message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns s2c_open
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): chest.s2c_open;
-
-        /**
-         * Verifies a s2c_open message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a s2c_open message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns s2c_open
-         */
-        public static fromObject(object: { [k: string]: any }): chest.s2c_open;
-
-        /**
-         * Creates a plain object from a s2c_open message. Also converts values to other types if specified.
-         * @param message s2c_open
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: chest.s2c_open, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this s2c_open to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-
-        /**
-         * Gets the default type url for s2c_open
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
-    }
-
-    /** Properties of a c2s_replace. */
-    interface Ic2s_replace {
-    }
-
-    /** Represents a c2s_replace. */
-    class c2s_replace implements Ic2s_replace {
-
-        /**
-         * Constructs a new c2s_replace.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: chest.Ic2s_replace);
-
-        /**
-         * Creates a new c2s_replace instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns c2s_replace instance
-         */
-        public static create(properties?: chest.Ic2s_replace): chest.c2s_replace;
-
-        /**
-         * Encodes the specified c2s_replace message. Does not implicitly {@link chest.c2s_replace.verify|verify} messages.
-         * @param message c2s_replace message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: chest.Ic2s_replace, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified c2s_replace message, length delimited. Does not implicitly {@link chest.c2s_replace.verify|verify} messages.
-         * @param message c2s_replace message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: chest.Ic2s_replace, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a c2s_replace message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns c2s_replace
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): chest.c2s_replace;
-
-        /**
-         * Decodes a c2s_replace message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns c2s_replace
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): chest.c2s_replace;
-
-        /**
-         * Verifies a c2s_replace message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a c2s_replace message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns c2s_replace
-         */
-        public static fromObject(object: { [k: string]: any }): chest.c2s_replace;
-
-        /**
-         * Creates a plain object from a c2s_replace message. Also converts values to other types if specified.
-         * @param message c2s_replace
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: chest.c2s_replace, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this c2s_replace to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-
-        /**
-         * Gets the default type url for c2s_replace
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
-    }
-
-    /** Properties of a s2c_replace. */
-    interface Is2c_replace {
-
-        /** s2c_replace err */
-        err?: (number|null);
-
-        /** s2c_replace info */
-        info?: (chest.IChestInfo|null);
-    }
-
-    /** Represents a s2c_replace. */
-    class s2c_replace implements Is2c_replace {
-
-        /**
-         * Constructs a new s2c_replace.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: chest.Is2c_replace);
-
-        /** s2c_replace err. */
-        public err: number;
-
-        /** s2c_replace info. */
-        public info?: (chest.IChestInfo|null);
-
-        /**
-         * Creates a new s2c_replace instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns s2c_replace instance
-         */
-        public static create(properties?: chest.Is2c_replace): chest.s2c_replace;
-
-        /**
-         * Encodes the specified s2c_replace message. Does not implicitly {@link chest.s2c_replace.verify|verify} messages.
-         * @param message s2c_replace message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: chest.Is2c_replace, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified s2c_replace message, length delimited. Does not implicitly {@link chest.s2c_replace.verify|verify} messages.
-         * @param message s2c_replace message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: chest.Is2c_replace, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a s2c_replace message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns s2c_replace
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): chest.s2c_replace;
-
-        /**
-         * Decodes a s2c_replace message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns s2c_replace
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): chest.s2c_replace;
-
-        /**
-         * Verifies a s2c_replace message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a s2c_replace message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns s2c_replace
-         */
-        public static fromObject(object: { [k: string]: any }): chest.s2c_replace;
-
-        /**
-         * Creates a plain object from a s2c_replace message. Also converts values to other types if specified.
-         * @param message s2c_replace
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: chest.s2c_replace, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this s2c_replace to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-
-        /**
-         * Gets the default type url for s2c_replace
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
-    }
-
-    /** Properties of a c2s_abandon. */
-    interface Ic2s_abandon {
-    }
-
-    /** Represents a c2s_abandon. */
-    class c2s_abandon implements Ic2s_abandon {
-
-        /**
-         * Constructs a new c2s_abandon.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: chest.Ic2s_abandon);
-
-        /**
-         * Creates a new c2s_abandon instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns c2s_abandon instance
-         */
-        public static create(properties?: chest.Ic2s_abandon): chest.c2s_abandon;
-
-        /**
-         * Encodes the specified c2s_abandon message. Does not implicitly {@link chest.c2s_abandon.verify|verify} messages.
-         * @param message c2s_abandon message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: chest.Ic2s_abandon, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified c2s_abandon message, length delimited. Does not implicitly {@link chest.c2s_abandon.verify|verify} messages.
-         * @param message c2s_abandon message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: chest.Ic2s_abandon, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a c2s_abandon message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns c2s_abandon
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): chest.c2s_abandon;
-
-        /**
-         * Decodes a c2s_abandon message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns c2s_abandon
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): chest.c2s_abandon;
-
-        /**
-         * Verifies a c2s_abandon message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a c2s_abandon message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns c2s_abandon
-         */
-        public static fromObject(object: { [k: string]: any }): chest.c2s_abandon;
-
-        /**
-         * Creates a plain object from a c2s_abandon message. Also converts values to other types if specified.
-         * @param message c2s_abandon
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: chest.c2s_abandon, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this c2s_abandon to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-
-        /**
-         * Gets the default type url for c2s_abandon
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
-    }
-
-    /** Properties of a s2c_abandon. */
-    interface Is2c_abandon {
-
-        /** s2c_abandon err */
-        err?: (number|null);
-    }
-
-    /** Represents a s2c_abandon. */
-    class s2c_abandon implements Is2c_abandon {
-
-        /**
-         * Constructs a new s2c_abandon.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: chest.Is2c_abandon);
-
-        /** s2c_abandon err. */
-        public err: number;
-
-        /**
-         * Creates a new s2c_abandon instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns s2c_abandon instance
-         */
-        public static create(properties?: chest.Is2c_abandon): chest.s2c_abandon;
-
-        /**
-         * Encodes the specified s2c_abandon message. Does not implicitly {@link chest.s2c_abandon.verify|verify} messages.
-         * @param message s2c_abandon message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: chest.Is2c_abandon, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified s2c_abandon message, length delimited. Does not implicitly {@link chest.s2c_abandon.verify|verify} messages.
-         * @param message s2c_abandon message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: chest.Is2c_abandon, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a s2c_abandon message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns s2c_abandon
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): chest.s2c_abandon;
-
-        /**
-         * Decodes a s2c_abandon message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns s2c_abandon
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): chest.s2c_abandon;
-
-        /**
-         * Verifies a s2c_abandon message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a s2c_abandon message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns s2c_abandon
-         */
-        public static fromObject(object: { [k: string]: any }): chest.s2c_abandon;
-
-        /**
-         * Creates a plain object from a s2c_abandon message. Also converts values to other types if specified.
-         * @param message s2c_abandon
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: chest.s2c_abandon, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this s2c_abandon to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-
-        /**
-         * Gets the default type url for s2c_abandon
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
-    }
-
-    /** Properties of a c2s_challenge_dungeon. */
-    interface Ic2s_challenge_dungeon {
-
-        /** c2s_challenge_dungeon dungeonId */
-        dungeonId?: (number|null);
-    }
-
-    /** Represents a c2s_challenge_dungeon. */
-    class c2s_challenge_dungeon implements Ic2s_challenge_dungeon {
-
-        /**
-         * Constructs a new c2s_challenge_dungeon.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: chest.Ic2s_challenge_dungeon);
-
-        /** c2s_challenge_dungeon dungeonId. */
-        public dungeonId: number;
-
-        /**
-         * Creates a new c2s_challenge_dungeon instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns c2s_challenge_dungeon instance
-         */
-        public static create(properties?: chest.Ic2s_challenge_dungeon): chest.c2s_challenge_dungeon;
-
-        /**
-         * Encodes the specified c2s_challenge_dungeon message. Does not implicitly {@link chest.c2s_challenge_dungeon.verify|verify} messages.
-         * @param message c2s_challenge_dungeon message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: chest.Ic2s_challenge_dungeon, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified c2s_challenge_dungeon message, length delimited. Does not implicitly {@link chest.c2s_challenge_dungeon.verify|verify} messages.
-         * @param message c2s_challenge_dungeon message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: chest.Ic2s_challenge_dungeon, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a c2s_challenge_dungeon message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns c2s_challenge_dungeon
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): chest.c2s_challenge_dungeon;
-
-        /**
-         * Decodes a c2s_challenge_dungeon message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns c2s_challenge_dungeon
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): chest.c2s_challenge_dungeon;
-
-        /**
-         * Verifies a c2s_challenge_dungeon message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a c2s_challenge_dungeon message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns c2s_challenge_dungeon
-         */
-        public static fromObject(object: { [k: string]: any }): chest.c2s_challenge_dungeon;
-
-        /**
-         * Creates a plain object from a c2s_challenge_dungeon message. Also converts values to other types if specified.
-         * @param message c2s_challenge_dungeon
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: chest.c2s_challenge_dungeon, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this c2s_challenge_dungeon to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-
-        /**
-         * Gets the default type url for c2s_challenge_dungeon
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
-    }
-
-    /** Properties of a s2c_challenge_dungeon. */
-    interface Is2c_challenge_dungeon {
-
-        /** s2c_challenge_dungeon err */
-        err?: (number|null);
-
-        /** s2c_challenge_dungeon warUid */
-        warUid?: (number|null);
-    }
-
-    /** Represents a s2c_challenge_dungeon. */
-    class s2c_challenge_dungeon implements Is2c_challenge_dungeon {
-
-        /**
-         * Constructs a new s2c_challenge_dungeon.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: chest.Is2c_challenge_dungeon);
-
-        /** s2c_challenge_dungeon err. */
-        public err: number;
-
-        /** s2c_challenge_dungeon warUid. */
-        public warUid: number;
-
-        /**
-         * Creates a new s2c_challenge_dungeon instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns s2c_challenge_dungeon instance
-         */
-        public static create(properties?: chest.Is2c_challenge_dungeon): chest.s2c_challenge_dungeon;
-
-        /**
-         * Encodes the specified s2c_challenge_dungeon message. Does not implicitly {@link chest.s2c_challenge_dungeon.verify|verify} messages.
-         * @param message s2c_challenge_dungeon message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: chest.Is2c_challenge_dungeon, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified s2c_challenge_dungeon message, length delimited. Does not implicitly {@link chest.s2c_challenge_dungeon.verify|verify} messages.
-         * @param message s2c_challenge_dungeon message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: chest.Is2c_challenge_dungeon, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a s2c_challenge_dungeon message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns s2c_challenge_dungeon
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): chest.s2c_challenge_dungeon;
-
-        /**
-         * Decodes a s2c_challenge_dungeon message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns s2c_challenge_dungeon
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): chest.s2c_challenge_dungeon;
-
-        /**
-         * Verifies a s2c_challenge_dungeon message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a s2c_challenge_dungeon message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns s2c_challenge_dungeon
-         */
-        public static fromObject(object: { [k: string]: any }): chest.s2c_challenge_dungeon;
-
-        /**
-         * Creates a plain object from a s2c_challenge_dungeon message. Also converts values to other types if specified.
-         * @param message s2c_challenge_dungeon
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: chest.s2c_challenge_dungeon, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this s2c_challenge_dungeon to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-
-        /**
-         * Gets the default type url for s2c_challenge_dungeon
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
-    }
-}
-
 /** Namespace dungeon. */
 export namespace dungeon {
 
     /** Properties of a Dungeon. */
     interface IDungeon {
+
+        /** Dungeon id */
+        id?: (number|null);
 
         /** Dungeon star */
         star?: (number|null);
@@ -2442,6 +1235,9 @@ export namespace dungeon {
          * @param [properties] Properties to set
          */
         constructor(properties?: dungeon.IDungeon);
+
+        /** Dungeon id. */
+        public id: number;
 
         /** Dungeon star. */
         public star: number;
@@ -2718,6 +1514,206 @@ export namespace dungeon {
 
         /**
          * Gets the default type url for s2c_load
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a c2s_challenge. */
+    interface Ic2s_challenge {
+
+        /** c2s_challenge dungeonId */
+        dungeonId?: (number|null);
+    }
+
+    /** Represents a c2s_challenge. */
+    class c2s_challenge implements Ic2s_challenge {
+
+        /**
+         * Constructs a new c2s_challenge.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: dungeon.Ic2s_challenge);
+
+        /** c2s_challenge dungeonId. */
+        public dungeonId: number;
+
+        /**
+         * Creates a new c2s_challenge instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns c2s_challenge instance
+         */
+        public static create(properties?: dungeon.Ic2s_challenge): dungeon.c2s_challenge;
+
+        /**
+         * Encodes the specified c2s_challenge message. Does not implicitly {@link dungeon.c2s_challenge.verify|verify} messages.
+         * @param message c2s_challenge message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: dungeon.Ic2s_challenge, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified c2s_challenge message, length delimited. Does not implicitly {@link dungeon.c2s_challenge.verify|verify} messages.
+         * @param message c2s_challenge message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: dungeon.Ic2s_challenge, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a c2s_challenge message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns c2s_challenge
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): dungeon.c2s_challenge;
+
+        /**
+         * Decodes a c2s_challenge message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns c2s_challenge
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): dungeon.c2s_challenge;
+
+        /**
+         * Verifies a c2s_challenge message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a c2s_challenge message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns c2s_challenge
+         */
+        public static fromObject(object: { [k: string]: any }): dungeon.c2s_challenge;
+
+        /**
+         * Creates a plain object from a c2s_challenge message. Also converts values to other types if specified.
+         * @param message c2s_challenge
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: dungeon.c2s_challenge, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this c2s_challenge to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for c2s_challenge
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a s2c_challenge. */
+    interface Is2c_challenge {
+
+        /** s2c_challenge err */
+        err?: (number|null);
+
+        /** s2c_challenge worldUid */
+        worldUid?: (number|null);
+    }
+
+    /** Represents a s2c_challenge. */
+    class s2c_challenge implements Is2c_challenge {
+
+        /**
+         * Constructs a new s2c_challenge.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: dungeon.Is2c_challenge);
+
+        /** s2c_challenge err. */
+        public err: number;
+
+        /** s2c_challenge worldUid. */
+        public worldUid: number;
+
+        /**
+         * Creates a new s2c_challenge instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns s2c_challenge instance
+         */
+        public static create(properties?: dungeon.Is2c_challenge): dungeon.s2c_challenge;
+
+        /**
+         * Encodes the specified s2c_challenge message. Does not implicitly {@link dungeon.s2c_challenge.verify|verify} messages.
+         * @param message s2c_challenge message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: dungeon.Is2c_challenge, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified s2c_challenge message, length delimited. Does not implicitly {@link dungeon.s2c_challenge.verify|verify} messages.
+         * @param message s2c_challenge message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: dungeon.Is2c_challenge, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a s2c_challenge message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns s2c_challenge
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): dungeon.s2c_challenge;
+
+        /**
+         * Decodes a s2c_challenge message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns s2c_challenge
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): dungeon.s2c_challenge;
+
+        /**
+         * Verifies a s2c_challenge message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a s2c_challenge message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns s2c_challenge
+         */
+        public static fromObject(object: { [k: string]: any }): dungeon.s2c_challenge;
+
+        /**
+         * Creates a plain object from a s2c_challenge message. Also converts values to other types if specified.
+         * @param message s2c_challenge
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: dungeon.s2c_challenge, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this s2c_challenge to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for s2c_challenge
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */
@@ -11101,9 +10097,6 @@ export namespace world {
 
         /** BattleAddBullet duration */
         duration?: (number|null);
-
-        /** BattleAddBullet h */
-        h?: (number|null);
     }
 
     /** Represents a BattleAddBullet. */
@@ -11126,9 +10119,6 @@ export namespace world {
 
         /** BattleAddBullet duration. */
         public duration: number;
-
-        /** BattleAddBullet h. */
-        public h: number;
 
         /**
          * Creates a new BattleAddBullet instance using the specified properties.

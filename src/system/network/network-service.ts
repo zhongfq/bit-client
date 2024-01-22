@@ -8,6 +8,7 @@ import { errcode, errmsg, opcode, registerProtocols } from "../../def/protocol.j
 type PromiseDescriptor = {
     resolve: (value: any) => void;
     reject: (reason?: any) => void;
+    request: any;
 };
 
 export type ProtocolDescriptor = {
@@ -184,7 +185,7 @@ export class NetworkService extends Service<NetworkService> {
 
             this._socket?.send(packet.buffer);
 
-            this._callbacks[session] = { resolve, reject };
+            this._callbacks[session] = { resolve, reject, request: message };
         });
     }
 
@@ -227,16 +228,17 @@ export class NetworkService extends Service<NetworkService> {
                 console.log(`Response: ${protocol.typeURL}`, message);
             }
 
+            const promise = this._callbacks[session];
+
             // dispatch to network service
             try {
-                this.event(protocol.op, message);
+                this.event(protocol.op, [message, promise?.request]);
             } catch (error) {
                 // TODO: report error?
                 console.log("handle network message", error);
             }
 
             // rpc call
-            const promise = this._callbacks[session];
             if (promise) {
                 delete this._callbacks[session];
                 promise.resolve(message);
