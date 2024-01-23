@@ -1,14 +1,19 @@
 import { ecs } from "../../../../core/ecs";
-import { World } from "../../world";
-import { Movement, MovementType, Position, TrackType } from "../components/movement";
+import { WorldContext } from "../../world-context";
+import {
+    MovementComponent,
+    MovementType,
+    PositionComponent,
+    TrackType,
+} from "../components/movement-component";
 
 export class MovementSystem extends ecs.System {
-    constructor(readonly context: World) {
+    constructor(readonly context: WorldContext) {
         super();
     }
 
     update(dt: number): void {
-        this.ecs.getComponents(Movement).forEach((movement) => {
+        this.ecs.getComponents(MovementComponent).forEach((movement) => {
             if (movement.type == MovementType.NONE) {
                 return;
             }
@@ -19,10 +24,10 @@ export class MovementSystem extends ecs.System {
         });
     }
 
-    private _updateWithTrack(movement: Movement, dt: number) {}
+    private _updateWithTrack(movement: MovementComponent, dt: number) {}
 
-    private _updateWithSpeed(movement: Movement, dt: number) {
-        const position = movement.getComponent(Position)!;
+    private _updateWithSpeed(movement: MovementComponent, dt: number) {
+        const position = movement.getComponent(PositionComponent)!;
         const speed = movement.speed;
         let target = movement.target;
 

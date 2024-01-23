@@ -35,16 +35,13 @@ export type AttrTable = {
 };
 
 //-----------------------------------------------------------------------------
-// battle
+// world
 //-----------------------------------------------------------------------------
-export type BattleEntityTable = {
-    entity: {
+export type WorldEntityTable = {
+    models: {
         [k: string]: {
-            // etype: ElementType;
             res: string;
-            card: string;
             id: number;
-            // track_type?: TrackType;
         };
     };
 };
@@ -63,6 +60,14 @@ export type HeroTable = {
     [k: string]: {
         id: number;
         name: string;
+        model: number;
+    };
+};
+
+export type SoldierTable = {
+    [k: string]: {
+        id: number;
+        model: string;
     };
 };
 
@@ -97,21 +102,4 @@ export type Task = {
 };
 export type TaskTable = {
     [k: number]: Task;
-};
-export type Money = {
-    id: number;
-};
-export type MoneyTable = {
-    [k: number]: Money;
-};
-export type Reward = [number, number];
-export type Mail = {
-    id: number;
-    title: string;
-    content: string;
-    reward: Reward[];
-};
-
-export type MailTable = {
-    [k: number]: Mail;
 };

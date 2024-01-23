@@ -9,12 +9,6 @@
   "bottom": 0,
   "name": "Scene2D",
   "autoDestroyAtClosed": true,
-  "_$comp": [
-    {
-      "_$type": "127cb2cc-74bb-48e5-b147-9561e9d65a0e",
-      "scriptPath": "../src/system/app-mediator.ts"
-    }
-  ],
   "_$child": [
     {
       "_$id": "33dcailo",

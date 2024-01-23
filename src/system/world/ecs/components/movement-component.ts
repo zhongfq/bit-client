@@ -1,7 +1,7 @@
 import { ecs } from "../../../../core/ecs";
 import { world } from "../../../../def/world";
 
-export class Position extends ecs.Component {
+export class PositionComponent extends ecs.Component {
     x: number = 0;
     y: number = 0;
     z: number = 0;
@@ -30,7 +30,7 @@ export const enum MovementType {
     TARGET,
 }
 
-export class Movement extends ecs.Component {
+export class MovementComponent extends ecs.Component {
     type: MovementType = MovementType.NONE;
     velocity: number = 1;
 

@@ -2,35 +2,35 @@
     "models": {
         "101": {
             "id": 101,
-            "res": "prefab/war/role/lvbu"
+            "res": "resources/prefab/battle/roles/mc01.lh"
         },
         "102": {
             "id": 102,
-            "res": "prefab/war/role/lvbu"
+            "res": "resources/prefab/battle/roles/mc02.lh"
         },
         "105": {
             "id": 105,
-            "res": "prefab/war/role/lvbu"
+            "res": "resources/prefab/battle/roles/mc03.lh"
         },
         "106": {
             "id": 106,
-            "res": "prefab/war/role/lvbu"
+            "res": "resources/prefab/battle/roles/mc01.lh"
         },
         "209": {
             "id": 209,
-            "res": "prefab/war/role/lvbu"
+            "res": "resources/prefab/battle/roles/mc01.lh"
         },
         "212": {
             "id": 212,
-            "res": "prefab/war/role/lvbu"
+            "res": "resources/prefab/battle/roles/mc01.lh"
         },
         "401": {
             "id": 401,
-            "res": "prefab/war/role/lvbu"
+            "res": "resources/prefab/battle/roles/mc01.lh"
         },
         "404": {
             "id": 404,
-            "res": "prefab/war/role/lvbu"
+            "res": "resources/prefab/battle/roles/mc01.lh"
         },
         "40001": {
             "id": 40001,

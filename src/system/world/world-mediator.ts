@@ -1,7 +1,5 @@
 import { app } from "../../app";
-import proto from "../../def/proto.js";
 import { WorldUI } from "../../ui-runtime/scene/WorldUI";
-import { CameraController } from "./camera-controller";
 
 const { regClass, property } = Laya;
 
@@ -13,23 +11,11 @@ export class WorldMediator extends Laya.Script {
     private _initPosition: Laya.Point = new Laya.Point();
     private _pressStart: Laya.Point | null = null;
 
-    private _troop!: proto.troop.Troop;
-
     onAwake() {
         this._initPosition.setTo(this.owner.joystick.x, this.owner.joystick.y);
         this.owner.joystickGroup.on(Laya.Event.MOUSE_DOWN, this, this.onJoysticHandler);
         this.owner.joystickGroup.on(Laya.Event.MOUSE_MOVE, this, this.onJoysticHandler);
         this.owner.joystickGroup.on(Laya.Event.MOUSE_UP, this, this.onJoysticHandler);
-    }
-
-    async onStart() {
-        await app.service.gm.requestGM("setup_troop 1 101 1 10");
-        await app.service.gm.requestGM("join_world");
-
-        this._troop = (await app.service.world.requestTroopLoad())
-            .troopList[0] as proto.troop.Troop;
-
-        await app.service.world.requestChangeViewport({ x: 0, y: 0 });
     }
 
     onJoysticHandler(e: Laya.Event) {
@@ -38,7 +24,6 @@ export class WorldMediator extends Laya.Script {
         }
         const joystick = this.owner.joystick;
         const indicator = this.owner.indicator;
-        const cameraController = this.owner.scene3D.getComponent(CameraController);
         if (e.type === Laya.Event.MOUSE_DOWN) {
             this._pressStart = Laya.Point.create();
             this._pressStart.copy(this.owner.joystickGroup.getMousePoint());
@@ -53,7 +38,7 @@ export class WorldMediator extends Laya.Script {
             joystick.alpha = 0.3;
             indicator.x = 0;
             indicator.y = 0;
-            cameraController.stopRun();
+            // cameraController.stopRun();
         } else {
             const maxOffset = joystick.width / 2;
             const current = this.owner.joystickGroup.getMousePoint();
@@ -69,7 +54,8 @@ export class WorldMediator extends Laya.Script {
             indicator.y = current.y;
 
             const rad = Math.atan2(-current.y, current.x);
-            cameraController.setTargetRoation((rad * 180) / Math.PI + 90);
+            // app.service.world.requestTroopMoveBy(this.)
+            // cameraController.setTargetRoation((rad * 180) / Math.PI + 90);
         }
     }
 }

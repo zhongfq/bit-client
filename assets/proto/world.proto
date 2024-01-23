@@ -24,7 +24,7 @@ message Alliance {
   string name = 3;
 }
 
-message ComponentTroop {
+message TroopComponent {
     uint32 hero_id = 1;
     uint32 soldier_id = 2; // 士兵id
     uint32 cmd = 3; // 当前执行指令
@@ -33,7 +33,7 @@ message ComponentTroop {
     uint32 battle_eid = 6; // 正在参与的战斗
 };
 
-message ComponentOwner {
+message OwnerComponent {
     uint32 rid = 1;
     uint32 aid = 2;
     uint32 eid = 3;
@@ -47,18 +47,19 @@ message Timer {
     uint32 start = 2; // 开始时间戳(ms)
     uint32 expire = 3; // 结束时间戳(ms)
 }
-message ComponentTimer {
+message TimerComponent {
     map<uint32, Timer> timers = 1;
 }
 
-message ComponentMove {
-    uint32 start_ms = 1;
-    repeated uint32 path = 2;
-    float speed = 3; // 每秒多少格
-    int32 degree = 4;
+message MoveComponent {
+    uint32 move_type = 1; // config.world MOVE_TYPE
+    uint32 start_ms = 2;
+    repeated uint32 path = 3;
+    float speed = 4; // 每秒多少格
+    int32 degree = 5;
 }
 
-message ComponentBuilding {
+message BuildingComponent {
     uint32 bid = 1; // 建筑id
     uint32 hp = 2; // 当前耐久
     uint32 max_hp = 3; // 最大耐久
@@ -68,7 +69,7 @@ message ComponentBuilding {
     string name = 9; // 自定义名字
 }
 
-message ComponentBattle {
+message BattleComponent {
     uint32 battle_uid = 1;
     repeated uint32 fighter_eids = 2; // 参战方
     uint32 start_ts = 3; // 开始时间戳
@@ -81,12 +82,12 @@ message Entity {
 
     Position pos = 3;
     uint32 state = 4;
-    ComponentTimer timer = 12;
-    ComponentMove move = 13;
-    ComponentBuilding building = 14;
-    ComponentOwner owner = 15;
-    ComponentTroop troop = 16;
-    ComponentBattle battle = 17;
+    TimerComponent timer = 12;
+    MoveComponent move = 13;
+    BuildingComponent building = 14;
+    OwnerComponent owner = 15;
+    TroopComponent troop = 16;
+    BattleComponent battle = 17;
 }
 
 // 沙盘地图基础信息

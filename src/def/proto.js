@@ -14692,29 +14692,29 @@ $root.world = (function() {
         return Alliance;
     })();
 
-    world.ComponentTroop = (function() {
+    world.TroopComponent = (function() {
 
         /**
-         * Properties of a ComponentTroop.
+         * Properties of a TroopComponent.
          * @memberof world
-         * @interface IComponentTroop
-         * @property {number|null} [heroId] ComponentTroop heroId
-         * @property {number|null} [soldierId] ComponentTroop soldierId
-         * @property {number|null} [cmd] ComponentTroop cmd
-         * @property {number|null} [stayEid] ComponentTroop stayEid
-         * @property {number|null} [homeEid] ComponentTroop homeEid
-         * @property {number|null} [battleEid] ComponentTroop battleEid
+         * @interface ITroopComponent
+         * @property {number|null} [heroId] TroopComponent heroId
+         * @property {number|null} [soldierId] TroopComponent soldierId
+         * @property {number|null} [cmd] TroopComponent cmd
+         * @property {number|null} [stayEid] TroopComponent stayEid
+         * @property {number|null} [homeEid] TroopComponent homeEid
+         * @property {number|null} [battleEid] TroopComponent battleEid
          */
 
         /**
-         * Constructs a new ComponentTroop.
+         * Constructs a new TroopComponent.
          * @memberof world
-         * @classdesc Represents a ComponentTroop.
-         * @implements IComponentTroop
+         * @classdesc Represents a TroopComponent.
+         * @implements ITroopComponent
          * @constructor
-         * @param {world.IComponentTroop=} [properties] Properties to set
+         * @param {world.ITroopComponent=} [properties] Properties to set
          */
-        function ComponentTroop(properties) {
+        function TroopComponent(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -14722,75 +14722,75 @@ $root.world = (function() {
         }
 
         /**
-         * ComponentTroop heroId.
+         * TroopComponent heroId.
          * @member {number} heroId
-         * @memberof world.ComponentTroop
+         * @memberof world.TroopComponent
          * @instance
          */
-        ComponentTroop.prototype.heroId = 0;
+        TroopComponent.prototype.heroId = 0;
 
         /**
-         * ComponentTroop soldierId.
+         * TroopComponent soldierId.
          * @member {number} soldierId
-         * @memberof world.ComponentTroop
+         * @memberof world.TroopComponent
          * @instance
          */
-        ComponentTroop.prototype.soldierId = 0;
+        TroopComponent.prototype.soldierId = 0;
 
         /**
-         * ComponentTroop cmd.
+         * TroopComponent cmd.
          * @member {number} cmd
-         * @memberof world.ComponentTroop
+         * @memberof world.TroopComponent
          * @instance
          */
-        ComponentTroop.prototype.cmd = 0;
+        TroopComponent.prototype.cmd = 0;
 
         /**
-         * ComponentTroop stayEid.
+         * TroopComponent stayEid.
          * @member {number} stayEid
-         * @memberof world.ComponentTroop
+         * @memberof world.TroopComponent
          * @instance
          */
-        ComponentTroop.prototype.stayEid = 0;
+        TroopComponent.prototype.stayEid = 0;
 
         /**
-         * ComponentTroop homeEid.
+         * TroopComponent homeEid.
          * @member {number} homeEid
-         * @memberof world.ComponentTroop
+         * @memberof world.TroopComponent
          * @instance
          */
-        ComponentTroop.prototype.homeEid = 0;
+        TroopComponent.prototype.homeEid = 0;
 
         /**
-         * ComponentTroop battleEid.
+         * TroopComponent battleEid.
          * @member {number} battleEid
-         * @memberof world.ComponentTroop
+         * @memberof world.TroopComponent
          * @instance
          */
-        ComponentTroop.prototype.battleEid = 0;
+        TroopComponent.prototype.battleEid = 0;
 
         /**
-         * Creates a new ComponentTroop instance using the specified properties.
+         * Creates a new TroopComponent instance using the specified properties.
          * @function create
-         * @memberof world.ComponentTroop
+         * @memberof world.TroopComponent
          * @static
-         * @param {world.IComponentTroop=} [properties] Properties to set
-         * @returns {world.ComponentTroop} ComponentTroop instance
+         * @param {world.ITroopComponent=} [properties] Properties to set
+         * @returns {world.TroopComponent} TroopComponent instance
          */
-        ComponentTroop.create = function create(properties) {
-            return new ComponentTroop(properties);
+        TroopComponent.create = function create(properties) {
+            return new TroopComponent(properties);
         };
 
         /**
-         * Encodes the specified ComponentTroop message. Does not implicitly {@link world.ComponentTroop.verify|verify} messages.
+         * Encodes the specified TroopComponent message. Does not implicitly {@link world.TroopComponent.verify|verify} messages.
          * @function encode
-         * @memberof world.ComponentTroop
+         * @memberof world.TroopComponent
          * @static
-         * @param {world.IComponentTroop} message ComponentTroop message or plain object to encode
+         * @param {world.ITroopComponent} message TroopComponent message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        ComponentTroop.encode = function encode(message, writer) {
+        TroopComponent.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.heroId != null && Object.hasOwnProperty.call(message, "heroId"))
@@ -14809,33 +14809,33 @@ $root.world = (function() {
         };
 
         /**
-         * Encodes the specified ComponentTroop message, length delimited. Does not implicitly {@link world.ComponentTroop.verify|verify} messages.
+         * Encodes the specified TroopComponent message, length delimited. Does not implicitly {@link world.TroopComponent.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof world.ComponentTroop
+         * @memberof world.TroopComponent
          * @static
-         * @param {world.IComponentTroop} message ComponentTroop message or plain object to encode
+         * @param {world.ITroopComponent} message TroopComponent message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        ComponentTroop.encodeDelimited = function encodeDelimited(message, writer) {
+        TroopComponent.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
         /**
-         * Decodes a ComponentTroop message from the specified reader or buffer.
+         * Decodes a TroopComponent message from the specified reader or buffer.
          * @function decode
-         * @memberof world.ComponentTroop
+         * @memberof world.TroopComponent
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {world.ComponentTroop} ComponentTroop
+         * @returns {world.TroopComponent} TroopComponent
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        ComponentTroop.decode = function decode(reader, length) {
+        TroopComponent.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.ComponentTroop();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.TroopComponent();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -14872,30 +14872,30 @@ $root.world = (function() {
         };
 
         /**
-         * Decodes a ComponentTroop message from the specified reader or buffer, length delimited.
+         * Decodes a TroopComponent message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof world.ComponentTroop
+         * @memberof world.TroopComponent
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {world.ComponentTroop} ComponentTroop
+         * @returns {world.TroopComponent} TroopComponent
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        ComponentTroop.decodeDelimited = function decodeDelimited(reader) {
+        TroopComponent.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
         /**
-         * Verifies a ComponentTroop message.
+         * Verifies a TroopComponent message.
          * @function verify
-         * @memberof world.ComponentTroop
+         * @memberof world.TroopComponent
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        ComponentTroop.verify = function verify(message) {
+        TroopComponent.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.heroId != null && message.hasOwnProperty("heroId"))
@@ -14920,17 +14920,17 @@ $root.world = (function() {
         };
 
         /**
-         * Creates a ComponentTroop message from a plain object. Also converts values to their respective internal types.
+         * Creates a TroopComponent message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof world.ComponentTroop
+         * @memberof world.TroopComponent
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {world.ComponentTroop} ComponentTroop
+         * @returns {world.TroopComponent} TroopComponent
          */
-        ComponentTroop.fromObject = function fromObject(object) {
-            if (object instanceof $root.world.ComponentTroop)
+        TroopComponent.fromObject = function fromObject(object) {
+            if (object instanceof $root.world.TroopComponent)
                 return object;
-            var message = new $root.world.ComponentTroop();
+            var message = new $root.world.TroopComponent();
             if (object.heroId != null)
                 message.heroId = object.heroId >>> 0;
             if (object.soldierId != null)
@@ -14947,15 +14947,15 @@ $root.world = (function() {
         };
 
         /**
-         * Creates a plain object from a ComponentTroop message. Also converts values to other types if specified.
+         * Creates a plain object from a TroopComponent message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof world.ComponentTroop
+         * @memberof world.TroopComponent
          * @static
-         * @param {world.ComponentTroop} message ComponentTroop
+         * @param {world.TroopComponent} message TroopComponent
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        ComponentTroop.toObject = function toObject(message, options) {
+        TroopComponent.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -14983,57 +14983,57 @@ $root.world = (function() {
         };
 
         /**
-         * Converts this ComponentTroop to JSON.
+         * Converts this TroopComponent to JSON.
          * @function toJSON
-         * @memberof world.ComponentTroop
+         * @memberof world.TroopComponent
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        ComponentTroop.prototype.toJSON = function toJSON() {
+        TroopComponent.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
         /**
-         * Gets the default type url for ComponentTroop
+         * Gets the default type url for TroopComponent
          * @function getTypeUrl
-         * @memberof world.ComponentTroop
+         * @memberof world.TroopComponent
          * @static
          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns {string} The default type url
          */
-        ComponentTroop.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        TroopComponent.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/world.ComponentTroop";
+            return typeUrlPrefix + "/world.TroopComponent";
         };
 
-        return ComponentTroop;
+        return TroopComponent;
     })();
 
-    world.ComponentOwner = (function() {
+    world.OwnerComponent = (function() {
 
         /**
-         * Properties of a ComponentOwner.
+         * Properties of an OwnerComponent.
          * @memberof world
-         * @interface IComponentOwner
-         * @property {number|null} [rid] ComponentOwner rid
-         * @property {number|null} [aid] ComponentOwner aid
-         * @property {number|null} [eid] ComponentOwner eid
-         * @property {boolean|null} [isRobot] ComponentOwner isRobot
-         * @property {string|null} [roleName] ComponentOwner roleName
-         * @property {string|null} [allianceName] ComponentOwner allianceName
+         * @interface IOwnerComponent
+         * @property {number|null} [rid] OwnerComponent rid
+         * @property {number|null} [aid] OwnerComponent aid
+         * @property {number|null} [eid] OwnerComponent eid
+         * @property {boolean|null} [isRobot] OwnerComponent isRobot
+         * @property {string|null} [roleName] OwnerComponent roleName
+         * @property {string|null} [allianceName] OwnerComponent allianceName
          */
 
         /**
-         * Constructs a new ComponentOwner.
+         * Constructs a new OwnerComponent.
          * @memberof world
-         * @classdesc Represents a ComponentOwner.
-         * @implements IComponentOwner
+         * @classdesc Represents an OwnerComponent.
+         * @implements IOwnerComponent
          * @constructor
-         * @param {world.IComponentOwner=} [properties] Properties to set
+         * @param {world.IOwnerComponent=} [properties] Properties to set
          */
-        function ComponentOwner(properties) {
+        function OwnerComponent(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -15041,75 +15041,75 @@ $root.world = (function() {
         }
 
         /**
-         * ComponentOwner rid.
+         * OwnerComponent rid.
          * @member {number} rid
-         * @memberof world.ComponentOwner
+         * @memberof world.OwnerComponent
          * @instance
          */
-        ComponentOwner.prototype.rid = 0;
+        OwnerComponent.prototype.rid = 0;
 
         /**
-         * ComponentOwner aid.
+         * OwnerComponent aid.
          * @member {number} aid
-         * @memberof world.ComponentOwner
+         * @memberof world.OwnerComponent
          * @instance
          */
-        ComponentOwner.prototype.aid = 0;
+        OwnerComponent.prototype.aid = 0;
 
         /**
-         * ComponentOwner eid.
+         * OwnerComponent eid.
          * @member {number} eid
-         * @memberof world.ComponentOwner
+         * @memberof world.OwnerComponent
          * @instance
          */
-        ComponentOwner.prototype.eid = 0;
+        OwnerComponent.prototype.eid = 0;
 
         /**
-         * ComponentOwner isRobot.
+         * OwnerComponent isRobot.
          * @member {boolean} isRobot
-         * @memberof world.ComponentOwner
+         * @memberof world.OwnerComponent
          * @instance
          */
-        ComponentOwner.prototype.isRobot = false;
+        OwnerComponent.prototype.isRobot = false;
 
         /**
-         * ComponentOwner roleName.
+         * OwnerComponent roleName.
          * @member {string} roleName
-         * @memberof world.ComponentOwner
+         * @memberof world.OwnerComponent
          * @instance
          */
-        ComponentOwner.prototype.roleName = "";
+        OwnerComponent.prototype.roleName = "";
 
         /**
-         * ComponentOwner allianceName.
+         * OwnerComponent allianceName.
          * @member {string} allianceName
-         * @memberof world.ComponentOwner
+         * @memberof world.OwnerComponent
          * @instance
          */
-        ComponentOwner.prototype.allianceName = "";
+        OwnerComponent.prototype.allianceName = "";
 
         /**
-         * Creates a new ComponentOwner instance using the specified properties.
+         * Creates a new OwnerComponent instance using the specified properties.
          * @function create
-         * @memberof world.ComponentOwner
+         * @memberof world.OwnerComponent
          * @static
-         * @param {world.IComponentOwner=} [properties] Properties to set
-         * @returns {world.ComponentOwner} ComponentOwner instance
+         * @param {world.IOwnerComponent=} [properties] Properties to set
+         * @returns {world.OwnerComponent} OwnerComponent instance
          */
-        ComponentOwner.create = function create(properties) {
-            return new ComponentOwner(properties);
+        OwnerComponent.create = function create(properties) {
+            return new OwnerComponent(properties);
         };
 
         /**
-         * Encodes the specified ComponentOwner message. Does not implicitly {@link world.ComponentOwner.verify|verify} messages.
+         * Encodes the specified OwnerComponent message. Does not implicitly {@link world.OwnerComponent.verify|verify} messages.
          * @function encode
-         * @memberof world.ComponentOwner
+         * @memberof world.OwnerComponent
          * @static
-         * @param {world.IComponentOwner} message ComponentOwner message or plain object to encode
+         * @param {world.IOwnerComponent} message OwnerComponent message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        ComponentOwner.encode = function encode(message, writer) {
+        OwnerComponent.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.rid != null && Object.hasOwnProperty.call(message, "rid"))
@@ -15128,33 +15128,33 @@ $root.world = (function() {
         };
 
         /**
-         * Encodes the specified ComponentOwner message, length delimited. Does not implicitly {@link world.ComponentOwner.verify|verify} messages.
+         * Encodes the specified OwnerComponent message, length delimited. Does not implicitly {@link world.OwnerComponent.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof world.ComponentOwner
+         * @memberof world.OwnerComponent
          * @static
-         * @param {world.IComponentOwner} message ComponentOwner message or plain object to encode
+         * @param {world.IOwnerComponent} message OwnerComponent message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        ComponentOwner.encodeDelimited = function encodeDelimited(message, writer) {
+        OwnerComponent.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
         /**
-         * Decodes a ComponentOwner message from the specified reader or buffer.
+         * Decodes an OwnerComponent message from the specified reader or buffer.
          * @function decode
-         * @memberof world.ComponentOwner
+         * @memberof world.OwnerComponent
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {world.ComponentOwner} ComponentOwner
+         * @returns {world.OwnerComponent} OwnerComponent
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        ComponentOwner.decode = function decode(reader, length) {
+        OwnerComponent.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.ComponentOwner();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.OwnerComponent();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -15191,30 +15191,30 @@ $root.world = (function() {
         };
 
         /**
-         * Decodes a ComponentOwner message from the specified reader or buffer, length delimited.
+         * Decodes an OwnerComponent message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof world.ComponentOwner
+         * @memberof world.OwnerComponent
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {world.ComponentOwner} ComponentOwner
+         * @returns {world.OwnerComponent} OwnerComponent
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        ComponentOwner.decodeDelimited = function decodeDelimited(reader) {
+        OwnerComponent.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
         /**
-         * Verifies a ComponentOwner message.
+         * Verifies an OwnerComponent message.
          * @function verify
-         * @memberof world.ComponentOwner
+         * @memberof world.OwnerComponent
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        ComponentOwner.verify = function verify(message) {
+        OwnerComponent.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.rid != null && message.hasOwnProperty("rid"))
@@ -15239,17 +15239,17 @@ $root.world = (function() {
         };
 
         /**
-         * Creates a ComponentOwner message from a plain object. Also converts values to their respective internal types.
+         * Creates an OwnerComponent message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof world.ComponentOwner
+         * @memberof world.OwnerComponent
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {world.ComponentOwner} ComponentOwner
+         * @returns {world.OwnerComponent} OwnerComponent
          */
-        ComponentOwner.fromObject = function fromObject(object) {
-            if (object instanceof $root.world.ComponentOwner)
+        OwnerComponent.fromObject = function fromObject(object) {
+            if (object instanceof $root.world.OwnerComponent)
                 return object;
-            var message = new $root.world.ComponentOwner();
+            var message = new $root.world.OwnerComponent();
             if (object.rid != null)
                 message.rid = object.rid >>> 0;
             if (object.aid != null)
@@ -15266,15 +15266,15 @@ $root.world = (function() {
         };
 
         /**
-         * Creates a plain object from a ComponentOwner message. Also converts values to other types if specified.
+         * Creates a plain object from an OwnerComponent message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof world.ComponentOwner
+         * @memberof world.OwnerComponent
          * @static
-         * @param {world.ComponentOwner} message ComponentOwner
+         * @param {world.OwnerComponent} message OwnerComponent
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        ComponentOwner.toObject = function toObject(message, options) {
+        OwnerComponent.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -15302,32 +15302,32 @@ $root.world = (function() {
         };
 
         /**
-         * Converts this ComponentOwner to JSON.
+         * Converts this OwnerComponent to JSON.
          * @function toJSON
-         * @memberof world.ComponentOwner
+         * @memberof world.OwnerComponent
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        ComponentOwner.prototype.toJSON = function toJSON() {
+        OwnerComponent.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
         /**
-         * Gets the default type url for ComponentOwner
+         * Gets the default type url for OwnerComponent
          * @function getTypeUrl
-         * @memberof world.ComponentOwner
+         * @memberof world.OwnerComponent
          * @static
          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns {string} The default type url
          */
-        ComponentOwner.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        OwnerComponent.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/world.ComponentOwner";
+            return typeUrlPrefix + "/world.OwnerComponent";
         };
 
-        return ComponentOwner;
+        return OwnerComponent;
     })();
 
     world.Timer = (function() {
@@ -15580,24 +15580,24 @@ $root.world = (function() {
         return Timer;
     })();
 
-    world.ComponentTimer = (function() {
+    world.TimerComponent = (function() {
 
         /**
-         * Properties of a ComponentTimer.
+         * Properties of a TimerComponent.
          * @memberof world
-         * @interface IComponentTimer
-         * @property {Object.<string,world.ITimer>|null} [timers] ComponentTimer timers
+         * @interface ITimerComponent
+         * @property {Object.<string,world.ITimer>|null} [timers] TimerComponent timers
          */
 
         /**
-         * Constructs a new ComponentTimer.
+         * Constructs a new TimerComponent.
          * @memberof world
-         * @classdesc Represents a ComponentTimer.
-         * @implements IComponentTimer
+         * @classdesc Represents a TimerComponent.
+         * @implements ITimerComponent
          * @constructor
-         * @param {world.IComponentTimer=} [properties] Properties to set
+         * @param {world.ITimerComponent=} [properties] Properties to set
          */
-        function ComponentTimer(properties) {
+        function TimerComponent(properties) {
             this.timers = {};
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -15606,35 +15606,35 @@ $root.world = (function() {
         }
 
         /**
-         * ComponentTimer timers.
+         * TimerComponent timers.
          * @member {Object.<string,world.ITimer>} timers
-         * @memberof world.ComponentTimer
+         * @memberof world.TimerComponent
          * @instance
          */
-        ComponentTimer.prototype.timers = $util.emptyObject;
+        TimerComponent.prototype.timers = $util.emptyObject;
 
         /**
-         * Creates a new ComponentTimer instance using the specified properties.
+         * Creates a new TimerComponent instance using the specified properties.
          * @function create
-         * @memberof world.ComponentTimer
+         * @memberof world.TimerComponent
          * @static
-         * @param {world.IComponentTimer=} [properties] Properties to set
-         * @returns {world.ComponentTimer} ComponentTimer instance
+         * @param {world.ITimerComponent=} [properties] Properties to set
+         * @returns {world.TimerComponent} TimerComponent instance
          */
-        ComponentTimer.create = function create(properties) {
-            return new ComponentTimer(properties);
+        TimerComponent.create = function create(properties) {
+            return new TimerComponent(properties);
         };
 
         /**
-         * Encodes the specified ComponentTimer message. Does not implicitly {@link world.ComponentTimer.verify|verify} messages.
+         * Encodes the specified TimerComponent message. Does not implicitly {@link world.TimerComponent.verify|verify} messages.
          * @function encode
-         * @memberof world.ComponentTimer
+         * @memberof world.TimerComponent
          * @static
-         * @param {world.IComponentTimer} message ComponentTimer message or plain object to encode
+         * @param {world.ITimerComponent} message TimerComponent message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        ComponentTimer.encode = function encode(message, writer) {
+        TimerComponent.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.timers != null && Object.hasOwnProperty.call(message, "timers"))
@@ -15646,33 +15646,33 @@ $root.world = (function() {
         };
 
         /**
-         * Encodes the specified ComponentTimer message, length delimited. Does not implicitly {@link world.ComponentTimer.verify|verify} messages.
+         * Encodes the specified TimerComponent message, length delimited. Does not implicitly {@link world.TimerComponent.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof world.ComponentTimer
+         * @memberof world.TimerComponent
          * @static
-         * @param {world.IComponentTimer} message ComponentTimer message or plain object to encode
+         * @param {world.ITimerComponent} message TimerComponent message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        ComponentTimer.encodeDelimited = function encodeDelimited(message, writer) {
+        TimerComponent.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
         /**
-         * Decodes a ComponentTimer message from the specified reader or buffer.
+         * Decodes a TimerComponent message from the specified reader or buffer.
          * @function decode
-         * @memberof world.ComponentTimer
+         * @memberof world.TimerComponent
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {world.ComponentTimer} ComponentTimer
+         * @returns {world.TimerComponent} TimerComponent
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        ComponentTimer.decode = function decode(reader, length) {
+        TimerComponent.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.ComponentTimer(), key, value;
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.TimerComponent(), key, value;
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -15708,30 +15708,30 @@ $root.world = (function() {
         };
 
         /**
-         * Decodes a ComponentTimer message from the specified reader or buffer, length delimited.
+         * Decodes a TimerComponent message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof world.ComponentTimer
+         * @memberof world.TimerComponent
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {world.ComponentTimer} ComponentTimer
+         * @returns {world.TimerComponent} TimerComponent
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        ComponentTimer.decodeDelimited = function decodeDelimited(reader) {
+        TimerComponent.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
         /**
-         * Verifies a ComponentTimer message.
+         * Verifies a TimerComponent message.
          * @function verify
-         * @memberof world.ComponentTimer
+         * @memberof world.TimerComponent
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        ComponentTimer.verify = function verify(message) {
+        TimerComponent.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.timers != null && message.hasOwnProperty("timers")) {
@@ -15752,24 +15752,24 @@ $root.world = (function() {
         };
 
         /**
-         * Creates a ComponentTimer message from a plain object. Also converts values to their respective internal types.
+         * Creates a TimerComponent message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof world.ComponentTimer
+         * @memberof world.TimerComponent
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {world.ComponentTimer} ComponentTimer
+         * @returns {world.TimerComponent} TimerComponent
          */
-        ComponentTimer.fromObject = function fromObject(object) {
-            if (object instanceof $root.world.ComponentTimer)
+        TimerComponent.fromObject = function fromObject(object) {
+            if (object instanceof $root.world.TimerComponent)
                 return object;
-            var message = new $root.world.ComponentTimer();
+            var message = new $root.world.TimerComponent();
             if (object.timers) {
                 if (typeof object.timers !== "object")
-                    throw TypeError(".world.ComponentTimer.timers: object expected");
+                    throw TypeError(".world.TimerComponent.timers: object expected");
                 message.timers = {};
                 for (var keys = Object.keys(object.timers), i = 0; i < keys.length; ++i) {
                     if (typeof object.timers[keys[i]] !== "object")
-                        throw TypeError(".world.ComponentTimer.timers: object expected");
+                        throw TypeError(".world.TimerComponent.timers: object expected");
                     message.timers[keys[i]] = $root.world.Timer.fromObject(object.timers[keys[i]]);
                 }
             }
@@ -15777,15 +15777,15 @@ $root.world = (function() {
         };
 
         /**
-         * Creates a plain object from a ComponentTimer message. Also converts values to other types if specified.
+         * Creates a plain object from a TimerComponent message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof world.ComponentTimer
+         * @memberof world.TimerComponent
          * @static
-         * @param {world.ComponentTimer} message ComponentTimer
+         * @param {world.TimerComponent} message TimerComponent
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        ComponentTimer.toObject = function toObject(message, options) {
+        TimerComponent.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -15801,55 +15801,56 @@ $root.world = (function() {
         };
 
         /**
-         * Converts this ComponentTimer to JSON.
+         * Converts this TimerComponent to JSON.
          * @function toJSON
-         * @memberof world.ComponentTimer
+         * @memberof world.TimerComponent
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        ComponentTimer.prototype.toJSON = function toJSON() {
+        TimerComponent.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
         /**
-         * Gets the default type url for ComponentTimer
+         * Gets the default type url for TimerComponent
          * @function getTypeUrl
-         * @memberof world.ComponentTimer
+         * @memberof world.TimerComponent
          * @static
          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns {string} The default type url
          */
-        ComponentTimer.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        TimerComponent.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/world.ComponentTimer";
+            return typeUrlPrefix + "/world.TimerComponent";
         };
 
-        return ComponentTimer;
+        return TimerComponent;
     })();
 
-    world.ComponentMove = (function() {
+    world.MoveComponent = (function() {
 
         /**
-         * Properties of a ComponentMove.
+         * Properties of a MoveComponent.
          * @memberof world
-         * @interface IComponentMove
-         * @property {number|null} [startMs] ComponentMove startMs
-         * @property {Array.<number>|null} [path] ComponentMove path
-         * @property {number|null} [speed] ComponentMove speed
-         * @property {number|null} [degree] ComponentMove degree
+         * @interface IMoveComponent
+         * @property {number|null} [moveType] MoveComponent moveType
+         * @property {number|null} [startMs] MoveComponent startMs
+         * @property {Array.<number>|null} [path] MoveComponent path
+         * @property {number|null} [speed] MoveComponent speed
+         * @property {number|null} [degree] MoveComponent degree
          */
 
         /**
-         * Constructs a new ComponentMove.
+         * Constructs a new MoveComponent.
          * @memberof world
-         * @classdesc Represents a ComponentMove.
-         * @implements IComponentMove
+         * @classdesc Represents a MoveComponent.
+         * @implements IMoveComponent
          * @constructor
-         * @param {world.IComponentMove=} [properties] Properties to set
+         * @param {world.IMoveComponent=} [properties] Properties to set
          */
-        function ComponentMove(properties) {
+        function MoveComponent(properties) {
             this.path = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -15858,112 +15859,126 @@ $root.world = (function() {
         }
 
         /**
-         * ComponentMove startMs.
+         * MoveComponent moveType.
+         * @member {number} moveType
+         * @memberof world.MoveComponent
+         * @instance
+         */
+        MoveComponent.prototype.moveType = 0;
+
+        /**
+         * MoveComponent startMs.
          * @member {number} startMs
-         * @memberof world.ComponentMove
+         * @memberof world.MoveComponent
          * @instance
          */
-        ComponentMove.prototype.startMs = 0;
+        MoveComponent.prototype.startMs = 0;
 
         /**
-         * ComponentMove path.
+         * MoveComponent path.
          * @member {Array.<number>} path
-         * @memberof world.ComponentMove
+         * @memberof world.MoveComponent
          * @instance
          */
-        ComponentMove.prototype.path = $util.emptyArray;
+        MoveComponent.prototype.path = $util.emptyArray;
 
         /**
-         * ComponentMove speed.
+         * MoveComponent speed.
          * @member {number} speed
-         * @memberof world.ComponentMove
+         * @memberof world.MoveComponent
          * @instance
          */
-        ComponentMove.prototype.speed = 0;
+        MoveComponent.prototype.speed = 0;
 
         /**
-         * ComponentMove degree.
+         * MoveComponent degree.
          * @member {number} degree
-         * @memberof world.ComponentMove
+         * @memberof world.MoveComponent
          * @instance
          */
-        ComponentMove.prototype.degree = 0;
+        MoveComponent.prototype.degree = 0;
 
         /**
-         * Creates a new ComponentMove instance using the specified properties.
+         * Creates a new MoveComponent instance using the specified properties.
          * @function create
-         * @memberof world.ComponentMove
+         * @memberof world.MoveComponent
          * @static
-         * @param {world.IComponentMove=} [properties] Properties to set
-         * @returns {world.ComponentMove} ComponentMove instance
+         * @param {world.IMoveComponent=} [properties] Properties to set
+         * @returns {world.MoveComponent} MoveComponent instance
          */
-        ComponentMove.create = function create(properties) {
-            return new ComponentMove(properties);
+        MoveComponent.create = function create(properties) {
+            return new MoveComponent(properties);
         };
 
         /**
-         * Encodes the specified ComponentMove message. Does not implicitly {@link world.ComponentMove.verify|verify} messages.
+         * Encodes the specified MoveComponent message. Does not implicitly {@link world.MoveComponent.verify|verify} messages.
          * @function encode
-         * @memberof world.ComponentMove
+         * @memberof world.MoveComponent
          * @static
-         * @param {world.IComponentMove} message ComponentMove message or plain object to encode
+         * @param {world.IMoveComponent} message MoveComponent message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        ComponentMove.encode = function encode(message, writer) {
+        MoveComponent.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
+            if (message.moveType != null && Object.hasOwnProperty.call(message, "moveType"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.moveType);
             if (message.startMs != null && Object.hasOwnProperty.call(message, "startMs"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.startMs);
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.startMs);
             if (message.path != null && message.path.length) {
-                writer.uint32(/* id 2, wireType 2 =*/18).fork();
+                writer.uint32(/* id 3, wireType 2 =*/26).fork();
                 for (var i = 0; i < message.path.length; ++i)
                     writer.uint32(message.path[i]);
                 writer.ldelim();
             }
             if (message.speed != null && Object.hasOwnProperty.call(message, "speed"))
-                writer.uint32(/* id 3, wireType 5 =*/29).float(message.speed);
+                writer.uint32(/* id 4, wireType 5 =*/37).float(message.speed);
             if (message.degree != null && Object.hasOwnProperty.call(message, "degree"))
-                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.degree);
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.degree);
             return writer;
         };
 
         /**
-         * Encodes the specified ComponentMove message, length delimited. Does not implicitly {@link world.ComponentMove.verify|verify} messages.
+         * Encodes the specified MoveComponent message, length delimited. Does not implicitly {@link world.MoveComponent.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof world.ComponentMove
+         * @memberof world.MoveComponent
          * @static
-         * @param {world.IComponentMove} message ComponentMove message or plain object to encode
+         * @param {world.IMoveComponent} message MoveComponent message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        ComponentMove.encodeDelimited = function encodeDelimited(message, writer) {
+        MoveComponent.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
         /**
-         * Decodes a ComponentMove message from the specified reader or buffer.
+         * Decodes a MoveComponent message from the specified reader or buffer.
          * @function decode
-         * @memberof world.ComponentMove
+         * @memberof world.MoveComponent
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {world.ComponentMove} ComponentMove
+         * @returns {world.MoveComponent} MoveComponent
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        ComponentMove.decode = function decode(reader, length) {
+        MoveComponent.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.ComponentMove();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.MoveComponent();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1: {
-                        message.startMs = reader.uint32();
+                        message.moveType = reader.uint32();
                         break;
                     }
                 case 2: {
+                        message.startMs = reader.uint32();
+                        break;
+                    }
+                case 3: {
                         if (!(message.path && message.path.length))
                             message.path = [];
                         if ((tag & 7) === 2) {
@@ -15974,11 +15989,11 @@ $root.world = (function() {
                             message.path.push(reader.uint32());
                         break;
                     }
-                case 3: {
+                case 4: {
                         message.speed = reader.float();
                         break;
                     }
-                case 4: {
+                case 5: {
                         message.degree = reader.int32();
                         break;
                     }
@@ -15991,32 +16006,35 @@ $root.world = (function() {
         };
 
         /**
-         * Decodes a ComponentMove message from the specified reader or buffer, length delimited.
+         * Decodes a MoveComponent message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof world.ComponentMove
+         * @memberof world.MoveComponent
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {world.ComponentMove} ComponentMove
+         * @returns {world.MoveComponent} MoveComponent
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        ComponentMove.decodeDelimited = function decodeDelimited(reader) {
+        MoveComponent.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
         /**
-         * Verifies a ComponentMove message.
+         * Verifies a MoveComponent message.
          * @function verify
-         * @memberof world.ComponentMove
+         * @memberof world.MoveComponent
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        ComponentMove.verify = function verify(message) {
+        MoveComponent.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
+            if (message.moveType != null && message.hasOwnProperty("moveType"))
+                if (!$util.isInteger(message.moveType))
+                    return "moveType: integer expected";
             if (message.startMs != null && message.hasOwnProperty("startMs"))
                 if (!$util.isInteger(message.startMs))
                     return "startMs: integer expected";
@@ -16037,22 +16055,24 @@ $root.world = (function() {
         };
 
         /**
-         * Creates a ComponentMove message from a plain object. Also converts values to their respective internal types.
+         * Creates a MoveComponent message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof world.ComponentMove
+         * @memberof world.MoveComponent
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {world.ComponentMove} ComponentMove
+         * @returns {world.MoveComponent} MoveComponent
          */
-        ComponentMove.fromObject = function fromObject(object) {
-            if (object instanceof $root.world.ComponentMove)
+        MoveComponent.fromObject = function fromObject(object) {
+            if (object instanceof $root.world.MoveComponent)
                 return object;
-            var message = new $root.world.ComponentMove();
+            var message = new $root.world.MoveComponent();
+            if (object.moveType != null)
+                message.moveType = object.moveType >>> 0;
             if (object.startMs != null)
                 message.startMs = object.startMs >>> 0;
             if (object.path) {
                 if (!Array.isArray(object.path))
-                    throw TypeError(".world.ComponentMove.path: array expected");
+                    throw TypeError(".world.MoveComponent.path: array expected");
                 message.path = [];
                 for (var i = 0; i < object.path.length; ++i)
                     message.path[i] = object.path[i] >>> 0;
@@ -16065,25 +16085,28 @@ $root.world = (function() {
         };
 
         /**
-         * Creates a plain object from a ComponentMove message. Also converts values to other types if specified.
+         * Creates a plain object from a MoveComponent message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof world.ComponentMove
+         * @memberof world.MoveComponent
          * @static
-         * @param {world.ComponentMove} message ComponentMove
+         * @param {world.MoveComponent} message MoveComponent
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        ComponentMove.toObject = function toObject(message, options) {
+        MoveComponent.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.arrays || options.defaults)
                 object.path = [];
             if (options.defaults) {
+                object.moveType = 0;
                 object.startMs = 0;
                 object.speed = 0;
                 object.degree = 0;
             }
+            if (message.moveType != null && message.hasOwnProperty("moveType"))
+                object.moveType = message.moveType;
             if (message.startMs != null && message.hasOwnProperty("startMs"))
                 object.startMs = message.startMs;
             if (message.path && message.path.length) {
@@ -16099,58 +16122,58 @@ $root.world = (function() {
         };
 
         /**
-         * Converts this ComponentMove to JSON.
+         * Converts this MoveComponent to JSON.
          * @function toJSON
-         * @memberof world.ComponentMove
+         * @memberof world.MoveComponent
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        ComponentMove.prototype.toJSON = function toJSON() {
+        MoveComponent.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
         /**
-         * Gets the default type url for ComponentMove
+         * Gets the default type url for MoveComponent
          * @function getTypeUrl
-         * @memberof world.ComponentMove
+         * @memberof world.MoveComponent
          * @static
          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns {string} The default type url
          */
-        ComponentMove.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        MoveComponent.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/world.ComponentMove";
+            return typeUrlPrefix + "/world.MoveComponent";
         };
 
-        return ComponentMove;
+        return MoveComponent;
     })();
 
-    world.ComponentBuilding = (function() {
+    world.BuildingComponent = (function() {
 
         /**
-         * Properties of a ComponentBuilding.
+         * Properties of a BuildingComponent.
          * @memberof world
-         * @interface IComponentBuilding
-         * @property {number|null} [bid] ComponentBuilding bid
-         * @property {number|null} [hp] ComponentBuilding hp
-         * @property {number|null} [maxHp] ComponentBuilding maxHp
-         * @property {number|null} [autoHpMs] ComponentBuilding autoHpMs
-         * @property {number|null} [autoHp] ComponentBuilding autoHp
-         * @property {number|null} [autoHpInr] ComponentBuilding autoHpInr
-         * @property {string|null} [name] ComponentBuilding name
+         * @interface IBuildingComponent
+         * @property {number|null} [bid] BuildingComponent bid
+         * @property {number|null} [hp] BuildingComponent hp
+         * @property {number|null} [maxHp] BuildingComponent maxHp
+         * @property {number|null} [autoHpMs] BuildingComponent autoHpMs
+         * @property {number|null} [autoHp] BuildingComponent autoHp
+         * @property {number|null} [autoHpInr] BuildingComponent autoHpInr
+         * @property {string|null} [name] BuildingComponent name
          */
 
         /**
-         * Constructs a new ComponentBuilding.
+         * Constructs a new BuildingComponent.
          * @memberof world
-         * @classdesc Represents a ComponentBuilding.
-         * @implements IComponentBuilding
+         * @classdesc Represents a BuildingComponent.
+         * @implements IBuildingComponent
          * @constructor
-         * @param {world.IComponentBuilding=} [properties] Properties to set
+         * @param {world.IBuildingComponent=} [properties] Properties to set
          */
-        function ComponentBuilding(properties) {
+        function BuildingComponent(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -16158,83 +16181,83 @@ $root.world = (function() {
         }
 
         /**
-         * ComponentBuilding bid.
+         * BuildingComponent bid.
          * @member {number} bid
-         * @memberof world.ComponentBuilding
+         * @memberof world.BuildingComponent
          * @instance
          */
-        ComponentBuilding.prototype.bid = 0;
+        BuildingComponent.prototype.bid = 0;
 
         /**
-         * ComponentBuilding hp.
+         * BuildingComponent hp.
          * @member {number} hp
-         * @memberof world.ComponentBuilding
+         * @memberof world.BuildingComponent
          * @instance
          */
-        ComponentBuilding.prototype.hp = 0;
+        BuildingComponent.prototype.hp = 0;
 
         /**
-         * ComponentBuilding maxHp.
+         * BuildingComponent maxHp.
          * @member {number} maxHp
-         * @memberof world.ComponentBuilding
+         * @memberof world.BuildingComponent
          * @instance
          */
-        ComponentBuilding.prototype.maxHp = 0;
+        BuildingComponent.prototype.maxHp = 0;
 
         /**
-         * ComponentBuilding autoHpMs.
+         * BuildingComponent autoHpMs.
          * @member {number} autoHpMs
-         * @memberof world.ComponentBuilding
+         * @memberof world.BuildingComponent
          * @instance
          */
-        ComponentBuilding.prototype.autoHpMs = 0;
+        BuildingComponent.prototype.autoHpMs = 0;
 
         /**
-         * ComponentBuilding autoHp.
+         * BuildingComponent autoHp.
          * @member {number} autoHp
-         * @memberof world.ComponentBuilding
+         * @memberof world.BuildingComponent
          * @instance
          */
-        ComponentBuilding.prototype.autoHp = 0;
+        BuildingComponent.prototype.autoHp = 0;
 
         /**
-         * ComponentBuilding autoHpInr.
+         * BuildingComponent autoHpInr.
          * @member {number} autoHpInr
-         * @memberof world.ComponentBuilding
+         * @memberof world.BuildingComponent
          * @instance
          */
-        ComponentBuilding.prototype.autoHpInr = 0;
+        BuildingComponent.prototype.autoHpInr = 0;
 
         /**
-         * ComponentBuilding name.
+         * BuildingComponent name.
          * @member {string} name
-         * @memberof world.ComponentBuilding
+         * @memberof world.BuildingComponent
          * @instance
          */
-        ComponentBuilding.prototype.name = "";
+        BuildingComponent.prototype.name = "";
 
         /**
-         * Creates a new ComponentBuilding instance using the specified properties.
+         * Creates a new BuildingComponent instance using the specified properties.
          * @function create
-         * @memberof world.ComponentBuilding
+         * @memberof world.BuildingComponent
          * @static
-         * @param {world.IComponentBuilding=} [properties] Properties to set
-         * @returns {world.ComponentBuilding} ComponentBuilding instance
+         * @param {world.IBuildingComponent=} [properties] Properties to set
+         * @returns {world.BuildingComponent} BuildingComponent instance
          */
-        ComponentBuilding.create = function create(properties) {
-            return new ComponentBuilding(properties);
+        BuildingComponent.create = function create(properties) {
+            return new BuildingComponent(properties);
         };
 
         /**
-         * Encodes the specified ComponentBuilding message. Does not implicitly {@link world.ComponentBuilding.verify|verify} messages.
+         * Encodes the specified BuildingComponent message. Does not implicitly {@link world.BuildingComponent.verify|verify} messages.
          * @function encode
-         * @memberof world.ComponentBuilding
+         * @memberof world.BuildingComponent
          * @static
-         * @param {world.IComponentBuilding} message ComponentBuilding message or plain object to encode
+         * @param {world.IBuildingComponent} message BuildingComponent message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        ComponentBuilding.encode = function encode(message, writer) {
+        BuildingComponent.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.bid != null && Object.hasOwnProperty.call(message, "bid"))
@@ -16255,33 +16278,33 @@ $root.world = (function() {
         };
 
         /**
-         * Encodes the specified ComponentBuilding message, length delimited. Does not implicitly {@link world.ComponentBuilding.verify|verify} messages.
+         * Encodes the specified BuildingComponent message, length delimited. Does not implicitly {@link world.BuildingComponent.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof world.ComponentBuilding
+         * @memberof world.BuildingComponent
          * @static
-         * @param {world.IComponentBuilding} message ComponentBuilding message or plain object to encode
+         * @param {world.IBuildingComponent} message BuildingComponent message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        ComponentBuilding.encodeDelimited = function encodeDelimited(message, writer) {
+        BuildingComponent.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
         /**
-         * Decodes a ComponentBuilding message from the specified reader or buffer.
+         * Decodes a BuildingComponent message from the specified reader or buffer.
          * @function decode
-         * @memberof world.ComponentBuilding
+         * @memberof world.BuildingComponent
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {world.ComponentBuilding} ComponentBuilding
+         * @returns {world.BuildingComponent} BuildingComponent
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        ComponentBuilding.decode = function decode(reader, length) {
+        BuildingComponent.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.ComponentBuilding();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.BuildingComponent();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -16322,30 +16345,30 @@ $root.world = (function() {
         };
 
         /**
-         * Decodes a ComponentBuilding message from the specified reader or buffer, length delimited.
+         * Decodes a BuildingComponent message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof world.ComponentBuilding
+         * @memberof world.BuildingComponent
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {world.ComponentBuilding} ComponentBuilding
+         * @returns {world.BuildingComponent} BuildingComponent
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        ComponentBuilding.decodeDelimited = function decodeDelimited(reader) {
+        BuildingComponent.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
         /**
-         * Verifies a ComponentBuilding message.
+         * Verifies a BuildingComponent message.
          * @function verify
-         * @memberof world.ComponentBuilding
+         * @memberof world.BuildingComponent
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        ComponentBuilding.verify = function verify(message) {
+        BuildingComponent.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.bid != null && message.hasOwnProperty("bid"))
@@ -16373,17 +16396,17 @@ $root.world = (function() {
         };
 
         /**
-         * Creates a ComponentBuilding message from a plain object. Also converts values to their respective internal types.
+         * Creates a BuildingComponent message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof world.ComponentBuilding
+         * @memberof world.BuildingComponent
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {world.ComponentBuilding} ComponentBuilding
+         * @returns {world.BuildingComponent} BuildingComponent
          */
-        ComponentBuilding.fromObject = function fromObject(object) {
-            if (object instanceof $root.world.ComponentBuilding)
+        BuildingComponent.fromObject = function fromObject(object) {
+            if (object instanceof $root.world.BuildingComponent)
                 return object;
-            var message = new $root.world.ComponentBuilding();
+            var message = new $root.world.BuildingComponent();
             if (object.bid != null)
                 message.bid = object.bid >>> 0;
             if (object.hp != null)
@@ -16402,15 +16425,15 @@ $root.world = (function() {
         };
 
         /**
-         * Creates a plain object from a ComponentBuilding message. Also converts values to other types if specified.
+         * Creates a plain object from a BuildingComponent message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof world.ComponentBuilding
+         * @memberof world.BuildingComponent
          * @static
-         * @param {world.ComponentBuilding} message ComponentBuilding
+         * @param {world.BuildingComponent} message BuildingComponent
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        ComponentBuilding.toObject = function toObject(message, options) {
+        BuildingComponent.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -16441,54 +16464,54 @@ $root.world = (function() {
         };
 
         /**
-         * Converts this ComponentBuilding to JSON.
+         * Converts this BuildingComponent to JSON.
          * @function toJSON
-         * @memberof world.ComponentBuilding
+         * @memberof world.BuildingComponent
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        ComponentBuilding.prototype.toJSON = function toJSON() {
+        BuildingComponent.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
         /**
-         * Gets the default type url for ComponentBuilding
+         * Gets the default type url for BuildingComponent
          * @function getTypeUrl
-         * @memberof world.ComponentBuilding
+         * @memberof world.BuildingComponent
          * @static
          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns {string} The default type url
          */
-        ComponentBuilding.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        BuildingComponent.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/world.ComponentBuilding";
+            return typeUrlPrefix + "/world.BuildingComponent";
         };
 
-        return ComponentBuilding;
+        return BuildingComponent;
     })();
 
-    world.ComponentBattle = (function() {
+    world.BattleComponent = (function() {
 
         /**
-         * Properties of a ComponentBattle.
+         * Properties of a BattleComponent.
          * @memberof world
-         * @interface IComponentBattle
-         * @property {number|null} [battleUid] ComponentBattle battleUid
-         * @property {Array.<number>|null} [fighterEids] ComponentBattle fighterEids
-         * @property {number|null} [startTs] ComponentBattle startTs
+         * @interface IBattleComponent
+         * @property {number|null} [battleUid] BattleComponent battleUid
+         * @property {Array.<number>|null} [fighterEids] BattleComponent fighterEids
+         * @property {number|null} [startTs] BattleComponent startTs
          */
 
         /**
-         * Constructs a new ComponentBattle.
+         * Constructs a new BattleComponent.
          * @memberof world
-         * @classdesc Represents a ComponentBattle.
-         * @implements IComponentBattle
+         * @classdesc Represents a BattleComponent.
+         * @implements IBattleComponent
          * @constructor
-         * @param {world.IComponentBattle=} [properties] Properties to set
+         * @param {world.IBattleComponent=} [properties] Properties to set
          */
-        function ComponentBattle(properties) {
+        function BattleComponent(properties) {
             this.fighterEids = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -16497,51 +16520,51 @@ $root.world = (function() {
         }
 
         /**
-         * ComponentBattle battleUid.
+         * BattleComponent battleUid.
          * @member {number} battleUid
-         * @memberof world.ComponentBattle
+         * @memberof world.BattleComponent
          * @instance
          */
-        ComponentBattle.prototype.battleUid = 0;
+        BattleComponent.prototype.battleUid = 0;
 
         /**
-         * ComponentBattle fighterEids.
+         * BattleComponent fighterEids.
          * @member {Array.<number>} fighterEids
-         * @memberof world.ComponentBattle
+         * @memberof world.BattleComponent
          * @instance
          */
-        ComponentBattle.prototype.fighterEids = $util.emptyArray;
+        BattleComponent.prototype.fighterEids = $util.emptyArray;
 
         /**
-         * ComponentBattle startTs.
+         * BattleComponent startTs.
          * @member {number} startTs
-         * @memberof world.ComponentBattle
+         * @memberof world.BattleComponent
          * @instance
          */
-        ComponentBattle.prototype.startTs = 0;
+        BattleComponent.prototype.startTs = 0;
 
         /**
-         * Creates a new ComponentBattle instance using the specified properties.
+         * Creates a new BattleComponent instance using the specified properties.
          * @function create
-         * @memberof world.ComponentBattle
+         * @memberof world.BattleComponent
          * @static
-         * @param {world.IComponentBattle=} [properties] Properties to set
-         * @returns {world.ComponentBattle} ComponentBattle instance
+         * @param {world.IBattleComponent=} [properties] Properties to set
+         * @returns {world.BattleComponent} BattleComponent instance
          */
-        ComponentBattle.create = function create(properties) {
-            return new ComponentBattle(properties);
+        BattleComponent.create = function create(properties) {
+            return new BattleComponent(properties);
         };
 
         /**
-         * Encodes the specified ComponentBattle message. Does not implicitly {@link world.ComponentBattle.verify|verify} messages.
+         * Encodes the specified BattleComponent message. Does not implicitly {@link world.BattleComponent.verify|verify} messages.
          * @function encode
-         * @memberof world.ComponentBattle
+         * @memberof world.BattleComponent
          * @static
-         * @param {world.IComponentBattle} message ComponentBattle message or plain object to encode
+         * @param {world.IBattleComponent} message BattleComponent message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        ComponentBattle.encode = function encode(message, writer) {
+        BattleComponent.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.battleUid != null && Object.hasOwnProperty.call(message, "battleUid"))
@@ -16558,33 +16581,33 @@ $root.world = (function() {
         };
 
         /**
-         * Encodes the specified ComponentBattle message, length delimited. Does not implicitly {@link world.ComponentBattle.verify|verify} messages.
+         * Encodes the specified BattleComponent message, length delimited. Does not implicitly {@link world.BattleComponent.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof world.ComponentBattle
+         * @memberof world.BattleComponent
          * @static
-         * @param {world.IComponentBattle} message ComponentBattle message or plain object to encode
+         * @param {world.IBattleComponent} message BattleComponent message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        ComponentBattle.encodeDelimited = function encodeDelimited(message, writer) {
+        BattleComponent.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
         /**
-         * Decodes a ComponentBattle message from the specified reader or buffer.
+         * Decodes a BattleComponent message from the specified reader or buffer.
          * @function decode
-         * @memberof world.ComponentBattle
+         * @memberof world.BattleComponent
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {world.ComponentBattle} ComponentBattle
+         * @returns {world.BattleComponent} BattleComponent
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        ComponentBattle.decode = function decode(reader, length) {
+        BattleComponent.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.ComponentBattle();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.BattleComponent();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -16616,30 +16639,30 @@ $root.world = (function() {
         };
 
         /**
-         * Decodes a ComponentBattle message from the specified reader or buffer, length delimited.
+         * Decodes a BattleComponent message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof world.ComponentBattle
+         * @memberof world.BattleComponent
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {world.ComponentBattle} ComponentBattle
+         * @returns {world.BattleComponent} BattleComponent
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        ComponentBattle.decodeDelimited = function decodeDelimited(reader) {
+        BattleComponent.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
         /**
-         * Verifies a ComponentBattle message.
+         * Verifies a BattleComponent message.
          * @function verify
-         * @memberof world.ComponentBattle
+         * @memberof world.BattleComponent
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        ComponentBattle.verify = function verify(message) {
+        BattleComponent.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.battleUid != null && message.hasOwnProperty("battleUid"))
@@ -16659,22 +16682,22 @@ $root.world = (function() {
         };
 
         /**
-         * Creates a ComponentBattle message from a plain object. Also converts values to their respective internal types.
+         * Creates a BattleComponent message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof world.ComponentBattle
+         * @memberof world.BattleComponent
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {world.ComponentBattle} ComponentBattle
+         * @returns {world.BattleComponent} BattleComponent
          */
-        ComponentBattle.fromObject = function fromObject(object) {
-            if (object instanceof $root.world.ComponentBattle)
+        BattleComponent.fromObject = function fromObject(object) {
+            if (object instanceof $root.world.BattleComponent)
                 return object;
-            var message = new $root.world.ComponentBattle();
+            var message = new $root.world.BattleComponent();
             if (object.battleUid != null)
                 message.battleUid = object.battleUid >>> 0;
             if (object.fighterEids) {
                 if (!Array.isArray(object.fighterEids))
-                    throw TypeError(".world.ComponentBattle.fighterEids: array expected");
+                    throw TypeError(".world.BattleComponent.fighterEids: array expected");
                 message.fighterEids = [];
                 for (var i = 0; i < object.fighterEids.length; ++i)
                     message.fighterEids[i] = object.fighterEids[i] >>> 0;
@@ -16685,15 +16708,15 @@ $root.world = (function() {
         };
 
         /**
-         * Creates a plain object from a ComponentBattle message. Also converts values to other types if specified.
+         * Creates a plain object from a BattleComponent message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof world.ComponentBattle
+         * @memberof world.BattleComponent
          * @static
-         * @param {world.ComponentBattle} message ComponentBattle
+         * @param {world.BattleComponent} message BattleComponent
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        ComponentBattle.toObject = function toObject(message, options) {
+        BattleComponent.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -16716,32 +16739,32 @@ $root.world = (function() {
         };
 
         /**
-         * Converts this ComponentBattle to JSON.
+         * Converts this BattleComponent to JSON.
          * @function toJSON
-         * @memberof world.ComponentBattle
+         * @memberof world.BattleComponent
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        ComponentBattle.prototype.toJSON = function toJSON() {
+        BattleComponent.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
         /**
-         * Gets the default type url for ComponentBattle
+         * Gets the default type url for BattleComponent
          * @function getTypeUrl
-         * @memberof world.ComponentBattle
+         * @memberof world.BattleComponent
          * @static
          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns {string} The default type url
          */
-        ComponentBattle.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        BattleComponent.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/world.ComponentBattle";
+            return typeUrlPrefix + "/world.BattleComponent";
         };
 
-        return ComponentBattle;
+        return BattleComponent;
     })();
 
     world.Entity = (function() {
@@ -16754,12 +16777,12 @@ $root.world = (function() {
          * @property {number|null} [etype] Entity etype
          * @property {world.IPosition|null} [pos] Entity pos
          * @property {number|null} [state] Entity state
-         * @property {world.IComponentTimer|null} [timer] Entity timer
-         * @property {world.IComponentMove|null} [move] Entity move
-         * @property {world.IComponentBuilding|null} [building] Entity building
-         * @property {world.IComponentOwner|null} [owner] Entity owner
-         * @property {world.IComponentTroop|null} [troop] Entity troop
-         * @property {world.IComponentBattle|null} [battle] Entity battle
+         * @property {world.ITimerComponent|null} [timer] Entity timer
+         * @property {world.IMoveComponent|null} [move] Entity move
+         * @property {world.IBuildingComponent|null} [building] Entity building
+         * @property {world.IOwnerComponent|null} [owner] Entity owner
+         * @property {world.ITroopComponent|null} [troop] Entity troop
+         * @property {world.IBattleComponent|null} [battle] Entity battle
          */
 
         /**
@@ -16811,7 +16834,7 @@ $root.world = (function() {
 
         /**
          * Entity timer.
-         * @member {world.IComponentTimer|null|undefined} timer
+         * @member {world.ITimerComponent|null|undefined} timer
          * @memberof world.Entity
          * @instance
          */
@@ -16819,7 +16842,7 @@ $root.world = (function() {
 
         /**
          * Entity move.
-         * @member {world.IComponentMove|null|undefined} move
+         * @member {world.IMoveComponent|null|undefined} move
          * @memberof world.Entity
          * @instance
          */
@@ -16827,7 +16850,7 @@ $root.world = (function() {
 
         /**
          * Entity building.
-         * @member {world.IComponentBuilding|null|undefined} building
+         * @member {world.IBuildingComponent|null|undefined} building
          * @memberof world.Entity
          * @instance
          */
@@ -16835,7 +16858,7 @@ $root.world = (function() {
 
         /**
          * Entity owner.
-         * @member {world.IComponentOwner|null|undefined} owner
+         * @member {world.IOwnerComponent|null|undefined} owner
          * @memberof world.Entity
          * @instance
          */
@@ -16843,7 +16866,7 @@ $root.world = (function() {
 
         /**
          * Entity troop.
-         * @member {world.IComponentTroop|null|undefined} troop
+         * @member {world.ITroopComponent|null|undefined} troop
          * @memberof world.Entity
          * @instance
          */
@@ -16851,7 +16874,7 @@ $root.world = (function() {
 
         /**
          * Entity battle.
-         * @member {world.IComponentBattle|null|undefined} battle
+         * @member {world.IBattleComponent|null|undefined} battle
          * @memberof world.Entity
          * @instance
          */
@@ -16890,17 +16913,17 @@ $root.world = (function() {
             if (message.state != null && Object.hasOwnProperty.call(message, "state"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.state);
             if (message.timer != null && Object.hasOwnProperty.call(message, "timer"))
-                $root.world.ComponentTimer.encode(message.timer, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                $root.world.TimerComponent.encode(message.timer, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
             if (message.move != null && Object.hasOwnProperty.call(message, "move"))
-                $root.world.ComponentMove.encode(message.move, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                $root.world.MoveComponent.encode(message.move, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
             if (message.building != null && Object.hasOwnProperty.call(message, "building"))
-                $root.world.ComponentBuilding.encode(message.building, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                $root.world.BuildingComponent.encode(message.building, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
             if (message.owner != null && Object.hasOwnProperty.call(message, "owner"))
-                $root.world.ComponentOwner.encode(message.owner, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                $root.world.OwnerComponent.encode(message.owner, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
             if (message.troop != null && Object.hasOwnProperty.call(message, "troop"))
-                $root.world.ComponentTroop.encode(message.troop, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
+                $root.world.TroopComponent.encode(message.troop, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
             if (message.battle != null && Object.hasOwnProperty.call(message, "battle"))
-                $root.world.ComponentBattle.encode(message.battle, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
+                $root.world.BattleComponent.encode(message.battle, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
             return writer;
         };
 
@@ -16952,27 +16975,27 @@ $root.world = (function() {
                         break;
                     }
                 case 12: {
-                        message.timer = $root.world.ComponentTimer.decode(reader, reader.uint32());
+                        message.timer = $root.world.TimerComponent.decode(reader, reader.uint32());
                         break;
                     }
                 case 13: {
-                        message.move = $root.world.ComponentMove.decode(reader, reader.uint32());
+                        message.move = $root.world.MoveComponent.decode(reader, reader.uint32());
                         break;
                     }
                 case 14: {
-                        message.building = $root.world.ComponentBuilding.decode(reader, reader.uint32());
+                        message.building = $root.world.BuildingComponent.decode(reader, reader.uint32());
                         break;
                     }
                 case 15: {
-                        message.owner = $root.world.ComponentOwner.decode(reader, reader.uint32());
+                        message.owner = $root.world.OwnerComponent.decode(reader, reader.uint32());
                         break;
                     }
                 case 16: {
-                        message.troop = $root.world.ComponentTroop.decode(reader, reader.uint32());
+                        message.troop = $root.world.TroopComponent.decode(reader, reader.uint32());
                         break;
                     }
                 case 17: {
-                        message.battle = $root.world.ComponentBattle.decode(reader, reader.uint32());
+                        message.battle = $root.world.BattleComponent.decode(reader, reader.uint32());
                         break;
                     }
                 default:
@@ -17025,32 +17048,32 @@ $root.world = (function() {
                 if (!$util.isInteger(message.state))
                     return "state: integer expected";
             if (message.timer != null && message.hasOwnProperty("timer")) {
-                var error = $root.world.ComponentTimer.verify(message.timer);
+                var error = $root.world.TimerComponent.verify(message.timer);
                 if (error)
                     return "timer." + error;
             }
             if (message.move != null && message.hasOwnProperty("move")) {
-                var error = $root.world.ComponentMove.verify(message.move);
+                var error = $root.world.MoveComponent.verify(message.move);
                 if (error)
                     return "move." + error;
             }
             if (message.building != null && message.hasOwnProperty("building")) {
-                var error = $root.world.ComponentBuilding.verify(message.building);
+                var error = $root.world.BuildingComponent.verify(message.building);
                 if (error)
                     return "building." + error;
             }
             if (message.owner != null && message.hasOwnProperty("owner")) {
-                var error = $root.world.ComponentOwner.verify(message.owner);
+                var error = $root.world.OwnerComponent.verify(message.owner);
                 if (error)
                     return "owner." + error;
             }
             if (message.troop != null && message.hasOwnProperty("troop")) {
-                var error = $root.world.ComponentTroop.verify(message.troop);
+                var error = $root.world.TroopComponent.verify(message.troop);
                 if (error)
                     return "troop." + error;
             }
             if (message.battle != null && message.hasOwnProperty("battle")) {
-                var error = $root.world.ComponentBattle.verify(message.battle);
+                var error = $root.world.BattleComponent.verify(message.battle);
                 if (error)
                     return "battle." + error;
             }
@@ -17083,32 +17106,32 @@ $root.world = (function() {
             if (object.timer != null) {
                 if (typeof object.timer !== "object")
                     throw TypeError(".world.Entity.timer: object expected");
-                message.timer = $root.world.ComponentTimer.fromObject(object.timer);
+                message.timer = $root.world.TimerComponent.fromObject(object.timer);
             }
             if (object.move != null) {
                 if (typeof object.move !== "object")
                     throw TypeError(".world.Entity.move: object expected");
-                message.move = $root.world.ComponentMove.fromObject(object.move);
+                message.move = $root.world.MoveComponent.fromObject(object.move);
             }
             if (object.building != null) {
                 if (typeof object.building !== "object")
                     throw TypeError(".world.Entity.building: object expected");
-                message.building = $root.world.ComponentBuilding.fromObject(object.building);
+                message.building = $root.world.BuildingComponent.fromObject(object.building);
             }
             if (object.owner != null) {
                 if (typeof object.owner !== "object")
                     throw TypeError(".world.Entity.owner: object expected");
-                message.owner = $root.world.ComponentOwner.fromObject(object.owner);
+                message.owner = $root.world.OwnerComponent.fromObject(object.owner);
             }
             if (object.troop != null) {
                 if (typeof object.troop !== "object")
                     throw TypeError(".world.Entity.troop: object expected");
-                message.troop = $root.world.ComponentTroop.fromObject(object.troop);
+                message.troop = $root.world.TroopComponent.fromObject(object.troop);
             }
             if (object.battle != null) {
                 if (typeof object.battle !== "object")
                     throw TypeError(".world.Entity.battle: object expected");
-                message.battle = $root.world.ComponentBattle.fromObject(object.battle);
+                message.battle = $root.world.BattleComponent.fromObject(object.battle);
             }
             return message;
         };
@@ -17147,17 +17170,17 @@ $root.world = (function() {
             if (message.state != null && message.hasOwnProperty("state"))
                 object.state = message.state;
             if (message.timer != null && message.hasOwnProperty("timer"))
-                object.timer = $root.world.ComponentTimer.toObject(message.timer, options);
+                object.timer = $root.world.TimerComponent.toObject(message.timer, options);
             if (message.move != null && message.hasOwnProperty("move"))
-                object.move = $root.world.ComponentMove.toObject(message.move, options);
+                object.move = $root.world.MoveComponent.toObject(message.move, options);
             if (message.building != null && message.hasOwnProperty("building"))
-                object.building = $root.world.ComponentBuilding.toObject(message.building, options);
+                object.building = $root.world.BuildingComponent.toObject(message.building, options);
             if (message.owner != null && message.hasOwnProperty("owner"))
-                object.owner = $root.world.ComponentOwner.toObject(message.owner, options);
+                object.owner = $root.world.OwnerComponent.toObject(message.owner, options);
             if (message.troop != null && message.hasOwnProperty("troop"))
-                object.troop = $root.world.ComponentTroop.toObject(message.troop, options);
+                object.troop = $root.world.TroopComponent.toObject(message.troop, options);
             if (message.battle != null && message.hasOwnProperty("battle"))
-                object.battle = $root.world.ComponentBattle.toObject(message.battle, options);
+                object.battle = $root.world.BattleComponent.toObject(message.battle, options);
             return object;
         };
 

@@ -6588,254 +6588,254 @@ export namespace world {
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
-    /** Properties of a ComponentTroop. */
-    interface IComponentTroop {
+    /** Properties of a TroopComponent. */
+    interface ITroopComponent {
 
-        /** ComponentTroop heroId */
+        /** TroopComponent heroId */
         heroId?: (number|null);
 
-        /** ComponentTroop soldierId */
+        /** TroopComponent soldierId */
         soldierId?: (number|null);
 
-        /** ComponentTroop cmd */
+        /** TroopComponent cmd */
         cmd?: (number|null);
 
-        /** ComponentTroop stayEid */
+        /** TroopComponent stayEid */
         stayEid?: (number|null);
 
-        /** ComponentTroop homeEid */
+        /** TroopComponent homeEid */
         homeEid?: (number|null);
 
-        /** ComponentTroop battleEid */
+        /** TroopComponent battleEid */
         battleEid?: (number|null);
     }
 
-    /** Represents a ComponentTroop. */
-    class ComponentTroop implements IComponentTroop {
+    /** Represents a TroopComponent. */
+    class TroopComponent implements ITroopComponent {
 
         /**
-         * Constructs a new ComponentTroop.
+         * Constructs a new TroopComponent.
          * @param [properties] Properties to set
          */
-        constructor(properties?: world.IComponentTroop);
+        constructor(properties?: world.ITroopComponent);
 
-        /** ComponentTroop heroId. */
+        /** TroopComponent heroId. */
         public heroId: number;
 
-        /** ComponentTroop soldierId. */
+        /** TroopComponent soldierId. */
         public soldierId: number;
 
-        /** ComponentTroop cmd. */
+        /** TroopComponent cmd. */
         public cmd: number;
 
-        /** ComponentTroop stayEid. */
+        /** TroopComponent stayEid. */
         public stayEid: number;
 
-        /** ComponentTroop homeEid. */
+        /** TroopComponent homeEid. */
         public homeEid: number;
 
-        /** ComponentTroop battleEid. */
+        /** TroopComponent battleEid. */
         public battleEid: number;
 
         /**
-         * Creates a new ComponentTroop instance using the specified properties.
+         * Creates a new TroopComponent instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns ComponentTroop instance
+         * @returns TroopComponent instance
          */
-        public static create(properties?: world.IComponentTroop): world.ComponentTroop;
+        public static create(properties?: world.ITroopComponent): world.TroopComponent;
 
         /**
-         * Encodes the specified ComponentTroop message. Does not implicitly {@link world.ComponentTroop.verify|verify} messages.
-         * @param message ComponentTroop message or plain object to encode
+         * Encodes the specified TroopComponent message. Does not implicitly {@link world.TroopComponent.verify|verify} messages.
+         * @param message TroopComponent message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: world.IComponentTroop, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: world.ITroopComponent, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified ComponentTroop message, length delimited. Does not implicitly {@link world.ComponentTroop.verify|verify} messages.
-         * @param message ComponentTroop message or plain object to encode
+         * Encodes the specified TroopComponent message, length delimited. Does not implicitly {@link world.TroopComponent.verify|verify} messages.
+         * @param message TroopComponent message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: world.IComponentTroop, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: world.ITroopComponent, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a ComponentTroop message from the specified reader or buffer.
+         * Decodes a TroopComponent message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns ComponentTroop
+         * @returns TroopComponent
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.ComponentTroop;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.TroopComponent;
 
         /**
-         * Decodes a ComponentTroop message from the specified reader or buffer, length delimited.
+         * Decodes a TroopComponent message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns ComponentTroop
+         * @returns TroopComponent
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.ComponentTroop;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.TroopComponent;
 
         /**
-         * Verifies a ComponentTroop message.
+         * Verifies a TroopComponent message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a ComponentTroop message from a plain object. Also converts values to their respective internal types.
+         * Creates a TroopComponent message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns ComponentTroop
+         * @returns TroopComponent
          */
-        public static fromObject(object: { [k: string]: any }): world.ComponentTroop;
+        public static fromObject(object: { [k: string]: any }): world.TroopComponent;
 
         /**
-         * Creates a plain object from a ComponentTroop message. Also converts values to other types if specified.
-         * @param message ComponentTroop
+         * Creates a plain object from a TroopComponent message. Also converts values to other types if specified.
+         * @param message TroopComponent
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: world.ComponentTroop, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: world.TroopComponent, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this ComponentTroop to JSON.
+         * Converts this TroopComponent to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
 
         /**
-         * Gets the default type url for ComponentTroop
+         * Gets the default type url for TroopComponent
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
-    /** Properties of a ComponentOwner. */
-    interface IComponentOwner {
+    /** Properties of an OwnerComponent. */
+    interface IOwnerComponent {
 
-        /** ComponentOwner rid */
+        /** OwnerComponent rid */
         rid?: (number|null);
 
-        /** ComponentOwner aid */
+        /** OwnerComponent aid */
         aid?: (number|null);
 
-        /** ComponentOwner eid */
+        /** OwnerComponent eid */
         eid?: (number|null);
 
-        /** ComponentOwner isRobot */
+        /** OwnerComponent isRobot */
         isRobot?: (boolean|null);
 
-        /** ComponentOwner roleName */
+        /** OwnerComponent roleName */
         roleName?: (string|null);
 
-        /** ComponentOwner allianceName */
+        /** OwnerComponent allianceName */
         allianceName?: (string|null);
     }
 
-    /** Represents a ComponentOwner. */
-    class ComponentOwner implements IComponentOwner {
+    /** Represents an OwnerComponent. */
+    class OwnerComponent implements IOwnerComponent {
 
         /**
-         * Constructs a new ComponentOwner.
+         * Constructs a new OwnerComponent.
          * @param [properties] Properties to set
          */
-        constructor(properties?: world.IComponentOwner);
+        constructor(properties?: world.IOwnerComponent);
 
-        /** ComponentOwner rid. */
+        /** OwnerComponent rid. */
         public rid: number;
 
-        /** ComponentOwner aid. */
+        /** OwnerComponent aid. */
         public aid: number;
 
-        /** ComponentOwner eid. */
+        /** OwnerComponent eid. */
         public eid: number;
 
-        /** ComponentOwner isRobot. */
+        /** OwnerComponent isRobot. */
         public isRobot: boolean;
 
-        /** ComponentOwner roleName. */
+        /** OwnerComponent roleName. */
         public roleName: string;
 
-        /** ComponentOwner allianceName. */
+        /** OwnerComponent allianceName. */
         public allianceName: string;
 
         /**
-         * Creates a new ComponentOwner instance using the specified properties.
+         * Creates a new OwnerComponent instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns ComponentOwner instance
+         * @returns OwnerComponent instance
          */
-        public static create(properties?: world.IComponentOwner): world.ComponentOwner;
+        public static create(properties?: world.IOwnerComponent): world.OwnerComponent;
 
         /**
-         * Encodes the specified ComponentOwner message. Does not implicitly {@link world.ComponentOwner.verify|verify} messages.
-         * @param message ComponentOwner message or plain object to encode
+         * Encodes the specified OwnerComponent message. Does not implicitly {@link world.OwnerComponent.verify|verify} messages.
+         * @param message OwnerComponent message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: world.IComponentOwner, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: world.IOwnerComponent, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified ComponentOwner message, length delimited. Does not implicitly {@link world.ComponentOwner.verify|verify} messages.
-         * @param message ComponentOwner message or plain object to encode
+         * Encodes the specified OwnerComponent message, length delimited. Does not implicitly {@link world.OwnerComponent.verify|verify} messages.
+         * @param message OwnerComponent message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: world.IComponentOwner, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: world.IOwnerComponent, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a ComponentOwner message from the specified reader or buffer.
+         * Decodes an OwnerComponent message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns ComponentOwner
+         * @returns OwnerComponent
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.ComponentOwner;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.OwnerComponent;
 
         /**
-         * Decodes a ComponentOwner message from the specified reader or buffer, length delimited.
+         * Decodes an OwnerComponent message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns ComponentOwner
+         * @returns OwnerComponent
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.ComponentOwner;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.OwnerComponent;
 
         /**
-         * Verifies a ComponentOwner message.
+         * Verifies an OwnerComponent message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a ComponentOwner message from a plain object. Also converts values to their respective internal types.
+         * Creates an OwnerComponent message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns ComponentOwner
+         * @returns OwnerComponent
          */
-        public static fromObject(object: { [k: string]: any }): world.ComponentOwner;
+        public static fromObject(object: { [k: string]: any }): world.OwnerComponent;
 
         /**
-         * Creates a plain object from a ComponentOwner message. Also converts values to other types if specified.
-         * @param message ComponentOwner
+         * Creates a plain object from an OwnerComponent message. Also converts values to other types if specified.
+         * @param message OwnerComponent
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: world.ComponentOwner, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: world.OwnerComponent, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this ComponentOwner to JSON.
+         * Converts this OwnerComponent to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
 
         /**
-         * Gets the default type url for ComponentOwner
+         * Gets the default type url for OwnerComponent
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */
@@ -6951,454 +6951,460 @@ export namespace world {
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
-    /** Properties of a ComponentTimer. */
-    interface IComponentTimer {
+    /** Properties of a TimerComponent. */
+    interface ITimerComponent {
 
-        /** ComponentTimer timers */
+        /** TimerComponent timers */
         timers?: ({ [k: string]: world.ITimer }|null);
     }
 
-    /** Represents a ComponentTimer. */
-    class ComponentTimer implements IComponentTimer {
+    /** Represents a TimerComponent. */
+    class TimerComponent implements ITimerComponent {
 
         /**
-         * Constructs a new ComponentTimer.
+         * Constructs a new TimerComponent.
          * @param [properties] Properties to set
          */
-        constructor(properties?: world.IComponentTimer);
+        constructor(properties?: world.ITimerComponent);
 
-        /** ComponentTimer timers. */
+        /** TimerComponent timers. */
         public timers: { [k: string]: world.ITimer };
 
         /**
-         * Creates a new ComponentTimer instance using the specified properties.
+         * Creates a new TimerComponent instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns ComponentTimer instance
+         * @returns TimerComponent instance
          */
-        public static create(properties?: world.IComponentTimer): world.ComponentTimer;
+        public static create(properties?: world.ITimerComponent): world.TimerComponent;
 
         /**
-         * Encodes the specified ComponentTimer message. Does not implicitly {@link world.ComponentTimer.verify|verify} messages.
-         * @param message ComponentTimer message or plain object to encode
+         * Encodes the specified TimerComponent message. Does not implicitly {@link world.TimerComponent.verify|verify} messages.
+         * @param message TimerComponent message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: world.IComponentTimer, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: world.ITimerComponent, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified ComponentTimer message, length delimited. Does not implicitly {@link world.ComponentTimer.verify|verify} messages.
-         * @param message ComponentTimer message or plain object to encode
+         * Encodes the specified TimerComponent message, length delimited. Does not implicitly {@link world.TimerComponent.verify|verify} messages.
+         * @param message TimerComponent message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: world.IComponentTimer, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: world.ITimerComponent, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a ComponentTimer message from the specified reader or buffer.
+         * Decodes a TimerComponent message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns ComponentTimer
+         * @returns TimerComponent
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.ComponentTimer;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.TimerComponent;
 
         /**
-         * Decodes a ComponentTimer message from the specified reader or buffer, length delimited.
+         * Decodes a TimerComponent message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns ComponentTimer
+         * @returns TimerComponent
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.ComponentTimer;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.TimerComponent;
 
         /**
-         * Verifies a ComponentTimer message.
+         * Verifies a TimerComponent message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a ComponentTimer message from a plain object. Also converts values to their respective internal types.
+         * Creates a TimerComponent message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns ComponentTimer
+         * @returns TimerComponent
          */
-        public static fromObject(object: { [k: string]: any }): world.ComponentTimer;
+        public static fromObject(object: { [k: string]: any }): world.TimerComponent;
 
         /**
-         * Creates a plain object from a ComponentTimer message. Also converts values to other types if specified.
-         * @param message ComponentTimer
+         * Creates a plain object from a TimerComponent message. Also converts values to other types if specified.
+         * @param message TimerComponent
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: world.ComponentTimer, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: world.TimerComponent, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this ComponentTimer to JSON.
+         * Converts this TimerComponent to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
 
         /**
-         * Gets the default type url for ComponentTimer
+         * Gets the default type url for TimerComponent
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
-    /** Properties of a ComponentMove. */
-    interface IComponentMove {
+    /** Properties of a MoveComponent. */
+    interface IMoveComponent {
 
-        /** ComponentMove startMs */
+        /** MoveComponent moveType */
+        moveType?: (number|null);
+
+        /** MoveComponent startMs */
         startMs?: (number|null);
 
-        /** ComponentMove path */
+        /** MoveComponent path */
         path?: (number[]|null);
 
-        /** ComponentMove speed */
+        /** MoveComponent speed */
         speed?: (number|null);
 
-        /** ComponentMove degree */
+        /** MoveComponent degree */
         degree?: (number|null);
     }
 
-    /** Represents a ComponentMove. */
-    class ComponentMove implements IComponentMove {
+    /** Represents a MoveComponent. */
+    class MoveComponent implements IMoveComponent {
 
         /**
-         * Constructs a new ComponentMove.
+         * Constructs a new MoveComponent.
          * @param [properties] Properties to set
          */
-        constructor(properties?: world.IComponentMove);
+        constructor(properties?: world.IMoveComponent);
 
-        /** ComponentMove startMs. */
+        /** MoveComponent moveType. */
+        public moveType: number;
+
+        /** MoveComponent startMs. */
         public startMs: number;
 
-        /** ComponentMove path. */
+        /** MoveComponent path. */
         public path: number[];
 
-        /** ComponentMove speed. */
+        /** MoveComponent speed. */
         public speed: number;
 
-        /** ComponentMove degree. */
+        /** MoveComponent degree. */
         public degree: number;
 
         /**
-         * Creates a new ComponentMove instance using the specified properties.
+         * Creates a new MoveComponent instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns ComponentMove instance
+         * @returns MoveComponent instance
          */
-        public static create(properties?: world.IComponentMove): world.ComponentMove;
+        public static create(properties?: world.IMoveComponent): world.MoveComponent;
 
         /**
-         * Encodes the specified ComponentMove message. Does not implicitly {@link world.ComponentMove.verify|verify} messages.
-         * @param message ComponentMove message or plain object to encode
+         * Encodes the specified MoveComponent message. Does not implicitly {@link world.MoveComponent.verify|verify} messages.
+         * @param message MoveComponent message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: world.IComponentMove, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: world.IMoveComponent, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified ComponentMove message, length delimited. Does not implicitly {@link world.ComponentMove.verify|verify} messages.
-         * @param message ComponentMove message or plain object to encode
+         * Encodes the specified MoveComponent message, length delimited. Does not implicitly {@link world.MoveComponent.verify|verify} messages.
+         * @param message MoveComponent message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: world.IComponentMove, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: world.IMoveComponent, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a ComponentMove message from the specified reader or buffer.
+         * Decodes a MoveComponent message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns ComponentMove
+         * @returns MoveComponent
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.ComponentMove;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.MoveComponent;
 
         /**
-         * Decodes a ComponentMove message from the specified reader or buffer, length delimited.
+         * Decodes a MoveComponent message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns ComponentMove
+         * @returns MoveComponent
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.ComponentMove;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.MoveComponent;
 
         /**
-         * Verifies a ComponentMove message.
+         * Verifies a MoveComponent message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a ComponentMove message from a plain object. Also converts values to their respective internal types.
+         * Creates a MoveComponent message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns ComponentMove
+         * @returns MoveComponent
          */
-        public static fromObject(object: { [k: string]: any }): world.ComponentMove;
+        public static fromObject(object: { [k: string]: any }): world.MoveComponent;
 
         /**
-         * Creates a plain object from a ComponentMove message. Also converts values to other types if specified.
-         * @param message ComponentMove
+         * Creates a plain object from a MoveComponent message. Also converts values to other types if specified.
+         * @param message MoveComponent
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: world.ComponentMove, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: world.MoveComponent, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this ComponentMove to JSON.
+         * Converts this MoveComponent to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
 
         /**
-         * Gets the default type url for ComponentMove
+         * Gets the default type url for MoveComponent
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
-    /** Properties of a ComponentBuilding. */
-    interface IComponentBuilding {
+    /** Properties of a BuildingComponent. */
+    interface IBuildingComponent {
 
-        /** ComponentBuilding bid */
+        /** BuildingComponent bid */
         bid?: (number|null);
 
-        /** ComponentBuilding hp */
+        /** BuildingComponent hp */
         hp?: (number|null);
 
-        /** ComponentBuilding maxHp */
+        /** BuildingComponent maxHp */
         maxHp?: (number|null);
 
-        /** ComponentBuilding autoHpMs */
+        /** BuildingComponent autoHpMs */
         autoHpMs?: (number|null);
 
-        /** ComponentBuilding autoHp */
+        /** BuildingComponent autoHp */
         autoHp?: (number|null);
 
-        /** ComponentBuilding autoHpInr */
+        /** BuildingComponent autoHpInr */
         autoHpInr?: (number|null);
 
-        /** ComponentBuilding name */
+        /** BuildingComponent name */
         name?: (string|null);
     }
 
-    /** Represents a ComponentBuilding. */
-    class ComponentBuilding implements IComponentBuilding {
+    /** Represents a BuildingComponent. */
+    class BuildingComponent implements IBuildingComponent {
 
         /**
-         * Constructs a new ComponentBuilding.
+         * Constructs a new BuildingComponent.
          * @param [properties] Properties to set
          */
-        constructor(properties?: world.IComponentBuilding);
+        constructor(properties?: world.IBuildingComponent);
 
-        /** ComponentBuilding bid. */
+        /** BuildingComponent bid. */
         public bid: number;
 
-        /** ComponentBuilding hp. */
+        /** BuildingComponent hp. */
         public hp: number;
 
-        /** ComponentBuilding maxHp. */
+        /** BuildingComponent maxHp. */
         public maxHp: number;
 
-        /** ComponentBuilding autoHpMs. */
+        /** BuildingComponent autoHpMs. */
         public autoHpMs: number;
 
-        /** ComponentBuilding autoHp. */
+        /** BuildingComponent autoHp. */
         public autoHp: number;
 
-        /** ComponentBuilding autoHpInr. */
+        /** BuildingComponent autoHpInr. */
         public autoHpInr: number;
 
-        /** ComponentBuilding name. */
+        /** BuildingComponent name. */
         public name: string;
 
         /**
-         * Creates a new ComponentBuilding instance using the specified properties.
+         * Creates a new BuildingComponent instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns ComponentBuilding instance
+         * @returns BuildingComponent instance
          */
-        public static create(properties?: world.IComponentBuilding): world.ComponentBuilding;
+        public static create(properties?: world.IBuildingComponent): world.BuildingComponent;
 
         /**
-         * Encodes the specified ComponentBuilding message. Does not implicitly {@link world.ComponentBuilding.verify|verify} messages.
-         * @param message ComponentBuilding message or plain object to encode
+         * Encodes the specified BuildingComponent message. Does not implicitly {@link world.BuildingComponent.verify|verify} messages.
+         * @param message BuildingComponent message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: world.IComponentBuilding, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: world.IBuildingComponent, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified ComponentBuilding message, length delimited. Does not implicitly {@link world.ComponentBuilding.verify|verify} messages.
-         * @param message ComponentBuilding message or plain object to encode
+         * Encodes the specified BuildingComponent message, length delimited. Does not implicitly {@link world.BuildingComponent.verify|verify} messages.
+         * @param message BuildingComponent message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: world.IComponentBuilding, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: world.IBuildingComponent, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a ComponentBuilding message from the specified reader or buffer.
+         * Decodes a BuildingComponent message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns ComponentBuilding
+         * @returns BuildingComponent
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.ComponentBuilding;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.BuildingComponent;
 
         /**
-         * Decodes a ComponentBuilding message from the specified reader or buffer, length delimited.
+         * Decodes a BuildingComponent message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns ComponentBuilding
+         * @returns BuildingComponent
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.ComponentBuilding;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.BuildingComponent;
 
         /**
-         * Verifies a ComponentBuilding message.
+         * Verifies a BuildingComponent message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a ComponentBuilding message from a plain object. Also converts values to their respective internal types.
+         * Creates a BuildingComponent message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns ComponentBuilding
+         * @returns BuildingComponent
          */
-        public static fromObject(object: { [k: string]: any }): world.ComponentBuilding;
+        public static fromObject(object: { [k: string]: any }): world.BuildingComponent;
 
         /**
-         * Creates a plain object from a ComponentBuilding message. Also converts values to other types if specified.
-         * @param message ComponentBuilding
+         * Creates a plain object from a BuildingComponent message. Also converts values to other types if specified.
+         * @param message BuildingComponent
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: world.ComponentBuilding, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: world.BuildingComponent, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this ComponentBuilding to JSON.
+         * Converts this BuildingComponent to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
 
         /**
-         * Gets the default type url for ComponentBuilding
+         * Gets the default type url for BuildingComponent
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
-    /** Properties of a ComponentBattle. */
-    interface IComponentBattle {
+    /** Properties of a BattleComponent. */
+    interface IBattleComponent {
 
-        /** ComponentBattle battleUid */
+        /** BattleComponent battleUid */
         battleUid?: (number|null);
 
-        /** ComponentBattle fighterEids */
+        /** BattleComponent fighterEids */
         fighterEids?: (number[]|null);
 
-        /** ComponentBattle startTs */
+        /** BattleComponent startTs */
         startTs?: (number|null);
     }
 
-    /** Represents a ComponentBattle. */
-    class ComponentBattle implements IComponentBattle {
+    /** Represents a BattleComponent. */
+    class BattleComponent implements IBattleComponent {
 
         /**
-         * Constructs a new ComponentBattle.
+         * Constructs a new BattleComponent.
          * @param [properties] Properties to set
          */
-        constructor(properties?: world.IComponentBattle);
+        constructor(properties?: world.IBattleComponent);
 
-        /** ComponentBattle battleUid. */
+        /** BattleComponent battleUid. */
         public battleUid: number;
 
-        /** ComponentBattle fighterEids. */
+        /** BattleComponent fighterEids. */
         public fighterEids: number[];
 
-        /** ComponentBattle startTs. */
+        /** BattleComponent startTs. */
         public startTs: number;
 
         /**
-         * Creates a new ComponentBattle instance using the specified properties.
+         * Creates a new BattleComponent instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns ComponentBattle instance
+         * @returns BattleComponent instance
          */
-        public static create(properties?: world.IComponentBattle): world.ComponentBattle;
+        public static create(properties?: world.IBattleComponent): world.BattleComponent;
 
         /**
-         * Encodes the specified ComponentBattle message. Does not implicitly {@link world.ComponentBattle.verify|verify} messages.
-         * @param message ComponentBattle message or plain object to encode
+         * Encodes the specified BattleComponent message. Does not implicitly {@link world.BattleComponent.verify|verify} messages.
+         * @param message BattleComponent message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: world.IComponentBattle, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: world.IBattleComponent, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified ComponentBattle message, length delimited. Does not implicitly {@link world.ComponentBattle.verify|verify} messages.
-         * @param message ComponentBattle message or plain object to encode
+         * Encodes the specified BattleComponent message, length delimited. Does not implicitly {@link world.BattleComponent.verify|verify} messages.
+         * @param message BattleComponent message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: world.IComponentBattle, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: world.IBattleComponent, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a ComponentBattle message from the specified reader or buffer.
+         * Decodes a BattleComponent message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns ComponentBattle
+         * @returns BattleComponent
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.ComponentBattle;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.BattleComponent;
 
         /**
-         * Decodes a ComponentBattle message from the specified reader or buffer, length delimited.
+         * Decodes a BattleComponent message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns ComponentBattle
+         * @returns BattleComponent
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.ComponentBattle;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.BattleComponent;
 
         /**
-         * Verifies a ComponentBattle message.
+         * Verifies a BattleComponent message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a ComponentBattle message from a plain object. Also converts values to their respective internal types.
+         * Creates a BattleComponent message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns ComponentBattle
+         * @returns BattleComponent
          */
-        public static fromObject(object: { [k: string]: any }): world.ComponentBattle;
+        public static fromObject(object: { [k: string]: any }): world.BattleComponent;
 
         /**
-         * Creates a plain object from a ComponentBattle message. Also converts values to other types if specified.
-         * @param message ComponentBattle
+         * Creates a plain object from a BattleComponent message. Also converts values to other types if specified.
+         * @param message BattleComponent
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: world.ComponentBattle, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: world.BattleComponent, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this ComponentBattle to JSON.
+         * Converts this BattleComponent to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
 
         /**
-         * Gets the default type url for ComponentBattle
+         * Gets the default type url for BattleComponent
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */
@@ -7421,22 +7427,22 @@ export namespace world {
         state?: (number|null);
 
         /** Entity timer */
-        timer?: (world.IComponentTimer|null);
+        timer?: (world.ITimerComponent|null);
 
         /** Entity move */
-        move?: (world.IComponentMove|null);
+        move?: (world.IMoveComponent|null);
 
         /** Entity building */
-        building?: (world.IComponentBuilding|null);
+        building?: (world.IBuildingComponent|null);
 
         /** Entity owner */
-        owner?: (world.IComponentOwner|null);
+        owner?: (world.IOwnerComponent|null);
 
         /** Entity troop */
-        troop?: (world.IComponentTroop|null);
+        troop?: (world.ITroopComponent|null);
 
         /** Entity battle */
-        battle?: (world.IComponentBattle|null);
+        battle?: (world.IBattleComponent|null);
     }
 
     /** Represents an Entity. */
@@ -7461,22 +7467,22 @@ export namespace world {
         public state: number;
 
         /** Entity timer. */
-        public timer?: (world.IComponentTimer|null);
+        public timer?: (world.ITimerComponent|null);
 
         /** Entity move. */
-        public move?: (world.IComponentMove|null);
+        public move?: (world.IMoveComponent|null);
 
         /** Entity building. */
-        public building?: (world.IComponentBuilding|null);
+        public building?: (world.IBuildingComponent|null);
 
         /** Entity owner. */
-        public owner?: (world.IComponentOwner|null);
+        public owner?: (world.IOwnerComponent|null);
 
         /** Entity troop. */
-        public troop?: (world.IComponentTroop|null);
+        public troop?: (world.ITroopComponent|null);
 
         /** Entity battle. */
-        public battle?: (world.IComponentBattle|null);
+        public battle?: (world.IBattleComponent|null);
 
         /**
          * Creates a new Entity instance using the specified properties.

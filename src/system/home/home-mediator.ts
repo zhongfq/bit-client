@@ -1,13 +1,13 @@
 import { app } from "../../app";
 import { Mediator } from "../../core/ui-mediator";
 import { ui } from "../../misc/ui";
-import { MainSceneUI } from "../../ui-runtime/scene/main-scene/MainSceneUI";
+import { HomeUI } from "../../ui-runtime/scene/HomeUI";
 
 const { regClass, property } = Laya;
 
 @regClass()
 export class MainMediator extends Mediator {
-    owner!: MainSceneUI;
+    owner!: HomeUI;
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
     onAwake(): void {
         this.initBtn();

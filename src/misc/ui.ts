@@ -22,7 +22,6 @@ export const enum ui {
     itemTipsDialog,
     itemSynthesisDialog,
     loginServerDialog,
-    mainScene,
     bagBoxUseDialog,
     taskDialog,
     mailDialog,
@@ -74,9 +73,9 @@ export const registerUI = () => {
         blockInput: true,
     });
     app.ui.register({
-        id: ui.mainScene,
+        id: ui.home,
         autoClose: true,
-        url: "scenes/main.ls",
+        url: "scenes/home.ls",
         blockInput: true,
     });
     app.ui.register({

@@ -56,6 +56,10 @@ export const world = {
         TROOP: 2,
     },
     LOGIC_FPS: 10,
+    MOVE_TYPE: {
+        DEGREE: 2,
+        MOVE_TO: 1,
+    },
     SAND_WORLD_ID: 101,
     VISUAL_FPS: 60,
 }

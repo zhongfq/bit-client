@@ -15,7 +15,7 @@
     },
     {
       "_$type": "445a740f-55ae-4a44-9fa4-15ba95a48032",
-      "scriptPath": "../src/system/world/world.ts"
+      "scriptPath": "../src/system/world/world-context.ts"
     }
   ],
   "_$child": [
@@ -47,12 +47,6 @@
         "b": 0.5
       },
       "lightmaps": [],
-      "_$comp": [
-        {
-          "_$type": "7b033c15-def4-4289-9d93-f5062971b294",
-          "scriptPath": "../src/system/world/camera-controller.ts"
-        }
-      ],
       "_$child": [
         {
           "_$id": "6jx8h8bvc6",
@@ -235,7 +229,7 @@
               "_$type": "Vector3",
               "x": 0.10861278377299266,
               "y": 0,
-              "z": 0
+              "z": -1.7401549535633323
             },
             "localRotation": {
               "_$type": "Quaternion",

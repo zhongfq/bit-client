@@ -3,19 +3,21 @@ import { Service } from "../../core/service";
 import {
     AttrTable,
     BattleBuffTable,
-    BattleEntityTable,
+    WorldEntityTable,
     EquipTable,
     HeroTable,
     ItemTable,
     MailTable,
     SkillTable,
     TaskTable,
+    SoldierTable,
 } from "../../def/data";
 import { NetworkService } from "../network/network-service";
 
-const JSON_ENTITY_TABLE = "resources/data/battle/battle_entity.json";
+const JSON_ENTITY_TABLE = "resources/data/world/world_entity.json";
 const JSON_BUFF_TABLE = "resources/data/battle/battle_buff.json";
 const JSON_HERO_TABLE = "resources/data/hero.json";
+const JSON_SOLDIER_TABLE = "resources/data/soldier.json";
 const JSON_SKILL_TABLE = "resources/data/skill.json";
 const JSON_EQUIP_TABLE = "resources/data/equip.json";
 const JSON_ATTR_TABLE = "resources/data/attr.json";
@@ -26,9 +28,10 @@ const JSON_Mail_TABLE = "resources/data/mail.json";
 export class DataService extends Service<NetworkService> {
     equipTable!: EquipTable;
     attrTable!: AttrTable;
-    battleEntityTable!: BattleEntityTable;
+    worldEntityTable!: WorldEntityTable;
     battleBuffTable!: BattleBuffTable;
     heroTable!: HeroTable;
+    soldierTable!: SoldierTable;
     skillTable!: SkillTable;
     itemTable!: ItemTable;
     taskTable!: TaskTable;
@@ -42,7 +45,8 @@ export class DataService extends Service<NetworkService> {
         // TODO: 处理加载错误
         this.equipTable = await app.loader.loadJson(JSON_EQUIP_TABLE);
         this.attrTable = await app.loader.loadJson(JSON_ATTR_TABLE);
-        // this.battleEntityTable = await app.loader.loadJson(JSON_ENTITY_TABLE);
+        this.worldEntityTable = await app.loader.loadJson(JSON_ENTITY_TABLE);
+        this.soldierTable = await app.loader.loadJson(JSON_SOLDIER_TABLE);
         // this.battleBuffTable = await app.loader.loadJson(JSON_BUFF_TABLE);
         this.skillTable = await app.loader.loadJson(JSON_SKILL_TABLE);
         this.heroTable = await app.loader.loadJson(JSON_HERO_TABLE);

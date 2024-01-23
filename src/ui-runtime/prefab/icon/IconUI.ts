@@ -1,5 +1,4 @@
 const { regClass } = Laya;
-import { IconNodeMediator } from "../../../system/icon/icon-node-mediator";
 import { ItemVo } from "../../../misc/vo/goods/item-vo";
 import { IconUIBase } from "./IconUI.generated";
 
@@ -15,8 +14,5 @@ export class IconUI extends IconUIBase {
             // this.iconImage.text = vo.cmd?vo.cmd.num.toString():"0";
         } else {
         }
-    }
-    getMediator(): IconNodeMediator {
-        return this.getComponent(IconNodeMediator);
     }
 }

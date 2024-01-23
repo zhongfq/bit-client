@@ -11,7 +11,7 @@
   "_$comp": [
     {
       "_$type": "bee707b2-f2ed-41af-94b5-cf1bda0def05",
-      "scriptPath": "../src/system/main/main-mediator.ts"
+      "scriptPath": "../src/system/home/home-mediator.ts"
     }
   ],
   "_$child": [
@@ -83,6 +83,20 @@
       "_mouseState": 2,
       "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
       "label": "公告",
+      "labelSize": 20
+    },
+    {
+      "_$id": "cq2e94vq",
+      "_$var": true,
+      "_$type": "Button",
+      "name": "btnWorld",
+      "x": 19,
+      "y": 1178,
+      "width": 120,
+      "height": 40,
+      "_mouseState": 2,
+      "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
+      "label": "世界",
       "labelSize": 20
     }
   ]

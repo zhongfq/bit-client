@@ -6,7 +6,7 @@ import { IconUI } from "../../ui-runtime/prefab/icon/IconUI";
 const { regClass, property } = Laya;
 
 @regClass()
-export class IconNodeMediator extends Laya.Script {
+export class IconNode extends Laya.Script {
     @property(Boolean)
     isNoShowTips!: boolean;
     private clickBack: Function | null = null;

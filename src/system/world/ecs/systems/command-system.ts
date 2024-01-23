@@ -4,10 +4,19 @@ import { ecs } from "../../../../core/ecs";
 import proto from "../../../../def/proto.js";
 import { opcode } from "../../../../def/protocol";
 import { world } from "../../../../def/world";
-import { World } from "../../world";
+import { WorldContext } from "../../world-context";
+import { CameraComponent } from "../components/camera-component";
+import {
+    MovementComponent,
+    MovementType,
+    PositionComponent,
+} from "../components/movement-component";
+import { AnimationComponent } from "../components/render-component";
+import { Tilemap } from "../components/tilemap-component";
+import { OwnerComponent } from "../components/troop-component";
 
 export class CommandSystem extends ecs.System {
-    constructor(readonly context: World) {
+    constructor(readonly context: WorldContext) {
         super();
 
         this.handle(opcode.world.notify_roles, this._onNotifyRoles);
@@ -57,10 +66,72 @@ export class CommandSystem extends ecs.System {
         entity.etype = etype;
 
         if (cmd.pos) {
+            const position = entity.addComponent(PositionComponent);
+            const data = cmd.pos as proto.world.Position;
+            Tilemap.grid2Pixel(data.x, data.y, position);
+        }
+
+        if (cmd.owner) {
+            const owner = entity.addComponent(OwnerComponent);
+            const data = cmd.owner as proto.world.OwnerComponent;
+            owner.rid = data.rid;
+            owner.name = data.roleName;
+        }
+
+        if (cmd.building) {
+            console.log("TODO: add building component");
+        }
+
+        if (cmd.move) {
+            entity.addComponent(MovementComponent);
+            this._updateMovement(cmd.eid, cmd.move as proto.world.MoveComponent);
+        }
+
+        if (cmd.troop) {
+            const data = cmd.troop as proto.world.TroopComponent;
+            const animation = entity.addComponent(AnimationComponent);
+            const heroProp = app.service.data.heroTable[data.heroId];
+            const modelProp = app.service.data.worldEntityTable.models[heroProp.model];
+            animation.path = modelProp.res;
+
+            if (this.context.troop.eid === cmd.eid) {
+                const camera = this.ecs.getSingletonComponent(CameraComponent)!;
+                camera.focus = cmd.eid;
+            }
+        }
+
+        if (cmd.etype === ENTITY_TYPE.TROOP) {
+            // const prop = app.service.data.worldEntityTable.models[cmd.]
+        } else {
+            console.log(`unhandle entity type: ${cmd.etype}`);
         }
     }
 
     private _delEntity(eid: number) {}
 
     private _moveEntity(cmd: proto.world.MoveAction) {}
+
+    private _updateMovement(eid: number, data: proto.world.MoveComponent) {
+        const entity = this.ecs.getEntity(eid);
+        if (!entity) {
+            console.warn(`entity not found: eid=${eid}`);
+            return;
+        }
+
+        const movement = entity.getComponent(MovementComponent)!;
+        const type = MovementType.NONE;
+        if (type === MovementType.NONE) {
+            movement.type = MovementType.NONE;
+            movement.speed.x = 0;
+            movement.speed.y = 0;
+            movement.speed.z = 0;
+            movement.track = null;
+            movement.target = null;
+        } else if (type === MovementType.WHEEL) {
+            movement.type = MovementType.WHEEL;
+            movement.velocity = data.speed;
+            Tilemap.degree2Speed(data.degree, data.speed, movement.speed);
+        } else if (type === MovementType.PATH) {
+        }
+    }
 }

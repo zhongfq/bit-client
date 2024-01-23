@@ -1,21 +1,21 @@
 import { ecs } from "../../../../core/ecs";
 import { TroopAi } from "../../behavior3/troop-ai";
-import { World } from "../../world";
-import { AI } from "../components/ai";
-import { TroopMember } from "../components/troop";
+import { WorldContext } from "../../world-context";
+import { AiComponent } from "../components/ai-component";
+import { MemberComponent } from "../components/troop-component";
 
 export class AISystem extends ecs.System {
     private static readonly TICK = 100;
 
     private _time: number = 0;
 
-    constructor(readonly context: World) {
+    constructor(readonly context: WorldContext) {
         super();
     }
 
     onAddComponent(component: ecs.Component): void {
-        if (component instanceof TroopMember) {
-            const ai = component.addComponent(AI);
+        if (component instanceof MemberComponent) {
+            const ai = component.addComponent(AiComponent);
             ai.tree = new TroopAi();
             ai.tree.run();
         }
@@ -24,7 +24,7 @@ export class AISystem extends ecs.System {
     update(dt: number): void {
         const currTimer = Laya.timer.currTimer;
         if (currTimer - this._time > AISystem.TICK) {
-            this.ecs.getComponents(AI).forEach((ai) => {
+            this.ecs.getComponents(AiComponent).forEach((ai) => {
                 ai.tree.run();
             });
             this._time = currTimer;
