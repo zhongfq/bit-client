@@ -9,10 +9,13 @@ import { MovementSystem } from "./ecs/systems/movement-system";
 import { RenderSystem } from "./ecs/systems/render-system";
 import { CameraComponent } from "./ecs/components/camera-component";
 import { CameraSystem } from "./ecs/systems/camera-system";
+import { JoystickComponent } from "./ecs/components/joystick-component";
+import { JoystickSystem } from "./ecs/systems/joystick-system";
+import { WorldUI } from "../../ui-runtime/scene/WorldUI";
 
 @Laya.regClass()
 export class WorldContext extends Mediator {
-    declare owner: Laya.Scene;
+    declare owner: WorldUI;
 
     private _ecs!: ecs.World;
 
@@ -29,6 +32,8 @@ export class WorldContext extends Mediator {
     onAwake(): void {
         this._ecs = new ecs.World();
         this._ecs.addSingletonComponent(CameraComponent);
+        this._ecs.addSingletonComponent(JoystickComponent);
+        this._ecs.addSystem(new JoystickSystem(this));
         this._ecs.addSystem(new CommandSystem(this));
         this._ecs.addSystem(new AISystem(this));
         this._ecs.addSystem(new MovementSystem(this));

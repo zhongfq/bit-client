@@ -69,6 +69,7 @@ export class CommandSystem extends ecs.System {
             const position = entity.addComponent(PositionComponent);
             const data = cmd.pos as proto.world.Position;
             Tilemap.grid2Pixel(data.x, data.y, position);
+            console.log(position);
         }
 
         if (cmd.owner) {
@@ -109,7 +110,26 @@ export class CommandSystem extends ecs.System {
 
     private _delEntity(eid: number) {}
 
-    private _moveEntity(cmd: proto.world.MoveAction) {}
+    private _moveEntity(cmd: proto.world.MoveAction) {
+        const entity = this.ecs.getEntity(cmd.eid as number);
+        if (!entity) {
+            console.warn(`entity not found: eid=${cmd.eid}`);
+            return;
+        }
+        if (cmd.curPos) {
+            const position = entity.getComponent(PositionComponent)!;
+            Tilemap.grid2Pixel(cmd.curPos.x!, cmd.curPos.y!, position);
+        }
+        this._updateMovement(
+            cmd.eid as number,
+            proto.world.MoveComponent.create({
+                path: cmd.path,
+                speed: cmd.speed,
+                startMs: cmd.startMs,
+                degree: cmd.degree,
+            })
+        );
+    }
 
     private _updateMovement(eid: number, data: proto.world.MoveComponent) {
         const entity = this.ecs.getEntity(eid);
@@ -119,19 +139,25 @@ export class CommandSystem extends ecs.System {
         }
 
         const movement = entity.getComponent(MovementComponent)!;
-        const type = MovementType.NONE;
-        if (type === MovementType.NONE) {
+        const animation = entity.getComponent(AnimationComponent);
+        if (data.speed === 0 && data.path.length === 0) {
             movement.type = MovementType.NONE;
             movement.speed.x = 0;
             movement.speed.y = 0;
             movement.speed.z = 0;
             movement.track = null;
             movement.target = null;
-        } else if (type === MovementType.WHEEL) {
+            if (animation?.animator) {
+                animation.animator.setParamsBool("moving", false);
+            }
+        } else if (data.path.length > 0) {
+        } else if (data.speed > 0) {
             movement.type = MovementType.WHEEL;
             movement.velocity = data.speed;
             Tilemap.degree2Speed(data.degree, data.speed, movement.speed);
-        } else if (type === MovementType.PATH) {
+            if (animation?.animator) {
+                animation.animator.setParamsBool("moving", true);
+            }
         }
     }
 }

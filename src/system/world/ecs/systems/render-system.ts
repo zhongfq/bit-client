@@ -25,9 +25,11 @@ export class RenderSystem extends ecs.System {
     private _updatePosition(anim: AnimationComponent) {
         const position = anim.getComponent(PositionComponent)!;
         if (anim.view) {
-            const p = anim.view.transform.position;
+            const transform = anim.view.transform;
+            const p = transform.position;
             p.x = position.x;
             p.z = position.z;
+            transform.position = p;
         }
     }
 
@@ -35,7 +37,7 @@ export class RenderSystem extends ecs.System {
         if (anim.path) {
             const prefab: Laya.Prefab = await Laya.loader.load(anim.path, Laya.Loader.HIERARCHY);
             anim.view = prefab.create() as Laya.Sprite3D;
-            anim.view.transform.position = new Laya.Vector3(0, 0, 1);
+            anim.animator = anim.view.getComponent(Laya.Animator);
             this.context.scene3D.addChild(anim.view);
         }
     }
