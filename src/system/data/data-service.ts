@@ -7,6 +7,7 @@ import {
     EquipTable,
     HeroTable,
     ItemTable,
+    MailTable,
     SkillTable,
     TaskTable,
 } from "../../def/data";
@@ -20,6 +21,7 @@ const JSON_EQUIP_TABLE = "resources/data/equip.json";
 const JSON_ATTR_TABLE = "resources/data/attr.json";
 const JSON_ITEM_TABLE = "resources/data/item.json";
 const JSON_TASK_TABLE = "resources/data/task.json";
+const JSON_Mail_TABLE = "resources/data/mail.json";
 
 export class DataService extends Service<NetworkService> {
     equipTable!: EquipTable;
@@ -30,6 +32,7 @@ export class DataService extends Service<NetworkService> {
     skillTable!: SkillTable;
     itemTable!: ItemTable;
     taskTable!: TaskTable;
+    mailTable!: MailTable;
 
     constructor(network: NetworkService) {
         super(network);
@@ -45,5 +48,6 @@ export class DataService extends Service<NetworkService> {
         this.heroTable = await app.loader.loadJson(JSON_HERO_TABLE);
         this.itemTable = await app.loader.loadJson(JSON_ITEM_TABLE);
         this.taskTable = await app.loader.loadJson(JSON_TASK_TABLE);
+        this.mailTable = await app.loader.loadJson(JSON_Mail_TABLE);
     }
 }

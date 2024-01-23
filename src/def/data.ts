@@ -1,6 +1,6 @@
-import { BuffType } from "../system/war/ecs/components/buff";
-import { ElementType, SkillType } from "../system/war/ecs/components/element";
-import { TrackType } from "../system/war/ecs/components/movement";
+// import { BuffType } from "../system/war/ecs/components/buff";
+// import { ElementType, SkillType } from "../system/war/ecs/components/element";
+// import { TrackType } from "../system/war/ecs/components/movement";
 
 //-----------------------------------------------------------------------------
 // equip
@@ -40,11 +40,11 @@ export type AttrTable = {
 export type BattleEntityTable = {
     entity: {
         [k: string]: {
-            etype: ElementType;
+            // etype: ElementType;
             res: string;
             card: string;
             id: number;
-            track_type?: TrackType;
+            // track_type?: TrackType;
         };
     };
 };
@@ -53,7 +53,7 @@ export type BattleBuffTable = {
     buff: {
         [k: string]: {
             id: number;
-            type: BuffType;
+            // type: BuffType;
             res: string;
         };
     };
@@ -69,7 +69,7 @@ export type HeroTable = {
 export type SkillTable = {
     [k: string]: {
         id: number;
-        type: SkillType;
+        // type: SkillType;
     };
 };
 export type Item = {
@@ -97,4 +97,21 @@ export type Task = {
 };
 export type TaskTable = {
     [k: number]: Task;
+};
+export type Money = {
+    id: number;
+};
+export type MoneyTable = {
+    [k: number]: Money;
+};
+export type Reward = [number, number];
+export type Mail = {
+    id: number;
+    title: string;
+    content: string;
+    reward: Reward[];
+};
+
+export type MailTable = {
+    [k: number]: Mail;
 };

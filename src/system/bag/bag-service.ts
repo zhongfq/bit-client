@@ -10,7 +10,7 @@ import { ItemBag } from "../../misc/vo/goods/item-vo-bag";
 export class BagService extends Service<NetworkService> {
     static readonly ITEM_UPDATE = "item-update";
 
-    readonly itemBag = VoUtil.createGoodsBag(ItemBag);
+    readonly itemBag = VoUtil.createGoodsBag(ItemBag); //创建道具背包
 
     constructor(network: NetworkService) {
         super(network);
@@ -52,18 +52,18 @@ export class BagService extends Service<NetworkService> {
     public async load(data: proto.bag.Ic2s_load) {
         await this._network.call(proto.bag.c2s_load.create(data), proto.bag.s2c_load);
     }
-
+    //请求使用道具
     public async requestUseItem(data: proto.bag.Ic2s_use_item) {
         await this._network.call(proto.bag.c2s_use_item.create(data), proto.bag.s2c_use_item);
     }
-
+    //请求合成道具
     public async requestCompositeItem(data: proto.bag.Ic2s_composite_item) {
         await this._network.call(
             proto.bag.c2s_composite_item.create(data),
             proto.bag.s2c_composite_item
         );
     }
-
+    //请求丢弃道具
     public async requestDiscardItem(data: proto.bag.Ic2s_discard_item) {
         await this._network.call(
             proto.bag.c2s_discard_item.create(data),

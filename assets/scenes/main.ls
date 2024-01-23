@@ -56,6 +56,34 @@
       "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
       "label": "邮件",
       "labelSize": 20
+    },
+    {
+      "_$id": "pauk1fot",
+      "_$var": true,
+      "_$type": "Button",
+      "name": "btnShop",
+      "x": 170,
+      "y": 1264,
+      "width": 120,
+      "height": 40,
+      "_mouseState": 2,
+      "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
+      "label": "商城",
+      "labelSize": 20
+    },
+    {
+      "_$id": "a2ce0771",
+      "_$var": true,
+      "_$type": "Button",
+      "name": "btnNotice",
+      "x": 19,
+      "y": 1264,
+      "width": 120,
+      "height": 40,
+      "_mouseState": 2,
+      "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
+      "label": "公告",
+      "labelSize": 20
     }
   ]
 }

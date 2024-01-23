@@ -8,5 +8,7 @@ export class MainSceneUIBase extends Laya.Scene {
     public btnBag!: Laya.Button;
     public btnTask!: Laya.Button;
     public btnMail!: Laya.Button;
+    public btnShop!: Laya.Button;
+    public btnNotice!: Laya.Button;
 }
 

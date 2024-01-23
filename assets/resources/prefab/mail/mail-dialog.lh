@@ -57,13 +57,11 @@
       "name": "itemList",
       "x": 5,
       "y": 53,
-      "width": 501,
-      "height": 689,
+      "width": 495,
+      "height": 618,
       "_mouseState": 2,
       "left": 5,
-      "right": 5,
       "top": 53,
-      "bottom": 11,
       "itemTemplate": {
         "_$ref": "ee3dm4xh",
         "_$tmpl": "itemRender"
@@ -156,7 +154,7 @@
       "_$id": "6ee7kogk",
       "_$var": true,
       "_$type": "Button",
-      "name": "Button",
+      "name": "btnClose",
       "x": 470,
       "y": 7,
       "width": 32,
@@ -184,6 +182,38 @@
       "align": "center",
       "valign": "middle",
       "padding": "0,0,0,0"
+    },
+    {
+      "_$id": "ia5qdxo5",
+      "_$var": true,
+      "_$type": "Button",
+      "name": "btnReward",
+      "x": 79,
+      "y": 690,
+      "width": 128,
+      "height": 42,
+      "_mouseState": 2,
+      "right": 304,
+      "top": 690,
+      "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
+      "label": "一键领取",
+      "labelSize": 20
+    },
+    {
+      "_$id": "kbf4weev",
+      "_$var": true,
+      "_$type": "Button",
+      "name": "btnDelete",
+      "x": 312,
+      "y": 691,
+      "width": 128,
+      "height": 42,
+      "_mouseState": 2,
+      "right": 71,
+      "top": 691,
+      "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
+      "label": "一键删除",
+      "labelSize": 20
     }
   ]
 }

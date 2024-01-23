@@ -1,0 +1,142 @@
+{
+  "_$ver": 1,
+  "_$id": "sxpq9fzh",
+  "_$type": "Dialog",
+  "name": "Dialog",
+  "width": 533,
+  "height": 753,
+  "_mouseState": 2,
+  "isModal": true,
+  "_$child": [
+    {
+      "_$id": "2kdo09if",
+      "_$var": true,
+      "_$type": "Image",
+      "name": "Image",
+      "width": 533,
+      "height": 753,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "bottom": 0,
+      "skin": "res://3225dc27-5bcb-446e-8b66-27df87624835",
+      "sizeGrid": "50,30,50,30,0",
+      "color": "#ffffff"
+    },
+    {
+      "_$id": "yccd3eik",
+      "_$var": true,
+      "_$type": "List",
+      "name": "itemList",
+      "x": 5,
+      "y": 53,
+      "width": 523,
+      "height": 691,
+      "_mouseState": 2,
+      "left": 5,
+      "right": 5,
+      "top": 53,
+      "bottom": 9,
+      "itemTemplate": {
+        "_$ref": "ee3dm4xh",
+        "_$tmpl": "itemRender"
+      },
+      "repeatX": 3,
+      "repeatY": 4,
+      "spaceX": 5,
+      "spaceY": 7,
+      "scrollType": 2,
+      "_$child": [
+        {
+          "_$id": "ee3dm4xh",
+          "_$type": "Box",
+          "name": "Box",
+          "width": 177,
+          "height": 213,
+          "bgColor": "rgba(93, 85, 85, 1)",
+          "_$child": [
+            {
+              "_$id": "s9yygi89",
+              "_$type": "Label",
+              "name": "labelName",
+              "x": 33,
+              "y": 11.999999999999943,
+              "width": 112,
+              "height": 33,
+              "centerX": 0,
+              "text": "道具名字",
+              "fontSize": 24,
+              "color": "#FFFFFF",
+              "align": "center",
+              "valign": "middle",
+              "padding": "0,0,0,0"
+            },
+            {
+              "_$id": "eoisr8hq",
+              "_$var": true,
+              "_$type": "Label",
+              "name": "labelConsume",
+              "x": -21,
+              "y": 162,
+              "width": 220,
+              "height": 197,
+              "centerX": 0,
+              "text": "<img src='resources/atlas/icon/icon1.png' widht = 20 height = 20/>111111111111",
+              "fontSize": 24,
+              "color": "#FFFFFF",
+              "ubb": true,
+              "valign": "top",
+              "wordWrap": true,
+              "padding": "0,0,0,0"
+            },
+            {
+              "_$id": "mk6a3w9u",
+              "_$prefab": "296a5627-8151-43ef-8283-ced0d50d81a8",
+              "name": "iconDrward",
+              "active": true,
+              "x": 35,
+              "y": 51,
+              "visible": true,
+              "centerX": 0,
+              "scaleX": 1,
+              "scaleY": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "6ee7kogk",
+      "_$var": true,
+      "_$type": "Button",
+      "name": "btnClose",
+      "x": 492,
+      "y": 7,
+      "width": 32,
+      "height": 32,
+      "_mouseState": 2,
+      "right": 9,
+      "top": 7,
+      "skin": "res://60a9086c-a9c2-4e01-a563-355c117b509e",
+      "label": "",
+      "labelSize": 20
+    },
+    {
+      "_$id": "vyoq14nb",
+      "_$type": "Label",
+      "name": "Label",
+      "x": 207,
+      "y": 10,
+      "width": 120,
+      "height": 28,
+      "top": 10,
+      "centerX": 0,
+      "text": "邮件",
+      "fontSize": 20,
+      "color": "#FFFFFF",
+      "align": "center",
+      "valign": "middle",
+      "padding": "0,0,0,0"
+    }
+  ]
+}

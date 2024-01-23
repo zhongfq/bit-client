@@ -8,6 +8,8 @@ export class MailUIBase extends Laya.Dialog {
     public Image!: Laya.Image;
     public menuTab!: Laya.Tab;
     public itemList!: Laya.List;
-    public Button!: Laya.Button;
+    public btnClose!: Laya.Button;
+    public btnReward!: Laya.Button;
+    public btnDelete!: Laya.Button;
 }
 

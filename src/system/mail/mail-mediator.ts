@@ -1,76 +1,85 @@
 import { app } from "../../app";
 import { Mediator } from "../../core/ui-mediator";
 import { IconUI } from "../../ui-runtime/prefab/icon/IconUI";
-import { DataUtil } from "../data/data-util";
 import { MailUI } from "../../ui-runtime/prefab/mail/MailUI";
 import proto from "../../def/proto.js";
 import { Util } from "../../core/untils/Util";
+import { StringUtil } from "../../core/untils/StringUtil";
+import { ui } from "../../misc/ui";
+import { Mail, MailTable } from "../../def/data";
+import { MailService } from "./mail-service";
 
-const { regClass, property } = Laya;
+const { regClass } = Laya;
 
 @regClass()
 export class MailMediator extends Mediator {
     owner!: MailUI;
-    itemListData!: proto.mail.IMailInfo[];
+    itemListData!: proto.mail.MailInfo[];
 
     onAwake(): void {
+        this.initHander();
+        this.updateList();
+    }
+    initHander() {
         this.owner.itemList.renderHandler = new Laya.Handler(this, this.updateItem);
         this.owner.itemList.mouseHandler = new Laya.Handler(this, this.onListClick);
         this.owner.menuTab.selectHandler = new Laya.Handler(this, this.onTabSelect);
-
-        this.updateList();
+        this.on(app.service.mail, MailService.MAIL_UPDATE, () => {
+            this.updateList();
+        });
+        this.owner.btnClose.on(Laya.Event.CLICK, () => {
+            this.owner.close();
+        });
+        this.owner.btnReward.on(Laya.Event.CLICK, () => {
+            app.service.mail.oneClickReward();
+        });
+        this.owner.btnDelete.on(Laya.Event.CLICK, () => {
+            app.service.mail.oneClickDelete();
+        });
     }
-    onIconClick() {}
     onListClick(evn: Laya.Event, index: number) {
         if (evn.type == Laya.Event.CLICK) {
-            // app.ui.show;()
+            if (app.service.mail.getMailIsRead(this.itemListData[index].state)) {
+                app.service.mail.requestRead({ mailUids: [this.itemListData[index].uid] });
+            }
+            app.ui.show(ui.mailInfoDialog, this.itemListData[index]);
         }
     }
     onTabSelect(index: number) {
         this.updateList();
     }
     updateItem(cell: MailUI, index: number) {
-        cell.getChildByName("labelMailTips");
-        cell.getChildByName("labelTailTime");
-        cell.getChildByName("labelMailRemainder");
-        cell.getChildByName("labeliconDrward");
-        // let cellData = this.itemListData.get(index);
-        // cell.iconNumber.text = cellData.goodsNumber?.toString() || "0";
-        // cell.updateGoods(cellData);
+        let refData!: Mail;
+
+        (cell.getChildByName("labelMailTips") as Laya.Label).text = this.itemListData[index].title;
+
+        (cell.getChildByName("labelMailTime") as Laya.Label).text =
+            StringUtil.convertTimestampToYMD(Number(this.itemListData[index].time) * 1000);
+
+        if (this.itemListData[index].reward.length > 0) {
+            (cell.getChildByName("iconDrward") as Laya.Box).visible = true;
+            let vo = app.service.bag.itemBag.createByRef(
+                Number(this.itemListData[index].reward[0].id)
+            );
+            vo.goodsNumber = this.itemListData[index].reward[0].num || 0;
+            (cell.getChildByName("iconDrward") as IconUI).updateGoods(vo);
+        } else {
+            (cell.getChildByName("iconDrward") as Laya.Box).visible = false;
+        }
+        if (app.service.mail.getMailIsRead(this.itemListData[index].state)) {
+            (cell.getChildByName("imgMialType") as Laya.Image).skin =
+                "resources/atlas/layadefault/img_mail.png";
+        } else {
+            (cell.getChildByName("imgMialType") as Laya.Image).skin =
+                "resources/atlas/layadefault/img_mail_open.png";
+        }
     }
     updateList() {
         if (this.owner.menuTab.selectedIndex == 0) {
-            this.itemListData = Util.toArray<proto.mail.IMailInfo>(app.service.mail.mails);
+            this.itemListData = Util.toArray<proto.mail.MailInfo>(app.service.mail.mails);
         } else {
-            // let tlItem = DataUtil.getArrayRef(app.service.data.itemTable, { composite: 1 });
-            // for (let refItem of tlItem) {
-            //     let itemvo = bag.createByRef(refItem.id);
-            //     this.itemListData.push(itemvo);
-            // }
         }
-        // this.owner.itemList.array = this.itemListData;
+        this.owner.itemList.array = this.itemListData;
+        this.owner.itemList.refresh();
     }
-    //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
-    //onAwake(): void {}
-
-    //组件被启用后执行，例如节点被添加到舞台后
-    //onEnable(): void {}
-
-    //组件被禁用时执行，例如从节点从舞台移除后
-    //onDisable(): void {}
-
-    //第一次执行update之前执行，只会执行一次
-    //onStart(): void {}
-
-    //手动调用节点销毁时执行
-    //onDestroy(): void {}
-
-    //每帧更新时执行，尽量不要在这里写大循环逻辑或者使用getComponent方法
-    //onUpdate(): void {}
-
-    //每帧更新时执行，在update之后执行，尽量不要在这里写大循环逻辑或者使用getComponent方法
-    //onLateUpdate(): void {}
-
-    //鼠标点击后执行。与交互相关的还有onMouseDown等十多个函数，具体请参阅文档。
-    //onMouseClick(): void {}
 }
