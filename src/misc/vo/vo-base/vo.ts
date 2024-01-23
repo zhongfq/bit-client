@@ -2,7 +2,7 @@
  * VO
  */
 export abstract class VO<Ref = any, Cmd = any> {
-    protected _ref: Ref | undefined;
+    protected _ref!: Ref;
     protected _cmd: Cmd | null = null;
 
     initByCmd(cmd: Cmd) {
@@ -10,12 +10,12 @@ export abstract class VO<Ref = any, Cmd = any> {
         this._ref = this.getRefByCmd(cmd);
     }
 
-    initByRef(ref: Ref | undefined) {
+    initByRef(ref: Ref) {
         this._ref = ref;
         this._cmd = null;
     }
 
-    get ref(): Ref | undefined {
+    get ref(): Ref {
         return this._ref;
     }
 

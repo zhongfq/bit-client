@@ -24,7 +24,7 @@ export class ItemBoxUseMediator extends Mediator {
         this.owner.iconNodeTop.updateGoods(this.owner.data);
         let tlData = [];
 
-        for (let data of this.owner.data.ref!.args) {
+        for (let data of this.owner.data.ref.args) {
             let vo = app.service.bag.itemBag.createByRef(data[0]);
             vo.goodsNumber = data[1];
             tlData.push(vo);

@@ -1,5 +1,5 @@
 const { regClass } = Laya;
-import { ItemVo } from "../../../system/bag/vo/goods/item-vo";
+import { ItemVo } from "../../../misc/vo/goods/item-vo";
 import { ItemBoxUseUIBase } from "./ItemBoxUseUI.generated";
 
 @regClass()
