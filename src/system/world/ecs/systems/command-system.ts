@@ -9,7 +9,7 @@ import { CameraComponent } from "../components/camera-component";
 import {
     MovementComponent,
     MovementType,
-    PositionComponent,
+    TransformComponent,
 } from "../components/movement-component";
 import { AnimationComponent } from "../components/render-component";
 import { Tilemap } from "../components/tilemap-component";
@@ -66,10 +66,9 @@ export class CommandSystem extends ecs.System {
         entity.etype = etype;
 
         if (cmd.pos) {
-            const position = entity.addComponent(PositionComponent);
+            const transform = entity.addComponent(TransformComponent);
             const data = cmd.pos as proto.world.Position;
-            Tilemap.grid2Pixel(data.x, data.y, position);
-            console.log(position);
+            Tilemap.grid2Pixel(data.x, data.y, transform.position);
         }
 
         if (cmd.owner) {
@@ -117,8 +116,8 @@ export class CommandSystem extends ecs.System {
             return;
         }
         if (cmd.curPos) {
-            const position = entity.getComponent(PositionComponent)!;
-            Tilemap.grid2Pixel(cmd.curPos.x!, cmd.curPos.y!, position);
+            const transform = entity.getComponent(TransformComponent)!;
+            Tilemap.grid2Pixel(cmd.curPos.x!, cmd.curPos.y!, transform.position);
         }
         this._updateMovement(
             cmd.eid as number,

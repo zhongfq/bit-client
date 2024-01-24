@@ -1,10 +1,13 @@
 import { ecs } from "../../../../core/ecs";
 import { world } from "../../../../def/world";
 
-export class PositionComponent extends ecs.Component {
-    x: number = 0;
-    y: number = 0;
-    z: number = 0;
+export class TransformComponent extends ecs.Component {
+    static readonly POSITION = 1 << 0;
+    static readonly ROTATION = 1 << 1;
+
+    flag: number = 0;
+    position: Laya.Vector3 = new Laya.Vector3();
+    rotation: number = 0;
 }
 
 export const enum TrackType {
@@ -30,6 +33,12 @@ export const enum MovementType {
     TARGET,
 }
 
+type Rotation = {
+    from: number;
+    to: number;
+    ration: number;
+};
+
 export class MovementComponent extends ecs.Component {
     type: MovementType = MovementType.NONE;
     velocity: number = 1;
@@ -43,4 +52,7 @@ export class MovementComponent extends ecs.Component {
     // 轨迹方式移动
     track: Track | null = null;
     trackType: TrackType = TrackType.NONE;
+
+    // 改变角度
+    rotation: Rotation = { from: 0, to: 0, ration: 1 };
 }

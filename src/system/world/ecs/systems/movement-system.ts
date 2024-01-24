@@ -3,7 +3,7 @@ import { WorldContext } from "../../world-context";
 import {
     MovementComponent,
     MovementType,
-    PositionComponent,
+    TransformComponent,
     TrackType,
 } from "../components/movement-component";
 
@@ -16,10 +16,15 @@ export class MovementSystem extends ecs.System {
         this.ecs.getComponents(MovementComponent).forEach((movement) => {
             if (movement.type == MovementType.NONE) {
                 return;
-            }
-            if (movement.type == MovementType.TARGET && movement.trackType === TrackType.CURVE) {
+            } else if (
+                movement.type == MovementType.TARGET &&
+                movement.trackType === TrackType.CURVE
+            ) {
             } else {
                 this._updateWithSpeed(movement, dt);
+            }
+            if (movement.rotation.ration < 1) {
+                this._updateRotation(movement, dt);
             }
         });
     }
@@ -27,7 +32,8 @@ export class MovementSystem extends ecs.System {
     private _updateWithTrack(movement: MovementComponent, dt: number) {}
 
     private _updateWithSpeed(movement: MovementComponent, dt: number) {
-        const position = movement.getComponent(PositionComponent)!;
+        const transform = movement.getComponent(TransformComponent)!;
+        const position = transform.position;
         const speed = movement.speed;
         let target = movement.target;
 
@@ -41,6 +47,7 @@ export class MovementSystem extends ecs.System {
         position.x += speed.x * dt;
         position.y += speed.y * dt;
         position.z += speed.z * dt;
+        transform.flag |= TransformComponent.POSITION;
 
         if (target) {
             const offsetX = target.x - position.x;
@@ -59,5 +66,17 @@ export class MovementSystem extends ecs.System {
                 }
             }
         }
+    }
+
+    private _updateRotation(movement: MovementComponent, dt: number) {
+        const rotation = movement.rotation;
+        const transform = movement.getComponent(TransformComponent)!;
+        // 0.2s完成转向
+        rotation.ration += dt * (1 / 0.2);
+        if (rotation.ration > 1) {
+            rotation.ration = 1;
+        }
+        transform.rotation = rotation.from + (rotation.to - rotation.from) * rotation.ration;
+        transform.flag |= TransformComponent.ROTATION;
     }
 }

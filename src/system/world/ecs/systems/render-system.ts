@@ -1,6 +1,6 @@
 import { ecs } from "../../../../core/ecs";
 import { WorldContext } from "../../world-context";
-import { MovementComponent, PositionComponent } from "../components/movement-component";
+import { MovementComponent, TransformComponent } from "../components/movement-component";
 import { AnimationComponent } from "../components/render-component";
 
 export class RenderSystem extends ecs.System {
@@ -23,13 +23,21 @@ export class RenderSystem extends ecs.System {
     }
 
     private _updatePosition(anim: AnimationComponent) {
-        const position = anim.getComponent(PositionComponent)!;
-        if (anim.view) {
-            const transform = anim.view.transform;
-            const p = transform.position;
-            p.x = position.x;
-            p.z = position.z;
-            transform.position = p;
+        if (!anim.view) {
+            return;
+        }
+
+        const transform = anim.getComponent(TransformComponent)!;
+        const targetTransform = anim.view.transform;
+
+        if (transform.flag & TransformComponent.POSITION) {
+            targetTransform.localPosition = transform.position;
+            transform.flag &= ~TransformComponent.POSITION;
+        }
+
+        if (transform.flag & TransformComponent.ROTATION) {
+            targetTransform.localRotationEulerY = transform.rotation;
+            transform.flag &= ~TransformComponent.ROTATION;
         }
     }
 

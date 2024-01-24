@@ -15,9 +15,11 @@ type ServerData = {
 
 @regClass()
 export class LoginMediator extends Mediator {
+    declare owner: LoginUI;
+
     _tlServerList!: any[];
-    owner!: LoginUI;
     serverData!: ServerData;
+
     onStart(): void {
         let Http = new Laya.HttpRequest();
         Http.once(Laya.Event.COMPLETE, (data: any) => {
@@ -30,7 +32,10 @@ export class LoginMediator extends Mediator {
         this.owner.btnServer.on(Laya.Event.CLICK, this, this.onBtnServer);
 
         // this.handle(opcode.connection.connected, this.onConnected);
+
+        this.owner.inputAccount.text = app.service.user.username;
     }
+
     onBtnLogin() {
         if (this.owner.inputAccount.text != "") {
             const { host, port } = this.serverData;
@@ -38,6 +43,7 @@ export class LoginMediator extends Mediator {
             app.service.user.username = this.owner.inputAccount.text;
         }
     }
+
     onBtnServer() {
         //打开服务器列表
         app.ui.show(ui.loginServerDialog, {
@@ -45,10 +51,12 @@ export class LoginMediator extends Mediator {
             serverList: this._tlServerList,
         });
     }
+
     onServerDialogClick(data: ServerData) {
         this.serverData = data;
         this.updateInfo();
     }
+
     updateInfo() {
         this.owner.labelServerName.text =
             "· " + this.serverData.state_desc + "  " + this.serverData.server_name;
