@@ -138,6 +138,7 @@ export class CommandSystem extends ecs.System {
         }
 
         const movement = entity.getComponent(MovementComponent)!;
+        const transform = entity.getComponent(TransformComponent)!;
         const animation = entity.getComponent(AnimationComponent);
         if (data.speed === 0 && data.path.length === 0) {
             movement.type = MovementType.NONE;
@@ -153,7 +154,15 @@ export class CommandSystem extends ecs.System {
         } else if (data.speed > 0) {
             movement.type = MovementType.WHEEL;
             movement.velocity = data.speed;
+            // movement.rotation.to = data.degree;
+            // movement.rotation.ration = 1;
+
             Tilemap.degree2Speed(data.degree, data.speed, movement.speed);
+
+            const rad = Math.atan2(-movement.speed.z, movement.speed.x);
+            transform.rotation = (rad * 180) / Math.PI + 90;
+            transform.flag |= TransformComponent.ROTATION;
+
             if (animation?.animator) {
                 animation.animator.setParamsBool("moving", true);
             }
