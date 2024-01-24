@@ -1,0 +1,60 @@
+{
+  "_$ver": 1,
+  "name": "Top grass",
+  "active": true,
+  "isStatic": false,
+  "layer": 0,
+  "transform": {
+    "localPosition": {
+      "_$type": "Vector3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "localRotation": {
+      "_$type": "Quaternion",
+      "x": 0.7071068,
+      "y": 0,
+      "z": 0,
+      "w": -0.7071068
+    },
+    "localScale": {
+      "_$type": "Vector3",
+      "x": 0.01,
+      "y": 0.01,
+      "z": 0.01
+    }
+  },
+  "_$id": "#1",
+  "_$type": "Sprite3D",
+  "_$type": "Sprite3D",
+  "_$comp": [
+    {
+      "_$type": "MeshFilter",
+      "sharedMesh": {
+        "_$uuid": "7cf7c2d0-021f-447d-9415-e7e40e55407a",
+        "_$type": "mesh"
+      }
+    },
+    {
+      "_$type": "MeshRenderer",
+      "enabled": true,
+      "sharedMaterials": [
+        {
+          "_$type": "Material",
+          "_$uuid": "a86be854-f9aa-4fea-8551-356ff1f0934a"
+        },
+        {
+          "_$type": "Material",
+          "_$uuid": "42f2996a-287b-449c-8acb-4ec4be6722a3"
+        },
+        {
+          "_$type": "Material",
+          "_$uuid": "a10a99f7-349b-4dc2-bc82-93b702202868"
+        }
+      ],
+      "receiveShadows": true,
+      "castShadow": true
+    }
+  ]
+}

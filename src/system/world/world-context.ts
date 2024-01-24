@@ -13,6 +13,27 @@ import { JoystickComponent } from "./ecs/components/joystick-component";
 import { JoystickSystem } from "./ecs/systems/joystick-system";
 import { WorldUI } from "../../ui-runtime/scene/WorldUI";
 
+type WorldMap = {
+    width: number;
+    height: number;
+    tilewidth: number;
+    tileheight: number;
+    layers: {
+        class: string;
+        type: string;
+        data: number[];
+    }[];
+    tilesets: {
+        firstgid: number;
+        tilecount: number;
+        properties: {
+            name: string;
+            type: string;
+            value: number;
+        }[];
+    }[];
+};
+
 @Laya.regClass()
 export class WorldContext extends Mediator {
     declare owner: WorldUI;
@@ -39,6 +60,8 @@ export class WorldContext extends Mediator {
         this._ecs.addSystem(new MovementSystem(this));
         this._ecs.addSystem(new CameraSystem(this));
         this._ecs.addSystem(new RenderSystem(this));
+
+        this.loadMap();
     }
 
     async onStart() {
@@ -52,5 +75,38 @@ export class WorldContext extends Mediator {
 
     onUpdate(): void {
         this._ecs.update(Laya.timer.delta / 1000);
+    }
+
+    private async loadMap() {
+        const arr: Laya.Prefab[] = [
+            await Laya.loader.load("resources/prefab/world/Top grass.lh", Laya.Loader.HIERARCHY),
+            await Laya.loader.load("resources/prefab/world/Top Ice.lh", Laya.Loader.HIERARCHY),
+            await Laya.loader.load("resources/prefab/world/Top lava.lh", Laya.Loader.HIERARCHY),
+            await Laya.loader.load("resources/prefab/world/Top pavement.lh", Laya.Loader.HIERARCHY),
+        ];
+        const map = (await Laya.loader.fetch("resources/data/world-map.json", "json")) as WorldMap;
+        map.layers.forEach((layer) => {
+            if (!layer.data || layer.class !== "grounds") {
+                return;
+            }
+            for (let i = 0; i < layer.data.length; i++) {
+                let idx = -1;
+                const gid = layer.data[i];
+                for (const ts of map.tilesets) {
+                    if (gid >= ts.firstgid && gid < ts.firstgid + ts.tilecount) {
+                        idx = ts.properties[0].value + gid - ts.firstgid;
+                        break;
+                    }
+                }
+                const tile = arr[idx % arr.length].create() as Laya.Sprite3D;
+                const position = tile.transform.position;
+                position.x = i % map.width;
+                position.y = -0.5;
+                position.z = Math.floor(i / map.width);
+                tile.transform.position = position;
+                // this.scene3D.addChild(tile);
+            }
+        });
+        console.log(map);
     }
 }

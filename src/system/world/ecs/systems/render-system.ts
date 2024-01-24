@@ -36,7 +36,13 @@ export class RenderSystem extends ecs.System {
         }
 
         if (transform.flag & TransformComponent.ROTATION) {
-            targetTransform.localRotationEulerY = transform.rotation;
+            // targetTransform.localRotationEulerY = transform.rotation;
+            const r = new Laya.Vector3(
+                0,
+                transform.rotation - targetTransform.localRotationEulerY,
+                0
+            );
+            targetTransform.rotate(r, true, false);
             transform.flag &= ~TransformComponent.ROTATION;
         }
     }

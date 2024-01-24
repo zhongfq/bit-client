@@ -1,0 +1,52 @@
+{
+  "_$ver": 1,
+  "name": "Cube Stone",
+  "active": true,
+  "isStatic": true,
+  "layer": 0,
+  "transform": {
+    "localPosition": {
+      "_$type": "Vector3",
+      "x": 6.460006,
+      "y": 0.5,
+      "z": 1.489939
+    },
+    "localRotation": {
+      "_$type": "Quaternion",
+      "x": -0.5000025,
+      "y": 0.5000036,
+      "z": 0.499983,
+      "w": -0.5000109
+    },
+    "localScale": {
+      "_$type": "Vector3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    }
+  },
+  "_$id": "#1",
+  "_$type": "Sprite3D",
+  "_$type": "Sprite3D",
+  "_$comp": [
+    {
+      "_$type": "MeshFilter",
+      "sharedMesh": {
+        "_$uuid": "6f6f51a9-cc95-4606-b88b-6c748bb820e3",
+        "_$type": "mesh"
+      }
+    },
+    {
+      "_$type": "MeshRenderer",
+      "enabled": true,
+      "sharedMaterials": [
+        {
+          "_$type": "Material",
+          "_$uuid": "449c1d1b-7e2e-4bf1-9626-050dddc2284c"
+        }
+      ],
+      "receiveShadows": true,
+      "castShadow": true
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "_$ver": 1,
+  "name": "Cube Grass",
+  "active": true,
+  "isStatic": true,
+  "layer": 0,
+  "transform": {
+    "localPosition": {
+      "_$type": "Vector3",
+      "x": 2.532,
+      "y": 0.51,
+      "z": -0.461
+    },
+    "localRotation": {
+      "_$type": "Quaternion",
+      "x": 0,
+      "y": 1,
+      "z": 0,
+      "w": -1.342595E-05
+    },
+    "localScale": {
+      "_$type": "Vector3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    }
+  },
+  "_$id": "#1",
+  "_$type": "Sprite3D",
+  "_$type": "Sprite3D",
+  "_$comp": [
+    {
+      "_$type": "MeshFilter",
+      "sharedMesh": {
+        "_$uuid": "6f6f51a9-cc95-4606-b88b-6c748bb820e3",
+        "_$type": "mesh"
+      }
+    },
+    {
+      "_$type": "MeshRenderer",
+      "enabled": true,
+      "sharedMaterials": [
+        {
+          "_$type": "Material",
+          "_$uuid": "efce2191-c65b-4095-b28b-7242aa19c6bc"
+        }
+      ],
+      "receiveShadows": true,
+      "castShadow": true
+    }
+  ]
+}

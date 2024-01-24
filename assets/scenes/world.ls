@@ -124,6 +124,7 @@
           "_$id": "5l41upqc",
           "_$type": "Sprite3D",
           "name": "Plane",
+          "active": false,
           "transform": {
             "localScale": {
               "_$type": "Vector3",

@@ -1,0 +1,86 @@
+{
+  "version": "LAYAMATERIAL:04",
+  "props": {
+    "type": "PBR",
+    "s_Cull": 2,
+    "s_Blend": 0,
+    "s_BlendSrc": 1,
+    "s_BlendDst": 0,
+    "alphaTest": false,
+    "alphaTestValue": 0.5,
+    "renderQueue": 2000,
+    "textures": [
+      {
+        "name": "u_AlbedoTexture",
+        "constructParams": [
+          512,
+          512,
+          3,
+          true,
+          false
+        ],
+        "propertyParams": {
+          "filterMode": 1,
+          "wrapModeU": 0,
+          "wrapModeV": 0,
+          "anisoLevel": 4
+        },
+        "path": "res://d950fe42-be29-43be-880c-2089351ae1b3"
+      },
+      {
+        "name": "u_NormalTexture",
+        "constructParams": [
+          512,
+          512,
+          5,
+          true,
+          false
+        ],
+        "propertyParams": {
+          "filterMode": 1,
+          "wrapModeU": 0,
+          "wrapModeV": 0,
+          "anisoLevel": 4
+        },
+        "path": "res://035af8b6-5380-409f-9d53-8aadfa0d5e60"
+      }
+    ],
+    "materialRenderMode": 0,
+    "u_AlbedoColor": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "u_EmissionIntensity": 1,
+    "u_EmissionColor": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "u_TilingOffset": [
+      1,
+      1,
+      0,
+      0
+    ],
+    "u_DetailTillingOffset": [
+      1,
+      1,
+      0,
+      0
+    ],
+    "u_Metallic": 0,
+    "u_Smoothness": 0,
+    "u_NormalScale": 1,
+    "u_ParallaxScale": 0.02,
+    "u_DetailNormalScale": 1,
+    "defines": [
+      "ALBEDOTEXTURE",
+      "NORMALTEXTURE",
+      "EMISSION",
+      "NEEDTBN"
+    ]
+  }
+}

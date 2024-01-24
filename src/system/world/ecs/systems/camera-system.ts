@@ -39,6 +39,7 @@ export class CameraSystem extends ecs.System {
         ray.direction.scale(t, ray.direction);
         ray.origin.vadd(ray.direction, ray.origin);
         focusTarget.transform.position.vsub(ray.origin, ray.origin);
+        ray.origin.y = 0;
         ray.origin.vadd(cameraTransform.position, ray.origin);
         cameraTransform.position = ray.origin;
 
