@@ -12,7 +12,7 @@ message c2s_load {
     uint32 shop_id = 1;//商城id
 } 
 message s2c_load {
-    uint32 err = 1; // OK, INVALID_ID
+    uint32 err = 1; // OK, INVALID_SHOP_ID
     repeated ItemInfo items = 2;
     uint32 time = 3;//商城上一次刷新的时间
 }
@@ -24,5 +24,5 @@ message c2s_buy {
     uint32 num = 3;//购买数量
 }
 message s2c_buy {
-    uint32 err = 1; // OK, INVALID_ID
+    uint32 err = 1; // OK, INVALID_SHOP_ID, INVALID_ID, COST_NOT_ENOUGH, NUM_ERROR
 }

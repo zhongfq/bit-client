@@ -16249,6 +16249,8 @@ $root.world = (function() {
          * @property {number|null} [stayEid] TroopComponent stayEid
          * @property {number|null} [homeEid] TroopComponent homeEid
          * @property {number|null} [battleEid] TroopComponent battleEid
+         * @property {number|null} [maxHp] TroopComponent maxHp
+         * @property {number|null} [hp] TroopComponent hp
          */
 
         /**
@@ -16315,6 +16317,22 @@ $root.world = (function() {
         TroopComponent.prototype.battleEid = 0;
 
         /**
+         * TroopComponent maxHp.
+         * @member {number} maxHp
+         * @memberof world.TroopComponent
+         * @instance
+         */
+        TroopComponent.prototype.maxHp = 0;
+
+        /**
+         * TroopComponent hp.
+         * @member {number} hp
+         * @memberof world.TroopComponent
+         * @instance
+         */
+        TroopComponent.prototype.hp = 0;
+
+        /**
          * Creates a new TroopComponent instance using the specified properties.
          * @function create
          * @memberof world.TroopComponent
@@ -16350,6 +16368,10 @@ $root.world = (function() {
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.homeEid);
             if (message.battleEid != null && Object.hasOwnProperty.call(message, "battleEid"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.battleEid);
+            if (message.maxHp != null && Object.hasOwnProperty.call(message, "maxHp"))
+                writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.maxHp);
+            if (message.hp != null && Object.hasOwnProperty.call(message, "hp"))
+                writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.hp);
             return writer;
         };
 
@@ -16408,6 +16430,14 @@ $root.world = (function() {
                         message.battleEid = reader.uint32();
                         break;
                     }
+                case 7: {
+                        message.maxHp = reader.uint32();
+                        break;
+                    }
+                case 8: {
+                        message.hp = reader.uint32();
+                        break;
+                    }
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -16461,6 +16491,12 @@ $root.world = (function() {
             if (message.battleEid != null && message.hasOwnProperty("battleEid"))
                 if (!$util.isInteger(message.battleEid))
                     return "battleEid: integer expected";
+            if (message.maxHp != null && message.hasOwnProperty("maxHp"))
+                if (!$util.isInteger(message.maxHp))
+                    return "maxHp: integer expected";
+            if (message.hp != null && message.hasOwnProperty("hp"))
+                if (!$util.isInteger(message.hp))
+                    return "hp: integer expected";
             return null;
         };
 
@@ -16488,6 +16524,10 @@ $root.world = (function() {
                 message.homeEid = object.homeEid >>> 0;
             if (object.battleEid != null)
                 message.battleEid = object.battleEid >>> 0;
+            if (object.maxHp != null)
+                message.maxHp = object.maxHp >>> 0;
+            if (object.hp != null)
+                message.hp = object.hp >>> 0;
             return message;
         };
 
@@ -16511,6 +16551,8 @@ $root.world = (function() {
                 object.stayEid = 0;
                 object.homeEid = 0;
                 object.battleEid = 0;
+                object.maxHp = 0;
+                object.hp = 0;
             }
             if (message.heroId != null && message.hasOwnProperty("heroId"))
                 object.heroId = message.heroId;
@@ -16524,6 +16566,10 @@ $root.world = (function() {
                 object.homeEid = message.homeEid;
             if (message.battleEid != null && message.hasOwnProperty("battleEid"))
                 object.battleEid = message.battleEid;
+            if (message.maxHp != null && message.hasOwnProperty("maxHp"))
+                object.maxHp = message.maxHp;
+            if (message.hp != null && message.hasOwnProperty("hp"))
+                object.hp = message.hp;
             return object;
         };
 

@@ -31,6 +31,8 @@ message TroopComponent {
     uint32 stay_eid = 4; // 当前所处建筑
     uint32 home_eid = 5; // 归属建筑
     uint32 battle_eid = 6; // 正在参与的战斗
+    uint32 max_hp = 7; // 最大血量
+    uint32 hp = 8; // 当前血量
 };
 
 message OwnerComponent {

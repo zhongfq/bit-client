@@ -7315,6 +7315,12 @@ export namespace world {
 
         /** TroopComponent battleEid */
         battleEid?: (number|null);
+
+        /** TroopComponent maxHp */
+        maxHp?: (number|null);
+
+        /** TroopComponent hp */
+        hp?: (number|null);
     }
 
     /** Represents a TroopComponent. */
@@ -7343,6 +7349,12 @@ export namespace world {
 
         /** TroopComponent battleEid. */
         public battleEid: number;
+
+        /** TroopComponent maxHp. */
+        public maxHp: number;
+
+        /** TroopComponent hp. */
+        public hp: number;
 
         /**
          * Creates a new TroopComponent instance using the specified properties.
