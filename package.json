@@ -6,7 +6,8 @@
     },
     "scripts": {
         "build-proto:pbjs": "pbjs --dependency protobufjs/minimal.js --target static-module --wrap commonjs --out ./src/def/proto.js ./assets/proto/*.proto",
-        "build-proto:pbts": "pbts --main --out ./src/def/proto.d.ts ./src/def/*.js"
+        "build-proto:pbts": "pbts --main --out ./src/def/proto.d.ts ./src/def/*.js",
+        "check-ts:tsc:": "tsc --noEmit"
     },
     "dependencies": {
         "bytebuffer": "^5.0.1",

@@ -1,5 +1,5 @@
 import { Mediator } from "../../core/ui-mediator";
-import { LoginServerUI } from "../../ui-runtime/prefab/login/LoginServerUI";
+import { LoginServerUI } from "../../ui-runtime/prefab/login/LoginServerListUI";
 
 const { regClass, property } = Laya;
 

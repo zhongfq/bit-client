@@ -15,24 +15,24 @@ export class MainMediator extends Mediator {
 
     onKeyDown(evt: Laya.Event): void {
         if (evt.ctrlKey && evt.keyCode == Laya.Keyboard.B) {
-            app.ui.show(ui.gmDialog);
+            app.ui.show(ui.GM);
         }
     }
     initBtn() {
         this.owner.btnBag.on(Laya.Event.CLICK, () => {
-            app.ui.show(ui.bagDialog);
+            app.ui.show(ui.BAG);
         });
         this.owner.btnTask.on(Laya.Event.CLICK, () => {
-            app.ui.show(ui.taskDialog);
+            app.ui.show(ui.TASK);
         });
         this.owner.btnMail.on(Laya.Event.CLICK, () => {
-            app.ui.show(ui.mailDialog);
+            app.ui.show(ui.MAIL);
         });
         this.owner.btnShop.on(Laya.Event.CLICK, () => {
-            app.ui.show(ui.mailDialog);
+            app.ui.show(ui.MAIL);
         });
         this.owner.btnWorld.on(Laya.Event.CLICK, () => {
-            app.ui.replace(ui.world);
+            app.ui.replace(ui.WORLD_SCENE);
         });
     }
 }

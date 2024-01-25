@@ -26,7 +26,8 @@ export class TaskBag extends VOBag<TaskVo> {
         let clazz = this.getVOClass();
         let vo = new clazz();
         let ref = DataUtil.getRef(app.service.data.taskTable, { id: refId });
-        vo.initByRef(ref);
+        // TODO: check ref
+        vo.initByRef(ref!);
         return vo;
     }
 

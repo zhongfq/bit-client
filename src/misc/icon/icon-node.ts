@@ -31,19 +31,19 @@ export class IconNode extends Laya.Script {
             if (itemData.ref?.composite == 1) {
                 //可合成
                 //打开合成弹窗
-                app.ui.show(ui.itemSynthesisDialog, { vo: itemData });
+                app.ui.show(ui.ITEM_SYNTHESIS, { vo: itemData });
             }
         } else if (itemData.cmd) {
             //有背包数据
             if (itemData.ref?.sub_type == 1) {
                 //宝箱类型
                 //打开宝箱弹窗
-                app.ui.show(ui.bagBoxUseDialog, { vo: itemData });
+                app.ui.show(ui.BAG_BOX_USE, { vo: itemData });
             } else if (itemData.ref?.use == 1) {
                 //可使用类型
                 //打开使用弹窗
             } else {
-                app.ui.show(ui.itemTipsDialog, {
+                app.ui.show(ui.ITEM_TIPS, {
                     x: evn.stageX,
                     y: evn.stageY,
                     itemTipsParam: this.owner.dataSource,

@@ -6,27 +6,32 @@ export interface AlertArgs extends UIAlertArgs {}
 export interface ToastArgs extends UIToastArgs {}
 
 export const enum ui {
-    toast = -2,
-    alert = -1,
+    TOAST = -2,
+    ALERT = -1,
 
     app,
-    loading,
-    login,
-    home,
-    chest,
-    world,
+    LOADING,
+    LOGIN_SCENE,
+    HOME_SCENE,
+    WORLD_SCENE,
 
-    test1,
-    test2,
-    bagDialog,
-    itemTipsDialog,
-    itemSynthesisDialog,
-    loginServerDialog,
-    bagBoxUseDialog,
-    taskDialog,
-    mailDialog,
-    mailInfoDialog,
-    gmDialog,
+    TEST1,
+    TEST2,
+
+    BAG,
+    BAG_BOX_USE,
+
+    ITEM_TIPS,
+    ITEM_SYNTHESIS,
+
+    LOGIN_SERVER_LIST,
+
+    TASK,
+
+    MAIL,
+    MAIL_INFO,
+
+    GM,
 }
 
 export const registerUI = () => {
@@ -35,78 +40,78 @@ export const registerUI = () => {
         url: "scenes/app.ls",
     });
     app.ui.register({
-        id: ui.alert,
+        id: ui.ALERT,
         url: "resources/prefab/misc/alert.lh",
     });
     app.ui.register({
-        id: ui.toast,
+        id: ui.TOAST,
         url: "resources/prefab/misc/toast.lh",
     });
     app.ui.register({
-        id: ui.login,
+        id: ui.LOGIN_SCENE,
         autoClose: true,
         url: "scenes/login.ls",
     });
     app.ui.register({
-        id: ui.world,
+        id: ui.WORLD_SCENE,
         url: "scenes/world.ls",
     });
     app.ui.register({
-        id: ui.bagDialog,
+        id: ui.BAG,
         url: "resources/prefab/bag/bag-dialog.lh",
         blockInput: true,
     });
     app.ui.register({
-        id: ui.itemTipsDialog,
+        id: ui.ITEM_TIPS,
         url: "resources/prefab/bag/item-tips-dialog.lh",
         blockInput: false,
     });
     app.ui.register({
-        id: ui.itemSynthesisDialog,
+        id: ui.ITEM_SYNTHESIS,
         url: "resources/prefab/bag/item-synthesis-dialog.lh",
         blockInput: true,
     });
 
     app.ui.register({
-        id: ui.loginServerDialog,
-        url: "resources/prefab/login/login-server-dialog.lh",
+        id: ui.LOGIN_SERVER_LIST,
+        url: "resources/prefab/login/login-server-list.lh",
         blockInput: true,
     });
     app.ui.register({
-        id: ui.home,
+        id: ui.HOME_SCENE,
         autoClose: true,
         url: "scenes/home.ls",
         blockInput: true,
     });
     app.ui.register({
-        id: ui.bagBoxUseDialog,
+        id: ui.BAG_BOX_USE,
         autoClose: false,
         url: "resources/prefab/bag/item-box-use-dialog.lh",
         blockInput: true,
     });
     app.ui.register({
-        id: ui.taskDialog,
+        id: ui.TASK,
         autoClose: false,
         url: "resources/prefab/task/task-dialog.lh",
         blockInput: true,
     });
 
     app.ui.register({
-        id: ui.mailDialog,
+        id: ui.MAIL,
         autoClose: false,
         url: "resources/prefab/mail/mail-dialog.lh",
         blockInput: true,
     });
 
     app.ui.register({
-        id: ui.mailInfoDialog,
+        id: ui.MAIL_INFO,
         autoClose: false,
         url: "resources/prefab/mail/mail-info-dialog.lh",
         blockInput: true,
     });
 
     app.ui.register({
-        id: ui.gmDialog,
+        id: ui.GM,
         url: "resources/prefab/gm/gm-dialog.lh",
         blockInput: true,
     });

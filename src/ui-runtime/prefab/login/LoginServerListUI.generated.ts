@@ -2,9 +2,9 @@
 
 
 /**
- * resources/prefab/login/login-server-dialog.lh
+ * resources/prefab/login/login-server-list.lh
  */
-export class LoginServerUIBase extends Laya.Dialog {
+export class LoginServerListUIBase extends Laya.Dialog {
     public itemList!: Laya.List;
     public listItemBox!: Laya.Box;
     public Button!: Laya.Button;

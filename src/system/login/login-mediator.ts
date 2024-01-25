@@ -46,7 +46,7 @@ export class LoginMediator extends Mediator {
 
     onBtnServer() {
         //打开服务器列表
-        app.ui.show(ui.loginServerDialog, {
+        app.ui.show(ui.LOGIN_SERVER_LIST, {
             back: new Laya.Handler(this, this.onServerDialogClick),
             serverList: this._tlServerList,
         });

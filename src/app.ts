@@ -106,7 +106,7 @@ class App {
         // await this.bagd.load();
         // this.ui.openDialog(ui.bagDialog);
 
-        app.ui.open(ui.login);
+        app.ui.open(ui.LOGIN_SCENE);
     }
 }
 

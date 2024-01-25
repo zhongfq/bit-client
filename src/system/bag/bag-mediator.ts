@@ -1,11 +1,9 @@
 import { app } from "../../app";
-import { toEventType } from "../../core/dispatcher";
 import { Mediator } from "../../core/ui-mediator";
+import { ItemVo } from "../../misc/vo/goods/item-vo";
 import { BagUI } from "../../ui-runtime/prefab/bag/BagUI";
 import { IconUI } from "../../ui-runtime/prefab/icon/IconUI";
 import { DataUtil } from "../data/data-util";
-import { IconNodeMediator } from "../icon/icon-node-mediator";
-import { ItemVo } from "../../misc/vo/goods/item-vo";
 import { BagService } from "./bag-service";
 
 const { regClass, property } = Laya;

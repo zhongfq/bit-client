@@ -48,7 +48,7 @@ export class UserService extends Service<NetworkService> {
         await app.service.bag.load({ bagId: 1 });
         await app.service.task.load({ taskType: 2 });
         await app.service.mail.load();
-        app.ui.replace(ui.home);
+        app.ui.replace(ui.HOME_SCENE);
     }
     private async onConnected() {
         const data = await this.login(this.username);

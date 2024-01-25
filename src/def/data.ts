@@ -103,3 +103,15 @@ export type Task = {
 export type TaskTable = {
     [k: number]: Task;
 };
+
+export type Reward = [number, number];
+export type Mail = {
+    id: number;
+    title: string;
+    content: string;
+    reward: Reward[];
+};
+
+export type MailTable = {
+    [k: number]: Mail;
+};

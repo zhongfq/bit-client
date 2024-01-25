@@ -6,6 +6,7 @@
   "name": "Dialog",
   "width": 365,
   "height": 521,
+  "_mouseState": 2,
   "isModal": true,
   "_$comp": [
     {

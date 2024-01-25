@@ -1,12 +1,11 @@
 import { app } from "../../app";
 import { Mediator } from "../../core/ui-mediator";
+import { StringUtil } from "../../core/untils/StringUtil";
+import { Util } from "../../core/untils/Util";
+import proto from "../../def/proto.js";
+import { ui } from "../../misc/ui";
 import { IconUI } from "../../ui-runtime/prefab/icon/IconUI";
 import { MailUI } from "../../ui-runtime/prefab/mail/MailUI";
-import proto from "../../def/proto.js";
-import { Util } from "../../core/untils/Util";
-import { StringUtil } from "../../core/untils/StringUtil";
-import { ui } from "../../misc/ui";
-import { Mail, MailTable } from "../../def/data";
 import { MailService } from "./mail-service";
 
 const { regClass } = Laya;
@@ -42,15 +41,13 @@ export class MailMediator extends Mediator {
             if (app.service.mail.getMailIsRead(this.itemListData[index].state)) {
                 app.service.mail.requestRead({ mailUids: [this.itemListData[index].uid] });
             }
-            app.ui.show(ui.mailInfoDialog, this.itemListData[index]);
+            app.ui.show(ui.MAIL_INFO, this.itemListData[index]);
         }
     }
     onTabSelect(index: number) {
         this.updateList();
     }
     updateItem(cell: MailUI, index: number) {
-        let refData!: Mail;
-
         (cell.getChildByName("labelMailTips") as Laya.Label).text = this.itemListData[index].title;
 
         (cell.getChildByName("labelMailTime") as Laya.Label).text =

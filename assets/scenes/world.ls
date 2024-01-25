@@ -157,7 +157,7 @@
           "_$id": "x0wshm8x",
           "_$prefab": "07bf69d2-0e5d-4e63-b5ab-cd4f13595967",
           "name": "mc01",
-          "active": true,
+          "active": false,
           "layer": 0,
           "transform": {
             "localPosition": {
@@ -176,10 +176,32 @@
           }
         },
         {
+          "_$id": "5kzv21t2",
+          "_$prefab": "e9170845-af71-406a-89bb-49f851b9d995",
+          "name": "mc04",
+          "active": false,
+          "layer": 0,
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": 0.10861278377299266,
+              "y": 0,
+              "z": -1.7401549535633323
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": 0,
+              "y": 0,
+              "z": 0,
+              "w": -1
+            }
+          }
+        },
+        {
           "_$id": "pcor7b8q",
           "_$prefab": "a66f552b-a274-4dec-8f17-7e9ca565c9a5",
           "name": "mc02",
-          "active": true,
+          "active": false,
           "layer": 0,
           "transform": {
             "localPosition": {
@@ -201,7 +223,7 @@
           "_$id": "i81bwyxz",
           "_$prefab": "b6ab5d2a-c255-4411-8846-83b695f2d6c9",
           "name": "mc03",
-          "active": true,
+          "active": false,
           "layer": 0,
           "transform": {
             "localPosition": {
@@ -209,28 +231,6 @@
               "x": -2.835201137476017,
               "y": 0,
               "z": 0
-            },
-            "localRotation": {
-              "_$type": "Quaternion",
-              "x": 0,
-              "y": 0,
-              "z": 0,
-              "w": -1
-            }
-          }
-        },
-        {
-          "_$id": "5kzv21t2",
-          "_$prefab": "e9170845-af71-406a-89bb-49f851b9d995",
-          "name": "mc04",
-          "active": true,
-          "layer": 0,
-          "transform": {
-            "localPosition": {
-              "_$type": "Vector3",
-              "x": 0.10861278377299266,
-              "y": 0,
-              "z": -1.7401549535633323
             },
             "localRotation": {
               "_$type": "Quaternion",
