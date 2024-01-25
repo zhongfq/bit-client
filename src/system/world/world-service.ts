@@ -1,6 +1,6 @@
 import { LayaExt } from "../../core/laya";
 import { Service } from "../../core/service";
-import proto from "../../def/proto.js";
+import proto from "../../def/proto";
 import { NetworkService } from "../network/network-service";
 
 export class WorldService extends Service<NetworkService> {

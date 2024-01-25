@@ -2,7 +2,7 @@ import { app } from "../../app";
 import { Mediator } from "../../core/ui-mediator";
 import { StringUtil } from "../../core/utils/string-util";
 import { Util } from "../../core/utils/util";
-import proto from "../../def/proto.js";
+import proto from "../../def/proto";
 import { ui } from "../../misc/ui";
 import { IconUI } from "../../ui-runtime/prefab/icon/IconUI";
 import { MailUI } from "../../ui-runtime/prefab/mail/MailUI";

@@ -1,7 +1,7 @@
 // AUTO GENERATED, DON'T NOT MODIFY!
 
 import { register } from "../system/network/network-service";
-import proto from "../def/proto.js";
+import proto from "../def/proto";
 
 export const opcode = {
     alliance: {

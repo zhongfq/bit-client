@@ -1,7 +1,7 @@
 import { app } from "../../../../app";
 import { Callback } from "../../../../core/dispatcher";
 import { ecs } from "../../../../core/ecs";
-import proto from "../../../../def/proto.js";
+import proto from "../../../../def/proto";
 import { opcode } from "../../../../def/protocol";
 import { world } from "../../../../def/world";
 import { WorldContext } from "../../world-context";

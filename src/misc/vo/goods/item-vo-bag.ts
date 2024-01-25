@@ -1,7 +1,7 @@
 import { GoodsVoBag } from "./goods-vo-bag";
 import { ItemVo } from "./item-vo";
 
-import proto from "../../../def/proto.js";
+import proto from "../../../def/proto";
 import { app } from "../../../app";
 import { Constructor } from "../../../core/dispatcher";
 import { DataUtil } from "../../../system/data/data-util";

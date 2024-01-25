@@ -1,7 +1,7 @@
 import { app } from "../../app";
 import { Constructor } from "../../core/dispatcher";
 import { Service } from "../../core/service";
-import proto from "../../def/proto.js";
+import proto from "../../def/proto";
 import { errcode, errmsg, opcode } from "../../def/protocol";
 import { VoUtil } from "../../misc/vo-util";
 import { TaskBag } from "../../misc/vo/task/task-vo-bag";

@@ -1,6 +1,6 @@
 const { regClass } = Laya;
 import { MailInfoUIBase } from "./MailInfoUI.generated";
-import proto from "../../../def/proto.js";
+import proto from "../../../def/proto";
 import { MailRow } from "../../../def/data";
 import { DataUtil } from "../../../system/data/data-util";
 import { app } from "../../../app";

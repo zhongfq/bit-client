@@ -1,6 +1,6 @@
 import { app } from "../../app";
 import { Service } from "../../core/service";
-import proto from "../../def/proto.js";
+import proto from "../../def/proto";
 import { errcode, opcode } from "../../def/protocol";
 import { NetworkService } from "../network/network-service";
 import { ItemVo } from "../../misc/vo/goods/item-vo";

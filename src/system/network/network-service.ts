@@ -1,9 +1,9 @@
-import ByteBuffer from "../../3rd/bytebuffer.js";
-import { Constructor } from "../../core/dispatcher.js";
-import { Service } from "../../core/service.js";
-import { Socket } from "../../core/socket.js";
-import { user } from "../../def/proto.js";
-import { errcode, errmsg, opcode, registerProtocols } from "../../def/protocol.js";
+import ByteBuffer from "../../3rd/bytebuffer";
+import { Constructor } from "../../core/dispatcher";
+import { Service } from "../../core/service";
+import { Socket } from "../../core/socket";
+import { user } from "../../def/proto";
+import { errcode, errmsg, opcode, registerProtocols } from "../../def/protocol";
 
 type PromiseDescriptor = {
     resolve: (value: any) => void;

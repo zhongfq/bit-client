@@ -1,6 +1,6 @@
 import { Service } from "../../core/service";
 import { errcode, opcode } from "../../def/protocol";
-import proto from "../../def/proto.js";
+import proto from "../../def/proto";
 import { NetworkService } from "../network/network-service";
 import { app } from "../../app";
 import { DataUtil } from "../data/data-util";

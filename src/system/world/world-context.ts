@@ -1,6 +1,6 @@
 import { app } from "../../app";
 import { Callback } from "../../core/dispatcher";
-import proto from "../../def/proto.js";
+import proto from "../../def/proto";
 import { ecs } from "../../core/ecs";
 import { Mediator } from "../../core/ui-mediator";
 import { AISystem } from "./ecs/systems/ai-system";

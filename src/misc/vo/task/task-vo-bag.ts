@@ -1,9 +1,9 @@
-import proto from "../../../def/proto.js";
-import { app } from "../../../app.js";
-import { Constructor } from "../../../core/dispatcher.js";
-import { DataUtil } from "../../../system/data/data-util.js";
+import proto from "../../../def/proto";
+import { app } from "../../../app";
+import { Constructor } from "../../../core/dispatcher";
+import { DataUtil } from "../../../system/data/data-util";
 import { VOBag } from "../vo-base/vo-bag";
-import { TaskVo } from "./task-vo.js";
+import { TaskVo } from "./task-vo";
 
 /**
  * ItemBag 道具
