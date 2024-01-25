@@ -3,20 +3,20 @@
 import { IconUI } from "../icon/IconUI";
 
 /**
- * resources/prefab/bag/item-box-use-dialog.lh
+ * resources/prefab/shop/shop-buy-dialog.lh
  */
-export class ItemBoxUseUIBase extends Laya.Dialog {
+export class ShopBuyUIBase extends Laya.Dialog {
     public Image!: Laya.Image;
     public closeBtn!: Laya.Button;
     public synthesisBtn!: Laya.Button;
     public iconNodeTop!: IconUI;
     public itemName!: Laya.Label;
-    public itemDesc!: Laya.Label;
+    public labelItemNum!: Laya.Label;
+    public labelItemDesc!: Laya.Label;
     public slider!: Laya.HSlider;
     public selectNumber!: Laya.Label;
     public haveNumber!: Laya.Label;
     public minusBtn!: Laya.Button;
     public addBtn!: Laya.Button;
-    public itemList!: Laya.List;
 }
 

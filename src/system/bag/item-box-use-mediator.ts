@@ -17,7 +17,7 @@ export class ItemBoxUseMediator extends Mediator {
         this.owner.closeBtn.on(Laya.Event.CLICK, this, this.onCloseBtn);
         this.owner.synthesisBtn.on(Laya.Event.CLICK, this, this.onSynthesisBtn);
         this.owner.minusBtn.on(Laya.Event.CLICK, this, this.onMinusBtn);
-
+        this.owner.itemDesc.scrollRect = this.owner.itemDesc.getBounds()
         this.owner.slider.min = 1;
         this.owner.slider.max = this.owner.data.goodsNumber;
         this.owner.slider.value = 1;
