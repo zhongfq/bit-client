@@ -16,7 +16,7 @@ export class Socket {
     private _wxs: any;
 
     constructor(readonly url: string, protocols?: string | string[]) {
-        if (Laya.Browser.onWeiXin || Laya.Browser.onTTMiniGame) {
+        if (Laya.Browser.onMiniGame || Laya.Browser.onTTMiniGame) {
             console.log("connect to wx:", url);
             this._wxs = wx.connectSocket({ url, protocols, tcpNoDelay: true });
             this._wxs.onClose((e: any) => this.onclose?.(e));
