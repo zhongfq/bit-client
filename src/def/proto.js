@@ -6695,6 +6695,384 @@ $root.mail = (function() {
         return s2c_delete_mails;
     })();
 
+    mail.c2s_receive_all = (function() {
+
+        /**
+         * Properties of a c2s_receive_all.
+         * @memberof mail
+         * @interface Ic2s_receive_all
+         */
+
+        /**
+         * Constructs a new c2s_receive_all.
+         * @memberof mail
+         * @classdesc Represents a c2s_receive_all.
+         * @implements Ic2s_receive_all
+         * @constructor
+         * @param {mail.Ic2s_receive_all=} [properties] Properties to set
+         */
+        function c2s_receive_all(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Creates a new c2s_receive_all instance using the specified properties.
+         * @function create
+         * @memberof mail.c2s_receive_all
+         * @static
+         * @param {mail.Ic2s_receive_all=} [properties] Properties to set
+         * @returns {mail.c2s_receive_all} c2s_receive_all instance
+         */
+        c2s_receive_all.create = function create(properties) {
+            return new c2s_receive_all(properties);
+        };
+
+        /**
+         * Encodes the specified c2s_receive_all message. Does not implicitly {@link mail.c2s_receive_all.verify|verify} messages.
+         * @function encode
+         * @memberof mail.c2s_receive_all
+         * @static
+         * @param {mail.Ic2s_receive_all} message c2s_receive_all message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_receive_all.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified c2s_receive_all message, length delimited. Does not implicitly {@link mail.c2s_receive_all.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof mail.c2s_receive_all
+         * @static
+         * @param {mail.Ic2s_receive_all} message c2s_receive_all message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_receive_all.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a c2s_receive_all message from the specified reader or buffer.
+         * @function decode
+         * @memberof mail.c2s_receive_all
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {mail.c2s_receive_all} c2s_receive_all
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_receive_all.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.mail.c2s_receive_all();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a c2s_receive_all message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof mail.c2s_receive_all
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {mail.c2s_receive_all} c2s_receive_all
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_receive_all.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a c2s_receive_all message.
+         * @function verify
+         * @memberof mail.c2s_receive_all
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        c2s_receive_all.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+
+        /**
+         * Creates a c2s_receive_all message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof mail.c2s_receive_all
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {mail.c2s_receive_all} c2s_receive_all
+         */
+        c2s_receive_all.fromObject = function fromObject(object) {
+            if (object instanceof $root.mail.c2s_receive_all)
+                return object;
+            return new $root.mail.c2s_receive_all();
+        };
+
+        /**
+         * Creates a plain object from a c2s_receive_all message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof mail.c2s_receive_all
+         * @static
+         * @param {mail.c2s_receive_all} message c2s_receive_all
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        c2s_receive_all.toObject = function toObject() {
+            return {};
+        };
+
+        /**
+         * Converts this c2s_receive_all to JSON.
+         * @function toJSON
+         * @memberof mail.c2s_receive_all
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        c2s_receive_all.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for c2s_receive_all
+         * @function getTypeUrl
+         * @memberof mail.c2s_receive_all
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        c2s_receive_all.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/mail.c2s_receive_all";
+        };
+
+        return c2s_receive_all;
+    })();
+
+    mail.s2c_receive_all = (function() {
+
+        /**
+         * Properties of a s2c_receive_all.
+         * @memberof mail
+         * @interface Is2c_receive_all
+         * @property {number|null} [err] s2c_receive_all err
+         */
+
+        /**
+         * Constructs a new s2c_receive_all.
+         * @memberof mail
+         * @classdesc Represents a s2c_receive_all.
+         * @implements Is2c_receive_all
+         * @constructor
+         * @param {mail.Is2c_receive_all=} [properties] Properties to set
+         */
+        function s2c_receive_all(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * s2c_receive_all err.
+         * @member {number} err
+         * @memberof mail.s2c_receive_all
+         * @instance
+         */
+        s2c_receive_all.prototype.err = 0;
+
+        /**
+         * Creates a new s2c_receive_all instance using the specified properties.
+         * @function create
+         * @memberof mail.s2c_receive_all
+         * @static
+         * @param {mail.Is2c_receive_all=} [properties] Properties to set
+         * @returns {mail.s2c_receive_all} s2c_receive_all instance
+         */
+        s2c_receive_all.create = function create(properties) {
+            return new s2c_receive_all(properties);
+        };
+
+        /**
+         * Encodes the specified s2c_receive_all message. Does not implicitly {@link mail.s2c_receive_all.verify|verify} messages.
+         * @function encode
+         * @memberof mail.s2c_receive_all
+         * @static
+         * @param {mail.Is2c_receive_all} message s2c_receive_all message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_receive_all.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified s2c_receive_all message, length delimited. Does not implicitly {@link mail.s2c_receive_all.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof mail.s2c_receive_all
+         * @static
+         * @param {mail.Is2c_receive_all} message s2c_receive_all message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_receive_all.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a s2c_receive_all message from the specified reader or buffer.
+         * @function decode
+         * @memberof mail.s2c_receive_all
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {mail.s2c_receive_all} s2c_receive_all
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_receive_all.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.mail.s2c_receive_all();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.err = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a s2c_receive_all message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof mail.s2c_receive_all
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {mail.s2c_receive_all} s2c_receive_all
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_receive_all.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a s2c_receive_all message.
+         * @function verify
+         * @memberof mail.s2c_receive_all
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        s2c_receive_all.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.err != null && message.hasOwnProperty("err"))
+                if (!$util.isInteger(message.err))
+                    return "err: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a s2c_receive_all message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof mail.s2c_receive_all
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {mail.s2c_receive_all} s2c_receive_all
+         */
+        s2c_receive_all.fromObject = function fromObject(object) {
+            if (object instanceof $root.mail.s2c_receive_all)
+                return object;
+            var message = new $root.mail.s2c_receive_all();
+            if (object.err != null)
+                message.err = object.err >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a s2c_receive_all message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof mail.s2c_receive_all
+         * @static
+         * @param {mail.s2c_receive_all} message s2c_receive_all
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        s2c_receive_all.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.err = 0;
+            if (message.err != null && message.hasOwnProperty("err"))
+                object.err = message.err;
+            return object;
+        };
+
+        /**
+         * Converts this s2c_receive_all to JSON.
+         * @function toJSON
+         * @memberof mail.s2c_receive_all
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        s2c_receive_all.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for s2c_receive_all
+         * @function getTypeUrl
+         * @memberof mail.s2c_receive_all
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        s2c_receive_all.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/mail.s2c_receive_all";
+        };
+
+        return s2c_receive_all;
+    })();
+
     mail.notify_new_mails = (function() {
 
         /**
@@ -8729,6 +9107,1173 @@ $root.profile = (function() {
     })();
 
     return profile;
+})();
+
+$root.shop = (function() {
+
+    /**
+     * Namespace shop.
+     * @exports shop
+     * @namespace
+     */
+    var shop = {};
+
+    shop.ItemInfo = (function() {
+
+        /**
+         * Properties of an ItemInfo.
+         * @memberof shop
+         * @interface IItemInfo
+         * @property {number|null} [id] ItemInfo id
+         * @property {number|null} [buyNum] ItemInfo buyNum
+         */
+
+        /**
+         * Constructs a new ItemInfo.
+         * @memberof shop
+         * @classdesc Represents an ItemInfo.
+         * @implements IItemInfo
+         * @constructor
+         * @param {shop.IItemInfo=} [properties] Properties to set
+         */
+        function ItemInfo(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * ItemInfo id.
+         * @member {number} id
+         * @memberof shop.ItemInfo
+         * @instance
+         */
+        ItemInfo.prototype.id = 0;
+
+        /**
+         * ItemInfo buyNum.
+         * @member {number} buyNum
+         * @memberof shop.ItemInfo
+         * @instance
+         */
+        ItemInfo.prototype.buyNum = 0;
+
+        /**
+         * Creates a new ItemInfo instance using the specified properties.
+         * @function create
+         * @memberof shop.ItemInfo
+         * @static
+         * @param {shop.IItemInfo=} [properties] Properties to set
+         * @returns {shop.ItemInfo} ItemInfo instance
+         */
+        ItemInfo.create = function create(properties) {
+            return new ItemInfo(properties);
+        };
+
+        /**
+         * Encodes the specified ItemInfo message. Does not implicitly {@link shop.ItemInfo.verify|verify} messages.
+         * @function encode
+         * @memberof shop.ItemInfo
+         * @static
+         * @param {shop.IItemInfo} message ItemInfo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ItemInfo.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.id);
+            if (message.buyNum != null && Object.hasOwnProperty.call(message, "buyNum"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.buyNum);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified ItemInfo message, length delimited. Does not implicitly {@link shop.ItemInfo.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof shop.ItemInfo
+         * @static
+         * @param {shop.IItemInfo} message ItemInfo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ItemInfo.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes an ItemInfo message from the specified reader or buffer.
+         * @function decode
+         * @memberof shop.ItemInfo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {shop.ItemInfo} ItemInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ItemInfo.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.shop.ItemInfo();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.id = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.buyNum = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes an ItemInfo message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof shop.ItemInfo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {shop.ItemInfo} ItemInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ItemInfo.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies an ItemInfo message.
+         * @function verify
+         * @memberof shop.ItemInfo
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        ItemInfo.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isInteger(message.id))
+                    return "id: integer expected";
+            if (message.buyNum != null && message.hasOwnProperty("buyNum"))
+                if (!$util.isInteger(message.buyNum))
+                    return "buyNum: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates an ItemInfo message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof shop.ItemInfo
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {shop.ItemInfo} ItemInfo
+         */
+        ItemInfo.fromObject = function fromObject(object) {
+            if (object instanceof $root.shop.ItemInfo)
+                return object;
+            var message = new $root.shop.ItemInfo();
+            if (object.id != null)
+                message.id = object.id >>> 0;
+            if (object.buyNum != null)
+                message.buyNum = object.buyNum >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from an ItemInfo message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof shop.ItemInfo
+         * @static
+         * @param {shop.ItemInfo} message ItemInfo
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        ItemInfo.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.id = 0;
+                object.buyNum = 0;
+            }
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            if (message.buyNum != null && message.hasOwnProperty("buyNum"))
+                object.buyNum = message.buyNum;
+            return object;
+        };
+
+        /**
+         * Converts this ItemInfo to JSON.
+         * @function toJSON
+         * @memberof shop.ItemInfo
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        ItemInfo.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for ItemInfo
+         * @function getTypeUrl
+         * @memberof shop.ItemInfo
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        ItemInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/shop.ItemInfo";
+        };
+
+        return ItemInfo;
+    })();
+
+    shop.c2s_load = (function() {
+
+        /**
+         * Properties of a c2s_load.
+         * @memberof shop
+         * @interface Ic2s_load
+         * @property {number|null} [shopId] c2s_load shopId
+         */
+
+        /**
+         * Constructs a new c2s_load.
+         * @memberof shop
+         * @classdesc Represents a c2s_load.
+         * @implements Ic2s_load
+         * @constructor
+         * @param {shop.Ic2s_load=} [properties] Properties to set
+         */
+        function c2s_load(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * c2s_load shopId.
+         * @member {number} shopId
+         * @memberof shop.c2s_load
+         * @instance
+         */
+        c2s_load.prototype.shopId = 0;
+
+        /**
+         * Creates a new c2s_load instance using the specified properties.
+         * @function create
+         * @memberof shop.c2s_load
+         * @static
+         * @param {shop.Ic2s_load=} [properties] Properties to set
+         * @returns {shop.c2s_load} c2s_load instance
+         */
+        c2s_load.create = function create(properties) {
+            return new c2s_load(properties);
+        };
+
+        /**
+         * Encodes the specified c2s_load message. Does not implicitly {@link shop.c2s_load.verify|verify} messages.
+         * @function encode
+         * @memberof shop.c2s_load
+         * @static
+         * @param {shop.Ic2s_load} message c2s_load message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_load.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.shopId != null && Object.hasOwnProperty.call(message, "shopId"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.shopId);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified c2s_load message, length delimited. Does not implicitly {@link shop.c2s_load.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof shop.c2s_load
+         * @static
+         * @param {shop.Ic2s_load} message c2s_load message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_load.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a c2s_load message from the specified reader or buffer.
+         * @function decode
+         * @memberof shop.c2s_load
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {shop.c2s_load} c2s_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_load.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.shop.c2s_load();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.shopId = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a c2s_load message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof shop.c2s_load
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {shop.c2s_load} c2s_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_load.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a c2s_load message.
+         * @function verify
+         * @memberof shop.c2s_load
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        c2s_load.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.shopId != null && message.hasOwnProperty("shopId"))
+                if (!$util.isInteger(message.shopId))
+                    return "shopId: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a c2s_load message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof shop.c2s_load
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {shop.c2s_load} c2s_load
+         */
+        c2s_load.fromObject = function fromObject(object) {
+            if (object instanceof $root.shop.c2s_load)
+                return object;
+            var message = new $root.shop.c2s_load();
+            if (object.shopId != null)
+                message.shopId = object.shopId >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a c2s_load message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof shop.c2s_load
+         * @static
+         * @param {shop.c2s_load} message c2s_load
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        c2s_load.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.shopId = 0;
+            if (message.shopId != null && message.hasOwnProperty("shopId"))
+                object.shopId = message.shopId;
+            return object;
+        };
+
+        /**
+         * Converts this c2s_load to JSON.
+         * @function toJSON
+         * @memberof shop.c2s_load
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        c2s_load.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for c2s_load
+         * @function getTypeUrl
+         * @memberof shop.c2s_load
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        c2s_load.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/shop.c2s_load";
+        };
+
+        return c2s_load;
+    })();
+
+    shop.s2c_load = (function() {
+
+        /**
+         * Properties of a s2c_load.
+         * @memberof shop
+         * @interface Is2c_load
+         * @property {number|null} [err] s2c_load err
+         * @property {Array.<shop.IItemInfo>|null} [items] s2c_load items
+         * @property {number|null} [time] s2c_load time
+         */
+
+        /**
+         * Constructs a new s2c_load.
+         * @memberof shop
+         * @classdesc Represents a s2c_load.
+         * @implements Is2c_load
+         * @constructor
+         * @param {shop.Is2c_load=} [properties] Properties to set
+         */
+        function s2c_load(properties) {
+            this.items = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * s2c_load err.
+         * @member {number} err
+         * @memberof shop.s2c_load
+         * @instance
+         */
+        s2c_load.prototype.err = 0;
+
+        /**
+         * s2c_load items.
+         * @member {Array.<shop.IItemInfo>} items
+         * @memberof shop.s2c_load
+         * @instance
+         */
+        s2c_load.prototype.items = $util.emptyArray;
+
+        /**
+         * s2c_load time.
+         * @member {number} time
+         * @memberof shop.s2c_load
+         * @instance
+         */
+        s2c_load.prototype.time = 0;
+
+        /**
+         * Creates a new s2c_load instance using the specified properties.
+         * @function create
+         * @memberof shop.s2c_load
+         * @static
+         * @param {shop.Is2c_load=} [properties] Properties to set
+         * @returns {shop.s2c_load} s2c_load instance
+         */
+        s2c_load.create = function create(properties) {
+            return new s2c_load(properties);
+        };
+
+        /**
+         * Encodes the specified s2c_load message. Does not implicitly {@link shop.s2c_load.verify|verify} messages.
+         * @function encode
+         * @memberof shop.s2c_load
+         * @static
+         * @param {shop.Is2c_load} message s2c_load message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_load.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
+            if (message.items != null && message.items.length)
+                for (var i = 0; i < message.items.length; ++i)
+                    $root.shop.ItemInfo.encode(message.items[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            if (message.time != null && Object.hasOwnProperty.call(message, "time"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.time);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified s2c_load message, length delimited. Does not implicitly {@link shop.s2c_load.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof shop.s2c_load
+         * @static
+         * @param {shop.Is2c_load} message s2c_load message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_load.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a s2c_load message from the specified reader or buffer.
+         * @function decode
+         * @memberof shop.s2c_load
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {shop.s2c_load} s2c_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_load.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.shop.s2c_load();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.err = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        if (!(message.items && message.items.length))
+                            message.items = [];
+                        message.items.push($root.shop.ItemInfo.decode(reader, reader.uint32()));
+                        break;
+                    }
+                case 3: {
+                        message.time = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a s2c_load message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof shop.s2c_load
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {shop.s2c_load} s2c_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_load.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a s2c_load message.
+         * @function verify
+         * @memberof shop.s2c_load
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        s2c_load.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.err != null && message.hasOwnProperty("err"))
+                if (!$util.isInteger(message.err))
+                    return "err: integer expected";
+            if (message.items != null && message.hasOwnProperty("items")) {
+                if (!Array.isArray(message.items))
+                    return "items: array expected";
+                for (var i = 0; i < message.items.length; ++i) {
+                    var error = $root.shop.ItemInfo.verify(message.items[i]);
+                    if (error)
+                        return "items." + error;
+                }
+            }
+            if (message.time != null && message.hasOwnProperty("time"))
+                if (!$util.isInteger(message.time))
+                    return "time: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a s2c_load message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof shop.s2c_load
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {shop.s2c_load} s2c_load
+         */
+        s2c_load.fromObject = function fromObject(object) {
+            if (object instanceof $root.shop.s2c_load)
+                return object;
+            var message = new $root.shop.s2c_load();
+            if (object.err != null)
+                message.err = object.err >>> 0;
+            if (object.items) {
+                if (!Array.isArray(object.items))
+                    throw TypeError(".shop.s2c_load.items: array expected");
+                message.items = [];
+                for (var i = 0; i < object.items.length; ++i) {
+                    if (typeof object.items[i] !== "object")
+                        throw TypeError(".shop.s2c_load.items: object expected");
+                    message.items[i] = $root.shop.ItemInfo.fromObject(object.items[i]);
+                }
+            }
+            if (object.time != null)
+                message.time = object.time >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a s2c_load message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof shop.s2c_load
+         * @static
+         * @param {shop.s2c_load} message s2c_load
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        s2c_load.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.items = [];
+            if (options.defaults) {
+                object.err = 0;
+                object.time = 0;
+            }
+            if (message.err != null && message.hasOwnProperty("err"))
+                object.err = message.err;
+            if (message.items && message.items.length) {
+                object.items = [];
+                for (var j = 0; j < message.items.length; ++j)
+                    object.items[j] = $root.shop.ItemInfo.toObject(message.items[j], options);
+            }
+            if (message.time != null && message.hasOwnProperty("time"))
+                object.time = message.time;
+            return object;
+        };
+
+        /**
+         * Converts this s2c_load to JSON.
+         * @function toJSON
+         * @memberof shop.s2c_load
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        s2c_load.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for s2c_load
+         * @function getTypeUrl
+         * @memberof shop.s2c_load
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        s2c_load.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/shop.s2c_load";
+        };
+
+        return s2c_load;
+    })();
+
+    shop.c2s_buy = (function() {
+
+        /**
+         * Properties of a c2s_buy.
+         * @memberof shop
+         * @interface Ic2s_buy
+         * @property {number|null} [shopId] c2s_buy shopId
+         * @property {number|null} [shopItemId] c2s_buy shopItemId
+         * @property {number|null} [num] c2s_buy num
+         */
+
+        /**
+         * Constructs a new c2s_buy.
+         * @memberof shop
+         * @classdesc Represents a c2s_buy.
+         * @implements Ic2s_buy
+         * @constructor
+         * @param {shop.Ic2s_buy=} [properties] Properties to set
+         */
+        function c2s_buy(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * c2s_buy shopId.
+         * @member {number} shopId
+         * @memberof shop.c2s_buy
+         * @instance
+         */
+        c2s_buy.prototype.shopId = 0;
+
+        /**
+         * c2s_buy shopItemId.
+         * @member {number} shopItemId
+         * @memberof shop.c2s_buy
+         * @instance
+         */
+        c2s_buy.prototype.shopItemId = 0;
+
+        /**
+         * c2s_buy num.
+         * @member {number} num
+         * @memberof shop.c2s_buy
+         * @instance
+         */
+        c2s_buy.prototype.num = 0;
+
+        /**
+         * Creates a new c2s_buy instance using the specified properties.
+         * @function create
+         * @memberof shop.c2s_buy
+         * @static
+         * @param {shop.Ic2s_buy=} [properties] Properties to set
+         * @returns {shop.c2s_buy} c2s_buy instance
+         */
+        c2s_buy.create = function create(properties) {
+            return new c2s_buy(properties);
+        };
+
+        /**
+         * Encodes the specified c2s_buy message. Does not implicitly {@link shop.c2s_buy.verify|verify} messages.
+         * @function encode
+         * @memberof shop.c2s_buy
+         * @static
+         * @param {shop.Ic2s_buy} message c2s_buy message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_buy.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.shopId != null && Object.hasOwnProperty.call(message, "shopId"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.shopId);
+            if (message.shopItemId != null && Object.hasOwnProperty.call(message, "shopItemId"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.shopItemId);
+            if (message.num != null && Object.hasOwnProperty.call(message, "num"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.num);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified c2s_buy message, length delimited. Does not implicitly {@link shop.c2s_buy.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof shop.c2s_buy
+         * @static
+         * @param {shop.Ic2s_buy} message c2s_buy message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_buy.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a c2s_buy message from the specified reader or buffer.
+         * @function decode
+         * @memberof shop.c2s_buy
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {shop.c2s_buy} c2s_buy
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_buy.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.shop.c2s_buy();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.shopId = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.shopItemId = reader.uint32();
+                        break;
+                    }
+                case 3: {
+                        message.num = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a c2s_buy message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof shop.c2s_buy
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {shop.c2s_buy} c2s_buy
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_buy.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a c2s_buy message.
+         * @function verify
+         * @memberof shop.c2s_buy
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        c2s_buy.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.shopId != null && message.hasOwnProperty("shopId"))
+                if (!$util.isInteger(message.shopId))
+                    return "shopId: integer expected";
+            if (message.shopItemId != null && message.hasOwnProperty("shopItemId"))
+                if (!$util.isInteger(message.shopItemId))
+                    return "shopItemId: integer expected";
+            if (message.num != null && message.hasOwnProperty("num"))
+                if (!$util.isInteger(message.num))
+                    return "num: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a c2s_buy message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof shop.c2s_buy
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {shop.c2s_buy} c2s_buy
+         */
+        c2s_buy.fromObject = function fromObject(object) {
+            if (object instanceof $root.shop.c2s_buy)
+                return object;
+            var message = new $root.shop.c2s_buy();
+            if (object.shopId != null)
+                message.shopId = object.shopId >>> 0;
+            if (object.shopItemId != null)
+                message.shopItemId = object.shopItemId >>> 0;
+            if (object.num != null)
+                message.num = object.num >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a c2s_buy message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof shop.c2s_buy
+         * @static
+         * @param {shop.c2s_buy} message c2s_buy
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        c2s_buy.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.shopId = 0;
+                object.shopItemId = 0;
+                object.num = 0;
+            }
+            if (message.shopId != null && message.hasOwnProperty("shopId"))
+                object.shopId = message.shopId;
+            if (message.shopItemId != null && message.hasOwnProperty("shopItemId"))
+                object.shopItemId = message.shopItemId;
+            if (message.num != null && message.hasOwnProperty("num"))
+                object.num = message.num;
+            return object;
+        };
+
+        /**
+         * Converts this c2s_buy to JSON.
+         * @function toJSON
+         * @memberof shop.c2s_buy
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        c2s_buy.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for c2s_buy
+         * @function getTypeUrl
+         * @memberof shop.c2s_buy
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        c2s_buy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/shop.c2s_buy";
+        };
+
+        return c2s_buy;
+    })();
+
+    shop.s2c_buy = (function() {
+
+        /**
+         * Properties of a s2c_buy.
+         * @memberof shop
+         * @interface Is2c_buy
+         * @property {number|null} [err] s2c_buy err
+         */
+
+        /**
+         * Constructs a new s2c_buy.
+         * @memberof shop
+         * @classdesc Represents a s2c_buy.
+         * @implements Is2c_buy
+         * @constructor
+         * @param {shop.Is2c_buy=} [properties] Properties to set
+         */
+        function s2c_buy(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * s2c_buy err.
+         * @member {number} err
+         * @memberof shop.s2c_buy
+         * @instance
+         */
+        s2c_buy.prototype.err = 0;
+
+        /**
+         * Creates a new s2c_buy instance using the specified properties.
+         * @function create
+         * @memberof shop.s2c_buy
+         * @static
+         * @param {shop.Is2c_buy=} [properties] Properties to set
+         * @returns {shop.s2c_buy} s2c_buy instance
+         */
+        s2c_buy.create = function create(properties) {
+            return new s2c_buy(properties);
+        };
+
+        /**
+         * Encodes the specified s2c_buy message. Does not implicitly {@link shop.s2c_buy.verify|verify} messages.
+         * @function encode
+         * @memberof shop.s2c_buy
+         * @static
+         * @param {shop.Is2c_buy} message s2c_buy message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_buy.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified s2c_buy message, length delimited. Does not implicitly {@link shop.s2c_buy.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof shop.s2c_buy
+         * @static
+         * @param {shop.Is2c_buy} message s2c_buy message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_buy.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a s2c_buy message from the specified reader or buffer.
+         * @function decode
+         * @memberof shop.s2c_buy
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {shop.s2c_buy} s2c_buy
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_buy.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.shop.s2c_buy();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.err = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a s2c_buy message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof shop.s2c_buy
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {shop.s2c_buy} s2c_buy
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_buy.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a s2c_buy message.
+         * @function verify
+         * @memberof shop.s2c_buy
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        s2c_buy.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.err != null && message.hasOwnProperty("err"))
+                if (!$util.isInteger(message.err))
+                    return "err: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a s2c_buy message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof shop.s2c_buy
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {shop.s2c_buy} s2c_buy
+         */
+        s2c_buy.fromObject = function fromObject(object) {
+            if (object instanceof $root.shop.s2c_buy)
+                return object;
+            var message = new $root.shop.s2c_buy();
+            if (object.err != null)
+                message.err = object.err >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a s2c_buy message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof shop.s2c_buy
+         * @static
+         * @param {shop.s2c_buy} message s2c_buy
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        s2c_buy.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.err = 0;
+            if (message.err != null && message.hasOwnProperty("err"))
+                object.err = message.err;
+            return object;
+        };
+
+        /**
+         * Converts this s2c_buy to JSON.
+         * @function toJSON
+         * @memberof shop.s2c_buy
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        s2c_buy.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for s2c_buy
+         * @function getTypeUrl
+         * @memberof shop.s2c_buy
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        s2c_buy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/shop.s2c_buy";
+        };
+
+        return s2c_buy;
+    })();
+
+    return shop;
 })();
 
 $root.task = (function() {
@@ -15835,7 +17380,6 @@ $root.world = (function() {
          * Properties of a MoveComponent.
          * @memberof world
          * @interface IMoveComponent
-         * @property {number|null} [moveType] MoveComponent moveType
          * @property {number|null} [startMs] MoveComponent startMs
          * @property {Array.<number>|null} [path] MoveComponent path
          * @property {number|null} [speed] MoveComponent speed
@@ -15857,14 +17401,6 @@ $root.world = (function() {
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
-
-        /**
-         * MoveComponent moveType.
-         * @member {number} moveType
-         * @memberof world.MoveComponent
-         * @instance
-         */
-        MoveComponent.prototype.moveType = 0;
 
         /**
          * MoveComponent startMs.
@@ -15922,8 +17458,6 @@ $root.world = (function() {
         MoveComponent.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.moveType != null && Object.hasOwnProperty.call(message, "moveType"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.moveType);
             if (message.startMs != null && Object.hasOwnProperty.call(message, "startMs"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.startMs);
             if (message.path != null && message.path.length) {
@@ -15970,10 +17504,6 @@ $root.world = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.moveType = reader.uint32();
-                        break;
-                    }
                 case 2: {
                         message.startMs = reader.uint32();
                         break;
@@ -16032,9 +17562,6 @@ $root.world = (function() {
         MoveComponent.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.moveType != null && message.hasOwnProperty("moveType"))
-                if (!$util.isInteger(message.moveType))
-                    return "moveType: integer expected";
             if (message.startMs != null && message.hasOwnProperty("startMs"))
                 if (!$util.isInteger(message.startMs))
                     return "startMs: integer expected";
@@ -16066,8 +17593,6 @@ $root.world = (function() {
             if (object instanceof $root.world.MoveComponent)
                 return object;
             var message = new $root.world.MoveComponent();
-            if (object.moveType != null)
-                message.moveType = object.moveType >>> 0;
             if (object.startMs != null)
                 message.startMs = object.startMs >>> 0;
             if (object.path) {
@@ -16100,13 +17625,10 @@ $root.world = (function() {
             if (options.arrays || options.defaults)
                 object.path = [];
             if (options.defaults) {
-                object.moveType = 0;
                 object.startMs = 0;
                 object.speed = 0;
                 object.degree = 0;
             }
-            if (message.moveType != null && message.hasOwnProperty("moveType"))
-                object.moveType = message.moveType;
             if (message.startMs != null && message.hasOwnProperty("startMs"))
                 object.startMs = message.startMs;
             if (message.path && message.path.length) {

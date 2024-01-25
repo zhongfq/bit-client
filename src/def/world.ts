@@ -11,6 +11,13 @@ export const world = {
     },
     ENTITY_ACTION: {
         ADD_ENTITY: 1,
+        BATTLE_ADD_BUFF: 6,
+        BATTLE_ADD_BULLET: 9,
+        BATTLE_DEL_BUFF: 7,
+        BATTLE_SKILL: 4,
+        BATTLE_STOP: 8,
+        BATTLE_SUB_HP: 5,
+        CHANGE_OWNER: 10,
         DEL_ENTITY: 2,
         MOVE: 3,
     },

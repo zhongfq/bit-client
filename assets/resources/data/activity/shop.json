@@ -1,0 +1,127 @@
+{
+    "shop_1": [
+        {
+            "cost": [
+                [
+                    101,
+                    10
+                ]
+            ],
+            "id": 1,
+            "item_id": 10101,
+            "item_num": 1,
+            "sort_id": 1
+        },
+        {
+            "cost": [
+                [
+                    101,
+                    10
+                ]
+            ],
+            "id": 2,
+            "item_id": 10102,
+            "item_num": 1,
+            "sort_id": 2
+        },
+        {
+            "cost": [
+                [
+                    101,
+                    10
+                ]
+            ],
+            "id": 3,
+            "item_id": 10103,
+            "item_num": 1,
+            "sort_id": 2
+        },
+        {
+            "cost": [
+                [
+                    101,
+                    10
+                ]
+            ],
+            "id": 4,
+            "item_id": 10104,
+            "item_num": 1,
+            "sort_id": 3
+        },
+        {
+            "id": 5,
+            "item_id": 10104,
+            "item_num": 1,
+            "limit_day": 1,
+            "sort_id": 3
+        }
+    ],
+    "shop_2": [
+        {
+            "cost": [
+                [
+                    101,
+                    10
+                ]
+            ],
+            "id": 1,
+            "item_id": 10101,
+            "item_num": 1,
+            "sort_id": 1
+        },
+        {
+            "cost": [
+                [
+                    101,
+                    10
+                ]
+            ],
+            "id": 2,
+            "item_id": 10102,
+            "item_num": 1,
+            "sort_id": 2
+        },
+        {
+            "cost": [
+                [
+                    101,
+                    10
+                ]
+            ],
+            "id": 3,
+            "item_id": 10103,
+            "item_num": 1,
+            "sort_id": 2
+        },
+        {
+            "cost": [
+                [
+                    101,
+                    10
+                ]
+            ],
+            "id": 4,
+            "item_id": 10104,
+            "item_num": 1,
+            "sort_id": 3
+        },
+        {
+            "id": 5,
+            "item_id": 10104,
+            "item_num": 1,
+            "limit_day": 1,
+            "sort_id": 3
+        }
+    ],
+    "shop_config": [
+        {
+            "id": 1,
+            "type": 1
+        },
+        {
+            "id": 2,
+            "time": 24,
+            "type": 2
+        }
+    ]
+}

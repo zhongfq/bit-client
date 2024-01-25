@@ -2964,6 +2964,194 @@ export namespace mail {
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
+    /** Properties of a c2s_receive_all. */
+    interface Ic2s_receive_all {
+    }
+
+    /** Represents a c2s_receive_all. */
+    class c2s_receive_all implements Ic2s_receive_all {
+
+        /**
+         * Constructs a new c2s_receive_all.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: mail.Ic2s_receive_all);
+
+        /**
+         * Creates a new c2s_receive_all instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns c2s_receive_all instance
+         */
+        public static create(properties?: mail.Ic2s_receive_all): mail.c2s_receive_all;
+
+        /**
+         * Encodes the specified c2s_receive_all message. Does not implicitly {@link mail.c2s_receive_all.verify|verify} messages.
+         * @param message c2s_receive_all message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: mail.Ic2s_receive_all, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified c2s_receive_all message, length delimited. Does not implicitly {@link mail.c2s_receive_all.verify|verify} messages.
+         * @param message c2s_receive_all message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: mail.Ic2s_receive_all, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a c2s_receive_all message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns c2s_receive_all
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): mail.c2s_receive_all;
+
+        /**
+         * Decodes a c2s_receive_all message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns c2s_receive_all
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): mail.c2s_receive_all;
+
+        /**
+         * Verifies a c2s_receive_all message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a c2s_receive_all message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns c2s_receive_all
+         */
+        public static fromObject(object: { [k: string]: any }): mail.c2s_receive_all;
+
+        /**
+         * Creates a plain object from a c2s_receive_all message. Also converts values to other types if specified.
+         * @param message c2s_receive_all
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: mail.c2s_receive_all, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this c2s_receive_all to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for c2s_receive_all
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a s2c_receive_all. */
+    interface Is2c_receive_all {
+
+        /** s2c_receive_all err */
+        err?: (number|null);
+    }
+
+    /** Represents a s2c_receive_all. */
+    class s2c_receive_all implements Is2c_receive_all {
+
+        /**
+         * Constructs a new s2c_receive_all.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: mail.Is2c_receive_all);
+
+        /** s2c_receive_all err. */
+        public err: number;
+
+        /**
+         * Creates a new s2c_receive_all instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns s2c_receive_all instance
+         */
+        public static create(properties?: mail.Is2c_receive_all): mail.s2c_receive_all;
+
+        /**
+         * Encodes the specified s2c_receive_all message. Does not implicitly {@link mail.s2c_receive_all.verify|verify} messages.
+         * @param message s2c_receive_all message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: mail.Is2c_receive_all, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified s2c_receive_all message, length delimited. Does not implicitly {@link mail.s2c_receive_all.verify|verify} messages.
+         * @param message s2c_receive_all message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: mail.Is2c_receive_all, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a s2c_receive_all message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns s2c_receive_all
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): mail.s2c_receive_all;
+
+        /**
+         * Decodes a s2c_receive_all message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns s2c_receive_all
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): mail.s2c_receive_all;
+
+        /**
+         * Verifies a s2c_receive_all message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a s2c_receive_all message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns s2c_receive_all
+         */
+        public static fromObject(object: { [k: string]: any }): mail.s2c_receive_all;
+
+        /**
+         * Creates a plain object from a s2c_receive_all message. Also converts values to other types if specified.
+         * @param message s2c_receive_all
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: mail.s2c_receive_all, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this s2c_receive_all to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for s2c_receive_all
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
     /** Properties of a notify_new_mails. */
     interface Inotify_new_mails {
 
@@ -3869,6 +4057,525 @@ export namespace profile {
 
         /**
          * Gets the default type url for notify_profile
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+}
+
+/** Namespace shop. */
+export namespace shop {
+
+    /** Properties of an ItemInfo. */
+    interface IItemInfo {
+
+        /** ItemInfo id */
+        id?: (number|null);
+
+        /** ItemInfo buyNum */
+        buyNum?: (number|null);
+    }
+
+    /** Represents an ItemInfo. */
+    class ItemInfo implements IItemInfo {
+
+        /**
+         * Constructs a new ItemInfo.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: shop.IItemInfo);
+
+        /** ItemInfo id. */
+        public id: number;
+
+        /** ItemInfo buyNum. */
+        public buyNum: number;
+
+        /**
+         * Creates a new ItemInfo instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns ItemInfo instance
+         */
+        public static create(properties?: shop.IItemInfo): shop.ItemInfo;
+
+        /**
+         * Encodes the specified ItemInfo message. Does not implicitly {@link shop.ItemInfo.verify|verify} messages.
+         * @param message ItemInfo message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: shop.IItemInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified ItemInfo message, length delimited. Does not implicitly {@link shop.ItemInfo.verify|verify} messages.
+         * @param message ItemInfo message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: shop.IItemInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes an ItemInfo message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns ItemInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): shop.ItemInfo;
+
+        /**
+         * Decodes an ItemInfo message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns ItemInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): shop.ItemInfo;
+
+        /**
+         * Verifies an ItemInfo message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates an ItemInfo message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns ItemInfo
+         */
+        public static fromObject(object: { [k: string]: any }): shop.ItemInfo;
+
+        /**
+         * Creates a plain object from an ItemInfo message. Also converts values to other types if specified.
+         * @param message ItemInfo
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: shop.ItemInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this ItemInfo to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for ItemInfo
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a c2s_load. */
+    interface Ic2s_load {
+
+        /** c2s_load shopId */
+        shopId?: (number|null);
+    }
+
+    /** Represents a c2s_load. */
+    class c2s_load implements Ic2s_load {
+
+        /**
+         * Constructs a new c2s_load.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: shop.Ic2s_load);
+
+        /** c2s_load shopId. */
+        public shopId: number;
+
+        /**
+         * Creates a new c2s_load instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns c2s_load instance
+         */
+        public static create(properties?: shop.Ic2s_load): shop.c2s_load;
+
+        /**
+         * Encodes the specified c2s_load message. Does not implicitly {@link shop.c2s_load.verify|verify} messages.
+         * @param message c2s_load message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: shop.Ic2s_load, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified c2s_load message, length delimited. Does not implicitly {@link shop.c2s_load.verify|verify} messages.
+         * @param message c2s_load message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: shop.Ic2s_load, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a c2s_load message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns c2s_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): shop.c2s_load;
+
+        /**
+         * Decodes a c2s_load message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns c2s_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): shop.c2s_load;
+
+        /**
+         * Verifies a c2s_load message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a c2s_load message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns c2s_load
+         */
+        public static fromObject(object: { [k: string]: any }): shop.c2s_load;
+
+        /**
+         * Creates a plain object from a c2s_load message. Also converts values to other types if specified.
+         * @param message c2s_load
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: shop.c2s_load, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this c2s_load to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for c2s_load
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a s2c_load. */
+    interface Is2c_load {
+
+        /** s2c_load err */
+        err?: (number|null);
+
+        /** s2c_load items */
+        items?: (shop.IItemInfo[]|null);
+
+        /** s2c_load time */
+        time?: (number|null);
+    }
+
+    /** Represents a s2c_load. */
+    class s2c_load implements Is2c_load {
+
+        /**
+         * Constructs a new s2c_load.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: shop.Is2c_load);
+
+        /** s2c_load err. */
+        public err: number;
+
+        /** s2c_load items. */
+        public items: shop.IItemInfo[];
+
+        /** s2c_load time. */
+        public time: number;
+
+        /**
+         * Creates a new s2c_load instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns s2c_load instance
+         */
+        public static create(properties?: shop.Is2c_load): shop.s2c_load;
+
+        /**
+         * Encodes the specified s2c_load message. Does not implicitly {@link shop.s2c_load.verify|verify} messages.
+         * @param message s2c_load message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: shop.Is2c_load, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified s2c_load message, length delimited. Does not implicitly {@link shop.s2c_load.verify|verify} messages.
+         * @param message s2c_load message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: shop.Is2c_load, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a s2c_load message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns s2c_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): shop.s2c_load;
+
+        /**
+         * Decodes a s2c_load message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns s2c_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): shop.s2c_load;
+
+        /**
+         * Verifies a s2c_load message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a s2c_load message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns s2c_load
+         */
+        public static fromObject(object: { [k: string]: any }): shop.s2c_load;
+
+        /**
+         * Creates a plain object from a s2c_load message. Also converts values to other types if specified.
+         * @param message s2c_load
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: shop.s2c_load, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this s2c_load to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for s2c_load
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a c2s_buy. */
+    interface Ic2s_buy {
+
+        /** c2s_buy shopId */
+        shopId?: (number|null);
+
+        /** c2s_buy shopItemId */
+        shopItemId?: (number|null);
+
+        /** c2s_buy num */
+        num?: (number|null);
+    }
+
+    /** Represents a c2s_buy. */
+    class c2s_buy implements Ic2s_buy {
+
+        /**
+         * Constructs a new c2s_buy.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: shop.Ic2s_buy);
+
+        /** c2s_buy shopId. */
+        public shopId: number;
+
+        /** c2s_buy shopItemId. */
+        public shopItemId: number;
+
+        /** c2s_buy num. */
+        public num: number;
+
+        /**
+         * Creates a new c2s_buy instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns c2s_buy instance
+         */
+        public static create(properties?: shop.Ic2s_buy): shop.c2s_buy;
+
+        /**
+         * Encodes the specified c2s_buy message. Does not implicitly {@link shop.c2s_buy.verify|verify} messages.
+         * @param message c2s_buy message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: shop.Ic2s_buy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified c2s_buy message, length delimited. Does not implicitly {@link shop.c2s_buy.verify|verify} messages.
+         * @param message c2s_buy message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: shop.Ic2s_buy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a c2s_buy message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns c2s_buy
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): shop.c2s_buy;
+
+        /**
+         * Decodes a c2s_buy message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns c2s_buy
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): shop.c2s_buy;
+
+        /**
+         * Verifies a c2s_buy message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a c2s_buy message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns c2s_buy
+         */
+        public static fromObject(object: { [k: string]: any }): shop.c2s_buy;
+
+        /**
+         * Creates a plain object from a c2s_buy message. Also converts values to other types if specified.
+         * @param message c2s_buy
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: shop.c2s_buy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this c2s_buy to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for c2s_buy
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a s2c_buy. */
+    interface Is2c_buy {
+
+        /** s2c_buy err */
+        err?: (number|null);
+    }
+
+    /** Represents a s2c_buy. */
+    class s2c_buy implements Is2c_buy {
+
+        /**
+         * Constructs a new s2c_buy.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: shop.Is2c_buy);
+
+        /** s2c_buy err. */
+        public err: number;
+
+        /**
+         * Creates a new s2c_buy instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns s2c_buy instance
+         */
+        public static create(properties?: shop.Is2c_buy): shop.s2c_buy;
+
+        /**
+         * Encodes the specified s2c_buy message. Does not implicitly {@link shop.s2c_buy.verify|verify} messages.
+         * @param message s2c_buy message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: shop.Is2c_buy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified s2c_buy message, length delimited. Does not implicitly {@link shop.s2c_buy.verify|verify} messages.
+         * @param message s2c_buy message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: shop.Is2c_buy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a s2c_buy message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns s2c_buy
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): shop.s2c_buy;
+
+        /**
+         * Decodes a s2c_buy message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns s2c_buy
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): shop.s2c_buy;
+
+        /**
+         * Verifies a s2c_buy message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a s2c_buy message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns s2c_buy
+         */
+        public static fromObject(object: { [k: string]: any }): shop.s2c_buy;
+
+        /**
+         * Creates a plain object from a s2c_buy message. Also converts values to other types if specified.
+         * @param message s2c_buy
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: shop.s2c_buy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this s2c_buy to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for s2c_buy
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */
@@ -7051,9 +7758,6 @@ export namespace world {
     /** Properties of a MoveComponent. */
     interface IMoveComponent {
 
-        /** MoveComponent moveType */
-        moveType?: (number|null);
-
         /** MoveComponent startMs */
         startMs?: (number|null);
 
@@ -7075,9 +7779,6 @@ export namespace world {
          * @param [properties] Properties to set
          */
         constructor(properties?: world.IMoveComponent);
-
-        /** MoveComponent moveType. */
-        public moveType: number;
 
         /** MoveComponent startMs. */
         public startMs: number;

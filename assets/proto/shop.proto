@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package shop;
+
+message ItemInfo {
+    uint32 id = 1; // 商城格子id
+    uint32 buy_num = 2;//已购数量
+}
+
+// 加载商城
+message c2s_load {
+    uint32 shop_id = 1;//商城id
+} 
+message s2c_load {
+    uint32 err = 1; // OK, INVALID_ID
+    repeated ItemInfo items = 2;
+    uint32 time = 3;//商城上一次刷新的时间
+}
+
+// 购买
+message c2s_buy {
+    uint32 shop_id = 1;//商城id
+    uint32 shop_item_id = 2;//商城格子id
+    uint32 num = 3;//购买数量
+}
+message s2c_buy {
+    uint32 err = 1; // OK, INVALID_ID
+}

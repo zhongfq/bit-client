@@ -43,6 +43,8 @@ export const opcode = {
         s2c_receive_reward: 0x1905,
         c2s_delete_mails: 0x1906,
         s2c_delete_mails: 0x1907,
+        c2s_receive_all: 0x1908,
+        s2c_receive_all: 0x1909,
         notify_new_mails: 0x1990,
     },
     money: {
@@ -54,6 +56,12 @@ export const opcode = {
         c2s_load: 0x1A00,
         s2c_load: 0x1A01,
         notify_profile: 0x1A90,
+    },
+    shop: {
+        c2s_load: 0x1D00,
+        s2c_load: 0x1D01,
+        c2s_buy: 0x1D02,
+        s2c_buy: 0x1D03,
     },
     task: {
         c2s_load: 0x1B00,
@@ -334,6 +342,18 @@ export const registerProtocols = () => {
         decode: proto.mail.s2c_delete_mails.decode,
     });
     register({
+        op: opcode.mail.c2s_receive_all,
+        typeURL: proto.mail.c2s_receive_all.getTypeUrl(),
+        encode: proto.mail.c2s_receive_all.encode,
+        decode: proto.mail.c2s_receive_all.decode,
+    });
+    register({
+        op: opcode.mail.s2c_receive_all,
+        typeURL: proto.mail.s2c_receive_all.getTypeUrl(),
+        encode: proto.mail.s2c_receive_all.encode,
+        decode: proto.mail.s2c_receive_all.decode,
+    });
+    register({
         op: opcode.mail.notify_new_mails,
         typeURL: proto.mail.notify_new_mails.getTypeUrl(),
         encode: proto.mail.notify_new_mails.encode,
@@ -374,6 +394,30 @@ export const registerProtocols = () => {
         typeURL: proto.profile.notify_profile.getTypeUrl(),
         encode: proto.profile.notify_profile.encode,
         decode: proto.profile.notify_profile.decode,
+    });
+    register({
+        op: opcode.shop.c2s_load,
+        typeURL: proto.shop.c2s_load.getTypeUrl(),
+        encode: proto.shop.c2s_load.encode,
+        decode: proto.shop.c2s_load.decode,
+    });
+    register({
+        op: opcode.shop.s2c_load,
+        typeURL: proto.shop.s2c_load.getTypeUrl(),
+        encode: proto.shop.s2c_load.encode,
+        decode: proto.shop.s2c_load.decode,
+    });
+    register({
+        op: opcode.shop.c2s_buy,
+        typeURL: proto.shop.c2s_buy.getTypeUrl(),
+        encode: proto.shop.c2s_buy.encode,
+        decode: proto.shop.c2s_buy.decode,
+    });
+    register({
+        op: opcode.shop.s2c_buy,
+        typeURL: proto.shop.s2c_buy.getTypeUrl(),
+        encode: proto.shop.s2c_buy.encode,
+        decode: proto.shop.s2c_buy.decode,
     });
     register({
         op: opcode.task.c2s_load,

@@ -30,7 +30,7 @@ message s2c_read {
     int32 err = 1; // OK, INVALID_ID
 }
 
-// 领取奖励
+// 领取奖励，未读邮件也会变成已读
 message c2s_receive_reward {
     repeated uint32 mail_uids = 1;
 }
@@ -44,6 +44,13 @@ message c2s_delete_mails {
 }
 message s2c_delete_mails {
     uint32 err = 1; // OK, INVALID_ID
+}
+
+// 一键领取，所有未读邮件也会变成已读
+message c2s_receive_all {
+}
+message s2c_receive_all {
+    uint32 err = 1; // OK
 }
 
 // 通知新邮件

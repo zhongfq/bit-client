@@ -51,8 +51,8 @@ message TimerComponent {
     map<uint32, Timer> timers = 1;
 }
 
+// speed > 0 在移动 #path > 0 在寻路 否则摇杆
 message MoveComponent {
-    uint32 move_type = 1; // config.world MOVE_TYPE
     uint32 start_ms = 2;
     repeated uint32 path = 3;
     float speed = 4; // 每秒多少格

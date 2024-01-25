@@ -54,6 +54,12 @@ export class CommandSystem extends ecs.System {
                 case ACTION.MOVE:
                     this._moveEntity(cmd.move as proto.world.MoveAction);
                     break;
+                case ACTION.BATTLE_SKILL:
+                    break;
+                case ACTION.BATTLE_STOP:
+                    break;
+                case ACTION.BATTLE_SUB_HP:
+                    break;
             }
         }
     }
@@ -69,6 +75,7 @@ export class CommandSystem extends ecs.System {
             const transform = entity.addComponent(TransformComponent);
             const data = cmd.pos as proto.world.Position;
             Tilemap.grid2Pixel(data.x, data.y, transform.position);
+            transform.flag |= TransformComponent.POSITION;
         }
 
         if (cmd.owner) {

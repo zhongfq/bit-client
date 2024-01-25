@@ -98,13 +98,16 @@ export class WorldContext extends Mediator {
                         break;
                     }
                 }
+                if (idx < 0) {
+                    continue;
+                }
                 const tile = arr[idx % arr.length].create() as Laya.Sprite3D;
                 const position = tile.transform.position;
                 position.x = i % map.width;
                 position.y = -0.5;
                 position.z = Math.floor(i / map.width);
                 tile.transform.position = position;
-                // this.scene3D.addChild(tile);
+                this.scene3D.addChild(tile);
             }
         });
         console.log(map);
