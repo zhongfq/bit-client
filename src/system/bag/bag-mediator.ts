@@ -14,9 +14,9 @@ export class BagMediator extends Mediator {
     itemListData!: ItemVo[];
 
     onAwake(): void {
-        this.owner.itemList.renderHandler = new Laya.Handler(this, this.updateItem);
-        this.owner.itemList.mouseHandler = new Laya.Handler(this, this.onListClick);
-        this.owner.menuTab.selectHandler = new Laya.Handler(this, this.onTabSelect);
+        this.owner.listItem.renderHandler = new Laya.Handler(this, this.updateItem);
+        this.owner.listItem.mouseHandler = new Laya.Handler(this, this.onListClick);
+        this.owner.tabMenu.selectHandler = new Laya.Handler(this, this.onTabSelect);
         this.updateList();
         this.on(app.service.bag, BagService.ITEM_UPDATE, () => {
             this.updateList();
@@ -36,7 +36,7 @@ export class BagMediator extends Mediator {
     updateList() {
         const bag = app.service.bag.itemBag;
         this.itemListData = [];
-        if (this.owner.menuTab.selectedIndex == 0) {
+        if (this.owner.tabMenu.selectedIndex == 0) {
             this.itemListData = bag.toArray();
         } else {
             let tlItem = DataUtil.getArrayRef(app.service.data.itemTable, { composite: 1 });
@@ -45,6 +45,6 @@ export class BagMediator extends Mediator {
                 this.itemListData.push(itemvo);
             }
         }
-        this.owner.itemList.array = this.itemListData;
+        this.owner.listItem.array = this.itemListData;
     }
 }

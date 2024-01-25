@@ -7,9 +7,9 @@ export class IconUI extends IconUIBase {
     onAwake(): void {}
     public updateGoods(vo?: ItemVo) {
         if (vo) {
-            this.iconImage.skin = vo.iconUrl;
-            this.iconQuality.skin = vo.qualitySkin;
-            this.iconNumber.text = vo.goodsNumber.toString();
+            this.imgIcon.skin = vo.iconUrl;
+            this.imgQuality.skin = vo.qualitySkin;
+            this.labelNumber.text = vo.goodsNumber.toString();
             // this.iconNumber.text = vo.goodsNumber?.toString();
             // this.iconImage.text = vo.cmd?vo.cmd.num.toString():"0";
         } else {

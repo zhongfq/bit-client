@@ -11,7 +11,7 @@
   "_$comp": [
     {
       "_$type": "860eb74c-9f74-4610-9a44-3670d056e3a8",
-      "scriptPath": "../src/system/login/login-server-mediator.ts"
+      "scriptPath": "../src/system/login/login-server-list-mediator.ts"
     }
   ],
   "_$child": [
@@ -33,7 +33,7 @@
       "_$id": "43f9cphd",
       "_$var": true,
       "_$type": "List",
-      "name": "itemList",
+      "name": "listServer",
       "x": 5,
       "y": 57,
       "width": 350,
@@ -78,7 +78,7 @@
       "_$id": "ao0wkcwl",
       "_$var": true,
       "_$type": "Button",
-      "name": "Button",
+      "name": "btnClose",
       "x": 324,
       "y": 7,
       "width": 32,

@@ -1,22 +1,22 @@
 const { regClass } = Laya;
 import { MailInfoUIBase } from "./MailInfoUI.generated";
 import proto from "../../../def/proto.js";
-import { Mail } from "../../../def/data";
+import { MailRow } from "../../../def/data";
 import { DataUtil } from "../../../system/data/data-util";
 import { app } from "../../../app";
-import { Util } from "../../../core/untils/Util";
+import { Util } from "../../../core/utils/util";
 
 @regClass()
 export class MailInfoUI extends MailInfoUIBase {
     oepnData!: proto.mail.MailInfo; //界面打开数据
-    refData!: Mail; //配置表数据
+    refData!: MailRow; //配置表数据
     rewards!: proto.bag.IItem[]; //奖励数据
     open(closeOther?: boolean | undefined, param?: any): void {
         this.oepnData = param;
         if (this.oepnData.id) {
             this.refData = DataUtil.getRef(app.service.data.mailTable, {
                 id: this.oepnData.id,
-            }) as Mail;
+            }) as MailRow;
             if (this.refData.reward) {
                 this.rewards = Util.toBagItemArray(this.refData.reward);
             }

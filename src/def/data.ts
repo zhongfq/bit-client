@@ -77,7 +77,7 @@ export type SkillTable = {
         // type: SkillType;
     };
 };
-export type Item = {
+export type ItemRow = {
     id: number;
     name: string;
     lv: number;
@@ -92,19 +92,19 @@ export type Item = {
     args: any[];
 };
 export type ItemTable = {
-    [k: number]: Item;
+    [k: number]: ItemRow;
 };
-export type Task = {
+export type TaskRow = {
     id: number;
     comment: string;
     type: number;
     desc: string;
 };
 export type TaskTable = {
-    [k: number]: Task;
+    [k: number]: TaskRow;
 };
-export type Reward = [number, number];
-export type Mail = {
+export type Reward = { id: number; const: number };
+export type MailRow = {
     id: number;
     title: string;
     content: string;
@@ -112,5 +112,5 @@ export type Mail = {
 };
 
 export type MailTable = {
-    [k: number]: Mail;
+    [k: number]: MailRow;
 };

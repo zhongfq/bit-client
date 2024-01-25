@@ -60,17 +60,17 @@ export const registerUI = () => {
     });
     app.ui.register({
         id: ui.BAG,
-        url: "resources/prefab/bag/bag-dialog.lh",
+        url: "resources/prefab/bag/bag.lh",
         blockInput: true,
     });
     app.ui.register({
         id: ui.ITEM_TIPS,
-        url: "resources/prefab/bag/item-tips-dialog.lh",
+        url: "resources/prefab/bag/item-tips.lh",
         blockInput: false,
     });
     app.ui.register({
         id: ui.ITEM_SYNTHESIS,
-        url: "resources/prefab/bag/item-synthesis-dialog.lh",
+        url: "resources/prefab/bag/item-synthesis.lh",
         blockInput: true,
     });
 
@@ -88,40 +88,40 @@ export const registerUI = () => {
     app.ui.register({
         id: ui.BAG_BOX_USE,
         autoClose: false,
-        url: "resources/prefab/bag/item-box-use-dialog.lh",
+        url: "resources/prefab/bag/item-box-use.lh",
         blockInput: true,
     });
     app.ui.register({
         id: ui.TASK,
         autoClose: false,
-        url: "resources/prefab/task/task-dialog.lh",
+        url: "resources/prefab/task/task.lh",
         blockInput: true,
     });
 
     app.ui.register({
         id: ui.MAIL,
         autoClose: false,
-        url: "resources/prefab/mail/mail-dialog.lh",
+        url: "resources/prefab/mail/mail.lh",
         blockInput: true,
     });
 
     app.ui.register({
         id: ui.MAIL_INFO,
         autoClose: false,
-        url: "resources/prefab/mail/mail-info-dialog.lh",
+        url: "resources/prefab/mail/mail-info.lh",
         blockInput: true,
     });
 
     app.ui.register({
         id: ui.SHOP,
         autoClose: false,
-        url: "resources/prefab/shop/shop-dialog.lh",
+        url: "resources/prefab/shop/shop.lh",
         blockInput: true,
     });
 
     app.ui.register({
         id: ui.GM,
-        url: "resources/prefab/gm/gm-dialog.lh",
+        url: "resources/prefab/gm/gm.lh",
         blockInput: true,
     });
 };

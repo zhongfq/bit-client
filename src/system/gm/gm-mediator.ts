@@ -12,18 +12,18 @@ export class GmMediator extends Mediator {
     owner!: GmUI;
     listData!: GmCmdData[];
     onAwake(): void {
-        this.owner.List.mouseHandler = new Laya.Handler(this, this.onListClick);
-        this.owner.List.renderHandler = new Laya.Handler(this, this.updateItem);
-        this.owner.List.selectHandler = new Laya.Handler(this, this.onListClick);
+        this.owner.listEdict.mouseHandler = new Laya.Handler(this, this.onListClick);
+        this.owner.listEdict.renderHandler = new Laya.Handler(this, this.updateItem);
+        this.owner.listEdict.selectHandler = new Laya.Handler(this, this.onListClick);
 
-        this.owner.closeBtn.on(Laya.Event.CLICK, () => {
+        this.owner.btnClose.on(Laya.Event.CLICK, () => {
             this.owner.close();
         });
-        this.owner.useBtn.on(Laya.Event.CLICK, () => {
+        this.owner.btnUse.on(Laya.Event.CLICK, () => {
             app.service.gm.requestGM(this.owner.textInput.text);
         });
 
-        this.owner.resetBtn.on(Laya.Event.CLICK, () => {
+        this.owner.btnReset.on(Laya.Event.CLICK, () => {
             app.service.gm.requestGM("reset");
         });
         this.updateList();
@@ -55,6 +55,6 @@ export class GmMediator extends Mediator {
             instruct: "gm_mail hello 'content xxx' {10101,11},{10102,22}}",
         });
         this.listData.push({ name: "修改主城位置1:X,2:Y", instruct: " change_castle_pos 1 2" });
-        this.owner.List.array = this.listData;
+        this.owner.listEdict.array = this.listData;
     }
 }

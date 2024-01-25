@@ -2,10 +2,10 @@
 
 
 /**
- * resources/prefab/task/task-dialog.lh
+ * resources/prefab/task/task.lh
  */
 export class TaskUIBase extends Laya.Dialog {
-    public closeBtn!: Laya.Button;
-    public List!: Laya.List;
+    public btnClose!: Laya.Button;
+    public listTask!: Laya.List;
 }
 

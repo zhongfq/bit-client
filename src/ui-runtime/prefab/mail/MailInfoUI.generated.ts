@@ -2,11 +2,11 @@
 
 
 /**
- * resources/prefab/mail/mail-info-dialog.lh
+ * resources/prefab/mail/mail-info.lh
  */
 export class MailInfoUIBase extends Laya.Dialog {
     public Image!: Laya.Image;
-    public itemList!: Laya.List;
+    public listItem!: Laya.List;
     public btnClose!: Laya.Button;
     public labelTitle!: Laya.Label;
     public labelContent!: Laya.Label;

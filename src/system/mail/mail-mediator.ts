@@ -1,7 +1,7 @@
 import { app } from "../../app";
 import { Mediator } from "../../core/ui-mediator";
-import { StringUtil } from "../../core/untils/StringUtil";
-import { Util } from "../../core/untils/Util";
+import { StringUtil } from "../../core/utils/string-util";
+import { Util } from "../../core/utils/util";
 import proto from "../../def/proto.js";
 import { ui } from "../../misc/ui";
 import { IconUI } from "../../ui-runtime/prefab/icon/IconUI";
@@ -20,9 +20,9 @@ export class MailMediator extends Mediator {
         this.updateList();
     }
     initHander() {
-        this.owner.itemList.renderHandler = new Laya.Handler(this, this.updateItem);
-        this.owner.itemList.mouseHandler = new Laya.Handler(this, this.onListClick);
-        this.owner.menuTab.selectHandler = new Laya.Handler(this, this.onTabSelect);
+        this.owner.listMail.renderHandler = new Laya.Handler(this, this.updateItem);
+        this.owner.listMail.mouseHandler = new Laya.Handler(this, this.onListClick);
+        this.owner.tabMenu.selectHandler = new Laya.Handler(this, this.onTabSelect);
         this.on(app.service.mail, MailService.MAIL_UPDATE, () => {
             this.updateList();
         });
@@ -72,11 +72,11 @@ export class MailMediator extends Mediator {
         }
     }
     updateList() {
-        if (this.owner.menuTab.selectedIndex == 0) {
+        if (this.owner.tabMenu.selectedIndex == 0) {
             this.itemListData = Util.toArray<proto.mail.MailInfo>(app.service.mail.mails);
         } else {
         }
-        this.owner.itemList.array = this.itemListData;
-        this.owner.itemList.refresh();
+        this.owner.listMail.array = this.itemListData;
+        this.owner.listMail.refresh();
     }
 }

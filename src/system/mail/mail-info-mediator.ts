@@ -16,7 +16,7 @@ export class MailInfoMediator extends Mediator {
         this.updateList();
     }
     private initClick() {
-        this.owner.itemList.renderHandler = new Laya.Handler(this, this.updateItem);
+        this.owner.listItem.renderHandler = new Laya.Handler(this, this.updateItem);
         this.owner.btnClose.on(Laya.Event.CLICK, () => {
             this.owner.close();
         });
@@ -52,10 +52,10 @@ export class MailInfoMediator extends Mediator {
     }
     updateList() {
         if (this.owner.rewards && this.owner.rewards.length > 0) {
-            this.owner.itemList.visible = true;
-            this.owner.itemList.array = this.owner.rewards;
+            this.owner.listItem.visible = true;
+            this.owner.listItem.array = this.owner.rewards;
         } else {
-            this.owner.itemList.visible = false;
+            this.owner.listItem.visible = false;
         }
     }
 }

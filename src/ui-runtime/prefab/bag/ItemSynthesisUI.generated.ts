@@ -3,17 +3,17 @@
 import { IconUI } from "../icon/IconUI";
 
 /**
- * resources/prefab/bag/item-synthesis-dialog.lh
+ * resources/prefab/bag/item-synthesis.lh
  */
 export class ItemSynthesisUIBase extends Laya.Dialog {
     public Image!: Laya.Image;
-    public closeBtn!: Laya.Button;
-    public synthesisBtn!: Laya.Button;
-    public iconNodeDown!: IconUI;
-    public iconNodeTop!: IconUI;
-    public itemName!: Laya.Label;
-    public itemDesc!: Laya.TextArea;
-    public slider!: Laya.HSlider;
+    public btnClose!: Laya.Button;
+    public btnUse!: Laya.Button;
+    public iconDown!: IconUI;
+    public iconTop!: IconUI;
+    public labelName!: Laya.Label;
+    public labelDesc!: Laya.TextArea;
+    public slNum!: Laya.HSlider;
     public selectNumber!: Laya.Label;
     public haveNumber!: Laya.Label;
     public minusBtn!: Laya.Button;

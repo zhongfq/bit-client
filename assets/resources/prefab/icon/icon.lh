@@ -10,7 +10,7 @@
   "_$comp": [
     {
       "_$type": "d0248154-482a-4749-b95a-337759868f51",
-      "scriptPath": "../src/system/icon/icon-node-mediator.ts",
+      "scriptPath": "../src/misc/icon/icon-node.ts",
       "isNoShowTips": false
     }
   ],
@@ -19,7 +19,7 @@
       "_$id": "2al8ymhd",
       "_$var": true,
       "_$type": "Image",
-      "name": "iconBg",
+      "name": "imgIBg",
       "width": 108,
       "height": 108,
       "centerX": 0,
@@ -32,7 +32,7 @@
       "_$id": "7ac886vo",
       "_$var": true,
       "_$type": "Image",
-      "name": "iconQuality",
+      "name": "imgQuality",
       "width": 108,
       "height": 108,
       "centerX": 0,
@@ -45,7 +45,7 @@
       "_$id": "0gth0gc8",
       "_$var": true,
       "_$type": "Image",
-      "name": "iconImage",
+      "name": "imgIcon",
       "x": 5,
       "y": 5,
       "width": 100,
@@ -59,7 +59,7 @@
       "_$id": "qxxd2isv",
       "_$var": true,
       "_$type": "Image",
-      "name": "iconRedPoint",
+      "name": "imgRedPoint",
       "x": 69,
       "y": -5,
       "width": 37,
@@ -73,7 +73,7 @@
       "_$id": "wtv4bbbr",
       "_$var": true,
       "_$type": "Label",
-      "name": "iconNumber",
+      "name": "labelNumber",
       "x": 12,
       "y": 71,
       "width": 76,

@@ -1,5 +1,5 @@
 import { app } from "../../../app";
-import { ItemTable, Task } from "../../../def/data";
+import { ItemTable, TaskRow } from "../../../def/data";
 import { task } from "../../../def/proto";
 import { DataUtil } from "../../../system/data/data-util";
 import { VO } from "../vo-base/vo";
@@ -8,7 +8,7 @@ import { VO } from "../vo-base/vo";
  * Item
  * 道具
  */
-export class MoneyVo extends VO<Task, task.TaskInfo> {
+export class MoneyVo extends VO<TaskRow, task.TaskInfo> {
     refTable!: ItemTable;
 
     //#region 重载
@@ -23,8 +23,8 @@ export class MoneyVo extends VO<Task, task.TaskInfo> {
         return 0;
     }
 
-    getRefByCmd(cmd: task.TaskInfo): Task | undefined {
-        return DataUtil.getRef<Task>(app.service.data.taskTable, { id: cmd.id });
+    getRefByCmd(cmd: task.TaskInfo): TaskRow | undefined {
+        return DataUtil.getRef<TaskRow>(app.service.data.taskTable, { id: cmd.id });
     }
 
     get goodsType(): number {

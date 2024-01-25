@@ -48,7 +48,7 @@ export class ItemTipsUI extends ItemTipsUIBase {
         Laya.Dialog.lock(false);
     }
     onOpened(param: any): void {
-        this.icon.updateGoods(this.data.vo);
+        this.iconItem.updateGoods(this.data.vo);
         // this.itemNumber.text = "当前拥有："+this.data.vo.goodsNumber;
         // this.itemDesc.text = this.data.vo.desc;
         // this.ItemName.text = this.data.vo.name;

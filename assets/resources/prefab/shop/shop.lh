@@ -28,7 +28,7 @@
       "_$id": "yccd3eik",
       "_$var": true,
       "_$type": "List",
-      "name": "itemList",
+      "name": "listItem",
       "x": 5,
       "y": 53,
       "width": 523,

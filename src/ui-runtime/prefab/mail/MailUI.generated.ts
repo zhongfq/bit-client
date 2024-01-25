@@ -2,12 +2,12 @@
 
 
 /**
- * resources/prefab/mail/mail-dialog.lh
+ * resources/prefab/mail/mail.lh
  */
 export class MailUIBase extends Laya.Dialog {
     public Image!: Laya.Image;
-    public menuTab!: Laya.Tab;
-    public itemList!: Laya.List;
+    public tabMenu!: Laya.Tab;
+    public listMail!: Laya.List;
     public btnClose!: Laya.Button;
     public btnReward!: Laya.Button;
     public btnDelete!: Laya.Button;

@@ -34,7 +34,7 @@
       "_$id": "yccd3eik",
       "_$var": true,
       "_$type": "List",
-      "name": "itemList",
+      "name": "listItem",
       "x": 6,
       "y": 357,
       "width": 492,

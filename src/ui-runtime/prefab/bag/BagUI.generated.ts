@@ -3,12 +3,12 @@
 import { IconUI } from "../icon/IconUI";
 
 /**
- * resources/prefab/bag/bag-dialog.lh
+ * resources/prefab/bag/bag.lh
  */
 export class BagUIBase extends Laya.Dialog {
-    public menuTab!: Laya.Tab;
-    public itemList!: Laya.List;
+    public tabMenu!: Laya.Tab;
+    public listItem!: Laya.List;
     public iconNode!: IconUI;
-    public Button!: Laya.Button;
+    public btnClose!: Laya.Button;
 }
 

@@ -10,27 +10,27 @@ export class ItemSynthesisMediator extends Mediator {
 
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
     onAwake(): void {
-        this.owner.slider.changeHandler = new Laya.Handler(this, this.onChange);
+        this.owner.slNum.changeHandler = new Laya.Handler(this, this.onChange);
         this.owner.addBtn.on(Laya.Event.CLICK, this, this.onAddBtn);
-        this.owner.closeBtn.on(Laya.Event.CLICK, this, this.onCloseBtn);
-        this.owner.synthesisBtn.on(Laya.Event.CLICK, this, this.onSynthesisBtn);
+        this.owner.btnClose.on(Laya.Event.CLICK, this, this.onCloseBtn);
+        this.owner.btnUse.on(Laya.Event.CLICK, this, this.onSynthesisBtn);
         this.owner.minusBtn.on(Laya.Event.CLICK, this, this.onMinusBtn);
 
-        this.owner.slider.min = 0;
-        this.owner.slider.max = 100;
-        this.owner.slider.value = 110;
-        this.owner.iconNodeTop.updateGoods();
+        this.owner.slNum.min = 0;
+        this.owner.slNum.max = 100;
+        this.owner.slNum.value = 110;
+        this.owner.iconTop.updateGoods();
     }
     onAddBtn() {
-        this.owner.slider.value++;
+        this.owner.slNum.value++;
     }
     onMinusBtn() {
-        this.owner.slider.value--;
+        this.owner.slNum.value--;
     }
     onSynthesisBtn() {
         app.service.bag.requestCompositeItem({
             itemId: this.owner.data.vo.id,
-            num: this.owner.slider.value,
+            num: this.owner.slNum.value,
         });
     }
     onCloseBtn() {

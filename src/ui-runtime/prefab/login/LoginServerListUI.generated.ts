@@ -5,8 +5,8 @@
  * resources/prefab/login/login-server-list.lh
  */
 export class LoginServerListUIBase extends Laya.Dialog {
-    public itemList!: Laya.List;
+    public listServer!: Laya.List;
     public listItemBox!: Laya.Box;
-    public Button!: Laya.Button;
+    public btnClose!: Laya.Button;
 }
 

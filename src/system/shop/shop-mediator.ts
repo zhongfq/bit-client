@@ -13,8 +13,8 @@ export class ShopMediator extends Mediator {
     itemListData!: ItemVo[];
 
     onAwake(): void {
-        this.owner.itemList.renderHandler = new Laya.Handler(this, this.updateItem);
-        this.owner.itemList.mouseHandler = new Laya.Handler(this, this.onListClick);
+        this.owner.listItem.renderHandler = new Laya.Handler(this, this.updateItem);
+        this.owner.listItem.mouseHandler = new Laya.Handler(this, this.onListClick);
 
         this.updateList();
     }
@@ -31,6 +31,6 @@ export class ShopMediator extends Mediator {
     }
     updateList() {
         this.itemListData = [];
-        this.owner.itemList.array = this.itemListData;
+        this.owner.listItem.array = this.itemListData;
     }
 }

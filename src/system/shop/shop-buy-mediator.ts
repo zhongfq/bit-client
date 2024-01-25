@@ -12,9 +12,11 @@ export class ShopBuyMediator extends Mediator {
 
     onAwake(): void {
         // this.owner.labelItemDesc.viewport = this.owner.labelItemDesc.getBounds();
-        this.owner.labelItemDesc.scrollRect = new Laya.Rectangle(0, 0, 106, 100);
+        // this.owner.labelItemDesc.scrollRect = new Laya.Rectangle(0, 0, 106, 100);
+        // this.owner.labelItemDesc.
+        // let a = this.owner.TextArea.scrollRect;
+        // let b = 1;
         // this.owner.labelItemDesc.scrollRect.x;
-
         // this.updateList();
     }
     onListClick(evn: Laya.Event, index: number) {

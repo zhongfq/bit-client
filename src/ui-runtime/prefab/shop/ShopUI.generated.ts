@@ -2,11 +2,11 @@
 
 
 /**
- * resources/prefab/shop/shop-dialog.lh
+ * resources/prefab/shop/shop.lh
  */
 export class ShopUIBase extends Laya.Dialog {
     public Image!: Laya.Image;
-    public itemList!: Laya.List;
+    public listItem!: Laya.List;
     public labelConsume!: Laya.Label;
     public btnClose!: Laya.Button;
 }

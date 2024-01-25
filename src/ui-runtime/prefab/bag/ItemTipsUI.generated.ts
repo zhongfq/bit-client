@@ -3,14 +3,14 @@
 import { IconUI } from "../icon/IconUI";
 
 /**
- * resources/prefab/bag/item-tips-dialog.lh
+ * resources/prefab/bag/item-tips.lh
  */
 export class ItemTipsUIBase extends Laya.Dialog {
     public Sprite!: Laya.Sprite;
     public Image!: Laya.Image;
-    public icon!: IconUI;
-    public ItemName!: Laya.Label;
-    public itemNumber!: Laya.Label;
-    public itemDesc!: Laya.TextArea;
+    public iconItem!: IconUI;
+    public labelName!: Laya.Label;
+    public labelNumber!: Laya.Label;
+    public labelDesc!: Laya.TextArea;
 }
 

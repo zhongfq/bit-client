@@ -4,8 +4,8 @@ import proto from "../../def/proto.js";
 import { NetworkService } from "../network/network-service";
 import { app } from "../../app";
 import { DataUtil } from "../data/data-util";
-import { Mail, MailTable } from "../../def/data";
-import { Util } from "../../core/untils/Util";
+import { MailRow, MailTable } from "../../def/data";
+import { Util } from "../../core/utils/util";
 import { mail } from "../../def/mail";
 
 interface UpdateMailData {
@@ -46,12 +46,12 @@ export class MailService extends Service<NetworkService> {
     //创建邮件数据
     private creatorMailInfo(cmdData: proto.mail.MailInfo): proto.mail.MailInfo {
         let cmdMail = new proto.mail.MailInfo();
-        let refData!: Mail;
+        let refData!: MailRow;
         cmdMail = cmdData;
         if (cmdData.id) {
             refData = DataUtil.getRef(app.service.data.mailTable, {
                 id: Number(cmdData.id),
-            }) as Mail;
+            }) as MailRow;
         }
 
         if (cmdMail.reward && cmdMail.reward.length > 0) {

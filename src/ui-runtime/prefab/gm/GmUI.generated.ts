@@ -2,14 +2,14 @@
 
 
 /**
- * resources/prefab/gm/gm-dialog.lh
+ * resources/prefab/gm/gm.lh
  */
 export class GmUIBase extends Laya.Dialog {
-    public closeBtn!: Laya.Button;
+    public btnClose!: Laya.Button;
     public textInput!: Laya.TextInput;
-    public useBtn!: Laya.Button;
-    public List!: Laya.List;
+    public btnUse!: Laya.Button;
+    public listEdict!: Laya.List;
     public Label!: Laya.Label;
-    public resetBtn!: Laya.Button;
+    public btnReset!: Laya.Button;
 }
 

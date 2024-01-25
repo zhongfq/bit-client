@@ -1,5 +1,5 @@
 import { app } from "../../../app";
-import { Item, ItemTable } from "../../../def/data";
+import { ItemRow, ItemTable } from "../../../def/data";
 import { bag } from "../../../def/proto";
 import { DataUtil } from "../../../system/data/data-util";
 import { GoodsVo } from "./goods-vo";
@@ -8,7 +8,7 @@ import { GoodsVo } from "./goods-vo";
  * Item
  * 道具
  */
-export class ItemVo extends GoodsVo<Item, bag.Item> {
+export class ItemVo extends GoodsVo<ItemRow, bag.Item> {
     __cname: string = "ItemVo";
     refTable!: ItemTable;
 
@@ -24,9 +24,9 @@ export class ItemVo extends GoodsVo<Item, bag.Item> {
         return 0;
     }
 
-    getRefByCmd(cmd: bag.Item): Item | undefined {
+    getRefByCmd(cmd: bag.Item): ItemRow | undefined {
         let id = cmd.uid ? cmd.uid : cmd.id;
-        return DataUtil.getRef<Item>(app.service.data.itemTable, { id: id });
+        return DataUtil.getRef<ItemRow>(app.service.data.itemTable, { id: id });
     }
 
     get goodsType(): number {

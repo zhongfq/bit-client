@@ -17,8 +17,8 @@ export class TaskMediator extends Mediator {
         this.initBtn();
         this.initEvent();
         this.tlTaskData = app.service.task.taskBag.toArray();
-        this.owner.List.renderHandler = new Laya.Handler(this, this.onListRender);
-        this.owner.List.mouseHandler = new Laya.Handler(this, this.onListClick);
+        this.owner.listTask.renderHandler = new Laya.Handler(this, this.onListRender);
+        this.owner.listTask.mouseHandler = new Laya.Handler(this, this.onListClick);
         this.updateList();
     }
 
@@ -39,6 +39,6 @@ export class TaskMediator extends Mediator {
     initEvent() {}
 
     updateList() {
-        this.owner.List.array = this.tlTaskData;
+        this.owner.listTask.array = this.tlTaskData;
     }
 }

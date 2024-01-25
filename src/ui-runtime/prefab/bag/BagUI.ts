@@ -6,16 +6,13 @@ import { BagUIBase } from "./BagUI.generated";
 @regClass()
 export class BagUI extends BagUIBase {
     onAwake(): void {
-        this.Button.on(Laya.Event.CLICK,()=>{
-            this.close()
-        })
-        this.menuTab.labels = "道具,合成";
-        this.menuTab.selectHandler = new Laya.Handler(this,this.onTabSelect);
+        this.btnClose.on(Laya.Event.CLICK, () => {
+            this.close();
+        });
+        this.tabMenu.labels = "道具,合成";
+        this.tabMenu.selectHandler = new Laya.Handler(this, this.onTabSelect);
     }
-    private onTabSelect(index:number){
+    private onTabSelect(index: number) {
         // this.
-    }
-    onClosed(type?: string | undefined): void {
-        let a = 1
     }
 }

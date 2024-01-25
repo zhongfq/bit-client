@@ -1,6 +1,6 @@
 import { app } from "../../app";
 import { Mediator } from "../../core/ui-mediator";
-import { StringUtil } from "../../core/untils/StringUtil";
+import { StringUtil } from "../../core/utils/string-util";
 import { ui } from "../../misc/ui";
 import { HomeUI } from "../../ui-runtime/scene/HomeUI";
 
@@ -35,7 +35,7 @@ export class MainMediator extends Mediator {
             app.ui.show(ui.MAIL);
         });
         this.owner.btnShop.on(Laya.Event.CLICK, () => {
-            app.ui.show(ui.shopDialog);
+            app.ui.show(ui.SHOP);
         });
         this.owner.btnWorld.on(Laya.Event.CLICK, () => {
             app.ui.replace(ui.WORLD_SCENE);

@@ -2,13 +2,13 @@
 
 
 /**
- * resources/prefab/icon/icon-node.lh
+ * resources/prefab/icon/icon.lh
  */
 export class IconUIBase extends Laya.Box {
-    public iconBg!: Laya.Image;
-    public iconQuality!: Laya.Image;
-    public iconImage!: Laya.Image;
-    public iconRedPoint!: Laya.Image;
-    public iconNumber!: Laya.Label;
+    public imgIBg!: Laya.Image;
+    public imgQuality!: Laya.Image;
+    public imgIcon!: Laya.Image;
+    public imgRedPoint!: Laya.Image;
+    public labelNumber!: Laya.Label;
 }
 
