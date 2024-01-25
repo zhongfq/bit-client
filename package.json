@@ -7,13 +7,24 @@
     "scripts": {
         "build-proto:pbjs": "pbjs --dependency protobufjs/minimal.js --target static-module --wrap commonjs --out ./src/def/proto.js ./assets/proto/*.proto",
         "build-proto:pbts": "pbts --main --out ./src/def/proto.d.ts ./src/def/*.js",
-        "check-ts:tsc:": "tsc --noEmit"
+        "check-ts:tsc:": "tsc --noEmit",
+        "postinstall": "copy-files-from-to"
     },
     "dependencies": {
         "bytebuffer": "^5.0.1",
         "protobufjs": "^7.2.5"
     },
     "devDependencies": {
-        "@types/bytebuffer": "^5.0.48"
-    }
+        "@types/bytebuffer": "^5.0.48",
+        "copy-files-from-to": "^3.9.1"
+    },
+    "copyFilesSettings": {
+        "whenFileExists": "overwrite"
+    },
+    "copyFiles": [
+        {
+            "from": "tools/git/pre-commit",
+            "to": ".git/hooks/pre-commit"
+        }
+    ]
 }
