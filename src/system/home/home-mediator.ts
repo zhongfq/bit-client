@@ -1,13 +1,19 @@
 import { app } from "../../app";
 import { Mediator } from "../../core/ui-mediator";
+import { StringUtil } from "../../core/untils/StringUtil";
 import { ui } from "../../misc/ui";
 import { HomeUI } from "../../ui-runtime/scene/HomeUI";
 
 const { regClass, property } = Laya;
+import Browser = Laya.Browser;
+import Render = Laya.Render;
+import SpriteUtils = Laya.SpriteUtils;
 
 @regClass()
 export class MainMediator extends Mediator {
     owner!: HomeUI;
+    iframeElement: any;
+    divElement: any;
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
     onAwake(): void {
         this.initBtn();
@@ -29,7 +35,7 @@ export class MainMediator extends Mediator {
             app.ui.show(ui.MAIL);
         });
         this.owner.btnShop.on(Laya.Event.CLICK, () => {
-            app.ui.show(ui.MAIL);
+            app.ui.show(ui.shopDialog);
         });
         this.owner.btnWorld.on(Laya.Event.CLICK, () => {
             app.ui.replace(ui.WORLD_SCENE);

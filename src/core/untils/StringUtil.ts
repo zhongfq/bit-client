@@ -1,3 +1,17 @@
+interface UBBData {
+    text?: string;
+    image?: string;
+    b?: boolean; //加粗
+    i?: boolean; //斜体
+    u?: boolean; //下划线
+    e?: string; //回调方法名
+    c?: Laya.Color | string; //颜色
+    fontSize?: number; //字体大小
+    width?: number; //图片宽度
+    height?: number; //图片宽度
+}
+
+let tlBBCodeStr = ["<color=", "<size=", "<b>", "<i>", "<u>", "<on click", "<outline color"];
 export class StringUtil {
     public static __cname: string = "StringUtil";
 
@@ -196,5 +210,51 @@ export class StringUtil {
         const day = String(date.getDate()).padStart(2, "0");
 
         return `${year}-${month}-${day}`;
+    }
+    static str2UBB(str: string, ...args: (UBBData | string | number)[]): string {
+        let reg = /{(\d+)}/gm;
+        return str.replace(reg, function (match, name) {
+            // return args[~~name];
+            let data = args[~~name];
+            if (typeof data == "string") {
+                return data;
+            } else if (typeof data == "number") {
+                return data.toString();
+            } else {
+                return StringUtil.getUBB(data);
+            }
+        });
+    }
+
+    static getUBB(data: UBBData): string {
+        let str = "";
+        if (data.image) {
+            str += `<img src='${data.image}'`;
+            if (data.width) {
+                str += ` widht=${data.width}`;
+            }
+            if (data.height) {
+                str += ` height=${data.height}`;
+            }
+            return str;
+        } else if (data.text) {
+            if (data.u) {
+                str += `<u>`;
+            }
+            if (data.i) {
+                str += `<i>`;
+            }
+            if (data.b) {
+                str += `<b>`;
+            }
+            str += data.text;
+            for (let i of tlBBCodeStr) {
+                if (str.indexOf(i) != -1) {
+                    str = str + i;
+                }
+            }
+            return str;
+        }
+        return "";
     }
 }

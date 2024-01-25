@@ -31,6 +31,8 @@ export const enum ui {
     MAIL,
     MAIL_INFO,
 
+    SHOP,
+
     GM,
 }
 
@@ -107,6 +109,13 @@ export const registerUI = () => {
         id: ui.MAIL_INFO,
         autoClose: false,
         url: "resources/prefab/mail/mail-info-dialog.lh",
+        blockInput: true,
+    });
+
+    app.ui.register({
+        id: ui.SHOP,
+        autoClose: false,
+        url: "resources/prefab/shop/shop-dialog.lh",
         blockInput: true,
     });
 

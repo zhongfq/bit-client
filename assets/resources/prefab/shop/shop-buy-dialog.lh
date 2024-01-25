@@ -1,7 +1,7 @@
 {
   "_$ver": 1,
   "_$id": "sxpq9fzh",
-  "_$runtime": "res://94db5ab0-3279-4238-9bec-323f91f08d53",
+  "_$runtime": "res://de37546e-0199-47b1-8bf7-117c34bb8b54",
   "_$type": "Dialog",
   "name": "Dialog",
   "width": 608,
@@ -10,8 +10,8 @@
   "isModal": true,
   "_$comp": [
     {
-      "_$type": "6320eec1-4c5d-4789-a46d-1fbdb5699108",
-      "scriptPath": "../src/system/bag/item-box-use-mediator.ts"
+      "_$type": "f12c99ff-9f4b-4e08-9640-e0592b47945d",
+      "scriptPath": "../src/system/shop/shop-buy-mediator.ts"
     }
   ],
   "_$child": [
@@ -98,16 +98,23 @@
       "_$var": true,
       "name": "iconNodeTop",
       "active": true,
-      "x": 12,
-      "y": 115,
-      "visible": true
+      "x": 249,
+      "y": 150,
+      "visible": true,
+      "_$child": [
+        {
+          "_$override": "0gth0gc8",
+          "x": 5,
+          "y": 5
+        }
+      ]
     },
     {
       "_$id": "oc27rid6",
       "_$type": "Sprite",
       "name": "Sprite",
-      "x": 10,
-      "y": 201,
+      "x": 16,
+      "y": 267,
       "width": 593,
       "height": 85,
       "_gcmds": [
@@ -128,28 +135,47 @@
       "_$var": true,
       "_$type": "Label",
       "name": "itemName",
-      "x": 130,
-      "y": 119,
+      "x": 237,
+      "y": 121,
       "width": 120,
       "height": 28,
       "text": "道具名字",
       "fontSize": 25,
       "color": "#FFFFFF",
-      "valign": "top",
+      "align": "center",
+      "valign": "middle",
       "padding": "0,0,0,0"
     },
     {
-      "_$id": "b7oictt8",
+      "_$id": "a4qtlb4m",
       "_$var": true,
       "_$type": "Label",
-      "name": "itemDesc",
-      "x": 130.99999999999997,
-      "y": 150,
-      "width": 456,
-      "height": 81,
-      "text": "道具名字阿萨德哦i久啊搜ID就哦啊手机哦啊收到就阿斯哦多久哦啊世界动啊时候氨基酸哦久啊度搜Jason",
-      "fontSize": 25,
+      "name": "labelItemNum",
+      "x": 241,
+      "y": 266,
+      "width": 120,
+      "height": 28,
+      "text": "拥有:1000",
+      "fontSize": 20,
       "color": "#FFFFFF",
+      "align": "center",
+      "valign": "middle",
+      "padding": "0,0,0,0"
+    },
+    {
+      "_$id": "1jjtxm4f",
+      "_$var": true,
+      "_$type": "Label",
+      "name": "labelItemDesc",
+      "x": 31,
+      "y": 318,
+      "width": 106,
+      "height": 162,
+      "text": "这是一个睡觉配电间哦i啊上都弄丹佛斯蒂芬妮欧舒丹发斯蒂芬斯蒂芬是的这是一个睡觉配电间哦i啊上都弄丹佛斯蒂芬妮欧舒丹发斯蒂芬斯蒂芬是的",
+      "fontSize": 20,
+      "color": "#FFFFFF",
+      "ubb": true,
+      "align": "center",
       "valign": "top",
       "overflow": "scroll",
       "wordWrap": true,
@@ -232,35 +258,6 @@
           "skin": "res://34582d14-0e49-41c3-9bac-3d12def95ef9",
           "label": "",
           "labelSize": 20
-        }
-      ]
-    },
-    {
-      "_$id": "og96q0ho",
-      "_$var": true,
-      "_$type": "List",
-      "name": "itemList",
-      "x": 18,
-      "y": 255,
-      "width": 572,
-      "height": 222,
-      "_mouseState": 2,
-      "itemTemplate": {
-        "_$ref": "80m3afqt",
-        "_$tmpl": "itemRender"
-      },
-      "repeatX": 5,
-      "repeatY": 2,
-      "spaceX": 7,
-      "spaceY": 6,
-      "_$child": [
-        {
-          "_$id": "80m3afqt",
-          "_$prefab": "296a5627-8151-43ef-8283-ced0d50d81a8",
-          "name": "icon-node",
-          "active": true,
-          "x": 237.99999999999994,
-          "y": 41
         }
       ]
     }
