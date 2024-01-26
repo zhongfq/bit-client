@@ -11,6 +11,7 @@ import { DataService } from "./system/data/data-service";
 import { GmService } from "./system/gm/gm-service";
 import { LoginService } from "./system/login/login-service";
 import { MailService } from "./system/mail/mail-service";
+import { ErrorListenService } from "./system/network/error-listen-service";
 import { NetworkService } from "./system/network/network-service";
 import { ShopService } from "./system/shop/shop-service";
 import { TaskService } from "./system/task/task-service";
@@ -38,6 +39,7 @@ class ServiceManager {
     readonly task: TaskService;
     readonly mail: MailService;
     readonly shop: ShopService;
+    readonly networkClickError: ErrorListenService;
 
     private _services: Service<NetworkService>[] = [];
 
@@ -52,7 +54,7 @@ class ServiceManager {
         this.task = this.newService(TaskService);
         this.mail = this.newService(MailService);
         this.shop = this.newService(ShopService);
-
+        this.networkClickError = this.newService(ErrorListenService);
         // ignore log
         this.network.ignoreLog(opcode.user.c2s_ping);
         this.network.ignoreLog(opcode.user.s2c_ping);

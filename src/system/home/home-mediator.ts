@@ -35,7 +35,7 @@ export class MainMediator extends Mediator {
             app.ui.show(ui.MAIL);
         });
         this.owner.btnShop.on(Laya.Event.CLICK, () => {
-            app.service.shop.load({ shopId: 1 });
+            app.service.shop.load({});
             app.ui.show(ui.SHOP);
         });
         this.owner.btnWorld.on(Laya.Event.CLICK, () => {
