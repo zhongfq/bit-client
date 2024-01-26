@@ -38,9 +38,19 @@
               ]
             },
             {
-              "id": "1"
+              "id": "1",
+              "exitByTime": true,
+              "transduration": 0.15,
+              "exitTime": 0.85,
+              "conditions": [
+                {
+                  "type": 0,
+                  "id": 1
+                }
+              ]
             }
-          ]
+          ],
+          "_isLooping": 1
         },
         {
           "_$type": "AnimatorState",
@@ -64,8 +74,7 @@
               "conditions": [
                 {
                   "type": 0,
-                  "id": 0,
-                  "checkValue": true
+                  "id": 0
                 }
               ]
             },
@@ -77,10 +86,10 @@
               "conditions": [
                 {
                   "type": 0,
-                  "id": 1,
-                  "checkValue": true
+                  "id": 2
                 }
-              ]
+              ],
+              "solo": false
             }
           ],
           "_isLooping": 1
@@ -107,8 +116,7 @@
               "conditions": [
                 {
                   "type": 0,
-                  "id": 1,
-                  "checkValue": true
+                  "id": 2
                 }
               ]
             },
@@ -120,7 +128,7 @@
               "conditions": [
                 {
                   "type": 0,
-                  "id": 0
+                  "id": 1
                 }
               ]
             }
@@ -241,15 +249,21 @@
   "animatorParams": [
     {
       "id": 0,
-      "name": "moving",
-      "type": 1,
-      "val": false
+      "name": "run",
+      "type": 2,
+      "val": 0
     },
     {
       "id": 1,
-      "name": "attacking",
-      "type": 1,
-      "val": false
+      "name": "idle",
+      "type": 2,
+      "val": 0
+    },
+    {
+      "id": 2,
+      "name": "attack",
+      "type": 2,
+      "val": 0
     }
   ]
 }

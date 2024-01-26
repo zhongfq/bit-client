@@ -20,6 +20,9 @@ export class CommandSystem extends ecs.System {
     constructor(readonly context: WorldContext) {
         super();
 
+        app.service.network.ignoreLog(opcode.world.c2s_troop_move_by);
+        app.service.network.ignoreLog(opcode.world.s2c_troop_move_by);
+
         this.handle(opcode.world.notify_roles, this._onNotifyRoles);
         this.handle(opcode.world.notify_entities, this._onNotifyEntities);
         this.handle(opcode.world.notify_actions, this._onNotifyActions);
@@ -164,7 +167,7 @@ export class CommandSystem extends ecs.System {
             movement.track = null;
             movement.target = null;
             if (animation?.animator) {
-                animation.animator.setParamsBool("moving", false);
+                animation.animator.setParamsTrigger("idle");
             }
         } else if (data.path.length > 0) {
         } else if (data.speed > 0) {
@@ -180,8 +183,12 @@ export class CommandSystem extends ecs.System {
             // movement.rotation.ration = 1;
 
             if (animation?.animator) {
-                animation.animator.setParamsBool("moving", true);
+                animation.animator.setParamsTrigger("run");
             }
         }
     }
+
+    private _startAttack(cmd: proto.world.BattleSkillAction) {}
+
+    private _stopAttack(cmd: proto.world.BattleStopAction) {}
 }
