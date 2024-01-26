@@ -23,6 +23,7 @@ export const opcode = {
         connected: 0x00F1,
         disconnected: 0x00F2,
         ioerror: 0x00F3,
+        msg_error: 0x00F4,
     },
     dungeon: {
         c2s_load: 0x1100,

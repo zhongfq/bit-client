@@ -3,7 +3,7 @@ import { Constructor } from "../../core/dispatcher";
 import { Service } from "../../core/service";
 import { Socket } from "../../core/socket";
 import { user } from "../../def/proto";
-import { errcode, errmsg, opcode, registerProtocols } from "../../def/protocol";
+import { errcode, errmsg, errname, opcode, registerProtocols } from "../../def/protocol";
 
 type PromiseDescriptor = {
     resolve: (value: any) => void;
@@ -16,6 +16,14 @@ export type ProtocolDescriptor = {
     typeURL: string;
     encode: (message: any, writer?: any) => any;
     decode: (reader: Uint8Array, length?: number) => any;
+};
+
+export type MessageError = {
+    op: number;
+    opname: string;
+    err: number;
+    msg: string;
+    name: string;
 };
 
 const protocols: { [key: number | string]: ProtocolDescriptor | undefined } = {};
@@ -228,13 +236,19 @@ export class NetworkService extends Service<NetworkService> {
 
             const promise = this._callbacks[session];
 
-            // dispatch to network service
-            try {
-                this.event(protocol.op, [message, promise?.request]);
-            } catch (error) {
-                // TODO: report error?
-                console.log("handle network message", error);
+            if (message.err) {
+                const err: keyof typeof errmsg = message.err;
+                this.event(opcode.connection.msg_error, {
+                    op: op,
+                    opname: protocol.typeURL,
+                    err: err,
+                    msg: errmsg[err],
+                    name: errname[err],
+                } as MessageError);
             }
+
+            // dispatch to network service
+            this.event(protocol.op, [message, promise?.request]);
 
             // rpc call
             if (promise) {
