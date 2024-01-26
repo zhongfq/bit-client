@@ -62,6 +62,18 @@ export class WorldContext extends Mediator {
         this._ecs.addSystem(new RenderSystem(this));
 
         this.loadMap();
+
+        // const mc1 = this.scene3D.getChildByName("mc04") as Laya.Sprite3D;
+        // const animator = mc1.getComponent(Laya.Animator);
+        // animator.setParamsTrigger("run");
+
+        // this.timer.delay(2, () => {
+        //     animator.setParamsTrigger("attack");
+        // });
+        // this.timer.delay(4, () => animator.setParamsTrigger("idle"));
+        // this.timer.delay(6, () => {
+        //     animator.setParamsTrigger("run");
+        // });
     }
 
     async onStart() {
@@ -74,6 +86,7 @@ export class WorldContext extends Mediator {
     }
 
     onUpdate(): void {
+        super.onUpdate();
         this._ecs.update(Laya.timer.delta / 1000);
     }
 
@@ -110,6 +123,5 @@ export class WorldContext extends Mediator {
                 this.scene3D.addChild(tile);
             }
         });
-        console.log(map);
     }
 }

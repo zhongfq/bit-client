@@ -17,8 +17,8 @@
           "speed": 1,
           "clipStart": 0,
           "clipEnd": 1,
-          "x": 584,
-          "y": 142,
+          "x": 585,
+          "y": 143,
           "clip": {
             "_$type": "AnimationClip",
             "_$uuid": "d1c7711c-1687-45a5-89b8-06a14c35e0e9"
@@ -96,7 +96,7 @@
         },
         {
           "_$type": "AnimatorState",
-          "name": "move",
+          "name": "run",
           "speed": 1,
           "clipStart": 0,
           "clipEnd": 1,

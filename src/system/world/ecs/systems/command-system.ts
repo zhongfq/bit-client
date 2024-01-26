@@ -16,6 +16,12 @@ import { AnimationComponent } from "../components/render-component";
 import { Tilemap } from "../components/tilemap-component";
 import { OwnerComponent } from "../components/troop-component";
 
+enum AnimatorTrigger {
+    IDLE = "idle",
+    RUN = "run",
+    ATTACK = "attack",
+}
+
 export class CommandSystem extends ecs.System {
     constructor(readonly context: WorldContext) {
         super();
@@ -59,8 +65,11 @@ export class CommandSystem extends ecs.System {
                     this._moveEntity(cmd.move as proto.world.MoveAction);
                     break;
                 case ACTION.BATTLE_SKILL:
+                    this._startAttack(cmd.battleSkill as proto.world.BattleSkillAction);
                     break;
                 case ACTION.BATTLE_STOP:
+                    this._stopAttack(cmd.battleStop!.srcEid!);
+                    this._stopAttack(cmd.battleStop!.dstEid!);
                     break;
                 case ACTION.BATTLE_SUB_HP:
                     break;
@@ -167,7 +176,7 @@ export class CommandSystem extends ecs.System {
             movement.track = null;
             movement.target = null;
             if (animation?.animator) {
-                animation.animator.setParamsTrigger("idle");
+                this._setTrigger(animation.animator, AnimatorTrigger.IDLE);
             }
         } else if (data.path.length > 0) {
         } else if (data.speed > 0) {
@@ -183,12 +192,47 @@ export class CommandSystem extends ecs.System {
             // movement.rotation.ration = 1;
 
             if (animation?.animator) {
-                animation.animator.setParamsTrigger("run");
+                this._setTrigger(animation.animator, AnimatorTrigger.RUN);
             }
         }
     }
 
-    private _startAttack(cmd: proto.world.BattleSkillAction) {}
+    private _startAttack(cmd: proto.world.BattleSkillAction) {
+        const entity = this.ecs.getEntity(cmd.srcEid);
+        if (!entity) {
+            console.warn(`entity not found: eid=${cmd.srcEid}`);
+            return;
+        }
+        const animation = entity.getComponent(AnimationComponent);
+        if (animation?.animator) {
+            this._setTrigger(animation.animator, AnimatorTrigger.ATTACK);
+        }
+    }
 
-    private _stopAttack(cmd: proto.world.BattleStopAction) {}
+    private _stopAttack(eid: number) {
+        const entity = this.ecs.getEntity(eid);
+        if (!entity) {
+            console.warn(`entity not found: eid=${eid}`);
+            return;
+        }
+        const animation = entity.getComponent(AnimationComponent);
+        if (animation?.animator) {
+            const movement = entity.getComponent(MovementComponent)!;
+            this._clearTrigger(animation.animator, AnimatorTrigger.ATTACK);
+            if (movement.type === MovementType.NONE) {
+                this._setTrigger(animation.animator, AnimatorTrigger.IDLE);
+            } else {
+                this._setTrigger(animation.animator, AnimatorTrigger.RUN);
+            }
+        }
+    }
+
+    private _setTrigger(animator: Laya.Animator, name: AnimatorTrigger) {
+        animator.setParamsTrigger(name);
+    }
+
+    private _clearTrigger(animator: Laya.Animator, name: AnimatorTrigger) {
+        const id = Laya.AnimatorStateCondition.conditionNameToID(name);
+        animator.animatorParams[id] = false;
+    }
 }
