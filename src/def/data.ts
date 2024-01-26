@@ -103,7 +103,7 @@ export type TaskRow = {
 export type TaskTable = {
     [k: number]: TaskRow;
 };
-export type Reward = { id: number; const: number };
+export type Reward = { id: number; count: number };
 export type MailRow = {
     id: number;
     title: string;
@@ -113,4 +113,19 @@ export type MailRow = {
 
 export type MailTable = {
     [k: number]: MailRow;
+};
+export type ShopRow = {
+    id: number;
+    desc: string;
+    items: Reward[];
+    cost?: Reward[];
+    limit_day?: number;
+    limit_week?: number;
+    sort_id?: number;
+    open_id?: number;
+};
+export type ShopTable = {
+    shop_config: { id: number; type: number; open_id?: number; time?: number }[];
+    shop_1: ShopRow[];
+    shop_2: ShopRow[];
 };

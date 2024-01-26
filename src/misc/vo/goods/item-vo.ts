@@ -19,7 +19,11 @@ export class ItemVo extends GoodsVo<ItemRow, bag.Item> {
 
     get id(): number {
         if (this._cmd) {
-            return Number(this._cmd.id);
+            if (this._cmd.uid) {
+                return this._cmd.uid;
+            } else {
+                return this.refId;
+            }
         }
         return 0;
     }
@@ -27,6 +31,15 @@ export class ItemVo extends GoodsVo<ItemRow, bag.Item> {
     getRefByCmd(cmd: bag.Item): ItemRow | undefined {
         let id = cmd.uid ? cmd.uid : cmd.id;
         return DataUtil.getRef<ItemRow>(app.service.data.itemTable, { id: id });
+    }
+
+    initByRefId(id: number) {
+        let ref = DataUtil.getRef(app.service.data.itemTable, { id: id });
+        if (ref) {
+            this.initByRef(ref);
+        } else {
+            console.log("没有找到该道具");
+        }
     }
 
     get goodsType(): number {

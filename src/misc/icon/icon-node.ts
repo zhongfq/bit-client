@@ -26,6 +26,9 @@ export class IconNode extends Laya.Script {
             return;
         }
         let itemData = this.owner.dataSource as ItemVo;
+        if (!itemData) {
+            return;
+        }
         if (!itemData.cmd) {
             //没背包数据
             if (itemData.ref?.composite == 1) {

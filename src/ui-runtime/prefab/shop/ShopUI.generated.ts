@@ -7,7 +7,6 @@
 export class ShopUIBase extends Laya.Dialog {
     public Image!: Laya.Image;
     public listItem!: Laya.List;
-    public labelConsume!: Laya.Label;
     public btnClose!: Laya.Button;
 }
 

@@ -15,7 +15,6 @@ export class ShopBuyUIBase extends Laya.Dialog {
     public labelItemDesc!: Laya.Label;
     public slNum!: Laya.HSlider;
     public selectNumber!: Laya.Label;
-    public haveNumber!: Laya.Label;
     public minusBtn!: Laya.Button;
     public addBtn!: Laya.Button;
 }

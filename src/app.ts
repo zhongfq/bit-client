@@ -12,6 +12,7 @@ import { GmService } from "./system/gm/gm-service";
 import { LoginService } from "./system/login/login-service";
 import { MailService } from "./system/mail/mail-service";
 import { NetworkService } from "./system/network/network-service";
+import { ShopService } from "./system/shop/shop-service";
 import { TaskService } from "./system/task/task-service";
 import { UserService } from "./system/user/user-service";
 import { WorldService } from "./system/world/world-service";
@@ -36,6 +37,7 @@ class ServiceManager {
     readonly gm: GmService;
     readonly task: TaskService;
     readonly mail: MailService;
+    readonly shop: ShopService;
 
     private _services: Service<NetworkService>[] = [];
 
@@ -49,6 +51,7 @@ class ServiceManager {
         this.gm = this.newService(GmService);
         this.task = this.newService(TaskService);
         this.mail = this.newService(MailService);
+        this.shop = this.newService(ShopService);
 
         // ignore log
         this.network.ignoreLog(opcode.user.c2s_ping);

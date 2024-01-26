@@ -2,35 +2,36 @@ import { Mediator } from "../../core/ui-mediator";
 import { IconUI } from "../../ui-runtime/prefab/icon/IconUI";
 import { ItemVo } from "../../misc/vo/goods/item-vo";
 import { ShopBuyUI } from "../../ui-runtime/prefab/shop/ShopBuyUI";
+import { app } from "../../app";
 
 const { regClass, property } = Laya;
 
 @regClass()
 export class ShopBuyMediator extends Mediator {
     owner!: ShopBuyUI;
-    itemListData!: ItemVo[];
 
     onAwake(): void {
-        // this.owner.labelItemDesc.viewport = this.owner.labelItemDesc.getBounds();
-        // this.owner.labelItemDesc.scrollRect = new Laya.Rectangle(0, 0, 106, 100);
-        // this.owner.labelItemDesc.
-        // let a = this.owner.TextArea.scrollRect;
-        // let b = 1;
-        // this.owner.labelItemDesc.scrollRect.x;
-        // this.updateList();
+        this.owner.btnClose.on(Laya.Event.CLICK, this.owner, this.owner.close);
+
+        this.owner.slNum.changeHandler = new Laya.Handler(this, this.onChange);
+        this.owner.addBtn.on(Laya.Event.CLICK, this, this.onAddBtn);
+        this.owner.minusBtn.on(Laya.Event.CLICK, this, this.onMinusBtn);
+        this.owner.btnSynthesis.on(Laya.Event.CLICK, () => {
+            app.service.shop.requestBuy({ shopId: 1, shopItemId: 2, num: this.owner.slNum.value });
+        });
+        let vo = new ItemVo();
+        vo.initByRefId(this.owner.openData.refData.items[0].id);
+        vo.goodsNumber = this.owner.openData.refData.items[0].count;
+        this.owner.iconNodeTop.updateGoods(vo);
     }
-    onListClick(evn: Laya.Event, index: number) {
-        if (evn.type == Laya.Event.CLICK) {
-        }
+
+    onAddBtn() {
+        this.owner.slNum.value++;
     }
-    onTabSelect(index: number) {
-        this.updateList();
+    onMinusBtn() {
+        this.owner.slNum.value--;
     }
-    updateItem(cell: IconUI, index: number) {
-        let cellData = this.itemListData[index];
-        cell.updateGoods(cellData);
-    }
-    updateList() {
-        this.itemListData = [];
+    onChange(value: number) {
+        this.owner.selectNumber.text = value.toString();
     }
 }

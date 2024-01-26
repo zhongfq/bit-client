@@ -32,6 +32,7 @@ export const enum ui {
     MAIL_INFO,
 
     SHOP,
+    SHOP_BUY,
 
     GM,
 }
@@ -116,6 +117,13 @@ export const registerUI = () => {
         id: ui.SHOP,
         autoClose: false,
         url: "resources/prefab/shop/shop.lh",
+        blockInput: true,
+    });
+
+    app.ui.register({
+        id: ui.SHOP_BUY,
+        autoClose: false,
+        url: "resources/prefab/shop/shop-buy.lh",
         blockInput: true,
     });
 

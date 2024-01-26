@@ -20,7 +20,7 @@ export class Util {
     static toBagItem(reward: Reward): proto.bag.IItem {
         let item: proto.bag.IItem = new proto.bag.Item();
         item.id = reward.id;
-        item.num = reward.const;
+        item.num = reward.count;
         return item;
     }
 }

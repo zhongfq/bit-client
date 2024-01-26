@@ -1,0 +1,61 @@
+{
+  "_$ver": 1,
+  "_$id": "ee3dm4xh",
+  "_$runtime": "res://4e012f76-e434-40e3-a698-7123e024d3f9",
+  "_$type": "Box",
+  "name": "Box",
+  "width": 177,
+  "height": 213,
+  "bgColor": "rgba(93, 85, 85, 1)",
+  "_$child": [
+    {
+      "_$id": "s9yygi89",
+      "_$var": true,
+      "_$type": "Label",
+      "name": "labelName",
+      "x": 33,
+      "y": 11.999999999999943,
+      "width": 112,
+      "height": 33,
+      "centerX": 0,
+      "text": "道具名字",
+      "fontSize": 24,
+      "color": "#FFFFFF",
+      "align": "center",
+      "valign": "middle",
+      "padding": "0,0,0,0"
+    },
+    {
+      "_$id": "eoisr8hq",
+      "_$var": true,
+      "_$type": "Label",
+      "name": "labelConsume",
+      "x": 10,
+      "y": 162,
+      "width": 157,
+      "height": 38,
+      "centerX": 0,
+      "text": "<img src = 'resources/atlas/iconSmall/iconSmall8.png'>111",
+      "fontSize": 24,
+      "color": "#FFFFFF",
+      "ubb": true,
+      "align": "center",
+      "valign": "middle",
+      "wordWrap": true,
+      "padding": "0,0,0,0"
+    },
+    {
+      "_$id": "mk6a3w9u",
+      "_$prefab": "296a5627-8151-43ef-8283-ced0d50d81a8",
+      "_$var": true,
+      "name": "iconDrward",
+      "active": true,
+      "x": 35,
+      "y": 51,
+      "visible": true,
+      "centerX": 0,
+      "scaleX": 1,
+      "scaleY": 1
+    }
+  ]
+}
