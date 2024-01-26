@@ -159,10 +159,8 @@ export class NetworkService extends Service<NetworkService> {
             }
 
             if (!this.connected) {
-                return reject({
-                    err: errcode.DISCONNECTED,
-                    message: errmsg[errcode.DISCONNECTED],
-                });
+                this.event(errcode.DISCONNECTED);
+                return;
             }
 
             if (this._session >= 1 << 16) {
