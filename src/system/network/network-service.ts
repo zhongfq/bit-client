@@ -159,7 +159,7 @@ export class NetworkService extends Service<NetworkService> {
             }
 
             if (!this.connected) {
-                this.event(errcode.DISCONNECTED);
+                console.log(errmsg[errcode.DISCONNECTED]);
                 return;
             }
 
