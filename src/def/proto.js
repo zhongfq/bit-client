@@ -23897,6 +23897,7 @@ $root.world = (function() {
          * @memberof world
          * @interface IBattleSkillAction
          * @property {number|null} [srcEid] BattleSkillAction srcEid
+         * @property {number|null} [dstEid] BattleSkillAction dstEid
          * @property {number|null} [skillId] BattleSkillAction skillId
          */
 
@@ -23922,6 +23923,14 @@ $root.world = (function() {
          * @instance
          */
         BattleSkillAction.prototype.srcEid = 0;
+
+        /**
+         * BattleSkillAction dstEid.
+         * @member {number} dstEid
+         * @memberof world.BattleSkillAction
+         * @instance
+         */
+        BattleSkillAction.prototype.dstEid = 0;
 
         /**
          * BattleSkillAction skillId.
@@ -23957,6 +23966,8 @@ $root.world = (function() {
                 writer = $Writer.create();
             if (message.srcEid != null && Object.hasOwnProperty.call(message, "srcEid"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.srcEid);
+            if (message.dstEid != null && Object.hasOwnProperty.call(message, "dstEid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.dstEid);
             if (message.skillId != null && Object.hasOwnProperty.call(message, "skillId"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.skillId);
             return writer;
@@ -23995,6 +24006,10 @@ $root.world = (function() {
                 switch (tag >>> 3) {
                 case 1: {
                         message.srcEid = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.dstEid = reader.uint32();
                         break;
                     }
                 case 3: {
@@ -24039,6 +24054,9 @@ $root.world = (function() {
             if (message.srcEid != null && message.hasOwnProperty("srcEid"))
                 if (!$util.isInteger(message.srcEid))
                     return "srcEid: integer expected";
+            if (message.dstEid != null && message.hasOwnProperty("dstEid"))
+                if (!$util.isInteger(message.dstEid))
+                    return "dstEid: integer expected";
             if (message.skillId != null && message.hasOwnProperty("skillId"))
                 if (!$util.isInteger(message.skillId))
                     return "skillId: integer expected";
@@ -24059,6 +24077,8 @@ $root.world = (function() {
             var message = new $root.world.BattleSkillAction();
             if (object.srcEid != null)
                 message.srcEid = object.srcEid >>> 0;
+            if (object.dstEid != null)
+                message.dstEid = object.dstEid >>> 0;
             if (object.skillId != null)
                 message.skillId = object.skillId >>> 0;
             return message;
@@ -24079,10 +24099,13 @@ $root.world = (function() {
             var object = {};
             if (options.defaults) {
                 object.srcEid = 0;
+                object.dstEid = 0;
                 object.skillId = 0;
             }
             if (message.srcEid != null && message.hasOwnProperty("srcEid"))
                 object.srcEid = message.srcEid;
+            if (message.dstEid != null && message.hasOwnProperty("dstEid"))
+                object.dstEid = message.dstEid;
             if (message.skillId != null && message.hasOwnProperty("skillId"))
                 object.skillId = message.skillId;
             return object;

@@ -10590,6 +10590,9 @@ export namespace world {
         /** BattleSkillAction srcEid */
         srcEid?: (number|null);
 
+        /** BattleSkillAction dstEid */
+        dstEid?: (number|null);
+
         /** BattleSkillAction skillId */
         skillId?: (number|null);
     }
@@ -10605,6 +10608,9 @@ export namespace world {
 
         /** BattleSkillAction srcEid. */
         public srcEid: number;
+
+        /** BattleSkillAction dstEid. */
+        public dstEid: number;
 
         /** BattleSkillAction skillId. */
         public skillId: number;

@@ -146,6 +146,7 @@ export class CommandSystem extends ecs.System {
         if (cmd.curPos) {
             const transform = entity.getComponent(TransformComponent)!;
             Tilemap.grid2Pixel(cmd.curPos.x!, cmd.curPos.y!, transform.position);
+            transform.flag |= TransformComponent.POSITION;
         }
         this._updateMovement(
             cmd.eid as number,
@@ -206,6 +207,20 @@ export class CommandSystem extends ecs.System {
         const animation = entity.getComponent(AnimationComponent);
         if (animation?.animator) {
             this._setTrigger(animation.animator, AnimatorTrigger.ATTACK);
+        }
+        // this._towardToTarget(cmd.srcEid, cmd.dstEid);
+    }
+
+    private _towardToTarget(eid: number, targetEid: number) {
+        const animation = this.ecs.getEntity(eid)?.getComponent(AnimationComponent);
+        const target = this.ecs.getEntity(targetEid)?.getComponent(AnimationComponent);
+        if (animation?.view && target?.view) {
+            const transform = animation.getComponent(TransformComponent)!;
+            const p1 = animation.view.transform.position;
+            const p2 = target.view.transform.position;
+            const rad = Math.atan2(-(p2.z - p1.z), (p2.x = p1.z));
+            transform.rotation = (rad * 180) / Math.PI + 90;
+            transform.flag |= TransformComponent.ROTATION;
         }
     }
 

@@ -160,7 +160,7 @@
         },
         {
             "id": 2,
-            "time": 24,
+            "refresh_hour": 24,
             "type": 2
         }
     ]
