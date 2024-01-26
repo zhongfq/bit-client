@@ -1,13 +1,13 @@
 import { app } from "../../app";
 import { Service } from "../../core/service";
-import { errcode, opcode } from "../../def/protocol";
+import { opcode } from "../../def/protocol";
 import { MessageError, NetworkService } from "./network-service";
 
-export class ErrorListenService extends Service<NetworkService> {
+export class ToastService extends Service<NetworkService> {
     constructor(network: NetworkService) {
         super(network);
         this.handle(opcode.connection.msg_error, (data: MessageError) => {
-            app.ui.toast(`${data.err}_${data.msg}_${data.name}`);
+            app.ui.toast(`${data.msg}[${data.name}]`);
             console.log(data.err, data.msg, data.name, data.opname);
         });
     }

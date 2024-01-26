@@ -42,8 +42,7 @@ export class Mediator extends Laya.Script {
 
     onCreate?(args?: any): void;
 
-    onUpdate() {
-        super.onUpdate?.();
+    onUpdate(): void {
         this.timer.update(Laya.timer.delta / 1000);
     }
 }
