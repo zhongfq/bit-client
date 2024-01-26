@@ -1,4 +1,4 @@
-export const mail = {
+export const MailConf = {
     MAIL_STATE_BIT: {
         NEW: 0,
         REWARD: 1,

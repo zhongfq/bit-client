@@ -3,8 +3,9 @@ import { Callback } from "../../../../core/dispatcher";
 import { ecs } from "../../../../core/ecs";
 import proto from "../../../../def/proto";
 import { opcode } from "../../../../def/protocol";
-import { world } from "../../../../def/world";
+import { WorldConf } from "../../../../def/world";
 import { WorldContext } from "../../world-context";
+import { BattleComponent } from "../components/battle-component";
 import { CameraComponent } from "../components/camera-component";
 import {
     MovementComponent,
@@ -42,7 +43,7 @@ export class CommandSystem extends ecs.System {
     }
 
     private _onNotifyActions(notify: proto.world.notify_actions) {
-        const ACTION = world.ENTITY_ACTION;
+        const ACTION = WorldConf.ENTITY_ACTION;
         for (const cmd of notify.actions) {
             switch (cmd.action) {
                 case ACTION.ADD_ENTITY:
@@ -67,7 +68,7 @@ export class CommandSystem extends ecs.System {
     private _addEntity(cmd: proto.world.Entity) {
         const entity = this.ecs.createEntity(cmd.eid);
         const etype = cmd.etype;
-        const ENTITY_TYPE = world.ENTITY_TYPE;
+        const ENTITY_TYPE = WorldConf.ENTITY_TYPE;
 
         entity.etype = etype;
 
@@ -105,6 +106,14 @@ export class CommandSystem extends ecs.System {
                 const camera = this.ecs.getSingletonComponent(CameraComponent)!;
                 camera.focus = cmd.eid;
             }
+        }
+
+        if (cmd.battle) {
+            const data = cmd.battle as proto.world.BattleComponent;
+            const battle = entity.addComponent(BattleComponent);
+            battle.battleUid = data.battleUid;
+            battle.fighterEids = data.fighterEids;
+            battle.startTime = data.startTs;
         }
 
         if (cmd.etype === ENTITY_TYPE.TROOP) {

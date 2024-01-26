@@ -1,4 +1,4 @@
-export const common = {
+export const CommonConf = {
     DAILY_RENAME_AMOUNT: 2,
     SERVER_STATE: {
         BUSY: 4,

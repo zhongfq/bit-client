@@ -1,6 +1,5 @@
 import { app } from "../../app";
 import { Mediator } from "../../core/ui-mediator";
-import { mail } from "../../def/mail";
 import { IconUI } from "../../ui-runtime/prefab/icon/IconUI";
 import { MailInfoUI } from "../../ui-runtime/prefab/mail/MailInfoUI";
 

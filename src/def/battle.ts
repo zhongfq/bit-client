@@ -1,4 +1,4 @@
-export const battle = {
+export const BattleConf = {
     ACTION_CD: 1,
     BATTLE_MODE: {
         DEFEND: 2,

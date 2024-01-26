@@ -1,4 +1,4 @@
-export const attr = {
+export const AttrConf = {
     DEFAULT_ATTRS: {
         5: 100,
         6: 0,

@@ -1,5 +1,4 @@
 import { ecs } from "../../../../core/ecs";
-import { world } from "../../../../def/world";
 
 export class TransformComponent extends ecs.Component {
     static readonly POSITION = 1 << 0;

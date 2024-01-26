@@ -1,4 +1,4 @@
-export const world = {
+export const WorldConf = {
     COM_ENUM: {
         BATTLE: "battle",
         BUILDING: "building",

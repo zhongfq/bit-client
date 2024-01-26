@@ -1,12 +1,12 @@
-import { Service } from "../../core/service";
-import { errcode, opcode } from "../../def/protocol";
-import proto from "../../def/proto";
-import { NetworkService } from "../network/network-service";
 import { app } from "../../app";
-import { DataUtil } from "../data/data-util";
-import { MailRow, MailTable } from "../../def/data";
+import { Service } from "../../core/service";
 import { Util } from "../../core/utils/util";
-import { mail } from "../../def/mail";
+import { MailRow } from "../../def/data";
+import { MailConf } from "../../def/mail";
+import proto from "../../def/proto";
+import { errcode, opcode } from "../../def/protocol";
+import { DataUtil } from "../data/data-util";
+import { NetworkService } from "../network/network-service";
 
 interface UpdateMailData {
     type: "add" | "update" | "delete";
@@ -81,7 +81,7 @@ export class MailService extends Service<NetworkService> {
             this.updateMail({
                 type: "update",
                 updateData: reqest.mailUids,
-                mailState: 1 << mail.MAIL_STATE_BIT.REWARD,
+                mailState: 1 << MailConf.MAIL_STATE_BIT.REWARD,
             });
         }
     }
@@ -91,7 +91,7 @@ export class MailService extends Service<NetworkService> {
             this.updateMail({
                 type: "update",
                 updateData: reqest.mailUids,
-                mailState: 1 << mail.MAIL_STATE_BIT.NEW,
+                mailState: 1 << MailConf.MAIL_STATE_BIT.NEW,
             });
         }
     }
@@ -135,11 +135,11 @@ export class MailService extends Service<NetworkService> {
     }
     //获取邮件是否已读true:未读
     public getMailIsRead(mailState: number): boolean {
-        return (mailState & (1 << mail.MAIL_STATE_BIT.NEW)) > 0;
+        return (mailState & (1 << MailConf.MAIL_STATE_BIT.NEW)) > 0;
     }
     //获取邮件是否已领取true:未领取
     public getMailIsReward(mailState: number): boolean {
-        return (mailState & (1 << mail.MAIL_STATE_BIT.REWARD)) > 0;
+        return (mailState & (1 << MailConf.MAIL_STATE_BIT.REWARD)) > 0;
     }
     // ------------------------------------------------------------------------
     // rpc call

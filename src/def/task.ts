@@ -1,4 +1,4 @@
-export const task = {
+export const TaskConf = {
     TASK_TYPE: {
         BRANCH: 2,
         DAILY: 3,

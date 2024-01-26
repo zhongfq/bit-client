@@ -1,4 +1,4 @@
-export const money = {
+export const MoneyConf = {
     MONEY_ID: {
         COIN: 101,
         DIAMOND: 102,

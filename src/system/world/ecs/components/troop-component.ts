@@ -1,5 +1,4 @@
 import { ecs } from "../../../../core/ecs";
-import { world } from "../../../../def/world";
 
 export class OwnerComponent extends ecs.Component {
     rid: number = 0;

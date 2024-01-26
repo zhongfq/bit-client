@@ -1,4 +1,4 @@
-export const item = {
+export const ItemConf = {
     BAG_TYPE: {
         ITEM: 1,
         PET: 2,
