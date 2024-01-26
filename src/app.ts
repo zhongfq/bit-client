@@ -9,6 +9,7 @@ import { registerUI, ui } from "./misc/ui";
 import { BagService } from "./system/bag/bag-service";
 import { DataService } from "./system/data/data-service";
 import { GmService } from "./system/gm/gm-service";
+import { LoginService } from "./system/login/login-service";
 import { MailService } from "./system/mail/mail-service";
 import { NetworkService } from "./system/network/network-service";
 import { TaskService } from "./system/task/task-service";
@@ -29,6 +30,7 @@ class ServiceManager {
     readonly network: NetworkService;
     readonly data: DataService;
     readonly user: UserService;
+    readonly login: LoginService;
     readonly world: WorldService;
     readonly bag: BagService;
     readonly gm: GmService;
@@ -40,6 +42,7 @@ class ServiceManager {
     constructor() {
         this.network = this.newService(NetworkService);
         this.user = this.newService(UserService);
+        this.login = this.newService(LoginService);
         this.world = this.newService(WorldService);
         this.data = this.newService(DataService);
         this.bag = this.newService(BagService);

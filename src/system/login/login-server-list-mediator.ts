@@ -4,7 +4,7 @@ import { LoginServerUI } from "../../ui-runtime/prefab/login/LoginServerListUI";
 const { regClass, property } = Laya;
 
 @regClass()
-export class LoginServerMediator extends Mediator {
+export class LoginServerListMediator extends Mediator {
     owner!: LoginServerUI;
     onStart(): void {
         this.owner.listServer.mouseHandler = new Laya.Handler(this, this.listClick);
