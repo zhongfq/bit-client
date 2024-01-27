@@ -1,7 +1,7 @@
 import proto from "../../../def/proto";
 import { app } from "../../../app";
 import { Constructor } from "../../../core/dispatcher";
-import { DataUtil } from "../../../system/data/data-util";
+import { DataUtil } from "../../../system/table/table-util";
 import { VOBag } from "../vo-base/vo-bag";
 import { TaskVo } from "./task-vo";
 
@@ -25,7 +25,7 @@ export class TaskBag extends VOBag<TaskVo> {
     createByRef(refId: number) {
         let clazz = this.getVOClass();
         let vo = new clazz();
-        let ref = DataUtil.getRef(app.service.data.taskTable, { id: refId });
+        let ref = DataUtil.getRef(app.service.table.task, { id: refId });
         // TODO: check ref
         vo.initByRef(ref!);
         return vo;

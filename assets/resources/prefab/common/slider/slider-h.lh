@@ -1,0 +1,42 @@
+{
+  "_$ver": 1,
+  "_$id": "4xipcpk8",
+  "_$runtime": "res://ce3d7e81-9708-4980-8060-ef103f9a813d",
+  "_$type": "HSlider",
+  "name": "HSlider",
+  "width": 234,
+  "height": 30,
+  "_mouseState": 2,
+  "skin": "res://051feaa7-15db-4143-958c-161475961a6b",
+  "_$child": [
+    {
+      "_$id": "ffa2ywka",
+      "_$var": true,
+      "_$type": "Button",
+      "name": "minBtn",
+      "x": -47,
+      "width": 32,
+      "height": 32,
+      "_mouseState": 2,
+      "left": -47,
+      "top": 0,
+      "skin": "res://679b3902-4c06-412d-aeef-7efca529bf41",
+      "label": "",
+      "labelSize": 20
+    },
+    {
+      "_$id": "nztsrhdn",
+      "_$var": true,
+      "_$type": "Button",
+      "name": "addBtn",
+      "x": 253,
+      "width": 32,
+      "height": 32,
+      "_mouseState": 2,
+      "right": -51,
+      "skin": "res://34582d14-0e49-41c3-9bac-3d12def95ef9",
+      "label": "",
+      "labelSize": 20
+    }
+  ]
+}

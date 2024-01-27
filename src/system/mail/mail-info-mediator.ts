@@ -10,11 +10,11 @@ export class MailInfoMediator extends Mediator {
     owner!: MailInfoUI;
 
     onAwake(): void {
-        this.initClick();
+        this.initEvent();
         this.updateInfo();
         this.updateList();
     }
-    private initClick() {
+    private initEvent() {
         this.owner.listItem.renderHandler = new Laya.Handler(this, this.updateItem);
         this.owner.btnClose.on(Laya.Event.CLICK, () => {
             this.owner.close();

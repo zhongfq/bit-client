@@ -1,14 +1,15 @@
 import { app } from "../../../app";
-import { ItemTable, TaskRow } from "../../../def/data";
-import { task } from "../../../def/proto";
-import { DataUtil } from "../../../system/data/data-util";
+import { ItemTable, MoneyRow } from "../../../def/data";
+import { money, task } from "../../../def/proto";
+import { DataUtil } from "../../../system/table/table-util";
+import { GoodsVo } from "../goods/goods-vo";
 import { VO } from "../vo-base/vo";
 
 /**
  * Item
  * 道具
  */
-export class MoneyVo extends VO<TaskRow, task.TaskInfo> {
+export class MoneyVo extends GoodsVo<MoneyRow, money.MoneyItem> {
     refTable!: ItemTable;
 
     //#region 重载
@@ -23,8 +24,8 @@ export class MoneyVo extends VO<TaskRow, task.TaskInfo> {
         return 0;
     }
 
-    getRefByCmd(cmd: task.TaskInfo): TaskRow | undefined {
-        return DataUtil.getRef<TaskRow>(app.service.data.taskTable, { id: cmd.id });
+    getRefByCmd(cmd: money.MoneyItem): MoneyRow | undefined {
+        return DataUtil.getRef<MoneyRow>(app.service.table.money, { id: cmd.id });
     }
 
     get goodsType(): number {
@@ -36,13 +37,22 @@ export class MoneyVo extends VO<TaskRow, task.TaskInfo> {
     }
 
     get name(): string {
-        return this._ref ? this._ref.comment : "";
+        return this._ref ? this._ref.name : "";
     }
     protected onGetNumber(): number {
         if (this._cmd) {
             return this._cmd.num ? this._cmd.num : 0;
         }
         return 0;
+    }
+    get iconUrl(): string {
+        return this._ref ? `resources/atlas/icon/${this._ref.icon}.png` : "";
+    }
+    get quality(): number {
+        throw new Error("Method not implemented.");
+    }
+    get qualitySkin(): string {
+        throw new Error("Method not implemented.");
     }
     //#endregion
 }

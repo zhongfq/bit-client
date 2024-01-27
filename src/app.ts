@@ -7,7 +7,7 @@ import { UIManager } from "./core/ui-manager";
 import { opcode } from "./def/protocol";
 import { registerUI, ui } from "./misc/ui";
 import { BagService } from "./system/bag/bag-service";
-import { DataService } from "./system/data/data-service";
+import { TableService } from "./system/table/table-service";
 import { GmService } from "./system/gm/gm-service";
 import { LoginService } from "./system/login/login-service";
 import { MailService } from "./system/mail/mail-service";
@@ -30,7 +30,7 @@ export class Main extends AppBase {
 
 class ServiceManager {
     readonly network: NetworkService;
-    readonly data: DataService;
+    readonly table: TableService;
     readonly user: UserService;
     readonly login: LoginService;
     readonly world: WorldService;
@@ -48,7 +48,7 @@ class ServiceManager {
         this.user = this.newService(UserService);
         this.login = this.newService(LoginService);
         this.world = this.newService(WorldService);
-        this.data = this.newService(DataService);
+        this.table = this.newService(TableService);
         this.bag = this.newService(BagService);
         this.gm = this.newService(GmService);
         this.task = this.newService(TaskService);
@@ -108,7 +108,7 @@ class App {
 
         this._service = new ServiceManager();
 
-        await app.service.data.load();
+        await app.service.table.load();
         // app.networkd.connect("ws://games.bitserver.wang:10001");
         // app.userd.username = "zxp";
         // await this.bagd.load();

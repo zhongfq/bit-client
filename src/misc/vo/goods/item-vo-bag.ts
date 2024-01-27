@@ -4,7 +4,7 @@ import { ItemVo } from "./item-vo";
 import proto from "../../../def/proto";
 import { app } from "../../../app";
 import { Constructor } from "../../../core/dispatcher";
-import { DataUtil } from "../../../system/data/data-util";
+import { DataUtil } from "../../../system/table/table-util";
 
 /**
  * ItemBag 道具
@@ -24,10 +24,10 @@ export class ItemBag extends GoodsVoBag<ItemVo> {
     protected getVOClass(): Constructor<ItemVo> {
         return ItemVo;
     }
-    createByRef(refId: number) {
+    createByRef(refId: number): ItemVo {
         let clazz = this.getVOClass();
         let vo = new clazz();
-        let ref = DataUtil.getRef(app.service.data.itemTable, { id: refId });
+        let ref = DataUtil.getRef(app.service.table.item, { id: refId });
         // TODO: check ref
         vo.initByRef(ref!);
         return vo;

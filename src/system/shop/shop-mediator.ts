@@ -1,16 +1,12 @@
 import { app } from "../../app";
 import { Mediator } from "../../core/ui-mediator";
-import { IconUI } from "../../ui-runtime/prefab/icon/IconUI";
-import { DataUtil } from "../data/data-util";
-import { ItemVo } from "../../misc/vo/goods/item-vo";
+import { DataUtil } from "../table/table-util";
 import { ShopUI } from "../../ui-runtime/prefab/shop/ShopUI";
 import { ui } from "../../misc/ui";
 import proto from "../../def/proto";
 import { ItemRow, ShopRow } from "../../def/data";
 import { ShopConf } from "../../def/shop";
 import { ShopItemUI } from "../../ui-runtime/prefab/shop/ShopItemUI";
-import { VoUtil } from "../../misc/vo-util";
-import { VOBag } from "../../misc/vo/vo-base/vo-bag";
 import { ShopService } from "./shop-service";
 
 const { regClass, property } = Laya;
@@ -24,31 +20,39 @@ export class ShopMediator extends Mediator {
     itemListData!: ShopItem[];
 
     onAwake(): void {
+        this.initEvent();
+        this.bind();
+    }
+    initEvent() {
         this.owner.listItem.renderHandler = new Laya.Handler(this, this.updateItem);
         this.owner.listItem.mouseHandler = new Laya.Handler(this, this.onListClick);
+    }
+    bind() {
         this.on(app.service.shop, ShopService.SHOP_UPDATE, () => {
             this.updateList();
         });
     }
     onListClick(evn: Laya.Event, index: number) {
         if (evn.type == Laya.Event.CLICK) {
-            app.ui.show(ui.SHOP_BUY, this.itemListData[index]);
+            app.ui.show(ui.SHOP_BUY, { shopId: 1, shopItem: this.itemListData[index] });
         }
     }
     updateItem(cell: ShopItemUI, index: number) {
         let cellData = this.itemListData[index];
-        let vo = new ItemVo();
-        vo.initByRef(
-            DataUtil.getRef(app.service.data.itemTable, { id: cellData.refData.id }) as ItemRow
-        );
+        let vo = app.service.bag.itemBag.createByRef(cellData.refData.id);
         cell.labelName.text = vo.name;
         if (cellData.refData.cost && cellData.refData.cost.length > 0) {
             cell.labelConsume.text = cellData.refData.cost[0].count.toString();
         } else {
             cell.labelConsume.text = "免费";
         }
-
-        // c;
+        if (cellData.refData.limit_day) {
+            cell.labelLimit.text = `每日限购:${cellData.refData.limit_day}`;
+        } else if (cellData.refData.limit_week) {
+            cell.labelLimit.text = `每周限购:${cellData.refData.limit_week}`;
+        } else {
+            cell.labelLimit.text = "";
+        }
         cell.iconDrward.updateGoods(vo);
     }
     updateList() {
@@ -58,7 +62,7 @@ export class ShopMediator extends Mediator {
             for (let [_, item] of shopItemList) {
                 this.itemListData.push({
                     cmdData: item,
-                    refData: DataUtil.getRef(app.service.data.shopTable.shop_1, {
+                    refData: DataUtil.getRef(app.service.table.shop.shop_1, {
                         id: item.id,
                     }) as ShopRow,
                 });

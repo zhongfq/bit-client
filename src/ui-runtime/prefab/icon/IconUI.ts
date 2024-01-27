@@ -10,9 +10,12 @@ export class IconUI extends IconUIBase {
             this.imgIcon.skin = vo.iconUrl;
             this.imgQuality.skin = vo.qualitySkin;
             this.labelNumber.text = vo.goodsNumber.toString();
-            // this.iconNumber.text = vo.goodsNumber?.toString();
+            // this.labelNumber.text = vo.goodsNumber?.toString();
             // this.iconImage.text = vo.cmd?vo.cmd.num.toString():"0";
         } else {
         }
+    }
+    set itemNumber(num: string) {
+        this.labelNumber.text = num;
     }
 }

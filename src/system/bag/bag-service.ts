@@ -6,6 +6,8 @@ import { NetworkService } from "../network/network-service";
 import { ItemVo } from "../../misc/vo/goods/item-vo";
 import { VoUtil } from "../../misc/vo-util";
 import { ItemBag } from "../../misc/vo/goods/item-vo-bag";
+import { VO } from "../../misc/vo/vo-base/vo";
+import { GoodsVo } from "../../misc/vo/goods/goods-vo";
 
 export class BagService extends Service<NetworkService> {
     static readonly ITEM_UPDATE = "item-update";
@@ -20,7 +22,6 @@ export class BagService extends Service<NetworkService> {
         this.handle(opcode.bag.s2c_discard_item, this._onDiscardItem);
         this.handle(opcode.bag.notify_items, this._noNotify);
     }
-
     private _onLoad(data: proto.bag.s2c_load) {
         if (data.err === errcode.OK) {
             this.itemBag.init(data);
@@ -45,7 +46,6 @@ export class BagService extends Service<NetworkService> {
         this.event(BagService.ITEM_UPDATE);
         // if(data.items)
     }
-
     // ------------------------------------------------------------------------
     // rpc call
     // ------------------------------------------------------------------------

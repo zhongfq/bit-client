@@ -8,6 +8,7 @@ import { IconUI } from "../icon/IconUI";
 export class ShopItemUIBase extends Laya.Box {
     public labelName!: Laya.Label;
     public labelConsume!: Laya.Label;
+    public labelLimit!: Laya.Label;
     public iconDrward!: IconUI;
 }
 

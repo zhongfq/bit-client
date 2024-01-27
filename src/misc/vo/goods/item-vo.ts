@@ -1,7 +1,7 @@
 import { app } from "../../../app";
 import { ItemRow, ItemTable } from "../../../def/data";
 import { bag } from "../../../def/proto";
-import { DataUtil } from "../../../system/data/data-util";
+import { DataUtil } from "../../../system/table/table-util";
 import { GoodsVo } from "./goods-vo";
 
 /**
@@ -30,11 +30,11 @@ export class ItemVo extends GoodsVo<ItemRow, bag.Item> {
 
     getRefByCmd(cmd: bag.Item): ItemRow | undefined {
         let id = cmd.uid ? cmd.uid : cmd.id;
-        return DataUtil.getRef<ItemRow>(app.service.data.itemTable, { id: id });
+        return DataUtil.getRef<ItemRow>(app.service.table.item, { id: id });
     }
 
     initByRefId(id: number) {
-        let ref = DataUtil.getRef(app.service.data.itemTable, { id: id });
+        let ref = DataUtil.getRef(app.service.table.item, { id: id });
         if (ref) {
             this.initByRef(ref);
         } else {

@@ -2,7 +2,7 @@ const { regClass } = Laya;
 import { MailInfoUIBase } from "./MailInfoUI.generated";
 import proto from "../../../def/proto";
 import { MailRow } from "../../../def/data";
-import { DataUtil } from "../../../system/data/data-util";
+import { DataUtil } from "../../../system/table/table-util";
 import { app } from "../../../app";
 import { Util } from "../../../core/utils/util";
 
@@ -14,7 +14,7 @@ export class MailInfoUI extends MailInfoUIBase {
     open(closeOther?: boolean | undefined, param?: any): void {
         this.oepnData = param;
         if (this.oepnData.id) {
-            this.refData = DataUtil.getRef(app.service.data.mailTable, {
+            this.refData = DataUtil.getRef(app.service.table.mail, {
                 id: this.oepnData.id,
             }) as MailRow;
             if (this.refData.reward) {

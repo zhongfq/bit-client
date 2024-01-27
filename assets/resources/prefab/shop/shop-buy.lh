@@ -51,12 +51,12 @@
       "_$var": true,
       "_$type": "Button",
       "name": "btnSynthesis",
-      "x": 260,
+      "x": 256,
       "y": 641,
       "width": 128,
       "height": 32,
       "_mouseState": 2,
-      "right": 220,
+      "right": 224,
       "top": 641,
       "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
       "label": "合成",
@@ -93,21 +93,14 @@
       ]
     },
     {
-      "_$id": "eaqsqyzs",
+      "_$id": "xrd91fb5",
       "_$prefab": "296a5627-8151-43ef-8283-ced0d50d81a8",
       "_$var": true,
-      "name": "iconNodeTop",
+      "name": "icon",
       "active": true,
       "x": 249,
       "y": 150,
-      "visible": true,
-      "_$child": [
-        {
-          "_$override": "0gth0gc8",
-          "x": 5,
-          "y": 5
-        }
-      ]
+      "visible": true
     },
     {
       "_$id": "oc27rid6",
@@ -150,7 +143,7 @@
       "_$id": "a4qtlb4m",
       "_$var": true,
       "_$type": "Label",
-      "name": "labelNum",
+      "name": "labelItemCurNum",
       "x": 241,
       "y": 266,
       "width": 120,
@@ -195,69 +188,37 @@
       ]
     },
     {
-      "_$id": "zi0cjfx1",
+      "_$id": "0vr7j6tx",
+      "_$prefab": "2f44d8a9-a9bb-4347-b790-4f3fcf3c5afb",
       "_$var": true,
-      "_$type": "HSlider",
-      "name": "slNum",
-      "x": 165,
-      "y": 557,
-      "width": 303,
-      "height": 51,
-      "_mouseState": 2,
+      "name": "slider",
+      "active": true,
+      "x": 73,
+      "y": 533,
+      "visible": true,
+      "tick": 1,
       "min": 1,
       "showLabel": false,
-      "showProgress": true,
-      "skin": "res://051feaa7-15db-4143-958c-161475961a6b",
-      "value": 56,
-      "_$child": [
-        {
-          "_$id": "ddbzi4ia",
-          "_$var": true,
-          "_$type": "Label",
-          "name": "selectNumber",
-          "x": 5,
-          "y": -44,
-          "width": 120,
-          "height": 28,
-          "text": "数量:1",
-          "fontSize": 20,
-          "color": "rgba(109, 109, 31, 1)",
-          "valign": "middle",
-          "padding": "0,0,0,0"
-        },
-        {
-          "_$id": "sbhtk0ea",
-          "_$var": true,
-          "_$type": "Button",
-          "name": "minusBtn",
-          "x": -63,
-          "y": -3,
-          "width": 32,
-          "height": 32,
-          "_mouseState": 2,
-          "right": 334,
-          "top": -3,
-          "skin": "res://679b3902-4c06-412d-aeef-7efca529bf41",
-          "label": "",
-          "labelSize": 20
-        },
-        {
-          "_$id": "tbahweuv",
-          "_$var": true,
-          "_$type": "Button",
-          "name": "addBtn",
-          "x": 339,
-          "y": 2,
-          "width": 32,
-          "height": 32,
-          "_mouseState": 2,
-          "right": -68,
-          "top": 2,
-          "skin": "res://34582d14-0e49-41c3-9bac-3d12def95ef9",
-          "label": "",
-          "labelSize": 20
-        }
-      ]
+      "width": 460
+    },
+    {
+      "_$id": "4g6q5agq",
+      "_$var": true,
+      "_$type": "Label",
+      "name": "labelNum",
+      "x": 259,
+      "y": 601,
+      "width": 113,
+      "height": 26,
+      "text": "拥有:1000",
+      "fontSize": 25,
+      "color": "#FFFFFF",
+      "fitContent": "yes",
+      "ubb": true,
+      "templateVars": true,
+      "align": "center",
+      "valign": "middle",
+      "padding": "0,0,0,0"
     }
   ]
 }

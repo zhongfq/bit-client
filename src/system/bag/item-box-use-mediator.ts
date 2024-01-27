@@ -11,14 +11,12 @@ export class ItemBoxUseMediator extends Mediator {
 
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
     onAwake(): void {
-        this.owner.slNum.changeHandler = new Laya.Handler(this, this.onChange);
-        this.owner.addBtn.on(Laya.Event.CLICK, this, this.onAddBtn);
-        this.owner.btnClose.on(Laya.Event.CLICK, this, this.onCloseBtn);
-        this.owner.btnSynthesis.on(Laya.Event.CLICK, this, this.onSynthesisBtn);
-        this.owner.minusBtn.on(Laya.Event.CLICK, this, this.onMinusBtn);
-        this.owner.slNum.min = 1;
-        this.owner.slNum.max = this.owner.data.goodsNumber;
-        this.owner.slNum.value = 1;
+        this.initInfo();
+    }
+    initInfo() {
+        this.owner.slider_h.min = 1;
+        this.owner.slider_h.max = this.owner.data.goodsNumber;
+        this.owner.slider_h.value = 1;
         this.owner.iconNodeTop.updateGoods(this.owner.data);
         let tlData = [];
 
@@ -27,28 +25,23 @@ export class ItemBoxUseMediator extends Mediator {
             vo.goodsNumber = data[1];
             tlData.push(vo);
         }
-        this.owner.listItem.renderHandler = new Laya.Handler(this, this.updateItem);
         this.owner.listItem.array = tlData;
+    }
+    initEvent() {
+        this.owner.btnClose.on(Laya.Event.CLICK, this, this.onCloseBtn);
+        this.owner.btnSynthesis.on(Laya.Event.CLICK, this, this.onSynthesisBtn);
+        this.owner.listItem.renderHandler = new Laya.Handler(this, this.updateItem);
     }
     updateItem(cell: IconUI, index: number) {
         cell.updateGoods(cell.dataSource);
     }
-    onAddBtn() {
-        this.owner.slNum.value++;
-    }
-    onMinusBtn() {
-        this.owner.slNum.value--;
-    }
     onSynthesisBtn() {
         app.service.bag.requestUseItem({
             itemId: this.owner.data.refId,
-            num: this.owner.slNum.value,
+            num: this.owner.slider_h.value,
         });
     }
     onCloseBtn() {
         this.owner.close();
-    }
-    onChange(value: number) {
-        this.owner.selectNumber.text = value.toString();
     }
 }
