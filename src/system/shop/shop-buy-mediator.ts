@@ -30,10 +30,10 @@ export class ShopBuyMediator extends Mediator {
         this.owner.slider.max = 50;
         this.owner.slider.value = 1;
         if (this.owner.openData.shopItem.refData.cost) {
-            let vo2 = VoUtil.createVo(this.owner.openData.shopItem.refData.cost[0].id);
+            let costVo = VoUtil.createVo(this.owner.openData.shopItem.refData.cost[0].id);
             this.owner.labelNum.text = StringUtil.str2UBB(
                 "{0} {1}/{2}",
-                { image: vo2.iconUrl, width: 20, height: 20 },
+                { image: costVo.iconUrl, width: 20, height: 20 },
                 {
                     text: `{voNum=${VoUtil.getNumber(
                         this.owner.openData.shopItem.refData.cost[0].id
