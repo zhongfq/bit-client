@@ -5,7 +5,7 @@
   "_$type": "Box",
   "name": "Box",
   "width": 177,
-  "height": 213,
+  "height": 247,
   "bgColor": "rgba(93, 85, 85, 1)",
   "_$child": [
     {
@@ -31,7 +31,7 @@
       "_$type": "Label",
       "name": "labelConsume",
       "x": 10,
-      "y": 162,
+      "y": 200,
       "width": 157,
       "height": 38,
       "centerX": 0,
@@ -42,6 +42,24 @@
       "align": "center",
       "valign": "middle",
       "wordWrap": true,
+      "padding": "0,0,0,0"
+    },
+    {
+      "_$id": "d2l5hzhq",
+      "_$var": true,
+      "_$type": "Label",
+      "name": "labelLimit",
+      "x": 41,
+      "y": 169,
+      "width": 100,
+      "height": 21,
+      "centerX": 2,
+      "text": "每日限购:2",
+      "fontSize": 20,
+      "color": "#FFFFFF",
+      "fitContent": "yes",
+      "align": "center",
+      "valign": "middle",
       "padding": "0,0,0,0"
     },
     {

@@ -5,7 +5,7 @@ import { MailRow } from "../../def/data";
 import { MailConf } from "../../def/mail";
 import proto from "../../def/proto";
 import { errcode, opcode } from "../../def/protocol";
-import { DataUtil } from "../data/data-util";
+import { DataUtil } from "../table/table-util";
 import { NetworkService } from "../network/network-service";
 
 interface UpdateMailData {
@@ -49,7 +49,7 @@ export class MailService extends Service<NetworkService> {
         let refData!: MailRow;
         cmdMail = cmdData;
         if (cmdData.id) {
-            refData = DataUtil.getRef(app.service.data.mailTable, {
+            refData = DataUtil.getRef(app.service.table.mail, {
                 id: Number(cmdData.id),
             }) as MailRow;
         }

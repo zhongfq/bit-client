@@ -14,14 +14,15 @@ export class TaskMediator extends Mediator {
 
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
     onAwake(): void {
-        this.initBtn();
         this.initEvent();
         this.tlTaskData = app.service.task.taskBag.toArray();
-        this.owner.listTask.renderHandler = new Laya.Handler(this, this.onListRender);
-        this.owner.listTask.mouseHandler = new Laya.Handler(this, this.onListClick);
         this.updateList();
     }
 
+    initEvent() {
+        this.owner.listTask.renderHandler = new Laya.Handler(this, this.onListRender);
+        this.owner.listTask.mouseHandler = new Laya.Handler(this, this.onListClick);
+    }
     onListClick(e: Laya.Event, index: number) {
         if (e.type == Laya.Event.CLICK) {
             if (e.target.name === "btnUse") {
@@ -29,14 +30,9 @@ export class TaskMediator extends Mediator {
             }
         }
     }
-
     onListRender(item: TaskItemBox, index: number) {
         item.updateInfo(item.dataSource);
     }
-
-    initBtn() {}
-
-    initEvent() {}
 
     updateList() {
         this.owner.listTask.array = this.tlTaskData;

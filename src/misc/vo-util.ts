@@ -1,5 +1,7 @@
+import { app } from "../app";
 import { Constructor } from "../core/dispatcher";
 import { Service } from "../core/service";
+import { DataUtil } from "../system/table/table-util";
 import { NetworkService } from "../system/network/network-service";
 import { GoodsVo } from "./vo/goods/goods-vo";
 import { GoodsVoBag } from "./vo/goods/goods-vo-bag";
@@ -22,5 +24,12 @@ export class VoUtil {
     static createGoodsBag<T extends GoodsVoBag<GoodsVo<any, any>>>(clazz: Constructor<T>): T {
         let bag = this.createBag(clazz);
         return bag;
+    }
+    static GetNumber(refId: number, vobag: GoodsVoBag): number {
+        let goods = vobag.getByRef(refId);
+        if (goods) {
+            return goods.goodsNumber;
+        }
+        return 0;
     }
 }

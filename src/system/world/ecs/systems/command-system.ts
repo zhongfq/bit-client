@@ -110,8 +110,8 @@ export class CommandSystem extends ecs.System {
         if (cmd.troop) {
             const data = cmd.troop as proto.world.TroopComponent;
             const animation = entity.addComponent(AnimationComponent);
-            const heroProp = app.service.data.heroTable[data.heroId];
-            const modelProp = app.service.data.worldEntityTable.models[heroProp.model];
+            const heroProp = app.service.table.hero[data.heroId];
+            const modelProp = app.service.table.worldEntity.models[heroProp.model];
             animation.path = modelProp.res;
 
             if (this.context.troop.eid === cmd.eid) {
