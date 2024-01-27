@@ -43,6 +43,7 @@ export class ShopService extends Service<NetworkService> {
         }
         this.event(ShopService.SHOP_UPDATE, { shopId: shopId });
     }
+
     // ------------------------------------------------------------------------
     // rpc call
     // ------------------------------------------------------------------------
