@@ -5,6 +5,7 @@ import { HSliderUIBase } from "./HSliderUI.generated";
 export class HSliderUI extends HSliderUIBase {
     _onSliderChange!: Function;
     onAwake(): void {
+        super.onAwake();
         this.on(Laya.Event.CLICK, () => {});
 
         this.changeHandler = new Laya.Handler(this, this.onChange);

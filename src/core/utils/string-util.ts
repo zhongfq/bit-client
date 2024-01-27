@@ -236,6 +236,7 @@ export class StringUtil {
             if (data.height) {
                 str += ` height=${data.height}`;
             }
+            str += `/>`;
             return str;
         } else if (data.text) {
             if (data.u) {

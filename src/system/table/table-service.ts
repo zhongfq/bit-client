@@ -12,8 +12,12 @@ import {
     TaskTable,
     SoldierTable,
     ShopTable,
+    MoneyTable,
 } from "../../def/data";
+import { ItemConf } from "../../def/item";
+import { VOBag } from "../../misc/vo/vo-base/vo-bag";
 import { NetworkService } from "../network/network-service";
+import { DataUtil } from "./table-util";
 
 const JSON_ENTITY_TABLE = "resources/data/world/world_entity.json";
 const JSON_BUFF_TABLE = "resources/data/battle/battle_buff.json";
@@ -39,11 +43,11 @@ export class TableService extends Service<NetworkService> {
     task!: TaskTable;
     mail!: MailTable;
     shop!: ShopTable;
+    money!: MoneyTable;
 
     constructor(network: NetworkService) {
         super(network);
     }
-
     async load() {
         // TODO: 处理加载错误
         this.equip = await app.loader.loadJson(JSON_EQUIP_TABLE);
@@ -56,6 +60,17 @@ export class TableService extends Service<NetworkService> {
         this.task = await app.loader.loadJson(JSON_TASK_TABLE);
         this.mail = await app.loader.loadJson(JSON_MAIL_TABLE);
         this.shop = await app.loader.loadJson(JSON_SHOP_TABLE);
+        this.money = await app.loader.loadJson(JSON_SHOP_TABLE);
     }
-    getGoods(refId: number) {}
+    getVo(refId: number) {
+        let dataRow = DataUtil.getRef(this.item, { id: refId });
+        if (dataRow) {
+            if (dataRow.sub_type == ItemConf.ITEM_TYPE.MONEY) {
+                return app.service.user.monye.get(refId);
+            } else {
+                return app.service.bag.itemBag;
+            }
+        }
+        return null;
+    }
 }

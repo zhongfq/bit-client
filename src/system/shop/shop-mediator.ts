@@ -34,7 +34,7 @@ export class ShopMediator extends Mediator {
     }
     onListClick(evn: Laya.Event, index: number) {
         if (evn.type == Laya.Event.CLICK) {
-            app.ui.show(ui.SHOP_BUY, this.itemListData[index]);
+            app.ui.show(ui.SHOP_BUY, { shopId: 1, shopItem: this.itemListData[index] });
         }
     }
     updateItem(cell: ShopItemUI, index: number) {

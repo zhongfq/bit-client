@@ -215,6 +215,7 @@
       "color": "#FFFFFF",
       "fitContent": "yes",
       "ubb": true,
+      "templateVars": true,
       "align": "center",
       "valign": "middle",
       "padding": "0,0,0,0"

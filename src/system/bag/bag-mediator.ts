@@ -14,16 +14,19 @@ export class BagMediator extends Mediator {
     itemListData!: ItemVo[];
 
     onAwake(): void {
-        this.initEvent();
-        this.bind();
+        this.initUiEvent();
+        this.initServiceEvent();
         this.updateList();
     }
-    initEvent() {
+    initUiEvent() {
+        //UI Event
         this.owner.listItem.renderHandler = new Laya.Handler(this, this.updateItem);
         this.owner.listItem.mouseHandler = new Laya.Handler(this, this.onListClick);
         this.owner.tabMenu.selectHandler = new Laya.Handler(this, this.onTabSelect);
+
+        //service Event
     }
-    bind() {
+    initServiceEvent() {
         this.on(app.service.bag, BagService.ITEM_UPDATE, () => {
             this.updateList();
         });

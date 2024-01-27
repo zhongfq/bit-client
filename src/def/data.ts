@@ -129,3 +129,12 @@ export type ShopTable = {
     shop_1: ShopRow[];
     shop_2: ShopRow[];
 };
+export type MoneyRow = {
+    id: number;
+    desc: string;
+    name: string;
+    icon: string;
+};
+export type MoneyTable = {
+    [k: number]: MoneyRow;
+};
