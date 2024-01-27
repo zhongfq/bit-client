@@ -1,7 +1,7 @@
 import { app } from "../app";
 import { Constructor } from "../core/dispatcher";
 import { Service } from "../core/service";
-import { DataUtil } from "../system/table/table-util";
+import { TableUtil } from "../system/table/table-util";
 import { NetworkService } from "../system/network/network-service";
 import { GoodsVo } from "./vo/goods/goods-vo";
 import { GoodsVoBag } from "./vo/goods/goods-vo-bag";
@@ -10,6 +10,8 @@ import { TaskBag } from "./vo/task/task-vo-bag";
 import { VO } from "./vo/vo-base/vo";
 import { VOBag } from "./vo/vo-base/vo-bag";
 import { ItemConf } from "../def/item";
+import { MoneyVo } from "./vo/money/money-vo";
+import { ItemArgsMoney, ItemRow, MoneyRow } from "../def/table";
 
 export class VoUtil {
     /**
@@ -28,11 +30,23 @@ export class VoUtil {
         let bag = this.createBag(clazz);
         return bag;
     }
-
-    static getVo(refId: number) {
-        let refData = DataUtil.getRef(app.service.table.item, { id: refId });
+    static createVo(refId: number): GoodsVo<any> {
+        let refData = TableUtil.getRef(app.service.table.item, { id: refId });
         if (refData?.sub_type == ItemConf.ITEM_TYPE.MONEY) {
-            return app.service.user.monye.get(refId);
+            let vo = new MoneyVo();
+            let args = refData.args as ItemArgsMoney;
+            let voRef = TableUtil.getRef(app.service.table.money, { id: args.money_id });
+            vo.initByRef(voRef as MoneyRow);
+            return vo;
+        } else {
+            return app.service.bag.itemBag.createByRef(refId);
+        }
+    }
+    static getVo(refId: number) {
+        let refData = TableUtil.getRef(app.service.table.item, { id: refId });
+        if (refData?.sub_type == ItemConf.ITEM_TYPE.MONEY) {
+            let args = refData.args as ItemArgsMoney;
+            return app.service.user.monye.get(args.money_id);
         } else {
             return app.service.bag.itemBag.getByRef(refId);
         }

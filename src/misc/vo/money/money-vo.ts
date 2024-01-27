@@ -1,7 +1,7 @@
 import { app } from "../../../app";
-import { ItemTable, MoneyRow } from "../../../def/data";
+import { ItemTable, MoneyRow } from "../../../def/table";
 import { money, task } from "../../../def/proto";
-import { DataUtil } from "../../../system/table/table-util";
+import { TableUtil } from "../../../system/table/table-util";
 import { GoodsVo } from "../goods/goods-vo";
 import { VO } from "../vo-base/vo";
 
@@ -25,7 +25,7 @@ export class MoneyVo extends GoodsVo<MoneyRow, money.MoneyItem> {
     }
 
     getRefByCmd(cmd: money.MoneyItem): MoneyRow | undefined {
-        return DataUtil.getRef<MoneyRow>(app.service.table.money, { id: cmd.id });
+        return TableUtil.getRef<MoneyRow>(app.service.table.money, { id: cmd.id });
     }
 
     get goodsType(): number {
@@ -46,7 +46,7 @@ export class MoneyVo extends GoodsVo<MoneyRow, money.MoneyItem> {
         return 0;
     }
     get iconUrl(): string {
-        return this._ref ? `resources/atlas/icon/${this._ref.icon}.png` : "";
+        return this._ref ? `resources/atlas/iconSmall/${this._ref.icon}.png` : "";
     }
     get quality(): number {
         throw new Error("Method not implemented.");

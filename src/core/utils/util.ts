@@ -1,4 +1,4 @@
-import { Reward } from "../../def/data.js";
+import { Reward } from "../../def/table.js";
 import proto from "../../def/proto.js";
 export class Util {
     //Map转换数组

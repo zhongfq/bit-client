@@ -1,4 +1,4 @@
-import { ItemTable } from "../../../def/data";
+import { ItemTable } from "../../../def/table";
 import { VO } from "../vo-base/vo";
 
 /**

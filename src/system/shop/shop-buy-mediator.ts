@@ -5,6 +5,8 @@ import { ShopBuyUI } from "../../ui-runtime/prefab/shop/ShopBuyUI";
 import { app } from "../../app";
 import { VoUtil } from "../../misc/vo-util";
 import { StringUtil } from "../../core/utils/string-util";
+import { TableUtil } from "../table/table-util";
+import { ItemRow, ItemTable } from "../../def/table";
 
 const { regClass, property } = Laya;
 
@@ -28,13 +30,15 @@ export class ShopBuyMediator extends Mediator {
         this.owner.slider.max = 50;
         this.owner.slider.value = 1;
         if (this.owner.openData.shopItem.refData.cost) {
-            let vo2 = app.service.bag.itemBag.createByRef(
-                this.owner.openData.shopItem.refData.cost[0].id
-            );
+            let vo2 = VoUtil.createVo(this.owner.openData.shopItem.refData.cost[0].id);
             this.owner.labelNum.text = StringUtil.str2UBB(
                 "{0} {1}/{2}",
                 { image: vo2.iconUrl, width: 20, height: 20 },
-                { text: `{voNum=${VoUtil.getNumber(vo2.refId)}}` },
+                {
+                    text: `{voNum=${VoUtil.getNumber(
+                        this.owner.openData.shopItem.refData.cost[0].id
+                    )}}`,
+                },
                 { text: `{seleNum=${this.owner.openData.shopItem.refData.cost[0].count}}` }
             );
         }

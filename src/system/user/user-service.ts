@@ -51,6 +51,7 @@ export class UserService extends Service<NetworkService> {
         await app.service.bag.load({ bagId: 1 });
         await app.service.task.load({ taskType: 2 });
         await app.service.mail.load();
+        await this.loadMonye();
         app.ui.replace(ui.HOME_SCENE);
     }
 

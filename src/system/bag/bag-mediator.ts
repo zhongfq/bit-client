@@ -3,7 +3,7 @@ import { Mediator } from "../../core/ui-mediator";
 import { ItemVo } from "../../misc/vo/goods/item-vo";
 import { BagUI } from "../../ui-runtime/prefab/bag/BagUI";
 import { IconUI } from "../../ui-runtime/prefab/icon/IconUI";
-import { DataUtil } from "../table/table-util";
+import { TableUtil } from "../table/table-util";
 import { BagService } from "./bag-service";
 
 const { regClass, property } = Laya;
@@ -48,7 +48,7 @@ export class BagMediator extends Mediator {
         if (this.owner.tabMenu.selectedIndex == 0) {
             this.itemListData = bag.toArray();
         } else {
-            let tlItem = DataUtil.getArrayRef(app.service.table.item, { composite: 1 });
+            let tlItem = TableUtil.getArrayRef(app.service.table.item, { composite: 1 });
             for (let refItem of tlItem) {
                 let itemvo = bag.createByRef(refItem.id);
                 this.itemListData.push(itemvo);

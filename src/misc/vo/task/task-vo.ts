@@ -1,7 +1,7 @@
 import { app } from "../../../app";
-import { ItemTable, TaskRow } from "../../../def/data";
+import { ItemTable, TaskRow } from "../../../def/table";
 import { task } from "../../../def/proto";
-import { DataUtil } from "../../../system/table/table-util";
+import { TableUtil } from "../../../system/table/table-util";
 import { VO } from "../vo-base/vo";
 
 /**
@@ -24,7 +24,7 @@ export class TaskVo extends VO<TaskRow, task.TaskInfo> {
     }
 
     getRefByCmd(cmd: task.TaskInfo): TaskRow | undefined {
-        return DataUtil.getRef<TaskRow>(app.service.table.task, { id: cmd.id });
+        return TableUtil.getRef<TaskRow>(app.service.table.task, { id: cmd.id });
     }
 
     get goodsType(): number {

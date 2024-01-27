@@ -89,7 +89,8 @@ export type ItemRow = {
     sub_type: number;
     use: number;
     quality: number;
-    args: any[];
+    args?: any;
+    _id: number;
 };
 export type ItemTable = {
     [k: number]: ItemRow;
@@ -137,4 +138,9 @@ export type MoneyRow = {
 };
 export type MoneyTable = {
     [k: number]: MoneyRow;
+};
+export type ItemArgsReward = {};
+export type ItemArgsExp = {};
+export type ItemArgsMoney = {
+    money_id: number;
 };

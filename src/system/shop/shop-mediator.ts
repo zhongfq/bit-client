@@ -1,10 +1,10 @@
 import { app } from "../../app";
 import { Mediator } from "../../core/ui-mediator";
-import { DataUtil } from "../table/table-util";
+import { TableUtil } from "../table/table-util";
 import { ShopUI } from "../../ui-runtime/prefab/shop/ShopUI";
 import { ui } from "../../misc/ui";
 import proto from "../../def/proto";
-import { ItemRow, ShopRow } from "../../def/data";
+import { ItemRow, ShopRow } from "../../def/table";
 import { ShopConf } from "../../def/shop";
 import { ShopItemUI } from "../../ui-runtime/prefab/shop/ShopItemUI";
 import { ShopService } from "./shop-service";
@@ -62,7 +62,7 @@ export class ShopMediator extends Mediator {
             for (let [_, item] of shopItemList) {
                 this.itemListData.push({
                     cmdData: item,
-                    refData: DataUtil.getRef(app.service.table.shop.shop_1, {
+                    refData: TableUtil.getRef(app.service.table.shop.shop_1, {
                         id: item.id,
                     }) as ShopRow,
                 });

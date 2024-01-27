@@ -13,11 +13,11 @@ import {
     SoldierTable,
     ShopTable,
     MoneyTable,
-} from "../../def/data";
+} from "../../def/table";
 import { ItemConf } from "../../def/item";
 import { VOBag } from "../../misc/vo/vo-base/vo-bag";
 import { NetworkService } from "../network/network-service";
-import { DataUtil } from "./table-util";
+import { TableUtil } from "./table-util";
 
 const JSON_ENTITY_TABLE = "resources/data/world/world_entity.json";
 const JSON_BUFF_TABLE = "resources/data/battle/battle_buff.json";
@@ -30,6 +30,7 @@ const JSON_ITEM_TABLE = "resources/data/item.json";
 const JSON_TASK_TABLE = "resources/data/task.json";
 const JSON_MAIL_TABLE = "resources/data/mail.json";
 const JSON_SHOP_TABLE = "resources/data/activity/shop.json";
+const JSON_MONEY_TABLE = "resources/data/money.json";
 
 export class TableService extends Service<NetworkService> {
     equip!: EquipTable;
@@ -60,10 +61,10 @@ export class TableService extends Service<NetworkService> {
         this.task = await app.loader.loadJson(JSON_TASK_TABLE);
         this.mail = await app.loader.loadJson(JSON_MAIL_TABLE);
         this.shop = await app.loader.loadJson(JSON_SHOP_TABLE);
-        this.money = await app.loader.loadJson(JSON_SHOP_TABLE);
+        this.money = await app.loader.loadJson(JSON_MONEY_TABLE);
     }
     getVo(refId: number) {
-        let dataRow = DataUtil.getRef(this.item, { id: refId });
+        let dataRow = TableUtil.getRef(this.item, { id: refId });
         if (dataRow) {
             if (dataRow.sub_type == ItemConf.ITEM_TYPE.MONEY) {
                 return app.service.user.monye.get(refId);

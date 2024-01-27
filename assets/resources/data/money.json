@@ -1,13 +1,16 @@
 {
     "101": {
+        "icon": "iconSmall15",
         "id": 101,
         "name": "coin"
     },
     "102": {
+        "icon": "iconSmall8",
         "id": 102,
         "name": "diamond"
     },
     "103": {
+        "icon": "iconSmall4",
         "id": 103,
         "name": "energy",
         "recover_inc": 10,
@@ -15,10 +18,12 @@
         "recover_sec": 10
     },
     "201": {
+        "icon": "iconSmall9",
         "id": 201,
         "name": "wood"
     },
     "202": {
+        "icon": "iconSmall11",
         "id": 202,
         "name": "food"
     }
