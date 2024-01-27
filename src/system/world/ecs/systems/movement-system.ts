@@ -23,7 +23,7 @@ export class MovementSystem extends ecs.System {
             } else {
                 this._updateWithSpeed(movement, dt);
             }
-            if (movement.rotation.ration < 1) {
+            if (movement.rotation.ratio < 1) {
                 this._updateRotation(movement, dt);
             }
         });
@@ -34,6 +34,7 @@ export class MovementSystem extends ecs.System {
     private _updateWithSpeed(movement: MovementComponent, dt: number) {
         const transform = movement.getComponent(TransformComponent)!;
         const position = transform.position;
+        const interpolation = movement.positionInterpolation;
         const speed = movement.speed;
         let target = movement.target;
 
@@ -44,8 +45,19 @@ export class MovementSystem extends ecs.System {
             }
         }
 
+        if (interpolation.ratio < 1) {
+            const last = interpolation.ratio;
+            let ratio = last + dt * (1 / 0.2);
+            if (ratio > 1) {
+                ratio = 1;
+            }
+            const step = ratio - last;
+            interpolation.ratio = ratio;
+            position.x += interpolation.x * step;
+            position.z += interpolation.z * step;
+        }
+
         position.x += speed.x * dt;
-        position.y += speed.y * dt;
         position.z += speed.z * dt;
         transform.flag |= TransformComponent.POSITION;
 
@@ -72,11 +84,11 @@ export class MovementSystem extends ecs.System {
         const rotation = movement.rotation;
         const transform = movement.getComponent(TransformComponent)!;
         // 0.2s完成转向
-        rotation.ration += dt * (1 / 0.2);
-        if (rotation.ration > 1) {
-            rotation.ration = 1;
+        rotation.ratio += dt * (1 / 0.2);
+        if (rotation.ratio > 1) {
+            rotation.ratio = 1;
         }
-        transform.rotation = rotation.from + (rotation.to - rotation.from) * rotation.ration;
+        transform.rotation = rotation.from + (rotation.to - rotation.from) * rotation.ratio;
         transform.flag |= TransformComponent.ROTATION;
     }
 }

@@ -60,8 +60,8 @@
             },
             "localRotation": {
               "_$type": "Quaternion",
-              "x": -0.25881904510252074,
-              "w": 0.9659258262890683
+              "x": -0.3826834323650898,
+              "w": 0.9238795325112867
             }
           },
           "orthographicVerticalSize": 10,
@@ -223,7 +223,7 @@
           "_$id": "i81bwyxz",
           "_$prefab": "b6ab5d2a-c255-4411-8846-83b695f2d6c9",
           "name": "mc03",
-          "active": false,
+          "active": true,
           "layer": 0,
           "transform": {
             "localPosition": {

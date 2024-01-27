@@ -102,7 +102,7 @@ export class WorldContext extends Mediator {
             if (!layer.data || layer.class !== "grounds") {
                 return;
             }
-            for (let i = 0; i < layer.data.length; i++) {
+            for (let i = 0; i < layer.data.length / 2; i++) {
                 let idx = -1;
                 const gid = layer.data[i];
                 for (const ts of map.tilesets) {

@@ -35,8 +35,12 @@ export const enum MovementType {
 type Rotation = {
     from: number;
     to: number;
-    ration: number;
+    ratio: number;
 };
+
+class PositionInterpolation extends Laya.Vector3 {
+    ratio: number = 1;
+}
 
 export class MovementComponent extends ecs.Component {
     type: MovementType = MovementType.NONE;
@@ -53,5 +57,8 @@ export class MovementComponent extends ecs.Component {
     trackType: TrackType = TrackType.NONE;
 
     // 改变角度
-    rotation: Rotation = { from: 0, to: 0, ration: 1 };
+    rotation: Rotation = { from: 0, to: 0, ratio: 1 };
+
+    // 位置差
+    positionInterpolation: PositionInterpolation = new PositionInterpolation();
 }

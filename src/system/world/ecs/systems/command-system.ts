@@ -145,8 +145,12 @@ export class CommandSystem extends ecs.System {
         }
         if (cmd.curPos) {
             const transform = entity.getComponent(TransformComponent)!;
-            Tilemap.grid2Pixel(cmd.curPos.x!, cmd.curPos.y!, transform.position);
-            transform.flag |= TransformComponent.POSITION;
+            const movement = entity.getComponent(MovementComponent)!;
+            const current = cmd.curPos as proto.world.Position;
+            const positionInterpolation = movement.positionInterpolation;
+            positionInterpolation.ratio = 0;
+            Tilemap.grid2Pixel(current.x, current.y, positionInterpolation);
+            positionInterpolation.vsub(transform.position, positionInterpolation);
         }
         this._updateMovement(
             cmd.eid as number,
