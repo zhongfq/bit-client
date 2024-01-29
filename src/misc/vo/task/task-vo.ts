@@ -3,20 +3,13 @@ import { ItemTable } from "../../../def/table";
 import { task } from "../../../def/proto";
 import { TableUtil } from "../../../system/table/table-util";
 import { VO } from "../vo-base/vo";
-import {
-    GeneratedTaskBranchRow,
-    GeneratedTaskDailyRow,
-    GeneratedTaskMainRow,
-} from "../../../def/table.generated";
+import { TaskMainRow, TaskBranchRow, TaskDailyRow } from "../../../def/table";
 
 /**
  * Item
  * 道具
  */
-export class TaskVo extends VO<
-    GeneratedTaskMainRow | GeneratedTaskBranchRow | GeneratedTaskDailyRow,
-    task.TaskInfo
-> {
+export class TaskVo extends VO<TaskMainRow | TaskBranchRow | TaskDailyRow, task.TaskInfo> {
     refTable!: ItemTable;
 
     //#region 重载
@@ -31,12 +24,13 @@ export class TaskVo extends VO<
         return 0;
     }
 
-    getRefByCmd(
-        cmd: task.TaskInfo
-    ): GeneratedTaskMainRow | GeneratedTaskBranchRow | GeneratedTaskDailyRow | undefined {
-        return TableUtil.getRef<
-            GeneratedTaskMainRow | GeneratedTaskBranchRow | GeneratedTaskDailyRow
-        >(app.service.table.task, { id: cmd.id });
+    getRefByCmd(cmd: task.TaskInfo): TaskMainRow | TaskBranchRow | TaskDailyRow | undefined {
+        return TableUtil.getRef<TaskMainRow | TaskBranchRow | TaskDailyRow>(
+            app.service.table.task,
+            {
+                id: cmd.id,
+            }
+        );
     }
 
     get goodsType(): number {

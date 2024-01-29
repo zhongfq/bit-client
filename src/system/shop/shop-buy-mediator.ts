@@ -6,6 +6,7 @@ import { app } from "../../app";
 import { VoUtil } from "../../misc/vo-util";
 import { StringUtil } from "../../core/utils/string-util";
 import { GoodsVo } from "../../misc/vo/goods/goods-vo";
+import { Reward } from "../../def/table";
 
 const { regClass, property } = Laya;
 
@@ -15,12 +16,13 @@ export class ShopBuyMediator extends Mediator {
     itemVo?: GoodsVo | null;
     costVo?: GoodsVo | null;
     onAwake(): void {
-        this.initEvent();
-        this.initInfo();
         this.itemVo = VoUtil.createVo(this.owner.openData.shopItem.refData.items[0].id);
         this.costVo = this.owner.openData.shopItem.refData.cost
             ? VoUtil.createVo(this.owner.openData.shopItem.refData.cost[0].id)
             : null;
+
+        this.initEvent();
+        this.initInfo();
     }
     initInfo() {
         if (this.itemVo) {
@@ -29,14 +31,14 @@ export class ShopBuyMediator extends Mediator {
             this.owner.labelName.text = this.itemVo.name;
             this.owner.labelItemCurNum.text = `当前拥有:${VoUtil.getNumber(this.itemVo.refId)}`;
         }
-        // if (this.costVo) {
-        // }
         this.owner.slider.min = 1;
 
         this.owner.slider.value = 1;
-        let max = app.service.shop.getShopItemLimit(this.costVo?.ref);
-        // if(max)
-        // this.owner.slider.max = 50;
+        let cost = this.owner.openData.shopItem.refData.cost as Reward[];
+        let costBagNum = VoUtil.getNumber(cost[0].id);
+        let maxNum = Math.floor(costBagNum / cost[0].count);
+        let limitNum = app.service.shop.getShopItemLimit(this.costVo?.ref);
+        this.owner.slider.max = limitNum == 0 ? maxNum : Math.min(limitNum, maxNum);
         // if (this.owner.openData.shopItem.refData.cost) {
         //     this.owner.labelNum.text = StringUtil.str2UBB(
         //         "{0} {1}/{2}",

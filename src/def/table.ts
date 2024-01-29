@@ -117,7 +117,9 @@ export type MailTable = {
 // 商城
 //-----------------------------------------------------------------------------
 export interface ShopconfigRow extends GeneratedShopconfigRow {}
-export interface Shop1Row extends GeneratedShop1Row {}
+export interface Shop1Row extends GeneratedShop1Row {
+    cost?: any[];
+}
 export interface Shop2Row extends GeneratedShop2Row {}
 export type ShopTable = {
     shop_config: ShopconfigRow[];
@@ -127,6 +129,7 @@ export type ShopTable = {
 //-----------------------------------------------------------------------------
 // 资源
 //-----------------------------------------------------------------------------
+export interface MoneyRow extends GeneratedMoneyRow {}
 export type MoneyTable = {
     [k: number]: GeneratedMoneyRow;
 };

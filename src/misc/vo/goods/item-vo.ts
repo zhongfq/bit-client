@@ -1,15 +1,14 @@
 import { app } from "../../../app";
-import { ItemTable } from "../../../def/table";
+import { ItemRow, ItemTable } from "../../../def/table";
 import { bag } from "../../../def/proto";
 import { TableUtil } from "../../../system/table/table-util";
 import { GoodsVo } from "./goods-vo";
-import { GeneratedItemRow } from "../../../def/table.generated";
 
 /**
  * Item
  * 道具
  */
-export class ItemVo extends GoodsVo<GeneratedItemRow, bag.Item> {
+export class ItemVo extends GoodsVo<ItemRow, bag.Item> {
     refTable!: ItemTable;
 
     //#region 重载
@@ -28,9 +27,9 @@ export class ItemVo extends GoodsVo<GeneratedItemRow, bag.Item> {
         return 0;
     }
 
-    getRefByCmd(cmd: bag.Item): GeneratedItemRow | undefined {
+    getRefByCmd(cmd: bag.Item): ItemRow | undefined {
         let id = cmd.uid ? cmd.uid : cmd.id;
-        return TableUtil.getRef<GeneratedItemRow>(app.service.table.item, { id: id });
+        return TableUtil.getRef<ItemRow>(app.service.table.item, { id: id });
     }
 
     get goodsType(): number {

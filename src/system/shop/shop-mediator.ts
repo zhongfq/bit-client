@@ -8,11 +8,12 @@ import { ShopConf } from "../../def/shop";
 import { ShopItemUI } from "../../ui-runtime/prefab/shop/ShopItemUI";
 import { ShopService } from "./shop-service";
 import { GeneratedShop1Row } from "../../def/table.generated";
+import { Shop1Row } from "../../def/table";
 
 const { regClass, property } = Laya;
 export interface ShopItem {
     cmdData: proto.shop.ItemInfo;
-    refData: GeneratedShop1Row;
+    refData: Shop1Row;
 }
 @regClass()
 export class ShopMediator extends Mediator {
