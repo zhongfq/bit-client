@@ -1,6 +1,7 @@
 // AUTO GENERATED, DON'T NOT MODIFY!
 
 export interface GeneratedItemRow {
+    id: number;
     name: string;
     desc: string;
     main_type: number;
@@ -17,14 +18,17 @@ export interface GeneratedItemRow {
 };
 
 export interface GeneratedRoleLevelRow {
+    lv: number;
     upgrade_exp: number;
 };
 
 export interface GeneratedRoleConfRow {
+    key: string;
     value?: string;
 };
 
 export interface GeneratedHeroRow {
+    id: number;
     name: string;
     type: number;
     model: number;
@@ -34,10 +38,12 @@ export interface GeneratedHeroRow {
 };
 
 export interface GeneratedSoldierRow {
+    id: number;
     model: number;
 };
 
 export interface GeneratedEquipItemsRow {
+    id: number;
     name: string;
     lv: number;
     color: number;
@@ -46,36 +52,44 @@ export interface GeneratedEquipItemsRow {
 };
 
 export interface GeneratedEquipSlotRow {
+    idx: number;
     name: string;
     icon: string;
 };
 
 export interface GeneratedEquipColorRow {
+    id: number;
     name: string;
 };
 
 export interface GeneratedEquipLevelRow {
+    lv: number;
     name: string;
 };
 
 export interface GeneratedEquipConfRow {
+    key: string;
     value?: string;
 };
 
 export interface GeneratedAttrRow {
+    id: number;
     name: string;
     define?: string;
 };
 
 export interface GeneratedDefineRow {
+    idx: number;
 };
 
 export interface GeneratedBagRow {
+    id: number;
     type: number;
     max_grid: number;
 };
 
 export interface GeneratedMoneyRow {
+    id: number;
     name: string;
     icon?: string;
     recover_max?: number;
@@ -84,12 +98,14 @@ export interface GeneratedMoneyRow {
 };
 
 export interface GeneratedSkillRow {
+    id: number;
     type: number;
     anim?: string;
     cd?: number;
 };
 
 export interface GeneratedMailRow {
+    id: number;
     type: number;
     title: string;
     content: string;
@@ -98,46 +114,54 @@ export interface GeneratedMailRow {
 };
 
 export interface GeneratedTaskMainRow {
+    id: number;
     type: number;
     desc: string;
     reward: any;
 };
 
 export interface GeneratedTaskBranchRow {
+    id: number;
     type: number;
     desc: string;
     reward: any;
 };
 
 export interface GeneratedTaskDailyRow {
+    id: number;
     type: number;
     desc: string;
     reward: any;
 };
 
 export interface GeneratedRandomNameRow {
+    id: number;
     firstname?: string;
     malename?: string;
     femalename?: string;
 };
 
 export interface GeneratedWorldMapRow {
+    id: number;
     battle_type: number;
     battle_mode: number;
     expired_sec: number;
 };
 
 export interface GeneratedBattleDemoRow {
+    key: string;
     hero_ids: any;
 };
 
 export interface GeneratedBattleBuffRow {
+    id: number;
     type: string;
     res: string;
     ban_actions?: any;
 };
 
 export interface GeneratedWorldEntityTypeConfRow {
+    etype: number;
     define: string;
     dispel_fog_size?: number;
     view_limit?: number;
@@ -148,10 +172,12 @@ export interface GeneratedWorldEntityTypeConfRow {
 };
 
 export interface GeneratedWorldEntityModelsRow {
+    id: number;
     res: string;
 };
 
 export interface GeneratedWorldBuildingCastleRow {
+    id: number;
     etype: number;
     fill_size: number;
     obstacle_size: number;
@@ -162,6 +188,7 @@ export interface GeneratedWorldBuildingCastleRow {
 };
 
 export interface GeneratedWorldBuildingCityRow {
+    id: number;
     etype: number;
     portal?: number;
     fill_size: number;
@@ -182,11 +209,13 @@ export interface GeneratedWorldBuildingCityRow {
 };
 
 export interface GeneratedWorldSeasonRow {
+    season: number;
     name: string;
     map: string;
 };
 
 export interface GeneratedWorldTroopCmdRow {
+    cmd: string;
     name: string;
     icon?: string;
     cost_energy?: number;
@@ -196,31 +225,37 @@ export interface GeneratedWorldTroopCmdRow {
 };
 
 export interface GeneratedWorldTroopStateRow {
+    state: string;
     speedup?: number;
     peace?: number;
 };
 
 export interface GeneratedWorldTroopState2cmdRow {
+    state: string;
     MOVE_TO?: number;
     STOP?: number;
     RETREAT?: number;
 };
 
 export interface GeneratedAllianceRow {
+    id: number;
     name: string;
 };
 
 export interface GeneratedDungeonRow {
+    id: number;
     reward?: any;
 };
 
 export interface GeneratedShopconfigRow {
+    id: number;
     type: number;
     open_id?: number;
     refresh_hour?: number;
 };
 
 export interface GeneratedShop1Row {
+    id: number;
     items: any;
     cost?: any;
     limit_day?: number;
@@ -230,6 +265,7 @@ export interface GeneratedShop1Row {
 };
 
 export interface GeneratedShop2Row {
+    id: number;
     items: any;
     cost?: any;
     limit_day?: number;
