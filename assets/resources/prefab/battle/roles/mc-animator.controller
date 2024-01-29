@@ -70,7 +70,7 @@
               "id": "2",
               "exitByTime": true,
               "transduration": 0.15,
-              "exitTime": 0.066,
+              "exitTime": 0.1,
               "conditions": [
                 {
                   "type": 0,
@@ -82,7 +82,7 @@
               "id": "0",
               "exitByTime": true,
               "transduration": 0.15,
-              "exitTime": 0.85,
+              "exitTime": 0.1,
               "conditions": [
                 {
                   "type": 0,
@@ -112,19 +112,20 @@
               "id": "0",
               "exitByTime": true,
               "transduration": 0.15,
-              "exitTime": 0.85,
+              "exitTime": 0.1,
               "conditions": [
                 {
                   "type": 0,
                   "id": 2
                 }
-              ]
+              ],
+              "solo": false
             },
             {
               "id": "1",
               "exitByTime": true,
               "transduration": 0.15,
-              "exitTime": 0.066,
+              "exitTime": 0.1,
               "conditions": [
                 {
                   "type": 0,
