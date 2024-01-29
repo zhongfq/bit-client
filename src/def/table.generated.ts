@@ -16,14 +16,17 @@ export interface GeneratedItemRow {
     args?: any;
     icon: string;
 };
+
 export interface GeneratedRoleLevelRow {
     comment: string;
     upgrade_exp: number;
 };
+
 export interface GeneratedRoleConfRow {
     comment: string;
     value?: string;
 };
+
 export interface GeneratedHeroRow {
     name: string;
     type: number;
@@ -67,10 +70,12 @@ export interface GeneratedHeroRow {
     RECOVER_HP: number;
     MP: number;
 };
+
 export interface GeneratedSoldierRow {
     comment: string;
     model: number;
 };
+
 export interface GeneratedEquipItemsRow {
     desc: string;
     name: string;
@@ -81,37 +86,45 @@ export interface GeneratedEquipItemsRow {
     attr1: any;
     attr2: any;
 };
+
 export interface GeneratedEquipSlotRow {
     desc: string;
     name: string;
     icon: string;
 };
+
 export interface GeneratedEquipColorRow {
     desc: string;
     name: string;
 };
+
 export interface GeneratedEquipLevelRow {
     desc: string;
     name: string;
 };
+
 export interface GeneratedEquipConfRow {
     comment: string;
     value?: string;
 };
+
 export interface GeneratedAttrRow {
     desc: string;
     name: string;
     define?: string;
 };
+
 export interface GeneratedDefineRow {
     desc: string;
     hero_id: number;
 };
+
 export interface GeneratedBagRow {
     comment: string;
     type: number;
     max_grid: number;
 };
+
 export interface GeneratedMoneyRow {
     desc: string;
     name: string;
@@ -121,6 +134,7 @@ export interface GeneratedMoneyRow {
     recover_sec?: number;
     recover_inc?: number;
 };
+
 export interface GeneratedSkillRow {
     desc: string;
     type: number;
@@ -129,6 +143,7 @@ export interface GeneratedSkillRow {
     coefficient?: number;
     cd?: number;
 };
+
 export interface GeneratedMailRow {
     comment: string;
     type: number;
@@ -137,6 +152,7 @@ export interface GeneratedMailRow {
     reward?: any;
     expired_sec?: number;
 };
+
 export interface GeneratedTaskMainRow {
     comment: string;
     type: number;
@@ -147,6 +163,7 @@ export interface GeneratedTaskMainRow {
     args: any;
     reward: any;
 };
+
 export interface GeneratedTaskBranchRow {
     comment: string;
     type: number;
@@ -157,6 +174,7 @@ export interface GeneratedTaskBranchRow {
     args: any;
     reward: any;
 };
+
 export interface GeneratedTaskDailyRow {
     comment: string;
     type: number;
@@ -167,26 +185,31 @@ export interface GeneratedTaskDailyRow {
     args: any;
     reward: any;
 };
+
 export interface GeneratedRandomNameRow {
     firstname?: string;
     malename?: string;
     femalename?: string;
 };
+
 export interface GeneratedWorldMapRow {
     desc: string;
     battle_type: number;
     battle_mode: number;
     expired_sec: number;
 };
+
 export interface GeneratedBattleDemoRow {
     hero_ids: any;
 };
+
 export interface GeneratedBattleBuffRow {
     desc: string;
     type: string;
     res: string;
     ban_actions?: any;
 };
+
 export interface GeneratedWorldEntityTypeConfRow {
     desc: string;
     define: string;
@@ -197,10 +220,12 @@ export interface GeneratedWorldEntityTypeConfRow {
     build_limit?: number;
     can_defend?: number;
 };
+
 export interface GeneratedWorldEntityModelsRow {
     desc: string;
     res: string;
 };
+
 export interface GeneratedWorldBuildingCastleRow {
     cn: string;
     etype: number;
@@ -215,6 +240,7 @@ export interface GeneratedWorldBuildingCastleRow {
     recover_zero: number;
     peace_time: number;
 };
+
 export interface GeneratedWorldBuildingCityRow {
     cn: string;
     etype: number;
@@ -243,10 +269,12 @@ export interface GeneratedWorldBuildingCityRow {
     alliance_mail: number;
     tips_pic: string;
 };
+
 export interface GeneratedWorldSeasonRow {
     name: string;
     map: string;
 };
+
 export interface GeneratedWorldTroopCmdRow {
     name: string;
     icon?: string;
@@ -255,33 +283,39 @@ export interface GeneratedWorldTroopCmdRow {
     auto_back?: number;
     rsp_color_name?: string;
 };
+
 export interface GeneratedWorldTroopStateRow {
     state_desc: string;
     speedup?: number;
     peace?: number;
 };
+
 export interface GeneratedWorldTroopState2cmdRow {
     state_desc: string;
     MOVE_TO?: number;
     STOP?: number;
     RETREAT?: number;
 };
+
 export interface GeneratedAllianceRow {
     comment: string;
     name: string;
     born_pos: any;
 };
+
 export interface GeneratedDungeonRow {
     comment: string;
     next_id?: number;
     reward?: any;
 };
+
 export interface GeneratedShopconfigRow {
     desc: string;
     type: number;
     open_id?: number;
     refresh_hour?: number;
 };
+
 export interface GeneratedShop1Row {
     desc: string;
     items: any;
@@ -292,6 +326,7 @@ export interface GeneratedShop1Row {
     open_id?: number;
     prob?: number;
 };
+
 export interface GeneratedShop2Row {
     desc: string;
     items: any;
