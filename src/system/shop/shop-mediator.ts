@@ -6,15 +6,12 @@ import { ui } from "../../misc/ui";
 import proto from "../../def/proto";
 import { ShopConf } from "../../def/shop";
 import { ShopItemUI } from "../../ui-runtime/prefab/shop/ShopItemUI";
-import { ShopService } from "./shop-service";
+import { ShopItem, ShopService } from "./shop-service";
 import { GeneratedShop1Row } from "../../def/table.generated";
-import { Shop1Row } from "../../def/table";
+import { Reward, Shop1Row } from "../../def/table";
+import { VoUtil } from "../../misc/vo-util";
 
 const { regClass, property } = Laya;
-export interface ShopItem {
-    cmdData: proto.shop.ItemInfo;
-    refData: Shop1Row;
-}
 @regClass()
 export class ShopMediator extends Mediator {
     owner!: ShopUI;
@@ -35,7 +32,24 @@ export class ShopMediator extends Mediator {
     }
     onListClick(evn: Laya.Event, index: number) {
         if (evn.type == Laya.Event.CLICK) {
-            app.ui.show(ui.SHOP_BUY, { shopId: 1, shopItem: this.itemListData[index] });
+            let buyData = app.service.shop.getShopItemBuyNum(this.itemListData[index]);
+            if (this.itemListData[index].refData.cost) {
+                if (buyData.num <= 0) {
+                    app.ui.toast(buyData.tips);
+                } else {
+                    app.ui.show(ui.SHOP_BUY, { shopId: 1, shopItem: this.itemListData[index] });
+                }
+            } else {
+                if (buyData.num) {
+                    app.service.shop.requestBuy({
+                        shopId: ShopConf.SHOP_TYPE.REGULAR,
+                        shopItemId: this.itemListData[index].refData.id,
+                        num: 1, //免费购买1次
+                    });
+                } else {
+                    app.ui.toast(buyData.tips);
+                }
+            }
         }
     }
     updateItem(cell: ShopItemUI, index: number) {

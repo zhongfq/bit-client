@@ -13,14 +13,10 @@ const { regClass, property } = Laya;
 @regClass()
 export class ShopBuyMediator extends Mediator {
     owner!: ShopBuyUI;
-    itemVo?: GoodsVo | null;
-    costVo?: GoodsVo | null;
+    itemVo!: GoodsVo;
+    costVo!: GoodsVo;
     onAwake(): void {
         this.itemVo = VoUtil.createVo(this.owner.openData.shopItem.refData.items[0].id);
-        this.costVo = this.owner.openData.shopItem.refData.cost
-            ? VoUtil.createVo(this.owner.openData.shopItem.refData.cost[0].id)
-            : null;
-
         this.initEvent();
         this.initInfo();
     }
@@ -35,22 +31,24 @@ export class ShopBuyMediator extends Mediator {
 
         this.owner.slider.value = 1;
         let cost = this.owner.openData.shopItem.refData.cost as Reward[];
+
+        this.costVo = VoUtil.createVo(cost[0].id);
         let costBagNum = VoUtil.getNumber(cost[0].id);
-        let maxNum = Math.floor(costBagNum / cost[0].count);
+        let maxBuyNum = Math.floor(costBagNum / cost[0].count);
         let limitNum = app.service.shop.getShopItemLimit(this.costVo?.ref);
-        this.owner.slider.max = limitNum == 0 ? maxNum : Math.min(limitNum, maxNum);
-        // if (this.owner.openData.shopItem.refData.cost) {
-        //     this.owner.labelNum.text = StringUtil.str2UBB(
-        //         "{0} {1}/{2}",
-        //         { image: costVo.iconUrl, width: 20, height: 20 },
-        //         {
-        //             text: `{voNum=${VoUtil.getNumber(
-        //                 this.owner.openData.shopItem.refData.cost[0].id
-        //             )}}`,
-        //         },
-        //         { text: `{seleNum=${this.owner.openData.shopItem.refData.cost[0].count}}` }
-        //     );
-        // }
+        this.owner.slider.max =
+            limitNum == 0
+                ? maxBuyNum
+                : Math.min(limitNum, maxBuyNum) - this.owner.openData.shopItem.cmdData.buyNum;
+
+        this.owner.labelNum.text = StringUtil.str2UBB(
+            "{0} {1}/{2}",
+            { image: this.costVo.iconUrl, width: 20, height: 20 },
+            {
+                text: `{voNum=${costBagNum}}`,
+            },
+            { text: `{seleNum=${cost[0].count}}` }
+        );
     }
     initEvent() {
         this.owner.btnClose.on(Laya.Event.CLICK, this.owner, this.owner.close);

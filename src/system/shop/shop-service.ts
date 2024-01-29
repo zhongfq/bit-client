@@ -1,11 +1,19 @@
+import { app } from "../../app";
 import { Service } from "../../core/service";
 import proto, { shop } from "../../def/proto";
 import { errcode, opcode } from "../../def/protocol";
+import { Reward, Shop1Row } from "../../def/table";
 import { GeneratedShop1Row } from "../../def/table.generated";
+import { VoUtil } from "../../misc/vo-util";
 import { NetworkService } from "../network/network-service";
 interface ShopData {
     itemList: Map<number, proto.shop.ItemInfo>;
     time?: number;
+}
+
+export interface ShopItem {
+    cmdData: proto.shop.ItemInfo;
+    refData: Shop1Row;
 }
 export class ShopService extends Service<NetworkService> {
     static readonly SHOP_UPDATE = "shop-update";
@@ -52,6 +60,21 @@ export class ShopService extends Service<NetworkService> {
             return ref.limit_week;
         }
         return 0;
+    }
+    public getShopItemBuyNum(shopItem: ShopItem): { num: number; tips: string } {
+        let num = 0;
+        let tips = "";
+        let cost = shopItem.refData.cost as Reward[];
+        let costBagNum = VoUtil.getNumber(cost[0].id);
+        let maxBuyNum = Math.floor(costBagNum / cost[0].count);
+        let limitNum = this.getShopItemLimit(shopItem.refData);
+        if (!maxBuyNum) {
+            tips = `道具不足····后续增加获取道具弹窗`;
+        } else if (Math.min(limitNum, maxBuyNum) - shopItem.cmdData.buyNum) {
+            tips = `已达购买上限`;
+        }
+        num = limitNum == 0 ? maxBuyNum : Math.min(limitNum, maxBuyNum) - shopItem.cmdData.buyNum;
+        return { num: num, tips: tips };
     }
 
     // ------------------------------------------------------------------------

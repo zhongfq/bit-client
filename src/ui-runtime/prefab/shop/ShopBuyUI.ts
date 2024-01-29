@@ -1,5 +1,5 @@
 const { regClass } = Laya;
-import { ShopItem } from "../../../system/shop/shop-mediator";
+import { ShopItem } from "../../../system/shop/shop-service";
 import { ShopBuyUIBase } from "./ShopBuyUI.generated";
 export interface OpenData {
     shopItem: ShopItem;
