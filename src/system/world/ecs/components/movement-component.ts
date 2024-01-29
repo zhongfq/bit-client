@@ -32,9 +32,8 @@ export const enum MovementType {
     TARGET,
 }
 
-type Rotation = {
-    from: number;
-    to: number;
+type RotationInterpolation = {
+    rotation: number;
     ratio: number;
 };
 
@@ -57,7 +56,7 @@ export class MovementComponent extends ecs.Component {
     trackType: TrackType = TrackType.NONE;
 
     // 改变角度
-    rotation: Rotation = { from: 0, to: 0, ratio: 1 };
+    rotationInterpolation: RotationInterpolation = { rotation: 0, ratio: 1 };
 
     // 位置差
     positionInterpolation: PositionInterpolation = new PositionInterpolation();

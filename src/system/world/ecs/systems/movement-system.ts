@@ -7,6 +7,9 @@ import {
     TrackType,
 } from "../components/movement-component";
 
+const POSITION_INTERPOLATE_RATE = 5;
+const ROTATION_INTERPOLATE_RATE = 7;
+
 export class MovementSystem extends ecs.System {
     constructor(readonly context: WorldContext) {
         super();
@@ -14,6 +17,9 @@ export class MovementSystem extends ecs.System {
 
     update(dt: number): void {
         this.ecs.getComponents(MovementComponent).forEach((movement) => {
+            if (movement.rotationInterpolation.ratio < 1) {
+                this._updateRotation(movement, dt);
+            }
             if (movement.type == MovementType.NONE) {
                 return;
             } else if (
@@ -23,9 +29,6 @@ export class MovementSystem extends ecs.System {
             } else {
                 this._updateWithSpeed(movement, dt);
             }
-            if (movement.rotation.ratio < 1) {
-                this._updateRotation(movement, dt);
-            }
         });
     }
 
@@ -34,7 +37,6 @@ export class MovementSystem extends ecs.System {
     private _updateWithSpeed(movement: MovementComponent, dt: number) {
         const transform = movement.getComponent(TransformComponent)!;
         const position = transform.position;
-        const interpolation = movement.positionInterpolation;
         const speed = movement.speed;
         let target = movement.target;
 
@@ -45,9 +47,10 @@ export class MovementSystem extends ecs.System {
             }
         }
 
-        if (interpolation.ratio < 1) {
+        if (movement.positionInterpolation.ratio < 1) {
+            const interpolation = movement.positionInterpolation;
             const last = interpolation.ratio;
-            let ratio = last + dt * (1 / 0.2);
+            let ratio = last + dt * POSITION_INTERPOLATE_RATE;
             if (ratio > 1) {
                 ratio = 1;
             }
@@ -81,14 +84,16 @@ export class MovementSystem extends ecs.System {
     }
 
     private _updateRotation(movement: MovementComponent, dt: number) {
-        const rotation = movement.rotation;
         const transform = movement.getComponent(TransformComponent)!;
-        // 0.2s完成转向
-        rotation.ratio += dt * (1 / 0.2);
-        if (rotation.ratio > 1) {
-            rotation.ratio = 1;
+        const interpolation = movement.rotationInterpolation;
+        const last = interpolation.ratio;
+        let ratio = last + dt * ROTATION_INTERPOLATE_RATE;
+        if (ratio > 1) {
+            ratio = 1;
         }
-        transform.rotation = rotation.from + (rotation.to - rotation.from) * rotation.ratio;
+        interpolation.ratio = ratio;
+        let rotation = transform.rotation + interpolation.rotation * (ratio - last);
+        transform.rotation = rotation % 360;
         transform.flag |= TransformComponent.ROTATION;
     }
 }

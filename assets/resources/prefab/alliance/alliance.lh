@@ -75,7 +75,7 @@
       "right": 194,
       "top": 692,
       "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
-      "label": "确认",
+      "label": "进入世界",
       "labelSize": 20
     },
     {
@@ -98,9 +98,11 @@
           "height": 307,
           "_mouseState": 2,
           "skin": "res://7db29ccb-50d2-461e-9b1c-8479ff20673f",
+          "stateNum": null,
           "labels": "label1,label2,label3,label4",
           "space": 17,
           "direction": "vertical",
+          "selectedIndex": 0,
           "labelFont": null,
           "labelStroke": null,
           "labelStrokeColor": null,

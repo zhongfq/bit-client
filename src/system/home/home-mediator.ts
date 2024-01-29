@@ -39,7 +39,7 @@ export class MainMediator extends Mediator {
             app.ui.show(ui.SHOP);
         });
         this.owner.btnWorld.on(Laya.Event.CLICK, () => {
-            app.ui.replace(ui.WORLD_SCENE);
+            app.ui.show(ui.ALLIANCE);
         });
     }
 }

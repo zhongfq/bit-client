@@ -1,5 +1,7 @@
 import { app } from "../../app";
 import { Mediator } from "../../core/ui-mediator";
+import { AllianceRow } from "../../def/table";
+import { ui } from "../../misc/ui";
 import { AllianceUI } from "../../ui-runtime/prefab/alliance/AllianceUI";
 import { TableUtil } from "../table/table-util";
 
@@ -9,21 +11,31 @@ const { regClass, property } = Laya;
 export class AllianceMediator extends Mediator {
     owner!: AllianceUI;
 
+    private _alliances: AllianceRow[] = [];
+
     onAwake(): void {
         let labels = "";
         for (let data of TableUtil.getArrayRef(app.service.table.alliance, {})) {
+            this._alliances.push(data);
             labels += `${data.name},`;
         }
         labels = labels.slice(0, -1);
         this.owner.radioGroup.labels = labels;
         this.initUiEvent();
     }
+
     initUiEvent() {
         //UI Event
         this.owner.radioGroup.on(Laya.Event.CHANGE, () => {});
         this.owner.btnClose.on(Laya.Event.CLICK, () => {});
-        this.owner.btnConfirm.on(Laya.Event.CLICK, () => {
-            if (this.owner.radioGroup.selectedIndex > 0) {
+        this.owner.btnConfirm.on(Laya.Event.CLICK, async () => {
+            this.owner.close();
+            const selectedIndex = this.owner.radioGroup.selectedIndex;
+            if (selectedIndex >= 0) {
+                await app.service.gm.requestGM(
+                    `change_alliance ${this._alliances[selectedIndex].id}`
+                );
+                app.ui.replace(ui.WORLD_SCENE);
             }
         });
         //service Event

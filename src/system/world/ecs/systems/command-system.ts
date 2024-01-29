@@ -135,7 +135,9 @@ export class CommandSystem extends ecs.System {
         }
     }
 
-    private _delEntity(eid: number) {}
+    private _delEntity(eid: number) {
+        this.ecs.removeEntity(eid);
+    }
 
     private _moveEntity(cmd: proto.world.MoveAction) {
         const entity = this.ecs.getEntity(cmd.eid as number);
@@ -189,10 +191,10 @@ export class CommandSystem extends ecs.System {
             movement.velocity = data.speed;
 
             Tilemap.degree2Speed(data.degree, data.speed, movement.speed);
-
-            const rad = Math.atan2(-movement.speed.z, movement.speed.x);
-            transform.rotation = (rad * 180) / Math.PI + 90;
-            transform.flag |= TransformComponent.ROTATION;
+            this._setRotation(transform, movement.speed.x, movement.speed.z, true);
+            // const rad = Math.atan2(-movement.speed.z, movement.speed.x);
+            // transform.rotation = (rad * 180) / Math.PI;
+            // transform.flag |= TransformComponent.ROTATION;
             // movement.rotation.to = data.degree;
             // movement.rotation.ration = 1;
 
@@ -212,19 +214,16 @@ export class CommandSystem extends ecs.System {
         if (animation?.animator) {
             this._setTrigger(animation.animator, AnimatorTrigger.ATTACK);
         }
-        // this._towardToTarget(cmd.srcEid, cmd.dstEid);
+        this._towardToTarget(cmd.srcEid, cmd.dstEid);
     }
 
-    private _towardToTarget(eid: number, targetEid: number) {
-        const animation = this.ecs.getEntity(eid)?.getComponent(AnimationComponent);
-        const target = this.ecs.getEntity(targetEid)?.getComponent(AnimationComponent);
-        if (animation?.view && target?.view) {
-            const transform = animation.getComponent(TransformComponent)!;
-            const p1 = animation.view.transform.position;
-            const p2 = target.view.transform.position;
-            const rad = Math.atan2(-(p2.z - p1.z), (p2.x = p1.z));
-            transform.rotation = (rad * 180) / Math.PI + 90;
-            transform.flag |= TransformComponent.ROTATION;
+    private _towardToTarget(eid1: number, eid2: number) {
+        const transform1 = this.ecs.getEntity(eid1)?.getComponent(TransformComponent);
+        const transform2 = this.ecs.getEntity(eid2)?.getComponent(TransformComponent);
+        if (transform1 && transform2) {
+            const p1 = transform1.position;
+            const p2 = transform2.position;
+            this._setRotation(transform1, p2.x - p1.x, p2.z - p1.z, true);
         }
     }
 
@@ -243,6 +242,30 @@ export class CommandSystem extends ecs.System {
             } else {
                 this._setTrigger(animation.animator, AnimatorTrigger.RUN);
             }
+        }
+    }
+
+    private _setRotation(
+        transform: TransformComponent,
+        x: number,
+        z: number,
+        shouldInterpolate?: boolean
+    ) {
+        const rad = Math.atan2(-z, x);
+        let dest = (rad * 180) / Math.PI;
+        if (shouldInterpolate) {
+            const movement = transform.getComponent(MovementComponent)!;
+            let offset = dest - transform.rotation;
+            if (offset > 180) {
+                offset -= 360;
+            } else if (offset < -180) {
+                offset += 360;
+            }
+            movement.rotationInterpolation.ratio = 0;
+            movement.rotationInterpolation.rotation = offset;
+        } else {
+            transform.rotation = dest;
+            transform.flag |= TransformComponent.ROTATION;
         }
     }
 

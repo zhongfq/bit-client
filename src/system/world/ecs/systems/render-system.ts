@@ -14,7 +14,13 @@ export class RenderSystem extends ecs.System {
         }
     }
 
-    onRemoveComponent(component: ecs.Component): void {}
+    onRemoveComponent(component: ecs.Component): void {
+        if (component instanceof AnimationComponent) {
+            component.view?.destroy(true);
+            component.view = null;
+            component.animator = null;
+        }
+    }
 
     update(dt: number): void {
         this.ecs.getComponents(AnimationComponent).forEach((anim) => {
@@ -39,7 +45,7 @@ export class RenderSystem extends ecs.System {
             // targetTransform.localRotationEulerY = transform.rotation;
             const r = new Laya.Vector3(
                 0,
-                transform.rotation - targetTransform.localRotationEulerY,
+                transform.rotation + 90 - targetTransform.localRotationEulerY,
                 0
             );
             targetTransform.rotate(r, true, false);

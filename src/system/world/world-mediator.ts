@@ -55,7 +55,7 @@ export class WorldMediator extends Laya.Script {
 
             const rad = Math.atan2(-current.y, current.x);
             // app.service.world.requestTroopMoveBy(this.)
-            // cameraController.setTargetRoation((rad * 180) / Math.PI + 90);
+            // cameraController.setTargetRoation((rad * 180) / Math.PI);
         }
     }
 }

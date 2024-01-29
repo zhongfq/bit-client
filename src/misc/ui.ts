@@ -1,6 +1,5 @@
 import { app } from "../app";
-import { UIALERT_ID, UIAlertArgs, UITOAST_ID, UIToastArgs } from "../core/ui-manager";
-import { AlertMediator } from "./alert";
+import { UIAlertArgs, UIToastArgs } from "../core/ui-manager";
 
 export interface AlertArgs extends UIAlertArgs {}
 export interface ToastArgs extends UIToastArgs {}
