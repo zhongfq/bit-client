@@ -4,6 +4,7 @@ import { ShopBuyUIBase } from "./ShopBuyUI.generated";
 export interface OpenData {
     shopItem: ShopItem;
     shopId: number;
+    buyBack?: Laya.Handler;
 }
 @regClass()
 export class ShopBuyUI extends ShopBuyUIBase {

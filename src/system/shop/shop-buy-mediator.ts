@@ -1,6 +1,4 @@
 import { Mediator } from "../../core/ui-mediator";
-import { IconUI } from "../../ui-runtime/prefab/icon/IconUI";
-import { ItemVo } from "../../misc/vo/goods/item-vo";
 import { ShopBuyUI } from "../../ui-runtime/prefab/shop/ShopBuyUI";
 import { app } from "../../app";
 import { VoUtil } from "../../misc/vo-util";
@@ -13,13 +11,17 @@ const { regClass, property } = Laya;
 @regClass()
 export class ShopBuyMediator extends Mediator {
     owner!: ShopBuyUI;
-    itemVo!: GoodsVo;
-    costVo!: GoodsVo;
+
+    private itemVo!: GoodsVo; //购买道具
+    private costVo!: GoodsVo; //货币道具
+
     onAwake(): void {
         this.itemVo = VoUtil.createVo(this.owner.openData.shopItem.refData.items[0].id);
-        this.initEvent();
+        this.initUIEvent();
         this.initInfo();
     }
+
+    //初始化UI
     initInfo() {
         if (this.itemVo) {
             this.itemVo.goodsNumber = this.owner.openData.shopItem.refData.items[0].count;
@@ -28,19 +30,14 @@ export class ShopBuyMediator extends Mediator {
             this.owner.labelItemCurNum.text = `当前拥有:${VoUtil.getNumber(this.itemVo.refId)}`;
         }
         this.owner.slider.min = 1;
-
         this.owner.slider.value = 1;
         let cost = this.owner.openData.shopItem.refData.cost as Reward[];
 
         this.costVo = VoUtil.createVo(cost[0].id);
         let costBagNum = VoUtil.getNumber(cost[0].id);
-        let maxBuyNum = Math.floor(costBagNum / cost[0].count);
-        let limitNum = app.service.shop.getShopItemLimit(this.costVo?.ref);
-        this.owner.slider.max =
-            limitNum == 0
-                ? maxBuyNum
-                : Math.min(limitNum, maxBuyNum) - this.owner.openData.shopItem.cmdData.buyNum;
-
+        this.owner.slider.max = app.service.shop.getShopItemBuyNum(
+            this.owner.openData.shopItem
+        ).num;
         this.owner.labelNum.text = StringUtil.str2UBB(
             "{0} {1}/{2}",
             { image: this.costVo.iconUrl, width: 20, height: 20 },
@@ -50,7 +47,9 @@ export class ShopBuyMediator extends Mediator {
             { text: `{seleNum=${cost[0].count}}` }
         );
     }
-    initEvent() {
+
+    //初始化UI事件监听
+    initUIEvent() {
         this.owner.btnClose.on(Laya.Event.CLICK, this.owner, this.owner.close);
         this.owner.slider.onSliderChange = () => {
             this.owner.icon.itemNumber = (
@@ -63,12 +62,22 @@ export class ShopBuyMediator extends Mediator {
                 );
             }
         };
-        this.owner.btnSynthesis.on(Laya.Event.CLICK, () => {
-            app.service.shop.requestBuy({
+        this.owner.btnSynthesis.on(Laya.Event.CLICK, this, this.callBuy);
+    }
+
+    //请求购买
+    async callBuy() {
+        app.service.shop
+            .requestBuy({
                 shopId: this.owner.openData.shopId,
                 shopItemId: this.owner.openData.shopItem.refData.id,
                 num: this.owner.slider.value,
+            })
+            .then(() => {
+                if (this.owner.openData.buyBack) {
+                    this.owner.openData.buyBack.run();
+                }
+                this.owner.close();
             });
-        });
     }
 }

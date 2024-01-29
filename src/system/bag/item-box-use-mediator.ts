@@ -12,7 +12,9 @@ export class ItemBoxUseMediator extends Mediator {
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
     onAwake(): void {
         this.initInfo();
+        this.initEvent();
     }
+    //初始化界面信息
     initInfo() {
         this.owner.slider_h.min = 1;
         this.owner.slider_h.max = this.owner.data.goodsNumber;
@@ -27,8 +29,9 @@ export class ItemBoxUseMediator extends Mediator {
         }
         this.owner.listItem.array = tlData;
     }
+    //初始化
     initEvent() {
-        this.owner.btnClose.on(Laya.Event.CLICK, this, this.onCloseBtn);
+        this.owner.btnClose.on(Laya.Event.CLICK, this.owner.close);
         this.owner.btnSynthesis.on(Laya.Event.CLICK, this, this.onSynthesisBtn);
         this.owner.listItem.renderHandler = new Laya.Handler(this, this.updateItem);
     }
@@ -40,8 +43,5 @@ export class ItemBoxUseMediator extends Mediator {
             itemId: this.owner.data.refId,
             num: this.owner.slider_h.value,
         });
-    }
-    onCloseBtn() {
-        this.owner.close();
     }
 }

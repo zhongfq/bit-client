@@ -17,6 +17,7 @@ export class UserService extends Service<NetworkService> {
         this.handle(opcode.user.s2c_login, this._onLogin);
         this.handle(opcode.money.s2c_load, this._onLoadMonye);
         this.handle(opcode.money.s2c_load, this._onLoadProfile);
+        this.handle(opcode.money.notify_items, this._onMoneyNotify); //资源信息广播
     }
 
     private _onLogin(data: proto.user.s2c_login) {
@@ -44,6 +45,14 @@ export class UserService extends Service<NetworkService> {
     private _onLoadProfile(data: proto.profile.s2c_load) {
         if (data.err === errcode.OK) {
             this.profileInfo = data.profile as proto.profile.ProfileInfo;
+        }
+    }
+
+    private _onMoneyNotify(data: proto.money.notify_items) {
+        for (let item of data.items) {
+            let vo = new MoneyVo();
+            vo.initByCmd(item as proto.money.MoneyItem);
+            this.monye.set(item.id!, vo);
         }
     }
 

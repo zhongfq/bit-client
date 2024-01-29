@@ -12,14 +12,13 @@ export class TaskMediator extends Mediator {
     declare owner: TaskUI;
     private tlTaskData!: TaskVo[];
 
-    //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
     onAwake(): void {
-        this.initEvent();
+        this.initUIEvent();
         this.tlTaskData = app.service.task.taskBag.toArray();
         this.updateList();
     }
 
-    initEvent() {
+    initUIEvent() {
         this.owner.listTask.renderHandler = new Laya.Handler(this, this.onListRender);
         this.owner.listTask.mouseHandler = new Laya.Handler(this, this.onListClick);
     }

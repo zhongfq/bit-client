@@ -10,11 +10,13 @@ export class MailInfoMediator extends Mediator {
     owner!: MailInfoUI;
 
     onAwake(): void {
-        this.initEvent();
+        this.initUIEvent();
         this.updateInfo();
         this.updateList();
     }
-    private initEvent() {
+
+    //初始化UI事件监听
+    private initUIEvent() {
         this.owner.listItem.renderHandler = new Laya.Handler(this, this.updateItem);
         this.owner.btnClose.on(Laya.Event.CLICK, () => {
             this.owner.close();
@@ -28,11 +30,15 @@ export class MailInfoMediator extends Mediator {
             this.owner.close();
         });
     }
+
+    //listItem更新回调
     updateItem(cell: IconUI, index: number) {
         let vo = app.service.bag.itemBag.createByRef(Number(this.owner.rewards[index].id));
         vo.goodsNumber = Number(this.owner.rewards[index].num);
         cell.updateGoods(vo);
     }
+
+    //刷新界面信息
     updateInfo() {
         let title = this.owner.refData ? this.owner.refData.title : this.owner.oepnData.title;
         let content = this.owner.refData ? this.owner.refData.content : this.owner.oepnData.content;
@@ -49,6 +55,7 @@ export class MailInfoMediator extends Mediator {
             this.owner.btnReceive.visible = false;
         }
     }
+    //更新列表
     updateList() {
         if (this.owner.rewards && this.owner.rewards.length > 0) {
             this.owner.listItem.visible = true;

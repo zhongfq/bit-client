@@ -13,13 +13,15 @@ const { regClass } = Laya;
 @regClass()
 export class MailMediator extends Mediator {
     owner!: MailUI;
-    itemListData!: proto.mail.MailInfo[];
+
+    itemListData!: proto.mail.MailInfo[]; //邮件列表数据
 
     onAwake(): void {
-        this.initHander();
+        this.initUIEvent();
         this.updateList();
     }
-    initHander() {
+    //初始化UI事件监听
+    initUIEvent() {
         this.owner.listMail.renderHandler = new Laya.Handler(this, this.updateItem);
         this.owner.listMail.mouseHandler = new Laya.Handler(this, this.onListClick);
         this.owner.tabMenu.selectHandler = new Laya.Handler(this, this.onTabSelect);
@@ -36,6 +38,8 @@ export class MailMediator extends Mediator {
             app.service.mail.oneClickDelete();
         });
     }
+
+    //列表点击回调
     onListClick(evn: Laya.Event, index: number) {
         if (evn.type == Laya.Event.CLICK) {
             if (app.service.mail.getMailIsRead(this.itemListData[index].state)) {
@@ -44,9 +48,13 @@ export class MailMediator extends Mediator {
             app.ui.show(ui.MAIL_INFO, this.itemListData[index]);
         }
     }
+
+    //标签点击回调
     onTabSelect(index: number) {
         this.updateList();
     }
+
+    //listItem刷新回调
     updateItem(cell: MailUI, index: number) {
         (cell.getChildByName("labelMailTips") as Laya.Label).text = this.itemListData[index].title;
 
@@ -71,6 +79,8 @@ export class MailMediator extends Mediator {
                 "resources/atlas/layadefault/img_mail_open.png";
         }
     }
+
+    //更新列表
     updateList() {
         if (this.owner.tabMenu.selectedIndex == 0) {
             this.itemListData = Util.toArray<proto.mail.MailInfo>(app.service.mail.mails);

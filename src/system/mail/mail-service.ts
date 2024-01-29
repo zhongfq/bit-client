@@ -31,6 +31,7 @@ export class MailService extends Service<NetworkService> {
         this.handle(opcode.mail.s2c_read, this._onRead);
         this.handle(opcode.mail.notify_new_mails, this._onNotifyNewMails);
     }
+
     //邮件加载回调
     private _onLoad(response: proto.mail.s2c_load) {
         if (response.err === errcode.OK) {
@@ -39,10 +40,12 @@ export class MailService extends Service<NetworkService> {
             }
         }
     }
+
     //新增邮件监听
     private _onNotifyNewMails(response: proto.mail.notify_new_mails) {
         this.updateMail({ type: "add", addData: response.mails });
     }
+
     //创建邮件数据
     private creatorMailInfo(cmdData: proto.mail.MailInfo): proto.mail.MailInfo {
         let cmdMail = new proto.mail.MailInfo();
@@ -63,6 +66,7 @@ export class MailService extends Service<NetworkService> {
         cmdMail.title = cmdData.title || refData!.title;
         return cmdMail;
     }
+
     //删除邮件回调
     private _onDeleteMails(
         response: proto.mail.s2c_delete_mails,
@@ -72,6 +76,7 @@ export class MailService extends Service<NetworkService> {
             this.updateMail({ type: "delete", deleteData: reqest.mailUids });
         }
     }
+
     //领取奖励回调
     private _onReceiveReward(
         response: proto.mail.s2c_receive_reward,
@@ -85,6 +90,7 @@ export class MailService extends Service<NetworkService> {
             });
         }
     }
+
     //读取邮件回调
     private _onRead(response: proto.mail.s2c_read, reqest: proto.mail.c2s_read) {
         if (response.err === errcode.OK) {
@@ -95,6 +101,7 @@ export class MailService extends Service<NetworkService> {
             });
         }
     }
+
     //邮件更新
     private updateMail(data: UpdateMailData) {
         switch (data.type) {
@@ -129,21 +136,26 @@ export class MailService extends Service<NetworkService> {
         }
         this.event(MailService.MAIL_UPDATE);
     }
+
     //获取邮件列表
     public get mails() {
         return this._mail;
     }
+
     //获取邮件是否已读true:未读
     public getMailIsRead(mailState: number): boolean {
         return (mailState & (1 << MailConf.MAIL_STATE_BIT.NEW)) > 0;
     }
+
     //获取邮件是否已领取true:未领取
     public getMailIsReward(mailState: number): boolean {
         return (mailState & (1 << MailConf.MAIL_STATE_BIT.REWARD)) > 0;
     }
+
     // ------------------------------------------------------------------------
     // rpc call
     // ------------------------------------------------------------------------
+    //一键领取邮件
     async oneClickReward() {
         let ids: number[] = [];
         for (let [k, mail] of this._mail) {
@@ -156,6 +168,8 @@ export class MailService extends Service<NetworkService> {
         }
         return await this.requestReceiveReward({ mailUids: ids });
     }
+
+    //一键删除邮件
     async oneClickDelete() {
         let ids: number[] = [];
         for (let [k, mail] of this._mail) {
@@ -168,6 +182,7 @@ export class MailService extends Service<NetworkService> {
         }
         return await this.requestDeleteMails({ mailUids: ids });
     }
+
     async load() {
         return await this._network.call(proto.mail.c2s_load.create(), proto.mail.s2c_load);
     }

@@ -7,29 +7,39 @@ import proto from "../../def/proto";
 import { ShopConf } from "../../def/shop";
 import { ShopItemUI } from "../../ui-runtime/prefab/shop/ShopItemUI";
 import { ShopItem, ShopService } from "./shop-service";
-import { GeneratedShop1Row } from "../../def/table.generated";
-import { Reward, Shop1Row } from "../../def/table";
-import { VoUtil } from "../../misc/vo-util";
+import { Shop1Row } from "../../def/table";
 
 const { regClass, property } = Laya;
 @regClass()
 export class ShopMediator extends Mediator {
     owner!: ShopUI;
-    itemListData!: ShopItem[];
+    shopInfoData!: proto.shop.s2c_load; //商城信息
+    itemListData!: ShopItem[]; //商城道具列表
 
     onAwake(): void {
-        this.initEvent();
-        this.bind();
+        this.initUIEvent();
+        this.callShopLoad();
     }
-    initEvent() {
+    //初始化UI事件监听
+    initUIEvent() {
+        this.owner.btnClose.on(Laya.Event.CLICK, () => {
+            this.owner.close();
+        });
         this.owner.listItem.renderHandler = new Laya.Handler(this, this.updateItem);
         this.owner.listItem.mouseHandler = new Laya.Handler(this, this.onListClick);
     }
-    bind() {
-        this.on(app.service.shop, ShopService.SHOP_UPDATE, () => {
-            this.updateList();
-        });
+
+    //请求商店数据
+    async callShopLoad() {
+        app.service.shop
+            .load({ shopId: ShopConf.SHOP_TYPE.REGULAR })
+            .then((data: proto.shop.s2c_load) => {
+                this.shopInfoData = data;
+                this.updateList();
+            });
     }
+
+    //list点击监听
     onListClick(evn: Laya.Event, index: number) {
         if (evn.type == Laya.Event.CLICK) {
             let buyData = app.service.shop.getShopItemBuyNum(this.itemListData[index]);
@@ -37,7 +47,11 @@ export class ShopMediator extends Mediator {
                 if (buyData.num <= 0) {
                     app.ui.toast(buyData.tips);
                 } else {
-                    app.ui.show(ui.SHOP_BUY, { shopId: 1, shopItem: this.itemListData[index] });
+                    app.ui.show(ui.SHOP_BUY, {
+                        shopId: 1,
+                        shopItem: this.itemListData[index],
+                        buyBack: new Laya.Handler(this, this.buyBack),
+                    });
                 }
             } else {
                 if (buyData.num) {
@@ -52,6 +66,13 @@ export class ShopMediator extends Mediator {
             }
         }
     }
+
+    //购买回调
+    buyBack() {
+        this.callShopLoad();
+    }
+
+    //listItem刷新
     updateItem(cell: ShopItemUI, index: number) {
         let cellData = this.itemListData[index];
         let vo = app.service.bag.itemBag.createByRef(cellData.refData.items[0].id);
@@ -70,16 +91,18 @@ export class ShopMediator extends Mediator {
         }
         cell.iconDrward.updateGoods(vo);
     }
+
+    //刷新list数据
     updateList() {
         this.itemListData = [];
-        let shopItemList = app.service.shop.shopCmd.get(ShopConf.SHOP_TYPE.REGULAR)?.itemList;
+        let shopItemList = this.shopInfoData.items as proto.shop.ItemInfo[];
         if (shopItemList) {
-            for (let [_, item] of shopItemList) {
+            for (let item of shopItemList) {
                 this.itemListData.push({
                     cmdData: item,
                     refData: TableUtil.getRef(app.service.table.shop.shop_1, {
                         id: item.id,
-                    }) as GeneratedShop1Row,
+                    }) as Shop1Row,
                 });
             }
         }
