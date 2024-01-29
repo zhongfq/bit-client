@@ -183,6 +183,7 @@ export class CommandSystem extends ecs.System {
             movement.track = null;
             movement.target = null;
             if (animation?.animator) {
+                this._clearTrigger(animation.animator, AnimatorTrigger.RUN);
                 this._setTrigger(animation.animator, AnimatorTrigger.IDLE);
             }
         } else if (data.path.length > 0) {
@@ -199,6 +200,7 @@ export class CommandSystem extends ecs.System {
             // movement.rotation.ration = 1;
 
             if (animation?.animator) {
+                this._clearTrigger(animation.animator, AnimatorTrigger.IDLE);
                 this._setTrigger(animation.animator, AnimatorTrigger.RUN);
             }
         }
@@ -213,6 +215,14 @@ export class CommandSystem extends ecs.System {
         const animation = entity.getComponent(AnimationComponent);
         if (animation?.animator) {
             this._setTrigger(animation.animator, AnimatorTrigger.ATTACK);
+            const movement = entity.getComponent(MovementComponent)!;
+            if (movement.type === MovementType.NONE) {
+                this._clearTrigger(animation.animator, AnimatorTrigger.RUN);
+                this._setTrigger(animation.animator, AnimatorTrigger.IDLE);
+            } else {
+                this._clearTrigger(animation.animator, AnimatorTrigger.IDLE);
+                this._setTrigger(animation.animator, AnimatorTrigger.RUN);
+            }
         }
         this._towardToTarget(cmd.srcEid, cmd.dstEid);
     }
@@ -238,8 +248,10 @@ export class CommandSystem extends ecs.System {
             const movement = entity.getComponent(MovementComponent)!;
             this._clearTrigger(animation.animator, AnimatorTrigger.ATTACK);
             if (movement.type === MovementType.NONE) {
+                this._clearTrigger(animation.animator, AnimatorTrigger.RUN);
                 this._setTrigger(animation.animator, AnimatorTrigger.IDLE);
             } else {
+                this._clearTrigger(animation.animator, AnimatorTrigger.IDLE);
                 this._setTrigger(animation.animator, AnimatorTrigger.RUN);
             }
         }

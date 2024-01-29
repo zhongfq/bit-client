@@ -50,7 +50,7 @@
               ]
             }
           ],
-          "_isLooping": 1
+          "_isLooping": 2
         },
         {
           "_$type": "AnimatorState",
