@@ -1,6 +1,5 @@
 import { app } from "../../app";
 import { Mediator } from "../../core/ui-mediator";
-import { AllianceRow } from "../../def/table";
 import { AllianceUI } from "../../ui-runtime/prefab/alliance/AllianceUI";
 import { TableUtil } from "../table/table-util";
 

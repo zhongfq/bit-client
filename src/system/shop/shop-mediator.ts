@@ -4,15 +4,15 @@ import { TableUtil } from "../table/table-util";
 import { ShopUI } from "../../ui-runtime/prefab/shop/ShopUI";
 import { ui } from "../../misc/ui";
 import proto from "../../def/proto";
-import { ItemRow, ShopRow } from "../../def/table";
 import { ShopConf } from "../../def/shop";
 import { ShopItemUI } from "../../ui-runtime/prefab/shop/ShopItemUI";
 import { ShopService } from "./shop-service";
+import { GeneratedShop1Row } from "../../def/table.generated";
 
 const { regClass, property } = Laya;
 export interface ShopItem {
     cmdData: proto.shop.ItemInfo;
-    refData: ShopRow;
+    refData: GeneratedShop1Row;
 }
 @regClass()
 export class ShopMediator extends Mediator {
@@ -39,7 +39,7 @@ export class ShopMediator extends Mediator {
     }
     updateItem(cell: ShopItemUI, index: number) {
         let cellData = this.itemListData[index];
-        let vo = app.service.bag.itemBag.createByRef(cellData.refData.id);
+        let vo = app.service.bag.itemBag.createByRef(cellData.refData.items[0].id);
         cell.labelName.text = vo.name;
         if (cellData.refData.cost && cellData.refData.cost.length > 0) {
             cell.labelConsume.text = cellData.refData.cost[0].count.toString();
@@ -64,7 +64,7 @@ export class ShopMediator extends Mediator {
                     cmdData: item,
                     refData: TableUtil.getRef(app.service.table.shop.shop_1, {
                         id: item.id,
-                    }) as ShopRow,
+                    }) as GeneratedShop1Row,
                 });
             }
         }

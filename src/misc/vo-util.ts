@@ -11,7 +11,8 @@ import { VO } from "./vo/vo-base/vo";
 import { VOBag } from "./vo/vo-base/vo-bag";
 import { ItemConf } from "../def/item";
 import { MoneyVo } from "./vo/money/money-vo";
-import { ItemArgsMoney, ItemRow, MoneyRow } from "../def/table";
+import { GeneratedMoneyRow } from "../def/table.generated";
+import { ItemMoneyRow } from "../def/table";
 
 export class VoUtil {
     /**
@@ -34,9 +35,9 @@ export class VoUtil {
         let refData = TableUtil.getRef(app.service.table.item, { id: refId });
         if (refData?.sub_type == ItemConf.ITEM_TYPE.MONEY) {
             let vo = new MoneyVo();
-            let args = refData.args as ItemArgsMoney;
+            let args = (refData as ItemMoneyRow).args;
             let voRef = TableUtil.getRef(app.service.table.money, { id: args.money_id });
-            vo.initByRef(voRef as MoneyRow);
+            vo.initByRef(voRef as GeneratedMoneyRow);
             return vo;
         } else {
             return app.service.bag.itemBag.createByRef(refId);
@@ -45,7 +46,7 @@ export class VoUtil {
     static getVo(refId: number) {
         let refData = TableUtil.getRef(app.service.table.item, { id: refId });
         if (refData?.sub_type == ItemConf.ITEM_TYPE.MONEY) {
-            let args = refData.args as ItemArgsMoney;
+            let args = (refData as ItemMoneyRow).args;
             return app.service.user.monye.get(args.money_id);
         } else {
             return app.service.bag.itemBag.getByRef(refId);

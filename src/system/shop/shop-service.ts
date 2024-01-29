@@ -1,6 +1,7 @@
 import { Service } from "../../core/service";
 import proto, { shop } from "../../def/proto";
 import { errcode, opcode } from "../../def/protocol";
+import { GeneratedShop1Row } from "../../def/table.generated";
 import { NetworkService } from "../network/network-service";
 interface ShopData {
     itemList: Map<number, proto.shop.ItemInfo>;
@@ -42,6 +43,15 @@ export class ShopService extends Service<NetworkService> {
             }
         }
         this.event(ShopService.SHOP_UPDATE, { shopId: shopId });
+    }
+
+    public getShopItemLimit(ref: GeneratedShop1Row): number {
+        if (ref.limit_day) {
+            return ref.limit_day;
+        } else if (ref.limit_week) {
+            return ref.limit_week;
+        }
+        return 0;
     }
 
     // ------------------------------------------------------------------------

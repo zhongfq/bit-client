@@ -1,12 +1,12 @@
 import { app } from "../../app";
 import { Service } from "../../core/service";
 import { Util } from "../../core/utils/util";
-import { MailRow } from "../../def/table";
 import { MailConf } from "../../def/mail";
 import proto from "../../def/proto";
 import { errcode, opcode } from "../../def/protocol";
 import { TableUtil } from "../table/table-util";
 import { NetworkService } from "../network/network-service";
+import { GeneratedMailRow } from "../../def/table.generated";
 
 interface UpdateMailData {
     type: "add" | "update" | "delete";
@@ -46,12 +46,12 @@ export class MailService extends Service<NetworkService> {
     //创建邮件数据
     private creatorMailInfo(cmdData: proto.mail.MailInfo): proto.mail.MailInfo {
         let cmdMail = new proto.mail.MailInfo();
-        let refData!: MailRow;
+        let refData!: GeneratedMailRow;
         cmdMail = cmdData;
         if (cmdData.id) {
             refData = TableUtil.getRef(app.service.table.mail, {
                 id: Number(cmdData.id),
-            }) as MailRow;
+            }) as GeneratedMailRow;
         }
 
         if (cmdMail.reward && cmdMail.reward.length > 0) {

@@ -2,158 +2,138 @@
 // import { ElementType, SkillType } from "../system/war/ecs/components/element";
 // import { TrackType } from "../system/war/ecs/components/movement";
 
+import {
+    GeneratedAllianceRow,
+    GeneratedAttrRow,
+    GeneratedBattleBuffRow,
+    GeneratedEquipColorRow,
+    GeneratedEquipItemsRow,
+    GeneratedEquipLevelRow,
+    GeneratedEquipSlotRow,
+    GeneratedHeroRow,
+    GeneratedItemRow,
+    GeneratedMailRow,
+    GeneratedMoneyRow,
+    GeneratedShop1Row,
+    GeneratedShop2Row,
+    GeneratedShopconfigRow,
+    GeneratedSkillRow,
+    GeneratedSoldierRow,
+    GeneratedTaskBranchRow,
+    GeneratedTaskDailyRow,
+    GeneratedTaskMainRow,
+    GeneratedWorldEntityModelsRow,
+} from "./table.generated";
+//-----------------------------------------------------------------------------通用接口----------|
+//通用奖励接口
+export interface Reward {
+    id: number;
+    count: number;
+}
+//-----------------------------------------------------------------------------通用接口----------|
+
 //-----------------------------------------------------------------------------
 // equip
 //-----------------------------------------------------------------------------
-type EquipItem = {
-    id: number;
-    name: string;
-    lv: number;
-    color: number;
-    slot: number;
-    icon: string;
-};
-
-type EquipSlot = {};
-type EquipColor = {};
-type EquipLevel = {};
-
+export interface EquipItemsRow extends GeneratedEquipItemsRow {}
+export interface EquipSlotRow extends GeneratedEquipSlotRow {}
+export interface EquipColorRow extends GeneratedEquipColorRow {}
+export interface EquipLevelRow extends GeneratedEquipLevelRow {}
 export type EquipTable = {
-    items: EquipItem[];
-    slot: EquipSlot[];
-    color: EquipColor[];
-    level: EquipLevel[];
+    items: EquipItemsRow[];
+    slot: EquipSlotRow[];
+    color: EquipColorRow[];
+    level: EquipLevelRow[];
 };
-
-type Attr = {
-    id: number;
-    name: string;
-};
-
 export type AttrTable = {
-    [key: number | string]: Attr;
+    [key: number | string]: GeneratedAttrRow;
 };
-
 //-----------------------------------------------------------------------------
 // world
 //-----------------------------------------------------------------------------
+export interface WorldEntityModelsRow extends GeneratedWorldEntityModelsRow {}
 export type WorldEntityTable = {
     models: {
-        [k: string]: {
-            res: string;
-            id: number;
-        };
+        [k: string]: WorldEntityModelsRow;
     };
 };
-
+//-----------------------------------------------------------------------------
+// Buff
+//-----------------------------------------------------------------------------
+export interface BattleBuffRow extends GeneratedBattleBuffRow {}
 export type BattleBuffTable = {
     buff: {
-        [k: string]: {
-            id: number;
-            // type: BuffType;
-            res: string;
-        };
+        [k: string]: BattleBuffRow;
     };
 };
-
+//-----------------------------------------------------------------------------
+// 武将
+//-----------------------------------------------------------------------------
+export interface HeroRow extends GeneratedHeroRow {}
 export type HeroTable = {
-    [k: string]: {
-        id: number;
-        name: string;
-        model: number;
-    };
+    [k: string]: HeroRow;
 };
-
+//-----------------------------------------------------------------------------
+// 兵种
+//-----------------------------------------------------------------------------
+export interface SoldierRow extends GeneratedSoldierRow {}
 export type SoldierTable = {
-    [k: string]: {
-        id: number;
-        model: string;
-    };
+    [k: string]: SoldierRow;
 };
-
+//-----------------------------------------------------------------------------
+// 技能
+//-----------------------------------------------------------------------------
+export interface SkillRow extends GeneratedSkillRow {}
 export type SkillTable = {
-    [k: string]: {
-        id: number;
-        // type: SkillType;
-    };
+    [k: string]: SkillRow;
 };
-export type ItemRow = {
-    id: number;
-    name: string;
-    lv: number;
-    color: number;
-    slot: number;
-    icon: string;
-    desc: string;
-    composite: number;
-    sub_type: number;
-    use: number;
-    quality: number;
-    args?: any;
-    _id: number;
-};
+//-----------------------------------------------------------------------------
+// 道具
+//-----------------------------------------------------------------------------
+export interface ItemMoneyRow extends ItemRow {
+    args: { money_id: number }; //去掉可选：导表已检查
+}
+export interface ItemRow extends GeneratedItemRow {}
 export type ItemTable = {
     [k: number]: ItemRow;
 };
-export type TaskRow = {
-    id: number;
-    comment: string;
-    type: number;
-    desc: string;
-};
+//-----------------------------------------------------------------------------
+// 任务
+//-----------------------------------------------------------------------------
+export interface TaskMainRow extends GeneratedTaskMainRow {}
+export interface TaskBranchRow extends GeneratedTaskBranchRow {}
+export interface TaskDailyRow extends GeneratedTaskDailyRow {}
 export type TaskTable = {
-    [k: number]: TaskRow;
+    [k: number]: TaskMainRow | TaskBranchRow | TaskDailyRow;
 };
-export type Reward = { id: number; count: number };
-export type MailRow = {
-    id: number;
-    title: string;
-    content: string;
-    reward: Reward[];
-};
-
+//-----------------------------------------------------------------------------
+// 邮件
+//-----------------------------------------------------------------------------
+export interface MailRow extends GeneratedMailRow {}
 export type MailTable = {
     [k: number]: MailRow;
 };
-export type ShopRow = {
-    id: number;
-    desc: string;
-    items: Reward[];
-    cost?: Reward[];
-    limit_day?: number;
-    limit_week?: number;
-    sort_id?: number;
-    open_id?: number;
-};
+//-----------------------------------------------------------------------------
+// 商城
+//-----------------------------------------------------------------------------
+export interface ShopconfigRow extends GeneratedShopconfigRow {}
+export interface Shop1Row extends GeneratedShop1Row {}
+export interface Shop2Row extends GeneratedShop2Row {}
 export type ShopTable = {
-    shop_config: { id: number; type: number; open_id?: number; time?: number }[];
-    shop_1: ShopRow[];
-    shop_2: ShopRow[];
+    shop_config: ShopconfigRow[];
+    shop_1: Shop1Row[];
+    shop_2: Shop2Row[];
 };
-export type MoneyRow = {
-    id: number;
-    desc: string;
-    name: string;
-    icon: string;
-};
+//-----------------------------------------------------------------------------
+// 资源
+//-----------------------------------------------------------------------------
 export type MoneyTable = {
-    [k: number]: MoneyRow;
+    [k: number]: GeneratedMoneyRow;
 };
-export type ItemArgsReward = {};
-export type ItemArgsExp = {};
-export type ItemArgsMoney = {
-    money_id: number;
-};
-export type TablePos = {
-    x: number;
-    y: number;
-};
-export type AllianceRow = {
-    id: number;
-    comment: number;
-    name: string;
-    born_pos: TablePos;
-};
+//-----------------------------------------------------------------------------
+// 联盟
+//-----------------------------------------------------------------------------
+export interface AllianceRow extends GeneratedAllianceRow {}
 export type AllianceTable = {
     [K: number]: AllianceRow;
 };

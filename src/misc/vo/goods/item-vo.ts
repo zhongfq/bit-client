@@ -1,15 +1,15 @@
 import { app } from "../../../app";
-import { ItemRow, ItemTable } from "../../../def/table";
+import { ItemTable } from "../../../def/table";
 import { bag } from "../../../def/proto";
 import { TableUtil } from "../../../system/table/table-util";
 import { GoodsVo } from "./goods-vo";
+import { GeneratedItemRow } from "../../../def/table.generated";
 
 /**
  * Item
  * 道具
  */
-export class ItemVo extends GoodsVo<ItemRow, bag.Item> {
-    __cname: string = "ItemVo";
+export class ItemVo extends GoodsVo<GeneratedItemRow, bag.Item> {
     refTable!: ItemTable;
 
     //#region 重载
@@ -28,18 +28,9 @@ export class ItemVo extends GoodsVo<ItemRow, bag.Item> {
         return 0;
     }
 
-    getRefByCmd(cmd: bag.Item): ItemRow | undefined {
+    getRefByCmd(cmd: bag.Item): GeneratedItemRow | undefined {
         let id = cmd.uid ? cmd.uid : cmd.id;
-        return TableUtil.getRef<ItemRow>(app.service.table.item, { id: id });
-    }
-
-    initByRefId(id: number) {
-        let ref = TableUtil.getRef(app.service.table.item, { id: id });
-        if (ref) {
-            this.initByRef(ref);
-        } else {
-            console.log("没有找到该道具");
-        }
+        return TableUtil.getRef<GeneratedItemRow>(app.service.table.item, { id: id });
     }
 
     get goodsType(): number {
@@ -64,7 +55,7 @@ export class ItemVo extends GoodsVo<ItemRow, bag.Item> {
     get qualitySkin(): string {
         return `resources/atlas/imgFrame/img_icon_frame_${this.quality}.png`;
     }
-    protected onGetNumber(): number {
+    onGetNumber(): number {
         if (this._cmd) {
             return this._cmd.num ? this._cmd.num : 0;
         }

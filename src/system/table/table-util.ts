@@ -1,5 +1,3 @@
-import { ItemRow } from "../../def/table";
-
 type KeyPairs<T> = {
     [K in keyof T]?: T[K];
 };

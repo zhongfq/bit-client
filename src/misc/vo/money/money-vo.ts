@@ -1,15 +1,16 @@
 import { app } from "../../../app";
-import { ItemTable, MoneyRow } from "../../../def/table";
+import { ItemTable } from "../../../def/table";
 import { money, task } from "../../../def/proto";
 import { TableUtil } from "../../../system/table/table-util";
 import { GoodsVo } from "../goods/goods-vo";
 import { VO } from "../vo-base/vo";
+import { GeneratedMoneyRow } from "../../../def/table.generated";
 
 /**
  * Item
  * 道具
  */
-export class MoneyVo extends GoodsVo<MoneyRow, money.MoneyItem> {
+export class MoneyVo extends GoodsVo<GeneratedMoneyRow, money.MoneyItem> {
     refTable!: ItemTable;
 
     //#region 重载
@@ -24,8 +25,8 @@ export class MoneyVo extends GoodsVo<MoneyRow, money.MoneyItem> {
         return 0;
     }
 
-    getRefByCmd(cmd: money.MoneyItem): MoneyRow | undefined {
-        return TableUtil.getRef<MoneyRow>(app.service.table.money, { id: cmd.id });
+    getRefByCmd(cmd: money.MoneyItem): GeneratedMoneyRow | undefined {
+        return TableUtil.getRef<GeneratedMoneyRow>(app.service.table.money, { id: cmd.id });
     }
 
     get goodsType(): number {
@@ -33,7 +34,7 @@ export class MoneyVo extends GoodsVo<MoneyRow, money.MoneyItem> {
     }
 
     get desc(): string {
-        return this.ref?.desc || ""; //this.ref.desc;
+        return ""; //this.ref.desc;
     }
 
     get name(): string {

@@ -1,11 +1,11 @@
 const { regClass } = Laya;
-import { ItemVo } from "../../../misc/vo/goods/item-vo";
+import { GoodsVo } from "../../../misc/vo/goods/goods-vo";
 import { IconUIBase } from "./IconUI.generated";
 
 @regClass()
 export class IconUI extends IconUIBase {
     onAwake(): void {}
-    public updateGoods(vo?: ItemVo) {
+    public updateGoods(vo?: GoodsVo) {
         if (vo) {
             this.imgIcon.skin = vo.iconUrl;
             this.imgQuality.skin = vo.qualitySkin;

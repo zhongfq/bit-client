@@ -6,7 +6,6 @@ import { VO } from "../vo-base/vo";
  * 物品基类
  */
 export abstract class GoodsVo<IRef = any, Cmd = any> extends VO<IRef, Cmd> {
-    static __cname: string = "Goods";
     refTable!: any;
     //获取物品refId
     abstract get refId(): number;

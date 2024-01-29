@@ -1,14 +1,22 @@
 import { app } from "../../../app";
-import { ItemTable, TaskRow } from "../../../def/table";
+import { ItemTable } from "../../../def/table";
 import { task } from "../../../def/proto";
 import { TableUtil } from "../../../system/table/table-util";
 import { VO } from "../vo-base/vo";
+import {
+    GeneratedTaskBranchRow,
+    GeneratedTaskDailyRow,
+    GeneratedTaskMainRow,
+} from "../../../def/table.generated";
 
 /**
  * Item
  * 道具
  */
-export class TaskVo extends VO<TaskRow, task.TaskInfo> {
+export class TaskVo extends VO<
+    GeneratedTaskMainRow | GeneratedTaskBranchRow | GeneratedTaskDailyRow,
+    task.TaskInfo
+> {
     refTable!: ItemTable;
 
     //#region 重载
@@ -23,8 +31,12 @@ export class TaskVo extends VO<TaskRow, task.TaskInfo> {
         return 0;
     }
 
-    getRefByCmd(cmd: task.TaskInfo): TaskRow | undefined {
-        return TableUtil.getRef<TaskRow>(app.service.table.task, { id: cmd.id });
+    getRefByCmd(
+        cmd: task.TaskInfo
+    ): GeneratedTaskMainRow | GeneratedTaskBranchRow | GeneratedTaskDailyRow | undefined {
+        return TableUtil.getRef<
+            GeneratedTaskMainRow | GeneratedTaskBranchRow | GeneratedTaskDailyRow
+        >(app.service.table.task, { id: cmd.id });
     }
 
     get goodsType(): number {
@@ -36,7 +48,7 @@ export class TaskVo extends VO<TaskRow, task.TaskInfo> {
     }
 
     get name(): string {
-        return this._ref ? this._ref.comment : "";
+        return "";
     }
     protected onGetNumber(): number {
         if (this._cmd) {

@@ -198,6 +198,7 @@ message MoveAction {
 
 message BattleSkillAction {
     uint32 src_eid = 1;
+    uint32 dst_eid = 2;
     uint32 skill_id = 3;
 }
 

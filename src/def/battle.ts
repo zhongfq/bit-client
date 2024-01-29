@@ -45,6 +45,7 @@ export const BattleConf = {
     RECOVER_HP: 1,
     RECOVER_INTERVAL_MS: 100,
     RECOVER_WIDTH_RANGE: 100,
+    SAME_ALLIANCE_LIMIT: 2,
     SIDE: {
         LEFT: -1,
         RIGHT: 1,
