@@ -144,3 +144,16 @@ export type ItemArgsExp = {};
 export type ItemArgsMoney = {
     money_id: number;
 };
+export type TablePos = {
+    x: number;
+    y: number;
+};
+export type AllianceRow = {
+    id: number;
+    comment: number;
+    name: string;
+    born_pos: TablePos;
+};
+export type AllianceTable = {
+    [K: number]: AllianceRow;
+};

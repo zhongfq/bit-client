@@ -34,6 +34,8 @@ export const enum ui {
     SHOP,
     SHOP_BUY,
 
+    ALLIANCE,
+
     GM,
 }
 
@@ -124,6 +126,13 @@ export const registerUI = () => {
         id: ui.SHOP_BUY,
         autoClose: false,
         url: "resources/prefab/shop/shop-buy.lh",
+        blockInput: true,
+    });
+
+    app.ui.register({
+        id: ui.ALLIANCE,
+        autoClose: false,
+        url: "resources/prefab/alliance/alliance.lh",
         blockInput: true,
     });
 

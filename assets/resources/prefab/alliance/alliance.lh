@@ -1,0 +1,113 @@
+{
+  "_$ver": 1,
+  "_$id": "sxpq9fzh",
+  "_$runtime": "res://88964155-2a55-420f-bf3e-a6efe5009da7",
+  "_$type": "Dialog",
+  "name": "Dialog",
+  "width": 511,
+  "height": 753,
+  "_mouseState": 2,
+  "isModal": true,
+  "_$comp": [
+    {
+      "_$type": "1a1fb883-c26a-4d9a-96f7-5cda3ad9550b",
+      "scriptPath": "../src/system/alliance/alliance-mediator.ts"
+    }
+  ],
+  "_$child": [
+    {
+      "_$id": "2kdo09if",
+      "_$type": "Image",
+      "name": "Image",
+      "width": 511,
+      "height": 753,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "bottom": 0,
+      "skin": "res://3225dc27-5bcb-446e-8b66-27df87624835",
+      "sizeGrid": "50,30,50,30,0",
+      "color": "#ffffff"
+    },
+    {
+      "_$id": "6ee7kogk",
+      "_$var": true,
+      "_$type": "Button",
+      "name": "btnClose",
+      "x": 470,
+      "y": 7,
+      "width": 32,
+      "height": 32,
+      "_mouseState": 2,
+      "right": 9,
+      "top": 7,
+      "skin": "res://60a9086c-a9c2-4e01-a563-355c117b509e",
+      "label": "",
+      "labelSize": 20
+    },
+    {
+      "_$id": "vyoq14nb",
+      "_$type": "Label",
+      "name": "Label",
+      "x": 196,
+      "y": 10,
+      "width": 120,
+      "height": 28,
+      "top": 10,
+      "centerX": 0,
+      "text": "同盟",
+      "fontSize": 20,
+      "color": "#FFFFFF",
+      "align": "center",
+      "valign": "middle",
+      "padding": "0,0,0,0"
+    },
+    {
+      "_$id": "iz5697gb",
+      "_$var": true,
+      "_$type": "Button",
+      "name": "btnConfirm",
+      "x": 189,
+      "y": 692,
+      "width": 128,
+      "height": 47,
+      "_mouseState": 2,
+      "right": 194,
+      "top": 692,
+      "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
+      "label": "确认",
+      "labelSize": 20
+    },
+    {
+      "_$id": "bgr8hmcf",
+      "_$type": "Panel",
+      "name": "Panel",
+      "x": 11,
+      "y": 57,
+      "width": 491,
+      "height": 612,
+      "_mouseState": 2,
+      "scrollType": 2,
+      "_$child": [
+        {
+          "_$id": "k4cug958",
+          "_$var": true,
+          "_$type": "RadioGroup",
+          "name": "radioGroup",
+          "width": 258,
+          "height": 307,
+          "_mouseState": 2,
+          "skin": "res://7db29ccb-50d2-461e-9b1c-8479ff20673f",
+          "labels": "label1,label2,label3,label4",
+          "space": 17,
+          "direction": "vertical",
+          "labelFont": null,
+          "labelStroke": null,
+          "labelStrokeColor": null,
+          "labelAlign": null,
+          "strokeColors": null
+        }
+      ]
+    }
+  ]
+}
