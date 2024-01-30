@@ -2673,6 +2673,1376 @@ $root.bag = (function() {
     return bag;
 })();
 
+$root.chat = (function() {
+
+    /**
+     * Namespace chat.
+     * @exports chat
+     * @namespace
+     */
+    var chat = {};
+
+    chat.MsgInfo = (function() {
+
+        /**
+         * Properties of a MsgInfo.
+         * @memberof chat
+         * @interface IMsgInfo
+         * @property {number|null} [channel] MsgInfo channel
+         * @property {profile.IProfileInfo|null} [user] MsgInfo user
+         * @property {string|null} [text] MsgInfo text
+         * @property {number|Long|null} [time] MsgInfo time
+         */
+
+        /**
+         * Constructs a new MsgInfo.
+         * @memberof chat
+         * @classdesc Represents a MsgInfo.
+         * @implements IMsgInfo
+         * @constructor
+         * @param {chat.IMsgInfo=} [properties] Properties to set
+         */
+        function MsgInfo(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * MsgInfo channel.
+         * @member {number} channel
+         * @memberof chat.MsgInfo
+         * @instance
+         */
+        MsgInfo.prototype.channel = 0;
+
+        /**
+         * MsgInfo user.
+         * @member {profile.IProfileInfo|null|undefined} user
+         * @memberof chat.MsgInfo
+         * @instance
+         */
+        MsgInfo.prototype.user = null;
+
+        /**
+         * MsgInfo text.
+         * @member {string} text
+         * @memberof chat.MsgInfo
+         * @instance
+         */
+        MsgInfo.prototype.text = "";
+
+        /**
+         * MsgInfo time.
+         * @member {number|Long} time
+         * @memberof chat.MsgInfo
+         * @instance
+         */
+        MsgInfo.prototype.time = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
+         * Creates a new MsgInfo instance using the specified properties.
+         * @function create
+         * @memberof chat.MsgInfo
+         * @static
+         * @param {chat.IMsgInfo=} [properties] Properties to set
+         * @returns {chat.MsgInfo} MsgInfo instance
+         */
+        MsgInfo.create = function create(properties) {
+            return new MsgInfo(properties);
+        };
+
+        /**
+         * Encodes the specified MsgInfo message. Does not implicitly {@link chat.MsgInfo.verify|verify} messages.
+         * @function encode
+         * @memberof chat.MsgInfo
+         * @static
+         * @param {chat.IMsgInfo} message MsgInfo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        MsgInfo.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.channel != null && Object.hasOwnProperty.call(message, "channel"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.channel);
+            if (message.user != null && Object.hasOwnProperty.call(message, "user"))
+                $root.profile.ProfileInfo.encode(message.user, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            if (message.text != null && Object.hasOwnProperty.call(message, "text"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.text);
+            if (message.time != null && Object.hasOwnProperty.call(message, "time"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.time);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified MsgInfo message, length delimited. Does not implicitly {@link chat.MsgInfo.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof chat.MsgInfo
+         * @static
+         * @param {chat.IMsgInfo} message MsgInfo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        MsgInfo.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a MsgInfo message from the specified reader or buffer.
+         * @function decode
+         * @memberof chat.MsgInfo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {chat.MsgInfo} MsgInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        MsgInfo.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chat.MsgInfo();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.channel = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.user = $root.profile.ProfileInfo.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 3: {
+                        message.text = reader.string();
+                        break;
+                    }
+                case 4: {
+                        message.time = reader.int64();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a MsgInfo message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof chat.MsgInfo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {chat.MsgInfo} MsgInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        MsgInfo.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a MsgInfo message.
+         * @function verify
+         * @memberof chat.MsgInfo
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        MsgInfo.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.channel != null && message.hasOwnProperty("channel"))
+                if (!$util.isInteger(message.channel))
+                    return "channel: integer expected";
+            if (message.user != null && message.hasOwnProperty("user")) {
+                var error = $root.profile.ProfileInfo.verify(message.user);
+                if (error)
+                    return "user." + error;
+            }
+            if (message.text != null && message.hasOwnProperty("text"))
+                if (!$util.isString(message.text))
+                    return "text: string expected";
+            if (message.time != null && message.hasOwnProperty("time"))
+                if (!$util.isInteger(message.time) && !(message.time && $util.isInteger(message.time.low) && $util.isInteger(message.time.high)))
+                    return "time: integer|Long expected";
+            return null;
+        };
+
+        /**
+         * Creates a MsgInfo message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof chat.MsgInfo
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {chat.MsgInfo} MsgInfo
+         */
+        MsgInfo.fromObject = function fromObject(object) {
+            if (object instanceof $root.chat.MsgInfo)
+                return object;
+            var message = new $root.chat.MsgInfo();
+            if (object.channel != null)
+                message.channel = object.channel >>> 0;
+            if (object.user != null) {
+                if (typeof object.user !== "object")
+                    throw TypeError(".chat.MsgInfo.user: object expected");
+                message.user = $root.profile.ProfileInfo.fromObject(object.user);
+            }
+            if (object.text != null)
+                message.text = String(object.text);
+            if (object.time != null)
+                if ($util.Long)
+                    (message.time = $util.Long.fromValue(object.time)).unsigned = false;
+                else if (typeof object.time === "string")
+                    message.time = parseInt(object.time, 10);
+                else if (typeof object.time === "number")
+                    message.time = object.time;
+                else if (typeof object.time === "object")
+                    message.time = new $util.LongBits(object.time.low >>> 0, object.time.high >>> 0).toNumber();
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a MsgInfo message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof chat.MsgInfo
+         * @static
+         * @param {chat.MsgInfo} message MsgInfo
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        MsgInfo.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.channel = 0;
+                object.user = null;
+                object.text = "";
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.time = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.time = options.longs === String ? "0" : 0;
+            }
+            if (message.channel != null && message.hasOwnProperty("channel"))
+                object.channel = message.channel;
+            if (message.user != null && message.hasOwnProperty("user"))
+                object.user = $root.profile.ProfileInfo.toObject(message.user, options);
+            if (message.text != null && message.hasOwnProperty("text"))
+                object.text = message.text;
+            if (message.time != null && message.hasOwnProperty("time"))
+                if (typeof message.time === "number")
+                    object.time = options.longs === String ? String(message.time) : message.time;
+                else
+                    object.time = options.longs === String ? $util.Long.prototype.toString.call(message.time) : options.longs === Number ? new $util.LongBits(message.time.low >>> 0, message.time.high >>> 0).toNumber() : message.time;
+            return object;
+        };
+
+        /**
+         * Converts this MsgInfo to JSON.
+         * @function toJSON
+         * @memberof chat.MsgInfo
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        MsgInfo.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for MsgInfo
+         * @function getTypeUrl
+         * @memberof chat.MsgInfo
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        MsgInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/chat.MsgInfo";
+        };
+
+        return MsgInfo;
+    })();
+
+    chat.c2s_load = (function() {
+
+        /**
+         * Properties of a c2s_load.
+         * @memberof chat
+         * @interface Ic2s_load
+         * @property {number|null} [channel] c2s_load channel
+         */
+
+        /**
+         * Constructs a new c2s_load.
+         * @memberof chat
+         * @classdesc Represents a c2s_load.
+         * @implements Ic2s_load
+         * @constructor
+         * @param {chat.Ic2s_load=} [properties] Properties to set
+         */
+        function c2s_load(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * c2s_load channel.
+         * @member {number} channel
+         * @memberof chat.c2s_load
+         * @instance
+         */
+        c2s_load.prototype.channel = 0;
+
+        /**
+         * Creates a new c2s_load instance using the specified properties.
+         * @function create
+         * @memberof chat.c2s_load
+         * @static
+         * @param {chat.Ic2s_load=} [properties] Properties to set
+         * @returns {chat.c2s_load} c2s_load instance
+         */
+        c2s_load.create = function create(properties) {
+            return new c2s_load(properties);
+        };
+
+        /**
+         * Encodes the specified c2s_load message. Does not implicitly {@link chat.c2s_load.verify|verify} messages.
+         * @function encode
+         * @memberof chat.c2s_load
+         * @static
+         * @param {chat.Ic2s_load} message c2s_load message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_load.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.channel != null && Object.hasOwnProperty.call(message, "channel"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.channel);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified c2s_load message, length delimited. Does not implicitly {@link chat.c2s_load.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof chat.c2s_load
+         * @static
+         * @param {chat.Ic2s_load} message c2s_load message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_load.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a c2s_load message from the specified reader or buffer.
+         * @function decode
+         * @memberof chat.c2s_load
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {chat.c2s_load} c2s_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_load.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chat.c2s_load();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.channel = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a c2s_load message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof chat.c2s_load
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {chat.c2s_load} c2s_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_load.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a c2s_load message.
+         * @function verify
+         * @memberof chat.c2s_load
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        c2s_load.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.channel != null && message.hasOwnProperty("channel"))
+                if (!$util.isInteger(message.channel))
+                    return "channel: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a c2s_load message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof chat.c2s_load
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {chat.c2s_load} c2s_load
+         */
+        c2s_load.fromObject = function fromObject(object) {
+            if (object instanceof $root.chat.c2s_load)
+                return object;
+            var message = new $root.chat.c2s_load();
+            if (object.channel != null)
+                message.channel = object.channel >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a c2s_load message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof chat.c2s_load
+         * @static
+         * @param {chat.c2s_load} message c2s_load
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        c2s_load.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.channel = 0;
+            if (message.channel != null && message.hasOwnProperty("channel"))
+                object.channel = message.channel;
+            return object;
+        };
+
+        /**
+         * Converts this c2s_load to JSON.
+         * @function toJSON
+         * @memberof chat.c2s_load
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        c2s_load.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for c2s_load
+         * @function getTypeUrl
+         * @memberof chat.c2s_load
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        c2s_load.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/chat.c2s_load";
+        };
+
+        return c2s_load;
+    })();
+
+    chat.s2c_load = (function() {
+
+        /**
+         * Properties of a s2c_load.
+         * @memberof chat
+         * @interface Is2c_load
+         * @property {Array.<chat.IMsgInfo>|null} [msgs] s2c_load msgs
+         */
+
+        /**
+         * Constructs a new s2c_load.
+         * @memberof chat
+         * @classdesc Represents a s2c_load.
+         * @implements Is2c_load
+         * @constructor
+         * @param {chat.Is2c_load=} [properties] Properties to set
+         */
+        function s2c_load(properties) {
+            this.msgs = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * s2c_load msgs.
+         * @member {Array.<chat.IMsgInfo>} msgs
+         * @memberof chat.s2c_load
+         * @instance
+         */
+        s2c_load.prototype.msgs = $util.emptyArray;
+
+        /**
+         * Creates a new s2c_load instance using the specified properties.
+         * @function create
+         * @memberof chat.s2c_load
+         * @static
+         * @param {chat.Is2c_load=} [properties] Properties to set
+         * @returns {chat.s2c_load} s2c_load instance
+         */
+        s2c_load.create = function create(properties) {
+            return new s2c_load(properties);
+        };
+
+        /**
+         * Encodes the specified s2c_load message. Does not implicitly {@link chat.s2c_load.verify|verify} messages.
+         * @function encode
+         * @memberof chat.s2c_load
+         * @static
+         * @param {chat.Is2c_load} message s2c_load message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_load.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.msgs != null && message.msgs.length)
+                for (var i = 0; i < message.msgs.length; ++i)
+                    $root.chat.MsgInfo.encode(message.msgs[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified s2c_load message, length delimited. Does not implicitly {@link chat.s2c_load.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof chat.s2c_load
+         * @static
+         * @param {chat.Is2c_load} message s2c_load message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_load.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a s2c_load message from the specified reader or buffer.
+         * @function decode
+         * @memberof chat.s2c_load
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {chat.s2c_load} s2c_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_load.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chat.s2c_load();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        if (!(message.msgs && message.msgs.length))
+                            message.msgs = [];
+                        message.msgs.push($root.chat.MsgInfo.decode(reader, reader.uint32()));
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a s2c_load message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof chat.s2c_load
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {chat.s2c_load} s2c_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_load.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a s2c_load message.
+         * @function verify
+         * @memberof chat.s2c_load
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        s2c_load.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.msgs != null && message.hasOwnProperty("msgs")) {
+                if (!Array.isArray(message.msgs))
+                    return "msgs: array expected";
+                for (var i = 0; i < message.msgs.length; ++i) {
+                    var error = $root.chat.MsgInfo.verify(message.msgs[i]);
+                    if (error)
+                        return "msgs." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a s2c_load message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof chat.s2c_load
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {chat.s2c_load} s2c_load
+         */
+        s2c_load.fromObject = function fromObject(object) {
+            if (object instanceof $root.chat.s2c_load)
+                return object;
+            var message = new $root.chat.s2c_load();
+            if (object.msgs) {
+                if (!Array.isArray(object.msgs))
+                    throw TypeError(".chat.s2c_load.msgs: array expected");
+                message.msgs = [];
+                for (var i = 0; i < object.msgs.length; ++i) {
+                    if (typeof object.msgs[i] !== "object")
+                        throw TypeError(".chat.s2c_load.msgs: object expected");
+                    message.msgs[i] = $root.chat.MsgInfo.fromObject(object.msgs[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a s2c_load message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof chat.s2c_load
+         * @static
+         * @param {chat.s2c_load} message s2c_load
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        s2c_load.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.msgs = [];
+            if (message.msgs && message.msgs.length) {
+                object.msgs = [];
+                for (var j = 0; j < message.msgs.length; ++j)
+                    object.msgs[j] = $root.chat.MsgInfo.toObject(message.msgs[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this s2c_load to JSON.
+         * @function toJSON
+         * @memberof chat.s2c_load
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        s2c_load.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for s2c_load
+         * @function getTypeUrl
+         * @memberof chat.s2c_load
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        s2c_load.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/chat.s2c_load";
+        };
+
+        return s2c_load;
+    })();
+
+    chat.c2s_send = (function() {
+
+        /**
+         * Properties of a c2s_send.
+         * @memberof chat
+         * @interface Ic2s_send
+         * @property {number|null} [channel] c2s_send channel
+         * @property {string|null} [text] c2s_send text
+         */
+
+        /**
+         * Constructs a new c2s_send.
+         * @memberof chat
+         * @classdesc Represents a c2s_send.
+         * @implements Ic2s_send
+         * @constructor
+         * @param {chat.Ic2s_send=} [properties] Properties to set
+         */
+        function c2s_send(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * c2s_send channel.
+         * @member {number} channel
+         * @memberof chat.c2s_send
+         * @instance
+         */
+        c2s_send.prototype.channel = 0;
+
+        /**
+         * c2s_send text.
+         * @member {string} text
+         * @memberof chat.c2s_send
+         * @instance
+         */
+        c2s_send.prototype.text = "";
+
+        /**
+         * Creates a new c2s_send instance using the specified properties.
+         * @function create
+         * @memberof chat.c2s_send
+         * @static
+         * @param {chat.Ic2s_send=} [properties] Properties to set
+         * @returns {chat.c2s_send} c2s_send instance
+         */
+        c2s_send.create = function create(properties) {
+            return new c2s_send(properties);
+        };
+
+        /**
+         * Encodes the specified c2s_send message. Does not implicitly {@link chat.c2s_send.verify|verify} messages.
+         * @function encode
+         * @memberof chat.c2s_send
+         * @static
+         * @param {chat.Ic2s_send} message c2s_send message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_send.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.channel != null && Object.hasOwnProperty.call(message, "channel"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.channel);
+            if (message.text != null && Object.hasOwnProperty.call(message, "text"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.text);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified c2s_send message, length delimited. Does not implicitly {@link chat.c2s_send.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof chat.c2s_send
+         * @static
+         * @param {chat.Ic2s_send} message c2s_send message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_send.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a c2s_send message from the specified reader or buffer.
+         * @function decode
+         * @memberof chat.c2s_send
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {chat.c2s_send} c2s_send
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_send.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chat.c2s_send();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.channel = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.text = reader.string();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a c2s_send message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof chat.c2s_send
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {chat.c2s_send} c2s_send
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_send.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a c2s_send message.
+         * @function verify
+         * @memberof chat.c2s_send
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        c2s_send.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.channel != null && message.hasOwnProperty("channel"))
+                if (!$util.isInteger(message.channel))
+                    return "channel: integer expected";
+            if (message.text != null && message.hasOwnProperty("text"))
+                if (!$util.isString(message.text))
+                    return "text: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a c2s_send message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof chat.c2s_send
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {chat.c2s_send} c2s_send
+         */
+        c2s_send.fromObject = function fromObject(object) {
+            if (object instanceof $root.chat.c2s_send)
+                return object;
+            var message = new $root.chat.c2s_send();
+            if (object.channel != null)
+                message.channel = object.channel >>> 0;
+            if (object.text != null)
+                message.text = String(object.text);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a c2s_send message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof chat.c2s_send
+         * @static
+         * @param {chat.c2s_send} message c2s_send
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        c2s_send.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.channel = 0;
+                object.text = "";
+            }
+            if (message.channel != null && message.hasOwnProperty("channel"))
+                object.channel = message.channel;
+            if (message.text != null && message.hasOwnProperty("text"))
+                object.text = message.text;
+            return object;
+        };
+
+        /**
+         * Converts this c2s_send to JSON.
+         * @function toJSON
+         * @memberof chat.c2s_send
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        c2s_send.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for c2s_send
+         * @function getTypeUrl
+         * @memberof chat.c2s_send
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        c2s_send.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/chat.c2s_send";
+        };
+
+        return c2s_send;
+    })();
+
+    chat.s2c_send = (function() {
+
+        /**
+         * Properties of a s2c_send.
+         * @memberof chat
+         * @interface Is2c_send
+         * @property {number|null} [err] s2c_send err
+         */
+
+        /**
+         * Constructs a new s2c_send.
+         * @memberof chat
+         * @classdesc Represents a s2c_send.
+         * @implements Is2c_send
+         * @constructor
+         * @param {chat.Is2c_send=} [properties] Properties to set
+         */
+        function s2c_send(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * s2c_send err.
+         * @member {number} err
+         * @memberof chat.s2c_send
+         * @instance
+         */
+        s2c_send.prototype.err = 0;
+
+        /**
+         * Creates a new s2c_send instance using the specified properties.
+         * @function create
+         * @memberof chat.s2c_send
+         * @static
+         * @param {chat.Is2c_send=} [properties] Properties to set
+         * @returns {chat.s2c_send} s2c_send instance
+         */
+        s2c_send.create = function create(properties) {
+            return new s2c_send(properties);
+        };
+
+        /**
+         * Encodes the specified s2c_send message. Does not implicitly {@link chat.s2c_send.verify|verify} messages.
+         * @function encode
+         * @memberof chat.s2c_send
+         * @static
+         * @param {chat.Is2c_send} message s2c_send message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_send.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified s2c_send message, length delimited. Does not implicitly {@link chat.s2c_send.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof chat.s2c_send
+         * @static
+         * @param {chat.Is2c_send} message s2c_send message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_send.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a s2c_send message from the specified reader or buffer.
+         * @function decode
+         * @memberof chat.s2c_send
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {chat.s2c_send} s2c_send
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_send.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chat.s2c_send();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.err = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a s2c_send message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof chat.s2c_send
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {chat.s2c_send} s2c_send
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_send.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a s2c_send message.
+         * @function verify
+         * @memberof chat.s2c_send
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        s2c_send.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.err != null && message.hasOwnProperty("err"))
+                if (!$util.isInteger(message.err))
+                    return "err: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a s2c_send message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof chat.s2c_send
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {chat.s2c_send} s2c_send
+         */
+        s2c_send.fromObject = function fromObject(object) {
+            if (object instanceof $root.chat.s2c_send)
+                return object;
+            var message = new $root.chat.s2c_send();
+            if (object.err != null)
+                message.err = object.err >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a s2c_send message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof chat.s2c_send
+         * @static
+         * @param {chat.s2c_send} message s2c_send
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        s2c_send.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.err = 0;
+            if (message.err != null && message.hasOwnProperty("err"))
+                object.err = message.err;
+            return object;
+        };
+
+        /**
+         * Converts this s2c_send to JSON.
+         * @function toJSON
+         * @memberof chat.s2c_send
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        s2c_send.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for s2c_send
+         * @function getTypeUrl
+         * @memberof chat.s2c_send
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        s2c_send.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/chat.s2c_send";
+        };
+
+        return s2c_send;
+    })();
+
+    chat.notify_chats = (function() {
+
+        /**
+         * Properties of a notify_chats.
+         * @memberof chat
+         * @interface Inotify_chats
+         * @property {chat.IMsgInfo} msgs notify_chats msgs
+         */
+
+        /**
+         * Constructs a new notify_chats.
+         * @memberof chat
+         * @classdesc Represents a notify_chats.
+         * @implements Inotify_chats
+         * @constructor
+         * @param {chat.Inotify_chats=} [properties] Properties to set
+         */
+        function notify_chats(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * notify_chats msgs.
+         * @member {chat.IMsgInfo} msgs
+         * @memberof chat.notify_chats
+         * @instance
+         */
+        notify_chats.prototype.msgs = null;
+
+        /**
+         * Creates a new notify_chats instance using the specified properties.
+         * @function create
+         * @memberof chat.notify_chats
+         * @static
+         * @param {chat.Inotify_chats=} [properties] Properties to set
+         * @returns {chat.notify_chats} notify_chats instance
+         */
+        notify_chats.create = function create(properties) {
+            return new notify_chats(properties);
+        };
+
+        /**
+         * Encodes the specified notify_chats message. Does not implicitly {@link chat.notify_chats.verify|verify} messages.
+         * @function encode
+         * @memberof chat.notify_chats
+         * @static
+         * @param {chat.Inotify_chats} message notify_chats message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        notify_chats.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            $root.chat.MsgInfo.encode(message.msgs, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified notify_chats message, length delimited. Does not implicitly {@link chat.notify_chats.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof chat.notify_chats
+         * @static
+         * @param {chat.Inotify_chats} message notify_chats message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        notify_chats.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a notify_chats message from the specified reader or buffer.
+         * @function decode
+         * @memberof chat.notify_chats
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {chat.notify_chats} notify_chats
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        notify_chats.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chat.notify_chats();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.msgs = $root.chat.MsgInfo.decode(reader, reader.uint32());
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("msgs"))
+                throw $util.ProtocolError("missing required 'msgs'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a notify_chats message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof chat.notify_chats
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {chat.notify_chats} notify_chats
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        notify_chats.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a notify_chats message.
+         * @function verify
+         * @memberof chat.notify_chats
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        notify_chats.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            {
+                var error = $root.chat.MsgInfo.verify(message.msgs);
+                if (error)
+                    return "msgs." + error;
+            }
+            return null;
+        };
+
+        /**
+         * Creates a notify_chats message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof chat.notify_chats
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {chat.notify_chats} notify_chats
+         */
+        notify_chats.fromObject = function fromObject(object) {
+            if (object instanceof $root.chat.notify_chats)
+                return object;
+            var message = new $root.chat.notify_chats();
+            if (object.msgs != null) {
+                if (typeof object.msgs !== "object")
+                    throw TypeError(".chat.notify_chats.msgs: object expected");
+                message.msgs = $root.chat.MsgInfo.fromObject(object.msgs);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a notify_chats message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof chat.notify_chats
+         * @static
+         * @param {chat.notify_chats} message notify_chats
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        notify_chats.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.msgs = null;
+            if (message.msgs != null && message.hasOwnProperty("msgs"))
+                object.msgs = $root.chat.MsgInfo.toObject(message.msgs, options);
+            return object;
+        };
+
+        /**
+         * Converts this notify_chats to JSON.
+         * @function toJSON
+         * @memberof chat.notify_chats
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        notify_chats.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for notify_chats
+         * @function getTypeUrl
+         * @memberof chat.notify_chats
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        notify_chats.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/chat.notify_chats";
+        };
+
+        return notify_chats;
+    })();
+
+    return chat;
+})();
+
 $root.dungeon = (function() {
 
     /**
@@ -8228,6 +9598,7 @@ $root.profile = (function() {
          * @property {number|null} [gender] ProfileInfo gender
          * @property {number|null} [exp] ProfileInfo exp
          * @property {number|null} [lv] ProfileInfo lv
+         * @property {number|null} [headImgId] ProfileInfo headImgId
          */
 
         /**
@@ -8278,6 +9649,14 @@ $root.profile = (function() {
         ProfileInfo.prototype.lv = 0;
 
         /**
+         * ProfileInfo headImgId.
+         * @member {number} headImgId
+         * @memberof profile.ProfileInfo
+         * @instance
+         */
+        ProfileInfo.prototype.headImgId = 0;
+
+        /**
          * Creates a new ProfileInfo instance using the specified properties.
          * @function create
          * @memberof profile.ProfileInfo
@@ -8309,6 +9688,8 @@ $root.profile = (function() {
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.exp);
             if (message.lv != null && Object.hasOwnProperty.call(message, "lv"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.lv);
+            if (message.headImgId != null && Object.hasOwnProperty.call(message, "headImgId"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.headImgId);
             return writer;
         };
 
@@ -8359,6 +9740,10 @@ $root.profile = (function() {
                         message.lv = reader.uint32();
                         break;
                     }
+                case 5: {
+                        message.headImgId = reader.uint32();
+                        break;
+                    }
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -8406,6 +9791,9 @@ $root.profile = (function() {
             if (message.lv != null && message.hasOwnProperty("lv"))
                 if (!$util.isInteger(message.lv))
                     return "lv: integer expected";
+            if (message.headImgId != null && message.hasOwnProperty("headImgId"))
+                if (!$util.isInteger(message.headImgId))
+                    return "headImgId: integer expected";
             return null;
         };
 
@@ -8429,6 +9817,8 @@ $root.profile = (function() {
                 message.exp = object.exp >>> 0;
             if (object.lv != null)
                 message.lv = object.lv >>> 0;
+            if (object.headImgId != null)
+                message.headImgId = object.headImgId >>> 0;
             return message;
         };
 
@@ -8450,6 +9840,7 @@ $root.profile = (function() {
                 object.gender = 0;
                 object.exp = 0;
                 object.lv = 0;
+                object.headImgId = 0;
             }
             if (message.name != null && message.hasOwnProperty("name"))
                 object.name = message.name;
@@ -8459,6 +9850,8 @@ $root.profile = (function() {
                 object.exp = message.exp;
             if (message.lv != null && message.hasOwnProperty("lv"))
                 object.lv = message.lv;
+            if (message.headImgId != null && message.hasOwnProperty("headImgId"))
+                object.headImgId = message.headImgId;
             return object;
         };
 

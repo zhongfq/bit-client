@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package chat;
+
+message MsgInfo {
+    uint32 channel = 1;//聊天类型 参照config.chat.CHAT_CHANNEL
+    profile.ProfileInfo user = 2;//玩家信息
+    string text = 3;//聊天信息
+	int64 time = 4;//时间戳
+}
+
+message c2s_load {
+    uint32 channel = 1;//聊天类型
+} 
+message s2c_load {
+    repeated MsgInfo msgs = 1;//聊天信息
+}
+
+message c2s_send {
+    uint32 channel = 1;//聊天类型
+    string text = 2;//聊天信息
+}
+message s2c_send {
+    uint32 err = 1;
+}
+
+// 通知聊天变化
+message notify_chats {
+    required MsgInfo msgs = 1;
+}

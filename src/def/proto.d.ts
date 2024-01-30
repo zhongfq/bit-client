@@ -1214,6 +1214,616 @@ export namespace bag {
     }
 }
 
+/** Namespace chat. */
+export namespace chat {
+
+    /** Properties of a MsgInfo. */
+    interface IMsgInfo {
+
+        /** MsgInfo channel */
+        channel?: (number|null);
+
+        /** MsgInfo user */
+        user?: (profile.IProfileInfo|null);
+
+        /** MsgInfo text */
+        text?: (string|null);
+
+        /** MsgInfo time */
+        time?: (number|Long|null);
+    }
+
+    /** Represents a MsgInfo. */
+    class MsgInfo implements IMsgInfo {
+
+        /**
+         * Constructs a new MsgInfo.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: chat.IMsgInfo);
+
+        /** MsgInfo channel. */
+        public channel: number;
+
+        /** MsgInfo user. */
+        public user?: (profile.IProfileInfo|null);
+
+        /** MsgInfo text. */
+        public text: string;
+
+        /** MsgInfo time. */
+        public time: (number|Long);
+
+        /**
+         * Creates a new MsgInfo instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns MsgInfo instance
+         */
+        public static create(properties?: chat.IMsgInfo): chat.MsgInfo;
+
+        /**
+         * Encodes the specified MsgInfo message. Does not implicitly {@link chat.MsgInfo.verify|verify} messages.
+         * @param message MsgInfo message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: chat.IMsgInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified MsgInfo message, length delimited. Does not implicitly {@link chat.MsgInfo.verify|verify} messages.
+         * @param message MsgInfo message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: chat.IMsgInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a MsgInfo message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns MsgInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): chat.MsgInfo;
+
+        /**
+         * Decodes a MsgInfo message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns MsgInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): chat.MsgInfo;
+
+        /**
+         * Verifies a MsgInfo message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a MsgInfo message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns MsgInfo
+         */
+        public static fromObject(object: { [k: string]: any }): chat.MsgInfo;
+
+        /**
+         * Creates a plain object from a MsgInfo message. Also converts values to other types if specified.
+         * @param message MsgInfo
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: chat.MsgInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this MsgInfo to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for MsgInfo
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a c2s_load. */
+    interface Ic2s_load {
+
+        /** c2s_load channel */
+        channel?: (number|null);
+    }
+
+    /** Represents a c2s_load. */
+    class c2s_load implements Ic2s_load {
+
+        /**
+         * Constructs a new c2s_load.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: chat.Ic2s_load);
+
+        /** c2s_load channel. */
+        public channel: number;
+
+        /**
+         * Creates a new c2s_load instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns c2s_load instance
+         */
+        public static create(properties?: chat.Ic2s_load): chat.c2s_load;
+
+        /**
+         * Encodes the specified c2s_load message. Does not implicitly {@link chat.c2s_load.verify|verify} messages.
+         * @param message c2s_load message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: chat.Ic2s_load, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified c2s_load message, length delimited. Does not implicitly {@link chat.c2s_load.verify|verify} messages.
+         * @param message c2s_load message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: chat.Ic2s_load, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a c2s_load message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns c2s_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): chat.c2s_load;
+
+        /**
+         * Decodes a c2s_load message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns c2s_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): chat.c2s_load;
+
+        /**
+         * Verifies a c2s_load message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a c2s_load message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns c2s_load
+         */
+        public static fromObject(object: { [k: string]: any }): chat.c2s_load;
+
+        /**
+         * Creates a plain object from a c2s_load message. Also converts values to other types if specified.
+         * @param message c2s_load
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: chat.c2s_load, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this c2s_load to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for c2s_load
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a s2c_load. */
+    interface Is2c_load {
+
+        /** s2c_load msgs */
+        msgs?: (chat.IMsgInfo[]|null);
+    }
+
+    /** Represents a s2c_load. */
+    class s2c_load implements Is2c_load {
+
+        /**
+         * Constructs a new s2c_load.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: chat.Is2c_load);
+
+        /** s2c_load msgs. */
+        public msgs: chat.IMsgInfo[];
+
+        /**
+         * Creates a new s2c_load instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns s2c_load instance
+         */
+        public static create(properties?: chat.Is2c_load): chat.s2c_load;
+
+        /**
+         * Encodes the specified s2c_load message. Does not implicitly {@link chat.s2c_load.verify|verify} messages.
+         * @param message s2c_load message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: chat.Is2c_load, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified s2c_load message, length delimited. Does not implicitly {@link chat.s2c_load.verify|verify} messages.
+         * @param message s2c_load message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: chat.Is2c_load, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a s2c_load message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns s2c_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): chat.s2c_load;
+
+        /**
+         * Decodes a s2c_load message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns s2c_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): chat.s2c_load;
+
+        /**
+         * Verifies a s2c_load message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a s2c_load message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns s2c_load
+         */
+        public static fromObject(object: { [k: string]: any }): chat.s2c_load;
+
+        /**
+         * Creates a plain object from a s2c_load message. Also converts values to other types if specified.
+         * @param message s2c_load
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: chat.s2c_load, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this s2c_load to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for s2c_load
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a c2s_send. */
+    interface Ic2s_send {
+
+        /** c2s_send channel */
+        channel?: (number|null);
+
+        /** c2s_send text */
+        text?: (string|null);
+    }
+
+    /** Represents a c2s_send. */
+    class c2s_send implements Ic2s_send {
+
+        /**
+         * Constructs a new c2s_send.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: chat.Ic2s_send);
+
+        /** c2s_send channel. */
+        public channel: number;
+
+        /** c2s_send text. */
+        public text: string;
+
+        /**
+         * Creates a new c2s_send instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns c2s_send instance
+         */
+        public static create(properties?: chat.Ic2s_send): chat.c2s_send;
+
+        /**
+         * Encodes the specified c2s_send message. Does not implicitly {@link chat.c2s_send.verify|verify} messages.
+         * @param message c2s_send message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: chat.Ic2s_send, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified c2s_send message, length delimited. Does not implicitly {@link chat.c2s_send.verify|verify} messages.
+         * @param message c2s_send message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: chat.Ic2s_send, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a c2s_send message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns c2s_send
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): chat.c2s_send;
+
+        /**
+         * Decodes a c2s_send message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns c2s_send
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): chat.c2s_send;
+
+        /**
+         * Verifies a c2s_send message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a c2s_send message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns c2s_send
+         */
+        public static fromObject(object: { [k: string]: any }): chat.c2s_send;
+
+        /**
+         * Creates a plain object from a c2s_send message. Also converts values to other types if specified.
+         * @param message c2s_send
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: chat.c2s_send, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this c2s_send to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for c2s_send
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a s2c_send. */
+    interface Is2c_send {
+
+        /** s2c_send err */
+        err?: (number|null);
+    }
+
+    /** Represents a s2c_send. */
+    class s2c_send implements Is2c_send {
+
+        /**
+         * Constructs a new s2c_send.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: chat.Is2c_send);
+
+        /** s2c_send err. */
+        public err: number;
+
+        /**
+         * Creates a new s2c_send instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns s2c_send instance
+         */
+        public static create(properties?: chat.Is2c_send): chat.s2c_send;
+
+        /**
+         * Encodes the specified s2c_send message. Does not implicitly {@link chat.s2c_send.verify|verify} messages.
+         * @param message s2c_send message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: chat.Is2c_send, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified s2c_send message, length delimited. Does not implicitly {@link chat.s2c_send.verify|verify} messages.
+         * @param message s2c_send message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: chat.Is2c_send, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a s2c_send message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns s2c_send
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): chat.s2c_send;
+
+        /**
+         * Decodes a s2c_send message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns s2c_send
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): chat.s2c_send;
+
+        /**
+         * Verifies a s2c_send message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a s2c_send message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns s2c_send
+         */
+        public static fromObject(object: { [k: string]: any }): chat.s2c_send;
+
+        /**
+         * Creates a plain object from a s2c_send message. Also converts values to other types if specified.
+         * @param message s2c_send
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: chat.s2c_send, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this s2c_send to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for s2c_send
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a notify_chats. */
+    interface Inotify_chats {
+
+        /** notify_chats msgs */
+        msgs: chat.IMsgInfo;
+    }
+
+    /** Represents a notify_chats. */
+    class notify_chats implements Inotify_chats {
+
+        /**
+         * Constructs a new notify_chats.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: chat.Inotify_chats);
+
+        /** notify_chats msgs. */
+        public msgs: chat.IMsgInfo;
+
+        /**
+         * Creates a new notify_chats instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns notify_chats instance
+         */
+        public static create(properties?: chat.Inotify_chats): chat.notify_chats;
+
+        /**
+         * Encodes the specified notify_chats message. Does not implicitly {@link chat.notify_chats.verify|verify} messages.
+         * @param message notify_chats message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: chat.Inotify_chats, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified notify_chats message, length delimited. Does not implicitly {@link chat.notify_chats.verify|verify} messages.
+         * @param message notify_chats message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: chat.Inotify_chats, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a notify_chats message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns notify_chats
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): chat.notify_chats;
+
+        /**
+         * Decodes a notify_chats message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns notify_chats
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): chat.notify_chats;
+
+        /**
+         * Verifies a notify_chats message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a notify_chats message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns notify_chats
+         */
+        public static fromObject(object: { [k: string]: any }): chat.notify_chats;
+
+        /**
+         * Creates a plain object from a notify_chats message. Also converts values to other types if specified.
+         * @param message notify_chats
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: chat.notify_chats, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this notify_chats to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for notify_chats
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+}
+
 /** Namespace dungeon. */
 export namespace dungeon {
 
@@ -3671,6 +4281,9 @@ export namespace profile {
 
         /** ProfileInfo lv */
         lv?: (number|null);
+
+        /** ProfileInfo headImgId */
+        headImgId?: (number|null);
     }
 
     /** Represents a ProfileInfo. */
@@ -3693,6 +4306,9 @@ export namespace profile {
 
         /** ProfileInfo lv. */
         public lv: number;
+
+        /** ProfileInfo headImgId. */
+        public headImgId: number;
 
         /**
          * Creates a new ProfileInfo instance using the specified properties.

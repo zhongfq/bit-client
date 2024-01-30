@@ -11,6 +11,7 @@ export const enum ui {
     app,
     LOADING,
     LOGIN_SCENE,
+    LOADING_SCENE,
     HOME_SCENE,
     WORLD_SCENE,
 
@@ -55,6 +56,11 @@ export const registerUI = () => {
         id: ui.LOGIN_SCENE,
         autoClose: true,
         url: "scenes/login.ls",
+    });
+    app.ui.register({
+        id: ui.LOADING_SCENE,
+        autoClose: true,
+        url: "scenes/loading.ls",
     });
     app.ui.register({
         id: ui.WORLD_SCENE,

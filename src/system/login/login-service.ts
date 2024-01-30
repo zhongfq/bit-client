@@ -39,6 +39,11 @@ export class LoginService extends Service<NetworkService> {
     // ------------------------------------------------------------------------
     // rpc call
     // ------------------------------------------------------------------------
+    /**
+     *请求登录
+     * @param username 登录账号
+     * @returns
+     */
     async login(username: string) {
         return await this._network.call(
             user.c2s_login.create({

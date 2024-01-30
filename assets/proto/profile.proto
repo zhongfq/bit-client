@@ -7,6 +7,7 @@ message ProfileInfo {
     uint32 gender = 2;
     uint32 exp = 3;
     uint32 lv = 4;
+    uint32 head_img_id = 5;
 }
 
 message c2s_load {

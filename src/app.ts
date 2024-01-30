@@ -108,12 +108,6 @@ class App {
 
         this._service = new ServiceManager();
 
-        await app.service.table.load();
-        // app.networkd.connect("ws://games.bitserver.wang:10001");
-        // app.userd.username = "zxp";
-        // await this.bagd.load();
-        // this.ui.openDialog(ui.bagDialog);
-
         app.ui.open(ui.LOGIN_SCENE);
     }
 }

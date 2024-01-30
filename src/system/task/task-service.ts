@@ -35,10 +35,10 @@ export class TaskService extends Service<NetworkService> {
     // rpc call
     // ------------------------------------------------------------------------
     public async load(data: proto.task.Ic2s_load) {
-        await this._network.call(proto.task.c2s_load.create(data), proto.task.s2c_load);
+        return await this._network.call(proto.task.c2s_load.create(data), proto.task.s2c_load);
     }
     public async requestReceiveReward(data: proto.task.Ic2s_receive_reward) {
-        await this._network.call(
+        return await this._network.call(
             proto.task.c2s_receive_reward.create(data),
             proto.task.s2c_receive_reward
         );
