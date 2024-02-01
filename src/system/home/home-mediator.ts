@@ -41,5 +41,8 @@ export class MainMediator extends Mediator {
         this.owner.btnWorld.on(Laya.Event.CLICK, () => {
             app.ui.show(ui.ALLIANCE);
         });
+        this.owner.btnChat.on(Laya.Event.CLICK, () => {
+            app.ui.show(ui.CHAT);
+        });
     }
 }

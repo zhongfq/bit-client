@@ -11,5 +11,6 @@ export class HomeUIBase extends Laya.Scene {
     public btnShop!: Laya.Button;
     public btnNotice!: Laya.Button;
     public btnWorld!: Laya.Button;
+    public btnChat!: Laya.Button;
 }
 

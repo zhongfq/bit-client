@@ -5,6 +5,7 @@ import proto from "../../../def/proto";
 import { app } from "../../../app";
 import { Constructor } from "../../../core/dispatcher";
 import { TableUtil } from "../../../system/table/table-util";
+import { todo } from "node:test";
 
 /**
  * ItemBag 道具
@@ -28,7 +29,7 @@ export class ItemBag extends GoodsVoBag<ItemVo> {
         let clazz = this.getVOClass();
         let vo = new clazz();
         let ref = TableUtil.getRef(app.service.table.item, { id: refId });
-        // TODO: check ref
+        /**TODO */
         vo.initByRef(ref!);
         return vo;
     }

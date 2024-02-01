@@ -8,7 +8,7 @@ import { GoodsVoBag } from "./vo/goods/goods-vo-bag";
 import { ItemBag } from "./vo/goods/item-vo-bag";
 import { TaskBag } from "./vo/task/task-vo-bag";
 import { VO } from "./vo/vo-base/vo";
-import { VOBag } from "./vo/vo-base/vo-bag";
+import { VoBag } from "./vo/vo-base/vo-bag";
 import { ItemConf } from "../def/item";
 import { MoneyVo } from "./vo/money/money-vo";
 import { GeneratedMoneyRow } from "../def/table.generated";
@@ -20,7 +20,7 @@ export class VoUtil {
      * map
      */
 
-    static createBag<T extends VOBag<VO<any, any>>>(clazz: Constructor<T>): T {
+    static createBag<T extends VoBag<VO<any, any>>>(clazz: Constructor<T>): T {
         let bag = new clazz();
         return bag;
     }

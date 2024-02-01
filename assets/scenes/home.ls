@@ -98,6 +98,20 @@
       "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
       "label": "世界",
       "labelSize": 20
+    },
+    {
+      "_$id": "g4kkmbqz",
+      "_$var": true,
+      "_$type": "Button",
+      "name": "btnChat",
+      "x": 166,
+      "y": 1179,
+      "width": 120,
+      "height": 40,
+      "_mouseState": 2,
+      "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
+      "label": "聊天",
+      "labelSize": 20
     }
   ]
 }

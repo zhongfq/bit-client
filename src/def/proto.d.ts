@@ -1217,115 +1217,224 @@ export namespace bag {
 /** Namespace chat. */
 export namespace chat {
 
-    /** Properties of a MsgInfo. */
-    interface IMsgInfo {
+    /** Properties of a ChatRole. */
+    interface IChatRole {
 
-        /** MsgInfo channel */
-        channel?: (number|null);
+        /** ChatRole rid */
+        rid?: (number|null);
 
-        /** MsgInfo user */
-        user?: (profile.IProfileInfo|null);
+        /** ChatRole avatarId */
+        avatarId?: (number|null);
 
-        /** MsgInfo text */
-        text?: (string|null);
+        /** ChatRole avatarUrl */
+        avatarUrl?: (string|null);
 
-        /** MsgInfo time */
-        time?: (number|Long|null);
+        /** ChatRole name */
+        name?: (string|null);
     }
 
-    /** Represents a MsgInfo. */
-    class MsgInfo implements IMsgInfo {
+    /** Represents a ChatRole. */
+    class ChatRole implements IChatRole {
 
         /**
-         * Constructs a new MsgInfo.
+         * Constructs a new ChatRole.
          * @param [properties] Properties to set
          */
-        constructor(properties?: chat.IMsgInfo);
+        constructor(properties?: chat.IChatRole);
 
-        /** MsgInfo channel. */
-        public channel: number;
+        /** ChatRole rid. */
+        public rid: number;
 
-        /** MsgInfo user. */
-        public user?: (profile.IProfileInfo|null);
+        /** ChatRole avatarId. */
+        public avatarId: number;
 
-        /** MsgInfo text. */
-        public text: string;
+        /** ChatRole avatarUrl. */
+        public avatarUrl: string;
 
-        /** MsgInfo time. */
-        public time: (number|Long);
+        /** ChatRole name. */
+        public name: string;
 
         /**
-         * Creates a new MsgInfo instance using the specified properties.
+         * Creates a new ChatRole instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns MsgInfo instance
+         * @returns ChatRole instance
          */
-        public static create(properties?: chat.IMsgInfo): chat.MsgInfo;
+        public static create(properties?: chat.IChatRole): chat.ChatRole;
 
         /**
-         * Encodes the specified MsgInfo message. Does not implicitly {@link chat.MsgInfo.verify|verify} messages.
-         * @param message MsgInfo message or plain object to encode
+         * Encodes the specified ChatRole message. Does not implicitly {@link chat.ChatRole.verify|verify} messages.
+         * @param message ChatRole message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: chat.IMsgInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: chat.IChatRole, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified MsgInfo message, length delimited. Does not implicitly {@link chat.MsgInfo.verify|verify} messages.
-         * @param message MsgInfo message or plain object to encode
+         * Encodes the specified ChatRole message, length delimited. Does not implicitly {@link chat.ChatRole.verify|verify} messages.
+         * @param message ChatRole message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: chat.IMsgInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: chat.IChatRole, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a MsgInfo message from the specified reader or buffer.
+         * Decodes a ChatRole message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns MsgInfo
+         * @returns ChatRole
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): chat.MsgInfo;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): chat.ChatRole;
 
         /**
-         * Decodes a MsgInfo message from the specified reader or buffer, length delimited.
+         * Decodes a ChatRole message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns MsgInfo
+         * @returns ChatRole
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): chat.MsgInfo;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): chat.ChatRole;
 
         /**
-         * Verifies a MsgInfo message.
+         * Verifies a ChatRole message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a MsgInfo message from a plain object. Also converts values to their respective internal types.
+         * Creates a ChatRole message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns MsgInfo
+         * @returns ChatRole
          */
-        public static fromObject(object: { [k: string]: any }): chat.MsgInfo;
+        public static fromObject(object: { [k: string]: any }): chat.ChatRole;
 
         /**
-         * Creates a plain object from a MsgInfo message. Also converts values to other types if specified.
-         * @param message MsgInfo
+         * Creates a plain object from a ChatRole message. Also converts values to other types if specified.
+         * @param message ChatRole
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: chat.MsgInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: chat.ChatRole, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this MsgInfo to JSON.
+         * Converts this ChatRole to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
 
         /**
-         * Gets the default type url for MsgInfo
+         * Gets the default type url for ChatRole
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a ChatMessage. */
+    interface IChatMessage {
+
+        /** ChatMessage rid */
+        rid?: (number|null);
+
+        /** ChatMessage text */
+        text?: (string|null);
+
+        /** ChatMessage time */
+        time?: (number|Long|null);
+    }
+
+    /** Represents a ChatMessage. */
+    class ChatMessage implements IChatMessage {
+
+        /**
+         * Constructs a new ChatMessage.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: chat.IChatMessage);
+
+        /** ChatMessage rid. */
+        public rid: number;
+
+        /** ChatMessage text. */
+        public text: string;
+
+        /** ChatMessage time. */
+        public time: (number|Long);
+
+        /**
+         * Creates a new ChatMessage instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns ChatMessage instance
+         */
+        public static create(properties?: chat.IChatMessage): chat.ChatMessage;
+
+        /**
+         * Encodes the specified ChatMessage message. Does not implicitly {@link chat.ChatMessage.verify|verify} messages.
+         * @param message ChatMessage message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: chat.IChatMessage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified ChatMessage message, length delimited. Does not implicitly {@link chat.ChatMessage.verify|verify} messages.
+         * @param message ChatMessage message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: chat.IChatMessage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a ChatMessage message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns ChatMessage
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): chat.ChatMessage;
+
+        /**
+         * Decodes a ChatMessage message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns ChatMessage
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): chat.ChatMessage;
+
+        /**
+         * Verifies a ChatMessage message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a ChatMessage message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns ChatMessage
+         */
+        public static fromObject(object: { [k: string]: any }): chat.ChatMessage;
+
+        /**
+         * Creates a plain object from a ChatMessage message. Also converts values to other types if specified.
+         * @param message ChatMessage
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: chat.ChatMessage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this ChatMessage to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for ChatMessage
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */
@@ -1432,8 +1541,17 @@ export namespace chat {
     /** Properties of a s2c_load. */
     interface Is2c_load {
 
-        /** s2c_load msgs */
-        msgs?: (chat.IMsgInfo[]|null);
+        /** s2c_load err */
+        err?: (number|null);
+
+        /** s2c_load channel */
+        channel?: (number|null);
+
+        /** s2c_load messages */
+        messages?: (chat.IChatMessage[]|null);
+
+        /** s2c_load chatRoles */
+        chatRoles?: (chat.IChatRole[]|null);
     }
 
     /** Represents a s2c_load. */
@@ -1445,8 +1563,17 @@ export namespace chat {
          */
         constructor(properties?: chat.Is2c_load);
 
-        /** s2c_load msgs. */
-        public msgs: chat.IMsgInfo[];
+        /** s2c_load err. */
+        public err: number;
+
+        /** s2c_load channel. */
+        public channel: number;
+
+        /** s2c_load messages. */
+        public messages: chat.IChatMessage[];
+
+        /** s2c_load chatRoles. */
+        public chatRoles: chat.IChatRole[];
 
         /**
          * Creates a new s2c_load instance using the specified properties.
@@ -1726,97 +1853,109 @@ export namespace chat {
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
-    /** Properties of a notify_chats. */
-    interface Inotify_chats {
+    /** Properties of a notify. */
+    interface Inotify {
 
-        /** notify_chats msgs */
-        msgs: chat.IMsgInfo;
+        /** notify channel */
+        channel?: (number|null);
+
+        /** notify messages */
+        messages?: (chat.IChatMessage[]|null);
+
+        /** notify chatRoles */
+        chatRoles?: (chat.IChatRole[]|null);
     }
 
-    /** Represents a notify_chats. */
-    class notify_chats implements Inotify_chats {
+    /** Represents a notify. */
+    class notify implements Inotify {
 
         /**
-         * Constructs a new notify_chats.
+         * Constructs a new notify.
          * @param [properties] Properties to set
          */
-        constructor(properties?: chat.Inotify_chats);
+        constructor(properties?: chat.Inotify);
 
-        /** notify_chats msgs. */
-        public msgs: chat.IMsgInfo;
+        /** notify channel. */
+        public channel: number;
+
+        /** notify messages. */
+        public messages: chat.IChatMessage[];
+
+        /** notify chatRoles. */
+        public chatRoles: chat.IChatRole[];
 
         /**
-         * Creates a new notify_chats instance using the specified properties.
+         * Creates a new notify instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns notify_chats instance
+         * @returns notify instance
          */
-        public static create(properties?: chat.Inotify_chats): chat.notify_chats;
+        public static create(properties?: chat.Inotify): chat.notify;
 
         /**
-         * Encodes the specified notify_chats message. Does not implicitly {@link chat.notify_chats.verify|verify} messages.
-         * @param message notify_chats message or plain object to encode
+         * Encodes the specified notify message. Does not implicitly {@link chat.notify.verify|verify} messages.
+         * @param message notify message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: chat.Inotify_chats, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: chat.Inotify, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified notify_chats message, length delimited. Does not implicitly {@link chat.notify_chats.verify|verify} messages.
-         * @param message notify_chats message or plain object to encode
+         * Encodes the specified notify message, length delimited. Does not implicitly {@link chat.notify.verify|verify} messages.
+         * @param message notify message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: chat.Inotify_chats, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: chat.Inotify, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a notify_chats message from the specified reader or buffer.
+         * Decodes a notify message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns notify_chats
+         * @returns notify
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): chat.notify_chats;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): chat.notify;
 
         /**
-         * Decodes a notify_chats message from the specified reader or buffer, length delimited.
+         * Decodes a notify message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns notify_chats
+         * @returns notify
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): chat.notify_chats;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): chat.notify;
 
         /**
-         * Verifies a notify_chats message.
+         * Verifies a notify message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a notify_chats message from a plain object. Also converts values to their respective internal types.
+         * Creates a notify message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns notify_chats
+         * @returns notify
          */
-        public static fromObject(object: { [k: string]: any }): chat.notify_chats;
+        public static fromObject(object: { [k: string]: any }): chat.notify;
 
         /**
-         * Creates a plain object from a notify_chats message. Also converts values to other types if specified.
-         * @param message notify_chats
+         * Creates a plain object from a notify message. Also converts values to other types if specified.
+         * @param message notify
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: chat.notify_chats, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: chat.notify, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this notify_chats to JSON.
+         * Converts this notify to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
 
         /**
-         * Gets the default type url for notify_chats
+         * Gets the default type url for notify
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */
@@ -11760,11 +11899,8 @@ export namespace world {
     /** Properties of a BattleStopAction. */
     interface IBattleStopAction {
 
-        /** BattleStopAction srcEid */
-        srcEid?: (number|null);
-
-        /** BattleStopAction dstEid */
-        dstEid?: (number|null);
+        /** BattleStopAction eid */
+        eid?: (number|null);
     }
 
     /** Represents a BattleStopAction. */
@@ -11776,11 +11912,8 @@ export namespace world {
          */
         constructor(properties?: world.IBattleStopAction);
 
-        /** BattleStopAction srcEid. */
-        public srcEid: number;
-
-        /** BattleStopAction dstEid. */
-        public dstEid: number;
+        /** BattleStopAction eid. */
+        public eid: number;
 
         /**
          * Creates a new BattleStopAction instance using the specified properties.

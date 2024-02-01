@@ -1,4 +1,5 @@
 import { app } from "../../app";
+import { ChatConf } from "../../def/chat";
 import { ui } from "../../misc/ui";
 import { LoadingUI } from "../../ui-runtime/scene/LoadingUI";
 
@@ -33,6 +34,7 @@ export class LoadingMediator extends Laya.Script {
         this.progress = 80;
 
         await app.service.mail.load();
+        await app.service.chat.load({ channel: ChatConf.CHAT_CHANNEL.WORLD });
         this.progress = 100;
     }
     onUpdate(): void {

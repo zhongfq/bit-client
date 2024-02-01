@@ -68,8 +68,8 @@ export class CommandSystem extends ecs.System {
                     this._startAttack(cmd.battleSkill as proto.world.BattleSkillAction);
                     break;
                 case ACTION.BATTLE_STOP:
-                    this._stopAttack(cmd.battleStop!.srcEid!);
-                    this._stopAttack(cmd.battleStop!.dstEid!);
+                    // this._stopAttack(cmd.battleStop!.srcEid!);
+                    // this._stopAttack(cmd.battleStop!.dstEid!);
                     break;
                 case ACTION.BATTLE_SUB_HP:
                     break;

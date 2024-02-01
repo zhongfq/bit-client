@@ -1,0 +1,56 @@
+{
+  "_$ver": 1,
+  "_$id": "hb6d4jmr",
+  "_$runtime": "res://f3703fef-2909-4574-a78f-49db71a6be1c",
+  "_$type": "Box",
+  "name": "Box",
+  "width": 469,
+  "height": 116,
+  "_$child": [
+    {
+      "_$id": "cut9scf1",
+      "_$var": true,
+      "_$type": "Image",
+      "name": "imgHead",
+      "x": 15,
+      "y": 13,
+      "width": 100,
+      "height": 100,
+      "skin": "res://74e5e5ca-31d2-43ad-bc7c-2bec9450b38e",
+      "useSourceSize": true,
+      "color": "#ffffff"
+    },
+    {
+      "_$id": "e227280z",
+      "_$var": true,
+      "_$type": "Label",
+      "name": "labelName",
+      "x": 124,
+      "y": 18,
+      "width": 120,
+      "height": 28,
+      "text": "玩家A",
+      "fontSize": 20,
+      "color": "rgba(238, 9, 9, 1)",
+      "valign": "top",
+      "padding": "0,0,0,0"
+    },
+    {
+      "_$id": "et438jwb",
+      "_$var": true,
+      "_$type": "Label",
+      "name": "labelMsg",
+      "x": 124,
+      "y": 57,
+      "width": 332,
+      "height": 21,
+      "text": "aaaa",
+      "fontSize": 20,
+      "color": "#FFFFFF",
+      "fitContent": "height",
+      "valign": "top",
+      "wordWrap": true,
+      "padding": "0,0,0,0"
+    }
+  ]
+}

@@ -2,13 +2,13 @@ import proto from "../../../def/proto";
 import { app } from "../../../app";
 import { Constructor } from "../../../core/dispatcher";
 import { TableUtil } from "../../../system/table/table-util";
-import { VOBag } from "../vo-base/vo-bag";
+import { VoBag } from "../vo-base/vo-bag";
 import { TaskVo } from "./task-vo";
 
 /**
  * ItemBag 道具
  */
-export class TaskBag extends VOBag<TaskVo> {
+export class TaskBag extends VoBag<TaskVo> {
     public Hash(t: TaskVo): string | number {
         return t.cmd?.id || 0;
     }

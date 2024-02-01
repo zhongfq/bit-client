@@ -17,6 +17,7 @@ import { ShopService } from "./system/shop/shop-service";
 import { TaskService } from "./system/task/task-service";
 import { UserService } from "./system/user/user-service";
 import { WorldService } from "./system/world/world-service";
+import { ChatService } from "./system/chat/chat-service";
 
 const { regClass, property } = Laya;
 
@@ -40,6 +41,7 @@ class ServiceManager {
     readonly mail: MailService;
     readonly shop: ShopService;
     readonly toast: ToastService;
+    readonly chat: ChatService;
 
     private _services: Service<NetworkService>[] = [];
 
@@ -55,6 +57,7 @@ class ServiceManager {
         this.mail = this.newService(MailService);
         this.shop = this.newService(ShopService);
         this.toast = this.newService(ToastService);
+        this.chat = this.newService(ChatService);
         // ignore log
         this.network.ignoreLog(opcode.user.c2s_ping);
         this.network.ignoreLog(opcode.user.s2c_ping);

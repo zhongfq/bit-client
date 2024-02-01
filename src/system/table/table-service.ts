@@ -16,7 +16,7 @@ import {
     AllianceTable,
 } from "../../def/table";
 import { ItemConf } from "../../def/item";
-import { VOBag } from "../../misc/vo/vo-base/vo-bag";
+import { VoBag } from "../../misc/vo/vo-base/vo-bag";
 import { NetworkService } from "../network/network-service";
 import { TableUtil } from "./table-util";
 

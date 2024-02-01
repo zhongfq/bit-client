@@ -19,6 +19,13 @@ export const opcode = {
         s2c_discard_item: 0x1707,
         notify_items: 0x1790,
     },
+    chat: {
+        c2s_load: 0x1E00,
+        s2c_load: 0x1E01,
+        c2s_send: 0x1E02,
+        s2c_send: 0x1E03,
+        notify: 0x1E90,
+    },
     connection: {
         connected: 0x00F1,
         disconnected: 0x00F2,
@@ -303,6 +310,36 @@ export const registerProtocols = () => {
         typeURL: proto.bag.notify_items.getTypeUrl(),
         encode: proto.bag.notify_items.encode,
         decode: proto.bag.notify_items.decode,
+    });
+    register({
+        op: opcode.chat.c2s_load,
+        typeURL: proto.chat.c2s_load.getTypeUrl(),
+        encode: proto.chat.c2s_load.encode,
+        decode: proto.chat.c2s_load.decode,
+    });
+    register({
+        op: opcode.chat.s2c_load,
+        typeURL: proto.chat.s2c_load.getTypeUrl(),
+        encode: proto.chat.s2c_load.encode,
+        decode: proto.chat.s2c_load.decode,
+    });
+    register({
+        op: opcode.chat.c2s_send,
+        typeURL: proto.chat.c2s_send.getTypeUrl(),
+        encode: proto.chat.c2s_send.encode,
+        decode: proto.chat.c2s_send.decode,
+    });
+    register({
+        op: opcode.chat.s2c_send,
+        typeURL: proto.chat.s2c_send.getTypeUrl(),
+        encode: proto.chat.s2c_send.encode,
+        decode: proto.chat.s2c_send.decode,
+    });
+    register({
+        op: opcode.chat.notify,
+        typeURL: proto.chat.notify.getTypeUrl(),
+        encode: proto.chat.notify.encode,
+        decode: proto.chat.notify.decode,
     });
     register({
         op: opcode.dungeon.c2s_load,

@@ -1,10 +1,10 @@
-import { VOBag } from "../vo-base/vo-bag";
+import { VoBag } from "../vo-base/vo-bag";
 import { GoodsVo } from "./goods-vo";
 
 /**
  * GoodsBag
  */
-export abstract class GoodsVoBag<T extends GoodsVo = GoodsVo> extends VOBag<T> {
+export abstract class GoodsVoBag<T extends GoodsVo = GoodsVo> extends VoBag<T> {
     static __cname: string = "GoodsBag";
 
     /**

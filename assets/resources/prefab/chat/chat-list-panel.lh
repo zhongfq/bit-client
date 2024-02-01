@@ -1,0 +1,20 @@
+{
+  "_$ver": 1,
+  "_$id": "e6j8mcj2",
+  "_$runtime": "res://8482f688-3061-4312-b869-8f2152142935",
+  "_$type": "Panel",
+  "name": "panel",
+  "x": 161,
+  "y": 220,
+  "width": 200,
+  "height": 200,
+  "_mouseState": 2,
+  "scrollType": 2,
+  "_$comp": [
+    {
+      "_$type": "9ce69809-af38-4a8d-a46f-1c41e5133660",
+      "scriptPath": "../src/core/panel/PanelCommont.ts",
+      "cellPrefab": null
+    }
+  ]
+}

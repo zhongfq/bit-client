@@ -230,8 +230,7 @@ message BattleDelBuffAction {
 }
 
 message BattleStopAction {
-    uint32 src_eid = 1;
-    uint32 dst_eid = 2;
+    uint32 eid = 1;
 }
 
 message EntityAction {

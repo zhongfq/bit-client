@@ -10,7 +10,7 @@ VO封装了缓存cmd跟配置表ref，原则上每个缓存cmd都必须封装成
 */
 export type BagEventType = "OnChanged" | "OnRemove" | "OnAdd" | "OnUpdate";
 
-export abstract class VOBag<T extends VO<any, any>> {
+export abstract class VoBag<T extends VO<any, any>> {
     public static __cname: string = "VOBagSubset";
     protected bag = new Map<string | number, T>();
 
@@ -58,6 +58,7 @@ export abstract class VOBag<T extends VO<any, any>> {
      * 获取一个Goods
      * @param key
      */
+
     get(key: string | number): T | any {
         return this.bag.get(key);
     }

@@ -2,29 +2,40 @@ syntax = "proto3";
 
 package chat;
 
-message MsgInfo {
-    uint32 channel = 1;//聊天类型 参照config.chat.CHAT_CHANNEL
-    profile.ProfileInfo user = 2;//玩家信息
-    string text = 3;//聊天信息
-	int64 time = 4;//时间戳
+message ChatRole {
+    uint32 rid = 1; // 玩家角色id
+    uint32 avatar_id = 2; // 头像id
+    string avatar_url = 3; // 头像url
+    string name = 4;
+}
+
+message ChatMessage {
+    uint32 rid = 1; // 玩家角色id
+    string text = 2;//聊天信息
+	int64 time = 4; //时间戳
 }
 
 message c2s_load {
-    uint32 channel = 1;//聊天类型
+    uint32 channel = 1;//聊天类型 参照config.chat.CHAT_CHANNEL
 } 
 message s2c_load {
-    repeated MsgInfo msgs = 1;//聊天信息
+    uint32 err = 1;
+    uint32 channel = 2;
+    repeated ChatMessage messages = 3; //聊天信息
+    repeated ChatRole chat_roles = 4; //玩家信息
 }
 
 message c2s_send {
-    uint32 channel = 1;//聊天类型
-    string text = 2;//聊天信息
+    uint32 channel = 1; //聊天类型
+    string text = 2; //聊天信息
 }
 message s2c_send {
     uint32 err = 1;
 }
 
 // 通知聊天变化
-message notify_chats {
-    required MsgInfo msgs = 1;
+message notify {
+    uint32 channel = 1;
+    repeated ChatMessage messages = 2; //聊天信息
+    repeated ChatRole chat_roles = 3; //玩家信息
 }

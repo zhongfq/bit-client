@@ -36,6 +36,8 @@ export const enum ui {
 
     ALLIANCE,
 
+    CHAT,
+
     GM,
 }
 
@@ -138,6 +140,13 @@ export const registerUI = () => {
         id: ui.ALLIANCE,
         autoClose: false,
         url: "resources/prefab/alliance/alliance.lh",
+        blockInput: true,
+    });
+
+    app.ui.register({
+        id: ui.CHAT,
+        autoClose: false,
+        url: "resources/prefab/chat/chat.lh",
         blockInput: true,
     });
 

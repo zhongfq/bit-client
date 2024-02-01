@@ -1,0 +1,129 @@
+{
+  "_$ver": 1,
+  "_$id": "sxpq9fzh",
+  "_$runtime": "res://a8fea6bb-7491-497d-9bc1-11b262e2c2b7",
+  "_$preloads": [
+    "res://9fec66b2-2544-472d-bfe9-3bceddb4baf0"
+  ],
+  "_$type": "Dialog",
+  "name": "Dialog",
+  "width": 511,
+  "height": 753,
+  "_mouseState": 2,
+  "isModal": true,
+  "_$comp": [
+    {
+      "_$type": "178f256c-5138-4ca7-abf2-c940ccee3c7b",
+      "scriptPath": "../src/system/chat/chat-mediator.ts"
+    }
+  ],
+  "_$child": [
+    {
+      "_$id": "2kdo09if",
+      "_$type": "Image",
+      "name": "Image",
+      "width": 511,
+      "height": 753,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "bottom": 0,
+      "skin": "res://3225dc27-5bcb-446e-8b66-27df87624835",
+      "sizeGrid": "50,30,50,30,0",
+      "color": "#ffffff"
+    },
+    {
+      "_$id": "6ee7kogk",
+      "_$var": true,
+      "_$type": "Button",
+      "name": "btnClose",
+      "x": 470,
+      "y": 7,
+      "width": 32,
+      "height": 32,
+      "_mouseState": 2,
+      "right": 9,
+      "top": 7,
+      "skin": "res://60a9086c-a9c2-4e01-a563-355c117b509e",
+      "label": "",
+      "labelSize": 20
+    },
+    {
+      "_$id": "7hq6qrqa",
+      "_$var": true,
+      "_$type": "Button",
+      "name": "btnSend",
+      "x": 406,
+      "y": 693,
+      "width": 94,
+      "height": 36,
+      "_mouseState": 2,
+      "right": 11,
+      "top": 693,
+      "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
+      "label": "发送",
+      "labelSize": 20
+    },
+    {
+      "_$id": "u9yjxdce",
+      "_$var": true,
+      "_$type": "Button",
+      "name": "btnEmoji",
+      "x": 357,
+      "y": 698,
+      "width": 32,
+      "height": 32,
+      "_mouseState": 2,
+      "right": 122,
+      "top": 698,
+      "skin": "res://c1da2147-6391-438e-a9a3-6f2dfb6b32d3",
+      "label": "",
+      "labelSize": 20
+    },
+    {
+      "_$id": "9swms2we",
+      "_$prefab": "4524d036-d272-41c6-a3ff-43a2ca11b7f8",
+      "_$var": true,
+      "name": "listPanel",
+      "active": true,
+      "x": 9,
+      "y": 61,
+      "visible": true,
+      "width": 492,
+      "height": 612,
+      "vScrollBarSkin": null,
+      "hitArea": null,
+      "_$comp": [
+        {
+          "_$override": "9ce69809-af38-4a8d-a46f-1c41e5133660",
+          "cellPrefab": {
+            "_$uuid": "b31a6d6e-b58d-4ef0-9d12-d657c47e1d78",
+            "_$type": "Prefab"
+          }
+        }
+      ]
+    },
+    {
+      "_$id": "7r1lchaj",
+      "_$var": true,
+      "_$type": "TextInput",
+      "name": "inputMsg",
+      "x": 16,
+      "y": 691,
+      "width": 319,
+      "height": 44,
+      "_mouseState": 2,
+      "text": "",
+      "fontSize": 20,
+      "color": "#FFFFFF",
+      "valign": "middle",
+      "overflow": "scroll",
+      "padding": "2,6,2,6",
+      "skin": "res://87262606-4dfe-490e-8644-7fd6496c2be7",
+      "type": "text",
+      "maxChars": 0,
+      "prompt": "点击输入内容",
+      "promptColor": "#A9A9A9"
+    }
+  ]
+}

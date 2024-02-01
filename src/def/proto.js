@@ -2682,27 +2682,27 @@ $root.chat = (function() {
      */
     var chat = {};
 
-    chat.MsgInfo = (function() {
+    chat.ChatRole = (function() {
 
         /**
-         * Properties of a MsgInfo.
+         * Properties of a ChatRole.
          * @memberof chat
-         * @interface IMsgInfo
-         * @property {number|null} [channel] MsgInfo channel
-         * @property {profile.IProfileInfo|null} [user] MsgInfo user
-         * @property {string|null} [text] MsgInfo text
-         * @property {number|Long|null} [time] MsgInfo time
+         * @interface IChatRole
+         * @property {number|null} [rid] ChatRole rid
+         * @property {number|null} [avatarId] ChatRole avatarId
+         * @property {string|null} [avatarUrl] ChatRole avatarUrl
+         * @property {string|null} [name] ChatRole name
          */
 
         /**
-         * Constructs a new MsgInfo.
+         * Constructs a new ChatRole.
          * @memberof chat
-         * @classdesc Represents a MsgInfo.
-         * @implements IMsgInfo
+         * @classdesc Represents a ChatRole.
+         * @implements IChatRole
          * @constructor
-         * @param {chat.IMsgInfo=} [properties] Properties to set
+         * @param {chat.IChatRole=} [properties] Properties to set
          */
-        function MsgInfo(properties) {
+        function ChatRole(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -2710,112 +2710,370 @@ $root.chat = (function() {
         }
 
         /**
-         * MsgInfo channel.
-         * @member {number} channel
-         * @memberof chat.MsgInfo
+         * ChatRole rid.
+         * @member {number} rid
+         * @memberof chat.ChatRole
          * @instance
          */
-        MsgInfo.prototype.channel = 0;
+        ChatRole.prototype.rid = 0;
 
         /**
-         * MsgInfo user.
-         * @member {profile.IProfileInfo|null|undefined} user
-         * @memberof chat.MsgInfo
+         * ChatRole avatarId.
+         * @member {number} avatarId
+         * @memberof chat.ChatRole
          * @instance
          */
-        MsgInfo.prototype.user = null;
+        ChatRole.prototype.avatarId = 0;
 
         /**
-         * MsgInfo text.
-         * @member {string} text
-         * @memberof chat.MsgInfo
+         * ChatRole avatarUrl.
+         * @member {string} avatarUrl
+         * @memberof chat.ChatRole
          * @instance
          */
-        MsgInfo.prototype.text = "";
+        ChatRole.prototype.avatarUrl = "";
 
         /**
-         * MsgInfo time.
-         * @member {number|Long} time
-         * @memberof chat.MsgInfo
+         * ChatRole name.
+         * @member {string} name
+         * @memberof chat.ChatRole
          * @instance
          */
-        MsgInfo.prototype.time = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        ChatRole.prototype.name = "";
 
         /**
-         * Creates a new MsgInfo instance using the specified properties.
+         * Creates a new ChatRole instance using the specified properties.
          * @function create
-         * @memberof chat.MsgInfo
+         * @memberof chat.ChatRole
          * @static
-         * @param {chat.IMsgInfo=} [properties] Properties to set
-         * @returns {chat.MsgInfo} MsgInfo instance
+         * @param {chat.IChatRole=} [properties] Properties to set
+         * @returns {chat.ChatRole} ChatRole instance
          */
-        MsgInfo.create = function create(properties) {
-            return new MsgInfo(properties);
+        ChatRole.create = function create(properties) {
+            return new ChatRole(properties);
         };
 
         /**
-         * Encodes the specified MsgInfo message. Does not implicitly {@link chat.MsgInfo.verify|verify} messages.
+         * Encodes the specified ChatRole message. Does not implicitly {@link chat.ChatRole.verify|verify} messages.
          * @function encode
-         * @memberof chat.MsgInfo
+         * @memberof chat.ChatRole
          * @static
-         * @param {chat.IMsgInfo} message MsgInfo message or plain object to encode
+         * @param {chat.IChatRole} message ChatRole message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        MsgInfo.encode = function encode(message, writer) {
+        ChatRole.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.channel != null && Object.hasOwnProperty.call(message, "channel"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.channel);
-            if (message.user != null && Object.hasOwnProperty.call(message, "user"))
-                $root.profile.ProfileInfo.encode(message.user, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            if (message.rid != null && Object.hasOwnProperty.call(message, "rid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.rid);
+            if (message.avatarId != null && Object.hasOwnProperty.call(message, "avatarId"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.avatarId);
+            if (message.avatarUrl != null && Object.hasOwnProperty.call(message, "avatarUrl"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.avatarUrl);
+            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.name);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified ChatRole message, length delimited. Does not implicitly {@link chat.ChatRole.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof chat.ChatRole
+         * @static
+         * @param {chat.IChatRole} message ChatRole message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ChatRole.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a ChatRole message from the specified reader or buffer.
+         * @function decode
+         * @memberof chat.ChatRole
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {chat.ChatRole} ChatRole
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ChatRole.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chat.ChatRole();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.rid = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.avatarId = reader.uint32();
+                        break;
+                    }
+                case 3: {
+                        message.avatarUrl = reader.string();
+                        break;
+                    }
+                case 4: {
+                        message.name = reader.string();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a ChatRole message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof chat.ChatRole
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {chat.ChatRole} ChatRole
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ChatRole.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a ChatRole message.
+         * @function verify
+         * @memberof chat.ChatRole
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        ChatRole.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.rid != null && message.hasOwnProperty("rid"))
+                if (!$util.isInteger(message.rid))
+                    return "rid: integer expected";
+            if (message.avatarId != null && message.hasOwnProperty("avatarId"))
+                if (!$util.isInteger(message.avatarId))
+                    return "avatarId: integer expected";
+            if (message.avatarUrl != null && message.hasOwnProperty("avatarUrl"))
+                if (!$util.isString(message.avatarUrl))
+                    return "avatarUrl: string expected";
+            if (message.name != null && message.hasOwnProperty("name"))
+                if (!$util.isString(message.name))
+                    return "name: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a ChatRole message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof chat.ChatRole
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {chat.ChatRole} ChatRole
+         */
+        ChatRole.fromObject = function fromObject(object) {
+            if (object instanceof $root.chat.ChatRole)
+                return object;
+            var message = new $root.chat.ChatRole();
+            if (object.rid != null)
+                message.rid = object.rid >>> 0;
+            if (object.avatarId != null)
+                message.avatarId = object.avatarId >>> 0;
+            if (object.avatarUrl != null)
+                message.avatarUrl = String(object.avatarUrl);
+            if (object.name != null)
+                message.name = String(object.name);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a ChatRole message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof chat.ChatRole
+         * @static
+         * @param {chat.ChatRole} message ChatRole
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        ChatRole.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.rid = 0;
+                object.avatarId = 0;
+                object.avatarUrl = "";
+                object.name = "";
+            }
+            if (message.rid != null && message.hasOwnProperty("rid"))
+                object.rid = message.rid;
+            if (message.avatarId != null && message.hasOwnProperty("avatarId"))
+                object.avatarId = message.avatarId;
+            if (message.avatarUrl != null && message.hasOwnProperty("avatarUrl"))
+                object.avatarUrl = message.avatarUrl;
+            if (message.name != null && message.hasOwnProperty("name"))
+                object.name = message.name;
+            return object;
+        };
+
+        /**
+         * Converts this ChatRole to JSON.
+         * @function toJSON
+         * @memberof chat.ChatRole
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        ChatRole.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for ChatRole
+         * @function getTypeUrl
+         * @memberof chat.ChatRole
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        ChatRole.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/chat.ChatRole";
+        };
+
+        return ChatRole;
+    })();
+
+    chat.ChatMessage = (function() {
+
+        /**
+         * Properties of a ChatMessage.
+         * @memberof chat
+         * @interface IChatMessage
+         * @property {number|null} [rid] ChatMessage rid
+         * @property {string|null} [text] ChatMessage text
+         * @property {number|Long|null} [time] ChatMessage time
+         */
+
+        /**
+         * Constructs a new ChatMessage.
+         * @memberof chat
+         * @classdesc Represents a ChatMessage.
+         * @implements IChatMessage
+         * @constructor
+         * @param {chat.IChatMessage=} [properties] Properties to set
+         */
+        function ChatMessage(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * ChatMessage rid.
+         * @member {number} rid
+         * @memberof chat.ChatMessage
+         * @instance
+         */
+        ChatMessage.prototype.rid = 0;
+
+        /**
+         * ChatMessage text.
+         * @member {string} text
+         * @memberof chat.ChatMessage
+         * @instance
+         */
+        ChatMessage.prototype.text = "";
+
+        /**
+         * ChatMessage time.
+         * @member {number|Long} time
+         * @memberof chat.ChatMessage
+         * @instance
+         */
+        ChatMessage.prototype.time = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
+         * Creates a new ChatMessage instance using the specified properties.
+         * @function create
+         * @memberof chat.ChatMessage
+         * @static
+         * @param {chat.IChatMessage=} [properties] Properties to set
+         * @returns {chat.ChatMessage} ChatMessage instance
+         */
+        ChatMessage.create = function create(properties) {
+            return new ChatMessage(properties);
+        };
+
+        /**
+         * Encodes the specified ChatMessage message. Does not implicitly {@link chat.ChatMessage.verify|verify} messages.
+         * @function encode
+         * @memberof chat.ChatMessage
+         * @static
+         * @param {chat.IChatMessage} message ChatMessage message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ChatMessage.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.rid != null && Object.hasOwnProperty.call(message, "rid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.rid);
             if (message.text != null && Object.hasOwnProperty.call(message, "text"))
-                writer.uint32(/* id 3, wireType 2 =*/26).string(message.text);
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.text);
             if (message.time != null && Object.hasOwnProperty.call(message, "time"))
                 writer.uint32(/* id 4, wireType 0 =*/32).int64(message.time);
             return writer;
         };
 
         /**
-         * Encodes the specified MsgInfo message, length delimited. Does not implicitly {@link chat.MsgInfo.verify|verify} messages.
+         * Encodes the specified ChatMessage message, length delimited. Does not implicitly {@link chat.ChatMessage.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof chat.MsgInfo
+         * @memberof chat.ChatMessage
          * @static
-         * @param {chat.IMsgInfo} message MsgInfo message or plain object to encode
+         * @param {chat.IChatMessage} message ChatMessage message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        MsgInfo.encodeDelimited = function encodeDelimited(message, writer) {
+        ChatMessage.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
         /**
-         * Decodes a MsgInfo message from the specified reader or buffer.
+         * Decodes a ChatMessage message from the specified reader or buffer.
          * @function decode
-         * @memberof chat.MsgInfo
+         * @memberof chat.ChatMessage
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {chat.MsgInfo} MsgInfo
+         * @returns {chat.ChatMessage} ChatMessage
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        MsgInfo.decode = function decode(reader, length) {
+        ChatMessage.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chat.MsgInfo();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chat.ChatMessage();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1: {
-                        message.channel = reader.uint32();
+                        message.rid = reader.uint32();
                         break;
                     }
                 case 2: {
-                        message.user = $root.profile.ProfileInfo.decode(reader, reader.uint32());
-                        break;
-                    }
-                case 3: {
                         message.text = reader.string();
                         break;
                     }
@@ -2832,40 +3090,35 @@ $root.chat = (function() {
         };
 
         /**
-         * Decodes a MsgInfo message from the specified reader or buffer, length delimited.
+         * Decodes a ChatMessage message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof chat.MsgInfo
+         * @memberof chat.ChatMessage
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {chat.MsgInfo} MsgInfo
+         * @returns {chat.ChatMessage} ChatMessage
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        MsgInfo.decodeDelimited = function decodeDelimited(reader) {
+        ChatMessage.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
         /**
-         * Verifies a MsgInfo message.
+         * Verifies a ChatMessage message.
          * @function verify
-         * @memberof chat.MsgInfo
+         * @memberof chat.ChatMessage
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        MsgInfo.verify = function verify(message) {
+        ChatMessage.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.channel != null && message.hasOwnProperty("channel"))
-                if (!$util.isInteger(message.channel))
-                    return "channel: integer expected";
-            if (message.user != null && message.hasOwnProperty("user")) {
-                var error = $root.profile.ProfileInfo.verify(message.user);
-                if (error)
-                    return "user." + error;
-            }
+            if (message.rid != null && message.hasOwnProperty("rid"))
+                if (!$util.isInteger(message.rid))
+                    return "rid: integer expected";
             if (message.text != null && message.hasOwnProperty("text"))
                 if (!$util.isString(message.text))
                     return "text: string expected";
@@ -2876,24 +3129,19 @@ $root.chat = (function() {
         };
 
         /**
-         * Creates a MsgInfo message from a plain object. Also converts values to their respective internal types.
+         * Creates a ChatMessage message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof chat.MsgInfo
+         * @memberof chat.ChatMessage
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {chat.MsgInfo} MsgInfo
+         * @returns {chat.ChatMessage} ChatMessage
          */
-        MsgInfo.fromObject = function fromObject(object) {
-            if (object instanceof $root.chat.MsgInfo)
+        ChatMessage.fromObject = function fromObject(object) {
+            if (object instanceof $root.chat.ChatMessage)
                 return object;
-            var message = new $root.chat.MsgInfo();
-            if (object.channel != null)
-                message.channel = object.channel >>> 0;
-            if (object.user != null) {
-                if (typeof object.user !== "object")
-                    throw TypeError(".chat.MsgInfo.user: object expected");
-                message.user = $root.profile.ProfileInfo.fromObject(object.user);
-            }
+            var message = new $root.chat.ChatMessage();
+            if (object.rid != null)
+                message.rid = object.rid >>> 0;
             if (object.text != null)
                 message.text = String(object.text);
             if (object.time != null)
@@ -2909,21 +3157,20 @@ $root.chat = (function() {
         };
 
         /**
-         * Creates a plain object from a MsgInfo message. Also converts values to other types if specified.
+         * Creates a plain object from a ChatMessage message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof chat.MsgInfo
+         * @memberof chat.ChatMessage
          * @static
-         * @param {chat.MsgInfo} message MsgInfo
+         * @param {chat.ChatMessage} message ChatMessage
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        MsgInfo.toObject = function toObject(message, options) {
+        ChatMessage.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.defaults) {
-                object.channel = 0;
-                object.user = null;
+                object.rid = 0;
                 object.text = "";
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
@@ -2931,10 +3178,8 @@ $root.chat = (function() {
                 } else
                     object.time = options.longs === String ? "0" : 0;
             }
-            if (message.channel != null && message.hasOwnProperty("channel"))
-                object.channel = message.channel;
-            if (message.user != null && message.hasOwnProperty("user"))
-                object.user = $root.profile.ProfileInfo.toObject(message.user, options);
+            if (message.rid != null && message.hasOwnProperty("rid"))
+                object.rid = message.rid;
             if (message.text != null && message.hasOwnProperty("text"))
                 object.text = message.text;
             if (message.time != null && message.hasOwnProperty("time"))
@@ -2946,32 +3191,32 @@ $root.chat = (function() {
         };
 
         /**
-         * Converts this MsgInfo to JSON.
+         * Converts this ChatMessage to JSON.
          * @function toJSON
-         * @memberof chat.MsgInfo
+         * @memberof chat.ChatMessage
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        MsgInfo.prototype.toJSON = function toJSON() {
+        ChatMessage.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
         /**
-         * Gets the default type url for MsgInfo
+         * Gets the default type url for ChatMessage
          * @function getTypeUrl
-         * @memberof chat.MsgInfo
+         * @memberof chat.ChatMessage
          * @static
          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns {string} The default type url
          */
-        MsgInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        ChatMessage.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/chat.MsgInfo";
+            return typeUrlPrefix + "/chat.ChatMessage";
         };
 
-        return MsgInfo;
+        return ChatMessage;
     })();
 
     chat.c2s_load = (function() {
@@ -3183,7 +3428,10 @@ $root.chat = (function() {
          * Properties of a s2c_load.
          * @memberof chat
          * @interface Is2c_load
-         * @property {Array.<chat.IMsgInfo>|null} [msgs] s2c_load msgs
+         * @property {number|null} [err] s2c_load err
+         * @property {number|null} [channel] s2c_load channel
+         * @property {Array.<chat.IChatMessage>|null} [messages] s2c_load messages
+         * @property {Array.<chat.IChatRole>|null} [chatRoles] s2c_load chatRoles
          */
 
         /**
@@ -3195,7 +3443,8 @@ $root.chat = (function() {
          * @param {chat.Is2c_load=} [properties] Properties to set
          */
         function s2c_load(properties) {
-            this.msgs = [];
+            this.messages = [];
+            this.chatRoles = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -3203,12 +3452,36 @@ $root.chat = (function() {
         }
 
         /**
-         * s2c_load msgs.
-         * @member {Array.<chat.IMsgInfo>} msgs
+         * s2c_load err.
+         * @member {number} err
          * @memberof chat.s2c_load
          * @instance
          */
-        s2c_load.prototype.msgs = $util.emptyArray;
+        s2c_load.prototype.err = 0;
+
+        /**
+         * s2c_load channel.
+         * @member {number} channel
+         * @memberof chat.s2c_load
+         * @instance
+         */
+        s2c_load.prototype.channel = 0;
+
+        /**
+         * s2c_load messages.
+         * @member {Array.<chat.IChatMessage>} messages
+         * @memberof chat.s2c_load
+         * @instance
+         */
+        s2c_load.prototype.messages = $util.emptyArray;
+
+        /**
+         * s2c_load chatRoles.
+         * @member {Array.<chat.IChatRole>} chatRoles
+         * @memberof chat.s2c_load
+         * @instance
+         */
+        s2c_load.prototype.chatRoles = $util.emptyArray;
 
         /**
          * Creates a new s2c_load instance using the specified properties.
@@ -3234,9 +3507,16 @@ $root.chat = (function() {
         s2c_load.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.msgs != null && message.msgs.length)
-                for (var i = 0; i < message.msgs.length; ++i)
-                    $root.chat.MsgInfo.encode(message.msgs[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
+            if (message.channel != null && Object.hasOwnProperty.call(message, "channel"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.channel);
+            if (message.messages != null && message.messages.length)
+                for (var i = 0; i < message.messages.length; ++i)
+                    $root.chat.ChatMessage.encode(message.messages[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            if (message.chatRoles != null && message.chatRoles.length)
+                for (var i = 0; i < message.chatRoles.length; ++i)
+                    $root.chat.ChatRole.encode(message.chatRoles[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
             return writer;
         };
 
@@ -3272,9 +3552,23 @@ $root.chat = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1: {
-                        if (!(message.msgs && message.msgs.length))
-                            message.msgs = [];
-                        message.msgs.push($root.chat.MsgInfo.decode(reader, reader.uint32()));
+                        message.err = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.channel = reader.uint32();
+                        break;
+                    }
+                case 3: {
+                        if (!(message.messages && message.messages.length))
+                            message.messages = [];
+                        message.messages.push($root.chat.ChatMessage.decode(reader, reader.uint32()));
+                        break;
+                    }
+                case 4: {
+                        if (!(message.chatRoles && message.chatRoles.length))
+                            message.chatRoles = [];
+                        message.chatRoles.push($root.chat.ChatRole.decode(reader, reader.uint32()));
                         break;
                     }
                 default:
@@ -3312,13 +3606,28 @@ $root.chat = (function() {
         s2c_load.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.msgs != null && message.hasOwnProperty("msgs")) {
-                if (!Array.isArray(message.msgs))
-                    return "msgs: array expected";
-                for (var i = 0; i < message.msgs.length; ++i) {
-                    var error = $root.chat.MsgInfo.verify(message.msgs[i]);
+            if (message.err != null && message.hasOwnProperty("err"))
+                if (!$util.isInteger(message.err))
+                    return "err: integer expected";
+            if (message.channel != null && message.hasOwnProperty("channel"))
+                if (!$util.isInteger(message.channel))
+                    return "channel: integer expected";
+            if (message.messages != null && message.hasOwnProperty("messages")) {
+                if (!Array.isArray(message.messages))
+                    return "messages: array expected";
+                for (var i = 0; i < message.messages.length; ++i) {
+                    var error = $root.chat.ChatMessage.verify(message.messages[i]);
                     if (error)
-                        return "msgs." + error;
+                        return "messages." + error;
+                }
+            }
+            if (message.chatRoles != null && message.hasOwnProperty("chatRoles")) {
+                if (!Array.isArray(message.chatRoles))
+                    return "chatRoles: array expected";
+                for (var i = 0; i < message.chatRoles.length; ++i) {
+                    var error = $root.chat.ChatRole.verify(message.chatRoles[i]);
+                    if (error)
+                        return "chatRoles." + error;
                 }
             }
             return null;
@@ -3336,14 +3645,28 @@ $root.chat = (function() {
             if (object instanceof $root.chat.s2c_load)
                 return object;
             var message = new $root.chat.s2c_load();
-            if (object.msgs) {
-                if (!Array.isArray(object.msgs))
-                    throw TypeError(".chat.s2c_load.msgs: array expected");
-                message.msgs = [];
-                for (var i = 0; i < object.msgs.length; ++i) {
-                    if (typeof object.msgs[i] !== "object")
-                        throw TypeError(".chat.s2c_load.msgs: object expected");
-                    message.msgs[i] = $root.chat.MsgInfo.fromObject(object.msgs[i]);
+            if (object.err != null)
+                message.err = object.err >>> 0;
+            if (object.channel != null)
+                message.channel = object.channel >>> 0;
+            if (object.messages) {
+                if (!Array.isArray(object.messages))
+                    throw TypeError(".chat.s2c_load.messages: array expected");
+                message.messages = [];
+                for (var i = 0; i < object.messages.length; ++i) {
+                    if (typeof object.messages[i] !== "object")
+                        throw TypeError(".chat.s2c_load.messages: object expected");
+                    message.messages[i] = $root.chat.ChatMessage.fromObject(object.messages[i]);
+                }
+            }
+            if (object.chatRoles) {
+                if (!Array.isArray(object.chatRoles))
+                    throw TypeError(".chat.s2c_load.chatRoles: array expected");
+                message.chatRoles = [];
+                for (var i = 0; i < object.chatRoles.length; ++i) {
+                    if (typeof object.chatRoles[i] !== "object")
+                        throw TypeError(".chat.s2c_load.chatRoles: object expected");
+                    message.chatRoles[i] = $root.chat.ChatRole.fromObject(object.chatRoles[i]);
                 }
             }
             return message;
@@ -3362,12 +3685,27 @@ $root.chat = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.arrays || options.defaults)
-                object.msgs = [];
-            if (message.msgs && message.msgs.length) {
-                object.msgs = [];
-                for (var j = 0; j < message.msgs.length; ++j)
-                    object.msgs[j] = $root.chat.MsgInfo.toObject(message.msgs[j], options);
+            if (options.arrays || options.defaults) {
+                object.messages = [];
+                object.chatRoles = [];
+            }
+            if (options.defaults) {
+                object.err = 0;
+                object.channel = 0;
+            }
+            if (message.err != null && message.hasOwnProperty("err"))
+                object.err = message.err;
+            if (message.channel != null && message.hasOwnProperty("channel"))
+                object.channel = message.channel;
+            if (message.messages && message.messages.length) {
+                object.messages = [];
+                for (var j = 0; j < message.messages.length; ++j)
+                    object.messages[j] = $root.chat.ChatMessage.toObject(message.messages[j], options);
+            }
+            if (message.chatRoles && message.chatRoles.length) {
+                object.chatRoles = [];
+                for (var j = 0; j < message.chatRoles.length; ++j)
+                    object.chatRoles[j] = $root.chat.ChatRole.toObject(message.chatRoles[j], options);
             }
             return object;
         };
@@ -3831,24 +4169,28 @@ $root.chat = (function() {
         return s2c_send;
     })();
 
-    chat.notify_chats = (function() {
+    chat.notify = (function() {
 
         /**
-         * Properties of a notify_chats.
+         * Properties of a notify.
          * @memberof chat
-         * @interface Inotify_chats
-         * @property {chat.IMsgInfo} msgs notify_chats msgs
+         * @interface Inotify
+         * @property {number|null} [channel] notify channel
+         * @property {Array.<chat.IChatMessage>|null} [messages] notify messages
+         * @property {Array.<chat.IChatRole>|null} [chatRoles] notify chatRoles
          */
 
         /**
-         * Constructs a new notify_chats.
+         * Constructs a new notify.
          * @memberof chat
-         * @classdesc Represents a notify_chats.
-         * @implements Inotify_chats
+         * @classdesc Represents a notify.
+         * @implements Inotify
          * @constructor
-         * @param {chat.Inotify_chats=} [properties] Properties to set
+         * @param {chat.Inotify=} [properties] Properties to set
          */
-        function notify_chats(properties) {
+        function notify(properties) {
+            this.messages = [];
+            this.chatRoles = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -3856,74 +4198,109 @@ $root.chat = (function() {
         }
 
         /**
-         * notify_chats msgs.
-         * @member {chat.IMsgInfo} msgs
-         * @memberof chat.notify_chats
+         * notify channel.
+         * @member {number} channel
+         * @memberof chat.notify
          * @instance
          */
-        notify_chats.prototype.msgs = null;
+        notify.prototype.channel = 0;
 
         /**
-         * Creates a new notify_chats instance using the specified properties.
-         * @function create
-         * @memberof chat.notify_chats
-         * @static
-         * @param {chat.Inotify_chats=} [properties] Properties to set
-         * @returns {chat.notify_chats} notify_chats instance
+         * notify messages.
+         * @member {Array.<chat.IChatMessage>} messages
+         * @memberof chat.notify
+         * @instance
          */
-        notify_chats.create = function create(properties) {
-            return new notify_chats(properties);
+        notify.prototype.messages = $util.emptyArray;
+
+        /**
+         * notify chatRoles.
+         * @member {Array.<chat.IChatRole>} chatRoles
+         * @memberof chat.notify
+         * @instance
+         */
+        notify.prototype.chatRoles = $util.emptyArray;
+
+        /**
+         * Creates a new notify instance using the specified properties.
+         * @function create
+         * @memberof chat.notify
+         * @static
+         * @param {chat.Inotify=} [properties] Properties to set
+         * @returns {chat.notify} notify instance
+         */
+        notify.create = function create(properties) {
+            return new notify(properties);
         };
 
         /**
-         * Encodes the specified notify_chats message. Does not implicitly {@link chat.notify_chats.verify|verify} messages.
+         * Encodes the specified notify message. Does not implicitly {@link chat.notify.verify|verify} messages.
          * @function encode
-         * @memberof chat.notify_chats
+         * @memberof chat.notify
          * @static
-         * @param {chat.Inotify_chats} message notify_chats message or plain object to encode
+         * @param {chat.Inotify} message notify message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        notify_chats.encode = function encode(message, writer) {
+        notify.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            $root.chat.MsgInfo.encode(message.msgs, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.channel != null && Object.hasOwnProperty.call(message, "channel"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.channel);
+            if (message.messages != null && message.messages.length)
+                for (var i = 0; i < message.messages.length; ++i)
+                    $root.chat.ChatMessage.encode(message.messages[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            if (message.chatRoles != null && message.chatRoles.length)
+                for (var i = 0; i < message.chatRoles.length; ++i)
+                    $root.chat.ChatRole.encode(message.chatRoles[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
             return writer;
         };
 
         /**
-         * Encodes the specified notify_chats message, length delimited. Does not implicitly {@link chat.notify_chats.verify|verify} messages.
+         * Encodes the specified notify message, length delimited. Does not implicitly {@link chat.notify.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof chat.notify_chats
+         * @memberof chat.notify
          * @static
-         * @param {chat.Inotify_chats} message notify_chats message or plain object to encode
+         * @param {chat.Inotify} message notify message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        notify_chats.encodeDelimited = function encodeDelimited(message, writer) {
+        notify.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
         /**
-         * Decodes a notify_chats message from the specified reader or buffer.
+         * Decodes a notify message from the specified reader or buffer.
          * @function decode
-         * @memberof chat.notify_chats
+         * @memberof chat.notify
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {chat.notify_chats} notify_chats
+         * @returns {chat.notify} notify
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        notify_chats.decode = function decode(reader, length) {
+        notify.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chat.notify_chats();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chat.notify();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1: {
-                        message.msgs = $root.chat.MsgInfo.decode(reader, reader.uint32());
+                        message.channel = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        if (!(message.messages && message.messages.length))
+                            message.messages = [];
+                        message.messages.push($root.chat.ChatMessage.decode(reader, reader.uint32()));
+                        break;
+                    }
+                case 3: {
+                        if (!(message.chatRoles && message.chatRoles.length))
+                            message.chatRoles = [];
+                        message.chatRoles.push($root.chat.ChatRole.decode(reader, reader.uint32()));
                         break;
                     }
                 default:
@@ -3931,113 +4308,158 @@ $root.chat = (function() {
                     break;
                 }
             }
-            if (!message.hasOwnProperty("msgs"))
-                throw $util.ProtocolError("missing required 'msgs'", { instance: message });
             return message;
         };
 
         /**
-         * Decodes a notify_chats message from the specified reader or buffer, length delimited.
+         * Decodes a notify message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof chat.notify_chats
+         * @memberof chat.notify
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {chat.notify_chats} notify_chats
+         * @returns {chat.notify} notify
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        notify_chats.decodeDelimited = function decodeDelimited(reader) {
+        notify.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
         /**
-         * Verifies a notify_chats message.
+         * Verifies a notify message.
          * @function verify
-         * @memberof chat.notify_chats
+         * @memberof chat.notify
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        notify_chats.verify = function verify(message) {
+        notify.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            {
-                var error = $root.chat.MsgInfo.verify(message.msgs);
-                if (error)
-                    return "msgs." + error;
+            if (message.channel != null && message.hasOwnProperty("channel"))
+                if (!$util.isInteger(message.channel))
+                    return "channel: integer expected";
+            if (message.messages != null && message.hasOwnProperty("messages")) {
+                if (!Array.isArray(message.messages))
+                    return "messages: array expected";
+                for (var i = 0; i < message.messages.length; ++i) {
+                    var error = $root.chat.ChatMessage.verify(message.messages[i]);
+                    if (error)
+                        return "messages." + error;
+                }
+            }
+            if (message.chatRoles != null && message.hasOwnProperty("chatRoles")) {
+                if (!Array.isArray(message.chatRoles))
+                    return "chatRoles: array expected";
+                for (var i = 0; i < message.chatRoles.length; ++i) {
+                    var error = $root.chat.ChatRole.verify(message.chatRoles[i]);
+                    if (error)
+                        return "chatRoles." + error;
+                }
             }
             return null;
         };
 
         /**
-         * Creates a notify_chats message from a plain object. Also converts values to their respective internal types.
+         * Creates a notify message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof chat.notify_chats
+         * @memberof chat.notify
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {chat.notify_chats} notify_chats
+         * @returns {chat.notify} notify
          */
-        notify_chats.fromObject = function fromObject(object) {
-            if (object instanceof $root.chat.notify_chats)
+        notify.fromObject = function fromObject(object) {
+            if (object instanceof $root.chat.notify)
                 return object;
-            var message = new $root.chat.notify_chats();
-            if (object.msgs != null) {
-                if (typeof object.msgs !== "object")
-                    throw TypeError(".chat.notify_chats.msgs: object expected");
-                message.msgs = $root.chat.MsgInfo.fromObject(object.msgs);
+            var message = new $root.chat.notify();
+            if (object.channel != null)
+                message.channel = object.channel >>> 0;
+            if (object.messages) {
+                if (!Array.isArray(object.messages))
+                    throw TypeError(".chat.notify.messages: array expected");
+                message.messages = [];
+                for (var i = 0; i < object.messages.length; ++i) {
+                    if (typeof object.messages[i] !== "object")
+                        throw TypeError(".chat.notify.messages: object expected");
+                    message.messages[i] = $root.chat.ChatMessage.fromObject(object.messages[i]);
+                }
+            }
+            if (object.chatRoles) {
+                if (!Array.isArray(object.chatRoles))
+                    throw TypeError(".chat.notify.chatRoles: array expected");
+                message.chatRoles = [];
+                for (var i = 0; i < object.chatRoles.length; ++i) {
+                    if (typeof object.chatRoles[i] !== "object")
+                        throw TypeError(".chat.notify.chatRoles: object expected");
+                    message.chatRoles[i] = $root.chat.ChatRole.fromObject(object.chatRoles[i]);
+                }
             }
             return message;
         };
 
         /**
-         * Creates a plain object from a notify_chats message. Also converts values to other types if specified.
+         * Creates a plain object from a notify message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof chat.notify_chats
+         * @memberof chat.notify
          * @static
-         * @param {chat.notify_chats} message notify_chats
+         * @param {chat.notify} message notify
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        notify_chats.toObject = function toObject(message, options) {
+        notify.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
+            if (options.arrays || options.defaults) {
+                object.messages = [];
+                object.chatRoles = [];
+            }
             if (options.defaults)
-                object.msgs = null;
-            if (message.msgs != null && message.hasOwnProperty("msgs"))
-                object.msgs = $root.chat.MsgInfo.toObject(message.msgs, options);
+                object.channel = 0;
+            if (message.channel != null && message.hasOwnProperty("channel"))
+                object.channel = message.channel;
+            if (message.messages && message.messages.length) {
+                object.messages = [];
+                for (var j = 0; j < message.messages.length; ++j)
+                    object.messages[j] = $root.chat.ChatMessage.toObject(message.messages[j], options);
+            }
+            if (message.chatRoles && message.chatRoles.length) {
+                object.chatRoles = [];
+                for (var j = 0; j < message.chatRoles.length; ++j)
+                    object.chatRoles[j] = $root.chat.ChatRole.toObject(message.chatRoles[j], options);
+            }
             return object;
         };
 
         /**
-         * Converts this notify_chats to JSON.
+         * Converts this notify to JSON.
          * @function toJSON
-         * @memberof chat.notify_chats
+         * @memberof chat.notify
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        notify_chats.prototype.toJSON = function toJSON() {
+        notify.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
         /**
-         * Gets the default type url for notify_chats
+         * Gets the default type url for notify
          * @function getTypeUrl
-         * @memberof chat.notify_chats
+         * @memberof chat.notify
          * @static
          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns {string} The default type url
          */
-        notify_chats.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        notify.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/chat.notify_chats";
+            return typeUrlPrefix + "/chat.notify";
         };
 
-        return notify_chats;
+        return notify;
     })();
 
     return chat;
@@ -26585,8 +27007,7 @@ $root.world = (function() {
          * Properties of a BattleStopAction.
          * @memberof world
          * @interface IBattleStopAction
-         * @property {number|null} [srcEid] BattleStopAction srcEid
-         * @property {number|null} [dstEid] BattleStopAction dstEid
+         * @property {number|null} [eid] BattleStopAction eid
          */
 
         /**
@@ -26605,20 +27026,12 @@ $root.world = (function() {
         }
 
         /**
-         * BattleStopAction srcEid.
-         * @member {number} srcEid
+         * BattleStopAction eid.
+         * @member {number} eid
          * @memberof world.BattleStopAction
          * @instance
          */
-        BattleStopAction.prototype.srcEid = 0;
-
-        /**
-         * BattleStopAction dstEid.
-         * @member {number} dstEid
-         * @memberof world.BattleStopAction
-         * @instance
-         */
-        BattleStopAction.prototype.dstEid = 0;
+        BattleStopAction.prototype.eid = 0;
 
         /**
          * Creates a new BattleStopAction instance using the specified properties.
@@ -26644,10 +27057,8 @@ $root.world = (function() {
         BattleStopAction.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.srcEid != null && Object.hasOwnProperty.call(message, "srcEid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.srcEid);
-            if (message.dstEid != null && Object.hasOwnProperty.call(message, "dstEid"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.dstEid);
+            if (message.eid != null && Object.hasOwnProperty.call(message, "eid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.eid);
             return writer;
         };
 
@@ -26683,11 +27094,7 @@ $root.world = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1: {
-                        message.srcEid = reader.uint32();
-                        break;
-                    }
-                case 2: {
-                        message.dstEid = reader.uint32();
+                        message.eid = reader.uint32();
                         break;
                     }
                 default:
@@ -26725,12 +27132,9 @@ $root.world = (function() {
         BattleStopAction.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.srcEid != null && message.hasOwnProperty("srcEid"))
-                if (!$util.isInteger(message.srcEid))
-                    return "srcEid: integer expected";
-            if (message.dstEid != null && message.hasOwnProperty("dstEid"))
-                if (!$util.isInteger(message.dstEid))
-                    return "dstEid: integer expected";
+            if (message.eid != null && message.hasOwnProperty("eid"))
+                if (!$util.isInteger(message.eid))
+                    return "eid: integer expected";
             return null;
         };
 
@@ -26746,10 +27150,8 @@ $root.world = (function() {
             if (object instanceof $root.world.BattleStopAction)
                 return object;
             var message = new $root.world.BattleStopAction();
-            if (object.srcEid != null)
-                message.srcEid = object.srcEid >>> 0;
-            if (object.dstEid != null)
-                message.dstEid = object.dstEid >>> 0;
+            if (object.eid != null)
+                message.eid = object.eid >>> 0;
             return message;
         };
 
@@ -26766,14 +27168,10 @@ $root.world = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults) {
-                object.srcEid = 0;
-                object.dstEid = 0;
-            }
-            if (message.srcEid != null && message.hasOwnProperty("srcEid"))
-                object.srcEid = message.srcEid;
-            if (message.dstEid != null && message.hasOwnProperty("dstEid"))
-                object.dstEid = message.dstEid;
+            if (options.defaults)
+                object.eid = 0;
+            if (message.eid != null && message.hasOwnProperty("eid"))
+                object.eid = message.eid;
             return object;
         };
 
