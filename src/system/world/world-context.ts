@@ -1,17 +1,17 @@
 import { app } from "../../app";
-import { Callback } from "../../core/dispatcher";
-import proto from "../../def/proto";
 import { ecs } from "../../core/ecs";
 import { Mediator } from "../../core/ui-mediator";
+import proto from "../../def/proto";
+import { WorldUI } from "../../ui-runtime/scene/WorldUI";
+import { CameraComponent } from "./ecs/components/camera-component";
+import { JoystickComponent } from "./ecs/components/joystick-component";
 import { AISystem } from "./ecs/systems/ai-system";
+import { CameraSystem } from "./ecs/systems/camera-system";
 import { CommandSystem } from "./ecs/systems/command-system";
+import { JoystickSystem } from "./ecs/systems/joystick-system";
 import { MovementSystem } from "./ecs/systems/movement-system";
 import { RenderSystem } from "./ecs/systems/render-system";
-import { CameraComponent } from "./ecs/components/camera-component";
-import { CameraSystem } from "./ecs/systems/camera-system";
-import { JoystickComponent } from "./ecs/components/joystick-component";
-import { JoystickSystem } from "./ecs/systems/joystick-system";
-import { WorldUI } from "../../ui-runtime/scene/WorldUI";
+import { TroopSystem } from "./ecs/systems/troop-system";
 
 type WorldMap = {
     width: number;
@@ -57,6 +57,7 @@ export class WorldContext extends Mediator {
         this._ecs.addSystem(new JoystickSystem(this));
         this._ecs.addSystem(new CommandSystem(this));
         this._ecs.addSystem(new AISystem(this));
+        this._ecs.addSystem(new TroopSystem(this));
         this._ecs.addSystem(new MovementSystem(this));
         this._ecs.addSystem(new CameraSystem(this));
         this._ecs.addSystem(new RenderSystem(this));
@@ -102,7 +103,12 @@ export class WorldContext extends Mediator {
             if (!layer.data || layer.class !== "grounds") {
                 return;
             }
-            for (let i = 0; i < layer.data.length / 2; i++) {
+            for (let i = 0; i < layer.data.length; i++) {
+                const x = i % map.width;
+                const y = Math.floor(i / map.width);
+                if (x > 50 || y > 50) {
+                    continue;
+                }
                 let idx = -1;
                 const gid = layer.data[i];
                 for (const ts of map.tilesets) {

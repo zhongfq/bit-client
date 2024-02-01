@@ -52,6 +52,7 @@ export class LoadingMediator extends Laya.Script {
         }
     }
     lerp(cur_value: number, last_value: number) {
-        return cur_value + (last_value - cur_value) * Laya.timer.delta * 0.001;
+        // console.log(Laya.timer.delta);
+        return cur_value + (last_value - cur_value) * Laya.timer.delta * 0.01;
     }
 }

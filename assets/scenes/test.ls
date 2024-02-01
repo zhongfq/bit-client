@@ -34,25 +34,24 @@
       "lightmaps": [],
       "_$child": [
         {
-          "_$id": "8k6k0i8x",
+          "_$id": "ako0tpha",
           "_$type": "Camera",
           "name": "Camera",
           "transform": {
             "localPosition": {
               "_$type": "Vector3",
-              "y": 13.65879,
-              "z": 30
+              "x": 0.00485081085935235,
+              "y": 3.9631,
+              "z": 7.02999
             },
             "localRotation": {
               "_$type": "Quaternion",
-              "x": -0.25872833035067044,
-              "y": 0.025571821138922608,
-              "z": -0.0068519488194953015,
-              "w": 0.9655872740643221
+              "x": -0.32062952247489873,
+              "w": 0.9472046818494505
             }
           },
           "orthographicVerticalSize": 10,
-          "fieldOfView": 30,
+          "fieldOfView": 36,
           "nearPlane": 0.3,
           "farPlane": 1000,
           "clearFlag": 0,
@@ -71,20 +70,37 @@
           "depthTextureFormat": 35
         },
         {
-          "_$id": "5u3imggg",
+          "_$id": "sn860xnc",
+          "_$prefab": "b6ab5d2a-c255-4411-8846-83b695f2d6c9",
+          "name": "mc03",
+          "active": true,
+          "layer": 0,
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": 0,
+              "y": 0.7071067811865475,
+              "z": 0,
+              "w": 0.7071067811865476
+            }
+          }
+        },
+        {
+          "_$id": "yn0seene",
           "_$type": "Sprite3D",
           "name": "DirectionLight",
           "transform": {
             "localPosition": {
               "_$type": "Vector3",
-              "x": 3.984975318751065,
-              "y": 3.994589897547382,
-              "z": 8.147677333384195
-            },
-            "localRotation": {
-              "_$type": "Quaternion",
-              "x": -0.27396761145820275,
-              "w": 0.9617389187673998
+              "x": 1.7948737001584525,
+              "y": -0.03564749317092275,
+              "z": 0.3554527160972029
             }
           },
           "_$comp": [
@@ -106,204 +122,114 @@
           ]
         },
         {
-          "_$id": "503p03n7",
-          "_$prefab": "738ffd74-44f8-4e56-852a-5250a72136d8",
-          "name": "Cube top Grass(1)",
+          "_$id": "z2774vhq",
+          "_$prefab": "b6ab5d2a-c255-4411-8846-83b695f2d6c9",
+          "name": "mc03(1)",
           "active": true,
           "layer": 0,
           "transform": {
             "localPosition": {
               "_$type": "Vector3",
-              "x": 1.69991,
+              "x": -1.0259635389962143,
               "y": 0,
-              "z": 0
+              "z": -2.2780966868390135e-16
             },
             "localRotation": {
               "_$type": "Quaternion",
               "x": 0,
-              "y": 0,
+              "y": 0.7071067811865475,
               "z": 0,
-              "w": 1
-            },
-            "localScale": {
-              "_$type": "Vector3",
-              "x": 1,
-              "y": 1,
-              "z": 1
-            }
-          },
-          "isStatic": true
-        },
-        {
-          "_$id": "qg35ws14",
-          "_$prefab": "7b632272-0626-4da3-9177-8a097b8d44d4",
-          "name": "Cube Lava(3)",
-          "active": true,
-          "layer": 0,
-          "transform": {
-            "localPosition": {
-              "_$type": "Vector3",
-              "x": -2.02004,
-              "y": 0,
-              "z": 0
-            },
-            "localRotation": {
-              "_$type": "Quaternion",
-              "x": 0,
-              "y": 0,
-              "z": 0,
-              "w": 1
-            },
-            "localScale": {
-              "_$type": "Vector3",
-              "x": 1.0000000003605123,
-              "y": 1,
-              "z": 1.0000000003605123
+              "w": 0.7071067811865476
             }
           }
         },
         {
-          "_$id": "slcl6zsb",
-          "_$prefab": "738ffd74-44f8-4e56-852a-5250a72136d8",
-          "name": "Cube top Grass(2)",
+          "_$id": "on899bjg",
+          "_$prefab": "b6ab5d2a-c255-4411-8846-83b695f2d6c9",
+          "name": "mc03(2)",
           "active": true,
           "layer": 0,
           "transform": {
             "localPosition": {
               "_$type": "Vector3",
-              "x": -3.5239768048282096,
+              "x": 0.937488783481738,
               "y": 0,
-              "z": 0
+              "z": 1.8603272795753584e-16
             },
             "localRotation": {
               "_$type": "Quaternion",
               "x": 0,
-              "y": 0,
+              "y": 0.7071067811865475,
               "z": 0,
-              "w": 1
-            },
-            "localScale": {
-              "_$type": "Vector3",
-              "x": 1,
-              "y": 1,
-              "z": 1
-            }
-          },
-          "isStatic": true
-        },
-        {
-          "_$id": "xzo7wo2b",
-          "_$prefab": "7b632272-0626-4da3-9177-8a097b8d44d4",
-          "name": "Cube Lava(4)",
-          "active": true,
-          "layer": 0,
-          "transform": {
-            "localPosition": {
-              "_$type": "Vector3",
-              "x": -2.9782024891978267,
-              "y": 0,
-              "z": 1.1303481750958855
-            },
-            "localRotation": {
-              "_$type": "Quaternion",
-              "x": 0,
-              "y": 0,
-              "z": 0,
-              "w": 1
-            },
-            "localScale": {
-              "_$type": "Vector3",
-              "x": 1.0000000003605123,
-              "y": 1,
-              "z": 1.0000000003605123
+              "w": 0.7071067811865476
             }
           }
         },
         {
-          "_$id": "v5styjqb",
-          "_$prefab": "738ffd74-44f8-4e56-852a-5250a72136d8",
-          "name": "Cube top Grass(3)",
+          "_$id": "skz0vwpg",
+          "_$prefab": "b6ab5d2a-c255-4411-8846-83b695f2d6c9",
+          "name": "mc03(3)",
           "active": true,
           "layer": 0,
           "transform": {
             "localPosition": {
               "_$type": "Vector3",
-              "x": -2.5339261010707874,
+              "x": -2.0381938403832012e-16,
               "y": 0,
-              "z": 2.2188224660822278
+              "z": 0.9179209020058625
             },
             "localRotation": {
               "_$type": "Quaternion",
               "x": 0,
-              "y": 0,
+              "y": 0.7071067811865475,
               "z": 0,
-              "w": 1
-            },
-            "localScale": {
-              "_$type": "Vector3",
-              "x": 1,
-              "y": 1,
-              "z": 1
-            }
-          },
-          "isStatic": true
-        },
-        {
-          "_$id": "ltovbeyb",
-          "_$prefab": "7b632272-0626-4da3-9177-8a097b8d44d4",
-          "name": "Cube Lava(5)",
-          "active": true,
-          "layer": 0,
-          "transform": {
-            "localPosition": {
-              "_$type": "Vector3",
-              "x": -1.3187668433055115,
-              "y": -0.47868793341473825,
-              "z": 1.1303481750958855
-            },
-            "localRotation": {
-              "_$type": "Quaternion",
-              "x": 0,
-              "y": 0,
-              "z": 0,
-              "w": 1
-            },
-            "localScale": {
-              "_$type": "Vector3",
-              "x": 1.0000000003605123,
-              "y": 1,
-              "z": 1.0000000003605123
+              "w": 0.7071067811865476
             }
           }
         },
         {
-          "_$id": "hii8xdug",
-          "_$prefab": "738ffd74-44f8-4e56-852a-5250a72136d8",
-          "name": "Cube top Grass(4)",
+          "_$id": "gd70x7ns",
+          "_$prefab": "b6ab5d2a-c255-4411-8846-83b695f2d6c9",
+          "name": "mc03(4)",
           "active": true,
           "layer": 0,
           "transform": {
             "localPosition": {
               "_$type": "Vector3",
-              "x": -1.7382297589889748,
+              "x": -1.0259635389962143,
               "y": 0,
-              "z": 1.2378982952424744
+              "z": 0.9179209020058623
             },
             "localRotation": {
               "_$type": "Quaternion",
               "x": 0,
-              "y": 0,
+              "y": 0.7071067811865475,
               "z": 0,
-              "w": 1
-            },
-            "localScale": {
-              "_$type": "Vector3",
-              "x": 1,
-              "y": 1,
-              "z": 1
+              "w": 0.7071067811865476
             }
-          },
-          "isStatic": true
+          }
+        },
+        {
+          "_$id": "eh2vhhm5",
+          "_$prefab": "b6ab5d2a-c255-4411-8846-83b695f2d6c9",
+          "name": "mc03(5)",
+          "active": true,
+          "layer": 0,
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": 0.937488783481738,
+              "y": 0,
+              "z": 0.9179209020058627
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": 0,
+              "y": 0.7071067811865475,
+              "z": 0,
+              "w": 0.7071067811865476
+            }
+          }
         }
       ]
     }

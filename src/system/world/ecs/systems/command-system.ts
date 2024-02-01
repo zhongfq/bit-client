@@ -1,20 +1,29 @@
 import { app } from "../../../../app";
 import { Callback } from "../../../../core/dispatcher";
 import { ecs } from "../../../../core/ecs";
+import { IVector3Like, Pool } from "../../../../core/laya";
 import proto from "../../../../def/proto";
 import { opcode } from "../../../../def/protocol";
 import { WorldConf } from "../../../../def/world";
+import { IBehaviorContext } from "../../behavior3/behavior-context";
 import { WorldContext } from "../../world-context";
 import { BattleComponent } from "../components/battle-component";
 import { CameraComponent } from "../components/camera-component";
 import {
+    InterpolationRate,
     MovementComponent,
     MovementType,
+    TrackVector3,
     TransformComponent,
 } from "../components/movement-component";
 import { AnimationComponent } from "../components/render-component";
 import { Tilemap } from "../components/tilemap-component";
-import { OwnerComponent } from "../components/troop-component";
+import {
+    OwnerComponent,
+    SoldierComponent,
+    SoliderOrder,
+    TroopComponent,
+} from "../components/troop-component";
 
 enum AnimatorTrigger {
     IDLE = "idle",
@@ -22,7 +31,24 @@ enum AnimatorTrigger {
     ATTACK = "attack",
 }
 
-export class CommandSystem extends ecs.System {
+const formation: IVector3Like[] = [
+    { x: -0.7, y: 0, z: 0 },
+    { x: -0.7, y: 0, z: 0.6 },
+    { x: -0.7, y: 0, z: -0.6 },
+    { x: -1.4, y: 0, z: 0 },
+    { x: -1.4, y: 0, z: 0.6 },
+    { x: -1.4, y: 0, z: -0.6 },
+    { x: -2.1, y: 0, z: 0 },
+    { x: -2.1, y: 0, z: 0.6 },
+    { x: -2.1, y: 0, z: -0.6 },
+    { x: -2.8, y: 0, z: 0 },
+    { x: -2.8, y: 0, z: 0.6 },
+    { x: -2.8, y: 0, z: -0.6 },
+];
+
+const PREFAB_SOLDIER = "resources/prefab/battle/roles/mc03.lh";
+
+export class CommandSystem extends ecs.System implements IBehaviorContext {
     constructor(readonly context: WorldContext) {
         super();
 
@@ -68,8 +94,7 @@ export class CommandSystem extends ecs.System {
                     this._startAttack(cmd.battleSkill as proto.world.BattleSkillAction);
                     break;
                 case ACTION.BATTLE_STOP:
-                    // this._stopAttack(cmd.battleStop!.srcEid!);
-                    // this._stopAttack(cmd.battleStop!.dstEid!);
+                    this._stopAttack(cmd.battleStop!.eid!);
                     break;
                 case ACTION.BATTLE_SUB_HP:
                     break;
@@ -103,7 +128,9 @@ export class CommandSystem extends ecs.System {
         }
 
         if (cmd.move) {
-            entity.addComponent(MovementComponent);
+            const movement = entity.addComponent(MovementComponent);
+            movement.positionInterpolation.rate = InterpolationRate.POSITION;
+            movement.rotationInterpolation.rate = InterpolationRate.ROTATION;
             this._updateMovement(cmd.eid, cmd.move as proto.world.MoveComponent);
         }
 
@@ -118,6 +145,18 @@ export class CommandSystem extends ecs.System {
                 const camera = this.ecs.getSingletonComponent(CameraComponent)!;
                 camera.focus = cmd.eid;
             }
+
+            const troop = entity.addComponent(TroopComponent);
+            const transform = entity.getComponent(TransformComponent)!;
+            const position = transform.position;
+            for (let i = 0; i < 40; i++) {
+                const dis = 0.1 * i;
+                troop.positions.push(
+                    new TrackVector3(position.x - dis, position.y, position.z, 0.1)
+                );
+            }
+            troop.latestIndex = 0;
+            this._loadSoldiers(troop);
         }
 
         if (cmd.battle) {
@@ -150,7 +189,7 @@ export class CommandSystem extends ecs.System {
             const movement = entity.getComponent(MovementComponent)!;
             const current = cmd.curPos as proto.world.Position;
             const positionInterpolation = movement.positionInterpolation;
-            positionInterpolation.ratio = 0;
+            positionInterpolation.percent = 0;
             Tilemap.grid2Pixel(current.x, current.y, positionInterpolation);
             positionInterpolation.vsub(transform.position, positionInterpolation);
         }
@@ -173,35 +212,17 @@ export class CommandSystem extends ecs.System {
         }
 
         const movement = entity.getComponent(MovementComponent)!;
-        const transform = entity.getComponent(TransformComponent)!;
-        const animation = entity.getComponent(AnimationComponent);
+        const troop = entity.getComponent(TroopComponent)!;
         if (data.speed === 0 && data.path.length === 0) {
-            movement.type = MovementType.NONE;
-            movement.speed.x = 0;
-            movement.speed.y = 0;
-            movement.speed.z = 0;
-            movement.track = null;
-            movement.target = null;
-            if (animation?.animator) {
-                this._clearTrigger(animation.animator, AnimatorTrigger.RUN);
-                this._setTrigger(animation.animator, AnimatorTrigger.IDLE);
+            this.stopMove(movement);
+            if (troop) {
+                this._stopMoveSoldiers(troop);
             }
         } else if (data.path.length > 0) {
         } else if (data.speed > 0) {
-            movement.type = MovementType.WHEEL;
-            movement.velocity = data.speed;
-
-            Tilemap.degree2Speed(data.degree, data.speed, movement.speed);
-            this._setRotation(transform, movement.speed.x, movement.speed.z, true);
-            // const rad = Math.atan2(-movement.speed.z, movement.speed.x);
-            // transform.rotation = (rad * 180) / Math.PI;
-            // transform.flag |= TransformComponent.ROTATION;
-            // movement.rotation.to = data.degree;
-            // movement.rotation.ration = 1;
-
-            if (animation?.animator) {
-                this._clearTrigger(animation.animator, AnimatorTrigger.IDLE);
-                this._setTrigger(animation.animator, AnimatorTrigger.RUN);
+            this.startMove(movement, data.degree, data.speed);
+            if (troop) {
+                this._startMoveSoldiers(troop);
             }
         }
     }
@@ -273,7 +294,7 @@ export class CommandSystem extends ecs.System {
             } else if (offset < -180) {
                 offset += 360;
             }
-            movement.rotationInterpolation.ratio = 0;
+            movement.rotationInterpolation.percent = 0;
             movement.rotationInterpolation.rotation = offset;
         } else {
             transform.rotation = dest;
@@ -288,5 +309,112 @@ export class CommandSystem extends ecs.System {
     private _clearTrigger(animator: Laya.Animator, name: AnimatorTrigger) {
         const id = Laya.AnimatorStateCondition.conditionNameToID(name);
         animator.animatorParams[id] = false;
+    }
+
+    // 加载小兵
+    private _loadSoldiers(troop: TroopComponent) {
+        const leaderTransform = troop.getComponent(TransformComponent)!;
+        for (let i = 0; i < formation.length; i++) {
+            const offset = formation[i];
+            const entity = this.ecs.createEntity();
+            const transform = entity.addComponent(TransformComponent);
+            transform.position.x = leaderTransform.position.x + offset.x;
+            transform.position.y = leaderTransform.position.y + offset.y;
+            transform.position.z = leaderTransform.position.z + offset.z;
+            transform.flag |= TransformComponent.POSITION;
+
+            const animation = entity.addComponent(AnimationComponent);
+            animation.path = PREFAB_SOLDIER;
+
+            const movement = entity.addComponent(MovementComponent);
+            movement.positionInterpolation.rate = InterpolationRate.SOLDIER_POSITION;
+            movement.rotationInterpolation.rate = InterpolationRate.SOLDIER_ROTATION;
+
+            const soldier = entity.addComponent(SoldierComponent);
+            soldier.leader = troop.eid;
+            soldier.offset = offset;
+            transform.position.cloneTo(soldier.destination);
+            troop.soldiers.set(entity.eid, soldier);
+        }
+    }
+
+    private _startMoveSoldiers(troop: TroopComponent) {
+        const leaderMovement = troop.getComponent(MovementComponent)!;
+        troop.soldiers.forEach((soldier) => {
+            soldier.order = SoliderOrder.MOVE;
+        });
+    }
+
+    private _stopMoveSoldiers(troop: TroopComponent) {
+        troop.soldiers.forEach((soldier) => {
+            soldier.order = SoliderOrder.IDLE;
+        });
+    }
+
+    calcSoldierPosition(troop: TroopComponent, solider: SoldierComponent, out: Laya.Vector3) {
+        const offset = solider.offset;
+
+        // 在主角路径上查找合适的点
+        const len = troop.positions.length;
+        const latestIndex = troop.latestIndex;
+        let dis = Math.abs(offset.x);
+        let p0: TrackVector3 = troop.positions[latestIndex];
+        let p1!: TrackVector3;
+        for (let i = 1; i < len; i++) {
+            p0 = troop.positions[(i + latestIndex - 1) % len];
+            p1 = troop.positions[(i + latestIndex) % len];
+            dis -= Math.abs(p0.offset);
+            if (dis <= 0) {
+                break;
+            }
+        }
+
+        // 二维空间中, 一个向量(x, y)的垂直向量是(-y, x)
+        const dir = Pool.obtain(Laya.Vector3);
+        dir.set(-(p0.z - p1.z), 0, p0.x - p1.x);
+        dir.normalize();
+        out.x = p1.x + dir.x * offset.z;
+        out.y = p1.y;
+        out.z = p1.z + dir.z * offset.z;
+        Pool.free(dir);
+
+        // 检查
+        const transform = solider.getComponent(TransformComponent)!;
+        const leaderDir = Pool.obtain(Laya.Vector3);
+        const soldierDir = Pool.obtain(Laya.Vector3);
+        p0.vsub(p1, leaderDir);
+        out.vsub(transform.position, soldierDir);
+        if (leaderDir.dot(soldierDir) < 0) {
+            transform.position.cloneTo(out);
+        }
+        Pool.free(leaderDir);
+        Pool.free(soldierDir);
+    }
+
+    startMove(movement: MovementComponent, degree: number, velocity: number) {
+        const transform = movement.getComponent(TransformComponent)!;
+        const animation = movement.getComponent(AnimationComponent);
+        movement.type = MovementType.WHEEL;
+        movement.velocity = velocity;
+        Tilemap.degree2Speed(degree, velocity, movement.speed);
+        this._setRotation(transform, movement.speed.x, movement.speed.z, true);
+        if (animation?.animator) {
+            this._clearTrigger(animation.animator, AnimatorTrigger.IDLE);
+            this._setTrigger(animation.animator, AnimatorTrigger.RUN);
+        }
+    }
+
+    stopMove(movement: MovementComponent) {
+        const animation = movement.getComponent(AnimationComponent);
+        movement.type = MovementType.NONE;
+        movement.speed.x = 0;
+        movement.speed.y = 0;
+        movement.speed.z = 0;
+        movement.track = null;
+        movement.target = null;
+        if (animation?.animator) {
+            this._clearTrigger(animation.animator, AnimatorTrigger.RUN);
+            this._setTrigger(animation.animator, AnimatorTrigger.IDLE);
+        }
     }
 }

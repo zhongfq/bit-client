@@ -1,10 +1,10 @@
 import { ecs } from "../../../../core/ecs";
-import { LayaExt } from "../../../../core/laya";
+import { IVector3Like } from "../../../../core/laya";
 
 const RATE = 1;
 
 export class Tilemap extends ecs.Component {
-    static grid2Pixel(x: number, z: number, out: LayaExt.IVector3Like) {
+    static grid2Pixel(x: number, z: number, out: IVector3Like) {
         // TODO
         out.x = x * RATE;
         out.z = z * RATE;
@@ -12,7 +12,7 @@ export class Tilemap extends ecs.Component {
         return out;
     }
 
-    static degree2Speed(deg: number, velocity: number, out: LayaExt.IVector3Like) {
+    static degree2Speed(deg: number, velocity: number, out: IVector3Like) {
         const rad = (deg / 180) * Math.PI;
         out.x = Math.cos(rad) * velocity * RATE;
         out.z = Math.sin(rad) * velocity * RATE;

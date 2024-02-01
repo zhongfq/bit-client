@@ -16,6 +16,15 @@ export const enum TrackType {
     CURVE = 3,
 }
 
+export class TrackVector3 extends Laya.Vector3 {
+    /** 与前一个坐标点的距离差 */
+    offset: number = 0;
+    constructor(x?: number, y?: number, z?: number, offset?: number) {
+        super(x, y, z);
+        this.offset = offset ?? 0;
+    }
+}
+
 export type Track = {
     time: number;
     duration: number;
@@ -32,13 +41,22 @@ export const enum MovementType {
     TARGET,
 }
 
-type RotationInterpolation = {
-    rotation: number;
-    ratio: number;
-};
+export class InterpolationRate {
+    static readonly POSITION = 5;
+    static readonly ROTATION = 7;
+    static readonly SOLDIER_POSITION = 5;
+    static readonly SOLDIER_ROTATION = 4;
+}
+
+class RotationInterpolation {
+    rotation: number = 0;
+    percent: number = 1;
+    rate: number = 1;
+}
 
 class PositionInterpolation extends Laya.Vector3 {
-    ratio: number = 1;
+    percent: number = 1;
+    rate: number = 1;
 }
 
 export class MovementComponent extends ecs.Component {
@@ -56,7 +74,7 @@ export class MovementComponent extends ecs.Component {
     trackType: TrackType = TrackType.NONE;
 
     // 改变角度
-    rotationInterpolation: RotationInterpolation = { rotation: 0, ratio: 1 };
+    rotationInterpolation: RotationInterpolation = new RotationInterpolation();
 
     // 位置差
     positionInterpolation: PositionInterpolation = new PositionInterpolation();

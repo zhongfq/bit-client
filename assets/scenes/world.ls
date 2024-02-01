@@ -106,8 +106,8 @@
             {
               "_$type": "DirectionLightCom",
               "intensity": 1,
-              "lightmapBakedType": 1,
-              "shadowMode": 2,
+              "lightmapBakedType": 0,
+              "shadowMode": 0,
               "shadowStrength": 0.506,
               "shadowDistance": 50,
               "shadowDepthBias": 0,
@@ -206,9 +206,9 @@
           "transform": {
             "localPosition": {
               "_$type": "Vector3",
-              "x": -1.865705434002788,
+              "x": 1.7817782753107887,
               "y": 0,
-              "z": -9.225678663349289
+              "z": -0.06360746430235675
             },
             "localRotation": {
               "_$type": "Quaternion",
@@ -228,9 +228,185 @@
           "transform": {
             "localPosition": {
               "_$type": "Vector3",
-              "x": -2.835201137476017,
+              "x": 0,
               "y": 0,
               "z": 0
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": 0,
+              "y": 0,
+              "z": 0,
+              "w": -1
+            }
+          }
+        },
+        {
+          "_$id": "hmlivy3g",
+          "_$prefab": "b6ab5d2a-c255-4411-8846-83b695f2d6c9",
+          "name": "mc03(1)",
+          "active": true,
+          "layer": 0,
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": -0.5619612515847968,
+              "y": 0,
+              "z": 0
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": 0,
+              "y": 0,
+              "z": 0,
+              "w": -1
+            }
+          }
+        },
+        {
+          "_$id": "alourjrg",
+          "_$prefab": "b6ab5d2a-c255-4411-8846-83b695f2d6c9",
+          "name": "mc03(2)",
+          "active": false,
+          "layer": 0,
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": 0.70675501462297,
+              "y": 0,
+              "z": 0
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": 0,
+              "y": 0,
+              "z": 0,
+              "w": -1
+            }
+          }
+        },
+        {
+          "_$id": "wufx48u8",
+          "_$prefab": "b6ab5d2a-c255-4411-8846-83b695f2d6c9",
+          "name": "mc03(3)",
+          "active": false,
+          "layer": 0,
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": 0,
+              "y": 0,
+              "z": 0.7211829280463724
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": 0,
+              "y": 0,
+              "z": 0,
+              "w": -1
+            }
+          }
+        },
+        {
+          "_$id": "d926y9lw",
+          "_$prefab": "b6ab5d2a-c255-4411-8846-83b695f2d6c9",
+          "name": "mc03(4)",
+          "active": false,
+          "layer": 0,
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": -0.5619612515847968,
+              "y": 0,
+              "z": 0.7211829280463724
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": 0,
+              "y": 0,
+              "z": 0,
+              "w": -1
+            }
+          }
+        },
+        {
+          "_$id": "ylc0f3re",
+          "_$prefab": "b6ab5d2a-c255-4411-8846-83b695f2d6c9",
+          "name": "mc03(5)",
+          "active": false,
+          "layer": 0,
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": 0.70675501462297,
+              "y": 0,
+              "z": 0.7211829280463724
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": 0,
+              "y": 0,
+              "z": 0,
+              "w": -1
+            }
+          }
+        },
+        {
+          "_$id": "2yrz0su1",
+          "_$prefab": "b6ab5d2a-c255-4411-8846-83b695f2d6c9",
+          "name": "mc03(6)",
+          "active": false,
+          "layer": 0,
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": 0,
+              "y": 0,
+              "z": 1.5424489039481601
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": 0,
+              "y": 0,
+              "z": 0,
+              "w": -1
+            }
+          }
+        },
+        {
+          "_$id": "it10amyl",
+          "_$prefab": "b6ab5d2a-c255-4411-8846-83b695f2d6c9",
+          "name": "mc03(7)",
+          "active": false,
+          "layer": 0,
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": -0.5619612515847968,
+              "y": 0,
+              "z": 1.5424489039481601
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": 0,
+              "y": 0,
+              "z": 0,
+              "w": -1
+            }
+          }
+        },
+        {
+          "_$id": "hz80m8w2",
+          "_$prefab": "b6ab5d2a-c255-4411-8846-83b695f2d6c9",
+          "name": "mc03(8)",
+          "active": false,
+          "layer": 0,
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": 0.70675501462297,
+              "y": 0,
+              "z": 1.5424489039481601
             },
             "localRotation": {
               "_$type": "Quaternion",

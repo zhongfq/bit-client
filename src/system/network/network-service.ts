@@ -154,7 +154,7 @@ export class NetworkService extends Service<NetworkService> {
     }
 
     // shoud use try catch
-    async call<T, R>(message: T, cls: Constructor<R>) {
+    async call<T, R>(message: T, _: Constructor<R>) {
         return new Promise<R>((resolve, reject) => {
             const typeURL = (message as any).constructor.getTypeUrl();
             const protocol = protocols[typeURL];

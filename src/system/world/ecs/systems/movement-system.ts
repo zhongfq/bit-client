@@ -3,12 +3,12 @@ import { WorldContext } from "../../world-context";
 import {
     MovementComponent,
     MovementType,
-    TransformComponent,
     TrackType,
+    TransformComponent,
 } from "../components/movement-component";
+import { TroopComponent } from "../components/troop-component";
 
-const POSITION_INTERPOLATE_RATE = 5;
-const ROTATION_INTERPOLATE_RATE = 7;
+const tmpVector3 = new Laya.Vector3();
 
 export class MovementSystem extends ecs.System {
     constructor(readonly context: WorldContext) {
@@ -17,7 +17,7 @@ export class MovementSystem extends ecs.System {
 
     update(dt: number): void {
         this.ecs.getComponents(MovementComponent).forEach((movement) => {
-            if (movement.rotationInterpolation.ratio < 1) {
+            if (movement.rotationInterpolation.percent < 1) {
                 this._updateRotation(movement, dt);
             }
             if (movement.type == MovementType.NONE) {
@@ -28,6 +28,12 @@ export class MovementSystem extends ecs.System {
             ) {
             } else {
                 this._updateWithSpeed(movement, dt);
+            }
+        });
+        this.ecs.getComponents(TroopComponent).forEach((troop) => {
+            const movement = troop.getComponent(MovementComponent)!;
+            if (movement.type == MovementType.WHEEL) {
+                this._updateTroopPosition(troop);
             }
         });
     }
@@ -47,15 +53,15 @@ export class MovementSystem extends ecs.System {
             }
         }
 
-        if (movement.positionInterpolation.ratio < 1) {
+        if (movement.positionInterpolation.percent < 1) {
             const interpolation = movement.positionInterpolation;
-            const last = interpolation.ratio;
-            let ratio = last + dt * POSITION_INTERPOLATE_RATE;
+            const last = interpolation.percent;
+            let ratio = last + dt * interpolation.rate;
             if (ratio > 1) {
                 ratio = 1;
             }
             const step = ratio - last;
-            interpolation.ratio = ratio;
+            interpolation.percent = ratio;
             position.x += interpolation.x * step;
             position.z += interpolation.z * step;
         }
@@ -86,14 +92,33 @@ export class MovementSystem extends ecs.System {
     private _updateRotation(movement: MovementComponent, dt: number) {
         const transform = movement.getComponent(TransformComponent)!;
         const interpolation = movement.rotationInterpolation;
-        const last = interpolation.ratio;
-        let ratio = last + dt * ROTATION_INTERPOLATE_RATE;
+        const last = interpolation.percent;
+        let ratio = last + dt * interpolation.rate;
         if (ratio > 1) {
             ratio = 1;
         }
-        interpolation.ratio = ratio;
+        interpolation.percent = ratio;
         let rotation = transform.rotation + interpolation.rotation * (ratio - last);
         transform.rotation = rotation % 360;
         transform.flag |= TransformComponent.ROTATION;
+    }
+
+    private _updateTroopPosition(troop: TroopComponent) {
+        let latestIndex = troop.latestIndex;
+        let latestPosition = troop.positions[latestIndex];
+        const transform = troop.getComponent(TransformComponent)!;
+        const offset = Laya.Vector3.distance(transform.position, latestPosition);
+        if (offset < 0.1) {
+            return;
+        }
+
+        if (--latestIndex < 0) {
+            latestIndex = troop.positions.length - 1;
+        }
+
+        latestPosition = troop.positions[latestIndex];
+        latestPosition.offset = offset;
+        troop.latestIndex = latestIndex;
+        transform.position.cloneTo(latestPosition);
     }
 }

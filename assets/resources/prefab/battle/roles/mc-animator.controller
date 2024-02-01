@@ -50,7 +50,7 @@
               ]
             }
           ],
-          "_isLooping": 2
+          "_isLooping": 1
         },
         {
           "_$type": "AnimatorState",
@@ -70,7 +70,7 @@
               "id": "2",
               "exitByTime": true,
               "transduration": 0.15,
-              "exitTime": 0.1,
+              "exitTime": 0,
               "conditions": [
                 {
                   "type": 0,
@@ -125,7 +125,7 @@
               "id": "1",
               "exitByTime": true,
               "transduration": 0.15,
-              "exitTime": 0.1,
+              "exitTime": 0,
               "conditions": [
                 {
                   "type": 0,

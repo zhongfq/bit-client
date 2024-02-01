@@ -45,7 +45,7 @@ export class RenderSystem extends ecs.System {
             // targetTransform.localRotationEulerY = transform.rotation;
             const r = new Laya.Vector3(
                 0,
-                transform.rotation + 90 - targetTransform.localRotationEulerY,
+                transform.rotation - targetTransform.localRotationEulerY,
                 0
             );
             targetTransform.rotate(r, true, false);
@@ -57,7 +57,8 @@ export class RenderSystem extends ecs.System {
         if (anim.path) {
             const prefab: Laya.Prefab = await Laya.loader.load(anim.path, Laya.Loader.HIERARCHY);
             anim.view = prefab.create() as Laya.Sprite3D;
-            anim.animator = anim.view.getComponent(Laya.Animator);
+            anim.animator = anim.view.getChildByName("anim").getComponent(Laya.Animator);
+            (anim.animator.owner as Laya.Sprite3D).transform.localRotationEulerY = 90;
             this.context.scene3D.addChild(anim.view);
         }
     }
