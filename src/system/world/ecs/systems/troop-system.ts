@@ -1,6 +1,4 @@
 import { ecs } from "../../../../core/ecs";
-import { MathUtil } from "../../../../core/utils/math-util";
-import { troop } from "../../../../def/proto";
 import { WorldContext } from "../../world-context";
 import {
     MovementComponent,

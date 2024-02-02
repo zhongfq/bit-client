@@ -1,6 +1,5 @@
 const { regClass } = Laya;
 import { app } from "../../../app";
-import { chat } from "../../../def/proto";
 import { ChatMsgVo } from "../../../misc/vo/chat/chat-msg-vo";
 import { ChatRoleVo } from "../../../misc/vo/chat/chat-role-vo";
 import { ChatCellUIBase } from "./ChatCellUI.generated";

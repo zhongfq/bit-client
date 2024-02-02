@@ -2963,7 +2963,7 @@ $root.chat = (function() {
          * @interface IChatMessage
          * @property {number|null} [rid] ChatMessage rid
          * @property {string|null} [text] ChatMessage text
-         * @property {number|Long|null} [time] ChatMessage time
+         * @property {number|null} [time] ChatMessage time
          */
 
         /**
@@ -2999,7 +2999,7 @@ $root.chat = (function() {
 
         /**
          * ChatMessage time.
-         * @member {number|Long} time
+         * @member {number} time
          * @memberof chat.ChatMessage
          * @instance
          */
@@ -14611,7 +14611,7 @@ $root.user = (function() {
          * Properties of a RoleInfo.
          * @memberof user
          * @interface IRoleInfo
-         * @property {number|Long|null} [rid] RoleInfo rid
+         * @property {number|null} [rid] RoleInfo rid
          */
 
         /**
@@ -14631,7 +14631,7 @@ $root.user = (function() {
 
         /**
          * RoleInfo rid.
-         * @member {number|Long} rid
+         * @member {number} rid
          * @memberof user.RoleInfo
          * @instance
          */
@@ -22326,7 +22326,7 @@ $root.world = (function() {
          * Properties of a c2s_cancel_giveup.
          * @memberof world
          * @interface Ic2s_cancel_giveup
-         * @property {number|Long|null} [eid] c2s_cancel_giveup eid
+         * @property {number|null} [eid] c2s_cancel_giveup eid
          */
 
         /**
@@ -22346,7 +22346,7 @@ $root.world = (function() {
 
         /**
          * c2s_cancel_giveup eid.
-         * @member {number|Long} eid
+         * @member {number} eid
          * @memberof world.c2s_cancel_giveup
          * @instance
          */
@@ -25131,7 +25131,7 @@ $root.world = (function() {
          * Properties of a DelEntityAction.
          * @memberof world
          * @interface IDelEntityAction
-         * @property {number|Long|null} [eid] DelEntityAction eid
+         * @property {number|null} [eid] DelEntityAction eid
          */
 
         /**
@@ -25151,7 +25151,7 @@ $root.world = (function() {
 
         /**
          * DelEntityAction eid.
-         * @member {number|Long} eid
+         * @member {number} eid
          * @memberof world.DelEntityAction
          * @instance
          */
@@ -25348,7 +25348,7 @@ $root.world = (function() {
          * Properties of a MoveAction.
          * @memberof world
          * @interface IMoveAction
-         * @property {number|Long|null} [eid] MoveAction eid
+         * @property {number|null} [eid] MoveAction eid
          * @property {Array.<number>|null} [path] MoveAction path
          * @property {number|null} [speed] MoveAction speed
          * @property {number|null} [startMs] MoveAction startMs
@@ -25374,7 +25374,7 @@ $root.world = (function() {
 
         /**
          * MoveAction eid.
-         * @member {number|Long} eid
+         * @member {number} eid
          * @memberof world.MoveAction
          * @instance
          */

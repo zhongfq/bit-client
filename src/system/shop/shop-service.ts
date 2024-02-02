@@ -1,7 +1,5 @@
-import { app } from "../../app";
 import { Service } from "../../core/service";
-import proto, { shop } from "../../def/proto";
-import { errcode, opcode } from "../../def/protocol";
+import proto from "../../def/proto";
 import { Reward, Shop1Row } from "../../def/table";
 import { GeneratedShop1Row } from "../../def/table.generated";
 import { VoUtil } from "../../misc/vo-util";
