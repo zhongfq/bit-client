@@ -31,3 +31,25 @@ export class Pool {
         Laya.Pool.recoverByClass(obj);
     }
 }
+
+declare global {
+    module Laya {
+        interface Vector2 {
+            normalize(): void;
+            clone(): Vector2;
+
+            get length(): number;
+        }
+    }
+}
+
+Laya.Vector2.prototype.normalize = function () {
+    Laya.Vector2.normalize(this, this);
+};
+
+Object.defineProperty(Laya.Vector2.prototype, "length", {
+    get() {
+        const { x, y } = this as Laya.Vector2;
+        return Math.sqrt(x * x + y * y);
+    },
+});
