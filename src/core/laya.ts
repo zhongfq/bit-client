@@ -22,16 +22,6 @@ export interface IVector4Like {
     w: number;
 }
 
-export class Pool {
-    static obtain<T>(cls: Constructor<T>) {
-        return Laya.Pool.createByClass(cls);
-    }
-
-    static free<T>(obj: T) {
-        Laya.Pool.recoverByClass(obj);
-    }
-}
-
 declare global {
     module Laya {
         interface Vector2 {
@@ -40,11 +30,24 @@ declare global {
 
             get length(): number;
         }
+
+        namespace Pool {
+            export function obtain<T>(cls: Constructor<T>): T;
+            export function free<T>(obj: T): void;
+        }
     }
 }
 
 Laya.Vector2.prototype.normalize = function () {
     Laya.Vector2.normalize(this, this);
+};
+
+Laya.Pool.obtain = function <T>(cls: Constructor<T>): T {
+    return Laya.Pool.createByClass(cls);
+};
+
+Laya.Pool.free = function <T>(obj: T): void {
+    Laya.Pool.recoverByClass(obj);
 };
 
 Object.defineProperty(Laya.Vector2.prototype, "length", {

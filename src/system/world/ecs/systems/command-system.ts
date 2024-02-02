@@ -1,7 +1,7 @@
 import { app } from "../../../../app";
 import { Callback } from "../../../../core/dispatcher";
 import { ecs } from "../../../../core/ecs";
-import { IVector3Like, Pool } from "../../../../core/laya";
+import { IVector3Like } from "../../../../core/laya";
 import { MathUtil } from "../../../../core/utils/math-util";
 import proto from "../../../../def/proto";
 import { opcode } from "../../../../def/protocol";
@@ -371,25 +371,25 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
         }
 
         // 二维空间中, 一个向量(x, y)的垂直向量是(-y, x)
-        const dir = Pool.obtain(Laya.Vector3);
+        const dir = Laya.Pool.obtain(Laya.Vector3);
         dir.set(-(p0.z - p1.z), 0, p0.x - p1.x);
         dir.normalize();
         out.x = p1.x + dir.x * offset.z;
         out.y = p1.y;
         out.z = p1.z + dir.z * offset.z;
-        Pool.free(dir);
+        Laya.Pool.free(dir);
 
         // 检查
         const transform = solider.getComponent(TransformComponent)!;
-        const leaderDir = Pool.obtain(Laya.Vector3);
-        const soldierDir = Pool.obtain(Laya.Vector3);
+        const leaderDir = Laya.Pool.obtain(Laya.Vector3);
+        const soldierDir = Laya.Pool.obtain(Laya.Vector3);
         p0.vsub(p1, leaderDir);
         out.vsub(transform.position, soldierDir);
         if (leaderDir.dot(soldierDir) < 0) {
             transform.position.cloneTo(out);
         }
-        Pool.free(leaderDir);
-        Pool.free(soldierDir);
+        Laya.Pool.free(leaderDir);
+        Laya.Pool.free(soldierDir);
     }
 
     startMove(movement: MovementComponent, degree: number, velocity: number) {
