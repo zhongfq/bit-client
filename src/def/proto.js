@@ -19330,7 +19330,7 @@ $root.world = (function() {
             if (message.speed != null && Object.hasOwnProperty.call(message, "speed"))
                 writer.uint32(/* id 4, wireType 5 =*/37).float(message.speed);
             if (message.degree != null && Object.hasOwnProperty.call(message, "degree"))
-                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.degree);
+                writer.uint32(/* id 5, wireType 5 =*/45).float(message.degree);
             return writer;
         };
 
@@ -19385,7 +19385,7 @@ $root.world = (function() {
                         break;
                     }
                 case 5: {
-                        message.degree = reader.int32();
+                        message.degree = reader.float();
                         break;
                     }
                 default:
@@ -19437,8 +19437,8 @@ $root.world = (function() {
                 if (typeof message.speed !== "number")
                     return "speed: number expected";
             if (message.degree != null && message.hasOwnProperty("degree"))
-                if (!$util.isInteger(message.degree))
-                    return "degree: integer expected";
+                if (typeof message.degree !== "number")
+                    return "degree: number expected";
             return null;
         };
 
@@ -19466,7 +19466,7 @@ $root.world = (function() {
             if (object.speed != null)
                 message.speed = Number(object.speed);
             if (object.degree != null)
-                message.degree = object.degree | 0;
+                message.degree = Number(object.degree);
             return message;
         };
 
@@ -19500,7 +19500,7 @@ $root.world = (function() {
             if (message.speed != null && message.hasOwnProperty("speed"))
                 object.speed = options.json && !isFinite(message.speed) ? String(message.speed) : message.speed;
             if (message.degree != null && message.hasOwnProperty("degree"))
-                object.degree = message.degree;
+                object.degree = options.json && !isFinite(message.degree) ? String(message.degree) : message.degree;
             return object;
         };
 
@@ -23701,7 +23701,7 @@ $root.world = (function() {
             if (message.troopEid != null && Object.hasOwnProperty.call(message, "troopEid"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.troopEid);
             if (message.degree != null && Object.hasOwnProperty.call(message, "degree"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.degree);
+                writer.uint32(/* id 2, wireType 5 =*/21).float(message.degree);
             return writer;
         };
 
@@ -23741,7 +23741,7 @@ $root.world = (function() {
                         break;
                     }
                 case 2: {
-                        message.degree = reader.uint32();
+                        message.degree = reader.float();
                         break;
                     }
                 default:
@@ -23783,8 +23783,8 @@ $root.world = (function() {
                 if (!$util.isInteger(message.troopEid))
                     return "troopEid: integer expected";
             if (message.degree != null && message.hasOwnProperty("degree"))
-                if (!$util.isInteger(message.degree))
-                    return "degree: integer expected";
+                if (typeof message.degree !== "number")
+                    return "degree: number expected";
             return null;
         };
 
@@ -23803,7 +23803,7 @@ $root.world = (function() {
             if (object.troopEid != null)
                 message.troopEid = object.troopEid >>> 0;
             if (object.degree != null)
-                message.degree = object.degree >>> 0;
+                message.degree = Number(object.degree);
             return message;
         };
 
@@ -23827,7 +23827,7 @@ $root.world = (function() {
             if (message.troopEid != null && message.hasOwnProperty("troopEid"))
                 object.troopEid = message.troopEid;
             if (message.degree != null && message.hasOwnProperty("degree"))
-                object.degree = message.degree;
+                object.degree = options.json && !isFinite(message.degree) ? String(message.degree) : message.degree;
             return object;
         };
 
@@ -25459,7 +25459,7 @@ $root.world = (function() {
             if (message.curPos != null && Object.hasOwnProperty.call(message, "curPos"))
                 $root.world.Position.encode(message.curPos, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
             if (message.degree != null && Object.hasOwnProperty.call(message, "degree"))
-                writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.degree);
+                writer.uint32(/* id 6, wireType 5 =*/53).float(message.degree);
             return writer;
         };
 
@@ -25522,7 +25522,7 @@ $root.world = (function() {
                         break;
                     }
                 case 6: {
-                        message.degree = reader.uint32();
+                        message.degree = reader.float();
                         break;
                     }
                 default:
@@ -25582,8 +25582,8 @@ $root.world = (function() {
                     return "curPos." + error;
             }
             if (message.degree != null && message.hasOwnProperty("degree"))
-                if (!$util.isInteger(message.degree))
-                    return "degree: integer expected";
+                if (typeof message.degree !== "number")
+                    return "degree: number expected";
             return null;
         };
 
@@ -25625,7 +25625,7 @@ $root.world = (function() {
                 message.curPos = $root.world.Position.fromObject(object.curPos);
             }
             if (object.degree != null)
-                message.degree = object.degree >>> 0;
+                message.degree = Number(object.degree);
             return message;
         };
 
@@ -25672,7 +25672,7 @@ $root.world = (function() {
             if (message.curPos != null && message.hasOwnProperty("curPos"))
                 object.curPos = $root.world.Position.toObject(message.curPos, options);
             if (message.degree != null && message.hasOwnProperty("degree"))
-                object.degree = message.degree;
+                object.degree = options.json && !isFinite(message.degree) ? String(message.degree) : message.degree;
             return object;
         };
 

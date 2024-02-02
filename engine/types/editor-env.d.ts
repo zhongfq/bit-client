@@ -62,6 +62,7 @@ declare global {
             framesLayout?: boolean;
             mipmapCoverageIBL?: boolean;
             cubemapSize?: number;
+            cubemapFileMode?: string;
             fadeOutMipmap?: { x: number, y: number };
             mipmapFilter?: number;
             extendFilter?: number;
@@ -92,6 +93,37 @@ declare global {
 
         export namespace TextureTool {
             function run(srcFilePath: string, destFilePrefix: string, config: ITextureSettings, options?: ITextureToolOptions): Promise<ITextureConfig>;
+        }
+        export interface ITexturePackerOptions extends IMaxRectsPackingOptions {
+            trimImage?: boolean;
+            scale?: number;
+        }
+
+        export interface IAtlasFrame {
+            frame: {
+                idx: number;
+                x: number;
+                y: number;
+                w: number;
+                h: number;
+            },
+            sourceSize: {
+                w: number;
+                h: number;
+            },
+            spriteSourceSize: {
+                x: number,
+                y: number
+            }
+        }
+
+        export interface ITexturePackerResult {
+            frames: Record<string, IAtlasFrame>;
+            images: Array<{ name: string, width: number, height: number }>;
+        }
+
+        export namespace ITexturePacker {
+            function pack(sourceFiles: string[], outTexturePath: string, options?: ITexturePackerOptions): Promise<ITexturePackerResult>;
         }
         export interface IEncodeObjOptions {
             writeType?: boolean,
@@ -131,6 +163,34 @@ declare global {
 
             setProps(obj: any, datapath: string[], value: any): Promise<boolean>;
             getProps(obj: any, changes?: Array<any>, excludeUnserializable?: boolean): boolean;
+        }
+        export interface IPrefabDepInfo {
+            obj: any;
+            prop: string;
+            url: string;
+            absolute: boolean;
+        }
+
+        export interface IPrefabI18nString {
+            obj: any;
+            prop: string;
+            text: string;
+        }
+
+        export interface IPrefabAnalyseOptions {
+            getDeps?: boolean;
+            getI18nStrings?: boolean;
+        }
+
+        export interface IPrefabAnalyseResult<ProvidedOptions extends IPrefabAnalyseOptions> {
+            deps: Array<IPrefabDepInfo> | (ProvidedOptions['getDeps'] extends false ? never : undefined);
+            i18nStrings: Array<IPrefabI18nString> | (ProvidedOptions['getI18nStrings'] extends false ? never : undefined);
+        }
+
+        export interface IPrefabDataAnalyzer {
+            analyse<T extends IPrefabAnalyseOptions>(asset: IAssetInfo, options: T): Promise<IPrefabAnalyseResult<T>>;
+            analyseRaw<T extends IPrefabAnalyseOptions>(sourceData: any, isWidget: boolean, options: T): Promise<IPrefabAnalyseResult<T>>;
+            getContent(asset: IAssetInfo): Promise<any>;
         }
 
         export interface IMyScene extends gui.EventDispatcher {
@@ -215,6 +275,123 @@ declare global {
             readonly owner: IMyNode;
             hideFlags: number;
             enabled: boolean;
+        }
+        export interface IRectangle {
+            width: number;
+            height: number;
+            x: number;
+            y: number;
+            allowRotation?: boolean;
+            index?: number;
+            tag?: number;
+            data?: any;
+
+            oversized?: boolean;
+            rotated?: boolean;
+        }
+
+        export interface IBin<T extends IRectangle> {
+            width: number;
+            height: number;
+            freeRects: IRectangle[];
+            rects: T[];
+            tag?: number;
+        }
+
+        export enum MaxRectsPackingLogic {
+            MaxArea = 0,
+            MaxEdge = 1
+        }
+
+        /**
+         * Options for MaxRect Packer
+         * @property {boolean} smart Smart sizing packer (default is true)
+         * @property {boolean} pot use power of 2 sizing (default is true)
+         * @property {boolean} square use square size (default is false)
+         * @property {boolean} allowRotation allow rotation packing (default is false)
+         * @property {boolean} tag allow auto grouping based on `rect.tag` (default is false)
+         * @property {boolean} exclusiveTag tagged rects will have dependent bin, if set to `false`, packer will try to put tag rects into the same bin (default is true)
+         * @property {boolean} border atlas edge spacing (default is 0)
+         * @property {MaxRectsPackingLogic} logic MAX_AREA or MAX_EDGE based sorting logic (default is MAX_EDGE)
+         * @export
+         * @interface Option
+         */
+        export interface IMaxRectsPackingOptions {
+            smart?: boolean,
+            pot?: boolean,
+            square?: boolean,
+            allowRotation?: boolean,
+            tag?: boolean,
+            exclusiveTag?: boolean,
+            border?: number,
+            logic?: MaxRectsPackingLogic
+        }
+
+        export interface IMaxRectsPacker<T extends IRectangle> {
+            readonly bins: IBin<T>[];
+
+            /**
+             * Add a bin/rectangle object with data to packer
+             * @param {number} width of the input bin/rectangle
+             * @param {number} height of the input bin/rectangle
+             * @param {*} data custom data object
+             */
+            add(width: number, height: number, data: any): T;
+            /**
+             * Add a bin/rectangle object extends IRectangle to packer
+             * @template T Generic type extends IRectangle interface
+             * @param {T} rect the rect object add to the packer bin
+             */
+            add(rect: T): T;
+            /**
+             * Add an Array of bins/rectangles to the packer.
+             *
+             * `Javascript`: Any object has property: { width, height, ... } is accepted.
+             *
+             * `Typescript`: object shall extends `MaxrectsPacker.IRectangle`.
+             *
+             * note: object has `hash` property will have more stable packing result
+             *
+             * @param {T[]} rects Array of bin/rectangles
+             */
+            addArray(rects: T[]): void;
+            /**
+             * Reset entire packer to initial states, keep settings
+             */
+            reset(): void;
+            /**
+             * Stop adding new element to the current bin and return a new bin.
+             *
+             * note: After calling `next()` all elements will no longer added to previous bins.
+             *
+             * @returns {number}
+             */
+            next(): number;
+
+            /**
+             * Return current functioning bin index, perior to this wont accept any new elements
+             *
+             * @readonly
+             * @type {number}
+             */
+            get currentBinIndex(): number;
+
+            /**
+             * Return all rectangles in this packer
+             *
+             * @readonly
+             * @type {T[]}
+             */
+            get rects(): T[];
+        }
+        export interface ILiveServer {
+            readonly host: string;
+            readonly port: number;
+            serveAnywhere(webRootPath: string): Promise<string>;
+        }
+        export namespace II18nUtils {
+            function collectStrings(defAssetId: string): Promise<void>;
+            function syncTranslations(defAssetId: string): Promise<void>;
         }
         export interface IHierarchyWriterOptions {
             getNodeRef?: (node: Laya.Node) => string | string[];
@@ -516,11 +693,18 @@ declare global {
             function drawMesh(mesh: Laya.Mesh, subMeshIndex: number, position?: Laya.Vector3, rotation?: Laya.Quaternion, scale?: Laya.Vector3, color?: Laya.Color): void;
 
         }
+        export interface IGraphicsEditingInfo {
+            node: IMyNode;
+            comp: IMyComponent;
+            propPath: Array<string>;
+        }
+
         export namespace IGizmos2D {
-            var showPhysicsToos: boolean;
-            var allowObjectAction: boolean;
+            const editingGraphics: Readonly<IGraphicsEditingInfo>;
+            const allowObjectAction: boolean;
 
             function getManager(node: IMyNode): IGizmosManager;
+            function switchEditingGraphics(node: IMyNode, comp?: IMyComponent, propPath?: Array<string>): void;
         }
 
         export interface StrokeData {
@@ -542,7 +726,6 @@ declare global {
 
         export interface IGizmosManager {
             readonly owner: IMyNode;
-            locked: boolean;
 
             createRect(width: number, height: number): IGizmoRect;
             createCircle(radius: number): IGizmoCircle;
@@ -579,6 +762,9 @@ declare global {
 
             get direction(): number;
             set direction(value: number);
+
+            get cursor(): string;
+            set cursor(value: string);
 
             setLocalPos(x: number, y: number): this;
             setPos(x: number, y: number): this;
@@ -720,6 +906,7 @@ declare global {
             maxHeight: number;
             padding: number;
             pot: boolean;
+            scale: number;
         }
 
         export interface ITextureInAutoAtlasInfo {
@@ -782,16 +969,23 @@ declare global {
             readonly assetsPath: string;
             readonly webRootPath: string;
             readonly unpackedWebRootPath: string;
+
             readonly isPackaged: boolean;
             readonly isForeground: boolean;
             readonly started: boolean;
+
             readonly ipc: IIpc;
             readonly assetMgr: IAssetManager;
             readonly liveServer: ILiveServer;
+            readonly codeBuilder: ICodeBuilder;
             readonly sceneManager: ISceneManager;
             readonly resourceManager: IResourceManager;
+            readonly navigationManager: INavigationManager;
             readonly port: IMyMessagePort;
             readonly scene: IGameScene;
+            readonly uiRoot: Laya.Sprite;
+            readonly buildManager: IBuildManager;
+
             readonly onUpdate: IDelegate<() => void>;
             readonly onAppActivate: IDelegate<() => void>;
 
@@ -808,6 +1002,7 @@ declare global {
             alert(msg: string, type?: "none" | "info" | "error" | "question" | "warning"): Promise<void>;
 
             openDevTools(): void;
+            clearConsoleMessage(group?: string): void;
 
             invalidateFrame(): void;
         }
@@ -852,6 +1047,63 @@ declare global {
 
             function writeTexture(tex: Laya.Texture | Laya.BaseTexture, filter: number): ArrayBuffer;
         }
+        export interface IJsPluginInfo {
+            asset: IAssetInfo;
+            type: number;
+            allowLoadInEditor: boolean;
+            allowLoadInRuntime: boolean;
+            autoLoad: boolean;
+            scriptElement: HTMLElement;
+            loadOrder: number;
+            minifyOnPublish: boolean;
+        }
+
+        export interface IScriptBundleDefinition {
+            enabled: boolean;
+            asset: IAssetInfo;
+            globalName: string;
+            allowLoadInEditor: boolean;
+            allowLoadInRuntime: boolean;
+            autoLoad: boolean;
+            loadOrder: number;
+            minifyOnPublish: boolean;
+            entries: string[];
+            includeAllFiles: boolean;
+        }
+
+        export interface IClassIdTransformer {
+            (classId: string): string;
+        }
+
+        export enum RebuildReason {
+            Code = 1,
+            JsPlugin = 2,
+            BundleDef = 4
+        }
+
+        export interface ICodeBuildOptions {
+            minify?: boolean;
+            sourcemap?: boolean;
+            classIdTransformer?: IClassIdTransformer;
+            logger?: ILogger;
+        }
+
+        export interface ICodeBuilder {
+            readonly busy: boolean;
+            get started(): boolean;
+
+            start(): Promise<void>;
+            rebuild(reason?: number): void;
+            flushChanges(): Promise<void>;
+
+            getJsPlugins(): ReadonlyMap<string, IJsPluginInfo>;
+            getScriptBundleDefs(): ReadonlyMap<string, IScriptBundleDefinition>;
+
+            findFunction(name: string): Function;
+
+            buildRelease(outDir: string, outputAssets: { has(asset: IAssetInfo): boolean }, options?: ICodeBuildOptions): Promise<Array<string>>;
+            buildScriptBundle(defAsset: IAssetInfo, outDir: string, options?: ICodeBuildOptions): Promise<Array<string>>;
+        }
         export interface IBuildTask {
             readonly name: string;
             readonly platform: string;
@@ -867,6 +1119,7 @@ declare global {
             readonly logger: ILogger;
 
             readonly status: BuildTaskStatus;
+            waitForCompletion(): Promise<BuildTaskStatus>;
             terminate(success: boolean): void;
 
             mergeConfigFile(filePath: string, overrides?: any): void;
@@ -1004,22 +1257,6 @@ declare global {
              */
             subpackageGameJsName: string;
         }
-        export interface ILiveServer {
-            readonly host: string;
-            readonly port: number;
-            serveAnywhere(webRootPath: string): Promise<string>;
-        }
-
-        export interface IClassIdTransformer {
-            (classId: string): string;
-        }
-
-        export interface ICodeBuildOptions {
-            minify?: boolean;
-            sourcemap?: boolean;
-            classIdTransformer?: IClassIdTransformer
-        }
-
         export interface IAssetProcessor {
             onPreprocessImage?(assetImporter: IImageAssetImporter): void | Promise<void>;
             onPreprocessAsset?(assetImporter: IAssetImporter): void | Promise<void>;
@@ -1030,11 +1267,15 @@ declare global {
         export interface IAssetManager {
             readonly allAssets: Readonly<Record<string, IAssetInfo>>;
             readonly customAssetFilters: Record<string, IAssetFilter>;
+            readonly onAssetChanged: IDelegate<(asset: IAssetInfo, flag: AssetChangedFlag) => void>;
 
-            getAllAssetsInDir(folder: IAssetInfo, types?: Array<AssetType>): Array<IAssetInfo>;
+            getAllAssetsInDir(folderAsset: IAssetInfo, types?: Array<AssetType>, customFilter?: string): Array<IAssetInfo>;
 
             readonly resourceDirs: Readonly<Set<IAssetInfo>>;
-            getAllAssetsInResourceDir(): Array<IAssetInfo>;
+            getAllAssetsInResourceDir(types?: Array<AssetType>, customFilter?: string): Array<IAssetInfo>;
+
+            getChildrenAssets(folderAsset: IAssetInfo, types: Array<AssetType>, matchSubType?: boolean, customFilter?: string): IAssetInfo[];
+            findAssets(keyword: string, types?: Array<AssetType>, matchSubType?: boolean, customFilter?: string, limit?: number): IAssetInfo[];
 
             getAsset(idOrPath: string, allowResourcesSearch?: boolean): IAssetInfo;
             getAssetsByType(types?: Array<AssetType>, matchSubType?: boolean): Array<IAssetInfo>;
@@ -1043,7 +1284,13 @@ declare global {
             createFolderAsset(folderPath: string): IAssetInfo;
 
             getShader(shaderName: string): IAssetInfo;
+            getAllShaders(): Record<string, IAssetInfo>;
             setAssetIsShader(asset: IAssetInfo, shaderName: string): void;
+
+            getI18nSettings(id: string): IAssetInfo;
+            getAllI18nSettings(forGUI?: boolean): Record<string, IAssetInfo>;
+
+            getAssetTypeByFileExt(ext: string): AssetType[];
 
             setMetaData(asset: IAssetInfo, data: any): Promise<void>;
 
@@ -1053,6 +1300,7 @@ declare global {
             getPrefabSourcePath(asset: IAssetInfo): string;
 
             importAsset(asset: IAssetInfo): void;
+            unpackModel(asset: IAssetInfo): Promise<void>;
             flushChanges(): Promise<void>;
         }
         export interface IAssetImporter {
@@ -1110,17 +1358,11 @@ declare global {
 
             /** 标题。如果不提供，则使用name。 */
             caption?: string;
-            /** 本地语言的标题。 */
-            localizedCaption?: string;
-            /** 本地语言的标题，但只有激活翻译引擎符号才生效。*/
-            $localizedCaption?: string;
             /** 可以设定是否隐藏标题 */
             captionDisplay?: "normal" | "hidden" | "none";
 
             /** 提示文字 */
             tips?: string;
-            /** 本地语言的提示文字。 */
-            localizedTips?: string;
 
             /** 属性栏目。为多个属性设置相同的值，可以将它们显示在同一个Inspector栏目内。*/
             catalog?: string;
@@ -1128,8 +1370,6 @@ declare global {
             catalogHelp?: string;
             /* 栏目标题。不提供则直接使用栏目名称。 */
             catalogCaption?: string;
-            /* 本地语言的栏目标题 */
-            localizedCatalogCaption?: string;
             /* 栏目的显示顺序，数值越小显示在前面。不提供则按属性出现的顺序。*/
             catalogOrder?: number;
 
@@ -1188,8 +1428,8 @@ declare global {
             submitOnTyping?: boolean;
             /** 如果是文本类型，是输入文本的提示信息；如果是布尔类型，是多选框的标题。 */
             prompt?: string;
-            /** 本地语言的输入文本的提示信息 */
-            localizedPrompt?: string;
+            /** 字符串类型适用，表示文本支持多国语言输出 */
+            multiLanguage?: boolean;
 
             /** 提供数据源显示一个下拉框去改变属性的值 */
             enumSource?: FEnumDescriptor;
@@ -1299,10 +1539,6 @@ declare global {
             help?: string;
             /** 标题。如果不提供，则使用name。 */
             caption?: string;
-            /** 本地语言的标题。 */
-            localizedCaption?: string;
-            /** 本地语言的标题，但只有激活翻译引擎符号才生效。*/
-            $localizedCaption?: string;
             /** 添加到组件菜单。 */
             menu?: string;
             /** 图标。*/
@@ -1324,6 +1560,8 @@ declare global {
             properties: Array<FPropertyDescriptor>;
             /** 编辑这个类实例的控件 */
             inspector?: string;
+            /** 是否引擎符号。如果是引擎符号，则不勾选翻译引擎符号时，不会应用本地化翻译。*/
+            isEngineSymbol?: boolean;
 
             /** 对资源类型的属性适用。多个资源类型用逗号分隔，例如“Image,Audio"。可用值参考editor/public/IAssetInfo.ts。 */
             assetTypeFilter?: string;
@@ -1343,7 +1581,17 @@ declare global {
             catalogBarStyle?: CatalogBarStyle;
 
             /** 额外的选项 */
-            options?: any;
+            options?: Record<string, any>;
+        }
+
+        export interface IPropertyButtonInfo {
+            name?: string;
+            caption?: string;
+            tips?: string;
+            event?: string;
+            runScript?: string;
+            runNodeScript?: string;
+            sceneHotkey?: string;
         }
         export enum AssetType {
             Unknown = 0,
@@ -1389,6 +1637,7 @@ declare global {
             Texture2DArray,
 
             SVGImage,
+            I18nSettings
         }
 
         export enum AssetFlags {
@@ -1411,10 +1660,10 @@ declare global {
 
         export enum AssetScriptType {
             None = 0,
-            Engine = 1,
+            Runtime = 1,
             Scene = 2,
             Editor = 4,
-            Plugin = 8
+            Javascript = 8
         }
 
         export interface IAssetInfo {
@@ -1424,13 +1673,11 @@ declare global {
             file: string;
             ext: string;
             type: AssetType;
-            icon: string;
-            openedIcon?: string;
             ver: number;
             parentId: string;
             hasChild?: boolean;
             flags: number;
-            scriptType: AssetScriptType,
+            scriptType: AssetScriptType;
             children?: ReadonlyArray<IAssetInfo>;
         }
 
@@ -1512,6 +1759,8 @@ declare global {
 
         export interface IMyMessagePort {
             readonly onClose: IDelegate<() => void>;
+            logHandlerMissing: boolean;
+
             start(): void;
             close(): void;
 
@@ -1545,7 +1794,7 @@ declare global {
 
             formatOutpathArg(path: string): string;
 
-            formatInFileArg(path: string, tempPath?: string): string;
+            formatInFileArg(path: string, tempPath?: string): Promise<string>;
             openCodeEditor(filePath: string): void;
 
             openBrowser(url: string): void;
@@ -1576,6 +1825,7 @@ declare global {
             downloadFile(url: string, localPath: string, progress?: (receivedLength: number, contentLength: number) => void): Promise<void>;
             getIPAddress(): string;
         }
+
         export interface IObjectUtils {
 
             /**
@@ -1628,7 +1878,7 @@ declare global {
 
         export const ShaderTypePrefix = "Shader.";
         export type DefaultValueComparator = (value: any) => boolean;
-        export type TypeMenuItem = { type: FTypeDescriptor, label: string, icon: string, order: number };
+        export type TypeMenuItem = { type: FTypeDescriptor, assetId?: string, label: string, icon: string, order: number };
         export type PropertyTestFunctions = { hiddenTest: Function, readonlyTest: Function, validator: Function, requiredTest: Function };
 
         export interface ITypeRegistry {
@@ -1638,9 +1888,6 @@ declare global {
 
             nodeTypeName: string;
             componentTypeName: string;
-
-            localizedCaptions: boolean;
-            localizedEngineSymbols: boolean;
 
             addTypes(types: Array<FTypeDescriptor>): void;
             removeTypes(names: Array<string>): void;
@@ -1660,7 +1907,8 @@ declare global {
 
             getTypeCaption(type: string | FTypeDescriptor, noSplit?: boolean): string;
             getTypeIcon(type: string | FTypeDescriptor): string;
-            getPropCaption(prop: FPropertyDescriptor): string;
+            getPropCaption(type: FTypeDescriptor, prop: FPropertyDescriptor): string;
+            getPropTips(type: FTypeDescriptor, prop: FPropertyDescriptor): string;
             getNodeBaseType(type: string): string;
 
             getAllPropsOfType(type: FTypeDescriptor): Readonly<Record<string, FPropertyDescriptor>>;
@@ -1684,6 +1932,9 @@ declare global {
 
             writeJson(filePath: string, content: any, space?: string | number): void;
             writeJsonAsync(filePath: string, content: any, space?: string | number): Promise<void>;
+
+            readFirstNBytes(filePath: string, bytesCount: number): Promise<Buffer>;
+
             isObject(obj: any): boolean;
 
             parseFeatures(features: string): Record<string, string>;
@@ -1692,6 +1943,17 @@ declare global {
 
             splitCamelCase(str: string): string;
 
+            getTempBaseDir(): string;
+
+            mkTempDir(subDir?: string): string;
+
+            joinPaths(...paths: string[]): string;
+
+            copyFile(src: string, dest: string): Promise<void>;
+
+            rmDirSync(path: string): void;
+
+            rmSync(path: string): void;
 
             /**
              * source是一个文件夹路径，将source文件夹内的内容全部拷贝到destDir里。
@@ -1727,21 +1989,22 @@ declare global {
 
             calculate(str: string): number;
 
-            getProjectTempPath(): string;
-
             simplifyHtml(source: string, ignoreWhiteSpace?: boolean): string;
 
-            deleteFiles(folder: string, ignores?: Array<string>): Promise<void>;
+            deleteFiles(folder: string, ignores?: Iterable<string>): Promise<void>;
 
-            addToSet(set: Set<any>, elements: Array<any>): void;
+            addToSet(set: Set<any>, elements: Iterable<any>): void;
 
             formatBytes(bytes: number): string;
             getTimeAgo(time: number, includeTime?: boolean): string;
+
+            runTasks<T, T2>(datas: Array<T2> | Iterable<T2> & { size?: number }, numParallelTasks: number | ((numTasks: number) => boolean), taskFunc: (data: T2, index: number) => T | Promise<T>): Promise<T[]>;
+            runAllTasks<T, T2>(datas: Array<T2> | Iterable<T2> & { size?: number }, numParallelTasks: number | ((numTasks: number) => boolean), taskFunc: (data: T2, index: number) => T | Promise<T>): Promise<PromiseSettledResult<T>[]>;
+            printPromiseResult(rets: Iterable<PromiseSettledResult<any>>): void;
         }
         export interface IUUIDUtils {
             genUUID(): string;
-            genShortId1(): string;
-            genShortId2(): string;
+            genShortId(size?: number): string;
             isUUID(str: string): boolean;
 
             compressUUID(uuid: string): string;
@@ -1749,8 +2012,9 @@ declare global {
         }
         export interface IZipFileW {
             excludeNames: Array<string>;
-            addFile(realPath: string): void;
-            addFolder(realPath: string, pattern?: string, ignore?: string[]): void;
+            addFile(realPath: string, entryPath?: string): void;
+            addFolder(realPath: string, entryPath?: string, pattern?: string, ignore?: string[]): void;
+            addBuffer(entryPath: string, buf: string | NodeJS.ArrayBufferView | Iterable<string | NodeJS.ArrayBufferView> | AsyncIterable<string | NodeJS.ArrayBufferView>, encoding?: string): void;
             save(filePath: string, progressCallback?: (progress: number) => void, abortToken?: IAbortToken): Promise<void>;
         }
 
@@ -1831,7 +2095,17 @@ declare global {
         const HierarchyWriter: typeof IHierarchyWriter;
         const SerializeUtil: typeof ISerializeUtil;
         const ExportAssetTool: new (options?: IExportAssetToolOptions) => IExportAssetTool;
+        const PrefabDataAnalyzer: new () => IPrefabDataAnalyzer;
+        const MaxRectsPacker: new <T extends IRectangle>(width: number, height: number, padding: number, options?: IMaxRectsPackingOptions) => IMaxRectsPacker<T>;
+        const TexturePacker: typeof ITexturePacker;
+        const i18nUtils: typeof II18nUtils;
         const BuildTask: typeof BuildTaskStatic;
+        const PropsKey: Symbol;
+
+        function require(id: string): any;
+
+        function onLoad(target: Object, propertyName: string): void;
+        function onUnload(target: Object, propertyName: string): void;
 
         function customEditor(target: Node | Component): Function;
         /**
@@ -1848,5 +2122,4 @@ declare global {
     }
 
     var EditorEnv: IEditorEnv.IEditorEnvSingleton;
-    var i18n: IEditorEnv.ILanguageModule;
 }

@@ -3,8 +3,9 @@ declare global {
     export namespace IEditor {
         export interface IZipFileW {
             excludeNames: Array<string>;
-            addFile(realPath: string): void;
-            addFolder(realPath: string, pattern?: string, ignore?: string[]): void;
+            addFile(realPath: string, entryPath?: string): void;
+            addFolder(realPath: string, entryPath?: string, pattern?: string, ignore?: string[]): void;
+            addBuffer(entryPath: string, buf: string | NodeJS.ArrayBufferView | Iterable<string | NodeJS.ArrayBufferView> | AsyncIterable<string | NodeJS.ArrayBufferView>, encoding?: string): void;
             save(filePath: string, progressCallback?: (progress: number) => void, abortToken?: IAbortToken): Promise<void>;
         }
 
@@ -47,6 +48,9 @@ declare global {
 
             writeJson(filePath: string, content: any, space?: string | number): void;
             writeJsonAsync(filePath: string, content: any, space?: string | number): Promise<void>;
+
+            readFirstNBytes(filePath: string, bytesCount: number): Promise<Buffer>;
+
             isObject(obj: any): boolean;
 
             parseFeatures(features: string): Record<string, string>;
@@ -55,6 +59,17 @@ declare global {
 
             splitCamelCase(str: string): string;
 
+            getTempBaseDir(): string;
+
+            mkTempDir(subDir?: string): string;
+
+            joinPaths(...paths: string[]): string;
+
+            copyFile(src: string, dest: string): Promise<void>;
+
+            rmDirSync(path: string): void;
+
+            rmSync(path: string): void;
 
             /**
              * source是一个文件夹路径，将source文件夹内的内容全部拷贝到destDir里。
@@ -90,21 +105,22 @@ declare global {
 
             calculate(str: string): number;
 
-            getProjectTempPath(): string;
-
             simplifyHtml(source: string, ignoreWhiteSpace?: boolean): string;
 
-            deleteFiles(folder: string, ignores?: Array<string>): Promise<void>;
+            deleteFiles(folder: string, ignores?: Iterable<string>): Promise<void>;
 
-            addToSet(set: Set<any>, elements: Array<any>): void;
+            addToSet(set: Set<any>, elements: Iterable<any>): void;
 
             formatBytes(bytes: number): string;
             getTimeAgo(time: number, includeTime?: boolean): string;
+
+            runTasks<T, T2>(datas: Array<T2> | Iterable<T2> & { size?: number }, numParallelTasks: number | ((numTasks: number) => boolean), taskFunc: (data: T2, index: number) => T | Promise<T>): Promise<T[]>;
+            runAllTasks<T, T2>(datas: Array<T2> | Iterable<T2> & { size?: number }, numParallelTasks: number | ((numTasks: number) => boolean), taskFunc: (data: T2, index: number) => T | Promise<T>): Promise<PromiseSettledResult<T>[]>;
+            printPromiseResult(rets: Iterable<PromiseSettledResult<any>>): void;
         }
         export interface IUUIDUtils {
             genUUID(): string;
-            genShortId1(): string;
-            genShortId2(): string;
+            genShortId(size?: number): string;
             isUUID(str: string): boolean;
 
             compressUUID(uuid: string): string;
@@ -112,7 +128,7 @@ declare global {
         }
         export const ShaderTypePrefix = "Shader.";
         export type DefaultValueComparator = (value: any) => boolean;
-        export type TypeMenuItem = { type: FTypeDescriptor, label: string, icon: string, order: number };
+        export type TypeMenuItem = { type: FTypeDescriptor, assetId?: string, label: string, icon: string, order: number };
         export type PropertyTestFunctions = { hiddenTest: Function, readonlyTest: Function, validator: Function, requiredTest: Function };
 
         export interface ITypeRegistry {
@@ -122,9 +138,6 @@ declare global {
 
             nodeTypeName: string;
             componentTypeName: string;
-
-            localizedCaptions: boolean;
-            localizedEngineSymbols: boolean;
 
             addTypes(types: Array<FTypeDescriptor>): void;
             removeTypes(names: Array<string>): void;
@@ -144,7 +157,8 @@ declare global {
 
             getTypeCaption(type: string | FTypeDescriptor, noSplit?: boolean): string;
             getTypeIcon(type: string | FTypeDescriptor): string;
-            getPropCaption(prop: FPropertyDescriptor): string;
+            getPropCaption(type: FTypeDescriptor, prop: FPropertyDescriptor): string;
+            getPropTips(type: FTypeDescriptor, prop: FPropertyDescriptor): string;
             getNodeBaseType(type: string): string;
 
             getAllPropsOfType(type: FTypeDescriptor): Readonly<Record<string, FPropertyDescriptor>>;
@@ -183,13 +197,17 @@ declare global {
         }
 
         export interface ISelectResourceDialog extends IDialog {
-            show(popupOwner?: gui.Widget, initialValue?: string, assetTypeFilter?: AssetType[], allowInternalAssets?: boolean): Promise<void>;
+            show(popupOwner?: gui.Widget, initialValue?: string, assetTypeFilter?: AssetType[], allowInternalAssets?: boolean, customFilter?: string): Promise<void>;
+        }
+        export interface ISelectNodeDialog extends IDialog {
+            show(popupOwner: gui.Widget, typeName: string): Promise<void>;
         }
         export interface ISceneManager extends gui.EventDispatcher {
             readonly sceneView: IWebview;
             readonly onNodeChanged: IDelegate<(node: IMyNode, datapath: ReadonlyArray<string>, value: any, oldValue: any) => void>;
 
             readonly activeScene: IMyScene;
+            readonly sceneReady: boolean;
 
             openScene(sceneId: string, assetId: string): Promise<void>;
             closeScene(sceneId: string): Promise<void>;
@@ -228,6 +246,18 @@ declare global {
             webRootPath: string;
             unpackedWebRootPath: string;
             isPackaged: boolean;
+            serverURL: string;
+            cliMode: boolean;
+        }
+
+        export interface IRendererStartupAction {
+            openFile?: string;
+            openURL?: string;
+            runScript?: string;
+            [index: string]: any;
+        }
+        export interface IQRCodeDialog extends IDialog {
+            show(popupOwner: gui.Widget, url: string): Promise<void>;
         }
         export interface IPropertyFieldCreateResult {
             ui: gui.Widget;
@@ -258,11 +288,22 @@ declare global {
             getStatus(name: string): any;
             setStatus(name: string, value: any): void;
 
+            displayError(msg: string): void;
+
             refresh(): void;
         }
 
         export interface IProjectPanel extends IEditorPanel {
             select(assetId: string, setFocus?: boolean, disableEvent?: boolean): void;
+            getSelectedResource(): IAssetInfo;
+            getSelectedResources(result?: Array<IAssetInfo>): Array<IAssetInfo>;
+            getSelectedFolder(): IAssetInfo;
+            getExpandedFolders(result?: Array<string>): Array<string>;
+            setExpanedFolders(arr: Array<string>): Promise<void>;
+            expand(asset: IAssetInfo): void;
+            rename(asset: IAssetInfo): Promise<void>;
+            addNew(folder: IAssetInfo, fileName: string, callback: (fileName: string) => void): void;
+            createAsset(fileName: string, templateName: string, assetPath?: string, args?: Record<string, string>): Promise<void>;
         }
         export interface IPanelManagerOptions {
             filePath: string,
@@ -289,9 +330,9 @@ declare global {
 
             start(): void;
             dispose(): void;
-            loadLayout(): void;
-            resetLayout(): void;
-            saveLayout(): void;
+            saveLayout(filePath?: string): Promise<void>;
+            loadLayout(filePath?: string): Promise<void>;
+            resetLayout(): Promise<void>;
             switchGroup(groupName: string): void;
 
             sendMessage(panelId: string, cmd: string, ...args: Array<any>): Promise<any>;
@@ -388,7 +429,7 @@ declare global {
 
             formatOutpathArg(path: string): string;
 
-            formatInFileArg(path: string, tempPath?: string): string;
+            formatInFileArg(path: string, tempPath?: string): Promise<string>;
             openCodeEditor(filePath: string): void;
 
             openBrowser(url: string): void;
@@ -515,6 +556,9 @@ declare global {
             getPrefabOverrides(key?: string): Array<Array<string>>;
 
             readonly isRoot: boolean;
+            readonly isTopPrefab: boolean;
+            readonly inPrefab: boolean;
+            hasFeature(feature: number): boolean;
         }
 
         export interface IMyComponent {
@@ -533,6 +577,8 @@ declare global {
 
         export interface IMyMessagePort {
             readonly onClose: IDelegate<() => void>;
+            logHandlerMissing: boolean;
+
             start(): void;
             close(): void;
 
@@ -765,7 +811,7 @@ declare global {
             getSelectedNode(): IMyNode;
             getSelectedNodes(): Array<IMyNode>;
             getExpandedNodes(): Array<string>;
-            setExpanedNodes(arr: Array<string>): void;
+            setExpandedNodes(arr: Array<string>): void;
             expand(sceneNode: IMyNode): void;
             highlight(sceneNode: IMyNode): void;
         }
@@ -860,6 +906,8 @@ declare global {
             readonly isPackaged: boolean;
             readonly isForeground: boolean;
             readonly moduleName: string;
+            readonly serverURL: string;
+            readonly cliMode: boolean;
 
             readonly typeRegistry: ITypeRegistry;
             readonly ipc: IIpc;
@@ -893,7 +941,7 @@ declare global {
 
             getDialog<T extends IDialog>(cls: gui.Constructor<T>): Promise<T>;
             getDialogSync<T extends IDialog>(cls: gui.Constructor<T>): T;
-            showDialog<T extends IDialog>(cls: gui.Constructor<T>, ...showArgs: Parameters<T['show']>): Promise<T>;
+            showDialog<T extends IDialog>(cls: gui.Constructor<T>, popupOwner?: gui.Widget, ...args: any[]): Promise<T>;
 
             getMenuById(id: string): IMenu;
 
@@ -904,10 +952,14 @@ declare global {
             shutdown(): void;
 
             showMessageBox(options: MessageBoxOptions): Promise<MessageBoxReturnValue>;
+            showOpenDialog(title: string, extensionTypeName: string, fileExtension: string, defaultPath?: string): Promise<OpenDialogReturnValue>;
             showOpenDialog(options: OpenDialogOptions): Promise<OpenDialogReturnValue>;
+            showSaveDialog(title: string, extensionTypeName: string, fileExtension: string, defaultPath?: string): Promise<SaveDialogReturnValue>;
             showSaveDialog(options: SaveDialogOptions): Promise<SaveDialogReturnValue>;
+
             alert(msg: string, type?: "none" | "info" | "error" | "question" | "warning"): Promise<void>;
             confirm(msg: string): Promise<boolean>;
+            prompt(title?: string, text?: string, multiline?: boolean): Promise<string>;
 
             showLoading(): Promise<{ label: gui.Widget, pb: gui.ProgressBar }>;
 
@@ -916,10 +968,12 @@ declare global {
             checkUpdate(manually?: boolean): void;
             openDevTools(mode?: string, view?: string): void;
             setWindowTitle(title: string): void;
+            moveWindowTop(): void;
             reload(): void;
             queryToReload(msg?: string): Promise<void>;
             undo(): void;
             redo(): void;
+            clearConsoleMessage(group?: string): void;
 
             getHistoryDocuments(moduleName?: string): { files: Array<string>, active: number };
             setHistoryDocuments(files: Array<string>, active: number): Promise<void>;
@@ -930,9 +984,9 @@ declare global {
         }
 
         export interface IEditorFrontEnd {
-            onBeginPlay(toOpenFile: string): Promise<void>;
+            onBeginPlay(startupAction: IRendererStartupAction): Promise<void>;
             onBeforeEndPlay?(): Promise<boolean>;
-            onEndPlay(): Promise<void>;
+            onEndPlay(passive: boolean): Promise<void>;
             onOpenFile?(filePath: string): void;
         }
         export interface IPanelOptions {
@@ -1289,6 +1343,8 @@ declare global {
             transformDataByType(obj: any, typeDef: FTypeDescriptor): any;
 
             formatDataByType(data: any, typeDef: FTypeDescriptor): any;
+
+            propTypeEquals(type1: FPropertyType, type2: FPropertyType): boolean;
         }
         export interface IDataInspector {
             readonly id: string;
@@ -1309,7 +1365,6 @@ declare global {
 
             validateTypes(): boolean;
             runValidators(parentField?: IPropertyField): boolean;
-            showErrorTips(field: IPropertyField, str: string): void;
             scrollTo(field: IPropertyField): void;
 
             dispose(): void;
@@ -1338,6 +1393,9 @@ declare global {
             untrace(obj: any): void;
 
             getUndoTargets(): Array<any>;
+
+            runInSingleBatch(callback: () => Promise<void>): Promise<void>;
+            runUntrace(callback: () => void): void;
         }
         export interface ICryptoUtils {
             createHash(data: string): string;
@@ -1444,6 +1502,7 @@ declare global {
             Texture2DArray,
 
             SVGImage,
+            I18nSettings
         }
 
         export enum AssetFlags {
@@ -1466,10 +1525,10 @@ declare global {
 
         export enum AssetScriptType {
             None = 0,
-            Engine = 1,
+            Runtime = 1,
             Scene = 2,
             Editor = 4,
-            Plugin = 8
+            Javascript = 8
         }
 
         export interface IAssetInfo {
@@ -1479,13 +1538,11 @@ declare global {
             file: string;
             ext: string;
             type: AssetType;
-            icon: string;
-            openedIcon?: string;
             ver: number;
             parentId: string;
             hasChild?: boolean;
             flags: number;
-            scriptType: AssetScriptType,
+            scriptType: AssetScriptType;
             children?: ReadonlyArray<IAssetInfo>;
         }
 
@@ -1519,13 +1576,17 @@ declare global {
             getFullPath(asset: IAssetInfo): string;
             getURL(asset: IAssetInfo): string;
             toFullPath(assetFile: string): string;
-            getInitials(asset: IAssetInfo): string;
+            toURL(assetFile: string): string;
+
+            getAssetInitials(asset: IAssetInfo): string;
+            getAssetIcon(asset: IAssetInfo, opened?: boolean): string;
+            getFileIcon(ext: string): string;
+            getFolderIcon(name: string): [string, string];
 
             reimport(assets: Array<IAssetInfo>): void;
             unpack(assets: Array<IAssetInfo>): void;
 
             search(keyword: string, types?: Array<AssetType>, matchSubType?: boolean, customFilter?: string): Promise<Array<IAssetInfo>>;
-            getIdsOfType(type: AssetType): Promise<Array<string>>;
             rename(assetId: string, newName: string): Promise<number>;
             move(sourceAssetIds: string[], targetFolderId: string, conflictResolution?: "keepBoth" | "replace"): Promise<void>;
             copy(sourceAssetIds: string[], targetFolderId: string, conflictResolution?: "keepBoth" | "replace"): Promise<void>;
@@ -1533,6 +1594,10 @@ declare global {
 
             createTempAsset(fileName: string): Promise<IAssetInfo>;
             refreshFolder(folderAsset: IAssetInfo): void;
+
+            syncI18nSettings(): Promise<void>;
+
+            getAssetTypeByFileExt(ext: string): AssetType[];
         }
         /**
          * 登录用户的信息
@@ -1558,6 +1623,8 @@ declare global {
             readonly userInfo: IUserInfo;
             //用于商店验证的token
             readonly storeToken: string;
+
+            login(): Promise<void>;
         }
         export interface IAbortToken {
             readonly aborted: boolean;
@@ -1593,17 +1660,11 @@ declare global {
 
             /** 标题。如果不提供，则使用name。 */
             caption?: string;
-            /** 本地语言的标题。 */
-            localizedCaption?: string;
-            /** 本地语言的标题，但只有激活翻译引擎符号才生效。*/
-            $localizedCaption?: string;
             /** 可以设定是否隐藏标题 */
             captionDisplay?: "normal" | "hidden" | "none";
 
             /** 提示文字 */
             tips?: string;
-            /** 本地语言的提示文字。 */
-            localizedTips?: string;
 
             /** 属性栏目。为多个属性设置相同的值，可以将它们显示在同一个Inspector栏目内。*/
             catalog?: string;
@@ -1611,8 +1672,6 @@ declare global {
             catalogHelp?: string;
             /* 栏目标题。不提供则直接使用栏目名称。 */
             catalogCaption?: string;
-            /* 本地语言的栏目标题 */
-            localizedCatalogCaption?: string;
             /* 栏目的显示顺序，数值越小显示在前面。不提供则按属性出现的顺序。*/
             catalogOrder?: number;
 
@@ -1671,8 +1730,8 @@ declare global {
             submitOnTyping?: boolean;
             /** 如果是文本类型，是输入文本的提示信息；如果是布尔类型，是多选框的标题。 */
             prompt?: string;
-            /** 本地语言的输入文本的提示信息 */
-            localizedPrompt?: string;
+            /** 字符串类型适用，表示文本支持多国语言输出 */
+            multiLanguage?: boolean;
 
             /** 提供数据源显示一个下拉框去改变属性的值 */
             enumSource?: FEnumDescriptor;
@@ -1782,10 +1841,6 @@ declare global {
             help?: string;
             /** 标题。如果不提供，则使用name。 */
             caption?: string;
-            /** 本地语言的标题。 */
-            localizedCaption?: string;
-            /** 本地语言的标题，但只有激活翻译引擎符号才生效。*/
-            $localizedCaption?: string;
             /** 添加到组件菜单。 */
             menu?: string;
             /** 图标。*/
@@ -1807,6 +1862,8 @@ declare global {
             properties: Array<FPropertyDescriptor>;
             /** 编辑这个类实例的控件 */
             inspector?: string;
+            /** 是否引擎符号。如果是引擎符号，则不勾选翻译引擎符号时，不会应用本地化翻译。*/
+            isEngineSymbol?: boolean;
 
             /** 对资源类型的属性适用。多个资源类型用逗号分隔，例如“Image,Audio"。可用值参考editor/public/IAssetInfo.ts。 */
             assetTypeFilter?: string;
@@ -1826,11 +1883,19 @@ declare global {
             catalogBarStyle?: CatalogBarStyle;
 
             /** 额外的选项 */
-            options?: any;
+            options?: Record<string, any>;
+        }
+
+        export interface IPropertyButtonInfo {
+            name?: string;
+            caption?: string;
+            tips?: string;
+            event?: string;
+            runScript?: string;
+            runNodeScript?: string;
+            sceneHotkey?: string;
         }
         export interface ISceneEditor extends IEditorFrontEnd {
-            readonly serverURL: string;
-
             save(forced?: boolean): Promise<boolean>;
             saveAs(): Promise<boolean>;
             saveAll(): void;
@@ -1844,7 +1909,6 @@ declare global {
             transparent: boolean;
             showType: "none" | "popup" | "dropdown";
             alwaysInFront: boolean;
-            title: string;
             readonly features: Record<string, any>;
             result: any;
             readonly id: string;
@@ -1859,6 +1923,7 @@ declare global {
             private _y;
             private _width;
             private _height;
+            private _titleStr;
             private _showing;
             private _creatingWin;
             private _blockLayer;
@@ -1873,6 +1938,8 @@ declare global {
             getResult(): Promise<any>;
             dispose(): void;
             private createWindow;
+            get title(): string;
+            set title(value: string);
             get winX(): number;
             get winY(): number;
             get winWidth(): number;
@@ -2109,6 +2176,9 @@ declare global {
             protected _savedText: string;
             protected _textField: gui.TextInput;
             protected _clear: gui.Widget;
+            protected _lang: gui.Widget;
+            protected _key: gui.TextField;
+            protected _textInfo: gui.I18nTextInfo;
             get text(): string;
             set text(value: string);
             get editable(): boolean;
@@ -2119,16 +2189,25 @@ declare global {
             private __focusOut;
             private __textChanged;
             private __clickClear;
+            private __clickLang;
+            private __clickLangRemove;
         }
 
         export class TextArea extends gui.Label {
             private _savedText;
             private _textField;
+            private _lang;
+            private _key;
+            private _textInfo;
             get editable(): boolean;
             set editable(value: boolean);
+            get text(): string;
+            set text(value: string);
             onConstruct(): void;
             private __focusIn;
             private __focusOut;
+            private __clickLang;
+            private __clickLangRemove;
         }
 
         export class SearchInput extends TextInput {
@@ -2165,6 +2244,16 @@ declare global {
             private onHotkey;
         }
 
+        export declare enum FieldStatusFlags {
+            Hidden = 0,
+            Hidden_UserCall = 1,
+            Hidden_MultipleTypes = 2,
+            Hidden_MultipleObjects = 3,
+            Hidden_NullObject = 4,
+            Readonly = 5,
+            Readonly2 = 6,
+            _Max = 7
+        }
         export class PropertyField extends gui.TreeNode implements IPropertyField {
             inspector: IDataInspector;
             objType: Readonly<FTypeDescriptor>;
@@ -2174,6 +2263,8 @@ declare global {
             memberProps: Array<FPropertyDescriptor>;
             _inheritedFlag: number;
             _flag: number;
+            _noneTestHiddenFlag: boolean;
+            _readonlyFlag: boolean;
             _hotUpdateTime: number;
             _statusKey: string;
             _stayInvisible: boolean;
@@ -2184,14 +2275,20 @@ declare global {
             getStatus(name: string): any;
             setStatus(name: string, value: any): void;
             setHidden(hidden: boolean): void;
+            isFlagSet(flag: number): boolean;
             findBrotherField(name: string): IPropertyField;
             findChildField(name: string): IPropertyField;
             getChildFields(result?: Array<IPropertyField>): Array<IPropertyField>;
+            displayError(msg: string): void;
         }
 
         export class ButtonsField extends PropertyField {
             protected list: gui.List;
+            private _hasHotkey;
             create(): IPropertyFieldCreateResult;
+            protected addButton(info: string | IPropertyButtonInfo): gui.Widget;
+            private onClickButton;
+            private handleHotkey;
             refresh(): void;
         }
 
@@ -2216,11 +2313,16 @@ declare global {
         const BuildTask: { start(platform: string, destPath?: string): void };
 
         const SelectResourceDialog: new () => ISelectResourceDialog;
+        const SelectNodeDialog: new () => ISelectNodeDialog;
         const ColorPickerDialog: new () => IDialog;
         const InputTextDialog: new () => IInputTextDialog;
         const BuildTaskDialog: new () => IDialog;
+        const ChooseUploadTargetDialog: new () => IDialog;
+        const QRCodeDialog: new () => IQRCodeDialog;
         const utils: ICryptoUtils & INativeTools & IUUIDUtils & IObjectUtils & IUtils & INetUtils & IDataUtils & ITemplateUtils;
         const GUIUtils: IGUIUtils;
+
+        function require(id: string): any;
 
         function inspectorField(name: string): Function;
         function inspectorLayout(type: string): Function;

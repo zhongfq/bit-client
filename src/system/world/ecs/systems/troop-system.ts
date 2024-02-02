@@ -7,6 +7,7 @@ import {
     MovementType,
     TransformComponent,
 } from "../components/movement-component";
+import { Tilemap } from "../components/tilemap-component";
 import { SoldierComponent, SoliderOrder, TroopComponent } from "../components/troop-component";
 import { CommandSystem } from "./command-system";
 
@@ -44,15 +45,14 @@ export class TroopSystem extends ecs.System {
                     api.calcSoldierPosition(leaderTroop, solider, p1);
                     const distance = Laya.Vector3.distance(p1, p0);
                     if (distance == 0) {
-                        movement.speed.x = 0;
-                        movement.speed.y = 0;
-                        movement.speed.z = 0;
+                        movement.speed.x *= 0.1;
+                        movement.speed.y *= 0.1;
+                        movement.speed.z *= 0.1;
                     } else {
                         const rad = Math.atan2(p1.z - p0.z, p1.x - p0.x);
                         const degree = (rad * 180) / Math.PI;
-                        const velocity =
-                            (distance / (TroopSystem.TICK / 1000)) * leaderMovement.velocity;
-                        // console.log("move:", degree, velocity);
+                        const velocity = distance / (TroopSystem.TICK / 1000) / Tilemap.RATE;
+                        console.log("move:", degree, velocity);
                         api.startMove(
                             movement,
                             degree,

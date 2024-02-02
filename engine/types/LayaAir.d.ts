@@ -13,26 +13,23 @@ declare class Laya {
     static timer: Laya.Timer;
     /** 加载管理器的引用。*/
     static loader: Laya.Loader;
-    /** 当前引擎版本。*/
     /**@private Render 类的引用。*/
     static render: Laya.Render;
-    /**是否是微信小游戏子域，默认为false**/
-    static isWXOpenDataContext: boolean;
-    /**微信小游戏是否需要在主域中自动将加载的文本数据自动传递到子域，默认 false**/
-    static isWXPosMsg: boolean;
+    private static _inited;
+    private static _initCallbacks;
+    private static _beforeInitCallbacks;
+    private static _afterInitCallbacks;
     /**
-     * 初始化引擎。使用引擎需要先初始化引擎，否则可能会报错。
+     * 初始化引擎。使用引擎需要先初始化引擎。
      */
     static init(stageConfig?: Laya.IStageConfig): Promise<void>;
     /**
-     * 初始化引擎。使用引擎需要先初始化引擎，否则可能会报错。
+     * 初始化引擎。使用引擎需要先初始化引擎。
      * @param	width 初始化的游戏窗口宽度，又称设计宽度。
-     * @param	height	初始化的游戏窗口高度，又称设计高度。
-     * @param	plugins 参数已失效。
+     * @param	height 初始化的游戏窗口高度，又称设计高度。
      */
-    static init(width: number, height: number, ...plugins: any[]): Promise<void>;
-    static createRender(): Laya.Render;
-    static addWasmModule(id: string, exports: WebAssembly.Exports, memory: WebAssembly.Memory): void;
+    static init(width: number, height: number): Promise<void>;
+    static initRender2D(stageConfig: Laya.IStageConfig): void;
     /**
      * 表示是否捕获全局错误并弹出提示。默认为false。
      * 适用于移动设备等不方便调试的时候，设置为true后，如有未知错误，可以弹窗抛出详细错误堆栈。
@@ -46,22 +43,41 @@ declare class Laya {
     private static isNativeRender_enable;
     /**@private */
     private static enableNative;
+    /**
+     * 引擎各个模块，例如物理，寻路等，如果有初始化逻辑可以在这里注册初始化函数。开发者一般不直接使用。
+     * @param callback 模块的初始化函数
+     */
+    static addInitCallback(callback: () => void | Promise<void>): void;
+    /**
+     * 在引擎初始化前执行自定义逻辑。此时Stage尚未创建，因为可以修改stageConfig实现动态舞台配置。
+     * @param callback
+     */
+    static addBeforeInitCallback(callback: (stageConfig: Laya.IStageConfig) => void | Promise<void>): void;
+    /**
+     * 在引擎初始化后执行自定义逻辑
+     * @param callback
+     */
+    static addAfterInitCallback(callback: () => void | Promise<void>): void;
 }
+declare var addInitCallback: typeof Laya.addInitCallback;
+declare var addBeforeInitCallback: typeof Laya.addBeforeInitCallback;
+declare var addAfterInitCallback: typeof Laya.addAfterInitCallback;
 /**
  * <code>Laya3D</code> 类用于初始化3D设置。
  */
 declare class Laya3D {
+    /**物理创建管理器 */
+    static _PhysicsCreateUtil: Laya.IPhysicsCreateUtil;
     /**
-     * 获取是否可以启用物理。
+     * 设置物理创建管理器
+     */
+    static set PhysicsCreateUtil(value: Laya.IPhysicsCreateUtil);
+    static get PhysicsCreateUtil(): Laya.IPhysicsCreateUtil;
+    /**
+     * 是否启用物理。
      * @param 是否启用物理。
      */
     static get enablePhysics(): any;
-    /**
-     * 初始化Laya3D相关设置。
-     * @deprecated use Laya.init instead.
-     */
-    static init(width: number, height: number, config?: any, complete?: Laya.Handler): void;
-    static createRenderObjInit(): void;
 }
 declare module Laya {
     /**
@@ -190,19 +206,19 @@ declare module Laya {
         /**最小cellbuild数，如果小于这个数，不会BVH构建 */
         static BVH_Min_Build_nums: number;
     }
-    type EnumDescriptor = {
+    type FEnumDescriptor = {
         name: string;
         value: any;
-        extend?: EnumDescriptor;
+        extend?: FEnumDescriptor;
         [index: string]: any;
     }[] | any[] | Object | string;
-    type PropertType = string | Function | Object | [
-        PropertType
+    type FPropertyType = string | Function | Object | [
+        FPropertyType
     ] | [
         "Record",
-        PropertType
+        FPropertyType
     ];
-    interface PropertyDescriptor {
+    interface FPropertyDescriptor {
         /** 属性名称。一般不需要设定。 */
         name: string;
         /**
@@ -212,7 +228,7 @@ declare module Laya {
          * 其他对象类型可以直接使用类名，但要注意该类必须有使用regClass装饰器。也支持枚举类型。枚举类型不需要regClass。
          * 如果不提供type，表示只用于ui样式，没有实际对应数据，和不会序列化
          */
-        type: PropertType;
+        type: FPropertyType;
         /** 标题。如果不提供，则使用name。 */
         caption: string;
         /** 提示文字 */
@@ -256,6 +272,10 @@ declare module Laya {
          * 其中的value为当前用户在该属性输入的值，data为当前组件的对象数据，data.a是当前组件中的a属性值
          */
         validator: string;
+        /** 是否允许数据为空值。
+         * 可以用表达式，返回true或者false的结果。
+         */
+        required?: boolean | string;
         /** 是否序列化 */
         serializable: boolean;
         /** 属性在不参与序列化时，如果它的数据可能受其他可序列化的属性影响，在这里填写其他属性名称。这通常用于判断预制体属性是否覆盖。*/
@@ -266,10 +286,12 @@ declare module Laya {
         password: boolean;
         /** 如果true或者缺省，文本输入每次输入都提交；否则只有在失焦时才提交 */
         submitOnTyping: boolean;
-        /** 输入文本的提示信息 */
+        /** 如果是文本类型，是输入文本的提示信息；如果是布尔类型，是多选框的标题。 */
         prompt: string;
         /** 定义枚举 */
-        enumSource: EnumDescriptor;
+        enumSource: FEnumDescriptor;
+        /** 当数据源为空时，隐藏这个属性 */
+        hideIfEnumSourceEmpty?: boolean;
         /** 是否反转布尔值。例如当属性值为true时，多选框显示为不勾选。 */
         reverseBool: boolean;
         /** 是否允许null值。默认为true。*/
@@ -294,7 +316,7 @@ declare module Laya {
         /** 对数组类型属性适用。如果不提供，则表示数组允许所有操作，如果提供，则只允许列出的操作。*/
         arrayActions: Array<"append" | "insert" | "delete" | "move">;
         /** 对数组类型属性适用。这里可以定义数组元素的属性 */
-        elementProps: Partial<PropertyDescriptor>;
+        elementProps: Partial<FPropertyDescriptor>;
         /** 对颜色类型属性适用。表示是否提供透明度a值的修改。 */
         showAlpha: boolean;
         /** 对颜色类型属性适用。它与default值不同的是，当default是null时，可以用defaultColor定义一个非null时的默认值。*/
@@ -305,6 +327,11 @@ declare module Laya {
         hideHeader: boolean;
         /** 对对象类型属性适用。对象创建时可以下拉选择一个类型。如果显示设置为null，则禁止菜单。默认是显示一个创建基类的菜单。*/
         createObjectMenu: Array<string>;
+        /** 对对象类型属性适用。表示这个属性类型有类似结构体的行为特性，即总是作为一个整体使用。
+         * 例如，obj对象的某个属性b的值是a1，a1是T类型的实例，且T类型的structLike为true，那么当a1的属性改变时，编辑器将同时调用obj.b = a1。
+         * 默认为false。
+         */
+        structLike?: boolean;
         /** 说明此属性是引用一个资源 */
         isAsset?: boolean;
         /** 对资源类型的属性适用。多个资源类型用逗号分隔，例如“Image,Audio"。*/
@@ -313,6 +340,10 @@ declare module Laya {
         useAssetPath: boolean;
         /** 对资源类型的属性适用。选择资源时是否允许选择内部资源 */
         allowInternalAssets: boolean;
+        /** 对资源类型的属性适用。可以设置一个自定义的过滤器。过滤器需要先通过EditorEnv.assetMgr.customAssetFilters注册。 */
+        customAssetFilter?: string;
+        /** 对类型是Node或者Component的属性适用。如果不为null，当在实际运行环境里执行反序列化时，引用对象不再实例化，而是将它的序列化数据原样保存到指定的属性中。*/
+        toTemplate?: string;
         /** 显示位置。语法：before xxx/after xxx/first/last。 */
         position: string;
         /** 表示属性是私有属性。私有属性不会显示在Inspector里，但会序列化保存。 */
@@ -331,15 +362,26 @@ declare module Laya {
         /** 额外的选项 */
         options: Record<string, any>;
     }
-    interface TypeDescriptor {
+    interface FTypeDescriptor {
         /** 标题。如果不提供，则使用name。 */
         caption: string;
+        /**帮助文档url地址 */
+        help?: string;
         /** 添加到组件菜单。 */
         menu: string;
         /** 图标。*/
         icon: string;
+        /** 是否资源类型 */
+        isAsset?: boolean;
+        /** 对资源类型的属性适用。多个资源类型用逗号分隔，例如“Image,Audio"。可用值参考editor/public/IAssetInfo.ts。 */
+        assetTypeFilter?: string;
+        /** 表示这个类型有类似结构体的行为特性，即总是作为一个整体使用。
+         * 例如，obj对象的某个属性b的值是a1，a1是T类型的实例，且T类型的structLike为true，那么当a1的属性改变时，编辑器将同时调用obj.b = a1。
+         * 默认为false。
+         */
+        structLike?: boolean;
         /** 属性列表 */
-        properties: Array<Partial<PropertyDescriptor>>;
+        properties: Array<Partial<FPropertyDescriptor>>;
         /** 编辑这个类实例的控件 */
         inspector: string;
         /** 对Component使用，表示这个组件允许挂载的节点类型。默认null */
@@ -355,7 +397,7 @@ declare module Laya {
      * 设置类型的额外信息。
      * @param info 类型的额外信息
      */
-    function classInfo(info?: Partial<TypeDescriptor>): any;
+    function classInfo(info?: Partial<FTypeDescriptor>): any;
     /**
      * 设置组件可以在编辑器环境中执行完整声明周期。
      */
@@ -364,7 +406,7 @@ declare module Laya {
      * 使用这个装饰器，可以使属性显示在编辑器属性设置面板上，并且能序列化保存。
      * @param info 属性的类型，如: Number,"number",[Number],["Record", Number]等。或传递对象描述详细信息，例如{ type: "string", multiline: true }。
      */
-    function property(info: PropertType | Partial<PropertyDescriptor>): any;
+    function property(info: FPropertyType | Partial<FPropertyDescriptor>): any;
     /**开始播放时调度。
      * @eventType Event.PLAYED
      * */
@@ -1413,6 +1455,11 @@ declare module Laya {
     }
     class AnimationClip2D extends Resource {
         /**
+         * @param data
+         * @returns
+         */
+        static _parse(data: ArrayBuffer): AnimationClip2D;
+        /**
          * 动画补帧函数
          */
         static tween: {
@@ -2034,9 +2081,9 @@ declare module Laya {
         /**
          * 是否可以在IDE环境中运行
          */
-        runInEditor?: boolean;
-        scriptPath?: string;
-        _extra?: IComponentExtra;
+        runInEditor: boolean;
+        scriptPath: string;
+        _extra: IComponentExtra;
         get hideFlags(): number;
         set hideFlags(value: number);
         /**
@@ -2221,15 +2268,15 @@ declare module Laya {
         /**
          * 3D物理触发器事件与2D物理碰撞事件，开始碰撞时执行
          */
-        onTriggerEnter?(other: PhysicsComponent | ColliderBase, self?: ColliderBase, contact?: any): void;
+        onTriggerEnter?(other: PhysicsColliderComponent | ColliderBase, self?: ColliderBase, contact?: any): void;
         /**
          * 3D物理触发器事件与2D物理碰撞事件，持续碰撞时执行
          */
-        onTriggerStay?(other: PhysicsComponent | ColliderBase, self?: ColliderBase, contact?: any): void;
+        onTriggerStay?(other: PhysicsColliderComponent | ColliderBase, self?: ColliderBase, contact?: any): void;
         /**
          * 3D物理触发器事件与2D物理碰撞事件，结束碰撞时执行
          */
-        onTriggerExit?(other: PhysicsComponent | ColliderBase, self?: ColliderBase, contact?: any): void;
+        onTriggerExit?(other: PhysicsColliderComponent | ColliderBase, self?: ColliderBase, contact?: any): void;
         /**
          * 3D物理碰撞器事件（不适用2D），开始碰撞时执行
          */
@@ -2374,7 +2421,6 @@ declare module Laya {
         static MAX_CLIP_SIZE: number;
     }
     /**
-     * @private
      * 节点标志
      */
     class NodeFlags {
@@ -2408,6 +2454,10 @@ declare module Laya {
      * <code>AnimationClip</code> 类用于动画片段资源。
      */
     class AnimationClip extends Resource {
+        /**
+         * @inheritDoc
+         */
+        static _parse(data: any): AnimationClip;
         /**
          * 加载动画片段。
          * @param url 动画片段地址。
@@ -2492,6 +2542,66 @@ declare module Laya {
          * 动画设置了循环的话，每次循环结束时执行
          */
         onStateLoop(): void;
+    }
+    /**
+     *<code>KeyframeNode</code> 类用于动画帧。
+     */
+    class KeyframeNode {
+        private _ownerPath;
+        private _propertys;
+        /**
+         * 精灵路径个数。
+         */
+        get ownerPathCount(): number;
+        /**
+         * 属性路径个数。
+         */
+        get propertyCount(): number;
+        /**
+         * 帧个数。
+         */
+        get keyFramesCount(): number;
+        /**
+         * 通过索引获取精灵路径。
+         * @param index 索引。
+         */
+        getOwnerPathByIndex(index: number): string;
+        /**
+         * 通过索引获取属性路径。
+         * @param index 索引。
+         */
+        getPropertyByIndex(index: number): string;
+        /**
+         * 通过索引获取帧。
+         * @param index 索引。
+         */
+        getKeyframeByIndex(index: number): Keyframe;
+    }
+    /**
+     * <code>KeyframeNodeList</code> 类用于创建KeyframeNode节点队列。
+     */
+    class KeyframeNodeList {
+        /**
+         *	节点个数。
+         */
+        get count(): number;
+        set count(value: number);
+        /**
+         * 创建一个 <code>KeyframeNodeList</code> 实例。
+         */
+        constructor();
+        /**
+         * 通过索引获取节点。
+         * @param	index 索引。
+         * @return 节点。
+         */
+        getNodeByIndex(index: number): KeyframeNode;
+        /**
+         * 通过索引设置节点。
+         * @param	index 索引。
+         * @param 节点。
+         */
+        setNodeByIndex(index: number, node: KeyframeNode): void;
     }
     type AnimatorParams = {
         [key: number]: number | boolean;
@@ -3156,6 +3266,7 @@ declare module Laya {
          * 实例化一个LODGroup
          */
         constructor();
+        shadowCullPass(): boolean;
         /**
         * get LODInfo 数组
         * @returns
@@ -3279,7 +3390,6 @@ declare module Laya {
         _getType(): number;
         _updateRenderParams(state: RenderContext3D): void;
         _prepareRender(state: RenderContext3D): boolean;
-        _render(state: RenderContext3D): void;
         destroy(): void;
     }
     class StaticMeshMergeInfo {
@@ -3533,6 +3643,9 @@ declare module Laya {
      * @miner
      */
     class ReflectionProbe extends Volume {
+        static reflectionCount: number;
+        /**获取一个全局唯一ID。*/
+        static getID(): number;
         static TEMPVECTOR3: Vector3;
         /** 默认解码数据 */
         static defaultTextureHDRDecodeValues: Vector4;
@@ -3798,7 +3911,9 @@ declare module Laya {
         static ReflectionProbeVolumeType: number;
         static VolumetricGIType: number;
         /** 有些Volume需要特殊的管理能力 */
-        private _regVolumeManager;
+        _regVolumeManager: {
+            [key: number]: IVolumeManager;
+        };
         _volumetricGIManager: VolumetricGIManager;
         constructor();
         /**
@@ -3834,30 +3949,73 @@ declare module Laya {
         needreCaculateAllRenderObjects(): boolean;
     }
     class VolumetricGI extends Volume {
-        probeCounts: Vector3;
-        probeStep: Vector3;
+        static volumetricCount: number;
+        /**获取一个全局唯一ID。*/
+        static getID(): number;
+        /**密度 */
+        private _intensity;
         /**
-         * x: irradiance probe texel size
-         * y: distance probe texel size
-         * z: normalBias
-         * w: viewBias
+         * <code>实例化一个体积光照探针<code>
          */
-        private _params;
-        private _irradiance;
-        set irradiance(value: Texture2D);
-        private _distance;
-        set distance(value: Texture2D);
-        intensity: number;
         constructor();
+        /**
+        * @inheritDoc
+        * @override
+        */
+        protected _onEnable(): void;
+        /**
+         * light probe texture
+         */
+        get irradiance(): Texture2D;
+        set irradiance(value: Texture2D);
+        /**
+         * distance texture
+         */
+        get distance(): Texture2D;
+        set distance(value: Texture2D);
+        /**
+         * normal bias
+         */
         get normalBias(): number;
         set normalBias(value: number);
+        /**
+         * view bias
+         */
         get viewBias(): number;
         set viewBias(value: number);
+        /**
+         * irradiance Texture one probe texel number
+         */
         get irradianceTexel(): number;
+        /**
+         * distance Texture one probe texel number
+         */
         get distanceTexel(): number;
+        /**
+         * 设置反射探针强度
+         */
+        get intensity(): number;
+        set intensity(value: number);
+        /**
+         * 设置反射数量
+         */
+        get probeCounts(): Vector3;
+        set probeCounts(value: Vector3);
+        /**
+         * 设置反射探针间隔
+         */
+        get probeStep(): Vector3;
+        set probeStep(value: Vector3);
+        /**
+         * @interanl
+         * upload volumetric GI data
+         * @param shaderData
+         */
         applyVolumetricGI(shaderData: ShaderData): void;
+        /**
+         * @interanl
+         */
         _onDestroy(): void;
-        _cloneTo(dest: VolumetricGI): void;
     }
     /**
      * <code>BaseCamera</code> 类用于创建摄像机的父类。
@@ -4280,6 +4438,7 @@ declare module Laya {
      */
     class GeometryElement {
         protected _owner: any;
+        static _typeCounter: number;
         _geometryElementOBj: IRenderGeometryElement;
         /**
          * VAO OBJ
@@ -4330,6 +4489,16 @@ declare module Laya {
         private _maxColorAlphaKeysCount;
         private _colorRGBKeysCount;
         private _colorAlphaKeysCount;
+        /**
+         * 获取颜色数据。
+         * @return  颜色数据。
+         */
+        get rgbElements(): Float32Array;
+        /**
+         * 获取 alpha数据。
+         * @return  alpha数据。
+         */
+        get alphaElements(): Float32Array;
         /**
          * 获取梯度模式。
          * @return  梯度模式。
@@ -4556,6 +4725,12 @@ declare module Laya {
          */
         constructor();
     }
+    enum LightType {
+        Directional = 0,
+        Spot = 1,
+        Point = 2,
+        Area = 3
+    }
     enum LightMode {
         mix = 0,
         realTime = 1,
@@ -4613,6 +4788,7 @@ declare module Laya {
         get lightmapBakedType(): LightMode;
         set lightmapBakedType(value: LightMode);
         get lightWorldMatrix(): Matrix4x4;
+        get lightType(): LightType;
         /**
          * 创建一个 <code>LightSprite</code> 实例。
          */
@@ -5017,501 +5193,6 @@ declare module Laya {
         * @override
         */
         clone(): any;
-    }
-    enum MaterialRenderMode {
-        /**渲染状态_不透明。*/
-        RENDERMODE_OPAQUE = 0,
-        /**渲染状态_阿尔法测试。*/
-        RENDERMODE_CUTOUT = 1,
-        /**渲染状态__透明。*/
-        RENDERMODE_TRANSPARENT = 2,
-        /**渲染状态__加色法混合。*/
-        RENDERMODE_ADDTIVE = 3,
-        /**渲染状态_透明混合。*/
-        RENDERMODE_ALPHABLENDED = 4,
-        /**渲染状态_自定义 */
-        RENDERMODE_CUSTOME = 5
-    }
-    /**
-     * <code>Material</code> 类用于创建材质。
-     */
-    class Material extends Resource implements IClone {
-        /** 渲染队列_不透明。*/
-        static RENDERQUEUE_OPAQUE: number;
-        /** 渲染队列_阿尔法裁剪。*/
-        static RENDERQUEUE_ALPHATEST: number;
-        /** 渲染队列_透明。*/
-        static RENDERQUEUE_TRANSPARENT: number;
-        /**着色器变量,透明测试值。*/
-        static ALPHATESTVALUE: number;
-        /**材质级着色器宏定义,透明测试。*/
-        static SHADERDEFINE_ALPHATEST: ShaderDefine;
-        static SHADERDEFINE_MAINTEXTURE: ShaderDefine;
-        static SHADERDEFINE_ADDTIVEFOG: ShaderDefine;
-        /**
-         * 加载材质。
-         * @param url 材质地址。
-         * @param complete 完成回掉。
-         */
-        static load(url: string, complete: Handler): void;
-        /** @private */
-        _shaderValues: ShaderData | null;
-        /** 所属渲染队列. */
-        renderQueue: number;
-        /**
-         * 着色器数据。
-         */
-        get shaderData(): ShaderData;
-        /**
-         * 透明测试模式裁剪值。
-         */
-        get alphaTestValue(): number;
-        set alphaTestValue(value: number);
-        /**
-         * 是否透明裁剪。
-         */
-        get alphaTest(): boolean;
-        set alphaTest(value: boolean);
-        /**
-         * 增加Shader宏定义。
-         * @param value 宏定义。
-         */
-        addDefine(define: ShaderDefine): void;
-        /**
-         * 移除Shader宏定义。
-         * @param value 宏定义。
-         */
-        removeDefine(define: ShaderDefine): void;
-        /**
-         * 开启 或 关闭 shader 宏定义
-         * @param define
-         * @param value true: addDefine, false: removeDefine
-         */
-        setDefine(define: ShaderDefine, value: boolean): void;
-        /**
-         * 是否包含Shader宏定义。
-         * @param value 宏定义。
-         */
-        hasDefine(define: ShaderDefine): boolean;
-        /**
-         * 是否写入深度。
-         */
-        get depthWrite(): boolean;
-        set depthWrite(value: boolean);
-        /**
-         * 剔除方式。
-         */
-        get cull(): number;
-        set cull(value: number);
-        /**
-         * 混合方式。
-         */
-        get blend(): number;
-        set blend(value: number);
-        /**
-         * 混合源。
-         */
-        get blendSrc(): number;
-        set blendSrc(value: number);
-        /**
-         * 混合目标。
-         */
-        get blendDst(): number;
-        set blendDst(value: number);
-        /**
-         * 混合目标 alpha
-         */
-        get blendSrcAlpha(): number;
-        set blendSrcAlpha(value: number);
-        /**
-         * 混合原 RGB
-         */
-        get blendSrcRGB(): number;
-        /**
-         * 混合原 RGB
-         */
-        set blendSrcRGB(value: number);
-        get blendDstRGB(): number;
-        set blendDstRGB(value: number);
-        /**
-         * 混合目标 alpha
-         */
-        get blendDstAlpha(): number;
-        set blendDstAlpha(value: number);
-        /**
-         * 混合方程
-         */
-        get blendEquation(): number;
-        set blendEquation(value: number);
-        /**
-         * 混合方式 RGB
-         */
-        get blendEquationRGB(): number;
-        set blendEquationRGB(value: number);
-        /**
-         * 混合方式 Alpha
-         */
-        get blendEquationAlpha(): number;
-        set blendEquationAlpha(value: number);
-        /**
-         * 深度测试方式。
-         */
-        get depthTest(): number;
-        set depthTest(value: number);
-        /**
-         * 模板测试方式
-         */
-        get stencilTest(): number;
-        set stencilTest(value: number);
-        /**
-         * 是否写入模板。
-         */
-        get stencilWrite(): boolean;
-        set stencilWrite(value: boolean);
-        /**
-         * 写入模板值
-         */
-        set stencilRef(value: number);
-        get stencilRef(): number;
-        /** */
-        /**
-         * 写入模板测试设置
-         * vector(fail, zfail, zpass)
-         */
-        set stencilOp(value: Vector3);
-        get stencilOp(): Vector3;
-        /**
-         * 获得材质属性
-         */
-        get MaterialProperty(): any;
-        /**
-         * 获得材质宏
-         */
-        get MaterialDefine(): Array<string>;
-        /**
-         * 渲染模式。
-         */
-        set materialRenderMode(value: MaterialRenderMode);
-        /**
-         * 获得材质渲染状态
-         */
-        get materialRenderMode(): MaterialRenderMode;
-        /**
-         * 创建一个 <code>Material</code> 实例。
-         */
-        constructor();
-        /**
-         * @inheritDoc
-         * @override
-         */
-        protected _disposeResource(): void;
-        /**
-         * get all material uniform property
-         * @returns
-         */
-        effectiveProperty(): Map<string, ShaderDataType>;
-        /**
-         * 设置使用Shader名字。
-         * @param name 名称。
-         */
-        setShaderName(name: string): void;
-        /**
-         * 获得bool属性值
-         * @param uniformIndex 属性索引
-         * @returns
-         */
-        getBoolByIndex(uniformIndex: number): boolean;
-        /**
-         * 设置bool值
-         * @param uniformIndex 属性索引
-         * @param value 值
-         */
-        setBoolByIndex(uniformIndex: number, value: boolean): void;
-        /**
-         * 活得bool值
-         * @param name 属性名称
-         * @returns
-         */
-        getBool(name: string): boolean;
-        /**
-         * 设置bool值
-         * @param name 属性名称
-         * @param value 值
-         */
-        setBool(name: string, value: boolean): void;
-        /**
-         * 获得Float值
-         * @param uniformIndex 属性索引
-         * @returns
-         */
-        getFloatByIndex(uniformIndex: number): number;
-        /**
-         * 设置Float值
-         * @param uniformIndex 属性索引
-         * @param value 值
-         */
-        setFloatByIndex(uniformIndex: number, value: number): void;
-        /**
-         * 获得Float值
-         * @param name 属性名称
-         * @returns
-         */
-        getFloat(name: string): number;
-        /**
-         * 设置Float值
-         * @param name 属性名称
-         * @param value 值
-         */
-        setFloat(name: string, value: number): void;
-        /**
-         * 获得Int值
-         * @param uniformIndex 属性索引
-         * @returns
-         */
-        getIntByIndex(uniformIndex: number): number;
-        /**
-         * 设置Int值
-         * @param uniformIndex 属性索引
-         * @param value 值
-         */
-        setIntByIndex(uniformIndex: number, value: number): void;
-        /**
-         * 获得Int值
-         * @param name 属性名称
-         * @returns
-         */
-        getInt(name: string): number;
-        /**
-         * 设置Int值
-         * @param name 属性名称
-         * @param value 值
-         */
-        setInt(name: string, value: number): void;
-        /**
-         * 获得Vector2
-         * @param uniformIndex 属性索引
-         * @returns
-         */
-        getVector2ByIndex(uniformIndex: number): Vector2;
-        /**
-         * 设置Vector2
-         * @param uniformIndex 属性索引
-         * @param value 值
-         */
-        setVector2ByIndex(uniformIndex: number, value: Vector2): void;
-        /**
-         * 获得Vector2
-         * @param name 属性名称
-         * @returns
-         */
-        getVector2(name: string): Vector2;
-        /**
-         * 设置Vector2
-         * @param name 属性名称
-         * @param value 值
-         */
-        setVector2(name: string, value: Vector2): void;
-        /**
-         * 获得Vector3
-         * @param uniformIndex 属性索引
-         * @returns
-         */
-        getVector3ByIndex(uniformIndex: number): Vector3;
-        /**
-         * 设置Vector3
-         * @param uniformIndex 属性索引
-         * @param value 值
-         */
-        setVector3ByIndex(uniformIndex: number, value: Vector3): void;
-        /**
-         * 获得Vector3
-         * @param name 属性名称
-         * @returns
-         */
-        getVector3(name: string): Vector3;
-        /**
-         * 设置Vector3
-         * @param name 属性名称
-         * @param value 值
-         */
-        setVector3(name: string, value: Vector3): void;
-        /**
-         * 获得Vector4
-         * @param uniformIndex 属性索引
-         * @param value 值
-         */
-        setVector4ByIndex(uniformIndex: number, value: Vector4): void;
-        /**
-         * 设置Vector4
-         * @param uniformIndex 属性索引
-         * @returns
-         */
-        getVector4ByIndex(uniformIndex: number): Vector4;
-        /**
-         * 设置Vector4
-         * @param name 属性名称
-         * @param value 值
-         */
-        setVector4(name: string, value: Vector4): void;
-        /**
-         * 获得Vector4
-         * @param name 属性名称
-         * @returns
-         */
-        getVector4(name: string): Vector4;
-        /**
-         * 获得Color
-         * @param uniformIndex 属性索引
-         * @returns
-         */
-        getColorByIndex(uniformIndex: number): Color;
-        /**
-         * 设置Color
-         * @param uniformIndex 属性索引
-         * @param value 值
-         */
-        setColorByIndex(uniformIndex: number, value: Color): void;
-        /**
-         * 获得Color
-         * @param name 属性名称
-         * @returns
-         */
-        getColor(name: string): Color;
-        /**
-         * 设置Color
-         * @param name 属性名称
-         * @param value 值
-         */
-        setColor(name: string, value: Color): void;
-        /**
-         * 获得Matrix4x4
-         * @param uniformIndex 属性索引
-         * @returns
-         */
-        getMatrix4x4ByIndex(uniformIndex: number): Matrix4x4;
-        /**
-         * 设置Matrix4x4
-         * @param uniformIndex 属性索引
-         * @param value 值
-         */
-        setMatrix4x4ByIndex(uniformIndex: number, value: Matrix4x4): void;
-        /**
-         * 获得Matrix4x4
-         * @param name 属性名称
-         * @returns
-         */
-        getMatrix4x4(name: string): Matrix4x4;
-        /**
-         * 设置Matrix4x4
-         * @param name 属性名称
-         * @param value 值
-         */
-        setMatrix4x4(name: string, value: Matrix4x4): void;
-        /**
-         * 设置纹理
-         * @param uniformIndex 属性索引
-         * @param texture
-         */
-        setTextureByIndex(uniformIndex: number, texture: BaseTexture): void;
-        private reSetTexture;
-        /**
-         * 获得纹理
-         * @param uniformIndex 属性索引
-         * @returns
-         */
-        getTextureByIndex(uniformIndex: number): BaseTexture;
-        /**
-         * 设置纹理
-         * @param name 属性名称
-         * @param texture
-         */
-        setTexture(name: string, texture: BaseTexture): void;
-        /**
-         * 获得纹理
-         * @param name 属性名称
-         * @returns
-         */
-        getTexture(name: string): BaseTexture;
-        /**
-         * 获得Buffer
-         * @param uniformIndex 属性索引
-         * @returns
-         */
-        getBufferByIndex(uniformIndex: number): Float32Array;
-        /**
-         * 设置Buffer
-         * @param uniformIndex 属性索引
-         * @param value 值
-         */
-        setBufferByIndex(uniformIndex: number, value: Float32Array): void;
-        /**
-         * 获得Buffer
-         * @param name 属性名称
-         * @returns
-         */
-        getBuffer(name: string): Float32Array;
-        /**
-         * 设置Buffer
-         * @param name 属性名称
-         * @param value 值
-         */
-        setBuffer(name: string, value: Float32Array): void;
-        /**
-         * 设置ShaderData的属性值
-         * @param uniformIndex 属性索引
-         * @param type 值类型
-         * @param value 值
-         */
-        setShaderDataByIndex(uniformIndex: number, type: ShaderDataType, value: ShaderDataItem): void;
-        /**
-         * 设置ShaderData的属性值
-         * @param name 属性名称
-         * @param type 值类型
-         * @param value 值
-         */
-        setShaderData(name: string, type: ShaderDataType, value: ShaderDataItem): void;
-        /**
-         * 获得ShaderData的属性值
-         * @param name 属性名称
-         * @param type 值类型
-         * @returns
-         */
-        getShaderData(name: string, type: ShaderDataType): ShaderDataItem;
-        /**
-         * 获得ShaderData的属性值
-         * @param uniformIndex 属性索引
-         * @param type 值类型
-         * @returns
-         */
-        getShaderDataByIndex(uniformIndex: number, type: ShaderDataType): ShaderDataItem;
-        /**
-         * 克隆。
-         * @param	destObject 克隆源。
-         */
-        cloneTo(destObject: any): void;
-        /**
-         * 克隆。
-         * @return	 克隆副本。
-         */
-        clone(): any;
-        /**
-         * 设置属性值
-         * @deprecated
-         * @param name
-         * @param value
-         */
-        setShaderPropertyValue(name: string, value: any): void;
-        /**
-         * 获取属性值
-         * @deprecated
-         * @param name
-         */
-        getShaderPropertyValue(name: string): any;
-        get _defineDatas(): DefineDatas;
-        /**
-         * override it
-         */
-        oldparseEndEvent(): void;
     }
     /**
      * 渲染模式。
@@ -6016,6 +5697,11 @@ declare module Laya {
         getMesh(): Mesh;
         protected _changeVertexDefine(mesh: Mesh): void;
         private _morphTargetValues;
+        /**
+         * 设置 morph target 通道 权重
+         * @param channelName 通道名
+         * @param weight 权重值
+         */
         setMorphChannelWeight(channelName: string, weight: number): void;
         /**
          * 更新 morph target 数据
@@ -6034,6 +5720,7 @@ declare module Laya {
         _cloneTo(dest: Component): void;
     }
     /**
+     * @deprecated
      * <code>MeshSprite3D</code> 类用于创建网格。
      */
     class MeshSprite3D extends RenderableSprite3D {
@@ -7454,6 +7141,8 @@ declare module Laya {
      * <code>ShurikenParticleRender</code> 类用于创建3D粒子渲染器。
      */
     class ShurikenParticleRenderer extends BaseRender {
+        /**重力值。*/
+        static gravity: Vector3;
         private _dragConstant;
         /**@interanl */
         _particleSystem: ShurikenParticleSystem;
@@ -7478,6 +7167,7 @@ declare module Laya {
          * 创建一个 <code>ShurikenParticleRender</code> 实例。
          */
         constructor();
+        protected _getcommonUniformMap(): Array<string>;
         protected _onAdded(): void;
         protected _onEnable(): void;
         protected _onDisable(): void;
@@ -7962,6 +7652,11 @@ declare module Laya {
         RenderBitFlag_InstanceBatch = 3,
         RenderBitFlag_VertexMergeBatch = 4
     }
+    enum IrradianceMode {
+        LightMap = 0,
+        VolumetricGI = 1,
+        Common = 2
+    }
     /**
      * <code>Render</code> 类用于渲染器的父类，抽象类不允许实例。
      */
@@ -7998,6 +7693,10 @@ declare module Laya {
          */
         get lightmapIndex(): number;
         set lightmapIndex(value: number);
+        /**
+         * 光照功能查询
+         */
+        get irradientMode(): IrradianceMode;
         /**
          * 光照贴图的缩放和偏移。
          */
@@ -8044,10 +7743,13 @@ declare module Laya {
         get reflectionMode(): ReflectionProbeMode;
         set volume(value: Volume);
         get volume(): Volume;
+        set lightProb(volumetricGI: VolumetricGI);
         /**
          * 创建一个新的 <code>BaseRender</code> 实例。
          */
         constructor();
+        private _getIrradientMode;
+        protected _getcommonUniformMap(): Array<string>;
         protected _createBaseRenderNode(): IBaseRenderNode;
         private _changeLayer;
         private _changeStaticMask;
@@ -8058,6 +7760,15 @@ declare module Laya {
          * 设置渲染flag,每一位都代表不同的淘汰原因，1表示lod淘汰
          */
         setRenderbitFlag(flag: number, pass: boolean): void;
+        /**
+         * apply lightProb
+         * @returns
+         */
+        _applyLightProb(): void;
+        /**
+         * apply reflection
+         * @returns
+         */
         _applyReflection(): void;
         protected _onDestroy(): void;
         /**
@@ -8789,6 +8500,174 @@ declare module Laya {
         */
         render(context: PostProcessRenderContext): void;
     }
+    class LensFlareCMD extends Command {
+        /**instance绘制的个数 */
+        private _instanceCount;
+        get instanceCount(): number;
+        set instanceCount(value: number);
+        /**
+         * instance CMD
+         */
+        constructor();
+        /**
+         * init material
+         */
+        private _initMaterial;
+        get lensFlareElement(): LensFlareElement;
+        /**
+         * apply element Data
+         */
+        applyElementData(): void;
+        /**
+         * @inheritDoc
+         * @override
+         */
+        run(): void;
+    }
+    /**
+     * lens Flare Element
+     * 光耀元素
+     */
+    class LensFlareElement {
+        private _startPosition;
+        private _angularOffset;
+        /**
+         * 是否激活
+         */
+        get active(): boolean;
+        set active(value: boolean);
+        /**
+         * 颜色
+         */
+        get tint(): Color;
+        set tint(value: Color);
+        /**
+         * 强度
+         */
+        get intensity(): number;
+        set intensity(value: number);
+        /**
+         * 贴图
+         */
+        get texture(): BaseTexture;
+        set texture(value: BaseTexture);
+        /**
+         * 位置偏移(屏幕空间下)
+         */
+        get positionOffset(): Vector2;
+        set positionOffset(value: Vector2);
+        /**
+         * 缩放(每个轴上)
+         */
+        get scale(): Vector2;
+        set scale(value: Vector2);
+        /**
+         * 自动旋转
+         */
+        get autoRotate(): boolean;
+        set autoRotate(value: boolean);
+        /**
+         * 旋转角度
+         */
+        get rotation(): number;
+        set rotation(value: number);
+        /**
+         * 起始位置
+         */
+        get startPosition(): number;
+        set startPosition(value: number);
+        /**
+         * 角度偏移
+         */
+        get angularOffset(): number;
+        set angularOffset(value: number);
+    }
+    /**
+     * lens Flare Data
+     * 资源数据
+     */
+    class LensFlareData extends Resource {
+        constructor();
+        elements: LensFlareElement[];
+    }
+    /**
+     * lens Flare Element
+     */
+    class LensFlareEffect extends PostProcessEffect {
+        /**@interal */
+        static SHADERDEFINE_AUTOROTATE: ShaderDefine;
+        /**
+         * init Shader\Geometry
+         */
+        static init(): void;
+        /**
+         * LensFlareData
+         */
+        set lensFlareData(value: LensFlareData);
+        get lensFlareData(): LensFlareData;
+        /**
+         * bind light
+         */
+        set bindLight(light: Light);
+        get bindLight(): Light;
+        /**
+         * 后处理强度
+         */
+        get effectIntensity(): number;
+        set effectIntensity(value: number);
+        /**
+         * 后处理缩放
+         */
+        get effectScale(): number;
+        set effectScale(value: number);
+        constructor();
+        /**
+         * 计算直射光中心点
+         * @param camera
+         */
+        caculateDirCenter(camera: Camera): void;
+        /**
+         * 计算点光
+         * @param camera
+         */
+        caculatePointCenter(camera: Camera): void;
+        /**
+         * 计算spot光
+         * @param value
+         */
+        caculateSpotCenter(value: Vector2): void;
+        /**
+         * 渲染流程
+         * @param context
+         * @returns
+         */
+        render(context: PostProcessRenderContext): void;
+        /**
+       * 释放Effect
+       * @inheritDoc
+       * @override
+       */
+        release(postprocess: PostProcess): void;
+    }
+    class LensFlareElementGeomtry extends GeometryElement {
+        static PositionUV: number;
+        static PositionRotationScale: number;
+        /**
+         * initData
+         */
+        static init(): void;
+        /**
+         * instance LensFlaresGeometry
+         */
+        constructor();
+        /**
+         * 销毁。
+         */
+        destroy(): void;
+    }
+    class LensFlareShaderInit {
+        static init(): void;
+    }
     /**
      * AO质量
      */
@@ -8904,10 +8783,12 @@ declare module Laya {
      * <code>RenderContext3D</code> 类用于实现渲染状态。
      */
     class RenderContext3D {
+        static _instance: RenderContext3D;
         /**渲染区宽度。*/
         static clientWidth: number;
         /**渲染区高度。*/
         static clientHeight: number;
+        camera: Camera;
         /**设置渲染管线 */
         configPipeLineMode: PipelineMode;
         set viewport(value: Viewport);
@@ -8919,6 +8800,7 @@ declare module Laya {
         get scene(): Scene3D;
         changeViewport(x: number, y: number, width: number, height: number): void;
         changeScissor(x: number, y: number, width: number, height: number): void;
+        applyContext(cameraUpdateMark: number): void;
         /**
          * 渲染一个
          * @param renderelemt
@@ -8939,12 +8821,31 @@ declare module Laya {
         _renderElementOBJ: IRenderElement;
         _batchElement: RenderElement;
         _transform: Transform3D;
+        /**
+         * set RenderElement Material/Shaderdata
+         */
+        set material(value: Material);
+        /**
+         * 设置 SubShader
+         */
+        set renderSubShader(value: SubShader);
+        get renderSubShader(): SubShader;
+        set subShaderIndex(value: number);
+        get subShaderIndex(): number;
         get render(): BaseRender;
         /**
          * 创建一个 <code>RenderElement</code> 实例。
          */
         constructor();
         protected _createRenderElementOBJ(): void;
+        /**
+         * 设置位置
+         */
+        setTransform(transform: Transform3D): void;
+        /**
+         * 设置渲染几何信息
+         */
+        setGeometry(geometry: GeometryElement): void;
         /**
          * 编译shader
          * @param context
@@ -8988,6 +8889,7 @@ declare module Laya {
         static SHADERDEFINE_VOLUMETRICGI: ShaderDefine;
     }
     /**
+     * @deprecated
      * <code>RenderableSprite3D</code> 类用于可渲染3D精灵的父类，抽象类不允许实例。
      */
     class RenderableSprite3D extends Sprite3D {
@@ -9264,8 +9166,9 @@ declare module Laya {
         /**
          * 获得这个节点包含的所有content
          * @param out
+         * @param conditionalFun条件函数
          */
-        traverseBoundsCell(out: SingletonList<IBoundsCell>): void;
+        traverseBoundsCell(out: SingletonList<IBoundsCell>, conditionalFun?: Function): void;
         /**
          * Override it
          * @returns
@@ -9440,6 +9343,11 @@ declare module Laya {
         destroy(): void;
     }
     /**
+     * Interface Overall management of a type of component
+     */
+    interface IElementComponentManager {
+    }
+    /**
      * 光照贴图。
      */
     class Lightmap {
@@ -9468,11 +9376,13 @@ declare module Laya {
         /**Scene3D UniformMap */
         static sceneUniformMap: CommandUniformMap;
         static SceneUBOData: UnifromBufferData;
+        static componentManagerMap: Map<string, any>;
         /**
          * 场景更新标记
          */
         static set _updateMark(value: number);
         static get _updateMark(): number;
+        static regManager(type: string, cla: any): void;
         /**
          * init shaderData
          */
@@ -9501,6 +9411,7 @@ declare module Laya {
         currentCreationLayer: number;
         /** 是否启用灯光。*/
         enableLight: boolean;
+        componentElementMap: Map<string, IElementComponentManager>;
         /**
          * Scene3D所属的2D场景，使用IDE编辑的场景载入后具有此属性。
          */
@@ -9591,7 +9502,7 @@ declare module Laya {
         /**
          * 物理模拟器。
          */
-        get physicsSimulation(): PhysicsSimulation;
+        get physicsSimulation(): IPhysicsManager;
         /**
          * 场景时钟。
          * @override
@@ -9639,6 +9550,11 @@ declare module Laya {
          * 删除资源
          */
         destroy(destroyChild?: boolean): void;
+        /**
+         * 获得某个组件的管理器
+         * @param type
+         */
+        getComponentElementManager(type: string): IElementComponentManager;
         /**
          * 渲染入口
          */
@@ -9723,6 +9639,7 @@ declare module Laya {
          * 创建一个 <code>SkinnedMeshRender</code> 实例。
          */
         constructor();
+        protected _getcommonUniformMap(): string[];
         _cloneTo(dest: Component): void;
         /**
          * 删除节点
@@ -10065,6 +9982,7 @@ declare module Laya {
          * 实例化一个拖尾渲染器
          */
         constructor();
+        protected _getcommonUniformMap(): Array<string>;
         protected _onAdded(): void;
         /**
          * 获取淡出时间。单位s
@@ -10749,52 +10667,8 @@ declare module Laya {
          */
         destroy(): void;
     }
-    class MaterialParser {
-        static parse(data: any): Material;
-        static collectLinks(data: any, basePath: string): ILoadURL[];
-        /**
-         * @deprecated
-         * @inheritDoc
-         */
-        static parseLegacy(data: any): Material;
-        /**
-            * @deprecated
-            * 兼容Blend数据
-            */
-        private static _getRenderStateParams;
-    }
-    class ShaderParser {
-        static parse(data: string, basePath?: string): Shader3D;
-        static compileToTree(sliceFlag: string[], data: string, sliceIndex: number): string[];
-        static getMapKey(value: string): string;
-        /**
-         * get Shader Data
-         */
-        static getShaderBlock(source: string): IShaderObjStructor;
-        /**
-         * get CG data for map
-         * @param source
-         * @returns
-         */
-        static getCGBlock(source: string): {
-            [key: string]: string;
-        };
-        static bindCG(shaderObj: IShaderObjStructor, cgmap: {
-            [key: string]: string;
-        }): void;
-        /**
-         * trans string to ShaderDataType
-         * @param value
-         * @returns
-         */
-        static getShaderDataType(value: string): ShaderDataType;
-        /**
-         * set ShaderData Value
-         * @param type
-         * @param data
-         * @returns
-         */
-        static getDefaultData(type: ShaderDataType, data: any): any;
+    class LensFlareSettingsLoader implements IResourceLoader {
+        load(task: ILoadTask): Promise<LensFlareData>;
     }
     /**
      * <code>BoundBox</code> 类用于创建包围盒。
@@ -11507,6 +11381,7 @@ declare module Laya {
     interface IBoundsCell {
         bounds: Bounds;
         id: number;
+        shadowCullPass(): boolean;
     }
     /**
      * 平面。
@@ -11701,69 +11576,46 @@ declare module Laya {
          */
         cloneTo(out: Viewport): void;
     }
-    interface IPhyDebugDrawer {
-        /**
-         * 设置颜色
-         * @param c
-         */
-        color(c: number): void;
-        /**
-         * 画线
-         * @param sx
-         * @param sy
-         * @param sz
-         * @param ex
-         * @param ey
-         * @param ez
-         */
-        line(sx: number, sy: number, sz: number, ex: number, ey: number, ez: number): void;
-        /**
-         * 清除画线结果
-         */
-        clear(): void;
-    }
     /**
      * <code>CharacterController</code> 类用于创建角色控制器。
      */
-    class CharacterController extends PhysicsComponent {
-        static UPAXIS_X: number;
-        static UPAXIS_Y: number;
-        static UPAXIS_Z: number;
-        userData: any;
-        set colliderShape(value: ColliderShape);
+    class CharacterController extends PhysicsColliderComponent {
+        onUpdate(): void;
         /**
-        * 碰撞形状。
-        */
-        get colliderShape(): ColliderShape;
-        /**
-         * 角色降落速度。
+         * 胶囊半径。
          */
-        get fallSpeed(): number;
-        set fallSpeed(value: number);
+        get radius(): number;
+        set radius(value: number);
         /**
-         * 角色与其他物体碰撞的时候，产生的推力的大小
+         * 高度。
          */
-        set pushForce(v: number);
-        get pushForce(): number;
+        get height(): number;
+        set height(value: number);
         /**
-         * 角色跳跃速度。
+         *
          */
-        get jumpSpeed(): number;
-        set jumpSpeed(value: number);
+        get minDistance(): number;
+        set minDistance(value: number);
+        /**
+         * 碰撞偏移
+         */
+        get centerOffset(): Vector3;
+        set centerOffset(value: Vector3);
         /**
          * 重力。
          */
         get gravity(): Vector3;
         set gravity(value: Vector3);
         /**
+        * 碰撞偏移。
+        */
+        get skinWidth(): number;
+        set skinWidth(value: number);
+        /**
          * 最大坡度。
          */
         get maxSlope(): number;
         set maxSlope(value: number);
-        /**
-         * 角色是否在地表。
-         */
-        get isGrounded(): boolean;
         /**
          * 角色行走的脚步高度，表示可跨越的最大高度。
          */
@@ -11780,10 +11632,10 @@ declare module Laya {
         get position(): Vector3;
         set position(v: Vector3);
         /**
-         * 获得角色四元数
+         * 推动力大小
          */
-        get orientation(): Quaternion;
-        set orientation(v: Quaternion);
+        get pushForce(): number;
+        set pushForce(value: number);
         /**
          * 创建一个 <code>CharacterController</code> 实例。
          * @param stepheight 角色脚步高度。
@@ -11791,25 +11643,12 @@ declare module Laya {
          * @param collisionGroup 所属碰撞组。
          * @param canCollideWith 可产生碰撞的碰撞组。
          */
-        constructor(stepheight?: number, upAxis?: Vector3, collisionGroup?: number, canCollideWith?: number);
-        private setJumpAxis;
-        protected _onAdded(): void;
-        protected _onDestroy(): void;
-        /**
-         * 获得碰撞标签
-         * @returns
-         */
-        getHitFlag(): any;
+        constructor();
         /**
          * 获得速度
          * @returns
          */
-        getVerticalVel(): any;
-        /**
-         * 获得角色碰撞的对象
-         * @param cb
-         */
-        getOverlappingObj(cb: (body: Rigidbody3D) => void): void;
+        getVerticalVel(): number;
         /**
          * 通过指定移动向量移动角色。
          * @param	movement 移动向量。
@@ -11820,7 +11659,6 @@ declare module Laya {
          * @param velocity 跳跃速度。
          */
         jump(velocity?: Vector3): void;
-        get btColliderObject(): number;
     }
     /**
      * <code>Collision</code> 类用于创建物理碰撞信息。
@@ -11829,174 +11667,181 @@ declare module Laya {
         /**@readonly*/
         contacts: ContactPoint[];
         /**@readonly*/
-        other: PhysicsComponent;
+        other: ICollider;
         /**
          * 创建一个 <code>Collision</code> 实例。
          */
         constructor();
     }
     /**
-     * <code>CollisionMap</code> 类用于实现碰撞组合实例图。
-     */
-    class CollisionTool {
-        /**
-         * 创建一个 <code>CollisionMap</code> 实例。
-         */
-        constructor();
-    }
-    /**
-     * ...
-     * @author ...
-     */
-    class Constraint3D {
-        /**获取刚体A。[只读]*/
-        rigidbodyA: Rigidbody3D;
-        /**获取刚体A。[只读]*/
-        rigidbodyB: Rigidbody3D;
-        constructor();
-    }
-    /**
      * <code>ConfigurableConstraint</code>类用于可设置的约束组件
      */
     class ConfigurableConstraint extends ConstraintComponent {
-        /** 约束限制模式  完全限制 */
-        static CONFIG_MOTION_TYPE_LOCKED: number;
-        /** 约束限制模式  范围限制 */
-        static CONFIG_MOTION_TYPE_LIMITED: number;
-        /** 约束限制模式  不限制 */
-        static CONFIG_MOTION_TYPE_FREE: number;
         /**
          * 创建一个<code>ConfigurableConstraint</code>实例	可设置的约束组件
          */
         constructor();
+        private _setDriveLinearX;
+        private _setDriveLinearY;
+        private _setDriveLinearZ;
+        private _setAngularXDrive;
+        private _setAngularYZDrive;
+        private _setAngularSlerpDrive;
+        private _setDistanceLimit;
+        private _setAngularXLimit;
+        private _setSwingLimit;
+        private _setTargetTransform;
         /**
-         * 主轴
+         * axis
          */
+        private _setAxis;
+        private _setTargetVelocirty;
+        /**
+         * main Axis
+         */
+        set axis(value: Vector3);
         get axis(): Vector3;
+        set secondaryAxis(value: Vector3);
         /**
          * 副轴
          */
         get secondaryAxis(): Vector3;
         /**
-         * 旋转角度最大值
+         * X Motion
          */
-        set maxAngularLimit(value: Vector3);
+        set XMotion(value: D6Axis);
+        get XMotion(): D6Axis;
         /**
-         * 旋转角度最小值
+         * Y Motion
          */
-        set minAngularLimit(value: Vector3);
-        get maxAngularLimit(): Vector3;
-        get minAngularLimit(): Vector3;
+        set YMotion(value: D6Axis);
+        get YMotion(): D6Axis;
         /**
-         * 最大线性位置
+         * Z Motion
          */
-        set maxLinearLimit(value: Vector3);
+        set ZMotion(value: D6Axis);
+        get ZMotion(): D6Axis;
         /**
-         * 最小线性位置
+         * X 角度motion
          */
-        set minLinearLimit(value: Vector3);
-        get maxLinearLimit(): Vector3;
-        get minLinearLimit(): Vector3;
+        set angularXMotion(value: D6Axis);
+        get angularXMotion(): D6Axis;
         /**
-         * X轴线性约束模式
+         * Y 角度motion
          */
-        set XMotion(value: number);
-        get XMotion(): number;
+        set angularYMotion(value: D6Axis);
+        get angularYMotion(): D6Axis;
         /**
-         * Y轴线性约束模式
+         * Z 角度motion
          */
-        set YMotion(value: number);
-        get YMotion(): number;
-        /**
-         * Z轴线性约束模式
-         */
-        set ZMotion(value: number);
-        get ZMotion(): number;
-        /**
-         * X轴旋转约束模式
-         */
-        set angularXMotion(value: number);
-        get angularXMotion(): number;
-        /**
-         * Y轴旋转约束模式
-         */
-        set angularYMotion(value: number);
-        get angularYMotion(): number;
-        /**
-         * Z轴旋转约束模式
-         */
-        set angularZMotion(value: number);
-        get angularZMotion(): number;
-        /**
-         * 线性弹簧
-         */
-        set linearLimitSpring(value: Vector3);
-        get linearLimitSpring(): Vector3;
-        /**
-         * 角度弹簧
-         */
-        set angularLimitSpring(value: Vector3);
-        get angularLimitSpring(): Vector3;
-        /**
-         * 线性弹力
-         */
-        set linearBounce(value: Vector3);
-        get linearBounce(): Vector3;
-        /**
-         * 角度弹力
-         */
-        set angularBounce(value: Vector3);
-        get angularBounce(): Vector3;
-        /**
-         * 线性阻力
-         */
-        set linearDamp(value: Vector3);
-        get linearDamp(): Vector3;
-        /**
-         * 角度阻力
-         */
-        set angularDamp(value: Vector3);
-        get angularDamp(): Vector3;
-        /**
-         * 设置锚点
-         */
-        set anchor(value: Vector3);
-        get anchor(): Vector3;
-        /**
-         * 设置链接锚点
-         */
-        set connectAnchor(value: Vector3);
-        get connectAnchor(): Vector3;
-        /**
-         * 设置对象自然旋转的局部轴主轴，axis2为副轴
-         * @param axis1
-         * @param axis2
-         */
-        setAxis(axis: Vector3, secondaryAxis: Vector3): void;
+        set angularZMotion(value: D6Axis);
+        get angularZMotion(): D6Axis;
+        set distanceLimit(value: number);
+        get distanceLimit(): number;
+        set distanceBounciness(value: number);
+        get distanceBounciness(): number;
+        set distanceBounceThreshold(value: number);
+        get distanceBounceThreshold(): number;
+        set distanceSpring(value: number);
+        get distanceSpring(): number;
+        set distanceDamper(value: number);
+        get distanceDamper(): number;
+        /**-180 ---- 180 */
+        set angularXMaxLimit(value: number);
+        get angularXMaxLimit(): number;
+        set angularXMinLimit(value: number);
+        get angularXMinLimit(): number;
+        set AngleXLimitBounceness(value: number);
+        get AngleXLimitBounceness(): number;
+        set AngleXLimitBounceThreshold(value: number);
+        get AngleXLimitBounceThreshold(): number;
+        set AngleXLimitSpring(value: number);
+        get AngleXLimitSpring(): number;
+        set AngleXLimitDamp(value: number);
+        get AngleXLimitDamp(): number;
+        set AngleYLimit(value: number);
+        get AngleYLimit(): number;
+        set AngleZLimit(value: number);
+        get AngleZLimit(): number;
+        set AngleYZLimitBounciness(value: number);
+        get AngleYZLimitBounciness(): number;
+        set AngleYZLimitBounceThreshold(value: number);
+        get AngleYZLimitBounceThreshold(): number;
+        set AngleYZLimitSpring(value: number);
+        get AngleYZLimitSpring(): number;
+        set AngleYZLimitDamping(value: number);
+        get AngleYZLimitDamping(): number;
+        set targetPosition(value: Vector3);
+        get targetPosition(): Vector3;
+        set targetRotation(value: Vector3);
+        get targetRotation(): Vector3;
+        set targetPositionVelocity(value: Vector3);
+        get targetPositionVelocity(): Vector3;
+        set targetAngularVelocity(value: Vector3);
+        get targetAngularVelocity(): Vector3;
+        set XDriveSpring(value: number);
+        get XDriveSpring(): number;
+        set YDriveSpring(value: number);
+        get YDriveSpring(): number;
+        set ZDriveSpring(value: number);
+        get ZDriveSpring(): number;
+        set XDriveDamp(value: number);
+        get XDriveDamp(): number;
+        set YDriveDamp(value: number);
+        get YDriveDamp(): number;
+        set ZDriveDamp(value: number);
+        get ZDriveDamp(): number;
+        set XDriveForceLimit(value: number);
+        get XDriveForceLimit(): number;
+        set YDriveForceLimit(value: number);
+        get YDriveForceLimit(): number;
+        set ZDriveForceLimit(value: number);
+        get ZDriveForceLimit(): number;
+        get angularXDriveForceLimit(): number;
+        set angularXDriveForceLimit(value: number);
+        get angularXDriveForce(): number;
+        set angularXDriveForce(value: number);
+        get angularXDriveDamp(): number;
+        set angularXDriveDamp(value: number);
+        get angularYZDriveForceLimit(): number;
+        set angularYZDriveForceLimit(value: number);
+        get angularYZDriveForce(): number;
+        set angularYZDriveForce(value: number);
+        get angularYZDriveDamp(): number;
+        set angularYZDriveDamp(value: number);
+        get angularSlerpDriveForceLimit(): number;
+        set angularSlerpDriveForceLimit(value: number);
+        get angularSlerpDriveForce(): number;
+        set angularSlerpDriveForce(value: number);
+        get angularSlerpDriveDamp(): number;
+        set angularSlerpDriveDamp(value: number);
         _initAllConstraintInfo(): void;
         protected _onEnable(): void;
         protected _onDisable(): void;
+        /**
+        * create joint
+        */
+        protected _initJoint(): void;
     }
     /**
      * <code>ConstraintComponent</code> 类用于创建约束的父类。
      */
     class ConstraintComponent extends Component {
-        /** 连接的两个物体是否进行碰撞检测 */
-        disableCollisionsBetweenLinkedBodies: boolean;
+        protected _physicsManager: IPhysicsManager;
+        protected _connectCollider: PhysicsColliderComponent;
+        protected _breakForce: number;
+        protected _breakTorque: number;
+        protected _ownColliderLocalPos: Vector3;
+        protected _connectColliderLocalPos: Vector3;
         /**
-         * 获取应用的冲力。
+         * instance joint
          */
-        get appliedImpulse(): number;
-        /**
-         * 获取连接的刚体B。
-         * @return 已连接刚体B。
-         */
-        get connectedBody(): Rigidbody3D;
-        /**
-         * 获取连接的刚体A。
-         * @return 已连接刚体A。
-         */
-        get ownBody(): Rigidbody3D;
+        initJoint(): void;
+        protected _initJoint(): void;
+        set connectedBody(value: PhysicsColliderComponent);
+        get connectedBody(): PhysicsColliderComponent;
+        get ownBody(): PhysicsColliderComponent;
+        set ownBody(value: PhysicsColliderComponent);
         /**
          * 获得收到的总力
          */
@@ -12023,14 +11868,20 @@ declare module Laya {
         set anchor(value: Vector3);
         get anchor(): Vector3;
         /**
-         * 设置链接锚点
+         * 设置链接锚点位置
          */
         set connectAnchor(value: Vector3);
         get connectAnchor(): Vector3;
         /**
+         * 是否碰撞关节之间的内容
+         */
+        get enableCollison(): boolean;
+        set enableCollison(value: boolean);
+        /**
          * 创建一个 <code>ConstraintComponent</code> 实例。
          */
-        constructor(constraintType: number);
+        constructor();
+        protected _onAdded(): void;
         /**
          * 设置迭代的次数，次数越高，越精确
          * @param overideNumIterations
@@ -12041,40 +11892,6 @@ declare module Laya {
          * @param enable
          */
         setConstraintEnabled(enable: boolean): void;
-        /**
-         * 设置约束的本地空间
-         */
-        setFrames(): void;
-        /**
-         * 设置约束刚体
-         * @param ownerRigid
-         * @param connectRigidBody
-         * @override
-         */
-        setConnectRigidBody(ownerRigid: Rigidbody3D, connectRigidBody: Rigidbody3D): void;
-        /**
-         * 连接两个刚体。
-         * 上面的限制太多，例如希望可以没有shape
-         * @param A
-         * @param B
-         */
-        _setConnectRigidBody(A: Rigidbody3D, B: Rigidbody3D): void;
-        /**
-         * 获得当前力
-         * @param out
-         */
-        getcurrentForce(out: Vector3): void;
-        /**
-         * 获取物理世界。
-         * 缺省的是从所属的scene3d取，子类可以提供另外的方法
-         * @returns
-         */
-        getPhysicsSimulation(): PhysicsSimulation;
-        /**
-         * 获得当前力矩
-         * @param out
-         */
-        getcurrentTorque(out: Vector3): void;
         protected _onDestroy(): void;
     }
     class FixedConstraint extends ConstraintComponent {
@@ -12085,14 +11902,122 @@ declare module Laya {
         protected _onEnable(): void;
         protected _onDisable(): void;
     }
+    class HingeConstraint extends ConstraintComponent {
+        /**
+        * 创建一个<code>HingeConstraint</code>铰链实例
+        */
+        constructor();
+        /**
+         * create joint
+         */
+        protected _initJoint(): void;
+        /**
+         * overrid it
+         */
+        protected _onEnable(): void;
+        /**
+         * overrid it
+         */
+        protected _onDisable(): void;
+        /**
+        * set Hinge Rotation Axis,value by local rigibody0
+        */
+        set Axis(value: Vector3);
+        get Axis(): Vector3;
+        /**
+         * set limitLower
+         * @param lowerLimit
+         */
+        set lowerLimit(value: number);
+        get lowerLimit(): number;
+        /**
+         * set uperLimit
+         * @param lowerLimit
+         */
+        set uperLimit(value: number);
+        get uperLimit(): number;
+        /**
+         * @param value
+         */
+        set bounceness(value: number);
+        get bounceness(): number;
+        /**
+         * @param value
+         */
+        set bouncenMinVelocity(value: number);
+        get bouncenMinVelocity(): number;
+        /**
+         * @param value
+         */
+        set contactDistance(value: number);
+        get contactDistance(): number;
+        /**
+         * @param value
+         */
+        set limit(value: boolean);
+        get limit(): boolean;
+        /**
+         * @param value
+         */
+        set motor(value: boolean);
+        get motor(): boolean;
+        /**
+         * @param value
+         */
+        set freeSpin(value: boolean);
+        get freeSpin(): boolean;
+        /**
+         * set the target velocity for the drive model.
+         * @param velocity the drive target velocity
+         */
+        set targetVelocity(velocity: number);
+        get targetVelocity(): number;
+        /**
+         * The current angle in degrees of the joint relative to its rest position.
+         */
+        getAngle(): number;
+        /**
+         * The angular velocity of the joint in degrees per second.
+         */
+        getVelocity(): Vector3;
+    }
+    class SpringConstraint extends ConstraintComponent {
+        protected _onAdded(): void;
+        /**
+         * set spring min Distance
+         */
+        set minDistance(value: number);
+        get minDistance(): number;
+        /**
+         * set spring max Distance
+         */
+        set maxDistance(value: number);
+        get maxDistance(): number;
+        /**
+         * set sprint default length
+         * Set the error tolerance of the joint.
+         */
+        set tolerance(value: number);
+        get tolerance(): number;
+        /**
+         * set spring stifness
+         */
+        set spring(value: number);
+        get spring(): number;
+        /**
+         * set damping in spring
+         */
+        set damping(value: number);
+        get damping(): number;
+    }
     /**
      * <code>ContactPoint</code> 类用于创建物理碰撞信息。
      */
     class ContactPoint {
         /**碰撞器A。*/
-        colliderA: PhysicsComponent;
+        _colliderA: ICollider;
         /**碰撞器B。*/
-        colliderB: PhysicsComponent;
+        _colliderB: ICollider;
         /**距离。*/
         distance: number;
         /**法线。*/
@@ -12113,7 +12038,7 @@ declare module Laya {
         /** 是否成功。 */
         succeeded: boolean;
         /** 发生碰撞的碰撞组件。*/
-        collider: PhysicsComponent;
+        collider: ICollider;
         /** 碰撞点。*/
         point: Vector3;
         /** 碰撞法线。*/
@@ -12128,23 +12053,48 @@ declare module Laya {
     /**
      * <code>PhysicsCollider</code> 类用于创建物理碰撞器。
      */
-    class PhysicsCollider extends PhysicsTriggerComponent {
+    class PhysicsCollider extends PhysicsColliderComponent {
         /**
-         * 创建一个 <code>PhysicsCollider</code> 实例。
-         * @param collisionGroup 所属碰撞组。
-         * @param canCollideWith 可产生碰撞的碰撞组。
+         * @override
+         * @interanl
          */
-        constructor(collisionGroup?: number, canCollideWith?: number);
-        protected _onAdded(): void;
+        _collider: IStaticCollider;
+        /**
+         * @override
+         * @interanl
+         */
+        protected _initCollider(): void;
+        constructor();
+        /**
+         * 是否为触发器。
+         */
+        get isTrigger(): boolean;
+        set isTrigger(value: boolean);
     }
     /**
-     * <code>PhysicsComponent</code> 类用于创建物理组件的父类。
+     * Describes how physics materials of the colliding objects are combined.
      */
-    class PhysicsComponent extends Component {
-        /** 是否可以缩放Shape。 */
-        canScaleShape: boolean;
+    enum PhysicsCombineMode {
+        /** Averages the friction/bounce of the two colliding materials. */
+        Average = 0,
+        /** Uses the smaller friction/bounce of the two colliding materials. */
+        Minimum = 1,
+        /** Multiplies the friction/bounce of the two colliding materials. */
+        Multiply = 2,
+        /** Uses the larger friction/bounce of the two colliding materials. */
+        Maximum = 3
+    }
+    enum PhysicsForceMode {
+        Force = 0,
+        Impulse = 1
+    }
+    /**
+     * <code>PhysicsColliderComponent</code> 类用于创建物理组件的父类。
+     */
+    class PhysicsColliderComponent extends Component {
+        get collider(): ICollider;
         /**
-         * 弹力。
+         * 弹力。也叫Bounciness
          */
         get restitution(): number;
         set restitution(value: number);
@@ -12159,6 +12109,26 @@ declare module Laya {
         get rollingFriction(): number;
         set rollingFriction(value: number);
         /**
+         * 动态摩擦力
+         */
+        get dynamicFriction(): number;
+        set dynamicFriction(value: number);
+        /**
+         * 静态摩擦力
+         */
+        get staticFriction(): number;
+        set staticFriction(value: number);
+        /**
+         * 摩擦力模式
+         */
+        set frictionCombine(value: PhysicsCombineMode);
+        get frictionCombine(): PhysicsCombineMode;
+        /**
+         * 弹力模式
+         */
+        set restitutionCombine(value: PhysicsCombineMode);
+        get restitutionCombine(): PhysicsCombineMode;
+        /**
          * 用于连续碰撞检测(CCD)的速度阈值,当物体移动速度小于该值时不进行CCD检测,防止快速移动物体(例如:子弹)错误的穿过其它物体,0表示禁止。
          */
         get ccdMotionThreshold(): number;
@@ -12169,18 +12139,10 @@ declare module Laya {
         get ccdSweptSphereRadius(): number;
         set ccdSweptSphereRadius(value: number);
         /**
-         * 获取是否激活。
-         */
-        get isActive(): boolean;
-        /**
          * 碰撞形状。
          */
-        get colliderShape(): ColliderShape;
-        set colliderShape(value: ColliderShape);
-        /**
-         * 模拟器。
-         */
-        get simulation(): PhysicsSimulation;
+        get colliderShape(): Physics3DColliderShape;
+        set colliderShape(value: Physics3DColliderShape);
         /**
          * 所属碰撞组。
          */
@@ -12191,26 +12153,13 @@ declare module Laya {
          */
         get canCollideWith(): number;
         set canCollideWith(value: number);
-        /**
-         * 创建一个 <code>PhysicsComponent</code> 实例。
-         * @param collisionGroup 所属碰撞组。
-         * @param canCollideWith 可产生碰撞的碰撞组。
-         */
-        constructor(collisionGroup: number, canCollideWith: number);
+        constructor();
+        initCollider(): void;
+        protected _initCollider(): void;
         protected _onAdded(): void;
         protected _onEnable(): void;
         protected _onDisable(): void;
         protected _onDestroy(): void;
-        /**
-         * 获得物理位置
-         * @returns 返回位置
-         */
-        getPhysicsPosition(): Vector3;
-        /**
-         * 获得物理四元数
-         * @returns
-         */
-        getPhysicsOrientation(): Quaternion;
     }
     /**
      * <code>PhysicsSettings</code> 类用于创建物理配置信息。
@@ -12224,215 +12173,25 @@ declare module Laya {
         fixedTimeStep: number;
     }
     /**
-     * <code>Simulation</code> 类用于创建物理模拟器。
-     */
-    class PhysicsSimulation {
-        static disableSimulation: boolean;
-        protected _updateCount: number;
-        /**
-         * 创建限制刚体运动的约束条件。
-         */
-        static createConstraint(): void;
-        /**物理引擎在一帧中用于补偿减速的最大次数：模拟器每帧允许的最大模拟次数，如果引擎运行缓慢,可能需要增加该次数，否则模拟器会丢失“时间",引擎间隔时间小于maxSubSteps*fixedTimeStep非常重要。*/
-        maxSubSteps: number;
-        /**物理模拟器帧的间隔时间:通过减少fixedTimeStep可增加模拟精度，默认是1.0 / 60.0。*/
-        fixedTimeStep: number;
-        dt: number;
-        /**
-         * 是否进行连续碰撞检测。
-         */
-        get continuousCollisionDetection(): boolean;
-        set continuousCollisionDetection(value: boolean);
-        /**
-         * 获取重力。
-         */
-        get gravity(): Vector3;
-        set gravity(value: Vector3);
-        enableDebugDrawer(b: boolean): void;
-        /**
-         * 射线检测第一个碰撞物体。
-         * @param	from 起始位置。
-         * @param	to 结束位置。
-         * @param	out 碰撞结果。
-         * @param   collisonGroup 射线所属碰撞组。
-         * @param   collisionMask 与射线可产生碰撞的组。
-         * @return 	是否成功。
-         */
-        raycastFromTo(from: Vector3, to: Vector3, out?: HitResult, collisonGroup?: number, collisionMask?: number): boolean;
-        /**
-         * 射线检测所有碰撞的物体。
-         * @param	from 起始位置。
-         * @param	to 结束位置。
-         * @param	out 碰撞结果[数组元素会被回收]。
-         * @param   collisonGroup 射线所属碰撞组。
-         * @param   collisionMask 与射线可产生碰撞的组。
-         * @return 	是否成功。
-         */
-        raycastAllFromTo(from: Vector3, to: Vector3, out: HitResult[], collisonGroup?: number, collisionMask?: number): boolean;
-        /**
-         *  射线检测第一个碰撞物体。
-         * @param  	ray        射线
-         * @param  	outHitInfo 与该射线发生碰撞的第一个碰撞器的碰撞信息
-         * @param  	distance   射线长度,默认为最大值
-         * @param   collisonGroup 射线所属碰撞组。
-         * @param   collisionMask 与射线可产生碰撞的组。
-         * @return 	是否检测成功。
-         */
-        rayCast(ray: Ray, outHitResult?: HitResult, distance?: number, collisonGroup?: number, collisionMask?: number): boolean;
-        /**
-         * 射线检测所有碰撞的物体。
-         * @param  	ray        射线
-         * @param  	out 碰撞结果[数组元素会被回收]。
-         * @param  	distance   射线长度,默认为最大值
-         * @param   collisonGroup 射线所属碰撞组。
-         * @param   collisionMask 与射线可产生碰撞的组。
-         * @return 	是否检测成功。
-         */
-        rayCastAll(ray: Ray, out: HitResult[], distance?: number, collisonGroup?: number, collisionMask?: number): boolean;
-        /**
-         * 形状检测第一个碰撞的物体。
-         * @param   shape 形状。
-         * @param	fromPosition 世界空间起始位置。
-         * @param	toPosition 世界空间结束位置。
-         * @param	out 碰撞结果。
-         * @param	fromRotation 起始旋转。
-         * @param	toRotation 结束旋转。
-         * @param   collisonGroup 射线所属碰撞组。
-         * @param   collisionMask 与射线可产生碰撞的组。
-         * @return 	是否成功。
-         */
-        shapeCast(shape: ColliderShape, fromPosition: Vector3, toPosition: Vector3, out?: HitResult, fromRotation?: Quaternion, toRotation?: Quaternion, collisonGroup?: number, collisionMask?: number, allowedCcdPenetration?: number): boolean;
-        /**
-         * 形状检测所有碰撞的物体。
-         * @param   shape 形状。
-         * @param	fromPosition 世界空间起始位置。
-         * @param	toPosition 世界空间结束位置。
-         * @param	out 碰撞结果[数组元素会被回收]。
-         * @param	fromRotation 起始旋转。
-         * @param	toRotation 结束旋转。
-         * @param   collisonGroup 射线所属碰撞组。
-         * @param   collisionMask 与射线可产生碰撞的组。
-         * @return 	是否成功。
-         */
-        shapeCastAll(shape: ColliderShape, fromPosition: Vector3, toPosition: Vector3, out: HitResult[], fromRotation?: Quaternion, toRotation?: Quaternion, collisonGroup?: number, collisionMask?: number, allowedCcdPenetration?: number): boolean;
-        /**
-         * 添加刚体运动的约束条件。
-         * @param constraint 约束。
-         * @param disableCollisionsBetweenLinkedBodies 是否禁用
-         */
-        addConstraint(constraint: ConstraintComponent, disableCollisionsBetweenLinkedBodies?: boolean): void;
-        /**
-         * 移除刚体运动的约束条件。
-         */
-        removeConstraint(constraint: ConstraintComponent): void;
-        /**
-         * 设置射线检测回调
-         * @param HITSRAYRESULTCALLBACK_FLAG值
-         */
-        setHitsRayResultCallbackFlag(flag?: number): void;
-        /**
-         * 这个只是给对象发送事件，不会挨个组件调用碰撞函数
-         * 组件要响应碰撞的话，要通过监听事件
-         */
-        dispatchCollideEvent(): void;
-        /**
-         * 清除力。
-         */
-        clearForces(): void;
-        createRaycastVehicle(body: Rigidbody3D): RaycastVehicle;
-        addVehicle(v: RaycastVehicle): void;
-        removeVehicle(v: RaycastVehicle): void;
-        private _btPairCachingGhost;
-        private _btSphereShape;
-        private _btTransform;
-        private _btVec;
-        sphereQuery(pos: Vector3, radius: number, result: PhysicsComponent[], collisionmask?: number): void;
-    }
-    /**
-     * <code>PhysicsTriggerComponent</code> 类用于创建物理触发器组件。
-     */
-    class PhysicsTriggerComponent extends PhysicsComponent {
-        /**
-         * 是否为触发器。
-         */
-        get isTrigger(): boolean;
-        set isTrigger(value: boolean);
-        /**
-         * 创建一个 <code>PhysicsTriggerComponent</code> 实例。
-         * @param collisionGroup 所属碰撞组。
-         * @param canCollideWith 可产生碰撞的碰撞组。
-         */
-        constructor(collisionGroup: number, canCollideWith: number);
-        protected _onAdded(): void;
-    }
-    /**
      * <code>PhysicsUpdateList</code> 类用于实现物理更新队列。
      */
-    class PhysicsUpdateList extends SingletonList<PhysicsComponent> {
+    class PhysicsUpdateList extends SingletonList<ICollider> {
         /**
          * 创建一个新的 <code>PhysicsUpdateList</code> 实例。
          */
         constructor();
     }
-    class btVehicleTuning {
-        suspensionStiffness: number;
-        suspensionCompression: number;
-        suspensionDamping: number;
-        maxSuspensionTravelCm: number;
-        frictionSlip: number;
-        maxSuspensionForce: number;
-    }
-    class RaycastVehicle {
-        userdata: any;
-        btVehiclePtr: number;
-        tuing: btVehicleTuning;
-        private wheels;
-        constructor(btObj: number);
-        addWheel(connectionPointCS0: Vector3, wheelDirectionCS0: Vector3, wheelAxleCS: Vector3, wheelRadius: number, suspensionRestLength: number, suspensionMaxTravel: number, suspensionStiffness: number, suspensionDamping: number, frictionSlip: number, isFrontWheel: boolean): RaycastWheel;
-        getNumWheels(): any;
-        getWheelInfo(i: number): any;
-    }
-    class RaycastWheel {
-        btWheelPtr: number;
-        worldPos: Vector3;
-        worldQuat: Quaternion;
-        bt: any;
-        private btMemory;
-        worldMat: Matrix4x4;
-        constructor(ptr: number);
-        set engineForce(force: number);
-        get engineForce(): number;
-        set steeringValue(v: number);
-        get steeringValue(): number;
-        set brake(v: number);
-        get brake(): number;
-        get rotation(): any;
-        get deltaRotation(): any;
-        get transform(): Matrix4x4;
-        getWorldTransform(): void;
-    }
     /**
      * <code>Rigidbody3D</code> 类用于创建刚体碰撞器。
      */
-    class Rigidbody3D extends PhysicsTriggerComponent {
-        static TYPE_STATIC: number;
-        static TYPE_DYNAMIC: number;
-        static TYPE_KINEMATIC: number;
-        userData: any;
+    class Rigidbody3D extends PhysicsColliderComponent {
         /**
          * 质量。
          */
         get mass(): number;
         set mass(value: number);
         /**
-        * 获得碰撞标记
-        * @returns
-        */
-        getCollisionFlags(): any;
-        /**
          * 是否为运动物体，如果为true仅可通过transform属性移动物体,而非其他力相关属性。
-         *
-         * TODO 这个现在是指static或者kinematic
          */
         get isKinematic(): boolean;
         set isKinematic(value: boolean);
@@ -12447,19 +12206,10 @@ declare module Laya {
         get angularDamping(): number;
         set angularDamping(value: number);
         /**
-         * 是否重载重力。
-         */
-        get overrideGravity(): boolean;
-        set overrideGravity(value: boolean);
-        /**
          * 重力。
          */
         get gravity(): Vector3;
         set gravity(value: Vector3);
-        /**
-         * 总力。
-         */
-        get totalForce(): Vector3;
         /**
          * 每个轴的线性运动缩放因子,如果某一轴的值为0表示冻结在该轴的线性运动。
          */
@@ -12481,71 +12231,29 @@ declare module Laya {
         get angularVelocity(): Vector3;
         set angularVelocity(value: Vector3);
         /**
-         * 刚体所有扭力。
-         */
-        get totalTorque(): Vector3;
-        /**
-         * 是否进行碰撞检测。
-         */
-        get detectCollisions(): boolean;
-        set detectCollisions(value: boolean);
-        /**
-         * 是否处于睡眠状态。
-         */
-        get isSleeping(): boolean;
-        /**
          * 刚体睡眠的线速度阈值。
          */
-        get sleepLinearVelocity(): number;
-        set sleepLinearVelocity(value: number);
-        /**
-         * 刚体睡眠的角速度阈值。
-         */
-        get sleepAngularVelocity(): number;
-        set sleepAngularVelocity(value: number);
-        get btColliderObject(): number;
+        get sleepThreshold(): number;
+        set sleepThreshold(value: number);
         /**
          * 直接设置物理位置
          */
         set position(pos: Vector3);
-        get position(): Vector3;
-        /**
-         * 设置物理旋转
-         */
         set orientation(q: Quaternion);
-        get orientation(): Quaternion;
         /**
-         * 创建一个 <code>RigidBody3D</code> 实例。
-         * @param collisionGroup 所属碰撞组。
-         * @param canCollideWith 可产生碰撞的碰撞组。
+         * 是否触发器
          */
-        constructor(collisionGroup?: number, canCollideWith?: number);
+        get trigger(): boolean;
+        set trigger(value: boolean);
+        constructor();
         protected _onAdded(): void;
         protected _onDestroy(): void;
-        set colliderShape(value: ColliderShape);
-        /**
-        * 碰撞形状。
-        */
-        get colliderShape(): ColliderShape;
         /**
          * 应用作用力。
          * @param	force 作用力。
          * @param	localOffset 偏移,如果为null则为中心点
          */
         applyForce(force: Vector3, localOffset?: Vector3): void;
-        /**
-         * 应用作用力
-         * @param fx
-         * @param fy
-         * @param fz
-         * @param localOffset
-         */
-        applyForceXYZ(fx: number, fy: number, fz: number, localOffset?: Vector3): void;
-        /**
-         * 设置物理标签
-         * @param flags
-         */
-        setCollisionFlags(flags: number): void;
         /**
          * 应用扭转力。
          * @param	torque 扭转力。
@@ -12567,29 +12275,31 @@ declare module Laya {
          */
         wakeUp(): void;
         /**
-         *清除应用到刚体上的所有力。
+         * @deprecated
+         * 刚体睡眠的线速度阈值。
          */
-        clearForces(): void;
+        get sleepLinearVelocity(): number;
+        set sleepLinearVelocity(value: number);
+        /**
+         * @deprecated
+         * 刚体睡眠的角速度阈值。
+         */
+        get sleepAngularVelocity(): number;
+        set sleepAngularVelocity(value: number);
+        /**
+         * @deprecated
+         * 应用作用力
+         * @param fx
+         * @param fy
+         * @param fz
+         * @param localOffset
+         */
+        applyForceXYZ(fx: number, fy: number, fz: number, localOffset?: Vector3): void;
     }
     /**
      * <code>BoxColliderShape</code> 类用于创建盒子形状碰撞器。
      */
-    class BoxColliderShape extends ColliderShape {
-        /**
-         * X轴尺寸。
-         */
-        get sizeX(): number;
-        set sizeX(value: number);
-        /**
-         * Y轴尺寸。
-         */
-        get sizeY(): number;
-        set sizeY(value: number);
-        /**
-         * Z轴尺寸。
-         */
-        get sizeZ(): number;
-        set sizeZ(value: number);
+    class BoxColliderShape extends Physics3DColliderShape {
         /**
          * 创建一个新的 <code>BoxColliderShape</code> 实例。
          * @param sizeX 盒子X轴尺寸。
@@ -12597,16 +12307,42 @@ declare module Laya {
          * @param sizeZ 盒子Z轴尺寸。
          */
         constructor(sizeX?: number, sizeY?: number, sizeZ?: number);
+        protected _createShape(): void;
+        /**
+         * Box size
+         */
+        get size(): Vector3;
+        set size(value: Vector3);
         /**
          * @inheritDoc
          * @override
          */
         clone(): any;
+        cloneTo(destObject: any): void;
+        /**
+         * @description
+         * X轴尺寸。
+         */
+        get sizeX(): number;
+        set sizeX(value: number);
+        /**
+         * @description
+         * Y轴尺寸。
+         */
+        get sizeY(): number;
+        set sizeY(value: number);
+        /**
+         * @description
+         * Z轴尺寸。
+         */
+        get sizeZ(): number;
+        set sizeZ(value: number);
     }
     /**
      * <code>CapsuleColliderShape</code> 类用于创建胶囊形状碰撞器。
      */
-    class CapsuleColliderShape extends ColliderShape {
+    class CapsuleColliderShape extends Physics3DColliderShape {
+        _shape: ICapsuleColliderShape;
         /**
          * 半径。
          */
@@ -12630,63 +12366,24 @@ declare module Laya {
          */
         constructor(radius?: number, length?: number, orientation?: number);
         /**
+         * @override
+         */
+        protected _createShape(): void;
+        /**
          * @inheritDoc
          * @override
          */
         clone(): any;
-    }
-    /**
-     * <code>ColliderShape</code> 类用于创建形状碰撞器的父类，该类为抽象类。
-     */
-    class ColliderShape implements IClone {
-        /** 形状方向_X轴正向 */
-        static SHAPEORIENTATION_UPX: number;
-        /** 形状方向_Y轴正向 */
-        static SHAPEORIENTATION_UPY: number;
-        /** 形状方向_Z轴正向 */
-        static SHAPEORIENTATION_UPZ: number;
-        needsCustomCollisionCallback: boolean;
         /**
-         * 碰撞类型。
+         * @inheritDoc
+         * @override
          */
-        get type(): number;
-        /**
-         * Shape的本地偏移。
-         */
-        get localOffset(): Vector3;
-        set localOffset(value: Vector3);
-        /**
-         * Shape的本地旋转。
-         */
-        get localRotation(): Quaternion;
-        set localRotation(value: Quaternion);
-        /**
-         * 创建一个新的 <code>ColliderShape</code> 实例。
-         */
-        constructor();
-        /**
-         * 更新本地偏移,如果修改LocalOffset或LocalRotation需要调用。
-         */
-        updateLocalTransformations(): void;
-        /**
-         * 克隆。
-         * @param	destObject 克隆源。
-         */
-        cloneTo(destObject: any): void;
-        /**
-         * 克隆。
-         * @return 克隆副本。
-         */
-        clone(): any;
-        /**
-         * 销毁。
-         */
-        destroy(): void;
+        cloneTo(destObject: CapsuleColliderShape): void;
     }
     /**
      * <code>CompoundColliderShape</code> 类用于创建组合碰撞器。
      */
-    class CompoundColliderShape extends ColliderShape {
+    class CompoundColliderShape extends Physics3DColliderShape {
         /**
          * 创建一个新的 <code>CompoundColliderShape</code> 实例。
          */
@@ -12695,18 +12392,18 @@ declare module Laya {
          * 设置物理shape数组
          * IDE
          */
-        set shapes(value: ColliderShape[]);
-        get shapes(): ColliderShape[];
+        set shapes(value: any[]);
+        get shapes(): any[];
         /**
          * 添加子碰撞器形状。
          * @param	shape 子碰撞器形状。
          */
-        addChildShape(shape: ColliderShape): void;
+        addChildShape(shape: any): void;
         /**
          * 移除子碰撞器形状。
          * @param	shape 子碰撞器形状。
          */
-        removeChildShape(shape: ColliderShape): void;
+        removeChildShape(shape: any): void;
         /**
          * 清空子碰撞器形状。
          */
@@ -12735,10 +12432,7 @@ declare module Laya {
     /**
      * <code>ConeColliderShape</code> 类用于创建圆锥碰撞器。
      */
-    class ConeColliderShape extends ColliderShape {
-        private _orientation;
-        private _radius;
-        private _height;
+    class ConeColliderShape extends Physics3DColliderShape {
         /**
          * 半径。
          */
@@ -12767,14 +12461,18 @@ declare module Laya {
          * @returns 克隆的ConeColliderShape实例
          */
         clone(): any;
+        /**
+         * 克隆
+         * @inheritDoc
+         * @override
+         * @returns 克隆的ConeColliderShape实例
+         */
+        cloneTo(destObject: ConeColliderShape): void;
     }
     /**
      * <code>CylinderColliderShape</code> 类用于创建圆柱碰撞器。
      */
-    class CylinderColliderShape extends ColliderShape {
-        private _orientation;
-        private _radius;
-        private _height;
+    class CylinderColliderShape extends Physics3DColliderShape {
         /**
          * 半径。
          */
@@ -12801,37 +12499,55 @@ declare module Laya {
          * @override
          */
         clone(): any;
-    }
-    /**
-     * <code>BoxColliderShape</code> 类用于创建高度图地形形状碰撞器。
-     *
-     */
-    class HeightfieldTerrainShape extends ColliderShape {
-        dataPtr: number;
-        initSize: Vector3;
-        constructor(heightfieldData: Uint16Array | Float32Array | Uint8Array, heightStickWidth: number, heightStickLength: number, minHeight: number, maxHeight: number, heightScale: number);
         /**
-        * 设置地形的margin
-        * margin有助于提高稳定性
-        * @param margin
-        */
-        setMargin(margin: number): void;
-        destroy(): void;
-        /**
+         * 克隆
          * @inheritDoc
          * @override
+         * @returns 克隆的ConeColliderShape实例
          */
-        clone(): any;
+        cloneTo(destObject: CylinderColliderShape): void;
+    }
+    /**
+     * 高度场数据
+     */
+    interface heightFieldData {
+        /** 排*/
+        numRows: number;
+        /** 列*/
+        numCols: number;
+        /** 高度数据*/
+        heightData: Float32Array;
+        /** 镶嵌标志 0和1 分别表示地形三角形朝向左还是朝右*/
+        flag: Uint8Array;
+        /** 高度Scale*/
+        scale: Vector3;
+    }
+    /**
+     * 此类描述高度场物理碰撞
+     */
+    class HeightFieldColliderShape extends Physics3DColliderShape {
+        /**
+         * 实例化一个高度场碰撞体
+         * @param heightFieldData
+         */
+        constructor(heightFieldData: heightFieldData);
     }
     /**
      * <code>MeshColliderShape</code> 类用于创建网格碰撞器。
      */
-    class MeshColliderShape extends ColliderShape {
+    class MeshColliderShape extends Physics3DColliderShape {
+        _shape: IMeshColliderShape;
         /**
          * 网格。
          */
         get mesh(): Mesh;
         set mesh(value: Mesh);
+        private _changeShape;
+        /**
+         * 是否使用凸多边形。
+         */
+        get convexVertexMax(): number;
+        set convexVertexMax(value: number);
         /**
          * 是否使用凸多边形。
          */
@@ -12841,8 +12557,10 @@ declare module Laya {
          * 创建一个新的 <code>MeshColliderShape</code> 实例。
          */
         constructor();
-        private _createDynamicMeshCollider;
-        private _createBvhTriangleCollider;
+        /**
+         * @override
+         */
+        protected _createShape(): void;
         /**
          * @inheritDoc
          * @override
@@ -12855,9 +12573,45 @@ declare module Laya {
         clone(): any;
     }
     /**
+     * <code>ColliderShape</code> 类用于创建形状碰撞器的父类，该类为抽象类。
+     */
+    class Physics3DColliderShape implements IClone {
+        /** 形状方向_X轴正向 */
+        static SHAPEORIENTATION_UPX: number;
+        /** 形状方向_Y轴正向 */
+        static SHAPEORIENTATION_UPY: number;
+        /** 形状方向_Z轴正向 */
+        static SHAPEORIENTATION_UPZ: number;
+        _shape: IColliderShape;
+        /**
+         * Shape的本地偏移。
+         */
+        get localOffset(): Vector3;
+        set localOffset(value: Vector3);
+        /**
+         * 创建一个新的 <code>ColliderShape</code> 实例。
+         */
+        constructor();
+        protected _createShape(): void;
+        /**
+         * 克隆。
+         * @param	destObject 克隆源。
+         */
+        cloneTo(destObject: any): void;
+        /**
+         * 克隆。
+         * @return 克隆副本。
+         */
+        clone(): any;
+        /**
+         * 销毁。
+         */
+        destroy(): void;
+    }
+    /**
      * <code>SphereColliderShape</code> 类用于创建球形碰撞器。
      */
-    class SphereColliderShape extends ColliderShape {
+    class SphereColliderShape extends Physics3DColliderShape {
         /**
          * 半径。
          */
@@ -12874,25 +12628,26 @@ declare module Laya {
          */
         clone(): any;
     }
-    /**
-     * <code>StaticPlaneColliderShape</code> 类用于创建静态平面碰撞器。
-     */
-    class StaticPlaneColliderShape extends ColliderShape {
-        /**
-         * 创建一个新的 <code>StaticPlaneColliderShape</code> 实例。
-         */
-        constructor(normal: Vector3, offset: number);
-        /**
-         * @inheritDoc
-         * @override
-         */
-        clone(): any;
+    interface IRenderEngine3DOBJFactory {
+        createTransform(owner: Sprite3D): Transform3D;
+        createBounds(min: Vector3, max: Vector3): any;
+        createRenderElement(): IRenderElement;
+        createSkinRenderElement(): IRenderElement;
+        createInstanceRenderElement(): IRenderElement;
+        createBaseRenderQueue(isTransparent: boolean): IRenderQueue;
+        createVertexBuffer3D(byteLength: number, bufferUsage: BufferUsage, canRead: boolean): VertexBuffer3D;
+        createIndexBuffer3D(indexType: IndexFormat, indexCount: number, bufferUsage: BufferUsage, canRead: boolean): IndexBuffer3D;
+        createSceneRenderManager(): ISceneRenderManager;
+        createCullPass(): ICullPass;
+        createSortPass(): ISortPass;
+        createShadowCullInfo(): IShadowCullInfo;
+        createCameraCullInfo(): ICameraCullInfo;
+        createRenderGeometry(mode: MeshTopology, drayType: DrawType): IRenderGeometryElement;
+        createBaseRenderNode(): IBaseRenderNode;
+        createRenderContext3D(): IRenderContext3D;
     }
-    /**
-     * Laya物理类
-     * internal
-     */
-    class Physics3D {
+    class Laya3DRender {
+        static renderOBJCreate: IRenderEngine3DOBJFactory;
     }
     class NativeBaseRenderNode implements IBaseRenderNode {
         private _nativeObj;
@@ -13039,14 +12794,6 @@ declare module Laya {
         set staticMask(value: number);
         get staticMask(): number;
     }
-    class NativeCommandUniformMap extends CommandUniformMap {
-        private _nativeObj;
-        constructor(_nativeObj: any, stateName: string);
-        hasPtrID(propertyID: number): boolean;
-        getMap(): {
-            [key: number]: string;
-        };
-    }
     class NativeCullPassBase implements ICullPass {
         private _nativeObj;
         private _tempRenderList;
@@ -13055,6 +12802,24 @@ declare module Laya {
         cullByCameraCullInfo(cameraCullInfo: ICameraCullInfo, renderManager: ISceneRenderManager): void;
         cullByShadowCullInfo(cullInfo: IShadowCullInfo, renderManager: ISceneRenderManager): void;
         cullingSpotShadow(cameraCullInfo: ICameraCullInfo, renderManager: ISceneRenderManager): void;
+    }
+    class NativeGLRenderEngine3DOBJFactory implements IRenderEngine3DOBJFactory {
+        createTransform(owner: Sprite3D): Transform3D;
+        createBounds(min: Vector3, max: Vector3): any;
+        createRenderElement(): IRenderElement;
+        createSkinRenderElement(): IRenderElement;
+        createInstanceRenderElement(): IRenderElement;
+        createBaseRenderQueue(isTransparent: boolean): IRenderQueue;
+        createVertexBuffer3D(byteLength: number, bufferUsage: BufferUsage, canRead?: boolean): NativeVertexBuffer3D;
+        createIndexBuffer3D(indexType: IndexFormat, indexCount: number, bufferUsage?: BufferUsage, canRead?: boolean): IndexBuffer3D;
+        createSceneRenderManager(): ISceneRenderManager;
+        createCullPass(): ICullPass;
+        createSortPass(): ISortPass;
+        createShadowCullInfo(): IShadowCullInfo;
+        createCameraCullInfo(): ICameraCullInfo;
+        createBaseRenderNode(): NativeBaseRenderNode;
+        createRenderContext3D(): NativeRenderContext3DOBJ;
+        createRenderGeometry(mode: MeshTopology, drayType: DrawType): NativeRenderGeometryElementOBJ;
     }
     class NativeIndexBuffer3D extends IndexBuffer3D {
         _conchIndexBuffer3D: any;
@@ -13097,6 +12862,7 @@ declare module Laya {
         private _globalShaderData;
         private _nativeObj;
         constructor();
+        end(): void;
         drawRenderElement(renderelemt: NativeRenderElementOBJ): void;
         /**设置IRenderContext */
         applyContext(cameraUpdateMark: number): void;
@@ -13174,73 +12940,6 @@ declare module Laya {
         set indexFormat(value: IndexFormat);
         get indexFormat(): IndexFormat;
     }
-    class NativeRenderOBJCreateUtil implements IRenderOBJCreate {
-        createTransform(owner: Sprite3D): Transform3D;
-        createBounds(min: Vector3, max: Vector3): any;
-        createShaderData(): ShaderData;
-        createRenderElement(): IRenderElement;
-        createSkinRenderElement(): IRenderElement;
-        createInstanceRenderElement(): IRenderElement;
-        createBaseRenderQueue(isTransparent: boolean): IRenderQueue;
-        createRenderGeometry(mode: MeshTopology, drayType: DrawType): IRenderGeometryElement;
-        createVertexBuffer3D(byteLength: number, bufferUsage: BufferUsage, canRead?: boolean): NativeVertexBuffer3D;
-        createIndexBuffer3D(indexType: IndexFormat, indexCount: number, bufferUsage?: BufferUsage, canRead?: boolean): IndexBuffer3D;
-        createShaderInstance(vs: string, ps: string, attributeMap: {
-            [name: string]: [
-                number,
-                ShaderDataType
-            ];
-        }, shaderPass: ShaderCompileDefineBase): ShaderInstance;
-        createBaseRenderNode(): IBaseRenderNode;
-        createRenderContext3D(): IRenderContext3D;
-        createSceneRenderManager(): ISceneRenderManager;
-        createCullPass(): ICullPass;
-        createSortPass(): ISortPass;
-        createShadowCullInfo(): IShadowCullInfo;
-        createCameraCullInfo(): ICameraCullInfo;
-        createRenderStateComand(): NativeRenderStateCommand;
-        createRenderState(): RenderState;
-        createUniformBufferObject(glPointer: number, name: string, bufferUsage: BufferUsage, byteLength: number, isSingle: boolean): UniformBufferObject;
-        createGlobalUniformMap(blockName: string): NativeCommandUniformMap;
-    }
-    class NativeRenderState {
-        _nativeObj: any;
-        set cull(value: number);
-        get cull(): number;
-        set blend(value: number);
-        get blend(): number;
-        set srcBlend(value: number);
-        get srcBlend(): number;
-        set dstBlend(value: number);
-        get dstBlend(): number;
-        set srcBlendRGB(value: number);
-        get srcBlendRGB(): number;
-        set dstBlendRGB(value: number);
-        get dstBlendRGB(): number;
-        set srcBlendAlpha(value: number);
-        get srcBlendAlpha(): number;
-        set dstBlendAlpha(value: number);
-        get dstBlendAlpha(): number;
-        set blendEquation(value: number);
-        get blendEquation(): number;
-        set blendEquationRGB(value: number);
-        get blendEquationRGB(): number;
-        set blendEquationAlpha(value: number);
-        get blendEquationAlpha(): number;
-        set depthTest(value: number);
-        get depthTest(): number;
-        set depthWrite(value: boolean);
-        get depthWrite(): boolean;
-        set stencilWrite(value: boolean);
-        get stencilWrite(): boolean;
-        set stencilTest(value: number);
-        get stencilTest(): number;
-        set stencilRef(value: number);
-        get stencilRef(): number;
-        set stencilOp(value: Vector3);
-        setNull(): void;
-        constructor();
-    }
     class NativeSceneRenderManager implements ISceneRenderManager {
         _customUpdateList: SingletonList<BaseRender>;
         _customCullList: SingletonList<BaseRender>;
@@ -13253,116 +12952,6 @@ declare module Laya {
         removeMotionObject(object: BaseRender): void;
         updateMotionObjects(): void;
         addMotionObject(object: BaseRender): void;
-        destroy(): void;
-    }
-    enum NativeShaderDataType {
-        Number32 = 0,
-        Vector2 = 1,
-        Vector3 = 2,
-        Vector4 = 3,
-        Matrix4x4 = 4,
-        Number32Array = 5,
-        Texture = 6,
-        ShaderDefine = 7,
-        UBO = 8
-    }
-    class NativeShaderData extends ShaderData implements INativeUploadNode {
-        private inUploadList;
-        _dataType: MemoryDataType;
-        nativeObjID: number;
-        _nativeObj: any;
-        updateMap: Map<number, Function>;
-        updataSizeMap: Map<number, number>;
-        payload32bitNum: number;
-        clearUpload(): void;
-        compressNumber(index: number, memoryBlock: UploadMemory, stride: number): number;
-        compressVector2(index: number, memoryBlock: UploadMemory, stride: number): number;
-        compressVector3(index: number, memoryBlock: UploadMemory, stride: number): number;
-        compressVector4(index: number, memoryBlock: UploadMemory, stride: number): number;
-        compressMatrix4x4(index: number, memoryBlock: UploadMemory, stride: number): number;
-        compressNumberArray(index: number, memoryBlock: UploadMemory, stride: number): number;
-        compressTexture(index: number, memoryBlock: UploadMemory, stride: number): number;
-        compressUBO(index: number, memoryBlock: UploadMemory, stride: number): number;
-        private configMotionProperty;
-        /**
-         * 设置布尔。
-         * @param	index shader索引。
-         * @param	value 布尔。
-         */
-        setBool(index: number, value: boolean): void;
-        /**
-         * 设置整型。
-         * @param	index shader索引。
-         * @param	value 整形。
-         */
-        setInt(index: number, value: number): void;
-        /**
-         * 设置浮点。
-         * @param	index shader索引。
-         * @param	value 浮点。
-         */
-        setNumber(index: number, value: number): void;
-        /**
-         * 设置Vector2向量。
-         * @param	index shader索引。
-         * @param	value Vector2向量。
-         */
-        setVector2(index: number, value: Vector2): void;
-        /**
-         * 设置Vector3向量。
-         * @param	index shader索引。
-         * @param	value Vector3向量。
-         */
-        setVector3(index: number, value: Vector3): void;
-        /**
-         * 设置向量。
-         * @param	index shader索引。
-         * @param	value 向量。
-         */
-        setVector(index: number, value: Vector4): void;
-        /**
-         * 设置颜色
-         * @param index 索引
-         * @param value 颜色值
-         */
-        setColor(index: number, value: Color): void;
-        /**
-         * 设置矩阵。
-         * @param	index shader索引。
-         * @param	value  矩阵。
-         */
-        setMatrix4x4(index: number, value: Matrix4x4): void;
-        /**
-         * 设置Buffer。
-         * @param	index shader索引。
-         * @param	value  buffer数据。
-         */
-        setBuffer(index: number, value: Float32Array): void;
-        /**
-         * 设置纹理。
-         * @param	index shader索引。
-         * @param	value 纹理。
-         */
-        setTexture(index: number, value: BaseTexture): void;
-        /**
-         *
-         * @param index
-         * @param value
-         */
-        setUniformBuffer(index: number, value: NativeUniformBufferObject): void;
-        /**
-         * set shader data
-         * @deprecated
-         * @param index uniformID
-         * @param value data
-         */
-        setValueData(index: number, value: any): void;
-        cloneTo(destObject: NativeShaderData): void;
-        /**
-         * 克隆。
-         * @return	 克隆副本。
-         */
-        clone(): any;
         destroy(): void;
     }
     class NativeShadowCullInfo implements IShadowCullInfo {
@@ -13591,10 +13180,6 @@ declare module Laya {
         offAll(type?: string): EventDispatcher;
         offAllCaller(caller: any): EventDispatcher;
     }
-    class NativeUniformBufferObject extends UniformBufferObject {
-        _conchUniformBufferObject: any;
-        constructor(glPointer: number, name: string, bufferUsage: BufferUsage, byteLength: number, isSingle: boolean);
-    }
     class NativeVertexBuffer3D extends VertexBuffer3D {
         _conchVertexBuffer3D: any;
         /**
@@ -13715,6 +13300,7 @@ declare module Laya {
         cameraUpdateMark: number;
         globalShaderData: ShaderData;
         constructor();
+        end(): void;
         /**设置IRenderContext */
         applyContext(cameraUpdateMark: number): void;
         drawRenderElement(renderelemt: RenderElementOBJ): void;
@@ -13753,35 +13339,6 @@ declare module Laya {
         get mode(): MeshTopology;
         set mode(value: MeshTopology);
     }
-    class RenderOBJCreateUtil implements IRenderOBJCreate {
-        createTransform(owner: Sprite3D): Transform3D;
-        createBounds(min: Vector3, max: Vector3): any;
-        createShaderData(): ShaderData;
-        createRenderElement(): IRenderElement;
-        createSkinRenderElement(): IRenderElement;
-        createInstanceRenderElement(): InstanceRenderElementOBJ;
-        createBaseRenderQueue(isTransparent: boolean): IRenderQueue;
-        createRenderGeometry(mode: MeshTopology, drayType: DrawType): IRenderGeometryElement;
-        createVertexBuffer3D(byteLength: number, bufferUsage: BufferUsage, canRead?: boolean): VertexBuffer3D;
-        createIndexBuffer3D(indexType: IndexFormat, indexCount: number, bufferUsage?: BufferUsage, canRead?: boolean): IndexBuffer3D;
-        createShaderInstance(vs: string, ps: string, attributeMap: {
-            [name: string]: [
-                number,
-                ShaderDataType
-            ];
-        }, shaderPass: ShaderCompileDefineBase): ShaderInstance;
-        createBaseRenderNode(): IBaseRenderNode;
-        createRenderContext3D(): IRenderContext3D;
-        createSceneRenderManager(): ISceneRenderManager;
-        createCullPass(): ICullPass;
-        createSortPass(): ISortPass;
-        createShadowCullInfo(): IShadowCullInfo;
-        createCameraCullInfo(): ICameraCullInfo;
-        createRenderStateComand(): RenderStateCommand;
-        createRenderState(): RenderState;
-        createUniformBufferObject(glPointer: number, name: string, bufferUsage: BufferUsage, byteLength: number, isSingle: boolean): UniformBufferObject;
-        createGlobalUniformMap(blockName: string): CommandUniformMap;
-    }
     class SceneRenderManagerOBJ implements ISceneRenderManager {
         _motionRenders: SingletonList<BaseRender>;
         constructor();
@@ -13807,12 +13364,293 @@ declare module Laya {
         /** 更新数据并且 */
         drawGeometry(shaderIns: ShaderInstance): void;
     }
+    class WebGLRenderEngine3DFactory implements IRenderEngine3DOBJFactory {
+        createTransform(owner: Sprite3D): Transform3D;
+        createBounds(min: Vector3, max: Vector3): any;
+        createRenderElement(): IRenderElement;
+        createSkinRenderElement(): IRenderElement;
+        createInstanceRenderElement(): InstanceRenderElementOBJ;
+        createBaseRenderQueue(isTransparent: boolean): IRenderQueue;
+        createVertexBuffer3D(byteLength: number, bufferUsage: BufferUsage, canRead?: boolean): VertexBuffer3D;
+        createIndexBuffer3D(indexType: IndexFormat, indexCount: number, bufferUsage?: BufferUsage, canRead?: boolean): IndexBuffer3D;
+        createSceneRenderManager(): ISceneRenderManager;
+        createCullPass(): ICullPass;
+        createSortPass(): ISortPass;
+        createShadowCullInfo(): IShadowCullInfo;
+        createCameraCullInfo(): ICameraCullInfo;
+        createRenderGeometry(mode: MeshTopology, drayType: DrawType): IRenderGeometryElement;
+        createBaseRenderNode(): IBaseRenderNode;
+        createRenderContext3D(): IRenderContext3D;
+    }
+    /**
+     * WebGPU BlendState
+     */
+    class WGPUBlendState {
+        static pool: {
+            [key: number]: WGPUBlendState;
+        };
+        static getBlendState(blend: BlendType, operationRGB?: BlendEquationSeparate, srcBlendRGB?: BlendFactor, dstBlendRGB?: BlendFactor, operationAlpha?: BlendEquationSeparate, srcBlendAlpha?: BlendFactor, dstBlendAlpha?: BlendFactor): WGPUBlendState;
+        mapId: number;
+        state: GPUBlendState;
+        constructor(blend: BlendType, operationRGB: BlendEquationSeparate, srcBlendRGB: BlendFactor, dstBlendRGB: BlendFactor, operationAlpha: BlendEquationSeparate, srcBlendAlpha: BlendFactor, dstBlendAlpha: BlendFactor);
+        getComponent(operation: BlendEquationSeparate, src: BlendFactor, dst: BlendFactor): GPUBlendComponent;
+        static getmapID(blend: BlendType, operationRGB: BlendEquationSeparate, srcBlendRGB: BlendFactor, dstBlendRGB: BlendFactor, operationAlpha: BlendEquationSeparate, srcBlendAlpha: BlendFactor, dstBlendAlpha: BlendFactor): number;
+    }
+    /**
+     * WebGPU DepthStencil
+     */
+    class WGPUDepthStencilState {
+        static pool: {
+            [key: number]: WGPUDepthStencilState;
+        };
+        static getmapID(format: RenderTargetFormat, depthWriteEnabled: boolean, depthCompare: CompareFunction, stencilParam?: any, depthBiasParam?: any): number;
+        static getDepthStencilState(format: RenderTargetFormat, depthWriteEnabled: boolean, depthCompare: CompareFunction, stencilParam?: any, depthBiasParam?: any): WGPUDepthStencilState;
+        state: GPUDepthStencilState;
+        mapId: number;
+        constructor(format: RenderTargetFormat, depthWriteEnabled: boolean, depthCompare: CompareFunction, stencilParam?: any, depthBiasParam?: any);
+    }
+    /**
+     * WebGPU GPUPrimitiveState
+     */
+    class WGPUPrimitiveState {
+        static pool: {
+            [key: number]: WGPUPrimitiveState;
+        };
+        static getmapID(mode: MeshTopology, indexformat: IndexFormat, cullMode: CullMode, unclippedDepth?: boolean): number;
+        static getPrimitiveState(mode: MeshTopology, indexformat: IndexFormat, cullMode: CullMode, unclippedDepth?: boolean): WGPUPrimitiveState;
+        state: GPUPrimitiveState;
+        mapId: number;
+        constructor(mode: MeshTopology, indexformat: IndexFormat, cullMode: CullMode, unclippedDepth?: boolean);
+    }
+    /**
+     * WebGPU GPUVertexState.buffers
+     */
+    class WGPUVertexBufferLayouts {
+        static pool: {
+            [key: number]: WGPUVertexBufferLayouts;
+        };
+        static getVertexBufferLayouts(vetexlayout: VertexAttributeLayout): WGPUVertexBufferLayouts;
+        state: Array<GPUVertexBufferLayout>;
+        mapID: number;
+        constructor(vertexlayout: VertexAttributeLayout);
+        getvertexAttributeFormat(data: string): GPUVertexFormat;
+    }
+    class WGPURenderPipeline {
+        static offscreenFormat: GPUTextureFormat;
+        pipeline: GPURenderPipeline;
+        constructor(engine: WebGPUEngine, gpuPipelineLayout: GPUPipelineLayout, vertexModule: GPUShaderModule, fragModule: GPUShaderModule, vertexBufferLayouts: WGPUVertexBufferLayouts, targets: WebGPUInternalRT, blendState: WGPUBlendState, depthStencilState: WGPUDepthStencilState, primitiveState: WGPUPrimitiveState);
+        getFragmentFormatByRT(rt: WebGPUInternalRT, blendState: WGPUBlendState): Array<GPUColorTargetState>;
+    }
+    class WGPURenderContext3D implements IRenderContext3D {
+        device: GPUDevice;
+        private _destTarget;
+        get destTarget(): IRenderTarget;
+        set destTarget(value: IRenderTarget);
+        internalRT: WebGPUInternalRT;
+        viewPort: Viewport;
+        scissor: Vector4;
+        invertY: boolean;
+        pipelineMode: PipelineMode;
+        cameraShaderData: WGPUShaderData;
+        sceneID: number;
+        sceneShaderData: WGPUShaderData;
+        cameraUpdateMark: number;
+        globalShaderData: WGPUShaderData;
+        commandEncoder: WebGPURenderCommandEncoder;
+        renderPassDec: WebGPURenderPassDescriptor;
+        constructor();
+        configShaderData: ShaderData;
+        /**设置IRenderContext */
+        applyContext(cameraUpdateMark: number): void;
+        /**draw one element by context */
+        drawRenderElement(renderelemt: WGPURenderElementObJ): void;
+        /**end Encoder orcall submit render*/
+        end(): void;
+        /**
+         * Render pre
+         */
+        private _startRender;
+    }
+    class WGPURenderElementObJ implements IRenderElement {
+        _geometry: IRenderGeometryElement;
+        _shaderInstances: SingletonList<ShaderInstance>;
+        _materialShaderData: WGPUShaderData;
+        _renderShaderData: WGPUShaderData;
+        _transform: Transform3D;
+        _isRender: boolean;
+        _owner: IBaseRenderNode;
+        _invertFront: boolean;
+        constructor();
+        _render(context: WGPURenderContext3D): void;
+        _addShaderInstance(shader: ShaderInstance): void;
+        _clearShaderInstance(): void;
+        _destroy(): void;
+    }
+    class WGPURenderEngine3DOBJFactory implements IRenderEngine3DOBJFactory {
+        createTransform(owner: Sprite3D): Transform3D;
+        createBounds(min: Vector3, max: Vector3): any;
+        createRenderElement(): WGPURenderElementObJ;
+        createSkinRenderElement(): SkinRenderElementOBJ;
+        createInstanceRenderElement(): InstanceRenderElementOBJ;
+        createBaseRenderQueue(isTransparent: boolean): IRenderQueue;
+        createVertexBuffer3D(byteLength: number, bufferUsage: BufferUsage, canRead?: boolean): VertexBuffer3D;
+        createIndexBuffer3D(indexType: IndexFormat, indexCount: number, bufferUsage?: BufferUsage, canRead?: boolean): IndexBuffer3D;
+        createSceneRenderManager(): SceneRenderManagerOBJ;
+        createCullPass(): CullPassBase;
+        createSortPass(): QuickSort;
+        createShadowCullInfo(): ShadowCullInfo;
+        createCameraCullInfo(): CameraCullInfo;
+        createRenderGeometry(mode: MeshTopology, drayType: DrawType): IRenderGeometryElement;
+        createBaseRenderNode(): BaseRenderNode;
+        createRenderContext3D(): WGPURenderContext3D;
+    }
+    class WGPURenderPipelineInstance {
+        cachePool: any;
+        engine: WebGPUEngine;
+        /**
+         * 创建一个 <code>ShaderInstance</code> 实例。
+         */
+        constructor(shaderProcessInfo: ShaderProcessInfo, shaderPass: ShaderCompileDefineBase);
+        get complete(): boolean;
+        /**
+         * @inheritDoc
+         * @override
+         */
+        protected _disposeResource(): void;
+        private _getData;
+        bind(): boolean;
+        getBlendState(shaderDatas: ShaderData): WGPUBlendState;
+        /**
+         * WGPU VertexBuffer Layouts
+         * @param vertexLayout
+         * @returns
+         */
+        getVertexAttributeLayout(vertexLayout: VertexAttributeLayout): WGPUVertexBufferLayouts;
+        /**
+         * Render Pipeline
+         * @param blendState
+         * @param depthStencilState
+         * @param primitiveState
+         * @param vertexBufferLayouts
+         * @param destTexture
+         * @returns
+         */
+        getGPURenderPipeline(blendState: WGPUBlendState, depthStencilState: WGPUDepthStencilState, primitiveState: WGPUPrimitiveState, vertexBufferLayouts: WGPUVertexBufferLayouts, destTexture: WebGPUInternalRT): WGPURenderPipeline;
+        /**
+         * update Uniform Data
+         * @param WGPURenderCommand
+         */
+        uploadUniforms(shaderUniform: CommandEncoder, shaderDatas: WGPUShaderData, renderEncoder: WebGPURenderCommandEncoder): void;
+        private testCreateSceneCommandEncoder;
+        private testCreateCameraCommandEncoder;
+        private testCreateSpriteCommandEncoder;
+        private testMaterialUniformParamsMap;
+    }
+    interface BindGroupResourceMap {
+        [key: number]: WebGPUBuffer | WebGPUInternalTex;
+    }
+    /**
+     * WGPU着色器数据类
+     */
+    class WGPUShaderData extends ShaderData {
+        static arrayOne: Float32Array;
+        static arrayVec2: Float32Array;
+        static arrayVec3: Float32Array;
+        static arrayVec4: Float32Array;
+        protected _device: GPUDevice;
+        constructor();
+        private _setChangeFlag;
+        private uploadUniformOneValue;
+        private uploadUniformVec2Value;
+        private uploadUniformVec3Value;
+        private uploadUniformVec4Value;
+        private uploadUniformMatValue;
+        private uploadUniformBufferValue;
+        private uploadUniformTexture;
+        /**
+         * 重新绑定BindGroup
+         */
+        private rebindResource;
+        /**
+         * 设置整型。
+         * @param	index shader索引。
+         * @param	value 整形。
+         */
+        setInt(index: number, value: number): void;
+        /**
+         * 设置布尔。
+         * @param	index shader索引。
+         * @param	value 布尔。
+         */
+        setBool(index: number, value: boolean): void;
+        /**
+         * 设置浮点。
+         * @param	index shader索引。
+         * @param	value 浮点。
+         */
+        setNumber(index: number, value: number): void;
+        /**
+         * 设置Vector2向量。
+         * @param	index shader索引。
+         * @param	value Vector2向量。
+         */
+        setVector2(index: number, value: Vector2): void;
+        /**
+         * 设置Vector3向量。
+         * @param	index shader索引。
+         * @param	value Vector3向量。
+         */
+        setVector3(index: number, value: Vector3): void;
+        /**
+         * 设置向量。
+         * @param	index shader索引。
+         * @param	value 向量。
+         */
+        setVector(index: number, value: Vector4): void;
+        /**
+         * 设置颜色
+         * @param index 索引
+         * @param value 颜色值
+         */
+        setColor(index: number, value: Color): void;
+        /**
+         * 设置矩阵。
+         * @param	index shader索引。
+         * @param	value  矩阵。
+         */
+        setMatrix4x4(index: number, value: Matrix4x4): void;
+        /**
+         * set Buffer
+         * @param index
+         * @param value
+         */
+        setBuffer(index: number, value: Float32Array): void;
+        setTexture(index: number, value: BaseTexture): void;
+        /**
+         * 更新_dataBindGroupResourceMap，bufferUpdate，textureResource change
+         */
+        updateBindGroup(): void;
+        clearBindGroup(): void;
+        getBindGroup(shaderVariable: WGPUShaderVariable): GPUBindGroup;
+        destroy(): void;
+    }
+    class ShaderDataCacheNode {
+        constructor(variable: WGPUShaderVariable, shaderData: WGPUShaderData);
+        /**needUpdata */
+        needUpdate(propertyIndex: number): boolean;
+        /**rebuild */
+        rebuild(shaderData: WGPUShaderData): void;
+        /**release */
+        destroy(): void;
+    }
     /**
      * <code>Mesh</code> 类用于创建文件网格数据模板。
      */
     class Mesh extends Resource implements IClone {
         static MESH_INSTANCEBUFFER_TYPE_NORMAL: number;
         static MESH_INSTANCEBUFFER_TYPE_SIMPLEANIMATOR: number;
+        /**@interanl */
+        _triangleMesh: any;
         /**
          * 加载网格模板。
          * @param url 模板地址。
@@ -13972,6 +13810,10 @@ declare module Laya {
          * 从模型位置数据生成包围盒。
          */
         calculateBounds(): void;
+        /**
+         * 获得Corve模型
+         */
+        getCorveMesh(): Mesh;
         /**
          * 克隆。
          * @param	destObject 克隆源。
@@ -14181,6 +14023,26 @@ declare module Laya {
          * anisotropy
          */
         static DEFINE_ANISOTROPY: ShaderDefine;
+        /**
+         * ior
+         */
+        static DEFINE_IOR: ShaderDefine;
+        /**
+         * iridescence
+         */
+        static DEFINE_IRIDESCENCE: ShaderDefine;
+        /**
+         * sheen
+         */
+        static DEFINE_SHEEN: ShaderDefine;
+        /**
+         * transmission
+         */
+        static DEFINE_TRANSMISSION: ShaderDefine;
+        /**
+         * thick / volume
+         */
+        static DEFINE_THICKNESS: ShaderDefine;
         static init(): void;
     }
     class PBRStandardShaderInit {
@@ -14267,21 +14129,6 @@ declare module Laya {
          */
         constructor();
     }
-    class ParseJSON {
-        static parse(str: string): any;
-        private static findIndex;
-        private static finCurrObj;
-        private static formatVal;
-        private static len;
-        private static ret;
-        private static currStr;
-        private static currArr;
-        private static cobj;
-        /**type为0代表没有找到任何状态，1为当前在寻找key，2为当前在寻找val */
-        private static type;
-        private static finCurrStr;
-        private static parseStart;
-    }
     /**
      * <code>Physics</code> 类用于简单物理检测。
      */
@@ -14320,26 +14167,8 @@ declare module Laya {
         static COLLISIONFILTERGROUP_CUSTOMFILTER10: number;
         /**所有过滤 */
         static COLLISIONFILTERGROUP_ALLFILTER: number;
-        /**重力值。*/
-        static gravity: Vector3;
-        /**
-         * 创建一个 <code>Physics</code> 实例。
-         */
-        constructor();
-        /**
-         * 是否忽略两个碰撞器的碰撞检测。
-         * @param	collider1 碰撞器一。
-         * @param	collider2 碰撞器二。
-         * @param	ignore 是否忽略。
-         */
-        static setColliderCollision(collider1: PhysicsComponent, collider2: PhysicsComponent, collsion: boolean): void;
-        /**
-         * 获取是否忽略两个碰撞器的碰撞检测。
-         * @param	collider1 碰撞器一。
-         * @param	collider2 碰撞器二。
-         * @return	是否忽略。
-         */
-        static getIColliderCollision(collider1: PhysicsComponent, collider2: PhysicsComponent): boolean;
+        /**PHYSX默认分组 */
+        static PHYSXDEFAULTMASKVALUE: number;
     }
     /**
      * <code>Picker</code> 类用于创建拾取。
@@ -14548,7 +14377,6 @@ declare module Laya {
         static _getNodeByHierarchyPath(rootSprite: Node, invPath: number[]): Node;
         static _getParentNodeByHierarchyPath(rootSprite: Node, path: number[]): Node;
         /**
-         * @deprecated
          * 将RenderTexture转换为Base64
          * @param rendertexture 渲染Buffer
          * @returns
@@ -16966,12 +16794,24 @@ declare module Laya {
      * @see laya.display.Sprite#graphics
      */
     class Graphics {
+        /**
+         * add global Uniform Data Map
+         * @param propertyID
+         * @param propertyKey
+         * @param uniformtype
+         */
+        static add2DGlobalUniformData(propertyID: number, propertyKey: string, uniformtype: ShaderDataType): void;
+        /**
+         * get global shaderData
+         */
+        static get globalShaderData(): import("../RenderEngine/RenderShader/ShaderData").ShaderData;
         /**@private */
         private _cmds;
         /**@private */
         protected _vectorgraphArray: any[] | null;
         /**@private */
         private _graphicBounds;
+        private _material;
         constructor();
         /**
          * <p>销毁此对象。</p>
@@ -17008,6 +16848,14 @@ declare module Laya {
          * 获取端点列表。
          */
         getBoundPoints(realSize?: boolean): any[];
+        /**
+         *
+         */
+        get material(): Material;
+        /**
+         *
+         */
+        set material(value: Material);
         /**
          * 绘制单独图片
          * @param texture		纹理。
@@ -17533,16 +17381,18 @@ declare module Laya {
      *  <code>Node</code> 类是可放在显示列表中的所有对象的基类。该显示列表管理 Laya 运行时中显示的所有对象。使用 Node 类排列显示列表中的显示对象。Node 对象可以有子显示对象。
      */
     class Node extends EventDispatcher {
+        static EVENT_SET_ACTIVESCENE: string;
+        static EVENT_SET_IN_ACTIVESCENE: string;
         /**@private */
         private _bits;
         /**@private */
         private _hideFlags;
-        _url?: string;
-        _extra?: INodeExtra;
+        _url: string;
+        _extra: INodeExtra;
         /**节点名称。*/
         name: string;
         /** 节点标签 */
-        tag?: string;
+        tag: string;
         /**
          * 如果节点从资源中创建，这里记录是他的url
          */
@@ -17558,6 +17408,8 @@ declare module Laya {
         /** 是否已经销毁。对象销毁后不能再使用。*/
         get destroyed(): boolean;
         constructor();
+        _setBit(type: number, value: boolean): void;
+        _getBit(type: number): boolean;
         protected onStartListeningToType(type: string): void;
         bubbleEvent(type: string, data?: any): void;
         hasHideFlag(flag: number): boolean;
@@ -18086,147 +17938,6 @@ declare module Laya {
     /**拖动结束后调度。
      * @eventType Event.DRAG_END
      * */
-    /**
-     * <p> <code>Sprite</code> 是基本的显示图形的显示列表节点。 <code>Sprite</code> 默认没有宽高，默认不接受鼠标事件。通过 <code>graphics</code> 可以绘制图片或者矢量图，支持旋转，缩放，位移等操作。<code>Sprite</code>同时也是容器类，可用来添加多个子节点。</p>
-     * <p>注意： <code>Sprite</code> 默认没有宽高，可以通过<code>getBounds</code>函数获取；也可手动设置宽高；还可以设置<code>autoSize=true</code>，然后再获取宽高。<code>Sprite</code>的宽高一般用于进行碰撞检测和排版，并不影响显示图像大小，如果需要更改显示图像大小，请使用 <code>scaleX</code> ， <code>scaleY</code> ， <code>scale</code>。</p>
-     * <p> <code>Sprite</code> 默认不接受鼠标事件，即<code>mouseEnabled=false</code>，但是只要对其监听任意鼠标事件，会自动打开自己以及所有父对象的<code>mouseEnabled=true</code>。所以一般也无需手动设置<code>mouseEnabled</code>。</p>
-     * <p>LayaAir引擎API设计精简巧妙。核心显示类只有一个<code>Sprite</code>。<code>Sprite</code>针对不同的情况做了渲染优化，所以保证一个类实现丰富功能的同时，又达到高性能。</p>
-     *
-     * @example <caption>创建了一个 <code>Sprite</code> 实例。</caption>
-     * package
-     * {
-     * 	import laya.display.Sprite;
-     * 	import laya.events.Event;
-     *
-     * 	public class Sprite_Example
-     * 	{
-     * 		private var sprite:Sprite;
-     * 		private var shape:Sprite
-     * 		public function Sprite_Example()
-     * 		{
-     * 			Laya.init(640, 800);//设置游戏画布宽高、渲染模式。
-     * 			Laya.stage.bgColor = "#efefef";//设置画布的背景颜色。
-     * 			onInit();
-     * 		}
-     * 		private function onInit():void
-     * 		{
-     * 			sprite = new Sprite();//创建一个 Sprite 类的实例对象 sprite 。
-     * 			sprite.loadImage("resource/ui/bg.png");//加载并显示图片。
-     * 			sprite.x = 200;//设置 sprite 对象相对于父容器的水平方向坐标值。
-     * 			sprite.y = 200;//设置 sprite 对象相对于父容器的垂直方向坐标值。
-     * 			sprite.pivotX = 0;//设置 sprite 对象的水平方法轴心点坐标。
-     * 			sprite.pivotY = 0;//设置 sprite 对象的垂直方法轴心点坐标。
-     * 			Laya.stage.addChild(sprite);//将此 sprite 对象添加到显示列表。
-     * 			sprite.on(Event.CLICK, this, onClickSprite);//给 sprite 对象添加点击事件侦听。
-        
-     * 			shape = new Sprite();//创建一个 Sprite 类的实例对象 sprite 。
-     * 			shape.graphics.drawRect(0, 0, 100, 100, "#ccff00", "#ff0000", 2);//绘制一个有边框的填充矩形。
-     * 			shape.x = 400;//设置 shape 对象相对于父容器的水平方向坐标值。
-     * 			shape.y = 200;//设置 shape 对象相对于父容器的垂直方向坐标值。
-     * 			shape.width = 100;//设置 shape 对象的宽度。
-     * 			shape.height = 100;//设置 shape 对象的高度。
-     * 			shape.pivotX = 50;//设置 shape 对象的水平方法轴心点坐标。
-     * 			shape.pivotY = 50;//设置 shape 对象的垂直方法轴心点坐标。
-     * 			Laya.stage.addChild(shape);//将此 shape 对象添加到显示列表。
-     * 			shape.on(Event.CLICK, this, onClickShape);//给 shape 对象添加点击事件侦听。
-     * 		}
-     * 		private function onClickSprite():void
-     * 		{
-     * 			trace("点击 sprite 对象。");
-     * 			sprite.rotation += 5;//旋转 sprite 对象。
-     * 		}
-     * 		private function onClickShape():void
-     * 		{
-     * 			trace("点击 shape 对象。");
-     * 			shape.rotation += 5;//旋转 shape 对象。
-     * 		}
-     * 	}
-     * }
-     *
-     * @example
-     * var sprite;
-     * var shape;
-     * Sprite_Example();
-     * function Sprite_Example()
-     * {
-     *     Laya.init(640, 800);//设置游戏画布宽高、渲染模式。
-     *     Laya.stage.bgColor = "#efefef";//设置画布的背景颜色。
-     *     onInit();
-     * }
-     * function onInit()
-     * {
-     *     sprite = new laya.display.Sprite();//创建一个 Sprite 类的实例对象 sprite 。
-     *     sprite.loadImage("resource/ui/bg.png");//加载并显示图片。
-     *     sprite.x = 200;//设置 sprite 对象相对于父容器的水平方向坐标值。
-     *     sprite.y = 200;//设置 sprite 对象相对于父容器的垂直方向坐标值。
-     *     sprite.pivotX = 0;//设置 sprite 对象的水平方法轴心点坐标。
-     *     sprite.pivotY = 0;//设置 sprite 对象的垂直方法轴心点坐标。
-     *     Laya.stage.addChild(sprite);//将此 sprite 对象添加到显示列表。
-     *     sprite.on(Event.CLICK, this, onClickSprite);//给 sprite 对象添加点击事件侦听。
-        
-     *     shape = new laya.display.Sprite();//创建一个 Sprite 类的实例对象 sprite 。
-     *     shape.graphics.drawRect(0, 0, 100, 100, "#ccff00", "#ff0000", 2);//绘制一个有边框的填充矩形。
-     *     shape.x = 400;//设置 shape 对象相对于父容器的水平方向坐标值。
-     *     shape.y = 200;//设置 shape 对象相对于父容器的垂直方向坐标值。
-     *     shape.width = 100;//设置 shape 对象的宽度。
-     *     shape.height = 100;//设置 shape 对象的高度。
-     *     shape.pivotX = 50;//设置 shape 对象的水平方法轴心点坐标。
-     *     shape.pivotY = 50;//设置 shape 对象的垂直方法轴心点坐标。
-     *     Laya.stage.addChild(shape);//将此 shape 对象添加到显示列表。
-     *     shape.on(laya.events.Event.CLICK, this, onClickShape);//给 shape 对象添加点击事件侦听。
-     * }
-     * function onClickSprite()
-     * {
-     *     console.log("点击 sprite 对象。");
-     *     sprite.rotation += 5;//旋转 sprite 对象。
-     * }
-     * function onClickShape()
-     * {
-     *     console.log("点击 shape 对象。");
-     *     shape.rotation += 5;//旋转 shape 对象。
-     * }
-     *
-     * @example
-     * import Sprite = laya.display.Sprite;
-     * class Sprite_Example {
-     *     private sprite: Sprite;
-     *     private shape: Sprite
-     *     public Sprite_Example() {
-     *         Laya.init(640, 800);//设置游戏画布宽高、渲染模式。
-     *         Laya.stage.bgColor = "#efefef";//设置画布的背景颜色。
-     *         this.onInit();
-     *     }
-     *     private onInit(): void {
-     *         this.sprite = new Sprite();//创建一个 Sprite 类的实例对象 sprite 。
-     *         this.sprite.loadImage("resource/ui/bg.png");//加载并显示图片。
-     *         this.sprite.x = 200;//设置 sprite 对象相对于父容器的水平方向坐标值。
-     *         this.sprite.y = 200;//设置 sprite 对象相对于父容器的垂直方向坐标值。
-     *         this.sprite.pivotX = 0;//设置 sprite 对象的水平方法轴心点坐标。
-     *         this.sprite.pivotY = 0;//设置 sprite 对象的垂直方法轴心点坐标。
-     *         Laya.stage.addChild(this.sprite);//将此 sprite 对象添加到显示列表。
-     *         this.sprite.on(laya.events.Event.CLICK, this, this.onClickSprite);//给 sprite 对象添加点击事件侦听。
-        
-     *         this.shape = new Sprite();//创建一个 Sprite 类的实例对象 sprite 。
-     *         this.shape.graphics.drawRect(0, 0, 100, 100, "#ccff00", "#ff0000", 2);//绘制一个有边框的填充矩形。
-     *         this.shape.x = 400;//设置 shape 对象相对于父容器的水平方向坐标值。
-     *         this.shape.y = 200;//设置 shape 对象相对于父容器的垂直方向坐标值。
-     *         this.shape.width = 100;//设置 shape 对象的宽度。
-     *         this.shape.height = 100;//设置 shape 对象的高度。
-     *         this.shape.pivotX = 50;//设置 shape 对象的水平方法轴心点坐标。
-     *         this.shape.pivotY = 50;//设置 shape 对象的垂直方法轴心点坐标。
-     *         Laya.stage.addChild(this.shape);//将此 shape 对象添加到显示列表。
-     *         this.shape.on(laya.events.Event.CLICK, this, this.onClickShape);//给 shape 对象添加点击事件侦听。
-     *     }
-     *     private onClickSprite(): void {
-     *         console.log("点击 sprite 对象。");
-     *         this.sprite.rotation += 5;//旋转 sprite 对象。
-     *     }
-     *     private onClickShape(): void {
-     *         console.log("点击 shape 对象。");
-     *         this.shape.rotation += 5;//旋转 shape 对象。
-     *     }
-     * }
-     */
     class Sprite extends Node {
         _ownGraphics: boolean;
         /**
@@ -18415,6 +18126,11 @@ declare module Laya {
         get graphics(): Graphics;
         set graphics(value: Graphics);
         setGraphics(value: Graphics, transferOwnership: boolean): void;
+        get material(): Material;
+        /**
+         *
+         */
+        set material(value: Material);
         /**
          * <p>显示对象的滚动矩形范围，具有裁剪效果(如果只想限制子对象渲染区域，请使用viewport)</p>
          * <p> srollRect和viewport的区别：<br/>
@@ -18485,7 +18201,7 @@ declare module Laya {
          *
          * var htmlCanvas:HTMLCanvas = sprite.drawToCanvas(100, 100, 0, 0);//把精灵绘制到canvas上面
          * htmlCanvas.toBase64("image/png",0.9);//打印图片base64信息，可以发给服务器或者保存为图片
-         * @deprecated
+         *
          * @param	canvasWidth 画布宽度。
          * @param	canvasHeight 画布高度。
          * @param	x 绘制的 X 轴偏移量。
@@ -18509,7 +18225,6 @@ declare module Laya {
          */
         drawToTexture3D(offx: number, offy: number, tex: Texture2D): void;
         /**
-         * @deprecated
          * @private
          * 绘制到画布。
          */
@@ -18589,7 +18304,7 @@ declare module Laya {
         /**cacheAs时，设置所有父对象缓存失效。 */
         parentRepaint(type?: number): void;
         /**对舞台 <code>stage</code> 的引用。*/
-        get stage(): Stage;
+        get stage(): import("./Stage").Stage;
         /**
          * <p>可以设置一个Rectangle区域作为点击区域，或者设置一个<code>HitArea</code>实例作为点击区域，HitArea内可以设置可点击和不可点击区域。</p>
          * <p>如果不设置hitArea，则根据宽高形成的区域进行碰撞。</p>
@@ -18630,18 +18345,6 @@ declare module Laya {
         /**获得相对于本对象上的鼠标坐标信息。*/
         getMousePoint(): Point;
         /**
-         * 获得相对于stage的全局X轴缩放值（会叠加父亲节点的缩放值）。
-         */
-        get globalScaleX(): number;
-        /**
-         * 获得相对于stage的全局旋转值（会叠加父亲节点的旋转值）。
-         */
-        get globalRotation(): number;
-        /**
-         * 获得相对于stage的全局Y轴缩放值（会叠加父亲节点的缩放值）。
-         */
-        get globalScaleY(): number;
-        /**
          * 返回鼠标在此对象坐标系上的 X 轴坐标信息。
          */
         get mouseX(): number;
@@ -18671,6 +18374,16 @@ declare module Laya {
         set drawCallOptimize(value: boolean);
         get drawCallOptimize(): boolean;
         onAfterDeserialize(): void;
+        get cacheGlobal(): boolean;
+        CustomMaterial(): void;
+        /**
+         * 获得相对于stage的全局X轴缩放值（会叠加父亲节点的缩放值）。
+         */
+        get globalScaleX(): number;
+        /**
+         * 获得相对于stage的全局Y轴缩放值（会叠加父亲节点的缩放值）。
+         */
+        get globalScaleY(): number;
     }
     /**
      * @private
@@ -20082,7 +19795,7 @@ declare module Laya {
     class BlurFilter extends Filter {
         /**模糊滤镜的强度(值越大，越不清晰 */
         strength: number;
-        strength_sig2_2sig2_gauss1: any[];
+        strength_sig2_2sig2_gauss1: number[];
         strength_sig2_native: Float32Array;
         renderFunc: any;
         /**
@@ -20303,14 +20016,65 @@ declare module Laya {
         readonly name: string;
         private _resource;
         constructor(resource: glTFResource);
-        loadTextures(basePath: string, progress?: IBatchProgress): Promise<any>;
+        loadAdditionTextures(basePath: string, progress?: IBatchProgress): Promise<any>;
         additionMaterialProperties(glTFMaterial: glTFMaterial, material: Material): void;
     }
     class KHR_materials_emissive_strength implements glTFExtension {
         readonly name: string;
         private _resource;
         constructor(resource: glTFResource);
-        additionMaterialProperties?(glTFMaterial: glTFMaterial, material: Material): void;
+        additionMaterialProperties(glTFMaterial: glTFMaterial, material: Material): void;
+    }
+    class KHR_materials_ior implements glTFExtension {
+        readonly name: string;
+        private _resource;
+        constructor(resource: glTFResource);
+        additionMaterialProperties(glTFMaterial: glTFMaterial, material: Material): void;
+    }
+    class KHR_materials_iridescence implements glTFExtension {
+        readonly name: string;
+        private _resource;
+        constructor(resource: glTFResource);
+        loadAdditionTextures(basePath: string, progress?: IBatchProgress): Promise<any>;
+        additionMaterialProperties(glTFMaterial: glTFMaterial, material: Material): void;
+    }
+    class KHR_materials_sheen implements glTFExtension {
+        readonly name: string;
+        private _resource;
+        constructor(resource: glTFResource);
+        loadAdditionTextures(basePath: string, progress?: IBatchProgress): Promise<any>;
+        additionMaterialProperties(glTFMaterial: glTFMaterial, material: Material): void;
+    }
+    class KHR_materials_specular implements glTFExtension {
+        readonly name: string;
+        private _resource;
+        constructor(resource: glTFResource);
+        loadAdditionTextures(basePath: string, progress?: IBatchProgress): Promise<Texture2D[]>;
+        additionMaterialProperties(glTFMaterial: glTFMaterial, material: Material): void;
+    }
+    class KHR_materials_transmission implements glTFExtension {
+        readonly name: string;
+        private _resource;
+        constructor(resource: glTFResource);
+        loadAdditionTextures(basePath: string, progress?: IBatchProgress): Promise<any>;
+        additionMaterialProperties(glTFMaterial: glTFMaterial, material: Material): void;
+    }
+    class KHR_materials_volume implements glTFExtension {
+        readonly name: string;
+        private _resource;
+        constructor(resource: glTFResource);
+        loadAdditionTextures(basePath: string, progress?: IBatchProgress): Promise<any>;
+        additionMaterialProperties(glTFMaterial: glTFMaterial, material: Material): void;
+    }
+    class KHR_texture_transform implements glTFExtension {
+        readonly name: string;
+        private _resource;
+        constructor(resource: glTFResource);
+        createTransform(extension: glTFTextureTransform): Matrix3x3;
+        loadExtensionTextureInfo(info: glTFTextureInfo): {
+            transform: Matrix3x3;
+            texCoord: number;
+        };
     }
     enum HtmlElementType {
         Text = 0,
@@ -20509,7 +20273,7 @@ declare module Laya {
         static renderEngine: IRenderEngine;
         static render2DContext: IRender2DContext;
         static renderDrawContext: IRenderDrawContext;
-        static renderOBJCreate: IRenderOBJCreate;
+        static renderOBJCreate: IRenderEngineFactory;
     }
     /**
      * ...
@@ -20695,6 +20459,20 @@ declare module Laya {
         /**@private */
         finish(): void;
     }
+    class MaterialParser {
+        static parse(data: any): Material;
+        static collectLinks(data: any, basePath: string): ILoadURL[];
+        /**
+         * @deprecated
+         * @inheritDoc
+         */
+        static parseLegacy(data: any): Material;
+        /**
+            * @deprecated
+            * 兼容Blend数据
+            */
+        private static _getRenderStateParams;
+    }
     class NullLoader implements IResourceLoader {
         load(task: ILoadTask): Promise<any>;
     }
@@ -20711,6 +20489,39 @@ declare module Laya {
         static getLoadTypeByEngineType(type: string): string;
         static bakeOverrideData(overrideData: any): Record<string, any[]>;
         static applyOverrideData(nodeData: any, overrideDataMap: Record<string, Array<any>>): any;
+    }
+    class ShaderParser {
+        static parse(data: string, basePath?: string): Shader3D;
+        static compileToTree(sliceFlag: string[], data: string, sliceIndex: number): string[];
+        static getMapKey(value: string): string;
+        /**
+         * get Shader Data
+         */
+        static getShaderBlock(source: string): IShaderObjStructor;
+        /**
+         * get CG data for map
+         * @param source
+         * @returns
+         */
+        static getCGBlock(source: string): {
+            [key: string]: string;
+        };
+        static bindCG(shaderObj: IShaderObjStructor, cgmap: {
+            [key: string]: string;
+        }): void;
+        /**
+         * trans string to ShaderDataType
+         * @param value
+         * @returns
+         */
+        static getShaderDataType(value: string): ShaderDataType;
+        /**
+         * set ShaderData Value
+         * @param type
+         * @param data
+         * @returns
+         */
+        static getDefaultData(type: ShaderDataType, data: any): any;
     }
     /**
      * 地图的每层都会分块渲染处理
@@ -21743,6 +21554,7 @@ declare module Laya {
      */
     class Matrix3x3 implements IClone {
         static readonly DEFAULT: Readonly<Matrix3x3>;
+        static Temp: Matrix3x3;
         /**
          * 通过四元数创建旋转矩阵。
          * @param rotation 旋转四元数。
@@ -21786,6 +21598,11 @@ declare module Laya {
          * 创建一个 <code>Matrix3x3</code> 实例。
          */
         constructor(createElement?: boolean);
+        /**
+         * 克隆
+         * @param destObject
+         */
+        cloneByArray(destObject: Float32Array): void;
         /**
          * 计算3x3矩阵的行列式
          * @return    矩阵的行列式
@@ -22164,6 +21981,13 @@ declare module Laya {
          * @param	out 输出四元数
          */
         static multiply(left: Quaternion, right: Quaternion, out: Quaternion): void;
+        /**
+       * Calculate a quaternion rotates around an arbitrary axis.
+       * @param axis - The axis
+       * @param rad - The rotation angle in radians
+       * @param out - The quaternion after rotate
+       */
+        static rotationAxisAngle(axis: Vector3, rad: number, out: Quaternion): void;
         private static arcTanAngle;
         private static angleTo;
         /**
@@ -22468,6 +22292,10 @@ declare module Laya {
          */
         isEmpty(): boolean;
     }
+    interface IV2 {
+        x: number;
+        y: number;
+    }
     /**
      * <code>Vector2</code> 类用于创建二维向量。
      */
@@ -22476,6 +22304,7 @@ declare module Laya {
         static readonly ZERO: Readonly<Vector2>;
         /**一向量,禁止修改*/
         static readonly ONE: Readonly<Vector2>;
+        static TempVector2: Vector2;
         /**X轴坐标*/
         x: number;
         /**Y轴坐标*/
@@ -22559,6 +22388,7 @@ declare module Laya {
      * <code>Vector3</code> 类用于创建三维向量。
      */
     class Vector3 implements IClone {
+        static _tempVector3: Vector3;
         static readonly ZERO: Readonly<Vector3>;
         static readonly ONE: Readonly<Vector3>;
         static readonly NegativeUnitX: Readonly<Vector3>;
@@ -22753,7 +22583,7 @@ declare module Laya {
          * @param  arr 数组。
          * @param  offset 数组偏移。
          */
-        fromArray(arr: any[], offset?: number): void;
+        fromArray(arr: ArrayLike<number>, offset?: number): void;
         /**
          * 转换为Array数组
          * @return
@@ -22869,7 +22699,7 @@ declare module Laya {
          * @param  arr 数组。
          * @param  offset 数组偏移。
          */
-        fromArray(arr: any[], offset?: number): void;
+        fromArray(arr: ArrayLike<number>, offset?: number): void;
         /**
          * 转换为Array数组
          * @return
@@ -24587,458 +24417,54 @@ declare module Laya {
         private static workerMessage;
     }
     /**
-     *
-     * @private
-     */
-    class Emitter2D extends EmitterBase {
-        setting: ParticleSetting;
-        private _posRange;
-        private _emitFun;
-        constructor(_template: ParticleTemplate2D);
-        set template(template: ParticleTemplate2D);
-        get template(): ParticleTemplate2D;
-        /**
-         * @override
-         */
-        emit(): void;
-        getRandom(value: number): number;
-        webGLEmit(): void;
-        canvasEmit(): void;
-    }
-    /**
-     * <code>EmitterBase</code> 类是粒子发射器类
-     */
-    class EmitterBase {
-        /**
-         * 积累的帧时间
-         */
-        protected _frameTime: number;
-        /**
-         * 粒子发射速率
-         */
-        protected _emissionRate: number;
-        /**
-         * 当前剩余发射时间
-         */
-        protected _emissionTime: number;
-        /**
-         * 发射粒子最小时间间隔
-         */
-        minEmissionTime: number;
-        /**
-         * 设置粒子粒子模板
-         * @param particleTemplate 粒子模板
-         *
-         */
-        set particleTemplate(particleTemplate: ParticleTemplate2D);
-        /**
-         * 设置粒子发射速率
-         * @param emissionRate 粒子发射速率 (个/秒)
-         */
-        set emissionRate(_emissionRate: number);
-        /**
-         * 获取粒子发射速率
-         * @return 发射速率  粒子发射速率 (个/秒)
-         */
-        get emissionRate(): number;
-        /**
-         * 开始发射粒子
-         * @param duration 发射持续的时间(秒)
-         */
-        start(duration?: number): void;
-        /**
-         * 停止发射粒子
-         * @param clearParticles 是否清理当前的粒子
-         */
-        stop(): void;
-        /**
-         * 清理当前的活跃粒子
-         * @param clearTexture 是否清理贴图数据,若清除贴图数据将无法再播放
-         */
-        clear(): void;
-        /**
-         * 发射一个粒子
-         *
-         */
-        emit(): void;
-        /**
-         * 时钟前进
-         * @param passedTime 前进时间
-         *
-         */
-        advanceTime(passedTime?: number): void;
-    }
-    /**
-     * <code>Particle2D</code> 类是2D粒子播放类
-     *
-     */
-    class Particle2D extends Sprite {
-        /**@private */
-        private _matrix4;
-        private _source;
-        /**@private */
-        private _template;
-        /**@private */
-        private _canvasTemplate;
-        /**@private */
-        private _emitter;
-        /**是否自动播放*/
-        autoPlay: boolean;
-        /**
-         * 创建一个新的 <code>Particle2D</code> 类实例。
-         * @param setting 粒子配置数据
-         */
-        constructor();
-        /**
-         * 得到粒子模板的地址
-         * @return templet.
-         */
-        get source(): string;
-        /**
-         *
-         */
-        set source(value: string);
-        get template(): ParticleTemplate2D;
-        /**
-         * 设置 粒子模板
-         * @param value 粒子模板
-         */
-        set template(value: ParticleTemplate2D);
-        /**
-         * 获取粒子发射器
-         */
-        get emitter(): EmitterBase;
-        /**
-         * 设置粒子配置数据
-         * @param settings 粒子配置数据
-         */
-        init(template: ParticleTemplate2D): void;
-        /**
-         * 播放
-         */
-        play(): void;
-        /**
-         * 停止
-         */
-        stop(): void;
-        /**@private */
-        private _loop;
-        /**
-         * 时钟前进
-         * @param passedTime 时钟前进时间
-         */
-        advanceTime(passedTime?: number): void;
-        /**
-         *
-         * @param context
-         * @param x
-         * @param y
-         * @override
-         */
-        customRender(context: Context, x: number, y: number): void;
-        private reset;
-        destroy(destroyChild?: boolean): void;
-    }
-    /**
-     *  @private
-     */
-    class ParticleData {
-        private static _tempVelocity;
-        private static _tempStartColor;
-        private static _tempEndColor;
-        private static _tempSizeRotation;
-        private static _tempRadius;
-        private static _tempRadian;
-        position: Float32Array;
-        velocity: Float32Array;
-        startColor: Float32Array;
-        endColor: Float32Array;
-        sizeRotation: Float32Array;
-        radius: Float32Array;
-        radian: Float32Array;
-        durationAddScale: number;
-        time: number;
-        constructor();
-        static create(settings: ParticleSetting, position: Float32Array, velocity: Float32Array, time: number): ParticleData;
-    }
-    /**
-     *  @private
-     */
-    class ParticleEmitter {
-        private _templet;
-        private _timeBetweenParticles;
-        private _previousPosition;
-        private _timeLeftOver;
-        private _tempVelocity;
-        private _tempPosition;
-        constructor(templet: ParticleTemplate2D, particlesPerSecond: number, initialPosition: Float32Array);
-        update(elapsedTime: number, newPosition: Float32Array): void;
-    }
-    /**
-     * <code>ParticleSettings</code> 类是粒子配置数据类
-     */
-    class ParticleSetting {
-        /**贴图*/
-        textureName: string;
-        /**贴图个数,默认为1可不设置*/
-        textureCount: number;
-        /**由于循环队列判断算法，最大饱和粒子数为maxPartices-1*/
-        maxPartices: number;
-        /**粒子持续时间(单位:秒）*/
-        duration: number;
-        /**如果大于0，某些粒子的持续时间会小于其他粒子,并具有随机性(单位:无）*/
-        ageAddScale: number;
-        /**粒子受发射器速度的敏感度（需在自定义发射器中编码设置）*/
-        emitterVelocitySensitivity: number;
-        /**最小开始尺寸（单位：2D像素、3D坐标）*/
-        minStartSize: number;
-        /**最大开始尺寸（单位：2D像素、3D坐标）*/
-        maxStartSize: number;
-        /**最小结束尺寸（单位：2D像素、3D坐标）*/
-        minEndSize: number;
-        /**最大结束尺寸（单位：2D像素、3D坐标）*/
-        maxEndSize: number;
-        /**最小水平速度（单位：2D像素、3D坐标）*/
-        minHorizontalVelocity: number;
-        /**最大水平速度（单位：2D像素、3D坐标）*/
-        maxHorizontalVelocity: number;
-        /**最小垂直速度（单位：2D像素、3D坐标）*/
-        minVerticalVelocity: number;
-        /**最大垂直速度（单位：2D像素、3D坐标）*/
-        maxVerticalVelocity: number;
-        /**等于1时粒子从出生到消亡保持一致的速度，等于0时粒子消亡时速度为0，大于1时粒子会保持加速（单位：无）*/
-        endVelocity: number;
-        /**（单位：2D像素、3D坐标）*/
-        gravity: Float32Array;
-        /**最小旋转速度（单位：2D弧度/秒、3D弧度/秒）*/
-        minRotateSpeed: number;
-        /**最大旋转速度（单位：2D弧度/秒、3D弧度/秒）*/
-        maxRotateSpeed: number;
-        /**最小开始半径（单位：2D像素、3D坐标）*/
-        minStartRadius: number;
-        /**最大开始半径（单位：2D像素、3D坐标）*/
-        maxStartRadius: number;
-        /**最小结束半径（单位：2D像素、3D坐标）*/
-        minEndRadius: number;
-        /**最大结束半径（单位：2D像素、3D坐标）*/
-        maxEndRadius: number;
-        /**最小水平开始弧度（单位：2D弧度、3D弧度）*/
-        minHorizontalStartRadian: number;
-        /**最大水平开始弧度（单位：2D弧度、3D弧度）*/
-        maxHorizontalStartRadian: number;
-        /**最小垂直开始弧度（单位：2D弧度、3D弧度）*/
-        minVerticalStartRadian: number;
-        /**最大垂直开始弧度（单位：2D弧度、3D弧度）*/
-        maxVerticalStartRadian: number;
-        /**是否使用结束弧度,false为结束时与起始弧度保持一致,true为根据minHorizontalEndRadian、maxHorizontalEndRadian、minVerticalEndRadian、maxVerticalEndRadian计算结束弧度。*/
-        useEndRadian: boolean;
-        /**最小水平结束弧度（单位：2D弧度、3D弧度）*/
-        minHorizontalEndRadian: number;
-        /**最大水平结束弧度（单位：2D弧度、3D弧度）*/
-        maxHorizontalEndRadian: number;
-        /**最小垂直结束弧度（单位：2D弧度、3D弧度）*/
-        minVerticalEndRadian: number;
-        /**最大垂直结束弧度（单位：2D弧度、3D弧度）*/
-        maxVerticalEndRadian: number;
-        /**最小开始颜色*/
-        minStartColor: Float32Array;
-        /**最大开始颜色*/
-        maxStartColor: Float32Array;
-        /**最小结束颜色*/
-        minEndColor: Float32Array;
-        /**最大结束颜色*/
-        maxEndColor: Float32Array;
-        /**false代表RGBA整体插值，true代表RGBA逐分量插值*/
-        colorComponentInter: boolean;
-        /**false代表使用参数颜色数据，true代表使用原图颜色数据*/
-        disableColor: boolean;
-        /**混合模式，待调整，引擎中暂无BlendState抽象*/
-        blendState: number;
-        /**发射器类型,"point","box","sphere","ring"*/
-        emitterType: string;
-        /**发射器发射速率*/
-        emissionRate: number;
-        /**点发射器位置*/
-        pointEmitterPosition: Float32Array;
-        /**点发射器位置随机值*/
-        pointEmitterPositionVariance: Float32Array;
-        /**点发射器速度*/
-        pointEmitterVelocity: Float32Array;
-        /**点发射器速度随机值*/
-        pointEmitterVelocityAddVariance: Float32Array;
-        /**盒发射器中心位置*/
-        boxEmitterCenterPosition: Float32Array;
-        /**盒发射器尺寸*/
-        boxEmitterSize: Float32Array;
-        /**盒发射器速度*/
-        boxEmitterVelocity: Float32Array;
-        /**盒发射器速度随机值*/
-        boxEmitterVelocityAddVariance: Float32Array;
-        /**球发射器中心位置*/
-        sphereEmitterCenterPosition: Float32Array;
-        /**球发射器半径*/
-        sphereEmitterRadius: number;
-        /**球发射器速度*/
-        sphereEmitterVelocity: number;
-        /**球发射器速度随机值*/
-        sphereEmitterVelocityAddVariance: number;
-        /**环发射器中心位置*/
-        ringEmitterCenterPosition: Float32Array;
-        /**环发射器半径*/
-        ringEmitterRadius: number;
-        /**环发射器速度*/
-        ringEmitterVelocity: number;
-        /**环发射器速度随机值*/
-        ringEmitterVelocityAddVariance: number;
-        /**环发射器up向量，0代表X轴,1代表Y轴,2代表Z轴*/
-        ringEmitterUp: number;
-        /**发射器位置随机值,2D使用*/
-        positionVariance: Float32Array;
-    }
-    function checkSetting(setting: any): ParticleSetting;
-    class ParticleTemplate2D extends Resource implements ISubmit {
-        /**
-         * 粒子配置数据
-         */
-        readonly settings: ParticleSetting;
-        /**
-         * 粒子贴图
-         */
-        readonly texture: Texture;
-        protected _vertices: Float32Array;
-        protected _mesh: MeshParticle2D;
-        protected _conchMesh: any;
-        protected _floatCountPerVertex: number;
-        protected _firstActiveElement: number;
-        protected _firstNewElement: number;
-        protected _firstFreeElement: number;
-        protected _firstRetiredElement: number;
-        protected _drawCounter: number;
-        static activeBlendType: number;
-        x: number;
-        y: number;
-        protected _blendFn: Function;
-        sv: ParticleShaderValue;
-        constructor(settings: ParticleSetting, texture: Texture);
-        getRenderType(): number;
-        releaseRender(): void;
-        protected initialize(): void;
-        /**
-         *
-         * @param position
-         * @param velocity
-         * @override
-         */
-        addParticleArray(position: Float32Array, velocity: Float32Array): void;
-        /**
-         * @override
-         */
-        addNewParticlesToVertexBuffer(): void;
-        renderSubmit(): number;
-        updateParticleForNative(): void;
-        update(elapsedTime: number): void;
-        private retireActiveParticles;
-        private freeRetiredParticles;
-        getMesh(): MeshParticle2D;
-        getConchMesh(): any;
-        getFirstNewElement(): number;
-        getFirstFreeElement(): number;
-        getFirstActiveElement(): number;
-        getFirstRetiredElement(): number;
-        setFirstFreeElement(_value: number): void;
-        setFirstNewElement(_value: number): void;
-        addDrawCounter(): void;
-        blend(): void;
-        protected _disposeResource(): void;
-    }
-    /**
-     *  @private
-     */
-    class ParticleShader extends Shader {
-        static vs: string;
-        static ps: string;
-        constructor();
-    }
-    /**
-     * 2D粒子
-     */
-    class ParticleShaderValue extends Value2D {
-        private static pShader;
-        u_CurrentTime: number;
-        u_Duration: number;
-        u_Gravity: Float32Array;
-        u_EndVelocity: number;
-        u_texture: any;
-        constructor();
-        /**
-         * @override
-         */
-        upload(): void;
-    }
-    /**
      * 2D矩形碰撞体
      */
     class BoxCollider extends ColliderBase {
-        /**相对节点的x轴偏移*/
-        private _x;
-        /**相对节点的y轴偏移*/
-        private _y;
         /**矩形宽度*/
         private _width;
         /**矩形高度*/
         private _height;
         /**
-         * @override
-         */
-        protected getDef(): any;
-        /**
-         * @override 初始化设置为当前显示对象的宽和高
-         */
-        protected _onAdded(): void;
-        private _setShape;
-        /**相对节点的x轴偏移*/
-        get x(): number;
-        set x(value: number);
-        /**相对节点的y轴偏移*/
-        get y(): number;
-        set y(value: number);
+        * 创建一个新的 <code>BoxCollider</code> 实例。
+        */
+        constructor();
+        /**@override */
+        protected _setShapeData(shape: any): void;
         /**矩形宽度*/
         get width(): number;
         set width(value: number);
         /**矩形高度*/
         get height(): number;
         set height(value: number);
-        /**@private 重置形状
-         * @override
-        */
-        resetShape(re?: boolean): void;
     }
     /**
      * 2D线形碰撞体
      */
     class ChainCollider extends ColliderBase {
-        /**相对节点的x轴偏移*/
-        private _x;
-        /**相对节点的y轴偏移*/
-        private _y;
-        /**用逗号隔开的点的集合，格式：x,y,x,y ...*/
+        /**
+         * @deprecated
+         * 用逗号隔开的点的集合，格式：x,y,x,y ...
+         */
         private _points;
+        /**顶点数据*/
+        private _datas;
         /**是否是闭环，注意不要有自相交的链接形状，它可能不能正常工作*/
         private _loop;
+        constructor();
         /**
-         * @override
+        * @override
+        */
+        protected _setShapeData(shape: any): void;
+        /**
+         * @deprecated
+         * 用逗号隔开的点的集合，格式：x,y,x,y ...
          */
-        protected getDef(): any;
-        private _setShape;
-        /**相对节点的x轴偏移*/
-        get x(): number;
-        set x(value: number);
-        /**相对节点的y轴偏移*/
-        get y(): number;
-        set y(value: number);
-        /**用逗号隔开的点的集合，格式：x,y,x,y ...*/
         get points(): string;
+        onAdded(): void;
         set points(value: string);
+        /**顶点数据 x,y,x,y ...*/
+        get datas(): number[];
+        set datas(value: number[]);
         /**是否是闭环，注意不要有自相交的链接形状，它可能不能正常工作*/
         get loop(): boolean;
         set loop(value: boolean);
@@ -25047,41 +24473,23 @@ declare module Laya {
      * 2D圆形碰撞体
      */
     class CircleCollider extends ColliderBase {
-        /**@private */
-        private static _temp;
-        /**相对节点的x轴偏移*/
-        private _x;
-        /**相对节点的y轴偏移*/
-        private _y;
         /**圆形半径，必须为正数*/
         private _radius;
+        constructor();
         /**
-         * @override
-         */
-        protected getDef(): any;
-        /**
-         * @override 初始化设置为当前显示对象的宽和高
-         */
-        protected _onAdded(): void;
-        private _setShape;
-        /**相对节点的x轴偏移*/
-        get x(): number;
-        set x(value: number);
-        /**相对节点的y轴偏移*/
-        get y(): number;
-        set y(value: number);
+        * @override
+        */
+        protected _setShapeData(shape: any): void;
         /**圆形半径，必须为正数*/
         get radius(): number;
         set radius(value: number);
-        /**@private 重置形状
-         * @override
-        */
-        resetShape(re?: boolean): void;
     }
     /**
      * 碰撞体基类
      */
     class ColliderBase extends Component {
+        /**FixtureBox2DDef 数据 */
+        private static TempDef;
         /**是否是传感器，传感器能够触发碰撞事件，但不会产生碰撞反应*/
         private _isSensor;
         /**密度值，值可以为零或者是正数，建议使用相似的密度，这样做可以改善堆叠稳定性，默认值为10*/
@@ -25092,20 +24500,34 @@ declare module Laya {
         private _restitution;
         /**标签*/
         label: string;
-        /**@private b2Shape对象*/
-        protected _shape: any;
-        /**@private b2FixtureDef对象 */
-        protected _def: any;
-        /**[只读]b2Fixture对象 */
+        /**@private box2D fixture Def */
+        protected _fixtureDef: any;
+        /**@readonly[只读]b2Fixture对象 */
         fixture: any;
-        /**[只读]刚体引用*/
+        /**刚体引用*/
         rigidBody: RigidBody;
+        /**相对节点的x轴偏移*/
+        private _x;
+        /**相对节点的y轴偏移*/
+        private _y;
+        /**相对节点的x轴偏移*/
+        get x(): number;
+        set x(value: number);
+        /**相对节点的y轴偏移*/
+        get y(): number;
+        set y(value: number);
+        /**
+         * 创建一个新的 <code>ColliderBase</code> 实例。
+         */
         constructor();
-        /**@private 获取碰撞体信息*/
-        protected getDef(): any;
+        /**@private 创建Shape*/
+        protected createfixture(): any;
+        /**@private 设置shape属性*/
+        protected resetFixtureData(): void;
         protected _onEnable(): void;
-        private _checkRigidBody;
-        protected _onDestroy(): void;
+        protected _onAwake(): void;
+        /**通知rigidBody 更新shape 属性值 */
+        protected _needupdataShapeAttribute(): void;
         /**是否是传感器，传感器能够触发碰撞事件，但不会产生碰撞反应*/
         get isSensor(): boolean;
         set isSensor(value: boolean);
@@ -25123,67 +24545,539 @@ declare module Laya {
          * 碰撞体参数发生变化后，刷新物理世界碰撞信息
          */
         refresh(): void;
-        /**
-         * @private
-         * 重置形状
-         */
-        resetShape(re?: boolean): void;
+        protected _onDisable(): void;
     }
-    /**
-     * JS实现Box2D SayGoodbyeParticle
-     * 相关类型对象被隐性移除时触发对应的SayGoodBye方法
-     */
-    class DestructionListener {
-        /**
-         * Joint被隐性移除时触发
-         * @param params box2d的Joint相关对象
-         */
-        SayGoodbyeJoint(params: any): void;
-        /**
-         * Fixtures被隐性移除时触发
-         * @param params box2d的Fixtures相关对象
-         */
-        SayGoodbyeFixture(params: any): void;
-        /**
-         * ParticleGroup被隐性移除时触发
-         * @param params box2d的ParticleGroup相关对象
-         */
-        SayGoodbyeParticleGroup(params: any): void;
-        /**
-         * Particle被隐性移除时触发
-         * @param params box2d的Particle相关对象
-         */
-        SayGoodbyeParticle(params: any): void;
+    enum PhysicsShape {
+        BoxShape = 0,
+        CircleShape = 1,
+        PolygonShape = 2,
+        ChainShape = 3,
+        EdgeShape = 4
+    }
+    class FixtureBox2DDef {
+        density: number;
+        friction: number;
+        isSensor: boolean;
+        restitution: number;
+        shape: PhysicsShape;
+        groupIndex: number;
     }
     /**
      * 2D边框碰撞体
      */
     class EdgeCollider extends ColliderBase {
-        /**相对节点的x轴偏移*/
-        private _x;
-        /**相对节点的y轴偏移*/
-        private _y;
-        /**用逗号隔开的点的集合，注意只有两个点，格式：x,y,x,y*/
+        /**
+         * @deprecated
+         * 用逗号隔开的点的集合，注意只有两个点，格式：x,y,x,y
+         */
         private _points;
+        /**顶点数据*/
+        private _datas;
+        constructor();
         /**
          * @override
          */
-        protected getDef(): any;
-        private _setShape;
-        /**相对节点的x轴偏移*/
-        get x(): number;
-        set x(value: number);
-        /**相对节点的y轴偏移*/
-        get y(): number;
-        set y(value: number);
-        /**用逗号隔开的点的集合，注意只有两个点，格式：x,y,x,y*/
+        protected _setShapeData(shape: any): void;
+        /**
+         * @deprecated
+         * 用逗号隔开的点的集合，注意只有两个点，格式：x,y,x,y*/
         get points(): string;
         set points(value: string);
+        /**顶点数据 x,y,x,y ...*/
+        get datas(): number[];
+        set datas(value: number[]);
+    }
+    /**
+     * 2D多边形碰撞体，暂时不支持凹多边形，如果是凹多边形，先手动拆分为多个凸多边形
+     * 节点个数最多是b2_maxPolygonVertices，这数值默认是8，所以点的数量不建议超过8个，也不能小于3个
+     */
+    class PolygonCollider extends ColliderBase {
+        /**
+         * @deprecated
+         * 用逗号隔开的点的集合，格式：x,y,x,y ...
+         */
+        private _points;
+        /**顶点数据*/
+        private _datas;
+        constructor();
+        onAdded(): void;
+        /**
+        * @override
+        */
+        protected _setShapeData(shape: any): void;
+        /**
+         * @deprecated
+         * 用逗号隔开的点的集合，格式：x,y,x,y ...
+         */
+        get points(): string;
+        set points(value: string);
+        /**顶点数据 x,y,x,y ...*/
+        get datas(): number[];
+        set datas(value: number[]);
+    }
+    /**
+     * 实现Box2D c++  2.4.1 版本
+     */
+    class physics2DwasmFactory implements IPhysiscs2DFactory {
+        private _tempVe21;
+        private _tempVe22;
+        set gravity(value: Vector2);
+        set allowSleeping(value: boolean);
+        /**
+         * initial box2D physics Engine
+         * @returns
+         */
+        initialize(): Promise<void>;
+        /**
+         * create Box2D world
+         */
+        start(): void;
+        /**
+         * update Frame
+         * @param delta
+         */
+        update(delta: number): void;
+        /**
+         * set Event CallBack
+         * @param type
+         * @param contact
+         */
+        sendEvent(type: number, contact: any): void;
+        /**
+         * create Box2D Body
+         * @param def
+         * @returns
+         */
+        createBody(def: any): any;
+        /**
+         * remove Box2D Body
+         * @param body
+         */
+        removeBody(body: any): void;
+        /**
+        * create Box2D Joint
+        * @param def
+        * @returns
+        */
+        createJoint(def: any, cls?: any): any;
+        /**
+         * Remove Box2D Joint
+         * @param joint
+         */
+        removeJoint(joint: any): void;
+        /**
+         * @param joint
+         */
+        getJoint_userData(joint: any): any;
+        /**
+         * @param joint
+         */
+        getJoint_userData_destroy(joint: any): boolean;
+        /**
+         * @param joint
+         * @param enableMotor
+         */
+        set_Joint_EnableMotor(joint: any, enableMotor: boolean): void;
+        /**
+         * @param joint
+         * @param motorSpeed
+         */
+        set_Joint_SetMotorSpeed(joint: any, motorSpeed: number): void;
+        /**
+         * @param joint
+         * @param maxTorque
+         */
+        set_Joint_SetMaxMotorTorque(joint: any, maxTorque: number): void;
+        /**
+         * @param joint
+         * @param enableLimit
+         */
+        set_Joint_EnableLimit(joint: any, enableLimit: boolean): void;
+        /**
+         * @param joint
+         * @param lowerAngle
+         * @param upperAngle
+         */
+        set_Joint_SetLimits(joint: any, lowerAngle: number, upperAngle: number): void;
+        /**
+         * @param Joint
+         * @param frequency
+         * @param dampingRatio
+         * @param isdamping
+         */
+        set_Joint_frequencyAndDampingRatio(Joint: any, frequency: number, dampingRatio: number, isdamping: boolean): void;
+        /**
+         * @param defStruct
+         * @returns
+         */
+        createDistanceJoint(defStruct: physics2D_DistancJointDef): any;
+        /**
+         * @param joint
+         * @param length
+         */
+        set_DistanceJoint_length(joint: any, length: number): void;
+        /**
+         * @param joint
+         * @param length
+         */
+        set_DistanceJoint_MaxLength(joint: any, length: number): void;
+        /**
+         * @param joint
+         * @param length
+         */
+        set_DistanceJoint_MinLength(joint: any, length: number): void;
+        /**
+         * @param joint
+         * @param steffness
+         * @param damping
+         */
+        set_DistanceJointStiffnessDamping(joint: any, steffness: number, damping: number): void;
+        /**
+         * @param defStruct
+         * @returns
+         */
+        create_GearJoint(defStruct: physics2D_GearJointDef): void;
+        /**
+         * @param joint
+         * @param radio
+         */
+        set_GearJoint_SetRatio(joint: any, radio: number): void;
+        /**
+         * @param defStruct
+         * @returns
+         */
+        create_PulleyJoint(defStruct: physics2D_PulleyJointDef): void;
+        /**
+         * @param defStruct
+         * @returns
+         */
+        create_WheelJoint(defStruct: physics2D_WheelJointDef): any;
+        /**
+         * @param defStruct
+         * @returns
+         */
+        create_WeldJoint(defStruct: physics2D_WeldJointDef): any;
+        /**
+         * @param def
+         * @returns
+         */
+        create_MouseJoint(defStruct: physics2D_MouseJointJointDef): any;
+        /**
+         * @param joint
+         * @param x
+         * @param y
+         */
+        set_MouseJoint_target(joint: any, x: number, y: number): void;
+        /**
+         * @param Joint
+         * @param frequency
+         * @param dampingRatio
+         */
+        set_MouseJoint_frequencyAndDampingRatio(Joint: any, frequency: number, dampingRatio: number): void;
+        /**
+         * @param defStruct
+         * @returns
+         */
+        create_RevoluteJoint(defStruct: physics2D_RevoluteJointDef): any;
+        /**
+         * @param defStruct
+         * @returns
+         */
+        create_MotorJoint(defStruct: physics2D_MotorJointDef): any;
+        /**
+         * @param joint
+         * @param x
+         * @param y
+         */
+        set_MotorJoint_linearOffset(joint: any, x: number, y: number): void;
+        /**
+         * @param joint
+         * @param angular
+         */
+        set_MotorJoint_SetAngularOffset(joint: any, angular: number): void;
+        /**
+         * @param joint
+         * @param maxForce
+         */
+        set_MotorJoint_SetMaxForce(joint: any, maxForce: number): void;
+        /**
+         * @param joint
+         * @param maxTorque
+         */
+        set_MotorJoint_SetMaxTorque(joint: any, maxTorque: number): void;
+        /**
+         * @param joint
+         * @param correctionFactor
+         */
+        set_MotorJoint_SetCorrectionFactor(joint: any, correctionFactor: number): void;
+        /**
+         * @param def
+         * @returns
+         */
+        create_PrismaticJoint(def: physics2D_PrismaticJointDef): any;
+        /**
+         * @returns
+         */
+        create_boxColliderShape(): any;
+        /**
+         * @param shape
+         * @param width
+         * @param height
+         * @param pos
+         *
+         */
+        set_collider_SetAsBox(shape: any, width: number, height: number, pos: IV2, scaleX: number, scaleY: number): void;
+        /**
+         * @returns
+         */
+        create_ChainShape(): any;
+        /**
+         * @param shape
+         * @param x
+         * @param y
+         * @param arr
+         * @param loop
+         */
+        set_ChainShape_data(shape: any, x: number, y: number, arr: number[], loop: boolean, scaleX: number, scaleY: number): void;
+        /**
+         * @returns
+         */
+        create_CircleShape(): any;
+        /**
+         * @param shape
+         * @param radius
+         */
+        set_CircleShape_radius(shape: any, radius: number, scale: number): void;
+        /**
+         * @param shape
+         * @param x
+         * @param y
+         */
+        set_CircleShape_pos(shape: any, x: number, y: number, scale: number): void;
+        /**
+         * @returns
+         */
+        create_EdgeShape(): any;
+        /**
+         * @param shape
+         * @param x
+         * @param y
+         * @param arr
+         */
+        set_EdgeShape_data(shape: any, x: number, y: number, arr: number[], scaleX: number, scaleY: number): void;
+        /**
+         * @returns
+         */
+        create_PolygonShape(): any;
+        /**
+        * @param shape
+        * @param x
+        * @param y
+        * @param arr
+        */
+        set_PolygonShape_data(shape: any, x: number, y: number, arr: number[], scaleX: number, scaleY: number): void;
+        /**
+         * create fixture descript
+         * @param fixtureDef
+         * @returns
+         */
+        createFixtureDef(fixtureDef: FixtureBox2DDef): any;
+        /**
+         * @param def
+         * @param groupIndex
+         */
+        set_fixtureDef_GroupIndex(def: any, groupIndex: number): void;
+        /**
+         * @param def
+         * @param categoryBits
+         */
+        set_fixtureDef_CategoryBits(def: any, categoryBits: number): void;
+        /**
+         * @param def
+         * @param maskbits
+         */
+        set_fixtureDef_maskBits(def: any, maskbits: number): void;
+        /**
+        * create fixture by body and def
+        * @param body
+        * @param def
+        */
+        createfixture(body: any, fixtureDef: any): any;
+        /**
+         * @param fixture
+         * @param instance
+         */
+        set_fixture_collider(fixture: any, instance: ColliderBase): void;
+        /**
+         * @param fixture
+         */
+        get_fixture_body(fixture: any): any;
+        /**
+         * @param body
+         * @param fixture
+         */
+        rigidBody_DestroyFixture(body: any, fixture: any): void;
+        /**
+         * @param rigidbodyDef
+         * @returns
+         */
+        rigidBodyDef_Create(rigidbodyDef: RigidBody2DInfo): any;
+        /**
+         * @param body
+         * @param v2
+         */
+        get_RigidBody_Position(body: any, v2: Vector2): void;
+        /**
+         * @param body
+         * @returns
+         */
+        get_RigidBody_Angle(body: any): number;
+        /**
+         * @param body
+         * @param x
+         * @param y
+         * @param angle
+         */
+        set_RigibBody_Transform(body: any, x: number, y: number, angle: any): void;
+        /**
+         * @param body
+         * @param x
+         * @param y
+         * @returns
+         */
+        get_rigidBody_WorldPoint(body: any, x: number, y: number): IV2;
+        /**
+         * @param body
+         * @param x
+         * @param y
+         */
+        get_rigidBody_LocalPoint(body: any, x: number, y: number): IV2;
+        /**
+         * @param body
+         * @param force
+         * @param position
+         */
+        rigidBody_applyForce(body: any, force: IV2, position: IV2): void;
+        /**
+         * @param body
+         * @param force
+         */
+        rigidBody_applyForceToCenter(body: any, force: IV2): void;
+        /**
+         * @param body
+         * @param impulse
+         * @param position
+         */
+        rigidbody_ApplyLinearImpulse(body: any, impulse: IV2, position: IV2): void;
+        /**
+         * @param body
+         */
+        rigidbody_ApplyLinearImpulseToCenter(body: any, impulse: IV2): void;
+        /**
+        * 对刚体施加扭矩，使其旋转
+        * @param	torque	施加的扭矩
+        */
+        rigidbody_applyTorque(body: any, torque: number): void;
+        /**
+         * 设置速度，比如{x:10,y:10}
+         * @param	velocity
+         */
+        set_rigidbody_Velocity(body: any, velocity: IV2): void;
+        /**
+         * 设置角度
+         * @param	value 单位为弧度
+         */
+        set_rigidbody_Awake(body: any, awake: boolean): void;
+        /**
+         * 获得刚体质量
+         * @param body
+         * @returns
+         */
+        get_rigidbody_Mass(body: any): number;
+        /**
+         * 获得质心的相对节点0,0点的位置偏移
+         * @param body
+         * @returns
+         */
+        get_rigidBody_Center(body: any): IV2;
+        /**
+         * @param body
+         */
+        get_rigidBody_IsAwake(body: any): any;
+        /**
+         * 获得质心的世界坐标，相对于Physics.I.worldRoot节点
+         * @param body
+         * @returns
+         */
+        get_rigidBody_WorldCenter(body: any): IV2;
+        /**
+         * @param body
+         * @param value
+         */
+        set_rigidBody_type(body: any, value: string): void;
+        /**
+         * @param body
+         * @param value
+         */
+        set_rigidBody_gravityScale(body: any, value: number): void;
+        /**
+         * @param body
+         * @param value
+         */
+        set_rigidBody_allowRotation(body: any, value: boolean): void;
+        /**
+         * @param body
+         * @param value
+         */
+        set_rigidBody_allowSleep(body: any, value: boolean): void;
+        /**
+         * @param body
+         * @param value
+         */
+        set_rigidBody_angularDamping(body: any, value: number): void;
+        /**
+         * @param body
+         * @returns
+         */
+        get_rigidBody_angularVelocity(body: any): number;
+        /**
+         * @param body
+         * @param value
+         */
+        set_rigidBody_angularVelocity(body: any, value: number): void;
+        /**
+         * @param body
+         * @param value
+         */
+        set_rigidBody_linearDamping(body: any, value: number): void;
+        /**
+         * @param body
+         * @returns
+         */
+        get_rigidBody_linearVelocity(body: any): IV2;
+        /**
+         * @param body
+         * @param value
+         */
+        set_rigidBody_linearVelocity(body: any, value: IV2): void;
+        /**
+         * @param body
+         * @param value
+         */
+        set_rigidBody_bullet(body: any, value: boolean): void;
+        /**
+        * @param body
+        */
+        retSet_rigidBody_MassData(body: any): void;
+    }
+    interface IPhysiscs2DFactory {
     }
     /**
      * 距离关节：两个物体上面各自有一点，两点之间的距离固定不变
      */
     class DistanceJoint extends JointBase {
+        /**@private */
+        private static _tempP;
         /**@private */
         private static _temp;
         /**[首次设置有效]关节的自身刚体*/
@@ -25210,6 +25104,7 @@ declare module Laya {
          * @override
          */
         protected _createJoint(): void;
+        onDestroy(): void;
         /**约束的目标静止长度*/
         get length(): number;
         set length(value: number);
@@ -25225,6 +25120,8 @@ declare module Laya {
         /**刚体在回归到节点过程中受到的阻尼比，建议取值0~1*/
         get damping(): number;
         set damping(value: number);
+        /**刚体当前长度*/
+        get jointLength(): number;
     }
     /**
      * 齿轮关节：用来模拟两个齿轮间的约束关系，齿轮旋转时，产生的动量有两种输出方式，一种是齿轮本身的角速度，另一种是齿轮表面的线速度
@@ -25233,9 +25130,9 @@ declare module Laya {
         /**@private */
         private static _temp;
         /**[首次设置有效]要绑定的第1个关节，类型可以是RevoluteJoint或者PrismaticJoint*/
-        joint1: any;
+        joint1: RevoluteJoint | PrismaticJoint;
         /**[首次设置有效]要绑定的第2个关节，类型可以是RevoluteJoint或者PrismaticJoint*/
-        joint2: any;
+        joint2: RevoluteJoint | PrismaticJoint;
         /**[首次设置有效]两个刚体是否可以发生碰撞，默认为false*/
         collideConnected: boolean;
         /**两个齿轮角速度比例，默认1*/
@@ -25255,13 +25152,115 @@ declare module Laya {
     class JointBase extends Component {
         /**原生关节对象*/
         protected _joint: any;
+        protected _factory: IPhysiscs2DFactory;
         constructor();
+        protected getBodyAnchor(body: RigidBody, anchorx: number, anchory: number): Point;
         /**[只读]原生关节对象*/
         get joint(): any;
         protected _onEnable(): void;
         protected _onAwake(): void;
         protected _createJoint(): void;
         protected _onDisable(): void;
+    }
+    /**
+     * Box2D distance Joint def Struct
+     */
+    class physics2D_DistancJointDef {
+        bodyA: any;
+        bodyB: any;
+        localAnchorA: Vector2;
+        localAnchorB: Vector2;
+        frequency: number;
+        dampingRatio: number;
+        collideConnected: boolean;
+        length: number;
+        maxLength: number;
+        minLength: number;
+        isLocalAnchor: boolean;
+    }
+    class physics2D_GearJointDef {
+        bodyA: any;
+        bodyB: any;
+        joint1: any;
+        joint2: any;
+        ratio: number;
+        collideConnected: boolean;
+    }
+    class physics2D_MotorJointDef {
+        bodyA: any;
+        bodyB: any;
+        linearOffset: Vector2;
+        angularOffset: number;
+        maxForce: number;
+        maxTorque: number;
+        correctionFactor: number;
+        collideConnected: boolean;
+    }
+    class physics2D_MouseJointJointDef {
+        bodyA: any;
+        bodyB: any;
+        maxForce: number;
+        frequency: number;
+        dampingRatio: number;
+        target: Vector2;
+    }
+    class physics2D_PrismaticJointDef {
+        bodyA: any;
+        bodyB: any;
+        anchor: Vector2;
+        axis: Vector2;
+        enableMotor: boolean;
+        motorSpeed: number;
+        maxMotorForce: number;
+        enableLimit: boolean;
+        lowerTranslation: number;
+        upperTranslation: number;
+        collideConnected: boolean;
+    }
+    class physics2D_PulleyJointDef {
+        bodyA: any;
+        bodyB: any;
+        groundAnchorA: Vector2;
+        groundAnchorB: Vector2;
+        localAnchorA: Vector2;
+        localAnchorB: Vector2;
+        ratio: number;
+        collideConnected: boolean;
+    }
+    class physics2D_RevoluteJointDef {
+        bodyA: any;
+        bodyB: any;
+        anchor: Vector2;
+        enableMotor: boolean;
+        motorSpeed: number;
+        maxMotorTorque: number;
+        enableLimit: boolean;
+        lowerAngle: number;
+        upperAngle: number;
+        collideConnected: boolean;
+    }
+    class physics2D_WeldJointDef {
+        bodyA: any;
+        bodyB: any;
+        anchor: Vector2;
+        frequency: number;
+        dampingRatio: number;
+        collideConnected: boolean;
+    }
+    class physics2D_WheelJointDef {
+        bodyA: any;
+        bodyB: any;
+        anchor: Vector2;
+        axis: Vector2;
+        enableMotor: boolean;
+        motorSpeed: number;
+        maxMotorTorque: number;
+        enableLimit: boolean;
+        lowerTranslation: number;
+        upperTranslation: number;
+        frequency: number;
+        dampingRatio: number;
+        collideConnected: boolean;
     }
     /**
      * 马达关节：用来限制两个刚体，使其相对位置和角度保持不变
@@ -25323,6 +25322,7 @@ declare module Laya {
         /**刚体在回归到节点过程中受到的阻尼比，建议取值0~1*/
         private _dampingRatio;
         protected _onEnable(): void;
+        protected _onAwake(): void;
         private onMouseDown;
         /**
          * @override
@@ -25354,8 +25354,12 @@ declare module Laya {
         otherBody: RigidBody;
         /**[首次设置有效]关节的控制点，是相对于自身刚体的左上角位置偏移*/
         anchor: any[];
-        /**[首次设置有效]一个向量值，描述运动方向，比如1,0是沿X轴向右*/
-        axis: any[];
+        /**
+         * @deprecated
+         * [首次设置有效]一个向量值，描述运动方向，比如1,0是沿X轴向右*/
+        _axis: any[];
+        /**[首次设置有效]一个角度，描述运动方向，比如0是沿X轴向右*/
+        angle: number;
         /**[首次设置有效]两个刚体是否可以发生碰撞，默认为false*/
         collideConnected: boolean;
         /**是否开启马达，开启马达可使目标刚体运动*/
@@ -25393,6 +25397,11 @@ declare module Laya {
         /**启用约束后，刚体移动范围的上限，是距离anchor的偏移量*/
         get upperTranslation(): number;
         set upperTranslation(value: number);
+        /**
+         * @deprecated
+         * 启用约束后，刚体移动范围的上限，是距离anchor的偏移量*/
+        get axis(): any;
+        set axis(value: any);
     }
     /**
      * 滑轮关节：它将两个物体接地(ground)并彼此连接，当一个物体上升，另一个物体就会下降
@@ -25443,9 +25452,9 @@ declare module Laya {
         private _maxMotorTorque;
         /**是否对刚体的旋转范围加以约束*/
         private _enableLimit;
-        /**启用约束后，刚体旋转范围的下限弧度*/
+        /**启用约束后，刚体旋转范围的下限角度*/
         private _lowerAngle;
-        /**启用约束后，刚体旋转范围的上限弧度*/
+        /**启用约束后，刚体旋转范围的上限角度*/
         private _upperAngle;
         /**
          * @override
@@ -25463,10 +25472,10 @@ declare module Laya {
         /**是否对刚体的旋转范围加以约束*/
         get enableLimit(): boolean;
         set enableLimit(value: boolean);
-        /**启用约束后，刚体旋转范围的下限弧度*/
+        /**启用约束后，刚体旋转范围的下限角度*/
         get lowerAngle(): number;
         set lowerAngle(value: number);
-        /**启用约束后，刚体旋转范围的上限弧度*/
+        /**启用约束后，刚体旋转范围的上限角度*/
         get upperAngle(): number;
         set upperAngle(value: number);
     }
@@ -25513,8 +25522,12 @@ declare module Laya {
         anchor: any[];
         /**[首次设置有效]两个刚体是否可以发生碰撞，默认为false*/
         collideConnected: boolean;
-        /**[首次设置有效]一个向量值，描述运动方向，比如1,0是沿X轴向右*/
-        axis: any[];
+        /**
+         * @deprecated
+         * [首次设置有效]一个向量值，描述运动方向，比如1,0是沿X轴向右*/
+        _axis: any[];
+        /**[首次设置有效]一个角度，描述运动方向，比如0是沿X轴向右*/
+        angle: number;
         /**弹簧系统的震动频率，可以视为弹簧的弹性系数，通常频率应该小于时间步长频率的一半*/
         private _frequency;
         /**刚体在回归到节点过程中受到的阻尼比，建议取值0~1*/
@@ -25559,23 +25572,18 @@ declare module Laya {
         /**启用约束后，刚体移动范围的上限，是距离anchor的偏移量*/
         get upperTranslation(): number;
         set upperTranslation(value: number);
+        /**
+         * @deprecated
+         * 启用约束后，刚体移动范围的上限，是距离anchor的偏移量*/
+        get axis(): any;
+        set axis(value: any);
     }
     /**
-     * 2D物理引擎，使用Box2d驱动
+     * 2D物理引擎
      */
-    class Physics extends EventDispatcher {
-        /**2D游戏默认单位为像素，物理默认单位为米，此值设置了像素和米的转换比率，默认50像素=1米*/
-        static PIXEL_RATIO: number;
+    class Physics2D extends EventDispatcher {
         /**@private */
         private static _I;
-        /**Box2d引擎的全局引用，更多属性和api请参考 http://box2d.org */
-        box2d: any;
-        /**[只读]物理世界引用，更多属性请参考官网 */
-        world: any;
-        /**旋转迭代次数，增大数字会提高精度，但是会降低性能*/
-        velocityIterations: number;
-        /**位置迭代次数，增大数字会提高精度，但是会降低性能*/
-        positionIterations: number;
         /**@private 是否已经激活*/
         private _enabled;
         /**@private 根容器*/
@@ -25584,35 +25592,50 @@ declare module Laya {
         _emptyBody: any;
         /**@private */
         _eventList: any[];
+        _factory: IPhysiscs2DFactory;
+        /**@private 需要同步实时跟新数据列表*/
+        _rigiBodyList: SingletonList<RigidBody>;
+        /**@private 需要同步物理数据的列表；使用后会及时释放*/
+        _updataattributeLists: SingletonList<RigidBody>;
         /**全局物理单例*/
-        static get I(): Physics;
-        constructor();
+        static get I(): Physics2D;
+        /**
+         * 设置物理绘制
+         */
+        set enableDebugDraw(enable: boolean);
+        /**
+         * 是否绘制Shape
+         */
+        set drawShape(enable: boolean);
+        /**
+         * 是否绘制Joint
+         */
+        set drawJoint(enable: boolean);
+        /**
+         * 是否绘制AABB
+         */
+        set drawAABB(enable: boolean);
+        /**
+        * 是否绘制Pair
+        */
+        set drawPair(enable: boolean);
+        /**
+        * 是否绘制CenterOfMass
+        */
+        set drawCenterOfMass(enable: boolean);
+        enable(): Promise<void>;
+        /**
+        * 销毁当前物理世界
+        */
+        destroyWorld(): void;
         /**
          * 开启物理世界
-         * options值参考如下：
-           allowSleeping:true,
-           gravity:10,
-           customUpdate:false 自己控制物理更新时机，自己调用Physics.update
          */
-        static enable(options?: any): void;
-        /**
-         * 开启物理世界
-         * options值参考如下：
-           allowSleeping:true,
-           gravity:10,
-           customUpdate:false 自己控制物理更新时机，自己调用Physics.update
-         */
-        start(options?: any): void;
+        start(): void;
+        /**@private*/
         private _update;
-        private _sendEvent;
-        /**@private */
-        _createBody(def: any): any;
-        /**@private */
-        _removeBody(body: any): void;
-        /**@private */
-        _createJoint(def: any): any;
-        /**@private */
-        _removeJoint(joint: any): void;
+        /**@private*/
+        _updatePhysicsTransformToRender(): void;
         /**
          * 停止物理世界
          */
@@ -25623,11 +25646,11 @@ declare module Laya {
         get allowSleeping(): boolean;
         set allowSleeping(value: boolean);
         /**
-         * 物理世界重力环境，默认值为{x:0,y:1}
-         * 如果修改y方向重力方向向上，可以直接设置gravity.y=-1;
-         */
+        * 物理世界重力环境，默认值为{x:0,y:10}
+        * 如果修改y方向重力方向向上，可以直接设置gravity.y=-10;
+        */
         get gravity(): any;
-        set gravity(value: any);
+        set gravity(value: Vector2);
         /**获得刚体总数量*/
         getBodyCount(): number;
         /**获得碰撞总数量*/
@@ -25645,126 +25668,77 @@ declare module Laya {
         updatePhysicsByWorldRoot(): void;
     }
     /**
-     * 物理辅助线，调用PhysicsDebugDraw.enable()开启，或者通过IDE设置打开
+     * 物理辅助线
      */
-    class PhysicsDebugDraw extends Sprite {
-        /**@private */
-        m_drawFlags: number;
-        /**@private */
-        static box2d: any;
-        /**@private */
-        static DrawString_s_color: any;
-        /**@private */
-        static DrawStringWorld_s_p: any;
-        /**@private */
-        static DrawStringWorld_s_cc: any;
-        /**@private */
-        static DrawStringWorld_s_color: any;
-        /**@private */
-        world: any;
-        /**@private */
-        private _camera;
-        /**@private */
-        private static _canvas;
-        /**@private */
-        private static _inited;
-        /**@private */
-        private _mG;
+    class Physics2DDebugDraw extends Sprite {
+        DrawString_color: string;
+        Red: string;
+        Green: string;
+        /**@protected */
+        protected _camera: any;
+        /**@protected */
+        protected _mG: Graphics;
         /**@private */
         private _textSp;
-        /**@private */
-        private _textG;
-        /**@private */
-        static init(): void;
-        constructor();
+        /**@protected */
+        protected _textG: Graphics;
+        /**@protected */
+        protected _factory: IPhysiscs2DFactory;
+        /**@protected */
+        protected _lineWidth: number;
+        constructor(factory: IPhysiscs2DFactory);
         /**@private
          * @override
         */
         render(ctx: Context, x: number, y: number): void;
         /**@private */
-        private lineWidth;
-        /**@private */
         private _renderToGraphic;
-        /**@private */
-        SetFlags(flags: number): void;
-        /**@private */
-        GetFlags(): number;
-        /**@private */
-        AppendFlags(flags: number): void;
-        /**@private */
-        ClearFlags(flags: any): void;
-        /**@private */
-        PushTransform(xf: any): void;
-        /**@private */
-        PopTransform(xf: any): void;
-        /**@private */
-        DrawPolygon(vertices: any, vertexCount: any, color: any): void;
-        /**@private */
-        DrawSolidPolygon(vertices: any, vertexCount: any, color: any): void;
-        /**@private */
-        DrawCircle(center: any, radius: any, color: any): void;
-        /**@private */
-        DrawSolidCircle(center: any, radius: any, axis: any, color: any): void;
-        /**@private */
-        DrawParticles(centers: any, radius: any, colors: any, count: any): void;
-        /**@private */
-        DrawSegment(p1: any, p2: any, color: any): void;
-        /**@private */
-        DrawTransform(xf: any): void;
-        /**@private */
-        DrawPoint(p: any, size: any, color: any): void;
-        /**@private */
-        DrawString(x: any, y: any, message: any): void;
-        /**@private */
-        DrawStringWorld(x: any, y: any, message: any): void;
-        /**@private */
-        DrawAABB(aabb: any, color: any): void;
-        /**@private */
-        static I: PhysicsDebugDraw;
-        /**
-         * 激活物理辅助线
-         * @param	flags 位标记值，其值是AND的结果，其值有-1:显示形状，2:显示关节，4:显示AABB包围盒,8:显示broad-phase pairs,16:显示质心
-         * @return	返回一个Sprite对象，本对象用来显示物理辅助线
-         */
-        static enable(flags?: number): PhysicsDebugDraw;
+        PushTransform(tx: number, ty: number, angle: number): void;
+        PopTransform(): void;
+        get mG(): Graphics;
+        get textG(): Graphics;
+        get lineWidth(): number;
+        get camera(): any;
     }
     /**
-     * 2D多边形碰撞体，暂时不支持凹多边形，如果是凹多边形，先手动拆分为多个凸多边形
-     * 节点个数最多是b2_maxPolygonVertices，这数值默认是8，所以点的数量不建议超过8个，也不能小于3个
+     *  Physics2DOption 用于配置2D物理的默认参数
      */
-    class PolygonCollider extends ColliderBase {
-        /**相对节点的x轴偏移*/
-        private _x;
-        /**相对节点的y轴偏移*/
-        private _y;
-        /**用逗号隔开的点的集合，格式：x,y,x,y ...*/
-        private _points;
-        /**
-         * @override
-         */
-        protected getDef(): any;
-        private _setShape;
-        /**相对节点的x轴偏移*/
-        get x(): number;
-        set x(value: number);
-        /**相对节点的y轴偏移*/
-        get y(): number;
-        set y(value: number);
-        /**用逗号隔开的点的集合，格式：x,y,x,y ...*/
-        get points(): string;
-        set points(value: string);
+    class Physics2DOption {
+        /**设置是否允许休眠，休眠可以提高稳定性和性能，但通常会牺牲准确性*/
+        static allowSleeping: boolean;
+        /**重力 （单位：像素）*/
+        static gravity: {
+            x: number;
+            y: number;
+        };
+        /**是否由外部跟新*/
+        static customUpdate: boolean;
+        /**旋转迭代次数，增大数字会提高精度，但是会降低性能*/
+        static velocityIterations: number;
+        /**位置迭代次数，增大数字会提高精度，但是会降低性能*/
+        static positionIterations: number;
+        /**2D游戏默认单位为像素，物理默认单位为米，此值设置了像素和米的转换比率，默认50像素=1米*/
+        static pixelRatio: number;
+        /**是否开启物理绘制*/
+        static debugDraw: boolean;
+        /**是否绘制形状*/
+        static drawShape: boolean;
+        /**是否绘制关节*/
+        static drawJoint: boolean;
+        /**是否绘制包围盒*/
+        static drawAABB: boolean;
+        /**是否绘制质心*/
+        static drawCenterOfMass: boolean;
     }
     /**
      * 2D刚体，显示对象通过RigidBody和物理世界进行绑定，保持物理和显示对象之间的位置同步
      * 物理世界的位置变化会自动同步到显示对象，显示对象本身的位移，旋转（父对象位移无效）也会自动同步到物理世界
-     * 由于引擎限制，暂时不支持以下情形：
-     * 1.不支持绑定节点缩放
-     * 2.不支持绑定节点的父节点缩放和旋转
-     * 3.不支持实时控制父对象位移，IDE内父对象位移是可以的
-     * 如果想整体位移物理世界，可以Physics.I.worldRoot=场景，然后移动场景即可
-     * 可以通过IDE-"项目设置" 开启物理辅助线显示，或者通过代码PhysicsDebugDraw.enable();
+     * 如果想整体位移物理世界，可以Physics2D.I.worldRoot=场景，然后移动场景即可
+     * 可以通过IDE-"项目设置"-"2D物理"-"是否开启2D物理绘制" 开启物理辅助线显示，或者通过代码Physics2D.I.enableDebugDraw=true;
      */
     class RigidBody extends Component {
+        /** 用于判断节点属性更改时更新物理属性*/
+        private static changeFlag;
         /**
          * 刚体类型，支持三种类型static，dynamic和kinematic类型，默认为dynamic类型
          * static为静态类型，静止不动，不受重力影响，质量无限大，可以通过节点移动，旋转，缩放进行控制
@@ -25806,31 +25780,25 @@ declare module Laya {
         label: string;
         /**[只读]原始刚体*/
         protected _body: any;
+        /**
+         * @private
+         */
         private _createBody;
+        /**
+         * @private
+         * 同步Body 类型
+         */
+        private _updateBodyType;
+        /** @override */
         protected _onAwake(): void;
+        /** @private */
+        private _globalChangeHandler;
+        /** @override */
         protected _onEnable(): void;
-        /**
-         * 获取对象某属性的get set方法
-         * 通过其本身无法获取该方法，只能从原型上获取
-         * @param obj
-         * @param prop
-         * @param accessor
-         */
-        private accessGetSetFunc;
-        /**
-         * 重置Collider
-         * @param	resetShape 是否先重置形状，比如缩放导致碰撞体变化
-         */
-        private resetCollider;
-        /**同步物理坐标到游戏坐标*/
-        onUpdate(): void;
-        /**@private 同步节点坐标及旋转到物理世界*/
-        private _sysNodeToPhysic;
-        /**@private 同步节点坐标到物理世界*/
-        private _sysPosToPhysic;
-        /**@private */
-        private _overSet;
+        /** @override */
         protected _onDisable(): void;
+        /** @override */
+        protected _onDestroy(): void;
         /**获得原始body对象 */
         getBody(): any;
         _getOriBody(): any;
@@ -25841,23 +25809,23 @@ declare module Laya {
          * @param	position 施加力的点，如{x:100,y:100}，全局坐标
          * @param	force	施加的力，如{x:0.1,y:0.1}
          */
-        applyForce(position: any, force: any): void;
+        applyForce(position: IV2, force: IV2): void;
         /**
          * 从中心点对刚体施加力，防止对象旋转
          * @param	force	施加的力，如{x:0.1,y:0.1}
          */
-        applyForceToCenter(force: any): void;
+        applyForceToCenter(force: IV2): void;
         /**
          * 施加速度冲量，添加的速度冲量会与刚体原有的速度叠加，产生新的速度
          * @param	position 施加力的点，如{x:100,y:100}，全局坐标
          * @param	impulse	施加的速度冲量，如{x:0.1,y:0.1}
          */
-        applyLinearImpulse(position: any, impulse: any): void;
+        applyLinearImpulse(position: IV2, impulse: IV2): void;
         /**
          * 施加速度冲量，添加的速度冲量会与刚体原有的速度叠加，产生新的速度
          * @param	impulse	施加的速度冲量，如{x:0.1,y:0.1}
          */
-        applyLinearImpulseToCenter(impulse: any): void;
+        applyLinearImpulseToCenter(impulse: IV2): void;
         /**
          * 对刚体施加扭矩，使其旋转
          * @param	torque	施加的扭矩
@@ -25867,10 +25835,10 @@ declare module Laya {
          * 设置速度，比如{x:10,y:10}
          * @param	velocity
          */
-        setVelocity(velocity: any): void;
+        setVelocity(velocity: IV2): void;
         /**
          * 设置角度
-         * @param	value 单位为弧度
+         * @param	value 单位为角度
          */
         setAngle(value: any): void;
         /**获得刚体质量*/
@@ -25880,7 +25848,7 @@ declare module Laya {
          */
         getCenter(): any;
         /**
-         * 获得质心的世界坐标，相对于Physics.I.worldRoot节点
+         * 获得质心的世界坐标，相对于Physics2D.I.worldRoot节点
          */
         getWorldCenter(): any;
         /**
@@ -25910,11 +25878,2002 @@ declare module Laya {
         get linearDamping(): number;
         set linearDamping(value: number);
         /**线性运动速度，比如{x:5,y:5}*/
-        get linearVelocity(): any;
+        get linearVelocity(): IV2;
         set linearVelocity(value: any);
         /**是否高速移动的物体，设置为true，可以防止高速穿透*/
         get bullet(): boolean;
         set bullet(value: boolean);
+        /**
+         * 获得相对body的世界坐标
+         * @param x (单位： 像素)
+         * @param y (单位： 像素)
+        */
+        GetWorldPoint(x: number, y: number): Point;
+        /**
+         * 获得相对body的本地坐标
+         * @param x (单位： 像素)
+         * @param y (单位： 像素)
+        */
+        GetLocalPoint(x: number, y: number): Point;
+    }
+    class RigidBody2DInfo {
+        position: Vector2;
+        angle: number;
+        allowSleep: boolean;
+        angularDamping: number;
+        angularVelocity: number;
+        bullet: boolean;
+        fixedRotation: boolean;
+        gravityScale: number;
+        linearDamping: number;
+        linearVelocity: Vector2;
+        type: string;
+        group: number;
+    }
+    interface IPhyDebugDrawer {
+        /**
+         * 设置颜色
+         * @param c
+         */
+        color(c: number): void;
+        /**
+         * 画线
+         * @param sx
+         * @param sy
+         * @param sz
+         * @param ex
+         * @param ey
+         * @param ez
+         */
+        line(sx: number, sy: number, sz: number, ex: number, ey: number, ez: number): void;
+        /**
+         * 清除画线结果
+         */
+        clear(): void;
+    }
+    class btPhysicsCreateUtil implements IPhysicsCreateUtil {
+        protected _physicsEngineCapableMap: Map<any, any>;
+        initPhysicsCapable(): void;
+        getPhysicsCapable(value: EPhysicsCapable): boolean;
+        initialize(): Promise<void>;
+        createPhysicsManger(physicsSettings: PhysicsSettings): btPhysicsManager;
+        createDynamicCollider(manager: btPhysicsManager): btRigidBodyCollider;
+        createStaticCollider(manager: btPhysicsManager): btStaticCollider;
+        createCharacterController(manager: btPhysicsManager): btCharacterCollider;
+        createFixedJoint(manager: btPhysicsManager): btFixedJoint;
+        createHingeJoint(manager: btPhysicsManager): IHingeJoint;
+        createSpringJoint(manager: btPhysicsManager): btSpringJoint;
+        createD6Joint(manager: btPhysicsManager): ID6Joint;
+        createBoxColliderShape(): btBoxColliderShape;
+        createSphereColliderShape(): btSphereColliderShape;
+        createCapsuleColliderShape(): btCapsuleColliderShape;
+        createMeshColliderShape(): btMeshColliderShape;
+        createPlaneColliderShape(): IPlaneColliderShape;
+        createCylinderColliderShape(): btCylinderColliderShape;
+        createConeColliderShape(): btConeColliderShape;
+        createCorveMesh(mesh: Mesh): Mesh;
+    }
+    class btPhysicsManager implements IPhysicsManager {
+        /**默认碰撞组 */
+        static COLLISIONFILTERGROUP_DEFAULTFILTER: number;
+        /**静态碰撞组 */
+        static COLLISIONFILTERGROUP_STATICFILTER: number;
+        /**运动学刚体碰撞组 */
+        static COLLISIONFILTERGROUP_KINEMATICFILTER: number;
+        /**碎片碰撞组 */
+        static COLLISIONFILTERGROUP_DEBRISFILTER: number;
+        /**传感器触发器*/
+        static COLLISIONFILTERGROUP_SENSORTRIGGER: number;
+        /**字符过滤器 */
+        static COLLISIONFILTERGROUP_CHARACTERFILTER: number;
+        /**自定义过滤1 */
+        static COLLISIONFILTERGROUP_CUSTOMFILTER1: number;
+        /**自定义过滤2 */
+        static COLLISIONFILTERGROUP_CUSTOMFILTER2: number;
+        /**自定义过滤3 */
+        static COLLISIONFILTERGROUP_CUSTOMFILTER3: number;
+        /**自定义过滤4 */
+        static COLLISIONFILTERGROUP_CUSTOMFILTER4: number;
+        /**自定义过滤5 */
+        static COLLISIONFILTERGROUP_CUSTOMFILTER5: number;
+        /**自定义过滤6 */
+        static COLLISIONFILTERGROUP_CUSTOMFILTER6: number;
+        /**自定义过滤7 */
+        static COLLISIONFILTERGROUP_CUSTOMFILTER7: number;
+        /**自定义过滤8 */
+        static COLLISIONFILTERGROUP_CUSTOMFILTER8: number;
+        /**自定义过滤9 */
+        static COLLISIONFILTERGROUP_CUSTOMFILTER9: number;
+        /**自定义过滤10*/
+        static COLLISIONFILTERGROUP_CUSTOMFILTER10: number;
+        /**所有过滤 */
+        static COLLISIONFILTERGROUP_ALLFILTER: number;
+        static init(): void;
+        /**物理引擎在一帧中用于补偿减速的最大次数：模拟器每帧允许的最大模拟次数，如果引擎运行缓慢,可能需要增加该次数，否则模拟器会丢失“时间",引擎间隔时间小于maxSubSteps*fixedTimeStep非常重要。*/
+        maxSubSteps: number;
+        /**物理模拟器帧的间隔时间:通过减少fixedTimeStep可增加模拟精度，默认是1.0 / 60.0。*/
+        fixedTimeStep: number;
+        /**delta */
+        dt: number;
+        protected _updateCount: number;
+        _characters: btCharacterCollider[];
+        protected _physicsEngineCapableMap: Map<any, any>;
+        constructor(physicsSettings: PhysicsSettings);
+        /**
+         * 这个只是给对象发送事件，不会挨个组件调用碰撞函数
+         * 组件要响应碰撞的话，要通过监听事件
+         */
+        dispatchCollideEvent(): void;
+        /**
+         * debugger Function
+         * @param value
+         */
+        enableDebugDrawer(value: boolean): void;
+        getPhysicsCapable(value: EPhysicsCapable): boolean;
+        initPhysicsCapable(): void;
+        /**
+         * gravity
+         * @param gravity
+         */
+        setGravity(gravity: Vector3): void;
+        addCollider(collider: ICollider): void;
+        removeCollider(collider: ICollider): void;
+        addJoint(joint: btJoint): void;
+        removeJoint(joint: btJoint): void;
+        update(elapsedTime: number): void;
+        rayCast(ray: Ray, outHitResult: HitResult, distance?: number, collisonGroup?: number, collisionMask?: number): boolean;
+        rayCastAll(ray: Ray, out: HitResult[], distance?: number, collisonGroup?: number, collisionMask?: number): boolean;
+        destroy(): void;
+    }
+    class btCharacterCollider extends btCollider implements ICharacterController {
+        static __init__(): void;
+        getCapable(value: number): boolean;
+        constructor(physicsManager: btPhysicsManager);
+        setShapelocalOffset(value: Vector3): void;
+        setSkinWidth?(width: number): void;
+        setPosition(value: Vector3): void;
+        setRadius?(value: number): void;
+        setHeight?(value: number): void;
+        setminDistance(value: number): void;
+        setDynamicFriction?(value: number): void;
+        setStaticFriction?(value: number): void;
+        setFrictionCombine?(value: PhysicsCombineMode): void;
+        setBounceCombine?(value: PhysicsCombineMode): void;
+        static getCharacterCapable(value: ECharacterCapable): boolean;
+        static initCapable(): void;
+        protected getColliderType(): btColliderType;
+        protected _initCollider(): void;
+        protected _onShapeChange(): void;
+        setWorldPosition(value: Vector3): void;
+        move(disp: Vector3): void;
+        jump(velocity: Vector3): void;
+        setStepOffset(offset: number): void;
+        setUpDirection(up: Vector3): void;
+        getVerticalVel(): number;
+        setSlopeLimit(slopeLimit: number): void;
+        setfallSpeed(value: number): void;
+        setPushForce(value: number): void;
+        setGravity(value: Vector3): void;
+        /**
+         * 获得角色碰撞的对象
+         * @param cb
+         */
+        getOverlappingObj(cb: (body: btCollider) => void): void;
+        setColliderShape(shape: btColliderShape): void;
+    }
+    enum btColliderType {
+        RigidbodyCollider = 0,
+        CharactorCollider = 1,
+        StaticCollider = 2
+    }
+    class btCollider implements ICollider {
+        static _colliderID: number;
+        static _addUpdateList: boolean;
+        static TYPE_STATIC: number;
+        static TYPE_DYNAMIC: number;
+        static TYPE_KINEMATIC: number;
+        protected static _btVector30: number;
+        _btCollider: any;
+        _btColliderShape: btColliderShape;
+        _collisionGroup: number;
+        _canCollideWith: number;
+        _physicsManager: btPhysicsManager;
+        _isSimulate: boolean;
+        _type: btColliderType;
+        inPhysicUpdateListIndex: number;
+        _id: number;
+        /**触发器 */
+        _isTrigger: boolean;
+        _enableProcessCollisions: boolean;
+        _destroyed: boolean;
+        owner: Sprite3D;
+        _transform: Transform3D;
+        constructor(physicsManager: btPhysicsManager);
+        getCapable(value: number): boolean;
+        setOwner(node: Sprite3D): void;
+        setCollisionGroup(value: number): void;
+        setCanCollideWith(value: number): void;
+        protected _initCollider(): void;
+        protected getColliderType(): btColliderType;
+        protected _onShapeChange(): void;
+        setColliderShape(shape: btColliderShape): void;
+        destroy(): void;
+        transformChanged(flag: number): void;
+        setBounciness(value: number): void;
+        setfriction(value: number): void;
+        setRollingFriction(value: number): void;
+    }
+    class btRigidBodyCollider extends btCollider implements IDynamicCollider {
+        constructor(manager: btPhysicsManager);
+        getCapable(value: number): boolean;
+        static getRigidBodyCapable(value: EColliderCapable): boolean;
+        static initCapable(): void;
+        setWorldPosition(value: Vector3): void;
+        setWorldRotation(value: Quaternion): void;
+        sleep(): void;
+        protected getColliderType(): btColliderType;
+        /**
+        * 是否重载重力。
+        */
+        private _setoverrideGravity;
+        /**
+         * 是否处于睡眠状态。
+         */
+        private isSleeping;
+        protected _initCollider(): void;
+        protected _onShapeChange(): void;
+        setLinearDamping(value: number): void;
+        setAngularDamping(value: number): void;
+        setLinearVelocity(value: Vector3): void;
+        /**
+         * 设置睡眠刚体线速度阈值
+         * @param value
+         */
+        setSleepLinearVelocity(value: Vector3): void;
+        setAngularVelocity(value: Vector3): void;
+        setMass(value: number): void;
+        setInertiaTensor(value: Vector3): void;
+        setCenterOfMass(value: Vector3): void;
+        setMaxAngularVelocity(value: number): void;
+        setMaxDepenetrationVelocity(value: number): void;
+        setSleepThreshold(value: number): void;
+        setSleepAngularVelocity(value: number): void;
+        setSolverIterations(value: number): void;
+        setCollisionDetectionMode(value: number): void;
+        setIsKinematic(value: boolean): void;
+        setConstraints(linearFactor: Vector3, angularFactor: Vector3): void;
+        setTrigger(value: boolean): void;
+        /**
+         * 应用作用力。
+         * @param	force 作用力。
+         * @param	localOffset 偏移,如果为null则为中心点
+         */
+        private _applyForce;
+        /**
+       * 应用扭转力。
+       * @param	torque 扭转力。
+       */
+        private _applyTorque;
+        /**
+         * 应用冲量。
+         * @param	impulse 冲量。
+         * @param   localOffset 偏移,如果为null则为中心点。
+         */
+        private _applyImpulse;
+        /**
+         * 应用扭转冲量。
+         * @param	torqueImpulse
+         */
+        private _applyTorqueImpulse;
+        addForce(force: Vector3, mode: PhysicsForceMode, localOffset: Vector3): void;
+        addTorque(torque: Vector3, mode: PhysicsForceMode): void;
+        /**
+         * 清除应用到刚体上的所有力。
+         */
+        private clearForces;
+        wakeUp(): void;
+        setColliderShape(shape: btColliderShape): void;
+        destroy(): void;
+    }
+    class btStaticCollider extends btCollider implements IStaticCollider {
+        protected _initCollider(): void;
+        setTrigger(value: boolean): void;
+        protected getColliderType(): btColliderType;
+        getCapable(value: number): boolean;
+        constructor(physicsManager: btPhysicsManager);
+        static getStaticColliderCapable(value: EColliderCapable): boolean;
+        static initCapable(): void;
+        setWorldPosition(value: Vector3): void;
+    }
+    /**
+     * <code>CollisionMap</code> 类用于实现碰撞组合实例图。
+     */
+    class CollisionTool {
+        /**
+         * 创建一个 <code>CollisionMap</code> 实例。
+         */
+        constructor();
+    }
+    class btCustomJoint extends btJoint implements ID6Joint {
+        initJoint(): void;
+        protected _createJoint(): void;
+        _initAllConstraintInfo(): void;
+        constructor(manager: btPhysicsManager);
+        setLocalPos(pos: Vector3): void;
+        setConnectLocalPos(pos: Vector3): void;
+        setAxis(axis: Vector3, secendary: Vector3): void;
+        setMotion(axis: D6Axis, motionType: D6MotionType): void;
+        setDistanceLimit(limit: number, bounceness: number, bounceThreshold: number, spring: number, damp: number): void;
+        setLinearLimit(linearAxis: D6MotionType, upper: number, lower: number, bounceness: number, bounceThreshold: number, spring: number, damping: number): void;
+        setTwistLimit(upper: number, lower: number, bounceness: number, bounceThreshold: number, spring: number, damping: number): void;
+        setSwingLimit(yAngle: number, zAngle: number, bounceness: number, bounceThreshold: number, spring: number, damping: number): void;
+        setDrive(index: D6Drive, stiffness: number, damping: number, forceLimit: number): void;
+        setDriveTransform(position: Vector3, rotate: Quaternion): void;
+        setDriveVelocity(position: Vector3, angular: Vector3): void;
+        getTwistAngle(): number;
+        getSwingYAngle(): number;
+        getSwingZAngle(): number;
+    }
+    class btFixedJoint extends btJoint implements IFixedJoint {
+        constructor(manager: btPhysicsManager);
+        protected _createJoint(): void;
+    }
+    class btHingeJoint extends btJoint implements IHingeJoint {
+        protected _createJoint(): void;
+        constructor(manager: btPhysicsManager);
+        setLocalPos(pos: Vector3): void;
+        setConnectLocalPos(pos: Vector3): void;
+        setLowerLimit(lowerLimit: number): void;
+        setUpLimit(value: number): void;
+        setBounceness(value: number): void;
+        setBouncenMinVelocity(value: number): void;
+        setContactDistance(value: number): void;
+        enableLimit(value: boolean): void;
+        enableDrive(value: boolean): void;
+        enableFreeSpin(value: boolean): void;
+        setAxis(value: Vector3): void;
+        setSwingOffset(value: Vector3): void;
+        getAngle(): number;
+        getVelocity(): Readonly<Vector3>;
+        setHardLimit(lowerLimit: number, upperLimit: number, contactDist: number): void;
+        setSoftLimit(lowerLimit: number, upperLimit: number, stiffness: number, damping: number): void;
+        setDriveVelocity(velocity: number): void;
+        setDriveForceLimit(limit: number): void;
+        setDriveGearRatio(ratio: number): void;
+        setHingeJointFlag(flag: number, value: boolean): void;
+    }
+    class btJoint implements IJoint {
+        _manager: btPhysicsManager;
+        /** 连接的两个物体是否进行碰撞检测 */
+        _disableCollisionsBetweenLinkedBodies: boolean;
+        static __init__(): void;
+        static initJointCapable(): void;
+        static getJointCapable(value: EJointCapable): boolean;
+        constructor(manager: btPhysicsManager);
+        protected _createJoint(): void;
+        setCollider(collider: btCollider): void;
+        setConnectedCollider(collider: btCollider): void;
+        setLocalPos(pos: Vector3): void;
+        setConnectLocalPos(pos: Vector3): void;
+        getlinearForce(): Vector3;
+        getAngularForce(): Vector3;
+        isValid(): boolean;
+        isEnable(value: boolean): void;
+        isCollision(value: boolean): void;
+        protected initJoint(): void;
+        setOwner(owner: Sprite3D): void;
+        _isBreakConstrained(): boolean;
+        setConnectedMassScale(value: number): void;
+        setConnectedInertiaScale(value: number): void;
+        setMassScale(value: number): void;
+        setInertiaScale(value: number): void;
+        setBreakForce(value: number): void;
+        setBreakTorque(value: number): void;
+    }
+    class btSpringJoint extends btJoint implements ISpringJoint {
+        protected _createJoint(): void;
+        constructor(manager: btPhysicsManager);
+        setLocalPos(pos: Vector3): void;
+        setConnectLocalPos(pos: Vector3): void;
+        setSwingOffset(value: Vector3): void;
+        setMinDistance(distance: number): void;
+        setMaxDistance(distance: number): void;
+        setTolerance(tolerance: number): void;
+        setStiffness(stiffness: number): void;
+        setDamping(damping: number): void;
+    }
+    class btBoxColliderShape extends btColliderShape implements IBoxColliderShape {
+        /** @interanl */
+        private _size;
+        constructor();
+        private changeBoxShape;
+        protected _createShape(): void;
+        protected _getType(): number;
+        setSize(size: Vector3): void;
+        destroy(): void;
+    }
+    class btCapsuleColliderShape extends btColliderShape implements ICapsuleColliderShape {
+        private static _tempVector30;
+        constructor();
+        protected _createShape(): void;
+        protected _getType(): number;
+        setRadius(radius: number): void;
+        setHeight(height: number): void;
+        setUpAxis(upAxis: number): void;
+        setWorldScale(scale: Vector3): void;
+        destroy(): void;
+    }
+    class btColliderShape implements IColliderShape {
+        /** 形状方向_X轴正向 */
+        static SHAPEORIENTATION_UPX: number;
+        /** 形状方向_Y轴正向 */
+        static SHAPEORIENTATION_UPY: number;
+        /** 形状方向_Z轴正向 */
+        static SHAPEORIENTATION_UPZ: number;
+        _type: number;
+        _btShape: any;
+        _btScale: any;
+        _localOffset: Vector3;
+        _worldScale: Vector3;
+        _btCollider: btCollider;
+        _destroyed: boolean;
+        constructor();
+        /**
+         * @override
+         */
+        protected _createShape(): void;
+        /**
+         * @override
+         */
+        protected _getType(): number;
+        setOffset(value: Vector3): void;
+        setWorldScale(scale: Vector3): void;
+        destroy(): void;
+    }
+    /**
+     * <code>CompoundColliderShape</code> 类用于创建组合碰撞器。
+     */
+    class btCompoundColliderShape extends btColliderShape implements ICompoundColliderShape {
+        /**
+         * 创建一个新的 <code>CompoundColliderShape</code> 实例。
+         */
+        constructor();
+        /**
+         * 设置物理shape数组
+         * IDE
+         */
+        set shapes(value: any[]);
+        get shapes(): any[];
+        /**
+         * 添加子碰撞器形状。
+         * @param	shape 子碰撞器形状。
+         */
+        addChildShape(shape: any): void;
+        /**
+         * 移除子碰撞器形状。
+         * @param	shape 子碰撞器形状。
+         */
+        removeChildShape(shape: any): void;
+        /**
+         * 清空子碰撞器形状。
+         */
+        clearChildShape(): void;
+        /**
+         * 获取子形状数量。
+         * @return
+         */
+        getChildShapeCount(): number;
+        /**
+         * @inheritDoc
+         * @override
+         */
+        cloneTo(destObject: any): void;
+        /**
+         * @inheritDoc
+         * @override
+         */
+        clone(): any;
+        /**
+         * @inheritDoc
+         * @override
+         */
+        destroy(): void;
+    }
+    class btConeColliderShape extends btColliderShape implements IConeColliderShape {
+        private static _tempVector30;
+        constructor();
+        protected _createShape(): void;
+        protected _getType(): number;
+        setRadius(radius: number): void;
+        setHeight(height: number): void;
+        setUpAxis(upAxis: number): void;
+        destroy(): void;
+    }
+    class btCylinderColliderShape extends btColliderShape implements ICylinderColliderShape {
+        private static _tempVector30;
+        private _btSize;
+        constructor();
+        protected _createShape(): void;
+        protected _getType(): number;
+        setRadius(radius: number): void;
+        setHeight(height: number): void;
+        setUpAxis(upAxis: number): void;
+        destroy(): void;
+    }
+    class btMeshColliderShape extends btColliderShape implements IMeshColliderShape {
+        private _limitvertex;
+        private _convex;
+        /**
+         * 网格
+        */
+        get mesh(): Mesh;
+        set mesh(value: Mesh);
+        static __init__(): void;
+        constructor();
+        setPhysicsMeshFromMesh(value: Mesh): void;
+        setConvexMesh(value: Mesh): void;
+        setLimitVertex(limit: number): void;
+        private _createPhysicsMeshFromMesh;
+        private _createConvexMeshFromMesh;
+        protected _createTrianggleMeshGeometry(): void;
+        protected _createConvexMeshGeometry(): void;
+        setWorldScale(value: Vector3): void;
+    }
+    class btSphereColliderShape extends btColliderShape implements ISphereColliderShape {
+        constructor();
+        protected _getType(): number;
+        protected _createShape(): void;
+        setRadius(radius: number): void;
+        destroy(): void;
+    }
+    /**
+     * Base class for character controllers.
+     */
+    interface ICharacterController extends ICollider {
+        /**
+         * Moves the character using a "collide-and-slide" algorithm.
+         * @param disp Displacement vector
+         */
+        move(disp: Vector3): void;
+        /**
+         * jump
+         * @param velocity
+         */
+        jump?(velocity: Vector3): void;
+        /**
+         * set position of characterController
+         * @param v
+         */
+        setPosition(value: Vector3): void;
+        /**
+         * The step height.
+         * @param offset The new step offset for the controller.
+         */
+        setStepOffset?(offset: number): void;
+        /**
+         * set skin offset
+         * @param width
+         */
+        setSkinWidth?(width: number): void;
+        /**
+         * Sets the 'up' direction.
+         * @param up The up direction for the controller.
+         */
+        setUpDirection?(up: Vector3): void;
+        /**
+         * get VerticalVel
+         */
+        getVerticalVel?(): number;
+        /**
+         * Sets the slope limit.
+         * @param slopeLimit The slope limit for the controller.
+         */
+        setSlopeLimit?(slopeLimit: number): void;
+        /**
+         * 设置重力
+         * @param value
+         */
+        setGravity?(value: Vector3): void;
+        /**
+         * 设置角色的半径
+         * @param value
+         */
+        setRadius?(value: number): void;
+        /**
+         * 设置角色的高度
+         * @param value
+         */
+        setHeight?(value: number): void;
+        setminDistance(value: number): void;
+        setShapelocalOffset(value: Vector3): void;
+        /**
+         * 设置推开的力
+         */
+        setPushForce?(value: number): void;
+    }
+    interface ICollider {
+        owner: Node;
+        inPhysicUpdateListIndex: number;
+        /**
+         * get capable
+         * @param value
+         */
+        getCapable(value: number): boolean;
+        setColliderShape(shape: IColliderShape): void;
+        /**
+         * Deletes the collider.
+         */
+        destroy(): void;
+        /**
+         * set collision Group
+         * @param value
+         */
+        setCollisionGroup(value: number): void;
+        /**
+         * set can collision Group
+         * @param value
+         */
+        setCanCollideWith(value: number): void;
+        /**
+         * set node
+         */
+        setOwner(node: Node): void;
+        /**
+         * transform Change
+         */
+        transformChanged(flag: number): void;
+        setBounciness?(value: number): void;
+        setfriction?(value: number): void;
+        setRollingFriction?(value: number): void;
+        setDynamicFriction?(value: number): void;
+        setStaticFriction?(value: number): void;
+        setFrictionCombine?(value: PhysicsCombineMode): void;
+        setBounceCombine?(value: PhysicsCombineMode): void;
+        setEventFilter?(events: string[]): void;
+    }
+    /**
+     * Interface of physics dynamic collider.
+     */
+    interface IDynamicCollider extends ICollider {
+        /**
+         * Sets the linear damping coefficient.
+         * @param value - Linear damping coefficient.
+         */
+        setLinearDamping(value: number): void;
+        /**
+         * Sets the angular damping coefficient.
+         * @param value - Angular damping coefficient.
+         */
+        setAngularDamping(value: number): void;
+        /**
+         * Sets the linear velocity of the actor.
+         * @param value - New linear velocity of actor.
+         */
+        setLinearVelocity(value: Vector3): void;
+        /**
+         * Sets the angular velocity of the actor.
+         * @param value - New angular velocity of actor.
+         */
+        setAngularVelocity(value: Vector3): void;
+        /**
+         *  Sets the mass of a dynamic actor.
+         * @param value - New mass value for the actor.
+         */
+        setMass(value: number): void;
+        /**
+         * Sets the pose of the center of mass relative to the actor.
+         * @param value - Mass frame offset transform relative to the actor frame.
+         */
+        setCenterOfMass(value: Vector3): void;
+        /**
+         * Sets the inertia tensor, using a parameter specified in mass space coordinates.
+         * @param value - New mass space inertia tensor for the actor.
+         */
+        setInertiaTensor(value: Vector3): void;
+        /**
+         * Sets the mass-normalized kinetic energy threshold below which an actor may go to sleep.
+         * @param value - Energy below which an actor may go to sleep.
+         */
+        setSleepThreshold(value: number): void;
+        /**
+         * Sets the colliders' collision detection mode.
+         * @param value - rigid body flag
+         */
+        setCollisionDetectionMode(value: number): void;
+        /**
+         * Controls whether physics affects the dynamic collider.
+         * @param value - is or not
+         */
+        setIsKinematic(value: boolean): void;
+        /**
+         * Raises or clears a particular rigid dynamic lock flag.
+         * @param flags - the flag to raise(set) or clear.
+         */
+        setConstraints(linearFactor: Vector3, angularFactor: Vector3): void;
+        /**
+         * Apply a force to the dynamic collider.
+         * @param force - The force make the collider move
+         */
+        addForce(force: Vector3, mode: PhysicsForceMode, localOffset: Vector3): void;
+        /**
+         * Apply a torque to the dynamic collider.
+         * @param torque - The force make the collider rotate
+         */
+        addTorque(torque: Vector3, mode: PhysicsForceMode): void;
+        /**
+         * Forces a collider to sleep at least one frame.
+         */
+        sleep?(): void;
+        /**
+         * Forces a collider to wake up.
+         */
+        wakeUp(): void;
+        /**
+         * set world position
+         * @param value
+         */
+        setWorldPosition(value: Vector3): void;
+        /**
+         * set world rotation
+         * @param value
+         */
+        setWorldRotation(value: Quaternion): void;
+        /**
+         * set trigger
+         * @param value
+         */
+        setTrigger(value: boolean): void;
+    }
+    interface IPhysicsCreateUtil {
+        /**
+         * 初始化物理
+         */
+        initialize(): Promise<void>;
+        /**
+         * set PhysicsEngine Capable
+         */
+        initPhysicsCapable(): void;
+        /**
+         * get PhysicsEngine Capable
+         * @param value
+         */
+        getPhysicsCapable(value: EPhysicsCapable): boolean;
+        /**
+         * 创建物理管理类
+         */
+        createPhysicsManger(physicsSettings: PhysicsSettings): IPhysicsManager;
+        /**
+         * 创建动态碰撞体
+         */
+        createDynamicCollider(manager: IPhysicsManager): IDynamicCollider;
+        /**
+         * 创建静态碰撞体
+         */
+        createStaticCollider(manager: IPhysicsManager): IStaticCollider;
+        /**
+         * 创建角色碰撞器
+         */
+        createCharacterController(manager: IPhysicsManager): ICharacterController;
+        /**
+         * Create fixed joint.
+         * @param collider - Affector of joint
+         */
+        createFixedJoint(manager: IPhysicsManager): IFixedJoint;
+        /**
+         * Create hinge joint.
+         * @param collider - Affector of joint
+         */
+        createHingeJoint(manager: IPhysicsManager): IHingeJoint;
+        /**
+         * Create spring joint
+         * @param collider - Affector of joint
+         */
+        createSpringJoint(manager: IPhysicsManager): ISpringJoint;
+        /**
+         * Create Custom Joint
+         */
+        createD6Joint(manager: IPhysicsManager): ID6Joint;
+        /**
+         * Create box collider shape.
+         * @param uniqueID - Shape unique id
+         * @param size - Size of the box
+         * @param material - The material of this shape
+         */
+        createBoxColliderShape(): IBoxColliderShape;
+        /**
+         * Create sphere collider shape.
+         * @param uniqueID - Shape unique id
+         * @param radius - Radius of the sphere
+         * @param material - The material of this shape
+         */
+        createSphereColliderShape(): ISphereColliderShape;
+        /**
+         * Create plane collider shape.
+         * @param uniqueID - Shape unique id
+         * @param material - The material of this shape
+         */
+        createPlaneColliderShape(): IPlaneColliderShape;
+        /**
+         * Create capsule collider shape.
+         * @param uniqueID - Shape unique id
+         * @param radius - Radius of capsule
+         * @param height - Height of capsule
+         * @param material - The material of this shape
+         */
+        createCapsuleColliderShape?(): ICapsuleColliderShape;
+        /**
+         * create Mesh Collider shape
+         */
+        createMeshColliderShape?(): IMeshColliderShape;
+        /**
+         * create Cylinder Collider Shape
+         */
+        createCylinderColliderShape?(): ICylinderColliderShape;
+        /**
+         * create Cone Collider Shape
+         */
+        createConeColliderShape?(): IConeColliderShape;
+        /**
+         * create Height Field Collider
+         */
+        createHeightFieldShape?(): IHeightFieldShape;
+        /**
+         * create Corve Mesh
+         */
+        createCorveMesh?(mesh: Mesh): Mesh;
+    }
+    interface IPhysicsManager {
+        /**
+        * Set gravity.
+        * @param gravity - Physics gravity
+        */
+        setGravity(gravity: Vector3): void;
+        /**
+         * Add ICollider into the manager.
+         * @param collider - StaticCollider or DynamicCollider.
+         */
+        addCollider(collider: ICollider): void;
+        /**
+         * Remove ICollider.
+         * @param collider - StaticCollider or DynamicCollider.
+         */
+        removeCollider(collider: ICollider): void;
+        /**
+         * Call on every frame to update pose of objects.
+         * @param elapsedTime - Step time of update.
+         */
+        update(elapsedTime: number): void;
+        /**
+         * ray cast first one collision
+         * @param ray
+         * @param outHitResult
+         * @param distance
+         * @param collisonGroup
+         * @param collisionMask
+         */
+        rayCast?(ray: Ray, outHitResult: HitResult, distance?: number, collisonGroup?: number, collisionMask?: number): boolean;
+        /**
+         * ray cast all collision
+         * @param ray
+         * @param out
+         * @param distance
+         * @param collisonGroup
+         * @param collisionMask
+         */
+        rayCastAll?(ray: Ray, out: HitResult[], distance?: number, collisonGroup?: number, collisionMask?: number): boolean;
+        /**
+         * debugger
+         * @param value
+         */
+        enableDebugDrawer?(value: boolean): void;
+        /**
+         * Query
+         * @param pos
+         * @param radius
+         * @param result
+         * @param collisionmask
+         */
+        sphereQuery?(pos: Vector3, radius: number, result: ICollider[], collisionmask: number): void;
+        /**
+         * destroy
+         */
+        destroy(): void;
+    }
+    interface IPhysicsMaterial {
+        /**
+         * 设置弹力
+         * @param value - The bounciness
+         */
+        setBounciness(value: number): void;
+        /**
+         * 设置动态摩擦力
+         * @param value - The dynamic friction
+         */
+        setDynamicFriction(value: number): void;
+        /**
+         * 设置静态摩擦力
+         * @param value - The static friction
+         */
+        setStaticFriction(value: number): void;
+        /**
+         * 设置弹性组合模式
+         * @param value - The combine mode
+         */
+        setBounceCombine(value: number): void;
+        /**
+         * 设置摩擦组合模式
+         * @param value - The combine mode
+         */
+        setFrictionCombine(value: number): void;
+        /**
+         * Decrements the reference count of a material and releases it if the new reference count is zero.
+         */
+        destroy(): void;
+    }
+    interface IStaticCollider extends ICollider {
+        /**
+         * set trigger
+         * @param value
+         */
+        setTrigger(value: boolean): void;
+    }
+    interface ICustomJoint extends IJoint {
+    }
+    enum D6MotionType {
+        eX = 0,
+        eY = 1,
+        eZ = 2,
+        eTWIST = 3,
+        eSWING1 = 4,
+        eSWING2 = 5
+    }
+    enum D6Axis {
+        eLOCKED = 0,
+        eLIMITED = 1,
+        eFREE = 2
+    }
+    enum D6Drive {
+        eX = 0,
+        eY = 1,
+        eZ = 2,
+        eSWING = 3,
+        eTWIST = 4,
+        eSLERP = 5
+    }
+    interface ID6Joint extends IJoint {
+        setAxis(axis: Vector3, secendary: Vector3): void;
+        setMotion(axis: D6Axis, motionType: D6MotionType): void;
+        setDistanceLimit(limit: number, bounceness: number, bounceThreshold: number, spring: number, damp: number): void;
+        setLinearLimit(linearAxis: D6MotionType, upper: number, lower: number, bounceness: number, bounceThreshold: number, spring: number, damping: number): void;
+        setTwistLimit(upper: number, lower: number, bounceness: number, bounceThreshold: number, spring: number, damping: number): void;
+        setSwingLimit(yAngle: number, zAngle: number, bounceness: number, bounceThreshold: number, spring: number, damping: number): void;
+        setDrive(index: D6Drive, stiffness: number, damping: number, forceLimit: number): void;
+        setDriveTransform(position: Vector3, rotate: Quaternion): void;
+        setDriveVelocity(position: Vector3, angular: Vector3): void;
+        getTwistAngle(): number;
+        getSwingYAngle(): number;
+        getSwingZAngle(): number;
+    }
+    interface IFixedJoint extends IJoint {
+    }
+    interface IHingeJoint extends IJoint {
+        /**
+         * The anchor rotation.
+         */
+        setAxis(value: Vector3): void;
+        /**
+         * The current angle in degrees of the joint relative to its rest position.
+         */
+        getAngle(): number;
+        /**
+         * The angular velocity of the joint in degrees per second.
+         */
+        getVelocity(): Readonly<Vector3>;
+        /**
+         * set limitLower
+         * @param lowerLimit
+         */
+        setLowerLimit(lowerLimit: number): void;
+        /**
+         * @param value
+         */
+        setUpLimit(value: number): void;
+        /**
+         * @param value
+         */
+        setBounceness(value: number): void;
+        /**
+         * @param value
+         */
+        setBouncenMinVelocity(value: number): void;
+        /**
+         * @param value
+         */
+        setContactDistance(value: number): void;
+        /**
+         * @param value
+         */
+        enableLimit(value: boolean): void;
+        /**
+         * @param value
+         */
+        enableDrive(value: boolean): void;
+        /**
+         * @param value
+         */
+        enableFreeSpin(value: boolean): void;
+        /**
+         * set the target velocity for the drive model.
+         * @param velocity the drive target velocity
+         */
+        setDriveVelocity(velocity: number): void;
+        /**
+         * sets the maximum torque the drive can exert.
+         * @param limit the maximum torque
+         */
+        setDriveForceLimit(limit: number): void;
+    }
+    interface IJoint {
+        /**
+         * set owner
+         * @param value
+         */
+        setOwner(value: Node): void;
+        /**
+         * the Collider
+         * @param owner
+         */
+        setCollider(owner: ICollider): void;
+        /**
+         * The connected collider.
+         */
+        setConnectedCollider(owner: ICollider): void;
+        /**
+         *  The scale to apply to the inverse mass of collider 0 for resolving this constraint.
+         */
+        setConnectedMassScale(value: number): void;
+        /**
+         * The scale to apply to the inverse inertia of collider0 for resolving this constraint.
+         */
+        setConnectedInertiaScale(value: number): void;
+        /**
+         * The scale to apply to the inverse mass of collider 1 for resolving this constraint.
+         */
+        setMassScale(value: number): void;
+        /**
+         * The scale to apply to the inverse inertia of collider1 for resolving this constraint.
+         */
+        setInertiaScale(value: number): void;
+        /**
+         * The maximum force the joint can apply before breaking.
+         */
+        setBreakForce(value: number): void;
+        /**
+         * The maximum torque the joint can apply before breaking.
+         */
+        setBreakTorque(value: number): void;
+        /**
+         * set Actor0 local anchor/Frame Pos
+         * @param pos
+         */
+        setLocalPos(pos: Vector3): void;
+        /**
+         * set Actor1 local anchor/Frame Pos
+         * @param pos
+         */
+        setConnectLocalPos(pos: Vector3): void;
+        /**
+         * get linear force
+         */
+        getlinearForce(): Vector3;
+        /**
+         * get angular force
+         */
+        getAngularForce(): Vector3;
+        /**
+         * is breaked
+         */
+        isValid(): boolean;
+        isEnable(value: boolean): void;
+        isCollision(value: boolean): void;
+    }
+    interface ISpringJoint extends IJoint {
+        /**
+         * Set the allowed minimum distance for the joint.
+         * @param distance the minimum distance
+         */
+        setMinDistance(distance: number): void;
+        /**
+         * Set the allowed maximum distance for the joint.
+         * @param distance the maximum distance
+         */
+        setMaxDistance(distance: number): void;
+        /**
+         * Set the error tolerance of the joint.
+         * @param tolerance the distance beyond the allowed range at which the joint becomes active
+         */
+        setTolerance(tolerance: number): void;
+        /**
+         * Set the strength of the joint spring.
+         * @param stiffness the spring strength of the joint
+         */
+        setStiffness(stiffness: number): void;
+        /**
+         * Set the damping of the joint spring.
+         * @param damping the degree of damping of the joint spring of the joint
+         */
+        setDamping(damping: number): void;
+    }
+    interface IBoxColliderShape extends IColliderShape {
+        /**
+          * Set size of Box Shape.
+          * @param size - The size
+          */
+        setSize(size: Vector3): void;
+    }
+    interface ICapsuleColliderShape extends IColliderShape {
+        /**
+         * Set radius of capsule.
+         * @param radius - The radius
+         */
+        setRadius(radius: number): void;
+        /**
+         * Set height of capsule.
+         * @param height - The height
+         */
+        setHeight(height: number): void;
+        /**
+         * Set up axis of capsule.
+         * @param upAxis - The up axis
+         */
+        setUpAxis(upAxis: number): void;
+    }
+    interface IColliderShape {
+        /**
+         * Set local position.
+         * @param position - The local position
+         */
+        setOffset(position: Vector3): void;
+        /**
+         * Decrements the reference count of a shape and releases it if the new reference count is zero.
+         */
+        destroy(): void;
+    }
+    interface ICompoundColliderShape {
+    }
+    interface IConeColliderShape extends IColliderShape {
+        /**
+        * Set radius of capsule.
+        * @param radius - The radius
+        */
+        setRadius(radius: number): void;
+        /**
+         * Set height of capsule.
+         * @param height - The height
+         */
+        setHeight(height: number): void;
+        /**
+         * Set up axis of capsule.
+         * @param upAxis - The up axis
+         */
+        setUpAxis(upAxis: number): void;
+    }
+    interface ICylinderColliderShape extends IColliderShape {
+        /**
+        * Set radius of capsule.
+        * @param radius - The radius
+        */
+        setRadius(radius: number): void;
+        /**
+         * Set height of capsule.
+         * @param height - The height
+         */
+        setHeight(height: number): void;
+        /**
+         * Set up axis of capsule.
+         * @param upAxis - The up axis
+         */
+        setUpAxis(upAxis: number): void;
+    }
+    interface IHeightFieldShape extends IColliderShape {
+        /**
+         * 设置高度数据
+         * @param numRows
+         * @param numCols
+         * @param heightData
+         * @param _scale
+         */
+        setHeightFieldData(numRows: number, numCols: number, heightData: Float32Array, flag: Uint8Array, scale: Vector3): void;
+        /**
+         * NBRows
+         */
+        getNbRows(): number;
+        /**
+         * NBColumns
+         */
+        getNbColumns(): number;
+        /**
+         * height
+         * @param rows
+         * @param cols
+         */
+        getHeight(rows: number, cols: number): number;
+    }
+    interface IMeshColliderShape extends IColliderShape {
+        /**
+         * create physicsMesh from Mesh
+         * @param value
+         */
+        setPhysicsMeshFromMesh(value: Mesh): void;
+        /**
+         *
+         * @param value
+         */
+        setConvexMesh(value: Mesh): void;
+        /**
+         * create limit Vertex
+         * @param limit
+         */
+        setLimitVertex(limit: number): void;
+    }
+    interface IPlaneColliderShape extends IColliderShape {
+    }
+    interface ISphereColliderShape extends IColliderShape {
+        /**
+         * Set radius of sphere.
+         * @param radius - The radius
+         */
+        setRadius(radius: number): void;
+    }
+    enum ECharacterCapable {
+        Charcater_Gravity = 0,
+        Charcater_CollisionGroup = 1,
+        Charcater_WorldPosition = 2,
+        Charcater_Move = 3,
+        Charcater_Jump = 4,
+        Charcater_StepOffset = 5,
+        Character_UpDirection = 6,
+        Character_FallSpeed = 7,
+        Character_SlopeLimit = 8,
+        Character_PushForce = 9,
+        Character_Radius = 10,
+        Character_Height = 11,
+        Character_offset = 12,
+        Character_Skin = 13,
+        Character_minDistance = 14,
+        Character_EventFilter = 15,
+        Character_SimulateGravity = 16
+    }
+    enum EColliderCapable {
+        Collider_CollisionGroup = 0,
+        Collider_Friction = 1,
+        Collider_RollingFriction = 2,
+        Collider_Restitution = 3,
+        Collider_AllowTrigger = 4,
+        Collider_DynamicFriction = 5,
+        Collider_StaticFriction = 6,
+        Collider_BounceCombine = 7,
+        Collider_FrictionCombine = 8,
+        Collider_EventFilter = 9,
+        RigidBody_CanKinematic = 10,
+        RigidBody_AllowSleep = 11,
+        RigidBody_Gravity = 12,
+        RigidBody_LinearDamp = 13,
+        RigidBody_AngularDamp = 14,
+        RigidBody_LinearVelocity = 15,
+        RigidBody_AngularVelocity = 16,
+        RigidBody_Mass = 17,
+        RigidBody_WorldPosition = 18,
+        RigidBody_WorldOrientation = 19,
+        RigidBody_InertiaTensor = 20,
+        RigidBody_MassCenter = 21,
+        RigidBody_MaxAngularVelocity = 22,
+        RigidBody_MaxDepenetrationVelocity = 23,
+        RigidBody_SleepThreshold = 24,
+        RigidBody_SleepAngularVelocity = 25,
+        RigidBody_SolverIterations = 26,
+        RigidBody_AllowDetectionMode = 27,
+        RigidBody_AllowKinematic = 28,
+        RigidBody_AllowCharacter = 29,
+        RigidBody_LinearFactor = 30,
+        RigidBody_AngularFactor = 31,
+        RigidBody_ApplyForce = 32,
+        RigidBody_ClearForce = 33,
+        RigidBody_ApplyForceWithOffset = 34,
+        RigidBody_ApplyTorque = 35,
+        RigidBody_ApplyImpulse = 36,
+        RigidBody_ApplyTorqueImpulse = 37
+    }
+    enum EJointCapable {
+        Joint_Anchor = 0,
+        Joint_ConnectAnchor = 1
+    }
+    enum EPhysicsCapable {
+        Physics_Gravity = 0,
+        Physics_StaticCollider = 1,
+        Physics_DynamicCollider = 2,
+        Physics_CharacterCollider = 3,
+        Physics_BoxColliderShape = 4,
+        Physics_SphereColliderShape = 5,
+        Physics_CapsuleColliderShape = 6,
+        Physics_CylinderColliderShape = 7,
+        Physics_ConeColliderShape = 8,
+        Physics_MeshColliderShape = 9,
+        Physics_CompoundColliderShape = 10,
+        Physics_CreateCorveMesh = 11,
+        physics_heightFieldColliderShape = 12,
+        Physics_Joint = 13,
+        Physics_FixedJoint = 14,
+        Physics_SpringJoint = 15,
+        Physics_HingeJoint = 16,
+        Physics_D6Joint = 17
+    }
+    enum ControllerNonWalkableMode {
+        ePREVENT_CLIMBING = 0,
+        ePREVENT_CLIMBING_AND_FORCE_SLIDING = 1
+    }
+    enum ECharacterCollisionFlag {
+        eCOLLISION_SIDES = 1,
+        eCOLLISION_UP = 2,
+        eCOLLISION_DOWN = 4
+    }
+    class pxCharactorCollider extends pxCollider implements ICharacterController {
+        static tempV3: Vector3;
+        _shapeID: number;
+        private _nonWalkableMode;
+        private _gravity;
+        private _characterCollisionFlags;
+        constructor(manager: pxPhysicsManager);
+        private _getNodeScale;
+        protected _initCollider(): void;
+        getCapable(value: number): boolean;
+        static getCharacterCapable(value: ECharacterCapable): boolean;
+        static initCapable(): void;
+        /**
+         * create from physics Engine
+         */
+        _createController(): void;
+        /**
+         * 设置角色控制器的碰撞类型
+         * @param value
+         */
+        _setCharacterCollisonFlag(value: ECharacterCollisionFlag): void;
+        /**
+         * remove from physics Engine
+         */
+        _releaseController(): void;
+        move(disp: Vector3): void;
+        jump?(velocity: Vector3): void;
+        setStepOffset(offset: number): void;
+        setUpDirection(up: Vector3): void;
+        setSlopeLimit(value: number): void;
+        setGravity(value: Vector3): void;
+        setPushForce(value: number): void;
+        getWorldTransform(): void;
+        setSkinWidth(width: number): void;
+        destroy(): void;
+        setPosition(value: Vector3): void;
+        setShapelocalOffset(value: Vector3): void;
+        setHeight(value: number): void;
+        setRadius(value: number): void;
+        setminDistance(value: number): void;
+        setNonWalkableMode(value: ControllerNonWalkableMode): void;
+        setEventFilter(events: [
+        ]): void;
+        release(): void;
+    }
+    /**
+     * collider type
+     */
+    enum pxColliderType {
+        RigidbodyCollider = 0,
+        CharactorCollider = 1,
+        StaticCollider = 2
+    }
+    /**
+     *physX actor flag
+     */
+    enum pxActorFlag {
+        eVISUALIZATION = 1,
+        eDISABLE_GRAVITY = 2,
+        eSEND_SLEEP_NOTIFIES = 4,
+        eDISABLE_SIMULATION = 8
+    }
+    class pxCollider implements ICollider {
+        /**temp tranform object */
+        private static _tempTransform;
+        /**actor */
+        _pxActor: any;
+        /**owner transform */
+        _transform: Transform3D;
+        /**type data */
+        _type: pxColliderType;
+        /**触发器 */
+        _isTrigger: boolean;
+        /**can collision Group*/
+        _canCollisionWith: number;
+        /**collision group */
+        _collisionGroup: number;
+        /**pxshape */
+        _shape: pxColliderShape;
+        /**manager */
+        _physicsManager: pxPhysicsManager;
+        /**check destroy */
+        _destroyed: boolean;
+        inPhysicUpdateListIndex: number;
+        /**id */
+        _id: number;
+        private _bounciness;
+        constructor(manager: pxPhysicsManager);
+        protected setActorFlag(flag: pxActorFlag, value: boolean): void;
+        getCapable(value: number): boolean;
+        setColliderShape(shape: pxColliderShape): void;
+        protected _initColliderShapeByCollider(): void;
+        destroy(): void;
+        setCollisionGroup(value: number): void;
+        setCanCollideWith(value: number): void;
+        setEventFilter(events: [
+        ]): void;
+        setOwner(node: Sprite3D): void;
+        protected _initCollider(): void;
+        transformChanged(flag: number): void;
+        /**
+         * {@inheritDoc ICollider.setWorldTransform }
+         */
+        setWorldTransform(focus: boolean): void;
+        setBounciness(value: number): void;
+        setDynamicFriction(value: number): void;
+        setStaticFriction(value: number): void;
+        setFrictionCombine(value: PhysicsCombineMode): void;
+        setBounceCombine(value: PhysicsCombineMode): void;
+    }
+    /**
+     * The collision detection mode constants.
+     */
+    enum CollisionDetectionMode {
+        /** Continuous collision detection is off for this dynamic collider. */
+        Discrete = 0,
+        /** Continuous collision detection is on for colliding with static mesh geometry. */
+        Continuous = 1,
+        /** Continuous collision detection is on for colliding with static and dynamic geometry. */
+        ContinuousDynamic = 2,
+        /** Speculative continuous collision detection is on for static and dynamic geometries */
+        ContinuousSpeculative = 3
+    }
+    /**
+     * Use these flags to constrain motion of dynamic collider.
+     */
+    enum DynamicColliderConstraints {
+        /** Not Freeze. */
+        None = 0,
+        /** Freeze motion along the X-axis. */
+        FreezePositionX = 1,
+        /** Freeze motion along the Y-axis. */
+        FreezePositionY = 2,
+        /** Freeze motion along the Z-axis. */
+        FreezePositionZ = 4,
+        /** Freeze rotation along the X-axis. */
+        FreezeRotationX = 8,
+        /** Freeze rotation along the Y-axis. */
+        FreezeRotationY = 16,
+        /** Freeze rotation along the Z-axis. */
+        FreezeRotationZ = 32
+    }
+    class pxDynamicCollider extends pxCollider implements IDynamicCollider {
+        static getStaticColliderCapable(value: EColliderCapable): boolean;
+        static initCapable(): void;
+        static _tempTranslation: Vector3;
+        private static _tempRotation;
+        IsKinematic: boolean;
+        constructor(manager: pxPhysicsManager);
+        getCapable(value: number): boolean;
+        protected _initCollider(): void;
+        protected _initColliderShapeByCollider(): void;
+        setWorldPosition(value: Vector3): void;
+        setWorldRotation(value: Quaternion): void;
+        getWorldTransform(): void;
+        setTrigger(value: boolean): void;
+        setLinearDamping(value: number): void;
+        setAngularDamping(value: number): void;
+        setLinearVelocity(value: Vector3): void;
+        setAngularVelocity(value: Vector3): void;
+        setMass(value: number): void;
+        setCenterOfMass(value: Vector3): void;
+        setInertiaTensor(value: Vector3): void;
+        setSleepThreshold(value: number): void;
+        setCollisionDetectionMode(value: number): void;
+        setSolverIterations(value: number): void;
+        setIsKinematic(value: boolean): void;
+        setConstraints(linearFactor: Vector3, angularFactor: Vector3): void;
+        addForce(force: Vector3, mode: PhysicsForceMode, localOffset: Vector3): void;
+        addTorque(torque: Vector3, mode: PhysicsForceMode): void;
+        sleep(): void;
+        wakeUp(): void;
+        /**
+         * {@inheritDoc IDynamicCollider.move }
+         */
+        move(positionOrRotation: Vector3 | Quaternion, rotation?: Quaternion): void;
+    }
+    class pxStaticCollider extends pxCollider implements IStaticCollider {
+        static getStaticColliderCapable(value: EColliderCapable): boolean;
+        static initCapable(): void;
+        constructor(manager: pxPhysicsManager);
+        getCapable(value: number): boolean;
+        protected _initCollider(): void;
+        setTrigger(value: boolean): void;
+        protected _initColliderShapeByCollider(): void;
+    }
+    enum PxD6JointDriveFlag {
+        eACCELERATION = 1
+    }
+    class pxD6Joint extends pxJoint implements ID6Joint {
+        /**
+         * create Joint
+         */
+        protected _createJoint(): void;
+        /**
+         * set local Pose
+         * @param actor
+         * @param position
+         */
+        protected _setLocalPose(actor: number, position: Vector3): void;
+        /**
+         * set Joint axis and secendary Axis
+         * @param axis
+         * @param secendary
+         */
+        setAxis(axis: Vector3, secendary: Vector3): void;
+        /**
+         * set Motion Type
+         * @param axis
+         * @param motionType
+         */
+        setMotion(axis: D6Axis, motionType: D6MotionType): void;
+        /**
+         * set Distance Limit
+         * @param limit
+         * @param bounceness
+         * @param bounceThreshold
+         * @param spring
+         * @param damp
+         */
+        setDistanceLimit(limit: number, bounceness: number, bounceThreshold: number, spring: number, damp: number): void;
+        /**
+         *
+         * @param linearAxis
+         * @param upper
+         * @param lower
+         * @param bounceness
+         * @param bounceThreshold
+         * @param spring
+         * @param damping
+         */
+        setLinearLimit(linearAxis: D6MotionType, upper: number, lower: number, bounceness: number, bounceThreshold: number, spring: number, damping: number): void;
+        /**
+         *
+         * @param upper
+         * @param lower
+         * @param bounceness
+         * @param bounceThreshold
+         * @param spring
+         * @param damping
+         */
+        setTwistLimit(upper: number, lower: number, bounceness: number, bounceThreshold: number, spring: number, damping: number): void;
+        /**
+         *
+         * @param yAngle
+         * @param zAngle
+         * @param bounceness
+         * @param bounceThreshold
+         * @param spring
+         * @param damping
+         */
+        setSwingLimit(yAngle: number, zAngle: number, bounceness: number, bounceThreshold: number, spring: number, damping: number): void;
+        /**
+         *
+         * @param index
+         * @param stiffness
+         * @param damping
+         * @param forceLimit
+         */
+        setDrive(index: D6Drive, stiffness: number, damping: number, forceLimit: number): void;
+        /**
+         *
+         * @param position
+         * @param rotate
+         */
+        setDriveTransform(position: Vector3, rotate: Quaternion): void;
+        /**
+         *
+         * @param position
+         * @param angular
+         */
+        setDriveVelocity(position: Vector3, angular: Vector3): void;
+        /**
+         *
+         * @returns
+         */
+        getTwistAngle(): number;
+        /**
+         *
+         * @returns
+         */
+        getSwingYAngle(): number;
+        /**
+         *
+         * @returns
+         */
+        getSwingZAngle(): number;
+    }
+    class pxDistanceJoint extends pxJoint implements ISpringJoint {
+        /**
+         * create Joint
+         */
+        protected _createJoint(): void;
+        /**
+         * min distance
+         * @param distance
+         */
+        setMinDistance(distance: number): void;
+        /**
+         * max distance
+         * @param distance
+         */
+        setMaxDistance(distance: number): void;
+        /**
+         * set connect Distance
+         * @param distance
+         */
+        setConnectDistance(distance: number): void;
+        /**
+         * 允许弹簧具有不同的静止长度。
+         * @param tolerance
+         */
+        setTolerance(tolerance: number): void;
+        /**
+         * 弹力
+         * @param stiffness
+         */
+        setStiffness(stiffness: number): void;
+        /**
+         * 弹簧阻尼
+         * @param damping
+         */
+        setDamping(damping: number): void;
+    }
+    class pxFixedJoint extends pxJoint implements IFixedJoint {
+        /**
+         * create Joint
+         */
+        protected _createJoint(): void;
+    }
+    /**
+     * joint flag
+     */
+    enum PxConstraintFlag {
+        eBROKEN = 1,
+        ePROJECT_TO_ACTOR0 = 2,
+        ePROJECT_TO_ACTOR1 = 4,
+        ePROJECTION = 6,
+        eCOLLISION_ENABLED = 8,
+        eVISUALIZATION = 16,
+        eDRIVE_LIMITS_ARE_FORCES = 32,
+        eIMPROVED_SLERP = 128,
+        eDISABLE_PREPROCESSING = 256,
+        eENABLE_EXTENDED_LIMITS = 512,
+        eGPU_COMPATIBLE = 1024,
+        eALWAYS_UPDATE = 2048,
+        eDISABLE_CONSTRAINT = 4096
+    }
+    class pxJoint implements IJoint {
+        /**@interanl */
+        static _tempTransform0: {
+            translation: Vector3;
+            rotation: Quaternion;
+        };
+        /**
+         * @param manager
+         */
+        constructor(manager: pxPhysicsManager);
+    }
+    enum PxRevoluteJointFlag {
+        eLIMIT_ENABLED = 1,
+        eDRIVE_ENABLED = 2,
+        eDRIVE_FREESPIN = 4
+    }
+    class pxRevoluteJoint extends pxJoint implements IHingeJoint {
+        /**
+         * create Joint
+         */
+        protected _createJoint(): void;
+    }
+    class pxSphereJoint extends pxJoint {
+    }
+    /**
+     * 实现PhysX碰撞数据内容
+     */
+    class pxCollisionTool {
+        constructor();
+        /**
+         * 转换physX的LayaQuaryResult到HitResult类型
+         * @param out
+         * @param quaryResult
+         * @returns
+         */
+        static getRayCastResult(out: HitResult, quaryResult: any): HitResult;
+        /**
+         * 转换所有physX的LayaQuaryResult到HitResult类型
+         * @param out
+         * @param quaryResults
+         * @returns
+         */
+        static getRayCastResults(out: HitResult[], quaryResults: any): HitResult[];
+        /**
+         * 回收Collision到pool
+         * @param value
+         */
+        static reCoverCollision(value: Collision): void;
+        /**
+         * 回收HitResult到pool
+         * @param value
+         */
+        static reCoverHitresults(value: HitResult): void;
+    }
+    class pxPhysicsCreateUtil implements IPhysicsCreateUtil {
+        static _physXPVD: boolean;
+        static _PxPvdPort: any;
+        static _allocator: any;
+        static _tolerancesScale: any;
+        protected _physicsEngineCapableMap: Map<any, any>;
+        initPhysicsCapable(): void;
+        getPhysicsCapable(value: EPhysicsCapable): boolean;
+        initialize(): Promise<void>;
+        private _init;
+        createPhysicsManger(physicsSettings: PhysicsSettings): pxPhysicsManager;
+        createDynamicCollider(manager: pxPhysicsManager): IDynamicCollider;
+        createStaticCollider(manager: pxPhysicsManager): IStaticCollider;
+        createCharacterController(manager: pxPhysicsManager): ICharacterController;
+        createFixedJoint(manager: pxPhysicsManager): IFixedJoint;
+        createHingeJoint(manager: pxPhysicsManager): IHingeJoint;
+        createSpringJoint(manager: pxPhysicsManager): ISpringJoint;
+        createD6Joint(manager: pxPhysicsManager): ID6Joint;
+        createBoxColliderShape(): IBoxColliderShape;
+        createSphereColliderShape(): ISphereColliderShape;
+        createPlaneColliderShape(): IPlaneColliderShape;
+        createCapsuleColliderShape?(): ICapsuleColliderShape;
+        createMeshColliderShape?(): IMeshColliderShape;
+        createCylinderColliderShape?(): ICylinderColliderShape;
+        createConeColliderShape?(): IConeColliderShape;
+        createHeightFieldShape(): pxHeightFieldShape;
+        createCorveMesh(mesh: Mesh): Mesh;
+        static createFloat32Array(length: number): {
+            ptr: number;
+            buffer: Float32Array;
+        };
+        static createUint32Array(length: number): {
+            ptr: number;
+            buffer: Uint32Array;
+        };
+        static createUint16Array(length: number): {
+            ptr: number;
+            buffer: Uint16Array;
+        };
+        static createUint8Array(length: number): {
+            ptr: number;
+            buffer: Uint8Array;
+        };
+        static freeBuffer(data: any): void;
+    }
+    enum partFlag {
+        eSOLVE_CONTACT = 1,
+        eMODIFY_CONTACTS = 2,
+        eNOTIFY_TOUCH_FOUND = 4,
+        eNOTIFY_TOUCH_PERSISTS = 8,
+        eNOTIFY_TOUCH_LOST = 16,
+        eNOTIFY_TOUCH_CCD = 32,
+        eNOTIFY_THRESHOLD_FORCE_FOUND = 64,
+        eNOTIFY_THRESHOLD_FORCE_PERSISTS = 128,
+        eNOTIFY_THRESHOLD_FORCE_LOST = 256,
+        eNOTIFY_CONTACT_POINTS = 512,
+        eDETECT_DISCRETE_CONTACT = 1024,
+        eDETECT_CCD_CONTACT = 2048,
+        ePRE_SOLVER_VELOCITY = 4096,
+        ePOST_SOLVER_VELOCITY = 8192,
+        eCONTACT_EVENT_POSE = 16384,
+        eNEXT_FREE = 32768,
+        eCONTACT_DEFAULT = 1025,
+        eTRIGGER_DEFAULT = 1044
+    }
+    class pxPhysicsManager implements IPhysicsManager {
+        _dynamicUpdateList: PhysicsUpdateList;
+        /**fixedTimeStep */
+        fixedTime: number;
+        _pxcontrollerManager: any;
+        private _gravity;
+        constructor(physicsSettings: PhysicsSettings);
+        setDataToMap(dataCallBack: any, eventType: string, isTrigger?: boolean): void;
+        setGravity(gravity: Vector3): void;
+        private _addCharactorCollider;
+        private _removeCharactorCollider;
+        private addDynamicElementByUUID;
+        private removeDynamicElementByUUID;
+        addCollider(collider: ICollider): void;
+        removeCollider(collider: ICollider): void;
+        private _updatePhysicsEvents;
+        private _updatePhysicsTransformToRender;
+        private functiontest;
+        update(elapsedTime: number): void;
+        rayCast(ray: Ray, outHitResult: HitResult, distance?: number, collisonGroup?: number, collisionMask?: number): boolean;
+        rayCastAll?(ray: Ray, out: HitResult[], distance?: number, collisonGroup?: number, collisionMask?: number): boolean;
+        sphereQuery?(pos: Vector3, radius: number, result: ICollider[], collisionmask: number): void;
+        destroy(): void;
+    }
+    class pxPhysicsMaterial {
+        private _bounciness;
+        private _dynamicFriction;
+        private _staticFriction;
+        private _bounceCombine;
+        private _frictionCombine;
+        constructor();
+        setBounciness(value: number): void;
+        setDynamicFriction(value: number): void;
+        setStaticFriction(value: number): void;
+        setBounceCombine(value: PhysicsCombineMode): void;
+        setFrictionCombine(value: PhysicsCombineMode): void;
+        destroy(): void;
+    }
+    class pxBoxColliderShape extends pxColliderShape implements IBoxColliderShape {
+        private static _tempHalfExtents;
+        /** @interanl */
+        private _size;
+        constructor();
+        setSize(size: Vector3): void;
+        setOffset(position: Vector3): void;
+        destroy(): void;
+    }
+    class pxCapsuleColliderShape extends pxColliderShape implements ICapsuleColliderShape {
+        private _upAxis;
+        constructor();
+        addToActor(collider: pxCollider): void;
+        setRadius(radius: number): void;
+        setHeight(height: number): void;
+        setUpAxis(upAxis: number): void;
+        setOffset(position: Vector3): void;
+        destroy(): void;
+    }
+    /**
+     * Flags which affect the behavior of Shapes.
+     */
+    enum ShapeFlag {
+        /** The shape will partake in collision in the physical simulation. */
+        SIMULATION_SHAPE = 1,
+        /** The shape will partake in scene queries (ray casts, overlap tests, sweeps, ...). */
+        SCENE_QUERY_SHAPE = 2,
+        /** The shape is a trigger which can send reports whenever other shapes enter/leave its volume. */
+        TRIGGER_SHAPE = 4
+    }
+    interface pxFilterData {
+        word0?: number;
+        word1?: number;
+        word2?: number;
+        word3?: number;
+    }
+    class pxColliderShape implements IColliderShape {
+        static _shapePool: Map<number, pxColliderShape>;
+        static _pxShapeID: number;
+        static transform: {
+            translation: Vector3;
+            rotation: Quaternion;
+        };
+        _offset: Vector3;
+        _scale: Vector3;
+        _shapeFlags: ShapeFlag;
+        _pxShape: any;
+        _pxGeometry: any;
+        _id: number;
+        filterData: pxFilterData;
+        constructor();
+        /**
+         * @override
+         */
+        protected _createShape(): void;
+        private _modifyFlag;
+        addToActor(collider: pxCollider): void;
+        removeFromActor(collider: pxCollider): void;
+        setOffset(position: Vector3): void;
+        setIsTrigger(value: boolean): void;
+        _setShapeFlags(flags: ShapeFlag): void;
+        setSimulationFilterData(colliderGroup: number, colliderMask: number): void;
+        setEventFilterData(filterWorld2Number: number): void;
+        destroy(): void;
+    }
+    class pxHeightFieldShape extends pxColliderShape implements IHeightFieldShape {
+        constructor();
+        /**
+         * get height data tranform
+         * @returns
+         */
+        private getHeightData;
+        /**
+         * get flag Data
+         * @returns
+         */
+        private getFlagData;
+        /**
+         * create HeightField Geometry
+         */
+        private _createHeightField;
+        /**
+         * set height field Data
+         * @param numRows
+         * @param numCols
+         * @param heightData
+         * @param flag
+         * @param scale
+         */
+        setHeightFieldData(numRows: number, numCols: number, heightData: Float32Array, flag: Uint8Array, scale: Vector3): void;
+        /**
+         * get rows number
+         * @returns
+         */
+        getNbRows(): number;
+        /**
+         * get cols number
+         * @returns
+         */
+        getNbColumns(): number;
+        /**
+         * get height number
+         * @param rows
+         * @param cols
+         * @returns
+         */
+        getHeight(rows: number, cols: number): number;
+    }
+    enum PxConvexFlag {
+        e16_BIT_INDICES = 1,
+        eCOMPUTE_CONVEX = 2,
+        eCHECK_ZERO_AREA_TRIANGLES = 4,
+        eQUANTIZE_INPUT = 8,
+        eDISABLE_MESH_VALIDATION = 16,
+        ePLANE_SHIFTING = 32,
+        eFAST_INERTIA_COMPUTATION = 64,
+        eGPU_COMPATIBLE = 128,
+        eSHIFT_VERTICES = 256
+    }
+    enum PxConvexMeshGeometryFlag {
+        eTIGHT_BOUNDS = 1
+    }
+    enum PxMeshGeometryFlag {
+        eTIGHT_BOUNDS = 1,
+        eDOUBLE_SIDED = 2
+    }
+    class pxMeshColliderShape extends pxColliderShape implements IMeshColliderShape {
+        private _limitvertex;
+        private _mesh;
+        private _convex;
+        private _meshScale;
+        constructor();
+        private _getMeshPosition;
+        private _getIndices;
+        private _createConvexMeshGeometry;
+        private _createTrianggleMeshGeometry;
+        /**
+         * @override
+         */
+        protected _createShape(): void;
+        private _reConfigShape;
+        private _setScale;
+        setOffset(position: Vector3): void;
+        setPhysicsMeshFromMesh(value: Mesh): void;
+        setConvexMesh(value: Mesh): void;
+        setLimitVertex(limit: number): void;
+    }
+    class pxSphereColliderShape extends pxColliderShape implements ISphereColliderShape {
+        constructor();
+        setRadius(radius: number): void;
+        setOffset(position: Vector3): void;
+        destroy(): void;
     }
     class BlendState {
         static _blend_All_pool: any;
@@ -25957,13 +27916,29 @@ declare module Laya {
          */
         destroy(): void;
     }
+    type UniformProperty = {
+        id: number;
+        propertyName: string;
+        uniformtype?: ShaderDataType;
+    };
     class CommandUniformMap {
         _stateName: string;
         constructor(stateName: string);
         hasPtrID(propertyID: number): boolean;
         getMap(): {
-            [key: number]: string;
+            [key: number]: {
+                block?: Object;
+                propertyName: string;
+                uniformtype?: ShaderDataType;
+                blockProperty?: UniformProperty[];
+            };
         };
+        /**
+         * 增加一个Uniform
+         * @param propertyID
+         * @param propertyKey
+         */
+        addShaderBlockUniform(propertyID: number, blockname: string, blockProperty: UniformProperty[]): void;
     }
     /**
      * dds 未存储 color space 需要手动指定
@@ -26170,6 +28145,23 @@ declare module Laya {
          */
         clear(): void;
     }
+    class NativeCommandUniformMap extends CommandUniformMap {
+        private _nativeObj;
+        constructor(_nativeObj: any, stateName: string);
+        hasPtrID(propertyID: number): boolean;
+        getMap(): {
+            [key: number]: {
+                block?: Object;
+                propertyName: string;
+                uniformtype?: import("../../RenderShader/ShaderData").ShaderDataType;
+                blockProperty?: {
+                    id: number;
+                    propertyName: string;
+                    uniformtype?: import("../../RenderShader/ShaderData").ShaderDataType;
+                }[];
+            };
+        };
+    }
     /**
      * 将继承修改为类似 WebGLRenderingContextBase, WebGLRenderingContextOverloads 多继承 ?
      */
@@ -26203,7 +28195,17 @@ declare module Laya {
         constructor(engine: NativeWebGLEngine);
         drawElements2DTemp(mode: MeshTopology, count: number, type: IndexFormat, offset: number): void;
     }
+    class NativeGLRenderEngineFactory implements IRenderEngineFactory {
+        createShaderData(): ShaderData;
+        createShaderInstance(shaderProcessInfo: ShaderProcessInfo, shaderPass: ShaderCompileDefineBase): ShaderInstance;
+        createRenderStateComand(): NativeRenderStateCommand;
+        createRenderState(): RenderState;
+        createUniformBufferObject(glPointer: number, name: string, bufferUsage: BufferUsage, byteLength: number, isSingle: boolean): UniformBufferObject;
+        createGlobalUniformMap(blockName: string): NativeCommandUniformMap;
+        createEngine(config: any, canvas: any): Promise<void>;
+    }
     class NativeGLTextureContext extends NativeGLObject implements ITextureContext {
+        needBitmap: boolean;
         protected _native: any;
         constructor(engine: NativeWebGLEngine, native: any);
         createTextureInternal(dimension: TextureDimension, width: number, height: number, format: TextureFormat, generateMipmap: boolean, sRGB: boolean): InternalTexture;
@@ -26224,7 +28226,7 @@ declare module Laya {
         setCubeDDSData(texture: InternalTexture, ddsInfo: DDSTextureInfo): void;
         setCubeKTXData(texture: InternalTexture, ktxInfo: KTXTextureInfo): void;
         setTextureCompareMode(texture: InternalTexture, compareMode: TextureCompareMode): TextureCompareMode;
-        bindRenderTarget(renderTarget: InternalRenderTarget): void;
+        bindRenderTarget(renderTarget: InternalRenderTarget, faceIndex?: number): void;
         bindoutScreenTarget(): void;
         unbindRenderTarget(renderTarget: InternalRenderTarget): void;
         createRenderTextureInternal(dimension: TextureDimension, width: number, height: number, format: RenderTargetFormat, generateMipmap: boolean, sRGB: boolean): InternalTexture;
@@ -26248,6 +28250,44 @@ declare module Laya {
         applyVertexBuffer(vertexBuffer: VertexBuffer[]): void;
         applyIndexBuffer(indexBuffer: IndexBuffer | null): void;
     }
+    class NativeRenderState {
+        _nativeObj: any;
+        set cull(value: number);
+        get cull(): number;
+        set blend(value: number);
+        get blend(): number;
+        set srcBlend(value: number);
+        get srcBlend(): number;
+        set dstBlend(value: number);
+        get dstBlend(): number;
+        set srcBlendRGB(value: number);
+        get srcBlendRGB(): number;
+        set dstBlendRGB(value: number);
+        get dstBlendRGB(): number;
+        set srcBlendAlpha(value: number);
+        get srcBlendAlpha(): number;
+        set dstBlendAlpha(value: number);
+        get dstBlendAlpha(): number;
+        set blendEquation(value: number);
+        get blendEquation(): number;
+        set blendEquationRGB(value: number);
+        get blendEquationRGB(): number;
+        set blendEquationAlpha(value: number);
+        get blendEquationAlpha(): number;
+        set depthTest(value: number);
+        get depthTest(): number;
+        set depthWrite(value: boolean);
+        get depthWrite(): boolean;
+        set stencilWrite(value: boolean);
+        get stencilWrite(): boolean;
+        set stencilTest(value: number);
+        get stencilTest(): number;
+        set stencilRef(value: number);
+        get stencilRef(): number;
+        set stencilOp(value: Vector3);
+        setNull(): void;
+        constructor();
+    }
     /**
      * 渲染状态设置命令流
      */
@@ -26257,6 +28297,121 @@ declare module Laya {
         addCMD(renderstate: RenderStateType, value: any): void;
         applyCMD(): void;
         clear(): void;
+    }
+    enum NativeShaderDataType {
+        Number32 = 0,
+        Vector2 = 1,
+        Vector3 = 2,
+        Vector4 = 3,
+        Matrix4x4 = 4,
+        Number32Array = 5,
+        Texture = 6,
+        ShaderDefine = 7,
+        UBO = 8
+    }
+    class NativeShaderData extends ShaderData implements INativeUploadNode {
+        private inUploadList;
+        _dataType: MemoryDataType;
+        nativeObjID: number;
+        _nativeObj: any;
+        updateMap: Map<number, Function>;
+        updataSizeMap: Map<number, number>;
+        payload32bitNum: number;
+        clearUpload(): void;
+        applyUBOData(): void;
+        compressNumber(index: number, memoryBlock: UploadMemory, stride: number): number;
+        compressVector2(index: number, memoryBlock: UploadMemory, stride: number): number;
+        compressVector3(index: number, memoryBlock: UploadMemory, stride: number): number;
+        compressVector4(index: number, memoryBlock: UploadMemory, stride: number): number;
+        compressMatrix4x4(index: number, memoryBlock: UploadMemory, stride: number): number;
+        compressNumberArray(index: number, memoryBlock: UploadMemory, stride: number): number;
+        compressTexture(index: number, memoryBlock: UploadMemory, stride: number): number;
+        compressUBO(index: number, memoryBlock: UploadMemory, stride: number): number;
+        private configMotionProperty;
+        /**
+         * 设置布尔。
+         * @param	index shader索引。
+         * @param	value 布尔。
+         */
+        setBool(index: number, value: boolean): void;
+        /**
+         * 设置整型。
+         * @param	index shader索引。
+         * @param	value 整形。
+         */
+        setInt(index: number, value: number): void;
+        /**
+         * 设置浮点。
+         * @param	index shader索引。
+         * @param	value 浮点。
+         */
+        setNumber(index: number, value: number): void;
+        /**
+         * 设置Vector2向量。
+         * @param	index shader索引。
+         * @param	value Vector2向量。
+         */
+        setVector2(index: number, value: Vector2): void;
+        /**
+         * 设置Vector3向量。
+         * @param	index shader索引。
+         * @param	value Vector3向量。
+         */
+        setVector3(index: number, value: Vector3): void;
+        /**
+         * 设置向量。
+         * @param	index shader索引。
+         * @param	value 向量。
+         */
+        setVector(index: number, value: Vector4): void;
+        /**
+         * 设置颜色
+         * @param index 索引
+         * @param value 颜色值
+         */
+        setColor(index: number, value: Color): void;
+        /**
+         * 设置矩阵。
+         * @param	index shader索引。
+         * @param	value  矩阵。
+         */
+        setMatrix4x4(index: number, value: Matrix4x4): void;
+        /**
+         * 设置Buffer。
+         * @param	index shader索引。
+         * @param	value  buffer数据。
+         */
+        setBuffer(index: number, value: Float32Array): void;
+        /**
+         * 设置纹理。
+         * @param	index shader索引。
+         * @param	value 纹理。
+         */
+        setTexture(index: number, value: BaseTexture): void;
+        /**
+         *
+         * @param index
+         * @param value
+         */
+        setUniformBuffer(index: number, value: NativeUniformBufferObject): void;
+        /**
+         * set shader data
+         * @deprecated
+         * @param index uniformID
+         * @param value data
+         */
+        setValueData(index: number, value: any): void;
+        cloneTo(destObject: NativeShaderData): void;
+        /**
+         * 克隆。
+         * @return	 克隆副本。
+         */
+        clone(): any;
+        destroy(): void;
+    }
+    class NativeUniformBufferObject extends UniformBufferObject {
+        _conchUniformBufferObject: any;
+        constructor(glPointer: number, name: string, bufferUsage: BufferUsage, byteLength: number, isSingle: boolean);
     }
     /**
      * @private 封装Webgl
@@ -26305,7 +28460,7 @@ declare module Laya {
         getTextureContext(): ITextureContext;
         getDrawContext(): IRenderDrawContext;
         get2DRenderContext(): IRender2DContext;
-        getCreateRenderOBJContext(): IRenderOBJCreate;
+        getCreateRenderOBJContext(): IRenderEngineFactory;
         propertyNameToID(name: string): number;
         propertyIDToName(id: number): string;
         uploadUniforms(shader: IRenderShaderInstance, commandEncoder: CommandEncoder, shaderData: any, uploadUnTexture: boolean): number;
@@ -26338,8 +28493,9 @@ declare module Laya {
         setTextureImageData(texture: WebGLInternalTex, source: HTMLImageElement | HTMLCanvasElement | ImageBitmap, premultiplyAlpha: boolean, invertY: boolean): void;
         setTextureSubImageData(texture: WebGLInternalTex, source: HTMLImageElement | HTMLCanvasElement | ImageBitmap, x: number, y: number, premultiplyAlpha: boolean, invertY: boolean): void;
         setTexturePixelsData(texture: WebGLInternalTex, source: ArrayBufferView, premultiplyAlpha: boolean, invertY: boolean): void;
+        createTexture3DInternal(dimension: TextureDimension, width: number, height: number, depth: number, format: TextureFormat, generateMipmap: boolean, sRGB: boolean, premultipliedAlpha: boolean): InternalTexture;
         setTexture3DImageData(texture: WebGLInternalTex, sources: HTMLImageElement[] | HTMLCanvasElement[] | ImageBitmap[], depth: number, premultiplyAlpha: boolean, invertY: boolean): void;
-        setTexture3DPixlesData(texture: WebGLInternalTex, source: ArrayBufferView, depth: number, premultiplyAlpha: boolean, invertY: boolean): void;
+        setTexture3DPixelsData(texture: WebGLInternalTex, source: ArrayBufferView, depth: number, premultiplyAlpha: boolean, invertY: boolean): void;
         setTexture3DSubPixelsData(texture: WebGLInternalTex, source: ArrayBufferView, mipmapLevel: number, generateMipmap: boolean, xOffset: number, yOffset: number, zOffset: number, width: number, height: number, depth: number, premultiplyAlpha: boolean, invertY: boolean): void;
         setTextureHDRData(texture: WebGLInternalTex, hdrInfo: HDRTextureInfo): void;
         setTextureKTXData(texture: WebGLInternalTex, ktxInfo: KTXTextureInfo): void;
@@ -26533,6 +28689,7 @@ declare module Laya {
         protected _compressedTextureETC: any;
         protected _compressedTextureASTC: any;
         protected _webgl_depth_texture: any;
+        needBitmap: boolean;
         constructor(engine: WebGLEngine);
         _glParam: {
             internalFormat: number;
@@ -26698,7 +28855,7 @@ declare module Laya {
         getTextureContext(): ITextureContext;
         getDrawContext(): IRenderDrawContext;
         get2DRenderContext(): IRender2DContext;
-        getCreateRenderOBJContext(): IRenderOBJCreate;
+        getCreateRenderOBJContext(): IRenderEngineFactory;
         /**
        * 通过Shader属性名称获得唯一ID。
        * @param name Shader属性名称。
@@ -26722,6 +28879,7 @@ declare module Laya {
         _depthTexture: InternalTexture;
         colorFormat: RenderTargetFormat;
         depthStencilFormat: RenderTargetFormat;
+        isSRGB: boolean;
         /**bytelength */
         _gpuMemory: number;
         get gpuMemory(): number;
@@ -26729,31 +28887,250 @@ declare module Laya {
         constructor(engine: WebGLEngine, colorFormat: RenderTargetFormat, depthStencilFormat: RenderTargetFormat, isCube: boolean, generateMipmap: boolean, samples: number);
         dispose(): void;
     }
-    class WebGLInternalTex extends GLObject implements InternalTexture {
-        _gl: WebGLRenderingContext | WebGL2RenderingContext;
-        readonly resource: WebGLTexture;
-        _resourceTarget: number;
-        readonly width: number;
-        readonly height: number;
-        readonly isPotSize: boolean;
-        private _mipmap;
+    class WebGLRenderEngineFactory implements IRenderEngineFactory {
+        createShaderData(): ShaderData;
+        createShaderInstance(shaderProcessInfo: ShaderProcessInfo, shaderPass: ShaderCompileDefineBase): ShaderInstance;
+        createRenderStateComand(): RenderStateCommand;
+        createRenderState(): RenderState;
+        createUniformBufferObject(glPointer: number, name: string, bufferUsage: BufferUsage, byteLength: number, isSingle: boolean): UniformBufferObject;
+        createGlobalUniformMap(blockName: string): CommandUniformMap;
+        createEngine(config: any, canvas: any): Promise<void>;
+        /**@private test function*/
+        private _replaceWebglcall;
+    }
+    /**
+     */
+    enum GPUBUfferUsage {
+        MAP_READ = 1,
+        MAP_WRITE = 2,
+        COPY_SRC = 4,
+        COPY_DST = 8,
+        INDEX = 16,
+        VERTEX = 32,
+        UNIFORM = 64,
+        STORAGE = 128,
+        INDIRECT = 256,
+        QUERY_RESOLVE = 512
+    }
+    class WebGPUBuffer extends WebGPUObject implements IRenderBuffer {
+        _gpuBuffer: GPUBuffer;
+        _gpuUsage: GPUBufferUsageFlags;
+        _size: number;
+        private _isCreate;
+        private _mappedAtCreation;
+        constructor(engine: WebGPUEngine, usage: GPUBufferUsageFlags, byteSize?: number, mappedAtCreation?: boolean);
+        bindBuffer(): boolean;
+        unbindBuffer(): void;
+        bindBufferBase(glPointer: number): void;
+        bindBufferRange(glPointer: number, offset: number, byteCount: number): void;
         /**
-         * 是否存在 mipmap 数据
+         *
+         * @param srcData
          */
-        get mipmap(): boolean;
-        private _mipmapCount;
-        get mipmapCount(): number;
-        readonly useSRGBLoad: boolean;
-        readonly gammaCorrection: number;
-        readonly target: number;
-        internalFormat: number;
-        format: number;
-        type: number;
-        /**bytelength */
-        _gpuMemory: number;
-        get gpuMemory(): number;
-        set gpuMemory(value: number);
-        constructor(engine: WebGLEngine, target: number, width: number, height: number, dimension: TextureDimension, mipmap: boolean, useSRGBLoader: boolean, gammaCorrection: number);
+        setDataLength(srcData: number): void;
+        private _create;
+        private _alignedLength;
+        private _memorychange;
+        setData(srcData: ArrayBuffer | ArrayBufferView, offset: number): void;
+        setDataEx(srcData: ArrayBuffer | ArrayBufferView, offset: number, bytelength: number, dstOffset?: number): void;
+        setSubDataEx(srcData: ArrayBuffer | ArrayBufferView, offset: number, bytelength: number, dstOffset?: number): void;
+        readDataFromBuffer(): void;
+        destroy(): void;
+        release(): void;
+    }
+    class WebGPUCapable extends WebGPUObject {
+        constructor(gpuEngine: WebGPUEngine);
+        initCapable(): void;
+        getCapable(type: RenderCapable): boolean;
+    }
+    /**
+     * init webgpu option
+     */
+    class WebGPUConfig {
+        /**
+         * Defines the category of adapter to use.
+         */
+        powerPreference: GPUPowerPreference;
+        /**
+         * Defines the device descriptor used to create a device.
+         */
+        deviceDescriptor?: GPUDeviceDescriptor;
+        /**
+         * context params
+         */
+        swapChainFormat?: GPUTextureFormat;
+        /**
+         * canvans alpha mode
+         */
+        alphaMode: GPUCanvasAlphaMode;
+        /**
+         * attach canvans usage
+         */
+        usage?: GPUTextureUsageFlags;
+        /**
+         * color space
+         */
+        colorSpace?: string;
+    }
+    class WebGPUEngine implements IRenderEngine {
+        _canvas: HTMLCanvasElement;
+        _context: GPUCanvasContext;
+        _isShaderDebugMode: boolean;
+        _renderOBJCreateContext: IRenderEngineFactory;
+        private _lastViewport;
+        private _lastScissor;
+        private _enableScissor;
+        private _GLStatisticsInfo;
+        private _adapter;
+        private _adapterSupportedExtensions;
+        _device: GPUDevice;
+        private _deviceEnabledExtensions;
+        _config: WebGPUConfig;
+        _deferredDestroyBuffers: WebGPUBuffer[];
+        _deferredDestroyTextures: WebGPUInternalTex[];
+        _samplerContext: WebGPUSamplerContext;
+        _webGPUTextureContext: WebGPUTextureContext;
+        _cavansRT: WebGPUInternalRT;
+        /**
+         * 实例化一个webgpuEngine
+         */
+        constructor(config: WebGPUConfig, canvas: any);
+        /**
+         * get adapter by computer
+         * @returns
+         */
+        private _getAdapter;
+        /**
+         * init Adapter
+         * @param adapter
+         */
+        _initAdapter(adapter: GPUAdapter): void;
+        /**
+         * get GPUDevice
+         * @param deviceDescriptor
+         * @returns
+         */
+        private _getGPUdevice;
+        /**
+         * get init Device info
+         * @param device
+         */
+        private _initGPUDevice;
+        /**
+         * error handle
+         * @param event
+         */
+        private _uncapturederrorCall;
+        /**
+         * device lost handle
+         * @param info
+         */
+        private _deviceLostCall;
+        /**
+         * init webgpu environment
+         * @returns
+         */
+        _initAsync(): Promise<void>;
+        /**
+         * get and config webgpu context
+         */
+        private _initContext;
+        initRenderEngine(): Promise<void>;
+        applyRenderStateCMD(cmd: RenderStateCommand): void;
+        viewport(x: number, y: number, width: number, height: number): void;
+        scissor(x: number, y: number, width: number, height: number): void;
+        scissorTest(value: boolean): void;
+        clearRenderTexture(clearFlag: number, clearcolor: Color, clearDepth: number): void;
+        colorMask(r: boolean, g: boolean, b: boolean, a: boolean): void;
+        copySubFrameBuffertoTex(texture: BaseTexture, level: number, xoffset: number, yoffset: number, x: number, y: number, width: number, height: number): void;
+        bindTexture(texture: BaseTexture): void;
+        propertyNameToID(name: string): number;
+        propertyIDToName(id: number): string;
+        getParams(params: RenderParams): number;
+        getCapable(capatableType: RenderCapable): boolean;
+        getTextureContext(): WebGPUTextureContext;
+        getDrawContext(): IRenderDrawContext;
+        get2DRenderContext(): IRender2DContext;
+        getCreateRenderOBJContext(): IRenderEngineFactory;
+        uploadUniforms(shader: IRenderShaderInstance, commandEncoder: CommandEncoder, shaderData: WGPUShaderData, uploadUnTexture: boolean): number;
+        uploadCustomUniforms(shader: IRenderShaderInstance, custom: any[], index: number, data: any): number;
+        createRenderStateComand(): RenderStateCommand;
+        createShaderInstance(vs: string, ps: string, attributeMap: {
+            [name: string]: [
+                number,
+                ShaderDataType
+            ];
+        }): IRenderShaderInstance;
+        createBuffer(targetType: BufferTargetType, bufferUsageType: BufferUsage): WebGPUBuffer;
+        createVertexState(): IRenderVertexState;
+        getUBOPointer(name: string): number;
+        clearStatisticsInfo(info: RenderStatisticsInfo): void;
+        getStatisticsInfo(info: RenderStatisticsInfo): number;
+        unbindVertexState(): void;
+        getCurCommandEncoder(): GPUCommandEncoder;
+        private _destroyDeferredBuffer;
+        private _destroyDefferedTexture;
+        /**
+         * resize canvans
+         */
+        resizeCavansRT(): void;
+        setRenderPassDescriptor(rt: WebGPUInternalRT, renderPassDec: WebGPURenderPassDescriptor): void;
+        createUniformBuffer(bufferSize: number): WebGPUBuffer;
+        /**
+         *
+         * 每帧结束后的调用
+         */
+        endframe(): void;
+    }
+    interface WGPRenderPassDesCache {
+        clearFlag: number;
+        clearColor: Color;
+        clearDepth: number;
+    }
+    interface GPURTSourceGroup {
+        texture: WebGPUInternalTex;
+        view: GPUTextureView;
+    }
+    class WebGPUInternalRT extends WebGPUObject implements InternalRenderTarget {
+        _isCube: boolean;
+        _samples: number;
+        _generateMipmap: boolean;
+        _textures: WebGPUInternalTex[];
+        _depthTexture: WebGPUInternalTex;
+        colorFormat: RenderTargetFormat;
+        depthStencilFormat: RenderTargetFormat;
+        gpuMemory: number;
+        isSRGB: boolean;
+        loadClear: boolean;
+        clearDes: WGPRenderPassDesCache;
+        isOffscreenRT: boolean;
+        constructor(engine: WebGPUEngine, colorFormat: RenderTargetFormat, depthStencilFormat: RenderTargetFormat, isCube: boolean, generateMipmap: boolean, samples: number);
+        dispose(): void;
+    }
+    class WebGPUInternalTex extends WebGPUObject implements InternalTexture {
+        resource: GPUTexture;
+        target: number;
+        width: number;
+        height: number;
+        depth: number;
+        mipmap: boolean;
+        mipmapCount: number;
+        webGPUFormat: GPUTextureFormat;
+        view: GPUTextureView;
+        descriptor: GPUTextureDescriptor;
+        webgpuSampler: GPUSampler;
+        webGPUSamplerParams: WebGPUSamplerParams;
+        isPotSize: boolean;
+        baseMipmapLevel: number;
+        maxMipmapLevel: number;
+        gpuMemory: number;
+        useSRGBLoad: boolean;
+        gammaCorrection: number;
+        _cacheBindGroup: GPUBindGroup;
+        _cacheSampler: GPUSampler;
+        constructor(engine: WebGPUEngine, width: number, height: number, dimension: TextureDimension, mipmap: boolean);
+        get textureView(): GPUTextureView;
+        releaseTexture(texture: InternalTexture | GPUTexture): void;
         private _filterMode;
         get filterMode(): FilterMode;
         set filterMode(value: FilterMode);
@@ -26769,22 +29146,363 @@ declare module Laya {
         private _anisoLevel;
         get anisoLevel(): number;
         set anisoLevel(value: number);
-        private _baseMipmapLevel;
-        set baseMipmapLevel(value: number);
-        get baseMipmapLevel(): number;
-        private _maxMipmapLevel;
-        set maxMipmapLevel(value: number);
-        get maxMipmapLevel(): number;
         private _compareMode;
         get compareMode(): TextureCompareMode;
         set compareMode(value: TextureCompareMode);
-        _setTexParameteri(pname: number, param: number): void;
-        _setTexParametexf(pname: number, param: number): void;
-        protected getFilteMinrParam(filterMode: FilterMode, mipmap: boolean): number;
-        protected getFilterMagParam(filterMode: FilterMode): number;
-        protected getWrapParam(wrapMode: WrapMode): number;
-        protected _setWrapMode(pname: number, param: number): void;
         dispose(): void;
+        disposDerredDispose(): void;
+    }
+    /**
+     * WebGPUObject基类
+     */
+    class WebGPUObject {
+        protected _engine: WebGPUEngine;
+        protected _device: GPUDevice;
+        protected _context: GPUCanvasContext;
+        protected _id: number;
+        protected _destroyed: boolean;
+        /**
+         * instance one WebGPU Object
+         * @param engine
+         */
+        constructor(engine: WebGPUEngine);
+        /**
+         * get destroyed state
+         */
+        get destroyed(): boolean;
+        /**
+         * destroy
+         * @override
+         * @returns
+         */
+        destroy(): void;
+    }
+    class WebGPURenderCommandEncoder {
+        /**
+         * command Encoder
+         */
+        commandEncoder: GPUCommandEncoder;
+        /**
+         * if Render has RenderEncoder
+         */
+        renderpassEncoder: GPURenderPassEncoder;
+        /**
+         * engine
+         */
+        engine: WebGPUEngine;
+        /**
+         * pipeline
+         */
+        curpipeline: WGPURenderPipeline;
+        curGeometry: IRenderGeometryElement;
+        cachemap: {
+            [key: number]: GPUBindGroup;
+        };
+        obb: any;
+        constructor();
+        /**
+         * crate Render CommandEncoder
+         * @param renderpassDes
+         */
+        startRender(renderpassDes: GPURenderPassDescriptor): void;
+        setPipeline(pipeline: WGPURenderPipeline): void;
+        /**
+         * draw
+         * @param geometry
+         */
+        applyGeometry(geometry: IRenderGeometryElement): void;
+        /**
+         * 设置indexBuffer
+         * @param buffer
+         * @param indexformat
+         * @param offset
+         * @param byteSize
+         */
+        setIndexBuffer(buffer: WebGPUBuffer, indexformat: GPUIndexFormat, offset: number, byteSize: number): void;
+        setVertexBuffer(slot: GPUIndex32, buffer: GPUBuffer, offset?: GPUSize64, size?: GPUSize64): void;
+        drawIndirect(indirectBuffer: GPUBuffer, indirectOffset: GPUSize64): void;
+        drawIndexedIndirect(indirectBuffer: GPUBuffer, indirectOffset: GPUSize64): void;
+        setBindGroup(index: GPUIndex32, bindGroup: GPUBindGroup, dynamicOffsets?: Iterable<GPUBufferDynamicOffset>): void;
+        setBindGroupByDataOffaset(index: GPUIndex32, bindGroup: GPUBindGroup, dynamicOffsetsData: Uint32Array, dynamicOffsetsDataStart: GPUSize64, dynamicOffsetsDataLength: GPUSize32): void;
+        end(): void;
+        setViewport(x: number, y: number, width: number, height: number, minDepth: number, maxDepth: number): void;
+        setScissorRect(x: GPUIntegerCoordinate, y: GPUIntegerCoordinate, width: GPUIntegerCoordinate, height: GPUIntegerCoordinate): void;
+        setBlendConstant(color: GPUColor): void;
+        setStencilReference(reference: GPUStencilValue): void;
+        executeBundles(bundles: Iterable<GPURenderBundle>): void;
+        finish(): GPUCommandBuffer;
+    }
+    class WebGPURenderPassDescriptor {
+        des: GPURenderPassDescriptor;
+        constructor();
+        setColorAttachments(textures: WebGPUInternalTex[], clear: boolean, clearColor?: Color): void;
+        setDepthAttachments(depthTex: WebGPUInternalTex, clear: boolean, clearDepthValue?: number): void;
+    }
+    interface WebGPUSamplerParams {
+        comparedMode: TextureCompareMode;
+        wrapU: WrapMode;
+        warpV: WrapMode;
+        warpW: WrapMode;
+        mipmapFilter: FilterMode;
+        filterMode: FilterMode;
+        anisoLevel: number;
+    }
+    class WebGPUSamplerContext extends WebGPUObject {
+        private _cacheMap;
+        createGPUSampler(params: WebGPUSamplerParams): GPUSampler;
+        getcacheSampler(params: WebGPUSamplerParams): any;
+        private _getCatchWrapKey;
+        private _anisoLevel;
+        private _getSamplerDescriptor;
+        private _getSamplerAddressMode;
+        private _getFilterMode;
+        private _getGPUCompareFunction;
+    }
+    class WebGPUShaderInstance extends WebGPUObject implements IRenderShaderInstance {
+        _complete: boolean;
+        private _pipelineLayout;
+        constructor(engine: WebGPUEngine);
+        _WGSLShaderLanguageProcess3D(vs: ShaderNode, fs: ShaderNode): void;
+        create(): void;
+        /**
+         * contactBindGroupLayout
+         * @returns
+         */
+        private _contactBindGroupLayout;
+        getVertexModule(): GPUShaderModule;
+        getFragmentModule(): GPUShaderModule;
+        getUniformMap(): WGPUShaderVariable[];
+        applyBindGroupLayoutByUniformMap(uniformMap: {
+            [name: string]: ShaderDataType;
+        }, command: CommandEncoder): void;
+        applyBindGroupLayout(map: CommandUniformMap, command: CommandEncoder): void;
+        getWGPUPipelineLayout(): GPUPipelineLayout;
+        bind(): boolean;
+    }
+    enum GPUTextureViewDimension {
+        VD1d = "1d",
+        VD2d = "2d",
+        VD2d_array = "2d-array",
+        VDcube = "cube",
+        VDcube_array = "cube-array",
+        VD3d = "3d"
+    }
+    enum GPUTextureFormat {
+        r8unorm = "r8unorm",
+        r8snorm = "r8snorm",
+        r8uint = "r8uint",
+        r8sint = "r8sint",
+        r16uint = "r16uint",
+        r16sint = "r16sint",
+        r16float = "r16float",
+        rg8unorm = "rg8unorm",
+        rg8snorm = "rg8snorm",
+        rg8uint = "rg8uint",
+        rg8sint = "rg8sint",
+        r32uint = "r32uint",
+        r32sint = "r32sint",
+        r32float = "r32float",
+        rg16uint = "rg16uint",
+        rg16sint = "rg16sint",
+        rg16float = "rg16float",
+        rgba8unorm = "rgba8unorm",
+        rgba8unorm_srgb = "rgba8unorm-srgb",
+        rgba8snorm = "rgba8snorm",
+        rgba8uint = "rgba8uint",
+        rgba8sint = "rgba8sint",
+        bgra8unorm = "bgra8unorm",
+        bgra8unorm_srgb = "bgra8unorm-srgb",
+        rgb9e5ufloat = "rgb9e5ufloat",
+        rgb10a2unorm = "rgb10a2unorm",
+        rg11b10ufloat = "rg11b10ufloat",
+        rg32uint = "rg32uint",
+        rg32sint = "rg32sint",
+        rg32float = "rg32float",
+        rgba16uint = "rgba16uint",
+        rgba16sint = "rgba16sint",
+        rgba16float = "rgba16float",
+        rgba32uint = "rgba32uint",
+        rgba32sint = "rgba32sint",
+        rgba32float = "rgba32float",
+        stencil8 = "stencil8",
+        depth16unorm = "depth16unorm",
+        depth24plus = "depth24plus",
+        depth24plus_stencil8 = "depth24plus-stencil8",
+        depth32float = "depth32float",
+        depth32float_stencil8 = "depth32float-stencil8",
+        bc1_rgba_unorm = "bc1-rgba-unorm",
+        bc1_rgba_unorm_srgb = "bc1-rgba-unorm-srgb",
+        bc2_rgba_unorm = "bc2-rgba-unorm",
+        bc2_rgba_unorm_srgb = "bc2-rgba-unorm-srgb",
+        bc3_rgba_unorm = "bc3-rgba-unorm",
+        bc3_rgba_unorm_srgb = "bc3-rgba-unorm-srgb",
+        bc4_r_unorm = "bc4-r-unorm",
+        bc4_r_snorm = "bc4-r-snorm",
+        bc5_rg_unorm = "bc5-rg-unorm",
+        bc5_rg_snorm = "bc5-rg-snorm",
+        bc6h_rgb_ufloat = "bc6h-rgb-ufloat",
+        bc6h_rgb_float = "bc6h-rgb-float",
+        bc7_rgba_unorm = "bc7-rgba-unorm",
+        bc7_rgba_unorm_srgb = "bc7-rgba-unorm-srgb",
+        etc2_rgb8unorm = "etc2-rgb8unorm",
+        etc2_rgb8unorm_srgb = "etc2-rgb8unorm-srgb",
+        etc2_rgb8a1unorm = "etc2-rgb8a1unorm",
+        etc2_rgb8a1unorm_srgb = "etc2-rgb8a1unorm-srgb",
+        etc2_rgba8unorm = "etc2-rgba8unorm",
+        etc2_rgba8unorm_srgb = "etc2-rgba8unorm-srgb",
+        astc_4x4_unorm = "astc-4x4-unorm",
+        astc_4x4_unorm_srgb = "astc-4x4-unorm-srgb",
+        astc_5x4_unorm = "astc-5x4-unorm",
+        astc_5x4_unorm_srgb = "astc-5x4-unorm-srgb",
+        astc_5x5_unorm = "astc-5x5-unorm",
+        astc_5x5_unorm_srgb = "astc-5x5-unorm-srgb",
+        astc_6x5_unorm = "astc-6x5-unorm",
+        astc_6x5_unorm_srgb = "astc-6x5-unorm-srgb",
+        astc_6x6_unorm = "astc-6x6-unorm",
+        astc_6x6_unorm_srgb = "astc-6x6-unorm-srgb",
+        astc_8x5_unorm = "astc-8x5-unorm",
+        astc_8x5_unorm_srgb = "astc-8x5-unorm-srgb",
+        astc_8x6_unorm = "astc-8x6-unorm",
+        astc_8x6_unorm_srgb = "astc-8x6-unorm-srgb",
+        astc_8x8_unorm = "astc-8x8-unorm",
+        astc_8x8_unorm_srgb = "astc-8x8-unorm-srgb",
+        astc_10x5_unorm = "astc-10x5-unorm",
+        astc_10x5_unorm_srgb = "astc-10x5-unorm-srgb",
+        astc_10x6_unorm = "astc-10x6-unorm",
+        astc_10x6_unorm_srgb = "astc-10x6-unorm-srgb",
+        astc_10x8_unorm = "astc-10x8-unorm",
+        astc_10x8_unorm_srgb = "astc-10x8-unorm-srgb",
+        astc_10x10_unorm = "astc-10x10-unorm",
+        astc_10x10_unorm_srgb = "astc-10x10-unorm-srgb",
+        astc_12x10_unorm = "astc-12x10-unorm",
+        astc_12x10_unorm_srgb = "astc-12x10-unorm-srgb",
+        astc_12x12_unorm = "astc-12x12-unorm",
+        astc_12x12_unorm_srgb = "astc-12x12-unorm-srgb"
+    }
+    enum GPUTextureUsage {
+        COPY_SRC = 1,
+        COPY_DST = 2,
+        TEXTURE_BINDING = 4,
+        STORAGE_BINDING = 8,
+        RENDER_ATTACHMENT = 16
+    }
+    class WebGPUTextureContext extends WebGPUObject implements ITextureContext {
+        needBitmap: boolean;
+        curBindWGPURT: WebGPUInternalRT;
+        constructor(engine: WebGPUEngine);
+        setTexture3DImageData(texture: InternalTexture, source: HTMLImageElement[] | HTMLCanvasElement[] | ImageBitmap[], depth: number, premultiplyAlpha: boolean, invertY: boolean): void;
+        setTexture3DPixlesData(texture: InternalTexture, source: ArrayBufferView, depth: number, premultiplyAlpha: boolean, invertY: boolean): void;
+        setTexture3DSubPixelsData(texture: InternalTexture, source: ArrayBufferView, mipmapLevel: number, generateMipmap: boolean, xOffset: number, yOffset: number, zOffset: number, width: number, height: number, depth: number, premultiplyAlpha: boolean, invertY: boolean): void;
+        getGPUTextureFormat(format: TextureFormat, useSRGB: boolean): GPUTextureFormat;
+        private isCompressTexture;
+        getGPURenderTargetFormat(format: RenderTargetFormat, useSRGB: boolean): GPUTextureFormat.rgba8unorm | GPUTextureFormat.rgba8unorm_srgb | GPUTextureFormat.rgba16float | GPUTextureFormat.rgba32float | GPUTextureFormat.stencil8 | GPUTextureFormat.depth16unorm | GPUTextureFormat.depth24plus | GPUTextureFormat.depth24plus_stencil8 | GPUTextureFormat.depth32float;
+        getTextureViewDimension(demension: TextureDimension): GPUTextureViewDimension;
+        /**
+        * caculate texture memory
+        * @param tex
+        * @returns
+        */
+        getGLtexMemory(tex: WebGPUInternalTex, depth?: number): number;
+        private _generateMipmaps;
+        createTextureInternal(dimension: TextureDimension, width: number, height: number, format: TextureFormat, generateMipmap: boolean, sRGB: boolean): WebGPUInternalTex;
+        private getGPUTextureDescriptor;
+        createRenderTextureInternal(dimension: TextureDimension, width: number, height: number, format: RenderTargetFormat, generateMipmap: boolean, sRGB: boolean): WebGPUInternalTex;
+        createRenderTargetInternal(width: number, height: number, format: RenderTargetFormat, depthStencilFormat: RenderTargetFormat, generateMipmap: boolean, sRGB: boolean, multiSamples: number): WebGPUInternalRT;
+        setTextureImageData(texture: WebGPUInternalTex, source: HTMLCanvasElement | HTMLImageElement | ImageBitmap, premultiplyAlpha: boolean, invertY: boolean): void;
+        setTextureSubImageData(texture: InternalTexture, source: HTMLCanvasElement | HTMLImageElement | ImageBitmap, x: number, y: number, premultiplyAlpha: boolean, invertY: boolean): void;
+        setTexturePixelsData(texture: WebGPUInternalTex, source: ArrayBufferView, premultiplyAlpha: boolean, invertY: boolean): void;
+        setTextureSubPixelsData(texture: WebGPUInternalTex, source: ArrayBufferView, mipmapLevel: number, generateMipmap: boolean, xOffset: number, yOffset: number, width: number, height: number, premultiplyAlpha: boolean, invertY: boolean): void;
+        initVideoTextureData(texture: WebGPUInternalTex): void;
+        setTextureDDSData(texture: WebGPUInternalTex, ddsInfo: DDSTextureInfo): void;
+        setTextureKTXData(texture: WebGPUInternalTex, ktxInfo: KTXTextureInfo): void;
+        setTextureHDRData(texture: WebGPUInternalTex, hdrInfo: HDRTextureInfo): void;
+        setCubeImageData(texture: WebGPUInternalTex, sources: (HTMLCanvasElement | HTMLImageElement | ImageBitmap)[], premultiplyAlpha: boolean, invertY: boolean): void;
+        setCubePixelsData(texture: WebGPUInternalTex, source: ArrayBufferView[], premultiplyAlpha: boolean, invertY: boolean): void;
+        setCubeSubPixelData(texture: WebGPUInternalTex, source: ArrayBufferView[], mipmapLevel: number, generateMipmap: boolean, xOffset: number, yOffset: number, width: number, height: number, premultiplyAlpha: boolean, invertY: boolean): void;
+        setCubeDDSData(texture: WebGPUInternalTex, ddsInfo: DDSTextureInfo): void;
+        setCubeKTXData(texture: WebGPUInternalTex, ktxInfo: KTXTextureInfo): void;
+        setTextureCompareMode(texture: WebGPUInternalTex, compareMode: TextureCompareMode): TextureCompareMode;
+        createRenderTargetCubeInternal(size: number, colorFormat: RenderTargetFormat, depthStencilFormat: RenderTargetFormat, generateMipmap: boolean, sRGB: boolean, multiSamples: number): InternalRenderTarget;
+        setupRendertargetTextureAttachment(renderTarget: InternalRenderTarget, texture: InternalTexture): void;
+        bindRenderTarget(renderTarget: InternalRenderTarget, faceIndex?: number): void;
+        bindoutScreenTarget(): void;
+        unbindRenderTarget(renderTarget: InternalRenderTarget): void;
+        readRenderTargetPixelData(renderTarget: InternalRenderTarget, xOffset: number, yOffset: number, width: number, height: number, out: ArrayBufferView): ArrayBufferView;
+        updateVideoTexture(texture: InternalTexture, video: HTMLVideoElement, premultiplyAlpha: boolean, invertY: boolean): void;
+        getRenderTextureData(internalTex: InternalRenderTarget, x: number, y: number, width: number, height: number): ArrayBufferView;
+    }
+    class WGPUBindGroup {
+    }
+    class WGPUBindGroupHelper {
+        static device: GPUDevice;
+        /**create BindGroup by ShaderVariable */
+        static getBindGroupbyUniformMap(shaderVariable: WGPUShaderVariable, shaderData: WGPUShaderData): GPUBindGroup;
+        /**Buffer BindGroup */
+        static getBufferBindGroup(shaderVariable: WGPUShaderVariable, databuffer: GPUBuffer, size: number, offset?: number): GPUBindGroup;
+        /**Texture BindGroup */
+        static getTextureBindGroup(shaderVariable: WGPUShaderVariable, internalTexture: WebGPUInternalTex): GPUBindGroup;
+        /**Buffer BindGroup Entry */
+        static createBufferBindGroupEntry(bindIndex: number, databuffer: GPUBuffer, size: number, offset?: number): GPUBindGroupEntry;
+        /**Sampler BindGroup Entry */
+        static createSamplerBindGroupEntry(bindIndex: number, sampler: GPUSampler): GPUBindGroupEntry;
+        /**TextureView BindGroup Entry */
+        static createTextureBindGroupEntry(bindIndex: number, texture: GPUTextureView): GPUBindGroupEntry;
+        /**todo */
+        static createExternalTextureBindGroupEntry(): void;
+    }
+    class WGPUBindGroupLayoutHelper {
+        /**
+         * CommandUniformMap生成GPUBindGroupLayout
+         * @param bindStart
+         * @param map
+         * @param out
+         *
+         * @returns
+         */
+        static getBindGroupLayoutByMap(map: CommandUniformMap, out: WGPUShaderVariable[]): void;
+        static getBindGroupLayoutByUniformMap(uniformMap: {
+            [name: string]: ShaderDataType;
+        }, out: WGPUShaderVariable[]): void;
+        static getTextureBindGroupLayout(visibility: GPUShaderStageFlags, dimension?: GPUTextureViewDimension, mulsampler?: boolean, GPUTtextureType?: GPUTextureSampleType, samplerType?: GPUSamplerBindingType): GPUBindGroupLayout;
+        static getBufferBindGroupLayout(visibility: GPUShaderStageFlags, bufferBindType?: GPUBufferBindingType): GPUBindGroupLayout;
+        /**
+         * BufferEntry
+         * @returns
+         */
+        static createBufferLayoutEntry(binding: number, visibility: GPUShaderStageFlags, bufferBindType: GPUBufferBindingType, dynamicOffset?: boolean): GPUBindGroupLayoutEntry;
+        /**
+         * TextureEntry
+         * @returns
+         */
+        static createTextureLayoutEntry(binding: number, visibility: GPUShaderStageFlags, dimension?: GPUTextureViewDimension, mulsampler?: boolean, GPUTtextureType?: GPUTextureSampleType): GPUBindGroupLayoutEntry;
+        /**
+         * SamplerEntry
+         * @returns
+         */
+        static createSamplerLayoutEntry(binding: number, visibility: GPUShaderStageFlags, samplerType?: GPUSamplerBindingType): GPUBindGroupLayoutEntry;
+        /**
+         * StrorageEntry
+         * @returns
+         */
+        static createStorageTextureEntry(binding: number, visibility: GPUShaderStageFlags, textureFormat: GPUTextureFormat, dimension?: GPUTextureViewDimension): GPUBindGroupLayoutEntry;
+        /**
+         * ExternalTextureEntry
+         * @returns
+         */
+        static createExternalTextureEntry(): GPUBindGroupLayoutEntry;
+    }
+    class WGPURenderEngineFactory implements IRenderEngineFactory {
+        createShaderData(): WGPUShaderData;
+        createShaderInstance(shaderProcessInfo: ShaderProcessInfo, shaderPass: ShaderCompileDefineBase): WGPURenderPipelineInstance;
+        createRenderStateComand(): RenderStateCommand;
+        createRenderState(): RenderState;
+        createUniformBufferObject(glPointer: number, name: string, bufferUsage: BufferUsage, byteLength: number, isSingle: boolean): UniformBufferObject;
+        createGlobalUniformMap(blockName: string): CommandUniformMap;
+        createEngine(config: any, canvas: any): Promise<any>;
+    }
+    class WGPUShaderVariable extends ShaderVariable {
+        constructor();
+        containProperty(propertyIndex: number): boolean;
     }
     enum BlendEquationSeparate {
         ADD = 0,
@@ -26866,7 +29584,9 @@ declare module Laya {
         /** pass if the incoming value is greater than or equal to the depth/stencil buffer value. */
         GreaterEqual = 6,
         /** always pass. */
-        Always = 7
+        Always = 7,
+        /** off */
+        Off = 8
     }
     enum CullMode {
         /** Disable culling. */
@@ -26927,10 +29647,9 @@ declare module Laya {
         Texture_SRGB = 17,
         MSAA = 18,
         UnifromBufferObject = 19,
-        GRAPHICS_API_GLES3 = 20,
-        Texture3D = 21,
-        Texture_FloatLinearFiltering = 22,
-        Texture_HalfFloatLinearFiltering = 23
+        Texture3D = 20,
+        Texture_FloatLinearFiltering = 21,
+        Texture_HalfFloatLinearFiltering = 22
     }
     enum RenderClearFlag {
         Nothing = 0,
@@ -27020,7 +29739,8 @@ declare module Laya {
         DEPTH_16 = 35,
         STENCIL_8 = 36,
         DEPTHSTENCIL_24_8 = 37,
-        DEPTH_32 = 38
+        DEPTH_32 = 38,
+        DEPTHSTENCIL_24_Plus = 39
     }
     enum StencilOperation {
         /** Keeps the current value. */
@@ -27156,6 +29876,7 @@ declare module Laya {
         _depthTexture: InternalTexture;
         colorFormat: RenderTargetFormat;
         depthStencilFormat: RenderTargetFormat;
+        isSRGB: boolean;
         gpuMemory: number;
         dispose(): void;
     }
@@ -27170,6 +29891,7 @@ declare module Laya {
         target: number;
         width: number;
         height: number;
+        depth: number;
         isPotSize: boolean;
         mipmap: boolean;
         mipmapCount: number;
@@ -27228,7 +29950,7 @@ declare module Laya {
         getTextureContext(): ITextureContext;
         getDrawContext(): IRenderDrawContext;
         get2DRenderContext(): IRender2DContext;
-        getCreateRenderOBJContext(): IRenderOBJCreate;
+        getCreateRenderOBJContext(): IRenderEngineFactory;
         createRenderStateComand(): RenderStateCommand;
         createShaderInstance(vs: string, ps: string, attributeMap: {
             [name: string]: [
@@ -27241,34 +29963,14 @@ declare module Laya {
         getUBOPointer(name: string): number;
         unbindVertexState(): void;
     }
-    interface IRenderOBJCreate {
-        createShaderInstance(vs: string, ps: string, attributeMap: {
-            [name: string]: [
-                number,
-                ShaderDataType
-            ];
-        }, shaderPass: ShaderCompileDefineBase): ShaderInstance;
-        createTransform(owner: Sprite3D): Transform3D;
-        createBounds(min: Vector3, max: Vector3): any;
+    interface IRenderEngineFactory {
+        createShaderInstance(shaderProcessInfo: ShaderProcessInfo, shaderPass: ShaderCompileDefineBase): any;
         createShaderData(ownerResource: Resource): ShaderData;
-        createRenderElement(): IRenderElement;
-        createSkinRenderElement(): IRenderElement;
-        createInstanceRenderElement(): IRenderElement;
-        createBaseRenderQueue(isTransparent: boolean): IRenderQueue;
-        createRenderGeometry(mode: MeshTopology, drayType: DrawType): IRenderGeometryElement;
-        createVertexBuffer3D(byteLength: number, bufferUsage: BufferUsage, canRead: boolean): VertexBuffer3D;
-        createIndexBuffer3D(indexType: IndexFormat, indexCount: number, bufferUsage: BufferUsage, canRead: boolean): IndexBuffer3D;
-        createBaseRenderNode(): IBaseRenderNode;
-        createRenderContext3D(): IRenderContext3D;
-        createSceneRenderManager(): ISceneRenderManager;
-        createCullPass(): ICullPass;
-        createSortPass(): ISortPass;
-        createShadowCullInfo(): IShadowCullInfo;
-        createCameraCullInfo(): ICameraCullInfo;
         createRenderStateComand(): RenderStateCommand;
         createRenderState(): RenderState;
         createUniformBufferObject(glPointer: number, name: string, bufferUsage: BufferUsage, byteLength: number, isSingle: boolean): UniformBufferObject;
         createGlobalUniformMap(blockName: string): CommandUniformMap;
+        createEngine(config: Config, canvas: any): Promise<void>;
     }
     interface IRenderShaderInstance {
         getUniformMap(): ShaderVariable[];
@@ -27293,6 +29995,7 @@ declare module Laya {
         applyIndexBuffer(indexBuffer: IndexBuffer | null): void;
     }
     interface ITextureContext {
+        needBitmap: boolean;
         /**
          * 为 Texture 创建 InternalTexture
          * @param width
@@ -27329,8 +30032,9 @@ declare module Laya {
         getRenderTextureData(internalTex: InternalRenderTarget, x: number, y: number, width: number, height: number): ArrayBufferView;
     }
     interface ITexture3DContext extends ITextureContext {
+        createTexture3DInternal(dimension: TextureDimension, width: number, height: number, depth: number, format: TextureFormat, generateMipmap: boolean, sRGB: boolean, premultipliedAlpha: boolean): InternalTexture;
         setTexture3DImageData(texture: InternalTexture, source: HTMLImageElement[] | HTMLCanvasElement[] | ImageBitmap[], depth: number, premultiplyAlpha: boolean, invertY: boolean): void;
-        setTexture3DPixlesData(texture: InternalTexture, source: ArrayBufferView, depth: number, premultiplyAlpha: boolean, invertY: boolean): void;
+        setTexture3DPixelsData(texture: InternalTexture, source: ArrayBufferView, depth: number, premultiplyAlpha: boolean, invertY: boolean): void;
         setTexture3DSubPixelsData(texture: InternalTexture, source: ArrayBufferView, mipmapLevel: number, generateMipmap: boolean, xOffset: number, yOffset: number, zOffset: number, width: number, height: number, depth: number, premultiplyAlpha: boolean, invertY: boolean): void;
     }
     /**
@@ -27376,6 +30080,7 @@ declare module Laya {
         applyContext(cameraUpdateMark: number): void;
         /**draw one element by context */
         drawRenderElement(renderelemt: IRenderElement): void;
+        end(): void;
     }
     interface IRenderElement {
         _geometry: IRenderGeometryElement;
@@ -27661,11 +30366,22 @@ declare module Laya {
          * 创建一个 <code>RenderState</code> 实例。
          */
         constructor();
+        /**
+         * 克隆
+         * @param dest
+         */
+        cloneTo(dest: RenderState): void;
+        /**
+         * 克隆。
+         * @return	 克隆副本。
+         */
+        clone(): RenderState;
     }
     interface IShaderObjStructor {
         name: string;
         enableInstancing: boolean;
         supportReflectionProbe: boolean;
+        surportVolumetricGI: boolean;
         attributeMap: any;
         uniformMap: any;
         defaultValue: any;
@@ -27677,6 +30393,8 @@ declare module Laya {
         VSPath?: string;
         FSPath?: string;
         pipeline?: string;
+        statefirst?: boolean;
+        renderState?: Record<string, string | boolean | number | string[]>;
     }
     /**
      * <code>Shader3D</code> 类用于创建Shader3D。
@@ -27757,7 +30475,7 @@ declare module Laya {
          * @param   passIndex  通道索引。
          * @param	defineNames 宏定义名字集合。
          */
-        static compileShaderByDefineNames(shaderName: string, subShaderIndex: number, passIndex: number, defineNames: string[]): void;
+        static compileShaderByDefineNames(shaderName: string, subShaderIndex: number, passIndex: number, defineNames: string[], nodeCommonMap: string[]): void;
         /**
          * 添加预编译shader文件，主要是处理宏定义
          */
@@ -27788,15 +30506,6 @@ declare module Laya {
          * @return 子着色器。
          */
         getSubShaderAt(index: number): SubShader;
-        /**
-         * @deprecated
-         * 通过宏定义遮罩编译shader,建议使用compileShaderByDefineNames。
-         * @param	shaderName Shader名称。
-         * @param   subShaderIndex 子着色器索引。
-         * @param   passIndex  通道索引。
-         * @param	defineMask 宏定义遮罩集合。
-         */
-        static compileShader(shaderName: string, subShaderIndex: number, passIndex: number, ...defineMask: any[]): void;
     }
     enum ShaderDataType {
         Int = 0,
@@ -27809,10 +30518,11 @@ declare module Laya {
         Matrix4x4 = 7,
         Texture2D = 8,
         TextureCube = 9,
-        Buffer = 10
+        Buffer = 10,
+        Matrix3x3 = 11
     }
-    type ShaderDataItem = number | boolean | Vector2 | Vector3 | Vector4 | Color | Matrix4x4 | BaseTexture | Float32Array;
-    function ShaderDataDefaultValue(type: ShaderDataType): false | Readonly<Vector2> | 0 | Readonly<Vector3> | Readonly<Matrix4x4> | Readonly<Vector4> | Color;
+    type ShaderDataItem = number | boolean | Vector2 | Vector3 | Vector4 | Color | Matrix4x4 | BaseTexture | Float32Array | Matrix3x3;
+    function ShaderDataDefaultValue(type: ShaderDataType): false | Readonly<Vector2> | 0 | Readonly<Matrix3x3> | Readonly<Vector3> | Readonly<Matrix4x4> | Readonly<Vector4> | Color;
     /**
      * 着色器数据类。
      */
@@ -27935,6 +30645,18 @@ declare module Laya {
          */
         setMatrix4x4(index: number, value: Matrix4x4): void;
         /**
+         * 获取矩阵
+         * @param index
+         * @returns
+         */
+        getMatrix3x3(index: number): Matrix3x3;
+        /**
+         * 设置矩阵。
+         * @param index
+         * @param value
+         */
+        setMatrix3x3(index: number, value: Matrix3x3): void;
+        /**
          * 获取Buffer。
          * @param	index shader索引。
          * @return
@@ -27974,7 +30696,7 @@ declare module Laya {
         setUniformBuffer(index: number, value: UniformBufferObject): void;
         getUniformBuffer(index: number): UniformBufferObject;
         setShaderData(uniformIndex: number, type: ShaderDataType, value: ShaderDataItem | Quaternion): void;
-        getShaderData(uniformIndex: number, type: ShaderDataType): number | boolean | Vector2 | Float32Array | Vector3 | Matrix4x4 | Vector4 | Color | BaseTexture;
+        getShaderData(uniformIndex: number, type: ShaderDataType): number | boolean | Vector2 | Float32Array | Vector3 | Matrix3x3 | Matrix4x4 | Vector4 | Color | BaseTexture;
         /**
          * get shader data
          * @deprecated
@@ -28010,19 +30732,28 @@ declare module Laya {
      * <code>ShaderInstance</code> 类用于实现ShaderInstance。
      */
     class ShaderInstance {
+        private _renderShaderInstance;
         /**
          * 创建一个 <code>ShaderInstance</code> 实例。
          */
-        constructor(vs: string, ps: string, attributeMap: {
-            [name: string]: [
-                number,
-                ShaderDataType
-            ];
-        }, shaderPass: ShaderCompileDefineBase);
+        constructor(shaderProcessInfo: ShaderProcessInfo, shaderPass: ShaderCompileDefineBase);
         /**
          * get complete
          */
         get complete(): boolean;
+        protected _webGLShaderLanguageProcess3D(defineString: string[], attributeMap: {
+            [name: string]: [
+                number,
+                ShaderDataType
+            ];
+        }, uniformMap: UniformMapType, VS: ShaderNode, FS: ShaderNode): void;
+        protected _webGLShaderLanguageProcess2D(defineString: string[], attributeMap: {
+            [name: string]: [
+                number,
+                ShaderDataType
+            ];
+        }, uniformMap: UniformMapType, VS: ShaderNode, FS: ShaderNode): void;
+        private hasSpritePtrID;
         /**
          * @inheritDoc
          * @override
@@ -28072,6 +30803,7 @@ declare module Laya {
      *  <code>shaderVariable</code> 类用于保存shader变量上传相关信息。
      */
     class ShaderVariable {
+        static pointID: number;
         /**
          * 创建一个 <code>shaderVariable</code> 实例。
          */
@@ -28203,7 +30935,6 @@ declare module Laya {
                 ShaderDataType
             ];
         };
-        static __init__(): void;
         /**
          * 创建一个 <code>SubShader</code> 实例。
          * @param	attributeMap  顶点属性表。
@@ -28542,6 +31273,36 @@ declare module Laya {
          */
         destroy(): void;
     }
+    interface VAElement {
+        format: string;
+        stride: number;
+        shaderLocation: number;
+    }
+    class VertexAttributeLayout {
+        static IPoint: number;
+        static _pool: {
+            [key: number]: VertexAttributeLayout;
+        };
+        static getVertexLayoutByPool(vertexs: VertexBuffer[]): VertexAttributeLayout;
+        /**
+         * vertex attribute byte size Array
+         */
+        attributeByteSize: Array<number>;
+        /**
+         * vertex Layout des
+         */
+        VAElements: Array<VAElement[]>;
+        instanceMode: Array<boolean>;
+        /**
+         * pool index
+         */
+        id: number;
+        /**
+         * instance one VertexAttributeLayout
+         * @param vertexs
+         */
+        constructor(vertexs: VertexBuffer[]);
+    }
     class VertexBuffer extends Buffer {
         private _instanceBuffer;
         /**
@@ -28625,8 +31386,6 @@ declare module Laya {
          */
         static vsyncTime(): number;
         initRender(canvas: HTMLCanvas, w: number, h: number): boolean;
-        /**@private */
-        private _replaceWebglcall;
         /**@private */
         private _enterFrame;
         /** 目前使用的渲染器。*/
@@ -28937,6 +31696,8 @@ declare module Laya {
         setTransform(...args: any[]): void;
         /**@private */
         $transform(a: number, b: number, c: number, d: number, tx: number, ty: number): void;
+        set material(value: Material);
+        get material(): Material;
         /**@private */
         get lineJoin(): string;
         /**@private */
@@ -29026,7 +31787,6 @@ declare module Laya {
          */
         getMatScaleX(): number;
         getMatScaleY(): number;
-        setFillColor(color: number): void;
         getFillColor(): number;
         set fillStyle(value: any);
         get fillStyle(): any;
@@ -29061,14 +31821,6 @@ declare module Laya {
         setColorFilter(filter: ColorFilter): void;
         drawTexture(tex: Texture, x: number, y: number, width: number, height: number, color?: number): void;
         drawTextures(tex: Texture, pos: ArrayLike<number>, tx: number, ty: number, colors: number[]): void;
-        /**
-         * 为drawTexture添加一个新的submit。类型是 SubmitTexture
-         * @param	vbSize
-         * @param	alpha
-         * @param	webGLImg
-         * @param	tex
-         */
-        private _drawTextureAddSubmit;
         submitDebugger(): void;
         private isSameClipInfo;
         drawCallOptimize(enable: boolean): boolean;
@@ -29310,6 +32062,526 @@ declare module Laya {
          */
         toBase64Async(type: string, encoderOptions: number, callBack: Function): void;
     }
+    enum MaterialRenderMode {
+        /**渲染状态_不透明。*/
+        RENDERMODE_OPAQUE = 0,
+        /**渲染状态_阿尔法测试。*/
+        RENDERMODE_CUTOUT = 1,
+        /**渲染状态__透明。*/
+        RENDERMODE_TRANSPARENT = 2,
+        /**渲染状态__加色法混合。*/
+        RENDERMODE_ADDTIVE = 3,
+        /**渲染状态_透明混合。*/
+        RENDERMODE_ALPHABLENDED = 4,
+        /**渲染状态_自定义 */
+        RENDERMODE_CUSTOME = 5
+    }
+    /**
+     * <code>Material</code> 类用于创建材质。
+     */
+    class Material extends Resource implements IClone {
+        /** 渲染队列_不透明。*/
+        static RENDERQUEUE_OPAQUE: number;
+        /** 渲染队列_阿尔法裁剪。*/
+        static RENDERQUEUE_ALPHATEST: number;
+        /** 渲染队列_透明。*/
+        static RENDERQUEUE_TRANSPARENT: number;
+        /**着色器变量,透明测试值。*/
+        static ALPHATESTVALUE: number;
+        /**材质级着色器宏定义,透明测试。*/
+        static SHADERDEFINE_ALPHATEST: ShaderDefine;
+        static SHADERDEFINE_MAINTEXTURE: ShaderDefine;
+        static SHADERDEFINE_ADDTIVEFOG: ShaderDefine;
+        /**
+         * 加载材质。
+         * @param url 材质地址。
+         * @param complete 完成回掉。
+         */
+        static load(url: string, complete: Handler): void;
+        /** @private */
+        _shaderValues: ShaderData | null;
+        /** 所属渲染队列. */
+        renderQueue: number;
+        /**
+         * 着色器数据。
+         */
+        get shaderData(): ShaderData;
+        /**
+         * 透明测试模式裁剪值。
+         */
+        get alphaTestValue(): number;
+        set alphaTestValue(value: number);
+        /**
+         * 是否透明裁剪。
+         */
+        get alphaTest(): boolean;
+        set alphaTest(value: boolean);
+        /**
+         * 增加Shader宏定义。
+         * @param value 宏定义。
+         */
+        addDefine(define: ShaderDefine): void;
+        /**
+         * 移除Shader宏定义。
+         * @param value 宏定义。
+         */
+        removeDefine(define: ShaderDefine): void;
+        /**
+         * 开启 或 关闭 shader 宏定义
+         * @param define
+         * @param value true: addDefine, false: removeDefine
+         */
+        setDefine(define: ShaderDefine, value: boolean): void;
+        /**
+         * 是否包含Shader宏定义。
+         * @param value 宏定义。
+         */
+        hasDefine(define: ShaderDefine): boolean;
+        /**
+         * 是否写入深度。
+         */
+        get depthWrite(): boolean;
+        set depthWrite(value: boolean);
+        /**
+         * 剔除方式。
+         */
+        get cull(): number;
+        set cull(value: number);
+        /**
+         * 混合方式。
+         */
+        get blend(): number;
+        set blend(value: number);
+        /**
+         * 混合源。
+         */
+        get blendSrc(): number;
+        set blendSrc(value: number);
+        /**
+         * 混合目标。
+         */
+        get blendDst(): number;
+        set blendDst(value: number);
+        /**
+         * 混合目标 alpha
+         */
+        get blendSrcAlpha(): number;
+        set blendSrcAlpha(value: number);
+        /**
+         * 混合原 RGB
+         */
+        get blendSrcRGB(): number;
+        /**
+         * 混合原 RGB
+         */
+        set blendSrcRGB(value: number);
+        get blendDstRGB(): number;
+        set blendDstRGB(value: number);
+        /**
+         * 混合目标 alpha
+         */
+        get blendDstAlpha(): number;
+        set blendDstAlpha(value: number);
+        /**
+         * 混合方程
+         */
+        get blendEquation(): number;
+        set blendEquation(value: number);
+        /**
+         * 混合方式 RGB
+         */
+        get blendEquationRGB(): number;
+        set blendEquationRGB(value: number);
+        /**
+         * 混合方式 Alpha
+         */
+        get blendEquationAlpha(): number;
+        set blendEquationAlpha(value: number);
+        /**
+         * 深度测试方式。
+         */
+        get depthTest(): number;
+        set depthTest(value: number);
+        /**
+         * 模板测试方式
+         */
+        get stencilTest(): number;
+        set stencilTest(value: number);
+        /**
+         * 是否写入模板。
+         */
+        get stencilWrite(): boolean;
+        set stencilWrite(value: boolean);
+        /**
+         * 写入模板值
+         */
+        set stencilRef(value: number);
+        get stencilRef(): number;
+        /** */
+        /**
+         * 写入模板测试设置
+         * vector(fail, zfail, zpass)
+         */
+        set stencilOp(value: Vector3);
+        get stencilOp(): Vector3;
+        /**
+         * 获得材质属性
+         */
+        get MaterialProperty(): any;
+        /**
+         * 获得材质宏
+         */
+        get MaterialDefine(): Array<string>;
+        /**
+         * 渲染模式。
+         */
+        set materialRenderMode(value: MaterialRenderMode);
+        /**
+         * 获得材质渲染状态
+         */
+        get materialRenderMode(): MaterialRenderMode;
+        /**
+         * 创建一个 <code>Material</code> 实例。
+         */
+        constructor();
+        /**
+         * @inheritDoc
+         * @override
+         */
+        protected _disposeResource(): void;
+        get shader(): Shader3D;
+        /**
+         * get all material uniform property
+         * @returns
+         */
+        effectiveProperty(): Map<string, ShaderDataType>;
+        /**
+         * 设置使用Shader名字。
+         * @param name 名称。
+         */
+        setShaderName(name: string): void;
+        /**
+         * 获得bool属性值
+         * @param uniformIndex 属性索引
+         * @returns
+         */
+        getBoolByIndex(uniformIndex: number): boolean;
+        /**
+         * 设置bool值
+         * @param uniformIndex 属性索引
+         * @param value 值
+         */
+        setBoolByIndex(uniformIndex: number, value: boolean): void;
+        /**
+         * 活得bool值
+         * @param name 属性名称
+         * @returns
+         */
+        getBool(name: string): boolean;
+        /**
+         * 设置bool值
+         * @param name 属性名称
+         * @param value 值
+         */
+        setBool(name: string, value: boolean): void;
+        /**
+         * 获得Float值
+         * @param uniformIndex 属性索引
+         * @returns
+         */
+        getFloatByIndex(uniformIndex: number): number;
+        /**
+         * 设置Float值
+         * @param uniformIndex 属性索引
+         * @param value 值
+         */
+        setFloatByIndex(uniformIndex: number, value: number): void;
+        /**
+         * 获得Float值
+         * @param name 属性名称
+         * @returns
+         */
+        getFloat(name: string): number;
+        /**
+         * 设置Float值
+         * @param name 属性名称
+         * @param value 值
+         */
+        setFloat(name: string, value: number): void;
+        /**
+         * 获得Int值
+         * @param uniformIndex 属性索引
+         * @returns
+         */
+        getIntByIndex(uniformIndex: number): number;
+        /**
+         * 设置Int值
+         * @param uniformIndex 属性索引
+         * @param value 值
+         */
+        setIntByIndex(uniformIndex: number, value: number): void;
+        /**
+         * 获得Int值
+         * @param name 属性名称
+         * @returns
+         */
+        getInt(name: string): number;
+        /**
+         * 设置Int值
+         * @param name 属性名称
+         * @param value 值
+         */
+        setInt(name: string, value: number): void;
+        /**
+         * 获得Vector2
+         * @param uniformIndex 属性索引
+         * @returns
+         */
+        getVector2ByIndex(uniformIndex: number): Vector2;
+        /**
+         * 设置Vector2
+         * @param uniformIndex 属性索引
+         * @param value 值
+         */
+        setVector2ByIndex(uniformIndex: number, value: Vector2): void;
+        /**
+         * 获得Vector2
+         * @param name 属性名称
+         * @returns
+         */
+        getVector2(name: string): Vector2;
+        /**
+         * 设置Vector2
+         * @param name 属性名称
+         * @param value 值
+         */
+        setVector2(name: string, value: Vector2): void;
+        /**
+         * 获得Vector3
+         * @param uniformIndex 属性索引
+         * @returns
+         */
+        getVector3ByIndex(uniformIndex: number): Vector3;
+        /**
+         * 设置Vector3
+         * @param uniformIndex 属性索引
+         * @param value 值
+         */
+        setVector3ByIndex(uniformIndex: number, value: Vector3): void;
+        /**
+         * 获得Vector3
+         * @param name 属性名称
+         * @returns
+         */
+        getVector3(name: string): Vector3;
+        /**
+         * 设置Vector3
+         * @param name 属性名称
+         * @param value 值
+         */
+        setVector3(name: string, value: Vector3): void;
+        /**
+         * 获得Vector4
+         * @param uniformIndex 属性索引
+         * @param value 值
+         */
+        setVector4ByIndex(uniformIndex: number, value: Vector4): void;
+        /**
+         * 设置Vector4
+         * @param uniformIndex 属性索引
+         * @returns
+         */
+        getVector4ByIndex(uniformIndex: number): Vector4;
+        /**
+         * 设置Vector4
+         * @param name 属性名称
+         * @param value 值
+         */
+        setVector4(name: string, value: Vector4): void;
+        /**
+         * 获得Vector4
+         * @param name 属性名称
+         * @returns
+         */
+        getVector4(name: string): Vector4;
+        /**
+         * 获得Color
+         * @param uniformIndex 属性索引
+         * @returns
+         */
+        getColorByIndex(uniformIndex: number): Color;
+        /**
+         * 设置Color
+         * @param uniformIndex 属性索引
+         * @param value 值
+         */
+        setColorByIndex(uniformIndex: number, value: Color): void;
+        /**
+         * 获得Color
+         * @param name 属性名称
+         * @returns
+         */
+        getColor(name: string): Color;
+        /**
+         * 设置Color
+         * @param name 属性名称
+         * @param value 值
+         */
+        setColor(name: string, value: Color): void;
+        /**
+         * 获得Matrix4x4
+         * @param uniformIndex 属性索引
+         * @returns
+         */
+        getMatrix4x4ByIndex(uniformIndex: number): Matrix4x4;
+        /**
+         * 设置Matrix4x4
+         * @param uniformIndex 属性索引
+         * @param value 值
+         */
+        setMatrix4x4ByIndex(uniformIndex: number, value: Matrix4x4): void;
+        /**
+         * 获得Matrix4x4
+         * @param name 属性名称
+         * @returns
+         */
+        getMatrix4x4(name: string): Matrix4x4;
+        /**
+         * 设置Matrix4x4
+         * @param name 属性名称
+         * @param value 值
+         */
+        setMatrix4x4(name: string, value: Matrix4x4): void;
+        /**
+         * 获取 matrix3x3
+         * @param index
+         * @returns
+         */
+        getMatrix3x3ByIndex(index: number): Matrix3x3;
+        /**
+         * 设置 matrix3x3
+         * @param index
+         * @param value
+         */
+        setMatrix3x3ByIndex(index: number, value: Matrix3x3): void;
+        /**
+         * 获取 matrix3x3
+         * @param name
+         * @returns
+         */
+        getMatrix3x3(name: string): Matrix3x3;
+        /**
+         * 设置 matrix3x3
+         * @param name
+         * @param value
+         */
+        setMatrix3x3(name: string, value: Matrix3x3): void;
+        /**
+         * 设置纹理
+         * @param uniformIndex 属性索引
+         * @param texture
+         */
+        setTextureByIndex(uniformIndex: number, texture: BaseTexture): void;
+        private reSetTexture;
+        /**
+         * 获得纹理
+         * @param uniformIndex 属性索引
+         * @returns
+         */
+        getTextureByIndex(uniformIndex: number): BaseTexture;
+        /**
+         * 设置纹理
+         * @param name 属性名称
+         * @param texture
+         */
+        setTexture(name: string, texture: BaseTexture): void;
+        /**
+         * 获得纹理
+         * @param name 属性名称
+         * @returns
+         */
+        getTexture(name: string): BaseTexture;
+        /**
+         * 获得Buffer
+         * @param uniformIndex 属性索引
+         * @returns
+         */
+        getBufferByIndex(uniformIndex: number): Float32Array;
+        /**
+         * 设置Buffer
+         * @param uniformIndex 属性索引
+         * @param value 值
+         */
+        setBufferByIndex(uniformIndex: number, value: Float32Array): void;
+        /**
+         * 获得Buffer
+         * @param name 属性名称
+         * @returns
+         */
+        getBuffer(name: string): Float32Array;
+        /**
+         * 设置Buffer
+         * @param name 属性名称
+         * @param value 值
+         */
+        setBuffer(name: string, value: Float32Array): void;
+        /**
+         * 设置ShaderData的属性值
+         * @param uniformIndex 属性索引
+         * @param type 值类型
+         * @param value 值
+         */
+        setShaderDataByIndex(uniformIndex: number, type: ShaderDataType, value: ShaderDataItem): void;
+        /**
+         * 设置ShaderData的属性值
+         * @param name 属性名称
+         * @param type 值类型
+         * @param value 值
+         */
+        setShaderData(name: string, type: ShaderDataType, value: ShaderDataItem): void;
+        /**
+         * 获得ShaderData的属性值
+         * @param name 属性名称
+         * @param type 值类型
+         * @returns
+         */
+        getShaderData(name: string, type: ShaderDataType): ShaderDataItem;
+        /**
+         * 获得ShaderData的属性值
+         * @param uniformIndex 属性索引
+         * @param type 值类型
+         * @returns
+         */
+        getShaderDataByIndex(uniformIndex: number, type: ShaderDataType): ShaderDataItem;
+        /**
+         * 克隆。
+         * @param	destObject 克隆源。
+         */
+        cloneTo(destObject: any): void;
+        /**
+         * 克隆。
+         * @return	 克隆副本。
+         */
+        clone(): any;
+        /**
+         * 设置属性值
+         * @deprecated
+         * @param name
+         * @param value
+         */
+        setShaderPropertyValue(name: string, value: any): void;
+        /**
+         * 获取属性值
+         * @deprecated
+         * @param name
+         */
+        getShaderPropertyValue(name: string): any;
+        get _defineDatas(): DefineDatas;
+        /**
+         * override it
+         */
+        oldparseEndEvent(): void;
+    }
     /**
      * <code>RenderTexture</code> 类用于创建渲染目标。
      */
@@ -29525,9 +32797,9 @@ declare module Laya {
          */
         static get currentActive(): RenderTexture2D;
         /** @private */
-        _depthStencilFormat: number;
+        private _depthStencilFormat;
         /** @private */
-        _colorFormat: RenderTargetFormat;
+        private _colorFormat;
         /**
          * 获取深度格式。
          *@return 深度格式。
@@ -29616,7 +32888,7 @@ declare module Laya {
          * @param height 高度。
          * @return 像素数据。
          */
-        getData(x: number, y: number, width: number, height: number, out?: Uint8Array | Float32Array): ArrayBufferView;
+        getData(x: number, y: number, width: number, height: number): ArrayBufferView;
     }
     /**
      * <code>SpotLight</code> 类用于创建RenderTextureCube。
@@ -29770,7 +33042,7 @@ declare module Laya {
         /**@private 反转 UV 信息。*/
         static readonly INV_UV: Float32Array;
         /**@private uv的范围*/
-        uvrect: any[];
+        uvrect: number[];
         /**@private */
         private _bitmap;
         /** @private */
@@ -30003,7 +33275,7 @@ declare module Laya {
      * 2D 纹理 数组
      */
     class Texture2DArray extends BaseTexture {
-        readonly depth: number;
+        depth: number;
         constructor(width: number, height: number, depth: number, format: TextureFormat, mipmap: boolean, canRead: boolean, sRGB?: boolean);
         /**
          * 设置Image数据
@@ -30018,7 +33290,7 @@ declare module Laya {
          * @param premultiplyAlpha 是否预乘 alpha
          * @param invertY 是否反转图像 Y 轴
          */
-        setPixlesData(source: ArrayBufferView, premultiplyAlpha: boolean, invertY: boolean): void;
+        setPixelsData(source: ArrayBufferView, premultiplyAlpha: boolean, invertY: boolean): void;
         /**
          * 更新像素数据
          * @param xOffset x 偏移
@@ -30034,6 +33306,31 @@ declare module Laya {
          * @param invertY 是否反转 Y 轴
          */
         setSubPixelsData(xOffset: number, yOffset: number, zOffset: number, width: number, height: number, depth: number, pixels: ArrayBufferView, mipmapLevel: number, generateMipmap: boolean, premultiplyAlpha: boolean, invertY: boolean): void;
+    }
+    /**
+     * 3D 纹理
+     */
+    class Texture3D extends BaseTexture {
+        depth: number;
+        constructor(width: number, height: number, depth: number, format: TextureFormat, mipmap?: boolean, sRGB?: boolean);
+        /**
+        * 设置像素数据
+        * @param source 像素数据
+        */
+        setPixelsData(source: ArrayBufferView): void;
+        /**
+         * 更新像素数据
+         * @param xOffset x 偏移
+         * @param yOffset y 偏移
+         * @param zOffset z 偏移
+         * @param width 更新数据宽度
+         * @param height 更新数据高度
+         * @param depth 更新数据深度层级
+         * @param pixels 像素数据
+         * @param mipmapLevel mipmap 等级
+         * @param generateMipmap 是否生成 mipmap
+         */
+        setSubPixelsData(xOffset: number, yOffset: number, zOffset: number, width: number, height: number, depth: number, pixels: ArrayBufferView, mipmapLevel: number, generateMipmap: boolean): void;
     }
     enum TextureCubeFace {
         /**+x */
@@ -35621,8 +38918,6 @@ declare module Laya {
          */
         get labelColors(): string;
         set labelColors(value: string);
-        set labelAlign(value: string);
-        get labelAlign(): string;
         /**
          * <p>描边宽度（以像素为单位）。</p>
          * 默认值0，表示不描边。
@@ -36209,6 +39504,10 @@ declare module Laya {
         static getQueryString(name: string): string;
         static getSafariToolbarOffset(): number;
     }
+    function arrayBufferSlice(this: ArrayBuffer, start: number, end: number): ArrayBuffer;
+    function uint8ArraySlice(this: Uint8Array): Uint8Array;
+    function float32ArraySlice(this: Float32Array): Float32Array;
+    function uint16ArraySlice(this: Uint16Array, ...arg: any[]): Uint16Array;
     /**
      * <p> <code>Byte</code> 类提供用于优化读取、写入以及处理二进制数据的方法和属性。</p>
      * <p> <code>Byte</code> 类适用于需要在字节层访问数据的高级开发人员。</p>
@@ -37434,6 +40733,21 @@ declare module Laya {
          */
         static show(): void;
     }
+    class ParseJSON {
+        static parse(str: string): any;
+        private static findIndex;
+        private static finCurrObj;
+        private static formatVal;
+        private static len;
+        private static ret;
+        private static currStr;
+        private static currArr;
+        private static cobj;
+        /**type为0代表没有找到任何状态，1为当前在寻找key，2为当前在寻找val */
+        private static type;
+        private static finCurrStr;
+        private static parseStart;
+    }
     /**
      * <p> <code>Pool</code> 是对象池类，用于对象的存储、重复使用。</p>
      * <p>合理使用对象池，可以有效减少对象创建的开销，避免频繁的垃圾回收，从而优化游戏流畅度。</p>
@@ -37537,7 +40851,6 @@ declare module Laya {
      * @private
      */
     class RunDriver {
-        static createShaderCondition: Function;
         /**
          * 用于改变 WebGL宽高信息。
          */
@@ -37652,6 +40965,7 @@ declare module Laya {
         static renderSlow: boolean;
         /** 资源管理器所管理资源的累计内存,以字节为单位。*/
         static cpuMemory: number;
+        static blitDrawCall: number;
         /** 资源管理器所管理资源的累计内存,以字节为单位。*/
         static gpuMemory: number;
         /**@interanl */
@@ -38173,12 +41487,6 @@ declare module Laya {
          * 更改文件名的扩展名。
          */
         static replaceFileExtension(path: string, newExt: string, excludeDot?: boolean): string;
-        /**
-         * 将RenderTexture转换为Base64
-         * @param rendertexture 渲染Buffer
-         * @returns
-         */
-        static uint8ArrayToArrayBuffer(rendertexture: RenderTexture | RenderTexture2D): String;
     }
     /**
      * @private
@@ -38324,7 +41632,6 @@ declare module Laya {
     }
     class DrawStyle {
         static DEFAULT: DrawStyle;
-        static _Defaultinit(): void;
         _color: ColorUtils;
         static create(value: any): DrawStyle;
         constructor(value: any);
@@ -38466,53 +41773,48 @@ declare module Laya {
         constructor();
     }
     class Shader2D {
-        ALPHA: number;
-        shader: Shader;
-        filters: any[];
-        defines: ShaderDefines2D;
-        shaderType: number;
-        colorAdd: any[];
-        fillStyle: DrawStyle;
-        strokeStyle: DrawStyle;
-        destroy(): void;
-        static __init__(): void;
-    }
-    class Shader2X extends Shader {
-        _params2dQuick2: any[] | null;
-        _shaderValueWidth: number;
-        _shaderValueHeight: number;
-        constructor(vs: string, ps: string, saveName?: any, nameMap?: any, bindAttrib?: any[] | null);
         /**
-         * @override
+         * primitive Mesh Descript
          */
-        protected _disposeResource(): void;
-        upload2dQuick2(shaderValue: ShaderValue): void;
-        _make2dQuick2(): any[];
-        static create(vs: string, ps: string, saveName?: any, nameMap?: any, bindAttrib?: any[] | null): Shader;
-    }
-    class ShaderDefines2D extends ShaderDefinesBase {
-        static TEXTURE2D: number;
-        static PRIMITIVE: number;
-        static FILTERGLOW: number;
-        static FILTERBLUR: number;
-        static FILTERCOLOR: number;
-        static COLORADD: number;
-        static WORLDMAT: number;
-        static FILLTEXTURE: number;
-        static SKINMESH: number;
-        static MVP3D: number;
-        static GAMMASPACE: number;
-        static INVERTY: number;
-        static GAMMATEXTURE: number;
-        static NOOPTMASK: number;
-        private static __name2int;
-        private static __int2name;
-        private static __int2nameMap;
+        static readonly primitiveAttribute: {
+            [name: string]: [
+                number,
+                ShaderDataType
+            ];
+        };
+        /**
+         * TextureSV Mesh Descript
+         */
+        static readonly textureAttribute: {
+            [name: string]: [
+                number,
+                ShaderDataType
+            ];
+        };
+        /**
+         * init 2D internal Shader
+         */
         static __init__(): void;
-        constructor();
-        static reg(name: string, value: number): void;
-        static toText(value: number, int2name: any[], int2nameMap: any): any;
-        static toInt(names: string): number;
+    }
+    class ShaderDefines2D {
+        static UNIFORM_CLIPMATDIR: number;
+        static UNIFORM_CLIPMATPOS: number;
+        static UNIFORM_MMAT2: number;
+        static UNIFORM_SIZE: number;
+        static UNIFORM_CLIPOFF: number;
+        static UNIFORM_MVPMatrix: number;
+        static UNIFORM_SPRITETEXTURE: number;
+        static UNIFORM_STRENGTH_SIG2_2SIG2_GAUSS1: number;
+        static UNIFORM_BLURINFO: number;
+        static UNIFORM_COLORALPHA: number;
+        static UNIFORM_COLORMAT: number;
+        static UNIFORM_COLOR: number;
+        static UNIFORM_BLURINFO1: number;
+        static UNIFORM_BLURINFO2: number;
+        static UNIFORM_COLORADD: number;
+        static UNIFORM_TEXRANGE: number;
+        static __init__(): void;
+        static initSprite2DCommandEncoder(): void;
     }
     class SkinMeshBuffer {
         ib: IndexBuffer2D;
@@ -38523,168 +41825,95 @@ declare module Laya {
         addSkinMesh(skinMesh: any): void;
         reset(): void;
     }
-    class SkinSV extends Value2D {
-        texcoord: any;
-        position: any;
-        offsetX: number;
-        offsetY: number;
-        constructor(type: any);
-    }
     class PrimitiveSV extends Value2D {
-        constructor(args: any);
+        constructor();
     }
     class TextureSV extends Value2D {
-        u_colorMatrix: any[];
         strength: number;
-        blurInfo: any[];
-        colorMat: Float32Array;
-        colorAlpha: Float32Array;
-        constructor(subID?: number);
+        private _blurInfo;
+        get blurInfo(): Vector2;
+        set blurInfo(value: Vector2);
+        private _u_blurInfo1;
+        get u_blurInfo1(): Vector4;
+        set u_blurInfo1(value: Vector4);
+        private _u_blurInfo2;
+        get u_blurInfo2(): Vector4;
+        set u_blurInfo2(value: Vector4);
+        private _u_TexRange;
+        get u_TexRange(): Vector4;
+        set u_TexRange(value: Vector4);
+        private _colorMat;
+        get colorMat(): Matrix4x4;
+        set colorMat(value: Matrix4x4);
+        private _colorAlpha;
+        get colorAlpha(): Vector4;
+        set colorAlpha(value: Vector4);
+        private _strength_sig2_2sig2_gauss1;
+        get strength_sig2_2sig2_gauss1(): Vector4;
+        set strength_sig2_2sig2_gauss1(value: Vector4);
+        constructor();
         /**
          * @override
          */
         clear(): void;
+    }
+    enum RenderSpriteData {
+        Zero = 0,
+        Texture2D = 1,
+        Primitive = 2
     }
     class Value2D {
+        static globalShaderData: ShaderData;
         protected static _cache: any[];
         protected static _typeClass: any;
-        static TEMPMAT4_ARRAY: any[];
         static _initone(type: number, classT: any): void;
-        static create(mainType: number, subType: number): Value2D;
-        static __init__(): void;
-        defines: ShaderDefines2D;
-        size: any[];
+        static TEMPMAT4_ARRAY: any[];
+        static _compileDefine: DefineDatas;
+        /**
+         * 对象池概念
+         * @param mainType
+         * @returns
+         */
+        static create(mainType: RenderSpriteData): Value2D;
+        defines: ShaderData;
+        _defaultShader: Shader3D;
         alpha: number;
-        mmat: any[];
-        u_MvpMatrix: any[];
-        texture: any;
         ALPHA: number;
-        shader: Shader;
-        mainID: number;
-        subID: number;
-        filters: any[];
-        textureHost: Texture | RenderTexture2D | TextTexture;
-        color: any[];
-        colorAdd: any[];
-        u_mmat2: any[];
+        mainID: RenderSpriteData;
         ref: number;
-        protected _attribLocation: any[];
         private _inClassCache;
         private _cacheID;
-        clipMatDir: any[];
-        clipMatPos: any[];
-        clipOff: any[];
-        constructor(mainID: number, subID: number);
-        setValue(value: Shader2D): void;
-        private _ShaderWithCompile;
+        get size(): Vector2;
+        filters: any[];
+        get u_MvpMatrix(): Matrix4x4;
+        texture: any;
+        private _textureHost;
+        get textureHost(): Texture | RenderTexture2D | TextTexture;
+        set textureHost(value: Texture | RenderTexture2D | TextTexture);
+        _color: Vector4;
+        set color(value: Vector4);
+        get color(): Vector4;
+        _colorAdd: Vector4;
+        set colorAdd(value: Vector4);
+        get colorAdd(): Vector4;
+        private _clipMatDir;
+        set clipMatDir(value: Vector4);
+        get clipMatDir(): Vector4;
+        private _clipMatpos;
+        set clipMatPos(value: Vector2);
+        get clipMatPos(): Vector2;
+        _clipOff: Vector2;
+        set clipOff(value: Vector2);
+        get clipOff(): Vector2;
+        constructor(mainID: RenderSpriteData);
+        /**
+         * 组织Define宏数据
+         */
         updateShaderData(): void;
-        upload(): void;
+        upload(material?: Material): void;
         setFilters(value: any[]): void;
         clear(): void;
-        /**
-         * 重设Value2D内容
-         */
-        resetValue(): void;
         release(): void;
-    }
-    class Shader extends BaseShader {
-        private static _count;
-        private _attribInfo;
-        static SHADERNAME2ID: number;
-        static nameKey: StringKey;
-        static sharders: any[];
-        static create(vs: string, ps: string, saveName?: any, nameMap?: any, bindAttrib?: any[]): Shader;
-        /**
-         * 根据宏动态生成shader文件，支持#include?COLOR_FILTER "parts/ColorFilter_ps_logic.glsl";条件嵌入文件
-         * @param	name
-         * @param	vs
-         * @param	ps
-         * @param	define 宏定义，格式:{name:value...}
-         * @return
-         */
-        static withCompile2D(nameID: number, mainID: number, define: any, shaderName: any, createShader: Function, bindAttrib?: any[]): Shader;
-        static addInclude(fileName: string, txt: string): void;
-        /**
-         * 预编译shader文件，主要是处理宏定义
-         * @param	nameID,一般是特殊宏+shaderNameID*0.0002组成的一个浮点数当做唯一标识
-         * @param	vs
-         * @param	ps
-         */
-        static preCompile(nameID: number, vs: string, ps: string, nameMap: any): void;
-        /**
-         * 预编译shader文件，主要是处理宏定义
-         * @param	nameID,一般是特殊宏+shaderNameID*0.0002组成的一个浮点数当做唯一标识
-         * @param	vs
-         * @param	ps
-         */
-        static preCompile2D(nameID: number, mainID: number, vs: string, ps: string, nameMap: any): void;
-        private _nameMap;
-        private _vs;
-        private _ps;
-        private _curActTexIndex;
-        private _reCompile;
-        private _render2DContext;
-        tag: any;
-        /**
-         * 根据vs和ps信息生成shader对象
-         * 把自己存储在 sharders 数组中
-         * @param	vs
-         * @param	ps
-         * @param	name:
-         * @param	nameMap 帮助里要详细解释为什么需要nameMap
-         */
-        constructor(vs: string, ps: string, saveName?: any, nameMap?: any, bindAttrib?: any[] | null);
-        protected recreateResource(): void;
-        /**
-         * @override
-         */
-        protected _disposeResource(): void;
-        private _compile;
-        private static _createShader;
-        /**
-         * 根据变量名字获得
-         * @param	name
-         * @return
-         */
-        getUniform(name: string): any;
-        private _uniform1f;
-        private _uniform1fv;
-        private _uniform_vec2;
-        private _uniform_vec2v;
-        private _uniform_vec3;
-        private _uniform_vec3v;
-        private _uniform_vec4;
-        private _uniform_vec4v;
-        private _uniformMatrix4fv;
-        private _uniform1i;
-        private _uniform1iv;
-        private _uniform_sampler2D;
-        private _uniform_samplerCube;
-        uploadTexture2D(value: any): void;
-        /**
-         * 提交shader到GPU
-         * @param	shaderValue
-         */
-        upload(shaderValue: ShaderValue, params?: any[]): void;
-    }
-    class ShaderDefinesBase {
-        private _name2int;
-        private _int2name;
-        private _int2nameMap;
-        constructor(name2int: any, int2name: any[], int2nameMap: any[]);
-        add(value: any): number;
-        addInt(value: number): number;
-        remove(value: any): number;
-        isDefine(def: number): boolean;
-        getValue(): number;
-        setValue(value: number): void;
-        toNameDic(): any;
-        static _reg(name: string, value: number, _name2int: any, _int2name: any[]): void;
-        static _toText(value: number, _int2name: any[], _int2nameMap: any): any;
-        static _toInt(names: string, _name2int: any): number;
-    }
-    class ShaderValue {
-        constructor();
     }
     class BasePoly {
         private static tempData;
@@ -38781,6 +42010,7 @@ declare module Laya {
     class Submit extends SubmitBase {
         protected static _poolSize: number;
         protected static POOL: Submit[];
+        material: Material;
         constructor(renderType?: number);
         /**
          * @override
@@ -38904,6 +42134,7 @@ declare module Laya {
     class SubmitTexture extends SubmitBase {
         private static _poolSize;
         private static POOL;
+        material: Material;
         constructor(renderType?: number);
         /**
          * @override
@@ -39001,35 +42232,6 @@ declare module Laya {
          */
         getCharBmp(char: string, font: string, lineWidth: number, colStr: string, strokeColStr: string, cri: CharRenderInfo, margin_left: number, margin_top: number, margin_right: number, margin_bottom: number, rect?: any[] | null): ImageData | null;
         getCharCanvas(char: string, font: string, lineWidth: number, colStr: string, strokeColStr: string, cri: CharRenderInfo, margin_left: number, margin_top: number, margin_right: number, margin_bottom: number): ImageData;
-    }
-    class CharRender_Native extends ICharRender {
-        private lastFont;
-        private lastScaleX;
-        private lastScaleY;
-        constructor();
-        /**
-         *
-         * @param font
-         * @param str
-         * @override
-         */
-        getWidth(font: string, str: string): number;
-        /**
-         *
-         * @param sx
-         * @param sy
-         * @override
-         */
-        scale(sx: number, sy: number): void;
-        /**
-         *TODO stroke
-         * @param	char
-         * @param	font
-         * @param	size  返回宽高
-         * @return
-         * @override
-         */
-        getCharBmp(char: string, font: string, lineWidth: number, colStr: string, strokeColStr: string, size: CharRenderInfo, margin_left: number, margin_top: number, margin_right: number, margin_bottom: number, rect?: any[] | null): ImageData | null;
     }
     /**
      * TODO如果占用内存较大,这个结构有很多成员可以临时计算
@@ -39415,7 +42617,6 @@ declare module Laya {
         protected _quadNum: number;
         canReuse: boolean;
         /**
-         *
          * @param	stride
          * @param	vballoc  vb预分配的大小。主要是用来提高效率。防止不断的resizebfufer
          * @param	iballoc
@@ -39529,6 +42730,14 @@ declare module Laya {
          *
          */
         static getAMesh(mainctx: boolean): MeshTexture;
+        /**
+         * 增加四个顶点
+         * @param vertices
+         * @param uvs
+         * @param idx
+         * @param matrix
+         * @param rgba
+         */
         addData(vertices: Float32Array, uvs: Float32Array, idx: Uint16Array, matrix: Matrix, rgba: number): void;
         /**
          * 把本对象放到回收池中，以便getMesh能用。
@@ -39612,8 +42821,23 @@ declare module Laya {
          * @private
          */
         private static _compileToTree;
+        static getRenderState(obj: Record<string, string | boolean | number | string[]>, renderState: RenderState): void;
+    }
+    class ShaderProcessInfo {
+        defineString: string[];
+        vs: ShaderNode;
+        ps: ShaderNode;
+        attributeMap: {
+            [name: string]: [
+                number,
+                ShaderDataType
+            ];
+        };
+        uniformMap: UniformMapType;
+        is2D: boolean;
     }
     class ShaderCompileDefineBase {
+        nodeCommonMap: Array<string>;
         constructor(owner: any, name: string, compiledObj: IShaderCompiledObj);
     }
     class ShaderNode {
@@ -39677,7 +42901,9 @@ declare module Laya {
         static isPlaying: boolean;
         static isPreview: boolean;
         static isConch: boolean;
+        /** @deprecated Uses Laya.addBeforeInitCallback */
         static beforeInit: (stageConfig: IStageConfig) => void;
+        /** @deprecated Use Laya.addAfterInitCallback */
         static afterInit: () => void;
     }
     interface IStageConfig {

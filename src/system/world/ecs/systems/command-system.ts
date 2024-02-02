@@ -2,6 +2,7 @@ import { app } from "../../../../app";
 import { Callback } from "../../../../core/dispatcher";
 import { ecs } from "../../../../core/ecs";
 import { IVector3Like, Pool } from "../../../../core/laya";
+import { MathUtil } from "../../../../core/utils/math-util";
 import proto from "../../../../def/proto";
 import { opcode } from "../../../../def/protocol";
 import { WorldConf } from "../../../../def/world";
@@ -220,7 +221,7 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
             }
         } else if (data.path.length > 0) {
         } else if (data.speed > 0) {
-            this.startMove(movement, data.degree, data.speed);
+            this.startMove(movement, MathUtil.toDegree(data.degree), data.speed);
             if (troop) {
                 this._startMoveSoldiers(troop);
             }

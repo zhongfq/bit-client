@@ -3,6 +3,8 @@ declare module gui {
         isPlaying: boolean;
         isPreview: boolean;
         assetDb: IAssetDb;
+        i18nProvider: import("i18next").i18n;
+        language: string;
         readonly resourceMgr: IResourceManager;
         createWidget<T extends Widget>(url: string, options?: Record<string, any>, errors?: Array<any>): Promise<T>;
         createWidgetSync<T extends Widget>(url: string, options?: Record<string, any>, errors?: Array<any>): T;
@@ -251,6 +253,7 @@ declare module gui {
     function lerp(start: number, end: number, percent: number): number;
     function repeat(t: number, length: number): number;
     function distance(x1: number, y1: number, x2: number, y2: number): number;
+    function getBaseName(path: string): string;
     function getPath(url: string): string;
     /**
         * 获取文件名的扩展名，并转换为小写字母。例如"1.abc"将返回abc。
@@ -584,6 +587,7 @@ declare module gui {
         localToGlobalRect(ax: number, ay: number, aWidth: number, aHeight: number, out?: Rect): Rect;
         globalToLocalRect(ax: number, ay: number, aWidth: number, aHeight: number, out?: Rect): Rect;
         transformRect(ax: number, ay: number, aWidth: number, aHeight: number, targetSpace?: Widget, out?: Rect): Rect;
+        hitTest(x: number, y: number): boolean;
         protected createElement(): void;
         protected _sizeChanged(changeByLayout?: boolean): void;
         setLayoutChangedFlag(reason?: LayoutChangedReason): void;
@@ -792,7 +796,7 @@ declare module gui {
         protected _selectable: boolean;
         protected _ubb: boolean;
         protected _updatingSize: boolean;
-        protected _template: Record<string, string>;
+        protected _templateVars: Record<string, any>;
         protected _parsedText: string;
         protected _changed: boolean;
         protected _wrapChanged: boolean;
@@ -900,6 +904,7 @@ declare module gui {
         private _mouseWheelDisabled;
         private _pageMode;
         private _inertiaDisabled;
+        private _paddingMaskDisabled;
         private _hScrollBarRes;
         private _vScrollBarRes;
         private _footerRes;
@@ -1033,6 +1038,7 @@ declare module gui {
         lockFooter(size: number): void;
         _prepareActiveChangeList(active: boolean, out: Array<Widget>): void;
         _shouldCheckOverflow(): number;
+        _processClipping(): void;
         _ownerSizeChanged(): void;
         private onSizeChanged;
         _ownerContentSizeChanged(): void;
@@ -2528,7 +2534,7 @@ declare module gui {
         private updatePointerEvents;
         private updateTransform;
         clearBackgroundStyle(): void;
-        attachToDoc(doc: Document): void;
+        static addStyles(doc: Document): void;
     }
     const defaultInputPadding: Array<number>;
     class SRect extends SGraphics {
@@ -2590,11 +2596,12 @@ declare module gui {
         protected onRender(style: CSSStyleDeclaration): void;
     }
     class SGraphics implements IGraphics {
-        sizeSensitive: boolean;
+        protected sizeSensitive: boolean;
+        protected empty: boolean;
         protected _owner: UIElement;
         get owner(): UIElement;
         set owner(value: UIElement);
-        refresh(): void;
+        refresh(bySizeChanged?: boolean): void;
         protected refreshNow(): void;
         private _draw;
         protected adjustContentBox(offsetX: number, offsetY: number): void;
@@ -2605,9 +2612,35 @@ declare module gui {
         protected onRender(style: CSSStyleDeclaration): void;
     }
     interface IGraphics {
-        sizeSensitive?: boolean;
         owner: UIElement;
-        refresh(immediately?: boolean): void;
+        refresh(): void;
+    }
+    class TranslationsLoader implements IResourceLoader {
+        load(task: ILoadTask): Promise<Translations>;
+    }
+    type I18nTextInfo = {
+        sid?: string;
+        key?: string;
+        text: string;
+    };
+    class Translations extends Resource {
+        private _id;
+        private _t;
+        private _lngs;
+        private _fallbackLng;
+        static _allInsts: Map<string, Translations>;
+        static getById(id: string): Translations;
+        static create(id: string, fallbackLng?: string): Translations;
+        static translate(text: string, options?: Record<string, any>): string;
+        static decodeI18nText(text: string, out?: I18nTextInfo): I18nTextInfo;
+        static encodeI18nText(info: I18nTextInfo, newText?: string): string;
+        protected constructor(id: string, fallbackLng?: string);
+        get id(): string;
+        setContent(lng: string, content: any): this;
+        t(name: string, defaultValue?: string): string;
+        t(name: string, options: Record<string, any>): string;
+        t(name: string, defaultValue: string, options: Record<string, any>): string;
+        protected onDestroy(): void;
     }
     class TextureLoader implements IResourceLoader {
         load(task: ILoadTask): Promise<Texture>;
@@ -2692,14 +2725,12 @@ declare module gui {
         loaderType: new () => IResourceLoader;
     };
     class Resource extends EventDispatcher implements IResource {
-        _id: number;
-        _ref: number;
-        _obsolute: boolean;
+        protected _ref: number;
+        protected _obsolute: boolean;
         protected _destroyed?: boolean;
         url: string;
         uuid: string;
         lock: boolean;
-        get id(): number;
         get destroyed(): boolean;
         get obsolute(): boolean;
         set obsolute(value: boolean);
@@ -2720,7 +2751,7 @@ declare module gui {
         load(task: ILoadTask): Promise<Prefab>;
     }
     class Prefab extends Resource {
-        static parseAPI: IPrefabParserAPI;
+        static parserAPI: IPrefabParserAPI;
         protected _deps: Array<IResource>;
         data: any;
         basePath: string;
@@ -2800,7 +2831,6 @@ declare module gui {
         url: string;
         uuid: string;
         lock: boolean;
-        get id(): number;
         get destroyed(): boolean;
         get obsolute(): boolean;
         set obsolute(value: boolean);
@@ -2823,6 +2853,7 @@ declare module gui {
         URL_to_UUID(url: string): Promise<string>;
         formatURL(url: string): string;
         getMeta(url: string, uuid: string): Promise<any>;
+        getI18nSettingsURL(id: string): string;
     }
     class Downloader {
         common(owner: any, url: string, originalUrl: string, contentType: string, onProgress: (progress: number) => void, onComplete: (data: any, error?: string) => void): void;
@@ -2859,11 +2890,13 @@ declare module gui {
         static uuidMap: Record<string, string>;
         static urlMap: Record<string, string>;
         static metaMap: Record<string, any>;
+        static i18nUrlMap: Record<string, string>;
         UUID_to_URL_sync(uuid: string): string;
         UUID_to_URL(uuid: string): Promise<string>;
         URL_to_UUID(url: string): Promise<string>;
         formatURL(url: string): string;
         getMeta(url: string, uuid: string): Promise<any>;
+        getI18nSettingsURL(id: string): string;
     }
     class ComponentDriver {
         static readonly onUpdates: Set<Component>;

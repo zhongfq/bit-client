@@ -58,7 +58,7 @@ message MoveComponent {
     uint32 start_ms = 2;
     repeated uint32 path = 3;
     float speed = 4; // 每秒多少格
-    int32 degree = 5;
+    float degree = 5;
 }
 
 message BuildingComponent {
@@ -155,7 +155,7 @@ message s2c_troop_move_to {
 // 摇杆移动
 message c2s_troop_move_by {
     uint32 troop_eid = 1;
-    uint32 degree = 2; // 角度0-360
+    float degree = 2;
 }
 message s2c_troop_move_by {
     uint32 err = 1;
@@ -192,7 +192,7 @@ message MoveAction {
     uint32 speed = 3;
     uint32 start_ms = 4;
     Position cur_pos = 5;
-    uint32 degree = 6;
+    float degree = 6;
 }
 
 

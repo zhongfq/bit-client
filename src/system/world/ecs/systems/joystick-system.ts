@@ -1,5 +1,6 @@
 import { app } from "../../../../app";
 import { ecs } from "../../../../core/ecs";
+import { MathUtil } from "../../../../core/utils/math-util";
 import { WorldContext } from "../../world-context";
 import { JoystickComponent } from "../components/joystick-component";
 
@@ -54,10 +55,10 @@ export class JoystickSystem extends ecs.System {
             owner.indicator.y = current.y;
 
             const rad = Math.atan2(current.y, current.x);
-            const degree = Math.floor(((rad * 180) / Math.PI + 360) % 360);
+            const degree = Math.floor((MathUtil.toDegree(rad) + 360) % 360);
             if (Math.abs(joystick.degree - degree) >= 5) {
                 joystick.degree = degree;
-                app.service.world.requestTroopMoveBy(this.context.troop.eid, degree);
+                app.service.world.requestTroopMoveBy(this.context.troop.eid, rad);
             }
         }
     }
