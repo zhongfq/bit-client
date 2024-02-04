@@ -1,0 +1,21 @@
+{
+  "_$ver": 1,
+  "_$id": "gs7nt5w0",
+  "_$runtime": "res://2f6bca04-eea4-43ee-be6a-6935e8881043",
+  "_$type": "Box",
+  "name": "virtuallyList",
+  "x": 200,
+  "y": 400,
+  "width": 400,
+  "height": 400,
+  "_$comp": [
+    {
+      "_$type": "0749476e-6012-4b4b-bd97-ae10d104891b",
+      "scriptPath": "../src/core/virtuallyList/virtually-list.ts",
+      "cellPrefab": {
+        "_$uuid": "b31a6d6e-b58d-4ef0-9d12-d657c47e1d78",
+        "_$type": "Prefab"
+      }
+    }
+  ]
+}
