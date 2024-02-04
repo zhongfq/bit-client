@@ -1,6 +1,8 @@
 import { Callback } from "./dispatcher";
 import { Mediator } from "./ui-mediator";
 
+import "./laya";
+
 export const UIALERT_ID = -1;
 export const UITOAST_ID = -2;
 
