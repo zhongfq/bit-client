@@ -20,6 +20,23 @@ export class VirtuallyList extends Laya.Script {
         for (let i = 0; i < count; i++) {
             this._createNode();
         }
+        //-------------------------------------------------|
+        // this.data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        // this.data = [1, 2, 3, 4, 5];
+        // Laya.timer.once(5000, this, () => {
+        //     // this._data.unshift(0);
+        //     // this._data.unshift(-1);
+        //     // this._data.unshift(-2);
+        //     this._data.push(0);
+        //     this._data.push(-1);
+        //     this._data.push(-2);
+        //     // this._node2Idx.forEach((idx, node) => {
+        //     //     this._node2Idx.set(node, idx + 3);
+        //     //     console.log(idx + 3);
+        //     // });
+        // });
+        //测试数据
+        //-------------------------------------------------|
         this.owner.on(Laya.Event.MOUSE_DOWN, this, this.onBarMouseDown);
     }
     /**
@@ -68,11 +85,13 @@ export class VirtuallyList extends Laya.Script {
         this._mouseX = Laya.stage.mouseX;
         this._mouseY = Laya.stage.mouseY;
         if (shiftingNum > 0) {
-            if (this.fistIndex > 0) {
-                this.moveUP();
+            if (this.owner.scrollRect.y <= this._contentRect.y) {
+                if (this.fistIndex > 0) {
+                    this.moveUP();
+                }
             }
-            if (this.owner.scrollRect.y - shiftingNum < 0) {
-                this.owner.scrollRect.y = 0;
+            if (this.owner.scrollRect.y - shiftingNum < this._contentRect.y) {
+                this.owner.scrollRect.y = this._contentRect.y;
                 return;
             }
         } else if (shiftingNum < 0) {
@@ -145,4 +164,5 @@ export class VirtuallyList extends Laya.Script {
         this._contentRect.y -= node.height;
         this._contentRect.height += node.height;
     }
+    toIndex() {}
 }
