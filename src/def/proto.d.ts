@@ -12007,8 +12007,11 @@ declare namespace proto {
         /** Properties of a BattleStopAction. */
         interface IBattleStopAction {
 
-            /** BattleStopAction eid */
-            eid?: (number|null);
+            /** BattleStopAction fighterEid */
+            fighterEid?: (number|null);
+
+            /** BattleStopAction battleEid */
+            battleEid?: (number|null);
         }
 
         /** Represents a BattleStopAction. */
@@ -12020,8 +12023,11 @@ declare namespace proto {
              */
             constructor(properties?: world.IBattleStopAction);
 
-            /** BattleStopAction eid. */
-            public eid: number;
+            /** BattleStopAction fighterEid. */
+            public fighterEid: number;
+
+            /** BattleStopAction battleEid. */
+            public battleEid: number;
 
             /**
              * Creates a new BattleStopAction instance using the specified properties.

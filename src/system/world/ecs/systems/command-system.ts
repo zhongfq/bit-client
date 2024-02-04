@@ -47,6 +47,8 @@ const formation: IVector3Like[] = [
     { x: -2.8, y: 0, z: -0.6 },
 ];
 
+const attackFormation: IVector3Like[] = [];
+
 const PREFAB_SOLDIER = "resources/prefab/battle/roles/mc03.lh";
 
 export class CommandSystem extends ecs.System implements IBehaviorContext {
@@ -94,8 +96,11 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
                 case ACTION.BATTLE_SKILL:
                     this._startAttack(cmd.battleSkill as proto.world.BattleSkillAction);
                     break;
+                case ACTION.BATTLE_START:
+                    this._startBattle(cmd.battleStart as proto.world.BattleStartAction);
+                    break;
                 case ACTION.BATTLE_STOP:
-                    this._stopAttack(cmd.battleStop!.eid!);
+                    this._stopBattle(cmd.battleStop as proto.world.BattleStopAction);
                     break;
                 case ACTION.BATTLE_SUB_HP:
                     break;
@@ -164,8 +169,10 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
             const data = cmd.battle as proto.world.BattleComponent;
             const battle = entity.addComponent(BattleComponent);
             battle.battleUid = data.battleUid;
-            battle.fighterEids = data.fighterEids;
             battle.startTime = data.startTs;
+            data.fighterEids.forEach((fightEid) => {
+                this._joinBattle(battle.eid, fightEid);
+            });
         }
 
         if (cmd.etype === ENTITY_TYPE.TROOP) {
@@ -268,24 +275,71 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
         }
     }
 
-    private _stopAttack(eid: number) {
-        const entity = this.ecs.getEntity(eid);
-        if (!entity) {
-            console.warn(`entity not found: eid=${eid}`);
+    private _startBattle(action: proto.world.BattleStartAction) {
+        this._joinBattle(action.battleEid, action.fighterEid);
+    }
+
+    private _stopBattle(action: proto.world.BattleStopAction) {
+        const entity = this.ecs.getEntity(action.fighterEid);
+        if (entity) {
+            const animation = entity.getComponent(AnimationComponent);
+            if (animation?.animator) {
+                const movement = entity.getComponent(MovementComponent)!;
+                this._clearTrigger(animation.animator, AnimatorTrigger.ATTACK);
+                if (movement.type === MovementType.NONE) {
+                    this._clearTrigger(animation.animator, AnimatorTrigger.RUN);
+                    this._setTrigger(animation.animator, AnimatorTrigger.IDLE);
+                } else {
+                    this._clearTrigger(animation.animator, AnimatorTrigger.IDLE);
+                    this._setTrigger(animation.animator, AnimatorTrigger.RUN);
+
+                    const transform = animation.getComponent(TransformComponent)!;
+                    transform.rotation = MathUtil.toDegree(
+                        Math.atan2(-movement.speed.z, movement.speed.x)
+                    );
+                    transform.flag |= TransformComponent.ROTATION;
+                }
+            }
+        } else {
+            console.warn(`entity not found in 'stop battle': ${action.fighterEid}`);
+        }
+
+        const battle = this.ecs.getComponent(action.battleEid, BattleComponent);
+        if (battle) {
+            const idx = battle.fighterEids.indexOf(action.fighterEid);
+            if (idx >= 0) {
+                battle.fighterEids.splice(idx, 1);
+            }
+        } else {
+            console.warn(`battle not found in 'stop battle': ${action.battleEid}`);
+        }
+    }
+
+    private _joinBattle(battleEid: number, fighterEid: number) {
+        const battle = this.ecs.getComponent(battleEid, BattleComponent);
+        const entity = this.ecs.getEntity(fighterEid);
+
+        if (!battle) {
+            console.warn(`join battle: battle not found: ${battleEid}`);
             return;
         }
-        const animation = entity.getComponent(AnimationComponent);
-        if (animation?.animator) {
-            const movement = entity.getComponent(MovementComponent)!;
-            this._clearTrigger(animation.animator, AnimatorTrigger.ATTACK);
-            if (movement.type === MovementType.NONE) {
-                this._clearTrigger(animation.animator, AnimatorTrigger.RUN);
-                this._setTrigger(animation.animator, AnimatorTrigger.IDLE);
-            } else {
-                this._clearTrigger(animation.animator, AnimatorTrigger.IDLE);
-                this._setTrigger(animation.animator, AnimatorTrigger.RUN);
-            }
+
+        if (!entity) {
+            console.warn(`join battle: entity not found: ${fighterEid}`);
+            return;
         }
+
+        if (battle.fighterEids.indexOf(fighterEid) >= 0) {
+            console.warn(`join battle: fighter alread exist: ${fighterEid}`);
+            return;
+        }
+
+        battle.fighterEids.push(fighterEid);
+        if (battle.fighterEids.length == 2) {
+            console.log("start battle in battle:", battle.fighterEids);
+        } else if (battle.fighterEids.length > 2) {
+        }
+        console.log("in battle:", battle.fighterEids);
     }
 
     private _setRotation(

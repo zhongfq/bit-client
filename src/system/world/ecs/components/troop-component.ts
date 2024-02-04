@@ -15,14 +15,23 @@ export enum TroopType {
 export enum SoliderOrder {
     IDLE,
     MOVE,
-    FIGHT,
+    RUSH, // 快速移动到指定位置
+    FIGHT, // 战斗中
 }
+
+type SoliderAttack = {
+    target: number | null;
+    position: Laya.Vector3;
+};
 
 export class SoldierComponent extends ecs.Component {
     order: SoliderOrder = SoliderOrder.IDLE;
     leader!: number;
     offset!: IVector3Like;
     destination: Laya.Vector3 = new Laya.Vector3();
+
+    // 攻击的小兵对象
+    attack: SoliderAttack = { target: null, position: new Laya.Vector3() };
 }
 
 export class TroopComponent extends ecs.Component {
@@ -30,4 +39,7 @@ export class TroopComponent extends ecs.Component {
     // 主角的位置轨迹
     latestIndex: number = 0;
     positions: TrackVector3[] = [];
+
+    // 攻击的主角对象
+    attackTarget: number = 0;
 }

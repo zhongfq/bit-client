@@ -27234,7 +27234,8 @@ $root.world = (function() {
          * Properties of a BattleStopAction.
          * @memberof world
          * @interface IBattleStopAction
-         * @property {number|null} [eid] BattleStopAction eid
+         * @property {number|null} [fighterEid] BattleStopAction fighterEid
+         * @property {number|null} [battleEid] BattleStopAction battleEid
          */
 
         /**
@@ -27253,12 +27254,20 @@ $root.world = (function() {
         }
 
         /**
-         * BattleStopAction eid.
-         * @member {number} eid
+         * BattleStopAction fighterEid.
+         * @member {number} fighterEid
          * @memberof world.BattleStopAction
          * @instance
          */
-        BattleStopAction.prototype.eid = 0;
+        BattleStopAction.prototype.fighterEid = 0;
+
+        /**
+         * BattleStopAction battleEid.
+         * @member {number} battleEid
+         * @memberof world.BattleStopAction
+         * @instance
+         */
+        BattleStopAction.prototype.battleEid = 0;
 
         /**
          * Creates a new BattleStopAction instance using the specified properties.
@@ -27284,8 +27293,10 @@ $root.world = (function() {
         BattleStopAction.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eid != null && Object.hasOwnProperty.call(message, "eid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.eid);
+            if (message.fighterEid != null && Object.hasOwnProperty.call(message, "fighterEid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.fighterEid);
+            if (message.battleEid != null && Object.hasOwnProperty.call(message, "battleEid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.battleEid);
             return writer;
         };
 
@@ -27321,7 +27332,11 @@ $root.world = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1: {
-                        message.eid = reader.uint32();
+                        message.fighterEid = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.battleEid = reader.uint32();
                         break;
                     }
                 default:
@@ -27359,9 +27374,12 @@ $root.world = (function() {
         BattleStopAction.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.eid != null && message.hasOwnProperty("eid"))
-                if (!$util.isInteger(message.eid))
-                    return "eid: integer expected";
+            if (message.fighterEid != null && message.hasOwnProperty("fighterEid"))
+                if (!$util.isInteger(message.fighterEid))
+                    return "fighterEid: integer expected";
+            if (message.battleEid != null && message.hasOwnProperty("battleEid"))
+                if (!$util.isInteger(message.battleEid))
+                    return "battleEid: integer expected";
             return null;
         };
 
@@ -27377,8 +27395,10 @@ $root.world = (function() {
             if (object instanceof $root.world.BattleStopAction)
                 return object;
             var message = new $root.world.BattleStopAction();
-            if (object.eid != null)
-                message.eid = object.eid >>> 0;
+            if (object.fighterEid != null)
+                message.fighterEid = object.fighterEid >>> 0;
+            if (object.battleEid != null)
+                message.battleEid = object.battleEid >>> 0;
             return message;
         };
 
@@ -27395,10 +27415,14 @@ $root.world = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults)
-                object.eid = 0;
-            if (message.eid != null && message.hasOwnProperty("eid"))
-                object.eid = message.eid;
+            if (options.defaults) {
+                object.fighterEid = 0;
+                object.battleEid = 0;
+            }
+            if (message.fighterEid != null && message.hasOwnProperty("fighterEid"))
+                object.fighterEid = message.fighterEid;
+            if (message.battleEid != null && message.hasOwnProperty("battleEid"))
+                object.battleEid = message.battleEid;
             return object;
         };
 
