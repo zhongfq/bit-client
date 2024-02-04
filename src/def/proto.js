@@ -25705,6 +25705,233 @@ $root.world = (function() {
         return MoveAction;
     })();
 
+    world.BattleStartAction = (function() {
+
+        /**
+         * Properties of a BattleStartAction.
+         * @memberof world
+         * @interface IBattleStartAction
+         * @property {number|null} [fighterEid] BattleStartAction fighterEid
+         * @property {number|null} [battleEid] BattleStartAction battleEid
+         */
+
+        /**
+         * Constructs a new BattleStartAction.
+         * @memberof world
+         * @classdesc Represents a BattleStartAction.
+         * @implements IBattleStartAction
+         * @constructor
+         * @param {world.IBattleStartAction=} [properties] Properties to set
+         */
+        function BattleStartAction(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * BattleStartAction fighterEid.
+         * @member {number} fighterEid
+         * @memberof world.BattleStartAction
+         * @instance
+         */
+        BattleStartAction.prototype.fighterEid = 0;
+
+        /**
+         * BattleStartAction battleEid.
+         * @member {number} battleEid
+         * @memberof world.BattleStartAction
+         * @instance
+         */
+        BattleStartAction.prototype.battleEid = 0;
+
+        /**
+         * Creates a new BattleStartAction instance using the specified properties.
+         * @function create
+         * @memberof world.BattleStartAction
+         * @static
+         * @param {world.IBattleStartAction=} [properties] Properties to set
+         * @returns {world.BattleStartAction} BattleStartAction instance
+         */
+        BattleStartAction.create = function create(properties) {
+            return new BattleStartAction(properties);
+        };
+
+        /**
+         * Encodes the specified BattleStartAction message. Does not implicitly {@link world.BattleStartAction.verify|verify} messages.
+         * @function encode
+         * @memberof world.BattleStartAction
+         * @static
+         * @param {world.IBattleStartAction} message BattleStartAction message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        BattleStartAction.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.fighterEid != null && Object.hasOwnProperty.call(message, "fighterEid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.fighterEid);
+            if (message.battleEid != null && Object.hasOwnProperty.call(message, "battleEid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.battleEid);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified BattleStartAction message, length delimited. Does not implicitly {@link world.BattleStartAction.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof world.BattleStartAction
+         * @static
+         * @param {world.IBattleStartAction} message BattleStartAction message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        BattleStartAction.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a BattleStartAction message from the specified reader or buffer.
+         * @function decode
+         * @memberof world.BattleStartAction
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {world.BattleStartAction} BattleStartAction
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        BattleStartAction.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.BattleStartAction();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.fighterEid = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.battleEid = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a BattleStartAction message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof world.BattleStartAction
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {world.BattleStartAction} BattleStartAction
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        BattleStartAction.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a BattleStartAction message.
+         * @function verify
+         * @memberof world.BattleStartAction
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        BattleStartAction.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.fighterEid != null && message.hasOwnProperty("fighterEid"))
+                if (!$util.isInteger(message.fighterEid))
+                    return "fighterEid: integer expected";
+            if (message.battleEid != null && message.hasOwnProperty("battleEid"))
+                if (!$util.isInteger(message.battleEid))
+                    return "battleEid: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a BattleStartAction message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof world.BattleStartAction
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {world.BattleStartAction} BattleStartAction
+         */
+        BattleStartAction.fromObject = function fromObject(object) {
+            if (object instanceof $root.world.BattleStartAction)
+                return object;
+            var message = new $root.world.BattleStartAction();
+            if (object.fighterEid != null)
+                message.fighterEid = object.fighterEid >>> 0;
+            if (object.battleEid != null)
+                message.battleEid = object.battleEid >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a BattleStartAction message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof world.BattleStartAction
+         * @static
+         * @param {world.BattleStartAction} message BattleStartAction
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        BattleStartAction.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.fighterEid = 0;
+                object.battleEid = 0;
+            }
+            if (message.fighterEid != null && message.hasOwnProperty("fighterEid"))
+                object.fighterEid = message.fighterEid;
+            if (message.battleEid != null && message.hasOwnProperty("battleEid"))
+                object.battleEid = message.battleEid;
+            return object;
+        };
+
+        /**
+         * Converts this BattleStartAction to JSON.
+         * @function toJSON
+         * @memberof world.BattleStartAction
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        BattleStartAction.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for BattleStartAction
+         * @function getTypeUrl
+         * @memberof world.BattleStartAction
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        BattleStartAction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/world.BattleStartAction";
+        };
+
+        return BattleStartAction;
+    })();
+
     world.BattleSkillAction = (function() {
 
         /**
@@ -27214,6 +27441,7 @@ $root.world = (function() {
          * @property {world.IAddEntityAction|null} [addEntity] EntityAction addEntity
          * @property {world.IDelEntityAction|null} [delEntity] EntityAction delEntity
          * @property {world.IMoveAction|null} [move] EntityAction move
+         * @property {world.IBattleStartAction|null} [battleStart] EntityAction battleStart
          * @property {world.IBattleSkillAction|null} [battleSkill] EntityAction battleSkill
          * @property {world.IBattleAddBuffAction|null} [battleAddBuff] EntityAction battleAddBuff
          * @property {world.IBattleDelBuffAction|null} [battleDelBuff] EntityAction battleDelBuff
@@ -27267,6 +27495,14 @@ $root.world = (function() {
          * @instance
          */
         EntityAction.prototype.move = null;
+
+        /**
+         * EntityAction battleStart.
+         * @member {world.IBattleStartAction|null|undefined} battleStart
+         * @memberof world.EntityAction
+         * @instance
+         */
+        EntityAction.prototype.battleStart = null;
 
         /**
          * EntityAction battleSkill.
@@ -27342,6 +27578,8 @@ $root.world = (function() {
                 $root.world.MoveAction.encode(message.move, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
             if (message.battleSkill != null && Object.hasOwnProperty.call(message, "battleSkill"))
                 $root.world.BattleSkillAction.encode(message.battleSkill, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+            if (message.battleStart != null && Object.hasOwnProperty.call(message, "battleStart"))
+                $root.world.BattleStartAction.encode(message.battleStart, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
             if (message.battleAddBuff != null && Object.hasOwnProperty.call(message, "battleAddBuff"))
                 $root.world.BattleAddBuffAction.encode(message.battleAddBuff, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
             if (message.battleDelBuff != null && Object.hasOwnProperty.call(message, "battleDelBuff"))
@@ -27398,6 +27636,10 @@ $root.world = (function() {
                     }
                 case 12: {
                         message.move = $root.world.MoveAction.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 21: {
+                        message.battleStart = $root.world.BattleStartAction.decode(reader, reader.uint32());
                         break;
                     }
                 case 20: {
@@ -27473,6 +27715,11 @@ $root.world = (function() {
                 if (error)
                     return "move." + error;
             }
+            if (message.battleStart != null && message.hasOwnProperty("battleStart")) {
+                var error = $root.world.BattleStartAction.verify(message.battleStart);
+                if (error)
+                    return "battleStart." + error;
+            }
             if (message.battleSkill != null && message.hasOwnProperty("battleSkill")) {
                 var error = $root.world.BattleSkillAction.verify(message.battleSkill);
                 if (error)
@@ -27530,6 +27777,11 @@ $root.world = (function() {
                     throw TypeError(".world.EntityAction.move: object expected");
                 message.move = $root.world.MoveAction.fromObject(object.move);
             }
+            if (object.battleStart != null) {
+                if (typeof object.battleStart !== "object")
+                    throw TypeError(".world.EntityAction.battleStart: object expected");
+                message.battleStart = $root.world.BattleStartAction.fromObject(object.battleStart);
+            }
             if (object.battleSkill != null) {
                 if (typeof object.battleSkill !== "object")
                     throw TypeError(".world.EntityAction.battleSkill: object expected");
@@ -27577,6 +27829,7 @@ $root.world = (function() {
                 object.delEntity = null;
                 object.move = null;
                 object.battleSkill = null;
+                object.battleStart = null;
                 object.battleAddBuff = null;
                 object.battleDelBuff = null;
                 object.battleStop = null;
@@ -27592,6 +27845,8 @@ $root.world = (function() {
                 object.move = $root.world.MoveAction.toObject(message.move, options);
             if (message.battleSkill != null && message.hasOwnProperty("battleSkill"))
                 object.battleSkill = $root.world.BattleSkillAction.toObject(message.battleSkill, options);
+            if (message.battleStart != null && message.hasOwnProperty("battleStart"))
+                object.battleStart = $root.world.BattleStartAction.toObject(message.battleStart, options);
             if (message.battleAddBuff != null && message.hasOwnProperty("battleAddBuff"))
                 object.battleAddBuff = $root.world.BattleAddBuffAction.toObject(message.battleAddBuff, options);
             if (message.battleDelBuff != null && message.hasOwnProperty("battleDelBuff"))

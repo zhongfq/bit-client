@@ -176,7 +176,16 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
     }
 
     private _delEntity(eid: number) {
-        this.ecs.removeEntity(eid);
+        const entity = this.ecs.getEntity(eid);
+        if (entity) {
+            const troop = entity.getComponent(TroopComponent);
+            if (troop) {
+                troop.soldiers.forEach((solider) => {
+                    this.ecs.removeEntity(solider.eid);
+                });
+            }
+            this.ecs.removeEntity(eid);
+        }
     }
 
     private _moveEntity(cmd: proto.world.MoveAction) {

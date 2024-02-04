@@ -34,7 +34,6 @@ export class TroopSystem extends ecs.System {
                         api.stopMove(movement);
                     }
                 } else if (solider.order === SoliderOrder.MOVE) {
-                    // console.log("------------------------ calc");
                     const leaderTroop = this.ecs.getComponent(solider.leader, TroopComponent)!;
                     const leaderMovement = leaderTroop.getComponent(MovementComponent)!;
                     const transform = solider.getComponent(TransformComponent)!;
@@ -50,7 +49,6 @@ export class TroopSystem extends ecs.System {
                         const rad = Math.atan2(p1.z - p0.z, p1.x - p0.x);
                         const degree = (rad * 180) / Math.PI;
                         const velocity = distance / (TroopSystem.TICK / 1000) / Tilemap.RATE;
-                        console.log("move:", degree, velocity);
                         api.startMove(
                             movement,
                             degree,

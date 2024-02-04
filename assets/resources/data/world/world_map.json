@@ -1,14 +1,390 @@
 {
-    "101": {
-        "battle_mode": 3,
-        "battle_type": 2,
-        "expired_sec": 120,
-        "id": 101
+    "maps": {
+        "101": {
+            "battle_mode": 3,
+            "battle_type": 2,
+            "expired_sec": 120,
+            "id": 101
+        },
+        "102": {
+            "battle_mode": 1,
+            "battle_type": 2,
+            "expired_sec": 120,
+            "id": 102
+        }
     },
-    "102": {
-        "battle_mode": 1,
-        "battle_type": 2,
-        "expired_sec": 120,
-        "id": 102
+    "states": {
+        "1": {
+            "id": 1
+        },
+        "2": {
+            "id": 2
+        },
+        "3": {
+            "id": 3
+        },
+        "4": {
+            "id": 4
+        },
+        "5": {
+            "id": 5
+        },
+        "6": {
+            "id": 6
+        },
+        "101": {
+            "aid": 1,
+            "id": 101,
+            "next_state": 102,
+            "pass_cond": [
+                {
+                    "gold": 100
+                }
+            ]
+        },
+        "102": {
+            "aid": 1,
+            "id": 102,
+            "next_state": 103,
+            "pass_cond": [
+                {
+                    "gold": 200
+                }
+            ]
+        },
+        "103": {
+            "aid": 1,
+            "id": 103,
+            "next_state": 104,
+            "pass_cond": [
+                {
+                    "gold": 300
+                }
+            ]
+        },
+        "104": {
+            "aid": 1,
+            "id": 104,
+            "next_state": 105,
+            "pass_cond": [
+                {
+                    "gold": 400
+                }
+            ]
+        },
+        "105": {
+            "aid": 1,
+            "id": 105,
+            "next_state": 106,
+            "pass_cond": [
+                {
+                    "gold": 500
+                }
+            ]
+        },
+        "106": {
+            "aid": 1,
+            "id": 106,
+            "pass_cond": [
+                {
+                    "gold": 600
+                }
+            ]
+        },
+        "201": {
+            "aid": 2,
+            "id": 201,
+            "next_state": 202,
+            "pass_cond": [
+                {
+                    "gold": 100
+                }
+            ]
+        },
+        "202": {
+            "aid": 2,
+            "id": 202,
+            "next_state": 203,
+            "pass_cond": [
+                {
+                    "gold": 200
+                }
+            ]
+        },
+        "203": {
+            "aid": 2,
+            "id": 203,
+            "next_state": 204,
+            "pass_cond": [
+                {
+                    "gold": 300
+                }
+            ]
+        },
+        "204": {
+            "aid": 2,
+            "id": 204,
+            "next_state": 205,
+            "pass_cond": [
+                {
+                    "gold": 400
+                }
+            ]
+        },
+        "205": {
+            "aid": 2,
+            "id": 205,
+            "next_state": 206,
+            "pass_cond": [
+                {
+                    "gold": 500
+                }
+            ]
+        },
+        "206": {
+            "aid": 2,
+            "id": 206,
+            "pass_cond": [
+                {
+                    "gold": 600
+                }
+            ]
+        },
+        "301": {
+            "aid": 3,
+            "id": 301,
+            "next_state": 302,
+            "pass_cond": [
+                {
+                    "gold": 100
+                }
+            ]
+        },
+        "302": {
+            "aid": 3,
+            "id": 302,
+            "next_state": 303,
+            "pass_cond": [
+                {
+                    "gold": 200
+                }
+            ]
+        },
+        "303": {
+            "aid": 3,
+            "id": 303,
+            "next_state": 304,
+            "pass_cond": [
+                {
+                    "gold": 300
+                }
+            ]
+        },
+        "304": {
+            "aid": 3,
+            "id": 304,
+            "next_state": 305,
+            "pass_cond": [
+                {
+                    "gold": 400
+                }
+            ]
+        },
+        "305": {
+            "aid": 3,
+            "id": 305,
+            "next_state": 306,
+            "pass_cond": [
+                {
+                    "gold": 500
+                }
+            ]
+        },
+        "306": {
+            "aid": 3,
+            "id": 306,
+            "pass_cond": [
+                {
+                    "gold": 600
+                }
+            ]
+        },
+        "401": {
+            "aid": 4,
+            "id": 401,
+            "next_state": 402,
+            "pass_cond": [
+                {
+                    "gold": 100
+                }
+            ]
+        },
+        "402": {
+            "aid": 4,
+            "id": 402,
+            "next_state": 403,
+            "pass_cond": [
+                {
+                    "gold": 200
+                }
+            ]
+        },
+        "403": {
+            "aid": 4,
+            "id": 403,
+            "next_state": 404,
+            "pass_cond": [
+                {
+                    "gold": 300
+                }
+            ]
+        },
+        "404": {
+            "aid": 4,
+            "id": 404,
+            "next_state": 405,
+            "pass_cond": [
+                {
+                    "gold": 400
+                }
+            ]
+        },
+        "405": {
+            "aid": 4,
+            "id": 405,
+            "next_state": 406,
+            "pass_cond": [
+                {
+                    "gold": 500
+                }
+            ]
+        },
+        "406": {
+            "aid": 4,
+            "id": 406,
+            "pass_cond": [
+                {
+                    "gold": 600
+                }
+            ]
+        },
+        "501": {
+            "aid": 5,
+            "id": 501,
+            "next_state": 502,
+            "pass_cond": [
+                {
+                    "gold": 100
+                }
+            ]
+        },
+        "502": {
+            "aid": 5,
+            "id": 502,
+            "next_state": 503,
+            "pass_cond": [
+                {
+                    "gold": 200
+                }
+            ]
+        },
+        "503": {
+            "aid": 5,
+            "id": 503,
+            "next_state": 504,
+            "pass_cond": [
+                {
+                    "gold": 300
+                }
+            ]
+        },
+        "504": {
+            "aid": 5,
+            "id": 504,
+            "next_state": 505,
+            "pass_cond": [
+                {
+                    "gold": 400
+                }
+            ]
+        },
+        "505": {
+            "aid": 5,
+            "id": 505,
+            "next_state": 506,
+            "pass_cond": [
+                {
+                    "gold": 500
+                }
+            ]
+        },
+        "506": {
+            "aid": 5,
+            "id": 506,
+            "pass_cond": [
+                {
+                    "gold": 600
+                }
+            ]
+        },
+        "601": {
+            "aid": 6,
+            "id": 601,
+            "next_state": 602,
+            "pass_cond": [
+                {
+                    "gold": 100
+                }
+            ]
+        },
+        "602": {
+            "aid": 6,
+            "id": 602,
+            "next_state": 603,
+            "pass_cond": [
+                {
+                    "gold": 200
+                }
+            ]
+        },
+        "603": {
+            "aid": 6,
+            "id": 603,
+            "next_state": 604,
+            "pass_cond": [
+                {
+                    "gold": 300
+                }
+            ]
+        },
+        "604": {
+            "aid": 6,
+            "id": 604,
+            "next_state": 605,
+            "pass_cond": [
+                {
+                    "gold": 400
+                }
+            ]
+        },
+        "605": {
+            "aid": 6,
+            "id": 605,
+            "next_state": 606,
+            "pass_cond": [
+                {
+                    "gold": 500
+                }
+            ]
+        },
+        "606": {
+            "aid": 6,
+            "id": 606,
+            "pass_cond": [
+                {
+                    "gold": 600
+                }
+            ]
+        }
     }
 }

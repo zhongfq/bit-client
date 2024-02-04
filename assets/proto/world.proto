@@ -195,6 +195,10 @@ message MoveAction {
     float degree = 6;
 }
 
+message BattleStartAction {
+    uint32 fighter_eid = 1;
+    uint32 battle_eid = 2;
+}
 
 message BattleSkillAction {
     uint32 src_eid = 1;
@@ -240,6 +244,7 @@ message EntityAction {
     DelEntityAction del_entity = 11;
     MoveAction move = 12;
 
+    BattleStartAction battle_start = 21;
     BattleSkillAction battle_skill = 20;
     BattleAddBuffAction battle_add_buff = 22;
     BattleDelBuffAction battle_del_buff = 23;

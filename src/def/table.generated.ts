@@ -141,11 +141,18 @@ export interface GeneratedRandomNameRow {
     femalename?: string;
 }
 
-export interface GeneratedWorldMapRow {
+export interface GeneratedWorldMapMapsRow {
     id: number;
     battle_type: number;
     battle_mode: number;
     expired_sec: number;
+}
+
+export interface GeneratedWorldMapStatesRow {
+    id: number;
+    aid?: number;
+    next_state?: number;
+    pass_cond?: any;
 }
 
 export interface GeneratedBattleDemoRow {
