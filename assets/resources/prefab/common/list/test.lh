@@ -1,0 +1,45 @@
+{
+  "_$ver": 1,
+  "_$id": "eagjnijp",
+  "_$type": "Box",
+  "name": "Box",
+  "width": 400,
+  "height": 400,
+  "_$child": [
+    {
+      "_$id": "51iw4jfn",
+      "_$type": "Box",
+      "name": "Box",
+      "x": 42,
+      "y": 48,
+      "width": 315,
+      "height": 300,
+      "bgColor": "rgba(255, 255, 255, 1)",
+      "_$child": [
+        {
+          "_$id": "3i51cfdl",
+          "_$prefab": "8cbb7480-4db0-4435-952d-312638b0699c",
+          "name": "list",
+          "active": true,
+          "x": 0,
+          "y": 0,
+          "visible": true,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "bottom": 0,
+          "bgColor": null,
+          "_$comp": [
+            {
+              "_$override": "0749476e-6012-4b4b-bd97-ae10d104891b",
+              "cellPrefab": {
+                "_$uuid": "6669a2c4-94a0-4dc2-a23f-3b83a3823fc1",
+                "_$type": "Prefab"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

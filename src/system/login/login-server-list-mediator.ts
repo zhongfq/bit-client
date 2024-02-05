@@ -21,7 +21,10 @@ export class LoginServerListMediator extends Mediator {
         }
     }
     itemUpdate(cell: any, index: number) {
-        cell.getChildByName("labelName").text = this.owner.tlServerList[index].server_name;
+        cell.getChildByName("labelName").text =
+            this.owner.tlServerList[index].server_name +
+            "    " +
+            this.owner.tlServerList[index].state_desc;
     }
     updateServerList() {
         this.owner.listServer.array = this.owner.tlServerList;
