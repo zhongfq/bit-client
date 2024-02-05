@@ -63,6 +63,8 @@ export const opcode = {
     profile: {
         c2s_load: 0x1A00,
         s2c_load: 0x1A01,
+        c2s_create_role: 0x1A02,
+        s2c_create_role: 0x1A03,
         notify_profile: 0x1A90,
     },
     shop: {
@@ -88,8 +90,6 @@ export const opcode = {
         s2c_login: 0x1001,
         c2s_random_name: 0x1002,
         s2c_random_name: 0x1003,
-        c2s_create_role: 0x1004,
-        s2c_create_role: 0x1005,
         c2s_ping: 0x1006,
         s2c_ping: 0x1007,
         c2s_gm: 0x1008,
@@ -155,6 +155,9 @@ export const enum errcode {
     INVALID_SHOP_ID = 0x1019,
     NUM_ERROR = 0x101A,
     COST_NOT_ENOUGH = 0x101B,
+    HAS_CRAP = 0x101C,
+    NAME_REPEATED = 0x101D,
+    GENDER_ERROR = 0x101E,
     ARGS_ERROR = 0xA000,
     BODY_ERROR = 0xA001,
     AUTH_FAIL = 0xA002,
@@ -195,6 +198,9 @@ export const errname = {
     0x1019: "INVALID_SHOP_ID",
     0x101A: "NUM_ERROR",
     0x101B: "COST_NOT_ENOUGH",
+    0x101C: "HAS_CRAP",
+    0x101D: "NAME_REPEATED",
+    0x101E: "GENDER_ERROR",
     0xA000: "ARGS_ERROR",
     0xA001: "BODY_ERROR",
     0xA002: "AUTH_FAIL",
@@ -235,6 +241,9 @@ export const errmsg = {
     0x1019: "商店类型错误",
     0x101A: "数量错误",
     0x101B: "资源不足",
+    0x101C: "包含敏感词",
+    0x101D: "昵称重复",
+    0x101E: "性别错误",
     0xA000: "参数错误",
     0xA001: "body错误",
     0xA002: "登录过期",
@@ -474,6 +483,18 @@ export const registerProtocols = () => {
         decode: proto.profile.s2c_load.decode,
     });
     register({
+        op: opcode.profile.c2s_create_role,
+        typeURL: proto.profile.c2s_create_role.getTypeUrl(),
+        encode: proto.profile.c2s_create_role.encode,
+        decode: proto.profile.c2s_create_role.decode,
+    });
+    register({
+        op: opcode.profile.s2c_create_role,
+        typeURL: proto.profile.s2c_create_role.getTypeUrl(),
+        encode: proto.profile.s2c_create_role.encode,
+        decode: proto.profile.s2c_create_role.decode,
+    });
+    register({
         op: opcode.profile.notify_profile,
         typeURL: proto.profile.notify_profile.getTypeUrl(),
         encode: proto.profile.notify_profile.encode,
@@ -574,18 +595,6 @@ export const registerProtocols = () => {
         typeURL: proto.user.s2c_random_name.getTypeUrl(),
         encode: proto.user.s2c_random_name.encode,
         decode: proto.user.s2c_random_name.decode,
-    });
-    register({
-        op: opcode.user.c2s_create_role,
-        typeURL: proto.user.c2s_create_role.getTypeUrl(),
-        encode: proto.user.c2s_create_role.encode,
-        decode: proto.user.c2s_create_role.decode,
-    });
-    register({
-        op: opcode.user.s2c_create_role,
-        typeURL: proto.user.s2c_create_role.getTypeUrl(),
-        encode: proto.user.s2c_create_role.encode,
-        decode: proto.user.s2c_create_role.decode,
     });
     register({
         op: opcode.user.c2s_ping,

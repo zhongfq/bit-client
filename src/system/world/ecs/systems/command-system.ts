@@ -49,7 +49,10 @@ const formation: IVector3Like[] = [
 
 const attackFormation: IVector3Like[] = [];
 
-const PREFAB_SOLDIER = "resources/prefab/battle/roles/mc03.lh";
+const PREFAB_SOLDIERS = [
+    "resources/prefab/battle/roles/mc03.lh",
+    "resources/prefab/battle/roles/mc04.lh",
+];
 
 export class CommandSystem extends ecs.System implements IBehaviorContext {
     constructor(readonly context: WorldContext) {
@@ -72,6 +75,7 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
     private _onNotifyRoles(notify: proto.world.notify_roles) {}
 
     private _onNotifyEntities(notify: proto.world.notify_entities) {
+        notify.enterList.sort((a, b) => a.eid! - b.eid!);
         for (const cmd of notify.enterList) {
             this._addEntity(cmd as proto.world.Entity);
         }
@@ -126,6 +130,7 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
             const owner = entity.addComponent(OwnerComponent);
             const data = cmd.owner as proto.world.OwnerComponent;
             owner.rid = data.rid;
+            owner.aid = data.aid;
             owner.name = data.roleName;
         }
 
@@ -282,8 +287,14 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
     private _stopBattle(action: proto.world.BattleStopAction) {
         const entity = this.ecs.getEntity(action.fighterEid);
         if (entity) {
-            const animation = entity.getComponent(AnimationComponent);
-            if (animation?.animator) {
+            const animation = entity.getComponent(AnimationComponent)!;
+            const troop = entity.getComponent(TroopComponent)!;
+            troop.attackTarget = 0;
+            troop.soldiers.forEach((soldier) => {
+                soldier.attack.target = null;
+                soldier.order = SoliderOrder.IDLE;
+            });
+            if (animation.animator) {
                 const movement = entity.getComponent(MovementComponent)!;
                 this._clearTrigger(animation.animator, AnimatorTrigger.ATTACK);
                 if (movement.type === MovementType.NONE) {
@@ -315,16 +326,29 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
         }
     }
 
+    private _findAttackTarget(battle: BattleComponent, fightEid: number) {
+        const fighterOwner = this.ecs.getComponent(fightEid, OwnerComponent);
+        if (fighterOwner) {
+            for (let i = 0; i < battle.fighterEids.length - 1; i++) {
+                const target = this.ecs.getComponent(battle.fighterEids[i], OwnerComponent);
+                if (target && target.aid !== fighterOwner.aid) {
+                    return target.getComponent(TroopComponent)!;
+                }
+            }
+        }
+        return null;
+    }
+
     private _joinBattle(battleEid: number, fighterEid: number) {
         const battle = this.ecs.getComponent(battleEid, BattleComponent);
-        const entity = this.ecs.getEntity(fighterEid);
+        const fighter = this.ecs.getComponent(fighterEid, TroopComponent);
 
         if (!battle) {
             console.warn(`join battle: battle not found: ${battleEid}`);
             return;
         }
 
-        if (!entity) {
+        if (!fighter) {
             console.warn(`join battle: entity not found: ${fighterEid}`);
             return;
         }
@@ -335,11 +359,46 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
         }
 
         battle.fighterEids.push(fighterEid);
-        if (battle.fighterEids.length == 2) {
-            console.log("start battle in battle:", battle.fighterEids);
-        } else if (battle.fighterEids.length > 2) {
+        if (battle.fighterEids.length > 1) {
+            const target = this._findAttackTarget(battle, fighterEid);
+            if (target && target.soldiers.length && fighter.soldiers.length) {
+                this._fight(fighter, target);
+            }
         }
-        console.log("in battle:", battle.fighterEids);
+    }
+
+    private _fight(troop1: TroopComponent, troop2: TroopComponent) {
+        if (troop2.attackTarget) {
+        } else {
+            troop1.attackTarget = troop2.eid;
+            troop2.attackTarget = troop1.eid;
+            const transform1 = troop1.getComponent(TransformComponent)!;
+            const transform2 = troop2.getComponent(TransformComponent)!;
+            const x = (transform1.position.x + transform2.position.x) / 2.5;
+            const z = (transform1.position.z + transform2.position.z) / 2.5;
+            const count = Math.max(troop1.soldiers.length, troop2.soldiers.length);
+            for (let i = 0; i < count; i++) {
+                const sx = x + (Math.random() - 0.5) * Tilemap.RATE * 1.2;
+                const sz = z + (Math.random() - 0.5) * Tilemap.RATE * 1.2;
+                const solider1 = troop1.soldiers[i] || troop1.soldiers[0];
+                const solider2 = troop2.soldiers[i] || troop2.soldiers[0];
+                const rad = Math.random() * Math.PI;
+                const px = Math.cos(rad) * 0.3 * Tilemap.RATE;
+                const pz = Math.sin(rad) * 0.3 * Tilemap.RATE;
+                if (!solider1.attack.target) {
+                    solider1.attack.target = solider2.eid;
+                    solider1.attack.position.x = sx + px;
+                    solider1.attack.position.z = sz + pz;
+                    solider1.order = SoliderOrder.RUSH;
+                }
+                if (!solider2.attack.target) {
+                    solider2.attack.target = solider1.eid;
+                    solider2.attack.position.x = sx - px;
+                    solider2.attack.position.z = sz - pz;
+                    solider2.order = SoliderOrder.RUSH;
+                }
+            }
+        }
     }
 
     private _setRotation(
@@ -378,6 +437,7 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
     // 加载小兵
     private _loadSoldiers(troop: TroopComponent) {
         const leaderTransform = troop.getComponent(TransformComponent)!;
+        const aid = troop.getComponent(OwnerComponent)!.aid;
         for (let i = 0; i < formation.length; i++) {
             const offset = formation[i];
             const entity = this.ecs.createEntity();
@@ -388,7 +448,7 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
             transform.flag |= TransformComponent.POSITION;
 
             const animation = entity.addComponent(AnimationComponent);
-            animation.path = PREFAB_SOLDIER;
+            animation.path = PREFAB_SOLDIERS[aid % PREFAB_SOLDIERS.length];
 
             const movement = entity.addComponent(MovementComponent);
             movement.positionInterpolation.rate = InterpolationRate.SOLDIER_POSITION;
@@ -398,21 +458,54 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
             soldier.leader = troop.eid;
             soldier.offset = offset;
             transform.position.cloneTo(soldier.destination);
-            troop.soldiers.set(entity.eid, soldier);
+            troop.soldiers.push(soldier);
         }
     }
 
     private _startMoveSoldiers(troop: TroopComponent) {
         const leaderMovement = troop.getComponent(MovementComponent)!;
         troop.soldiers.forEach((soldier) => {
-            soldier.order = SoliderOrder.MOVE;
+            if (soldier.order == SoliderOrder.IDLE) {
+                soldier.order = SoliderOrder.MOVE;
+            }
         });
     }
 
     private _stopMoveSoldiers(troop: TroopComponent) {
         troop.soldiers.forEach((soldier) => {
-            soldier.order = SoliderOrder.IDLE;
+            if (soldier.order == SoliderOrder.MOVE) {
+                soldier.order = SoliderOrder.IDLE;
+            }
         });
+    }
+
+    soldierFight(soldier: SoldierComponent) {
+        if (soldier.attack.target) {
+            this._towardToTarget(soldier.eid, soldier.attack.target);
+            const animation = soldier.getComponent(AnimationComponent);
+            if (animation?.animator) {
+                this._setTrigger(animation.animator, AnimatorTrigger.ATTACK);
+            }
+        }
+    }
+
+    calcSoldierPositionImmediately(
+        troop: TroopComponent,
+        solider: SoldierComponent,
+        out: Laya.Vector3
+    ) {
+        const animation = troop.getComponent(AnimationComponent)!;
+        const transform = troop.getComponent(TransformComponent)!;
+        if (animation.view) {
+            out.x = solider.offset.x;
+            out.y = solider.offset.y;
+            out.z = solider.offset.z;
+            animation.view.transform.localToGlobal(out, out);
+        } else {
+            out.x = transform.position.x + solider.offset.x;
+            out.y = transform.position.y + solider.offset.y;
+            out.z = transform.position.z + solider.offset.z;
+        }
     }
 
     calcSoldierPosition(troop: TroopComponent, solider: SoldierComponent, out: Laya.Vector3) {

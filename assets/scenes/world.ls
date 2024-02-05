@@ -30,7 +30,6 @@
           "_$type": "Material"
         }
       },
-      "ambientMode": 0,
       "ambientColor": {
         "_$type": "Color",
         "r": 0.424308,
@@ -106,14 +105,11 @@
             {
               "_$type": "DirectionLightCom",
               "intensity": 1,
-              "lightmapBakedType": 0,
-              "shadowMode": 0,
               "shadowStrength": 0.506,
               "shadowDistance": 50,
               "shadowDepthBias": 0,
               "shadowNormalBias": 0,
               "shadowNearPlane": 0.1,
-              "shadowCascadesMode": 0,
               "strength": null,
               "angle": null,
               "maxBounces": null
@@ -179,14 +175,14 @@
           "_$id": "5kzv21t2",
           "_$prefab": "e9170845-af71-406a-89bb-49f851b9d995",
           "name": "mc04",
-          "active": false,
+          "active": true,
           "layer": 0,
           "transform": {
             "localPosition": {
               "_$type": "Vector3",
-              "x": 0.10861278377299266,
+              "x": -1.2823338158946402,
               "y": 0,
-              "z": -1.7401549535633323
+              "z": 0
             },
             "localRotation": {
               "_$type": "Quaternion",

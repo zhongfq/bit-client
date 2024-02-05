@@ -1,5 +1,9 @@
 export const CommonConf = {
     DAILY_RENAME_AMOUNT: 2,
+    GENDER: {
+        FEMALE: 2,
+        MALE: 1,
+    },
     SERVER_STATE: {
         BUSY: 4,
         CLOSED: 1,

@@ -131,7 +131,7 @@ export namespace ecs {
                     this._systems.forEach((sys) => sys.onRemoveComponent?.(value));
                 });
                 components.forEach((value) => {
-                    this.__removeComponent(entity, value.constructor as Constructor<any>);
+                    this.__removeComponent(entity.eid, value.constructor as Constructor<any>);
                 });
                 this._systems.forEach((sys) => sys.onRemoveEntity?.(entity));
                 this._entities.delete(eid);
@@ -169,17 +169,11 @@ export namespace ecs {
         }
 
         getComponent<T extends Component>(eid: number, cls: Constructor<T>) {
-            const entity = this.getEntity(eid);
-            if (entity) {
-                return this.__getComponent(entity, cls);
-            }
+            return this.__getComponent(eid, cls);
         }
 
         removeComponent<T extends Component>(eid: number, cls: Constructor<T>) {
-            const entity = this.getEntity(eid);
-            if (entity) {
-                return this.__removeComponent(entity, cls);
-            }
+            return this.__removeComponent(eid, cls);
         }
 
         // internal use
@@ -198,23 +192,23 @@ export namespace ecs {
             return component as T;
         }
 
-        __hasComponent<T extends Component>(entity: Entity, cls: Constructor<T>) {
+        __hasComponent<T extends Component>(eid: number, cls: Constructor<T>) {
             const components = this._components.get(cls);
-            return components?.has(entity.eid) ?? false;
+            return components?.has(eid) ?? false;
         }
 
-        __getComponent<T extends Component>(entity: Entity, cls: Constructor<T>) {
+        __getComponent<T extends Component>(eid: number, cls: Constructor<T>) {
             const components = this._components.get(cls);
-            return components?.get(entity.eid) as T | undefined;
+            return components?.get(eid) as T | undefined;
         }
 
-        __removeComponent<T extends Component>(entity: Entity, cls: Constructor<T>) {
+        __removeComponent<T extends Component>(eid: number, cls: Constructor<T>) {
             const components = this._components.get(cls);
-            const component = components?.get(entity.eid);
+            const component = components?.get(eid);
             if (component) {
                 this._systems.forEach((sys) => sys.onRemoveComponent?.(component));
             }
-            return components?.delete(entity.eid);
+            return components?.delete(eid);
         }
 
         __getComponents(entity: Entity) {
@@ -287,15 +281,15 @@ export namespace ecs {
         }
 
         hasComponent<T extends Component>(cls: Constructor<T>): boolean {
-            return this.ecs.__hasComponent(this, cls);
+            return this.ecs.__hasComponent(this._eid, cls);
         }
 
         removeComponent<T extends Component>(cls: Constructor<T>) {
-            return this.ecs.__removeComponent(this, cls);
+            return this.ecs.__removeComponent(this._eid, cls);
         }
 
         getComponent<T extends Component>(cls: Constructor<T>): T | undefined {
-            return this.ecs.__getComponent(this, cls);
+            return this.ecs.__getComponent(this._eid, cls);
         }
 
         getComponents(): Component[] {

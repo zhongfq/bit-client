@@ -10,6 +10,15 @@ message ProfileInfo {
     uint32 head_img_id = 5;
 }
 
+message c2s_create_role {
+    string name = 1; // 昵称
+    uint32 gender = 2; // 性别
+}
+message s2c_create_role {
+    uint32 err = 1; // OK, HAS_CRAB, NAME_REPEATED, GENDER_ERROR
+    ProfileInfo profile = 2;
+}
+
 message c2s_load {
 }
 message s2c_load {

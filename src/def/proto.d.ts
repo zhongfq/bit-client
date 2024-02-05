@@ -4532,6 +4532,212 @@ declare namespace proto {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
+        /** Properties of a c2s_create_role. */
+        interface Ic2s_create_role {
+
+            /** c2s_create_role name */
+            name?: (string|null);
+
+            /** c2s_create_role gender */
+            gender?: (number|null);
+        }
+
+        /** Represents a c2s_create_role. */
+        class c2s_create_role implements Ic2s_create_role {
+
+            /**
+             * Constructs a new c2s_create_role.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: profile.Ic2s_create_role);
+
+            /** c2s_create_role name. */
+            public name: string;
+
+            /** c2s_create_role gender. */
+            public gender: number;
+
+            /**
+             * Creates a new c2s_create_role instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns c2s_create_role instance
+             */
+            public static create(properties?: profile.Ic2s_create_role): profile.c2s_create_role;
+
+            /**
+             * Encodes the specified c2s_create_role message. Does not implicitly {@link profile.c2s_create_role.verify|verify} messages.
+             * @param message c2s_create_role message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: profile.Ic2s_create_role, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified c2s_create_role message, length delimited. Does not implicitly {@link profile.c2s_create_role.verify|verify} messages.
+             * @param message c2s_create_role message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: profile.Ic2s_create_role, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a c2s_create_role message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns c2s_create_role
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): profile.c2s_create_role;
+
+            /**
+             * Decodes a c2s_create_role message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns c2s_create_role
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): profile.c2s_create_role;
+
+            /**
+             * Verifies a c2s_create_role message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a c2s_create_role message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns c2s_create_role
+             */
+            public static fromObject(object: { [k: string]: any }): profile.c2s_create_role;
+
+            /**
+             * Creates a plain object from a c2s_create_role message. Also converts values to other types if specified.
+             * @param message c2s_create_role
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: profile.c2s_create_role, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this c2s_create_role to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for c2s_create_role
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a s2c_create_role. */
+        interface Is2c_create_role {
+
+            /** s2c_create_role err */
+            err?: (number|null);
+
+            /** s2c_create_role profile */
+            profile?: (profile.IProfileInfo|null);
+        }
+
+        /** Represents a s2c_create_role. */
+        class s2c_create_role implements Is2c_create_role {
+
+            /**
+             * Constructs a new s2c_create_role.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: profile.Is2c_create_role);
+
+            /** s2c_create_role err. */
+            public err: number;
+
+            /** s2c_create_role profile. */
+            public profile?: (profile.IProfileInfo|null);
+
+            /**
+             * Creates a new s2c_create_role instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns s2c_create_role instance
+             */
+            public static create(properties?: profile.Is2c_create_role): profile.s2c_create_role;
+
+            /**
+             * Encodes the specified s2c_create_role message. Does not implicitly {@link profile.s2c_create_role.verify|verify} messages.
+             * @param message s2c_create_role message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: profile.Is2c_create_role, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified s2c_create_role message, length delimited. Does not implicitly {@link profile.s2c_create_role.verify|verify} messages.
+             * @param message s2c_create_role message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: profile.Is2c_create_role, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a s2c_create_role message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns s2c_create_role
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): profile.s2c_create_role;
+
+            /**
+             * Decodes a s2c_create_role message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns s2c_create_role
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): profile.s2c_create_role;
+
+            /**
+             * Verifies a s2c_create_role message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a s2c_create_role message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns s2c_create_role
+             */
+            public static fromObject(object: { [k: string]: any }): profile.s2c_create_role;
+
+            /**
+             * Creates a plain object from a s2c_create_role message. Also converts values to other types if specified.
+             * @param message s2c_create_role
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: profile.s2c_create_role, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this s2c_create_role to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for s2c_create_role
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** Properties of a c2s_load. */
         interface Ic2s_load {
         }
@@ -6948,206 +7154,6 @@ declare namespace proto {
 
             /**
              * Gets the default type url for s2c_random_name
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a c2s_create_role. */
-        interface Ic2s_create_role {
-
-            /** c2s_create_role name */
-            name?: (string|null);
-        }
-
-        /** Represents a c2s_create_role. */
-        class c2s_create_role implements Ic2s_create_role {
-
-            /**
-             * Constructs a new c2s_create_role.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: user.Ic2s_create_role);
-
-            /** c2s_create_role name. */
-            public name: string;
-
-            /**
-             * Creates a new c2s_create_role instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns c2s_create_role instance
-             */
-            public static create(properties?: user.Ic2s_create_role): user.c2s_create_role;
-
-            /**
-             * Encodes the specified c2s_create_role message. Does not implicitly {@link user.c2s_create_role.verify|verify} messages.
-             * @param message c2s_create_role message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: user.Ic2s_create_role, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified c2s_create_role message, length delimited. Does not implicitly {@link user.c2s_create_role.verify|verify} messages.
-             * @param message c2s_create_role message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: user.Ic2s_create_role, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a c2s_create_role message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns c2s_create_role
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): user.c2s_create_role;
-
-            /**
-             * Decodes a c2s_create_role message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns c2s_create_role
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): user.c2s_create_role;
-
-            /**
-             * Verifies a c2s_create_role message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a c2s_create_role message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns c2s_create_role
-             */
-            public static fromObject(object: { [k: string]: any }): user.c2s_create_role;
-
-            /**
-             * Creates a plain object from a c2s_create_role message. Also converts values to other types if specified.
-             * @param message c2s_create_role
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: user.c2s_create_role, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this c2s_create_role to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for c2s_create_role
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a s2c_create_role. */
-        interface Is2c_create_role {
-
-            /** s2c_create_role err */
-            err?: (number|null);
-
-            /** s2c_create_role role */
-            role?: (user.IRoleInfo|null);
-        }
-
-        /** Represents a s2c_create_role. */
-        class s2c_create_role implements Is2c_create_role {
-
-            /**
-             * Constructs a new s2c_create_role.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: user.Is2c_create_role);
-
-            /** s2c_create_role err. */
-            public err: number;
-
-            /** s2c_create_role role. */
-            public role?: (user.IRoleInfo|null);
-
-            /**
-             * Creates a new s2c_create_role instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns s2c_create_role instance
-             */
-            public static create(properties?: user.Is2c_create_role): user.s2c_create_role;
-
-            /**
-             * Encodes the specified s2c_create_role message. Does not implicitly {@link user.s2c_create_role.verify|verify} messages.
-             * @param message s2c_create_role message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: user.Is2c_create_role, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified s2c_create_role message, length delimited. Does not implicitly {@link user.s2c_create_role.verify|verify} messages.
-             * @param message s2c_create_role message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: user.Is2c_create_role, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a s2c_create_role message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns s2c_create_role
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): user.s2c_create_role;
-
-            /**
-             * Decodes a s2c_create_role message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns s2c_create_role
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): user.s2c_create_role;
-
-            /**
-             * Verifies a s2c_create_role message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a s2c_create_role message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns s2c_create_role
-             */
-            public static fromObject(object: { [k: string]: any }): user.s2c_create_role;
-
-            /**
-             * Creates a plain object from a s2c_create_role message. Also converts values to other types if specified.
-             * @param message s2c_create_role
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: user.s2c_create_role, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this s2c_create_role to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for s2c_create_role
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

@@ -280,3 +280,8 @@ export interface GeneratedShop2Row {
     sort_id?: number;
     open_id?: number;
 }
+
+export interface GeneratedEmojiRow {
+    id: number;
+    icon: string;
+}

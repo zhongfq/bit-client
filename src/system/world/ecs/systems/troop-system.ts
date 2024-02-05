@@ -28,35 +28,66 @@ export class TroopSystem extends ecs.System {
             this._time = currTimer;
             const api = this.ecs.getSystem(CommandSystem)!;
             this.ecs.getComponents(SoldierComponent).forEach((solider) => {
-                const movement = solider.getComponent(MovementComponent)!;
                 if (solider.order === SoliderOrder.IDLE) {
-                    if (movement.type !== MovementType.NONE) {
-                        api.stopMove(movement);
-                    }
+                    this._doIdle(solider);
                 } else if (solider.order === SoliderOrder.MOVE) {
-                    const leaderTroop = this.ecs.getComponent(solider.leader, TroopComponent)!;
-                    const leaderMovement = leaderTroop.getComponent(MovementComponent)!;
-                    const transform = solider.getComponent(TransformComponent)!;
-                    const p1 = tmpVector3;
-                    const p0 = transform.position;
-                    api.calcSoldierPosition(leaderTroop, solider, p1);
-                    const distance = Laya.Vector3.distance(p1, p0);
-                    if (distance == 0) {
-                        movement.speed.x *= 0.1;
-                        movement.speed.y *= 0.1;
-                        movement.speed.z *= 0.1;
-                    } else {
-                        const rad = Math.atan2(p1.z - p0.z, p1.x - p0.x);
-                        const degree = (rad * 180) / Math.PI;
-                        const velocity = distance / (TroopSystem.TICK / 1000) / Tilemap.RATE;
-                        api.startMove(
-                            movement,
-                            degree,
-                            Math.min(velocity, leaderMovement.velocity)
-                        );
-                    }
+                    this._doMove(solider);
+                } else if (solider.order === SoliderOrder.RUSH) {
+                    this._doRush(solider);
                 }
             });
+        }
+    }
+
+    private _doIdle(soldier: SoldierComponent) {
+        const movement = soldier.getComponent(MovementComponent)!;
+        const api = this.ecs.getSystem(CommandSystem)!;
+        if (movement.type !== MovementType.NONE) {
+            api.stopMove(movement);
+        }
+    }
+
+    private _doMove(soldier: SoldierComponent) {
+        const api = this.ecs.getSystem(CommandSystem)!;
+        const movement = soldier.getComponent(MovementComponent)!;
+        const leaderTroop = this.ecs.getComponent(soldier.leader, TroopComponent)!;
+        const leaderMovement = leaderTroop.getComponent(MovementComponent)!;
+        const transform = soldier.getComponent(TransformComponent)!;
+        const p1 = tmpVector3;
+        const p0 = transform.position;
+        api.calcSoldierPositionImmediately(leaderTroop, soldier, p1);
+        const distance = Laya.Vector3.distance(p1, p0);
+        if (distance == 0) {
+            movement.speed.x *= 0.1;
+            movement.speed.y *= 0.1;
+            movement.speed.z *= 0.1;
+        } else {
+            const rad = Math.atan2(p1.z - p0.z, p1.x - p0.x);
+            const degree = (rad * 180) / Math.PI;
+            const velocity = distance / (TroopSystem.TICK / 1000) / Tilemap.RATE;
+            // api.startMove(movement, degree, Math.min(velocity, leaderMovement.velocity));
+            api.startMove(movement, degree, Math.min(velocity, leaderMovement.velocity * 1.4));
+        }
+    }
+
+    private _doRush(soldier: SoldierComponent) {
+        const api = this.ecs.getSystem(CommandSystem)!;
+        const movement = soldier.getComponent(MovementComponent)!;
+        const transform = soldier.getComponent(TransformComponent)!;
+        const distance = Laya.Vector3.distance(transform.position, soldier.attack.position);
+        if (distance < 0.1) {
+            soldier.order = SoliderOrder.FIGHT;
+            api.soldierFight(soldier);
+        } else if (!movement.target) {
+            movement.target = Laya.Pool.obtain(Laya.Vector3);
+            soldier.attack.position.cloneTo(movement.target);
+            const rad = Math.atan2(
+                soldier.attack.position.z - transform.position.z,
+                soldier.attack.position.x - transform.position.x
+            );
+            const degree = (rad * 180) / Math.PI;
+            const velocity = distance / 1 / Tilemap.RATE;
+            api.startMove(movement, degree, velocity);
         }
     }
 }

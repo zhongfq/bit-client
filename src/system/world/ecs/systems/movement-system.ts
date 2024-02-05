@@ -83,8 +83,7 @@ export class MovementSystem extends ecs.System {
             }
             if (speed.x === 0 && speed.z === 0) {
                 movement.target = null;
-                if (movement.type !== MovementType.PATH) {
-                }
+                movement.type == MovementType.NONE;
             }
         }
     }

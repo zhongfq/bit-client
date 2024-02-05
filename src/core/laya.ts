@@ -55,4 +55,5 @@ Object.defineProperty(Laya.Vector2.prototype, "length", {
         const { x, y } = this as Laya.Vector2;
         return Math.sqrt(x * x + y * y);
     },
+    configurable: true,
 });

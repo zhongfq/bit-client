@@ -4,6 +4,7 @@ import { TrackVector3 } from "./movement-component";
 
 export class OwnerComponent extends ecs.Component {
     rid: number = 0;
+    aid: number = 0;
     name: string = "";
 }
 
@@ -35,7 +36,7 @@ export class SoldierComponent extends ecs.Component {
 }
 
 export class TroopComponent extends ecs.Component {
-    soldiers: Map<number, SoldierComponent> = new Map();
+    soldiers: SoldierComponent[] = [];
     // 主角的位置轨迹
     latestIndex: number = 0;
     positions: TrackVector3[] = [];

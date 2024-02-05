@@ -10306,6 +10306,465 @@ $root.profile = (function() {
         return ProfileInfo;
     })();
 
+    profile.c2s_create_role = (function() {
+
+        /**
+         * Properties of a c2s_create_role.
+         * @memberof profile
+         * @interface Ic2s_create_role
+         * @property {string|null} [name] c2s_create_role name
+         * @property {number|null} [gender] c2s_create_role gender
+         */
+
+        /**
+         * Constructs a new c2s_create_role.
+         * @memberof profile
+         * @classdesc Represents a c2s_create_role.
+         * @implements Ic2s_create_role
+         * @constructor
+         * @param {profile.Ic2s_create_role=} [properties] Properties to set
+         */
+        function c2s_create_role(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * c2s_create_role name.
+         * @member {string} name
+         * @memberof profile.c2s_create_role
+         * @instance
+         */
+        c2s_create_role.prototype.name = "";
+
+        /**
+         * c2s_create_role gender.
+         * @member {number} gender
+         * @memberof profile.c2s_create_role
+         * @instance
+         */
+        c2s_create_role.prototype.gender = 0;
+
+        /**
+         * Creates a new c2s_create_role instance using the specified properties.
+         * @function create
+         * @memberof profile.c2s_create_role
+         * @static
+         * @param {profile.Ic2s_create_role=} [properties] Properties to set
+         * @returns {profile.c2s_create_role} c2s_create_role instance
+         */
+        c2s_create_role.create = function create(properties) {
+            return new c2s_create_role(properties);
+        };
+
+        /**
+         * Encodes the specified c2s_create_role message. Does not implicitly {@link profile.c2s_create_role.verify|verify} messages.
+         * @function encode
+         * @memberof profile.c2s_create_role
+         * @static
+         * @param {profile.Ic2s_create_role} message c2s_create_role message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_create_role.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+            if (message.gender != null && Object.hasOwnProperty.call(message, "gender"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.gender);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified c2s_create_role message, length delimited. Does not implicitly {@link profile.c2s_create_role.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof profile.c2s_create_role
+         * @static
+         * @param {profile.Ic2s_create_role} message c2s_create_role message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_create_role.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a c2s_create_role message from the specified reader or buffer.
+         * @function decode
+         * @memberof profile.c2s_create_role
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {profile.c2s_create_role} c2s_create_role
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_create_role.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.profile.c2s_create_role();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.name = reader.string();
+                        break;
+                    }
+                case 2: {
+                        message.gender = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a c2s_create_role message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof profile.c2s_create_role
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {profile.c2s_create_role} c2s_create_role
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_create_role.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a c2s_create_role message.
+         * @function verify
+         * @memberof profile.c2s_create_role
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        c2s_create_role.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.name != null && message.hasOwnProperty("name"))
+                if (!$util.isString(message.name))
+                    return "name: string expected";
+            if (message.gender != null && message.hasOwnProperty("gender"))
+                if (!$util.isInteger(message.gender))
+                    return "gender: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a c2s_create_role message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof profile.c2s_create_role
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {profile.c2s_create_role} c2s_create_role
+         */
+        c2s_create_role.fromObject = function fromObject(object) {
+            if (object instanceof $root.profile.c2s_create_role)
+                return object;
+            var message = new $root.profile.c2s_create_role();
+            if (object.name != null)
+                message.name = String(object.name);
+            if (object.gender != null)
+                message.gender = object.gender >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a c2s_create_role message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof profile.c2s_create_role
+         * @static
+         * @param {profile.c2s_create_role} message c2s_create_role
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        c2s_create_role.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.name = "";
+                object.gender = 0;
+            }
+            if (message.name != null && message.hasOwnProperty("name"))
+                object.name = message.name;
+            if (message.gender != null && message.hasOwnProperty("gender"))
+                object.gender = message.gender;
+            return object;
+        };
+
+        /**
+         * Converts this c2s_create_role to JSON.
+         * @function toJSON
+         * @memberof profile.c2s_create_role
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        c2s_create_role.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for c2s_create_role
+         * @function getTypeUrl
+         * @memberof profile.c2s_create_role
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        c2s_create_role.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/profile.c2s_create_role";
+        };
+
+        return c2s_create_role;
+    })();
+
+    profile.s2c_create_role = (function() {
+
+        /**
+         * Properties of a s2c_create_role.
+         * @memberof profile
+         * @interface Is2c_create_role
+         * @property {number|null} [err] s2c_create_role err
+         * @property {profile.IProfileInfo|null} [profile] s2c_create_role profile
+         */
+
+        /**
+         * Constructs a new s2c_create_role.
+         * @memberof profile
+         * @classdesc Represents a s2c_create_role.
+         * @implements Is2c_create_role
+         * @constructor
+         * @param {profile.Is2c_create_role=} [properties] Properties to set
+         */
+        function s2c_create_role(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * s2c_create_role err.
+         * @member {number} err
+         * @memberof profile.s2c_create_role
+         * @instance
+         */
+        s2c_create_role.prototype.err = 0;
+
+        /**
+         * s2c_create_role profile.
+         * @member {profile.IProfileInfo|null|undefined} profile
+         * @memberof profile.s2c_create_role
+         * @instance
+         */
+        s2c_create_role.prototype.profile = null;
+
+        /**
+         * Creates a new s2c_create_role instance using the specified properties.
+         * @function create
+         * @memberof profile.s2c_create_role
+         * @static
+         * @param {profile.Is2c_create_role=} [properties] Properties to set
+         * @returns {profile.s2c_create_role} s2c_create_role instance
+         */
+        s2c_create_role.create = function create(properties) {
+            return new s2c_create_role(properties);
+        };
+
+        /**
+         * Encodes the specified s2c_create_role message. Does not implicitly {@link profile.s2c_create_role.verify|verify} messages.
+         * @function encode
+         * @memberof profile.s2c_create_role
+         * @static
+         * @param {profile.Is2c_create_role} message s2c_create_role message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_create_role.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
+            if (message.profile != null && Object.hasOwnProperty.call(message, "profile"))
+                $root.profile.ProfileInfo.encode(message.profile, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified s2c_create_role message, length delimited. Does not implicitly {@link profile.s2c_create_role.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof profile.s2c_create_role
+         * @static
+         * @param {profile.Is2c_create_role} message s2c_create_role message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_create_role.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a s2c_create_role message from the specified reader or buffer.
+         * @function decode
+         * @memberof profile.s2c_create_role
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {profile.s2c_create_role} s2c_create_role
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_create_role.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.profile.s2c_create_role();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.err = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.profile = $root.profile.ProfileInfo.decode(reader, reader.uint32());
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a s2c_create_role message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof profile.s2c_create_role
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {profile.s2c_create_role} s2c_create_role
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_create_role.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a s2c_create_role message.
+         * @function verify
+         * @memberof profile.s2c_create_role
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        s2c_create_role.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.err != null && message.hasOwnProperty("err"))
+                if (!$util.isInteger(message.err))
+                    return "err: integer expected";
+            if (message.profile != null && message.hasOwnProperty("profile")) {
+                var error = $root.profile.ProfileInfo.verify(message.profile);
+                if (error)
+                    return "profile." + error;
+            }
+            return null;
+        };
+
+        /**
+         * Creates a s2c_create_role message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof profile.s2c_create_role
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {profile.s2c_create_role} s2c_create_role
+         */
+        s2c_create_role.fromObject = function fromObject(object) {
+            if (object instanceof $root.profile.s2c_create_role)
+                return object;
+            var message = new $root.profile.s2c_create_role();
+            if (object.err != null)
+                message.err = object.err >>> 0;
+            if (object.profile != null) {
+                if (typeof object.profile !== "object")
+                    throw TypeError(".profile.s2c_create_role.profile: object expected");
+                message.profile = $root.profile.ProfileInfo.fromObject(object.profile);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a s2c_create_role message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof profile.s2c_create_role
+         * @static
+         * @param {profile.s2c_create_role} message s2c_create_role
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        s2c_create_role.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.err = 0;
+                object.profile = null;
+            }
+            if (message.err != null && message.hasOwnProperty("err"))
+                object.err = message.err;
+            if (message.profile != null && message.hasOwnProperty("profile"))
+                object.profile = $root.profile.ProfileInfo.toObject(message.profile, options);
+            return object;
+        };
+
+        /**
+         * Converts this s2c_create_role to JSON.
+         * @function toJSON
+         * @memberof profile.s2c_create_role
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        s2c_create_role.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for s2c_create_role
+         * @function getTypeUrl
+         * @memberof profile.s2c_create_role
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        s2c_create_role.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/profile.s2c_create_role";
+        };
+
+        return s2c_create_role;
+    })();
+
     profile.c2s_load = (function() {
 
         /**
@@ -14635,7 +15094,7 @@ $root.user = (function() {
          * @memberof user.RoleInfo
          * @instance
          */
-        RoleInfo.prototype.rid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        RoleInfo.prototype.rid = 0;
 
         /**
          * Creates a new RoleInfo instance using the specified properties.
@@ -14662,7 +15121,7 @@ $root.user = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.rid != null && Object.hasOwnProperty.call(message, "rid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.rid);
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.rid);
             return writer;
         };
 
@@ -14698,7 +15157,7 @@ $root.user = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1: {
-                        message.rid = reader.int64();
+                        message.rid = reader.uint32();
                         break;
                     }
                 default:
@@ -14737,8 +15196,8 @@ $root.user = (function() {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.rid != null && message.hasOwnProperty("rid"))
-                if (!$util.isInteger(message.rid) && !(message.rid && $util.isInteger(message.rid.low) && $util.isInteger(message.rid.high)))
-                    return "rid: integer|Long expected";
+                if (!$util.isInteger(message.rid))
+                    return "rid: integer expected";
             return null;
         };
 
@@ -14755,14 +15214,7 @@ $root.user = (function() {
                 return object;
             var message = new $root.user.RoleInfo();
             if (object.rid != null)
-                if ($util.Long)
-                    (message.rid = $util.Long.fromValue(object.rid)).unsigned = false;
-                else if (typeof object.rid === "string")
-                    message.rid = parseInt(object.rid, 10);
-                else if (typeof object.rid === "number")
-                    message.rid = object.rid;
-                else if (typeof object.rid === "object")
-                    message.rid = new $util.LongBits(object.rid.low >>> 0, object.rid.high >>> 0).toNumber();
+                message.rid = object.rid >>> 0;
             return message;
         };
 
@@ -14780,16 +15232,9 @@ $root.user = (function() {
                 options = {};
             var object = {};
             if (options.defaults)
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, false);
-                    object.rid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.rid = options.longs === String ? "0" : 0;
+                object.rid = 0;
             if (message.rid != null && message.hasOwnProperty("rid"))
-                if (typeof message.rid === "number")
-                    object.rid = options.longs === String ? String(message.rid) : message.rid;
-                else
-                    object.rid = options.longs === String ? $util.Long.prototype.toString.call(message.rid) : options.longs === Number ? new $util.LongBits(message.rid.low >>> 0, message.rid.high >>> 0).toNumber() : message.rid;
+                object.rid = message.rid;
             return object;
         };
 
@@ -15685,441 +16130,6 @@ $root.user = (function() {
         };
 
         return s2c_random_name;
-    })();
-
-    user.c2s_create_role = (function() {
-
-        /**
-         * Properties of a c2s_create_role.
-         * @memberof user
-         * @interface Ic2s_create_role
-         * @property {string|null} [name] c2s_create_role name
-         */
-
-        /**
-         * Constructs a new c2s_create_role.
-         * @memberof user
-         * @classdesc Represents a c2s_create_role.
-         * @implements Ic2s_create_role
-         * @constructor
-         * @param {user.Ic2s_create_role=} [properties] Properties to set
-         */
-        function c2s_create_role(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * c2s_create_role name.
-         * @member {string} name
-         * @memberof user.c2s_create_role
-         * @instance
-         */
-        c2s_create_role.prototype.name = "";
-
-        /**
-         * Creates a new c2s_create_role instance using the specified properties.
-         * @function create
-         * @memberof user.c2s_create_role
-         * @static
-         * @param {user.Ic2s_create_role=} [properties] Properties to set
-         * @returns {user.c2s_create_role} c2s_create_role instance
-         */
-        c2s_create_role.create = function create(properties) {
-            return new c2s_create_role(properties);
-        };
-
-        /**
-         * Encodes the specified c2s_create_role message. Does not implicitly {@link user.c2s_create_role.verify|verify} messages.
-         * @function encode
-         * @memberof user.c2s_create_role
-         * @static
-         * @param {user.Ic2s_create_role} message c2s_create_role message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        c2s_create_role.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-            return writer;
-        };
-
-        /**
-         * Encodes the specified c2s_create_role message, length delimited. Does not implicitly {@link user.c2s_create_role.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof user.c2s_create_role
-         * @static
-         * @param {user.Ic2s_create_role} message c2s_create_role message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        c2s_create_role.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a c2s_create_role message from the specified reader or buffer.
-         * @function decode
-         * @memberof user.c2s_create_role
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {user.c2s_create_role} c2s_create_role
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        c2s_create_role.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.user.c2s_create_role();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1: {
-                        message.name = reader.string();
-                        break;
-                    }
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes a c2s_create_role message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof user.c2s_create_role
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {user.c2s_create_role} c2s_create_role
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        c2s_create_role.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a c2s_create_role message.
-         * @function verify
-         * @memberof user.c2s_create_role
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        c2s_create_role.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.name != null && message.hasOwnProperty("name"))
-                if (!$util.isString(message.name))
-                    return "name: string expected";
-            return null;
-        };
-
-        /**
-         * Creates a c2s_create_role message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof user.c2s_create_role
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {user.c2s_create_role} c2s_create_role
-         */
-        c2s_create_role.fromObject = function fromObject(object) {
-            if (object instanceof $root.user.c2s_create_role)
-                return object;
-            var message = new $root.user.c2s_create_role();
-            if (object.name != null)
-                message.name = String(object.name);
-            return message;
-        };
-
-        /**
-         * Creates a plain object from a c2s_create_role message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof user.c2s_create_role
-         * @static
-         * @param {user.c2s_create_role} message c2s_create_role
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        c2s_create_role.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults)
-                object.name = "";
-            if (message.name != null && message.hasOwnProperty("name"))
-                object.name = message.name;
-            return object;
-        };
-
-        /**
-         * Converts this c2s_create_role to JSON.
-         * @function toJSON
-         * @memberof user.c2s_create_role
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        c2s_create_role.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        /**
-         * Gets the default type url for c2s_create_role
-         * @function getTypeUrl
-         * @memberof user.c2s_create_role
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        c2s_create_role.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/user.c2s_create_role";
-        };
-
-        return c2s_create_role;
-    })();
-
-    user.s2c_create_role = (function() {
-
-        /**
-         * Properties of a s2c_create_role.
-         * @memberof user
-         * @interface Is2c_create_role
-         * @property {number|null} [err] s2c_create_role err
-         * @property {user.IRoleInfo|null} [role] s2c_create_role role
-         */
-
-        /**
-         * Constructs a new s2c_create_role.
-         * @memberof user
-         * @classdesc Represents a s2c_create_role.
-         * @implements Is2c_create_role
-         * @constructor
-         * @param {user.Is2c_create_role=} [properties] Properties to set
-         */
-        function s2c_create_role(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * s2c_create_role err.
-         * @member {number} err
-         * @memberof user.s2c_create_role
-         * @instance
-         */
-        s2c_create_role.prototype.err = 0;
-
-        /**
-         * s2c_create_role role.
-         * @member {user.IRoleInfo|null|undefined} role
-         * @memberof user.s2c_create_role
-         * @instance
-         */
-        s2c_create_role.prototype.role = null;
-
-        /**
-         * Creates a new s2c_create_role instance using the specified properties.
-         * @function create
-         * @memberof user.s2c_create_role
-         * @static
-         * @param {user.Is2c_create_role=} [properties] Properties to set
-         * @returns {user.s2c_create_role} s2c_create_role instance
-         */
-        s2c_create_role.create = function create(properties) {
-            return new s2c_create_role(properties);
-        };
-
-        /**
-         * Encodes the specified s2c_create_role message. Does not implicitly {@link user.s2c_create_role.verify|verify} messages.
-         * @function encode
-         * @memberof user.s2c_create_role
-         * @static
-         * @param {user.Is2c_create_role} message s2c_create_role message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        s2c_create_role.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
-            if (message.role != null && Object.hasOwnProperty.call(message, "role"))
-                $root.user.RoleInfo.encode(message.role, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-            return writer;
-        };
-
-        /**
-         * Encodes the specified s2c_create_role message, length delimited. Does not implicitly {@link user.s2c_create_role.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof user.s2c_create_role
-         * @static
-         * @param {user.Is2c_create_role} message s2c_create_role message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        s2c_create_role.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a s2c_create_role message from the specified reader or buffer.
-         * @function decode
-         * @memberof user.s2c_create_role
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {user.s2c_create_role} s2c_create_role
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        s2c_create_role.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.user.s2c_create_role();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1: {
-                        message.err = reader.uint32();
-                        break;
-                    }
-                case 2: {
-                        message.role = $root.user.RoleInfo.decode(reader, reader.uint32());
-                        break;
-                    }
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes a s2c_create_role message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof user.s2c_create_role
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {user.s2c_create_role} s2c_create_role
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        s2c_create_role.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a s2c_create_role message.
-         * @function verify
-         * @memberof user.s2c_create_role
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        s2c_create_role.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.err != null && message.hasOwnProperty("err"))
-                if (!$util.isInteger(message.err))
-                    return "err: integer expected";
-            if (message.role != null && message.hasOwnProperty("role")) {
-                var error = $root.user.RoleInfo.verify(message.role);
-                if (error)
-                    return "role." + error;
-            }
-            return null;
-        };
-
-        /**
-         * Creates a s2c_create_role message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof user.s2c_create_role
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {user.s2c_create_role} s2c_create_role
-         */
-        s2c_create_role.fromObject = function fromObject(object) {
-            if (object instanceof $root.user.s2c_create_role)
-                return object;
-            var message = new $root.user.s2c_create_role();
-            if (object.err != null)
-                message.err = object.err >>> 0;
-            if (object.role != null) {
-                if (typeof object.role !== "object")
-                    throw TypeError(".user.s2c_create_role.role: object expected");
-                message.role = $root.user.RoleInfo.fromObject(object.role);
-            }
-            return message;
-        };
-
-        /**
-         * Creates a plain object from a s2c_create_role message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof user.s2c_create_role
-         * @static
-         * @param {user.s2c_create_role} message s2c_create_role
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        s2c_create_role.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.err = 0;
-                object.role = null;
-            }
-            if (message.err != null && message.hasOwnProperty("err"))
-                object.err = message.err;
-            if (message.role != null && message.hasOwnProperty("role"))
-                object.role = $root.user.RoleInfo.toObject(message.role, options);
-            return object;
-        };
-
-        /**
-         * Converts this s2c_create_role to JSON.
-         * @function toJSON
-         * @memberof user.s2c_create_role
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        s2c_create_role.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        /**
-         * Gets the default type url for s2c_create_role
-         * @function getTypeUrl
-         * @memberof user.s2c_create_role
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        s2c_create_role.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/user.s2c_create_role";
-        };
-
-        return s2c_create_role;
     })();
 
     user.c2s_ping = (function() {

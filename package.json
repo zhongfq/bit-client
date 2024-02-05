@@ -5,7 +5,7 @@
         "version": "3.1.0"
     },
     "scripts": {
-        "build-proto": "pbjs --dependency protobufjs/minimal.js --target static-module --wrap commonjs --force-number --out ./src/def/proto.js ./assets/proto/*.proto && pbts --main --name proto --out ./src/def/proto.d.ts ./src/def/*.js",
+        "build-proto": "pbjs --dependency protobufjs/minimal.js --target static-module --wrap commonjs --force-number --out ./src/def/proto.js ./assets/proto/*.proto && pbts --main --name proto --out ./src/def/proto.d.ts ./src/def/proto.js",
         "check-tsc:": "tsc --noEmit",
         "postinstall": "copy-files-from-to"
     },
