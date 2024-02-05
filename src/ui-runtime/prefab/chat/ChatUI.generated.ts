@@ -11,5 +11,7 @@ export class ChatUIBase extends Laya.Dialog {
     public btnEmoji!: Laya.Button;
     public listPanel!: ChatListPanelUI;
     public inputMsg!: Laya.TextInput;
+    public boxEmoji!: Laya.Box;
+    public listEmoji!: Laya.List;
 }
 

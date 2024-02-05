@@ -124,6 +124,64 @@
       "maxChars": 0,
       "prompt": "点击输入内容",
       "promptColor": "#A9A9A9"
+    },
+    {
+      "_$id": "zkqc6cxx",
+      "_$var": true,
+      "_$type": "Box",
+      "name": "boxEmoji",
+      "x": 9,
+      "y": 523,
+      "width": 496,
+      "height": 156,
+      "_mouseState": 2,
+      "_$child": [
+        {
+          "_$id": "54p5x47k",
+          "_$var": true,
+          "_$type": "List",
+          "name": "listEmoji",
+          "width": 496,
+          "height": 156,
+          "_mouseState": 2,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "bottom": 0,
+          "bgColor": "rgba(255, 255, 255, 1)",
+          "itemTemplate": {
+            "_$ref": "7w46my1f",
+            "_$tmpl": "itemRender"
+          },
+          "repeatX": 6,
+          "repeatY": 3,
+          "spaceY": -37,
+          "scrollType": 2,
+          "_$child": [
+            {
+              "_$id": "7w46my1f",
+              "_$type": "Box",
+              "name": "listItem",
+              "width": 88,
+              "height": 89,
+              "scaleX": 0.5,
+              "scaleY": 0.5,
+              "_$child": [
+                {
+                  "_$id": "8snigqd8",
+                  "_$type": "Image",
+                  "name": "icon",
+                  "width": 88,
+                  "height": 89,
+                  "skin": "res://0fd8958a-79bf-4258-a811-5d14fed27bc7",
+                  "useSourceSize": true,
+                  "color": "#ffffff"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }

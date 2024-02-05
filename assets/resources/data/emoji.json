@@ -1,184 +1,182 @@
 {
-    "emoji": [
-        {
-            "icon": "emote_1",
-            "id": 1
-        },
-        {
-            "icon": "emote_2",
-            "id": 2
-        },
-        {
-            "icon": "emote_3",
-            "id": 3
-        },
-        {
-            "icon": "emote_4",
-            "id": 4
-        },
-        {
-            "icon": "emote_5",
-            "id": 5
-        },
-        {
-            "icon": "emote_6",
-            "id": 6
-        },
-        {
-            "icon": "emote_7",
-            "id": 7
-        },
-        {
-            "icon": "emote_8",
-            "id": 8
-        },
-        {
-            "icon": "emote_9",
-            "id": 9
-        },
-        {
-            "icon": "emote_10",
-            "id": 10
-        },
-        {
-            "icon": "emote_11",
-            "id": 11
-        },
-        {
-            "icon": "emote_12",
-            "id": 12
-        },
-        {
-            "icon": "emote_13",
-            "id": 13
-        },
-        {
-            "icon": "emote_14",
-            "id": 14
-        },
-        {
-            "icon": "emote_15",
-            "id": 15
-        },
-        {
-            "icon": "emote_16",
-            "id": 16
-        },
-        {
-            "icon": "emote_17",
-            "id": 17
-        },
-        {
-            "icon": "emote_18",
-            "id": 18
-        },
-        {
-            "icon": "emote_19",
-            "id": 19
-        },
-        {
-            "icon": "emote_20",
-            "id": 20
-        },
-        {
-            "icon": "emote_21",
-            "id": 21
-        },
-        {
-            "icon": "emote_22",
-            "id": 22
-        },
-        {
-            "icon": "emote_23",
-            "id": 23
-        },
-        {
-            "icon": "emote_24",
-            "id": 24
-        },
-        {
-            "icon": "emote_25",
-            "id": 25
-        },
-        {
-            "icon": "emote_26",
-            "id": 26
-        },
-        {
-            "icon": "emote_27",
-            "id": 27
-        },
-        {
-            "icon": "emote_28",
-            "id": 28
-        },
-        {
-            "icon": "emote_29",
-            "id": 29
-        },
-        {
-            "icon": "emote_30",
-            "id": 30
-        },
-        {
-            "icon": "emote_31",
-            "id": 31
-        },
-        {
-            "icon": "emote_32",
-            "id": 32
-        },
-        {
-            "icon": "emote_33",
-            "id": 33
-        },
-        {
-            "icon": "emote_34",
-            "id": 34
-        },
-        {
-            "icon": "emote_35",
-            "id": 35
-        },
-        {
-            "icon": "emote_36",
-            "id": 36
-        },
-        {
-            "icon": "emote_37",
-            "id": 37
-        },
-        {
-            "icon": "emote_38",
-            "id": 38
-        },
-        {
-            "icon": "emote_39",
-            "id": 39
-        },
-        {
-            "icon": "emote_40",
-            "id": 40
-        },
-        {
-            "icon": "emote_41",
-            "id": 41
-        },
-        {
-            "icon": "emote_42",
-            "id": 42
-        },
-        {
-            "icon": "emote_43",
-            "id": 43
-        },
-        {
-            "icon": "emote_44",
-            "id": 44
-        },
-        {
-            "icon": "emote_45",
-            "id": 45
-        }
-    ]
+    "1": {
+        "icon": "emote_1",
+        "id": 1
+    },
+    "2": {
+        "icon": "emote_2",
+        "id": 2
+    },
+    "3": {
+        "icon": "emote_3",
+        "id": 3
+    },
+    "4": {
+        "icon": "emote_4",
+        "id": 4
+    },
+    "5": {
+        "icon": "emote_5",
+        "id": 5
+    },
+    "6": {
+        "icon": "emote_6",
+        "id": 6
+    },
+    "7": {
+        "icon": "emote_7",
+        "id": 7
+    },
+    "8": {
+        "icon": "emote_8",
+        "id": 8
+    },
+    "9": {
+        "icon": "emote_9",
+        "id": 9
+    },
+    "10": {
+        "icon": "emote_10",
+        "id": 10
+    },
+    "11": {
+        "icon": "emote_11",
+        "id": 11
+    },
+    "12": {
+        "icon": "emote_12",
+        "id": 12
+    },
+    "13": {
+        "icon": "emote_13",
+        "id": 13
+    },
+    "14": {
+        "icon": "emote_14",
+        "id": 14
+    },
+    "15": {
+        "icon": "emote_15",
+        "id": 15
+    },
+    "16": {
+        "icon": "emote_16",
+        "id": 16
+    },
+    "17": {
+        "icon": "emote_17",
+        "id": 17
+    },
+    "18": {
+        "icon": "emote_18",
+        "id": 18
+    },
+    "19": {
+        "icon": "emote_19",
+        "id": 19
+    },
+    "20": {
+        "icon": "emote_20",
+        "id": 20
+    },
+    "21": {
+        "icon": "emote_21",
+        "id": 21
+    },
+    "22": {
+        "icon": "emote_22",
+        "id": 22
+    },
+    "23": {
+        "icon": "emote_23",
+        "id": 23
+    },
+    "24": {
+        "icon": "emote_24",
+        "id": 24
+    },
+    "25": {
+        "icon": "emote_25",
+        "id": 25
+    },
+    "26": {
+        "icon": "emote_26",
+        "id": 26
+    },
+    "27": {
+        "icon": "emote_27",
+        "id": 27
+    },
+    "28": {
+        "icon": "emote_28",
+        "id": 28
+    },
+    "29": {
+        "icon": "emote_29",
+        "id": 29
+    },
+    "30": {
+        "icon": "emote_30",
+        "id": 30
+    },
+    "31": {
+        "icon": "emote_31",
+        "id": 31
+    },
+    "32": {
+        "icon": "emote_32",
+        "id": 32
+    },
+    "33": {
+        "icon": "emote_33",
+        "id": 33
+    },
+    "34": {
+        "icon": "emote_34",
+        "id": 34
+    },
+    "35": {
+        "icon": "emote_35",
+        "id": 35
+    },
+    "36": {
+        "icon": "emote_36",
+        "id": 36
+    },
+    "37": {
+        "icon": "emote_37",
+        "id": 37
+    },
+    "38": {
+        "icon": "emote_38",
+        "id": 38
+    },
+    "39": {
+        "icon": "emote_39",
+        "id": 39
+    },
+    "40": {
+        "icon": "emote_40",
+        "id": 40
+    },
+    "41": {
+        "icon": "emote_41",
+        "id": 41
+    },
+    "42": {
+        "icon": "emote_42",
+        "id": 42
+    },
+    "43": {
+        "icon": "emote_43",
+        "id": 43
+    },
+    "44": {
+        "icon": "emote_44",
+        "id": 44
+    },
+    "45": {
+        "icon": "emote_45",
+        "id": 45
+    }
 }

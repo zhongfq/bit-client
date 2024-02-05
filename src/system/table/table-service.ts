@@ -14,6 +14,7 @@ import {
     ShopTable,
     MoneyTable,
     AllianceTable,
+    EmojiTable,
 } from "../../def/table";
 import { ItemConf } from "../../def/item";
 import { VoBag } from "../../misc/vo/vo-base/vo-bag";
@@ -33,6 +34,7 @@ const JSON_MAIL_TABLE = "resources/data/mail.json";
 const JSON_SHOP_TABLE = "resources/data/activity/shop.json";
 const JSON_MONEY_TABLE = "resources/data/money.json";
 const JSON_ALLIANCE_TABLE = "resources/data/alliance.json";
+const JSON_EMOJI_TABLE = "resources/data/emoji.json";
 
 export class TableService extends Service<NetworkService> {
     equip!: EquipTable;
@@ -48,6 +50,7 @@ export class TableService extends Service<NetworkService> {
     shop!: ShopTable;
     money!: MoneyTable;
     alliance!: AllianceTable;
+    emoji!: EmojiTable;
 
     constructor(network: NetworkService) {
         super(network);
@@ -66,6 +69,7 @@ export class TableService extends Service<NetworkService> {
         this.shop = await app.loader.loadJson(JSON_SHOP_TABLE);
         this.money = await app.loader.loadJson(JSON_MONEY_TABLE);
         this.alliance = await app.loader.loadJson(JSON_ALLIANCE_TABLE);
+        this.emoji = await app.loader.loadJson(JSON_EMOJI_TABLE);
     }
     getVo(refId: number) {
         let dataRow = TableUtil.getRef(this.item, { id: refId });
