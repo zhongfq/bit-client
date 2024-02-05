@@ -26,7 +26,7 @@ export class VirtuallyList extends Laya.Script {
         // this.data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
         // this.data = [1, 2, 3, 4, 5];
         // Laya.timer.once(5000, this, () => {
-        //     this.scrollToIndex(8);
+        //     this.scrollToIndex(9);
         // this._data.unshift(0);                           //测试数据
         //     // this._data.unshift(-1);
         //     // this._data.unshift(-2);

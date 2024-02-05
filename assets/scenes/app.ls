@@ -46,15 +46,6 @@
       "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
       "label": "Title",
       "labelSize": 20
-    },
-    {
-      "_$id": "svomr76o",
-      "_$prefab": "8cbb7480-4db0-4435-952d-312638b0699c",
-      "name": "Box",
-      "active": true,
-      "x": 281,
-      "y": 946,
-      "visible": true
     }
   ]
 }
