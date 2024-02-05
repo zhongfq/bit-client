@@ -47,7 +47,9 @@ Laya.Pool.obtain = function <T>(cls: Constructor<T>): T {
 };
 
 Laya.Pool.free = function <T>(obj: T): void {
-    Laya.Pool.recoverByClass(obj);
+    if (obj) {
+        Laya.Pool.recoverByClass(obj);
+    }
 };
 
 Object.defineProperty(Laya.Vector2.prototype, "length", {

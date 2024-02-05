@@ -18,9 +18,11 @@ export enum SoliderOrder {
     MOVE,
     RUSH, // 快速移动到指定位置
     FIGHT, // 战斗中
+    RETURN, // 归队
 }
 
-type SoliderAttack = {
+type AttackInfo = {
+    time: number;
     target: number | null;
     position: Laya.Vector3;
 };
@@ -32,7 +34,7 @@ export class SoldierComponent extends ecs.Component {
     velocity: number = 0;
 
     // 攻击的小兵对象
-    attack: SoliderAttack = { target: null, position: new Laya.Vector3() };
+    attackInfo: AttackInfo = { target: null, time: 0, position: new Laya.Vector3() };
 }
 
 export class TroopComponent extends ecs.Component {

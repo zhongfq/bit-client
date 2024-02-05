@@ -40,36 +40,6 @@
                 },
                 {
                   "_$type": "AnimatorState",
-                  "name": "attack_combo2",
-                  "clipStart": 0,
-                  "clip": {
-                    "_$uuid": "09abc4d1-fa9a-4de5-a3b0-65c903d184dd",
-                    "_$type": "AnimationClip"
-                  },
-                  "soloTransitions": []
-                },
-                {
-                  "_$type": "AnimatorState",
-                  "name": "attack_combo3",
-                  "clipStart": 0,
-                  "clip": {
-                    "_$uuid": "15706372-5f22-4660-be0e-d46be3ee606f",
-                    "_$type": "AnimationClip"
-                  },
-                  "soloTransitions": []
-                },
-                {
-                  "_$type": "AnimatorState",
-                  "name": "attack_combo1",
-                  "clipStart": 0,
-                  "clip": {
-                    "_$uuid": "6afa3964-508f-4061-81f1-cae0877a2e17",
-                    "_$type": "AnimationClip"
-                  },
-                  "soloTransitions": []
-                },
-                {
-                  "_$type": "AnimatorState",
                   "name": "run",
                   "_isLooping": 1,
                   "clipStart": 0,

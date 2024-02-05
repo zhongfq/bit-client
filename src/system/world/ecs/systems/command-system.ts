@@ -26,7 +26,7 @@ import {
     TroopComponent,
 } from "../components/troop-component";
 
-enum AnimatorTrigger {
+enum AnimatorParam {
     IDLE = "idle",
     RUN = "run",
     ATTACK = "attack",
@@ -257,15 +257,7 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
         }
         const animation = entity.getComponent(AnimationComponent);
         if (animation?.animator) {
-            this._setTrigger(animation.animator, AnimatorTrigger.ATTACK);
-            const movement = entity.getComponent(MovementComponent)!;
-            if (movement.type === MovementType.NONE) {
-                this._clearTrigger(animation.animator, AnimatorTrigger.RUN);
-                this._setTrigger(animation.animator, AnimatorTrigger.IDLE);
-            } else {
-                this._clearTrigger(animation.animator, AnimatorTrigger.IDLE);
-                this._setTrigger(animation.animator, AnimatorTrigger.RUN);
-            }
+            animation.animator.setParamsTrigger(AnimatorParam.ATTACK);
         }
         this._towardToTarget(cmd.srcEid, cmd.dstEid);
     }
@@ -291,25 +283,16 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
             const troop = entity.getComponent(TroopComponent)!;
             troop.attackTarget = 0;
             troop.soldiers.forEach((soldier) => {
-                soldier.attack.target = null;
-                soldier.order = SoliderOrder.IDLE;
+                soldier.attackInfo.target = null;
+                soldier.order = SoliderOrder.RETURN;
             });
-            if (animation.animator) {
-                const movement = entity.getComponent(MovementComponent)!;
-                this._clearTrigger(animation.animator, AnimatorTrigger.ATTACK);
-                if (movement.type === MovementType.NONE) {
-                    this._clearTrigger(animation.animator, AnimatorTrigger.RUN);
-                    this._setTrigger(animation.animator, AnimatorTrigger.IDLE);
-                } else {
-                    this._clearTrigger(animation.animator, AnimatorTrigger.IDLE);
-                    this._setTrigger(animation.animator, AnimatorTrigger.RUN);
-
-                    const transform = animation.getComponent(TransformComponent)!;
-                    transform.rotation = MathUtil.toDegree(
-                        Math.atan2(-movement.speed.z, movement.speed.x)
-                    );
-                    transform.flag |= TransformComponent.ROTATION;
-                }
+            const movement = entity.getComponent(MovementComponent)!;
+            if (movement.type === MovementType.WHEEL) {
+                const transform = animation.getComponent(TransformComponent)!;
+                transform.rotation = MathUtil.toDegree(
+                    Math.atan2(-movement.speed.z, movement.speed.x)
+                );
+                transform.flag |= TransformComponent.ROTATION;
             }
         } else {
             console.warn(`entity not found in 'stop battle': ${action.fighterEid}`);
@@ -385,16 +368,16 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
                 const rad = Math.random() * Math.PI;
                 const px = Math.cos(rad) * 0.3 * Tilemap.RATE;
                 const pz = Math.sin(rad) * 0.3 * Tilemap.RATE;
-                if (!solider1.attack.target) {
-                    solider1.attack.target = solider2.eid;
-                    solider1.attack.position.x = sx + px;
-                    solider1.attack.position.z = sz + pz;
+                if (!solider1.attackInfo.target) {
+                    solider1.attackInfo.target = solider2.eid;
+                    solider1.attackInfo.position.x = sx + px;
+                    solider1.attackInfo.position.z = sz + pz;
                     solider1.order = SoliderOrder.RUSH;
                 }
-                if (!solider2.attack.target) {
-                    solider2.attack.target = solider1.eid;
-                    solider2.attack.position.x = sx - px;
-                    solider2.attack.position.z = sz - pz;
+                if (!solider2.attackInfo.target) {
+                    solider2.attackInfo.target = solider1.eid;
+                    solider2.attackInfo.position.x = sx - px;
+                    solider2.attackInfo.position.z = sz - pz;
                     solider2.order = SoliderOrder.RUSH;
                 }
             }
@@ -425,11 +408,7 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
         }
     }
 
-    private _setTrigger(animator: Laya.Animator, name: AnimatorTrigger) {
-        animator.setParamsTrigger(name);
-    }
-
-    private _clearTrigger(animator: Laya.Animator, name: AnimatorTrigger) {
+    private _clearTrigger(animator: Laya.Animator, name: AnimatorParam) {
         const id = Laya.AnimatorStateCondition.conditionNameToID(name);
         animator.animatorParams[id] = false;
     }
@@ -479,11 +458,19 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
     }
 
     soldierFight(soldier: SoldierComponent) {
-        if (soldier.attack.target) {
-            this._towardToTarget(soldier.eid, soldier.attack.target);
-            const animation = soldier.getComponent(AnimationComponent);
-            if (animation?.animator) {
-                this._setTrigger(animation.animator, AnimatorTrigger.ATTACK);
+        if (soldier.attackInfo.target) {
+            this._towardToTarget(soldier.eid, soldier.attackInfo.target);
+            const animation = soldier.getComponent(AnimationComponent)!;
+            const movement = soldier.getComponent(MovementComponent)!;
+            if (animation.animator) {
+                animation.animator.setParamsTrigger(AnimatorParam.ATTACK);
+                if (movement.type === MovementType.NONE) {
+                    animation.animator.setParamsBool(AnimatorParam.IDLE, true);
+                    animation.animator.setParamsBool(AnimatorParam.RUN, false);
+                } else {
+                    animation.animator.setParamsBool(AnimatorParam.IDLE, true);
+                    animation.animator.setParamsBool(AnimatorParam.RUN, false);
+                }
             }
         }
     }
@@ -555,8 +542,8 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
         Tilemap.degree2Speed(degree, velocity, movement.speed);
         this._setRotation(transform, movement.speed.x, movement.speed.z, true);
         if (animation?.animator) {
-            this._clearTrigger(animation.animator, AnimatorTrigger.IDLE);
-            this._setTrigger(animation.animator, AnimatorTrigger.RUN);
+            animation.animator.setParamsBool(AnimatorParam.IDLE, false);
+            animation.animator.setParamsBool(AnimatorParam.RUN, true);
         }
     }
 
@@ -568,9 +555,10 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
         movement.speed.z = 0;
         movement.track = null;
         movement.target = null;
+        Laya.Pool.free(movement.target);
         if (animation?.animator) {
-            this._clearTrigger(animation.animator, AnimatorTrigger.RUN);
-            this._setTrigger(animation.animator, AnimatorTrigger.IDLE);
+            animation.animator.setParamsBool(AnimatorParam.IDLE, true);
+            animation.animator.setParamsBool(AnimatorParam.RUN, false);
         }
     }
 }
