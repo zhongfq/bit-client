@@ -81,29 +81,6 @@
       "labelSize": 20
     },
     {
-      "_$id": "9swms2we",
-      "_$prefab": "4524d036-d272-41c6-a3ff-43a2ca11b7f8",
-      "_$var": true,
-      "name": "listPanel",
-      "active": true,
-      "x": 9,
-      "y": 61,
-      "visible": true,
-      "width": 492,
-      "height": 612,
-      "vScrollBarSkin": null,
-      "hitArea": null,
-      "_$comp": [
-        {
-          "_$override": "9ce69809-af38-4a8d-a46f-1c41e5133660",
-          "cellPrefab": {
-            "_$uuid": "b31a6d6e-b58d-4ef0-9d12-d657c47e1d78",
-            "_$type": "Prefab"
-          }
-        }
-      ]
-    },
-    {
       "_$id": "7r1lchaj",
       "_$var": true,
       "_$type": "TextInput",
@@ -124,6 +101,76 @@
       "maxChars": 0,
       "prompt": "点击输入内容",
       "promptColor": "#A9A9A9"
+    },
+    {
+      "_$id": "zkqc6cxx",
+      "_$var": true,
+      "_$type": "Box",
+      "name": "boxEmoji",
+      "x": 9,
+      "y": 523,
+      "width": 496,
+      "height": 156,
+      "_mouseState": 2,
+      "_$child": [
+        {
+          "_$id": "54p5x47k",
+          "_$var": true,
+          "_$type": "List",
+          "name": "listEmoji",
+          "width": 496,
+          "height": 156,
+          "_mouseState": 2,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "bottom": 0,
+          "bgColor": "rgba(255, 255, 255, 1)",
+          "itemTemplate": {
+            "_$ref": "7w46my1f",
+            "_$tmpl": "itemRender"
+          },
+          "repeatX": 6,
+          "repeatY": 3,
+          "spaceY": -37,
+          "scrollType": 2,
+          "_$child": [
+            {
+              "_$id": "7w46my1f",
+              "_$type": "Box",
+              "name": "listItem",
+              "width": 88,
+              "height": 89,
+              "scaleX": 0.5,
+              "scaleY": 0.5,
+              "_$child": [
+                {
+                  "_$id": "8snigqd8",
+                  "_$type": "Image",
+                  "name": "icon",
+                  "width": 88,
+                  "height": 89,
+                  "skin": "res://0fd8958a-79bf-4258-a811-5d14fed27bc7",
+                  "useSourceSize": true,
+                  "color": "#ffffff"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "03w3ggwt",
+      "_$prefab": "8cbb7480-4db0-4435-952d-312638b0699c",
+      "_$var": true,
+      "name": "virtuallyList",
+      "active": true,
+      "x": 9,
+      "y": 61,
+      "visible": true,
+      "width": 492,
+      "height": 612
     }
   ]
 }

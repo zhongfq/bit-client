@@ -104,7 +104,9 @@ export abstract class VoBag<T extends VO<any, any>> {
         this.onUpdate(t);
     }
 
-    public onAdd(t: T) {}
+    public onAdd(t: T) {
+        this.bag.set(t.id, t);
+    }
     public onUpdate(t: T) {
         this.bag.set(t.id, t);
     }

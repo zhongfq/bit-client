@@ -6,6 +6,7 @@ import {
     GeneratedAllianceRow,
     GeneratedAttrRow,
     GeneratedBattleBuffRow,
+    GeneratedEmojiRow,
     GeneratedEquipColorRow,
     GeneratedEquipItemsRow,
     GeneratedEquipLevelRow,
@@ -139,4 +140,11 @@ export type MoneyTable = {
 export interface AllianceRow extends GeneratedAllianceRow {}
 export type AllianceTable = {
     [K: number]: AllianceRow;
+};
+//-----------------------------------------------------------------------------
+// 表情
+//-----------------------------------------------------------------------------
+export interface EmojiRow extends GeneratedEmojiRow {}
+export type EmojiTable = {
+    [K: number]: EmojiRow;
 };

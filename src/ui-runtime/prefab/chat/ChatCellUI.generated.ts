@@ -2,7 +2,7 @@
 
 
 /**
- * resources/prefab/chat/chatCell.lh
+ * resources/prefab/chat/chat-cell.lh
  */
 export class ChatCellUIBase extends Laya.Box {
     public imgHead!: Laya.Image;

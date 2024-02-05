@@ -48,6 +48,7 @@
       "fontSize": 20,
       "color": "#FFFFFF",
       "fitContent": "height",
+      "ubb": true,
       "valign": "top",
       "wordWrap": true,
       "padding": "0,0,0,0"
