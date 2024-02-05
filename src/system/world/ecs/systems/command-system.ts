@@ -457,7 +457,6 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
             const soldier = entity.addComponent(SoldierComponent);
             soldier.leader = troop.eid;
             soldier.offset = offset;
-            transform.position.cloneTo(soldier.destination);
             troop.soldiers.push(soldier);
         }
     }

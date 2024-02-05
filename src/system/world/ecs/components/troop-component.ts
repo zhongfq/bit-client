@@ -29,7 +29,7 @@ export class SoldierComponent extends ecs.Component {
     order: SoliderOrder = SoliderOrder.IDLE;
     leader!: number;
     offset!: IVector3Like;
-    destination: Laya.Vector3 = new Laya.Vector3();
+    velocity: number = 0;
 
     // 攻击的小兵对象
     attack: SoliderAttack = { target: null, position: new Laya.Vector3() };

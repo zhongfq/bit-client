@@ -65,8 +65,18 @@ export class TroopSystem extends ecs.System {
             const rad = Math.atan2(p1.z - p0.z, p1.x - p0.x);
             const degree = (rad * 180) / Math.PI;
             const velocity = distance / (TroopSystem.TICK / 1000) / Tilemap.RATE;
-            // api.startMove(movement, degree, Math.min(velocity, leaderMovement.velocity));
-            api.startMove(movement, degree, Math.min(velocity, leaderMovement.velocity * 1.4));
+            if (soldier.velocity < leaderMovement.velocity) {
+                soldier.velocity = leaderMovement.velocity;
+            }
+            if (soldier.velocity < velocity) {
+                soldier.velocity += 0.05;
+            } else {
+                soldier.velocity = velocity;
+            }
+            if (soldier.velocity > 2) {
+                soldier.velocity = 2;
+            }
+            api.startMove(movement, degree, soldier.velocity);
         }
     }
 
