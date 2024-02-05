@@ -1,0 +1,55 @@
+{
+  "_$ver": 1,
+  "_$id": "lvhoz1xw",
+  "_$type": "Box",
+  "name": "Box",
+  "width": 315,
+  "height": 116,
+  "bgColor": "rgba(150, 59, 59, 1)",
+  "_$child": [
+    {
+      "_$id": "wa2ng9qy",
+      "_$type": "Sprite",
+      "name": "Sprite",
+      "width": 315,
+      "height": 116,
+      "_gcmds": [
+        {
+          "_$type": "DrawLineCmd",
+          "fromX": 0,
+          "fromY": 1,
+          "toX": 1,
+          "toY": 1,
+          "percent": true,
+          "lineWidth": 1,
+          "lineColor": "rgba(52, 255, 0, 1)"
+        },
+        {
+          "_$type": "DrawLineCmd",
+          "fromX": 0,
+          "fromY": 0,
+          "toX": 1,
+          "toY": 0,
+          "percent": true,
+          "lineWidth": 1,
+          "lineColor": "#ffff00"
+        }
+      ]
+    },
+    {
+      "_$id": "p1bpht3j",
+      "_$var": true,
+      "_$type": "Label",
+      "name": "Label",
+      "x": 92,
+      "y": 44,
+      "width": 120,
+      "height": 28,
+      "text": "Label",
+      "fontSize": 20,
+      "color": "rgba(13, 13, 13, 1)",
+      "valign": "top",
+      "padding": "0,0,0,0"
+    }
+  ]
+}
