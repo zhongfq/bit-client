@@ -81,29 +81,6 @@
       "labelSize": 20
     },
     {
-      "_$id": "9swms2we",
-      "_$prefab": "4524d036-d272-41c6-a3ff-43a2ca11b7f8",
-      "_$var": true,
-      "name": "listPanel",
-      "active": true,
-      "x": 9,
-      "y": 61,
-      "visible": true,
-      "width": 492,
-      "height": 612,
-      "vScrollBarSkin": null,
-      "hitArea": null,
-      "_$comp": [
-        {
-          "_$override": "9ce69809-af38-4a8d-a46f-1c41e5133660",
-          "cellPrefab": {
-            "_$uuid": "b31a6d6e-b58d-4ef0-9d12-d657c47e1d78",
-            "_$type": "Prefab"
-          }
-        }
-      ]
-    },
-    {
       "_$id": "7r1lchaj",
       "_$var": true,
       "_$type": "TextInput",
@@ -182,6 +159,18 @@
           ]
         }
       ]
+    },
+    {
+      "_$id": "03w3ggwt",
+      "_$prefab": "8cbb7480-4db0-4435-952d-312638b0699c",
+      "_$var": true,
+      "name": "virtuallyList",
+      "active": true,
+      "x": 9,
+      "y": 61,
+      "visible": true,
+      "width": 492,
+      "height": 612
     }
   ]
 }

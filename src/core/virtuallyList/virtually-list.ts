@@ -2,11 +2,14 @@ import { ChatCellUI } from "../../ui-runtime/prefab/chat/ChatCellUI";
 import { VirtuallyListUI } from "../../ui-runtime/prefab/common/VirtuallyListUI";
 
 const { regClass, property } = Laya;
-
+export enum ListCreateDataType {
+    Top,
+    Down,
+}
 @regClass()
 export class VirtuallyList extends Laya.Script {
     declare owner: VirtuallyListUI;
-    private _nodes: ChatCellUI[] = []; //预创建
+    private _nodes: Laya.Box[] = []; //预创建
     private _node2Idx: Map<Laya.Sprite, number> = new Map();
     private _mouseX!: number; //横向列表要用
     private _mouseY!: number; //鼠标的Y坐标
@@ -44,7 +47,7 @@ export class VirtuallyList extends Laya.Script {
      * @returns 预制体创建出来的节点
      */
     private _createNode() {
-        let node = this.cellPrefab.create() as ChatCellUI;
+        let node = this.cellPrefab.create() as Laya.Box;
         node.visible = false;
         this.owner.addChild(node);
         this._nodes.push(node);
@@ -79,6 +82,9 @@ export class VirtuallyList extends Laya.Script {
      *按下事件
      */
     private _onBarMouseDown() {
+        if (this._contentRect.height < this.owner.height) {
+            return;
+        }
         this._mouseX = Laya.stage.mouseX;
         this._mouseY = Laya.stage.mouseY;
 
@@ -131,12 +137,32 @@ export class VirtuallyList extends Laya.Script {
     /**
      *设置数据
      */
-    set data(val: any[]) {
+    setArrayData(val: any[], type?: ListCreateDataType) {
         this._data = val;
         this._initRect();
-        this._addStarNode();
+        if (type && type == ListCreateDataType.Down) {
+            this._addEndNode();
+            this.owner.scrollRect.y -= this.owner.height;
+        } else {
+            this.scrollToUp();
+            this.owner.scrollRect.y = 0;
+        }
     }
-
+    addData(val: any) {
+        this._data.push(val);
+        let idx = this.backIndex;
+        let node = this._nodes.shift();
+        if (!node) {
+            return;
+        }
+        node.set_dataSource(val);
+        node.visible = true;
+        node.y = this._contentRect.bottom;
+        this._contentRect.height += node.height;
+        this._nodes.push(node);
+        this._node2Idx.set(node, idx + 1);
+        this.owner.scrollRect.y += node.height;
+    }
     /**
      *初始化滚动区域
      */
@@ -160,9 +186,8 @@ export class VirtuallyList extends Laya.Script {
         const node = this._nodes.shift()!;
         node.y = this._contentRect.bottom;
         this._contentRect.height -= node.height;
-        console.log("index:", index);
 
-        (node.getChildByName("Label") as Laya.Label).text = this._data[index];
+        node.set_dataSource(this._data[index]);
         node.visible = true;
         this._nodes.push(node);
         this._node2Idx.set(node, index);
@@ -177,7 +202,7 @@ export class VirtuallyList extends Laya.Script {
         const index = this.fistIndex - 1;
         const node = this._nodes.pop()!;
         this._contentRect.height -= node.height;
-        (node.getChildByName("Label") as Laya.Label).text = this._data[index];
+        node.set_dataSource(this._data[index]);
         node.y = this._contentRect.y - node.height;
         node.visible = true;
         this._nodes.unshift(node);
@@ -189,7 +214,7 @@ export class VirtuallyList extends Laya.Script {
     /**
      *滚动到顶部
      */
-    scrollToUp() {
+    scrollToUp(type?: ListCreateDataType) {
         this._initRect();
         this._addStarNode();
         this.owner.scrollRect.y = 0;
@@ -212,7 +237,7 @@ export class VirtuallyList extends Laya.Script {
             if (!node) {
                 break;
             }
-            (node.getChildByName("Label") as Laya.Label).text = this._data[i];
+            node.set_dataSource(this._data[i]);
             node.visible = true;
             node.y = this._contentRect.height;
 
@@ -244,11 +269,11 @@ export class VirtuallyList extends Laya.Script {
      */
     private _addStarNode() {
         for (let i = 0; i < this._data.length; i++) {
-            let node = this._nodes[i] as ChatCellUI;
+            let node = this._nodes[i];
             if (!node) {
                 break;
             }
-            (node.getChildByName("Label") as Laya.Label).text = this._data[i];
+            node.set_dataSource(this._data[i]);
             node.visible = true;
             node.y = this._contentRect.height;
             this._contentRect.height += node.height;
@@ -266,7 +291,7 @@ export class VirtuallyList extends Laya.Script {
                 break;
             }
             nodeIndex--;
-            (node.getChildByName("Label") as Laya.Label).text = this._data[i];
+            node.set_dataSource(this._data[i]);
             node.visible = true;
             node.y = this._contentRect.y - node.height;
             this._contentRect.height += node.height;

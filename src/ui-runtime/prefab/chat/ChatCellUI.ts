@@ -8,7 +8,8 @@ import { ChatCellUIBase } from "./ChatCellUI.generated";
 @regClass()
 export class ChatCellUI extends ChatCellUIBase {
     msgData!: ChatMsgVo;
-    setData(data: any) {
+    set_dataSource(data: any) {
+        super.set_dataSource(data);
         this.msgData = data;
         this.updateInfo();
     }
