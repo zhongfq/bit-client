@@ -1,6 +1,7 @@
 import { ecs } from "../../../../core/ecs";
 import { IVector3Like } from "../../../../core/laya";
-import { TrackVector3 } from "./movement-component";
+import { MovementComponent, TrackVector3, TransformComponent } from "./movement-component";
+import { AnimationComponent } from "./render-component";
 
 export class OwnerComponent extends ecs.Component {
     rid: number = 0;
@@ -27,7 +28,26 @@ type AttackInfo = {
     position: Laya.Vector3;
 };
 
-export class SoldierComponent extends ecs.Component {
+class RoleComponent extends ecs.Component {
+    // 缓存组件方便快速访问？
+    private _movement: MovementComponent | null = null;
+    private _transform: TransformComponent | null = null;
+    private _animation: AnimationComponent | null = null;
+
+    get movement() {
+        return (this._movement ||= this.getComponent(MovementComponent)!);
+    }
+
+    get transform() {
+        return (this._transform ||= this.getComponent(TransformComponent)!);
+    }
+
+    get animation() {
+        return (this._animation ||= this.getComponent(AnimationComponent)!);
+    }
+}
+
+export class SoldierComponent extends RoleComponent {
     order: SoliderOrder = SoliderOrder.IDLE;
     leader!: number;
     offset!: IVector3Like;
@@ -37,11 +57,8 @@ export class SoldierComponent extends ecs.Component {
     attackInfo: AttackInfo = { target: null, time: 0, position: new Laya.Vector3() };
 }
 
-export class TroopComponent extends ecs.Component {
+export class TroopComponent extends RoleComponent {
     soldiers: SoldierComponent[] = [];
-    // 主角的位置轨迹
-    latestIndex: number = 0;
-    positions: TrackVector3[] = [];
 
     // 攻击的主角对象
     attackTarget: number = 0;

@@ -158,15 +158,6 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
             }
 
             const troop = entity.addComponent(TroopComponent);
-            const transform = entity.getComponent(TransformComponent)!;
-            const position = transform.position;
-            for (let i = 0; i < 40; i++) {
-                const dis = 0.1 * i;
-                troop.positions.push(
-                    new TrackVector3(position.x - dis, position.y, position.z, 0.1)
-                );
-            }
-            troop.latestIndex = 0;
             this._loadSoldiers(troop);
         }
 
@@ -460,8 +451,8 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
     soldierFight(soldier: SoldierComponent) {
         if (soldier.attackInfo.target) {
             this._towardToTarget(soldier.eid, soldier.attackInfo.target);
-            const animation = soldier.getComponent(AnimationComponent)!;
-            const movement = soldier.getComponent(MovementComponent)!;
+            const animation = soldier.animation;
+            const movement = soldier.movement;
             if (animation.animator) {
                 animation.animator.setParamsTrigger(AnimatorParam.ATTACK);
                 if (movement.type === MovementType.NONE) {
@@ -475,13 +466,9 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
         }
     }
 
-    calcSoldierPositionImmediately(
-        troop: TroopComponent,
-        solider: SoldierComponent,
-        out: Laya.Vector3
-    ) {
-        const animation = troop.getComponent(AnimationComponent)!;
-        const transform = troop.getComponent(TransformComponent)!;
+    calcSoldierPosition(troop: TroopComponent, solider: SoldierComponent, out: Laya.Vector3) {
+        const animation = troop.animation;
+        const transform = troop.transform;
         if (animation.view) {
             out.x = solider.offset.x;
             out.y = solider.offset.y;
@@ -492,46 +479,6 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
             out.y = transform.position.y + solider.offset.y;
             out.z = transform.position.z + solider.offset.z;
         }
-    }
-
-    calcSoldierPosition(troop: TroopComponent, solider: SoldierComponent, out: Laya.Vector3) {
-        const offset = solider.offset;
-
-        // 在主角路径上查找合适的点
-        const len = troop.positions.length;
-        const latestIndex = troop.latestIndex;
-        let dis = Math.abs(offset.x);
-        let p0: TrackVector3 = troop.positions[latestIndex];
-        let p1!: TrackVector3;
-        for (let i = 1; i < len; i++) {
-            p0 = troop.positions[(i + latestIndex - 1) % len];
-            p1 = troop.positions[(i + latestIndex) % len];
-            dis -= Math.abs(p0.offset);
-            if (dis <= 0) {
-                break;
-            }
-        }
-
-        // 二维空间中, 一个向量(x, y)的垂直向量是(-y, x)
-        const dir = Laya.Pool.obtain(Laya.Vector3);
-        dir.set(-(p0.z - p1.z), 0, p0.x - p1.x);
-        dir.normalize();
-        out.x = p1.x + dir.x * offset.z;
-        out.y = p1.y;
-        out.z = p1.z + dir.z * offset.z;
-        Laya.Pool.free(dir);
-
-        // 检查
-        const transform = solider.getComponent(TransformComponent)!;
-        const leaderDir = Laya.Pool.obtain(Laya.Vector3);
-        const soldierDir = Laya.Pool.obtain(Laya.Vector3);
-        p0.vsub(p1, leaderDir);
-        out.vsub(transform.position, soldierDir);
-        if (leaderDir.dot(soldierDir) < 0) {
-            transform.position.cloneTo(out);
-        }
-        Laya.Pool.free(leaderDir);
-        Laya.Pool.free(soldierDir);
     }
 
     startMove(movement: MovementComponent, degree: number, velocity: number) {

@@ -45,8 +45,8 @@ export class TroopSystem extends ecs.System {
     }
 
     private _doIdle(soldier: SoldierComponent) {
-        const movement = soldier.getComponent(MovementComponent)!;
         const api = this.ecs.getSystem(CommandSystem)!;
+        const movement = soldier.movement;
         if (movement.type !== MovementType.NONE) {
             api.stopMove(movement);
         }
@@ -54,13 +54,12 @@ export class TroopSystem extends ecs.System {
 
     private _doMove(soldier: SoldierComponent) {
         const api = this.ecs.getSystem(CommandSystem)!;
-        const movement = soldier.getComponent(MovementComponent)!;
-        const leaderTroop = this.ecs.getComponent(soldier.leader, TroopComponent)!;
-        const leaderMovement = leaderTroop.getComponent(MovementComponent)!;
-        const transform = soldier.getComponent(TransformComponent)!;
+        const leader = this.ecs.getComponent(soldier.leader, TroopComponent)!;
+        const movement = soldier.movement;
+        const transform = soldier.transform;
         const p1 = tmpVector3;
         const p0 = transform.position;
-        api.calcSoldierPositionImmediately(leaderTroop, soldier, p1);
+        api.calcSoldierPosition(leader, soldier, p1);
         const distance = Laya.Vector3.distance(p1, p0);
         if (distance == 0) {
             movement.speed.x *= 0.1;
@@ -70,8 +69,8 @@ export class TroopSystem extends ecs.System {
             const rad = Math.atan2(p1.z - p0.z, p1.x - p0.x);
             const degree = (rad * 180) / Math.PI;
             const velocity = distance / (TroopSystem.TICK / 1000) / Tilemap.RATE;
-            if (soldier.velocity < leaderMovement.velocity) {
-                soldier.velocity = leaderMovement.velocity;
+            if (soldier.velocity < leader.movement.velocity) {
+                soldier.velocity = leader.movement.velocity;
             }
             if (soldier.velocity < velocity) {
                 soldier.velocity += 0.05;
@@ -87,16 +86,15 @@ export class TroopSystem extends ecs.System {
 
     private _doReturn(soldier: SoldierComponent) {
         const api = this.ecs.getSystem(CommandSystem)!;
-        const movement = soldier.getComponent(MovementComponent)!;
-        const leaderTroop = this.ecs.getComponent(soldier.leader, TroopComponent)!;
-        const leaderMovement = leaderTroop.getComponent(MovementComponent)!;
-        const transform = soldier.getComponent(TransformComponent)!;
+        const movement = soldier.movement;
+        const leader = this.ecs.getComponent(soldier.leader, TroopComponent)!;
+        const transform = soldier.transform;
         const p1 = tmpVector3;
         const p0 = transform.position;
-        api.calcSoldierPositionImmediately(leaderTroop, soldier, p1);
+        api.calcSoldierPosition(leader, soldier, p1);
         const distance = Laya.Vector3.distance(p1, p0);
         if (distance <= 0.01) {
-            if (leaderMovement.type === MovementType.WHEEL) {
+            if (leader.movement.type === MovementType.WHEEL) {
                 soldier.order = SoliderOrder.MOVE;
             } else {
                 soldier.order = SoliderOrder.IDLE;
@@ -105,8 +103,8 @@ export class TroopSystem extends ecs.System {
             const rad = Math.atan2(p1.z - p0.z, p1.x - p0.x);
             const degree = (rad * 180) / Math.PI;
             const velocity = distance / (TroopSystem.TICK / 1000) / Tilemap.RATE;
-            if (soldier.velocity < leaderMovement.velocity) {
-                soldier.velocity = leaderMovement.velocity;
+            if (soldier.velocity < leader.movement.velocity) {
+                soldier.velocity = leader.movement.velocity;
             }
             if (soldier.velocity < velocity) {
                 soldier.velocity += 0.2;
@@ -122,12 +120,12 @@ export class TroopSystem extends ecs.System {
 
     private _doRush(soldier: SoldierComponent) {
         const api = this.ecs.getSystem(CommandSystem)!;
-        const transform = soldier.getComponent(TransformComponent)!;
+        const transform = soldier.transform;
         const distance = Laya.Vector3.distance(transform.position, soldier.attackInfo.position);
         if (distance < 0.1) {
             soldier.order = SoliderOrder.FIGHT;
         } else {
-            const movement = soldier.getComponent(MovementComponent)!;
+            const movement = soldier.movement;
             if (!movement.target) {
                 movement.target = Laya.Pool.obtain(Laya.Vector3);
             }

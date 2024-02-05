@@ -230,6 +230,8 @@ export namespace ecs {
             this._entity = entity;
         }
 
+        reset?(): void;
+
         get entity() {
             return this._entity;
         }

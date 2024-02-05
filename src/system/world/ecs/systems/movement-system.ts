@@ -30,12 +30,6 @@ export class MovementSystem extends ecs.System {
                 this._updateWithSpeed(movement, dt);
             }
         });
-        this.ecs.getComponents(TroopComponent).forEach((troop) => {
-            const movement = troop.getComponent(MovementComponent)!;
-            if (movement.type == MovementType.WHEEL) {
-                this._updateTroopPosition(troop);
-            }
-        });
     }
 
     private _updateWithTrack(movement: MovementComponent, dt: number) {}
@@ -100,24 +94,5 @@ export class MovementSystem extends ecs.System {
         let rotation = transform.rotation + interpolation.rotation * (ratio - last);
         transform.rotation = rotation % 360;
         transform.flag |= TransformComponent.ROTATION;
-    }
-
-    private _updateTroopPosition(troop: TroopComponent) {
-        let latestIndex = troop.latestIndex;
-        let latestPosition = troop.positions[latestIndex];
-        const transform = troop.getComponent(TransformComponent)!;
-        const offset = Laya.Vector3.distance(transform.position, latestPosition);
-        if (offset < 0.1) {
-            return;
-        }
-
-        if (--latestIndex < 0) {
-            latestIndex = troop.positions.length - 1;
-        }
-
-        latestPosition = troop.positions[latestIndex];
-        latestPosition.offset = offset;
-        troop.latestIndex = latestIndex;
-        transform.position.cloneTo(latestPosition);
     }
 }
