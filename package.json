@@ -14,6 +14,7 @@
         "protobufjs": "^7.2.5"
     },
     "devDependencies": {
+        "@stylistic/eslint-plugin-js": "^1.6.0",
         "@types/bytebuffer": "^5.0.48",
         "@typescript-eslint/eslint-plugin": "^6.19.1",
         "@typescript-eslint/parser": "^6.19.1",

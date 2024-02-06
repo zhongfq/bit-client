@@ -166,6 +166,8 @@ export class CommandSystem extends ecs.System {
             }
 
             const hero = entity.addComponent(HeroComponent);
+            hero.maxHp = Math.max(0.1, data.maxHp);
+            hero.hp = data.hp;
             this._loadSoldiers(hero);
         }
 
@@ -309,6 +311,8 @@ export class CommandSystem extends ecs.System {
         }
     }
 
+    private _subHp(action: proto.world.BattleSubHpAction) {}
+
     private _findAttackTarget(battle: BattleComponent, fightEid: number) {
         const fighterOwner = this.ecs.getComponent(fightEid, OwnerComponent);
         if (fighterOwner) {
@@ -389,29 +393,6 @@ export class CommandSystem extends ecs.System {
                 );
                 solider.order = SoliderOrder.RUSH;
             });
-
-            // const count = Math.max(hero1.soldiers.length, hero2.soldiers.length);
-            // for (let i = 0; i < count; i++) {
-            //     const sx = x + (Math.random() - 0.5) * Tilemap.RATE * 1.2;
-            //     const sz = z + (Math.random() - 0.5) * Tilemap.RATE * 1.2;
-            //     const solider1 = hero1.soldiers[i] || hero1.soldiers[0];
-            //     const solider2 = hero2.soldiers[i] || hero2.soldiers[0];
-            //     const rad = Math.random() * Math.PI;
-            //     const px = Math.cos(rad) * 0.3 * Tilemap.RATE;
-            //     const pz = Math.sin(rad) * 0.3 * Tilemap.RATE;
-            //     if (!solider1.attack.target) {
-            //         solider1.attack.target = solider2.eid;
-            //         solider1.attack.position.x = sx + px;
-            //         solider1.attack.position.z = sz + pz;
-            //         solider1.order = SoliderOrder.RUSH;
-            //     }
-            //     if (!solider2.attack.target) {
-            //         solider2.attack.target = solider1.eid;
-            //         solider2.attack.position.x = sx - px;
-            //         solider2.attack.position.z = sz - pz;
-            //         solider2.order = SoliderOrder.RUSH;
-            //     }
-            // }
 
             Laya.Pool.free(matrix);
             Laya.Pool.free(position);

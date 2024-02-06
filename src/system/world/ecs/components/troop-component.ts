@@ -65,6 +65,8 @@ export class SoldierComponent extends CharacterComponent {
 
 export class HeroComponent extends CharacterComponent {
     soldiers: SoldierComponent[] = [];
+    hp: number = 0;
+    maxHp: number = 0;
 
     // 攻击的主角对象
     attackTarget: number = 0;
