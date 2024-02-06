@@ -34,6 +34,7 @@ export class LoadingMediator extends Laya.Script {
         this.progress = 80;
 
         await app.service.mail.load();
+        await app.service.user.loadProfile();
         await app.service.chat.load({ channel: ChatConf.CHAT_CHANNEL.WORLD });
         this.progress = 100;
     }

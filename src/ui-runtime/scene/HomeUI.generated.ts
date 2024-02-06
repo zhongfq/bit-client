@@ -5,12 +5,19 @@
  * scenes/home.ls
  */
 export class HomeUIBase extends Laya.Scene {
-    public btnBag!: Laya.Button;
     public btnTask!: Laya.Button;
     public btnMail!: Laya.Button;
     public btnShop!: Laya.Button;
     public btnNotice!: Laya.Button;
     public btnWorld!: Laya.Button;
-    public btnChat!: Laya.Button;
+    public imgHeadIcon!: Laya.Image;
+    public labelName!: Laya.Label;
+    public labelPower!: Laya.Label;
+    public labelLv!: Laya.Label;
+    public progressBarExp!: Laya.ProgressBar;
+    public labelExp!: Laya.Label;
+    public btnBag!: Laya.Button;
+    public boxChat!: Laya.Box;
+    public labelMsg!: Laya.Label;
 }
 

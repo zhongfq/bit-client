@@ -8,6 +8,10 @@ const { regClass, property } = Laya;
 import Browser = Laya.Browser;
 import Render = Laya.Render;
 import SpriteUtils = Laya.SpriteUtils;
+import { ChatMsgVo } from "../../misc/vo/chat/chat-msg-vo";
+import { ChatRoleVo } from "../../misc/vo/chat/chat-role-vo";
+import { ChatService } from "../chat/chat-service";
+import { TableUtil } from "../table/table-util";
 
 @regClass()
 export class MainMediator extends Mediator {
@@ -17,8 +21,33 @@ export class MainMediator extends Mediator {
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
     onAwake(): void {
         this.initBtn();
+        this._initServiceEvent();
+        this._initChat();
+        this._initRoleInfo();
     }
-
+    private _initServiceEvent() {
+        this.on(app.service.chat, ChatService.CHAT_UPDATE, (data: ChatMsgVo) => {
+            this._initChat();
+        });
+    }
+    private _initChat() {
+        let msg = app.service.chat.chatMsgVoBag.getOne() as ChatMsgVo;
+        let role = app.service.chat.chatRoleVoBag.get(msg.id) as ChatRoleVo;
+        this.owner.labelMsg.text = `${role.cmd?.name}:${msg.cmd?.text}`;
+    }
+    private _initRoleInfo() {
+        const profiInfo = app.service.user.profileInfo;
+        let lvRow = TableUtil.getRef(app.service.table.role.level, {
+            lv: app.service.user.profileInfo.lv,
+        });
+        let exp = profiInfo.exp || 0;
+        this.owner.labelName.text = app.service.user.profileInfo.name;
+        // this.owner.labelPower.text = app.service.user.profileInfo.power;
+        this.owner.labelLv.text = app.service.user.profileInfo.lv.toString();
+        let a = lvRow!.upgrade_exp * exp;
+        this.owner.labelExp.text = (exp / lvRow!.upgrade_exp) * 100 + "%";
+        this.owner.progressBarExp.value = exp / lvRow!.upgrade_exp;
+    }
     onKeyDown(evt: Laya.Event): void {
         if (evt.ctrlKey && evt.keyCode == Laya.Keyboard.B) {
             app.ui.show(ui.GM);
@@ -41,7 +70,7 @@ export class MainMediator extends Mediator {
         this.owner.btnWorld.on(Laya.Event.CLICK, () => {
             app.ui.replace(ui.WORLD_SCENE);
         });
-        this.owner.btnChat.on(Laya.Event.CLICK, () => {
+        this.owner.boxChat.on(Laya.Event.CLICK, () => {
             app.ui.show(ui.CHAT);
         });
     }

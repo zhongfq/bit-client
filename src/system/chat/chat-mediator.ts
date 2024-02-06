@@ -92,7 +92,7 @@ export class ChatMediator extends Mediator {
         // );
         // this.owner.listPanel.refreshScrollBar();
         this.owner.virtuallyList.setArrayData(
-            Util.toArray(app.service.chat.chatMsgVoBag.getBag()).reverse(),
+            Util.toArray(app.service.chat.chatMsgVoBag.getBag()),
             1
         );
     }

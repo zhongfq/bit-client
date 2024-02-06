@@ -15,6 +15,8 @@ import {
     GeneratedItemRow,
     GeneratedMailRow,
     GeneratedMoneyRow,
+    GeneratedRoleConfRow,
+    GeneratedRoleLevelRow,
     GeneratedShop1Row,
     GeneratedShop2Row,
     GeneratedShopconfigRow,
@@ -147,4 +149,13 @@ export type AllianceTable = {
 export interface EmojiRow extends GeneratedEmojiRow {}
 export type EmojiTable = {
     [K: number]: EmojiRow;
+};
+//-----------------------------------------------------------------------------
+// 表情
+//-----------------------------------------------------------------------------
+export interface RoleLevelRow extends GeneratedRoleLevelRow {}
+export interface RoleConfRow extends GeneratedRoleConfRow {}
+export type RoleTable = {
+    level: RoleLevelRow[];
+    conf: RoleConfRow[];
 };

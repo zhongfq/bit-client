@@ -14,7 +14,7 @@
           "clip": {
             "_$uuid": "0fe5f1fb-d52d-40ed-8780-05279889d7c4"
           },
-          "loop": -1,
+          "loop": 1,
           "speed": 1,
           "clipEnd": 1,
           "x": 189.40370441591392,
@@ -31,7 +31,9 @@
           "clipEnd": 1,
           "soloTransitions": [
             {
-              "id": "0"
+              "id": "0",
+              "exitByTime": true,
+              "exitTime": 1
             }
           ]
         },
@@ -54,7 +56,8 @@
           "clipEnd": 1,
           "clip": {
             "_$uuid": "538e9b8c-8d36-48a0-afb5-ec3a75db4469"
-          }
+          },
+          "loop": 1
         }
       ],
       "defaultWeight": 1

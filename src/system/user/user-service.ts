@@ -5,8 +5,9 @@ import { NetworkService } from "../network/network-service";
 import { app } from "../../app";
 import { ui } from "../../misc/ui";
 import { MoneyVo } from "../../misc/vo/money/money-vo";
-
 export class UserService extends Service<NetworkService> {
+    static readonly PROFILE_UPDATE = "profile-update";
+    static readonly MONEY_UPDATE = "money-update";
     uid: number = 0;
     rid: number = 0;
     monye: Map<number, MoneyVo> = new Map<number, MoneyVo>();
@@ -16,8 +17,9 @@ export class UserService extends Service<NetworkService> {
         super(network);
         this.handle(opcode.user.s2c_login, this._onLogin);
         this.handle(opcode.money.s2c_load, this._onLoadMonye);
-        this.handle(opcode.money.s2c_load, this._onLoadProfile);
+        this.handle(opcode.profile.s2c_load, this._onLoadProfile);
         this.handle(opcode.money.notify_items, this._onMoneyNotify); //资源信息广播
+        this.handle(opcode.profile.notify_profile, this._onProfileNotify);
     }
 
     private _onLogin(data: proto.user.s2c_login) {
@@ -39,6 +41,7 @@ export class UserService extends Service<NetworkService> {
                 vo.initByCmd(item as proto.money.MoneyItem);
                 this.monye.set(item.id!, vo);
             }
+            this.event(UserService.MONEY_UPDATE);
         }
     }
 
@@ -54,6 +57,12 @@ export class UserService extends Service<NetworkService> {
             vo.initByCmd(item as proto.money.MoneyItem);
             this.monye.set(item.id!, vo);
         }
+    }
+
+    private _onProfileNotify(data: proto.profile.notify_profile) {
+        this.profileInfo = data.profile as proto.profile.ProfileInfo;
+
+        this.event(UserService.PROFILE_UPDATE);
     }
 
     private async _goMainScen() {
