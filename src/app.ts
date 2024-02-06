@@ -5,7 +5,7 @@ import { Service } from "./core/service";
 import { TweenSystem } from "./core/tween/tween-system";
 import { UIManager } from "./core/ui-manager";
 import { opcode } from "./def/protocol";
-import { registerUI, ui } from "./misc/ui";
+import { ui } from "./misc/ui";
 import { BagService } from "./system/bag/bag-service";
 import { ChatService } from "./system/chat/chat-service";
 import { GmService } from "./system/gm/gm-service";
@@ -24,7 +24,7 @@ const { regClass, property } = Laya;
 @regClass()
 export class Main extends AppBase {
     onAwake(): void {
-        registerUI();
+        ui.register();
         app.init();
     }
 }
