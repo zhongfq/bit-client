@@ -6,13 +6,23 @@
   "name": "Box",
   "width": 469,
   "height": 116,
+  "_$comp": [
+    {
+      "_$type": "Animator2D",
+      "controller": {
+        "_$uuid": "33240c21-3c21-4ac2-8621-f87e3d19c57a",
+        "_$type": "AnimationController2D"
+      },
+      "controllerLayers": []
+    }
+  ],
   "_$child": [
     {
       "_$id": "cut9scf1",
       "_$var": true,
       "_$type": "Image",
       "name": "imgHead",
-      "x": 15,
+      "x": 358.269,
       "y": 13,
       "width": 100,
       "height": 100,

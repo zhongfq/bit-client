@@ -15,6 +15,11 @@ export class ChatCellUI extends ChatCellUIBase {
     }
     updateInfo() {
         let role = app.service.chat.chatRoleVoBag.get(this.msgData.id) as ChatRoleVo;
+        if (role.id == app.service.user.rid) {
+            this.getComponent(Laya.Animator2D).play("chat-cell-self");
+        } else {
+            this.getComponent(Laya.Animator2D).play("chat-cell");
+        }
         this.labelName.text = role.cmd?.name || "";
         let reg = /{(\d+)}/gm;
         let str = this.msgData.cmd?.text || "";
