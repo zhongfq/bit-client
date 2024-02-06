@@ -3,6 +3,8 @@ module.exports = {
     parser: "@typescript-eslint/parser",
     plugins: ["@typescript-eslint", "@stylistic/js"],
     rules: {
+        "@typescript-eslint/no-namespace": "off",
+
         // TODO:
         "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/no-unused-vars": "off",

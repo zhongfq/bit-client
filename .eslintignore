@@ -1,2 +1,4 @@
 **/*.js
+**/*.d.ts
+assets/plugins/*
 .eslintrc.cjs
