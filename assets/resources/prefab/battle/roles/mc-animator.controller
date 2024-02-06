@@ -17,7 +17,7 @@
           "speed": 1,
           "clipStart": 0,
           "clipEnd": 1,
-          "x": 585,
+          "x": 586,
           "y": 144,
           "clip": {
             "_$type": "AnimationClip",
@@ -52,7 +52,7 @@
               ]
             }
           ],
-          "_isLooping": 2
+          "_isLooping": 1
         },
         {
           "_$type": "AnimatorState",
@@ -192,7 +192,7 @@
       "id": 1,
       "name": "idle",
       "type": 1,
-      "val": false
+      "val": true
     },
     {
       "id": 2,

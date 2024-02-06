@@ -7,17 +7,17 @@ import { UIManager } from "./core/ui-manager";
 import { opcode } from "./def/protocol";
 import { registerUI, ui } from "./misc/ui";
 import { BagService } from "./system/bag/bag-service";
-import { TableService } from "./system/table/table-service";
+import { ChatService } from "./system/chat/chat-service";
 import { GmService } from "./system/gm/gm-service";
 import { LoginService } from "./system/login/login-service";
 import { MailService } from "./system/mail/mail-service";
-import { ToastService } from "./system/network/toast-service";
 import { NetworkService } from "./system/network/network-service";
+import { ToastService } from "./system/network/toast-service";
 import { ShopService } from "./system/shop/shop-service";
+import { TableService } from "./system/table/table-service";
 import { TaskService } from "./system/task/task-service";
 import { UserService } from "./system/user/user-service";
 import { WorldService } from "./system/world/world-service";
-import { ChatService } from "./system/chat/chat-service";
 
 const { regClass, property } = Laya;
 

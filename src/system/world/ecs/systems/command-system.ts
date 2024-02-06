@@ -27,21 +27,36 @@ import {
 } from "../components/troop-component";
 
 const formation: IVector3Like[] = [
-    { x: -0.7, y: 0, z: 0 },
-    { x: -0.7, y: 0, z: 0.6 },
-    { x: -0.7, y: 0, z: -0.6 },
-    { x: -1.4, y: 0, z: 0 },
-    { x: -1.4, y: 0, z: 0.6 },
-    { x: -1.4, y: 0, z: -0.6 },
-    { x: -2.1, y: 0, z: 0 },
-    { x: -2.1, y: 0, z: 0.6 },
-    { x: -2.1, y: 0, z: -0.6 },
-    { x: -2.8, y: 0, z: 0 },
-    { x: -2.8, y: 0, z: 0.6 },
-    { x: -2.8, y: 0, z: -0.6 },
+    { x: -0.6, y: 0, z: 0 },
+    { x: -0.6, y: 0, z: 0.6 },
+    { x: -0.6, y: 0, z: -0.6 },
+    { x: -1.2, y: 0, z: 0 },
+    { x: -1.2, y: 0, z: 0.6 },
+    { x: -1.2, y: 0, z: -0.6 },
+    { x: -1.8, y: 0, z: 0 },
+    { x: -1.8, y: 0, z: 0.6 },
+    { x: -1.8, y: 0, z: -0.6 },
+    { x: -2.4, y: 0, z: 0 },
+    { x: -2.4, y: 0, z: 0.6 },
+    { x: -2.4, y: 0, z: -0.6 },
 ];
 
-const attackFormation: IVector3Like[] = [];
+const attackFormation: IVector3Like[] = [
+    { x: -0.3, y: 0, z: 0 },
+    { x: -0.3, y: 0, z: 0.5 },
+    { x: -0.3, y: 0, z: -0.5 },
+    { x: -0.3, y: 0, z: 1 },
+    { x: -0.3, y: 0, z: -1 },
+    { x: -0.6, y: 0, z: 0.2 },
+    { x: -0.6, y: 0, z: -0.2 },
+    { x: -0.6, y: 0, z: 0.7 },
+    { x: -0.6, y: 0, z: -0.7 },
+    { x: -0.9, y: 0, z: 0 },
+    { x: -0.9, y: 0, z: 0.5 },
+    { x: -0.9, y: 0, z: -0.5 },
+    { x: -0.9, y: 0, z: 1 },
+    { x: -0.9, y: 0, z: -1 },
+];
 
 const PREFAB_SOLDIERS = [
     "resources/prefab/battle/roles/mc03.lh",
@@ -268,7 +283,7 @@ export class CommandSystem extends ecs.System {
             const hero = entity.getComponent(HeroComponent)!;
             hero.attackTarget = 0;
             hero.soldiers.forEach((soldier) => {
-                soldier.attackInfo.target = null;
+                soldier.attack.target = null;
                 soldier.order = SoliderOrder.RETURN;
             });
             const movement = entity.getComponent(MovementComponent)!;
@@ -342,30 +357,64 @@ export class CommandSystem extends ecs.System {
             hero2.attackTarget = hero1.eid;
             const transform1 = hero1.getComponent(TransformComponent)!;
             const transform2 = hero2.getComponent(TransformComponent)!;
+            const rad = Math.atan2(
+                -(transform2.position.z - transform1.position.z),
+                transform2.position.x - transform1.position.x
+            );
             const x = (transform1.position.x + transform2.position.x) / 2;
             const z = (transform1.position.z + transform2.position.z) / 2;
-            const count = Math.max(hero1.soldiers.length, hero2.soldiers.length);
-            for (let i = 0; i < count; i++) {
-                const sx = x + (Math.random() - 0.5) * Tilemap.RATE * 1.2;
-                const sz = z + (Math.random() - 0.5) * Tilemap.RATE * 1.2;
-                const solider1 = hero1.soldiers[i] || hero1.soldiers[0];
-                const solider2 = hero2.soldiers[i] || hero2.soldiers[0];
-                const rad = Math.random() * Math.PI;
-                const px = Math.cos(rad) * 0.3 * Tilemap.RATE;
-                const pz = Math.sin(rad) * 0.3 * Tilemap.RATE;
-                if (!solider1.attackInfo.target) {
-                    solider1.attackInfo.target = solider2.eid;
-                    solider1.attackInfo.position.x = sx + px;
-                    solider1.attackInfo.position.z = sz + pz;
-                    solider1.order = SoliderOrder.RUSH;
-                }
-                if (!solider2.attackInfo.target) {
-                    solider2.attackInfo.target = solider1.eid;
-                    solider2.attackInfo.position.x = sx - px;
-                    solider2.attackInfo.position.z = sz - pz;
-                    solider2.order = SoliderOrder.RUSH;
-                }
-            }
+            const matrix = Laya.Pool.obtain(Laya.Matrix4x4);
+            const position = Laya.Pool.obtain(Laya.Vector3).set(x, 0, z);
+
+            Laya.Matrix4x4.createRotationY(rad, matrix);
+            matrix.setPosition(position);
+            hero1.soldiers.forEach((solider, index) => {
+                const offset = attackFormation[index];
+                Laya.Vector3.transformCoordinate(
+                    offset as Laya.Vector3,
+                    matrix,
+                    solider.attack.position
+                );
+                solider.order = SoliderOrder.RUSH;
+            });
+
+            Laya.Matrix4x4.createRotationY(rad + Math.PI, matrix);
+            matrix.setPosition(position);
+            hero2.soldiers.forEach((solider, index) => {
+                const offset = attackFormation[index];
+                Laya.Vector3.transformCoordinate(
+                    offset as Laya.Vector3,
+                    matrix,
+                    solider.attack.position
+                );
+                solider.order = SoliderOrder.RUSH;
+            });
+
+            // const count = Math.max(hero1.soldiers.length, hero2.soldiers.length);
+            // for (let i = 0; i < count; i++) {
+            //     const sx = x + (Math.random() - 0.5) * Tilemap.RATE * 1.2;
+            //     const sz = z + (Math.random() - 0.5) * Tilemap.RATE * 1.2;
+            //     const solider1 = hero1.soldiers[i] || hero1.soldiers[0];
+            //     const solider2 = hero2.soldiers[i] || hero2.soldiers[0];
+            //     const rad = Math.random() * Math.PI;
+            //     const px = Math.cos(rad) * 0.3 * Tilemap.RATE;
+            //     const pz = Math.sin(rad) * 0.3 * Tilemap.RATE;
+            //     if (!solider1.attack.target) {
+            //         solider1.attack.target = solider2.eid;
+            //         solider1.attack.position.x = sx + px;
+            //         solider1.attack.position.z = sz + pz;
+            //         solider1.order = SoliderOrder.RUSH;
+            //     }
+            //     if (!solider2.attack.target) {
+            //         solider2.attack.target = solider1.eid;
+            //         solider2.attack.position.x = sx - px;
+            //         solider2.attack.position.z = sz - pz;
+            //         solider2.order = SoliderOrder.RUSH;
+            //     }
+            // }
+
+            Laya.Pool.free(matrix);
+            Laya.Pool.free(position);
         }
     }
 
@@ -437,10 +486,10 @@ export class CommandSystem extends ecs.System {
     }
 
     soldierFight(soldier: SoldierComponent) {
-        if (soldier.attackInfo.target) {
-            this._towardToTarget(soldier.eid, soldier.attackInfo.target);
-            this.playAnimation(soldier, CharacterAnimation.ATTACK);
-        }
+        // if (soldier.attack.target) {
+        // this._towardToTarget(soldier.eid, soldier.attack.target);
+        this.playAnimation(soldier, CharacterAnimation.ATTACK);
+        // }
     }
 
     playAnimation(character: CharacterComponent, name: CharacterAnimation) {

@@ -2,7 +2,7 @@ import { ecs } from "../../../../core/ecs";
 import { WorldContext } from "../../world-context";
 import { MovementType } from "../components/movement-component";
 import { Tilemap } from "../components/tilemap-component";
-import { SoldierComponent, SoliderOrder, HeroComponent } from "../components/troop-component";
+import { HeroComponent, SoldierComponent, SoliderOrder } from "../components/troop-component";
 import { CommandSystem } from "./command-system";
 
 const tmpVector3 = new Laya.Vector3();
@@ -82,7 +82,6 @@ export class TroopSystem extends ecs.System {
 
     private _doReturn(soldier: SoldierComponent) {
         const api = this.ecs.getSystem(CommandSystem)!;
-        const movement = soldier.movement;
         const leader = this.ecs.getComponent(soldier.leader, HeroComponent)!;
         const transform = soldier.transform;
         const p1 = tmpVector3;
@@ -117,7 +116,7 @@ export class TroopSystem extends ecs.System {
     private _doRush(soldier: SoldierComponent) {
         const api = this.ecs.getSystem(CommandSystem)!;
         const transform = soldier.transform;
-        const distance = Laya.Vector3.distance(transform.position, soldier.attackInfo.position);
+        const distance = Laya.Vector3.distance(transform.position, soldier.attack.position);
         if (distance < 0.1) {
             soldier.order = SoliderOrder.FIGHT;
         } else {
@@ -125,8 +124,8 @@ export class TroopSystem extends ecs.System {
             if (!movement.target) {
                 movement.target = Laya.Pool.obtain(Laya.Vector3);
             }
-            soldier.attackInfo.position.cloneTo(movement.target);
-            const p1 = soldier.attackInfo.position;
+            soldier.attack.position.cloneTo(movement.target);
+            const p1 = soldier.attack.position;
             const p0 = transform.position;
             const rad = Math.atan2(p1.z - p0.z, p1.x - p0.x);
             const degree = (rad * 180) / Math.PI;
@@ -146,8 +145,9 @@ export class TroopSystem extends ecs.System {
 
     private _doAttack(soldier: SoldierComponent) {
         const api = this.ecs.getSystem(CommandSystem)!;
-        if (Laya.timer.currTimer - soldier.attackInfo.time > TroopSystem.ATTACK_INTERVAL) {
-            soldier.attackInfo.time = Laya.timer.currTimer;
+        if (Laya.timer.currTimer - soldier.attack.time > TroopSystem.ATTACK_INTERVAL) {
+            soldier.attack.time = Laya.timer.currTimer;
+            api.stopMove(soldier);
             api.soldierFight(soldier);
         }
     }

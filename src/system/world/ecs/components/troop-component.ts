@@ -22,12 +22,6 @@ export enum SoliderOrder {
     RETURN, // 归队
 }
 
-type AttackInfo = {
-    time: number;
-    target: number | null;
-    position: Laya.Vector3;
-};
-
 export enum CharacterAnimation {
     IDLE = "idle",
     RUN = "run",
@@ -53,6 +47,12 @@ export abstract class CharacterComponent extends ecs.Component {
     }
 }
 
+type SoliderAttack = {
+    time: number;
+    target: number | null;
+    position: Laya.Vector3;
+};
+
 export class SoldierComponent extends CharacterComponent {
     order: SoliderOrder = SoliderOrder.IDLE;
     leader!: number;
@@ -60,7 +60,7 @@ export class SoldierComponent extends CharacterComponent {
     velocity: number = 0;
 
     // 攻击的小兵对象
-    attackInfo: AttackInfo = { target: null, time: 0, position: new Laya.Vector3() };
+    attack: SoliderAttack = { target: null, time: 0, position: new Laya.Vector3() };
 }
 
 export class HeroComponent extends CharacterComponent {

@@ -27,8 +27,14 @@ declare global {
         interface Vector2 {
             normalize(): void;
             clone(): Vector2;
+            cloneTo(value: IVector2Like): IVector2Like;
 
             get length(): number;
+        }
+
+        interface Vector3 {
+            clone(): Vector3;
+            cloneTo(value: IVector3Like): IVector3Like;
         }
 
         namespace Pool {
@@ -42,6 +48,14 @@ Laya.Vector2.prototype.normalize = function () {
     Laya.Vector2.normalize(this, this);
 };
 
+Object.defineProperty(Laya.Vector2.prototype, "length", {
+    get() {
+        const { x, y } = this as Laya.Vector2;
+        return Math.sqrt(x * x + y * y);
+    },
+    configurable: true,
+});
+
 Laya.Pool.obtain = function <T>(cls: Constructor<T>): T {
     return Laya.Pool.createByClass(cls);
 };
@@ -51,11 +65,3 @@ Laya.Pool.free = function <T>(obj: T): void {
         Laya.Pool.recoverByClass(obj);
     }
 };
-
-Object.defineProperty(Laya.Vector2.prototype, "length", {
-    get() {
-        const { x, y } = this as Laya.Vector2;
-        return Math.sqrt(x * x + y * y);
-    },
-    configurable: true,
-});
