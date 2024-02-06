@@ -6,7 +6,7 @@ import {
     TrackType,
     TransformComponent,
 } from "../components/movement-component";
-import { TroopComponent } from "../components/troop-component";
+import { HeroComponent } from "../components/troop-component";
 
 const tmpVector3 = new Laya.Vector3();
 

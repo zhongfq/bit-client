@@ -6,7 +6,6 @@ import { MathUtil } from "../../../../core/utils/math-util";
 import proto from "../../../../def/proto";
 import { opcode } from "../../../../def/protocol";
 import { WorldConf } from "../../../../def/world";
-import { IBehaviorContext } from "../../behavior3/behavior-context";
 import { WorldContext } from "../../world-context";
 import { BattleComponent } from "../components/battle-component";
 import { CameraComponent } from "../components/camera-component";
@@ -14,23 +13,18 @@ import {
     InterpolationRate,
     MovementComponent,
     MovementType,
-    TrackVector3,
     TransformComponent,
 } from "../components/movement-component";
 import { AnimationComponent } from "../components/render-component";
 import { Tilemap } from "../components/tilemap-component";
 import {
+    CharacterAnimation,
+    CharacterComponent,
+    HeroComponent,
     OwnerComponent,
     SoldierComponent,
     SoliderOrder,
-    TroopComponent,
 } from "../components/troop-component";
-
-enum AnimatorParam {
-    IDLE = "idle",
-    RUN = "run",
-    ATTACK = "attack",
-}
 
 const formation: IVector3Like[] = [
     { x: -0.7, y: 0, z: 0 },
@@ -54,7 +48,7 @@ const PREFAB_SOLDIERS = [
     "resources/prefab/battle/roles/mc04.lh",
 ];
 
-export class CommandSystem extends ecs.System implements IBehaviorContext {
+export class CommandSystem extends ecs.System {
     constructor(readonly context: WorldContext) {
         super();
 
@@ -142,7 +136,6 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
             const movement = entity.addComponent(MovementComponent);
             movement.positionInterpolation.rate = InterpolationRate.POSITION;
             movement.rotationInterpolation.rate = InterpolationRate.ROTATION;
-            this._updateMovement(cmd.eid, cmd.move as proto.world.MoveComponent);
         }
 
         if (cmd.troop) {
@@ -157,8 +150,8 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
                 camera.focus = cmd.eid;
             }
 
-            const troop = entity.addComponent(TroopComponent);
-            this._loadSoldiers(troop);
+            const hero = entity.addComponent(HeroComponent);
+            this._loadSoldiers(hero);
         }
 
         if (cmd.battle) {
@@ -176,14 +169,18 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
         } else {
             console.log(`unhandle entity type: ${cmd.etype}`);
         }
+
+        if (cmd.move) {
+            this._updateMovement(cmd.eid, cmd.move as proto.world.MoveComponent);
+        }
     }
 
     private _delEntity(eid: number) {
         const entity = this.ecs.getEntity(eid);
         if (entity) {
-            const troop = entity.getComponent(TroopComponent);
-            if (troop) {
-                troop.soldiers.forEach((solider) => {
+            const hero = entity.getComponent(HeroComponent);
+            if (hero) {
+                hero.soldiers.forEach((solider) => {
                     this.ecs.removeEntity(solider.eid);
                 });
             }
@@ -224,18 +221,17 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
             return;
         }
 
-        const movement = entity.getComponent(MovementComponent)!;
-        const troop = entity.getComponent(TroopComponent)!;
+        const hero = entity.getComponent(HeroComponent)!;
         if (data.speed === 0 && data.path.length === 0) {
-            this.stopMove(movement);
-            if (troop) {
-                this._stopMoveSoldiers(troop);
+            this.stopMove(hero);
+            if (hero) {
+                this._stopMoveSoldiers(hero);
             }
         } else if (data.path.length > 0) {
         } else if (data.speed > 0) {
-            this.startMove(movement, MathUtil.toDegree(data.degree), data.speed);
-            if (troop) {
-                this._startMoveSoldiers(troop);
+            this.startMove(hero, MathUtil.toDegree(data.degree), data.speed);
+            if (hero) {
+                this._startMoveSoldiers(hero);
             }
         }
     }
@@ -246,18 +242,8 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
             console.warn(`entity not found: eid=${cmd.srcEid}`);
             return;
         }
-        const animation = entity.getComponent(AnimationComponent);
-        if (animation?.animator) {
-            animation.animator.setParamsTrigger(AnimatorParam.ATTACK);
-            const movement = animation.getComponent(MovementComponent)!;
-            if (movement.type === MovementType.NONE) {
-                animation.animator.setParamsBool(AnimatorParam.IDLE, true);
-                animation.animator.setParamsBool(AnimatorParam.RUN, false);
-            } else {
-                animation.animator.setParamsBool(AnimatorParam.IDLE, false);
-                animation.animator.setParamsBool(AnimatorParam.RUN, true);
-            }
-        }
+        const character = entity.getComponent(HeroComponent)!;
+        this.playAnimation(character, CharacterAnimation.ATTACK);
         this._towardToTarget(cmd.srcEid, cmd.dstEid);
     }
 
@@ -279,9 +265,9 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
         const entity = this.ecs.getEntity(action.fighterEid);
         if (entity) {
             const animation = entity.getComponent(AnimationComponent)!;
-            const troop = entity.getComponent(TroopComponent)!;
-            troop.attackTarget = 0;
-            troop.soldiers.forEach((soldier) => {
+            const hero = entity.getComponent(HeroComponent)!;
+            hero.attackTarget = 0;
+            hero.soldiers.forEach((soldier) => {
                 soldier.attackInfo.target = null;
                 soldier.order = SoliderOrder.RETURN;
             });
@@ -314,7 +300,7 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
             for (let i = 0; i < battle.fighterEids.length - 1; i++) {
                 const target = this.ecs.getComponent(battle.fighterEids[i], OwnerComponent);
                 if (target && target.aid !== fighterOwner.aid) {
-                    return target.getComponent(TroopComponent)!;
+                    return target.getComponent(HeroComponent)!;
                 }
             }
         }
@@ -323,7 +309,7 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
 
     private _joinBattle(battleEid: number, fighterEid: number) {
         const battle = this.ecs.getComponent(battleEid, BattleComponent);
-        const fighter = this.ecs.getComponent(fighterEid, TroopComponent);
+        const fighter = this.ecs.getComponent(fighterEid, HeroComponent);
 
         if (!battle) {
             console.warn(`join battle: battle not found: ${battleEid}`);
@@ -349,21 +335,21 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
         }
     }
 
-    private _fight(troop1: TroopComponent, troop2: TroopComponent) {
-        if (troop2.attackTarget) {
+    private _fight(hero1: HeroComponent, hero2: HeroComponent) {
+        if (hero2.attackTarget) {
         } else {
-            troop1.attackTarget = troop2.eid;
-            troop2.attackTarget = troop1.eid;
-            const transform1 = troop1.getComponent(TransformComponent)!;
-            const transform2 = troop2.getComponent(TransformComponent)!;
+            hero1.attackTarget = hero2.eid;
+            hero2.attackTarget = hero1.eid;
+            const transform1 = hero1.getComponent(TransformComponent)!;
+            const transform2 = hero2.getComponent(TransformComponent)!;
             const x = (transform1.position.x + transform2.position.x) / 2;
             const z = (transform1.position.z + transform2.position.z) / 2;
-            const count = Math.max(troop1.soldiers.length, troop2.soldiers.length);
+            const count = Math.max(hero1.soldiers.length, hero2.soldiers.length);
             for (let i = 0; i < count; i++) {
                 const sx = x + (Math.random() - 0.5) * Tilemap.RATE * 1.2;
                 const sz = z + (Math.random() - 0.5) * Tilemap.RATE * 1.2;
-                const solider1 = troop1.soldiers[i] || troop1.soldiers[0];
-                const solider2 = troop2.soldiers[i] || troop2.soldiers[0];
+                const solider1 = hero1.soldiers[i] || hero1.soldiers[0];
+                const solider2 = hero2.soldiers[i] || hero2.soldiers[0];
                 const rad = Math.random() * Math.PI;
                 const px = Math.cos(rad) * 0.3 * Tilemap.RATE;
                 const pz = Math.sin(rad) * 0.3 * Tilemap.RATE;
@@ -407,15 +393,10 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
         }
     }
 
-    private _clearTrigger(animator: Laya.Animator, name: AnimatorParam) {
-        const id = Laya.AnimatorStateCondition.conditionNameToID(name);
-        animator.animatorParams[id] = false;
-    }
-
     // 加载小兵
-    private _loadSoldiers(troop: TroopComponent) {
-        const leaderTransform = troop.getComponent(TransformComponent)!;
-        const aid = troop.getComponent(OwnerComponent)!.aid;
+    private _loadSoldiers(hero: HeroComponent) {
+        const leaderTransform = hero.getComponent(TransformComponent)!;
+        const aid = hero.getComponent(OwnerComponent)!.aid;
         for (let i = 0; i < formation.length; i++) {
             const offset = formation[i];
             const entity = this.ecs.createEntity();
@@ -433,23 +414,22 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
             movement.rotationInterpolation.rate = InterpolationRate.SOLDIER_ROTATION;
 
             const soldier = entity.addComponent(SoldierComponent);
-            soldier.leader = troop.eid;
+            soldier.leader = hero.eid;
             soldier.offset = offset;
-            troop.soldiers.push(soldier);
+            hero.soldiers.push(soldier);
         }
     }
 
-    private _startMoveSoldiers(troop: TroopComponent) {
-        const leaderMovement = troop.getComponent(MovementComponent)!;
-        troop.soldiers.forEach((soldier) => {
+    private _startMoveSoldiers(hero: HeroComponent) {
+        hero.soldiers.forEach((soldier) => {
             if (soldier.order == SoliderOrder.IDLE) {
                 soldier.order = SoliderOrder.MOVE;
             }
         });
     }
 
-    private _stopMoveSoldiers(troop: TroopComponent) {
-        troop.soldiers.forEach((soldier) => {
+    private _stopMoveSoldiers(hero: HeroComponent) {
+        hero.soldiers.forEach((soldier) => {
             if (soldier.order == SoliderOrder.MOVE) {
                 soldier.order = SoliderOrder.IDLE;
             }
@@ -459,24 +439,32 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
     soldierFight(soldier: SoldierComponent) {
         if (soldier.attackInfo.target) {
             this._towardToTarget(soldier.eid, soldier.attackInfo.target);
-            const animation = soldier.animation;
-            const movement = soldier.movement;
-            if (animation.animator) {
-                animation.animator.setParamsTrigger(AnimatorParam.ATTACK);
-                if (movement.type === MovementType.NONE) {
-                    animation.animator.setParamsBool(AnimatorParam.IDLE, true);
-                    animation.animator.setParamsBool(AnimatorParam.RUN, false);
-                } else {
-                    animation.animator.setParamsBool(AnimatorParam.IDLE, true);
-                    animation.animator.setParamsBool(AnimatorParam.RUN, false);
-                }
+            this.playAnimation(soldier, CharacterAnimation.ATTACK);
+        }
+    }
+
+    playAnimation(character: CharacterComponent, name: CharacterAnimation) {
+        const animator = character.animation.animator;
+        if (animator) {
+            switch (name) {
+                case CharacterAnimation.ATTACK:
+                    animator.setParamsTrigger(CharacterAnimation.ATTACK);
+                    break;
+                case CharacterAnimation.IDLE:
+                    animator.setParamsBool(CharacterAnimation.RUN, false);
+                    animator.setParamsBool(CharacterAnimation.IDLE, true);
+                    break;
+                case CharacterAnimation.RUN:
+                    animator.setParamsBool(CharacterAnimation.IDLE, false);
+                    animator.setParamsBool(CharacterAnimation.RUN, true);
+                    break;
             }
         }
     }
 
-    calcSoldierPosition(troop: TroopComponent, solider: SoldierComponent, out: Laya.Vector3) {
-        const animation = troop.animation;
-        const transform = troop.transform;
+    calcSoldierPosition(hero: HeroComponent, solider: SoldierComponent, out: Laya.Vector3) {
+        const animation = hero.animation;
+        const transform = hero.transform;
         if (animation.view) {
             out.x = solider.offset.x;
             out.y = solider.offset.y;
@@ -489,31 +477,24 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
         }
     }
 
-    startMove(movement: MovementComponent, degree: number, velocity: number) {
-        const transform = movement.getComponent(TransformComponent)!;
-        const animation = movement.getComponent(AnimationComponent);
+    startMove(character: CharacterComponent, degree: number, velocity: number) {
+        const { transform, movement } = character;
         movement.type = MovementType.WHEEL;
         movement.velocity = velocity;
         Tilemap.degree2Speed(degree, velocity, movement.speed);
         this._setRotation(transform, movement.speed.x, movement.speed.z, true);
-        if (animation?.animator) {
-            animation.animator.setParamsBool(AnimatorParam.IDLE, false);
-            animation.animator.setParamsBool(AnimatorParam.RUN, true);
-        }
+        this.playAnimation(character, CharacterAnimation.RUN);
     }
 
-    stopMove(movement: MovementComponent) {
-        const animation = movement.getComponent(AnimationComponent);
+    stopMove(character: CharacterComponent) {
+        const { movement } = character;
+        Laya.Pool.free(movement.target);
         movement.type = MovementType.NONE;
         movement.speed.x = 0;
         movement.speed.y = 0;
         movement.speed.z = 0;
         movement.track = null;
         movement.target = null;
-        Laya.Pool.free(movement.target);
-        if (animation?.animator) {
-            animation.animator.setParamsBool(AnimatorParam.IDLE, true);
-            animation.animator.setParamsBool(AnimatorParam.RUN, false);
-        }
+        this.playAnimation(character, CharacterAnimation.IDLE);
     }
 }

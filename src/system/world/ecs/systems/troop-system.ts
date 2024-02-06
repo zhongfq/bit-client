@@ -1,12 +1,8 @@
 import { ecs } from "../../../../core/ecs";
 import { WorldContext } from "../../world-context";
-import {
-    MovementComponent,
-    MovementType,
-    TransformComponent,
-} from "../components/movement-component";
+import { MovementType } from "../components/movement-component";
 import { Tilemap } from "../components/tilemap-component";
-import { SoldierComponent, SoliderOrder, TroopComponent } from "../components/troop-component";
+import { SoldierComponent, SoliderOrder, HeroComponent } from "../components/troop-component";
 import { CommandSystem } from "./command-system";
 
 const tmpVector3 = new Laya.Vector3();
@@ -48,13 +44,13 @@ export class TroopSystem extends ecs.System {
         const api = this.ecs.getSystem(CommandSystem)!;
         const movement = soldier.movement;
         if (movement.type !== MovementType.NONE) {
-            api.stopMove(movement);
+            api.stopMove(soldier);
         }
     }
 
     private _doMove(soldier: SoldierComponent) {
         const api = this.ecs.getSystem(CommandSystem)!;
-        const leader = this.ecs.getComponent(soldier.leader, TroopComponent)!;
+        const leader = this.ecs.getComponent(soldier.leader, HeroComponent)!;
         const movement = soldier.movement;
         const transform = soldier.transform;
         const p1 = tmpVector3;
@@ -80,14 +76,14 @@ export class TroopSystem extends ecs.System {
             if (soldier.velocity > 2) {
                 soldier.velocity = 2;
             }
-            api.startMove(movement, degree, soldier.velocity);
+            api.startMove(soldier, degree, soldier.velocity);
         }
     }
 
     private _doReturn(soldier: SoldierComponent) {
         const api = this.ecs.getSystem(CommandSystem)!;
         const movement = soldier.movement;
-        const leader = this.ecs.getComponent(soldier.leader, TroopComponent)!;
+        const leader = this.ecs.getComponent(soldier.leader, HeroComponent)!;
         const transform = soldier.transform;
         const p1 = tmpVector3;
         const p0 = transform.position;
@@ -114,7 +110,7 @@ export class TroopSystem extends ecs.System {
             if (soldier.velocity > 4) {
                 soldier.velocity = 4;
             }
-            api.startMove(movement, degree, soldier.velocity);
+            api.startMove(soldier, degree, soldier.velocity);
         }
     }
 
@@ -144,7 +140,7 @@ export class TroopSystem extends ecs.System {
             if (soldier.velocity > 3) {
                 soldier.velocity = 3;
             }
-            api.startMove(movement, degree, soldier.velocity);
+            api.startMove(soldier, degree, soldier.velocity);
         }
     }
 

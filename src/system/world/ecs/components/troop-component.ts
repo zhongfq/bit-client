@@ -28,6 +28,12 @@ type AttackInfo = {
     position: Laya.Vector3;
 };
 
+export enum CharacterAnimation {
+    IDLE = "idle",
+    RUN = "run",
+    ATTACK = "attack",
+}
+
 export abstract class CharacterComponent extends ecs.Component {
     // 缓存组件方便快速访问？
     private _movement: MovementComponent | null = null;
@@ -57,7 +63,7 @@ export class SoldierComponent extends CharacterComponent {
     attackInfo: AttackInfo = { target: null, time: 0, position: new Laya.Vector3() };
 }
 
-export class TroopComponent extends CharacterComponent {
+export class HeroComponent extends CharacterComponent {
     soldiers: SoldierComponent[] = [];
 
     // 攻击的主角对象
