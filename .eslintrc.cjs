@@ -3,6 +3,7 @@ module.exports = {
     parser: "@typescript-eslint/parser",
     plugins: ["@typescript-eslint", "@stylistic/js"],
     rules: {
+        // TODO:
         "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/no-unused-vars": "off",
 
@@ -10,7 +11,11 @@ module.exports = {
         "@stylistic/js/lines-between-class-members": [
             "error",
             {
-                enforce: [{ blankLine: "always", prev: "method", next: "method" }],
+                enforce: [
+                    { blankLine: "always", prev: "method", next: "method" },
+                    { blankLine: "always", prev: "field", next: "method" },
+                    { blankLine: "always", prev: "method", next: "field" },
+                ],
             },
         ],
     },
