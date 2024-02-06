@@ -249,6 +249,14 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
         const animation = entity.getComponent(AnimationComponent);
         if (animation?.animator) {
             animation.animator.setParamsTrigger(AnimatorParam.ATTACK);
+            const movement = animation.getComponent(MovementComponent)!;
+            if (movement.type === MovementType.NONE) {
+                animation.animator.setParamsBool(AnimatorParam.IDLE, true);
+                animation.animator.setParamsBool(AnimatorParam.RUN, false);
+            } else {
+                animation.animator.setParamsBool(AnimatorParam.IDLE, false);
+                animation.animator.setParamsBool(AnimatorParam.RUN, true);
+            }
         }
         this._towardToTarget(cmd.srcEid, cmd.dstEid);
     }
@@ -348,8 +356,8 @@ export class CommandSystem extends ecs.System implements IBehaviorContext {
             troop2.attackTarget = troop1.eid;
             const transform1 = troop1.getComponent(TransformComponent)!;
             const transform2 = troop2.getComponent(TransformComponent)!;
-            const x = (transform1.position.x + transform2.position.x) / 2.5;
-            const z = (transform1.position.z + transform2.position.z) / 2.5;
+            const x = (transform1.position.x + transform2.position.x) / 2;
+            const z = (transform1.position.z + transform2.position.z) / 2;
             const count = Math.max(troop1.soldiers.length, troop2.soldiers.length);
             for (let i = 0; i < count; i++) {
                 const sx = x + (Math.random() - 0.5) * Tilemap.RATE * 1.2;

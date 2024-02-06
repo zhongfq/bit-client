@@ -28,7 +28,7 @@ type AttackInfo = {
     position: Laya.Vector3;
 };
 
-class RoleComponent extends ecs.Component {
+export abstract class CharacterComponent extends ecs.Component {
     // 缓存组件方便快速访问？
     private _movement: MovementComponent | null = null;
     private _transform: TransformComponent | null = null;
@@ -47,7 +47,7 @@ class RoleComponent extends ecs.Component {
     }
 }
 
-export class SoldierComponent extends RoleComponent {
+export class SoldierComponent extends CharacterComponent {
     order: SoliderOrder = SoliderOrder.IDLE;
     leader!: number;
     offset!: IVector3Like;
@@ -57,7 +57,7 @@ export class SoldierComponent extends RoleComponent {
     attackInfo: AttackInfo = { target: null, time: 0, position: new Laya.Vector3() };
 }
 
-export class TroopComponent extends RoleComponent {
+export class TroopComponent extends CharacterComponent {
     soldiers: SoldierComponent[] = [];
 
     // 攻击的主角对象

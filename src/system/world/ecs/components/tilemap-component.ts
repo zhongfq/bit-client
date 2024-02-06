@@ -2,7 +2,7 @@ import { ecs } from "../../../../core/ecs";
 import { IVector3Like } from "../../../../core/laya";
 
 export class Tilemap extends ecs.Component {
-    static readonly RATE = 1.5;
+    static readonly RATE = 1;
 
     static grid2Pixel(x: number, z: number, out: IVector3Like) {
         // TODO
