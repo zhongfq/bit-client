@@ -57,6 +57,7 @@ export class SoldierComponent extends CharacterComponent {
     order: SoliderOrder = SoliderOrder.IDLE;
     leader!: number;
     offset!: IVector3Like;
+    index: number = 0;
     velocity: number = 0;
 
     // 攻击的小兵对象
@@ -64,6 +65,7 @@ export class SoldierComponent extends CharacterComponent {
 }
 
 export class HeroComponent extends CharacterComponent {
+    formation!: Readonly<IVector3Like>[];
     soldiers: SoldierComponent[] = [];
     hp: number = 0;
     maxHp: number = 0;

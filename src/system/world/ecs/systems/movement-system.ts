@@ -26,6 +26,8 @@ export class MovementSystem extends ecs.System {
                 movement.type == MovementType.TARGET &&
                 movement.trackType === TrackType.CURVE
             ) {
+                // TODO
+                /* empty */
             } else {
                 this._updateWithSpeed(movement, dt);
             }

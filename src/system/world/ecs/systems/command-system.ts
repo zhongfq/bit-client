@@ -26,7 +26,7 @@ import {
     SoliderOrder,
 } from "../components/troop-component";
 
-const formation: IVector3Like[] = [
+const formation: Readonly<IVector3Like>[] = [
     { x: -0.6, y: 0, z: 0 },
     { x: -0.6, y: 0, z: 0.6 },
     { x: -0.6, y: 0, z: -0.6 },
@@ -41,7 +41,7 @@ const formation: IVector3Like[] = [
     { x: -2.4, y: 0, z: -0.6 },
 ];
 
-const attackFormation: IVector3Like[] = [
+const attackFormation: Readonly<IVector3Like>[] = [
     { x: -0.3, y: 0, z: 0 },
     { x: -0.3, y: 0, z: 0.5 },
     { x: -0.3, y: 0, z: -0.5 },
@@ -116,6 +116,7 @@ export class CommandSystem extends ecs.System {
                     this._stopBattle(cmd.battleStop as proto.world.BattleStopAction);
                     break;
                 case ACTION.BATTLE_SUB_HP:
+                    this._subHp(cmd.battleSubHp as proto.world.BattleSubHpAction);
                     break;
             }
         }
@@ -166,6 +167,7 @@ export class CommandSystem extends ecs.System {
             }
 
             const hero = entity.addComponent(HeroComponent);
+            hero.formation = formation;
             hero.maxHp = Math.max(0.1, data.maxHp);
             hero.hp = data.hp;
             this._loadSoldiers(hero);
@@ -245,6 +247,7 @@ export class CommandSystem extends ecs.System {
                 this._stopMoveSoldiers(hero);
             }
         } else if (data.path.length > 0) {
+            console.log("TODO");
         } else if (data.speed > 0) {
             this.startMove(hero, MathUtil.toDegree(data.degree), data.speed);
             if (hero) {
@@ -311,7 +314,34 @@ export class CommandSystem extends ecs.System {
         }
     }
 
-    private _subHp(action: proto.world.BattleSubHpAction) {}
+    private _subHp(action: proto.world.BattleSubHpAction) {
+        const hero = this.ecs.getComponent(action.dstEid, HeroComponent);
+        if (!hero) {
+            console.warn(`sub hp: hero not found: ${action.dstEid}`);
+            return;
+        }
+        hero.hp = action.curHp;
+        const soldiers = hero.soldiers;
+        const count = soldiers.length - Math.ceil((hero.hp / hero.maxHp) * hero.formation.length);
+        console.log("subhp:");
+        if (count > 0) {
+            const arr = soldiers.slice(0, Math.max(4, count));
+            for (let i = 0; i < count; i++) {
+                const idx = MathUtil.randomInt(0, arr.length - 1);
+                const dieSoldier = arr.splice(idx, 1)[0];
+                const soldier = soldiers.pop();
+                if (soldier) {
+                    soldier.offset = dieSoldier.offset;
+                    soldier.index = dieSoldier.index;
+                    soldier.attack.target = null;
+                    soldier.order = SoliderOrder.RUSH;
+                    dieSoldier.attack.position.cloneTo(soldier.attack.position);
+                    soldiers[soldier.index] = soldier;
+                }
+                this.ecs.removeEntity(dieSoldier.eid);
+            }
+        }
+    }
 
     private _findAttackTarget(battle: BattleComponent, fightEid: number) {
         const fighterOwner = this.ecs.getComponent(fightEid, OwnerComponent);
@@ -356,6 +386,7 @@ export class CommandSystem extends ecs.System {
 
     private _fight(hero1: HeroComponent, hero2: HeroComponent) {
         if (hero2.attackTarget) {
+            console.log("TODO");
         } else {
             hero1.attackTarget = hero2.eid;
             hero2.attackTarget = hero1.eid;
@@ -427,8 +458,9 @@ export class CommandSystem extends ecs.System {
     private _loadSoldiers(hero: HeroComponent) {
         const leaderTransform = hero.getComponent(TransformComponent)!;
         const aid = hero.getComponent(OwnerComponent)!.aid;
-        for (let i = 0; i < formation.length; i++) {
-            const offset = formation[i];
+        const count = Math.ceil((hero.hp / hero.maxHp) * hero.formation.length);
+        for (let i = 0; i < count; i++) {
+            const offset = hero.formation[i];
             const entity = this.ecs.createEntity();
             const transform = entity.addComponent(TransformComponent);
             transform.position.x = leaderTransform.position.x + offset.x;
@@ -446,6 +478,7 @@ export class CommandSystem extends ecs.System {
             const soldier = entity.addComponent(SoldierComponent);
             soldier.leader = hero.eid;
             soldier.offset = offset;
+            soldier.index = i;
             hero.soldiers.push(soldier);
         }
     }
@@ -467,10 +500,10 @@ export class CommandSystem extends ecs.System {
     }
 
     soldierFight(soldier: SoldierComponent) {
-        // if (soldier.attack.target) {
-        // this._towardToTarget(soldier.eid, soldier.attack.target);
+        if (soldier.attack.target) {
+            this._towardToTarget(soldier.eid, soldier.attack.target);
+        }
         this.playAnimation(soldier, CharacterAnimation.ATTACK);
-        // }
     }
 
     playAnimation(character: CharacterComponent, name: CharacterAnimation) {
