@@ -20,7 +20,7 @@ export class ChatCellUI extends ChatCellUIBase {
 
         const role = app.service.chat.chatRoleVoBag.get(this.msgData.cmd!.rid) as ChatRoleVo;
         if (!role) {
-            const a = 1;
+            return;
         }
         this.labelName.text = role.cmd?.name || "";
         const reg = /{(\d+)}/gm;

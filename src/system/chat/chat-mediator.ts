@@ -31,7 +31,6 @@ export class ChatMediator extends Mediator {
 
     //初始化UI事件监听
     initUIEvent() {
-        this.owner.btnClose.on(Laya.Event.CLICK, this.owner, this.owner.close);
         this.owner.on(Laya.Event.MOUSE_DOWN, this, (evn: Laya.Event) => {
             const touchPoint = this.owner.globalToLocal(evn.touchPos);
             if (!this.owner.boxEmoji.getBounds().contains(touchPoint.x, touchPoint.y)) {

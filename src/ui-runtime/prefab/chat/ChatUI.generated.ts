@@ -6,12 +6,11 @@ import { VirtuallyListUI } from "../common/VirtuallyListUI";
  * resources/prefab/chat/chat.lh
  */
 export class ChatUIBase extends Laya.Dialog {
-    public btnClose!: Laya.Button;
     public btnSend!: Laya.Button;
     public btnEmoji!: Laya.Button;
     public inputMsg!: Laya.TextInput;
+    public virtuallyList!: VirtuallyListUI;
     public boxEmoji!: Laya.Box;
     public listEmoji!: Laya.List;
-    public virtuallyList!: VirtuallyListUI;
 }
 

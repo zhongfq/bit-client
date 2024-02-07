@@ -33,22 +33,6 @@
       "color": "#ffffff"
     },
     {
-      "_$id": "6ee7kogk",
-      "_$var": true,
-      "_$type": "Button",
-      "name": "btnClose",
-      "x": 470,
-      "y": 7,
-      "width": 32,
-      "height": 32,
-      "_mouseState": 2,
-      "right": 9,
-      "top": 7,
-      "skin": "res://60a9086c-a9c2-4e01-a563-355c117b509e",
-      "label": "",
-      "labelSize": 20
-    },
-    {
       "_$id": "7hq6qrqa",
       "_$var": true,
       "_$type": "Button",
@@ -101,6 +85,33 @@
       "maxChars": 0,
       "prompt": "点击输入内容",
       "promptColor": "#A9A9A9"
+    },
+    {
+      "_$id": "03w3ggwt",
+      "_$prefab": "8cbb7480-4db0-4435-952d-312638b0699c",
+      "_$var": true,
+      "name": "virtuallyList",
+      "active": true,
+      "x": 9,
+      "y": 61,
+      "visible": true,
+      "width": 492,
+      "height": 612
+    },
+    {
+      "_$id": "vknhlkx1",
+      "_$type": "Button",
+      "name": "close",
+      "x": 473,
+      "y": 9,
+      "width": 32,
+      "height": 32,
+      "_mouseState": 2,
+      "right": 6,
+      "top": 9,
+      "skin": "res://60a9086c-a9c2-4e01-a563-355c117b509e",
+      "label": "",
+      "labelSize": 20
     },
     {
       "_$id": "zkqc6cxx",
@@ -159,18 +170,6 @@
           ]
         }
       ]
-    },
-    {
-      "_$id": "03w3ggwt",
-      "_$prefab": "8cbb7480-4db0-4435-952d-312638b0699c",
-      "_$var": true,
-      "name": "virtuallyList",
-      "active": true,
-      "x": 9,
-      "y": 61,
-      "visible": true,
-      "width": 492,
-      "height": 612
     }
   ]
 }
