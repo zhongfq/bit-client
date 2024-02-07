@@ -1,13 +1,22 @@
 module.exports = {
-    extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
-    parser: "@typescript-eslint/parser",
+    extends: [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+
+        // TODO
+        // "plugin:@typescript-eslint/recommended-type-checked",
+    ],
     plugins: ["@typescript-eslint", "@stylistic/js"],
+    parser: "@typescript-eslint/parser",
     rules: {
         "@typescript-eslint/no-namespace": "off",
 
         // TODO:
         "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/no-unsafe-assignment": "off",
+        "@typescript-eslint/no-unsafe-argument": "off",
+        "@typescript-eslint/no-floating-promises": "off",
 
         // https://eslint.style/rules/js/lines-between-class-members
         "@stylistic/js/lines-between-class-members": [
@@ -20,6 +29,10 @@ module.exports = {
                 ],
             },
         ],
+    },
+    parserOptions: {
+        project: true,
+        tsconfigRootDir: __dirname,
     },
     root: true,
 };

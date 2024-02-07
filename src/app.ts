@@ -98,7 +98,7 @@ class App {
         return this._service;
     }
 
-    async init() {
+    init() {
         if (App._inited) {
             return;
         }
