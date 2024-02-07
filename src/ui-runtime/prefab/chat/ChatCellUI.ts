@@ -28,7 +28,7 @@ export class ChatCellUI extends ChatCellUIBase {
         const ubbStr = str.replace(reg, function (match, name) {
             const emojiRow = TableUtil.getRef(app.service.table.emoji, { id: Number(name) });
             if (emojiRow) {
-                return `<img src='resources/atlas/emoji/${emojiRow.icon}.png' width=30 height = 30/>`;
+                return `<img src='resources/atlas/emoji/emoji/${emojiRow.icon}.png' width=30 height = 30/>`;
             } else {
                 return match;
             }

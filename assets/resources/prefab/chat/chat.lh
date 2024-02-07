@@ -2,9 +2,6 @@
   "_$ver": 1,
   "_$id": "sxpq9fzh",
   "_$runtime": "res://a8fea6bb-7491-497d-9bc1-11b262e2c2b7",
-  "_$preloads": [
-    "res://9fec66b2-2544-472d-bfe9-3bceddb4baf0"
-  ],
   "_$type": "Dialog",
   "name": "Dialog",
   "width": 511,
@@ -158,10 +155,9 @@
                 {
                   "_$id": "8snigqd8",
                   "_$type": "Image",
-                  "name": "icon",
+                  "name": "imgIcon",
                   "width": 88,
                   "height": 89,
-                  "skin": "res://0fd8958a-79bf-4258-a811-5d14fed27bc7",
                   "useSourceSize": true,
                   "color": "#ffffff"
                 }

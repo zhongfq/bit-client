@@ -70,9 +70,9 @@ export class ChatMediator extends Mediator {
         this.owner.listEmoji.renderHandler = new Laya.Handler(
             this,
             (cell: Laya.Sprite, index: number) => {
-                (
-                    cell.getChildByName("icon") as Laya.Image
-                ).skin = `resources/atlas/emoji/${this.emojiData[index].icon}.png`;
+                const a = 1;
+                const icon = cell.getChildByName("imgIcon") as Laya.Image;
+                icon.skin = `resources/atlas/emoji/emoji/${this.emojiData[index].icon}.png`;
             }
         );
         this.owner.listEmoji.array = this.emojiData;
