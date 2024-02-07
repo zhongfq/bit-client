@@ -33,15 +33,15 @@ export class MailInfoMediator extends Mediator {
 
     //listItem更新回调
     updateItem(cell: IconUI, index: number) {
-        let vo = app.service.bag.itemBag.createByRef(Number(this.owner.rewards[index].id));
+        const vo = app.service.bag.itemBag.createByRef(Number(this.owner.rewards[index].id));
         vo.goodsNumber = Number(this.owner.rewards[index].num);
         cell.updateGoods(vo);
     }
 
     //刷新界面信息
     updateInfo() {
-        let title = this.owner.refData ? this.owner.refData.title : this.owner.oepnData.title;
-        let content = this.owner.refData ? this.owner.refData.content : this.owner.oepnData.content;
+        const title = this.owner.refData ? this.owner.refData.title : this.owner.oepnData.title;
+        const content = this.owner.refData ? this.owner.refData.content : this.owner.oepnData.content;
         this.owner.labelTitle.text = title;
         this.owner.labelContent.text = content;
         if (
@@ -55,6 +55,7 @@ export class MailInfoMediator extends Mediator {
             this.owner.btnReceive.visible = false;
         }
     }
+
     //更新列表
     updateList() {
         if (this.owner.rewards && this.owner.rewards.length > 0) {

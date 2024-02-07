@@ -57,6 +57,7 @@ export class Timer {
     }
 
     delay(time: number, callback: Callback): void;
+
     delay(time: number, tag: string, callback: Callback): void;
 
     delay(time: number, callbackOrTag: string | Callback, callback?: Callback) {
@@ -111,6 +112,7 @@ export class Timer {
     }
 
     schedule(interval: number, callback: Callback): void;
+
     schedule(interval: number, tag: string, callback: Callback): void;
 
     schedule(time: number, callbackOrTag: string | Callback, callback?: Callback) {

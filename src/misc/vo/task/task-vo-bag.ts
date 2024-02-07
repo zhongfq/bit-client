@@ -12,32 +12,36 @@ export class TaskBag extends VoBag<TaskVo> {
     public Hash(t: TaskVo): string | number {
         return t.cmd?.id || 0;
     }
+
     init(data: proto.task.s2c_load) {
-        for (let cmdData of data.tasks) {
-            let vo = new TaskVo();
+        for (const cmdData of data.tasks) {
+            const vo = new TaskVo();
             vo.initByCmd(cmdData as proto.task.TaskInfo);
             this.add(vo);
         }
     }
+
     protected getVOClass(): Constructor<TaskVo> {
         return TaskVo;
     }
+
     createByRef(refId: number) {
-        let clazz = this.getVOClass();
-        let vo = new clazz();
-        let ref = TableUtil.getRef(app.service.table.task, { id: refId });
+        const clazz = this.getVOClass();
+        const vo = new clazz();
+        const ref = TableUtil.getRef(app.service.table.task, { id: refId });
         // TODO: check ref
         vo.initByRef(ref!);
         return vo;
     }
 
     getByRef(refId: number): TaskVo | null {
-        let tlBag = this.filter(this.getFilterOne(refId));
+        const tlBag = this.filter(this.getFilterOne(refId));
         if (tlBag) {
             return tlBag[0];
         }
         return null;
     }
+
     getFilterOne(refId: number) {
         return (t: TaskVo) => {
             if (t == null) {

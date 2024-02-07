@@ -11,6 +11,7 @@ interface GmCmdData {
 export class GmMediator extends Mediator {
     owner!: GmUI;
     listData!: GmCmdData[];
+
     onAwake(): void {
         this.owner.listEdict.mouseHandler = new Laya.Handler(this, this.onListClick);
         this.owner.listEdict.renderHandler = new Laya.Handler(this, this.updateItem);
@@ -28,17 +29,21 @@ export class GmMediator extends Mediator {
         });
         this.updateList();
     }
+
     onListClick(evn: Laya.Event, index: number) {
         if (evn.type == Laya.Event.CLICK) {
             this.owner.textInput.text = this.listData[index].instruct;
         }
     }
+
     onTabSelect(index: number) {
         this.updateList();
     }
+
     updateItem(cell: Laya.Node, index: number) {
         (cell.getChildByName("Label") as Laya.Label).text = this.listData[index].name;
     }
+
     updateList() {
         this.listData = [];
 

@@ -28,7 +28,7 @@ export class ItemVo extends GoodsVo<ItemRow, bag.Item> {
     }
 
     getRefByCmd(cmd: bag.Item): ItemRow | undefined {
-        let id = cmd.uid ? cmd.uid : cmd.id;
+        const id = cmd.uid ? cmd.uid : cmd.id;
         return TableUtil.getRef<ItemRow>(app.service.table.item, { id: id });
     }
 
@@ -51,9 +51,11 @@ export class ItemVo extends GoodsVo<ItemRow, bag.Item> {
     get quality(): number {
         return this._ref ? this._ref.quality : 1;
     }
+
     get qualitySkin(): string {
         return `resources/atlas/imgFrame/img_icon_frame_${this.quality}.png`;
     }
+
     onGetNumber(): number {
         if (this._cmd) {
             return this._cmd.num ? this._cmd.num : 0;

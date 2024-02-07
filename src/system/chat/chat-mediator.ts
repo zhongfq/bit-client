@@ -16,6 +16,7 @@ const { regClass, property } = Laya;
 export class ChatMediator extends Mediator {
     owner!: ChatUI;
     emojiData!: EmojiRow[];
+
     onAwake(): void {
         this.owner.boxEmoji.visible = false;
         this.emojiData = TableUtil.getArrayRef(app.service.table.emoji, {});
@@ -23,14 +24,16 @@ export class ChatMediator extends Mediator {
         this.initServiceEvent();
         this.initInfo();
     }
+
     onStart(): void {
         this.updateList();
     }
+
     //初始化UI事件监听
     initUIEvent() {
         this.owner.btnClose.on(Laya.Event.CLICK, this.owner, this.owner.close);
         this.owner.on(Laya.Event.MOUSE_DOWN, this, (evn: Laya.Event) => {
-            let touchPoint = this.owner.globalToLocal(evn.touchPos);
+            const touchPoint = this.owner.globalToLocal(evn.touchPos);
             if (!this.owner.boxEmoji.getBounds().contains(touchPoint.x, touchPoint.y)) {
                 this.owner.boxEmoji.visible = false;
             }
@@ -55,6 +58,7 @@ export class ChatMediator extends Mediator {
             this.owner.virtuallyList.addData(data);
         });
     }
+
     initInfo() {
         this.owner.listEmoji.mouseHandler = new Laya.Handler(
             this,
@@ -74,10 +78,11 @@ export class ChatMediator extends Mediator {
         );
         this.owner.listEmoji.array = this.emojiData;
     }
+
     //列表点击回调
     onListClick(evn: Laya.Event, index: number) {
-        if (evn.type == Laya.Event.CLICK) {
-        }
+        // if (evn.type == Laya.Event.CLICK) {
+        // }
     }
 
     //标签点击回调

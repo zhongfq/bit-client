@@ -193,6 +193,7 @@ export class Sequence extends ActionInterval {
     private _reversed = false;
 
     constructor(...actions: FiniteTimeAction[]);
+
     constructor(tempArray: any) {
         super();
 

@@ -164,7 +164,7 @@ export const enum errcode {
     TRACEBACK = 0xA003,
     API_NOT_FOUND = 0xA004,
     PASSWORD_ERROR = 0xA005,
-};
+}
 
 export const errname = {
     0x0000: "OK",

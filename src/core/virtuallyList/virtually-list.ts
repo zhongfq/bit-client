@@ -42,17 +42,19 @@ export class VirtuallyList extends Laya.Script {
         //-------------------------------------------------|
         this.owner.on(Laya.Event.MOUSE_DOWN, this, this._onBarMouseDown);
     }
+
     /**
      *创建预制体
      * @returns 预制体创建出来的节点
      */
     private _createNode() {
-        let node = this.cellPrefab.create() as Laya.Box;
+        const node = this.cellPrefab.create() as Laya.Box;
         node.visible = false;
         this.owner.addChild(node);
         this._nodes.push(node);
         return node;
     }
+
     /**
      * 获取最前节点的索引
      */
@@ -78,6 +80,7 @@ export class VirtuallyList extends Laya.Script {
         }
         return 0;
     }
+
     /**
      *按下事件
      */
@@ -97,7 +100,7 @@ export class VirtuallyList extends Laya.Script {
      *移动事件
      */
     private _mouseMove(e: Laya.Event) {
-        let shiftingNum = Laya.stage.mouseY - this._mouseY;
+        const shiftingNum = Laya.stage.mouseY - this._mouseY;
         this._mouseX = Laya.stage.mouseX;
         this._mouseY = Laya.stage.mouseY;
         if (shiftingNum > 0) {
@@ -148,10 +151,11 @@ export class VirtuallyList extends Laya.Script {
             this.owner.scrollRect.y = 0;
         }
     }
+
     addData(val: any) {
         this._data.push(val);
-        let idx = this.backIndex;
-        let node = this._nodes.shift();
+        const idx = this.backIndex;
+        const node = this._nodes.shift();
         if (!node) {
             return;
         }
@@ -163,6 +167,7 @@ export class VirtuallyList extends Laya.Script {
         this._node2Idx.set(node, idx + 1);
         this.owner.scrollRect.y += node.height;
     }
+
     /**
      *初始化滚动区域
      */
@@ -173,7 +178,7 @@ export class VirtuallyList extends Laya.Script {
         this._contentRect.width = 0;
         this.owner.scrollRect.x = 0;
         this.owner.scrollRect.y = 0;
-        for (let node of this._nodes) {
+        for (const node of this._nodes) {
             node.visible = false;
         }
     }
@@ -228,12 +233,12 @@ export class VirtuallyList extends Laya.Script {
         this._initRect();
         let nodeIndex = 0;
         let toIndexY = 0;
-        let idx =
+        const idx =
             this._data.length + 1 - toIndex > this._nodes.length
                 ? toIndex
                 : this._data.length + 1 - this._nodes.length;
         for (let i = idx; i < this._data.length; i++) {
-            let node = this._nodes[nodeIndex] as ChatCellUI;
+            const node = this._nodes[nodeIndex] as ChatCellUI;
             if (!node) {
                 break;
             }
@@ -264,12 +269,13 @@ export class VirtuallyList extends Laya.Script {
         this._addEndNode();
         this.owner.scrollRect.y -= this.owner.height;
     }
+
     /**
      * 正序创建节点
      */
     private _addStarNode() {
         for (let i = 0; i < this._data.length; i++) {
-            let node = this._nodes[i];
+            const node = this._nodes[i];
             if (!node) {
                 break;
             }
@@ -280,13 +286,14 @@ export class VirtuallyList extends Laya.Script {
             this._node2Idx.set(node, i);
         }
     }
+
     /**
      * 倒序创建节点
      */
     private _addEndNode() {
         let nodeIndex = this._nodes.length - 1;
         for (let i = this._data.length - 1; i >= 0; i--) {
-            let node = this._nodes[nodeIndex] as ChatCellUI;
+            const node = this._nodes[nodeIndex] as ChatCellUI;
             if (!node) {
                 break;
             }

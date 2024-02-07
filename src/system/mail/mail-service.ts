@@ -23,6 +23,7 @@ interface UpdateMailData {
 export class MailService extends Service<NetworkService> {
     static readonly MAIL_UPDATE = "mail-update";
     private _mail: Map<number, proto.mail.MailInfo> = new Map<number, proto.mail.MailInfo>();
+
     constructor(network: NetworkService) {
         super(network);
         this.handle(opcode.mail.s2c_load, this._onLoad);
@@ -35,7 +36,7 @@ export class MailService extends Service<NetworkService> {
     //邮件加载回调
     private _onLoad(response: proto.mail.s2c_load) {
         if (response.err === errcode.OK) {
-            for (let item of response.mails) {
+            for (const item of response.mails) {
                 this._mail.set(item.uid!, this.creatorMailInfo(item as proto.mail.MailInfo));
             }
         }
@@ -58,7 +59,7 @@ export class MailService extends Service<NetworkService> {
         }
 
         if (cmdMail.reward && cmdMail.reward.length > 0) {
-            cmdMail.reward = cmdMail.reward;
+            cmdMail.reward = cmdMail.reward as proto.bag.IItem[];
         } else {
             cmdMail.reward = refData.reward ? Util.toBagItemArray(refData.reward) : [];
         }
@@ -107,7 +108,7 @@ export class MailService extends Service<NetworkService> {
         switch (data.type) {
             case "add":
                 if (data.addData) {
-                    for (let mail of data.addData) {
+                    for (const mail of data.addData) {
                         this._mail.set(
                             Number(mail.uid),
                             this.creatorMailInfo(mail as proto.mail.MailInfo)
@@ -117,7 +118,7 @@ export class MailService extends Service<NetworkService> {
                 break;
             case "update":
                 if (data.updateData) {
-                    for (let id of data.updateData) {
+                    for (const id of data.updateData) {
                         const mailData = this._mail.get(id);
                         if (mailData) {
                             mailData.state = Number(mailData.state) ^ Number(data.mailState);
@@ -128,7 +129,7 @@ export class MailService extends Service<NetworkService> {
                 break;
             case "delete":
                 if (data.deleteData) {
-                    for (let id of data.deleteData) {
+                    for (const id of data.deleteData) {
                         this._mail.delete(id);
                     }
                 }
@@ -157,8 +158,8 @@ export class MailService extends Service<NetworkService> {
     // ------------------------------------------------------------------------
     //一键领取邮件
     async oneClickReward() {
-        let ids: number[] = [];
-        for (let [k, mail] of this._mail) {
+        const ids: number[] = [];
+        for (const [k, mail] of this._mail) {
             if (
                 (mail.reward.length > 0 && this.getMailIsReward(mail.state)) ||
                 (mail.reward.length == 0 && this.getMailIsRead(mail.state))
@@ -171,8 +172,8 @@ export class MailService extends Service<NetworkService> {
 
     //一键删除邮件
     async oneClickDelete() {
-        let ids: number[] = [];
-        for (let [k, mail] of this._mail) {
+        const ids: number[] = [];
+        for (const [k, mail] of this._mail) {
             if (
                 (mail.reward.length == 0 && !this.getMailIsRead(mail.state)) ||
                 (mail.reward.length > 0 && !this.getMailIsReward(mail.state))
@@ -186,15 +187,18 @@ export class MailService extends Service<NetworkService> {
     async load() {
         return await this._network.call(proto.mail.c2s_load.create(), proto.mail.s2c_load);
     }
+
     async requestDeleteMails(data: proto.mail.Ic2s_delete_mails) {
         return await this._network.call(
             proto.mail.c2s_delete_mails.create(data),
             proto.mail.s2c_delete_mails
         );
     }
+
     async requestRead(data: proto.mail.Ic2s_read) {
         return await this._network.call(proto.mail.c2s_read.create(data), proto.mail.s2c_read);
     }
+
     async requestReceiveReward(data: proto.mail.Ic2s_receive_reward) {
         return await this._network.call(
             proto.mail.c2s_receive_reward.create(data),

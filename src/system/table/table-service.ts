@@ -58,6 +58,7 @@ export class TableService extends Service<NetworkService> {
     constructor(network: NetworkService) {
         super(network);
     }
+
     async load() {
         // TODO: 处理加载错误
         this.equip = await app.loader.loadJson(JSON_EQUIP_TABLE);
@@ -75,8 +76,9 @@ export class TableService extends Service<NetworkService> {
         this.emoji = await app.loader.loadJson(JSON_EMOJI_TABLE);
         this.role = await app.loader.loadJson(JSON_ROLE_TABLE);
     }
+
     getVo(refId: number) {
-        let dataRow = TableUtil.getRef(this.item, { id: refId });
+        const dataRow = TableUtil.getRef(this.item, { id: refId });
         if (dataRow) {
             if (dataRow.sub_type == ItemConf.ITEM_TYPE.MONEY) {
                 return app.service.user.monye.get(refId);

@@ -9,6 +9,7 @@ export interface OpenData {
 @regClass()
 export class ShopBuyUI extends ShopBuyUIBase {
     openData!: OpenData;
+
     open(closeOther?: boolean | undefined, param?: any): void {
         this.openData = param;
         super.open(closeOther, param);

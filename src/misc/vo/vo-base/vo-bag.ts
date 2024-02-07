@@ -27,8 +27,8 @@ export abstract class VoBag<T extends VO<any, any>> {
     }
 
     toArray() {
-        let ret: Array<T> = [];
-        for (let [_, v] of this.bag) {
+        const ret: Array<T> = [];
+        for (const [_, v] of this.bag) {
             ret.push(v);
         }
         return ret;
@@ -38,8 +38,8 @@ export abstract class VoBag<T extends VO<any, any>> {
      * 以列表的形式获取背包
      */
     filter(predicate: (value: T, key: string | number) => boolean): Array<T> {
-        let ret: Array<T> = [];
-        for (let [k, v] of this.bag) {
+        const ret: Array<T> = [];
+        for (const [k, v] of this.bag) {
             if (predicate && !predicate(v, k)) continue;
             ret.push(v);
         }
@@ -47,7 +47,7 @@ export abstract class VoBag<T extends VO<any, any>> {
     }
 
     find(predicate: (value: T, key: string | number) => boolean) {
-        for (let [k, v] of this.bag) {
+        for (const [k, v] of this.bag) {
             if (predicate(v, k)) {
                 return v;
             }
@@ -68,8 +68,8 @@ export abstract class VoBag<T extends VO<any, any>> {
      */
     getOne(): T | any {
         if (this.bag.size > 0) {
-            let iter = this.bag.entries();
-            let [k, v] = iter.next().value;
+            const iter = this.bag.entries();
+            const [k, v] = iter.next().value;
             return v;
         }
         return null;
@@ -79,10 +79,7 @@ export abstract class VoBag<T extends VO<any, any>> {
      * 新增一个Goods
      */
     protected add(t: T) {
-        let k = this.Hash(t);
-        let old = this.bag.get(k);
-        if (old != null) {
-        }
+        const k = this.Hash(t);
         this.bag.set(k, t);
     }
 
@@ -91,7 +88,7 @@ export abstract class VoBag<T extends VO<any, any>> {
      * @param k
      */
     protected remove(key: string | number) {
-        let t = this.get(key);
+        const t = this.get(key);
         this.bag.delete(key);
     }
 
@@ -107,9 +104,11 @@ export abstract class VoBag<T extends VO<any, any>> {
     public onAdd(t: T) {
         this.bag.set(t.id, t);
     }
+
     public onUpdate(t: T) {
         this.bag.set(t.id, t);
     }
+
     public onRemove(key: string | number) {
         this.bag.delete(key);
     }

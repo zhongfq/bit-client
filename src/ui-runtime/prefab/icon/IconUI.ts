@@ -5,6 +5,7 @@ import { IconUIBase } from "./IconUI.generated";
 @regClass()
 export class IconUI extends IconUIBase {
     onAwake(): void {}
+
     public updateGoods(vo?: GoodsVo) {
         if (vo) {
             this.imgIcon.skin = vo.iconUrl;
@@ -12,9 +13,9 @@ export class IconUI extends IconUIBase {
             this.labelNumber.text = vo.goodsNumber.toString();
             // this.labelNumber.text = vo.goodsNumber?.toString();
             // this.iconImage.text = vo.cmd?vo.cmd.num.toString():"0";
-        } else {
         }
     }
+
     set itemNumber(num: string) {
         this.labelNumber.text = num;
     }

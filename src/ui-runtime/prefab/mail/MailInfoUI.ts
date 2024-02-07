@@ -11,6 +11,7 @@ export class MailInfoUI extends MailInfoUIBase {
     oepnData!: proto.mail.MailInfo; //界面打开数据
     refData!: GeneratedMailRow; //配置表数据
     rewards!: proto.bag.IItem[]; //奖励数据
+
     open(closeOther?: boolean | undefined, param?: any): void {
         this.oepnData = param;
         if (this.oepnData.id) {

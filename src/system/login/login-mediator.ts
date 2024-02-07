@@ -20,7 +20,7 @@ export class LoginMediator extends Mediator {
     serverData!: ServerInfo;
 
     onAwake(): void {
-        let Http = new Laya.HttpRequest();
+        const Http = new Laya.HttpRequest();
         Http.once(Laya.Event.COMPLETE, (data: any) => {
             this._tlServerList = JSON.parse(data);
             const last = this._tlServerList.find((v) => v.url === app.service.login.url);

@@ -19,6 +19,7 @@ export const enum TrackType {
 export class TrackVector3 extends Laya.Vector3 {
     /** 与前一个坐标点的距离差 */
     offset: number = 0;
+
     constructor(x?: number, y?: number, z?: number, offset?: number) {
         super(x, y, z);
         this.offset = offset ?? 0;

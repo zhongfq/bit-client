@@ -1,9 +1,11 @@
 const { regClass } = Laya;
+import { Callback } from "../../../core/dispatcher";
 import { HSliderUIBase } from "./HSliderUI.generated";
 
 @regClass()
 export class HSliderUI extends HSliderUIBase {
-    _onSliderChange!: Function;
+    _onSliderChange!: Callback;
+
     onAwake(): void {
         super.onAwake();
         this.on(Laya.Event.CLICK, () => {});
@@ -13,23 +15,28 @@ export class HSliderUI extends HSliderUIBase {
         this.minBtn.on(Laya.Event.CLICK, this, this.onMinBtn);
         this.updateBtnType();
     }
+
     onChange() {
         if (this._onSliderChange) {
             this._onSliderChange();
         }
         this.updateBtnType();
     }
+
     onAddBtn() {
         this.value++;
     }
+
     onMinBtn() {
         this.value--;
     }
+
     updateBtnType() {
         this.addBtn.disabled = this.value >= this.max;
         this.minBtn.disabled = this.value <= this.min;
     }
-    set onSliderChange(func: Function) {
+
+    set onSliderChange(func: Callback) {
         this._onSliderChange = func;
     }
 }

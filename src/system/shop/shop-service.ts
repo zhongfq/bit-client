@@ -30,10 +30,10 @@ export class ShopService extends Service<NetworkService> {
     public getShopItemBuyNum(shopItem: ShopItem): { num: number; tips: string } {
         let num = 0;
         let tips = "";
-        let cost = shopItem.refData.cost as Reward[];
-        let costBagNum = VoUtil.getNumber(cost[0].id);
-        let maxBuyNum = Math.floor(costBagNum / cost[0].count);
-        let limitNum = this.getShopItemLimit(shopItem.refData);
+        const cost = shopItem.refData.cost as Reward[];
+        const costBagNum = VoUtil.getNumber(cost[0].id);
+        const maxBuyNum = Math.floor(costBagNum / cost[0].count);
+        const limitNum = this.getShopItemLimit(shopItem.refData);
         if (!maxBuyNum) {
             tips = `道具不足····后续增加获取道具弹窗`;
         } else if (Math.min(limitNum, maxBuyNum) - shopItem.cmdData.buyNum) {
@@ -49,6 +49,7 @@ export class ShopService extends Service<NetworkService> {
     public async load(data: proto.shop.Ic2s_load) {
         return await this._network.call(proto.shop.c2s_load.create(data), proto.shop.s2c_load);
     }
+
     //请求购买
     public async requestBuy(data: proto.shop.Ic2s_buy) {
         return await this._network.call(proto.shop.c2s_buy.create(data), proto.shop.s2c_buy);

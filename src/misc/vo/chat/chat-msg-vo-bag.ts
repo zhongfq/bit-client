@@ -13,15 +13,17 @@ export class ChatMsgVoBag extends VoBag<ChatMsgVo> {
     }
 
     init(msgArray: proto.chat.ChatMessage[]) {
-        for (let cmdData of msgArray) {
-            let vo = new ChatMsgVo();
+        for (const cmdData of msgArray) {
+            const vo = new ChatMsgVo();
             vo.initByCmd(cmdData as proto.chat.ChatMessage);
             this.add(vo);
         }
     }
+
     protected add(t: ChatMsgVo) {
         this.bag.set(this.bag.size + 1, t);
     }
+
     protected getVOClass(): Constructor<ChatMsgVo> {
         return ChatMsgVo;
     }

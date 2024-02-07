@@ -323,9 +323,11 @@ export namespace ecs {
         abstract update(dt: number): void;
 
         onAddComponent?(component: Component): void;
+
         onRemoveComponent?(component: Component): void;
 
         onAddEntity?(entity: Entity): void;
+
         onRemoveEntity?(entity: Entity): void;
     }
 }

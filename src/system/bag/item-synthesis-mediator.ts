@@ -13,19 +13,23 @@ export class ItemSynthesisMediator extends Mediator {
         this.initEvent();
         this.initInfo();
     }
+
     initEvent() {
         this.owner.btnClose.on(Laya.Event.CLICK, this, this.onCloseBtn);
         this.owner.btnUse.on(Laya.Event.CLICK, this, this.onSynthesisBtn);
     }
+
     initInfo() {
         // this.owner.iconTop.updateGoods();
     }
+
     onSynthesisBtn() {
         // app.service.bag.requestCompositeItem({
         //     itemId: this.owner.data.vo.id,
         //     num: this.owner.slNum.value,
         // });
     }
+
     onCloseBtn() {
         this.owner.close();
     }

@@ -38,18 +38,22 @@ export class MoneyVo extends GoodsVo<MoneyRow, proto.money.MoneyItem> {
     get name(): string {
         return this._ref ? this._ref.name : "";
     }
+
     protected onGetNumber(): number {
         if (this._cmd) {
             return this._cmd.num ? this._cmd.num : 0;
         }
         return 0;
     }
+
     get iconUrl(): string {
         return this._ref ? `resources/atlas/iconSmall/${this._ref.icon}.png` : "";
     }
+
     get quality(): number {
         throw new Error("Method not implemented.");
     }
+
     get qualitySkin(): string {
         throw new Error("Method not implemented.");
     }

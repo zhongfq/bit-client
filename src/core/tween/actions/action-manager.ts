@@ -28,7 +28,7 @@
 import { Action } from "./action";
 import type { ActionInterval } from "./action-interval";
 
-let ID_COUNTER = 0;
+const ID_COUNTER = 0;
 
 class HashElement {
     actions: Action[] = [];

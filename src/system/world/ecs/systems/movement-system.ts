@@ -38,7 +38,7 @@ export class MovementSystem extends ecs.System {
         const transform = movement.getComponent(TransformComponent)!;
         const position = transform.position;
         const speed = movement.speed;
-        let target = movement.target;
+        const target = movement.target;
 
         if (movement.type === MovementType.PATH && !target) {
             if (movement.paths.length > 1) {
@@ -91,7 +91,7 @@ export class MovementSystem extends ecs.System {
             ratio = 1;
         }
         interpolation.percent = ratio;
-        let rotation = transform.rotation + interpolation.rotation * (ratio - last);
+        const rotation = transform.rotation + interpolation.rotation * (ratio - last);
         transform.rotation = rotation % 360;
         transform.flag |= TransformComponent.ROTATION;
     }

@@ -18,6 +18,7 @@ export class MainMediator extends Mediator {
     owner!: HomeUI;
     iframeElement: any;
     divElement: any;
+
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
     onAwake(): void {
         this.initBtn();
@@ -25,34 +26,38 @@ export class MainMediator extends Mediator {
         this._initChat();
         this._initRoleInfo();
     }
+
     private _initServiceEvent() {
         this.on(app.service.chat, ChatService.CHAT_UPDATE, (data: ChatMsgVo) => {
             this._initChat();
         });
     }
+
     private _initChat() {
-        let msg = app.service.chat.chatMsgVoBag.getOne() as ChatMsgVo;
-        let role = app.service.chat.chatRoleVoBag.get(msg.id) as ChatRoleVo;
+        const msg = app.service.chat.chatMsgVoBag.getOne() as ChatMsgVo;
+        const role = app.service.chat.chatRoleVoBag.get(msg.id) as ChatRoleVo;
         this.owner.labelMsg.text = `${role.cmd?.name}:${msg.cmd?.text}`;
     }
+
     private _initRoleInfo() {
         const profiInfo = app.service.user.profileInfo;
-        let lvRow = TableUtil.getRef(app.service.table.role.level, {
+        const lvRow = TableUtil.getRef(app.service.table.role.level, {
             lv: app.service.user.profileInfo.lv,
         });
-        let exp = profiInfo.exp || 0;
+        const exp = profiInfo.exp || 0;
         this.owner.labelName.text = app.service.user.profileInfo.name;
         // this.owner.labelPower.text = app.service.user.profileInfo.power;
         this.owner.labelLv.text = app.service.user.profileInfo.lv.toString();
-        let a = lvRow!.upgrade_exp * exp;
         this.owner.labelExp.text = (exp / lvRow!.upgrade_exp) * 100 + "%";
         this.owner.progressBarExp.value = exp / lvRow!.upgrade_exp;
     }
+
     onKeyDown(evt: Laya.Event): void {
         if (evt.ctrlKey && evt.keyCode == Laya.Keyboard.B) {
             app.ui.show(ui.GM);
         }
     }
+
     initBtn() {
         this.owner.btnBag.on(Laya.Event.CLICK, () => {
             app.ui.show(ui.BAG);

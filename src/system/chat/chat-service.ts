@@ -12,21 +12,24 @@ export class ChatService extends Service<NetworkService> {
     static readonly CHAT_UPDATE = "chat-update";
     chatRoleVoBag = VoUtil.createBag(ChatRoleVoBag);
     chatMsgVoBag = VoUtil.createBag(ChatMsgVoBag);
+
     constructor(network: NetworkService) {
         super(network);
 
         this.handle(opcode.chat.s2c_load, this._onLoad);
         this.handle(opcode.chat.notify, this._onNotify);
     }
+
     private _onLoad(response: chat.s2c_load) {
         if (response.err === errcode.OK) {
             this.chatRoleVoBag.init(response.chatRoles as chat.ChatRole[]);
             this.chatMsgVoBag.init(response.messages as chat.ChatMessage[]);
         }
     }
+
     private _onNotify(response: chat.notify) {
-        let roleVo = new ChatRoleVo();
-        for (let role of response.chatRoles) {
+        const roleVo = new ChatRoleVo();
+        for (const role of response.chatRoles) {
             roleVo.initByCmd(role as chat.ChatRole);
             if (this.chatRoleVoBag.get(Number(role.rid))) {
                 this.chatRoleVoBag.onUpdate(roleVo);
@@ -34,13 +37,14 @@ export class ChatService extends Service<NetworkService> {
                 this.chatRoleVoBag.onAdd(roleVo);
             }
         }
-        let msgVo = new ChatMsgVo();
-        for (let msg of response.messages) {
+        const msgVo = new ChatMsgVo();
+        for (const msg of response.messages) {
             msgVo.initByCmd(msg as chat.ChatMessage);
             this.chatMsgVoBag.onAdd(msgVo);
         }
         this.event(ChatService.CHAT_UPDATE, msgVo);
     }
+
     // ------------------------------------------------------------------------
     // rpc call
     // ------------------------------------------------------------------------

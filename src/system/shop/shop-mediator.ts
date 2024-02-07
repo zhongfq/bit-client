@@ -20,6 +20,7 @@ export class ShopMediator extends Mediator {
         this.initUIEvent();
         this.callShopLoad();
     }
+
     //初始化UI事件监听
     initUIEvent() {
         this.owner.btnClose.on(Laya.Event.CLICK, () => {
@@ -42,7 +43,7 @@ export class ShopMediator extends Mediator {
     //list点击监听
     onListClick(evn: Laya.Event, index: number) {
         if (evn.type == Laya.Event.CLICK) {
-            let buyData = app.service.shop.getShopItemBuyNum(this.itemListData[index]);
+            const buyData = app.service.shop.getShopItemBuyNum(this.itemListData[index]);
             if (this.itemListData[index].refData.cost) {
                 if (buyData.num <= 0) {
                     app.ui.toast(buyData.tips);
@@ -74,8 +75,8 @@ export class ShopMediator extends Mediator {
 
     //listItem刷新
     updateItem(cell: ShopItemUI, index: number) {
-        let cellData = this.itemListData[index];
-        let vo = app.service.bag.itemBag.createByRef(cellData.refData.items[0].id);
+        const cellData = this.itemListData[index];
+        const vo = app.service.bag.itemBag.createByRef(cellData.refData.items[0].id);
         cell.labelName.text = vo.name;
         if (cellData.refData.cost && cellData.refData.cost.length > 0) {
             cell.labelConsume.text = cellData.refData.cost[0].count.toString();
@@ -95,9 +96,9 @@ export class ShopMediator extends Mediator {
     //刷新list数据
     updateList() {
         this.itemListData = [];
-        let shopItemList = this.shopInfoData.items as proto.shop.ItemInfo[];
+        const shopItemList = this.shopInfoData.items as proto.shop.ItemInfo[];
         if (shopItemList) {
-            for (let item of shopItemList) {
+            for (const item of shopItemList) {
                 this.itemListData.push({
                     cmdData: item,
                     refData: TableUtil.getRef(app.service.table.shop.shop_1, {

@@ -12,6 +12,7 @@ export class BagUI extends BagUIBase {
         this.tabMenu.labels = "道具,合成";
         this.tabMenu.selectHandler = new Laya.Handler(this, this.onTabSelect);
     }
+
     private onTabSelect(index: number) {
         // this.
     }

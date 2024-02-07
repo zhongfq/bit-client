@@ -21,6 +21,7 @@ export const toEventType = (type: string | number) => {
 
 export class Dispatcher extends Laya.EventDispatcher {
     event(type: number, data?: any): boolean;
+
     event(type: string, data?: any): boolean;
 
     event(type: string | number, data?: any): boolean {

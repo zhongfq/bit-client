@@ -6,5 +6,6 @@ import { ChatUIBase } from "./ChatUI.generated";
 export class ChatUI extends ChatUIBase {
     addNum = 0;
     tlChatCell: ChatCellUI[] = [];
+
     onAwake(): void {}
 }

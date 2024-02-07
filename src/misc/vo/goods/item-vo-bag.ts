@@ -16,26 +16,28 @@ export class ItemBag extends GoodsVoBag<ItemVo> {
     }
 
     init(data: proto.bag.s2c_load) {
-        for (let cmdData of data.items) {
-            let vo = new ItemVo();
+        for (const cmdData of data.items) {
+            const vo = new ItemVo();
             vo.initByCmd(cmdData as proto.bag.Item);
             this.add(vo);
         }
     }
+
     protected getVOClass(): Constructor<ItemVo> {
         return ItemVo;
     }
+
     createByRef(refId: number): ItemVo {
-        let clazz = this.getVOClass();
-        let vo = new clazz();
-        let ref = TableUtil.getRef(app.service.table.item, { id: refId });
+        const clazz = this.getVOClass();
+        const vo = new clazz();
+        const ref = TableUtil.getRef(app.service.table.item, { id: refId });
         /**TODO */
         vo.initByRef(ref!);
         return vo;
     }
 
     getByRef(refId: number): ItemVo | null {
-        let tlBag = this.filter(this.getFilterOne(refId));
+        const tlBag = this.filter(this.getFilterOne(refId));
         if (tlBag) {
             return tlBag[0];
         }

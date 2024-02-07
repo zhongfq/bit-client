@@ -31,10 +31,10 @@ export class ShopBuyMediator extends Mediator {
         }
         this.owner.slider.min = 1;
         this.owner.slider.value = 1;
-        let cost = this.owner.openData.shopItem.refData.cost as Reward[];
+        const cost = this.owner.openData.shopItem.refData.cost as Reward[];
 
         this.costVo = VoUtil.createVo(cost[0].id);
-        let costBagNum = VoUtil.getNumber(cost[0].id);
+        const costBagNum = VoUtil.getNumber(cost[0].id);
         this.owner.slider.max = app.service.shop.getShopItemBuyNum(
             this.owner.openData.shopItem
         ).num;

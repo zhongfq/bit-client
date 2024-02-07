@@ -36,8 +36,8 @@ export class BagService extends Service<NetworkService> {
     private _onDiscardItem(data: proto.bag.s2c_discard_item) {}
 
     private _noNotify(data: proto.bag.notify_items) {
-        for (let item of data.items as proto.bag.Item[]) {
-            let vo = new ItemVo();
+        for (const item of data.items as proto.bag.Item[]) {
+            const vo = new ItemVo();
             vo.initByCmd(item);
             if (!this.itemBag.get(item.id)) {
                 this.itemBag.onAdd(vo); //新增道具
@@ -50,6 +50,7 @@ export class BagService extends Service<NetworkService> {
         this.event(BagService.ITEM_UPDATE);
         // if(data.items)
     }
+
     // ------------------------------------------------------------------------
     // rpc call
     // ------------------------------------------------------------------------

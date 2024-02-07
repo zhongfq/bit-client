@@ -1,21 +1,24 @@
 const { regClass } = Laya;
+import { Callback } from "../../../core/dispatcher";
 import { ItemVo } from "../../../misc/vo/goods/item-vo";
 import { ItemTipsUIBase } from "./ItemTipsUI.generated";
 
 export interface Iitem_Tips_Param {
     isShowTips: boolean;
-    touchBack: Function;
+    touchBack: Callback;
     vo: ItemVo;
 }
 @regClass()
 export class ItemTipsUI extends ItemTipsUIBase {
     data!: Iitem_Tips_Param;
+
     // isShowEffect = false;
     onAwake(): void {
         this.Sprite.on(Laya.Event.CLICK, () => {
             this.close();
         });
     }
+
     open(closeOther?: boolean | undefined, param?: any): void {
         this.data = param.itemTipsParam;
         if (param.x < Laya.stage.width * 0.5) {
@@ -47,6 +50,7 @@ export class ItemTipsUI extends ItemTipsUIBase {
         Laya.Dialog.manager.open(this, closeOther, this.isShowEffect);
         Laya.Dialog.lock(false);
     }
+
     onOpened(param: any): void {
         this.iconItem.updateGoods(this.data.vo);
         // this.itemNumber.text = "当前拥有："+this.data.vo.goodsNumber;

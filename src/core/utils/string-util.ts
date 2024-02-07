@@ -11,7 +11,7 @@ interface UBBData {
     height?: number; //图片宽度
 }
 
-let tlBBCodeStr = ["<color=", "<size=", "<b>", "<i>", "<u>", "<on click", "<outline color"];
+const tlBBCodeStr = ["<color=", "<size=", "<b>", "<i>", "<u>", "<on click", "<outline color"];
 export class StringUtil {
     public static __cname: string = "StringUtil";
 
@@ -21,7 +21,7 @@ export class StringUtil {
      * @param args 类似 "2018","2","14"
      */
     static format(str: string, ...args: any[]): string {
-        let reg = /{(\d+)}/gm;
+        const reg = /{(\d+)}/gm;
         return str.replace(reg, function (match, name) {
             return args[~~name];
         });
@@ -29,7 +29,7 @@ export class StringUtil {
 
     // 截取一定长度字符串,多于的以...代替 (不包含))
     static cutString(str: string, count: number) {
-        let length = str.length;
+        const length = str.length;
         if (length > count) {
             str = str.substr(0, count);
             str = str + "...";
@@ -40,12 +40,12 @@ export class StringUtil {
     //截取字符串 包含中文处理
     //(串,长度,增加...)
     static cutString2(str: string, len: number, hasDot: boolean = true) {
-        var newLength = 0;
-        var newStr = "";
-        var chineseRegex = /[^\x00-\xff]/g;
-        var singleChar = "";
-        var strLength = str.replace(chineseRegex, "**").length;
-        for (var i = 0; i < strLength; i++) {
+        let newLength = 0;
+        let newStr = "";
+        const chineseRegex = /[^\u4E00-\u9FA5]/g;
+        let singleChar = "";
+        const strLength = str.replace(chineseRegex, "**").length;
+        for (let i = 0; i < strLength; i++) {
             singleChar = str.charAt(i).toString();
             if (singleChar.match(chineseRegex) != null) {
                 newLength += 2;
@@ -66,21 +66,22 @@ export class StringUtil {
 
     //字符是否有中文
     static isCharHaveZH(str: string) {
-        let chineseRegex = /[^\x00-\xff]/g;
+        const chineseRegex = /[^\u4E00-\u9FA5]/g;
         return str.match(chineseRegex);
     }
+
     //一个中文算两个长度
     static getCharLength(str: string) {
-        let chineseRegex = /[^\x00-\xff]/g;
-        let length = str.replace(chineseRegex, "**").length;
+        const chineseRegex = /[^\u4E00-\u9FA5]/g;
+        const length = str.replace(chineseRegex, "**").length;
         // console.log(length)
         return length;
     }
 
     //一个中文算三个长度
     static getCharLength2(str: string) {
-        let chineseRegex = /[^\x00-\xff]/g;
-        let length = str.replace(chineseRegex, "***").length;
+        const chineseRegex = /[^\u4E00-\u9FA5]/g;
+        const length = str.replace(chineseRegex, "***").length;
         // console.log(length)
         return length;
     }
@@ -95,10 +96,10 @@ export class StringUtil {
             return str;
         }
 
-        let tlStr_ = str.split("%s");
-        let length = tlStr_.length;
+        const tlStr_ = str.split("%s");
+        const length = tlStr_.length;
 
-        let tlStr_new = [];
+        const tlStr_new = [];
 
         for (let i = 0; i < length; i++) {
             tlStr_new.push(tlStr_[i]);
@@ -113,7 +114,7 @@ export class StringUtil {
     static numbebrToFloatStr(num: number, count: number = 0): string {
         let numStr = num.toString();
         if (count != null) {
-            let index = numStr.indexOf(".");
+            const index = numStr.indexOf(".");
             if (index != -1) {
                 if (count == 0) {
                     count = -1;
@@ -145,7 +146,7 @@ export class StringUtil {
                 convertNumber = 10000;
                 limitStr = "W";
             }
-            let n = Math.floor(num / convertNumber);
+            const n = Math.floor(num / convertNumber);
             return n.toString() + limitStr;
         }
         return num.toString();
@@ -153,8 +154,8 @@ export class StringUtil {
 
     /**不够位数,在前面填充0 */
     static paddingNum(num: number, length: number): string {
-        let len = (num + "").length;
-        let diff = length - len;
+        const len = (num + "").length;
+        const diff = length - len;
         if (diff > 0) {
             return Array(diff + 1).join("0") + num;
         }
@@ -170,21 +171,21 @@ export class StringUtil {
 
     /**自动换行 */
     static autoNewLine(str: string, length: number): string {
-        let stringArray = [];
+        const stringArray = [];
         for (let i = 0; i < 10; i++) {
-            let len = str.length;
+            const len = str.length;
             if (len > length) {
-                let _str = str.substr(0, length);
+                const _str = str.substr(0, length);
                 str = str.replace(_str, "");
                 stringArray.push(_str);
             } else {
-                let _str = str.substr(0, len);
+                const _str = str.substr(0, len);
                 str = str.replace(_str, "");
                 stringArray.push(_str);
                 break;
             }
         }
-        let len = str.length;
+        const len = str.length;
         if (len > 0) {
             stringArray.push(str);
         }
@@ -194,10 +195,11 @@ export class StringUtil {
     /**数字转大写字符 0 ~ 9*/
     static numberToBigNumberStr(num: number): string {
         let bigString: string = "";
-        let tlTag: string[] = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九"];
+        const tlTag: string[] = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九"];
         bigString = tlTag[num];
         return bigString;
     }
+
     /**
      *时间戳转换年月日
      * @param timestamp 时间戳
@@ -211,11 +213,12 @@ export class StringUtil {
 
         return `${year}-${month}-${day}`;
     }
+
     static str2UBB(str: string, ...args: (UBBData | string | number)[]): string {
-        let reg = /{(\d+)}/gm;
+        const reg = /{(\d+)}/gm;
         return str.replace(reg, function (match, name) {
             // return args[~~name];
-            let data = args[~~name];
+            const data = args[~~name];
             if (typeof data == "string") {
                 return data;
             } else if (typeof data == "number") {
@@ -249,7 +252,7 @@ export class StringUtil {
                 str += `<b>`;
             }
             str += data.text;
-            for (let i of tlBBCodeStr) {
+            for (const i of tlBBCodeStr) {
                 if (str.indexOf(i) != -1) {
                     str = str + i;
                 }

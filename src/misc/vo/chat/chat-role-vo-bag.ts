@@ -15,12 +15,13 @@ export class ChatRoleVoBag extends VoBag<ChatRoleVo> {
     }
 
     init(roleArray: proto.chat.ChatRole[]) {
-        for (let cmdData of roleArray) {
-            let vo = new ChatRoleVo();
+        for (const cmdData of roleArray) {
+            const vo = new ChatRoleVo();
             vo.initByCmd(cmdData as proto.chat.ChatRole);
             this.add(vo);
         }
     }
+
     protected getVOClass(): Constructor<ChatRoleVo> {
         return ChatRoleVo;
     }

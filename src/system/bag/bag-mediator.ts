@@ -35,8 +35,9 @@ export class BagMediator extends Mediator {
 
     //列表点击回调
     onListClick(evn: Laya.Event, index: number) {
-        if (evn.type == Laya.Event.CLICK) {
-        }
+        //TODO
+        // if (evn.type == Laya.Event.CLICK) {
+        // }
     }
 
     //标签点击回调
@@ -46,7 +47,7 @@ export class BagMediator extends Mediator {
 
     //listItem更新回调
     updateItem(cell: IconUI, index: number) {
-        let cellData = this.itemListData[index];
+        const cellData = this.itemListData[index];
         cell.updateGoods(cellData);
     }
 
@@ -57,9 +58,9 @@ export class BagMediator extends Mediator {
         if (this.owner.tabMenu.selectedIndex == 0) {
             this.itemListData = bag.toArray();
         } else {
-            let tlItem = TableUtil.getArrayRef(app.service.table.item, { composite: 1 });
-            for (let refItem of tlItem) {
-                let itemvo = bag.createByRef(refItem.id);
+            const tlItem = TableUtil.getArrayRef(app.service.table.item, { composite: 1 });
+            for (const refItem of tlItem) {
+                const itemvo = bag.createByRef(refItem.id);
                 this.itemListData.push(itemvo);
             }
         }

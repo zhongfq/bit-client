@@ -35,6 +35,7 @@ export abstract class GoodsVo<IRef = any, Cmd = any> extends VO<IRef, Cmd> {
     get goodsNumberStr(): string {
         return "" + this.goodsNumber;
     }
+
     set goodsNumber(num: number) {
         if (typeof num == "string") {
             this.goodsNum = Number(num);
@@ -42,11 +43,12 @@ export abstract class GoodsVo<IRef = any, Cmd = any> extends VO<IRef, Cmd> {
             this.goodsNum = num;
         }
     }
+
     get goodsNumber(): number {
         if (this.goodsNum != null) {
             return this.goodsNum;
         }
-        let number = this.onGetNumber();
+        const number = this.onGetNumber();
         if (!isNaN(number)) {
             return number;
         }

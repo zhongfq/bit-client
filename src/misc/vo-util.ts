@@ -21,39 +21,43 @@ export class VoUtil {
      */
 
     static createBag<T extends VoBag<VO<any, any>>>(clazz: Constructor<T>): T {
-        let bag = new clazz();
+        const bag = new clazz();
         return bag;
     }
+
     /**
      * 创建一个道具背包(具有增查删改的功能)
      */
     static createGoodsBag<T extends GoodsVoBag<GoodsVo<any, any>>>(clazz: Constructor<T>): T {
-        let bag = this.createBag(clazz);
+        const bag = this.createBag(clazz);
         return bag;
     }
+
     static createVo(refId: number): GoodsVo<any> {
-        let refData = TableUtil.getRef(app.service.table.item, { id: refId });
+        const refData = TableUtil.getRef(app.service.table.item, { id: refId });
         if (refData?.sub_type == ItemConf.ITEM_TYPE.MONEY) {
-            let vo = new MoneyVo();
-            let args = (refData as ItemMoneyRow).args;
-            let voRef = TableUtil.getRef(app.service.table.money, { id: args.money_id });
+            const vo = new MoneyVo();
+            const args = (refData as ItemMoneyRow).args;
+            const voRef = TableUtil.getRef(app.service.table.money, { id: args.money_id });
             vo.initByRef(voRef as GeneratedMoneyRow);
             return vo;
         } else {
             return app.service.bag.itemBag.createByRef(refId);
         }
     }
+
     static getVo(refId: number) {
-        let refData = TableUtil.getRef(app.service.table.item, { id: refId });
+        const refData = TableUtil.getRef(app.service.table.item, { id: refId });
         if (refData?.sub_type == ItemConf.ITEM_TYPE.MONEY) {
-            let args = (refData as ItemMoneyRow).args;
+            const args = (refData as ItemMoneyRow).args;
             return app.service.user.monye.get(args.money_id);
         } else {
             return app.service.bag.itemBag.getByRef(refId);
         }
     }
+
     static getNumber(refId: number): number {
-        let vo = VoUtil.getVo(refId);
+        const vo = VoUtil.getVo(refId);
         if (vo) {
             return vo.goodsNumber;
         }

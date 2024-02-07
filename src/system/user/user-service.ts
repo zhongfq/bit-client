@@ -36,8 +36,8 @@ export class UserService extends Service<NetworkService> {
 
     private _onLoadMonye(data: proto.money.s2c_load) {
         if (data.err === errcode.OK) {
-            for (let item of data.items) {
-                let vo = new MoneyVo();
+            for (const item of data.items) {
+                const vo = new MoneyVo();
                 vo.initByCmd(item as proto.money.MoneyItem);
                 this.monye.set(item.id!, vo);
             }
@@ -52,8 +52,8 @@ export class UserService extends Service<NetworkService> {
     }
 
     private _onMoneyNotify(data: proto.money.notify_items) {
-        for (let item of data.items) {
-            let vo = new MoneyVo();
+        for (const item of data.items) {
+            const vo = new MoneyVo();
             vo.initByCmd(item as proto.money.MoneyItem);
             this.monye.set(item.id!, vo);
         }

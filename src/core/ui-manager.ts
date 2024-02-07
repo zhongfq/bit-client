@@ -193,7 +193,9 @@ export class UIManager {
     }
 
     alert(args: UIAlertArgs): void;
+
     alert(title: string, message: string, yes: Callback, no?: Callback): void;
+
     alert(titleOrArgs: string | UIAlertArgs, message?: string, yes?: Callback, no?: Callback) {
         if (typeof titleOrArgs == "string") {
             this.show(UIALERT_ID, {
@@ -208,7 +210,9 @@ export class UIManager {
     }
 
     toast(args: UIAlertArgs): void;
+
     toast(message: string, duration?: number, x?: number, y?: number): void;
+
     toast(messageOrArgs: string | UIAlertArgs, duration?: number, x?: number, y?: number) {
         if (typeof messageOrArgs == "string") {
             this.show(UITOAST_ID, {

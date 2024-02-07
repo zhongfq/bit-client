@@ -1,4 +1,5 @@
 import { app } from "../../app";
+import { Callback } from "../../core/dispatcher";
 import { ui } from "../../misc/ui";
 import { ItemVo } from "../../misc/vo/goods/item-vo";
 import { IconUI } from "../../ui-runtime/prefab/icon/IconUI";
@@ -9,7 +10,7 @@ const { regClass, property } = Laya;
 export class IconNode extends Laya.Script {
     @property(Boolean)
     isNoShowTips!: boolean;
-    private clickBack: Function | null = null;
+    private clickBack: Callback | null = null;
     owner!: IconUI;
 
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
@@ -20,12 +21,13 @@ export class IconNode extends Laya.Script {
             Laya.SoundManager.playSound("");
         });
     }
+
     onIconClick(evn: Laya.Event) {
         if (this.isNoShowTips && this.clickBack) {
             this.clickBack(evn);
             return;
         }
-        let itemData = this.owner.dataSource as ItemVo;
+        const itemData = this.owner.dataSource as ItemVo;
         if (!itemData) {
             return;
         }
@@ -54,7 +56,8 @@ export class IconNode extends Laya.Script {
             }
         }
     }
-    setClickHandler(func: Function | null) {
+
+    setClickHandler(func: Callback | null) {
         this.clickBack = func;
     }
 }

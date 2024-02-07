@@ -20,6 +20,7 @@ export class MailMediator extends Mediator {
         this.initUIEvent();
         this.updateList();
     }
+
     //初始化UI事件监听
     initUIEvent() {
         this.owner.listMail.renderHandler = new Laya.Handler(this, this.updateItem);
@@ -63,7 +64,7 @@ export class MailMediator extends Mediator {
 
         if (this.itemListData[index].reward.length > 0) {
             (cell.getChildByName("iconDrward") as Laya.Box).visible = true;
-            let vo = app.service.bag.itemBag.createByRef(
+            const vo = app.service.bag.itemBag.createByRef(
                 Number(this.itemListData[index].reward[0].id)
             );
             vo.goodsNumber = this.itemListData[index].reward[0].num || 0;
@@ -84,7 +85,6 @@ export class MailMediator extends Mediator {
     updateList() {
         if (this.owner.tabMenu.selectedIndex == 0) {
             this.itemListData = Util.toArray<proto.mail.MailInfo>(app.service.mail.mails);
-        } else {
         }
         this.owner.listMail.array = this.itemListData;
         this.owner.listMail.refresh();

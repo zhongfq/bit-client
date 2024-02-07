@@ -44,6 +44,7 @@ export class TaskVo extends VO<TaskMainRow | TaskBranchRow | TaskDailyRow, task.
     get name(): string {
         return "";
     }
+
     protected onGetNumber(): number {
         if (this._cmd) {
             return this._cmd.num ? this._cmd.num : 0;

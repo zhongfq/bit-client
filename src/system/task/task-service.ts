@@ -9,6 +9,7 @@ import { NetworkService } from "../network/network-service";
 
 export class TaskService extends Service<NetworkService> {
     taskBag = VoUtil.createBag(TaskBag);
+
     constructor(network: NetworkService) {
         super(network);
         this.handle(opcode.task.s2c_load, this._onLoad);
@@ -16,6 +17,7 @@ export class TaskService extends Service<NetworkService> {
         this.handle(opcode.task.notify_tasks, this._noNotifyTasks);
         this.handle(opcode.task.notify_remove_tasks, this._noNotifyRemoveTasks);
     }
+
     private _onLoad(data: proto.task.s2c_load) {
         if (data.err === errcode.OK) {
             this.taskBag.init(data);
@@ -23,12 +25,15 @@ export class TaskService extends Service<NetworkService> {
             console.log(errmsg[data.err as errcode]);
         }
     }
+
     private _onreceiveReward(data: proto.task.s2c_receive_reward) {
         if (data.err != errcode.OK) {
             console.log(errmsg[data.err as errcode]);
         }
     }
+
     private _noNotifyTasks(data: proto.bag.notify_items) {}
+
     private _noNotifyRemoveTasks(data: proto.bag.notify_items) {}
 
     // ------------------------------------------------------------------------
@@ -37,6 +42,7 @@ export class TaskService extends Service<NetworkService> {
     public async load(data: proto.task.Ic2s_load) {
         return await this._network.call(proto.task.c2s_load.create(data), proto.task.s2c_load);
     }
+
     public async requestReceiveReward(data: proto.task.Ic2s_receive_reward) {
         return await this._network.call(
             proto.task.c2s_receive_reward.create(data),

@@ -406,7 +406,7 @@ export class CommandSystem extends ecs.System {
         shouldInterpolate?: boolean
     ) {
         const rad = Math.atan2(-z, x);
-        let dest = (rad * 180) / Math.PI;
+        const dest = (rad * 180) / Math.PI;
         if (shouldInterpolate) {
             const movement = transform.getComponent(MovementComponent)!;
             let offset = dest - transform.rotation;

@@ -22,6 +22,7 @@ export class TaskMediator extends Mediator {
         this.owner.listTask.renderHandler = new Laya.Handler(this, this.onListRender);
         this.owner.listTask.mouseHandler = new Laya.Handler(this, this.onListClick);
     }
+
     onListClick(e: Laya.Event, index: number) {
         if (e.type == Laya.Event.CLICK) {
             if (e.target.name === "btnUse") {
@@ -29,6 +30,7 @@ export class TaskMediator extends Mediator {
             }
         }
     }
+
     onListRender(item: TaskItemBox, index: number) {
         item.updateInfo(item.dataSource);
     }
