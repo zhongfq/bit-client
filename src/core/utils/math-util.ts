@@ -18,4 +18,8 @@ export class MathUtil {
     static toRadian(degree: number) {
         return degree / TO_DEGREE;
     }
+
+    static randomInt(min: number, max: number) {
+        return min + Math.round(Math.random() * (max - min));
+    }
 }
