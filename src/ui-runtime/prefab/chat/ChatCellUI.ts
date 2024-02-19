@@ -16,8 +16,6 @@ export class ChatCellUI extends ChatCellUIBase {
     }
 
     updateInfo() {
-        console.log(this.msgData.cmd!.rid);
-
         const role = app.service.chat.chatRoleVoBag.get(this.msgData.cmd!.rid) as ChatRoleVo;
         if (!role) {
             return;
@@ -43,8 +41,6 @@ export class ChatCellUI extends ChatCellUIBase {
 
         if (role.id == app.service.user.rid) {
             this.getComponent(Laya.Animator2D).play("chat-cell-self");
-            const num = this.labelMsg.textField.lines;
-            console.log("num.length:", num.length);
             if (this.labelMsg.textField.lines.length <= 1) {
                 this.labelMsg.padding = `0,0,0,${
                     this.labelMsg.width - this.labelMsg.textField.textWidth

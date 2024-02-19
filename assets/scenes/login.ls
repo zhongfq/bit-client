@@ -22,6 +22,8 @@
       "name": "imgBg",
       "width": 750,
       "height": 1334,
+      "centerX": 0,
+      "centerY": 0,
       "skin": "res://79970b5b-ceed-4dba-9c31-9ff38c1f92e0",
       "color": "#ffffff"
     },

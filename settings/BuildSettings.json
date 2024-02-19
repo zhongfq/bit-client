@@ -1,15 +1,34 @@
 {
   "name": "bit-client",
   "minifyJS": true,
-  "sourcemap": true,
   "startupScene": "res://9b931ecf-fde9-44dd-acf3-15f8dc807965",
   "includedScenes": [
     "res://9b931ecf-fde9-44dd-acf3-15f8dc807965",
-    "res://cbf6cc44-4848-4c09-a57b-4703e09bde09"
+    "res://f2e0d290-e95a-423d-8f92-132ad51b499d",
+    "res://7cf5999e-1f6f-49d3-bbb8-314f4d7c49d5",
+    "res://cbf6cc44-4848-4c09-a57b-4703e09bde09",
+    "res://4c2e282b-60a2-427c-a3d6-3bd04e72508f",
+    "res://4c2e282b-60a2-427c-a3d6-3bd04e72508f"
   ],
+  "excludeFilesRule": [],
   "enableVersion": true,
   "enableSubpackages": true,
   "subpackages": [
-    {}
-  ]
+    {
+      "path": "resources/prefab",
+      "remote": true,
+      "remoteUrl": "http://10.168.69.32:2840/",
+      "autoLoad": true
+    },
+    {
+      "path": "resources/atlas",
+      "remote": true,
+      "remoteUrl": "http://10.168.69.32:2840/",
+      "autoLoad": true
+    }
+  ],
+  "wxgame": {
+    "appid": "wx2e2e96c1e3d6eb34",
+    "keepTextureSourceFile": true
+  }
 }
