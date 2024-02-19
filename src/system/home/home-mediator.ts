@@ -35,10 +35,10 @@ export class MainMediator extends Mediator {
 
     private _initChat() {
         const msg = app.service.chat.chatMsgVoBag.getOne() as ChatMsgVo;
-        const role = app.service.chat.chatRoleVoBag.get(msg.id) as ChatRoleVo;
         if (!msg) {
             return;
         }
+        const role = app.service.chat.chatRoleVoBag.get(msg.id) as ChatRoleVo;
         this.owner.labelMsg.text = `${role.cmd?.name}:${msg.cmd?.text}`;
     }
 
