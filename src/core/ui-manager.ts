@@ -130,7 +130,7 @@ export class UIManager {
                     this._doOpenScene(scene, args);
                 })
                 .catch((e) => {
-                    console.error("todo");
+                    console.error(e);
                 });
         }
     }
@@ -147,7 +147,7 @@ export class UIManager {
                     this._doOpenScene(scene, args);
                 })
                 .catch((e) => {
-                    console.error("todo");
+                    console.error(e);
                 });
         }
     }
