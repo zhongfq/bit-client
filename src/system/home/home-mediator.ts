@@ -34,12 +34,11 @@ export class MainMediator extends Mediator {
     }
 
     private _initChat() {
-        const msg = app.service.chat.chatMsgVoBag.getOne() as ChatMsgVo;
-        if (!msg) {
-            return;
+        const msg = app.service.chat.chatMsgVoBag.getOne();
+        if (msg) {
+            const role = app.service.chat.chatRoleVoBag.get(msg.id) as ChatRoleVo;
+            this.owner.labelMsg.text = `${role.cmd?.name}:${msg.cmd?.text}`;
         }
-        const role = app.service.chat.chatRoleVoBag.get(msg.id) as ChatRoleVo;
-        this.owner.labelMsg.text = `${role.cmd?.name}:${msg.cmd?.text}`;
     }
 
     private _initRoleInfo() {

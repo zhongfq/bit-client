@@ -59,20 +59,20 @@ export abstract class VoBag<T extends VO<any, any>> {
      * @param key
      */
 
-    get(key: string | number): T | any {
+    get(key: string | number) {
         return this.bag.get(key);
     }
 
     /**
      * 获取第一个
      */
-    getOne(): T | any {
+    getOne(): T | undefined {
         if (this.bag.size > 0) {
             const iter = this.bag.entries();
             const [k, v] = iter.next().value;
-            return v;
+            return v as T;
         }
-        return null;
+        return undefined;
     }
 
     /**
