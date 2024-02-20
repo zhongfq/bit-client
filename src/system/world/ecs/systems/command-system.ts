@@ -268,8 +268,8 @@ export class CommandSystem extends ecs.System {
     }
 
     private _towardToTarget(eid1: number, eid2: number) {
-        const transform1 = this.ecs.getEntity(eid1)?.getComponent(TransformComponent);
-        const transform2 = this.ecs.getEntity(eid2)?.getComponent(TransformComponent);
+        const transform1 = this.ecs.getComponent(eid1, TransformComponent);
+        const transform2 = this.ecs.getComponent(eid2, TransformComponent);
         if (transform1 && transform2) {
             const p1 = transform1.position;
             const p2 = transform2.position;
@@ -495,6 +495,28 @@ export class CommandSystem extends ecs.System {
         hero.soldiers.forEach((soldier) => {
             if (soldier.order == SoliderOrder.MOVE) {
                 soldier.order = SoliderOrder.IDLE;
+            }
+        });
+    }
+
+    soldierFindTarget(soldier: SoldierComponent) {
+        const leader = this.ecs.getComponent(soldier.leader, HeroComponent);
+        if (!leader) {
+            return;
+        }
+
+        const targetLeader = this.ecs.getComponent(leader.attackTarget, HeroComponent);
+        if (!targetLeader) {
+            return;
+        }
+
+        let distance = Number.MAX_VALUE;
+        soldier.attack.target = leader.attackTarget;
+        targetLeader.soldiers.forEach((value) => {
+            const d = Laya.Vector3.distance(soldier.transform.position, value.transform.position);
+            if (d < distance) {
+                distance = d;
+                soldier.attack.target = value.eid;
             }
         });
     }

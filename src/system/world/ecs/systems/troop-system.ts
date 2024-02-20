@@ -148,6 +148,7 @@ export class TroopSystem extends ecs.System {
         if (Laya.timer.currTimer - soldier.attack.time > TroopSystem.ATTACK_INTERVAL) {
             soldier.attack.time = Laya.timer.currTimer;
             api.stopMove(soldier);
+            api.soldierFindTarget(soldier);
             api.soldierFight(soldier);
         }
     }
