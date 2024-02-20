@@ -25,15 +25,6 @@
       "labelSize": 20
     },
     {
-      "_$id": "vrogaatl",
-      "_$type": "Sprite",
-      "name": "Sprite",
-      "x": 331,
-      "y": 623,
-      "width": 100,
-      "height": 100
-    },
-    {
       "_$id": "txxqpfrq",
       "_$var": true,
       "_$type": "Button",
