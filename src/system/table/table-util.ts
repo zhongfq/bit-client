@@ -14,11 +14,11 @@ export class TableUtil {
         return true;
     }
 
-    static getRef<T>(source: T[], filter: KeyPairs<T>): T | undefined;
+    static getTableRow<T>(source: T[], filter: KeyPairs<T>): T | undefined;
 
-    static getRef<T>(source: { [k: number | string]: T }, filter: KeyPairs<T>): T | undefined;
+    static getTableRow<T>(source: { [k: number | string]: T }, filter: KeyPairs<T>): T | undefined;
 
-    static getRef<T>(
+    static getTableRow<T>(
         source: T[] | { [k: number | string]: T },
         filter: KeyPairs<T>
     ): T | undefined {
@@ -30,11 +30,14 @@ export class TableUtil {
         }
     }
 
-    static getArrayRef<T>(source: T[], filter: KeyPairs<T>): T[];
+    static getArrayTableRow<T>(source: T[], filter: KeyPairs<T>): T[];
 
-    static getArrayRef<T>(source: { [k: number | string]: T }, filter: KeyPairs<T>): T[];
+    static getArrayTableRow<T>(source: { [k: number | string]: T }, filter: KeyPairs<T>): T[];
 
-    static getArrayRef<T>(source: T[] | { [k: number | string]: T }, filter: KeyPairs<T>): T[] {
+    static getArrayTableRow<T>(
+        source: T[] | { [k: number | string]: T },
+        filter: KeyPairs<T>
+    ): T[] {
         if (source instanceof Array) {
             return source.filter((value) => TableUtil.isMatch(value, filter));
         } else {

@@ -25,7 +25,7 @@ export class TaskVo extends VO<TaskMainRow | TaskBranchRow | TaskDailyRow, task.
     }
 
     getTableRowByCmd(cmd: task.TaskInfo): TaskMainRow | TaskBranchRow | TaskDailyRow | undefined {
-        return TableUtil.getRef<TaskMainRow | TaskBranchRow | TaskDailyRow>(
+        return TableUtil.getTableRow<TaskMainRow | TaskBranchRow | TaskDailyRow>(
             app.service.table.task,
             {
                 id: cmd.id,

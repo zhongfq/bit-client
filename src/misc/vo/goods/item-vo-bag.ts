@@ -30,7 +30,7 @@ export class ItemBag extends GoodsVoBag<ItemVo> {
     createByRef(refId: number): ItemVo {
         const clazz = this.getVOClass();
         const vo = new clazz();
-        const ref = TableUtil.getRef(app.service.table.item, { id: refId });
+        const ref = TableUtil.getTableRow(app.service.table.item, { id: refId });
         /**TODO */
         vo.initByTableRow(ref!);
         return vo;

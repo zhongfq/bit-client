@@ -29,7 +29,7 @@ export class ItemVo extends GoodsVo<ItemRow, bag.Item> {
 
     getTableRowByCmd(cmd: bag.Item): ItemRow | undefined {
         const id = cmd.uid ? cmd.uid : cmd.id;
-        return TableUtil.getRef<ItemRow>(app.service.table.item, { id: id });
+        return TableUtil.getTableRow<ItemRow>(app.service.table.item, { id: id });
     }
 
     get goodsType(): number {

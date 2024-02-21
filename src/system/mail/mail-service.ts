@@ -53,7 +53,7 @@ export class MailService extends Service<NetworkService> {
         let refData!: GeneratedMailRow;
         cmdMail = cmdData;
         if (cmdData.id) {
-            refData = TableUtil.getRef(app.service.table.mail, {
+            refData = TableUtil.getTableRow(app.service.table.mail, {
                 id: Number(cmdData.id),
             }) as GeneratedMailRow;
         }

@@ -43,7 +43,7 @@ export class MainMediator extends Mediator {
 
     private _initRoleInfo() {
         const profiInfo = app.service.user.profileInfo;
-        const lvRow = TableUtil.getRef(app.service.table.role.level, {
+        const lvRow = TableUtil.getTableRow(app.service.table.role.level, {
             lv: app.service.user.profileInfo.lv,
         });
         const exp = profiInfo.exp || 0;

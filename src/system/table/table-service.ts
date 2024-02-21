@@ -78,7 +78,7 @@ export class TableService extends Service<NetworkService> {
     }
 
     getVo(refId: number) {
-        const dataRow = TableUtil.getRef(this.item, { id: refId });
+        const dataRow = TableUtil.getTableRow(this.item, { id: refId });
         if (dataRow) {
             if (dataRow.sub_type == ItemConf.ITEM_TYPE.MONEY) {
                 return app.service.user.monye.get(refId);

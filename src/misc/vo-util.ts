@@ -34,11 +34,11 @@ export class VoUtil {
     }
 
     static createVo(refId: number): GoodsVo<any> {
-        const refData = TableUtil.getRef(app.service.table.item, { id: refId });
+        const refData = TableUtil.getTableRow(app.service.table.item, { id: refId });
         if (refData?.sub_type == ItemConf.ITEM_TYPE.MONEY) {
             const vo = new MoneyVo();
             const args = (refData as ItemMoneyRow).args;
-            const voRef = TableUtil.getRef(app.service.table.money, { id: args.money_id });
+            const voRef = TableUtil.getTableRow(app.service.table.money, { id: args.money_id });
             vo.initByTableRow(voRef as GeneratedMoneyRow);
             return vo;
         } else {
@@ -47,7 +47,7 @@ export class VoUtil {
     }
 
     static getVo(refId: number) {
-        const refData = TableUtil.getRef(app.service.table.item, { id: refId });
+        const refData = TableUtil.getTableRow(app.service.table.item, { id: refId });
         if (refData?.sub_type == ItemConf.ITEM_TYPE.MONEY) {
             const args = (refData as ItemMoneyRow).args;
             return app.service.user.monye.get(args.money_id);
