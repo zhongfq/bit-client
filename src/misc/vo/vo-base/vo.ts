@@ -7,10 +7,10 @@ export abstract class VO<Ref = any, Cmd = any> {
 
     initByCmd(cmd: Cmd) {
         this._cmd = cmd;
-        this._ref = this.getRefByCmd(cmd);
+        this._ref = this.getTableRowByCmd(cmd);
     }
 
-    initByRef(ref: Ref) {
+    initByTableRow(ref: Ref) {
         this._ref = ref;
         this._cmd = null;
     }
@@ -26,5 +26,5 @@ export abstract class VO<Ref = any, Cmd = any> {
     get id(): number {
         return 0;
     }
-    abstract getRefByCmd(cmd: Cmd): any;
+    abstract getTableRowByCmd(cmd: Cmd): any;
 }

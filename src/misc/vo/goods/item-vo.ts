@@ -27,7 +27,7 @@ export class ItemVo extends GoodsVo<ItemRow, bag.Item> {
         return 0;
     }
 
-    getRefByCmd(cmd: bag.Item): ItemRow | undefined {
+    getTableRowByCmd(cmd: bag.Item): ItemRow | undefined {
         const id = cmd.uid ? cmd.uid : cmd.id;
         return TableUtil.getRef<ItemRow>(app.service.table.item, { id: id });
     }

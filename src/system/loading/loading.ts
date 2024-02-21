@@ -49,6 +49,7 @@ export class LoadingMediator extends Laya.Script {
 
     updateView() {
         this.owner.progress.value = this.virtualProgress * 0.01;
+        this.owner.progress.bar.sizeGrid;
     }
 
     updateProg() {

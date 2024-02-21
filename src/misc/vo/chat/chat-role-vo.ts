@@ -18,7 +18,7 @@ export class ChatRoleVo extends VO<any, chat.ChatRole> {
         return 0;
     }
 
-    getRefByCmd(cmd: chat.ChatRole): undefined {
+    getTableRowByCmd(cmd: chat.ChatRole): undefined {
         return undefined;
     }
 

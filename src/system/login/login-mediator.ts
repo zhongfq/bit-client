@@ -35,6 +35,8 @@ export class LoginMediator extends Mediator {
     }
 
     onBtnLogin() {
+        console.log("点击了登录按钮");
+
         if (this.owner.inputAccount.text != "") {
             app.service.login.username = this.owner.inputAccount.text;
             app.service.login.url = this.serverData.url;

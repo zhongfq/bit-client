@@ -39,7 +39,7 @@ export class VoUtil {
             const vo = new MoneyVo();
             const args = (refData as ItemMoneyRow).args;
             const voRef = TableUtil.getRef(app.service.table.money, { id: args.money_id });
-            vo.initByRef(voRef as GeneratedMoneyRow);
+            vo.initByTableRow(voRef as GeneratedMoneyRow);
             return vo;
         } else {
             return app.service.bag.itemBag.createByRef(refId);

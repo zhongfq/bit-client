@@ -30,7 +30,7 @@ export class TaskBag extends VoBag<TaskVo> {
         const vo = new clazz();
         const ref = TableUtil.getRef(app.service.table.task, { id: refId });
         // TODO: check ref
-        vo.initByRef(ref!);
+        vo.initByTableRow(ref!);
         return vo;
     }
 

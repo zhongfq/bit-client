@@ -18,7 +18,7 @@ export class ChatMsgVo extends VO<any, chat.ChatMessage> {
         return 0;
     }
 
-    getRefByCmd(cmd: chat.ChatMessage): undefined {
+    getTableRowByCmd(cmd: chat.ChatMessage): undefined {
         return undefined;
     }
 

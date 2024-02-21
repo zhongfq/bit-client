@@ -1,6 +1,7 @@
 {
   "name": "bit-client",
   "minifyJS": true,
+  "sourcemap": true,
   "startupScene": "res://9b931ecf-fde9-44dd-acf3-15f8dc807965",
   "includedScenes": [
     "res://9b931ecf-fde9-44dd-acf3-15f8dc807965",
@@ -27,6 +28,10 @@
       "autoLoad": true
     }
   ],
+  "android": {
+    "version": "release-v3.1.0",
+    "screenOrientation": "portrait"
+  },
   "wxgame": {
     "appid": "wx2e2e96c1e3d6eb34",
     "keepTextureSourceFile": true

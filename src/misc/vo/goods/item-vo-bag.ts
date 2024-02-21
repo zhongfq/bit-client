@@ -32,7 +32,7 @@ export class ItemBag extends GoodsVoBag<ItemVo> {
         const vo = new clazz();
         const ref = TableUtil.getRef(app.service.table.item, { id: refId });
         /**TODO */
-        vo.initByRef(ref!);
+        vo.initByTableRow(ref!);
         return vo;
     }
 

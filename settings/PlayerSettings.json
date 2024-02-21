@@ -12,6 +12,11 @@
       "z": 12
     }
   },
+  "physics2D": {
+    "gravity": {
+      "y": 9.8
+    }
+  },
   "modules": {
     "laya.d3": true,
     "laya.ui": true
@@ -20,5 +25,6 @@
     "fit": "center"
   },
   "stat": true,
+  "vConsole": true,
   "alertGlobalError": true
 }
