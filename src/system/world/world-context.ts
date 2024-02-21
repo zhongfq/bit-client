@@ -39,6 +39,7 @@ export class WorldContext extends Mediator {
     declare owner: WorldUI;
 
     private _ecs!: ecs.World;
+    private _camera!: Laya.Camera;
 
     troop!: proto.troop.Troop;
 
@@ -46,8 +47,12 @@ export class WorldContext extends Mediator {
         return this.owner.scene;
     }
 
-    get scene3D(): Laya.Scene3D {
+    get scene3D() {
         return this.owner.scene3D;
+    }
+
+    get camera() {
+        return (this._camera ||= this.scene3D.getChildByName("Main Camera") as Laya.Camera);
     }
 
     onAwake(): void {

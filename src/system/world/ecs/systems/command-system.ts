@@ -15,7 +15,7 @@ import {
     MovementType,
     TransformComponent,
 } from "../components/movement-component";
-import { AnimationComponent } from "../components/render-component";
+import { AnimationComponent, HeroInfoComponent } from "../components/render-component";
 import { Tilemap } from "../components/tilemap-component";
 import {
     CharacterAnimation,
@@ -25,6 +25,8 @@ import {
     SoldierComponent,
     SoliderOrder,
 } from "../components/troop-component";
+
+const PREFAB_HERO_INFO = "resources/prefab/battle/ui/hero-info.lh";
 
 const formation: Readonly<IVector3Like>[] = [
     { x: -0.6, y: 0, z: 0 },
@@ -171,6 +173,9 @@ export class CommandSystem extends ecs.System {
             hero.maxHp = Math.max(0.1, data.maxHp);
             hero.hp = data.hp;
             this._loadSoldiers(hero);
+
+            const info = entity.addComponent(HeroInfoComponent);
+            info.path = PREFAB_HERO_INFO;
         }
 
         if (cmd.battle) {
@@ -323,7 +328,6 @@ export class CommandSystem extends ecs.System {
         hero.hp = action.curHp;
         const soldiers = hero.soldiers;
         const count = soldiers.length - Math.ceil((hero.hp / hero.maxHp) * hero.formation.length);
-        console.log("subhp:");
         if (count > 0) {
             const arr = soldiers.slice(0, Math.max(4, count));
             for (let i = 0; i < count; i++) {
@@ -340,6 +344,10 @@ export class CommandSystem extends ecs.System {
                 }
                 this.ecs.removeEntity(dieSoldier.eid);
             }
+        }
+        const info = hero.getComponent(HeroInfoComponent);
+        if (info?.view) {
+            info.view.updateHp(hero.hp / hero.maxHp);
         }
     }
 

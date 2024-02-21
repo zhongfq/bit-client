@@ -105,6 +105,7 @@
             {
               "_$type": "DirectionLightCom",
               "intensity": 1,
+              "lightmapBakedType": 1,
               "shadowStrength": 0.506,
               "shadowDistance": 50,
               "shadowDepthBias": 0,
@@ -412,6 +413,39 @@
               "w": -1
             }
           }
+        }
+      ]
+    },
+    {
+      "_$id": "6e4t2nbi",
+      "_$type": "Box",
+      "name": "battle",
+      "width": 750,
+      "height": 1334,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "bottom": 0,
+      "_$child": [
+        {
+          "_$id": "iqohvf4b",
+          "_$var": true,
+          "_$type": "Box",
+          "name": "troops",
+          "width": 750,
+          "height": 1334,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "bottom": 0
+        },
+        {
+          "_$id": "uqihrjjn",
+          "_$var": true,
+          "_$type": "Box",
+          "name": "labels",
+          "width": 200,
+          "height": 200
         }
       ]
     },

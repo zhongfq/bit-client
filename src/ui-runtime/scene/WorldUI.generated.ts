@@ -5,6 +5,8 @@
  * scenes/world.ls
  */
 export class WorldUIBase extends Laya.Scene {
+    public troops!: Laya.Box;
+    public labels!: Laya.Box;
     public joystickGroup!: Laya.Box;
     public joystick!: Laya.Box;
     public indicator!: Laya.Image;

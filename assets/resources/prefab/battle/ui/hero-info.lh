@@ -1,0 +1,71 @@
+{
+  "_$ver": 1,
+  "_$id": "khn4owpg",
+  "_$runtime": "res://e1e1480d-a43b-4a20-bca0-420db37e8de1",
+  "_$preloads": [
+    "res://318c6b25-05a2-47f5-8ce0-bcd0556ec848"
+  ],
+  "_$type": "Box",
+  "name": "HeroInfo",
+  "width": 141,
+  "height": 49,
+  "_$child": [
+    {
+      "_$id": "7nra45n0",
+      "_$type": "Image",
+      "name": "hpBg",
+      "x": 14,
+      "y": 22,
+      "width": 127,
+      "height": 16,
+      "skin": "res://318c6b25-05a2-47f5-8ce0-bcd0556ec848@hp_bg",
+      "useSourceSize": true,
+      "color": "#ffffff",
+      "_$child": [
+        {
+          "_$id": "nyenac02",
+          "_$var": true,
+          "_$type": "Image",
+          "name": "hp",
+          "x": 1.5,
+          "y": 1.5995418575594158,
+          "width": 124,
+          "height": 12,
+          "skin": "res://318c6b25-05a2-47f5-8ce0-bcd0556ec848@hp1",
+          "sizeGrid": "0,5,0,5,0",
+          "color": "#ffffff"
+        }
+      ]
+    },
+    {
+      "_$id": "2g9umj28",
+      "_$type": "Image",
+      "name": "icon",
+      "x": 1,
+      "y": 12,
+      "width": 31,
+      "height": 34,
+      "skin": "res://318c6b25-05a2-47f5-8ce0-bcd0556ec848@info_icon",
+      "useSourceSize": true,
+      "color": "#ffffff"
+    },
+    {
+      "_$id": "fkxjvp36",
+      "_$var": true,
+      "_$type": "Label",
+      "name": "label",
+      "x": 17,
+      "y": 2,
+      "width": 120,
+      "height": 17,
+      "text": "我是战斗姬",
+      "font": "SimHei",
+      "fontSize": 15,
+      "color": "#FFFFFF",
+      "align": "center",
+      "valign": "top",
+      "padding": "0,0,0,0",
+      "stroke": 1
+    }
+  ]
+}

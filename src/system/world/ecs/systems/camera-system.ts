@@ -4,14 +4,11 @@ import { CameraComponent } from "../components/camera-component";
 import { AnimationComponent } from "../components/render-component";
 
 export class CameraSystem extends ecs.System {
-    private _camera!: Laya.Camera;
     private _ray: Laya.Ray = new Laya.Ray(new Laya.Vector3(), new Laya.Vector3());
     private _rayMat: Laya.Matrix4x4 = new Laya.Matrix4x4();
 
     constructor(readonly context: WorldContext) {
         super();
-
-        this._camera = this.context.scene3D.getChildByName("Main Camera") as Laya.Camera;
     }
 
     update(dt: number): void {
@@ -25,7 +22,7 @@ export class CameraSystem extends ecs.System {
             return;
         }
 
-        const cameraTransform = this._camera.transform;
+        const cameraTransform = this.context.camera.transform;
         const ray = this._ray;
         const rayMat = this._rayMat;
         cameraTransform.position.cloneTo(ray.origin);

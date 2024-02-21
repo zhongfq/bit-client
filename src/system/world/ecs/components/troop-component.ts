@@ -1,6 +1,6 @@
 import { ecs } from "../../../../core/ecs";
 import { IVector3Like } from "../../../../core/laya";
-import { MovementComponent, TrackVector3, TransformComponent } from "./movement-component";
+import { MovementComponent, TransformComponent } from "./movement-component";
 import { AnimationComponent } from "./render-component";
 
 export class OwnerComponent extends ecs.Component {
