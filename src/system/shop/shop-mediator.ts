@@ -101,7 +101,7 @@ export class ShopMediator extends Mediator {
             for (const item of shopItemList) {
                 this.itemListData.push({
                     cmdData: item,
-                    refData: TableUtil.getTableRow(app.service.table.shop.shop_1, {
+                    refData: TableUtil.getRow(app.service.table.shop.shop_1, {
                         id: item.id,
                     }) as Shop1Row,
                 });

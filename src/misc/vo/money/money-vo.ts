@@ -24,7 +24,7 @@ export class MoneyVo extends GoodsVo<MoneyRow, proto.money.MoneyItem> {
     }
 
     getTableRowByCmd(cmd: proto.money.MoneyItem): MoneyRow | undefined {
-        return TableUtil.getTableRow<MoneyRow>(app.service.table.money, { id: cmd.id });
+        return TableUtil.getRow<MoneyRow>(app.service.table.money, { id: cmd.id });
     }
 
     get goodsType(): number {

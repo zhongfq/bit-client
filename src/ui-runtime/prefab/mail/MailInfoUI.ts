@@ -15,7 +15,7 @@ export class MailInfoUI extends MailInfoUIBase {
     open(closeOther?: boolean | undefined, param?: any): void {
         this.oepnData = param;
         if (this.oepnData.id) {
-            this.refData = TableUtil.getTableRow(app.service.table.mail, {
+            this.refData = TableUtil.getRow(app.service.table.mail, {
                 id: this.oepnData.id,
             }) as GeneratedMailRow;
             if (this.refData.reward) {

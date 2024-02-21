@@ -15,7 +15,7 @@ export class AllianceMediator extends Mediator {
 
     onAwake(): void {
         let labels = "";
-        for (const data of TableUtil.getArrayTableRow(app.service.table.alliance, {})) {
+        for (const data of TableUtil.getRows(app.service.table.alliance, {})) {
             this._alliances.push(data);
             labels += `${data.name},`;
         }

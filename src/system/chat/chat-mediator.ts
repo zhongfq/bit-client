@@ -19,7 +19,7 @@ export class ChatMediator extends Mediator {
 
     onAwake(): void {
         this.owner.boxEmoji.visible = false;
-        this.emojiData = TableUtil.getArrayTableRow(app.service.table.emoji, {});
+        this.emojiData = TableUtil.getRows(app.service.table.emoji, {});
         this.initUIEvent();
         this.initServiceEvent();
         this.initInfo();
