@@ -5,9 +5,6 @@ import { TableUtil } from "../../../system/table/table-util";
 import { VoBag } from "../vo-base/vo-bag";
 import { TaskVo } from "./task-vo";
 
-/**
- * ItemBag 道具
- */
 export class TaskBag extends VoBag<TaskVo> {
     public Hash(t: TaskVo): string | number {
         return t.cmd?.id || 0;

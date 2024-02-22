@@ -1,14 +1,19 @@
 import { app } from "../../app";
 import { Constructor } from "../../core/dispatcher";
 import { Service } from "../../core/service";
-import proto from "../../def/proto";
+import proto, { task } from "../../def/proto";
 import { errcode, errmsg, opcode } from "../../def/protocol";
+import { TaskConf } from "../../def/task";
 import { VoUtil } from "../../misc/vo-util";
+import { TaskVo } from "../../misc/vo/task/task-vo";
 import { TaskBag } from "../../misc/vo/task/task-vo-bag";
 import { NetworkService } from "../network/network-service";
+import { TableUtil } from "../table/table-util";
 
 export class TaskService extends Service<NetworkService> {
-    taskBag = VoUtil.createBag(TaskBag);
+    static readonly TASK_UPDATE = "task-update";
+    declare mainTask: TaskVo;
+    branchTaskBag = VoUtil.createBag(TaskBag);
 
     constructor(network: NetworkService) {
         super(network);
@@ -18,9 +23,17 @@ export class TaskService extends Service<NetworkService> {
         this.handle(opcode.task.notify_remove_tasks, this._noNotifyRemoveTasks);
     }
 
-    private _onLoad(data: proto.task.s2c_load) {
+    private _onLoad(data: proto.task.s2c_load, request: proto.task.c2s_load) {
         if (data.err === errcode.OK) {
-            this.taskBag.init(data);
+            switch (request.taskType) {
+                case TaskConf.TASK_TYPE.MAIN:
+                    this.mainTask = new TaskVo();
+                    this.mainTask.initByCmd(data.tasks[0] as task.TaskInfo);
+                    break;
+                case TaskConf.TASK_TYPE.BRANCH:
+                    this.branchTaskBag.init(data);
+                    break;
+            }
         } else {
             console.log(errmsg[data.err as errcode]);
         }
@@ -32,9 +45,33 @@ export class TaskService extends Service<NetworkService> {
         }
     }
 
-    private _noNotifyTasks(data: proto.bag.notify_items) {}
+    private _noNotifyTasks(data: proto.task.notify_tasks) {
+        for (const taskInfo of data.tasks) {
+            const taskRow = app.service.table.task[Number(taskInfo.id)];
+            if (taskRow.type == TaskConf.TASK_TYPE.MAIN) {
+                this.mainTask.initByCmd(taskInfo as task.TaskInfo);
+            } else if (taskRow.type == TaskConf.TASK_TYPE.BRANCH) {
+                if (this.branchTaskBag.getOne()) {
+                    const taskVo = new TaskVo();
+                    taskVo.initByCmd(taskInfo as task.TaskInfo);
+                    this.branchTaskBag.onUpdate(taskVo);
+                }
+            }
+        }
+        this.event(TaskService.TASK_UPDATE);
+    }
 
-    private _noNotifyRemoveTasks(data: proto.bag.notify_items) {}
+    private _noNotifyRemoveTasks(data: proto.task.notify_remove_tasks) {
+        for (const taskId of data.taskIds) {
+            const taskRow = app.service.table.task[taskId];
+            if (taskRow.type == TaskConf.TASK_TYPE.MAIN) {
+                this.mainTask.initByCmd({} as task.TaskInfo);
+            } else if (taskRow.type == TaskConf.TASK_TYPE.BRANCH) {
+                this.branchTaskBag.onRemove(taskId);
+            }
+        }
+        this.event(TaskService.TASK_UPDATE);
+    }
 
     // ------------------------------------------------------------------------
     // rpc call

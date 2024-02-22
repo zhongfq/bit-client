@@ -10,11 +10,12 @@ const { regClass, property } = Laya;
 @regClass()
 export class TaskMediator extends Mediator {
     declare owner: TaskUI;
-    private tlTaskData!: TaskVo[];
+    private tlTaskData: TaskVo[] = [];
 
     onAwake(): void {
         this.initUIEvent();
-        this.tlTaskData = app.service.task.taskBag.toArray();
+        this.tlTaskData.push(app.service.task.mainTask);
+        this.tlTaskData = this.tlTaskData.concat(app.service.task.branchTaskBag.toArray());
         this.updateList();
     }
 

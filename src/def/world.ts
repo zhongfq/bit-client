@@ -67,6 +67,7 @@ export const WorldConf = {
         8: {
             1: "pos",
             2: "building",
+            3: "owner",
         },
         9: {
             1: "pos",
@@ -78,6 +79,7 @@ export const WorldConf = {
         11: {
             1: "pos",
             2: "item",
+            3: "owner",
         },
     },
     ENTITY_STATE: {

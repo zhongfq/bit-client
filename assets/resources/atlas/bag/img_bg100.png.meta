@@ -1,6 +1,13 @@
 {
   "uuid": "ed52fb17-0bf3-4773-b8f6-1f92676b408a",
   "importer": {
-    "textureType": 2
+    "textureType": 2,
+    "platformDefault": {
+      "format": 1
+    },
+    "platformPC": {
+      "format": "BC3",
+      "quality": 1
+    }
   }
 }

@@ -1,5 +1,6 @@
 import { app } from "../../app";
 import { ChatConf } from "../../def/chat";
+import { TaskConf } from "../../def/task";
 import { ui } from "../../misc/ui";
 import { LoadingUI } from "../../ui-runtime/scene/LoadingUI";
 
@@ -24,18 +25,19 @@ export class LoadingMediator extends Laya.Script {
 
     async _starGame() {
         this.owner.progress.value = 0;
+        await app.service.user.loadProfile();
         await app.service.table.load();
         this.progress = 20;
         await app.service.bag.load({ bagId: 1 }).then();
         this.progress = 40;
 
-        await app.service.task.load({ taskType: 2 });
+        await app.service.task.load({ taskType: TaskConf.TASK_TYPE.MAIN });
+        await app.service.task.load({ taskType: TaskConf.TASK_TYPE.BRANCH });
         this.progress = 60;
 
         await app.service.user.loadMonye();
 
         await app.service.mail.load();
-        await app.service.user.loadProfile();
         await app.service.chat.load({ channel: ChatConf.CHAT_CHANNEL.WORLD });
         await Laya.loader.load("resources/texture/emoji/emoji.atlas");
         this.progress = 100;

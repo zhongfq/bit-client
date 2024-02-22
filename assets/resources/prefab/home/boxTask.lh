@@ -1,0 +1,74 @@
+{
+  "_$ver": 1,
+  "_$id": "pfslatst",
+  "_$var": true,
+  "_$runtime": "res://7fb6ce3f-11e8-4d9b-85a7-90ff7390746a",
+  "_$type": "Box",
+  "name": "boxTask",
+  "x": 42,
+  "y": 1037,
+  "width": 256,
+  "height": 83,
+  "bgColor": "rgba(4, 4, 4, 1)",
+  "_$comp": [
+    {
+      "_$type": "0379a74a-5606-4aca-9579-fc1d48ce94ba",
+      "scriptPath": "../src/system/home/home-task-mediator.ts"
+    }
+  ],
+  "_$child": [
+    {
+      "_$id": "yxt97t4i",
+      "_$var": true,
+      "_$type": "Image",
+      "name": "imgIcon",
+      "width": 83,
+      "height": 80,
+      "skin": "res://4474eaae-a79b-4b60-ae3b-1a3580f11de9",
+      "color": "#ffffff"
+    },
+    {
+      "_$id": "ks1s5i0o",
+      "_$var": true,
+      "_$type": "ProgressBar",
+      "name": "ProgressBar",
+      "x": 93,
+      "y": 43,
+      "width": 156,
+      "height": 34,
+      "skin": "res://ae3de75e-ee9f-478d-9f8b-ede75a4fc296",
+      "value": 0.413
+    },
+    {
+      "_$id": "jm4ntjx0",
+      "_$var": true,
+      "_$type": "Label",
+      "name": "labelDesc",
+      "x": 99,
+      "y": 11,
+      "width": 120,
+      "height": 28,
+      "text": "任务描述少于8字",
+      "fontSize": 20,
+      "color": "#FFFFFF",
+      "valign": "top",
+      "padding": "0,0,0,0"
+    },
+    {
+      "_$id": "rnhhkr78",
+      "_$var": true,
+      "_$type": "Label",
+      "name": "labelValue",
+      "x": 113,
+      "y": 47,
+      "width": 120,
+      "height": 28,
+      "text": "0/10",
+      "fontSize": 26,
+      "color": "rgba(255, 14, 68, 1)",
+      "align": "center",
+      "valign": "middle",
+      "padding": "0,0,0,0"
+    }
+  ]
+}
