@@ -1,0 +1,14 @@
+{
+  "_$ver": 1,
+  "_$id": "6np59eok",
+  "_$var": true,
+  "_$runtime": "res://c29633b7-b4cf-42c7-bbad-26cd10e907ea",
+  "_$type": "Image",
+  "name": "ImageBar",
+  "x": 78,
+  "y": 65,
+  "width": 100,
+  "height": 10,
+  "useSourceSize": true,
+  "color": "#ffffff"
+}

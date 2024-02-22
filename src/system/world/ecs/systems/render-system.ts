@@ -92,7 +92,7 @@ export class RenderSystem extends ecs.System {
         const prefab: Laya.Prefab = await Laya.loader.load(info.path, Laya.Loader.HIERARCHY);
         info.view = prefab.create() as HeroInfoUI;
         this.context.owner.troops.addChild(info.view);
-        info.view.label.text = owner.name;
+        info.view.heroName.text = owner.name;
         info.view.setHpStyle(info.hpStyle);
         info.view.updateHp(hero.hp / hero.maxHp);
     }
