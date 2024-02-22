@@ -8890,6 +8890,303 @@ declare namespace proto {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
+        /** Properties of a BagItem. */
+        interface IBagItem {
+
+            /** BagItem id */
+            id?: (number|null);
+
+            /** BagItem num */
+            num?: (number|null);
+        }
+
+        /** Represents a BagItem. */
+        class BagItem implements IBagItem {
+
+            /**
+             * Constructs a new BagItem.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: world.IBagItem);
+
+            /** BagItem id. */
+            public id: number;
+
+            /** BagItem num. */
+            public num: number;
+
+            /**
+             * Creates a new BagItem instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BagItem instance
+             */
+            public static create(properties?: world.IBagItem): world.BagItem;
+
+            /**
+             * Encodes the specified BagItem message. Does not implicitly {@link world.BagItem.verify|verify} messages.
+             * @param message BagItem message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: world.IBagItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BagItem message, length delimited. Does not implicitly {@link world.BagItem.verify|verify} messages.
+             * @param message BagItem message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: world.IBagItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BagItem message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BagItem
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.BagItem;
+
+            /**
+             * Decodes a BagItem message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BagItem
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.BagItem;
+
+            /**
+             * Verifies a BagItem message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BagItem message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BagItem
+             */
+            public static fromObject(object: { [k: string]: any }): world.BagItem;
+
+            /**
+             * Creates a plain object from a BagItem message. Also converts values to other types if specified.
+             * @param message BagItem
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: world.BagItem, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BagItem to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BagItem
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a BagComponent. */
+        interface IBagComponent {
+
+            /** BagComponent items */
+            items?: (world.IBagItem[]|null);
+        }
+
+        /** Represents a BagComponent. */
+        class BagComponent implements IBagComponent {
+
+            /**
+             * Constructs a new BagComponent.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: world.IBagComponent);
+
+            /** BagComponent items. */
+            public items: world.IBagItem[];
+
+            /**
+             * Creates a new BagComponent instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BagComponent instance
+             */
+            public static create(properties?: world.IBagComponent): world.BagComponent;
+
+            /**
+             * Encodes the specified BagComponent message. Does not implicitly {@link world.BagComponent.verify|verify} messages.
+             * @param message BagComponent message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: world.IBagComponent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BagComponent message, length delimited. Does not implicitly {@link world.BagComponent.verify|verify} messages.
+             * @param message BagComponent message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: world.IBagComponent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BagComponent message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BagComponent
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.BagComponent;
+
+            /**
+             * Decodes a BagComponent message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BagComponent
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.BagComponent;
+
+            /**
+             * Verifies a BagComponent message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BagComponent message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BagComponent
+             */
+            public static fromObject(object: { [k: string]: any }): world.BagComponent;
+
+            /**
+             * Creates a plain object from a BagComponent message. Also converts values to other types if specified.
+             * @param message BagComponent
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: world.BagComponent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BagComponent to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BagComponent
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of an ItemComponent. */
+        interface IItemComponent {
+
+            /** ItemComponent id */
+            id?: (number|null);
+        }
+
+        /** Represents an ItemComponent. */
+        class ItemComponent implements IItemComponent {
+
+            /**
+             * Constructs a new ItemComponent.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: world.IItemComponent);
+
+            /** ItemComponent id. */
+            public id: number;
+
+            /**
+             * Creates a new ItemComponent instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ItemComponent instance
+             */
+            public static create(properties?: world.IItemComponent): world.ItemComponent;
+
+            /**
+             * Encodes the specified ItemComponent message. Does not implicitly {@link world.ItemComponent.verify|verify} messages.
+             * @param message ItemComponent message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: world.IItemComponent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ItemComponent message, length delimited. Does not implicitly {@link world.ItemComponent.verify|verify} messages.
+             * @param message ItemComponent message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: world.IItemComponent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an ItemComponent message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ItemComponent
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.ItemComponent;
+
+            /**
+             * Decodes an ItemComponent message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ItemComponent
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.ItemComponent;
+
+            /**
+             * Verifies an ItemComponent message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an ItemComponent message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ItemComponent
+             */
+            public static fromObject(object: { [k: string]: any }): world.ItemComponent;
+
+            /**
+             * Creates a plain object from an ItemComponent message. Also converts values to other types if specified.
+             * @param message ItemComponent
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: world.ItemComponent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ItemComponent to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ItemComponent
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** Properties of an Entity. */
         interface IEntity {
 
@@ -8922,6 +9219,12 @@ declare namespace proto {
 
             /** Entity battle */
             battle?: (world.IBattleComponent|null);
+
+            /** Entity bag */
+            bag?: (world.IBagComponent|null);
+
+            /** Entity item */
+            item?: (world.IItemComponent|null);
         }
 
         /** Represents an Entity. */
@@ -8962,6 +9265,12 @@ declare namespace proto {
 
             /** Entity battle. */
             public battle?: (world.IBattleComponent|null);
+
+            /** Entity bag. */
+            public bag?: (world.IBagComponent|null);
+
+            /** Entity item. */
+            public item?: (world.IItemComponent|null);
 
             /**
              * Creates a new Entity instance using the specified properties.
@@ -12113,6 +12422,418 @@ declare namespace proto {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
+        /** Properties of an AddBoxAction. */
+        interface IAddBoxAction {
+
+            /** AddBoxAction troopEid */
+            troopEid?: (number|null);
+
+            /** AddBoxAction boxEid */
+            boxEid?: (number|null);
+        }
+
+        /** Represents an AddBoxAction. */
+        class AddBoxAction implements IAddBoxAction {
+
+            /**
+             * Constructs a new AddBoxAction.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: world.IAddBoxAction);
+
+            /** AddBoxAction troopEid. */
+            public troopEid: number;
+
+            /** AddBoxAction boxEid. */
+            public boxEid: number;
+
+            /**
+             * Creates a new AddBoxAction instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns AddBoxAction instance
+             */
+            public static create(properties?: world.IAddBoxAction): world.AddBoxAction;
+
+            /**
+             * Encodes the specified AddBoxAction message. Does not implicitly {@link world.AddBoxAction.verify|verify} messages.
+             * @param message AddBoxAction message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: world.IAddBoxAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified AddBoxAction message, length delimited. Does not implicitly {@link world.AddBoxAction.verify|verify} messages.
+             * @param message AddBoxAction message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: world.IAddBoxAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an AddBoxAction message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns AddBoxAction
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.AddBoxAction;
+
+            /**
+             * Decodes an AddBoxAction message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns AddBoxAction
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.AddBoxAction;
+
+            /**
+             * Verifies an AddBoxAction message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an AddBoxAction message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns AddBoxAction
+             */
+            public static fromObject(object: { [k: string]: any }): world.AddBoxAction;
+
+            /**
+             * Creates a plain object from an AddBoxAction message. Also converts values to other types if specified.
+             * @param message AddBoxAction
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: world.AddBoxAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this AddBoxAction to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for AddBoxAction
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a DropBoxAction. */
+        interface IDropBoxAction {
+
+            /** DropBoxAction troopEid */
+            troopEid?: (number|null);
+
+            /** DropBoxAction campEid */
+            campEid?: (number|null);
+        }
+
+        /** Represents a DropBoxAction. */
+        class DropBoxAction implements IDropBoxAction {
+
+            /**
+             * Constructs a new DropBoxAction.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: world.IDropBoxAction);
+
+            /** DropBoxAction troopEid. */
+            public troopEid: number;
+
+            /** DropBoxAction campEid. */
+            public campEid: number;
+
+            /**
+             * Creates a new DropBoxAction instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns DropBoxAction instance
+             */
+            public static create(properties?: world.IDropBoxAction): world.DropBoxAction;
+
+            /**
+             * Encodes the specified DropBoxAction message. Does not implicitly {@link world.DropBoxAction.verify|verify} messages.
+             * @param message DropBoxAction message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: world.IDropBoxAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified DropBoxAction message, length delimited. Does not implicitly {@link world.DropBoxAction.verify|verify} messages.
+             * @param message DropBoxAction message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: world.IDropBoxAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a DropBoxAction message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns DropBoxAction
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.DropBoxAction;
+
+            /**
+             * Decodes a DropBoxAction message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns DropBoxAction
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.DropBoxAction;
+
+            /**
+             * Verifies a DropBoxAction message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a DropBoxAction message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns DropBoxAction
+             */
+            public static fromObject(object: { [k: string]: any }): world.DropBoxAction;
+
+            /**
+             * Creates a plain object from a DropBoxAction message. Also converts values to other types if specified.
+             * @param message DropBoxAction
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: world.DropBoxAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this DropBoxAction to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for DropBoxAction
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a PickItemAction. */
+        interface IPickItemAction {
+
+            /** PickItemAction troopEid */
+            troopEid?: (number|null);
+
+            /** PickItemAction itemEid */
+            itemEid?: (number|null);
+        }
+
+        /** Represents a PickItemAction. */
+        class PickItemAction implements IPickItemAction {
+
+            /**
+             * Constructs a new PickItemAction.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: world.IPickItemAction);
+
+            /** PickItemAction troopEid. */
+            public troopEid: number;
+
+            /** PickItemAction itemEid. */
+            public itemEid: number;
+
+            /**
+             * Creates a new PickItemAction instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns PickItemAction instance
+             */
+            public static create(properties?: world.IPickItemAction): world.PickItemAction;
+
+            /**
+             * Encodes the specified PickItemAction message. Does not implicitly {@link world.PickItemAction.verify|verify} messages.
+             * @param message PickItemAction message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: world.IPickItemAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified PickItemAction message, length delimited. Does not implicitly {@link world.PickItemAction.verify|verify} messages.
+             * @param message PickItemAction message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: world.IPickItemAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a PickItemAction message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns PickItemAction
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.PickItemAction;
+
+            /**
+             * Decodes a PickItemAction message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns PickItemAction
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.PickItemAction;
+
+            /**
+             * Verifies a PickItemAction message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a PickItemAction message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns PickItemAction
+             */
+            public static fromObject(object: { [k: string]: any }): world.PickItemAction;
+
+            /**
+             * Creates a plain object from a PickItemAction message. Also converts values to other types if specified.
+             * @param message PickItemAction
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: world.PickItemAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this PickItemAction to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for PickItemAction
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of an InviteSoldierAction. */
+        interface IInviteSoldierAction {
+
+            /** InviteSoldierAction troopEid */
+            troopEid?: (number|null);
+
+            /** InviteSoldierAction soldierEid */
+            soldierEid?: (number|null);
+        }
+
+        /** Represents an InviteSoldierAction. */
+        class InviteSoldierAction implements IInviteSoldierAction {
+
+            /**
+             * Constructs a new InviteSoldierAction.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: world.IInviteSoldierAction);
+
+            /** InviteSoldierAction troopEid. */
+            public troopEid: number;
+
+            /** InviteSoldierAction soldierEid. */
+            public soldierEid: number;
+
+            /**
+             * Creates a new InviteSoldierAction instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns InviteSoldierAction instance
+             */
+            public static create(properties?: world.IInviteSoldierAction): world.InviteSoldierAction;
+
+            /**
+             * Encodes the specified InviteSoldierAction message. Does not implicitly {@link world.InviteSoldierAction.verify|verify} messages.
+             * @param message InviteSoldierAction message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: world.IInviteSoldierAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified InviteSoldierAction message, length delimited. Does not implicitly {@link world.InviteSoldierAction.verify|verify} messages.
+             * @param message InviteSoldierAction message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: world.IInviteSoldierAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an InviteSoldierAction message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns InviteSoldierAction
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.InviteSoldierAction;
+
+            /**
+             * Decodes an InviteSoldierAction message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns InviteSoldierAction
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.InviteSoldierAction;
+
+            /**
+             * Verifies an InviteSoldierAction message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an InviteSoldierAction message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns InviteSoldierAction
+             */
+            public static fromObject(object: { [k: string]: any }): world.InviteSoldierAction;
+
+            /**
+             * Creates a plain object from an InviteSoldierAction message. Also converts values to other types if specified.
+             * @param message InviteSoldierAction
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: world.InviteSoldierAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this InviteSoldierAction to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for InviteSoldierAction
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** Properties of an EntityAction. */
         interface IEntityAction {
 
@@ -12127,6 +12848,18 @@ declare namespace proto {
 
             /** EntityAction move */
             move?: (world.IMoveAction|null);
+
+            /** EntityAction addBox */
+            addBox?: (world.IAddBoxAction|null);
+
+            /** EntityAction dropBox */
+            dropBox?: (world.IDropBoxAction|null);
+
+            /** EntityAction pickItem */
+            pickItem?: (world.IPickItemAction|null);
+
+            /** EntityAction inviteSoldier */
+            inviteSoldier?: (world.IInviteSoldierAction|null);
 
             /** EntityAction battleStart */
             battleStart?: (world.IBattleStartAction|null);
@@ -12167,6 +12900,18 @@ declare namespace proto {
 
             /** EntityAction move. */
             public move?: (world.IMoveAction|null);
+
+            /** EntityAction addBox. */
+            public addBox?: (world.IAddBoxAction|null);
+
+            /** EntityAction dropBox. */
+            public dropBox?: (world.IDropBoxAction|null);
+
+            /** EntityAction pickItem. */
+            public pickItem?: (world.IPickItemAction|null);
+
+            /** EntityAction inviteSoldier. */
+            public inviteSoldier?: (world.IInviteSoldierAction|null);
 
             /** EntityAction battleStart. */
             public battleStart?: (world.IBattleStartAction|null);

@@ -158,13 +158,15 @@ export const enum errcode {
     HAS_CRAP = 0x101C,
     NAME_REPEATED = 0x101D,
     GENDER_ERROR = 0x101E,
+    DUNGEON_NOT_UNLOCK = 0x101F,
+    ALREADY_START = 0x1020,
     ARGS_ERROR = 0xA000,
     BODY_ERROR = 0xA001,
     AUTH_FAIL = 0xA002,
     TRACEBACK = 0xA003,
     API_NOT_FOUND = 0xA004,
     PASSWORD_ERROR = 0xA005,
-}
+};
 
 export const errname = {
     0x0000: "OK",
@@ -201,6 +203,8 @@ export const errname = {
     0x101C: "HAS_CRAP",
     0x101D: "NAME_REPEATED",
     0x101E: "GENDER_ERROR",
+    0x101F: "DUNGEON_NOT_UNLOCK",
+    0x1020: "ALREADY_START",
     0xA000: "ARGS_ERROR",
     0xA001: "BODY_ERROR",
     0xA002: "AUTH_FAIL",
@@ -244,6 +248,8 @@ export const errmsg = {
     0x101C: "包含敏感词",
     0x101D: "昵称重复",
     0x101E: "性别错误",
+    0x101F: "副本未解锁",
+    0x1020: "已经进入副本",
     0xA000: "参数错误",
     0xA001: "body错误",
     0xA002: "登录过期",

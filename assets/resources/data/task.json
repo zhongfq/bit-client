@@ -1,7 +1,10 @@
 {
     "1001": {
         "desc": "等级达到10级",
+        "icon": "0",
         "id": 1001,
+        "receive_type": 1,
+        "reset_type": 0,
         "reward": [
             {
                 "count": 1,
@@ -12,11 +15,15 @@
                 "id": 10102
             }
         ],
+        "sort": 1,
         "type": 1
     },
     "1002": {
         "desc": "等级达到20级",
+        "icon": "0",
         "id": 1002,
+        "receive_type": 1,
+        "reset_type": 0,
         "reward": [
             {
                 "count": 1,
@@ -27,11 +34,15 @@
                 "id": 10102
             }
         ],
+        "sort": 2,
         "type": 1
     },
     "1003": {
         "desc": "等级达到30级",
+        "icon": "0",
         "id": 1003,
+        "receive_type": 1,
+        "reset_type": 0,
         "reward": [
             {
                 "count": 1,
@@ -42,11 +53,15 @@
                 "id": 10102
             }
         ],
+        "sort": 3,
         "type": 1
     },
     "1004": {
         "desc": "等级达到40级",
+        "icon": "0",
         "id": 1004,
+        "receive_type": 1,
+        "reset_type": 0,
         "reward": [
             {
                 "count": 1,
@@ -57,11 +72,15 @@
                 "id": 10102
             }
         ],
+        "sort": 4,
         "type": 1
     },
     "2001": {
-        "desc": "拥有10个英雄",
+        "desc": "拥有10个小兵",
+        "icon": "0",
         "id": 2001,
+        "receive_type": 0,
+        "reset_type": 0,
         "reward": [
             {
                 "count": 1,
@@ -72,11 +91,15 @@
                 "id": 10102
             }
         ],
+        "sort": 1,
         "type": 2
     },
     "2002": {
-        "desc": "拥有20个英雄",
+        "desc": "拥有20个小兵",
+        "icon": "0",
         "id": 2002,
+        "receive_type": 0,
+        "reset_type": 0,
         "reward": [
             {
                 "count": 1,
@@ -87,11 +110,15 @@
                 "id": 10102
             }
         ],
+        "sort": 2,
         "type": 2
     },
     "2003": {
-        "desc": "拥有30个英雄",
+        "desc": "拥有30个小兵",
+        "icon": "0",
         "id": 2003,
+        "receive_type": 0,
+        "reset_type": 0,
         "reward": [
             {
                 "count": 1,
@@ -102,11 +129,15 @@
                 "id": 10102
             }
         ],
+        "sort": 3,
         "type": 2
     },
     "2004": {
-        "desc": "拥有40个英雄",
+        "desc": "拥有40个小兵",
+        "icon": "0",
         "id": 2004,
+        "receive_type": 0,
+        "reset_type": 0,
         "reward": [
             {
                 "count": 1,
@@ -117,11 +148,15 @@
                 "id": 10102
             }
         ],
+        "sort": 4,
         "type": 2
     },
     "3001": {
         "desc": "花费10点体力",
+        "icon": "0",
         "id": 3001,
+        "receive_type": 0,
+        "reset_type": 1,
         "reward": [
             {
                 "count": 1,
@@ -132,11 +167,15 @@
                 "id": 10102
             }
         ],
+        "sort": 1,
         "type": 3
     },
     "3002": {
         "desc": "花费20点体力",
+        "icon": "0",
         "id": 3002,
+        "receive_type": 0,
+        "reset_type": 1,
         "reward": [
             {
                 "count": 1,
@@ -147,11 +186,15 @@
                 "id": 10102
             }
         ],
+        "sort": 2,
         "type": 3
     },
     "3003": {
         "desc": "花费30点体力",
+        "icon": "0",
         "id": 3003,
+        "receive_type": 0,
+        "reset_type": 1,
         "reward": [
             {
                 "count": 1,
@@ -162,11 +205,15 @@
                 "id": 10102
             }
         ],
+        "sort": 3,
         "type": 3
     },
     "3004": {
         "desc": "花费40点体力",
+        "icon": "0",
         "id": 3004,
+        "receive_type": 0,
+        "reset_type": 1,
         "reward": [
             {
                 "count": 1,
@@ -177,6 +224,315 @@
                 "id": 10102
             }
         ],
+        "sort": 4,
         "type": 3
+    },
+    "4001": {
+        "desc": "花费10点体力",
+        "icon": "0",
+        "id": 4001,
+        "receive_type": 0,
+        "reset_type": 2,
+        "reward": [
+            {
+                "count": 1,
+                "id": 10101
+            },
+            {
+                "count": 2,
+                "id": 10102
+            }
+        ],
+        "sort": 1,
+        "type": 4
+    },
+    "4002": {
+        "desc": "花费20点体力",
+        "icon": "0",
+        "id": 4002,
+        "receive_type": 0,
+        "reset_type": 2,
+        "reward": [
+            {
+                "count": 1,
+                "id": 10101
+            },
+            {
+                "count": 3,
+                "id": 10102
+            }
+        ],
+        "sort": 2,
+        "type": 4
+    },
+    "4003": {
+        "desc": "花费30点体力",
+        "icon": "0",
+        "id": 4003,
+        "receive_type": 0,
+        "reset_type": 2,
+        "reward": [
+            {
+                "count": 1,
+                "id": 10101
+            },
+            {
+                "count": 4,
+                "id": 10102
+            }
+        ],
+        "sort": 3,
+        "type": 4
+    },
+    "4004": {
+        "desc": "花费40点体力",
+        "icon": "0",
+        "id": 4004,
+        "receive_type": 0,
+        "reset_type": 2,
+        "reward": [
+            {
+                "count": 1,
+                "id": 10101
+            },
+            {
+                "count": 5,
+                "id": 10102
+            }
+        ],
+        "sort": 4,
+        "type": 4
+    },
+    "5001": {
+        "desc": "等级达到10级",
+        "icon": "0",
+        "id": 5001,
+        "receive_type": 0,
+        "reset_type": 0,
+        "reward": [
+            {
+                "count": 1,
+                "id": 10101
+            },
+            {
+                "count": 2,
+                "id": 10102
+            }
+        ],
+        "sort": 1,
+        "type": 5,
+        "vip_reward": [
+            {
+                "count": 1,
+                "id": 10101
+            },
+            {
+                "count": 2,
+                "id": 10102
+            }
+        ]
+    },
+    "5002": {
+        "desc": "等级达到20级",
+        "icon": "0",
+        "id": 5002,
+        "receive_type": 0,
+        "reset_type": 0,
+        "reward": [
+            {
+                "count": 1,
+                "id": 10101
+            },
+            {
+                "count": 3,
+                "id": 10102
+            }
+        ],
+        "sort": 2,
+        "type": 5,
+        "vip_reward": [
+            {
+                "count": 1,
+                "id": 10101
+            },
+            {
+                "count": 3,
+                "id": 10102
+            }
+        ]
+    },
+    "5003": {
+        "desc": "等级达到30级",
+        "icon": "0",
+        "id": 5003,
+        "receive_type": 0,
+        "reset_type": 0,
+        "reward": [
+            {
+                "count": 1,
+                "id": 10101
+            },
+            {
+                "count": 4,
+                "id": 10102
+            }
+        ],
+        "sort": 3,
+        "type": 5,
+        "vip_reward": [
+            {
+                "count": 1,
+                "id": 10101
+            },
+            {
+                "count": 4,
+                "id": 10102
+            }
+        ]
+    },
+    "5004": {
+        "desc": "等级达到40级",
+        "icon": "0",
+        "id": 5004,
+        "receive_type": 0,
+        "reset_type": 0,
+        "reward": [
+            {
+                "count": 1,
+                "id": 10101
+            },
+            {
+                "count": 5,
+                "id": 10102
+            }
+        ],
+        "sort": 4,
+        "type": 5,
+        "vip_reward": [
+            {
+                "count": 1,
+                "id": 10101
+            },
+            {
+                "count": 5,
+                "id": 10102
+            }
+        ]
+    },
+    "6001": {
+        "desc": "等级达到10级",
+        "icon": "0",
+        "id": 6001,
+        "receive_type": 0,
+        "reset_type": 0,
+        "reward": [
+            {
+                "count": 1,
+                "id": 10101
+            },
+            {
+                "count": 2,
+                "id": 10102
+            }
+        ],
+        "sort": 1,
+        "type": 6,
+        "vip_reward": [
+            {
+                "count": 1,
+                "id": 10101
+            },
+            {
+                "count": 2,
+                "id": 10102
+            }
+        ]
+    },
+    "6002": {
+        "desc": "等级达到20级",
+        "icon": "0",
+        "id": 6002,
+        "receive_type": 0,
+        "reset_type": 0,
+        "reward": [
+            {
+                "count": 1,
+                "id": 10101
+            },
+            {
+                "count": 3,
+                "id": 10102
+            }
+        ],
+        "sort": 2,
+        "type": 6,
+        "vip_reward": [
+            {
+                "count": 1,
+                "id": 10101
+            },
+            {
+                "count": 3,
+                "id": 10102
+            }
+        ]
+    },
+    "6003": {
+        "desc": "等级达到30级",
+        "icon": "0",
+        "id": 6003,
+        "receive_type": 0,
+        "reset_type": 0,
+        "reward": [
+            {
+                "count": 1,
+                "id": 10101
+            },
+            {
+                "count": 4,
+                "id": 10102
+            }
+        ],
+        "sort": 3,
+        "type": 6,
+        "vip_reward": [
+            {
+                "count": 1,
+                "id": 10101
+            },
+            {
+                "count": 4,
+                "id": 10102
+            }
+        ]
+    },
+    "6004": {
+        "desc": "等级达到40级",
+        "icon": "0",
+        "id": 6004,
+        "receive_type": 0,
+        "reset_type": 0,
+        "reward": [
+            {
+                "count": 1,
+                "id": 10101
+            },
+            {
+                "count": 5,
+                "id": 10102
+            }
+        ],
+        "sort": 4,
+        "type": 6,
+        "vip_reward": [
+            {
+                "count": 1,
+                "id": 10101
+            },
+            {
+                "count": 5,
+                "id": 10102
+            }
+        ]
     }
 }

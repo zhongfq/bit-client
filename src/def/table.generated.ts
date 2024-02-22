@@ -115,23 +115,77 @@ export interface GeneratedMailRow {
 
 export interface GeneratedTaskMainRow {
     id: number;
+    sort: number;
     type: number;
     desc: string;
+    branch_tasks?: any;
     reward: any;
+    guide_id?: number;
+    reset_type: number;
+    receive_type: number;
+    icon: string;
 }
 
 export interface GeneratedTaskBranchRow {
     id: number;
+    sort: number;
     type: number;
     desc: string;
     reward: any;
+    guide_id?: number;
+    reset_type: number;
+    receive_type: number;
+    icon: string;
 }
 
 export interface GeneratedTaskDailyRow {
     id: number;
+    sort: number;
     type: number;
     desc: string;
     reward: any;
+    guide_id?: number;
+    reset_type: number;
+    receive_type: number;
+    icon: string;
+}
+
+export interface GeneratedTaskWeeklyRow {
+    id: number;
+    sort: number;
+    type: number;
+    desc: string;
+    reward: any;
+    guide_id?: number;
+    reset_type: number;
+    receive_type: number;
+    icon: string;
+}
+
+export interface GeneratedTaskEventsRow {
+    id: number;
+    sort: number;
+    type: number;
+    desc: string;
+    reward: any;
+    vip_reward: any;
+    guide_id?: number;
+    reset_type: number;
+    receive_type: number;
+    icon: string;
+}
+
+export interface GeneratedTaskPassesRow {
+    id: number;
+    sort: number;
+    type: number;
+    desc: string;
+    reward: any;
+    vip_reward: any;
+    guide_id?: number;
+    reset_type: number;
+    receive_type: number;
+    icon: string;
 }
 
 export interface GeneratedRandomNameRow {

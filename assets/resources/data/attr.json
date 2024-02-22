@@ -1,172 +1,150 @@
 {
     "101": {
-        "define": "force",
+        "define": "hp",
         "id": 101,
-        "name": "武力"
+        "name": "生命"
     },
     "102": {
-        "define": "brains",
+        "define": "atk",
         "id": 102,
-        "name": "智力"
+        "name": "攻击"
     },
     "103": {
         "define": "defence",
         "id": 103,
-        "name": "统率"
+        "name": "防御"
     },
     "104": {
-        "define": "politic",
+        "define": "move_speed",
         "id": 104,
-        "name": "政治"
+        "name": "速度"
     },
     "105": {
-        "define": "charm",
+        "define": "atk_speed",
         "id": 105,
-        "name": "魅力"
+        "name": "攻速"
     },
     "106": {
-        "define": "force_up",
+        "define": "critical_up",
         "id": 106,
-        "name": "武力成长值"
+        "name": "暴击"
     },
     "107": {
-        "define": "brains_up",
+        "define": "critical_damage",
         "id": 107,
-        "name": "智力成长值"
+        "name": "暴击伤害"
     },
     "108": {
-        "define": "defence_up",
+        "define": "pursuit_up",
         "id": 108,
-        "name": "统率成长值"
+        "name": "追击"
     },
     "109": {
-        "define": "politic_up",
+        "define": "pursuit_damage",
         "id": 109,
-        "name": "政治成长值"
+        "name": "追击伤害"
     },
     "110": {
-        "define": "charm_up",
+        "define": "counterattack_up",
         "id": 110,
-        "name": "魅力成长值"
+        "name": "反击"
     },
     "111": {
-        "define": "max_hp",
+        "define": "counterattack_damage",
         "id": 111,
-        "name": "血量"
+        "name": "反击伤害"
     },
     "112": {
-        "define": "move_speed",
+        "define": "dodge_up",
         "id": 112,
-        "name": "移动速度"
-    },
-    "113": {
-        "define": "atk_speed",
-        "id": 113,
-        "name": "攻击速度"
-    },
-    "114": {
-        "define": "atk_time",
-        "id": 114,
-        "name": "行动间隔"
-    },
-    "115": {
-        "define": "atk_range",
-        "id": 115,
-        "name": "攻击距离"
-    },
-    "116": {
-        "define": "critical_chance",
-        "id": 116,
-        "name": "会心几率"
-    },
-    "117": {
-        "define": "critical_effect",
-        "id": 117,
-        "name": "会心效果"
-    },
-    "118": {
-        "define": "critical_resist",
-        "id": 118,
-        "name": "会心抗性"
-    },
-    "119": {
-        "id": 119,
-        "name": "武力穿透"
-    },
-    "120": {
-        "id": 120,
-        "name": "谋略穿透"
-    },
-    "121": {
-        "id": 121,
-        "name": "武力吸血"
-    },
-    "122": {
-        "id": 122,
-        "name": "谋略吸血"
-    },
-    "123": {
-        "id": 123,
         "name": "闪避"
     },
+    "113": {
+        "define": "critical_down",
+        "id": 113,
+        "name": "抵抗暴击"
+    },
+    "114": {
+        "define": "pursuit_down",
+        "id": 114,
+        "name": "抵抗追击"
+    },
+    "115": {
+        "define": "counterattack_down",
+        "id": 115,
+        "name": "抵抗反击"
+    },
+    "116": {
+        "define": "dodge_down",
+        "id": 116,
+        "name": "抵抗闪避"
+    },
+    "117": {
+        "define": "finalattack_up",
+        "id": 117,
+        "name": "最终增伤"
+    },
+    "118": {
+        "define": "finalattack_down",
+        "id": 118,
+        "name": "最终减伤"
+    },
+    "119": {
+        "define": "generalattack_up",
+        "id": 119,
+        "name": "强化普攻伤害"
+    },
+    "120": {
+        "define": "generalattack_down",
+        "id": 120,
+        "name": "弱化普攻伤害"
+    },
+    "121": {
+        "define": "skillattack_up",
+        "id": 121,
+        "name": "强化战法伤害"
+    },
+    "122": {
+        "define": "skillattack_down",
+        "id": 122,
+        "name": "弱化战法伤害"
+    },
+    "123": {
+        "define": "treatment_up",
+        "id": 123,
+        "name": "强化治疗"
+    },
     "124": {
+        "define": "treatment_down",
         "id": 124,
-        "name": "识破"
+        "name": "弱化治疗"
     },
     "125": {
+        "define": "pvpattack_up",
         "id": 125,
-        "name": "造成的武力伤害提高"
+        "name": "PVP增伤"
     },
     "126": {
+        "define": "pvpattack_down",
         "id": 126,
-        "name": "造成的武力伤害降低"
+        "name": "PVP减伤"
     },
     "127": {
+        "define": "pveattack_up",
         "id": 127,
-        "name": "受到的武力伤害提高"
+        "name": "PVE增伤"
     },
     "128": {
+        "define": "pveattack_down",
         "id": 128,
-        "name": "受到的武力伤害降低"
+        "name": "PVE减伤"
     },
     "129": {
         "id": 129,
-        "name": "造成的谋略伤害提高"
+        "name": "主动、追击技能CD"
     },
     "130": {
         "id": 130,
-        "name": "造成的谋略伤害降低"
-    },
-    "131": {
-        "id": 131,
-        "name": "受到的谋略伤害提高"
-    },
-    "132": {
-        "id": 132,
-        "name": "受到的谋略伤害降低"
-    },
-    "133": {
-        "id": 133,
-        "name": "造成的伤害提高"
-    },
-    "134": {
-        "id": 134,
-        "name": "造成的伤害降低"
-    },
-    "135": {
-        "id": 135,
-        "name": "受到的伤害提高"
-    },
-    "136": {
-        "id": 136,
-        "name": "受到的伤害降低"
-    },
-    "137": {
-        "id": 137,
-        "name": "主动、追击技能CD"
-    },
-    "138": {
-        "id": 138,
         "name": "攻击范围"
     }
 }

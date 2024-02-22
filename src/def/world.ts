@@ -1,7 +1,9 @@
 export const WorldConf = {
     COM_ENUM: {
+        BAG: "bag",
         BATTLE: "battle",
         BUILDING: "building",
+        ITEM: "item",
         MOVE: "move",
         OWNER: "owner",
         PLAYER: "player",
@@ -10,6 +12,7 @@ export const WorldConf = {
         TROOP: "troop",
     },
     ENTITY_ACTION: {
+        ADD_BOX: 12,
         ADD_ENTITY: 1,
         BATTLE_ADD_BUFF: 6,
         BATTLE_ADD_BULLET: 10,
@@ -20,7 +23,10 @@ export const WorldConf = {
         BATTLE_SUB_HP: 5,
         CHANGE_OWNER: 11,
         DEL_ENTITY: 2,
+        DROP_BOX: 13,
+        INVITE_SOLDIER: 15,
         MOVE: 3,
+        PICK_ITEM: 14,
     },
     ENTITY_CMD: {
         MOVE_TO: 1,
@@ -47,6 +53,32 @@ export const WorldConf = {
             1: "pos",
             2: "battle",
         },
+        6: {
+            1: "pos",
+            2: "state",
+            3: "move",
+            4: "owner",
+            5: "troop",
+        },
+        7: {
+            1: "pos",
+            2: "item",
+        },
+        8: {
+            1: "pos",
+            2: "building",
+        },
+        9: {
+            1: "pos",
+        },
+        10: {
+            1: "pos",
+            2: "building",
+        },
+        11: {
+            1: "pos",
+            2: "item",
+        },
     },
     ENTITY_STATE: {
         FIGHTING: 5,
@@ -58,9 +90,15 @@ export const WorldConf = {
     },
     ENTITY_TYPE: {
         BATTLE: 5,
+        BOX: 7,
+        CAMP: 8,
         CASTLE: 1,
         CITY: 3,
+        DROP_ITEM: 11,
+        MINE: 10,
+        MONSTER: 6,
         PLAYER: 4,
+        SOLDIER: 9,
         TROOP: 2,
     },
     LOGIC_FPS: 10,

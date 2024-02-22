@@ -77,6 +77,19 @@ message BattleComponent {
     uint32 start_ts = 3; // 开始时间戳
 }
 
+message BagItem {
+    uint32 id = 1;
+    uint32 num = 2;
+}
+
+message BagComponent {
+    repeated BagItem items = 1;
+}
+
+message ItemComponent {
+    uint32 id = 1;
+}
+
 // 单位定义
 message Entity {
     uint32 eid = 1;
@@ -90,6 +103,8 @@ message Entity {
     OwnerComponent owner = 15;
     TroopComponent troop = 16;
     BattleComponent battle = 17;
+    BagComponent bag = 18;
+    ItemComponent item = 19;
 }
 
 // 沙盘地图基础信息
@@ -238,19 +253,43 @@ message BattleStopAction {
     uint32 battle_eid = 2;
 }
 
+message AddBoxAction {
+    uint32 troop_eid = 1;
+    uint32 box_eid = 2;
+}
+
+message DropBoxAction {
+    uint32 troop_eid = 1;
+    uint32 camp_eid = 2;
+}
+
+message PickItemAction {
+    uint32 troop_eid = 1;
+    uint32 item_eid = 2;
+}
+
+message InviteSoldierAction {
+    uint32 troop_eid = 1;
+    uint32 soldier_eid = 2;
+}
+
 message EntityAction {
     uint32 action = 1;
 
     AddEntityAction add_entity = 10;
     DelEntityAction del_entity = 11;
     MoveAction move = 12;
+    AddBoxAction add_box = 13;
+    DropBoxAction drop_box = 14;
+    PickItemAction pick_item = 15;
+    InviteSoldierAction invite_soldier = 16;
 
     BattleStartAction battle_start = 21;
     BattleSkillAction battle_skill = 20;
     BattleAddBuffAction battle_add_buff = 22;
     BattleDelBuffAction battle_del_buff = 23;
     BattleStopAction battle_stop = 24;
-    BattleSubHpAction battle_sub_hp = 25; 
+    BattleSubHpAction battle_sub_hp = 25;
 }
 
 // 单位同步(最基层)

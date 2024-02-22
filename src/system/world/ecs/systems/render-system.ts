@@ -3,7 +3,7 @@ import { HeroInfoUI } from "../../../../ui-runtime/prefab/battle/HeroInfoUI";
 import { WorldContext } from "../../world-context";
 import { MovementComponent, TransformComponent } from "../components/movement-component";
 import { AnimationComponent, HeroInfoComponent } from "../components/render-component";
-import { HeroComponent } from "../components/troop-component";
+import { HeroComponent, OwnerComponent } from "../components/troop-component";
 
 export class RenderSystem extends ecs.System {
     constructor(readonly context: WorldContext) {
@@ -88,9 +88,11 @@ export class RenderSystem extends ecs.System {
 
     private async _loadHeroInfo(info: HeroInfoComponent) {
         const hero = info.getComponent(HeroComponent)!;
+        const owner = info.getComponent(OwnerComponent)!;
         const prefab: Laya.Prefab = await Laya.loader.load(info.path, Laya.Loader.HIERARCHY);
         info.view = prefab.create() as HeroInfoUI;
         this.context.owner.troops.addChild(info.view);
+        info.view.label.text = owner.name;
         info.view.setHpStyle(info.hpStyle);
         info.view.updateHp(hero.hp / hero.maxHp);
     }

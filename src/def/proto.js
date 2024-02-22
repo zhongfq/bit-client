@@ -20160,6 +20160,660 @@ $root.world = (function() {
         return BattleComponent;
     })();
 
+    world.BagItem = (function() {
+
+        /**
+         * Properties of a BagItem.
+         * @memberof world
+         * @interface IBagItem
+         * @property {number|null} [id] BagItem id
+         * @property {number|null} [num] BagItem num
+         */
+
+        /**
+         * Constructs a new BagItem.
+         * @memberof world
+         * @classdesc Represents a BagItem.
+         * @implements IBagItem
+         * @constructor
+         * @param {world.IBagItem=} [properties] Properties to set
+         */
+        function BagItem(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * BagItem id.
+         * @member {number} id
+         * @memberof world.BagItem
+         * @instance
+         */
+        BagItem.prototype.id = 0;
+
+        /**
+         * BagItem num.
+         * @member {number} num
+         * @memberof world.BagItem
+         * @instance
+         */
+        BagItem.prototype.num = 0;
+
+        /**
+         * Creates a new BagItem instance using the specified properties.
+         * @function create
+         * @memberof world.BagItem
+         * @static
+         * @param {world.IBagItem=} [properties] Properties to set
+         * @returns {world.BagItem} BagItem instance
+         */
+        BagItem.create = function create(properties) {
+            return new BagItem(properties);
+        };
+
+        /**
+         * Encodes the specified BagItem message. Does not implicitly {@link world.BagItem.verify|verify} messages.
+         * @function encode
+         * @memberof world.BagItem
+         * @static
+         * @param {world.IBagItem} message BagItem message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        BagItem.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.id);
+            if (message.num != null && Object.hasOwnProperty.call(message, "num"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.num);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified BagItem message, length delimited. Does not implicitly {@link world.BagItem.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof world.BagItem
+         * @static
+         * @param {world.IBagItem} message BagItem message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        BagItem.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a BagItem message from the specified reader or buffer.
+         * @function decode
+         * @memberof world.BagItem
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {world.BagItem} BagItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        BagItem.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.BagItem();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.id = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.num = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a BagItem message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof world.BagItem
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {world.BagItem} BagItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        BagItem.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a BagItem message.
+         * @function verify
+         * @memberof world.BagItem
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        BagItem.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isInteger(message.id))
+                    return "id: integer expected";
+            if (message.num != null && message.hasOwnProperty("num"))
+                if (!$util.isInteger(message.num))
+                    return "num: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a BagItem message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof world.BagItem
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {world.BagItem} BagItem
+         */
+        BagItem.fromObject = function fromObject(object) {
+            if (object instanceof $root.world.BagItem)
+                return object;
+            var message = new $root.world.BagItem();
+            if (object.id != null)
+                message.id = object.id >>> 0;
+            if (object.num != null)
+                message.num = object.num >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a BagItem message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof world.BagItem
+         * @static
+         * @param {world.BagItem} message BagItem
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        BagItem.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.id = 0;
+                object.num = 0;
+            }
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            if (message.num != null && message.hasOwnProperty("num"))
+                object.num = message.num;
+            return object;
+        };
+
+        /**
+         * Converts this BagItem to JSON.
+         * @function toJSON
+         * @memberof world.BagItem
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        BagItem.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for BagItem
+         * @function getTypeUrl
+         * @memberof world.BagItem
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        BagItem.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/world.BagItem";
+        };
+
+        return BagItem;
+    })();
+
+    world.BagComponent = (function() {
+
+        /**
+         * Properties of a BagComponent.
+         * @memberof world
+         * @interface IBagComponent
+         * @property {Array.<world.IBagItem>|null} [items] BagComponent items
+         */
+
+        /**
+         * Constructs a new BagComponent.
+         * @memberof world
+         * @classdesc Represents a BagComponent.
+         * @implements IBagComponent
+         * @constructor
+         * @param {world.IBagComponent=} [properties] Properties to set
+         */
+        function BagComponent(properties) {
+            this.items = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * BagComponent items.
+         * @member {Array.<world.IBagItem>} items
+         * @memberof world.BagComponent
+         * @instance
+         */
+        BagComponent.prototype.items = $util.emptyArray;
+
+        /**
+         * Creates a new BagComponent instance using the specified properties.
+         * @function create
+         * @memberof world.BagComponent
+         * @static
+         * @param {world.IBagComponent=} [properties] Properties to set
+         * @returns {world.BagComponent} BagComponent instance
+         */
+        BagComponent.create = function create(properties) {
+            return new BagComponent(properties);
+        };
+
+        /**
+         * Encodes the specified BagComponent message. Does not implicitly {@link world.BagComponent.verify|verify} messages.
+         * @function encode
+         * @memberof world.BagComponent
+         * @static
+         * @param {world.IBagComponent} message BagComponent message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        BagComponent.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.items != null && message.items.length)
+                for (var i = 0; i < message.items.length; ++i)
+                    $root.world.BagItem.encode(message.items[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified BagComponent message, length delimited. Does not implicitly {@link world.BagComponent.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof world.BagComponent
+         * @static
+         * @param {world.IBagComponent} message BagComponent message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        BagComponent.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a BagComponent message from the specified reader or buffer.
+         * @function decode
+         * @memberof world.BagComponent
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {world.BagComponent} BagComponent
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        BagComponent.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.BagComponent();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        if (!(message.items && message.items.length))
+                            message.items = [];
+                        message.items.push($root.world.BagItem.decode(reader, reader.uint32()));
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a BagComponent message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof world.BagComponent
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {world.BagComponent} BagComponent
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        BagComponent.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a BagComponent message.
+         * @function verify
+         * @memberof world.BagComponent
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        BagComponent.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.items != null && message.hasOwnProperty("items")) {
+                if (!Array.isArray(message.items))
+                    return "items: array expected";
+                for (var i = 0; i < message.items.length; ++i) {
+                    var error = $root.world.BagItem.verify(message.items[i]);
+                    if (error)
+                        return "items." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a BagComponent message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof world.BagComponent
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {world.BagComponent} BagComponent
+         */
+        BagComponent.fromObject = function fromObject(object) {
+            if (object instanceof $root.world.BagComponent)
+                return object;
+            var message = new $root.world.BagComponent();
+            if (object.items) {
+                if (!Array.isArray(object.items))
+                    throw TypeError(".world.BagComponent.items: array expected");
+                message.items = [];
+                for (var i = 0; i < object.items.length; ++i) {
+                    if (typeof object.items[i] !== "object")
+                        throw TypeError(".world.BagComponent.items: object expected");
+                    message.items[i] = $root.world.BagItem.fromObject(object.items[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a BagComponent message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof world.BagComponent
+         * @static
+         * @param {world.BagComponent} message BagComponent
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        BagComponent.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.items = [];
+            if (message.items && message.items.length) {
+                object.items = [];
+                for (var j = 0; j < message.items.length; ++j)
+                    object.items[j] = $root.world.BagItem.toObject(message.items[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this BagComponent to JSON.
+         * @function toJSON
+         * @memberof world.BagComponent
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        BagComponent.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for BagComponent
+         * @function getTypeUrl
+         * @memberof world.BagComponent
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        BagComponent.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/world.BagComponent";
+        };
+
+        return BagComponent;
+    })();
+
+    world.ItemComponent = (function() {
+
+        /**
+         * Properties of an ItemComponent.
+         * @memberof world
+         * @interface IItemComponent
+         * @property {number|null} [id] ItemComponent id
+         */
+
+        /**
+         * Constructs a new ItemComponent.
+         * @memberof world
+         * @classdesc Represents an ItemComponent.
+         * @implements IItemComponent
+         * @constructor
+         * @param {world.IItemComponent=} [properties] Properties to set
+         */
+        function ItemComponent(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * ItemComponent id.
+         * @member {number} id
+         * @memberof world.ItemComponent
+         * @instance
+         */
+        ItemComponent.prototype.id = 0;
+
+        /**
+         * Creates a new ItemComponent instance using the specified properties.
+         * @function create
+         * @memberof world.ItemComponent
+         * @static
+         * @param {world.IItemComponent=} [properties] Properties to set
+         * @returns {world.ItemComponent} ItemComponent instance
+         */
+        ItemComponent.create = function create(properties) {
+            return new ItemComponent(properties);
+        };
+
+        /**
+         * Encodes the specified ItemComponent message. Does not implicitly {@link world.ItemComponent.verify|verify} messages.
+         * @function encode
+         * @memberof world.ItemComponent
+         * @static
+         * @param {world.IItemComponent} message ItemComponent message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ItemComponent.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.id);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified ItemComponent message, length delimited. Does not implicitly {@link world.ItemComponent.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof world.ItemComponent
+         * @static
+         * @param {world.IItemComponent} message ItemComponent message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ItemComponent.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes an ItemComponent message from the specified reader or buffer.
+         * @function decode
+         * @memberof world.ItemComponent
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {world.ItemComponent} ItemComponent
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ItemComponent.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.ItemComponent();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.id = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes an ItemComponent message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof world.ItemComponent
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {world.ItemComponent} ItemComponent
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ItemComponent.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies an ItemComponent message.
+         * @function verify
+         * @memberof world.ItemComponent
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        ItemComponent.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isInteger(message.id))
+                    return "id: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates an ItemComponent message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof world.ItemComponent
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {world.ItemComponent} ItemComponent
+         */
+        ItemComponent.fromObject = function fromObject(object) {
+            if (object instanceof $root.world.ItemComponent)
+                return object;
+            var message = new $root.world.ItemComponent();
+            if (object.id != null)
+                message.id = object.id >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from an ItemComponent message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof world.ItemComponent
+         * @static
+         * @param {world.ItemComponent} message ItemComponent
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        ItemComponent.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.id = 0;
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            return object;
+        };
+
+        /**
+         * Converts this ItemComponent to JSON.
+         * @function toJSON
+         * @memberof world.ItemComponent
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        ItemComponent.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for ItemComponent
+         * @function getTypeUrl
+         * @memberof world.ItemComponent
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        ItemComponent.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/world.ItemComponent";
+        };
+
+        return ItemComponent;
+    })();
+
     world.Entity = (function() {
 
         /**
@@ -20176,6 +20830,8 @@ $root.world = (function() {
          * @property {world.IOwnerComponent|null} [owner] Entity owner
          * @property {world.ITroopComponent|null} [troop] Entity troop
          * @property {world.IBattleComponent|null} [battle] Entity battle
+         * @property {world.IBagComponent|null} [bag] Entity bag
+         * @property {world.IItemComponent|null} [item] Entity item
          */
 
         /**
@@ -20274,6 +20930,22 @@ $root.world = (function() {
         Entity.prototype.battle = null;
 
         /**
+         * Entity bag.
+         * @member {world.IBagComponent|null|undefined} bag
+         * @memberof world.Entity
+         * @instance
+         */
+        Entity.prototype.bag = null;
+
+        /**
+         * Entity item.
+         * @member {world.IItemComponent|null|undefined} item
+         * @memberof world.Entity
+         * @instance
+         */
+        Entity.prototype.item = null;
+
+        /**
          * Creates a new Entity instance using the specified properties.
          * @function create
          * @memberof world.Entity
@@ -20317,6 +20989,10 @@ $root.world = (function() {
                 $root.world.TroopComponent.encode(message.troop, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
             if (message.battle != null && Object.hasOwnProperty.call(message, "battle"))
                 $root.world.BattleComponent.encode(message.battle, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
+            if (message.bag != null && Object.hasOwnProperty.call(message, "bag"))
+                $root.world.BagComponent.encode(message.bag, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
+            if (message.item != null && Object.hasOwnProperty.call(message, "item"))
+                $root.world.ItemComponent.encode(message.item, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
             return writer;
         };
 
@@ -20389,6 +21065,14 @@ $root.world = (function() {
                     }
                 case 17: {
                         message.battle = $root.world.BattleComponent.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 18: {
+                        message.bag = $root.world.BagComponent.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 19: {
+                        message.item = $root.world.ItemComponent.decode(reader, reader.uint32());
                         break;
                     }
                 default:
@@ -20470,6 +21154,16 @@ $root.world = (function() {
                 if (error)
                     return "battle." + error;
             }
+            if (message.bag != null && message.hasOwnProperty("bag")) {
+                var error = $root.world.BagComponent.verify(message.bag);
+                if (error)
+                    return "bag." + error;
+            }
+            if (message.item != null && message.hasOwnProperty("item")) {
+                var error = $root.world.ItemComponent.verify(message.item);
+                if (error)
+                    return "item." + error;
+            }
             return null;
         };
 
@@ -20526,6 +21220,16 @@ $root.world = (function() {
                     throw TypeError(".world.Entity.battle: object expected");
                 message.battle = $root.world.BattleComponent.fromObject(object.battle);
             }
+            if (object.bag != null) {
+                if (typeof object.bag !== "object")
+                    throw TypeError(".world.Entity.bag: object expected");
+                message.bag = $root.world.BagComponent.fromObject(object.bag);
+            }
+            if (object.item != null) {
+                if (typeof object.item !== "object")
+                    throw TypeError(".world.Entity.item: object expected");
+                message.item = $root.world.ItemComponent.fromObject(object.item);
+            }
             return message;
         };
 
@@ -20553,6 +21257,8 @@ $root.world = (function() {
                 object.owner = null;
                 object.troop = null;
                 object.battle = null;
+                object.bag = null;
+                object.item = null;
             }
             if (message.eid != null && message.hasOwnProperty("eid"))
                 object.eid = message.eid;
@@ -20574,6 +21280,10 @@ $root.world = (function() {
                 object.troop = $root.world.TroopComponent.toObject(message.troop, options);
             if (message.battle != null && message.hasOwnProperty("battle"))
                 object.battle = $root.world.BattleComponent.toObject(message.battle, options);
+            if (message.bag != null && message.hasOwnProperty("bag"))
+                object.bag = $root.world.BagComponent.toObject(message.bag, options);
+            if (message.item != null && message.hasOwnProperty("item"))
+                object.item = $root.world.ItemComponent.toObject(message.item, options);
             return object;
         };
 
@@ -27465,6 +28175,914 @@ $root.world = (function() {
         return BattleStopAction;
     })();
 
+    world.AddBoxAction = (function() {
+
+        /**
+         * Properties of an AddBoxAction.
+         * @memberof world
+         * @interface IAddBoxAction
+         * @property {number|null} [troopEid] AddBoxAction troopEid
+         * @property {number|null} [boxEid] AddBoxAction boxEid
+         */
+
+        /**
+         * Constructs a new AddBoxAction.
+         * @memberof world
+         * @classdesc Represents an AddBoxAction.
+         * @implements IAddBoxAction
+         * @constructor
+         * @param {world.IAddBoxAction=} [properties] Properties to set
+         */
+        function AddBoxAction(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * AddBoxAction troopEid.
+         * @member {number} troopEid
+         * @memberof world.AddBoxAction
+         * @instance
+         */
+        AddBoxAction.prototype.troopEid = 0;
+
+        /**
+         * AddBoxAction boxEid.
+         * @member {number} boxEid
+         * @memberof world.AddBoxAction
+         * @instance
+         */
+        AddBoxAction.prototype.boxEid = 0;
+
+        /**
+         * Creates a new AddBoxAction instance using the specified properties.
+         * @function create
+         * @memberof world.AddBoxAction
+         * @static
+         * @param {world.IAddBoxAction=} [properties] Properties to set
+         * @returns {world.AddBoxAction} AddBoxAction instance
+         */
+        AddBoxAction.create = function create(properties) {
+            return new AddBoxAction(properties);
+        };
+
+        /**
+         * Encodes the specified AddBoxAction message. Does not implicitly {@link world.AddBoxAction.verify|verify} messages.
+         * @function encode
+         * @memberof world.AddBoxAction
+         * @static
+         * @param {world.IAddBoxAction} message AddBoxAction message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        AddBoxAction.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.troopEid != null && Object.hasOwnProperty.call(message, "troopEid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.troopEid);
+            if (message.boxEid != null && Object.hasOwnProperty.call(message, "boxEid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.boxEid);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified AddBoxAction message, length delimited. Does not implicitly {@link world.AddBoxAction.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof world.AddBoxAction
+         * @static
+         * @param {world.IAddBoxAction} message AddBoxAction message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        AddBoxAction.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes an AddBoxAction message from the specified reader or buffer.
+         * @function decode
+         * @memberof world.AddBoxAction
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {world.AddBoxAction} AddBoxAction
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        AddBoxAction.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.AddBoxAction();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.troopEid = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.boxEid = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes an AddBoxAction message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof world.AddBoxAction
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {world.AddBoxAction} AddBoxAction
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        AddBoxAction.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies an AddBoxAction message.
+         * @function verify
+         * @memberof world.AddBoxAction
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        AddBoxAction.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.troopEid != null && message.hasOwnProperty("troopEid"))
+                if (!$util.isInteger(message.troopEid))
+                    return "troopEid: integer expected";
+            if (message.boxEid != null && message.hasOwnProperty("boxEid"))
+                if (!$util.isInteger(message.boxEid))
+                    return "boxEid: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates an AddBoxAction message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof world.AddBoxAction
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {world.AddBoxAction} AddBoxAction
+         */
+        AddBoxAction.fromObject = function fromObject(object) {
+            if (object instanceof $root.world.AddBoxAction)
+                return object;
+            var message = new $root.world.AddBoxAction();
+            if (object.troopEid != null)
+                message.troopEid = object.troopEid >>> 0;
+            if (object.boxEid != null)
+                message.boxEid = object.boxEid >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from an AddBoxAction message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof world.AddBoxAction
+         * @static
+         * @param {world.AddBoxAction} message AddBoxAction
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        AddBoxAction.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.troopEid = 0;
+                object.boxEid = 0;
+            }
+            if (message.troopEid != null && message.hasOwnProperty("troopEid"))
+                object.troopEid = message.troopEid;
+            if (message.boxEid != null && message.hasOwnProperty("boxEid"))
+                object.boxEid = message.boxEid;
+            return object;
+        };
+
+        /**
+         * Converts this AddBoxAction to JSON.
+         * @function toJSON
+         * @memberof world.AddBoxAction
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        AddBoxAction.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for AddBoxAction
+         * @function getTypeUrl
+         * @memberof world.AddBoxAction
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        AddBoxAction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/world.AddBoxAction";
+        };
+
+        return AddBoxAction;
+    })();
+
+    world.DropBoxAction = (function() {
+
+        /**
+         * Properties of a DropBoxAction.
+         * @memberof world
+         * @interface IDropBoxAction
+         * @property {number|null} [troopEid] DropBoxAction troopEid
+         * @property {number|null} [campEid] DropBoxAction campEid
+         */
+
+        /**
+         * Constructs a new DropBoxAction.
+         * @memberof world
+         * @classdesc Represents a DropBoxAction.
+         * @implements IDropBoxAction
+         * @constructor
+         * @param {world.IDropBoxAction=} [properties] Properties to set
+         */
+        function DropBoxAction(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * DropBoxAction troopEid.
+         * @member {number} troopEid
+         * @memberof world.DropBoxAction
+         * @instance
+         */
+        DropBoxAction.prototype.troopEid = 0;
+
+        /**
+         * DropBoxAction campEid.
+         * @member {number} campEid
+         * @memberof world.DropBoxAction
+         * @instance
+         */
+        DropBoxAction.prototype.campEid = 0;
+
+        /**
+         * Creates a new DropBoxAction instance using the specified properties.
+         * @function create
+         * @memberof world.DropBoxAction
+         * @static
+         * @param {world.IDropBoxAction=} [properties] Properties to set
+         * @returns {world.DropBoxAction} DropBoxAction instance
+         */
+        DropBoxAction.create = function create(properties) {
+            return new DropBoxAction(properties);
+        };
+
+        /**
+         * Encodes the specified DropBoxAction message. Does not implicitly {@link world.DropBoxAction.verify|verify} messages.
+         * @function encode
+         * @memberof world.DropBoxAction
+         * @static
+         * @param {world.IDropBoxAction} message DropBoxAction message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        DropBoxAction.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.troopEid != null && Object.hasOwnProperty.call(message, "troopEid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.troopEid);
+            if (message.campEid != null && Object.hasOwnProperty.call(message, "campEid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.campEid);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified DropBoxAction message, length delimited. Does not implicitly {@link world.DropBoxAction.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof world.DropBoxAction
+         * @static
+         * @param {world.IDropBoxAction} message DropBoxAction message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        DropBoxAction.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a DropBoxAction message from the specified reader or buffer.
+         * @function decode
+         * @memberof world.DropBoxAction
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {world.DropBoxAction} DropBoxAction
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        DropBoxAction.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.DropBoxAction();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.troopEid = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.campEid = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a DropBoxAction message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof world.DropBoxAction
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {world.DropBoxAction} DropBoxAction
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        DropBoxAction.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a DropBoxAction message.
+         * @function verify
+         * @memberof world.DropBoxAction
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        DropBoxAction.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.troopEid != null && message.hasOwnProperty("troopEid"))
+                if (!$util.isInteger(message.troopEid))
+                    return "troopEid: integer expected";
+            if (message.campEid != null && message.hasOwnProperty("campEid"))
+                if (!$util.isInteger(message.campEid))
+                    return "campEid: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a DropBoxAction message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof world.DropBoxAction
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {world.DropBoxAction} DropBoxAction
+         */
+        DropBoxAction.fromObject = function fromObject(object) {
+            if (object instanceof $root.world.DropBoxAction)
+                return object;
+            var message = new $root.world.DropBoxAction();
+            if (object.troopEid != null)
+                message.troopEid = object.troopEid >>> 0;
+            if (object.campEid != null)
+                message.campEid = object.campEid >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a DropBoxAction message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof world.DropBoxAction
+         * @static
+         * @param {world.DropBoxAction} message DropBoxAction
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        DropBoxAction.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.troopEid = 0;
+                object.campEid = 0;
+            }
+            if (message.troopEid != null && message.hasOwnProperty("troopEid"))
+                object.troopEid = message.troopEid;
+            if (message.campEid != null && message.hasOwnProperty("campEid"))
+                object.campEid = message.campEid;
+            return object;
+        };
+
+        /**
+         * Converts this DropBoxAction to JSON.
+         * @function toJSON
+         * @memberof world.DropBoxAction
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        DropBoxAction.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for DropBoxAction
+         * @function getTypeUrl
+         * @memberof world.DropBoxAction
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        DropBoxAction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/world.DropBoxAction";
+        };
+
+        return DropBoxAction;
+    })();
+
+    world.PickItemAction = (function() {
+
+        /**
+         * Properties of a PickItemAction.
+         * @memberof world
+         * @interface IPickItemAction
+         * @property {number|null} [troopEid] PickItemAction troopEid
+         * @property {number|null} [itemEid] PickItemAction itemEid
+         */
+
+        /**
+         * Constructs a new PickItemAction.
+         * @memberof world
+         * @classdesc Represents a PickItemAction.
+         * @implements IPickItemAction
+         * @constructor
+         * @param {world.IPickItemAction=} [properties] Properties to set
+         */
+        function PickItemAction(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * PickItemAction troopEid.
+         * @member {number} troopEid
+         * @memberof world.PickItemAction
+         * @instance
+         */
+        PickItemAction.prototype.troopEid = 0;
+
+        /**
+         * PickItemAction itemEid.
+         * @member {number} itemEid
+         * @memberof world.PickItemAction
+         * @instance
+         */
+        PickItemAction.prototype.itemEid = 0;
+
+        /**
+         * Creates a new PickItemAction instance using the specified properties.
+         * @function create
+         * @memberof world.PickItemAction
+         * @static
+         * @param {world.IPickItemAction=} [properties] Properties to set
+         * @returns {world.PickItemAction} PickItemAction instance
+         */
+        PickItemAction.create = function create(properties) {
+            return new PickItemAction(properties);
+        };
+
+        /**
+         * Encodes the specified PickItemAction message. Does not implicitly {@link world.PickItemAction.verify|verify} messages.
+         * @function encode
+         * @memberof world.PickItemAction
+         * @static
+         * @param {world.IPickItemAction} message PickItemAction message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        PickItemAction.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.troopEid != null && Object.hasOwnProperty.call(message, "troopEid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.troopEid);
+            if (message.itemEid != null && Object.hasOwnProperty.call(message, "itemEid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.itemEid);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified PickItemAction message, length delimited. Does not implicitly {@link world.PickItemAction.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof world.PickItemAction
+         * @static
+         * @param {world.IPickItemAction} message PickItemAction message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        PickItemAction.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a PickItemAction message from the specified reader or buffer.
+         * @function decode
+         * @memberof world.PickItemAction
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {world.PickItemAction} PickItemAction
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        PickItemAction.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.PickItemAction();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.troopEid = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.itemEid = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a PickItemAction message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof world.PickItemAction
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {world.PickItemAction} PickItemAction
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        PickItemAction.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a PickItemAction message.
+         * @function verify
+         * @memberof world.PickItemAction
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        PickItemAction.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.troopEid != null && message.hasOwnProperty("troopEid"))
+                if (!$util.isInteger(message.troopEid))
+                    return "troopEid: integer expected";
+            if (message.itemEid != null && message.hasOwnProperty("itemEid"))
+                if (!$util.isInteger(message.itemEid))
+                    return "itemEid: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a PickItemAction message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof world.PickItemAction
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {world.PickItemAction} PickItemAction
+         */
+        PickItemAction.fromObject = function fromObject(object) {
+            if (object instanceof $root.world.PickItemAction)
+                return object;
+            var message = new $root.world.PickItemAction();
+            if (object.troopEid != null)
+                message.troopEid = object.troopEid >>> 0;
+            if (object.itemEid != null)
+                message.itemEid = object.itemEid >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a PickItemAction message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof world.PickItemAction
+         * @static
+         * @param {world.PickItemAction} message PickItemAction
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        PickItemAction.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.troopEid = 0;
+                object.itemEid = 0;
+            }
+            if (message.troopEid != null && message.hasOwnProperty("troopEid"))
+                object.troopEid = message.troopEid;
+            if (message.itemEid != null && message.hasOwnProperty("itemEid"))
+                object.itemEid = message.itemEid;
+            return object;
+        };
+
+        /**
+         * Converts this PickItemAction to JSON.
+         * @function toJSON
+         * @memberof world.PickItemAction
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        PickItemAction.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for PickItemAction
+         * @function getTypeUrl
+         * @memberof world.PickItemAction
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        PickItemAction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/world.PickItemAction";
+        };
+
+        return PickItemAction;
+    })();
+
+    world.InviteSoldierAction = (function() {
+
+        /**
+         * Properties of an InviteSoldierAction.
+         * @memberof world
+         * @interface IInviteSoldierAction
+         * @property {number|null} [troopEid] InviteSoldierAction troopEid
+         * @property {number|null} [soldierEid] InviteSoldierAction soldierEid
+         */
+
+        /**
+         * Constructs a new InviteSoldierAction.
+         * @memberof world
+         * @classdesc Represents an InviteSoldierAction.
+         * @implements IInviteSoldierAction
+         * @constructor
+         * @param {world.IInviteSoldierAction=} [properties] Properties to set
+         */
+        function InviteSoldierAction(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * InviteSoldierAction troopEid.
+         * @member {number} troopEid
+         * @memberof world.InviteSoldierAction
+         * @instance
+         */
+        InviteSoldierAction.prototype.troopEid = 0;
+
+        /**
+         * InviteSoldierAction soldierEid.
+         * @member {number} soldierEid
+         * @memberof world.InviteSoldierAction
+         * @instance
+         */
+        InviteSoldierAction.prototype.soldierEid = 0;
+
+        /**
+         * Creates a new InviteSoldierAction instance using the specified properties.
+         * @function create
+         * @memberof world.InviteSoldierAction
+         * @static
+         * @param {world.IInviteSoldierAction=} [properties] Properties to set
+         * @returns {world.InviteSoldierAction} InviteSoldierAction instance
+         */
+        InviteSoldierAction.create = function create(properties) {
+            return new InviteSoldierAction(properties);
+        };
+
+        /**
+         * Encodes the specified InviteSoldierAction message. Does not implicitly {@link world.InviteSoldierAction.verify|verify} messages.
+         * @function encode
+         * @memberof world.InviteSoldierAction
+         * @static
+         * @param {world.IInviteSoldierAction} message InviteSoldierAction message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        InviteSoldierAction.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.troopEid != null && Object.hasOwnProperty.call(message, "troopEid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.troopEid);
+            if (message.soldierEid != null && Object.hasOwnProperty.call(message, "soldierEid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.soldierEid);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified InviteSoldierAction message, length delimited. Does not implicitly {@link world.InviteSoldierAction.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof world.InviteSoldierAction
+         * @static
+         * @param {world.IInviteSoldierAction} message InviteSoldierAction message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        InviteSoldierAction.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes an InviteSoldierAction message from the specified reader or buffer.
+         * @function decode
+         * @memberof world.InviteSoldierAction
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {world.InviteSoldierAction} InviteSoldierAction
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        InviteSoldierAction.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.InviteSoldierAction();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.troopEid = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.soldierEid = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes an InviteSoldierAction message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof world.InviteSoldierAction
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {world.InviteSoldierAction} InviteSoldierAction
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        InviteSoldierAction.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies an InviteSoldierAction message.
+         * @function verify
+         * @memberof world.InviteSoldierAction
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        InviteSoldierAction.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.troopEid != null && message.hasOwnProperty("troopEid"))
+                if (!$util.isInteger(message.troopEid))
+                    return "troopEid: integer expected";
+            if (message.soldierEid != null && message.hasOwnProperty("soldierEid"))
+                if (!$util.isInteger(message.soldierEid))
+                    return "soldierEid: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates an InviteSoldierAction message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof world.InviteSoldierAction
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {world.InviteSoldierAction} InviteSoldierAction
+         */
+        InviteSoldierAction.fromObject = function fromObject(object) {
+            if (object instanceof $root.world.InviteSoldierAction)
+                return object;
+            var message = new $root.world.InviteSoldierAction();
+            if (object.troopEid != null)
+                message.troopEid = object.troopEid >>> 0;
+            if (object.soldierEid != null)
+                message.soldierEid = object.soldierEid >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from an InviteSoldierAction message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof world.InviteSoldierAction
+         * @static
+         * @param {world.InviteSoldierAction} message InviteSoldierAction
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        InviteSoldierAction.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.troopEid = 0;
+                object.soldierEid = 0;
+            }
+            if (message.troopEid != null && message.hasOwnProperty("troopEid"))
+                object.troopEid = message.troopEid;
+            if (message.soldierEid != null && message.hasOwnProperty("soldierEid"))
+                object.soldierEid = message.soldierEid;
+            return object;
+        };
+
+        /**
+         * Converts this InviteSoldierAction to JSON.
+         * @function toJSON
+         * @memberof world.InviteSoldierAction
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        InviteSoldierAction.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for InviteSoldierAction
+         * @function getTypeUrl
+         * @memberof world.InviteSoldierAction
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        InviteSoldierAction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/world.InviteSoldierAction";
+        };
+
+        return InviteSoldierAction;
+    })();
+
     world.EntityAction = (function() {
 
         /**
@@ -27475,6 +29093,10 @@ $root.world = (function() {
          * @property {world.IAddEntityAction|null} [addEntity] EntityAction addEntity
          * @property {world.IDelEntityAction|null} [delEntity] EntityAction delEntity
          * @property {world.IMoveAction|null} [move] EntityAction move
+         * @property {world.IAddBoxAction|null} [addBox] EntityAction addBox
+         * @property {world.IDropBoxAction|null} [dropBox] EntityAction dropBox
+         * @property {world.IPickItemAction|null} [pickItem] EntityAction pickItem
+         * @property {world.IInviteSoldierAction|null} [inviteSoldier] EntityAction inviteSoldier
          * @property {world.IBattleStartAction|null} [battleStart] EntityAction battleStart
          * @property {world.IBattleSkillAction|null} [battleSkill] EntityAction battleSkill
          * @property {world.IBattleAddBuffAction|null} [battleAddBuff] EntityAction battleAddBuff
@@ -27529,6 +29151,38 @@ $root.world = (function() {
          * @instance
          */
         EntityAction.prototype.move = null;
+
+        /**
+         * EntityAction addBox.
+         * @member {world.IAddBoxAction|null|undefined} addBox
+         * @memberof world.EntityAction
+         * @instance
+         */
+        EntityAction.prototype.addBox = null;
+
+        /**
+         * EntityAction dropBox.
+         * @member {world.IDropBoxAction|null|undefined} dropBox
+         * @memberof world.EntityAction
+         * @instance
+         */
+        EntityAction.prototype.dropBox = null;
+
+        /**
+         * EntityAction pickItem.
+         * @member {world.IPickItemAction|null|undefined} pickItem
+         * @memberof world.EntityAction
+         * @instance
+         */
+        EntityAction.prototype.pickItem = null;
+
+        /**
+         * EntityAction inviteSoldier.
+         * @member {world.IInviteSoldierAction|null|undefined} inviteSoldier
+         * @memberof world.EntityAction
+         * @instance
+         */
+        EntityAction.prototype.inviteSoldier = null;
 
         /**
          * EntityAction battleStart.
@@ -27610,6 +29264,14 @@ $root.world = (function() {
                 $root.world.DelEntityAction.encode(message.delEntity, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
             if (message.move != null && Object.hasOwnProperty.call(message, "move"))
                 $root.world.MoveAction.encode(message.move, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+            if (message.addBox != null && Object.hasOwnProperty.call(message, "addBox"))
+                $root.world.AddBoxAction.encode(message.addBox, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+            if (message.dropBox != null && Object.hasOwnProperty.call(message, "dropBox"))
+                $root.world.DropBoxAction.encode(message.dropBox, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+            if (message.pickItem != null && Object.hasOwnProperty.call(message, "pickItem"))
+                $root.world.PickItemAction.encode(message.pickItem, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+            if (message.inviteSoldier != null && Object.hasOwnProperty.call(message, "inviteSoldier"))
+                $root.world.InviteSoldierAction.encode(message.inviteSoldier, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
             if (message.battleSkill != null && Object.hasOwnProperty.call(message, "battleSkill"))
                 $root.world.BattleSkillAction.encode(message.battleSkill, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
             if (message.battleStart != null && Object.hasOwnProperty.call(message, "battleStart"))
@@ -27670,6 +29332,22 @@ $root.world = (function() {
                     }
                 case 12: {
                         message.move = $root.world.MoveAction.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 13: {
+                        message.addBox = $root.world.AddBoxAction.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 14: {
+                        message.dropBox = $root.world.DropBoxAction.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 15: {
+                        message.pickItem = $root.world.PickItemAction.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 16: {
+                        message.inviteSoldier = $root.world.InviteSoldierAction.decode(reader, reader.uint32());
                         break;
                     }
                 case 21: {
@@ -27749,6 +29427,26 @@ $root.world = (function() {
                 if (error)
                     return "move." + error;
             }
+            if (message.addBox != null && message.hasOwnProperty("addBox")) {
+                var error = $root.world.AddBoxAction.verify(message.addBox);
+                if (error)
+                    return "addBox." + error;
+            }
+            if (message.dropBox != null && message.hasOwnProperty("dropBox")) {
+                var error = $root.world.DropBoxAction.verify(message.dropBox);
+                if (error)
+                    return "dropBox." + error;
+            }
+            if (message.pickItem != null && message.hasOwnProperty("pickItem")) {
+                var error = $root.world.PickItemAction.verify(message.pickItem);
+                if (error)
+                    return "pickItem." + error;
+            }
+            if (message.inviteSoldier != null && message.hasOwnProperty("inviteSoldier")) {
+                var error = $root.world.InviteSoldierAction.verify(message.inviteSoldier);
+                if (error)
+                    return "inviteSoldier." + error;
+            }
             if (message.battleStart != null && message.hasOwnProperty("battleStart")) {
                 var error = $root.world.BattleStartAction.verify(message.battleStart);
                 if (error)
@@ -27811,6 +29509,26 @@ $root.world = (function() {
                     throw TypeError(".world.EntityAction.move: object expected");
                 message.move = $root.world.MoveAction.fromObject(object.move);
             }
+            if (object.addBox != null) {
+                if (typeof object.addBox !== "object")
+                    throw TypeError(".world.EntityAction.addBox: object expected");
+                message.addBox = $root.world.AddBoxAction.fromObject(object.addBox);
+            }
+            if (object.dropBox != null) {
+                if (typeof object.dropBox !== "object")
+                    throw TypeError(".world.EntityAction.dropBox: object expected");
+                message.dropBox = $root.world.DropBoxAction.fromObject(object.dropBox);
+            }
+            if (object.pickItem != null) {
+                if (typeof object.pickItem !== "object")
+                    throw TypeError(".world.EntityAction.pickItem: object expected");
+                message.pickItem = $root.world.PickItemAction.fromObject(object.pickItem);
+            }
+            if (object.inviteSoldier != null) {
+                if (typeof object.inviteSoldier !== "object")
+                    throw TypeError(".world.EntityAction.inviteSoldier: object expected");
+                message.inviteSoldier = $root.world.InviteSoldierAction.fromObject(object.inviteSoldier);
+            }
             if (object.battleStart != null) {
                 if (typeof object.battleStart !== "object")
                     throw TypeError(".world.EntityAction.battleStart: object expected");
@@ -27862,6 +29580,10 @@ $root.world = (function() {
                 object.addEntity = null;
                 object.delEntity = null;
                 object.move = null;
+                object.addBox = null;
+                object.dropBox = null;
+                object.pickItem = null;
+                object.inviteSoldier = null;
                 object.battleSkill = null;
                 object.battleStart = null;
                 object.battleAddBuff = null;
@@ -27877,6 +29599,14 @@ $root.world = (function() {
                 object.delEntity = $root.world.DelEntityAction.toObject(message.delEntity, options);
             if (message.move != null && message.hasOwnProperty("move"))
                 object.move = $root.world.MoveAction.toObject(message.move, options);
+            if (message.addBox != null && message.hasOwnProperty("addBox"))
+                object.addBox = $root.world.AddBoxAction.toObject(message.addBox, options);
+            if (message.dropBox != null && message.hasOwnProperty("dropBox"))
+                object.dropBox = $root.world.DropBoxAction.toObject(message.dropBox, options);
+            if (message.pickItem != null && message.hasOwnProperty("pickItem"))
+                object.pickItem = $root.world.PickItemAction.toObject(message.pickItem, options);
+            if (message.inviteSoldier != null && message.hasOwnProperty("inviteSoldier"))
+                object.inviteSoldier = $root.world.InviteSoldierAction.toObject(message.inviteSoldier, options);
             if (message.battleSkill != null && message.hasOwnProperty("battleSkill"))
                 object.battleSkill = $root.world.BattleSkillAction.toObject(message.battleSkill, options);
             if (message.battleStart != null && message.hasOwnProperty("battleStart"))

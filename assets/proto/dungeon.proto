@@ -19,6 +19,6 @@ message c2s_challenge {
     uint32 dungeon_id = 1;
 }
 message s2c_challenge {
-    uint32 err = 1;
+    uint32 err = 1; // OK, DUNGEON_NOT_UNLOCK, ALREADY_START
     uint32 world_uid = 2;
 }
