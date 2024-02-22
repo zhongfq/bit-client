@@ -22,8 +22,8 @@ import { VoBag } from "../../misc/vo/vo-base/vo-bag";
 import { NetworkService } from "../network/network-service";
 import { TableUtil } from "./table-util";
 
-const JSON_ENTITY_TABLE = "resources/data/world/world_entity.json";
-const JSON_BUFF_TABLE = "resources/data/battle/battle_buff.json";
+const JSON_ENTITY_TABLE = "resources/data/world/world-entity.json";
+const JSON_BUFF_TABLE = "resources/data/battle/battle-buff.json";
 const JSON_HERO_TABLE = "resources/data/hero.json";
 const JSON_SOLDIER_TABLE = "resources/data/soldier.json";
 const JSON_SKILL_TABLE = "resources/data/skill.json";
