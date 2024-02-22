@@ -1,5 +1,6 @@
 // AUTO GENERATED, DON'T NOT MODIFY!
 
+// file: design/item.xlsx
 export interface GeneratedItemRow {
     id: number;
     name: string;
@@ -17,16 +18,19 @@ export interface GeneratedItemRow {
     icon: string;
 }
 
+// file: design/role.xlsx
 export interface GeneratedRoleLevelRow {
     lv: number;
     upgrade_exp: number;
 }
 
+// file: design/role.xlsx
 export interface GeneratedRoleConfRow {
     key: string;
     value?: string;
 }
 
+// file: design/hero.xlsx
 export interface GeneratedHeroRow {
     id: number;
     name: string;
@@ -37,11 +41,13 @@ export interface GeneratedHeroRow {
     attack_range: number;
 }
 
+// file: design/soldier.xlsx
 export interface GeneratedSoldierRow {
     id: number;
     model: number;
 }
 
+// file: design/equip.xlsx
 export interface GeneratedEquipItemsRow {
     id: number;
     name: string;
@@ -51,43 +57,51 @@ export interface GeneratedEquipItemsRow {
     icon: string;
 }
 
+// file: design/equip.xlsx
 export interface GeneratedEquipSlotRow {
     idx: number;
     name: string;
     icon: string;
 }
 
+// file: design/equip.xlsx
 export interface GeneratedEquipColorRow {
     id: number;
     name: string;
 }
 
+// file: design/equip.xlsx
 export interface GeneratedEquipLevelRow {
     lv: number;
     name: string;
 }
 
+// file: design/equip.xlsx
 export interface GeneratedEquipConfRow {
     key: string;
     value?: string;
 }
 
+// file: design/attr.xlsx
 export interface GeneratedAttrRow {
     id: number;
     name: string;
     define?: string;
 }
 
+// file: design/define.xlsx
 export interface GeneratedDefineRow {
     idx: number;
 }
 
+// file: design/bag.xlsx
 export interface GeneratedBagRow {
     id: number;
     type: number;
     max_grid: number;
 }
 
+// file: design/money.xlsx
 export interface GeneratedMoneyRow {
     id: number;
     name: string;
@@ -97,6 +111,7 @@ export interface GeneratedMoneyRow {
     recover_inc?: number;
 }
 
+// file: design/skill.xlsx
 export interface GeneratedSkillRow {
     id: number;
     type: number;
@@ -104,6 +119,7 @@ export interface GeneratedSkillRow {
     cd?: number;
 }
 
+// file: design/mail.xlsx
 export interface GeneratedMailRow {
     id: number;
     type: number;
@@ -113,6 +129,7 @@ export interface GeneratedMailRow {
     expired_sec?: number;
 }
 
+// file: design/task.xlsx
 export interface GeneratedTaskMainRow {
     id: number;
     sort: number;
@@ -126,6 +143,7 @@ export interface GeneratedTaskMainRow {
     icon: string;
 }
 
+// file: design/task.xlsx
 export interface GeneratedTaskBranchRow {
     id: number;
     sort: number;
@@ -138,6 +156,7 @@ export interface GeneratedTaskBranchRow {
     icon: string;
 }
 
+// file: design/task.xlsx
 export interface GeneratedTaskDailyRow {
     id: number;
     sort: number;
@@ -150,6 +169,7 @@ export interface GeneratedTaskDailyRow {
     icon: string;
 }
 
+// file: design/task.xlsx
 export interface GeneratedTaskWeeklyRow {
     id: number;
     sort: number;
@@ -162,6 +182,7 @@ export interface GeneratedTaskWeeklyRow {
     icon: string;
 }
 
+// file: design/task.xlsx
 export interface GeneratedTaskEventsRow {
     id: number;
     sort: number;
@@ -175,6 +196,7 @@ export interface GeneratedTaskEventsRow {
     icon: string;
 }
 
+// file: design/task.xlsx
 export interface GeneratedTaskPassesRow {
     id: number;
     sort: number;
@@ -188,6 +210,7 @@ export interface GeneratedTaskPassesRow {
     icon: string;
 }
 
+// file: design/random_name.xlsx
 export interface GeneratedRandomNameRow {
     id: number;
     firstname?: string;
@@ -195,6 +218,7 @@ export interface GeneratedRandomNameRow {
     femalename?: string;
 }
 
+// file: design/world/world_map.xlsx
 export interface GeneratedWorldMapMapsRow {
     id: number;
     battle_type: number;
@@ -202,6 +226,7 @@ export interface GeneratedWorldMapMapsRow {
     expired_sec: number;
 }
 
+// file: design/world/world_map.xlsx
 export interface GeneratedWorldMapStatesRow {
     id: number;
     aid?: number;
@@ -209,11 +234,13 @@ export interface GeneratedWorldMapStatesRow {
     pass_cond?: any;
 }
 
+// file: design/world/battle_demo.xlsx
 export interface GeneratedBattleDemoRow {
     key: string;
     hero_ids: any;
 }
 
+// file: design/world/battle_buff.xlsx
 export interface GeneratedBattleBuffRow {
     id: number;
     type: string;
@@ -221,6 +248,7 @@ export interface GeneratedBattleBuffRow {
     ban_actions?: any;
 }
 
+// file: design/world/world_entity.xlsx
 export interface GeneratedWorldEntityTypeConfRow {
     etype: number;
     define: string;
@@ -232,11 +260,13 @@ export interface GeneratedWorldEntityTypeConfRow {
     can_defend?: number;
 }
 
+// file: design/world/world_entity.xlsx
 export interface GeneratedWorldEntityModelsRow {
     id: number;
     res: string;
 }
 
+// file: design/world/world_building.xlsx
 export interface GeneratedWorldBuildingCastleRow {
     id: number;
     etype: number;
@@ -248,6 +278,7 @@ export interface GeneratedWorldBuildingCastleRow {
     max_hp: number;
 }
 
+// file: design/world/world_building.xlsx
 export interface GeneratedWorldBuildingCityRow {
     id: number;
     etype: number;
@@ -269,12 +300,14 @@ export interface GeneratedWorldBuildingCityRow {
     tips_pic: string;
 }
 
+// file: design/world/world_season.xlsx
 export interface GeneratedWorldSeasonRow {
     season: number;
     name: string;
     map: string;
 }
 
+// file: design/world/world_troop.xlsx
 export interface GeneratedWorldTroopCmdRow {
     cmd: string;
     name: string;
@@ -285,12 +318,14 @@ export interface GeneratedWorldTroopCmdRow {
     rsp_color_name?: string;
 }
 
+// file: design/world/world_troop.xlsx
 export interface GeneratedWorldTroopStateRow {
     state: string;
     speedup?: number;
     peace?: number;
 }
 
+// file: design/world/world_troop.xlsx
 export interface GeneratedWorldTroopState2cmdRow {
     state: string;
     MOVE_TO?: number;
@@ -298,16 +333,19 @@ export interface GeneratedWorldTroopState2cmdRow {
     RETREAT?: number;
 }
 
+// file: design/alliance.xlsx
 export interface GeneratedAllianceRow {
     id: number;
     name: string;
 }
 
+// file: design/dungeon.xlsx
 export interface GeneratedDungeonRow {
     id: number;
     reward?: any;
 }
 
+// file: design/activity/shop.xlsx
 export interface GeneratedShopconfigRow {
     id: number;
     type: number;
@@ -315,6 +353,7 @@ export interface GeneratedShopconfigRow {
     refresh_hour?: number;
 }
 
+// file: design/activity/shop.xlsx
 export interface GeneratedShop1Row {
     id: number;
     items: any;
@@ -325,6 +364,7 @@ export interface GeneratedShop1Row {
     open_id?: number;
 }
 
+// file: design/activity/shop.xlsx
 export interface GeneratedShop2Row {
     id: number;
     items: any;
@@ -335,6 +375,7 @@ export interface GeneratedShop2Row {
     open_id?: number;
 }
 
+// file: design/emoji.xlsx
 export interface GeneratedEmojiRow {
     id: number;
     icon: string;
