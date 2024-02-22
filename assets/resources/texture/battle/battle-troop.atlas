@@ -1,0 +1,194 @@
+{
+  "frames": {
+    "Ui_Fight_InjuredXBg.png": {
+      "frame": {
+        "idx": 0,
+        "x": 0,
+        "y": 258,
+        "w": 122,
+        "h": 36
+      },
+      "sourceSize": {
+        "w": 124,
+        "h": 36
+      },
+      "spriteSourceSize": {
+        "x": 2,
+        "y": 0
+      }
+    },
+    "icon_Fight_MonsterType.png": {
+      "frame": {
+        "idx": 0,
+        "x": 196,
+        "y": 164,
+        "w": 15,
+        "h": 16
+      },
+      "sourceSize": {
+        "w": 24,
+        "h": 24
+      },
+      "spriteSourceSize": {
+        "x": 4,
+        "y": 5
+      }
+    },
+    "icon_fight_Head001.png": {
+      "frame": {
+        "idx": 0,
+        "x": 196,
+        "y": 0,
+        "w": 63,
+        "h": 83
+      },
+      "sourceSize": {
+        "w": 86,
+        "h": 92
+      },
+      "spriteSourceSize": {
+        "x": 14,
+        "y": 8
+      }
+    },
+    "icon_fight_Head002.png": {
+      "frame": {
+        "idx": 0,
+        "x": 163,
+        "y": 194,
+        "w": 65,
+        "h": 76
+      },
+      "sourceSize": {
+        "w": 86,
+        "h": 92
+      },
+      "spriteSourceSize": {
+        "x": 10,
+        "y": 15
+      }
+    },
+    "icon_fight_Head003.png": {
+      "frame": {
+        "idx": 0,
+        "x": 196,
+        "y": 85,
+        "w": 61,
+        "h": 77
+      },
+      "sourceSize": {
+        "w": 86,
+        "h": 92
+      },
+      "spriteSourceSize": {
+        "x": 13,
+        "y": 14
+      }
+    },
+    "sb_fight_Blood.png": {
+      "frame": {
+        "idx": 0,
+        "x": 124,
+        "y": 272,
+        "w": 84,
+        "h": 7
+      },
+      "sourceSize": {
+        "w": 84,
+        "h": 7
+      },
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    "sb_fight_Blood2.png": {
+      "frame": {
+        "idx": 0,
+        "x": 124,
+        "y": 281,
+        "w": 72,
+        "h": 7
+      },
+      "sourceSize": {
+        "w": 72,
+        "h": 7
+      },
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    "sb_fight_energy.png": {
+      "frame": {
+        "idx": 0,
+        "x": 124,
+        "y": 290,
+        "w": 84,
+        "h": 4
+      },
+      "sourceSize": {
+        "w": 84,
+        "h": 4
+      },
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    "ui_fight_RoleInfoBg1.png": {
+      "frame": {
+        "idx": 0,
+        "x": 0,
+        "y": 0,
+        "w": 194,
+        "h": 95
+      },
+      "sourceSize": {
+        "w": 197,
+        "h": 95
+      },
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    "ui_fight_RoleInfoBg2.png": {
+      "frame": {
+        "idx": 0,
+        "x": 0,
+        "y": 97,
+        "w": 194,
+        "h": 95
+      },
+      "sourceSize": {
+        "w": 197,
+        "h": 95
+      },
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    "ui_fight_RoleInfoBg3.png": {
+      "frame": {
+        "idx": 0,
+        "x": 0,
+        "y": 194,
+        "w": 161,
+        "h": 62
+      },
+      "sourceSize": {
+        "w": 164,
+        "h": 76
+      },
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 10
+      }
+    }
+  },
+  "meta": {
+    "scale": 1
+  }
+}
