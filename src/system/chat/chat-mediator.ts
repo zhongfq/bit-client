@@ -70,7 +70,6 @@ export class ChatMediator extends Mediator {
         this.owner.listEmoji.renderHandler = new Laya.Handler(
             this,
             (cell: Laya.Sprite, index: number) => {
-                const a = 1;
                 const icon = cell.getChildByName("imgIcon") as Laya.Image;
                 icon.skin = `resources/texture/emoji/emoji/${this.emojiData[index].icon}.png`;
             }

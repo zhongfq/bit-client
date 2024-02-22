@@ -64,9 +64,6 @@ export class MainMediator extends Mediator {
         this.owner.btnBag.on(Laya.Event.CLICK, () => {
             app.ui.show(ui.BAG);
         });
-        this.owner.btnTask.on(Laya.Event.CLICK, () => {
-            app.ui.show(ui.TASK);
-        });
         this.owner.btnMail.on(Laya.Event.CLICK, () => {
             app.ui.show(ui.MAIL);
         });
