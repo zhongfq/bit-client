@@ -88,6 +88,7 @@ message BagComponent {
 
 message ItemComponent {
     uint32 id = 1;
+    uint32 num = 2;
 }
 
 // 单位定义

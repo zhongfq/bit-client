@@ -61,8 +61,10 @@ const attackFormation: Readonly<IVector3Like>[] = [
 ];
 
 const PREFAB_SOLDIERS = [
-    "resources/prefab/battle/roles/mc03.lh",
-    "resources/prefab/battle/roles/mc04.lh",
+    // "resources/prefab/battle/roles/mc03.lh",
+    // "resources/prefab/battle/roles/mc04.lh",
+    "resources/prefab/battle/roles/bing-gong.lh",
+    "resources/prefab/battle/roles/bing-dao.lh",
 ];
 
 export class CommandSystem extends ecs.System {

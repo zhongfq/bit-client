@@ -20618,6 +20618,7 @@ $root.world = (function() {
          * @memberof world
          * @interface IItemComponent
          * @property {number|null} [id] ItemComponent id
+         * @property {number|null} [num] ItemComponent num
          */
 
         /**
@@ -20642,6 +20643,14 @@ $root.world = (function() {
          * @instance
          */
         ItemComponent.prototype.id = 0;
+
+        /**
+         * ItemComponent num.
+         * @member {number} num
+         * @memberof world.ItemComponent
+         * @instance
+         */
+        ItemComponent.prototype.num = 0;
 
         /**
          * Creates a new ItemComponent instance using the specified properties.
@@ -20669,6 +20678,8 @@ $root.world = (function() {
                 writer = $Writer.create();
             if (message.id != null && Object.hasOwnProperty.call(message, "id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.id);
+            if (message.num != null && Object.hasOwnProperty.call(message, "num"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.num);
             return writer;
         };
 
@@ -20705,6 +20716,10 @@ $root.world = (function() {
                 switch (tag >>> 3) {
                 case 1: {
                         message.id = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.num = reader.uint32();
                         break;
                     }
                 default:
@@ -20745,6 +20760,9 @@ $root.world = (function() {
             if (message.id != null && message.hasOwnProperty("id"))
                 if (!$util.isInteger(message.id))
                     return "id: integer expected";
+            if (message.num != null && message.hasOwnProperty("num"))
+                if (!$util.isInteger(message.num))
+                    return "num: integer expected";
             return null;
         };
 
@@ -20762,6 +20780,8 @@ $root.world = (function() {
             var message = new $root.world.ItemComponent();
             if (object.id != null)
                 message.id = object.id >>> 0;
+            if (object.num != null)
+                message.num = object.num >>> 0;
             return message;
         };
 
@@ -20778,10 +20798,14 @@ $root.world = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults)
+            if (options.defaults) {
                 object.id = 0;
+                object.num = 0;
+            }
             if (message.id != null && message.hasOwnProperty("id"))
                 object.id = message.id;
+            if (message.num != null && message.hasOwnProperty("num"))
+                object.num = message.num;
             return object;
         };
 

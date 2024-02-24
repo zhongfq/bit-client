@@ -1,0 +1,218 @@
+{
+  "_$type": "Animator",
+  "enabled": true,
+  "controller": "null",
+  "cullingMode": 0,
+  "controllerLayers": [
+    {
+      "_$type": "AnimatorControllerLayer",
+      "playOnWake": true,
+      "name": "Base Layer",
+      "defaultWeight": 1,
+      "blendingMode": 0,
+      "states": [
+        {
+          "_$type": "AnimatorState",
+          "name": "attack",
+          "speed": 1,
+          "clipStart": 0,
+          "clipEnd": 1,
+          "x": 586,
+          "y": 144,
+          "clip": {
+            "_$uuid": "04145be7-5fb3-46a3-88c5-ab23e978319d"
+          },
+          "id": "0",
+          "soloTransitions": [
+            {
+              "id": "1",
+              "exitByTime": true,
+              "transduration": 0.15,
+              "exitTime": 0.85,
+              "conditions": [
+                {
+                  "type": 0,
+                  "id": 1,
+                  "checkValue": true
+                }
+              ]
+            },
+            {
+              "id": "2",
+              "exitByTime": true,
+              "transduration": 0.15,
+              "exitTime": 0.85,
+              "conditions": [
+                {
+                  "type": 0,
+                  "id": 0,
+                  "checkValue": true
+                }
+              ]
+            }
+          ],
+          "_isLooping": 1
+        },
+        {
+          "_$type": "AnimatorState",
+          "name": "idle",
+          "speed": 1,
+          "clipStart": 0,
+          "clipEnd": 1,
+          "x": 247.49149999999997,
+          "y": 97.29404,
+          "clip": {
+            "_$uuid": "5b60a641-0722-4f32-b361-f999a19e7307"
+          },
+          "id": "1",
+          "soloTransitions": [
+            {
+              "id": "2",
+              "exitByTime": true,
+              "transduration": 0.15,
+              "exitTime": 0.1,
+              "conditions": [
+                {
+                  "type": 0,
+                  "id": 0,
+                  "checkValue": true
+                }
+              ]
+            },
+            {
+              "id": "0",
+              "exitByTime": true,
+              "transduration": 0.15,
+              "exitTime": 0.1,
+              "conditions": [
+                {
+                  "type": 0,
+                  "id": 2
+                }
+              ]
+            }
+          ],
+          "_isLooping": 1
+        },
+        {
+          "_$type": "AnimatorState",
+          "name": "run",
+          "speed": 1,
+          "clipStart": 0,
+          "clipEnd": 1,
+          "x": 258,
+          "y": 240,
+          "clip": {
+            "_$uuid": "30966398-4ea0-469b-9541-7f92aefc4d63"
+          },
+          "id": "2",
+          "soloTransitions": [
+            {
+              "id": "1",
+              "exitByTime": true,
+              "transduration": 0.15,
+              "exitTime": 0.1,
+              "conditions": [
+                {
+                  "type": 0,
+                  "id": 1,
+                  "checkValue": true
+                }
+              ]
+            },
+            {
+              "id": "0",
+              "exitByTime": true,
+              "transduration": 0.15,
+              "exitTime": 0.1,
+              "conditions": [
+                {
+                  "type": 0,
+                  "id": 2
+                }
+              ]
+            }
+          ],
+          "_isLooping": 1
+        },
+        {
+          "id": "-1",
+          "name": "进入",
+          "speed": 1,
+          "clipEnd": 1,
+          "x": 50,
+          "y": 120,
+          "soloTransitions": [
+            {
+              "id": "1",
+              "exitByTime": true,
+              "transduration": 0.15,
+              "exitTime": 0.85
+            }
+          ]
+        },
+        {
+          "id": "-2",
+          "name": "任何状态",
+          "speed": 1,
+          "clipEnd": 1,
+          "x": 473,
+          "y": 278,
+          "soloTransitions": [
+            {
+              "id": "3",
+              "exitByTime": true,
+              "transduration": 0.15,
+              "exitTime": 0.85,
+              "conditions": [
+                {
+                  "type": 0,
+                  "id": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "x": 201,
+          "y": 379,
+          "_isLooping": 2,
+          "id": "3",
+          "name": "die",
+          "speed": 1,
+          "clipEnd": 1,
+          "clip": {
+            "_$uuid": "4e571d5e-71b0-4ada-8049-19336f966337"
+          }
+        }
+      ]
+    }
+  ],
+  "layerW": 150,
+  "animatorParams": [
+    {
+      "id": 0,
+      "name": "run",
+      "type": 1,
+      "val": false
+    },
+    {
+      "id": 1,
+      "name": "idle",
+      "type": 1,
+      "val": true
+    },
+    {
+      "id": 2,
+      "name": "attack",
+      "type": 2,
+      "val": 0
+    },
+    {
+      "id": 3,
+      "name": "die",
+      "type": 2,
+      "val": false
+    }
+  ]
+}

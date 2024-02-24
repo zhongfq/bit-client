@@ -1,0 +1,45 @@
+{
+  "_$ver": 1,
+  "_$id": "1927mohp",
+  "_$type": "Sprite3D",
+  "name": "mc01",
+  "_$child": [
+    {
+      "_$id": "uzdm9zdr",
+      "_$prefab": "b1a9ce51-9b5d-480e-9797-9a246f53dfbb",
+      "name": "anim",
+      "active": true,
+      "layer": 0,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": -1
+        },
+        "localScale": {
+          "_$type": "Vector3",
+          "x": 0.4,
+          "y": 0.4,
+          "z": 0.4
+        }
+      },
+      "_$comp": [
+        {
+          "_$override": "Animator",
+          "controller": {
+            "_$uuid": "e4cd672e-13d6-405b-b4a4-2b41fa901e48",
+            "_$type": "AnimationController"
+          }
+        }
+      ]
+    }
+  ]
+}

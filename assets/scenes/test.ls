@@ -96,6 +96,7 @@
             {
               "_$type": "DirectionLightCom",
               "intensity": 1,
+              "lightmapBakedType": 1,
               "shadowStrength": 1,
               "shadowDistance": 50,
               "shadowDepthBias": 1,
@@ -106,72 +107,6 @@
               "maxBounces": 1024
             }
           ]
-        },
-        {
-          "_$id": "7k32wqte",
-          "_$prefab": "938c9295-88df-48da-b062-736278b18894",
-          "name": "Hero(1)",
-          "active": true,
-          "layer": 0,
-          "transform": {
-            "localPosition": {
-              "_$type": "Vector3",
-              "x": -2.7934389083375035,
-              "y": 0.7761516756056596,
-              "z": 2.3848812085627085
-            },
-            "localRotation": {
-              "_$type": "Quaternion",
-              "x": 0,
-              "y": 0,
-              "z": 0,
-              "w": 1
-            }
-          }
-        },
-        {
-          "_$id": "gqhsfga5",
-          "_$prefab": "938c9295-88df-48da-b062-736278b18894",
-          "name": "Hero(2)",
-          "active": true,
-          "layer": 0,
-          "transform": {
-            "localPosition": {
-              "_$type": "Vector3",
-              "x": -1.956511346909061,
-              "y": 0.7761516756056596,
-              "z": 2.3848812085627085
-            },
-            "localRotation": {
-              "_$type": "Quaternion",
-              "x": 0,
-              "y": 0,
-              "z": 0,
-              "w": 1
-            }
-          }
-        },
-        {
-          "_$id": "i130oeho",
-          "_$prefab": "938c9295-88df-48da-b062-736278b18894",
-          "name": "Hero(3)",
-          "active": true,
-          "layer": 0,
-          "transform": {
-            "localPosition": {
-              "_$type": "Vector3",
-              "x": -0.7834468412244155,
-              "y": 0.7761516756056596,
-              "z": 2.3848812085627085
-            },
-            "localRotation": {
-              "_$type": "Quaternion",
-              "x": 0,
-              "y": 0,
-              "z": 0,
-              "w": 1
-            }
-          }
         }
       ]
     }

@@ -72,7 +72,7 @@ export class RenderSystem extends ecs.System {
         const p = Laya.Pool.obtain(Laya.Vector4);
         this.context.camera.worldToViewportPoint(animation.view.transform.position, p);
         // TODO: 高度差值待定
-        info.view.pos(p.x - info.view.width / 2, p.y - 100, true);
+        info.view.pos(p.x - info.view.width / 2, p.y - 170, true);
         Laya.Pool.free(p);
     }
 

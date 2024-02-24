@@ -9095,6 +9095,9 @@ declare namespace proto {
 
             /** ItemComponent id */
             id?: (number|null);
+
+            /** ItemComponent num */
+            num?: (number|null);
         }
 
         /** Represents an ItemComponent. */
@@ -9108,6 +9111,9 @@ declare namespace proto {
 
             /** ItemComponent id. */
             public id: number;
+
+            /** ItemComponent num. */
+            public num: number;
 
             /**
              * Creates a new ItemComponent instance using the specified properties.
