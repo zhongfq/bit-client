@@ -1,0 +1,94 @@
+{
+  "_$type": "Animator",
+  "enabled": true,
+  "controller": "null",
+  "cullingMode": 0,
+  "controllerLayers": [
+    {
+      "_$type": "AnimatorControllerLayer",
+      "playOnWake": true,
+      "name": "Base Layer",
+      "defaultWeight": 1,
+      "blendingMode": 0,
+      "states": [
+        {
+          "_$type": "AnimatorState",
+          "name": "fight_hero_attack",
+          "speed": 1,
+          "clipStart": 0,
+          "clipEnd": 1,
+          "x": 416,
+          "y": 253,
+          "clip": {
+            "_$type": "AnimationClip",
+            "_$uuid": "04145be7-5fb3-46a3-88c5-ab23e978319d"
+          },
+          "id": "0"
+        },
+        {
+          "_$type": "AnimatorState",
+          "name": "fight_hero_die",
+          "speed": 1,
+          "clipStart": 0,
+          "clipEnd": 1,
+          "x": 426,
+          "y": 263,
+          "clip": {
+            "_$type": "AnimationClip",
+            "_$uuid": "4e571d5e-71b0-4ada-8049-19336f966337"
+          },
+          "id": "1"
+        },
+        {
+          "_$type": "AnimatorState",
+          "name": "fight_hero_idle",
+          "speed": 1,
+          "clipStart": 0,
+          "clipEnd": 1,
+          "x": 436,
+          "y": 273,
+          "clip": {
+            "_$type": "AnimationClip",
+            "_$uuid": "5b60a641-0722-4f32-b361-f999a19e7307"
+          },
+          "id": "2"
+        },
+        {
+          "_$type": "AnimatorState",
+          "name": "fight_hero_move",
+          "speed": 1,
+          "clipStart": 0,
+          "clipEnd": 1,
+          "x": 446,
+          "y": 283,
+          "clip": {
+            "_$type": "AnimationClip",
+            "_$uuid": "30966398-4ea0-469b-9541-7f92aefc4d63"
+          },
+          "id": "3"
+        },
+        {
+          "id": "-1",
+          "name": "进入",
+          "speed": 1,
+          "clipEnd": 1,
+          "x": 50,
+          "y": 120,
+          "soloTransitions": [
+            {
+              "id": "0"
+            }
+          ]
+        },
+        {
+          "id": "-2",
+          "name": "任何状态",
+          "speed": 1,
+          "clipEnd": 1,
+          "x": 50,
+          "y": 20
+        }
+      ]
+    }
+  ]
+}
