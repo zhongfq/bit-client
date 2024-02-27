@@ -30,9 +30,13 @@ export class homeTaskMediator extends Mediator {
 
     updateInfo() {
         const taskInfo = app.service.task.mainTask;
-        this.owner.labelDesc.text = taskInfo?.ref.desc || "";
-        this.owner.labelValue.text = `${taskInfo?.cmd?.num}/${taskInfo?.cmd?.max}`;
-        this.owner.ProgressBar.value = Number(taskInfo.cmd?.num) / Number(taskInfo.cmd?.max);
+        if (!taskInfo.cmd) {
+            this.owner.visible = false;
+            return;
+        }
+        this.owner.labelDesc.text = taskInfo.ref.desc || "";
+        this.owner.labelValue.text = `${taskInfo.cmd.num}/${taskInfo.cmd.max}`;
+        this.owner.ProgressBar.value = Number(taskInfo.cmd.num) / Number(taskInfo.cmd.max);
     }
     //组件被启用后执行，例如节点被添加到舞台后
     //onEnable(): void {}

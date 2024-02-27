@@ -37,7 +37,17 @@ export class MainMediator extends Mediator {
         const msg = app.service.chat.chatMsgVoBag.getOne();
         if (msg) {
             const role = app.service.chat.chatRoleVoBag.get(msg.id) as ChatRoleVo;
-            this.owner.labelMsg.text = `${role.cmd?.name}:${msg.cmd?.text}`;
+            const reg = /{(\d+)}/gm;
+            const str = msg.cmd?.text || "";
+            const ubbStr = str.replace(reg, function (match, name) {
+                const emojiRow = TableUtil.getRow(app.service.table.emoji, { id: Number(name) });
+                if (emojiRow) {
+                    return `<img src='resources/texture/emoji/emoji/${emojiRow.icon}.png' width=30 height = 30/>`;
+                } else {
+                    return match;
+                }
+            });
+            this.owner.labelMsg.text = `${role.cmd?.name}:${ubbStr}`;
         }
     }
 
@@ -77,5 +87,9 @@ export class MainMediator extends Mediator {
         this.owner.boxChat.on(Laya.Event.CLICK, () => {
             app.ui.show(ui.CHAT);
         });
+        this.owner.btnBox.on(Laya.Event.CLICK, () => {
+            this.owner.boxNode.visible = true;
+        });
+        // this.owner.List.array = ["1111", "1111", "1111", "1111", "1111"];
     }
 }

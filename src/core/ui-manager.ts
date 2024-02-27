@@ -117,8 +117,8 @@ export class UIManager {
         if (descriptor?.autoClose) {
             scene.destroy(true);
         }
-
-        Laya.Scene.gc();
+        //TODO 切换场景会导致资源消失
+        // Laya.Scene.gc();
     }
 
     open(id: number, args?: any) {

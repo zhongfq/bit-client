@@ -21,6 +21,7 @@
       "name": "Panel",
       "width": 750,
       "height": 1334,
+      "visible": false,
       "_mouseState": 2,
       "left": 0,
       "right": 0,
@@ -519,6 +520,7 @@
           "fontSize": 20,
           "color": "#FFFFFF",
           "fitContent": "height",
+          "ubb": true,
           "valign": "bottom",
           "wordWrap": true,
           "padding": "0,0,0,0"
@@ -526,7 +528,20 @@
       ]
     },
     {
-      "_$id": "b87ozmop",
+      "_$id": "0juog0qc",
+      "_$prefab": "de548129-37fd-4bea-8be1-f98a06289f58",
+      "_$var": true,
+      "name": "boxNode",
+      "active": true,
+      "x": 0,
+      "y": 0,
+      "visible": false,
+      "left": 0,
+      "top": 0,
+      "bottom": 0
+    },
+    {
+      "_$id": "ahxs7o77",
       "_$type": "Box",
       "name": "底部按钮",
       "y": 1218,
@@ -537,8 +552,9 @@
       "_$child": [
         {
           "_$id": "jqfka8in",
+          "_$var": true,
           "_$type": "Button",
-          "name": "btnCamp",
+          "name": "btnBox",
           "x": 497,
           "y": 7,
           "width": 122,
@@ -546,13 +562,14 @@
           "_mouseState": 2,
           "stateNum": 2,
           "skin": "res://ce5a829b-8092-41e9-a3c2-dbcbfebc6562",
-          "label": "营地",
+          "label": "宝箱",
           "labelSize": 27,
           "labelBold": true,
           "labelColors": "#00d5ff,#00d5ff,#00d5ff"
         },
         {
           "_$id": "dbwirl39",
+          "_$var": true,
           "_$type": "Button",
           "name": "btnUnion",
           "x": 616.9999999999999,
