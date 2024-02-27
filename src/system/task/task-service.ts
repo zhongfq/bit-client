@@ -12,6 +12,8 @@ import { TableUtil } from "../table/table-util";
 
 export class TaskService extends Service<NetworkService> {
     static readonly TASK_UPDATE = "task-update";
+    static readonly TASK_REMOVE = "task-remove";
+
     declare mainTask: TaskVo;
     branchTaskBag = VoUtil.createBag(TaskBag);
 
@@ -70,7 +72,7 @@ export class TaskService extends Service<NetworkService> {
                 this.branchTaskBag.onRemove(taskId);
             }
         }
-        this.event(TaskService.TASK_UPDATE);
+        this.event(TaskService.TASK_REMOVE);
     }
 
     // ------------------------------------------------------------------------

@@ -43,7 +43,7 @@ export class TaskMediator extends Mediator {
                 const ids: number[] = [];
                 if (this.tlTaskData[index].ref.type == TaskConf.TASK_TYPE.BRANCH) {
                     for (const task of app.service.task.branchTaskBag.toArray()) {
-                        if (task.cmd && task.cmd?.num == task.cmd?.max) {
+                        if (task.cmd && task.cmd?.num >= task.cmd?.max) {
                             ids.push(task.cmd.id);
                         }
                     }
