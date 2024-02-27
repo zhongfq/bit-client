@@ -1,0 +1,31 @@
+{
+  "_$ver": 1,
+  "_$id": "dotz1qql",
+  "_$type": "Sprite3D",
+  "name": "Sprite3D",
+  "_$child": [
+    {
+      "_$id": "cp8i9232",
+      "_$type": "Sprite3D",
+      "name": "Plane",
+      "_$comp": [
+        {
+          "_$type": "MeshFilter",
+          "sharedMesh": {
+            "_$uuid": "4a4afb22-ef83-40a2-a6a8-212a2d20c52f",
+            "_$type": "Mesh"
+          }
+        },
+        {
+          "_$type": "MeshRenderer",
+          "sharedMaterials": [
+            {
+              "_$uuid": "168cd130-9cf6-4fd9-a562-91671f1aa067",
+              "_$type": "Material"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

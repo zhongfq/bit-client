@@ -16,7 +16,7 @@ import {
     TransformComponent,
 } from "../components/movement-component";
 import { AnimationComponent, HeroInfoComponent } from "../components/render-component";
-import { Tilemap } from "../components/tilemap-component";
+import { TilemapComponent } from "../components/tilemap-component";
 import {
     CharacterAnimation,
     CharacterComponent,
@@ -136,7 +136,7 @@ export class CommandSystem extends ecs.System {
         if (cmd.pos) {
             const transform = entity.addComponent(TransformComponent);
             const data = cmd.pos as proto.world.Position;
-            Tilemap.grid2Pixel(data.x, data.y, transform.position);
+            TilemapComponent.grid2Pixel(data.x, data.y, transform.position);
             transform.flag |= TransformComponent.POSITION;
         }
 
@@ -226,7 +226,7 @@ export class CommandSystem extends ecs.System {
             const current = cmd.curPos as proto.world.Position;
             const positionInterpolation = movement.positionInterpolation;
             positionInterpolation.percent = 0;
-            Tilemap.grid2Pixel(current.x, current.y, positionInterpolation);
+            TilemapComponent.grid2Pixel(current.x, current.y, positionInterpolation);
             positionInterpolation.vsub(transform.position, positionInterpolation);
         }
         this._updateMovement(
@@ -576,7 +576,7 @@ export class CommandSystem extends ecs.System {
         const { transform, movement } = character;
         movement.type = MovementType.WHEEL;
         movement.velocity = velocity;
-        Tilemap.degree2Speed(degree, velocity, movement.speed);
+        TilemapComponent.degree2Speed(degree, velocity, movement.speed);
         this._setRotation(transform, movement.speed.x, movement.speed.z, true);
         this.playAnimation(character, CharacterAnimation.RUN);
     }

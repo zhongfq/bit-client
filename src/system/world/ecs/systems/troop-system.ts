@@ -1,7 +1,7 @@
 import { ecs } from "../../../../core/ecs";
 import { WorldContext } from "../../world-context";
 import { MovementType } from "../components/movement-component";
-import { Tilemap } from "../components/tilemap-component";
+import { TilemapComponent } from "../components/tilemap-component";
 import { HeroComponent, SoldierComponent, SoliderOrder } from "../components/troop-component";
 import { CommandSystem } from "./command-system";
 
@@ -64,7 +64,7 @@ export class TroopSystem extends ecs.System {
         } else {
             const rad = Math.atan2(p1.z - p0.z, p1.x - p0.x);
             const degree = (rad * 180) / Math.PI;
-            const velocity = distance / (TroopSystem.TICK / 1000) / Tilemap.RATE;
+            const velocity = distance / (TroopSystem.TICK / 1000) / TilemapComponent.RATE;
             if (soldier.velocity < leader.movement.velocity) {
                 soldier.velocity = leader.movement.velocity;
             }
@@ -97,7 +97,7 @@ export class TroopSystem extends ecs.System {
         } else {
             const rad = Math.atan2(p1.z - p0.z, p1.x - p0.x);
             const degree = (rad * 180) / Math.PI;
-            const velocity = distance / (TroopSystem.TICK / 1000) / Tilemap.RATE;
+            const velocity = distance / (TroopSystem.TICK / 1000) / TilemapComponent.RATE;
             if (soldier.velocity < leader.movement.velocity) {
                 soldier.velocity = leader.movement.velocity;
             }
@@ -129,7 +129,7 @@ export class TroopSystem extends ecs.System {
             const p0 = transform.position;
             const rad = Math.atan2(p1.z - p0.z, p1.x - p0.x);
             const degree = (rad * 180) / Math.PI;
-            const velocity = distance / (TroopSystem.TICK / 1000) / Tilemap.RATE;
+            const velocity = distance / (TroopSystem.TICK / 1000) / TilemapComponent.RATE;
 
             if (soldier.velocity < velocity) {
                 soldier.velocity += 0.2;
