@@ -1,0 +1,160 @@
+{
+  "_$ver": 1,
+  "_$id": "y8ni452y",
+  "_$runtime": "res://88970b0d-e985-46f6-81ee-671df470df9d",
+  "_$preloads": [
+    "res://1ebcfa56-61d8-408c-9cbf-af7de6ab500a"
+  ],
+  "_$type": "Box",
+  "name": "box",
+  "width": 750,
+  "height": 1334,
+  "_mouseState": 2,
+  "left": 0,
+  "top": 0,
+  "bottom": 0,
+  "bgColor": "rgba(77, 112, 112, 1)",
+  "_$comp": [
+    {
+      "_$type": "8ec8d58e-0274-4530-b51e-70ae7f42e46a",
+      "scriptPath": "../src/system/box/box-mediator.ts"
+    }
+  ],
+  "_$child": [
+    {
+      "_$id": "uhoqz1w2",
+      "_$var": true,
+      "_$type": "Button",
+      "name": "btnBoxReward",
+      "x": 9,
+      "y": 155,
+      "width": 120,
+      "height": 40,
+      "_mouseState": 2,
+      "left": 9,
+      "top": 155,
+      "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
+      "label": "箱子积分",
+      "labelSize": 20
+    },
+    {
+      "_$id": "qfkmg54f",
+      "_$type": "Image",
+      "name": "Image",
+      "x": 193,
+      "y": 210,
+      "width": 364,
+      "height": 39,
+      "top": 210,
+      "centerX": 0,
+      "skin": "res://2123a790-201a-4900-8885-b7ef9a27cfba",
+      "color": "#ffffff",
+      "_$child": [
+        {
+          "_$id": "zc2s6y0d",
+          "_$var": true,
+          "_$type": "Label",
+          "name": "labelBoxDesc",
+          "x": 37,
+          "y": 9,
+          "width": 290,
+          "height": 21,
+          "centerX": 0,
+          "centerY": 0,
+          "text": "3星将领概率15%，4星将领概率5%",
+          "fontSize": 20,
+          "color": "#FFFFFF",
+          "fitContent": "yes",
+          "align": "center",
+          "valign": "middle",
+          "padding": "0,0,0,0"
+        }
+      ]
+    },
+    {
+      "_$id": "5dol2ueu",
+      "_$var": true,
+      "_$type": "Button",
+      "name": "btnOpenBox",
+      "x": 332,
+      "y": 995,
+      "width": 120,
+      "height": 40,
+      "_mouseState": 2,
+      "bottom": 299,
+      "centerX": 17,
+      "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
+      "label": "打开宝箱",
+      "labelSize": 20
+    },
+    {
+      "_$id": "0omkcmda",
+      "_$var": true,
+      "_$type": "List",
+      "name": "listBox",
+      "x": 58,
+      "y": 1056,
+      "width": 641,
+      "height": 141,
+      "_mouseState": 2,
+      "centerX": 3,
+      "bgColor": "rgba(255, 255, 255, 1)",
+      "itemTemplate": {
+        "_$ref": "m3d8u5lu",
+        "_$tmpl": "itemRender"
+      },
+      "repeatX": 5,
+      "repeatY": 1,
+      "spaceX": 44,
+      "selectEnable": true,
+      "selectedIndex": 0
+    },
+    {
+      "_$id": "0vsgof0v",
+      "_$var": true,
+      "_$type": "Sprite",
+      "name": "Sprite",
+      "x": 12,
+      "y": 49,
+      "width": 100,
+      "height": 100,
+      "_gcmds": [
+        {
+          "_$type": "DrawRectCmd",
+          "x": 0,
+          "y": 0,
+          "width": 1,
+          "height": 1,
+          "percent": true,
+          "lineWidth": 1,
+          "lineColor": "#000000",
+          "fillColor": "#FFFFFF"
+        }
+      ],
+      "_$comp": [
+        {
+          "_$type": "Animator2D",
+          "controllerLayers": []
+        }
+      ]
+    },
+    {
+      "_$id": "m3d8u5lu",
+      "_$prefab": "1ebcfa56-61d8-408c-9cbf-af7de6ab500a",
+      "name": "item-box",
+      "active": true,
+      "x": 339,
+      "y": 611
+    },
+    {
+      "_$id": "stlnkvxm",
+      "_$var": true,
+      "_$type": "Box",
+      "name": "boxHero",
+      "x": 71,
+      "y": 341,
+      "width": 210,
+      "height": 581
+    }
+  ]
+}

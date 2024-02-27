@@ -17,6 +17,7 @@ import { ShopService } from "./system/shop/shop-service";
 import { TableService } from "./system/table/table-service";
 import { TaskService } from "./system/task/task-service";
 import { UserService } from "./system/user/user-service";
+import { Renderable2D } from "./system/world/ecs/components/render-component";
 import { WorldService } from "./system/world/world-service";
 
 const { regClass, property } = Laya;
@@ -25,6 +26,18 @@ const { regClass, property } = Laya;
 export class Main extends AppBase {
     onAwake(): void {
         ui.register();
+
+        const rt = new Laya.RenderTexture2D(1024, 1024);
+        const sprite = new Laya.Sprite();
+
+        const img = new Laya.Image("resources/atlas/bag/img_hd.png");
+        sprite.addChild(img);
+
+        const img2 = new Laya.Image("resources/atlas/bag/img_bg100.png");
+        sprite.addChild(img2);
+        sprite.drawToTexture(1024, 1024, 0, 0, rt);
+
+        // this.addChild(img);
         app.init();
     }
 }

@@ -3,9 +3,8 @@
   "minifyJS": true,
   "startupScene": "res://06960274-3085-4eb0-ad1d-24b08a67cfd7",
   "includedScenes": [],
-  "excludeFilesRule": [
-    "unity/**"
-  ],
+  "copyBinFiles": false,
+  "excludeFilesRule": [],
   "enableSubpackages": true,
   "subpackages": [
     {

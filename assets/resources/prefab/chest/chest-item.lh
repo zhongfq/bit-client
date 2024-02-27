@@ -1,0 +1,106 @@
+{
+  "_$ver": 1,
+  "_$id": "cl031n8s",
+  "_$type": "Box",
+  "name": "Box",
+  "width": 92,
+  "height": 155,
+  "_$comp": [
+    {
+      "_$type": "Animator2D",
+      "controller": {
+        "_$uuid": "5d3f9e96-6266-4b81-be1c-fefd77d7aa75",
+        "_$type": "AnimationController2D"
+      },
+      "controllerLayers": [
+        {
+          "_$type": "AnimatorControllerLayer2D",
+          "name": "Base Layer",
+          "states": [
+            {
+              "_$type": "AnimatorState2D",
+              "name": "box-item 0",
+              "clipStart": 0,
+              "clip": {
+                "_$uuid": "e1d32fc2-6b63-44bb-a45d-1bc348d4c6aa",
+                "_$type": "AnimationClip2D"
+              },
+              "soloTransitions": []
+            },
+            {
+              "_$type": "AnimatorState2D",
+              "name": "box-item",
+              "clipStart": 0,
+              "clip": {
+                "_$uuid": "e1d32fc2-6b63-44bb-a45d-1bc348d4c6aa",
+                "_$type": "AnimationClip2D"
+              },
+              "soloTransitions": []
+            }
+          ],
+          "defaultStateName": "box-item"
+        }
+      ]
+    }
+  ],
+  "_$child": [
+    {
+      "_$id": "0jaivhzj",
+      "_$var": true,
+      "_$type": "Image",
+      "name": "imgs",
+      "x": -3,
+      "y": -3,
+      "width": 100,
+      "height": 100,
+      "centerX": 0,
+      "skin": "res://6afee441-6e13-483c-9d4a-812c65671eb6",
+      "color": "#ffffff"
+    },
+    {
+      "_$id": "oq7864ri",
+      "_$type": "Image",
+      "name": "Image",
+      "x": 1,
+      "y": 1,
+      "width": 90,
+      "height": 90,
+      "centerX": 0,
+      "skin": "res://2746a5c1-1212-413c-bb35-0a4cd4ef7e11",
+      "useSourceSize": true,
+      "color": "#ffffff"
+    },
+    {
+      "_$id": "4vkay9kk",
+      "_$type": "Image",
+      "name": "img",
+      "x": 8,
+      "y": 116,
+      "width": 76,
+      "height": 31,
+      "centerX": 0,
+      "skin": "res://2123a790-201a-4900-8885-b7ef9a27cfba",
+      "color": "#ffffff",
+      "_$child": [
+        {
+          "_$id": "szr878o1",
+          "_$var": true,
+          "_$type": "Label",
+          "name": "Label",
+          "x": -22,
+          "y": 2,
+          "width": 120,
+          "height": 28,
+          "centerX": 0,
+          "centerY": 0,
+          "text": "x0",
+          "fontSize": 20,
+          "color": "#FFFFFF",
+          "align": "center",
+          "valign": "middle",
+          "padding": "0,0,0,0"
+        }
+      ]
+    }
+  ]
+}

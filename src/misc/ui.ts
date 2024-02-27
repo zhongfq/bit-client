@@ -38,6 +38,8 @@ export enum ui {
 
     CHAT,
 
+    BOX_HERO,
+
     GM,
 }
 
@@ -148,6 +150,13 @@ export namespace ui {
             id: ui.CHAT,
             autoClose: false,
             url: "resources/prefab/chat/chat.lh",
+            blockInput: true,
+        });
+
+        app.ui.register({
+            id: ui.BOX_HERO,
+            autoClose: false,
+            url: "resources/prefab/box/box-hero.lh",
             blockInput: true,
         });
 

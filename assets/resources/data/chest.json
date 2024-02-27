@@ -1,53 +1,111 @@
 {
-    "chests": [
-        {
-            "lv": 1,
-            "name": "1级宝箱",
-            "open_exp": 20,
-            "upgrade_exp": 100
-        },
-        {
-            "lv": 2,
-            "name": "2级宝箱",
-            "open_exp": 40,
-            "upgrade_exp": 200
-        },
-        {
-            "lv": 3,
-            "name": "3级宝箱",
-            "open_exp": 60,
-            "upgrade_exp": 300
-        },
-        {
-            "lv": 4,
-            "name": "4级宝箱",
-            "open_exp": 80,
-            "upgrade_exp": 400
-        }
-    ],
-    "conf": {
-        "first_dungon_id": 4
-    },
-    "dungeon": [
+    "chest": [
         {
             "id": 1,
-            "name": "宝箱副本1-1",
-            "war_id": 102
+            "open_max_num": 10,
+            "open_score": 1,
+            "reward": [
+                {
+                    "count": 100,
+                    "id": 30601
+                },
+                {
+                    "count": 1,
+                    "id": 10201
+                }
+            ],
+            "reward_score": 5,
+            "sort": 1
         },
         {
             "id": 2,
-            "name": "宝箱副本1-2",
-            "war_id": 103
+            "open_max_num": 10,
+            "open_score": 5,
+            "reward": [
+                {
+                    "count": 100,
+                    "id": 30701
+                },
+                {
+                    "count": 1,
+                    "id": 10202
+                }
+            ],
+            "reward_score": 10,
+            "sort": 2
         },
         {
             "id": 3,
-            "name": "宝箱副本1-3",
-            "war_id": 104
+            "open_max_num": 10,
+            "open_score": 15,
+            "reward": [
+                {
+                    "count": 15,
+                    "id": 30301
+                },
+                {
+                    "count": 100,
+                    "id": 20602
+                }
+            ],
+            "reward_score": 30,
+            "sort": 3
         },
         {
             "id": 4,
-            "name": "宝箱副本BOSS",
-            "war_id": 105
+            "open_max_num": 3,
+            "open_score": 45,
+            "reward": [
+                {
+                    "count": 15,
+                    "id": 30301
+                },
+                {
+                    "count": 100,
+                    "id": 20603
+                }
+            ],
+            "reward_score": 50,
+            "sort": 4
+        },
+        {
+            "id": 5,
+            "open_max_num": 1,
+            "open_score": 0,
+            "reward": [
+                {
+                    "count": 15,
+                    "id": 30301
+                },
+                {
+                    "count": 100,
+                    "id": 20603
+                }
+            ],
+            "reward_score": 80,
+            "sort": 5
+        }
+    ],
+    "hero": [
+        {
+            "hero_id": 103,
+            "id": 1,
+            "sort": 1
+        },
+        {
+            "hero_id": 105,
+            "id": 2,
+            "sort": 2
+        },
+        {
+            "hero_id": 108,
+            "id": 3,
+            "sort": 3
+        },
+        {
+            "hero_id": 113,
+            "id": 4,
+            "sort": 4
         }
     ]
 }
