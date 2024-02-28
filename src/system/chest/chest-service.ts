@@ -7,32 +7,41 @@ import { VoUtil } from "../../misc/vo-util";
 import { ItemBag } from "../../misc/vo/goods/item-vo-bag";
 
 export class ChestService extends Service<NetworkService> {
-    static readonly ITEM_UPDATE = "item-update";
+    // static readonly ITEM_UPDATE = "item-update";
 
-    readonly itemBag = VoUtil.createGoodsBag(ItemBag); //创建道具背包
+    // readonly itemBag = VoUtil.createGoodsBag(ItemBag); //创建道具背包
+    scoreInfo: proto.chest.ScoreInfo | null = null; //积分数据
+    chestInfo: Map<number, proto.chest.ChestInfo> = new Map();
+    heroId!: number;
 
     constructor(network: NetworkService) {
         super(network);
-        this.handle(opcode.bag.s2c_load, this._onLoad);
-        this.handle(opcode.bag.s2c_use_item, this._onUseItem);
-        this.handle(opcode.bag.s2c_composite_item, this._onCompositeItem);
-        this.handle(opcode.bag.s2c_discard_item, this._onDiscardItem);
-        this.handle(opcode.bag.notify_items, this._noNotify);
+        this.handle(opcode.chest.s2c_load, this._onLoad);
+        this.handle(opcode.chest.s2c_open_chest, this._onOpenChest);
+        this.handle(opcode.chest.s2c_score_receive, this._onScoreReceive);
+        this.handle(opcode.chest.s2c_switch_hero, this._onSwitchHero);
+        this.handle(opcode.chest.notify, this._noNotify);
     }
 
-    private _onLoad(data: proto.bag.s2c_load) {
+    private _onLoad(data: proto.chest.s2c_load) {
         if (data.err === errcode.OK) {
-            this.itemBag.init(data);
+            if (data.score) {
+                this.scoreInfo = data.score as proto.chest.ScoreInfo;
+            }
+            for (const chest of data.chests) {
+                this.chestInfo.set(Number(chest.id), chest as proto.chest.ChestInfo);
+            }
+            this.heroId = data.heroId;
         }
     }
 
-    private _onUseItem(data: proto.bag.s2c_use_item) {}
+    private _onOpenChest(data: proto.chest.s2c_open_chest) {}
 
-    private _onCompositeItem(data: proto.bag.s2c_composite_item) {}
+    private _onScoreReceive(data: proto.chest.s2c_score_receive) {}
 
-    private _onDiscardItem(data: proto.bag.s2c_discard_item) {}
+    private _onSwitchHero(data: proto.chest.s2c_switch_hero) {}
 
-    private _noNotify(data: proto.bag.notify_items) {}
+    private _noNotify(data: proto.chest.notify) {}
 
     // ------------------------------------------------------------------------
     // rpc call
@@ -42,35 +51,35 @@ export class ChestService extends Service<NetworkService> {
     }
 
     /**
-     *请求使用道具
+     *请求打开宝箱
      * @param data
      */
-    public async requestUseItem(data: proto.bag.Ic2s_use_item) {
+    public async requestOpenChest(data: proto.chest.Ic2s_open_chest) {
         return await this._network.call(
-            proto.bag.c2s_use_item.create(data),
-            proto.bag.s2c_use_item
+            proto.chest.c2s_open_chest.create(data),
+            proto.chest.s2c_open_chest
         );
     }
 
     /**
-     *请求合成道具
+     *请求领取积分
      * @param data
      */
-    public async requestCompositeItem(data: proto.bag.Ic2s_composite_item) {
+    public async requestScoreReceive(data: proto.chest.Ic2s_score_receive) {
         return await this._network.call(
-            proto.bag.c2s_composite_item.create(data),
-            proto.bag.s2c_composite_item
+            proto.chest.c2s_score_receive.create(data),
+            proto.chest.s2c_score_receive
         );
     }
 
     /**
-     *请求丢弃道具
+     *请求切换武将
      * @param data
      */
-    public async requestDiscardItem(data: proto.bag.Ic2s_discard_item) {
+    public async requestSwitchHero(data: proto.chest.c2s_switch_hero) {
         return await this._network.call(
-            proto.bag.c2s_discard_item.create(data),
-            proto.bag.s2c_discard_item
+            proto.chest.c2s_switch_hero.create(data),
+            proto.chest.s2c_switch_hero
         );
     }
 }

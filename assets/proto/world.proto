@@ -84,6 +84,7 @@ message BagItem {
 
 message BagComponent {
     repeated BagItem items = 1;
+    uint32 touch_eid = 2; // 与某个实体交互
 }
 
 message ItemComponent {
@@ -144,7 +145,7 @@ message s2c_giveup {
 }
 
 message c2s_cancel_giveup {
-    int64 eid = 2;
+    uint32 eid = 2;
 }
 message s2c_cancel_giveup {
     uint32 err = 1;
@@ -200,10 +201,10 @@ message AddEntityAction {
     Entity entity = 1;
 }
 message DelEntityAction {
-    int64 eid = 1;
+    uint32 eid = 1;
 }
 message MoveAction {
-    int64 eid = 1;
+    uint32 eid = 1;
     repeated uint32 path = 2;
     uint32 speed = 3;
     uint32 start_ms = 4;
@@ -211,67 +212,19 @@ message MoveAction {
     float degree = 6;
 }
 
-message BattleStartAction {
-    uint32 fighter_eid = 1;
-    uint32 battle_eid = 2;
+message StartBattleAction {
+    uint32 battle_uid = 1;
+    repeated uint32 troop_eids = 2;
 }
 
-message BattleSkillAction {
-    uint32 src_eid = 1;
-    uint32 dst_eid = 2;
-    uint32 skill_id = 3;
+message LeaveBattleAction {
+    uint32 battle_uid = 1;
+    repeated uint32 troop_eids = 2;
 }
 
-message BattleSubHpAction {
-    uint32 src_eid = 1;
-    uint32 dst_eid = 2;
-    uint32 sub_hp = 3;
-    uint32 cur_hp = 4;
-}
-
-// 暂时保留
-message BattleAddBullet {
-    uint32 src_eid = 1;
-    uint32 dst_eid = 2;
-    uint32 bullet_id = 3;
-    uint32 duration = 4; // 毫秒
-}
-
-message BattleAddBuffAction {
-    uint32 src_eid = 1;
-    uint32 dst_eid = 2;
-    uint32 buff_id = 3;
-}
-
-message BattleDelBuffAction {
-    uint32 src_eid = 1;
-    uint32 dst_eid = 2;
-    uint32 buff_id = 3;
-}
-
-message BattleStopAction {
-    uint32 fighter_eid = 1;
-    uint32 battle_eid = 2;
-}
-
-message AddBoxAction {
-    uint32 troop_eid = 1;
-    uint32 box_eid = 2;
-}
-
-message DropBoxAction {
-    uint32 troop_eid = 1;
-    uint32 camp_eid = 2;
-}
-
-message PickItemAction {
-    uint32 troop_eid = 1;
-    uint32 item_eid = 2;
-}
-
-message InviteSoldierAction {
-    uint32 troop_eid = 1;
-    uint32 soldier_eid = 2;
+message StopBattleAction {
+    uint32 battle_uid = 1;
+    repeated uint32 troop_eids = 2;
 }
 
 message EntityAction {
@@ -280,17 +233,10 @@ message EntityAction {
     AddEntityAction add_entity = 10;
     DelEntityAction del_entity = 11;
     MoveAction move = 12;
-    AddBoxAction add_box = 13;
-    DropBoxAction drop_box = 14;
-    PickItemAction pick_item = 15;
-    InviteSoldierAction invite_soldier = 16;
 
-    BattleStartAction battle_start = 21;
-    BattleSkillAction battle_skill = 20;
-    BattleAddBuffAction battle_add_buff = 22;
-    BattleDelBuffAction battle_del_buff = 23;
-    BattleStopAction battle_stop = 24;
-    BattleSubHpAction battle_sub_hp = 25;
+    StartBattleAction start_battle = 21;
+    LeaveBattleAction leave_battle = 22;
+    StopBattleAction stop_battle = 23;
 }
 
 // 单位同步(最基层)

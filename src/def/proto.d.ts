@@ -1219,6 +1219,2910 @@ declare namespace proto {
         }
     }
 
+    /** Namespace battle. */
+    namespace battle {
+
+        /** Properties of a BattleHero. */
+        interface IBattleHero {
+
+            /** BattleHero heroId */
+            heroId?: (number|null);
+
+            /** BattleHero eid */
+            eid?: (number|null);
+        }
+
+        /** Represents a BattleHero. */
+        class BattleHero implements IBattleHero {
+
+            /**
+             * Constructs a new BattleHero.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: battle.IBattleHero);
+
+            /** BattleHero heroId. */
+            public heroId: number;
+
+            /** BattleHero eid. */
+            public eid: number;
+
+            /**
+             * Creates a new BattleHero instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BattleHero instance
+             */
+            public static create(properties?: battle.IBattleHero): battle.BattleHero;
+
+            /**
+             * Encodes the specified BattleHero message. Does not implicitly {@link battle.BattleHero.verify|verify} messages.
+             * @param message BattleHero message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: battle.IBattleHero, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BattleHero message, length delimited. Does not implicitly {@link battle.BattleHero.verify|verify} messages.
+             * @param message BattleHero message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: battle.IBattleHero, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BattleHero message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BattleHero
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): battle.BattleHero;
+
+            /**
+             * Decodes a BattleHero message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BattleHero
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): battle.BattleHero;
+
+            /**
+             * Verifies a BattleHero message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BattleHero message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BattleHero
+             */
+            public static fromObject(object: { [k: string]: any }): battle.BattleHero;
+
+            /**
+             * Creates a plain object from a BattleHero message. Also converts values to other types if specified.
+             * @param message BattleHero
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: battle.BattleHero, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BattleHero to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BattleHero
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a BattleRole. */
+        interface IBattleRole {
+
+            /** BattleRole rid */
+            rid?: (number|null);
+
+            /** BattleRole name */
+            name?: (string|null);
+
+            /** BattleRole heros */
+            heros?: (battle.IBattleHero[]|null);
+        }
+
+        /** Represents a BattleRole. */
+        class BattleRole implements IBattleRole {
+
+            /**
+             * Constructs a new BattleRole.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: battle.IBattleRole);
+
+            /** BattleRole rid. */
+            public rid: number;
+
+            /** BattleRole name. */
+            public name: string;
+
+            /** BattleRole heros. */
+            public heros: battle.IBattleHero[];
+
+            /**
+             * Creates a new BattleRole instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BattleRole instance
+             */
+            public static create(properties?: battle.IBattleRole): battle.BattleRole;
+
+            /**
+             * Encodes the specified BattleRole message. Does not implicitly {@link battle.BattleRole.verify|verify} messages.
+             * @param message BattleRole message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: battle.IBattleRole, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BattleRole message, length delimited. Does not implicitly {@link battle.BattleRole.verify|verify} messages.
+             * @param message BattleRole message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: battle.IBattleRole, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BattleRole message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BattleRole
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): battle.BattleRole;
+
+            /**
+             * Decodes a BattleRole message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BattleRole
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): battle.BattleRole;
+
+            /**
+             * Verifies a BattleRole message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BattleRole message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BattleRole
+             */
+            public static fromObject(object: { [k: string]: any }): battle.BattleRole;
+
+            /**
+             * Creates a plain object from a BattleRole message. Also converts values to other types if specified.
+             * @param message BattleRole
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: battle.BattleRole, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BattleRole to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BattleRole
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a BattleEntity. */
+        interface IBattleEntity {
+
+            /** BattleEntity eid */
+            eid?: (number|null);
+
+            /** BattleEntity rid */
+            rid?: (number|null);
+
+            /** BattleEntity entityId */
+            entityId?: (number|null);
+
+            /** BattleEntity maxHp */
+            maxHp?: (number|null);
+
+            /** BattleEntity hp */
+            hp?: (number|null);
+
+            /** BattleEntity x */
+            x?: (number|null);
+
+            /** BattleEntity y */
+            y?: (number|null);
+
+            /** BattleEntity z */
+            z?: (number|null);
+
+            /** BattleEntity maxMp */
+            maxMp?: (number|null);
+
+            /** BattleEntity mp */
+            mp?: (number|null);
+        }
+
+        /** Represents a BattleEntity. */
+        class BattleEntity implements IBattleEntity {
+
+            /**
+             * Constructs a new BattleEntity.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: battle.IBattleEntity);
+
+            /** BattleEntity eid. */
+            public eid: number;
+
+            /** BattleEntity rid. */
+            public rid: number;
+
+            /** BattleEntity entityId. */
+            public entityId: number;
+
+            /** BattleEntity maxHp. */
+            public maxHp: number;
+
+            /** BattleEntity hp. */
+            public hp: number;
+
+            /** BattleEntity x. */
+            public x: number;
+
+            /** BattleEntity y. */
+            public y: number;
+
+            /** BattleEntity z. */
+            public z: number;
+
+            /** BattleEntity maxMp. */
+            public maxMp: number;
+
+            /** BattleEntity mp. */
+            public mp: number;
+
+            /**
+             * Creates a new BattleEntity instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BattleEntity instance
+             */
+            public static create(properties?: battle.IBattleEntity): battle.BattleEntity;
+
+            /**
+             * Encodes the specified BattleEntity message. Does not implicitly {@link battle.BattleEntity.verify|verify} messages.
+             * @param message BattleEntity message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: battle.IBattleEntity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BattleEntity message, length delimited. Does not implicitly {@link battle.BattleEntity.verify|verify} messages.
+             * @param message BattleEntity message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: battle.IBattleEntity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BattleEntity message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BattleEntity
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): battle.BattleEntity;
+
+            /**
+             * Decodes a BattleEntity message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BattleEntity
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): battle.BattleEntity;
+
+            /**
+             * Verifies a BattleEntity message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BattleEntity message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BattleEntity
+             */
+            public static fromObject(object: { [k: string]: any }): battle.BattleEntity;
+
+            /**
+             * Creates a plain object from a BattleEntity message. Also converts values to other types if specified.
+             * @param message BattleEntity
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: battle.BattleEntity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BattleEntity to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BattleEntity
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a cmd_add_entity. */
+        interface Icmd_add_entity {
+
+            /** cmd_add_entity entity */
+            entity?: (battle.IBattleEntity|null);
+        }
+
+        /** Represents a cmd_add_entity. */
+        class cmd_add_entity implements Icmd_add_entity {
+
+            /**
+             * Constructs a new cmd_add_entity.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: battle.Icmd_add_entity);
+
+            /** cmd_add_entity entity. */
+            public entity?: (battle.IBattleEntity|null);
+
+            /**
+             * Creates a new cmd_add_entity instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns cmd_add_entity instance
+             */
+            public static create(properties?: battle.Icmd_add_entity): battle.cmd_add_entity;
+
+            /**
+             * Encodes the specified cmd_add_entity message. Does not implicitly {@link battle.cmd_add_entity.verify|verify} messages.
+             * @param message cmd_add_entity message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: battle.Icmd_add_entity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified cmd_add_entity message, length delimited. Does not implicitly {@link battle.cmd_add_entity.verify|verify} messages.
+             * @param message cmd_add_entity message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: battle.Icmd_add_entity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a cmd_add_entity message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns cmd_add_entity
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): battle.cmd_add_entity;
+
+            /**
+             * Decodes a cmd_add_entity message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns cmd_add_entity
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): battle.cmd_add_entity;
+
+            /**
+             * Verifies a cmd_add_entity message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a cmd_add_entity message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns cmd_add_entity
+             */
+            public static fromObject(object: { [k: string]: any }): battle.cmd_add_entity;
+
+            /**
+             * Creates a plain object from a cmd_add_entity message. Also converts values to other types if specified.
+             * @param message cmd_add_entity
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: battle.cmd_add_entity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this cmd_add_entity to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for cmd_add_entity
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a cmd_update_entity. */
+        interface Icmd_update_entity {
+
+            /** cmd_update_entity eid */
+            eid?: (number|null);
+
+            /** cmd_update_entity maxHp */
+            maxHp?: (number|null);
+
+            /** cmd_update_entity hp */
+            hp?: (number|null);
+
+            /** cmd_update_entity x */
+            x?: (number|null);
+
+            /** cmd_update_entity y */
+            y?: (number|null);
+
+            /** cmd_update_entity z */
+            z?: (number|null);
+        }
+
+        /** Represents a cmd_update_entity. */
+        class cmd_update_entity implements Icmd_update_entity {
+
+            /**
+             * Constructs a new cmd_update_entity.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: battle.Icmd_update_entity);
+
+            /** cmd_update_entity eid. */
+            public eid: number;
+
+            /** cmd_update_entity maxHp. */
+            public maxHp: number;
+
+            /** cmd_update_entity hp. */
+            public hp: number;
+
+            /** cmd_update_entity x. */
+            public x: number;
+
+            /** cmd_update_entity y. */
+            public y: number;
+
+            /** cmd_update_entity z. */
+            public z: number;
+
+            /**
+             * Creates a new cmd_update_entity instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns cmd_update_entity instance
+             */
+            public static create(properties?: battle.Icmd_update_entity): battle.cmd_update_entity;
+
+            /**
+             * Encodes the specified cmd_update_entity message. Does not implicitly {@link battle.cmd_update_entity.verify|verify} messages.
+             * @param message cmd_update_entity message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: battle.Icmd_update_entity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified cmd_update_entity message, length delimited. Does not implicitly {@link battle.cmd_update_entity.verify|verify} messages.
+             * @param message cmd_update_entity message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: battle.Icmd_update_entity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a cmd_update_entity message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns cmd_update_entity
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): battle.cmd_update_entity;
+
+            /**
+             * Decodes a cmd_update_entity message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns cmd_update_entity
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): battle.cmd_update_entity;
+
+            /**
+             * Verifies a cmd_update_entity message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a cmd_update_entity message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns cmd_update_entity
+             */
+            public static fromObject(object: { [k: string]: any }): battle.cmd_update_entity;
+
+            /**
+             * Creates a plain object from a cmd_update_entity message. Also converts values to other types if specified.
+             * @param message cmd_update_entity
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: battle.cmd_update_entity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this cmd_update_entity to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for cmd_update_entity
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a cmd_del_entity. */
+        interface Icmd_del_entity {
+
+            /** cmd_del_entity eid */
+            eid?: (number|null);
+        }
+
+        /** Represents a cmd_del_entity. */
+        class cmd_del_entity implements Icmd_del_entity {
+
+            /**
+             * Constructs a new cmd_del_entity.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: battle.Icmd_del_entity);
+
+            /** cmd_del_entity eid. */
+            public eid: number;
+
+            /**
+             * Creates a new cmd_del_entity instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns cmd_del_entity instance
+             */
+            public static create(properties?: battle.Icmd_del_entity): battle.cmd_del_entity;
+
+            /**
+             * Encodes the specified cmd_del_entity message. Does not implicitly {@link battle.cmd_del_entity.verify|verify} messages.
+             * @param message cmd_del_entity message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: battle.Icmd_del_entity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified cmd_del_entity message, length delimited. Does not implicitly {@link battle.cmd_del_entity.verify|verify} messages.
+             * @param message cmd_del_entity message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: battle.Icmd_del_entity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a cmd_del_entity message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns cmd_del_entity
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): battle.cmd_del_entity;
+
+            /**
+             * Decodes a cmd_del_entity message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns cmd_del_entity
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): battle.cmd_del_entity;
+
+            /**
+             * Verifies a cmd_del_entity message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a cmd_del_entity message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns cmd_del_entity
+             */
+            public static fromObject(object: { [k: string]: any }): battle.cmd_del_entity;
+
+            /**
+             * Creates a plain object from a cmd_del_entity message. Also converts values to other types if specified.
+             * @param message cmd_del_entity
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: battle.cmd_del_entity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this cmd_del_entity to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for cmd_del_entity
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a cmd_move_to. */
+        interface Icmd_move_to {
+
+            /** cmd_move_to eid */
+            eid?: (number|null);
+
+            /** cmd_move_to speed */
+            speed?: (number|null);
+
+            /** cmd_move_to targetX */
+            targetX?: (number|null);
+
+            /** cmd_move_to targetY */
+            targetY?: (number|null);
+
+            /** cmd_move_to targetZ */
+            targetZ?: (number|null);
+        }
+
+        /** Represents a cmd_move_to. */
+        class cmd_move_to implements Icmd_move_to {
+
+            /**
+             * Constructs a new cmd_move_to.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: battle.Icmd_move_to);
+
+            /** cmd_move_to eid. */
+            public eid: number;
+
+            /** cmd_move_to speed. */
+            public speed: number;
+
+            /** cmd_move_to targetX. */
+            public targetX: number;
+
+            /** cmd_move_to targetY. */
+            public targetY: number;
+
+            /** cmd_move_to targetZ. */
+            public targetZ: number;
+
+            /**
+             * Creates a new cmd_move_to instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns cmd_move_to instance
+             */
+            public static create(properties?: battle.Icmd_move_to): battle.cmd_move_to;
+
+            /**
+             * Encodes the specified cmd_move_to message. Does not implicitly {@link battle.cmd_move_to.verify|verify} messages.
+             * @param message cmd_move_to message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: battle.Icmd_move_to, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified cmd_move_to message, length delimited. Does not implicitly {@link battle.cmd_move_to.verify|verify} messages.
+             * @param message cmd_move_to message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: battle.Icmd_move_to, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a cmd_move_to message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns cmd_move_to
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): battle.cmd_move_to;
+
+            /**
+             * Decodes a cmd_move_to message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns cmd_move_to
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): battle.cmd_move_to;
+
+            /**
+             * Verifies a cmd_move_to message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a cmd_move_to message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns cmd_move_to
+             */
+            public static fromObject(object: { [k: string]: any }): battle.cmd_move_to;
+
+            /**
+             * Creates a plain object from a cmd_move_to message. Also converts values to other types if specified.
+             * @param message cmd_move_to
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: battle.cmd_move_to, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this cmd_move_to to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for cmd_move_to
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a cmd_force_to. */
+        interface Icmd_force_to {
+
+            /** cmd_force_to eid */
+            eid?: (number|null);
+
+            /** cmd_force_to speed */
+            speed?: (number|null);
+
+            /** cmd_force_to targetX */
+            targetX?: (number|null);
+
+            /** cmd_force_to targetY */
+            targetY?: (number|null);
+
+            /** cmd_force_to targetZ */
+            targetZ?: (number|null);
+        }
+
+        /** Represents a cmd_force_to. */
+        class cmd_force_to implements Icmd_force_to {
+
+            /**
+             * Constructs a new cmd_force_to.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: battle.Icmd_force_to);
+
+            /** cmd_force_to eid. */
+            public eid: number;
+
+            /** cmd_force_to speed. */
+            public speed: number;
+
+            /** cmd_force_to targetX. */
+            public targetX: number;
+
+            /** cmd_force_to targetY. */
+            public targetY: number;
+
+            /** cmd_force_to targetZ. */
+            public targetZ: number;
+
+            /**
+             * Creates a new cmd_force_to instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns cmd_force_to instance
+             */
+            public static create(properties?: battle.Icmd_force_to): battle.cmd_force_to;
+
+            /**
+             * Encodes the specified cmd_force_to message. Does not implicitly {@link battle.cmd_force_to.verify|verify} messages.
+             * @param message cmd_force_to message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: battle.Icmd_force_to, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified cmd_force_to message, length delimited. Does not implicitly {@link battle.cmd_force_to.verify|verify} messages.
+             * @param message cmd_force_to message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: battle.Icmd_force_to, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a cmd_force_to message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns cmd_force_to
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): battle.cmd_force_to;
+
+            /**
+             * Decodes a cmd_force_to message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns cmd_force_to
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): battle.cmd_force_to;
+
+            /**
+             * Verifies a cmd_force_to message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a cmd_force_to message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns cmd_force_to
+             */
+            public static fromObject(object: { [k: string]: any }): battle.cmd_force_to;
+
+            /**
+             * Creates a plain object from a cmd_force_to message. Also converts values to other types if specified.
+             * @param message cmd_force_to
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: battle.cmd_force_to, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this cmd_force_to to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for cmd_force_to
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a cmd_move_start. */
+        interface Icmd_move_start {
+
+            /** cmd_move_start eid */
+            eid?: (number|null);
+
+            /** cmd_move_start speed */
+            speed?: (number|null);
+
+            /** cmd_move_start dir */
+            dir?: (number|null);
+        }
+
+        /** Represents a cmd_move_start. */
+        class cmd_move_start implements Icmd_move_start {
+
+            /**
+             * Constructs a new cmd_move_start.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: battle.Icmd_move_start);
+
+            /** cmd_move_start eid. */
+            public eid: number;
+
+            /** cmd_move_start speed. */
+            public speed: number;
+
+            /** cmd_move_start dir. */
+            public dir: number;
+
+            /**
+             * Creates a new cmd_move_start instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns cmd_move_start instance
+             */
+            public static create(properties?: battle.Icmd_move_start): battle.cmd_move_start;
+
+            /**
+             * Encodes the specified cmd_move_start message. Does not implicitly {@link battle.cmd_move_start.verify|verify} messages.
+             * @param message cmd_move_start message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: battle.Icmd_move_start, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified cmd_move_start message, length delimited. Does not implicitly {@link battle.cmd_move_start.verify|verify} messages.
+             * @param message cmd_move_start message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: battle.Icmd_move_start, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a cmd_move_start message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns cmd_move_start
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): battle.cmd_move_start;
+
+            /**
+             * Decodes a cmd_move_start message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns cmd_move_start
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): battle.cmd_move_start;
+
+            /**
+             * Verifies a cmd_move_start message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a cmd_move_start message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns cmd_move_start
+             */
+            public static fromObject(object: { [k: string]: any }): battle.cmd_move_start;
+
+            /**
+             * Creates a plain object from a cmd_move_start message. Also converts values to other types if specified.
+             * @param message cmd_move_start
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: battle.cmd_move_start, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this cmd_move_start to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for cmd_move_start
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a cmd_move_stop. */
+        interface Icmd_move_stop {
+
+            /** cmd_move_stop eid */
+            eid?: (number|null);
+
+            /** cmd_move_stop face */
+            face?: (number|null);
+
+            /** cmd_move_stop x */
+            x?: (number|null);
+
+            /** cmd_move_stop y */
+            y?: (number|null);
+
+            /** cmd_move_stop z */
+            z?: (number|null);
+        }
+
+        /** Represents a cmd_move_stop. */
+        class cmd_move_stop implements Icmd_move_stop {
+
+            /**
+             * Constructs a new cmd_move_stop.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: battle.Icmd_move_stop);
+
+            /** cmd_move_stop eid. */
+            public eid: number;
+
+            /** cmd_move_stop face. */
+            public face: number;
+
+            /** cmd_move_stop x. */
+            public x: number;
+
+            /** cmd_move_stop y. */
+            public y: number;
+
+            /** cmd_move_stop z. */
+            public z: number;
+
+            /**
+             * Creates a new cmd_move_stop instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns cmd_move_stop instance
+             */
+            public static create(properties?: battle.Icmd_move_stop): battle.cmd_move_stop;
+
+            /**
+             * Encodes the specified cmd_move_stop message. Does not implicitly {@link battle.cmd_move_stop.verify|verify} messages.
+             * @param message cmd_move_stop message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: battle.Icmd_move_stop, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified cmd_move_stop message, length delimited. Does not implicitly {@link battle.cmd_move_stop.verify|verify} messages.
+             * @param message cmd_move_stop message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: battle.Icmd_move_stop, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a cmd_move_stop message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns cmd_move_stop
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): battle.cmd_move_stop;
+
+            /**
+             * Decodes a cmd_move_stop message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns cmd_move_stop
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): battle.cmd_move_stop;
+
+            /**
+             * Verifies a cmd_move_stop message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a cmd_move_stop message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns cmd_move_stop
+             */
+            public static fromObject(object: { [k: string]: any }): battle.cmd_move_stop;
+
+            /**
+             * Creates a plain object from a cmd_move_stop message. Also converts values to other types if specified.
+             * @param message cmd_move_stop
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: battle.cmd_move_stop, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this cmd_move_stop to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for cmd_move_stop
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a cmd_add_buff. */
+        interface Icmd_add_buff {
+
+            /** cmd_add_buff eid */
+            eid?: (number|null);
+
+            /** cmd_add_buff id */
+            id?: (number|null);
+
+            /** cmd_add_buff stack */
+            stack?: (number|null);
+
+            /** cmd_add_buff expired */
+            expired?: (number|null);
+        }
+
+        /** Represents a cmd_add_buff. */
+        class cmd_add_buff implements Icmd_add_buff {
+
+            /**
+             * Constructs a new cmd_add_buff.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: battle.Icmd_add_buff);
+
+            /** cmd_add_buff eid. */
+            public eid: number;
+
+            /** cmd_add_buff id. */
+            public id: number;
+
+            /** cmd_add_buff stack. */
+            public stack: number;
+
+            /** cmd_add_buff expired. */
+            public expired: number;
+
+            /**
+             * Creates a new cmd_add_buff instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns cmd_add_buff instance
+             */
+            public static create(properties?: battle.Icmd_add_buff): battle.cmd_add_buff;
+
+            /**
+             * Encodes the specified cmd_add_buff message. Does not implicitly {@link battle.cmd_add_buff.verify|verify} messages.
+             * @param message cmd_add_buff message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: battle.Icmd_add_buff, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified cmd_add_buff message, length delimited. Does not implicitly {@link battle.cmd_add_buff.verify|verify} messages.
+             * @param message cmd_add_buff message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: battle.Icmd_add_buff, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a cmd_add_buff message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns cmd_add_buff
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): battle.cmd_add_buff;
+
+            /**
+             * Decodes a cmd_add_buff message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns cmd_add_buff
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): battle.cmd_add_buff;
+
+            /**
+             * Verifies a cmd_add_buff message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a cmd_add_buff message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns cmd_add_buff
+             */
+            public static fromObject(object: { [k: string]: any }): battle.cmd_add_buff;
+
+            /**
+             * Creates a plain object from a cmd_add_buff message. Also converts values to other types if specified.
+             * @param message cmd_add_buff
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: battle.cmd_add_buff, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this cmd_add_buff to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for cmd_add_buff
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a cmd_del_buff. */
+        interface Icmd_del_buff {
+
+            /** cmd_del_buff eid */
+            eid?: (number|null);
+
+            /** cmd_del_buff id */
+            id?: (number|null);
+        }
+
+        /** Represents a cmd_del_buff. */
+        class cmd_del_buff implements Icmd_del_buff {
+
+            /**
+             * Constructs a new cmd_del_buff.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: battle.Icmd_del_buff);
+
+            /** cmd_del_buff eid. */
+            public eid: number;
+
+            /** cmd_del_buff id. */
+            public id: number;
+
+            /**
+             * Creates a new cmd_del_buff instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns cmd_del_buff instance
+             */
+            public static create(properties?: battle.Icmd_del_buff): battle.cmd_del_buff;
+
+            /**
+             * Encodes the specified cmd_del_buff message. Does not implicitly {@link battle.cmd_del_buff.verify|verify} messages.
+             * @param message cmd_del_buff message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: battle.Icmd_del_buff, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified cmd_del_buff message, length delimited. Does not implicitly {@link battle.cmd_del_buff.verify|verify} messages.
+             * @param message cmd_del_buff message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: battle.Icmd_del_buff, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a cmd_del_buff message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns cmd_del_buff
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): battle.cmd_del_buff;
+
+            /**
+             * Decodes a cmd_del_buff message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns cmd_del_buff
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): battle.cmd_del_buff;
+
+            /**
+             * Verifies a cmd_del_buff message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a cmd_del_buff message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns cmd_del_buff
+             */
+            public static fromObject(object: { [k: string]: any }): battle.cmd_del_buff;
+
+            /**
+             * Creates a plain object from a cmd_del_buff message. Also converts values to other types if specified.
+             * @param message cmd_del_buff
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: battle.cmd_del_buff, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this cmd_del_buff to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for cmd_del_buff
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a cmd_attack. */
+        interface Icmd_attack {
+
+            /** cmd_attack eid */
+            eid?: (number|null);
+
+            /** cmd_attack skillId */
+            skillId?: (number|null);
+
+            /** cmd_attack curMp */
+            curMp?: (number|null);
+        }
+
+        /** Represents a cmd_attack. */
+        class cmd_attack implements Icmd_attack {
+
+            /**
+             * Constructs a new cmd_attack.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: battle.Icmd_attack);
+
+            /** cmd_attack eid. */
+            public eid: number;
+
+            /** cmd_attack skillId. */
+            public skillId: number;
+
+            /** cmd_attack curMp. */
+            public curMp: number;
+
+            /**
+             * Creates a new cmd_attack instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns cmd_attack instance
+             */
+            public static create(properties?: battle.Icmd_attack): battle.cmd_attack;
+
+            /**
+             * Encodes the specified cmd_attack message. Does not implicitly {@link battle.cmd_attack.verify|verify} messages.
+             * @param message cmd_attack message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: battle.Icmd_attack, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified cmd_attack message, length delimited. Does not implicitly {@link battle.cmd_attack.verify|verify} messages.
+             * @param message cmd_attack message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: battle.Icmd_attack, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a cmd_attack message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns cmd_attack
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): battle.cmd_attack;
+
+            /**
+             * Decodes a cmd_attack message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns cmd_attack
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): battle.cmd_attack;
+
+            /**
+             * Verifies a cmd_attack message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a cmd_attack message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns cmd_attack
+             */
+            public static fromObject(object: { [k: string]: any }): battle.cmd_attack;
+
+            /**
+             * Creates a plain object from a cmd_attack message. Also converts values to other types if specified.
+             * @param message cmd_attack
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: battle.cmd_attack, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this cmd_attack to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for cmd_attack
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a cmd_under_atk. */
+        interface Icmd_under_atk {
+
+            /** cmd_under_atk eid */
+            eid?: (number|null);
+
+            /** cmd_under_atk skillId */
+            skillId?: (number|null);
+
+            /** cmd_under_atk subHp */
+            subHp?: (number|null);
+
+            /** cmd_under_atk curMp */
+            curMp?: (number|null);
+
+            /** cmd_under_atk critical */
+            critical?: (boolean|null);
+
+            /** cmd_under_atk dodge */
+            dodge?: (boolean|null);
+        }
+
+        /** Represents a cmd_under_atk. */
+        class cmd_under_atk implements Icmd_under_atk {
+
+            /**
+             * Constructs a new cmd_under_atk.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: battle.Icmd_under_atk);
+
+            /** cmd_under_atk eid. */
+            public eid: number;
+
+            /** cmd_under_atk skillId. */
+            public skillId: number;
+
+            /** cmd_under_atk subHp. */
+            public subHp: number;
+
+            /** cmd_under_atk curMp. */
+            public curMp: number;
+
+            /** cmd_under_atk critical. */
+            public critical: boolean;
+
+            /** cmd_under_atk dodge. */
+            public dodge: boolean;
+
+            /**
+             * Creates a new cmd_under_atk instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns cmd_under_atk instance
+             */
+            public static create(properties?: battle.Icmd_under_atk): battle.cmd_under_atk;
+
+            /**
+             * Encodes the specified cmd_under_atk message. Does not implicitly {@link battle.cmd_under_atk.verify|verify} messages.
+             * @param message cmd_under_atk message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: battle.Icmd_under_atk, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified cmd_under_atk message, length delimited. Does not implicitly {@link battle.cmd_under_atk.verify|verify} messages.
+             * @param message cmd_under_atk message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: battle.Icmd_under_atk, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a cmd_under_atk message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns cmd_under_atk
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): battle.cmd_under_atk;
+
+            /**
+             * Decodes a cmd_under_atk message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns cmd_under_atk
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): battle.cmd_under_atk;
+
+            /**
+             * Verifies a cmd_under_atk message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a cmd_under_atk message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns cmd_under_atk
+             */
+            public static fromObject(object: { [k: string]: any }): battle.cmd_under_atk;
+
+            /**
+             * Creates a plain object from a cmd_under_atk message. Also converts values to other types if specified.
+             * @param message cmd_under_atk
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: battle.cmd_under_atk, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this cmd_under_atk to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for cmd_under_atk
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a cmd_recover_hp. */
+        interface Icmd_recover_hp {
+
+            /** cmd_recover_hp eid */
+            eid?: (number|null);
+
+            /** cmd_recover_hp addHp */
+            addHp?: (number|null);
+        }
+
+        /** Represents a cmd_recover_hp. */
+        class cmd_recover_hp implements Icmd_recover_hp {
+
+            /**
+             * Constructs a new cmd_recover_hp.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: battle.Icmd_recover_hp);
+
+            /** cmd_recover_hp eid. */
+            public eid: number;
+
+            /** cmd_recover_hp addHp. */
+            public addHp: number;
+
+            /**
+             * Creates a new cmd_recover_hp instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns cmd_recover_hp instance
+             */
+            public static create(properties?: battle.Icmd_recover_hp): battle.cmd_recover_hp;
+
+            /**
+             * Encodes the specified cmd_recover_hp message. Does not implicitly {@link battle.cmd_recover_hp.verify|verify} messages.
+             * @param message cmd_recover_hp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: battle.Icmd_recover_hp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified cmd_recover_hp message, length delimited. Does not implicitly {@link battle.cmd_recover_hp.verify|verify} messages.
+             * @param message cmd_recover_hp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: battle.Icmd_recover_hp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a cmd_recover_hp message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns cmd_recover_hp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): battle.cmd_recover_hp;
+
+            /**
+             * Decodes a cmd_recover_hp message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns cmd_recover_hp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): battle.cmd_recover_hp;
+
+            /**
+             * Verifies a cmd_recover_hp message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a cmd_recover_hp message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns cmd_recover_hp
+             */
+            public static fromObject(object: { [k: string]: any }): battle.cmd_recover_hp;
+
+            /**
+             * Creates a plain object from a cmd_recover_hp message. Also converts values to other types if specified.
+             * @param message cmd_recover_hp
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: battle.cmd_recover_hp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this cmd_recover_hp to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for cmd_recover_hp
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a BattleCmd. */
+        interface IBattleCmd {
+
+            /** BattleCmd cmdType */
+            cmdType?: (number|null);
+
+            /** BattleCmd addEntity */
+            addEntity?: (battle.Icmd_add_entity|null);
+
+            /** BattleCmd updateEntity */
+            updateEntity?: (battle.Icmd_update_entity|null);
+
+            /** BattleCmd delEntity */
+            delEntity?: (battle.Icmd_del_entity|null);
+
+            /** BattleCmd moveStart */
+            moveStart?: (battle.Icmd_move_start|null);
+
+            /** BattleCmd moveStop */
+            moveStop?: (battle.Icmd_move_stop|null);
+
+            /** BattleCmd addBuff */
+            addBuff?: (battle.Icmd_add_buff|null);
+
+            /** BattleCmd delBuff */
+            delBuff?: (battle.Icmd_del_buff|null);
+
+            /** BattleCmd attack */
+            attack?: (battle.Icmd_attack|null);
+
+            /** BattleCmd underAtk */
+            underAtk?: (battle.Icmd_under_atk|null);
+
+            /** BattleCmd forceTo */
+            forceTo?: (battle.Icmd_force_to|null);
+
+            /** BattleCmd moveTo */
+            moveTo?: (battle.Icmd_move_to|null);
+
+            /** BattleCmd recoverHp */
+            recoverHp?: (battle.Icmd_recover_hp|null);
+        }
+
+        /** Represents a BattleCmd. */
+        class BattleCmd implements IBattleCmd {
+
+            /**
+             * Constructs a new BattleCmd.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: battle.IBattleCmd);
+
+            /** BattleCmd cmdType. */
+            public cmdType: number;
+
+            /** BattleCmd addEntity. */
+            public addEntity?: (battle.Icmd_add_entity|null);
+
+            /** BattleCmd updateEntity. */
+            public updateEntity?: (battle.Icmd_update_entity|null);
+
+            /** BattleCmd delEntity. */
+            public delEntity?: (battle.Icmd_del_entity|null);
+
+            /** BattleCmd moveStart. */
+            public moveStart?: (battle.Icmd_move_start|null);
+
+            /** BattleCmd moveStop. */
+            public moveStop?: (battle.Icmd_move_stop|null);
+
+            /** BattleCmd addBuff. */
+            public addBuff?: (battle.Icmd_add_buff|null);
+
+            /** BattleCmd delBuff. */
+            public delBuff?: (battle.Icmd_del_buff|null);
+
+            /** BattleCmd attack. */
+            public attack?: (battle.Icmd_attack|null);
+
+            /** BattleCmd underAtk. */
+            public underAtk?: (battle.Icmd_under_atk|null);
+
+            /** BattleCmd forceTo. */
+            public forceTo?: (battle.Icmd_force_to|null);
+
+            /** BattleCmd moveTo. */
+            public moveTo?: (battle.Icmd_move_to|null);
+
+            /** BattleCmd recoverHp. */
+            public recoverHp?: (battle.Icmd_recover_hp|null);
+
+            /**
+             * Creates a new BattleCmd instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BattleCmd instance
+             */
+            public static create(properties?: battle.IBattleCmd): battle.BattleCmd;
+
+            /**
+             * Encodes the specified BattleCmd message. Does not implicitly {@link battle.BattleCmd.verify|verify} messages.
+             * @param message BattleCmd message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: battle.IBattleCmd, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BattleCmd message, length delimited. Does not implicitly {@link battle.BattleCmd.verify|verify} messages.
+             * @param message BattleCmd message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: battle.IBattleCmd, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BattleCmd message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BattleCmd
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): battle.BattleCmd;
+
+            /**
+             * Decodes a BattleCmd message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BattleCmd
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): battle.BattleCmd;
+
+            /**
+             * Verifies a BattleCmd message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BattleCmd message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BattleCmd
+             */
+            public static fromObject(object: { [k: string]: any }): battle.BattleCmd;
+
+            /**
+             * Creates a plain object from a BattleCmd message. Also converts values to other types if specified.
+             * @param message BattleCmd
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: battle.BattleCmd, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BattleCmd to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BattleCmd
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a Battle. */
+        interface IBattle {
+
+            /** Battle battleId */
+            battleId?: (number|null);
+
+            /** Battle battleUid */
+            battleUid?: (number|null);
+
+            /** Battle roles */
+            roles?: (battle.IBattleRole[]|null);
+        }
+
+        /** Represents a Battle. */
+        class Battle implements IBattle {
+
+            /**
+             * Constructs a new Battle.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: battle.IBattle);
+
+            /** Battle battleId. */
+            public battleId: number;
+
+            /** Battle battleUid. */
+            public battleUid: number;
+
+            /** Battle roles. */
+            public roles: battle.IBattleRole[];
+
+            /**
+             * Creates a new Battle instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Battle instance
+             */
+            public static create(properties?: battle.IBattle): battle.Battle;
+
+            /**
+             * Encodes the specified Battle message. Does not implicitly {@link battle.Battle.verify|verify} messages.
+             * @param message Battle message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: battle.IBattle, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Battle message, length delimited. Does not implicitly {@link battle.Battle.verify|verify} messages.
+             * @param message Battle message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: battle.IBattle, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Battle message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Battle
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): battle.Battle;
+
+            /**
+             * Decodes a Battle message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Battle
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): battle.Battle;
+
+            /**
+             * Verifies a Battle message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Battle message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Battle
+             */
+            public static fromObject(object: { [k: string]: any }): battle.Battle;
+
+            /**
+             * Creates a plain object from a Battle message. Also converts values to other types if specified.
+             * @param message Battle
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: battle.Battle, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Battle to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Battle
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a c2s_enter. */
+        interface Ic2s_enter {
+
+            /** c2s_enter battleUid */
+            battleUid?: (number|null);
+        }
+
+        /** Represents a c2s_enter. */
+        class c2s_enter implements Ic2s_enter {
+
+            /**
+             * Constructs a new c2s_enter.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: battle.Ic2s_enter);
+
+            /** c2s_enter battleUid. */
+            public battleUid: number;
+
+            /**
+             * Creates a new c2s_enter instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns c2s_enter instance
+             */
+            public static create(properties?: battle.Ic2s_enter): battle.c2s_enter;
+
+            /**
+             * Encodes the specified c2s_enter message. Does not implicitly {@link battle.c2s_enter.verify|verify} messages.
+             * @param message c2s_enter message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: battle.Ic2s_enter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified c2s_enter message, length delimited. Does not implicitly {@link battle.c2s_enter.verify|verify} messages.
+             * @param message c2s_enter message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: battle.Ic2s_enter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a c2s_enter message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns c2s_enter
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): battle.c2s_enter;
+
+            /**
+             * Decodes a c2s_enter message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns c2s_enter
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): battle.c2s_enter;
+
+            /**
+             * Verifies a c2s_enter message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a c2s_enter message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns c2s_enter
+             */
+            public static fromObject(object: { [k: string]: any }): battle.c2s_enter;
+
+            /**
+             * Creates a plain object from a c2s_enter message. Also converts values to other types if specified.
+             * @param message c2s_enter
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: battle.c2s_enter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this c2s_enter to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for c2s_enter
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a s2c_enter. */
+        interface Is2c_enter {
+
+            /** s2c_enter err */
+            err?: (number|null);
+
+            /** s2c_enter roles */
+            roles?: (battle.IBattleRole[]|null);
+
+            /** s2c_enter entities */
+            entities?: (battle.IBattleEntity[]|null);
+        }
+
+        /** Represents a s2c_enter. */
+        class s2c_enter implements Is2c_enter {
+
+            /**
+             * Constructs a new s2c_enter.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: battle.Is2c_enter);
+
+            /** s2c_enter err. */
+            public err: number;
+
+            /** s2c_enter roles. */
+            public roles: battle.IBattleRole[];
+
+            /** s2c_enter entities. */
+            public entities: battle.IBattleEntity[];
+
+            /**
+             * Creates a new s2c_enter instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns s2c_enter instance
+             */
+            public static create(properties?: battle.Is2c_enter): battle.s2c_enter;
+
+            /**
+             * Encodes the specified s2c_enter message. Does not implicitly {@link battle.s2c_enter.verify|verify} messages.
+             * @param message s2c_enter message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: battle.Is2c_enter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified s2c_enter message, length delimited. Does not implicitly {@link battle.s2c_enter.verify|verify} messages.
+             * @param message s2c_enter message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: battle.Is2c_enter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a s2c_enter message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns s2c_enter
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): battle.s2c_enter;
+
+            /**
+             * Decodes a s2c_enter message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns s2c_enter
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): battle.s2c_enter;
+
+            /**
+             * Verifies a s2c_enter message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a s2c_enter message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns s2c_enter
+             */
+            public static fromObject(object: { [k: string]: any }): battle.s2c_enter;
+
+            /**
+             * Creates a plain object from a s2c_enter message. Also converts values to other types if specified.
+             * @param message s2c_enter
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: battle.s2c_enter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this s2c_enter to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for s2c_enter
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a notify_cmd. */
+        interface Inotify_cmd {
+
+            /** notify_cmd frame */
+            frame?: (number|null);
+
+            /** notify_cmd cmds */
+            cmds?: (battle.IBattleCmd[]|null);
+        }
+
+        /** Represents a notify_cmd. */
+        class notify_cmd implements Inotify_cmd {
+
+            /**
+             * Constructs a new notify_cmd.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: battle.Inotify_cmd);
+
+            /** notify_cmd frame. */
+            public frame: number;
+
+            /** notify_cmd cmds. */
+            public cmds: battle.IBattleCmd[];
+
+            /**
+             * Creates a new notify_cmd instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns notify_cmd instance
+             */
+            public static create(properties?: battle.Inotify_cmd): battle.notify_cmd;
+
+            /**
+             * Encodes the specified notify_cmd message. Does not implicitly {@link battle.notify_cmd.verify|verify} messages.
+             * @param message notify_cmd message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: battle.Inotify_cmd, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified notify_cmd message, length delimited. Does not implicitly {@link battle.notify_cmd.verify|verify} messages.
+             * @param message notify_cmd message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: battle.Inotify_cmd, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a notify_cmd message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns notify_cmd
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): battle.notify_cmd;
+
+            /**
+             * Decodes a notify_cmd message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns notify_cmd
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): battle.notify_cmd;
+
+            /**
+             * Verifies a notify_cmd message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a notify_cmd message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns notify_cmd
+             */
+            public static fromObject(object: { [k: string]: any }): battle.notify_cmd;
+
+            /**
+             * Creates a plain object from a notify_cmd message. Also converts values to other types if specified.
+             * @param message notify_cmd
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: battle.notify_cmd, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this notify_cmd to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for notify_cmd
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a c2s_launch_skill. */
+        interface Ic2s_launch_skill {
+
+            /** c2s_launch_skill eid */
+            eid?: (number|null);
+        }
+
+        /** Represents a c2s_launch_skill. */
+        class c2s_launch_skill implements Ic2s_launch_skill {
+
+            /**
+             * Constructs a new c2s_launch_skill.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: battle.Ic2s_launch_skill);
+
+            /** c2s_launch_skill eid. */
+            public eid: number;
+
+            /**
+             * Creates a new c2s_launch_skill instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns c2s_launch_skill instance
+             */
+            public static create(properties?: battle.Ic2s_launch_skill): battle.c2s_launch_skill;
+
+            /**
+             * Encodes the specified c2s_launch_skill message. Does not implicitly {@link battle.c2s_launch_skill.verify|verify} messages.
+             * @param message c2s_launch_skill message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: battle.Ic2s_launch_skill, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified c2s_launch_skill message, length delimited. Does not implicitly {@link battle.c2s_launch_skill.verify|verify} messages.
+             * @param message c2s_launch_skill message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: battle.Ic2s_launch_skill, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a c2s_launch_skill message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns c2s_launch_skill
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): battle.c2s_launch_skill;
+
+            /**
+             * Decodes a c2s_launch_skill message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns c2s_launch_skill
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): battle.c2s_launch_skill;
+
+            /**
+             * Verifies a c2s_launch_skill message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a c2s_launch_skill message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns c2s_launch_skill
+             */
+            public static fromObject(object: { [k: string]: any }): battle.c2s_launch_skill;
+
+            /**
+             * Creates a plain object from a c2s_launch_skill message. Also converts values to other types if specified.
+             * @param message c2s_launch_skill
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: battle.c2s_launch_skill, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this c2s_launch_skill to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for c2s_launch_skill
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a s2c_launch_skill. */
+        interface Is2c_launch_skill {
+
+            /** s2c_launch_skill err */
+            err?: (number|null);
+        }
+
+        /** Represents a s2c_launch_skill. */
+        class s2c_launch_skill implements Is2c_launch_skill {
+
+            /**
+             * Constructs a new s2c_launch_skill.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: battle.Is2c_launch_skill);
+
+            /** s2c_launch_skill err. */
+            public err: number;
+
+            /**
+             * Creates a new s2c_launch_skill instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns s2c_launch_skill instance
+             */
+            public static create(properties?: battle.Is2c_launch_skill): battle.s2c_launch_skill;
+
+            /**
+             * Encodes the specified s2c_launch_skill message. Does not implicitly {@link battle.s2c_launch_skill.verify|verify} messages.
+             * @param message s2c_launch_skill message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: battle.Is2c_launch_skill, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified s2c_launch_skill message, length delimited. Does not implicitly {@link battle.s2c_launch_skill.verify|verify} messages.
+             * @param message s2c_launch_skill message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: battle.Is2c_launch_skill, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a s2c_launch_skill message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns s2c_launch_skill
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): battle.s2c_launch_skill;
+
+            /**
+             * Decodes a s2c_launch_skill message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns s2c_launch_skill
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): battle.s2c_launch_skill;
+
+            /**
+             * Verifies a s2c_launch_skill message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a s2c_launch_skill message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns s2c_launch_skill
+             */
+            public static fromObject(object: { [k: string]: any }): battle.s2c_launch_skill;
+
+            /**
+             * Creates a plain object from a s2c_launch_skill message. Also converts values to other types if specified.
+             * @param message s2c_launch_skill
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: battle.s2c_launch_skill, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this s2c_launch_skill to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for s2c_launch_skill
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a notify_start. */
+        interface Inotify_start {
+        }
+
+        /** Represents a notify_start. */
+        class notify_start implements Inotify_start {
+
+            /**
+             * Constructs a new notify_start.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: battle.Inotify_start);
+
+            /**
+             * Creates a new notify_start instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns notify_start instance
+             */
+            public static create(properties?: battle.Inotify_start): battle.notify_start;
+
+            /**
+             * Encodes the specified notify_start message. Does not implicitly {@link battle.notify_start.verify|verify} messages.
+             * @param message notify_start message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: battle.Inotify_start, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified notify_start message, length delimited. Does not implicitly {@link battle.notify_start.verify|verify} messages.
+             * @param message notify_start message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: battle.Inotify_start, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a notify_start message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns notify_start
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): battle.notify_start;
+
+            /**
+             * Decodes a notify_start message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns notify_start
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): battle.notify_start;
+
+            /**
+             * Verifies a notify_start message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a notify_start message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns notify_start
+             */
+            public static fromObject(object: { [k: string]: any }): battle.notify_start;
+
+            /**
+             * Creates a plain object from a notify_start message. Also converts values to other types if specified.
+             * @param message notify_start
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: battle.notify_start, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this notify_start to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for notify_start
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a notify_end. */
+        interface Inotify_end {
+        }
+
+        /** Represents a notify_end. */
+        class notify_end implements Inotify_end {
+
+            /**
+             * Constructs a new notify_end.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: battle.Inotify_end);
+
+            /**
+             * Creates a new notify_end instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns notify_end instance
+             */
+            public static create(properties?: battle.Inotify_end): battle.notify_end;
+
+            /**
+             * Encodes the specified notify_end message. Does not implicitly {@link battle.notify_end.verify|verify} messages.
+             * @param message notify_end message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: battle.Inotify_end, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified notify_end message, length delimited. Does not implicitly {@link battle.notify_end.verify|verify} messages.
+             * @param message notify_end message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: battle.Inotify_end, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a notify_end message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns notify_end
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): battle.notify_end;
+
+            /**
+             * Decodes a notify_end message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns notify_end
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): battle.notify_end;
+
+            /**
+             * Verifies a notify_end message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a notify_end message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns notify_end
+             */
+            public static fromObject(object: { [k: string]: any }): battle.notify_end;
+
+            /**
+             * Creates a plain object from a notify_end message. Also converts values to other types if specified.
+             * @param message notify_end
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: battle.notify_end, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this notify_end to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for notify_end
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a DebugInfo. */
+        interface IDebugInfo {
+
+            /** DebugInfo x */
+            x?: (number|null);
+
+            /** DebugInfo y */
+            y?: (number|null);
+
+            /** DebugInfo z */
+            z?: (number|null);
+
+            /** DebugInfo color */
+            color?: (number|null);
+
+            /** DebugInfo size */
+            size?: (number|null);
+        }
+
+        /** Represents a DebugInfo. */
+        class DebugInfo implements IDebugInfo {
+
+            /**
+             * Constructs a new DebugInfo.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: battle.IDebugInfo);
+
+            /** DebugInfo x. */
+            public x: number;
+
+            /** DebugInfo y. */
+            public y: number;
+
+            /** DebugInfo z. */
+            public z: number;
+
+            /** DebugInfo color. */
+            public color: number;
+
+            /** DebugInfo size. */
+            public size: number;
+
+            /**
+             * Creates a new DebugInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns DebugInfo instance
+             */
+            public static create(properties?: battle.IDebugInfo): battle.DebugInfo;
+
+            /**
+             * Encodes the specified DebugInfo message. Does not implicitly {@link battle.DebugInfo.verify|verify} messages.
+             * @param message DebugInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: battle.IDebugInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified DebugInfo message, length delimited. Does not implicitly {@link battle.DebugInfo.verify|verify} messages.
+             * @param message DebugInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: battle.IDebugInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a DebugInfo message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns DebugInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): battle.DebugInfo;
+
+            /**
+             * Decodes a DebugInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns DebugInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): battle.DebugInfo;
+
+            /**
+             * Verifies a DebugInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a DebugInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns DebugInfo
+             */
+            public static fromObject(object: { [k: string]: any }): battle.DebugInfo;
+
+            /**
+             * Creates a plain object from a DebugInfo message. Also converts values to other types if specified.
+             * @param message DebugInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: battle.DebugInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this DebugInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for DebugInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a notify_debug. */
+        interface Inotify_debug {
+
+            /** notify_debug infos */
+            infos?: (battle.IDebugInfo[]|null);
+
+            /** notify_debug logs */
+            logs?: (string[]|null);
+        }
+
+        /** Represents a notify_debug. */
+        class notify_debug implements Inotify_debug {
+
+            /**
+             * Constructs a new notify_debug.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: battle.Inotify_debug);
+
+            /** notify_debug infos. */
+            public infos: battle.IDebugInfo[];
+
+            /** notify_debug logs. */
+            public logs: string[];
+
+            /**
+             * Creates a new notify_debug instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns notify_debug instance
+             */
+            public static create(properties?: battle.Inotify_debug): battle.notify_debug;
+
+            /**
+             * Encodes the specified notify_debug message. Does not implicitly {@link battle.notify_debug.verify|verify} messages.
+             * @param message notify_debug message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: battle.Inotify_debug, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified notify_debug message, length delimited. Does not implicitly {@link battle.notify_debug.verify|verify} messages.
+             * @param message notify_debug message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: battle.Inotify_debug, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a notify_debug message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns notify_debug
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): battle.notify_debug;
+
+            /**
+             * Decodes a notify_debug message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns notify_debug
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): battle.notify_debug;
+
+            /**
+             * Verifies a notify_debug message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a notify_debug message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns notify_debug
+             */
+            public static fromObject(object: { [k: string]: any }): battle.notify_debug;
+
+            /**
+             * Creates a plain object from a notify_debug message. Also converts values to other types if specified.
+             * @param message notify_debug
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: battle.notify_debug, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this notify_debug to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for notify_debug
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+    }
+
     /** Namespace chat. */
     namespace chat {
 
@@ -1952,6 +4856,1119 @@ declare namespace proto {
              * @returns Plain object
              */
             public static toObject(message: chat.notify, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this notify to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for notify
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+    }
+
+    /** Namespace chest. */
+    namespace chest {
+
+        /** Properties of a ChestInfo. */
+        interface IChestInfo {
+
+            /** ChestInfo id */
+            id?: (number|null);
+
+            /** ChestInfo num */
+            num?: (number|null);
+        }
+
+        /** Represents a ChestInfo. */
+        class ChestInfo implements IChestInfo {
+
+            /**
+             * Constructs a new ChestInfo.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: chest.IChestInfo);
+
+            /** ChestInfo id. */
+            public id: number;
+
+            /** ChestInfo num. */
+            public num: number;
+
+            /**
+             * Creates a new ChestInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ChestInfo instance
+             */
+            public static create(properties?: chest.IChestInfo): chest.ChestInfo;
+
+            /**
+             * Encodes the specified ChestInfo message. Does not implicitly {@link chest.ChestInfo.verify|verify} messages.
+             * @param message ChestInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: chest.IChestInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ChestInfo message, length delimited. Does not implicitly {@link chest.ChestInfo.verify|verify} messages.
+             * @param message ChestInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: chest.IChestInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ChestInfo message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ChestInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): chest.ChestInfo;
+
+            /**
+             * Decodes a ChestInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ChestInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): chest.ChestInfo;
+
+            /**
+             * Verifies a ChestInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ChestInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ChestInfo
+             */
+            public static fromObject(object: { [k: string]: any }): chest.ChestInfo;
+
+            /**
+             * Creates a plain object from a ChestInfo message. Also converts values to other types if specified.
+             * @param message ChestInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: chest.ChestInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ChestInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ChestInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a ScoreInfo. */
+        interface IScoreInfo {
+
+            /** ScoreInfo score */
+            score?: (number|null);
+
+            /** ScoreInfo scoreChestId */
+            scoreChestId?: (number|null);
+        }
+
+        /** Represents a ScoreInfo. */
+        class ScoreInfo implements IScoreInfo {
+
+            /**
+             * Constructs a new ScoreInfo.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: chest.IScoreInfo);
+
+            /** ScoreInfo score. */
+            public score: number;
+
+            /** ScoreInfo scoreChestId. */
+            public scoreChestId: number;
+
+            /**
+             * Creates a new ScoreInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ScoreInfo instance
+             */
+            public static create(properties?: chest.IScoreInfo): chest.ScoreInfo;
+
+            /**
+             * Encodes the specified ScoreInfo message. Does not implicitly {@link chest.ScoreInfo.verify|verify} messages.
+             * @param message ScoreInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: chest.IScoreInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ScoreInfo message, length delimited. Does not implicitly {@link chest.ScoreInfo.verify|verify} messages.
+             * @param message ScoreInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: chest.IScoreInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ScoreInfo message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ScoreInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): chest.ScoreInfo;
+
+            /**
+             * Decodes a ScoreInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ScoreInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): chest.ScoreInfo;
+
+            /**
+             * Verifies a ScoreInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ScoreInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ScoreInfo
+             */
+            public static fromObject(object: { [k: string]: any }): chest.ScoreInfo;
+
+            /**
+             * Creates a plain object from a ScoreInfo message. Also converts values to other types if specified.
+             * @param message ScoreInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: chest.ScoreInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ScoreInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ScoreInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a c2s_load. */
+        interface Ic2s_load {
+        }
+
+        /** Represents a c2s_load. */
+        class c2s_load implements Ic2s_load {
+
+            /**
+             * Constructs a new c2s_load.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: chest.Ic2s_load);
+
+            /**
+             * Creates a new c2s_load instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns c2s_load instance
+             */
+            public static create(properties?: chest.Ic2s_load): chest.c2s_load;
+
+            /**
+             * Encodes the specified c2s_load message. Does not implicitly {@link chest.c2s_load.verify|verify} messages.
+             * @param message c2s_load message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: chest.Ic2s_load, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified c2s_load message, length delimited. Does not implicitly {@link chest.c2s_load.verify|verify} messages.
+             * @param message c2s_load message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: chest.Ic2s_load, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a c2s_load message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns c2s_load
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): chest.c2s_load;
+
+            /**
+             * Decodes a c2s_load message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns c2s_load
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): chest.c2s_load;
+
+            /**
+             * Verifies a c2s_load message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a c2s_load message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns c2s_load
+             */
+            public static fromObject(object: { [k: string]: any }): chest.c2s_load;
+
+            /**
+             * Creates a plain object from a c2s_load message. Also converts values to other types if specified.
+             * @param message c2s_load
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: chest.c2s_load, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this c2s_load to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for c2s_load
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a s2c_load. */
+        interface Is2c_load {
+
+            /** s2c_load err */
+            err?: (number|null);
+
+            /** s2c_load heroId */
+            heroId?: (number|null);
+
+            /** s2c_load chests */
+            chests?: (chest.IChestInfo[]|null);
+
+            /** s2c_load score */
+            score?: (chest.IScoreInfo|null);
+        }
+
+        /** Represents a s2c_load. */
+        class s2c_load implements Is2c_load {
+
+            /**
+             * Constructs a new s2c_load.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: chest.Is2c_load);
+
+            /** s2c_load err. */
+            public err: number;
+
+            /** s2c_load heroId. */
+            public heroId: number;
+
+            /** s2c_load chests. */
+            public chests: chest.IChestInfo[];
+
+            /** s2c_load score. */
+            public score?: (chest.IScoreInfo|null);
+
+            /**
+             * Creates a new s2c_load instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns s2c_load instance
+             */
+            public static create(properties?: chest.Is2c_load): chest.s2c_load;
+
+            /**
+             * Encodes the specified s2c_load message. Does not implicitly {@link chest.s2c_load.verify|verify} messages.
+             * @param message s2c_load message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: chest.Is2c_load, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified s2c_load message, length delimited. Does not implicitly {@link chest.s2c_load.verify|verify} messages.
+             * @param message s2c_load message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: chest.Is2c_load, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a s2c_load message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns s2c_load
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): chest.s2c_load;
+
+            /**
+             * Decodes a s2c_load message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns s2c_load
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): chest.s2c_load;
+
+            /**
+             * Verifies a s2c_load message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a s2c_load message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns s2c_load
+             */
+            public static fromObject(object: { [k: string]: any }): chest.s2c_load;
+
+            /**
+             * Creates a plain object from a s2c_load message. Also converts values to other types if specified.
+             * @param message s2c_load
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: chest.s2c_load, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this s2c_load to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for s2c_load
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a c2s_open_chest. */
+        interface Ic2s_open_chest {
+
+            /** c2s_open_chest id */
+            id?: (number|null);
+        }
+
+        /** Represents a c2s_open_chest. */
+        class c2s_open_chest implements Ic2s_open_chest {
+
+            /**
+             * Constructs a new c2s_open_chest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: chest.Ic2s_open_chest);
+
+            /** c2s_open_chest id. */
+            public id: number;
+
+            /**
+             * Creates a new c2s_open_chest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns c2s_open_chest instance
+             */
+            public static create(properties?: chest.Ic2s_open_chest): chest.c2s_open_chest;
+
+            /**
+             * Encodes the specified c2s_open_chest message. Does not implicitly {@link chest.c2s_open_chest.verify|verify} messages.
+             * @param message c2s_open_chest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: chest.Ic2s_open_chest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified c2s_open_chest message, length delimited. Does not implicitly {@link chest.c2s_open_chest.verify|verify} messages.
+             * @param message c2s_open_chest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: chest.Ic2s_open_chest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a c2s_open_chest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns c2s_open_chest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): chest.c2s_open_chest;
+
+            /**
+             * Decodes a c2s_open_chest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns c2s_open_chest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): chest.c2s_open_chest;
+
+            /**
+             * Verifies a c2s_open_chest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a c2s_open_chest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns c2s_open_chest
+             */
+            public static fromObject(object: { [k: string]: any }): chest.c2s_open_chest;
+
+            /**
+             * Creates a plain object from a c2s_open_chest message. Also converts values to other types if specified.
+             * @param message c2s_open_chest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: chest.c2s_open_chest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this c2s_open_chest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for c2s_open_chest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a s2c_open_chest. */
+        interface Is2c_open_chest {
+
+            /** s2c_open_chest err */
+            err?: (number|null);
+
+            /** s2c_open_chest ches */
+            ches?: (chest.IChestInfo|null);
+
+            /** s2c_open_chest score */
+            score?: (chest.IScoreInfo|null);
+        }
+
+        /** Represents a s2c_open_chest. */
+        class s2c_open_chest implements Is2c_open_chest {
+
+            /**
+             * Constructs a new s2c_open_chest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: chest.Is2c_open_chest);
+
+            /** s2c_open_chest err. */
+            public err: number;
+
+            /** s2c_open_chest ches. */
+            public ches?: (chest.IChestInfo|null);
+
+            /** s2c_open_chest score. */
+            public score?: (chest.IScoreInfo|null);
+
+            /**
+             * Creates a new s2c_open_chest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns s2c_open_chest instance
+             */
+            public static create(properties?: chest.Is2c_open_chest): chest.s2c_open_chest;
+
+            /**
+             * Encodes the specified s2c_open_chest message. Does not implicitly {@link chest.s2c_open_chest.verify|verify} messages.
+             * @param message s2c_open_chest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: chest.Is2c_open_chest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified s2c_open_chest message, length delimited. Does not implicitly {@link chest.s2c_open_chest.verify|verify} messages.
+             * @param message s2c_open_chest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: chest.Is2c_open_chest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a s2c_open_chest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns s2c_open_chest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): chest.s2c_open_chest;
+
+            /**
+             * Decodes a s2c_open_chest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns s2c_open_chest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): chest.s2c_open_chest;
+
+            /**
+             * Verifies a s2c_open_chest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a s2c_open_chest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns s2c_open_chest
+             */
+            public static fromObject(object: { [k: string]: any }): chest.s2c_open_chest;
+
+            /**
+             * Creates a plain object from a s2c_open_chest message. Also converts values to other types if specified.
+             * @param message s2c_open_chest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: chest.s2c_open_chest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this s2c_open_chest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for s2c_open_chest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a c2s_score_receive. */
+        interface Ic2s_score_receive {
+        }
+
+        /** Represents a c2s_score_receive. */
+        class c2s_score_receive implements Ic2s_score_receive {
+
+            /**
+             * Constructs a new c2s_score_receive.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: chest.Ic2s_score_receive);
+
+            /**
+             * Creates a new c2s_score_receive instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns c2s_score_receive instance
+             */
+            public static create(properties?: chest.Ic2s_score_receive): chest.c2s_score_receive;
+
+            /**
+             * Encodes the specified c2s_score_receive message. Does not implicitly {@link chest.c2s_score_receive.verify|verify} messages.
+             * @param message c2s_score_receive message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: chest.Ic2s_score_receive, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified c2s_score_receive message, length delimited. Does not implicitly {@link chest.c2s_score_receive.verify|verify} messages.
+             * @param message c2s_score_receive message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: chest.Ic2s_score_receive, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a c2s_score_receive message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns c2s_score_receive
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): chest.c2s_score_receive;
+
+            /**
+             * Decodes a c2s_score_receive message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns c2s_score_receive
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): chest.c2s_score_receive;
+
+            /**
+             * Verifies a c2s_score_receive message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a c2s_score_receive message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns c2s_score_receive
+             */
+            public static fromObject(object: { [k: string]: any }): chest.c2s_score_receive;
+
+            /**
+             * Creates a plain object from a c2s_score_receive message. Also converts values to other types if specified.
+             * @param message c2s_score_receive
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: chest.c2s_score_receive, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this c2s_score_receive to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for c2s_score_receive
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a s2c_score_receive. */
+        interface Is2c_score_receive {
+
+            /** s2c_score_receive err */
+            err?: (number|null);
+
+            /** s2c_score_receive score */
+            score?: (chest.IScoreInfo|null);
+        }
+
+        /** Represents a s2c_score_receive. */
+        class s2c_score_receive implements Is2c_score_receive {
+
+            /**
+             * Constructs a new s2c_score_receive.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: chest.Is2c_score_receive);
+
+            /** s2c_score_receive err. */
+            public err: number;
+
+            /** s2c_score_receive score. */
+            public score?: (chest.IScoreInfo|null);
+
+            /**
+             * Creates a new s2c_score_receive instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns s2c_score_receive instance
+             */
+            public static create(properties?: chest.Is2c_score_receive): chest.s2c_score_receive;
+
+            /**
+             * Encodes the specified s2c_score_receive message. Does not implicitly {@link chest.s2c_score_receive.verify|verify} messages.
+             * @param message s2c_score_receive message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: chest.Is2c_score_receive, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified s2c_score_receive message, length delimited. Does not implicitly {@link chest.s2c_score_receive.verify|verify} messages.
+             * @param message s2c_score_receive message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: chest.Is2c_score_receive, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a s2c_score_receive message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns s2c_score_receive
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): chest.s2c_score_receive;
+
+            /**
+             * Decodes a s2c_score_receive message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns s2c_score_receive
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): chest.s2c_score_receive;
+
+            /**
+             * Verifies a s2c_score_receive message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a s2c_score_receive message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns s2c_score_receive
+             */
+            public static fromObject(object: { [k: string]: any }): chest.s2c_score_receive;
+
+            /**
+             * Creates a plain object from a s2c_score_receive message. Also converts values to other types if specified.
+             * @param message s2c_score_receive
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: chest.s2c_score_receive, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this s2c_score_receive to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for s2c_score_receive
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a c2s_switch_hero. */
+        interface Ic2s_switch_hero {
+
+            /** c2s_switch_hero heroId */
+            heroId?: (number|null);
+        }
+
+        /** Represents a c2s_switch_hero. */
+        class c2s_switch_hero implements Ic2s_switch_hero {
+
+            /**
+             * Constructs a new c2s_switch_hero.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: chest.Ic2s_switch_hero);
+
+            /** c2s_switch_hero heroId. */
+            public heroId: number;
+
+            /**
+             * Creates a new c2s_switch_hero instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns c2s_switch_hero instance
+             */
+            public static create(properties?: chest.Ic2s_switch_hero): chest.c2s_switch_hero;
+
+            /**
+             * Encodes the specified c2s_switch_hero message. Does not implicitly {@link chest.c2s_switch_hero.verify|verify} messages.
+             * @param message c2s_switch_hero message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: chest.Ic2s_switch_hero, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified c2s_switch_hero message, length delimited. Does not implicitly {@link chest.c2s_switch_hero.verify|verify} messages.
+             * @param message c2s_switch_hero message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: chest.Ic2s_switch_hero, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a c2s_switch_hero message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns c2s_switch_hero
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): chest.c2s_switch_hero;
+
+            /**
+             * Decodes a c2s_switch_hero message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns c2s_switch_hero
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): chest.c2s_switch_hero;
+
+            /**
+             * Verifies a c2s_switch_hero message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a c2s_switch_hero message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns c2s_switch_hero
+             */
+            public static fromObject(object: { [k: string]: any }): chest.c2s_switch_hero;
+
+            /**
+             * Creates a plain object from a c2s_switch_hero message. Also converts values to other types if specified.
+             * @param message c2s_switch_hero
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: chest.c2s_switch_hero, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this c2s_switch_hero to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for c2s_switch_hero
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a s2c_switch_hero. */
+        interface Is2c_switch_hero {
+
+            /** s2c_switch_hero err */
+            err?: (number|null);
+        }
+
+        /** Represents a s2c_switch_hero. */
+        class s2c_switch_hero implements Is2c_switch_hero {
+
+            /**
+             * Constructs a new s2c_switch_hero.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: chest.Is2c_switch_hero);
+
+            /** s2c_switch_hero err. */
+            public err: number;
+
+            /**
+             * Creates a new s2c_switch_hero instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns s2c_switch_hero instance
+             */
+            public static create(properties?: chest.Is2c_switch_hero): chest.s2c_switch_hero;
+
+            /**
+             * Encodes the specified s2c_switch_hero message. Does not implicitly {@link chest.s2c_switch_hero.verify|verify} messages.
+             * @param message s2c_switch_hero message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: chest.Is2c_switch_hero, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified s2c_switch_hero message, length delimited. Does not implicitly {@link chest.s2c_switch_hero.verify|verify} messages.
+             * @param message s2c_switch_hero message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: chest.Is2c_switch_hero, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a s2c_switch_hero message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns s2c_switch_hero
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): chest.s2c_switch_hero;
+
+            /**
+             * Decodes a s2c_switch_hero message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns s2c_switch_hero
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): chest.s2c_switch_hero;
+
+            /**
+             * Verifies a s2c_switch_hero message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a s2c_switch_hero message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns s2c_switch_hero
+             */
+            public static fromObject(object: { [k: string]: any }): chest.s2c_switch_hero;
+
+            /**
+             * Creates a plain object from a s2c_switch_hero message. Also converts values to other types if specified.
+             * @param message s2c_switch_hero
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: chest.s2c_switch_hero, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this s2c_switch_hero to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for s2c_switch_hero
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a notify. */
+        interface Inotify {
+
+            /** notify ches */
+            ches?: (chest.IChestInfo[]|null);
+
+            /** notify score */
+            score?: (chest.IScoreInfo|null);
+        }
+
+        /** Represents a notify. */
+        class notify implements Inotify {
+
+            /**
+             * Constructs a new notify.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: chest.Inotify);
+
+            /** notify ches. */
+            public ches: chest.IChestInfo[];
+
+            /** notify score. */
+            public score?: (chest.IScoreInfo|null);
+
+            /**
+             * Creates a new notify instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns notify instance
+             */
+            public static create(properties?: chest.Inotify): chest.notify;
+
+            /**
+             * Encodes the specified notify message. Does not implicitly {@link chest.notify.verify|verify} messages.
+             * @param message notify message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: chest.Inotify, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified notify message, length delimited. Does not implicitly {@link chest.notify.verify|verify} messages.
+             * @param message notify message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: chest.Inotify, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a notify message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns notify
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): chest.notify;
+
+            /**
+             * Decodes a notify message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns notify
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): chest.notify;
+
+            /**
+             * Verifies a notify message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a notify message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns notify
+             */
+            public static fromObject(object: { [k: string]: any }): chest.notify;
+
+            /**
+             * Creates a plain object from a notify message. Also converts values to other types if specified.
+             * @param message notify
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: chest.notify, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this notify to JSON.
@@ -8998,6 +13015,9 @@ declare namespace proto {
 
             /** BagComponent items */
             items?: (world.IBagItem[]|null);
+
+            /** BagComponent touchEid */
+            touchEid?: (number|null);
         }
 
         /** Represents a BagComponent. */
@@ -9011,6 +13031,9 @@ declare namespace proto {
 
             /** BagComponent items. */
             public items: world.IBagItem[];
+
+            /** BagComponent touchEid. */
+            public touchEid: number;
 
             /**
              * Creates a new BagComponent instance using the specified properties.
@@ -11665,1175 +15688,309 @@ declare namespace proto {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
-        /** Properties of a BattleStartAction. */
-        interface IBattleStartAction {
+        /** Properties of a StartBattleAction. */
+        interface IStartBattleAction {
 
-            /** BattleStartAction fighterEid */
-            fighterEid?: (number|null);
+            /** StartBattleAction battleUid */
+            battleUid?: (number|null);
 
-            /** BattleStartAction battleEid */
-            battleEid?: (number|null);
+            /** StartBattleAction troopEids */
+            troopEids?: (number[]|null);
         }
 
-        /** Represents a BattleStartAction. */
-        class BattleStartAction implements IBattleStartAction {
+        /** Represents a StartBattleAction. */
+        class StartBattleAction implements IStartBattleAction {
 
             /**
-             * Constructs a new BattleStartAction.
+             * Constructs a new StartBattleAction.
              * @param [properties] Properties to set
              */
-            constructor(properties?: world.IBattleStartAction);
+            constructor(properties?: world.IStartBattleAction);
 
-            /** BattleStartAction fighterEid. */
-            public fighterEid: number;
+            /** StartBattleAction battleUid. */
+            public battleUid: number;
 
-            /** BattleStartAction battleEid. */
-            public battleEid: number;
+            /** StartBattleAction troopEids. */
+            public troopEids: number[];
 
             /**
-             * Creates a new BattleStartAction instance using the specified properties.
+             * Creates a new StartBattleAction instance using the specified properties.
              * @param [properties] Properties to set
-             * @returns BattleStartAction instance
+             * @returns StartBattleAction instance
              */
-            public static create(properties?: world.IBattleStartAction): world.BattleStartAction;
+            public static create(properties?: world.IStartBattleAction): world.StartBattleAction;
 
             /**
-             * Encodes the specified BattleStartAction message. Does not implicitly {@link world.BattleStartAction.verify|verify} messages.
-             * @param message BattleStartAction message or plain object to encode
+             * Encodes the specified StartBattleAction message. Does not implicitly {@link world.StartBattleAction.verify|verify} messages.
+             * @param message StartBattleAction message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: world.IBattleStartAction, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: world.IStartBattleAction, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified BattleStartAction message, length delimited. Does not implicitly {@link world.BattleStartAction.verify|verify} messages.
-             * @param message BattleStartAction message or plain object to encode
+             * Encodes the specified StartBattleAction message, length delimited. Does not implicitly {@link world.StartBattleAction.verify|verify} messages.
+             * @param message StartBattleAction message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: world.IBattleStartAction, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: world.IStartBattleAction, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Decodes a BattleStartAction message from the specified reader or buffer.
+             * Decodes a StartBattleAction message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
-             * @returns BattleStartAction
+             * @returns StartBattleAction
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.BattleStartAction;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.StartBattleAction;
 
             /**
-             * Decodes a BattleStartAction message from the specified reader or buffer, length delimited.
+             * Decodes a StartBattleAction message from the specified reader or buffer, length delimited.
              * @param reader Reader or buffer to decode from
-             * @returns BattleStartAction
+             * @returns StartBattleAction
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.BattleStartAction;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.StartBattleAction;
 
             /**
-             * Verifies a BattleStartAction message.
+             * Verifies a StartBattleAction message.
              * @param message Plain object to verify
              * @returns `null` if valid, otherwise the reason why it is not
              */
             public static verify(message: { [k: string]: any }): (string|null);
 
             /**
-             * Creates a BattleStartAction message from a plain object. Also converts values to their respective internal types.
+             * Creates a StartBattleAction message from a plain object. Also converts values to their respective internal types.
              * @param object Plain object
-             * @returns BattleStartAction
+             * @returns StartBattleAction
              */
-            public static fromObject(object: { [k: string]: any }): world.BattleStartAction;
+            public static fromObject(object: { [k: string]: any }): world.StartBattleAction;
 
             /**
-             * Creates a plain object from a BattleStartAction message. Also converts values to other types if specified.
-             * @param message BattleStartAction
+             * Creates a plain object from a StartBattleAction message. Also converts values to other types if specified.
+             * @param message StartBattleAction
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: world.BattleStartAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: world.StartBattleAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
-             * Converts this BattleStartAction to JSON.
+             * Converts this StartBattleAction to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
 
             /**
-             * Gets the default type url for BattleStartAction
+             * Gets the default type url for StartBattleAction
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
-        /** Properties of a BattleSkillAction. */
-        interface IBattleSkillAction {
+        /** Properties of a LeaveBattleAction. */
+        interface ILeaveBattleAction {
 
-            /** BattleSkillAction srcEid */
-            srcEid?: (number|null);
+            /** LeaveBattleAction battleUid */
+            battleUid?: (number|null);
 
-            /** BattleSkillAction dstEid */
-            dstEid?: (number|null);
-
-            /** BattleSkillAction skillId */
-            skillId?: (number|null);
+            /** LeaveBattleAction troopEids */
+            troopEids?: (number[]|null);
         }
 
-        /** Represents a BattleSkillAction. */
-        class BattleSkillAction implements IBattleSkillAction {
+        /** Represents a LeaveBattleAction. */
+        class LeaveBattleAction implements ILeaveBattleAction {
 
             /**
-             * Constructs a new BattleSkillAction.
+             * Constructs a new LeaveBattleAction.
              * @param [properties] Properties to set
              */
-            constructor(properties?: world.IBattleSkillAction);
+            constructor(properties?: world.ILeaveBattleAction);
 
-            /** BattleSkillAction srcEid. */
-            public srcEid: number;
+            /** LeaveBattleAction battleUid. */
+            public battleUid: number;
 
-            /** BattleSkillAction dstEid. */
-            public dstEid: number;
-
-            /** BattleSkillAction skillId. */
-            public skillId: number;
+            /** LeaveBattleAction troopEids. */
+            public troopEids: number[];
 
             /**
-             * Creates a new BattleSkillAction instance using the specified properties.
+             * Creates a new LeaveBattleAction instance using the specified properties.
              * @param [properties] Properties to set
-             * @returns BattleSkillAction instance
+             * @returns LeaveBattleAction instance
              */
-            public static create(properties?: world.IBattleSkillAction): world.BattleSkillAction;
+            public static create(properties?: world.ILeaveBattleAction): world.LeaveBattleAction;
 
             /**
-             * Encodes the specified BattleSkillAction message. Does not implicitly {@link world.BattleSkillAction.verify|verify} messages.
-             * @param message BattleSkillAction message or plain object to encode
+             * Encodes the specified LeaveBattleAction message. Does not implicitly {@link world.LeaveBattleAction.verify|verify} messages.
+             * @param message LeaveBattleAction message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: world.IBattleSkillAction, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: world.ILeaveBattleAction, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified BattleSkillAction message, length delimited. Does not implicitly {@link world.BattleSkillAction.verify|verify} messages.
-             * @param message BattleSkillAction message or plain object to encode
+             * Encodes the specified LeaveBattleAction message, length delimited. Does not implicitly {@link world.LeaveBattleAction.verify|verify} messages.
+             * @param message LeaveBattleAction message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: world.IBattleSkillAction, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: world.ILeaveBattleAction, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Decodes a BattleSkillAction message from the specified reader or buffer.
+             * Decodes a LeaveBattleAction message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
-             * @returns BattleSkillAction
+             * @returns LeaveBattleAction
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.BattleSkillAction;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.LeaveBattleAction;
 
             /**
-             * Decodes a BattleSkillAction message from the specified reader or buffer, length delimited.
+             * Decodes a LeaveBattleAction message from the specified reader or buffer, length delimited.
              * @param reader Reader or buffer to decode from
-             * @returns BattleSkillAction
+             * @returns LeaveBattleAction
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.BattleSkillAction;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.LeaveBattleAction;
 
             /**
-             * Verifies a BattleSkillAction message.
+             * Verifies a LeaveBattleAction message.
              * @param message Plain object to verify
              * @returns `null` if valid, otherwise the reason why it is not
              */
             public static verify(message: { [k: string]: any }): (string|null);
 
             /**
-             * Creates a BattleSkillAction message from a plain object. Also converts values to their respective internal types.
+             * Creates a LeaveBattleAction message from a plain object. Also converts values to their respective internal types.
              * @param object Plain object
-             * @returns BattleSkillAction
+             * @returns LeaveBattleAction
              */
-            public static fromObject(object: { [k: string]: any }): world.BattleSkillAction;
+            public static fromObject(object: { [k: string]: any }): world.LeaveBattleAction;
 
             /**
-             * Creates a plain object from a BattleSkillAction message. Also converts values to other types if specified.
-             * @param message BattleSkillAction
+             * Creates a plain object from a LeaveBattleAction message. Also converts values to other types if specified.
+             * @param message LeaveBattleAction
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: world.BattleSkillAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: world.LeaveBattleAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
-             * Converts this BattleSkillAction to JSON.
+             * Converts this LeaveBattleAction to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
 
             /**
-             * Gets the default type url for BattleSkillAction
+             * Gets the default type url for LeaveBattleAction
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
-        /** Properties of a BattleSubHpAction. */
-        interface IBattleSubHpAction {
+        /** Properties of a StopBattleAction. */
+        interface IStopBattleAction {
 
-            /** BattleSubHpAction srcEid */
-            srcEid?: (number|null);
+            /** StopBattleAction battleUid */
+            battleUid?: (number|null);
 
-            /** BattleSubHpAction dstEid */
-            dstEid?: (number|null);
-
-            /** BattleSubHpAction subHp */
-            subHp?: (number|null);
-
-            /** BattleSubHpAction curHp */
-            curHp?: (number|null);
+            /** StopBattleAction troopEids */
+            troopEids?: (number[]|null);
         }
 
-        /** Represents a BattleSubHpAction. */
-        class BattleSubHpAction implements IBattleSubHpAction {
+        /** Represents a StopBattleAction. */
+        class StopBattleAction implements IStopBattleAction {
 
             /**
-             * Constructs a new BattleSubHpAction.
+             * Constructs a new StopBattleAction.
              * @param [properties] Properties to set
              */
-            constructor(properties?: world.IBattleSubHpAction);
+            constructor(properties?: world.IStopBattleAction);
 
-            /** BattleSubHpAction srcEid. */
-            public srcEid: number;
+            /** StopBattleAction battleUid. */
+            public battleUid: number;
 
-            /** BattleSubHpAction dstEid. */
-            public dstEid: number;
-
-            /** BattleSubHpAction subHp. */
-            public subHp: number;
-
-            /** BattleSubHpAction curHp. */
-            public curHp: number;
+            /** StopBattleAction troopEids. */
+            public troopEids: number[];
 
             /**
-             * Creates a new BattleSubHpAction instance using the specified properties.
+             * Creates a new StopBattleAction instance using the specified properties.
              * @param [properties] Properties to set
-             * @returns BattleSubHpAction instance
+             * @returns StopBattleAction instance
              */
-            public static create(properties?: world.IBattleSubHpAction): world.BattleSubHpAction;
+            public static create(properties?: world.IStopBattleAction): world.StopBattleAction;
 
             /**
-             * Encodes the specified BattleSubHpAction message. Does not implicitly {@link world.BattleSubHpAction.verify|verify} messages.
-             * @param message BattleSubHpAction message or plain object to encode
+             * Encodes the specified StopBattleAction message. Does not implicitly {@link world.StopBattleAction.verify|verify} messages.
+             * @param message StopBattleAction message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: world.IBattleSubHpAction, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: world.IStopBattleAction, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified BattleSubHpAction message, length delimited. Does not implicitly {@link world.BattleSubHpAction.verify|verify} messages.
-             * @param message BattleSubHpAction message or plain object to encode
+             * Encodes the specified StopBattleAction message, length delimited. Does not implicitly {@link world.StopBattleAction.verify|verify} messages.
+             * @param message StopBattleAction message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: world.IBattleSubHpAction, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: world.IStopBattleAction, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Decodes a BattleSubHpAction message from the specified reader or buffer.
+             * Decodes a StopBattleAction message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
-             * @returns BattleSubHpAction
+             * @returns StopBattleAction
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.BattleSubHpAction;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.StopBattleAction;
 
             /**
-             * Decodes a BattleSubHpAction message from the specified reader or buffer, length delimited.
+             * Decodes a StopBattleAction message from the specified reader or buffer, length delimited.
              * @param reader Reader or buffer to decode from
-             * @returns BattleSubHpAction
+             * @returns StopBattleAction
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.BattleSubHpAction;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.StopBattleAction;
 
             /**
-             * Verifies a BattleSubHpAction message.
+             * Verifies a StopBattleAction message.
              * @param message Plain object to verify
              * @returns `null` if valid, otherwise the reason why it is not
              */
             public static verify(message: { [k: string]: any }): (string|null);
 
             /**
-             * Creates a BattleSubHpAction message from a plain object. Also converts values to their respective internal types.
+             * Creates a StopBattleAction message from a plain object. Also converts values to their respective internal types.
              * @param object Plain object
-             * @returns BattleSubHpAction
+             * @returns StopBattleAction
              */
-            public static fromObject(object: { [k: string]: any }): world.BattleSubHpAction;
+            public static fromObject(object: { [k: string]: any }): world.StopBattleAction;
 
             /**
-             * Creates a plain object from a BattleSubHpAction message. Also converts values to other types if specified.
-             * @param message BattleSubHpAction
+             * Creates a plain object from a StopBattleAction message. Also converts values to other types if specified.
+             * @param message StopBattleAction
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: world.BattleSubHpAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: world.StopBattleAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
-             * Converts this BattleSubHpAction to JSON.
+             * Converts this StopBattleAction to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
 
             /**
-             * Gets the default type url for BattleSubHpAction
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a BattleAddBullet. */
-        interface IBattleAddBullet {
-
-            /** BattleAddBullet srcEid */
-            srcEid?: (number|null);
-
-            /** BattleAddBullet dstEid */
-            dstEid?: (number|null);
-
-            /** BattleAddBullet bulletId */
-            bulletId?: (number|null);
-
-            /** BattleAddBullet duration */
-            duration?: (number|null);
-        }
-
-        /** Represents a BattleAddBullet. */
-        class BattleAddBullet implements IBattleAddBullet {
-
-            /**
-             * Constructs a new BattleAddBullet.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: world.IBattleAddBullet);
-
-            /** BattleAddBullet srcEid. */
-            public srcEid: number;
-
-            /** BattleAddBullet dstEid. */
-            public dstEid: number;
-
-            /** BattleAddBullet bulletId. */
-            public bulletId: number;
-
-            /** BattleAddBullet duration. */
-            public duration: number;
-
-            /**
-             * Creates a new BattleAddBullet instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns BattleAddBullet instance
-             */
-            public static create(properties?: world.IBattleAddBullet): world.BattleAddBullet;
-
-            /**
-             * Encodes the specified BattleAddBullet message. Does not implicitly {@link world.BattleAddBullet.verify|verify} messages.
-             * @param message BattleAddBullet message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: world.IBattleAddBullet, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified BattleAddBullet message, length delimited. Does not implicitly {@link world.BattleAddBullet.verify|verify} messages.
-             * @param message BattleAddBullet message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: world.IBattleAddBullet, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a BattleAddBullet message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns BattleAddBullet
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.BattleAddBullet;
-
-            /**
-             * Decodes a BattleAddBullet message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns BattleAddBullet
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.BattleAddBullet;
-
-            /**
-             * Verifies a BattleAddBullet message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a BattleAddBullet message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns BattleAddBullet
-             */
-            public static fromObject(object: { [k: string]: any }): world.BattleAddBullet;
-
-            /**
-             * Creates a plain object from a BattleAddBullet message. Also converts values to other types if specified.
-             * @param message BattleAddBullet
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: world.BattleAddBullet, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this BattleAddBullet to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for BattleAddBullet
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a BattleAddBuffAction. */
-        interface IBattleAddBuffAction {
-
-            /** BattleAddBuffAction srcEid */
-            srcEid?: (number|null);
-
-            /** BattleAddBuffAction dstEid */
-            dstEid?: (number|null);
-
-            /** BattleAddBuffAction buffId */
-            buffId?: (number|null);
-        }
-
-        /** Represents a BattleAddBuffAction. */
-        class BattleAddBuffAction implements IBattleAddBuffAction {
-
-            /**
-             * Constructs a new BattleAddBuffAction.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: world.IBattleAddBuffAction);
-
-            /** BattleAddBuffAction srcEid. */
-            public srcEid: number;
-
-            /** BattleAddBuffAction dstEid. */
-            public dstEid: number;
-
-            /** BattleAddBuffAction buffId. */
-            public buffId: number;
-
-            /**
-             * Creates a new BattleAddBuffAction instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns BattleAddBuffAction instance
-             */
-            public static create(properties?: world.IBattleAddBuffAction): world.BattleAddBuffAction;
-
-            /**
-             * Encodes the specified BattleAddBuffAction message. Does not implicitly {@link world.BattleAddBuffAction.verify|verify} messages.
-             * @param message BattleAddBuffAction message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: world.IBattleAddBuffAction, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified BattleAddBuffAction message, length delimited. Does not implicitly {@link world.BattleAddBuffAction.verify|verify} messages.
-             * @param message BattleAddBuffAction message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: world.IBattleAddBuffAction, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a BattleAddBuffAction message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns BattleAddBuffAction
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.BattleAddBuffAction;
-
-            /**
-             * Decodes a BattleAddBuffAction message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns BattleAddBuffAction
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.BattleAddBuffAction;
-
-            /**
-             * Verifies a BattleAddBuffAction message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a BattleAddBuffAction message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns BattleAddBuffAction
-             */
-            public static fromObject(object: { [k: string]: any }): world.BattleAddBuffAction;
-
-            /**
-             * Creates a plain object from a BattleAddBuffAction message. Also converts values to other types if specified.
-             * @param message BattleAddBuffAction
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: world.BattleAddBuffAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this BattleAddBuffAction to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for BattleAddBuffAction
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a BattleDelBuffAction. */
-        interface IBattleDelBuffAction {
-
-            /** BattleDelBuffAction srcEid */
-            srcEid?: (number|null);
-
-            /** BattleDelBuffAction dstEid */
-            dstEid?: (number|null);
-
-            /** BattleDelBuffAction buffId */
-            buffId?: (number|null);
-        }
-
-        /** Represents a BattleDelBuffAction. */
-        class BattleDelBuffAction implements IBattleDelBuffAction {
-
-            /**
-             * Constructs a new BattleDelBuffAction.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: world.IBattleDelBuffAction);
-
-            /** BattleDelBuffAction srcEid. */
-            public srcEid: number;
-
-            /** BattleDelBuffAction dstEid. */
-            public dstEid: number;
-
-            /** BattleDelBuffAction buffId. */
-            public buffId: number;
-
-            /**
-             * Creates a new BattleDelBuffAction instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns BattleDelBuffAction instance
-             */
-            public static create(properties?: world.IBattleDelBuffAction): world.BattleDelBuffAction;
-
-            /**
-             * Encodes the specified BattleDelBuffAction message. Does not implicitly {@link world.BattleDelBuffAction.verify|verify} messages.
-             * @param message BattleDelBuffAction message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: world.IBattleDelBuffAction, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified BattleDelBuffAction message, length delimited. Does not implicitly {@link world.BattleDelBuffAction.verify|verify} messages.
-             * @param message BattleDelBuffAction message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: world.IBattleDelBuffAction, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a BattleDelBuffAction message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns BattleDelBuffAction
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.BattleDelBuffAction;
-
-            /**
-             * Decodes a BattleDelBuffAction message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns BattleDelBuffAction
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.BattleDelBuffAction;
-
-            /**
-             * Verifies a BattleDelBuffAction message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a BattleDelBuffAction message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns BattleDelBuffAction
-             */
-            public static fromObject(object: { [k: string]: any }): world.BattleDelBuffAction;
-
-            /**
-             * Creates a plain object from a BattleDelBuffAction message. Also converts values to other types if specified.
-             * @param message BattleDelBuffAction
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: world.BattleDelBuffAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this BattleDelBuffAction to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for BattleDelBuffAction
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a BattleStopAction. */
-        interface IBattleStopAction {
-
-            /** BattleStopAction fighterEid */
-            fighterEid?: (number|null);
-
-            /** BattleStopAction battleEid */
-            battleEid?: (number|null);
-        }
-
-        /** Represents a BattleStopAction. */
-        class BattleStopAction implements IBattleStopAction {
-
-            /**
-             * Constructs a new BattleStopAction.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: world.IBattleStopAction);
-
-            /** BattleStopAction fighterEid. */
-            public fighterEid: number;
-
-            /** BattleStopAction battleEid. */
-            public battleEid: number;
-
-            /**
-             * Creates a new BattleStopAction instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns BattleStopAction instance
-             */
-            public static create(properties?: world.IBattleStopAction): world.BattleStopAction;
-
-            /**
-             * Encodes the specified BattleStopAction message. Does not implicitly {@link world.BattleStopAction.verify|verify} messages.
-             * @param message BattleStopAction message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: world.IBattleStopAction, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified BattleStopAction message, length delimited. Does not implicitly {@link world.BattleStopAction.verify|verify} messages.
-             * @param message BattleStopAction message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: world.IBattleStopAction, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a BattleStopAction message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns BattleStopAction
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.BattleStopAction;
-
-            /**
-             * Decodes a BattleStopAction message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns BattleStopAction
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.BattleStopAction;
-
-            /**
-             * Verifies a BattleStopAction message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a BattleStopAction message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns BattleStopAction
-             */
-            public static fromObject(object: { [k: string]: any }): world.BattleStopAction;
-
-            /**
-             * Creates a plain object from a BattleStopAction message. Also converts values to other types if specified.
-             * @param message BattleStopAction
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: world.BattleStopAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this BattleStopAction to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for BattleStopAction
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of an AddBoxAction. */
-        interface IAddBoxAction {
-
-            /** AddBoxAction troopEid */
-            troopEid?: (number|null);
-
-            /** AddBoxAction boxEid */
-            boxEid?: (number|null);
-        }
-
-        /** Represents an AddBoxAction. */
-        class AddBoxAction implements IAddBoxAction {
-
-            /**
-             * Constructs a new AddBoxAction.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: world.IAddBoxAction);
-
-            /** AddBoxAction troopEid. */
-            public troopEid: number;
-
-            /** AddBoxAction boxEid. */
-            public boxEid: number;
-
-            /**
-             * Creates a new AddBoxAction instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns AddBoxAction instance
-             */
-            public static create(properties?: world.IAddBoxAction): world.AddBoxAction;
-
-            /**
-             * Encodes the specified AddBoxAction message. Does not implicitly {@link world.AddBoxAction.verify|verify} messages.
-             * @param message AddBoxAction message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: world.IAddBoxAction, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified AddBoxAction message, length delimited. Does not implicitly {@link world.AddBoxAction.verify|verify} messages.
-             * @param message AddBoxAction message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: world.IAddBoxAction, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes an AddBoxAction message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns AddBoxAction
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.AddBoxAction;
-
-            /**
-             * Decodes an AddBoxAction message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns AddBoxAction
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.AddBoxAction;
-
-            /**
-             * Verifies an AddBoxAction message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates an AddBoxAction message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns AddBoxAction
-             */
-            public static fromObject(object: { [k: string]: any }): world.AddBoxAction;
-
-            /**
-             * Creates a plain object from an AddBoxAction message. Also converts values to other types if specified.
-             * @param message AddBoxAction
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: world.AddBoxAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this AddBoxAction to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for AddBoxAction
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a DropBoxAction. */
-        interface IDropBoxAction {
-
-            /** DropBoxAction troopEid */
-            troopEid?: (number|null);
-
-            /** DropBoxAction campEid */
-            campEid?: (number|null);
-        }
-
-        /** Represents a DropBoxAction. */
-        class DropBoxAction implements IDropBoxAction {
-
-            /**
-             * Constructs a new DropBoxAction.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: world.IDropBoxAction);
-
-            /** DropBoxAction troopEid. */
-            public troopEid: number;
-
-            /** DropBoxAction campEid. */
-            public campEid: number;
-
-            /**
-             * Creates a new DropBoxAction instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns DropBoxAction instance
-             */
-            public static create(properties?: world.IDropBoxAction): world.DropBoxAction;
-
-            /**
-             * Encodes the specified DropBoxAction message. Does not implicitly {@link world.DropBoxAction.verify|verify} messages.
-             * @param message DropBoxAction message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: world.IDropBoxAction, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified DropBoxAction message, length delimited. Does not implicitly {@link world.DropBoxAction.verify|verify} messages.
-             * @param message DropBoxAction message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: world.IDropBoxAction, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a DropBoxAction message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns DropBoxAction
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.DropBoxAction;
-
-            /**
-             * Decodes a DropBoxAction message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns DropBoxAction
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.DropBoxAction;
-
-            /**
-             * Verifies a DropBoxAction message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a DropBoxAction message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns DropBoxAction
-             */
-            public static fromObject(object: { [k: string]: any }): world.DropBoxAction;
-
-            /**
-             * Creates a plain object from a DropBoxAction message. Also converts values to other types if specified.
-             * @param message DropBoxAction
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: world.DropBoxAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this DropBoxAction to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for DropBoxAction
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a PickItemAction. */
-        interface IPickItemAction {
-
-            /** PickItemAction troopEid */
-            troopEid?: (number|null);
-
-            /** PickItemAction itemEid */
-            itemEid?: (number|null);
-        }
-
-        /** Represents a PickItemAction. */
-        class PickItemAction implements IPickItemAction {
-
-            /**
-             * Constructs a new PickItemAction.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: world.IPickItemAction);
-
-            /** PickItemAction troopEid. */
-            public troopEid: number;
-
-            /** PickItemAction itemEid. */
-            public itemEid: number;
-
-            /**
-             * Creates a new PickItemAction instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns PickItemAction instance
-             */
-            public static create(properties?: world.IPickItemAction): world.PickItemAction;
-
-            /**
-             * Encodes the specified PickItemAction message. Does not implicitly {@link world.PickItemAction.verify|verify} messages.
-             * @param message PickItemAction message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: world.IPickItemAction, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified PickItemAction message, length delimited. Does not implicitly {@link world.PickItemAction.verify|verify} messages.
-             * @param message PickItemAction message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: world.IPickItemAction, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a PickItemAction message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns PickItemAction
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.PickItemAction;
-
-            /**
-             * Decodes a PickItemAction message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns PickItemAction
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.PickItemAction;
-
-            /**
-             * Verifies a PickItemAction message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a PickItemAction message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns PickItemAction
-             */
-            public static fromObject(object: { [k: string]: any }): world.PickItemAction;
-
-            /**
-             * Creates a plain object from a PickItemAction message. Also converts values to other types if specified.
-             * @param message PickItemAction
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: world.PickItemAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this PickItemAction to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for PickItemAction
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of an InviteSoldierAction. */
-        interface IInviteSoldierAction {
-
-            /** InviteSoldierAction troopEid */
-            troopEid?: (number|null);
-
-            /** InviteSoldierAction soldierEid */
-            soldierEid?: (number|null);
-        }
-
-        /** Represents an InviteSoldierAction. */
-        class InviteSoldierAction implements IInviteSoldierAction {
-
-            /**
-             * Constructs a new InviteSoldierAction.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: world.IInviteSoldierAction);
-
-            /** InviteSoldierAction troopEid. */
-            public troopEid: number;
-
-            /** InviteSoldierAction soldierEid. */
-            public soldierEid: number;
-
-            /**
-             * Creates a new InviteSoldierAction instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns InviteSoldierAction instance
-             */
-            public static create(properties?: world.IInviteSoldierAction): world.InviteSoldierAction;
-
-            /**
-             * Encodes the specified InviteSoldierAction message. Does not implicitly {@link world.InviteSoldierAction.verify|verify} messages.
-             * @param message InviteSoldierAction message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: world.IInviteSoldierAction, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified InviteSoldierAction message, length delimited. Does not implicitly {@link world.InviteSoldierAction.verify|verify} messages.
-             * @param message InviteSoldierAction message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: world.IInviteSoldierAction, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes an InviteSoldierAction message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns InviteSoldierAction
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.InviteSoldierAction;
-
-            /**
-             * Decodes an InviteSoldierAction message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns InviteSoldierAction
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.InviteSoldierAction;
-
-            /**
-             * Verifies an InviteSoldierAction message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates an InviteSoldierAction message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns InviteSoldierAction
-             */
-            public static fromObject(object: { [k: string]: any }): world.InviteSoldierAction;
-
-            /**
-             * Creates a plain object from an InviteSoldierAction message. Also converts values to other types if specified.
-             * @param message InviteSoldierAction
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: world.InviteSoldierAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this InviteSoldierAction to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for InviteSoldierAction
+             * Gets the default type url for StopBattleAction
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
@@ -12855,35 +16012,14 @@ declare namespace proto {
             /** EntityAction move */
             move?: (world.IMoveAction|null);
 
-            /** EntityAction addBox */
-            addBox?: (world.IAddBoxAction|null);
+            /** EntityAction startBattle */
+            startBattle?: (world.IStartBattleAction|null);
 
-            /** EntityAction dropBox */
-            dropBox?: (world.IDropBoxAction|null);
+            /** EntityAction leaveBattle */
+            leaveBattle?: (world.ILeaveBattleAction|null);
 
-            /** EntityAction pickItem */
-            pickItem?: (world.IPickItemAction|null);
-
-            /** EntityAction inviteSoldier */
-            inviteSoldier?: (world.IInviteSoldierAction|null);
-
-            /** EntityAction battleStart */
-            battleStart?: (world.IBattleStartAction|null);
-
-            /** EntityAction battleSkill */
-            battleSkill?: (world.IBattleSkillAction|null);
-
-            /** EntityAction battleAddBuff */
-            battleAddBuff?: (world.IBattleAddBuffAction|null);
-
-            /** EntityAction battleDelBuff */
-            battleDelBuff?: (world.IBattleDelBuffAction|null);
-
-            /** EntityAction battleStop */
-            battleStop?: (world.IBattleStopAction|null);
-
-            /** EntityAction battleSubHp */
-            battleSubHp?: (world.IBattleSubHpAction|null);
+            /** EntityAction stopBattle */
+            stopBattle?: (world.IStopBattleAction|null);
         }
 
         /** Represents an EntityAction. */
@@ -12907,35 +16043,14 @@ declare namespace proto {
             /** EntityAction move. */
             public move?: (world.IMoveAction|null);
 
-            /** EntityAction addBox. */
-            public addBox?: (world.IAddBoxAction|null);
+            /** EntityAction startBattle. */
+            public startBattle?: (world.IStartBattleAction|null);
 
-            /** EntityAction dropBox. */
-            public dropBox?: (world.IDropBoxAction|null);
+            /** EntityAction leaveBattle. */
+            public leaveBattle?: (world.ILeaveBattleAction|null);
 
-            /** EntityAction pickItem. */
-            public pickItem?: (world.IPickItemAction|null);
-
-            /** EntityAction inviteSoldier. */
-            public inviteSoldier?: (world.IInviteSoldierAction|null);
-
-            /** EntityAction battleStart. */
-            public battleStart?: (world.IBattleStartAction|null);
-
-            /** EntityAction battleSkill. */
-            public battleSkill?: (world.IBattleSkillAction|null);
-
-            /** EntityAction battleAddBuff. */
-            public battleAddBuff?: (world.IBattleAddBuffAction|null);
-
-            /** EntityAction battleDelBuff. */
-            public battleDelBuff?: (world.IBattleDelBuffAction|null);
-
-            /** EntityAction battleStop. */
-            public battleStop?: (world.IBattleStopAction|null);
-
-            /** EntityAction battleSubHp. */
-            public battleSubHp?: (world.IBattleSubHpAction|null);
+            /** EntityAction stopBattle. */
+            public stopBattle?: (world.IStopBattleAction|null);
 
             /**
              * Creates a new EntityAction instance using the specified properties.

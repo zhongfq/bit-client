@@ -12,7 +12,6 @@ export const WorldConf = {
         TROOP: "troop",
     },
     ENTITY_ACTION: {
-        ADD_BOX: 12,
         ADD_ENTITY: 1,
         BATTLE_ADD_BUFF: 6,
         BATTLE_ADD_BULLET: 10,
@@ -23,10 +22,11 @@ export const WorldConf = {
         BATTLE_SUB_HP: 5,
         CHANGE_OWNER: 11,
         DEL_ENTITY: 2,
-        DROP_BOX: 13,
         INVITE_SOLDIER: 15,
         MOVE: 3,
         PICK_ITEM: 14,
+        TOUCH_CAMP: 13,
+        TOUCH_MINE: 12,
     },
     ENTITY_CMD: {
         MOVE_TO: 1,
@@ -45,6 +45,7 @@ export const WorldConf = {
             3: "move",
             4: "owner",
             5: "troop",
+            6: "bag",
         },
         4: {
             1: "player",
@@ -63,6 +64,7 @@ export const WorldConf = {
         7: {
             1: "pos",
             2: "item",
+            3: "owner",
         },
         8: {
             1: "pos",
@@ -76,11 +78,6 @@ export const WorldConf = {
             1: "pos",
             2: "building",
         },
-        11: {
-            1: "pos",
-            2: "item",
-            3: "owner",
-        },
     },
     ENTITY_STATE: {
         FIGHTING: 5,
@@ -92,11 +89,10 @@ export const WorldConf = {
     },
     ENTITY_TYPE: {
         BATTLE: 5,
-        BOX: 7,
         CAMP: 8,
         CASTLE: 1,
         CITY: 3,
-        DROP_ITEM: 11,
+        DROP_ITEM: 7,
         MINE: 10,
         MONSTER: 6,
         PLAYER: 4,

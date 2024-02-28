@@ -8,6 +8,7 @@ import { opcode } from "./def/protocol";
 import { ui } from "./misc/ui";
 import { BagService } from "./system/bag/bag-service";
 import { ChatService } from "./system/chat/chat-service";
+import { ChestService } from "./system/chest/chest-service";
 import { GmService } from "./system/gm/gm-service";
 import { LoginService } from "./system/login/login-service";
 import { MailService } from "./system/mail/mail-service";
@@ -55,6 +56,7 @@ class ServiceManager {
     readonly shop: ShopService;
     readonly toast: ToastService;
     readonly chat: ChatService;
+    readonly chest: ChestService;
 
     private _services: Service<NetworkService>[] = [];
 
@@ -71,6 +73,7 @@ class ServiceManager {
         this.shop = this.newService(ShopService);
         this.toast = this.newService(ToastService);
         this.chat = this.newService(ChatService);
+        this.chest = this.newService(ChestService);
         // ignore log
         this.network.ignoreLog(opcode.user.c2s_ping);
         this.network.ignoreLog(opcode.user.s2c_ping);

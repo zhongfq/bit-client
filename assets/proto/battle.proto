@@ -1,0 +1,169 @@
+syntax = "proto3";
+
+// 战斗协议
+package battle;
+
+message BattleHero {
+    uint32 hero_id = 1;
+    uint32 eid = 2;
+}
+
+message BattleRole {
+    uint32 rid = 1;
+    string name = 2;
+    repeated BattleHero heros = 3;
+}
+
+message BattleEntity {
+    uint32 eid = 1;
+    uint32 rid = 2;
+    uint32 entity_id = 3; // battle_entity配置表id
+    uint32 max_hp = 5;
+    uint32 hp = 6;
+    uint32 x = 10;
+    uint32 y = 11;
+    uint32 z = 12;
+    uint32 max_mp = 13;
+    uint32 mp = 14;
+}
+
+// COMMAND
+message cmd_add_entity {
+    BattleEntity entity = 1;
+}
+
+message cmd_update_entity {
+    uint32 eid = 1;
+    uint32 max_hp = 3;
+    uint32 hp = 4;
+    uint32 x = 5;
+    uint32 y = 6;
+    uint32 z = 7;
+}
+
+message cmd_del_entity {
+    uint32 eid = 1;
+}
+
+message cmd_move_to {
+    uint32 eid = 1;
+    uint32 speed = 2;
+    uint32 target_x = 10;
+    uint32 target_y = 11;
+    uint32 target_z = 12;
+}
+
+message cmd_force_to {
+    uint32 eid = 1;
+    uint32 speed = 2;
+    uint32 target_x = 10;
+    uint32 target_y = 11;
+    uint32 target_z = 12;
+}
+
+message cmd_move_start {
+    uint32 eid = 1;
+    uint32 speed = 2;
+    uint32 dir = 3; // 0 - 360度
+}
+
+message cmd_move_stop {
+    uint32 eid = 1;
+    int32 face = 3;
+    uint32 x = 10;
+    uint32 y = 11;
+    uint32 z = 12;
+}
+
+message cmd_add_buff {
+    uint32 eid = 1;
+    uint32 id = 2;
+    uint32 stack = 3;
+    uint32 expired = 4; // 到期帧数
+}
+
+message cmd_del_buff {
+    uint32 eid = 1;
+    uint32 id = 2;
+}
+
+message cmd_attack {
+    uint32 eid = 1;
+    uint32 skill_id = 2;
+    uint32 cur_mp = 3;
+}
+
+message cmd_under_atk {
+    uint32 eid = 1;
+    uint32 skill_id = 2;
+    uint32 sub_hp = 3;
+    uint32 cur_mp = 4;
+    bool critical = 5;
+    bool dodge = 6;
+}
+
+message cmd_recover_hp {
+    uint32 eid = 1;
+    uint32 add_hp = 2;
+}
+
+message BattleCmd {
+    uint32 cmd_type = 1;
+    cmd_add_entity add_entity = 2;
+    cmd_update_entity update_entity = 3;
+    cmd_del_entity del_entity = 4;
+    cmd_move_start move_start = 5;
+    cmd_move_stop move_stop = 6;
+    cmd_add_buff add_buff = 7;
+    cmd_del_buff del_buff = 8;
+    cmd_attack attack = 9;
+    cmd_under_atk under_atk = 10;
+    cmd_force_to force_to = 13;
+    cmd_move_to move_to = 14;
+    cmd_recover_hp recover_hp = 17;
+}
+
+message Battle {
+    uint32 battle_id = 1;
+    uint32 battle_uid = 2;
+    repeated BattleRole roles = 3; // 服务器第一个在左，第二个在右，客户端转换为我方永远在左
+}
+
+message c2s_enter {
+    uint32 battle_uid = 1;
+}
+message s2c_enter {
+    uint32 err = 1; // NOT_IN_WAR
+    repeated BattleRole roles = 2;
+    repeated BattleEntity entities = 3;
+}
+
+message notify_cmd {
+    uint32 frame = 1;
+    repeated BattleCmd cmds = 2;
+}
+
+message c2s_launch_skill {
+    uint32 eid = 1;
+}
+message s2c_launch_skill {
+    uint32 err = 1;
+}
+
+message notify_start {
+}
+
+message notify_end {
+}
+
+message DebugInfo {
+    uint32 x = 1;
+    uint32 y = 2;
+    uint32 z = 3;
+    uint32 color = 4;
+    uint32 size = 5;
+}
+message notify_debug {
+    repeated DebugInfo infos = 1;
+    repeated string logs = 2;
+}

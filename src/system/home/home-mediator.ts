@@ -89,6 +89,7 @@ export class MainMediator extends Mediator {
         });
         this.owner.btnBox.on(Laya.Event.CLICK, () => {
             this.owner.boxNode.visible = true;
+            this.owner.boxNode.active = true;
         });
         // this.owner.List.array = ["1111", "1111", "1111", "1111", "1111"];
     }

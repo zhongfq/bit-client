@@ -6,6 +6,7 @@ import { TaskVo } from "../../misc/vo/task/task-vo";
 import { TaskConf } from "../../def/task";
 import { ChestUI } from "../../ui-runtime/prefab/chest/ChestUI";
 import { ui } from "../../misc/ui";
+import { ChestItemUI } from "../../ui-runtime/prefab/chest/ChestItemUI";
 
 const { regClass, property } = Laya;
 
@@ -21,18 +22,27 @@ export class ChestMediator extends Mediator {
     }
 
     initUIEvent() {
-        // this.owner.listBox.renderHandler = new Laya.Handler(this, this.onListRender);
-        this.owner.listBox.mouseHandler = new Laya.Handler(this, this.onListClick);
+        this.owner.listBox.renderHandler = new Laya.Handler(this, this.onListRender);
         this.owner.listBox.selectHandler = new Laya.Handler(this, this.onSelect);
         this.owner.btnOpenBox.on(Laya.Event.CLICK, () => {
             //TODO请求打开宝箱
+
+            this.owner.spineHero.play("atk", false);
+
+            this.owner.spineHero.once(Laya.Event.STOPPED, this, () => {
+                this.owner.spineHero.play("idle", true);
+                this.owner.spineShest.play("chest2_up", false);
+                this.owner.spineShest.once(Laya.Event.STOPPED, this, () => {
+                    this.owner.spineShest.play("chest2_down", false);
+                });
+            });
         });
         this.owner.btnBoxReward.on(Laya.Event.CLICK, () => {
             //TODO请求领取积分奖励、播放箱子落下动画刷新界面数据
         });
         this.owner.boxHero.on(Laya.Event.CLICK, () => {
             // BOX_HERO;
-            app.ui.show(ui.BOX_HERO);
+            app.ui.show(ui.CHEST_HERO);
         });
     }
 
@@ -46,12 +56,6 @@ export class ChestMediator extends Mediator {
         ani2.play("1");
     }
 
-    onListClick(type: Laya.Event, index: number) {
-        if (type.type == Laya.Event.CLICK) {
-            const a = 1;
-        }
-    }
-
     initServiceEvent() {
         // this.on(app.service.task, TaskService.TASK_UPDATE, () => {
         //     this.tlTaskData = [];
@@ -61,12 +65,18 @@ export class ChestMediator extends Mediator {
         // });
     }
 
-    onListRender(item: any, index: number) {
+    onListRender(item: ChestItemUI, index: number) {
         // item.updateInfo(item.dataSource);
+        // item.getChildByName("imgIcon");
+        item.labelNum.text = "x0";
     }
 
     updateList() {
-        this.owner.listBox.array = [{ a: 1 }, { a: 1 }, { a: 1 }, { a: 1 }, { a: 1 }];
+        const listData = [];
+        for (const chestRow of app.service.table.chest.chest) {
+            listData.push({ row: chestRow, cmd: app.service.chest.chestInfo.get(chestRow.id) });
+        }
+        this.owner.listBox.array = listData;
         this.selectedIndex = this.owner.listBox.selectedIndex;
 
         const cell = this.owner.listBox.cells[this.selectedIndex];

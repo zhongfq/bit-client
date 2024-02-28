@@ -6,6 +6,8 @@ import {
     GeneratedAllianceRow,
     GeneratedAttrRow,
     GeneratedBattleBuffRow,
+    GeneratedChestHeroRow,
+    GeneratedChestrow,
     GeneratedEmojiRow,
     GeneratedEquipColorRow,
     GeneratedEquipItemsRow,
@@ -151,11 +153,20 @@ export type EmojiTable = {
     [K: number]: EmojiRow;
 };
 //-----------------------------------------------------------------------------
-// 表情
+// 用户
 //-----------------------------------------------------------------------------
 export interface RoleLevelRow extends GeneratedRoleLevelRow {}
 export interface RoleConfRow extends GeneratedRoleConfRow {}
 export type RoleTable = {
     level: RoleLevelRow[];
     conf: RoleConfRow[];
+};
+//-----------------------------------------------------------------------------
+// 用户
+//-----------------------------------------------------------------------------
+export interface ChestRow extends GeneratedChestrow {}
+export interface ChestHeroRow extends GeneratedChestHeroRow {}
+export type ChestTable = {
+    chest: ChestRow[];
+    hero: ChestHeroRow[];
 };

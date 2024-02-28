@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package chest;
+
+//宝箱数据
+message ChestInfo {
+    uint32 id = 1; // 宝箱id
+    uint32 num = 2; // 数量
+}
+
+//积分数据
+message ScoreInfo {
+    uint32 score = 4; //积分
+    uint32 score_chest_id = 5;//当前积分奖励宝箱ID
+}
+
+
+//数据请求
+message c2s_load {
+} 
+message s2c_load {
+    uint32 err = 1;
+    uint32 hero_id = 2; //当前使用的武将
+    repeated ChestInfo chests = 3; //宝箱数据
+    ScoreInfo score = 4; //积分数据
+}
+
+//开宝箱
+message c2s_open_chest {
+    uint32 id = 1;//宝箱id
+}
+message s2c_open_chest {
+    uint32 err = 1;
+    ChestInfo ches = 2; //宝箱数据
+    ScoreInfo score = 3; //积分数据
+}
+
+//积分领取
+message c2s_score_receive {
+    
+}
+message s2c_score_receive {
+    uint32 err = 1;
+    ScoreInfo score = 2; //积分数据
+}
+
+
+//切换武将
+message c2s_switch_hero {
+    uint32 hero_id = 1;//武将id
+}
+message s2c_switch_hero {
+    uint32 err = 1;
+}
+
+
+// 通知箱子数据变化
+message notify {
+    repeated ChestInfo ches = 1; //宝箱数据
+    ScoreInfo score = 2; //积分数据
+}

@@ -38,7 +38,7 @@ export enum ui {
 
     CHAT,
 
-    BOX_HERO,
+    CHEST_HERO,
 
     GM,
 }
@@ -154,9 +154,9 @@ export namespace ui {
         });
 
         app.ui.register({
-            id: ui.BOX_HERO,
+            id: ui.CHEST_HERO,
             autoClose: false,
-            url: "resources/prefab/box/box-hero.lh",
+            url: "resources/prefab/chest/chest-hero.lh",
             blockInput: true,
         });
 

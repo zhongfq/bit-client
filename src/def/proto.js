@@ -2673,6 +2673,6964 @@ $root.bag = (function() {
     return bag;
 })();
 
+$root.battle = (function() {
+
+    /**
+     * Namespace battle.
+     * @exports battle
+     * @namespace
+     */
+    var battle = {};
+
+    battle.BattleHero = (function() {
+
+        /**
+         * Properties of a BattleHero.
+         * @memberof battle
+         * @interface IBattleHero
+         * @property {number|null} [heroId] BattleHero heroId
+         * @property {number|null} [eid] BattleHero eid
+         */
+
+        /**
+         * Constructs a new BattleHero.
+         * @memberof battle
+         * @classdesc Represents a BattleHero.
+         * @implements IBattleHero
+         * @constructor
+         * @param {battle.IBattleHero=} [properties] Properties to set
+         */
+        function BattleHero(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * BattleHero heroId.
+         * @member {number} heroId
+         * @memberof battle.BattleHero
+         * @instance
+         */
+        BattleHero.prototype.heroId = 0;
+
+        /**
+         * BattleHero eid.
+         * @member {number} eid
+         * @memberof battle.BattleHero
+         * @instance
+         */
+        BattleHero.prototype.eid = 0;
+
+        /**
+         * Creates a new BattleHero instance using the specified properties.
+         * @function create
+         * @memberof battle.BattleHero
+         * @static
+         * @param {battle.IBattleHero=} [properties] Properties to set
+         * @returns {battle.BattleHero} BattleHero instance
+         */
+        BattleHero.create = function create(properties) {
+            return new BattleHero(properties);
+        };
+
+        /**
+         * Encodes the specified BattleHero message. Does not implicitly {@link battle.BattleHero.verify|verify} messages.
+         * @function encode
+         * @memberof battle.BattleHero
+         * @static
+         * @param {battle.IBattleHero} message BattleHero message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        BattleHero.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.heroId != null && Object.hasOwnProperty.call(message, "heroId"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.heroId);
+            if (message.eid != null && Object.hasOwnProperty.call(message, "eid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.eid);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified BattleHero message, length delimited. Does not implicitly {@link battle.BattleHero.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof battle.BattleHero
+         * @static
+         * @param {battle.IBattleHero} message BattleHero message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        BattleHero.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a BattleHero message from the specified reader or buffer.
+         * @function decode
+         * @memberof battle.BattleHero
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {battle.BattleHero} BattleHero
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        BattleHero.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.battle.BattleHero();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.heroId = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.eid = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a BattleHero message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof battle.BattleHero
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {battle.BattleHero} BattleHero
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        BattleHero.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a BattleHero message.
+         * @function verify
+         * @memberof battle.BattleHero
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        BattleHero.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.heroId != null && message.hasOwnProperty("heroId"))
+                if (!$util.isInteger(message.heroId))
+                    return "heroId: integer expected";
+            if (message.eid != null && message.hasOwnProperty("eid"))
+                if (!$util.isInteger(message.eid))
+                    return "eid: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a BattleHero message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof battle.BattleHero
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {battle.BattleHero} BattleHero
+         */
+        BattleHero.fromObject = function fromObject(object) {
+            if (object instanceof $root.battle.BattleHero)
+                return object;
+            var message = new $root.battle.BattleHero();
+            if (object.heroId != null)
+                message.heroId = object.heroId >>> 0;
+            if (object.eid != null)
+                message.eid = object.eid >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a BattleHero message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof battle.BattleHero
+         * @static
+         * @param {battle.BattleHero} message BattleHero
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        BattleHero.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.heroId = 0;
+                object.eid = 0;
+            }
+            if (message.heroId != null && message.hasOwnProperty("heroId"))
+                object.heroId = message.heroId;
+            if (message.eid != null && message.hasOwnProperty("eid"))
+                object.eid = message.eid;
+            return object;
+        };
+
+        /**
+         * Converts this BattleHero to JSON.
+         * @function toJSON
+         * @memberof battle.BattleHero
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        BattleHero.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for BattleHero
+         * @function getTypeUrl
+         * @memberof battle.BattleHero
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        BattleHero.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/battle.BattleHero";
+        };
+
+        return BattleHero;
+    })();
+
+    battle.BattleRole = (function() {
+
+        /**
+         * Properties of a BattleRole.
+         * @memberof battle
+         * @interface IBattleRole
+         * @property {number|null} [rid] BattleRole rid
+         * @property {string|null} [name] BattleRole name
+         * @property {Array.<battle.IBattleHero>|null} [heros] BattleRole heros
+         */
+
+        /**
+         * Constructs a new BattleRole.
+         * @memberof battle
+         * @classdesc Represents a BattleRole.
+         * @implements IBattleRole
+         * @constructor
+         * @param {battle.IBattleRole=} [properties] Properties to set
+         */
+        function BattleRole(properties) {
+            this.heros = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * BattleRole rid.
+         * @member {number} rid
+         * @memberof battle.BattleRole
+         * @instance
+         */
+        BattleRole.prototype.rid = 0;
+
+        /**
+         * BattleRole name.
+         * @member {string} name
+         * @memberof battle.BattleRole
+         * @instance
+         */
+        BattleRole.prototype.name = "";
+
+        /**
+         * BattleRole heros.
+         * @member {Array.<battle.IBattleHero>} heros
+         * @memberof battle.BattleRole
+         * @instance
+         */
+        BattleRole.prototype.heros = $util.emptyArray;
+
+        /**
+         * Creates a new BattleRole instance using the specified properties.
+         * @function create
+         * @memberof battle.BattleRole
+         * @static
+         * @param {battle.IBattleRole=} [properties] Properties to set
+         * @returns {battle.BattleRole} BattleRole instance
+         */
+        BattleRole.create = function create(properties) {
+            return new BattleRole(properties);
+        };
+
+        /**
+         * Encodes the specified BattleRole message. Does not implicitly {@link battle.BattleRole.verify|verify} messages.
+         * @function encode
+         * @memberof battle.BattleRole
+         * @static
+         * @param {battle.IBattleRole} message BattleRole message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        BattleRole.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.rid != null && Object.hasOwnProperty.call(message, "rid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.rid);
+            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
+            if (message.heros != null && message.heros.length)
+                for (var i = 0; i < message.heros.length; ++i)
+                    $root.battle.BattleHero.encode(message.heros[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified BattleRole message, length delimited. Does not implicitly {@link battle.BattleRole.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof battle.BattleRole
+         * @static
+         * @param {battle.IBattleRole} message BattleRole message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        BattleRole.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a BattleRole message from the specified reader or buffer.
+         * @function decode
+         * @memberof battle.BattleRole
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {battle.BattleRole} BattleRole
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        BattleRole.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.battle.BattleRole();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.rid = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.name = reader.string();
+                        break;
+                    }
+                case 3: {
+                        if (!(message.heros && message.heros.length))
+                            message.heros = [];
+                        message.heros.push($root.battle.BattleHero.decode(reader, reader.uint32()));
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a BattleRole message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof battle.BattleRole
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {battle.BattleRole} BattleRole
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        BattleRole.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a BattleRole message.
+         * @function verify
+         * @memberof battle.BattleRole
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        BattleRole.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.rid != null && message.hasOwnProperty("rid"))
+                if (!$util.isInteger(message.rid))
+                    return "rid: integer expected";
+            if (message.name != null && message.hasOwnProperty("name"))
+                if (!$util.isString(message.name))
+                    return "name: string expected";
+            if (message.heros != null && message.hasOwnProperty("heros")) {
+                if (!Array.isArray(message.heros))
+                    return "heros: array expected";
+                for (var i = 0; i < message.heros.length; ++i) {
+                    var error = $root.battle.BattleHero.verify(message.heros[i]);
+                    if (error)
+                        return "heros." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a BattleRole message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof battle.BattleRole
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {battle.BattleRole} BattleRole
+         */
+        BattleRole.fromObject = function fromObject(object) {
+            if (object instanceof $root.battle.BattleRole)
+                return object;
+            var message = new $root.battle.BattleRole();
+            if (object.rid != null)
+                message.rid = object.rid >>> 0;
+            if (object.name != null)
+                message.name = String(object.name);
+            if (object.heros) {
+                if (!Array.isArray(object.heros))
+                    throw TypeError(".battle.BattleRole.heros: array expected");
+                message.heros = [];
+                for (var i = 0; i < object.heros.length; ++i) {
+                    if (typeof object.heros[i] !== "object")
+                        throw TypeError(".battle.BattleRole.heros: object expected");
+                    message.heros[i] = $root.battle.BattleHero.fromObject(object.heros[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a BattleRole message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof battle.BattleRole
+         * @static
+         * @param {battle.BattleRole} message BattleRole
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        BattleRole.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.heros = [];
+            if (options.defaults) {
+                object.rid = 0;
+                object.name = "";
+            }
+            if (message.rid != null && message.hasOwnProperty("rid"))
+                object.rid = message.rid;
+            if (message.name != null && message.hasOwnProperty("name"))
+                object.name = message.name;
+            if (message.heros && message.heros.length) {
+                object.heros = [];
+                for (var j = 0; j < message.heros.length; ++j)
+                    object.heros[j] = $root.battle.BattleHero.toObject(message.heros[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this BattleRole to JSON.
+         * @function toJSON
+         * @memberof battle.BattleRole
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        BattleRole.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for BattleRole
+         * @function getTypeUrl
+         * @memberof battle.BattleRole
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        BattleRole.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/battle.BattleRole";
+        };
+
+        return BattleRole;
+    })();
+
+    battle.BattleEntity = (function() {
+
+        /**
+         * Properties of a BattleEntity.
+         * @memberof battle
+         * @interface IBattleEntity
+         * @property {number|null} [eid] BattleEntity eid
+         * @property {number|null} [rid] BattleEntity rid
+         * @property {number|null} [entityId] BattleEntity entityId
+         * @property {number|null} [maxHp] BattleEntity maxHp
+         * @property {number|null} [hp] BattleEntity hp
+         * @property {number|null} [x] BattleEntity x
+         * @property {number|null} [y] BattleEntity y
+         * @property {number|null} [z] BattleEntity z
+         * @property {number|null} [maxMp] BattleEntity maxMp
+         * @property {number|null} [mp] BattleEntity mp
+         */
+
+        /**
+         * Constructs a new BattleEntity.
+         * @memberof battle
+         * @classdesc Represents a BattleEntity.
+         * @implements IBattleEntity
+         * @constructor
+         * @param {battle.IBattleEntity=} [properties] Properties to set
+         */
+        function BattleEntity(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * BattleEntity eid.
+         * @member {number} eid
+         * @memberof battle.BattleEntity
+         * @instance
+         */
+        BattleEntity.prototype.eid = 0;
+
+        /**
+         * BattleEntity rid.
+         * @member {number} rid
+         * @memberof battle.BattleEntity
+         * @instance
+         */
+        BattleEntity.prototype.rid = 0;
+
+        /**
+         * BattleEntity entityId.
+         * @member {number} entityId
+         * @memberof battle.BattleEntity
+         * @instance
+         */
+        BattleEntity.prototype.entityId = 0;
+
+        /**
+         * BattleEntity maxHp.
+         * @member {number} maxHp
+         * @memberof battle.BattleEntity
+         * @instance
+         */
+        BattleEntity.prototype.maxHp = 0;
+
+        /**
+         * BattleEntity hp.
+         * @member {number} hp
+         * @memberof battle.BattleEntity
+         * @instance
+         */
+        BattleEntity.prototype.hp = 0;
+
+        /**
+         * BattleEntity x.
+         * @member {number} x
+         * @memberof battle.BattleEntity
+         * @instance
+         */
+        BattleEntity.prototype.x = 0;
+
+        /**
+         * BattleEntity y.
+         * @member {number} y
+         * @memberof battle.BattleEntity
+         * @instance
+         */
+        BattleEntity.prototype.y = 0;
+
+        /**
+         * BattleEntity z.
+         * @member {number} z
+         * @memberof battle.BattleEntity
+         * @instance
+         */
+        BattleEntity.prototype.z = 0;
+
+        /**
+         * BattleEntity maxMp.
+         * @member {number} maxMp
+         * @memberof battle.BattleEntity
+         * @instance
+         */
+        BattleEntity.prototype.maxMp = 0;
+
+        /**
+         * BattleEntity mp.
+         * @member {number} mp
+         * @memberof battle.BattleEntity
+         * @instance
+         */
+        BattleEntity.prototype.mp = 0;
+
+        /**
+         * Creates a new BattleEntity instance using the specified properties.
+         * @function create
+         * @memberof battle.BattleEntity
+         * @static
+         * @param {battle.IBattleEntity=} [properties] Properties to set
+         * @returns {battle.BattleEntity} BattleEntity instance
+         */
+        BattleEntity.create = function create(properties) {
+            return new BattleEntity(properties);
+        };
+
+        /**
+         * Encodes the specified BattleEntity message. Does not implicitly {@link battle.BattleEntity.verify|verify} messages.
+         * @function encode
+         * @memberof battle.BattleEntity
+         * @static
+         * @param {battle.IBattleEntity} message BattleEntity message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        BattleEntity.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.eid != null && Object.hasOwnProperty.call(message, "eid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.eid);
+            if (message.rid != null && Object.hasOwnProperty.call(message, "rid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.rid);
+            if (message.entityId != null && Object.hasOwnProperty.call(message, "entityId"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.entityId);
+            if (message.maxHp != null && Object.hasOwnProperty.call(message, "maxHp"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.maxHp);
+            if (message.hp != null && Object.hasOwnProperty.call(message, "hp"))
+                writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.hp);
+            if (message.x != null && Object.hasOwnProperty.call(message, "x"))
+                writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.x);
+            if (message.y != null && Object.hasOwnProperty.call(message, "y"))
+                writer.uint32(/* id 11, wireType 0 =*/88).uint32(message.y);
+            if (message.z != null && Object.hasOwnProperty.call(message, "z"))
+                writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.z);
+            if (message.maxMp != null && Object.hasOwnProperty.call(message, "maxMp"))
+                writer.uint32(/* id 13, wireType 0 =*/104).uint32(message.maxMp);
+            if (message.mp != null && Object.hasOwnProperty.call(message, "mp"))
+                writer.uint32(/* id 14, wireType 0 =*/112).uint32(message.mp);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified BattleEntity message, length delimited. Does not implicitly {@link battle.BattleEntity.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof battle.BattleEntity
+         * @static
+         * @param {battle.IBattleEntity} message BattleEntity message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        BattleEntity.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a BattleEntity message from the specified reader or buffer.
+         * @function decode
+         * @memberof battle.BattleEntity
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {battle.BattleEntity} BattleEntity
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        BattleEntity.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.battle.BattleEntity();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.eid = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.rid = reader.uint32();
+                        break;
+                    }
+                case 3: {
+                        message.entityId = reader.uint32();
+                        break;
+                    }
+                case 5: {
+                        message.maxHp = reader.uint32();
+                        break;
+                    }
+                case 6: {
+                        message.hp = reader.uint32();
+                        break;
+                    }
+                case 10: {
+                        message.x = reader.uint32();
+                        break;
+                    }
+                case 11: {
+                        message.y = reader.uint32();
+                        break;
+                    }
+                case 12: {
+                        message.z = reader.uint32();
+                        break;
+                    }
+                case 13: {
+                        message.maxMp = reader.uint32();
+                        break;
+                    }
+                case 14: {
+                        message.mp = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a BattleEntity message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof battle.BattleEntity
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {battle.BattleEntity} BattleEntity
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        BattleEntity.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a BattleEntity message.
+         * @function verify
+         * @memberof battle.BattleEntity
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        BattleEntity.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.eid != null && message.hasOwnProperty("eid"))
+                if (!$util.isInteger(message.eid))
+                    return "eid: integer expected";
+            if (message.rid != null && message.hasOwnProperty("rid"))
+                if (!$util.isInteger(message.rid))
+                    return "rid: integer expected";
+            if (message.entityId != null && message.hasOwnProperty("entityId"))
+                if (!$util.isInteger(message.entityId))
+                    return "entityId: integer expected";
+            if (message.maxHp != null && message.hasOwnProperty("maxHp"))
+                if (!$util.isInteger(message.maxHp))
+                    return "maxHp: integer expected";
+            if (message.hp != null && message.hasOwnProperty("hp"))
+                if (!$util.isInteger(message.hp))
+                    return "hp: integer expected";
+            if (message.x != null && message.hasOwnProperty("x"))
+                if (!$util.isInteger(message.x))
+                    return "x: integer expected";
+            if (message.y != null && message.hasOwnProperty("y"))
+                if (!$util.isInteger(message.y))
+                    return "y: integer expected";
+            if (message.z != null && message.hasOwnProperty("z"))
+                if (!$util.isInteger(message.z))
+                    return "z: integer expected";
+            if (message.maxMp != null && message.hasOwnProperty("maxMp"))
+                if (!$util.isInteger(message.maxMp))
+                    return "maxMp: integer expected";
+            if (message.mp != null && message.hasOwnProperty("mp"))
+                if (!$util.isInteger(message.mp))
+                    return "mp: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a BattleEntity message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof battle.BattleEntity
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {battle.BattleEntity} BattleEntity
+         */
+        BattleEntity.fromObject = function fromObject(object) {
+            if (object instanceof $root.battle.BattleEntity)
+                return object;
+            var message = new $root.battle.BattleEntity();
+            if (object.eid != null)
+                message.eid = object.eid >>> 0;
+            if (object.rid != null)
+                message.rid = object.rid >>> 0;
+            if (object.entityId != null)
+                message.entityId = object.entityId >>> 0;
+            if (object.maxHp != null)
+                message.maxHp = object.maxHp >>> 0;
+            if (object.hp != null)
+                message.hp = object.hp >>> 0;
+            if (object.x != null)
+                message.x = object.x >>> 0;
+            if (object.y != null)
+                message.y = object.y >>> 0;
+            if (object.z != null)
+                message.z = object.z >>> 0;
+            if (object.maxMp != null)
+                message.maxMp = object.maxMp >>> 0;
+            if (object.mp != null)
+                message.mp = object.mp >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a BattleEntity message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof battle.BattleEntity
+         * @static
+         * @param {battle.BattleEntity} message BattleEntity
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        BattleEntity.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.eid = 0;
+                object.rid = 0;
+                object.entityId = 0;
+                object.maxHp = 0;
+                object.hp = 0;
+                object.x = 0;
+                object.y = 0;
+                object.z = 0;
+                object.maxMp = 0;
+                object.mp = 0;
+            }
+            if (message.eid != null && message.hasOwnProperty("eid"))
+                object.eid = message.eid;
+            if (message.rid != null && message.hasOwnProperty("rid"))
+                object.rid = message.rid;
+            if (message.entityId != null && message.hasOwnProperty("entityId"))
+                object.entityId = message.entityId;
+            if (message.maxHp != null && message.hasOwnProperty("maxHp"))
+                object.maxHp = message.maxHp;
+            if (message.hp != null && message.hasOwnProperty("hp"))
+                object.hp = message.hp;
+            if (message.x != null && message.hasOwnProperty("x"))
+                object.x = message.x;
+            if (message.y != null && message.hasOwnProperty("y"))
+                object.y = message.y;
+            if (message.z != null && message.hasOwnProperty("z"))
+                object.z = message.z;
+            if (message.maxMp != null && message.hasOwnProperty("maxMp"))
+                object.maxMp = message.maxMp;
+            if (message.mp != null && message.hasOwnProperty("mp"))
+                object.mp = message.mp;
+            return object;
+        };
+
+        /**
+         * Converts this BattleEntity to JSON.
+         * @function toJSON
+         * @memberof battle.BattleEntity
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        BattleEntity.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for BattleEntity
+         * @function getTypeUrl
+         * @memberof battle.BattleEntity
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        BattleEntity.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/battle.BattleEntity";
+        };
+
+        return BattleEntity;
+    })();
+
+    battle.cmd_add_entity = (function() {
+
+        /**
+         * Properties of a cmd_add_entity.
+         * @memberof battle
+         * @interface Icmd_add_entity
+         * @property {battle.IBattleEntity|null} [entity] cmd_add_entity entity
+         */
+
+        /**
+         * Constructs a new cmd_add_entity.
+         * @memberof battle
+         * @classdesc Represents a cmd_add_entity.
+         * @implements Icmd_add_entity
+         * @constructor
+         * @param {battle.Icmd_add_entity=} [properties] Properties to set
+         */
+        function cmd_add_entity(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * cmd_add_entity entity.
+         * @member {battle.IBattleEntity|null|undefined} entity
+         * @memberof battle.cmd_add_entity
+         * @instance
+         */
+        cmd_add_entity.prototype.entity = null;
+
+        /**
+         * Creates a new cmd_add_entity instance using the specified properties.
+         * @function create
+         * @memberof battle.cmd_add_entity
+         * @static
+         * @param {battle.Icmd_add_entity=} [properties] Properties to set
+         * @returns {battle.cmd_add_entity} cmd_add_entity instance
+         */
+        cmd_add_entity.create = function create(properties) {
+            return new cmd_add_entity(properties);
+        };
+
+        /**
+         * Encodes the specified cmd_add_entity message. Does not implicitly {@link battle.cmd_add_entity.verify|verify} messages.
+         * @function encode
+         * @memberof battle.cmd_add_entity
+         * @static
+         * @param {battle.Icmd_add_entity} message cmd_add_entity message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        cmd_add_entity.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.entity != null && Object.hasOwnProperty.call(message, "entity"))
+                $root.battle.BattleEntity.encode(message.entity, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified cmd_add_entity message, length delimited. Does not implicitly {@link battle.cmd_add_entity.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof battle.cmd_add_entity
+         * @static
+         * @param {battle.Icmd_add_entity} message cmd_add_entity message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        cmd_add_entity.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a cmd_add_entity message from the specified reader or buffer.
+         * @function decode
+         * @memberof battle.cmd_add_entity
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {battle.cmd_add_entity} cmd_add_entity
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        cmd_add_entity.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.battle.cmd_add_entity();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.entity = $root.battle.BattleEntity.decode(reader, reader.uint32());
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a cmd_add_entity message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof battle.cmd_add_entity
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {battle.cmd_add_entity} cmd_add_entity
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        cmd_add_entity.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a cmd_add_entity message.
+         * @function verify
+         * @memberof battle.cmd_add_entity
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        cmd_add_entity.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.entity != null && message.hasOwnProperty("entity")) {
+                var error = $root.battle.BattleEntity.verify(message.entity);
+                if (error)
+                    return "entity." + error;
+            }
+            return null;
+        };
+
+        /**
+         * Creates a cmd_add_entity message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof battle.cmd_add_entity
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {battle.cmd_add_entity} cmd_add_entity
+         */
+        cmd_add_entity.fromObject = function fromObject(object) {
+            if (object instanceof $root.battle.cmd_add_entity)
+                return object;
+            var message = new $root.battle.cmd_add_entity();
+            if (object.entity != null) {
+                if (typeof object.entity !== "object")
+                    throw TypeError(".battle.cmd_add_entity.entity: object expected");
+                message.entity = $root.battle.BattleEntity.fromObject(object.entity);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a cmd_add_entity message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof battle.cmd_add_entity
+         * @static
+         * @param {battle.cmd_add_entity} message cmd_add_entity
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        cmd_add_entity.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.entity = null;
+            if (message.entity != null && message.hasOwnProperty("entity"))
+                object.entity = $root.battle.BattleEntity.toObject(message.entity, options);
+            return object;
+        };
+
+        /**
+         * Converts this cmd_add_entity to JSON.
+         * @function toJSON
+         * @memberof battle.cmd_add_entity
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        cmd_add_entity.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for cmd_add_entity
+         * @function getTypeUrl
+         * @memberof battle.cmd_add_entity
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        cmd_add_entity.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/battle.cmd_add_entity";
+        };
+
+        return cmd_add_entity;
+    })();
+
+    battle.cmd_update_entity = (function() {
+
+        /**
+         * Properties of a cmd_update_entity.
+         * @memberof battle
+         * @interface Icmd_update_entity
+         * @property {number|null} [eid] cmd_update_entity eid
+         * @property {number|null} [maxHp] cmd_update_entity maxHp
+         * @property {number|null} [hp] cmd_update_entity hp
+         * @property {number|null} [x] cmd_update_entity x
+         * @property {number|null} [y] cmd_update_entity y
+         * @property {number|null} [z] cmd_update_entity z
+         */
+
+        /**
+         * Constructs a new cmd_update_entity.
+         * @memberof battle
+         * @classdesc Represents a cmd_update_entity.
+         * @implements Icmd_update_entity
+         * @constructor
+         * @param {battle.Icmd_update_entity=} [properties] Properties to set
+         */
+        function cmd_update_entity(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * cmd_update_entity eid.
+         * @member {number} eid
+         * @memberof battle.cmd_update_entity
+         * @instance
+         */
+        cmd_update_entity.prototype.eid = 0;
+
+        /**
+         * cmd_update_entity maxHp.
+         * @member {number} maxHp
+         * @memberof battle.cmd_update_entity
+         * @instance
+         */
+        cmd_update_entity.prototype.maxHp = 0;
+
+        /**
+         * cmd_update_entity hp.
+         * @member {number} hp
+         * @memberof battle.cmd_update_entity
+         * @instance
+         */
+        cmd_update_entity.prototype.hp = 0;
+
+        /**
+         * cmd_update_entity x.
+         * @member {number} x
+         * @memberof battle.cmd_update_entity
+         * @instance
+         */
+        cmd_update_entity.prototype.x = 0;
+
+        /**
+         * cmd_update_entity y.
+         * @member {number} y
+         * @memberof battle.cmd_update_entity
+         * @instance
+         */
+        cmd_update_entity.prototype.y = 0;
+
+        /**
+         * cmd_update_entity z.
+         * @member {number} z
+         * @memberof battle.cmd_update_entity
+         * @instance
+         */
+        cmd_update_entity.prototype.z = 0;
+
+        /**
+         * Creates a new cmd_update_entity instance using the specified properties.
+         * @function create
+         * @memberof battle.cmd_update_entity
+         * @static
+         * @param {battle.Icmd_update_entity=} [properties] Properties to set
+         * @returns {battle.cmd_update_entity} cmd_update_entity instance
+         */
+        cmd_update_entity.create = function create(properties) {
+            return new cmd_update_entity(properties);
+        };
+
+        /**
+         * Encodes the specified cmd_update_entity message. Does not implicitly {@link battle.cmd_update_entity.verify|verify} messages.
+         * @function encode
+         * @memberof battle.cmd_update_entity
+         * @static
+         * @param {battle.Icmd_update_entity} message cmd_update_entity message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        cmd_update_entity.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.eid != null && Object.hasOwnProperty.call(message, "eid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.eid);
+            if (message.maxHp != null && Object.hasOwnProperty.call(message, "maxHp"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.maxHp);
+            if (message.hp != null && Object.hasOwnProperty.call(message, "hp"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.hp);
+            if (message.x != null && Object.hasOwnProperty.call(message, "x"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.x);
+            if (message.y != null && Object.hasOwnProperty.call(message, "y"))
+                writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.y);
+            if (message.z != null && Object.hasOwnProperty.call(message, "z"))
+                writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.z);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified cmd_update_entity message, length delimited. Does not implicitly {@link battle.cmd_update_entity.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof battle.cmd_update_entity
+         * @static
+         * @param {battle.Icmd_update_entity} message cmd_update_entity message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        cmd_update_entity.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a cmd_update_entity message from the specified reader or buffer.
+         * @function decode
+         * @memberof battle.cmd_update_entity
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {battle.cmd_update_entity} cmd_update_entity
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        cmd_update_entity.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.battle.cmd_update_entity();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.eid = reader.uint32();
+                        break;
+                    }
+                case 3: {
+                        message.maxHp = reader.uint32();
+                        break;
+                    }
+                case 4: {
+                        message.hp = reader.uint32();
+                        break;
+                    }
+                case 5: {
+                        message.x = reader.uint32();
+                        break;
+                    }
+                case 6: {
+                        message.y = reader.uint32();
+                        break;
+                    }
+                case 7: {
+                        message.z = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a cmd_update_entity message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof battle.cmd_update_entity
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {battle.cmd_update_entity} cmd_update_entity
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        cmd_update_entity.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a cmd_update_entity message.
+         * @function verify
+         * @memberof battle.cmd_update_entity
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        cmd_update_entity.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.eid != null && message.hasOwnProperty("eid"))
+                if (!$util.isInteger(message.eid))
+                    return "eid: integer expected";
+            if (message.maxHp != null && message.hasOwnProperty("maxHp"))
+                if (!$util.isInteger(message.maxHp))
+                    return "maxHp: integer expected";
+            if (message.hp != null && message.hasOwnProperty("hp"))
+                if (!$util.isInteger(message.hp))
+                    return "hp: integer expected";
+            if (message.x != null && message.hasOwnProperty("x"))
+                if (!$util.isInteger(message.x))
+                    return "x: integer expected";
+            if (message.y != null && message.hasOwnProperty("y"))
+                if (!$util.isInteger(message.y))
+                    return "y: integer expected";
+            if (message.z != null && message.hasOwnProperty("z"))
+                if (!$util.isInteger(message.z))
+                    return "z: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a cmd_update_entity message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof battle.cmd_update_entity
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {battle.cmd_update_entity} cmd_update_entity
+         */
+        cmd_update_entity.fromObject = function fromObject(object) {
+            if (object instanceof $root.battle.cmd_update_entity)
+                return object;
+            var message = new $root.battle.cmd_update_entity();
+            if (object.eid != null)
+                message.eid = object.eid >>> 0;
+            if (object.maxHp != null)
+                message.maxHp = object.maxHp >>> 0;
+            if (object.hp != null)
+                message.hp = object.hp >>> 0;
+            if (object.x != null)
+                message.x = object.x >>> 0;
+            if (object.y != null)
+                message.y = object.y >>> 0;
+            if (object.z != null)
+                message.z = object.z >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a cmd_update_entity message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof battle.cmd_update_entity
+         * @static
+         * @param {battle.cmd_update_entity} message cmd_update_entity
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        cmd_update_entity.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.eid = 0;
+                object.maxHp = 0;
+                object.hp = 0;
+                object.x = 0;
+                object.y = 0;
+                object.z = 0;
+            }
+            if (message.eid != null && message.hasOwnProperty("eid"))
+                object.eid = message.eid;
+            if (message.maxHp != null && message.hasOwnProperty("maxHp"))
+                object.maxHp = message.maxHp;
+            if (message.hp != null && message.hasOwnProperty("hp"))
+                object.hp = message.hp;
+            if (message.x != null && message.hasOwnProperty("x"))
+                object.x = message.x;
+            if (message.y != null && message.hasOwnProperty("y"))
+                object.y = message.y;
+            if (message.z != null && message.hasOwnProperty("z"))
+                object.z = message.z;
+            return object;
+        };
+
+        /**
+         * Converts this cmd_update_entity to JSON.
+         * @function toJSON
+         * @memberof battle.cmd_update_entity
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        cmd_update_entity.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for cmd_update_entity
+         * @function getTypeUrl
+         * @memberof battle.cmd_update_entity
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        cmd_update_entity.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/battle.cmd_update_entity";
+        };
+
+        return cmd_update_entity;
+    })();
+
+    battle.cmd_del_entity = (function() {
+
+        /**
+         * Properties of a cmd_del_entity.
+         * @memberof battle
+         * @interface Icmd_del_entity
+         * @property {number|null} [eid] cmd_del_entity eid
+         */
+
+        /**
+         * Constructs a new cmd_del_entity.
+         * @memberof battle
+         * @classdesc Represents a cmd_del_entity.
+         * @implements Icmd_del_entity
+         * @constructor
+         * @param {battle.Icmd_del_entity=} [properties] Properties to set
+         */
+        function cmd_del_entity(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * cmd_del_entity eid.
+         * @member {number} eid
+         * @memberof battle.cmd_del_entity
+         * @instance
+         */
+        cmd_del_entity.prototype.eid = 0;
+
+        /**
+         * Creates a new cmd_del_entity instance using the specified properties.
+         * @function create
+         * @memberof battle.cmd_del_entity
+         * @static
+         * @param {battle.Icmd_del_entity=} [properties] Properties to set
+         * @returns {battle.cmd_del_entity} cmd_del_entity instance
+         */
+        cmd_del_entity.create = function create(properties) {
+            return new cmd_del_entity(properties);
+        };
+
+        /**
+         * Encodes the specified cmd_del_entity message. Does not implicitly {@link battle.cmd_del_entity.verify|verify} messages.
+         * @function encode
+         * @memberof battle.cmd_del_entity
+         * @static
+         * @param {battle.Icmd_del_entity} message cmd_del_entity message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        cmd_del_entity.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.eid != null && Object.hasOwnProperty.call(message, "eid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.eid);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified cmd_del_entity message, length delimited. Does not implicitly {@link battle.cmd_del_entity.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof battle.cmd_del_entity
+         * @static
+         * @param {battle.Icmd_del_entity} message cmd_del_entity message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        cmd_del_entity.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a cmd_del_entity message from the specified reader or buffer.
+         * @function decode
+         * @memberof battle.cmd_del_entity
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {battle.cmd_del_entity} cmd_del_entity
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        cmd_del_entity.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.battle.cmd_del_entity();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.eid = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a cmd_del_entity message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof battle.cmd_del_entity
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {battle.cmd_del_entity} cmd_del_entity
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        cmd_del_entity.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a cmd_del_entity message.
+         * @function verify
+         * @memberof battle.cmd_del_entity
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        cmd_del_entity.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.eid != null && message.hasOwnProperty("eid"))
+                if (!$util.isInteger(message.eid))
+                    return "eid: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a cmd_del_entity message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof battle.cmd_del_entity
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {battle.cmd_del_entity} cmd_del_entity
+         */
+        cmd_del_entity.fromObject = function fromObject(object) {
+            if (object instanceof $root.battle.cmd_del_entity)
+                return object;
+            var message = new $root.battle.cmd_del_entity();
+            if (object.eid != null)
+                message.eid = object.eid >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a cmd_del_entity message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof battle.cmd_del_entity
+         * @static
+         * @param {battle.cmd_del_entity} message cmd_del_entity
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        cmd_del_entity.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.eid = 0;
+            if (message.eid != null && message.hasOwnProperty("eid"))
+                object.eid = message.eid;
+            return object;
+        };
+
+        /**
+         * Converts this cmd_del_entity to JSON.
+         * @function toJSON
+         * @memberof battle.cmd_del_entity
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        cmd_del_entity.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for cmd_del_entity
+         * @function getTypeUrl
+         * @memberof battle.cmd_del_entity
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        cmd_del_entity.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/battle.cmd_del_entity";
+        };
+
+        return cmd_del_entity;
+    })();
+
+    battle.cmd_move_to = (function() {
+
+        /**
+         * Properties of a cmd_move_to.
+         * @memberof battle
+         * @interface Icmd_move_to
+         * @property {number|null} [eid] cmd_move_to eid
+         * @property {number|null} [speed] cmd_move_to speed
+         * @property {number|null} [targetX] cmd_move_to targetX
+         * @property {number|null} [targetY] cmd_move_to targetY
+         * @property {number|null} [targetZ] cmd_move_to targetZ
+         */
+
+        /**
+         * Constructs a new cmd_move_to.
+         * @memberof battle
+         * @classdesc Represents a cmd_move_to.
+         * @implements Icmd_move_to
+         * @constructor
+         * @param {battle.Icmd_move_to=} [properties] Properties to set
+         */
+        function cmd_move_to(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * cmd_move_to eid.
+         * @member {number} eid
+         * @memberof battle.cmd_move_to
+         * @instance
+         */
+        cmd_move_to.prototype.eid = 0;
+
+        /**
+         * cmd_move_to speed.
+         * @member {number} speed
+         * @memberof battle.cmd_move_to
+         * @instance
+         */
+        cmd_move_to.prototype.speed = 0;
+
+        /**
+         * cmd_move_to targetX.
+         * @member {number} targetX
+         * @memberof battle.cmd_move_to
+         * @instance
+         */
+        cmd_move_to.prototype.targetX = 0;
+
+        /**
+         * cmd_move_to targetY.
+         * @member {number} targetY
+         * @memberof battle.cmd_move_to
+         * @instance
+         */
+        cmd_move_to.prototype.targetY = 0;
+
+        /**
+         * cmd_move_to targetZ.
+         * @member {number} targetZ
+         * @memberof battle.cmd_move_to
+         * @instance
+         */
+        cmd_move_to.prototype.targetZ = 0;
+
+        /**
+         * Creates a new cmd_move_to instance using the specified properties.
+         * @function create
+         * @memberof battle.cmd_move_to
+         * @static
+         * @param {battle.Icmd_move_to=} [properties] Properties to set
+         * @returns {battle.cmd_move_to} cmd_move_to instance
+         */
+        cmd_move_to.create = function create(properties) {
+            return new cmd_move_to(properties);
+        };
+
+        /**
+         * Encodes the specified cmd_move_to message. Does not implicitly {@link battle.cmd_move_to.verify|verify} messages.
+         * @function encode
+         * @memberof battle.cmd_move_to
+         * @static
+         * @param {battle.Icmd_move_to} message cmd_move_to message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        cmd_move_to.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.eid != null && Object.hasOwnProperty.call(message, "eid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.eid);
+            if (message.speed != null && Object.hasOwnProperty.call(message, "speed"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.speed);
+            if (message.targetX != null && Object.hasOwnProperty.call(message, "targetX"))
+                writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.targetX);
+            if (message.targetY != null && Object.hasOwnProperty.call(message, "targetY"))
+                writer.uint32(/* id 11, wireType 0 =*/88).uint32(message.targetY);
+            if (message.targetZ != null && Object.hasOwnProperty.call(message, "targetZ"))
+                writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.targetZ);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified cmd_move_to message, length delimited. Does not implicitly {@link battle.cmd_move_to.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof battle.cmd_move_to
+         * @static
+         * @param {battle.Icmd_move_to} message cmd_move_to message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        cmd_move_to.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a cmd_move_to message from the specified reader or buffer.
+         * @function decode
+         * @memberof battle.cmd_move_to
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {battle.cmd_move_to} cmd_move_to
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        cmd_move_to.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.battle.cmd_move_to();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.eid = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.speed = reader.uint32();
+                        break;
+                    }
+                case 10: {
+                        message.targetX = reader.uint32();
+                        break;
+                    }
+                case 11: {
+                        message.targetY = reader.uint32();
+                        break;
+                    }
+                case 12: {
+                        message.targetZ = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a cmd_move_to message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof battle.cmd_move_to
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {battle.cmd_move_to} cmd_move_to
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        cmd_move_to.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a cmd_move_to message.
+         * @function verify
+         * @memberof battle.cmd_move_to
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        cmd_move_to.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.eid != null && message.hasOwnProperty("eid"))
+                if (!$util.isInteger(message.eid))
+                    return "eid: integer expected";
+            if (message.speed != null && message.hasOwnProperty("speed"))
+                if (!$util.isInteger(message.speed))
+                    return "speed: integer expected";
+            if (message.targetX != null && message.hasOwnProperty("targetX"))
+                if (!$util.isInteger(message.targetX))
+                    return "targetX: integer expected";
+            if (message.targetY != null && message.hasOwnProperty("targetY"))
+                if (!$util.isInteger(message.targetY))
+                    return "targetY: integer expected";
+            if (message.targetZ != null && message.hasOwnProperty("targetZ"))
+                if (!$util.isInteger(message.targetZ))
+                    return "targetZ: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a cmd_move_to message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof battle.cmd_move_to
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {battle.cmd_move_to} cmd_move_to
+         */
+        cmd_move_to.fromObject = function fromObject(object) {
+            if (object instanceof $root.battle.cmd_move_to)
+                return object;
+            var message = new $root.battle.cmd_move_to();
+            if (object.eid != null)
+                message.eid = object.eid >>> 0;
+            if (object.speed != null)
+                message.speed = object.speed >>> 0;
+            if (object.targetX != null)
+                message.targetX = object.targetX >>> 0;
+            if (object.targetY != null)
+                message.targetY = object.targetY >>> 0;
+            if (object.targetZ != null)
+                message.targetZ = object.targetZ >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a cmd_move_to message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof battle.cmd_move_to
+         * @static
+         * @param {battle.cmd_move_to} message cmd_move_to
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        cmd_move_to.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.eid = 0;
+                object.speed = 0;
+                object.targetX = 0;
+                object.targetY = 0;
+                object.targetZ = 0;
+            }
+            if (message.eid != null && message.hasOwnProperty("eid"))
+                object.eid = message.eid;
+            if (message.speed != null && message.hasOwnProperty("speed"))
+                object.speed = message.speed;
+            if (message.targetX != null && message.hasOwnProperty("targetX"))
+                object.targetX = message.targetX;
+            if (message.targetY != null && message.hasOwnProperty("targetY"))
+                object.targetY = message.targetY;
+            if (message.targetZ != null && message.hasOwnProperty("targetZ"))
+                object.targetZ = message.targetZ;
+            return object;
+        };
+
+        /**
+         * Converts this cmd_move_to to JSON.
+         * @function toJSON
+         * @memberof battle.cmd_move_to
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        cmd_move_to.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for cmd_move_to
+         * @function getTypeUrl
+         * @memberof battle.cmd_move_to
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        cmd_move_to.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/battle.cmd_move_to";
+        };
+
+        return cmd_move_to;
+    })();
+
+    battle.cmd_force_to = (function() {
+
+        /**
+         * Properties of a cmd_force_to.
+         * @memberof battle
+         * @interface Icmd_force_to
+         * @property {number|null} [eid] cmd_force_to eid
+         * @property {number|null} [speed] cmd_force_to speed
+         * @property {number|null} [targetX] cmd_force_to targetX
+         * @property {number|null} [targetY] cmd_force_to targetY
+         * @property {number|null} [targetZ] cmd_force_to targetZ
+         */
+
+        /**
+         * Constructs a new cmd_force_to.
+         * @memberof battle
+         * @classdesc Represents a cmd_force_to.
+         * @implements Icmd_force_to
+         * @constructor
+         * @param {battle.Icmd_force_to=} [properties] Properties to set
+         */
+        function cmd_force_to(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * cmd_force_to eid.
+         * @member {number} eid
+         * @memberof battle.cmd_force_to
+         * @instance
+         */
+        cmd_force_to.prototype.eid = 0;
+
+        /**
+         * cmd_force_to speed.
+         * @member {number} speed
+         * @memberof battle.cmd_force_to
+         * @instance
+         */
+        cmd_force_to.prototype.speed = 0;
+
+        /**
+         * cmd_force_to targetX.
+         * @member {number} targetX
+         * @memberof battle.cmd_force_to
+         * @instance
+         */
+        cmd_force_to.prototype.targetX = 0;
+
+        /**
+         * cmd_force_to targetY.
+         * @member {number} targetY
+         * @memberof battle.cmd_force_to
+         * @instance
+         */
+        cmd_force_to.prototype.targetY = 0;
+
+        /**
+         * cmd_force_to targetZ.
+         * @member {number} targetZ
+         * @memberof battle.cmd_force_to
+         * @instance
+         */
+        cmd_force_to.prototype.targetZ = 0;
+
+        /**
+         * Creates a new cmd_force_to instance using the specified properties.
+         * @function create
+         * @memberof battle.cmd_force_to
+         * @static
+         * @param {battle.Icmd_force_to=} [properties] Properties to set
+         * @returns {battle.cmd_force_to} cmd_force_to instance
+         */
+        cmd_force_to.create = function create(properties) {
+            return new cmd_force_to(properties);
+        };
+
+        /**
+         * Encodes the specified cmd_force_to message. Does not implicitly {@link battle.cmd_force_to.verify|verify} messages.
+         * @function encode
+         * @memberof battle.cmd_force_to
+         * @static
+         * @param {battle.Icmd_force_to} message cmd_force_to message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        cmd_force_to.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.eid != null && Object.hasOwnProperty.call(message, "eid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.eid);
+            if (message.speed != null && Object.hasOwnProperty.call(message, "speed"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.speed);
+            if (message.targetX != null && Object.hasOwnProperty.call(message, "targetX"))
+                writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.targetX);
+            if (message.targetY != null && Object.hasOwnProperty.call(message, "targetY"))
+                writer.uint32(/* id 11, wireType 0 =*/88).uint32(message.targetY);
+            if (message.targetZ != null && Object.hasOwnProperty.call(message, "targetZ"))
+                writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.targetZ);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified cmd_force_to message, length delimited. Does not implicitly {@link battle.cmd_force_to.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof battle.cmd_force_to
+         * @static
+         * @param {battle.Icmd_force_to} message cmd_force_to message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        cmd_force_to.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a cmd_force_to message from the specified reader or buffer.
+         * @function decode
+         * @memberof battle.cmd_force_to
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {battle.cmd_force_to} cmd_force_to
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        cmd_force_to.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.battle.cmd_force_to();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.eid = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.speed = reader.uint32();
+                        break;
+                    }
+                case 10: {
+                        message.targetX = reader.uint32();
+                        break;
+                    }
+                case 11: {
+                        message.targetY = reader.uint32();
+                        break;
+                    }
+                case 12: {
+                        message.targetZ = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a cmd_force_to message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof battle.cmd_force_to
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {battle.cmd_force_to} cmd_force_to
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        cmd_force_to.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a cmd_force_to message.
+         * @function verify
+         * @memberof battle.cmd_force_to
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        cmd_force_to.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.eid != null && message.hasOwnProperty("eid"))
+                if (!$util.isInteger(message.eid))
+                    return "eid: integer expected";
+            if (message.speed != null && message.hasOwnProperty("speed"))
+                if (!$util.isInteger(message.speed))
+                    return "speed: integer expected";
+            if (message.targetX != null && message.hasOwnProperty("targetX"))
+                if (!$util.isInteger(message.targetX))
+                    return "targetX: integer expected";
+            if (message.targetY != null && message.hasOwnProperty("targetY"))
+                if (!$util.isInteger(message.targetY))
+                    return "targetY: integer expected";
+            if (message.targetZ != null && message.hasOwnProperty("targetZ"))
+                if (!$util.isInteger(message.targetZ))
+                    return "targetZ: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a cmd_force_to message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof battle.cmd_force_to
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {battle.cmd_force_to} cmd_force_to
+         */
+        cmd_force_to.fromObject = function fromObject(object) {
+            if (object instanceof $root.battle.cmd_force_to)
+                return object;
+            var message = new $root.battle.cmd_force_to();
+            if (object.eid != null)
+                message.eid = object.eid >>> 0;
+            if (object.speed != null)
+                message.speed = object.speed >>> 0;
+            if (object.targetX != null)
+                message.targetX = object.targetX >>> 0;
+            if (object.targetY != null)
+                message.targetY = object.targetY >>> 0;
+            if (object.targetZ != null)
+                message.targetZ = object.targetZ >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a cmd_force_to message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof battle.cmd_force_to
+         * @static
+         * @param {battle.cmd_force_to} message cmd_force_to
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        cmd_force_to.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.eid = 0;
+                object.speed = 0;
+                object.targetX = 0;
+                object.targetY = 0;
+                object.targetZ = 0;
+            }
+            if (message.eid != null && message.hasOwnProperty("eid"))
+                object.eid = message.eid;
+            if (message.speed != null && message.hasOwnProperty("speed"))
+                object.speed = message.speed;
+            if (message.targetX != null && message.hasOwnProperty("targetX"))
+                object.targetX = message.targetX;
+            if (message.targetY != null && message.hasOwnProperty("targetY"))
+                object.targetY = message.targetY;
+            if (message.targetZ != null && message.hasOwnProperty("targetZ"))
+                object.targetZ = message.targetZ;
+            return object;
+        };
+
+        /**
+         * Converts this cmd_force_to to JSON.
+         * @function toJSON
+         * @memberof battle.cmd_force_to
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        cmd_force_to.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for cmd_force_to
+         * @function getTypeUrl
+         * @memberof battle.cmd_force_to
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        cmd_force_to.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/battle.cmd_force_to";
+        };
+
+        return cmd_force_to;
+    })();
+
+    battle.cmd_move_start = (function() {
+
+        /**
+         * Properties of a cmd_move_start.
+         * @memberof battle
+         * @interface Icmd_move_start
+         * @property {number|null} [eid] cmd_move_start eid
+         * @property {number|null} [speed] cmd_move_start speed
+         * @property {number|null} [dir] cmd_move_start dir
+         */
+
+        /**
+         * Constructs a new cmd_move_start.
+         * @memberof battle
+         * @classdesc Represents a cmd_move_start.
+         * @implements Icmd_move_start
+         * @constructor
+         * @param {battle.Icmd_move_start=} [properties] Properties to set
+         */
+        function cmd_move_start(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * cmd_move_start eid.
+         * @member {number} eid
+         * @memberof battle.cmd_move_start
+         * @instance
+         */
+        cmd_move_start.prototype.eid = 0;
+
+        /**
+         * cmd_move_start speed.
+         * @member {number} speed
+         * @memberof battle.cmd_move_start
+         * @instance
+         */
+        cmd_move_start.prototype.speed = 0;
+
+        /**
+         * cmd_move_start dir.
+         * @member {number} dir
+         * @memberof battle.cmd_move_start
+         * @instance
+         */
+        cmd_move_start.prototype.dir = 0;
+
+        /**
+         * Creates a new cmd_move_start instance using the specified properties.
+         * @function create
+         * @memberof battle.cmd_move_start
+         * @static
+         * @param {battle.Icmd_move_start=} [properties] Properties to set
+         * @returns {battle.cmd_move_start} cmd_move_start instance
+         */
+        cmd_move_start.create = function create(properties) {
+            return new cmd_move_start(properties);
+        };
+
+        /**
+         * Encodes the specified cmd_move_start message. Does not implicitly {@link battle.cmd_move_start.verify|verify} messages.
+         * @function encode
+         * @memberof battle.cmd_move_start
+         * @static
+         * @param {battle.Icmd_move_start} message cmd_move_start message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        cmd_move_start.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.eid != null && Object.hasOwnProperty.call(message, "eid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.eid);
+            if (message.speed != null && Object.hasOwnProperty.call(message, "speed"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.speed);
+            if (message.dir != null && Object.hasOwnProperty.call(message, "dir"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.dir);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified cmd_move_start message, length delimited. Does not implicitly {@link battle.cmd_move_start.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof battle.cmd_move_start
+         * @static
+         * @param {battle.Icmd_move_start} message cmd_move_start message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        cmd_move_start.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a cmd_move_start message from the specified reader or buffer.
+         * @function decode
+         * @memberof battle.cmd_move_start
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {battle.cmd_move_start} cmd_move_start
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        cmd_move_start.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.battle.cmd_move_start();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.eid = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.speed = reader.uint32();
+                        break;
+                    }
+                case 3: {
+                        message.dir = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a cmd_move_start message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof battle.cmd_move_start
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {battle.cmd_move_start} cmd_move_start
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        cmd_move_start.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a cmd_move_start message.
+         * @function verify
+         * @memberof battle.cmd_move_start
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        cmd_move_start.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.eid != null && message.hasOwnProperty("eid"))
+                if (!$util.isInteger(message.eid))
+                    return "eid: integer expected";
+            if (message.speed != null && message.hasOwnProperty("speed"))
+                if (!$util.isInteger(message.speed))
+                    return "speed: integer expected";
+            if (message.dir != null && message.hasOwnProperty("dir"))
+                if (!$util.isInteger(message.dir))
+                    return "dir: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a cmd_move_start message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof battle.cmd_move_start
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {battle.cmd_move_start} cmd_move_start
+         */
+        cmd_move_start.fromObject = function fromObject(object) {
+            if (object instanceof $root.battle.cmd_move_start)
+                return object;
+            var message = new $root.battle.cmd_move_start();
+            if (object.eid != null)
+                message.eid = object.eid >>> 0;
+            if (object.speed != null)
+                message.speed = object.speed >>> 0;
+            if (object.dir != null)
+                message.dir = object.dir >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a cmd_move_start message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof battle.cmd_move_start
+         * @static
+         * @param {battle.cmd_move_start} message cmd_move_start
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        cmd_move_start.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.eid = 0;
+                object.speed = 0;
+                object.dir = 0;
+            }
+            if (message.eid != null && message.hasOwnProperty("eid"))
+                object.eid = message.eid;
+            if (message.speed != null && message.hasOwnProperty("speed"))
+                object.speed = message.speed;
+            if (message.dir != null && message.hasOwnProperty("dir"))
+                object.dir = message.dir;
+            return object;
+        };
+
+        /**
+         * Converts this cmd_move_start to JSON.
+         * @function toJSON
+         * @memberof battle.cmd_move_start
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        cmd_move_start.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for cmd_move_start
+         * @function getTypeUrl
+         * @memberof battle.cmd_move_start
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        cmd_move_start.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/battle.cmd_move_start";
+        };
+
+        return cmd_move_start;
+    })();
+
+    battle.cmd_move_stop = (function() {
+
+        /**
+         * Properties of a cmd_move_stop.
+         * @memberof battle
+         * @interface Icmd_move_stop
+         * @property {number|null} [eid] cmd_move_stop eid
+         * @property {number|null} [face] cmd_move_stop face
+         * @property {number|null} [x] cmd_move_stop x
+         * @property {number|null} [y] cmd_move_stop y
+         * @property {number|null} [z] cmd_move_stop z
+         */
+
+        /**
+         * Constructs a new cmd_move_stop.
+         * @memberof battle
+         * @classdesc Represents a cmd_move_stop.
+         * @implements Icmd_move_stop
+         * @constructor
+         * @param {battle.Icmd_move_stop=} [properties] Properties to set
+         */
+        function cmd_move_stop(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * cmd_move_stop eid.
+         * @member {number} eid
+         * @memberof battle.cmd_move_stop
+         * @instance
+         */
+        cmd_move_stop.prototype.eid = 0;
+
+        /**
+         * cmd_move_stop face.
+         * @member {number} face
+         * @memberof battle.cmd_move_stop
+         * @instance
+         */
+        cmd_move_stop.prototype.face = 0;
+
+        /**
+         * cmd_move_stop x.
+         * @member {number} x
+         * @memberof battle.cmd_move_stop
+         * @instance
+         */
+        cmd_move_stop.prototype.x = 0;
+
+        /**
+         * cmd_move_stop y.
+         * @member {number} y
+         * @memberof battle.cmd_move_stop
+         * @instance
+         */
+        cmd_move_stop.prototype.y = 0;
+
+        /**
+         * cmd_move_stop z.
+         * @member {number} z
+         * @memberof battle.cmd_move_stop
+         * @instance
+         */
+        cmd_move_stop.prototype.z = 0;
+
+        /**
+         * Creates a new cmd_move_stop instance using the specified properties.
+         * @function create
+         * @memberof battle.cmd_move_stop
+         * @static
+         * @param {battle.Icmd_move_stop=} [properties] Properties to set
+         * @returns {battle.cmd_move_stop} cmd_move_stop instance
+         */
+        cmd_move_stop.create = function create(properties) {
+            return new cmd_move_stop(properties);
+        };
+
+        /**
+         * Encodes the specified cmd_move_stop message. Does not implicitly {@link battle.cmd_move_stop.verify|verify} messages.
+         * @function encode
+         * @memberof battle.cmd_move_stop
+         * @static
+         * @param {battle.Icmd_move_stop} message cmd_move_stop message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        cmd_move_stop.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.eid != null && Object.hasOwnProperty.call(message, "eid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.eid);
+            if (message.face != null && Object.hasOwnProperty.call(message, "face"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.face);
+            if (message.x != null && Object.hasOwnProperty.call(message, "x"))
+                writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.x);
+            if (message.y != null && Object.hasOwnProperty.call(message, "y"))
+                writer.uint32(/* id 11, wireType 0 =*/88).uint32(message.y);
+            if (message.z != null && Object.hasOwnProperty.call(message, "z"))
+                writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.z);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified cmd_move_stop message, length delimited. Does not implicitly {@link battle.cmd_move_stop.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof battle.cmd_move_stop
+         * @static
+         * @param {battle.Icmd_move_stop} message cmd_move_stop message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        cmd_move_stop.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a cmd_move_stop message from the specified reader or buffer.
+         * @function decode
+         * @memberof battle.cmd_move_stop
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {battle.cmd_move_stop} cmd_move_stop
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        cmd_move_stop.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.battle.cmd_move_stop();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.eid = reader.uint32();
+                        break;
+                    }
+                case 3: {
+                        message.face = reader.int32();
+                        break;
+                    }
+                case 10: {
+                        message.x = reader.uint32();
+                        break;
+                    }
+                case 11: {
+                        message.y = reader.uint32();
+                        break;
+                    }
+                case 12: {
+                        message.z = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a cmd_move_stop message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof battle.cmd_move_stop
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {battle.cmd_move_stop} cmd_move_stop
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        cmd_move_stop.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a cmd_move_stop message.
+         * @function verify
+         * @memberof battle.cmd_move_stop
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        cmd_move_stop.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.eid != null && message.hasOwnProperty("eid"))
+                if (!$util.isInteger(message.eid))
+                    return "eid: integer expected";
+            if (message.face != null && message.hasOwnProperty("face"))
+                if (!$util.isInteger(message.face))
+                    return "face: integer expected";
+            if (message.x != null && message.hasOwnProperty("x"))
+                if (!$util.isInteger(message.x))
+                    return "x: integer expected";
+            if (message.y != null && message.hasOwnProperty("y"))
+                if (!$util.isInteger(message.y))
+                    return "y: integer expected";
+            if (message.z != null && message.hasOwnProperty("z"))
+                if (!$util.isInteger(message.z))
+                    return "z: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a cmd_move_stop message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof battle.cmd_move_stop
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {battle.cmd_move_stop} cmd_move_stop
+         */
+        cmd_move_stop.fromObject = function fromObject(object) {
+            if (object instanceof $root.battle.cmd_move_stop)
+                return object;
+            var message = new $root.battle.cmd_move_stop();
+            if (object.eid != null)
+                message.eid = object.eid >>> 0;
+            if (object.face != null)
+                message.face = object.face | 0;
+            if (object.x != null)
+                message.x = object.x >>> 0;
+            if (object.y != null)
+                message.y = object.y >>> 0;
+            if (object.z != null)
+                message.z = object.z >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a cmd_move_stop message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof battle.cmd_move_stop
+         * @static
+         * @param {battle.cmd_move_stop} message cmd_move_stop
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        cmd_move_stop.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.eid = 0;
+                object.face = 0;
+                object.x = 0;
+                object.y = 0;
+                object.z = 0;
+            }
+            if (message.eid != null && message.hasOwnProperty("eid"))
+                object.eid = message.eid;
+            if (message.face != null && message.hasOwnProperty("face"))
+                object.face = message.face;
+            if (message.x != null && message.hasOwnProperty("x"))
+                object.x = message.x;
+            if (message.y != null && message.hasOwnProperty("y"))
+                object.y = message.y;
+            if (message.z != null && message.hasOwnProperty("z"))
+                object.z = message.z;
+            return object;
+        };
+
+        /**
+         * Converts this cmd_move_stop to JSON.
+         * @function toJSON
+         * @memberof battle.cmd_move_stop
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        cmd_move_stop.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for cmd_move_stop
+         * @function getTypeUrl
+         * @memberof battle.cmd_move_stop
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        cmd_move_stop.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/battle.cmd_move_stop";
+        };
+
+        return cmd_move_stop;
+    })();
+
+    battle.cmd_add_buff = (function() {
+
+        /**
+         * Properties of a cmd_add_buff.
+         * @memberof battle
+         * @interface Icmd_add_buff
+         * @property {number|null} [eid] cmd_add_buff eid
+         * @property {number|null} [id] cmd_add_buff id
+         * @property {number|null} [stack] cmd_add_buff stack
+         * @property {number|null} [expired] cmd_add_buff expired
+         */
+
+        /**
+         * Constructs a new cmd_add_buff.
+         * @memberof battle
+         * @classdesc Represents a cmd_add_buff.
+         * @implements Icmd_add_buff
+         * @constructor
+         * @param {battle.Icmd_add_buff=} [properties] Properties to set
+         */
+        function cmd_add_buff(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * cmd_add_buff eid.
+         * @member {number} eid
+         * @memberof battle.cmd_add_buff
+         * @instance
+         */
+        cmd_add_buff.prototype.eid = 0;
+
+        /**
+         * cmd_add_buff id.
+         * @member {number} id
+         * @memberof battle.cmd_add_buff
+         * @instance
+         */
+        cmd_add_buff.prototype.id = 0;
+
+        /**
+         * cmd_add_buff stack.
+         * @member {number} stack
+         * @memberof battle.cmd_add_buff
+         * @instance
+         */
+        cmd_add_buff.prototype.stack = 0;
+
+        /**
+         * cmd_add_buff expired.
+         * @member {number} expired
+         * @memberof battle.cmd_add_buff
+         * @instance
+         */
+        cmd_add_buff.prototype.expired = 0;
+
+        /**
+         * Creates a new cmd_add_buff instance using the specified properties.
+         * @function create
+         * @memberof battle.cmd_add_buff
+         * @static
+         * @param {battle.Icmd_add_buff=} [properties] Properties to set
+         * @returns {battle.cmd_add_buff} cmd_add_buff instance
+         */
+        cmd_add_buff.create = function create(properties) {
+            return new cmd_add_buff(properties);
+        };
+
+        /**
+         * Encodes the specified cmd_add_buff message. Does not implicitly {@link battle.cmd_add_buff.verify|verify} messages.
+         * @function encode
+         * @memberof battle.cmd_add_buff
+         * @static
+         * @param {battle.Icmd_add_buff} message cmd_add_buff message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        cmd_add_buff.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.eid != null && Object.hasOwnProperty.call(message, "eid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.eid);
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.id);
+            if (message.stack != null && Object.hasOwnProperty.call(message, "stack"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.stack);
+            if (message.expired != null && Object.hasOwnProperty.call(message, "expired"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.expired);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified cmd_add_buff message, length delimited. Does not implicitly {@link battle.cmd_add_buff.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof battle.cmd_add_buff
+         * @static
+         * @param {battle.Icmd_add_buff} message cmd_add_buff message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        cmd_add_buff.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a cmd_add_buff message from the specified reader or buffer.
+         * @function decode
+         * @memberof battle.cmd_add_buff
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {battle.cmd_add_buff} cmd_add_buff
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        cmd_add_buff.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.battle.cmd_add_buff();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.eid = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.id = reader.uint32();
+                        break;
+                    }
+                case 3: {
+                        message.stack = reader.uint32();
+                        break;
+                    }
+                case 4: {
+                        message.expired = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a cmd_add_buff message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof battle.cmd_add_buff
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {battle.cmd_add_buff} cmd_add_buff
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        cmd_add_buff.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a cmd_add_buff message.
+         * @function verify
+         * @memberof battle.cmd_add_buff
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        cmd_add_buff.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.eid != null && message.hasOwnProperty("eid"))
+                if (!$util.isInteger(message.eid))
+                    return "eid: integer expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isInteger(message.id))
+                    return "id: integer expected";
+            if (message.stack != null && message.hasOwnProperty("stack"))
+                if (!$util.isInteger(message.stack))
+                    return "stack: integer expected";
+            if (message.expired != null && message.hasOwnProperty("expired"))
+                if (!$util.isInteger(message.expired))
+                    return "expired: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a cmd_add_buff message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof battle.cmd_add_buff
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {battle.cmd_add_buff} cmd_add_buff
+         */
+        cmd_add_buff.fromObject = function fromObject(object) {
+            if (object instanceof $root.battle.cmd_add_buff)
+                return object;
+            var message = new $root.battle.cmd_add_buff();
+            if (object.eid != null)
+                message.eid = object.eid >>> 0;
+            if (object.id != null)
+                message.id = object.id >>> 0;
+            if (object.stack != null)
+                message.stack = object.stack >>> 0;
+            if (object.expired != null)
+                message.expired = object.expired >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a cmd_add_buff message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof battle.cmd_add_buff
+         * @static
+         * @param {battle.cmd_add_buff} message cmd_add_buff
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        cmd_add_buff.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.eid = 0;
+                object.id = 0;
+                object.stack = 0;
+                object.expired = 0;
+            }
+            if (message.eid != null && message.hasOwnProperty("eid"))
+                object.eid = message.eid;
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            if (message.stack != null && message.hasOwnProperty("stack"))
+                object.stack = message.stack;
+            if (message.expired != null && message.hasOwnProperty("expired"))
+                object.expired = message.expired;
+            return object;
+        };
+
+        /**
+         * Converts this cmd_add_buff to JSON.
+         * @function toJSON
+         * @memberof battle.cmd_add_buff
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        cmd_add_buff.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for cmd_add_buff
+         * @function getTypeUrl
+         * @memberof battle.cmd_add_buff
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        cmd_add_buff.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/battle.cmd_add_buff";
+        };
+
+        return cmd_add_buff;
+    })();
+
+    battle.cmd_del_buff = (function() {
+
+        /**
+         * Properties of a cmd_del_buff.
+         * @memberof battle
+         * @interface Icmd_del_buff
+         * @property {number|null} [eid] cmd_del_buff eid
+         * @property {number|null} [id] cmd_del_buff id
+         */
+
+        /**
+         * Constructs a new cmd_del_buff.
+         * @memberof battle
+         * @classdesc Represents a cmd_del_buff.
+         * @implements Icmd_del_buff
+         * @constructor
+         * @param {battle.Icmd_del_buff=} [properties] Properties to set
+         */
+        function cmd_del_buff(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * cmd_del_buff eid.
+         * @member {number} eid
+         * @memberof battle.cmd_del_buff
+         * @instance
+         */
+        cmd_del_buff.prototype.eid = 0;
+
+        /**
+         * cmd_del_buff id.
+         * @member {number} id
+         * @memberof battle.cmd_del_buff
+         * @instance
+         */
+        cmd_del_buff.prototype.id = 0;
+
+        /**
+         * Creates a new cmd_del_buff instance using the specified properties.
+         * @function create
+         * @memberof battle.cmd_del_buff
+         * @static
+         * @param {battle.Icmd_del_buff=} [properties] Properties to set
+         * @returns {battle.cmd_del_buff} cmd_del_buff instance
+         */
+        cmd_del_buff.create = function create(properties) {
+            return new cmd_del_buff(properties);
+        };
+
+        /**
+         * Encodes the specified cmd_del_buff message. Does not implicitly {@link battle.cmd_del_buff.verify|verify} messages.
+         * @function encode
+         * @memberof battle.cmd_del_buff
+         * @static
+         * @param {battle.Icmd_del_buff} message cmd_del_buff message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        cmd_del_buff.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.eid != null && Object.hasOwnProperty.call(message, "eid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.eid);
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.id);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified cmd_del_buff message, length delimited. Does not implicitly {@link battle.cmd_del_buff.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof battle.cmd_del_buff
+         * @static
+         * @param {battle.Icmd_del_buff} message cmd_del_buff message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        cmd_del_buff.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a cmd_del_buff message from the specified reader or buffer.
+         * @function decode
+         * @memberof battle.cmd_del_buff
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {battle.cmd_del_buff} cmd_del_buff
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        cmd_del_buff.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.battle.cmd_del_buff();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.eid = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.id = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a cmd_del_buff message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof battle.cmd_del_buff
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {battle.cmd_del_buff} cmd_del_buff
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        cmd_del_buff.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a cmd_del_buff message.
+         * @function verify
+         * @memberof battle.cmd_del_buff
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        cmd_del_buff.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.eid != null && message.hasOwnProperty("eid"))
+                if (!$util.isInteger(message.eid))
+                    return "eid: integer expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isInteger(message.id))
+                    return "id: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a cmd_del_buff message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof battle.cmd_del_buff
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {battle.cmd_del_buff} cmd_del_buff
+         */
+        cmd_del_buff.fromObject = function fromObject(object) {
+            if (object instanceof $root.battle.cmd_del_buff)
+                return object;
+            var message = new $root.battle.cmd_del_buff();
+            if (object.eid != null)
+                message.eid = object.eid >>> 0;
+            if (object.id != null)
+                message.id = object.id >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a cmd_del_buff message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof battle.cmd_del_buff
+         * @static
+         * @param {battle.cmd_del_buff} message cmd_del_buff
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        cmd_del_buff.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.eid = 0;
+                object.id = 0;
+            }
+            if (message.eid != null && message.hasOwnProperty("eid"))
+                object.eid = message.eid;
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            return object;
+        };
+
+        /**
+         * Converts this cmd_del_buff to JSON.
+         * @function toJSON
+         * @memberof battle.cmd_del_buff
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        cmd_del_buff.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for cmd_del_buff
+         * @function getTypeUrl
+         * @memberof battle.cmd_del_buff
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        cmd_del_buff.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/battle.cmd_del_buff";
+        };
+
+        return cmd_del_buff;
+    })();
+
+    battle.cmd_attack = (function() {
+
+        /**
+         * Properties of a cmd_attack.
+         * @memberof battle
+         * @interface Icmd_attack
+         * @property {number|null} [eid] cmd_attack eid
+         * @property {number|null} [skillId] cmd_attack skillId
+         * @property {number|null} [curMp] cmd_attack curMp
+         */
+
+        /**
+         * Constructs a new cmd_attack.
+         * @memberof battle
+         * @classdesc Represents a cmd_attack.
+         * @implements Icmd_attack
+         * @constructor
+         * @param {battle.Icmd_attack=} [properties] Properties to set
+         */
+        function cmd_attack(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * cmd_attack eid.
+         * @member {number} eid
+         * @memberof battle.cmd_attack
+         * @instance
+         */
+        cmd_attack.prototype.eid = 0;
+
+        /**
+         * cmd_attack skillId.
+         * @member {number} skillId
+         * @memberof battle.cmd_attack
+         * @instance
+         */
+        cmd_attack.prototype.skillId = 0;
+
+        /**
+         * cmd_attack curMp.
+         * @member {number} curMp
+         * @memberof battle.cmd_attack
+         * @instance
+         */
+        cmd_attack.prototype.curMp = 0;
+
+        /**
+         * Creates a new cmd_attack instance using the specified properties.
+         * @function create
+         * @memberof battle.cmd_attack
+         * @static
+         * @param {battle.Icmd_attack=} [properties] Properties to set
+         * @returns {battle.cmd_attack} cmd_attack instance
+         */
+        cmd_attack.create = function create(properties) {
+            return new cmd_attack(properties);
+        };
+
+        /**
+         * Encodes the specified cmd_attack message. Does not implicitly {@link battle.cmd_attack.verify|verify} messages.
+         * @function encode
+         * @memberof battle.cmd_attack
+         * @static
+         * @param {battle.Icmd_attack} message cmd_attack message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        cmd_attack.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.eid != null && Object.hasOwnProperty.call(message, "eid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.eid);
+            if (message.skillId != null && Object.hasOwnProperty.call(message, "skillId"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.skillId);
+            if (message.curMp != null && Object.hasOwnProperty.call(message, "curMp"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.curMp);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified cmd_attack message, length delimited. Does not implicitly {@link battle.cmd_attack.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof battle.cmd_attack
+         * @static
+         * @param {battle.Icmd_attack} message cmd_attack message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        cmd_attack.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a cmd_attack message from the specified reader or buffer.
+         * @function decode
+         * @memberof battle.cmd_attack
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {battle.cmd_attack} cmd_attack
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        cmd_attack.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.battle.cmd_attack();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.eid = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.skillId = reader.uint32();
+                        break;
+                    }
+                case 3: {
+                        message.curMp = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a cmd_attack message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof battle.cmd_attack
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {battle.cmd_attack} cmd_attack
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        cmd_attack.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a cmd_attack message.
+         * @function verify
+         * @memberof battle.cmd_attack
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        cmd_attack.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.eid != null && message.hasOwnProperty("eid"))
+                if (!$util.isInteger(message.eid))
+                    return "eid: integer expected";
+            if (message.skillId != null && message.hasOwnProperty("skillId"))
+                if (!$util.isInteger(message.skillId))
+                    return "skillId: integer expected";
+            if (message.curMp != null && message.hasOwnProperty("curMp"))
+                if (!$util.isInteger(message.curMp))
+                    return "curMp: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a cmd_attack message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof battle.cmd_attack
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {battle.cmd_attack} cmd_attack
+         */
+        cmd_attack.fromObject = function fromObject(object) {
+            if (object instanceof $root.battle.cmd_attack)
+                return object;
+            var message = new $root.battle.cmd_attack();
+            if (object.eid != null)
+                message.eid = object.eid >>> 0;
+            if (object.skillId != null)
+                message.skillId = object.skillId >>> 0;
+            if (object.curMp != null)
+                message.curMp = object.curMp >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a cmd_attack message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof battle.cmd_attack
+         * @static
+         * @param {battle.cmd_attack} message cmd_attack
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        cmd_attack.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.eid = 0;
+                object.skillId = 0;
+                object.curMp = 0;
+            }
+            if (message.eid != null && message.hasOwnProperty("eid"))
+                object.eid = message.eid;
+            if (message.skillId != null && message.hasOwnProperty("skillId"))
+                object.skillId = message.skillId;
+            if (message.curMp != null && message.hasOwnProperty("curMp"))
+                object.curMp = message.curMp;
+            return object;
+        };
+
+        /**
+         * Converts this cmd_attack to JSON.
+         * @function toJSON
+         * @memberof battle.cmd_attack
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        cmd_attack.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for cmd_attack
+         * @function getTypeUrl
+         * @memberof battle.cmd_attack
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        cmd_attack.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/battle.cmd_attack";
+        };
+
+        return cmd_attack;
+    })();
+
+    battle.cmd_under_atk = (function() {
+
+        /**
+         * Properties of a cmd_under_atk.
+         * @memberof battle
+         * @interface Icmd_under_atk
+         * @property {number|null} [eid] cmd_under_atk eid
+         * @property {number|null} [skillId] cmd_under_atk skillId
+         * @property {number|null} [subHp] cmd_under_atk subHp
+         * @property {number|null} [curMp] cmd_under_atk curMp
+         * @property {boolean|null} [critical] cmd_under_atk critical
+         * @property {boolean|null} [dodge] cmd_under_atk dodge
+         */
+
+        /**
+         * Constructs a new cmd_under_atk.
+         * @memberof battle
+         * @classdesc Represents a cmd_under_atk.
+         * @implements Icmd_under_atk
+         * @constructor
+         * @param {battle.Icmd_under_atk=} [properties] Properties to set
+         */
+        function cmd_under_atk(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * cmd_under_atk eid.
+         * @member {number} eid
+         * @memberof battle.cmd_under_atk
+         * @instance
+         */
+        cmd_under_atk.prototype.eid = 0;
+
+        /**
+         * cmd_under_atk skillId.
+         * @member {number} skillId
+         * @memberof battle.cmd_under_atk
+         * @instance
+         */
+        cmd_under_atk.prototype.skillId = 0;
+
+        /**
+         * cmd_under_atk subHp.
+         * @member {number} subHp
+         * @memberof battle.cmd_under_atk
+         * @instance
+         */
+        cmd_under_atk.prototype.subHp = 0;
+
+        /**
+         * cmd_under_atk curMp.
+         * @member {number} curMp
+         * @memberof battle.cmd_under_atk
+         * @instance
+         */
+        cmd_under_atk.prototype.curMp = 0;
+
+        /**
+         * cmd_under_atk critical.
+         * @member {boolean} critical
+         * @memberof battle.cmd_under_atk
+         * @instance
+         */
+        cmd_under_atk.prototype.critical = false;
+
+        /**
+         * cmd_under_atk dodge.
+         * @member {boolean} dodge
+         * @memberof battle.cmd_under_atk
+         * @instance
+         */
+        cmd_under_atk.prototype.dodge = false;
+
+        /**
+         * Creates a new cmd_under_atk instance using the specified properties.
+         * @function create
+         * @memberof battle.cmd_under_atk
+         * @static
+         * @param {battle.Icmd_under_atk=} [properties] Properties to set
+         * @returns {battle.cmd_under_atk} cmd_under_atk instance
+         */
+        cmd_under_atk.create = function create(properties) {
+            return new cmd_under_atk(properties);
+        };
+
+        /**
+         * Encodes the specified cmd_under_atk message. Does not implicitly {@link battle.cmd_under_atk.verify|verify} messages.
+         * @function encode
+         * @memberof battle.cmd_under_atk
+         * @static
+         * @param {battle.Icmd_under_atk} message cmd_under_atk message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        cmd_under_atk.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.eid != null && Object.hasOwnProperty.call(message, "eid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.eid);
+            if (message.skillId != null && Object.hasOwnProperty.call(message, "skillId"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.skillId);
+            if (message.subHp != null && Object.hasOwnProperty.call(message, "subHp"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.subHp);
+            if (message.curMp != null && Object.hasOwnProperty.call(message, "curMp"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.curMp);
+            if (message.critical != null && Object.hasOwnProperty.call(message, "critical"))
+                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.critical);
+            if (message.dodge != null && Object.hasOwnProperty.call(message, "dodge"))
+                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.dodge);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified cmd_under_atk message, length delimited. Does not implicitly {@link battle.cmd_under_atk.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof battle.cmd_under_atk
+         * @static
+         * @param {battle.Icmd_under_atk} message cmd_under_atk message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        cmd_under_atk.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a cmd_under_atk message from the specified reader or buffer.
+         * @function decode
+         * @memberof battle.cmd_under_atk
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {battle.cmd_under_atk} cmd_under_atk
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        cmd_under_atk.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.battle.cmd_under_atk();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.eid = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.skillId = reader.uint32();
+                        break;
+                    }
+                case 3: {
+                        message.subHp = reader.uint32();
+                        break;
+                    }
+                case 4: {
+                        message.curMp = reader.uint32();
+                        break;
+                    }
+                case 5: {
+                        message.critical = reader.bool();
+                        break;
+                    }
+                case 6: {
+                        message.dodge = reader.bool();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a cmd_under_atk message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof battle.cmd_under_atk
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {battle.cmd_under_atk} cmd_under_atk
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        cmd_under_atk.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a cmd_under_atk message.
+         * @function verify
+         * @memberof battle.cmd_under_atk
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        cmd_under_atk.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.eid != null && message.hasOwnProperty("eid"))
+                if (!$util.isInteger(message.eid))
+                    return "eid: integer expected";
+            if (message.skillId != null && message.hasOwnProperty("skillId"))
+                if (!$util.isInteger(message.skillId))
+                    return "skillId: integer expected";
+            if (message.subHp != null && message.hasOwnProperty("subHp"))
+                if (!$util.isInteger(message.subHp))
+                    return "subHp: integer expected";
+            if (message.curMp != null && message.hasOwnProperty("curMp"))
+                if (!$util.isInteger(message.curMp))
+                    return "curMp: integer expected";
+            if (message.critical != null && message.hasOwnProperty("critical"))
+                if (typeof message.critical !== "boolean")
+                    return "critical: boolean expected";
+            if (message.dodge != null && message.hasOwnProperty("dodge"))
+                if (typeof message.dodge !== "boolean")
+                    return "dodge: boolean expected";
+            return null;
+        };
+
+        /**
+         * Creates a cmd_under_atk message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof battle.cmd_under_atk
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {battle.cmd_under_atk} cmd_under_atk
+         */
+        cmd_under_atk.fromObject = function fromObject(object) {
+            if (object instanceof $root.battle.cmd_under_atk)
+                return object;
+            var message = new $root.battle.cmd_under_atk();
+            if (object.eid != null)
+                message.eid = object.eid >>> 0;
+            if (object.skillId != null)
+                message.skillId = object.skillId >>> 0;
+            if (object.subHp != null)
+                message.subHp = object.subHp >>> 0;
+            if (object.curMp != null)
+                message.curMp = object.curMp >>> 0;
+            if (object.critical != null)
+                message.critical = Boolean(object.critical);
+            if (object.dodge != null)
+                message.dodge = Boolean(object.dodge);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a cmd_under_atk message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof battle.cmd_under_atk
+         * @static
+         * @param {battle.cmd_under_atk} message cmd_under_atk
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        cmd_under_atk.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.eid = 0;
+                object.skillId = 0;
+                object.subHp = 0;
+                object.curMp = 0;
+                object.critical = false;
+                object.dodge = false;
+            }
+            if (message.eid != null && message.hasOwnProperty("eid"))
+                object.eid = message.eid;
+            if (message.skillId != null && message.hasOwnProperty("skillId"))
+                object.skillId = message.skillId;
+            if (message.subHp != null && message.hasOwnProperty("subHp"))
+                object.subHp = message.subHp;
+            if (message.curMp != null && message.hasOwnProperty("curMp"))
+                object.curMp = message.curMp;
+            if (message.critical != null && message.hasOwnProperty("critical"))
+                object.critical = message.critical;
+            if (message.dodge != null && message.hasOwnProperty("dodge"))
+                object.dodge = message.dodge;
+            return object;
+        };
+
+        /**
+         * Converts this cmd_under_atk to JSON.
+         * @function toJSON
+         * @memberof battle.cmd_under_atk
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        cmd_under_atk.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for cmd_under_atk
+         * @function getTypeUrl
+         * @memberof battle.cmd_under_atk
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        cmd_under_atk.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/battle.cmd_under_atk";
+        };
+
+        return cmd_under_atk;
+    })();
+
+    battle.cmd_recover_hp = (function() {
+
+        /**
+         * Properties of a cmd_recover_hp.
+         * @memberof battle
+         * @interface Icmd_recover_hp
+         * @property {number|null} [eid] cmd_recover_hp eid
+         * @property {number|null} [addHp] cmd_recover_hp addHp
+         */
+
+        /**
+         * Constructs a new cmd_recover_hp.
+         * @memberof battle
+         * @classdesc Represents a cmd_recover_hp.
+         * @implements Icmd_recover_hp
+         * @constructor
+         * @param {battle.Icmd_recover_hp=} [properties] Properties to set
+         */
+        function cmd_recover_hp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * cmd_recover_hp eid.
+         * @member {number} eid
+         * @memberof battle.cmd_recover_hp
+         * @instance
+         */
+        cmd_recover_hp.prototype.eid = 0;
+
+        /**
+         * cmd_recover_hp addHp.
+         * @member {number} addHp
+         * @memberof battle.cmd_recover_hp
+         * @instance
+         */
+        cmd_recover_hp.prototype.addHp = 0;
+
+        /**
+         * Creates a new cmd_recover_hp instance using the specified properties.
+         * @function create
+         * @memberof battle.cmd_recover_hp
+         * @static
+         * @param {battle.Icmd_recover_hp=} [properties] Properties to set
+         * @returns {battle.cmd_recover_hp} cmd_recover_hp instance
+         */
+        cmd_recover_hp.create = function create(properties) {
+            return new cmd_recover_hp(properties);
+        };
+
+        /**
+         * Encodes the specified cmd_recover_hp message. Does not implicitly {@link battle.cmd_recover_hp.verify|verify} messages.
+         * @function encode
+         * @memberof battle.cmd_recover_hp
+         * @static
+         * @param {battle.Icmd_recover_hp} message cmd_recover_hp message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        cmd_recover_hp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.eid != null && Object.hasOwnProperty.call(message, "eid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.eid);
+            if (message.addHp != null && Object.hasOwnProperty.call(message, "addHp"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.addHp);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified cmd_recover_hp message, length delimited. Does not implicitly {@link battle.cmd_recover_hp.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof battle.cmd_recover_hp
+         * @static
+         * @param {battle.Icmd_recover_hp} message cmd_recover_hp message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        cmd_recover_hp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a cmd_recover_hp message from the specified reader or buffer.
+         * @function decode
+         * @memberof battle.cmd_recover_hp
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {battle.cmd_recover_hp} cmd_recover_hp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        cmd_recover_hp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.battle.cmd_recover_hp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.eid = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.addHp = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a cmd_recover_hp message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof battle.cmd_recover_hp
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {battle.cmd_recover_hp} cmd_recover_hp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        cmd_recover_hp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a cmd_recover_hp message.
+         * @function verify
+         * @memberof battle.cmd_recover_hp
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        cmd_recover_hp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.eid != null && message.hasOwnProperty("eid"))
+                if (!$util.isInteger(message.eid))
+                    return "eid: integer expected";
+            if (message.addHp != null && message.hasOwnProperty("addHp"))
+                if (!$util.isInteger(message.addHp))
+                    return "addHp: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a cmd_recover_hp message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof battle.cmd_recover_hp
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {battle.cmd_recover_hp} cmd_recover_hp
+         */
+        cmd_recover_hp.fromObject = function fromObject(object) {
+            if (object instanceof $root.battle.cmd_recover_hp)
+                return object;
+            var message = new $root.battle.cmd_recover_hp();
+            if (object.eid != null)
+                message.eid = object.eid >>> 0;
+            if (object.addHp != null)
+                message.addHp = object.addHp >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a cmd_recover_hp message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof battle.cmd_recover_hp
+         * @static
+         * @param {battle.cmd_recover_hp} message cmd_recover_hp
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        cmd_recover_hp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.eid = 0;
+                object.addHp = 0;
+            }
+            if (message.eid != null && message.hasOwnProperty("eid"))
+                object.eid = message.eid;
+            if (message.addHp != null && message.hasOwnProperty("addHp"))
+                object.addHp = message.addHp;
+            return object;
+        };
+
+        /**
+         * Converts this cmd_recover_hp to JSON.
+         * @function toJSON
+         * @memberof battle.cmd_recover_hp
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        cmd_recover_hp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for cmd_recover_hp
+         * @function getTypeUrl
+         * @memberof battle.cmd_recover_hp
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        cmd_recover_hp.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/battle.cmd_recover_hp";
+        };
+
+        return cmd_recover_hp;
+    })();
+
+    battle.BattleCmd = (function() {
+
+        /**
+         * Properties of a BattleCmd.
+         * @memberof battle
+         * @interface IBattleCmd
+         * @property {number|null} [cmdType] BattleCmd cmdType
+         * @property {battle.Icmd_add_entity|null} [addEntity] BattleCmd addEntity
+         * @property {battle.Icmd_update_entity|null} [updateEntity] BattleCmd updateEntity
+         * @property {battle.Icmd_del_entity|null} [delEntity] BattleCmd delEntity
+         * @property {battle.Icmd_move_start|null} [moveStart] BattleCmd moveStart
+         * @property {battle.Icmd_move_stop|null} [moveStop] BattleCmd moveStop
+         * @property {battle.Icmd_add_buff|null} [addBuff] BattleCmd addBuff
+         * @property {battle.Icmd_del_buff|null} [delBuff] BattleCmd delBuff
+         * @property {battle.Icmd_attack|null} [attack] BattleCmd attack
+         * @property {battle.Icmd_under_atk|null} [underAtk] BattleCmd underAtk
+         * @property {battle.Icmd_force_to|null} [forceTo] BattleCmd forceTo
+         * @property {battle.Icmd_move_to|null} [moveTo] BattleCmd moveTo
+         * @property {battle.Icmd_recover_hp|null} [recoverHp] BattleCmd recoverHp
+         */
+
+        /**
+         * Constructs a new BattleCmd.
+         * @memberof battle
+         * @classdesc Represents a BattleCmd.
+         * @implements IBattleCmd
+         * @constructor
+         * @param {battle.IBattleCmd=} [properties] Properties to set
+         */
+        function BattleCmd(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * BattleCmd cmdType.
+         * @member {number} cmdType
+         * @memberof battle.BattleCmd
+         * @instance
+         */
+        BattleCmd.prototype.cmdType = 0;
+
+        /**
+         * BattleCmd addEntity.
+         * @member {battle.Icmd_add_entity|null|undefined} addEntity
+         * @memberof battle.BattleCmd
+         * @instance
+         */
+        BattleCmd.prototype.addEntity = null;
+
+        /**
+         * BattleCmd updateEntity.
+         * @member {battle.Icmd_update_entity|null|undefined} updateEntity
+         * @memberof battle.BattleCmd
+         * @instance
+         */
+        BattleCmd.prototype.updateEntity = null;
+
+        /**
+         * BattleCmd delEntity.
+         * @member {battle.Icmd_del_entity|null|undefined} delEntity
+         * @memberof battle.BattleCmd
+         * @instance
+         */
+        BattleCmd.prototype.delEntity = null;
+
+        /**
+         * BattleCmd moveStart.
+         * @member {battle.Icmd_move_start|null|undefined} moveStart
+         * @memberof battle.BattleCmd
+         * @instance
+         */
+        BattleCmd.prototype.moveStart = null;
+
+        /**
+         * BattleCmd moveStop.
+         * @member {battle.Icmd_move_stop|null|undefined} moveStop
+         * @memberof battle.BattleCmd
+         * @instance
+         */
+        BattleCmd.prototype.moveStop = null;
+
+        /**
+         * BattleCmd addBuff.
+         * @member {battle.Icmd_add_buff|null|undefined} addBuff
+         * @memberof battle.BattleCmd
+         * @instance
+         */
+        BattleCmd.prototype.addBuff = null;
+
+        /**
+         * BattleCmd delBuff.
+         * @member {battle.Icmd_del_buff|null|undefined} delBuff
+         * @memberof battle.BattleCmd
+         * @instance
+         */
+        BattleCmd.prototype.delBuff = null;
+
+        /**
+         * BattleCmd attack.
+         * @member {battle.Icmd_attack|null|undefined} attack
+         * @memberof battle.BattleCmd
+         * @instance
+         */
+        BattleCmd.prototype.attack = null;
+
+        /**
+         * BattleCmd underAtk.
+         * @member {battle.Icmd_under_atk|null|undefined} underAtk
+         * @memberof battle.BattleCmd
+         * @instance
+         */
+        BattleCmd.prototype.underAtk = null;
+
+        /**
+         * BattleCmd forceTo.
+         * @member {battle.Icmd_force_to|null|undefined} forceTo
+         * @memberof battle.BattleCmd
+         * @instance
+         */
+        BattleCmd.prototype.forceTo = null;
+
+        /**
+         * BattleCmd moveTo.
+         * @member {battle.Icmd_move_to|null|undefined} moveTo
+         * @memberof battle.BattleCmd
+         * @instance
+         */
+        BattleCmd.prototype.moveTo = null;
+
+        /**
+         * BattleCmd recoverHp.
+         * @member {battle.Icmd_recover_hp|null|undefined} recoverHp
+         * @memberof battle.BattleCmd
+         * @instance
+         */
+        BattleCmd.prototype.recoverHp = null;
+
+        /**
+         * Creates a new BattleCmd instance using the specified properties.
+         * @function create
+         * @memberof battle.BattleCmd
+         * @static
+         * @param {battle.IBattleCmd=} [properties] Properties to set
+         * @returns {battle.BattleCmd} BattleCmd instance
+         */
+        BattleCmd.create = function create(properties) {
+            return new BattleCmd(properties);
+        };
+
+        /**
+         * Encodes the specified BattleCmd message. Does not implicitly {@link battle.BattleCmd.verify|verify} messages.
+         * @function encode
+         * @memberof battle.BattleCmd
+         * @static
+         * @param {battle.IBattleCmd} message BattleCmd message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        BattleCmd.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmdType != null && Object.hasOwnProperty.call(message, "cmdType"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.cmdType);
+            if (message.addEntity != null && Object.hasOwnProperty.call(message, "addEntity"))
+                $root.battle.cmd_add_entity.encode(message.addEntity, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            if (message.updateEntity != null && Object.hasOwnProperty.call(message, "updateEntity"))
+                $root.battle.cmd_update_entity.encode(message.updateEntity, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            if (message.delEntity != null && Object.hasOwnProperty.call(message, "delEntity"))
+                $root.battle.cmd_del_entity.encode(message.delEntity, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            if (message.moveStart != null && Object.hasOwnProperty.call(message, "moveStart"))
+                $root.battle.cmd_move_start.encode(message.moveStart, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+            if (message.moveStop != null && Object.hasOwnProperty.call(message, "moveStop"))
+                $root.battle.cmd_move_stop.encode(message.moveStop, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+            if (message.addBuff != null && Object.hasOwnProperty.call(message, "addBuff"))
+                $root.battle.cmd_add_buff.encode(message.addBuff, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+            if (message.delBuff != null && Object.hasOwnProperty.call(message, "delBuff"))
+                $root.battle.cmd_del_buff.encode(message.delBuff, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+            if (message.attack != null && Object.hasOwnProperty.call(message, "attack"))
+                $root.battle.cmd_attack.encode(message.attack, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+            if (message.underAtk != null && Object.hasOwnProperty.call(message, "underAtk"))
+                $root.battle.cmd_under_atk.encode(message.underAtk, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+            if (message.forceTo != null && Object.hasOwnProperty.call(message, "forceTo"))
+                $root.battle.cmd_force_to.encode(message.forceTo, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+            if (message.moveTo != null && Object.hasOwnProperty.call(message, "moveTo"))
+                $root.battle.cmd_move_to.encode(message.moveTo, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+            if (message.recoverHp != null && Object.hasOwnProperty.call(message, "recoverHp"))
+                $root.battle.cmd_recover_hp.encode(message.recoverHp, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified BattleCmd message, length delimited. Does not implicitly {@link battle.BattleCmd.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof battle.BattleCmd
+         * @static
+         * @param {battle.IBattleCmd} message BattleCmd message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        BattleCmd.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a BattleCmd message from the specified reader or buffer.
+         * @function decode
+         * @memberof battle.BattleCmd
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {battle.BattleCmd} BattleCmd
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        BattleCmd.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.battle.BattleCmd();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmdType = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.addEntity = $root.battle.cmd_add_entity.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 3: {
+                        message.updateEntity = $root.battle.cmd_update_entity.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 4: {
+                        message.delEntity = $root.battle.cmd_del_entity.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 5: {
+                        message.moveStart = $root.battle.cmd_move_start.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 6: {
+                        message.moveStop = $root.battle.cmd_move_stop.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 7: {
+                        message.addBuff = $root.battle.cmd_add_buff.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 8: {
+                        message.delBuff = $root.battle.cmd_del_buff.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 9: {
+                        message.attack = $root.battle.cmd_attack.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 10: {
+                        message.underAtk = $root.battle.cmd_under_atk.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 13: {
+                        message.forceTo = $root.battle.cmd_force_to.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 14: {
+                        message.moveTo = $root.battle.cmd_move_to.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 17: {
+                        message.recoverHp = $root.battle.cmd_recover_hp.decode(reader, reader.uint32());
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a BattleCmd message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof battle.BattleCmd
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {battle.BattleCmd} BattleCmd
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        BattleCmd.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a BattleCmd message.
+         * @function verify
+         * @memberof battle.BattleCmd
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        BattleCmd.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.cmdType != null && message.hasOwnProperty("cmdType"))
+                if (!$util.isInteger(message.cmdType))
+                    return "cmdType: integer expected";
+            if (message.addEntity != null && message.hasOwnProperty("addEntity")) {
+                var error = $root.battle.cmd_add_entity.verify(message.addEntity);
+                if (error)
+                    return "addEntity." + error;
+            }
+            if (message.updateEntity != null && message.hasOwnProperty("updateEntity")) {
+                var error = $root.battle.cmd_update_entity.verify(message.updateEntity);
+                if (error)
+                    return "updateEntity." + error;
+            }
+            if (message.delEntity != null && message.hasOwnProperty("delEntity")) {
+                var error = $root.battle.cmd_del_entity.verify(message.delEntity);
+                if (error)
+                    return "delEntity." + error;
+            }
+            if (message.moveStart != null && message.hasOwnProperty("moveStart")) {
+                var error = $root.battle.cmd_move_start.verify(message.moveStart);
+                if (error)
+                    return "moveStart." + error;
+            }
+            if (message.moveStop != null && message.hasOwnProperty("moveStop")) {
+                var error = $root.battle.cmd_move_stop.verify(message.moveStop);
+                if (error)
+                    return "moveStop." + error;
+            }
+            if (message.addBuff != null && message.hasOwnProperty("addBuff")) {
+                var error = $root.battle.cmd_add_buff.verify(message.addBuff);
+                if (error)
+                    return "addBuff." + error;
+            }
+            if (message.delBuff != null && message.hasOwnProperty("delBuff")) {
+                var error = $root.battle.cmd_del_buff.verify(message.delBuff);
+                if (error)
+                    return "delBuff." + error;
+            }
+            if (message.attack != null && message.hasOwnProperty("attack")) {
+                var error = $root.battle.cmd_attack.verify(message.attack);
+                if (error)
+                    return "attack." + error;
+            }
+            if (message.underAtk != null && message.hasOwnProperty("underAtk")) {
+                var error = $root.battle.cmd_under_atk.verify(message.underAtk);
+                if (error)
+                    return "underAtk." + error;
+            }
+            if (message.forceTo != null && message.hasOwnProperty("forceTo")) {
+                var error = $root.battle.cmd_force_to.verify(message.forceTo);
+                if (error)
+                    return "forceTo." + error;
+            }
+            if (message.moveTo != null && message.hasOwnProperty("moveTo")) {
+                var error = $root.battle.cmd_move_to.verify(message.moveTo);
+                if (error)
+                    return "moveTo." + error;
+            }
+            if (message.recoverHp != null && message.hasOwnProperty("recoverHp")) {
+                var error = $root.battle.cmd_recover_hp.verify(message.recoverHp);
+                if (error)
+                    return "recoverHp." + error;
+            }
+            return null;
+        };
+
+        /**
+         * Creates a BattleCmd message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof battle.BattleCmd
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {battle.BattleCmd} BattleCmd
+         */
+        BattleCmd.fromObject = function fromObject(object) {
+            if (object instanceof $root.battle.BattleCmd)
+                return object;
+            var message = new $root.battle.BattleCmd();
+            if (object.cmdType != null)
+                message.cmdType = object.cmdType >>> 0;
+            if (object.addEntity != null) {
+                if (typeof object.addEntity !== "object")
+                    throw TypeError(".battle.BattleCmd.addEntity: object expected");
+                message.addEntity = $root.battle.cmd_add_entity.fromObject(object.addEntity);
+            }
+            if (object.updateEntity != null) {
+                if (typeof object.updateEntity !== "object")
+                    throw TypeError(".battle.BattleCmd.updateEntity: object expected");
+                message.updateEntity = $root.battle.cmd_update_entity.fromObject(object.updateEntity);
+            }
+            if (object.delEntity != null) {
+                if (typeof object.delEntity !== "object")
+                    throw TypeError(".battle.BattleCmd.delEntity: object expected");
+                message.delEntity = $root.battle.cmd_del_entity.fromObject(object.delEntity);
+            }
+            if (object.moveStart != null) {
+                if (typeof object.moveStart !== "object")
+                    throw TypeError(".battle.BattleCmd.moveStart: object expected");
+                message.moveStart = $root.battle.cmd_move_start.fromObject(object.moveStart);
+            }
+            if (object.moveStop != null) {
+                if (typeof object.moveStop !== "object")
+                    throw TypeError(".battle.BattleCmd.moveStop: object expected");
+                message.moveStop = $root.battle.cmd_move_stop.fromObject(object.moveStop);
+            }
+            if (object.addBuff != null) {
+                if (typeof object.addBuff !== "object")
+                    throw TypeError(".battle.BattleCmd.addBuff: object expected");
+                message.addBuff = $root.battle.cmd_add_buff.fromObject(object.addBuff);
+            }
+            if (object.delBuff != null) {
+                if (typeof object.delBuff !== "object")
+                    throw TypeError(".battle.BattleCmd.delBuff: object expected");
+                message.delBuff = $root.battle.cmd_del_buff.fromObject(object.delBuff);
+            }
+            if (object.attack != null) {
+                if (typeof object.attack !== "object")
+                    throw TypeError(".battle.BattleCmd.attack: object expected");
+                message.attack = $root.battle.cmd_attack.fromObject(object.attack);
+            }
+            if (object.underAtk != null) {
+                if (typeof object.underAtk !== "object")
+                    throw TypeError(".battle.BattleCmd.underAtk: object expected");
+                message.underAtk = $root.battle.cmd_under_atk.fromObject(object.underAtk);
+            }
+            if (object.forceTo != null) {
+                if (typeof object.forceTo !== "object")
+                    throw TypeError(".battle.BattleCmd.forceTo: object expected");
+                message.forceTo = $root.battle.cmd_force_to.fromObject(object.forceTo);
+            }
+            if (object.moveTo != null) {
+                if (typeof object.moveTo !== "object")
+                    throw TypeError(".battle.BattleCmd.moveTo: object expected");
+                message.moveTo = $root.battle.cmd_move_to.fromObject(object.moveTo);
+            }
+            if (object.recoverHp != null) {
+                if (typeof object.recoverHp !== "object")
+                    throw TypeError(".battle.BattleCmd.recoverHp: object expected");
+                message.recoverHp = $root.battle.cmd_recover_hp.fromObject(object.recoverHp);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a BattleCmd message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof battle.BattleCmd
+         * @static
+         * @param {battle.BattleCmd} message BattleCmd
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        BattleCmd.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.cmdType = 0;
+                object.addEntity = null;
+                object.updateEntity = null;
+                object.delEntity = null;
+                object.moveStart = null;
+                object.moveStop = null;
+                object.addBuff = null;
+                object.delBuff = null;
+                object.attack = null;
+                object.underAtk = null;
+                object.forceTo = null;
+                object.moveTo = null;
+                object.recoverHp = null;
+            }
+            if (message.cmdType != null && message.hasOwnProperty("cmdType"))
+                object.cmdType = message.cmdType;
+            if (message.addEntity != null && message.hasOwnProperty("addEntity"))
+                object.addEntity = $root.battle.cmd_add_entity.toObject(message.addEntity, options);
+            if (message.updateEntity != null && message.hasOwnProperty("updateEntity"))
+                object.updateEntity = $root.battle.cmd_update_entity.toObject(message.updateEntity, options);
+            if (message.delEntity != null && message.hasOwnProperty("delEntity"))
+                object.delEntity = $root.battle.cmd_del_entity.toObject(message.delEntity, options);
+            if (message.moveStart != null && message.hasOwnProperty("moveStart"))
+                object.moveStart = $root.battle.cmd_move_start.toObject(message.moveStart, options);
+            if (message.moveStop != null && message.hasOwnProperty("moveStop"))
+                object.moveStop = $root.battle.cmd_move_stop.toObject(message.moveStop, options);
+            if (message.addBuff != null && message.hasOwnProperty("addBuff"))
+                object.addBuff = $root.battle.cmd_add_buff.toObject(message.addBuff, options);
+            if (message.delBuff != null && message.hasOwnProperty("delBuff"))
+                object.delBuff = $root.battle.cmd_del_buff.toObject(message.delBuff, options);
+            if (message.attack != null && message.hasOwnProperty("attack"))
+                object.attack = $root.battle.cmd_attack.toObject(message.attack, options);
+            if (message.underAtk != null && message.hasOwnProperty("underAtk"))
+                object.underAtk = $root.battle.cmd_under_atk.toObject(message.underAtk, options);
+            if (message.forceTo != null && message.hasOwnProperty("forceTo"))
+                object.forceTo = $root.battle.cmd_force_to.toObject(message.forceTo, options);
+            if (message.moveTo != null && message.hasOwnProperty("moveTo"))
+                object.moveTo = $root.battle.cmd_move_to.toObject(message.moveTo, options);
+            if (message.recoverHp != null && message.hasOwnProperty("recoverHp"))
+                object.recoverHp = $root.battle.cmd_recover_hp.toObject(message.recoverHp, options);
+            return object;
+        };
+
+        /**
+         * Converts this BattleCmd to JSON.
+         * @function toJSON
+         * @memberof battle.BattleCmd
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        BattleCmd.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for BattleCmd
+         * @function getTypeUrl
+         * @memberof battle.BattleCmd
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        BattleCmd.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/battle.BattleCmd";
+        };
+
+        return BattleCmd;
+    })();
+
+    battle.Battle = (function() {
+
+        /**
+         * Properties of a Battle.
+         * @memberof battle
+         * @interface IBattle
+         * @property {number|null} [battleId] Battle battleId
+         * @property {number|null} [battleUid] Battle battleUid
+         * @property {Array.<battle.IBattleRole>|null} [roles] Battle roles
+         */
+
+        /**
+         * Constructs a new Battle.
+         * @memberof battle
+         * @classdesc Represents a Battle.
+         * @implements IBattle
+         * @constructor
+         * @param {battle.IBattle=} [properties] Properties to set
+         */
+        function Battle(properties) {
+            this.roles = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Battle battleId.
+         * @member {number} battleId
+         * @memberof battle.Battle
+         * @instance
+         */
+        Battle.prototype.battleId = 0;
+
+        /**
+         * Battle battleUid.
+         * @member {number} battleUid
+         * @memberof battle.Battle
+         * @instance
+         */
+        Battle.prototype.battleUid = 0;
+
+        /**
+         * Battle roles.
+         * @member {Array.<battle.IBattleRole>} roles
+         * @memberof battle.Battle
+         * @instance
+         */
+        Battle.prototype.roles = $util.emptyArray;
+
+        /**
+         * Creates a new Battle instance using the specified properties.
+         * @function create
+         * @memberof battle.Battle
+         * @static
+         * @param {battle.IBattle=} [properties] Properties to set
+         * @returns {battle.Battle} Battle instance
+         */
+        Battle.create = function create(properties) {
+            return new Battle(properties);
+        };
+
+        /**
+         * Encodes the specified Battle message. Does not implicitly {@link battle.Battle.verify|verify} messages.
+         * @function encode
+         * @memberof battle.Battle
+         * @static
+         * @param {battle.IBattle} message Battle message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Battle.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.battleId != null && Object.hasOwnProperty.call(message, "battleId"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.battleId);
+            if (message.battleUid != null && Object.hasOwnProperty.call(message, "battleUid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.battleUid);
+            if (message.roles != null && message.roles.length)
+                for (var i = 0; i < message.roles.length; ++i)
+                    $root.battle.BattleRole.encode(message.roles[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified Battle message, length delimited. Does not implicitly {@link battle.Battle.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof battle.Battle
+         * @static
+         * @param {battle.IBattle} message Battle message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Battle.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a Battle message from the specified reader or buffer.
+         * @function decode
+         * @memberof battle.Battle
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {battle.Battle} Battle
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Battle.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.battle.Battle();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.battleId = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.battleUid = reader.uint32();
+                        break;
+                    }
+                case 3: {
+                        if (!(message.roles && message.roles.length))
+                            message.roles = [];
+                        message.roles.push($root.battle.BattleRole.decode(reader, reader.uint32()));
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a Battle message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof battle.Battle
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {battle.Battle} Battle
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Battle.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a Battle message.
+         * @function verify
+         * @memberof battle.Battle
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        Battle.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.battleId != null && message.hasOwnProperty("battleId"))
+                if (!$util.isInteger(message.battleId))
+                    return "battleId: integer expected";
+            if (message.battleUid != null && message.hasOwnProperty("battleUid"))
+                if (!$util.isInteger(message.battleUid))
+                    return "battleUid: integer expected";
+            if (message.roles != null && message.hasOwnProperty("roles")) {
+                if (!Array.isArray(message.roles))
+                    return "roles: array expected";
+                for (var i = 0; i < message.roles.length; ++i) {
+                    var error = $root.battle.BattleRole.verify(message.roles[i]);
+                    if (error)
+                        return "roles." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a Battle message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof battle.Battle
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {battle.Battle} Battle
+         */
+        Battle.fromObject = function fromObject(object) {
+            if (object instanceof $root.battle.Battle)
+                return object;
+            var message = new $root.battle.Battle();
+            if (object.battleId != null)
+                message.battleId = object.battleId >>> 0;
+            if (object.battleUid != null)
+                message.battleUid = object.battleUid >>> 0;
+            if (object.roles) {
+                if (!Array.isArray(object.roles))
+                    throw TypeError(".battle.Battle.roles: array expected");
+                message.roles = [];
+                for (var i = 0; i < object.roles.length; ++i) {
+                    if (typeof object.roles[i] !== "object")
+                        throw TypeError(".battle.Battle.roles: object expected");
+                    message.roles[i] = $root.battle.BattleRole.fromObject(object.roles[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a Battle message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof battle.Battle
+         * @static
+         * @param {battle.Battle} message Battle
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        Battle.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.roles = [];
+            if (options.defaults) {
+                object.battleId = 0;
+                object.battleUid = 0;
+            }
+            if (message.battleId != null && message.hasOwnProperty("battleId"))
+                object.battleId = message.battleId;
+            if (message.battleUid != null && message.hasOwnProperty("battleUid"))
+                object.battleUid = message.battleUid;
+            if (message.roles && message.roles.length) {
+                object.roles = [];
+                for (var j = 0; j < message.roles.length; ++j)
+                    object.roles[j] = $root.battle.BattleRole.toObject(message.roles[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this Battle to JSON.
+         * @function toJSON
+         * @memberof battle.Battle
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        Battle.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for Battle
+         * @function getTypeUrl
+         * @memberof battle.Battle
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        Battle.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/battle.Battle";
+        };
+
+        return Battle;
+    })();
+
+    battle.c2s_enter = (function() {
+
+        /**
+         * Properties of a c2s_enter.
+         * @memberof battle
+         * @interface Ic2s_enter
+         * @property {number|null} [battleUid] c2s_enter battleUid
+         */
+
+        /**
+         * Constructs a new c2s_enter.
+         * @memberof battle
+         * @classdesc Represents a c2s_enter.
+         * @implements Ic2s_enter
+         * @constructor
+         * @param {battle.Ic2s_enter=} [properties] Properties to set
+         */
+        function c2s_enter(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * c2s_enter battleUid.
+         * @member {number} battleUid
+         * @memberof battle.c2s_enter
+         * @instance
+         */
+        c2s_enter.prototype.battleUid = 0;
+
+        /**
+         * Creates a new c2s_enter instance using the specified properties.
+         * @function create
+         * @memberof battle.c2s_enter
+         * @static
+         * @param {battle.Ic2s_enter=} [properties] Properties to set
+         * @returns {battle.c2s_enter} c2s_enter instance
+         */
+        c2s_enter.create = function create(properties) {
+            return new c2s_enter(properties);
+        };
+
+        /**
+         * Encodes the specified c2s_enter message. Does not implicitly {@link battle.c2s_enter.verify|verify} messages.
+         * @function encode
+         * @memberof battle.c2s_enter
+         * @static
+         * @param {battle.Ic2s_enter} message c2s_enter message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_enter.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.battleUid != null && Object.hasOwnProperty.call(message, "battleUid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.battleUid);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified c2s_enter message, length delimited. Does not implicitly {@link battle.c2s_enter.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof battle.c2s_enter
+         * @static
+         * @param {battle.Ic2s_enter} message c2s_enter message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_enter.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a c2s_enter message from the specified reader or buffer.
+         * @function decode
+         * @memberof battle.c2s_enter
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {battle.c2s_enter} c2s_enter
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_enter.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.battle.c2s_enter();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.battleUid = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a c2s_enter message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof battle.c2s_enter
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {battle.c2s_enter} c2s_enter
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_enter.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a c2s_enter message.
+         * @function verify
+         * @memberof battle.c2s_enter
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        c2s_enter.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.battleUid != null && message.hasOwnProperty("battleUid"))
+                if (!$util.isInteger(message.battleUid))
+                    return "battleUid: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a c2s_enter message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof battle.c2s_enter
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {battle.c2s_enter} c2s_enter
+         */
+        c2s_enter.fromObject = function fromObject(object) {
+            if (object instanceof $root.battle.c2s_enter)
+                return object;
+            var message = new $root.battle.c2s_enter();
+            if (object.battleUid != null)
+                message.battleUid = object.battleUid >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a c2s_enter message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof battle.c2s_enter
+         * @static
+         * @param {battle.c2s_enter} message c2s_enter
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        c2s_enter.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.battleUid = 0;
+            if (message.battleUid != null && message.hasOwnProperty("battleUid"))
+                object.battleUid = message.battleUid;
+            return object;
+        };
+
+        /**
+         * Converts this c2s_enter to JSON.
+         * @function toJSON
+         * @memberof battle.c2s_enter
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        c2s_enter.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for c2s_enter
+         * @function getTypeUrl
+         * @memberof battle.c2s_enter
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        c2s_enter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/battle.c2s_enter";
+        };
+
+        return c2s_enter;
+    })();
+
+    battle.s2c_enter = (function() {
+
+        /**
+         * Properties of a s2c_enter.
+         * @memberof battle
+         * @interface Is2c_enter
+         * @property {number|null} [err] s2c_enter err
+         * @property {Array.<battle.IBattleRole>|null} [roles] s2c_enter roles
+         * @property {Array.<battle.IBattleEntity>|null} [entities] s2c_enter entities
+         */
+
+        /**
+         * Constructs a new s2c_enter.
+         * @memberof battle
+         * @classdesc Represents a s2c_enter.
+         * @implements Is2c_enter
+         * @constructor
+         * @param {battle.Is2c_enter=} [properties] Properties to set
+         */
+        function s2c_enter(properties) {
+            this.roles = [];
+            this.entities = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * s2c_enter err.
+         * @member {number} err
+         * @memberof battle.s2c_enter
+         * @instance
+         */
+        s2c_enter.prototype.err = 0;
+
+        /**
+         * s2c_enter roles.
+         * @member {Array.<battle.IBattleRole>} roles
+         * @memberof battle.s2c_enter
+         * @instance
+         */
+        s2c_enter.prototype.roles = $util.emptyArray;
+
+        /**
+         * s2c_enter entities.
+         * @member {Array.<battle.IBattleEntity>} entities
+         * @memberof battle.s2c_enter
+         * @instance
+         */
+        s2c_enter.prototype.entities = $util.emptyArray;
+
+        /**
+         * Creates a new s2c_enter instance using the specified properties.
+         * @function create
+         * @memberof battle.s2c_enter
+         * @static
+         * @param {battle.Is2c_enter=} [properties] Properties to set
+         * @returns {battle.s2c_enter} s2c_enter instance
+         */
+        s2c_enter.create = function create(properties) {
+            return new s2c_enter(properties);
+        };
+
+        /**
+         * Encodes the specified s2c_enter message. Does not implicitly {@link battle.s2c_enter.verify|verify} messages.
+         * @function encode
+         * @memberof battle.s2c_enter
+         * @static
+         * @param {battle.Is2c_enter} message s2c_enter message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_enter.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
+            if (message.roles != null && message.roles.length)
+                for (var i = 0; i < message.roles.length; ++i)
+                    $root.battle.BattleRole.encode(message.roles[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            if (message.entities != null && message.entities.length)
+                for (var i = 0; i < message.entities.length; ++i)
+                    $root.battle.BattleEntity.encode(message.entities[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified s2c_enter message, length delimited. Does not implicitly {@link battle.s2c_enter.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof battle.s2c_enter
+         * @static
+         * @param {battle.Is2c_enter} message s2c_enter message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_enter.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a s2c_enter message from the specified reader or buffer.
+         * @function decode
+         * @memberof battle.s2c_enter
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {battle.s2c_enter} s2c_enter
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_enter.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.battle.s2c_enter();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.err = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        if (!(message.roles && message.roles.length))
+                            message.roles = [];
+                        message.roles.push($root.battle.BattleRole.decode(reader, reader.uint32()));
+                        break;
+                    }
+                case 3: {
+                        if (!(message.entities && message.entities.length))
+                            message.entities = [];
+                        message.entities.push($root.battle.BattleEntity.decode(reader, reader.uint32()));
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a s2c_enter message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof battle.s2c_enter
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {battle.s2c_enter} s2c_enter
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_enter.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a s2c_enter message.
+         * @function verify
+         * @memberof battle.s2c_enter
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        s2c_enter.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.err != null && message.hasOwnProperty("err"))
+                if (!$util.isInteger(message.err))
+                    return "err: integer expected";
+            if (message.roles != null && message.hasOwnProperty("roles")) {
+                if (!Array.isArray(message.roles))
+                    return "roles: array expected";
+                for (var i = 0; i < message.roles.length; ++i) {
+                    var error = $root.battle.BattleRole.verify(message.roles[i]);
+                    if (error)
+                        return "roles." + error;
+                }
+            }
+            if (message.entities != null && message.hasOwnProperty("entities")) {
+                if (!Array.isArray(message.entities))
+                    return "entities: array expected";
+                for (var i = 0; i < message.entities.length; ++i) {
+                    var error = $root.battle.BattleEntity.verify(message.entities[i]);
+                    if (error)
+                        return "entities." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a s2c_enter message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof battle.s2c_enter
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {battle.s2c_enter} s2c_enter
+         */
+        s2c_enter.fromObject = function fromObject(object) {
+            if (object instanceof $root.battle.s2c_enter)
+                return object;
+            var message = new $root.battle.s2c_enter();
+            if (object.err != null)
+                message.err = object.err >>> 0;
+            if (object.roles) {
+                if (!Array.isArray(object.roles))
+                    throw TypeError(".battle.s2c_enter.roles: array expected");
+                message.roles = [];
+                for (var i = 0; i < object.roles.length; ++i) {
+                    if (typeof object.roles[i] !== "object")
+                        throw TypeError(".battle.s2c_enter.roles: object expected");
+                    message.roles[i] = $root.battle.BattleRole.fromObject(object.roles[i]);
+                }
+            }
+            if (object.entities) {
+                if (!Array.isArray(object.entities))
+                    throw TypeError(".battle.s2c_enter.entities: array expected");
+                message.entities = [];
+                for (var i = 0; i < object.entities.length; ++i) {
+                    if (typeof object.entities[i] !== "object")
+                        throw TypeError(".battle.s2c_enter.entities: object expected");
+                    message.entities[i] = $root.battle.BattleEntity.fromObject(object.entities[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a s2c_enter message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof battle.s2c_enter
+         * @static
+         * @param {battle.s2c_enter} message s2c_enter
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        s2c_enter.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults) {
+                object.roles = [];
+                object.entities = [];
+            }
+            if (options.defaults)
+                object.err = 0;
+            if (message.err != null && message.hasOwnProperty("err"))
+                object.err = message.err;
+            if (message.roles && message.roles.length) {
+                object.roles = [];
+                for (var j = 0; j < message.roles.length; ++j)
+                    object.roles[j] = $root.battle.BattleRole.toObject(message.roles[j], options);
+            }
+            if (message.entities && message.entities.length) {
+                object.entities = [];
+                for (var j = 0; j < message.entities.length; ++j)
+                    object.entities[j] = $root.battle.BattleEntity.toObject(message.entities[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this s2c_enter to JSON.
+         * @function toJSON
+         * @memberof battle.s2c_enter
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        s2c_enter.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for s2c_enter
+         * @function getTypeUrl
+         * @memberof battle.s2c_enter
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        s2c_enter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/battle.s2c_enter";
+        };
+
+        return s2c_enter;
+    })();
+
+    battle.notify_cmd = (function() {
+
+        /**
+         * Properties of a notify_cmd.
+         * @memberof battle
+         * @interface Inotify_cmd
+         * @property {number|null} [frame] notify_cmd frame
+         * @property {Array.<battle.IBattleCmd>|null} [cmds] notify_cmd cmds
+         */
+
+        /**
+         * Constructs a new notify_cmd.
+         * @memberof battle
+         * @classdesc Represents a notify_cmd.
+         * @implements Inotify_cmd
+         * @constructor
+         * @param {battle.Inotify_cmd=} [properties] Properties to set
+         */
+        function notify_cmd(properties) {
+            this.cmds = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * notify_cmd frame.
+         * @member {number} frame
+         * @memberof battle.notify_cmd
+         * @instance
+         */
+        notify_cmd.prototype.frame = 0;
+
+        /**
+         * notify_cmd cmds.
+         * @member {Array.<battle.IBattleCmd>} cmds
+         * @memberof battle.notify_cmd
+         * @instance
+         */
+        notify_cmd.prototype.cmds = $util.emptyArray;
+
+        /**
+         * Creates a new notify_cmd instance using the specified properties.
+         * @function create
+         * @memberof battle.notify_cmd
+         * @static
+         * @param {battle.Inotify_cmd=} [properties] Properties to set
+         * @returns {battle.notify_cmd} notify_cmd instance
+         */
+        notify_cmd.create = function create(properties) {
+            return new notify_cmd(properties);
+        };
+
+        /**
+         * Encodes the specified notify_cmd message. Does not implicitly {@link battle.notify_cmd.verify|verify} messages.
+         * @function encode
+         * @memberof battle.notify_cmd
+         * @static
+         * @param {battle.Inotify_cmd} message notify_cmd message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        notify_cmd.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.frame != null && Object.hasOwnProperty.call(message, "frame"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.frame);
+            if (message.cmds != null && message.cmds.length)
+                for (var i = 0; i < message.cmds.length; ++i)
+                    $root.battle.BattleCmd.encode(message.cmds[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified notify_cmd message, length delimited. Does not implicitly {@link battle.notify_cmd.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof battle.notify_cmd
+         * @static
+         * @param {battle.Inotify_cmd} message notify_cmd message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        notify_cmd.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a notify_cmd message from the specified reader or buffer.
+         * @function decode
+         * @memberof battle.notify_cmd
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {battle.notify_cmd} notify_cmd
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        notify_cmd.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.battle.notify_cmd();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.frame = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        if (!(message.cmds && message.cmds.length))
+                            message.cmds = [];
+                        message.cmds.push($root.battle.BattleCmd.decode(reader, reader.uint32()));
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a notify_cmd message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof battle.notify_cmd
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {battle.notify_cmd} notify_cmd
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        notify_cmd.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a notify_cmd message.
+         * @function verify
+         * @memberof battle.notify_cmd
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        notify_cmd.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.frame != null && message.hasOwnProperty("frame"))
+                if (!$util.isInteger(message.frame))
+                    return "frame: integer expected";
+            if (message.cmds != null && message.hasOwnProperty("cmds")) {
+                if (!Array.isArray(message.cmds))
+                    return "cmds: array expected";
+                for (var i = 0; i < message.cmds.length; ++i) {
+                    var error = $root.battle.BattleCmd.verify(message.cmds[i]);
+                    if (error)
+                        return "cmds." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a notify_cmd message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof battle.notify_cmd
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {battle.notify_cmd} notify_cmd
+         */
+        notify_cmd.fromObject = function fromObject(object) {
+            if (object instanceof $root.battle.notify_cmd)
+                return object;
+            var message = new $root.battle.notify_cmd();
+            if (object.frame != null)
+                message.frame = object.frame >>> 0;
+            if (object.cmds) {
+                if (!Array.isArray(object.cmds))
+                    throw TypeError(".battle.notify_cmd.cmds: array expected");
+                message.cmds = [];
+                for (var i = 0; i < object.cmds.length; ++i) {
+                    if (typeof object.cmds[i] !== "object")
+                        throw TypeError(".battle.notify_cmd.cmds: object expected");
+                    message.cmds[i] = $root.battle.BattleCmd.fromObject(object.cmds[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a notify_cmd message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof battle.notify_cmd
+         * @static
+         * @param {battle.notify_cmd} message notify_cmd
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        notify_cmd.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.cmds = [];
+            if (options.defaults)
+                object.frame = 0;
+            if (message.frame != null && message.hasOwnProperty("frame"))
+                object.frame = message.frame;
+            if (message.cmds && message.cmds.length) {
+                object.cmds = [];
+                for (var j = 0; j < message.cmds.length; ++j)
+                    object.cmds[j] = $root.battle.BattleCmd.toObject(message.cmds[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this notify_cmd to JSON.
+         * @function toJSON
+         * @memberof battle.notify_cmd
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        notify_cmd.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for notify_cmd
+         * @function getTypeUrl
+         * @memberof battle.notify_cmd
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        notify_cmd.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/battle.notify_cmd";
+        };
+
+        return notify_cmd;
+    })();
+
+    battle.c2s_launch_skill = (function() {
+
+        /**
+         * Properties of a c2s_launch_skill.
+         * @memberof battle
+         * @interface Ic2s_launch_skill
+         * @property {number|null} [eid] c2s_launch_skill eid
+         */
+
+        /**
+         * Constructs a new c2s_launch_skill.
+         * @memberof battle
+         * @classdesc Represents a c2s_launch_skill.
+         * @implements Ic2s_launch_skill
+         * @constructor
+         * @param {battle.Ic2s_launch_skill=} [properties] Properties to set
+         */
+        function c2s_launch_skill(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * c2s_launch_skill eid.
+         * @member {number} eid
+         * @memberof battle.c2s_launch_skill
+         * @instance
+         */
+        c2s_launch_skill.prototype.eid = 0;
+
+        /**
+         * Creates a new c2s_launch_skill instance using the specified properties.
+         * @function create
+         * @memberof battle.c2s_launch_skill
+         * @static
+         * @param {battle.Ic2s_launch_skill=} [properties] Properties to set
+         * @returns {battle.c2s_launch_skill} c2s_launch_skill instance
+         */
+        c2s_launch_skill.create = function create(properties) {
+            return new c2s_launch_skill(properties);
+        };
+
+        /**
+         * Encodes the specified c2s_launch_skill message. Does not implicitly {@link battle.c2s_launch_skill.verify|verify} messages.
+         * @function encode
+         * @memberof battle.c2s_launch_skill
+         * @static
+         * @param {battle.Ic2s_launch_skill} message c2s_launch_skill message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_launch_skill.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.eid != null && Object.hasOwnProperty.call(message, "eid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.eid);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified c2s_launch_skill message, length delimited. Does not implicitly {@link battle.c2s_launch_skill.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof battle.c2s_launch_skill
+         * @static
+         * @param {battle.Ic2s_launch_skill} message c2s_launch_skill message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_launch_skill.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a c2s_launch_skill message from the specified reader or buffer.
+         * @function decode
+         * @memberof battle.c2s_launch_skill
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {battle.c2s_launch_skill} c2s_launch_skill
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_launch_skill.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.battle.c2s_launch_skill();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.eid = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a c2s_launch_skill message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof battle.c2s_launch_skill
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {battle.c2s_launch_skill} c2s_launch_skill
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_launch_skill.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a c2s_launch_skill message.
+         * @function verify
+         * @memberof battle.c2s_launch_skill
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        c2s_launch_skill.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.eid != null && message.hasOwnProperty("eid"))
+                if (!$util.isInteger(message.eid))
+                    return "eid: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a c2s_launch_skill message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof battle.c2s_launch_skill
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {battle.c2s_launch_skill} c2s_launch_skill
+         */
+        c2s_launch_skill.fromObject = function fromObject(object) {
+            if (object instanceof $root.battle.c2s_launch_skill)
+                return object;
+            var message = new $root.battle.c2s_launch_skill();
+            if (object.eid != null)
+                message.eid = object.eid >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a c2s_launch_skill message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof battle.c2s_launch_skill
+         * @static
+         * @param {battle.c2s_launch_skill} message c2s_launch_skill
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        c2s_launch_skill.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.eid = 0;
+            if (message.eid != null && message.hasOwnProperty("eid"))
+                object.eid = message.eid;
+            return object;
+        };
+
+        /**
+         * Converts this c2s_launch_skill to JSON.
+         * @function toJSON
+         * @memberof battle.c2s_launch_skill
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        c2s_launch_skill.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for c2s_launch_skill
+         * @function getTypeUrl
+         * @memberof battle.c2s_launch_skill
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        c2s_launch_skill.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/battle.c2s_launch_skill";
+        };
+
+        return c2s_launch_skill;
+    })();
+
+    battle.s2c_launch_skill = (function() {
+
+        /**
+         * Properties of a s2c_launch_skill.
+         * @memberof battle
+         * @interface Is2c_launch_skill
+         * @property {number|null} [err] s2c_launch_skill err
+         */
+
+        /**
+         * Constructs a new s2c_launch_skill.
+         * @memberof battle
+         * @classdesc Represents a s2c_launch_skill.
+         * @implements Is2c_launch_skill
+         * @constructor
+         * @param {battle.Is2c_launch_skill=} [properties] Properties to set
+         */
+        function s2c_launch_skill(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * s2c_launch_skill err.
+         * @member {number} err
+         * @memberof battle.s2c_launch_skill
+         * @instance
+         */
+        s2c_launch_skill.prototype.err = 0;
+
+        /**
+         * Creates a new s2c_launch_skill instance using the specified properties.
+         * @function create
+         * @memberof battle.s2c_launch_skill
+         * @static
+         * @param {battle.Is2c_launch_skill=} [properties] Properties to set
+         * @returns {battle.s2c_launch_skill} s2c_launch_skill instance
+         */
+        s2c_launch_skill.create = function create(properties) {
+            return new s2c_launch_skill(properties);
+        };
+
+        /**
+         * Encodes the specified s2c_launch_skill message. Does not implicitly {@link battle.s2c_launch_skill.verify|verify} messages.
+         * @function encode
+         * @memberof battle.s2c_launch_skill
+         * @static
+         * @param {battle.Is2c_launch_skill} message s2c_launch_skill message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_launch_skill.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified s2c_launch_skill message, length delimited. Does not implicitly {@link battle.s2c_launch_skill.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof battle.s2c_launch_skill
+         * @static
+         * @param {battle.Is2c_launch_skill} message s2c_launch_skill message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_launch_skill.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a s2c_launch_skill message from the specified reader or buffer.
+         * @function decode
+         * @memberof battle.s2c_launch_skill
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {battle.s2c_launch_skill} s2c_launch_skill
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_launch_skill.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.battle.s2c_launch_skill();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.err = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a s2c_launch_skill message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof battle.s2c_launch_skill
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {battle.s2c_launch_skill} s2c_launch_skill
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_launch_skill.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a s2c_launch_skill message.
+         * @function verify
+         * @memberof battle.s2c_launch_skill
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        s2c_launch_skill.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.err != null && message.hasOwnProperty("err"))
+                if (!$util.isInteger(message.err))
+                    return "err: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a s2c_launch_skill message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof battle.s2c_launch_skill
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {battle.s2c_launch_skill} s2c_launch_skill
+         */
+        s2c_launch_skill.fromObject = function fromObject(object) {
+            if (object instanceof $root.battle.s2c_launch_skill)
+                return object;
+            var message = new $root.battle.s2c_launch_skill();
+            if (object.err != null)
+                message.err = object.err >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a s2c_launch_skill message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof battle.s2c_launch_skill
+         * @static
+         * @param {battle.s2c_launch_skill} message s2c_launch_skill
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        s2c_launch_skill.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.err = 0;
+            if (message.err != null && message.hasOwnProperty("err"))
+                object.err = message.err;
+            return object;
+        };
+
+        /**
+         * Converts this s2c_launch_skill to JSON.
+         * @function toJSON
+         * @memberof battle.s2c_launch_skill
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        s2c_launch_skill.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for s2c_launch_skill
+         * @function getTypeUrl
+         * @memberof battle.s2c_launch_skill
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        s2c_launch_skill.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/battle.s2c_launch_skill";
+        };
+
+        return s2c_launch_skill;
+    })();
+
+    battle.notify_start = (function() {
+
+        /**
+         * Properties of a notify_start.
+         * @memberof battle
+         * @interface Inotify_start
+         */
+
+        /**
+         * Constructs a new notify_start.
+         * @memberof battle
+         * @classdesc Represents a notify_start.
+         * @implements Inotify_start
+         * @constructor
+         * @param {battle.Inotify_start=} [properties] Properties to set
+         */
+        function notify_start(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Creates a new notify_start instance using the specified properties.
+         * @function create
+         * @memberof battle.notify_start
+         * @static
+         * @param {battle.Inotify_start=} [properties] Properties to set
+         * @returns {battle.notify_start} notify_start instance
+         */
+        notify_start.create = function create(properties) {
+            return new notify_start(properties);
+        };
+
+        /**
+         * Encodes the specified notify_start message. Does not implicitly {@link battle.notify_start.verify|verify} messages.
+         * @function encode
+         * @memberof battle.notify_start
+         * @static
+         * @param {battle.Inotify_start} message notify_start message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        notify_start.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified notify_start message, length delimited. Does not implicitly {@link battle.notify_start.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof battle.notify_start
+         * @static
+         * @param {battle.Inotify_start} message notify_start message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        notify_start.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a notify_start message from the specified reader or buffer.
+         * @function decode
+         * @memberof battle.notify_start
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {battle.notify_start} notify_start
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        notify_start.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.battle.notify_start();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a notify_start message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof battle.notify_start
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {battle.notify_start} notify_start
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        notify_start.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a notify_start message.
+         * @function verify
+         * @memberof battle.notify_start
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        notify_start.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+
+        /**
+         * Creates a notify_start message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof battle.notify_start
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {battle.notify_start} notify_start
+         */
+        notify_start.fromObject = function fromObject(object) {
+            if (object instanceof $root.battle.notify_start)
+                return object;
+            return new $root.battle.notify_start();
+        };
+
+        /**
+         * Creates a plain object from a notify_start message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof battle.notify_start
+         * @static
+         * @param {battle.notify_start} message notify_start
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        notify_start.toObject = function toObject() {
+            return {};
+        };
+
+        /**
+         * Converts this notify_start to JSON.
+         * @function toJSON
+         * @memberof battle.notify_start
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        notify_start.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for notify_start
+         * @function getTypeUrl
+         * @memberof battle.notify_start
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        notify_start.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/battle.notify_start";
+        };
+
+        return notify_start;
+    })();
+
+    battle.notify_end = (function() {
+
+        /**
+         * Properties of a notify_end.
+         * @memberof battle
+         * @interface Inotify_end
+         */
+
+        /**
+         * Constructs a new notify_end.
+         * @memberof battle
+         * @classdesc Represents a notify_end.
+         * @implements Inotify_end
+         * @constructor
+         * @param {battle.Inotify_end=} [properties] Properties to set
+         */
+        function notify_end(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Creates a new notify_end instance using the specified properties.
+         * @function create
+         * @memberof battle.notify_end
+         * @static
+         * @param {battle.Inotify_end=} [properties] Properties to set
+         * @returns {battle.notify_end} notify_end instance
+         */
+        notify_end.create = function create(properties) {
+            return new notify_end(properties);
+        };
+
+        /**
+         * Encodes the specified notify_end message. Does not implicitly {@link battle.notify_end.verify|verify} messages.
+         * @function encode
+         * @memberof battle.notify_end
+         * @static
+         * @param {battle.Inotify_end} message notify_end message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        notify_end.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified notify_end message, length delimited. Does not implicitly {@link battle.notify_end.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof battle.notify_end
+         * @static
+         * @param {battle.Inotify_end} message notify_end message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        notify_end.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a notify_end message from the specified reader or buffer.
+         * @function decode
+         * @memberof battle.notify_end
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {battle.notify_end} notify_end
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        notify_end.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.battle.notify_end();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a notify_end message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof battle.notify_end
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {battle.notify_end} notify_end
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        notify_end.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a notify_end message.
+         * @function verify
+         * @memberof battle.notify_end
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        notify_end.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+
+        /**
+         * Creates a notify_end message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof battle.notify_end
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {battle.notify_end} notify_end
+         */
+        notify_end.fromObject = function fromObject(object) {
+            if (object instanceof $root.battle.notify_end)
+                return object;
+            return new $root.battle.notify_end();
+        };
+
+        /**
+         * Creates a plain object from a notify_end message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof battle.notify_end
+         * @static
+         * @param {battle.notify_end} message notify_end
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        notify_end.toObject = function toObject() {
+            return {};
+        };
+
+        /**
+         * Converts this notify_end to JSON.
+         * @function toJSON
+         * @memberof battle.notify_end
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        notify_end.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for notify_end
+         * @function getTypeUrl
+         * @memberof battle.notify_end
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        notify_end.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/battle.notify_end";
+        };
+
+        return notify_end;
+    })();
+
+    battle.DebugInfo = (function() {
+
+        /**
+         * Properties of a DebugInfo.
+         * @memberof battle
+         * @interface IDebugInfo
+         * @property {number|null} [x] DebugInfo x
+         * @property {number|null} [y] DebugInfo y
+         * @property {number|null} [z] DebugInfo z
+         * @property {number|null} [color] DebugInfo color
+         * @property {number|null} [size] DebugInfo size
+         */
+
+        /**
+         * Constructs a new DebugInfo.
+         * @memberof battle
+         * @classdesc Represents a DebugInfo.
+         * @implements IDebugInfo
+         * @constructor
+         * @param {battle.IDebugInfo=} [properties] Properties to set
+         */
+        function DebugInfo(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * DebugInfo x.
+         * @member {number} x
+         * @memberof battle.DebugInfo
+         * @instance
+         */
+        DebugInfo.prototype.x = 0;
+
+        /**
+         * DebugInfo y.
+         * @member {number} y
+         * @memberof battle.DebugInfo
+         * @instance
+         */
+        DebugInfo.prototype.y = 0;
+
+        /**
+         * DebugInfo z.
+         * @member {number} z
+         * @memberof battle.DebugInfo
+         * @instance
+         */
+        DebugInfo.prototype.z = 0;
+
+        /**
+         * DebugInfo color.
+         * @member {number} color
+         * @memberof battle.DebugInfo
+         * @instance
+         */
+        DebugInfo.prototype.color = 0;
+
+        /**
+         * DebugInfo size.
+         * @member {number} size
+         * @memberof battle.DebugInfo
+         * @instance
+         */
+        DebugInfo.prototype.size = 0;
+
+        /**
+         * Creates a new DebugInfo instance using the specified properties.
+         * @function create
+         * @memberof battle.DebugInfo
+         * @static
+         * @param {battle.IDebugInfo=} [properties] Properties to set
+         * @returns {battle.DebugInfo} DebugInfo instance
+         */
+        DebugInfo.create = function create(properties) {
+            return new DebugInfo(properties);
+        };
+
+        /**
+         * Encodes the specified DebugInfo message. Does not implicitly {@link battle.DebugInfo.verify|verify} messages.
+         * @function encode
+         * @memberof battle.DebugInfo
+         * @static
+         * @param {battle.IDebugInfo} message DebugInfo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        DebugInfo.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.x != null && Object.hasOwnProperty.call(message, "x"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.x);
+            if (message.y != null && Object.hasOwnProperty.call(message, "y"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.y);
+            if (message.z != null && Object.hasOwnProperty.call(message, "z"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.z);
+            if (message.color != null && Object.hasOwnProperty.call(message, "color"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.color);
+            if (message.size != null && Object.hasOwnProperty.call(message, "size"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.size);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified DebugInfo message, length delimited. Does not implicitly {@link battle.DebugInfo.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof battle.DebugInfo
+         * @static
+         * @param {battle.IDebugInfo} message DebugInfo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        DebugInfo.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a DebugInfo message from the specified reader or buffer.
+         * @function decode
+         * @memberof battle.DebugInfo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {battle.DebugInfo} DebugInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        DebugInfo.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.battle.DebugInfo();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.x = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.y = reader.uint32();
+                        break;
+                    }
+                case 3: {
+                        message.z = reader.uint32();
+                        break;
+                    }
+                case 4: {
+                        message.color = reader.uint32();
+                        break;
+                    }
+                case 5: {
+                        message.size = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a DebugInfo message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof battle.DebugInfo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {battle.DebugInfo} DebugInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        DebugInfo.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a DebugInfo message.
+         * @function verify
+         * @memberof battle.DebugInfo
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        DebugInfo.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.x != null && message.hasOwnProperty("x"))
+                if (!$util.isInteger(message.x))
+                    return "x: integer expected";
+            if (message.y != null && message.hasOwnProperty("y"))
+                if (!$util.isInteger(message.y))
+                    return "y: integer expected";
+            if (message.z != null && message.hasOwnProperty("z"))
+                if (!$util.isInteger(message.z))
+                    return "z: integer expected";
+            if (message.color != null && message.hasOwnProperty("color"))
+                if (!$util.isInteger(message.color))
+                    return "color: integer expected";
+            if (message.size != null && message.hasOwnProperty("size"))
+                if (!$util.isInteger(message.size))
+                    return "size: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a DebugInfo message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof battle.DebugInfo
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {battle.DebugInfo} DebugInfo
+         */
+        DebugInfo.fromObject = function fromObject(object) {
+            if (object instanceof $root.battle.DebugInfo)
+                return object;
+            var message = new $root.battle.DebugInfo();
+            if (object.x != null)
+                message.x = object.x >>> 0;
+            if (object.y != null)
+                message.y = object.y >>> 0;
+            if (object.z != null)
+                message.z = object.z >>> 0;
+            if (object.color != null)
+                message.color = object.color >>> 0;
+            if (object.size != null)
+                message.size = object.size >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a DebugInfo message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof battle.DebugInfo
+         * @static
+         * @param {battle.DebugInfo} message DebugInfo
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        DebugInfo.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.x = 0;
+                object.y = 0;
+                object.z = 0;
+                object.color = 0;
+                object.size = 0;
+            }
+            if (message.x != null && message.hasOwnProperty("x"))
+                object.x = message.x;
+            if (message.y != null && message.hasOwnProperty("y"))
+                object.y = message.y;
+            if (message.z != null && message.hasOwnProperty("z"))
+                object.z = message.z;
+            if (message.color != null && message.hasOwnProperty("color"))
+                object.color = message.color;
+            if (message.size != null && message.hasOwnProperty("size"))
+                object.size = message.size;
+            return object;
+        };
+
+        /**
+         * Converts this DebugInfo to JSON.
+         * @function toJSON
+         * @memberof battle.DebugInfo
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        DebugInfo.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for DebugInfo
+         * @function getTypeUrl
+         * @memberof battle.DebugInfo
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        DebugInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/battle.DebugInfo";
+        };
+
+        return DebugInfo;
+    })();
+
+    battle.notify_debug = (function() {
+
+        /**
+         * Properties of a notify_debug.
+         * @memberof battle
+         * @interface Inotify_debug
+         * @property {Array.<battle.IDebugInfo>|null} [infos] notify_debug infos
+         * @property {Array.<string>|null} [logs] notify_debug logs
+         */
+
+        /**
+         * Constructs a new notify_debug.
+         * @memberof battle
+         * @classdesc Represents a notify_debug.
+         * @implements Inotify_debug
+         * @constructor
+         * @param {battle.Inotify_debug=} [properties] Properties to set
+         */
+        function notify_debug(properties) {
+            this.infos = [];
+            this.logs = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * notify_debug infos.
+         * @member {Array.<battle.IDebugInfo>} infos
+         * @memberof battle.notify_debug
+         * @instance
+         */
+        notify_debug.prototype.infos = $util.emptyArray;
+
+        /**
+         * notify_debug logs.
+         * @member {Array.<string>} logs
+         * @memberof battle.notify_debug
+         * @instance
+         */
+        notify_debug.prototype.logs = $util.emptyArray;
+
+        /**
+         * Creates a new notify_debug instance using the specified properties.
+         * @function create
+         * @memberof battle.notify_debug
+         * @static
+         * @param {battle.Inotify_debug=} [properties] Properties to set
+         * @returns {battle.notify_debug} notify_debug instance
+         */
+        notify_debug.create = function create(properties) {
+            return new notify_debug(properties);
+        };
+
+        /**
+         * Encodes the specified notify_debug message. Does not implicitly {@link battle.notify_debug.verify|verify} messages.
+         * @function encode
+         * @memberof battle.notify_debug
+         * @static
+         * @param {battle.Inotify_debug} message notify_debug message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        notify_debug.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.infos != null && message.infos.length)
+                for (var i = 0; i < message.infos.length; ++i)
+                    $root.battle.DebugInfo.encode(message.infos[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.logs != null && message.logs.length)
+                for (var i = 0; i < message.logs.length; ++i)
+                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.logs[i]);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified notify_debug message, length delimited. Does not implicitly {@link battle.notify_debug.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof battle.notify_debug
+         * @static
+         * @param {battle.Inotify_debug} message notify_debug message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        notify_debug.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a notify_debug message from the specified reader or buffer.
+         * @function decode
+         * @memberof battle.notify_debug
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {battle.notify_debug} notify_debug
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        notify_debug.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.battle.notify_debug();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        if (!(message.infos && message.infos.length))
+                            message.infos = [];
+                        message.infos.push($root.battle.DebugInfo.decode(reader, reader.uint32()));
+                        break;
+                    }
+                case 2: {
+                        if (!(message.logs && message.logs.length))
+                            message.logs = [];
+                        message.logs.push(reader.string());
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a notify_debug message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof battle.notify_debug
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {battle.notify_debug} notify_debug
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        notify_debug.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a notify_debug message.
+         * @function verify
+         * @memberof battle.notify_debug
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        notify_debug.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.infos != null && message.hasOwnProperty("infos")) {
+                if (!Array.isArray(message.infos))
+                    return "infos: array expected";
+                for (var i = 0; i < message.infos.length; ++i) {
+                    var error = $root.battle.DebugInfo.verify(message.infos[i]);
+                    if (error)
+                        return "infos." + error;
+                }
+            }
+            if (message.logs != null && message.hasOwnProperty("logs")) {
+                if (!Array.isArray(message.logs))
+                    return "logs: array expected";
+                for (var i = 0; i < message.logs.length; ++i)
+                    if (!$util.isString(message.logs[i]))
+                        return "logs: string[] expected";
+            }
+            return null;
+        };
+
+        /**
+         * Creates a notify_debug message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof battle.notify_debug
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {battle.notify_debug} notify_debug
+         */
+        notify_debug.fromObject = function fromObject(object) {
+            if (object instanceof $root.battle.notify_debug)
+                return object;
+            var message = new $root.battle.notify_debug();
+            if (object.infos) {
+                if (!Array.isArray(object.infos))
+                    throw TypeError(".battle.notify_debug.infos: array expected");
+                message.infos = [];
+                for (var i = 0; i < object.infos.length; ++i) {
+                    if (typeof object.infos[i] !== "object")
+                        throw TypeError(".battle.notify_debug.infos: object expected");
+                    message.infos[i] = $root.battle.DebugInfo.fromObject(object.infos[i]);
+                }
+            }
+            if (object.logs) {
+                if (!Array.isArray(object.logs))
+                    throw TypeError(".battle.notify_debug.logs: array expected");
+                message.logs = [];
+                for (var i = 0; i < object.logs.length; ++i)
+                    message.logs[i] = String(object.logs[i]);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a notify_debug message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof battle.notify_debug
+         * @static
+         * @param {battle.notify_debug} message notify_debug
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        notify_debug.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults) {
+                object.infos = [];
+                object.logs = [];
+            }
+            if (message.infos && message.infos.length) {
+                object.infos = [];
+                for (var j = 0; j < message.infos.length; ++j)
+                    object.infos[j] = $root.battle.DebugInfo.toObject(message.infos[j], options);
+            }
+            if (message.logs && message.logs.length) {
+                object.logs = [];
+                for (var j = 0; j < message.logs.length; ++j)
+                    object.logs[j] = message.logs[j];
+            }
+            return object;
+        };
+
+        /**
+         * Converts this notify_debug to JSON.
+         * @function toJSON
+         * @memberof battle.notify_debug
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        notify_debug.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for notify_debug
+         * @function getTypeUrl
+         * @memberof battle.notify_debug
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        notify_debug.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/battle.notify_debug";
+        };
+
+        return notify_debug;
+    })();
+
+    return battle;
+})();
+
 $root.chat = (function() {
 
     /**
@@ -4463,6 +11421,2476 @@ $root.chat = (function() {
     })();
 
     return chat;
+})();
+
+$root.chest = (function() {
+
+    /**
+     * Namespace chest.
+     * @exports chest
+     * @namespace
+     */
+    var chest = {};
+
+    chest.ChestInfo = (function() {
+
+        /**
+         * Properties of a ChestInfo.
+         * @memberof chest
+         * @interface IChestInfo
+         * @property {number|null} [id] ChestInfo id
+         * @property {number|null} [num] ChestInfo num
+         */
+
+        /**
+         * Constructs a new ChestInfo.
+         * @memberof chest
+         * @classdesc Represents a ChestInfo.
+         * @implements IChestInfo
+         * @constructor
+         * @param {chest.IChestInfo=} [properties] Properties to set
+         */
+        function ChestInfo(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * ChestInfo id.
+         * @member {number} id
+         * @memberof chest.ChestInfo
+         * @instance
+         */
+        ChestInfo.prototype.id = 0;
+
+        /**
+         * ChestInfo num.
+         * @member {number} num
+         * @memberof chest.ChestInfo
+         * @instance
+         */
+        ChestInfo.prototype.num = 0;
+
+        /**
+         * Creates a new ChestInfo instance using the specified properties.
+         * @function create
+         * @memberof chest.ChestInfo
+         * @static
+         * @param {chest.IChestInfo=} [properties] Properties to set
+         * @returns {chest.ChestInfo} ChestInfo instance
+         */
+        ChestInfo.create = function create(properties) {
+            return new ChestInfo(properties);
+        };
+
+        /**
+         * Encodes the specified ChestInfo message. Does not implicitly {@link chest.ChestInfo.verify|verify} messages.
+         * @function encode
+         * @memberof chest.ChestInfo
+         * @static
+         * @param {chest.IChestInfo} message ChestInfo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ChestInfo.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.id);
+            if (message.num != null && Object.hasOwnProperty.call(message, "num"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.num);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified ChestInfo message, length delimited. Does not implicitly {@link chest.ChestInfo.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof chest.ChestInfo
+         * @static
+         * @param {chest.IChestInfo} message ChestInfo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ChestInfo.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a ChestInfo message from the specified reader or buffer.
+         * @function decode
+         * @memberof chest.ChestInfo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {chest.ChestInfo} ChestInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ChestInfo.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chest.ChestInfo();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.id = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.num = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a ChestInfo message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof chest.ChestInfo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {chest.ChestInfo} ChestInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ChestInfo.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a ChestInfo message.
+         * @function verify
+         * @memberof chest.ChestInfo
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        ChestInfo.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isInteger(message.id))
+                    return "id: integer expected";
+            if (message.num != null && message.hasOwnProperty("num"))
+                if (!$util.isInteger(message.num))
+                    return "num: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a ChestInfo message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof chest.ChestInfo
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {chest.ChestInfo} ChestInfo
+         */
+        ChestInfo.fromObject = function fromObject(object) {
+            if (object instanceof $root.chest.ChestInfo)
+                return object;
+            var message = new $root.chest.ChestInfo();
+            if (object.id != null)
+                message.id = object.id >>> 0;
+            if (object.num != null)
+                message.num = object.num >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a ChestInfo message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof chest.ChestInfo
+         * @static
+         * @param {chest.ChestInfo} message ChestInfo
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        ChestInfo.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.id = 0;
+                object.num = 0;
+            }
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            if (message.num != null && message.hasOwnProperty("num"))
+                object.num = message.num;
+            return object;
+        };
+
+        /**
+         * Converts this ChestInfo to JSON.
+         * @function toJSON
+         * @memberof chest.ChestInfo
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        ChestInfo.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for ChestInfo
+         * @function getTypeUrl
+         * @memberof chest.ChestInfo
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        ChestInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/chest.ChestInfo";
+        };
+
+        return ChestInfo;
+    })();
+
+    chest.ScoreInfo = (function() {
+
+        /**
+         * Properties of a ScoreInfo.
+         * @memberof chest
+         * @interface IScoreInfo
+         * @property {number|null} [score] ScoreInfo score
+         * @property {number|null} [scoreChestId] ScoreInfo scoreChestId
+         */
+
+        /**
+         * Constructs a new ScoreInfo.
+         * @memberof chest
+         * @classdesc Represents a ScoreInfo.
+         * @implements IScoreInfo
+         * @constructor
+         * @param {chest.IScoreInfo=} [properties] Properties to set
+         */
+        function ScoreInfo(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * ScoreInfo score.
+         * @member {number} score
+         * @memberof chest.ScoreInfo
+         * @instance
+         */
+        ScoreInfo.prototype.score = 0;
+
+        /**
+         * ScoreInfo scoreChestId.
+         * @member {number} scoreChestId
+         * @memberof chest.ScoreInfo
+         * @instance
+         */
+        ScoreInfo.prototype.scoreChestId = 0;
+
+        /**
+         * Creates a new ScoreInfo instance using the specified properties.
+         * @function create
+         * @memberof chest.ScoreInfo
+         * @static
+         * @param {chest.IScoreInfo=} [properties] Properties to set
+         * @returns {chest.ScoreInfo} ScoreInfo instance
+         */
+        ScoreInfo.create = function create(properties) {
+            return new ScoreInfo(properties);
+        };
+
+        /**
+         * Encodes the specified ScoreInfo message. Does not implicitly {@link chest.ScoreInfo.verify|verify} messages.
+         * @function encode
+         * @memberof chest.ScoreInfo
+         * @static
+         * @param {chest.IScoreInfo} message ScoreInfo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ScoreInfo.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.score != null && Object.hasOwnProperty.call(message, "score"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.score);
+            if (message.scoreChestId != null && Object.hasOwnProperty.call(message, "scoreChestId"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.scoreChestId);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified ScoreInfo message, length delimited. Does not implicitly {@link chest.ScoreInfo.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof chest.ScoreInfo
+         * @static
+         * @param {chest.IScoreInfo} message ScoreInfo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ScoreInfo.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a ScoreInfo message from the specified reader or buffer.
+         * @function decode
+         * @memberof chest.ScoreInfo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {chest.ScoreInfo} ScoreInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ScoreInfo.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chest.ScoreInfo();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 4: {
+                        message.score = reader.uint32();
+                        break;
+                    }
+                case 5: {
+                        message.scoreChestId = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a ScoreInfo message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof chest.ScoreInfo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {chest.ScoreInfo} ScoreInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ScoreInfo.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a ScoreInfo message.
+         * @function verify
+         * @memberof chest.ScoreInfo
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        ScoreInfo.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.score != null && message.hasOwnProperty("score"))
+                if (!$util.isInteger(message.score))
+                    return "score: integer expected";
+            if (message.scoreChestId != null && message.hasOwnProperty("scoreChestId"))
+                if (!$util.isInteger(message.scoreChestId))
+                    return "scoreChestId: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a ScoreInfo message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof chest.ScoreInfo
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {chest.ScoreInfo} ScoreInfo
+         */
+        ScoreInfo.fromObject = function fromObject(object) {
+            if (object instanceof $root.chest.ScoreInfo)
+                return object;
+            var message = new $root.chest.ScoreInfo();
+            if (object.score != null)
+                message.score = object.score >>> 0;
+            if (object.scoreChestId != null)
+                message.scoreChestId = object.scoreChestId >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a ScoreInfo message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof chest.ScoreInfo
+         * @static
+         * @param {chest.ScoreInfo} message ScoreInfo
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        ScoreInfo.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.score = 0;
+                object.scoreChestId = 0;
+            }
+            if (message.score != null && message.hasOwnProperty("score"))
+                object.score = message.score;
+            if (message.scoreChestId != null && message.hasOwnProperty("scoreChestId"))
+                object.scoreChestId = message.scoreChestId;
+            return object;
+        };
+
+        /**
+         * Converts this ScoreInfo to JSON.
+         * @function toJSON
+         * @memberof chest.ScoreInfo
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        ScoreInfo.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for ScoreInfo
+         * @function getTypeUrl
+         * @memberof chest.ScoreInfo
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        ScoreInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/chest.ScoreInfo";
+        };
+
+        return ScoreInfo;
+    })();
+
+    chest.c2s_load = (function() {
+
+        /**
+         * Properties of a c2s_load.
+         * @memberof chest
+         * @interface Ic2s_load
+         */
+
+        /**
+         * Constructs a new c2s_load.
+         * @memberof chest
+         * @classdesc Represents a c2s_load.
+         * @implements Ic2s_load
+         * @constructor
+         * @param {chest.Ic2s_load=} [properties] Properties to set
+         */
+        function c2s_load(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Creates a new c2s_load instance using the specified properties.
+         * @function create
+         * @memberof chest.c2s_load
+         * @static
+         * @param {chest.Ic2s_load=} [properties] Properties to set
+         * @returns {chest.c2s_load} c2s_load instance
+         */
+        c2s_load.create = function create(properties) {
+            return new c2s_load(properties);
+        };
+
+        /**
+         * Encodes the specified c2s_load message. Does not implicitly {@link chest.c2s_load.verify|verify} messages.
+         * @function encode
+         * @memberof chest.c2s_load
+         * @static
+         * @param {chest.Ic2s_load} message c2s_load message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_load.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified c2s_load message, length delimited. Does not implicitly {@link chest.c2s_load.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof chest.c2s_load
+         * @static
+         * @param {chest.Ic2s_load} message c2s_load message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_load.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a c2s_load message from the specified reader or buffer.
+         * @function decode
+         * @memberof chest.c2s_load
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {chest.c2s_load} c2s_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_load.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chest.c2s_load();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a c2s_load message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof chest.c2s_load
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {chest.c2s_load} c2s_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_load.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a c2s_load message.
+         * @function verify
+         * @memberof chest.c2s_load
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        c2s_load.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+
+        /**
+         * Creates a c2s_load message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof chest.c2s_load
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {chest.c2s_load} c2s_load
+         */
+        c2s_load.fromObject = function fromObject(object) {
+            if (object instanceof $root.chest.c2s_load)
+                return object;
+            return new $root.chest.c2s_load();
+        };
+
+        /**
+         * Creates a plain object from a c2s_load message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof chest.c2s_load
+         * @static
+         * @param {chest.c2s_load} message c2s_load
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        c2s_load.toObject = function toObject() {
+            return {};
+        };
+
+        /**
+         * Converts this c2s_load to JSON.
+         * @function toJSON
+         * @memberof chest.c2s_load
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        c2s_load.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for c2s_load
+         * @function getTypeUrl
+         * @memberof chest.c2s_load
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        c2s_load.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/chest.c2s_load";
+        };
+
+        return c2s_load;
+    })();
+
+    chest.s2c_load = (function() {
+
+        /**
+         * Properties of a s2c_load.
+         * @memberof chest
+         * @interface Is2c_load
+         * @property {number|null} [err] s2c_load err
+         * @property {number|null} [heroId] s2c_load heroId
+         * @property {Array.<chest.IChestInfo>|null} [chests] s2c_load chests
+         * @property {chest.IScoreInfo|null} [score] s2c_load score
+         */
+
+        /**
+         * Constructs a new s2c_load.
+         * @memberof chest
+         * @classdesc Represents a s2c_load.
+         * @implements Is2c_load
+         * @constructor
+         * @param {chest.Is2c_load=} [properties] Properties to set
+         */
+        function s2c_load(properties) {
+            this.chests = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * s2c_load err.
+         * @member {number} err
+         * @memberof chest.s2c_load
+         * @instance
+         */
+        s2c_load.prototype.err = 0;
+
+        /**
+         * s2c_load heroId.
+         * @member {number} heroId
+         * @memberof chest.s2c_load
+         * @instance
+         */
+        s2c_load.prototype.heroId = 0;
+
+        /**
+         * s2c_load chests.
+         * @member {Array.<chest.IChestInfo>} chests
+         * @memberof chest.s2c_load
+         * @instance
+         */
+        s2c_load.prototype.chests = $util.emptyArray;
+
+        /**
+         * s2c_load score.
+         * @member {chest.IScoreInfo|null|undefined} score
+         * @memberof chest.s2c_load
+         * @instance
+         */
+        s2c_load.prototype.score = null;
+
+        /**
+         * Creates a new s2c_load instance using the specified properties.
+         * @function create
+         * @memberof chest.s2c_load
+         * @static
+         * @param {chest.Is2c_load=} [properties] Properties to set
+         * @returns {chest.s2c_load} s2c_load instance
+         */
+        s2c_load.create = function create(properties) {
+            return new s2c_load(properties);
+        };
+
+        /**
+         * Encodes the specified s2c_load message. Does not implicitly {@link chest.s2c_load.verify|verify} messages.
+         * @function encode
+         * @memberof chest.s2c_load
+         * @static
+         * @param {chest.Is2c_load} message s2c_load message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_load.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
+            if (message.heroId != null && Object.hasOwnProperty.call(message, "heroId"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.heroId);
+            if (message.chests != null && message.chests.length)
+                for (var i = 0; i < message.chests.length; ++i)
+                    $root.chest.ChestInfo.encode(message.chests[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            if (message.score != null && Object.hasOwnProperty.call(message, "score"))
+                $root.chest.ScoreInfo.encode(message.score, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified s2c_load message, length delimited. Does not implicitly {@link chest.s2c_load.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof chest.s2c_load
+         * @static
+         * @param {chest.Is2c_load} message s2c_load message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_load.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a s2c_load message from the specified reader or buffer.
+         * @function decode
+         * @memberof chest.s2c_load
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {chest.s2c_load} s2c_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_load.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chest.s2c_load();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.err = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.heroId = reader.uint32();
+                        break;
+                    }
+                case 3: {
+                        if (!(message.chests && message.chests.length))
+                            message.chests = [];
+                        message.chests.push($root.chest.ChestInfo.decode(reader, reader.uint32()));
+                        break;
+                    }
+                case 4: {
+                        message.score = $root.chest.ScoreInfo.decode(reader, reader.uint32());
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a s2c_load message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof chest.s2c_load
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {chest.s2c_load} s2c_load
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_load.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a s2c_load message.
+         * @function verify
+         * @memberof chest.s2c_load
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        s2c_load.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.err != null && message.hasOwnProperty("err"))
+                if (!$util.isInteger(message.err))
+                    return "err: integer expected";
+            if (message.heroId != null && message.hasOwnProperty("heroId"))
+                if (!$util.isInteger(message.heroId))
+                    return "heroId: integer expected";
+            if (message.chests != null && message.hasOwnProperty("chests")) {
+                if (!Array.isArray(message.chests))
+                    return "chests: array expected";
+                for (var i = 0; i < message.chests.length; ++i) {
+                    var error = $root.chest.ChestInfo.verify(message.chests[i]);
+                    if (error)
+                        return "chests." + error;
+                }
+            }
+            if (message.score != null && message.hasOwnProperty("score")) {
+                var error = $root.chest.ScoreInfo.verify(message.score);
+                if (error)
+                    return "score." + error;
+            }
+            return null;
+        };
+
+        /**
+         * Creates a s2c_load message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof chest.s2c_load
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {chest.s2c_load} s2c_load
+         */
+        s2c_load.fromObject = function fromObject(object) {
+            if (object instanceof $root.chest.s2c_load)
+                return object;
+            var message = new $root.chest.s2c_load();
+            if (object.err != null)
+                message.err = object.err >>> 0;
+            if (object.heroId != null)
+                message.heroId = object.heroId >>> 0;
+            if (object.chests) {
+                if (!Array.isArray(object.chests))
+                    throw TypeError(".chest.s2c_load.chests: array expected");
+                message.chests = [];
+                for (var i = 0; i < object.chests.length; ++i) {
+                    if (typeof object.chests[i] !== "object")
+                        throw TypeError(".chest.s2c_load.chests: object expected");
+                    message.chests[i] = $root.chest.ChestInfo.fromObject(object.chests[i]);
+                }
+            }
+            if (object.score != null) {
+                if (typeof object.score !== "object")
+                    throw TypeError(".chest.s2c_load.score: object expected");
+                message.score = $root.chest.ScoreInfo.fromObject(object.score);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a s2c_load message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof chest.s2c_load
+         * @static
+         * @param {chest.s2c_load} message s2c_load
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        s2c_load.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.chests = [];
+            if (options.defaults) {
+                object.err = 0;
+                object.heroId = 0;
+                object.score = null;
+            }
+            if (message.err != null && message.hasOwnProperty("err"))
+                object.err = message.err;
+            if (message.heroId != null && message.hasOwnProperty("heroId"))
+                object.heroId = message.heroId;
+            if (message.chests && message.chests.length) {
+                object.chests = [];
+                for (var j = 0; j < message.chests.length; ++j)
+                    object.chests[j] = $root.chest.ChestInfo.toObject(message.chests[j], options);
+            }
+            if (message.score != null && message.hasOwnProperty("score"))
+                object.score = $root.chest.ScoreInfo.toObject(message.score, options);
+            return object;
+        };
+
+        /**
+         * Converts this s2c_load to JSON.
+         * @function toJSON
+         * @memberof chest.s2c_load
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        s2c_load.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for s2c_load
+         * @function getTypeUrl
+         * @memberof chest.s2c_load
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        s2c_load.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/chest.s2c_load";
+        };
+
+        return s2c_load;
+    })();
+
+    chest.c2s_open_chest = (function() {
+
+        /**
+         * Properties of a c2s_open_chest.
+         * @memberof chest
+         * @interface Ic2s_open_chest
+         * @property {number|null} [id] c2s_open_chest id
+         */
+
+        /**
+         * Constructs a new c2s_open_chest.
+         * @memberof chest
+         * @classdesc Represents a c2s_open_chest.
+         * @implements Ic2s_open_chest
+         * @constructor
+         * @param {chest.Ic2s_open_chest=} [properties] Properties to set
+         */
+        function c2s_open_chest(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * c2s_open_chest id.
+         * @member {number} id
+         * @memberof chest.c2s_open_chest
+         * @instance
+         */
+        c2s_open_chest.prototype.id = 0;
+
+        /**
+         * Creates a new c2s_open_chest instance using the specified properties.
+         * @function create
+         * @memberof chest.c2s_open_chest
+         * @static
+         * @param {chest.Ic2s_open_chest=} [properties] Properties to set
+         * @returns {chest.c2s_open_chest} c2s_open_chest instance
+         */
+        c2s_open_chest.create = function create(properties) {
+            return new c2s_open_chest(properties);
+        };
+
+        /**
+         * Encodes the specified c2s_open_chest message. Does not implicitly {@link chest.c2s_open_chest.verify|verify} messages.
+         * @function encode
+         * @memberof chest.c2s_open_chest
+         * @static
+         * @param {chest.Ic2s_open_chest} message c2s_open_chest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_open_chest.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.id);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified c2s_open_chest message, length delimited. Does not implicitly {@link chest.c2s_open_chest.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof chest.c2s_open_chest
+         * @static
+         * @param {chest.Ic2s_open_chest} message c2s_open_chest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_open_chest.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a c2s_open_chest message from the specified reader or buffer.
+         * @function decode
+         * @memberof chest.c2s_open_chest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {chest.c2s_open_chest} c2s_open_chest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_open_chest.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chest.c2s_open_chest();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.id = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a c2s_open_chest message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof chest.c2s_open_chest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {chest.c2s_open_chest} c2s_open_chest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_open_chest.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a c2s_open_chest message.
+         * @function verify
+         * @memberof chest.c2s_open_chest
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        c2s_open_chest.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isInteger(message.id))
+                    return "id: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a c2s_open_chest message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof chest.c2s_open_chest
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {chest.c2s_open_chest} c2s_open_chest
+         */
+        c2s_open_chest.fromObject = function fromObject(object) {
+            if (object instanceof $root.chest.c2s_open_chest)
+                return object;
+            var message = new $root.chest.c2s_open_chest();
+            if (object.id != null)
+                message.id = object.id >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a c2s_open_chest message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof chest.c2s_open_chest
+         * @static
+         * @param {chest.c2s_open_chest} message c2s_open_chest
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        c2s_open_chest.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.id = 0;
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            return object;
+        };
+
+        /**
+         * Converts this c2s_open_chest to JSON.
+         * @function toJSON
+         * @memberof chest.c2s_open_chest
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        c2s_open_chest.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for c2s_open_chest
+         * @function getTypeUrl
+         * @memberof chest.c2s_open_chest
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        c2s_open_chest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/chest.c2s_open_chest";
+        };
+
+        return c2s_open_chest;
+    })();
+
+    chest.s2c_open_chest = (function() {
+
+        /**
+         * Properties of a s2c_open_chest.
+         * @memberof chest
+         * @interface Is2c_open_chest
+         * @property {number|null} [err] s2c_open_chest err
+         * @property {chest.IChestInfo|null} [ches] s2c_open_chest ches
+         * @property {chest.IScoreInfo|null} [score] s2c_open_chest score
+         */
+
+        /**
+         * Constructs a new s2c_open_chest.
+         * @memberof chest
+         * @classdesc Represents a s2c_open_chest.
+         * @implements Is2c_open_chest
+         * @constructor
+         * @param {chest.Is2c_open_chest=} [properties] Properties to set
+         */
+        function s2c_open_chest(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * s2c_open_chest err.
+         * @member {number} err
+         * @memberof chest.s2c_open_chest
+         * @instance
+         */
+        s2c_open_chest.prototype.err = 0;
+
+        /**
+         * s2c_open_chest ches.
+         * @member {chest.IChestInfo|null|undefined} ches
+         * @memberof chest.s2c_open_chest
+         * @instance
+         */
+        s2c_open_chest.prototype.ches = null;
+
+        /**
+         * s2c_open_chest score.
+         * @member {chest.IScoreInfo|null|undefined} score
+         * @memberof chest.s2c_open_chest
+         * @instance
+         */
+        s2c_open_chest.prototype.score = null;
+
+        /**
+         * Creates a new s2c_open_chest instance using the specified properties.
+         * @function create
+         * @memberof chest.s2c_open_chest
+         * @static
+         * @param {chest.Is2c_open_chest=} [properties] Properties to set
+         * @returns {chest.s2c_open_chest} s2c_open_chest instance
+         */
+        s2c_open_chest.create = function create(properties) {
+            return new s2c_open_chest(properties);
+        };
+
+        /**
+         * Encodes the specified s2c_open_chest message. Does not implicitly {@link chest.s2c_open_chest.verify|verify} messages.
+         * @function encode
+         * @memberof chest.s2c_open_chest
+         * @static
+         * @param {chest.Is2c_open_chest} message s2c_open_chest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_open_chest.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
+            if (message.ches != null && Object.hasOwnProperty.call(message, "ches"))
+                $root.chest.ChestInfo.encode(message.ches, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            if (message.score != null && Object.hasOwnProperty.call(message, "score"))
+                $root.chest.ScoreInfo.encode(message.score, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified s2c_open_chest message, length delimited. Does not implicitly {@link chest.s2c_open_chest.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof chest.s2c_open_chest
+         * @static
+         * @param {chest.Is2c_open_chest} message s2c_open_chest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_open_chest.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a s2c_open_chest message from the specified reader or buffer.
+         * @function decode
+         * @memberof chest.s2c_open_chest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {chest.s2c_open_chest} s2c_open_chest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_open_chest.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chest.s2c_open_chest();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.err = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.ches = $root.chest.ChestInfo.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 3: {
+                        message.score = $root.chest.ScoreInfo.decode(reader, reader.uint32());
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a s2c_open_chest message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof chest.s2c_open_chest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {chest.s2c_open_chest} s2c_open_chest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_open_chest.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a s2c_open_chest message.
+         * @function verify
+         * @memberof chest.s2c_open_chest
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        s2c_open_chest.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.err != null && message.hasOwnProperty("err"))
+                if (!$util.isInteger(message.err))
+                    return "err: integer expected";
+            if (message.ches != null && message.hasOwnProperty("ches")) {
+                var error = $root.chest.ChestInfo.verify(message.ches);
+                if (error)
+                    return "ches." + error;
+            }
+            if (message.score != null && message.hasOwnProperty("score")) {
+                var error = $root.chest.ScoreInfo.verify(message.score);
+                if (error)
+                    return "score." + error;
+            }
+            return null;
+        };
+
+        /**
+         * Creates a s2c_open_chest message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof chest.s2c_open_chest
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {chest.s2c_open_chest} s2c_open_chest
+         */
+        s2c_open_chest.fromObject = function fromObject(object) {
+            if (object instanceof $root.chest.s2c_open_chest)
+                return object;
+            var message = new $root.chest.s2c_open_chest();
+            if (object.err != null)
+                message.err = object.err >>> 0;
+            if (object.ches != null) {
+                if (typeof object.ches !== "object")
+                    throw TypeError(".chest.s2c_open_chest.ches: object expected");
+                message.ches = $root.chest.ChestInfo.fromObject(object.ches);
+            }
+            if (object.score != null) {
+                if (typeof object.score !== "object")
+                    throw TypeError(".chest.s2c_open_chest.score: object expected");
+                message.score = $root.chest.ScoreInfo.fromObject(object.score);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a s2c_open_chest message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof chest.s2c_open_chest
+         * @static
+         * @param {chest.s2c_open_chest} message s2c_open_chest
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        s2c_open_chest.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.err = 0;
+                object.ches = null;
+                object.score = null;
+            }
+            if (message.err != null && message.hasOwnProperty("err"))
+                object.err = message.err;
+            if (message.ches != null && message.hasOwnProperty("ches"))
+                object.ches = $root.chest.ChestInfo.toObject(message.ches, options);
+            if (message.score != null && message.hasOwnProperty("score"))
+                object.score = $root.chest.ScoreInfo.toObject(message.score, options);
+            return object;
+        };
+
+        /**
+         * Converts this s2c_open_chest to JSON.
+         * @function toJSON
+         * @memberof chest.s2c_open_chest
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        s2c_open_chest.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for s2c_open_chest
+         * @function getTypeUrl
+         * @memberof chest.s2c_open_chest
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        s2c_open_chest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/chest.s2c_open_chest";
+        };
+
+        return s2c_open_chest;
+    })();
+
+    chest.c2s_score_receive = (function() {
+
+        /**
+         * Properties of a c2s_score_receive.
+         * @memberof chest
+         * @interface Ic2s_score_receive
+         */
+
+        /**
+         * Constructs a new c2s_score_receive.
+         * @memberof chest
+         * @classdesc Represents a c2s_score_receive.
+         * @implements Ic2s_score_receive
+         * @constructor
+         * @param {chest.Ic2s_score_receive=} [properties] Properties to set
+         */
+        function c2s_score_receive(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Creates a new c2s_score_receive instance using the specified properties.
+         * @function create
+         * @memberof chest.c2s_score_receive
+         * @static
+         * @param {chest.Ic2s_score_receive=} [properties] Properties to set
+         * @returns {chest.c2s_score_receive} c2s_score_receive instance
+         */
+        c2s_score_receive.create = function create(properties) {
+            return new c2s_score_receive(properties);
+        };
+
+        /**
+         * Encodes the specified c2s_score_receive message. Does not implicitly {@link chest.c2s_score_receive.verify|verify} messages.
+         * @function encode
+         * @memberof chest.c2s_score_receive
+         * @static
+         * @param {chest.Ic2s_score_receive} message c2s_score_receive message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_score_receive.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified c2s_score_receive message, length delimited. Does not implicitly {@link chest.c2s_score_receive.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof chest.c2s_score_receive
+         * @static
+         * @param {chest.Ic2s_score_receive} message c2s_score_receive message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_score_receive.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a c2s_score_receive message from the specified reader or buffer.
+         * @function decode
+         * @memberof chest.c2s_score_receive
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {chest.c2s_score_receive} c2s_score_receive
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_score_receive.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chest.c2s_score_receive();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a c2s_score_receive message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof chest.c2s_score_receive
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {chest.c2s_score_receive} c2s_score_receive
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_score_receive.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a c2s_score_receive message.
+         * @function verify
+         * @memberof chest.c2s_score_receive
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        c2s_score_receive.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+
+        /**
+         * Creates a c2s_score_receive message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof chest.c2s_score_receive
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {chest.c2s_score_receive} c2s_score_receive
+         */
+        c2s_score_receive.fromObject = function fromObject(object) {
+            if (object instanceof $root.chest.c2s_score_receive)
+                return object;
+            return new $root.chest.c2s_score_receive();
+        };
+
+        /**
+         * Creates a plain object from a c2s_score_receive message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof chest.c2s_score_receive
+         * @static
+         * @param {chest.c2s_score_receive} message c2s_score_receive
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        c2s_score_receive.toObject = function toObject() {
+            return {};
+        };
+
+        /**
+         * Converts this c2s_score_receive to JSON.
+         * @function toJSON
+         * @memberof chest.c2s_score_receive
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        c2s_score_receive.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for c2s_score_receive
+         * @function getTypeUrl
+         * @memberof chest.c2s_score_receive
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        c2s_score_receive.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/chest.c2s_score_receive";
+        };
+
+        return c2s_score_receive;
+    })();
+
+    chest.s2c_score_receive = (function() {
+
+        /**
+         * Properties of a s2c_score_receive.
+         * @memberof chest
+         * @interface Is2c_score_receive
+         * @property {number|null} [err] s2c_score_receive err
+         * @property {chest.IScoreInfo|null} [score] s2c_score_receive score
+         */
+
+        /**
+         * Constructs a new s2c_score_receive.
+         * @memberof chest
+         * @classdesc Represents a s2c_score_receive.
+         * @implements Is2c_score_receive
+         * @constructor
+         * @param {chest.Is2c_score_receive=} [properties] Properties to set
+         */
+        function s2c_score_receive(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * s2c_score_receive err.
+         * @member {number} err
+         * @memberof chest.s2c_score_receive
+         * @instance
+         */
+        s2c_score_receive.prototype.err = 0;
+
+        /**
+         * s2c_score_receive score.
+         * @member {chest.IScoreInfo|null|undefined} score
+         * @memberof chest.s2c_score_receive
+         * @instance
+         */
+        s2c_score_receive.prototype.score = null;
+
+        /**
+         * Creates a new s2c_score_receive instance using the specified properties.
+         * @function create
+         * @memberof chest.s2c_score_receive
+         * @static
+         * @param {chest.Is2c_score_receive=} [properties] Properties to set
+         * @returns {chest.s2c_score_receive} s2c_score_receive instance
+         */
+        s2c_score_receive.create = function create(properties) {
+            return new s2c_score_receive(properties);
+        };
+
+        /**
+         * Encodes the specified s2c_score_receive message. Does not implicitly {@link chest.s2c_score_receive.verify|verify} messages.
+         * @function encode
+         * @memberof chest.s2c_score_receive
+         * @static
+         * @param {chest.Is2c_score_receive} message s2c_score_receive message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_score_receive.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
+            if (message.score != null && Object.hasOwnProperty.call(message, "score"))
+                $root.chest.ScoreInfo.encode(message.score, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified s2c_score_receive message, length delimited. Does not implicitly {@link chest.s2c_score_receive.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof chest.s2c_score_receive
+         * @static
+         * @param {chest.Is2c_score_receive} message s2c_score_receive message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_score_receive.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a s2c_score_receive message from the specified reader or buffer.
+         * @function decode
+         * @memberof chest.s2c_score_receive
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {chest.s2c_score_receive} s2c_score_receive
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_score_receive.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chest.s2c_score_receive();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.err = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.score = $root.chest.ScoreInfo.decode(reader, reader.uint32());
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a s2c_score_receive message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof chest.s2c_score_receive
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {chest.s2c_score_receive} s2c_score_receive
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_score_receive.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a s2c_score_receive message.
+         * @function verify
+         * @memberof chest.s2c_score_receive
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        s2c_score_receive.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.err != null && message.hasOwnProperty("err"))
+                if (!$util.isInteger(message.err))
+                    return "err: integer expected";
+            if (message.score != null && message.hasOwnProperty("score")) {
+                var error = $root.chest.ScoreInfo.verify(message.score);
+                if (error)
+                    return "score." + error;
+            }
+            return null;
+        };
+
+        /**
+         * Creates a s2c_score_receive message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof chest.s2c_score_receive
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {chest.s2c_score_receive} s2c_score_receive
+         */
+        s2c_score_receive.fromObject = function fromObject(object) {
+            if (object instanceof $root.chest.s2c_score_receive)
+                return object;
+            var message = new $root.chest.s2c_score_receive();
+            if (object.err != null)
+                message.err = object.err >>> 0;
+            if (object.score != null) {
+                if (typeof object.score !== "object")
+                    throw TypeError(".chest.s2c_score_receive.score: object expected");
+                message.score = $root.chest.ScoreInfo.fromObject(object.score);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a s2c_score_receive message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof chest.s2c_score_receive
+         * @static
+         * @param {chest.s2c_score_receive} message s2c_score_receive
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        s2c_score_receive.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.err = 0;
+                object.score = null;
+            }
+            if (message.err != null && message.hasOwnProperty("err"))
+                object.err = message.err;
+            if (message.score != null && message.hasOwnProperty("score"))
+                object.score = $root.chest.ScoreInfo.toObject(message.score, options);
+            return object;
+        };
+
+        /**
+         * Converts this s2c_score_receive to JSON.
+         * @function toJSON
+         * @memberof chest.s2c_score_receive
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        s2c_score_receive.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for s2c_score_receive
+         * @function getTypeUrl
+         * @memberof chest.s2c_score_receive
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        s2c_score_receive.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/chest.s2c_score_receive";
+        };
+
+        return s2c_score_receive;
+    })();
+
+    chest.c2s_switch_hero = (function() {
+
+        /**
+         * Properties of a c2s_switch_hero.
+         * @memberof chest
+         * @interface Ic2s_switch_hero
+         * @property {number|null} [heroId] c2s_switch_hero heroId
+         */
+
+        /**
+         * Constructs a new c2s_switch_hero.
+         * @memberof chest
+         * @classdesc Represents a c2s_switch_hero.
+         * @implements Ic2s_switch_hero
+         * @constructor
+         * @param {chest.Ic2s_switch_hero=} [properties] Properties to set
+         */
+        function c2s_switch_hero(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * c2s_switch_hero heroId.
+         * @member {number} heroId
+         * @memberof chest.c2s_switch_hero
+         * @instance
+         */
+        c2s_switch_hero.prototype.heroId = 0;
+
+        /**
+         * Creates a new c2s_switch_hero instance using the specified properties.
+         * @function create
+         * @memberof chest.c2s_switch_hero
+         * @static
+         * @param {chest.Ic2s_switch_hero=} [properties] Properties to set
+         * @returns {chest.c2s_switch_hero} c2s_switch_hero instance
+         */
+        c2s_switch_hero.create = function create(properties) {
+            return new c2s_switch_hero(properties);
+        };
+
+        /**
+         * Encodes the specified c2s_switch_hero message. Does not implicitly {@link chest.c2s_switch_hero.verify|verify} messages.
+         * @function encode
+         * @memberof chest.c2s_switch_hero
+         * @static
+         * @param {chest.Ic2s_switch_hero} message c2s_switch_hero message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_switch_hero.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.heroId != null && Object.hasOwnProperty.call(message, "heroId"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.heroId);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified c2s_switch_hero message, length delimited. Does not implicitly {@link chest.c2s_switch_hero.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof chest.c2s_switch_hero
+         * @static
+         * @param {chest.Ic2s_switch_hero} message c2s_switch_hero message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_switch_hero.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a c2s_switch_hero message from the specified reader or buffer.
+         * @function decode
+         * @memberof chest.c2s_switch_hero
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {chest.c2s_switch_hero} c2s_switch_hero
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_switch_hero.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chest.c2s_switch_hero();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.heroId = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a c2s_switch_hero message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof chest.c2s_switch_hero
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {chest.c2s_switch_hero} c2s_switch_hero
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_switch_hero.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a c2s_switch_hero message.
+         * @function verify
+         * @memberof chest.c2s_switch_hero
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        c2s_switch_hero.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.heroId != null && message.hasOwnProperty("heroId"))
+                if (!$util.isInteger(message.heroId))
+                    return "heroId: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a c2s_switch_hero message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof chest.c2s_switch_hero
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {chest.c2s_switch_hero} c2s_switch_hero
+         */
+        c2s_switch_hero.fromObject = function fromObject(object) {
+            if (object instanceof $root.chest.c2s_switch_hero)
+                return object;
+            var message = new $root.chest.c2s_switch_hero();
+            if (object.heroId != null)
+                message.heroId = object.heroId >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a c2s_switch_hero message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof chest.c2s_switch_hero
+         * @static
+         * @param {chest.c2s_switch_hero} message c2s_switch_hero
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        c2s_switch_hero.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.heroId = 0;
+            if (message.heroId != null && message.hasOwnProperty("heroId"))
+                object.heroId = message.heroId;
+            return object;
+        };
+
+        /**
+         * Converts this c2s_switch_hero to JSON.
+         * @function toJSON
+         * @memberof chest.c2s_switch_hero
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        c2s_switch_hero.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for c2s_switch_hero
+         * @function getTypeUrl
+         * @memberof chest.c2s_switch_hero
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        c2s_switch_hero.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/chest.c2s_switch_hero";
+        };
+
+        return c2s_switch_hero;
+    })();
+
+    chest.s2c_switch_hero = (function() {
+
+        /**
+         * Properties of a s2c_switch_hero.
+         * @memberof chest
+         * @interface Is2c_switch_hero
+         * @property {number|null} [err] s2c_switch_hero err
+         */
+
+        /**
+         * Constructs a new s2c_switch_hero.
+         * @memberof chest
+         * @classdesc Represents a s2c_switch_hero.
+         * @implements Is2c_switch_hero
+         * @constructor
+         * @param {chest.Is2c_switch_hero=} [properties] Properties to set
+         */
+        function s2c_switch_hero(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * s2c_switch_hero err.
+         * @member {number} err
+         * @memberof chest.s2c_switch_hero
+         * @instance
+         */
+        s2c_switch_hero.prototype.err = 0;
+
+        /**
+         * Creates a new s2c_switch_hero instance using the specified properties.
+         * @function create
+         * @memberof chest.s2c_switch_hero
+         * @static
+         * @param {chest.Is2c_switch_hero=} [properties] Properties to set
+         * @returns {chest.s2c_switch_hero} s2c_switch_hero instance
+         */
+        s2c_switch_hero.create = function create(properties) {
+            return new s2c_switch_hero(properties);
+        };
+
+        /**
+         * Encodes the specified s2c_switch_hero message. Does not implicitly {@link chest.s2c_switch_hero.verify|verify} messages.
+         * @function encode
+         * @memberof chest.s2c_switch_hero
+         * @static
+         * @param {chest.Is2c_switch_hero} message s2c_switch_hero message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_switch_hero.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified s2c_switch_hero message, length delimited. Does not implicitly {@link chest.s2c_switch_hero.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof chest.s2c_switch_hero
+         * @static
+         * @param {chest.Is2c_switch_hero} message s2c_switch_hero message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_switch_hero.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a s2c_switch_hero message from the specified reader or buffer.
+         * @function decode
+         * @memberof chest.s2c_switch_hero
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {chest.s2c_switch_hero} s2c_switch_hero
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_switch_hero.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chest.s2c_switch_hero();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.err = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a s2c_switch_hero message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof chest.s2c_switch_hero
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {chest.s2c_switch_hero} s2c_switch_hero
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_switch_hero.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a s2c_switch_hero message.
+         * @function verify
+         * @memberof chest.s2c_switch_hero
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        s2c_switch_hero.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.err != null && message.hasOwnProperty("err"))
+                if (!$util.isInteger(message.err))
+                    return "err: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a s2c_switch_hero message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof chest.s2c_switch_hero
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {chest.s2c_switch_hero} s2c_switch_hero
+         */
+        s2c_switch_hero.fromObject = function fromObject(object) {
+            if (object instanceof $root.chest.s2c_switch_hero)
+                return object;
+            var message = new $root.chest.s2c_switch_hero();
+            if (object.err != null)
+                message.err = object.err >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a s2c_switch_hero message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof chest.s2c_switch_hero
+         * @static
+         * @param {chest.s2c_switch_hero} message s2c_switch_hero
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        s2c_switch_hero.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.err = 0;
+            if (message.err != null && message.hasOwnProperty("err"))
+                object.err = message.err;
+            return object;
+        };
+
+        /**
+         * Converts this s2c_switch_hero to JSON.
+         * @function toJSON
+         * @memberof chest.s2c_switch_hero
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        s2c_switch_hero.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for s2c_switch_hero
+         * @function getTypeUrl
+         * @memberof chest.s2c_switch_hero
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        s2c_switch_hero.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/chest.s2c_switch_hero";
+        };
+
+        return s2c_switch_hero;
+    })();
+
+    chest.notify = (function() {
+
+        /**
+         * Properties of a notify.
+         * @memberof chest
+         * @interface Inotify
+         * @property {Array.<chest.IChestInfo>|null} [ches] notify ches
+         * @property {chest.IScoreInfo|null} [score] notify score
+         */
+
+        /**
+         * Constructs a new notify.
+         * @memberof chest
+         * @classdesc Represents a notify.
+         * @implements Inotify
+         * @constructor
+         * @param {chest.Inotify=} [properties] Properties to set
+         */
+        function notify(properties) {
+            this.ches = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * notify ches.
+         * @member {Array.<chest.IChestInfo>} ches
+         * @memberof chest.notify
+         * @instance
+         */
+        notify.prototype.ches = $util.emptyArray;
+
+        /**
+         * notify score.
+         * @member {chest.IScoreInfo|null|undefined} score
+         * @memberof chest.notify
+         * @instance
+         */
+        notify.prototype.score = null;
+
+        /**
+         * Creates a new notify instance using the specified properties.
+         * @function create
+         * @memberof chest.notify
+         * @static
+         * @param {chest.Inotify=} [properties] Properties to set
+         * @returns {chest.notify} notify instance
+         */
+        notify.create = function create(properties) {
+            return new notify(properties);
+        };
+
+        /**
+         * Encodes the specified notify message. Does not implicitly {@link chest.notify.verify|verify} messages.
+         * @function encode
+         * @memberof chest.notify
+         * @static
+         * @param {chest.Inotify} message notify message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        notify.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.ches != null && message.ches.length)
+                for (var i = 0; i < message.ches.length; ++i)
+                    $root.chest.ChestInfo.encode(message.ches[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.score != null && Object.hasOwnProperty.call(message, "score"))
+                $root.chest.ScoreInfo.encode(message.score, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified notify message, length delimited. Does not implicitly {@link chest.notify.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof chest.notify
+         * @static
+         * @param {chest.Inotify} message notify message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        notify.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a notify message from the specified reader or buffer.
+         * @function decode
+         * @memberof chest.notify
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {chest.notify} notify
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        notify.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chest.notify();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        if (!(message.ches && message.ches.length))
+                            message.ches = [];
+                        message.ches.push($root.chest.ChestInfo.decode(reader, reader.uint32()));
+                        break;
+                    }
+                case 2: {
+                        message.score = $root.chest.ScoreInfo.decode(reader, reader.uint32());
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a notify message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof chest.notify
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {chest.notify} notify
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        notify.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a notify message.
+         * @function verify
+         * @memberof chest.notify
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        notify.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.ches != null && message.hasOwnProperty("ches")) {
+                if (!Array.isArray(message.ches))
+                    return "ches: array expected";
+                for (var i = 0; i < message.ches.length; ++i) {
+                    var error = $root.chest.ChestInfo.verify(message.ches[i]);
+                    if (error)
+                        return "ches." + error;
+                }
+            }
+            if (message.score != null && message.hasOwnProperty("score")) {
+                var error = $root.chest.ScoreInfo.verify(message.score);
+                if (error)
+                    return "score." + error;
+            }
+            return null;
+        };
+
+        /**
+         * Creates a notify message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof chest.notify
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {chest.notify} notify
+         */
+        notify.fromObject = function fromObject(object) {
+            if (object instanceof $root.chest.notify)
+                return object;
+            var message = new $root.chest.notify();
+            if (object.ches) {
+                if (!Array.isArray(object.ches))
+                    throw TypeError(".chest.notify.ches: array expected");
+                message.ches = [];
+                for (var i = 0; i < object.ches.length; ++i) {
+                    if (typeof object.ches[i] !== "object")
+                        throw TypeError(".chest.notify.ches: object expected");
+                    message.ches[i] = $root.chest.ChestInfo.fromObject(object.ches[i]);
+                }
+            }
+            if (object.score != null) {
+                if (typeof object.score !== "object")
+                    throw TypeError(".chest.notify.score: object expected");
+                message.score = $root.chest.ScoreInfo.fromObject(object.score);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a notify message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof chest.notify
+         * @static
+         * @param {chest.notify} message notify
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        notify.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.ches = [];
+            if (options.defaults)
+                object.score = null;
+            if (message.ches && message.ches.length) {
+                object.ches = [];
+                for (var j = 0; j < message.ches.length; ++j)
+                    object.ches[j] = $root.chest.ChestInfo.toObject(message.ches[j], options);
+            }
+            if (message.score != null && message.hasOwnProperty("score"))
+                object.score = $root.chest.ScoreInfo.toObject(message.score, options);
+            return object;
+        };
+
+        /**
+         * Converts this notify to JSON.
+         * @function toJSON
+         * @memberof chest.notify
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        notify.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for notify
+         * @function getTypeUrl
+         * @memberof chest.notify
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        notify.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/chest.notify";
+        };
+
+        return notify;
+    })();
+
+    return chest;
 })();
 
 $root.dungeon = (function() {
@@ -20394,6 +29822,7 @@ $root.world = (function() {
          * @memberof world
          * @interface IBagComponent
          * @property {Array.<world.IBagItem>|null} [items] BagComponent items
+         * @property {number|null} [touchEid] BagComponent touchEid
          */
 
         /**
@@ -20419,6 +29848,14 @@ $root.world = (function() {
          * @instance
          */
         BagComponent.prototype.items = $util.emptyArray;
+
+        /**
+         * BagComponent touchEid.
+         * @member {number} touchEid
+         * @memberof world.BagComponent
+         * @instance
+         */
+        BagComponent.prototype.touchEid = 0;
 
         /**
          * Creates a new BagComponent instance using the specified properties.
@@ -20447,6 +29884,8 @@ $root.world = (function() {
             if (message.items != null && message.items.length)
                 for (var i = 0; i < message.items.length; ++i)
                     $root.world.BagItem.encode(message.items[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.touchEid != null && Object.hasOwnProperty.call(message, "touchEid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.touchEid);
             return writer;
         };
 
@@ -20485,6 +29924,10 @@ $root.world = (function() {
                         if (!(message.items && message.items.length))
                             message.items = [];
                         message.items.push($root.world.BagItem.decode(reader, reader.uint32()));
+                        break;
+                    }
+                case 2: {
+                        message.touchEid = reader.uint32();
                         break;
                     }
                 default:
@@ -20531,6 +29974,9 @@ $root.world = (function() {
                         return "items." + error;
                 }
             }
+            if (message.touchEid != null && message.hasOwnProperty("touchEid"))
+                if (!$util.isInteger(message.touchEid))
+                    return "touchEid: integer expected";
             return null;
         };
 
@@ -20556,6 +30002,8 @@ $root.world = (function() {
                     message.items[i] = $root.world.BagItem.fromObject(object.items[i]);
                 }
             }
+            if (object.touchEid != null)
+                message.touchEid = object.touchEid >>> 0;
             return message;
         };
 
@@ -20574,11 +30022,15 @@ $root.world = (function() {
             var object = {};
             if (options.arrays || options.defaults)
                 object.items = [];
+            if (options.defaults)
+                object.touchEid = 0;
             if (message.items && message.items.length) {
                 object.items = [];
                 for (var j = 0; j < message.items.length; ++j)
                     object.items[j] = $root.world.BagItem.toObject(message.items[j], options);
             }
+            if (message.touchEid != null && message.hasOwnProperty("touchEid"))
+                object.touchEid = message.touchEid;
             return object;
         };
 
@@ -23094,7 +32546,7 @@ $root.world = (function() {
          * @memberof world.c2s_cancel_giveup
          * @instance
          */
-        c2s_cancel_giveup.prototype.eid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        c2s_cancel_giveup.prototype.eid = 0;
 
         /**
          * Creates a new c2s_cancel_giveup instance using the specified properties.
@@ -23121,7 +32573,7 @@ $root.world = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.eid != null && Object.hasOwnProperty.call(message, "eid"))
-                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.eid);
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.eid);
             return writer;
         };
 
@@ -23157,7 +32609,7 @@ $root.world = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 2: {
-                        message.eid = reader.int64();
+                        message.eid = reader.uint32();
                         break;
                     }
                 default:
@@ -23196,8 +32648,8 @@ $root.world = (function() {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.eid != null && message.hasOwnProperty("eid"))
-                if (!$util.isInteger(message.eid) && !(message.eid && $util.isInteger(message.eid.low) && $util.isInteger(message.eid.high)))
-                    return "eid: integer|Long expected";
+                if (!$util.isInteger(message.eid))
+                    return "eid: integer expected";
             return null;
         };
 
@@ -23214,14 +32666,7 @@ $root.world = (function() {
                 return object;
             var message = new $root.world.c2s_cancel_giveup();
             if (object.eid != null)
-                if ($util.Long)
-                    (message.eid = $util.Long.fromValue(object.eid)).unsigned = false;
-                else if (typeof object.eid === "string")
-                    message.eid = parseInt(object.eid, 10);
-                else if (typeof object.eid === "number")
-                    message.eid = object.eid;
-                else if (typeof object.eid === "object")
-                    message.eid = new $util.LongBits(object.eid.low >>> 0, object.eid.high >>> 0).toNumber();
+                message.eid = object.eid >>> 0;
             return message;
         };
 
@@ -23239,16 +32684,9 @@ $root.world = (function() {
                 options = {};
             var object = {};
             if (options.defaults)
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, false);
-                    object.eid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.eid = options.longs === String ? "0" : 0;
+                object.eid = 0;
             if (message.eid != null && message.hasOwnProperty("eid"))
-                if (typeof message.eid === "number")
-                    object.eid = options.longs === String ? String(message.eid) : message.eid;
-                else
-                    object.eid = options.longs === String ? $util.Long.prototype.toString.call(message.eid) : options.longs === Number ? new $util.LongBits(message.eid.low >>> 0, message.eid.high >>> 0).toNumber() : message.eid;
+                object.eid = message.eid;
             return object;
         };
 
@@ -25899,7 +35337,7 @@ $root.world = (function() {
          * @memberof world.DelEntityAction
          * @instance
          */
-        DelEntityAction.prototype.eid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        DelEntityAction.prototype.eid = 0;
 
         /**
          * Creates a new DelEntityAction instance using the specified properties.
@@ -25926,7 +35364,7 @@ $root.world = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.eid != null && Object.hasOwnProperty.call(message, "eid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.eid);
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.eid);
             return writer;
         };
 
@@ -25962,7 +35400,7 @@ $root.world = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1: {
-                        message.eid = reader.int64();
+                        message.eid = reader.uint32();
                         break;
                     }
                 default:
@@ -26001,8 +35439,8 @@ $root.world = (function() {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.eid != null && message.hasOwnProperty("eid"))
-                if (!$util.isInteger(message.eid) && !(message.eid && $util.isInteger(message.eid.low) && $util.isInteger(message.eid.high)))
-                    return "eid: integer|Long expected";
+                if (!$util.isInteger(message.eid))
+                    return "eid: integer expected";
             return null;
         };
 
@@ -26019,14 +35457,7 @@ $root.world = (function() {
                 return object;
             var message = new $root.world.DelEntityAction();
             if (object.eid != null)
-                if ($util.Long)
-                    (message.eid = $util.Long.fromValue(object.eid)).unsigned = false;
-                else if (typeof object.eid === "string")
-                    message.eid = parseInt(object.eid, 10);
-                else if (typeof object.eid === "number")
-                    message.eid = object.eid;
-                else if (typeof object.eid === "object")
-                    message.eid = new $util.LongBits(object.eid.low >>> 0, object.eid.high >>> 0).toNumber();
+                message.eid = object.eid >>> 0;
             return message;
         };
 
@@ -26044,16 +35475,9 @@ $root.world = (function() {
                 options = {};
             var object = {};
             if (options.defaults)
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, false);
-                    object.eid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.eid = options.longs === String ? "0" : 0;
+                object.eid = 0;
             if (message.eid != null && message.hasOwnProperty("eid"))
-                if (typeof message.eid === "number")
-                    object.eid = options.longs === String ? String(message.eid) : message.eid;
-                else
-                    object.eid = options.longs === String ? $util.Long.prototype.toString.call(message.eid) : options.longs === Number ? new $util.LongBits(message.eid.low >>> 0, message.eid.high >>> 0).toNumber() : message.eid;
+                object.eid = message.eid;
             return object;
         };
 
@@ -26122,7 +35546,7 @@ $root.world = (function() {
          * @memberof world.MoveAction
          * @instance
          */
-        MoveAction.prototype.eid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        MoveAction.prototype.eid = 0;
 
         /**
          * MoveAction path.
@@ -26189,7 +35613,7 @@ $root.world = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.eid != null && Object.hasOwnProperty.call(message, "eid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.eid);
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.eid);
             if (message.path != null && message.path.length) {
                 writer.uint32(/* id 2, wireType 2 =*/18).fork();
                 for (var i = 0; i < message.path.length; ++i)
@@ -26239,7 +35663,7 @@ $root.world = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1: {
-                        message.eid = reader.int64();
+                        message.eid = reader.uint32();
                         break;
                     }
                 case 2: {
@@ -26305,8 +35729,8 @@ $root.world = (function() {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.eid != null && message.hasOwnProperty("eid"))
-                if (!$util.isInteger(message.eid) && !(message.eid && $util.isInteger(message.eid.low) && $util.isInteger(message.eid.high)))
-                    return "eid: integer|Long expected";
+                if (!$util.isInteger(message.eid))
+                    return "eid: integer expected";
             if (message.path != null && message.hasOwnProperty("path")) {
                 if (!Array.isArray(message.path))
                     return "path: array expected";
@@ -26344,14 +35768,7 @@ $root.world = (function() {
                 return object;
             var message = new $root.world.MoveAction();
             if (object.eid != null)
-                if ($util.Long)
-                    (message.eid = $util.Long.fromValue(object.eid)).unsigned = false;
-                else if (typeof object.eid === "string")
-                    message.eid = parseInt(object.eid, 10);
-                else if (typeof object.eid === "number")
-                    message.eid = object.eid;
-                else if (typeof object.eid === "object")
-                    message.eid = new $util.LongBits(object.eid.low >>> 0, object.eid.high >>> 0).toNumber();
+                message.eid = object.eid >>> 0;
             if (object.path) {
                 if (!Array.isArray(object.path))
                     throw TypeError(".world.MoveAction.path: array expected");
@@ -26389,21 +35806,14 @@ $root.world = (function() {
             if (options.arrays || options.defaults)
                 object.path = [];
             if (options.defaults) {
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, false);
-                    object.eid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.eid = options.longs === String ? "0" : 0;
+                object.eid = 0;
                 object.speed = 0;
                 object.startMs = 0;
                 object.curPos = null;
                 object.degree = 0;
             }
             if (message.eid != null && message.hasOwnProperty("eid"))
-                if (typeof message.eid === "number")
-                    object.eid = options.longs === String ? String(message.eid) : message.eid;
-                else
-                    object.eid = options.longs === String ? $util.Long.prototype.toString.call(message.eid) : options.longs === Number ? new $util.LongBits(message.eid.low >>> 0, message.eid.high >>> 0).toNumber() : message.eid;
+                object.eid = message.eid;
             if (message.path && message.path.length) {
                 object.path = [];
                 for (var j = 0; j < message.path.length; ++j)
@@ -26449,25 +35859,26 @@ $root.world = (function() {
         return MoveAction;
     })();
 
-    world.BattleStartAction = (function() {
+    world.StartBattleAction = (function() {
 
         /**
-         * Properties of a BattleStartAction.
+         * Properties of a StartBattleAction.
          * @memberof world
-         * @interface IBattleStartAction
-         * @property {number|null} [fighterEid] BattleStartAction fighterEid
-         * @property {number|null} [battleEid] BattleStartAction battleEid
+         * @interface IStartBattleAction
+         * @property {number|null} [battleUid] StartBattleAction battleUid
+         * @property {Array.<number>|null} [troopEids] StartBattleAction troopEids
          */
 
         /**
-         * Constructs a new BattleStartAction.
+         * Constructs a new StartBattleAction.
          * @memberof world
-         * @classdesc Represents a BattleStartAction.
-         * @implements IBattleStartAction
+         * @classdesc Represents a StartBattleAction.
+         * @implements IStartBattleAction
          * @constructor
-         * @param {world.IBattleStartAction=} [properties] Properties to set
+         * @param {world.IStartBattleAction=} [properties] Properties to set
          */
-        function BattleStartAction(properties) {
+        function StartBattleAction(properties) {
+            this.troopEids = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -26475,89 +35886,100 @@ $root.world = (function() {
         }
 
         /**
-         * BattleStartAction fighterEid.
-         * @member {number} fighterEid
-         * @memberof world.BattleStartAction
+         * StartBattleAction battleUid.
+         * @member {number} battleUid
+         * @memberof world.StartBattleAction
          * @instance
          */
-        BattleStartAction.prototype.fighterEid = 0;
+        StartBattleAction.prototype.battleUid = 0;
 
         /**
-         * BattleStartAction battleEid.
-         * @member {number} battleEid
-         * @memberof world.BattleStartAction
+         * StartBattleAction troopEids.
+         * @member {Array.<number>} troopEids
+         * @memberof world.StartBattleAction
          * @instance
          */
-        BattleStartAction.prototype.battleEid = 0;
+        StartBattleAction.prototype.troopEids = $util.emptyArray;
 
         /**
-         * Creates a new BattleStartAction instance using the specified properties.
+         * Creates a new StartBattleAction instance using the specified properties.
          * @function create
-         * @memberof world.BattleStartAction
+         * @memberof world.StartBattleAction
          * @static
-         * @param {world.IBattleStartAction=} [properties] Properties to set
-         * @returns {world.BattleStartAction} BattleStartAction instance
+         * @param {world.IStartBattleAction=} [properties] Properties to set
+         * @returns {world.StartBattleAction} StartBattleAction instance
          */
-        BattleStartAction.create = function create(properties) {
-            return new BattleStartAction(properties);
+        StartBattleAction.create = function create(properties) {
+            return new StartBattleAction(properties);
         };
 
         /**
-         * Encodes the specified BattleStartAction message. Does not implicitly {@link world.BattleStartAction.verify|verify} messages.
+         * Encodes the specified StartBattleAction message. Does not implicitly {@link world.StartBattleAction.verify|verify} messages.
          * @function encode
-         * @memberof world.BattleStartAction
+         * @memberof world.StartBattleAction
          * @static
-         * @param {world.IBattleStartAction} message BattleStartAction message or plain object to encode
+         * @param {world.IStartBattleAction} message StartBattleAction message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        BattleStartAction.encode = function encode(message, writer) {
+        StartBattleAction.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.fighterEid != null && Object.hasOwnProperty.call(message, "fighterEid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.fighterEid);
-            if (message.battleEid != null && Object.hasOwnProperty.call(message, "battleEid"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.battleEid);
+            if (message.battleUid != null && Object.hasOwnProperty.call(message, "battleUid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.battleUid);
+            if (message.troopEids != null && message.troopEids.length) {
+                writer.uint32(/* id 2, wireType 2 =*/18).fork();
+                for (var i = 0; i < message.troopEids.length; ++i)
+                    writer.uint32(message.troopEids[i]);
+                writer.ldelim();
+            }
             return writer;
         };
 
         /**
-         * Encodes the specified BattleStartAction message, length delimited. Does not implicitly {@link world.BattleStartAction.verify|verify} messages.
+         * Encodes the specified StartBattleAction message, length delimited. Does not implicitly {@link world.StartBattleAction.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof world.BattleStartAction
+         * @memberof world.StartBattleAction
          * @static
-         * @param {world.IBattleStartAction} message BattleStartAction message or plain object to encode
+         * @param {world.IStartBattleAction} message StartBattleAction message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        BattleStartAction.encodeDelimited = function encodeDelimited(message, writer) {
+        StartBattleAction.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
         /**
-         * Decodes a BattleStartAction message from the specified reader or buffer.
+         * Decodes a StartBattleAction message from the specified reader or buffer.
          * @function decode
-         * @memberof world.BattleStartAction
+         * @memberof world.StartBattleAction
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {world.BattleStartAction} BattleStartAction
+         * @returns {world.StartBattleAction} StartBattleAction
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        BattleStartAction.decode = function decode(reader, length) {
+        StartBattleAction.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.BattleStartAction();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.StartBattleAction();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1: {
-                        message.fighterEid = reader.uint32();
+                        message.battleUid = reader.uint32();
                         break;
                     }
                 case 2: {
-                        message.battleEid = reader.uint32();
+                        if (!(message.troopEids && message.troopEids.length))
+                            message.troopEids = [];
+                        if ((tag & 7) === 2) {
+                            var end2 = reader.uint32() + reader.pos;
+                            while (reader.pos < end2)
+                                message.troopEids.push(reader.uint32());
+                        } else
+                            message.troopEids.push(reader.uint32());
                         break;
                     }
                 default:
@@ -26569,133 +35991,145 @@ $root.world = (function() {
         };
 
         /**
-         * Decodes a BattleStartAction message from the specified reader or buffer, length delimited.
+         * Decodes a StartBattleAction message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof world.BattleStartAction
+         * @memberof world.StartBattleAction
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {world.BattleStartAction} BattleStartAction
+         * @returns {world.StartBattleAction} StartBattleAction
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        BattleStartAction.decodeDelimited = function decodeDelimited(reader) {
+        StartBattleAction.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
         /**
-         * Verifies a BattleStartAction message.
+         * Verifies a StartBattleAction message.
          * @function verify
-         * @memberof world.BattleStartAction
+         * @memberof world.StartBattleAction
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        BattleStartAction.verify = function verify(message) {
+        StartBattleAction.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.fighterEid != null && message.hasOwnProperty("fighterEid"))
-                if (!$util.isInteger(message.fighterEid))
-                    return "fighterEid: integer expected";
-            if (message.battleEid != null && message.hasOwnProperty("battleEid"))
-                if (!$util.isInteger(message.battleEid))
-                    return "battleEid: integer expected";
+            if (message.battleUid != null && message.hasOwnProperty("battleUid"))
+                if (!$util.isInteger(message.battleUid))
+                    return "battleUid: integer expected";
+            if (message.troopEids != null && message.hasOwnProperty("troopEids")) {
+                if (!Array.isArray(message.troopEids))
+                    return "troopEids: array expected";
+                for (var i = 0; i < message.troopEids.length; ++i)
+                    if (!$util.isInteger(message.troopEids[i]))
+                        return "troopEids: integer[] expected";
+            }
             return null;
         };
 
         /**
-         * Creates a BattleStartAction message from a plain object. Also converts values to their respective internal types.
+         * Creates a StartBattleAction message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof world.BattleStartAction
+         * @memberof world.StartBattleAction
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {world.BattleStartAction} BattleStartAction
+         * @returns {world.StartBattleAction} StartBattleAction
          */
-        BattleStartAction.fromObject = function fromObject(object) {
-            if (object instanceof $root.world.BattleStartAction)
+        StartBattleAction.fromObject = function fromObject(object) {
+            if (object instanceof $root.world.StartBattleAction)
                 return object;
-            var message = new $root.world.BattleStartAction();
-            if (object.fighterEid != null)
-                message.fighterEid = object.fighterEid >>> 0;
-            if (object.battleEid != null)
-                message.battleEid = object.battleEid >>> 0;
+            var message = new $root.world.StartBattleAction();
+            if (object.battleUid != null)
+                message.battleUid = object.battleUid >>> 0;
+            if (object.troopEids) {
+                if (!Array.isArray(object.troopEids))
+                    throw TypeError(".world.StartBattleAction.troopEids: array expected");
+                message.troopEids = [];
+                for (var i = 0; i < object.troopEids.length; ++i)
+                    message.troopEids[i] = object.troopEids[i] >>> 0;
+            }
             return message;
         };
 
         /**
-         * Creates a plain object from a BattleStartAction message. Also converts values to other types if specified.
+         * Creates a plain object from a StartBattleAction message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof world.BattleStartAction
+         * @memberof world.StartBattleAction
          * @static
-         * @param {world.BattleStartAction} message BattleStartAction
+         * @param {world.StartBattleAction} message StartBattleAction
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        BattleStartAction.toObject = function toObject(message, options) {
+        StartBattleAction.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults) {
-                object.fighterEid = 0;
-                object.battleEid = 0;
+            if (options.arrays || options.defaults)
+                object.troopEids = [];
+            if (options.defaults)
+                object.battleUid = 0;
+            if (message.battleUid != null && message.hasOwnProperty("battleUid"))
+                object.battleUid = message.battleUid;
+            if (message.troopEids && message.troopEids.length) {
+                object.troopEids = [];
+                for (var j = 0; j < message.troopEids.length; ++j)
+                    object.troopEids[j] = message.troopEids[j];
             }
-            if (message.fighterEid != null && message.hasOwnProperty("fighterEid"))
-                object.fighterEid = message.fighterEid;
-            if (message.battleEid != null && message.hasOwnProperty("battleEid"))
-                object.battleEid = message.battleEid;
             return object;
         };
 
         /**
-         * Converts this BattleStartAction to JSON.
+         * Converts this StartBattleAction to JSON.
          * @function toJSON
-         * @memberof world.BattleStartAction
+         * @memberof world.StartBattleAction
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        BattleStartAction.prototype.toJSON = function toJSON() {
+        StartBattleAction.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
         /**
-         * Gets the default type url for BattleStartAction
+         * Gets the default type url for StartBattleAction
          * @function getTypeUrl
-         * @memberof world.BattleStartAction
+         * @memberof world.StartBattleAction
          * @static
          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns {string} The default type url
          */
-        BattleStartAction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        StartBattleAction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/world.BattleStartAction";
+            return typeUrlPrefix + "/world.StartBattleAction";
         };
 
-        return BattleStartAction;
+        return StartBattleAction;
     })();
 
-    world.BattleSkillAction = (function() {
+    world.LeaveBattleAction = (function() {
 
         /**
-         * Properties of a BattleSkillAction.
+         * Properties of a LeaveBattleAction.
          * @memberof world
-         * @interface IBattleSkillAction
-         * @property {number|null} [srcEid] BattleSkillAction srcEid
-         * @property {number|null} [dstEid] BattleSkillAction dstEid
-         * @property {number|null} [skillId] BattleSkillAction skillId
+         * @interface ILeaveBattleAction
+         * @property {number|null} [battleUid] LeaveBattleAction battleUid
+         * @property {Array.<number>|null} [troopEids] LeaveBattleAction troopEids
          */
 
         /**
-         * Constructs a new BattleSkillAction.
+         * Constructs a new LeaveBattleAction.
          * @memberof world
-         * @classdesc Represents a BattleSkillAction.
-         * @implements IBattleSkillAction
+         * @classdesc Represents a LeaveBattleAction.
+         * @implements ILeaveBattleAction
          * @constructor
-         * @param {world.IBattleSkillAction=} [properties] Properties to set
+         * @param {world.ILeaveBattleAction=} [properties] Properties to set
          */
-        function BattleSkillAction(properties) {
+        function LeaveBattleAction(properties) {
+            this.troopEids = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -26703,103 +36137,100 @@ $root.world = (function() {
         }
 
         /**
-         * BattleSkillAction srcEid.
-         * @member {number} srcEid
-         * @memberof world.BattleSkillAction
+         * LeaveBattleAction battleUid.
+         * @member {number} battleUid
+         * @memberof world.LeaveBattleAction
          * @instance
          */
-        BattleSkillAction.prototype.srcEid = 0;
+        LeaveBattleAction.prototype.battleUid = 0;
 
         /**
-         * BattleSkillAction dstEid.
-         * @member {number} dstEid
-         * @memberof world.BattleSkillAction
+         * LeaveBattleAction troopEids.
+         * @member {Array.<number>} troopEids
+         * @memberof world.LeaveBattleAction
          * @instance
          */
-        BattleSkillAction.prototype.dstEid = 0;
+        LeaveBattleAction.prototype.troopEids = $util.emptyArray;
 
         /**
-         * BattleSkillAction skillId.
-         * @member {number} skillId
-         * @memberof world.BattleSkillAction
-         * @instance
-         */
-        BattleSkillAction.prototype.skillId = 0;
-
-        /**
-         * Creates a new BattleSkillAction instance using the specified properties.
+         * Creates a new LeaveBattleAction instance using the specified properties.
          * @function create
-         * @memberof world.BattleSkillAction
+         * @memberof world.LeaveBattleAction
          * @static
-         * @param {world.IBattleSkillAction=} [properties] Properties to set
-         * @returns {world.BattleSkillAction} BattleSkillAction instance
+         * @param {world.ILeaveBattleAction=} [properties] Properties to set
+         * @returns {world.LeaveBattleAction} LeaveBattleAction instance
          */
-        BattleSkillAction.create = function create(properties) {
-            return new BattleSkillAction(properties);
+        LeaveBattleAction.create = function create(properties) {
+            return new LeaveBattleAction(properties);
         };
 
         /**
-         * Encodes the specified BattleSkillAction message. Does not implicitly {@link world.BattleSkillAction.verify|verify} messages.
+         * Encodes the specified LeaveBattleAction message. Does not implicitly {@link world.LeaveBattleAction.verify|verify} messages.
          * @function encode
-         * @memberof world.BattleSkillAction
+         * @memberof world.LeaveBattleAction
          * @static
-         * @param {world.IBattleSkillAction} message BattleSkillAction message or plain object to encode
+         * @param {world.ILeaveBattleAction} message LeaveBattleAction message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        BattleSkillAction.encode = function encode(message, writer) {
+        LeaveBattleAction.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.srcEid != null && Object.hasOwnProperty.call(message, "srcEid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.srcEid);
-            if (message.dstEid != null && Object.hasOwnProperty.call(message, "dstEid"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.dstEid);
-            if (message.skillId != null && Object.hasOwnProperty.call(message, "skillId"))
-                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.skillId);
+            if (message.battleUid != null && Object.hasOwnProperty.call(message, "battleUid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.battleUid);
+            if (message.troopEids != null && message.troopEids.length) {
+                writer.uint32(/* id 2, wireType 2 =*/18).fork();
+                for (var i = 0; i < message.troopEids.length; ++i)
+                    writer.uint32(message.troopEids[i]);
+                writer.ldelim();
+            }
             return writer;
         };
 
         /**
-         * Encodes the specified BattleSkillAction message, length delimited. Does not implicitly {@link world.BattleSkillAction.verify|verify} messages.
+         * Encodes the specified LeaveBattleAction message, length delimited. Does not implicitly {@link world.LeaveBattleAction.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof world.BattleSkillAction
+         * @memberof world.LeaveBattleAction
          * @static
-         * @param {world.IBattleSkillAction} message BattleSkillAction message or plain object to encode
+         * @param {world.ILeaveBattleAction} message LeaveBattleAction message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        BattleSkillAction.encodeDelimited = function encodeDelimited(message, writer) {
+        LeaveBattleAction.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
         /**
-         * Decodes a BattleSkillAction message from the specified reader or buffer.
+         * Decodes a LeaveBattleAction message from the specified reader or buffer.
          * @function decode
-         * @memberof world.BattleSkillAction
+         * @memberof world.LeaveBattleAction
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {world.BattleSkillAction} BattleSkillAction
+         * @returns {world.LeaveBattleAction} LeaveBattleAction
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        BattleSkillAction.decode = function decode(reader, length) {
+        LeaveBattleAction.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.BattleSkillAction();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.LeaveBattleAction();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1: {
-                        message.srcEid = reader.uint32();
+                        message.battleUid = reader.uint32();
                         break;
                     }
                 case 2: {
-                        message.dstEid = reader.uint32();
-                        break;
-                    }
-                case 3: {
-                        message.skillId = reader.uint32();
+                        if (!(message.troopEids && message.troopEids.length))
+                            message.troopEids = [];
+                        if ((tag & 7) === 2) {
+                            var end2 = reader.uint32() + reader.pos;
+                            while (reader.pos < end2)
+                                message.troopEids.push(reader.uint32());
+                        } else
+                            message.troopEids.push(reader.uint32());
                         break;
                     }
                 default:
@@ -26811,142 +36242,145 @@ $root.world = (function() {
         };
 
         /**
-         * Decodes a BattleSkillAction message from the specified reader or buffer, length delimited.
+         * Decodes a LeaveBattleAction message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof world.BattleSkillAction
+         * @memberof world.LeaveBattleAction
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {world.BattleSkillAction} BattleSkillAction
+         * @returns {world.LeaveBattleAction} LeaveBattleAction
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        BattleSkillAction.decodeDelimited = function decodeDelimited(reader) {
+        LeaveBattleAction.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
         /**
-         * Verifies a BattleSkillAction message.
+         * Verifies a LeaveBattleAction message.
          * @function verify
-         * @memberof world.BattleSkillAction
+         * @memberof world.LeaveBattleAction
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        BattleSkillAction.verify = function verify(message) {
+        LeaveBattleAction.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.srcEid != null && message.hasOwnProperty("srcEid"))
-                if (!$util.isInteger(message.srcEid))
-                    return "srcEid: integer expected";
-            if (message.dstEid != null && message.hasOwnProperty("dstEid"))
-                if (!$util.isInteger(message.dstEid))
-                    return "dstEid: integer expected";
-            if (message.skillId != null && message.hasOwnProperty("skillId"))
-                if (!$util.isInteger(message.skillId))
-                    return "skillId: integer expected";
+            if (message.battleUid != null && message.hasOwnProperty("battleUid"))
+                if (!$util.isInteger(message.battleUid))
+                    return "battleUid: integer expected";
+            if (message.troopEids != null && message.hasOwnProperty("troopEids")) {
+                if (!Array.isArray(message.troopEids))
+                    return "troopEids: array expected";
+                for (var i = 0; i < message.troopEids.length; ++i)
+                    if (!$util.isInteger(message.troopEids[i]))
+                        return "troopEids: integer[] expected";
+            }
             return null;
         };
 
         /**
-         * Creates a BattleSkillAction message from a plain object. Also converts values to their respective internal types.
+         * Creates a LeaveBattleAction message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof world.BattleSkillAction
+         * @memberof world.LeaveBattleAction
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {world.BattleSkillAction} BattleSkillAction
+         * @returns {world.LeaveBattleAction} LeaveBattleAction
          */
-        BattleSkillAction.fromObject = function fromObject(object) {
-            if (object instanceof $root.world.BattleSkillAction)
+        LeaveBattleAction.fromObject = function fromObject(object) {
+            if (object instanceof $root.world.LeaveBattleAction)
                 return object;
-            var message = new $root.world.BattleSkillAction();
-            if (object.srcEid != null)
-                message.srcEid = object.srcEid >>> 0;
-            if (object.dstEid != null)
-                message.dstEid = object.dstEid >>> 0;
-            if (object.skillId != null)
-                message.skillId = object.skillId >>> 0;
+            var message = new $root.world.LeaveBattleAction();
+            if (object.battleUid != null)
+                message.battleUid = object.battleUid >>> 0;
+            if (object.troopEids) {
+                if (!Array.isArray(object.troopEids))
+                    throw TypeError(".world.LeaveBattleAction.troopEids: array expected");
+                message.troopEids = [];
+                for (var i = 0; i < object.troopEids.length; ++i)
+                    message.troopEids[i] = object.troopEids[i] >>> 0;
+            }
             return message;
         };
 
         /**
-         * Creates a plain object from a BattleSkillAction message. Also converts values to other types if specified.
+         * Creates a plain object from a LeaveBattleAction message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof world.BattleSkillAction
+         * @memberof world.LeaveBattleAction
          * @static
-         * @param {world.BattleSkillAction} message BattleSkillAction
+         * @param {world.LeaveBattleAction} message LeaveBattleAction
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        BattleSkillAction.toObject = function toObject(message, options) {
+        LeaveBattleAction.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults) {
-                object.srcEid = 0;
-                object.dstEid = 0;
-                object.skillId = 0;
+            if (options.arrays || options.defaults)
+                object.troopEids = [];
+            if (options.defaults)
+                object.battleUid = 0;
+            if (message.battleUid != null && message.hasOwnProperty("battleUid"))
+                object.battleUid = message.battleUid;
+            if (message.troopEids && message.troopEids.length) {
+                object.troopEids = [];
+                for (var j = 0; j < message.troopEids.length; ++j)
+                    object.troopEids[j] = message.troopEids[j];
             }
-            if (message.srcEid != null && message.hasOwnProperty("srcEid"))
-                object.srcEid = message.srcEid;
-            if (message.dstEid != null && message.hasOwnProperty("dstEid"))
-                object.dstEid = message.dstEid;
-            if (message.skillId != null && message.hasOwnProperty("skillId"))
-                object.skillId = message.skillId;
             return object;
         };
 
         /**
-         * Converts this BattleSkillAction to JSON.
+         * Converts this LeaveBattleAction to JSON.
          * @function toJSON
-         * @memberof world.BattleSkillAction
+         * @memberof world.LeaveBattleAction
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        BattleSkillAction.prototype.toJSON = function toJSON() {
+        LeaveBattleAction.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
         /**
-         * Gets the default type url for BattleSkillAction
+         * Gets the default type url for LeaveBattleAction
          * @function getTypeUrl
-         * @memberof world.BattleSkillAction
+         * @memberof world.LeaveBattleAction
          * @static
          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns {string} The default type url
          */
-        BattleSkillAction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        LeaveBattleAction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/world.BattleSkillAction";
+            return typeUrlPrefix + "/world.LeaveBattleAction";
         };
 
-        return BattleSkillAction;
+        return LeaveBattleAction;
     })();
 
-    world.BattleSubHpAction = (function() {
+    world.StopBattleAction = (function() {
 
         /**
-         * Properties of a BattleSubHpAction.
+         * Properties of a StopBattleAction.
          * @memberof world
-         * @interface IBattleSubHpAction
-         * @property {number|null} [srcEid] BattleSubHpAction srcEid
-         * @property {number|null} [dstEid] BattleSubHpAction dstEid
-         * @property {number|null} [subHp] BattleSubHpAction subHp
-         * @property {number|null} [curHp] BattleSubHpAction curHp
+         * @interface IStopBattleAction
+         * @property {number|null} [battleUid] StopBattleAction battleUid
+         * @property {Array.<number>|null} [troopEids] StopBattleAction troopEids
          */
 
         /**
-         * Constructs a new BattleSubHpAction.
+         * Constructs a new StopBattleAction.
          * @memberof world
-         * @classdesc Represents a BattleSubHpAction.
-         * @implements IBattleSubHpAction
+         * @classdesc Represents a StopBattleAction.
+         * @implements IStopBattleAction
          * @constructor
-         * @param {world.IBattleSubHpAction=} [properties] Properties to set
+         * @param {world.IStopBattleAction=} [properties] Properties to set
          */
-        function BattleSubHpAction(properties) {
+        function StopBattleAction(properties) {
+            this.troopEids = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -26954,117 +36388,100 @@ $root.world = (function() {
         }
 
         /**
-         * BattleSubHpAction srcEid.
-         * @member {number} srcEid
-         * @memberof world.BattleSubHpAction
+         * StopBattleAction battleUid.
+         * @member {number} battleUid
+         * @memberof world.StopBattleAction
          * @instance
          */
-        BattleSubHpAction.prototype.srcEid = 0;
+        StopBattleAction.prototype.battleUid = 0;
 
         /**
-         * BattleSubHpAction dstEid.
-         * @member {number} dstEid
-         * @memberof world.BattleSubHpAction
+         * StopBattleAction troopEids.
+         * @member {Array.<number>} troopEids
+         * @memberof world.StopBattleAction
          * @instance
          */
-        BattleSubHpAction.prototype.dstEid = 0;
+        StopBattleAction.prototype.troopEids = $util.emptyArray;
 
         /**
-         * BattleSubHpAction subHp.
-         * @member {number} subHp
-         * @memberof world.BattleSubHpAction
-         * @instance
-         */
-        BattleSubHpAction.prototype.subHp = 0;
-
-        /**
-         * BattleSubHpAction curHp.
-         * @member {number} curHp
-         * @memberof world.BattleSubHpAction
-         * @instance
-         */
-        BattleSubHpAction.prototype.curHp = 0;
-
-        /**
-         * Creates a new BattleSubHpAction instance using the specified properties.
+         * Creates a new StopBattleAction instance using the specified properties.
          * @function create
-         * @memberof world.BattleSubHpAction
+         * @memberof world.StopBattleAction
          * @static
-         * @param {world.IBattleSubHpAction=} [properties] Properties to set
-         * @returns {world.BattleSubHpAction} BattleSubHpAction instance
+         * @param {world.IStopBattleAction=} [properties] Properties to set
+         * @returns {world.StopBattleAction} StopBattleAction instance
          */
-        BattleSubHpAction.create = function create(properties) {
-            return new BattleSubHpAction(properties);
+        StopBattleAction.create = function create(properties) {
+            return new StopBattleAction(properties);
         };
 
         /**
-         * Encodes the specified BattleSubHpAction message. Does not implicitly {@link world.BattleSubHpAction.verify|verify} messages.
+         * Encodes the specified StopBattleAction message. Does not implicitly {@link world.StopBattleAction.verify|verify} messages.
          * @function encode
-         * @memberof world.BattleSubHpAction
+         * @memberof world.StopBattleAction
          * @static
-         * @param {world.IBattleSubHpAction} message BattleSubHpAction message or plain object to encode
+         * @param {world.IStopBattleAction} message StopBattleAction message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        BattleSubHpAction.encode = function encode(message, writer) {
+        StopBattleAction.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.srcEid != null && Object.hasOwnProperty.call(message, "srcEid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.srcEid);
-            if (message.dstEid != null && Object.hasOwnProperty.call(message, "dstEid"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.dstEid);
-            if (message.subHp != null && Object.hasOwnProperty.call(message, "subHp"))
-                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.subHp);
-            if (message.curHp != null && Object.hasOwnProperty.call(message, "curHp"))
-                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.curHp);
+            if (message.battleUid != null && Object.hasOwnProperty.call(message, "battleUid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.battleUid);
+            if (message.troopEids != null && message.troopEids.length) {
+                writer.uint32(/* id 2, wireType 2 =*/18).fork();
+                for (var i = 0; i < message.troopEids.length; ++i)
+                    writer.uint32(message.troopEids[i]);
+                writer.ldelim();
+            }
             return writer;
         };
 
         /**
-         * Encodes the specified BattleSubHpAction message, length delimited. Does not implicitly {@link world.BattleSubHpAction.verify|verify} messages.
+         * Encodes the specified StopBattleAction message, length delimited. Does not implicitly {@link world.StopBattleAction.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof world.BattleSubHpAction
+         * @memberof world.StopBattleAction
          * @static
-         * @param {world.IBattleSubHpAction} message BattleSubHpAction message or plain object to encode
+         * @param {world.IStopBattleAction} message StopBattleAction message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        BattleSubHpAction.encodeDelimited = function encodeDelimited(message, writer) {
+        StopBattleAction.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
         /**
-         * Decodes a BattleSubHpAction message from the specified reader or buffer.
+         * Decodes a StopBattleAction message from the specified reader or buffer.
          * @function decode
-         * @memberof world.BattleSubHpAction
+         * @memberof world.StopBattleAction
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {world.BattleSubHpAction} BattleSubHpAction
+         * @returns {world.StopBattleAction} StopBattleAction
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        BattleSubHpAction.decode = function decode(reader, length) {
+        StopBattleAction.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.BattleSubHpAction();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.StopBattleAction();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1: {
-                        message.srcEid = reader.uint32();
+                        message.battleUid = reader.uint32();
                         break;
                     }
                 case 2: {
-                        message.dstEid = reader.uint32();
-                        break;
-                    }
-                case 3: {
-                        message.subHp = reader.uint32();
-                        break;
-                    }
-                case 4: {
-                        message.curHp = reader.uint32();
+                        if (!(message.troopEids && message.troopEids.length))
+                            message.troopEids = [];
+                        if ((tag & 7) === 2) {
+                            var end2 = reader.uint32() + reader.pos;
+                            while (reader.pos < end2)
+                                message.troopEids.push(reader.uint32());
+                        } else
+                            message.troopEids.push(reader.uint32());
                         break;
                     }
                 default:
@@ -27076,2035 +36493,123 @@ $root.world = (function() {
         };
 
         /**
-         * Decodes a BattleSubHpAction message from the specified reader or buffer, length delimited.
+         * Decodes a StopBattleAction message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof world.BattleSubHpAction
+         * @memberof world.StopBattleAction
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {world.BattleSubHpAction} BattleSubHpAction
+         * @returns {world.StopBattleAction} StopBattleAction
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        BattleSubHpAction.decodeDelimited = function decodeDelimited(reader) {
+        StopBattleAction.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
         /**
-         * Verifies a BattleSubHpAction message.
+         * Verifies a StopBattleAction message.
          * @function verify
-         * @memberof world.BattleSubHpAction
+         * @memberof world.StopBattleAction
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        BattleSubHpAction.verify = function verify(message) {
+        StopBattleAction.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.srcEid != null && message.hasOwnProperty("srcEid"))
-                if (!$util.isInteger(message.srcEid))
-                    return "srcEid: integer expected";
-            if (message.dstEid != null && message.hasOwnProperty("dstEid"))
-                if (!$util.isInteger(message.dstEid))
-                    return "dstEid: integer expected";
-            if (message.subHp != null && message.hasOwnProperty("subHp"))
-                if (!$util.isInteger(message.subHp))
-                    return "subHp: integer expected";
-            if (message.curHp != null && message.hasOwnProperty("curHp"))
-                if (!$util.isInteger(message.curHp))
-                    return "curHp: integer expected";
+            if (message.battleUid != null && message.hasOwnProperty("battleUid"))
+                if (!$util.isInteger(message.battleUid))
+                    return "battleUid: integer expected";
+            if (message.troopEids != null && message.hasOwnProperty("troopEids")) {
+                if (!Array.isArray(message.troopEids))
+                    return "troopEids: array expected";
+                for (var i = 0; i < message.troopEids.length; ++i)
+                    if (!$util.isInteger(message.troopEids[i]))
+                        return "troopEids: integer[] expected";
+            }
             return null;
         };
 
         /**
-         * Creates a BattleSubHpAction message from a plain object. Also converts values to their respective internal types.
+         * Creates a StopBattleAction message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof world.BattleSubHpAction
+         * @memberof world.StopBattleAction
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {world.BattleSubHpAction} BattleSubHpAction
+         * @returns {world.StopBattleAction} StopBattleAction
          */
-        BattleSubHpAction.fromObject = function fromObject(object) {
-            if (object instanceof $root.world.BattleSubHpAction)
+        StopBattleAction.fromObject = function fromObject(object) {
+            if (object instanceof $root.world.StopBattleAction)
                 return object;
-            var message = new $root.world.BattleSubHpAction();
-            if (object.srcEid != null)
-                message.srcEid = object.srcEid >>> 0;
-            if (object.dstEid != null)
-                message.dstEid = object.dstEid >>> 0;
-            if (object.subHp != null)
-                message.subHp = object.subHp >>> 0;
-            if (object.curHp != null)
-                message.curHp = object.curHp >>> 0;
+            var message = new $root.world.StopBattleAction();
+            if (object.battleUid != null)
+                message.battleUid = object.battleUid >>> 0;
+            if (object.troopEids) {
+                if (!Array.isArray(object.troopEids))
+                    throw TypeError(".world.StopBattleAction.troopEids: array expected");
+                message.troopEids = [];
+                for (var i = 0; i < object.troopEids.length; ++i)
+                    message.troopEids[i] = object.troopEids[i] >>> 0;
+            }
             return message;
         };
 
         /**
-         * Creates a plain object from a BattleSubHpAction message. Also converts values to other types if specified.
+         * Creates a plain object from a StopBattleAction message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof world.BattleSubHpAction
+         * @memberof world.StopBattleAction
          * @static
-         * @param {world.BattleSubHpAction} message BattleSubHpAction
+         * @param {world.StopBattleAction} message StopBattleAction
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        BattleSubHpAction.toObject = function toObject(message, options) {
+        StopBattleAction.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults) {
-                object.srcEid = 0;
-                object.dstEid = 0;
-                object.subHp = 0;
-                object.curHp = 0;
+            if (options.arrays || options.defaults)
+                object.troopEids = [];
+            if (options.defaults)
+                object.battleUid = 0;
+            if (message.battleUid != null && message.hasOwnProperty("battleUid"))
+                object.battleUid = message.battleUid;
+            if (message.troopEids && message.troopEids.length) {
+                object.troopEids = [];
+                for (var j = 0; j < message.troopEids.length; ++j)
+                    object.troopEids[j] = message.troopEids[j];
             }
-            if (message.srcEid != null && message.hasOwnProperty("srcEid"))
-                object.srcEid = message.srcEid;
-            if (message.dstEid != null && message.hasOwnProperty("dstEid"))
-                object.dstEid = message.dstEid;
-            if (message.subHp != null && message.hasOwnProperty("subHp"))
-                object.subHp = message.subHp;
-            if (message.curHp != null && message.hasOwnProperty("curHp"))
-                object.curHp = message.curHp;
             return object;
         };
 
         /**
-         * Converts this BattleSubHpAction to JSON.
+         * Converts this StopBattleAction to JSON.
          * @function toJSON
-         * @memberof world.BattleSubHpAction
+         * @memberof world.StopBattleAction
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        BattleSubHpAction.prototype.toJSON = function toJSON() {
+        StopBattleAction.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
         /**
-         * Gets the default type url for BattleSubHpAction
+         * Gets the default type url for StopBattleAction
          * @function getTypeUrl
-         * @memberof world.BattleSubHpAction
+         * @memberof world.StopBattleAction
          * @static
          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns {string} The default type url
          */
-        BattleSubHpAction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        StopBattleAction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/world.BattleSubHpAction";
+            return typeUrlPrefix + "/world.StopBattleAction";
         };
 
-        return BattleSubHpAction;
-    })();
-
-    world.BattleAddBullet = (function() {
-
-        /**
-         * Properties of a BattleAddBullet.
-         * @memberof world
-         * @interface IBattleAddBullet
-         * @property {number|null} [srcEid] BattleAddBullet srcEid
-         * @property {number|null} [dstEid] BattleAddBullet dstEid
-         * @property {number|null} [bulletId] BattleAddBullet bulletId
-         * @property {number|null} [duration] BattleAddBullet duration
-         */
-
-        /**
-         * Constructs a new BattleAddBullet.
-         * @memberof world
-         * @classdesc Represents a BattleAddBullet.
-         * @implements IBattleAddBullet
-         * @constructor
-         * @param {world.IBattleAddBullet=} [properties] Properties to set
-         */
-        function BattleAddBullet(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * BattleAddBullet srcEid.
-         * @member {number} srcEid
-         * @memberof world.BattleAddBullet
-         * @instance
-         */
-        BattleAddBullet.prototype.srcEid = 0;
-
-        /**
-         * BattleAddBullet dstEid.
-         * @member {number} dstEid
-         * @memberof world.BattleAddBullet
-         * @instance
-         */
-        BattleAddBullet.prototype.dstEid = 0;
-
-        /**
-         * BattleAddBullet bulletId.
-         * @member {number} bulletId
-         * @memberof world.BattleAddBullet
-         * @instance
-         */
-        BattleAddBullet.prototype.bulletId = 0;
-
-        /**
-         * BattleAddBullet duration.
-         * @member {number} duration
-         * @memberof world.BattleAddBullet
-         * @instance
-         */
-        BattleAddBullet.prototype.duration = 0;
-
-        /**
-         * Creates a new BattleAddBullet instance using the specified properties.
-         * @function create
-         * @memberof world.BattleAddBullet
-         * @static
-         * @param {world.IBattleAddBullet=} [properties] Properties to set
-         * @returns {world.BattleAddBullet} BattleAddBullet instance
-         */
-        BattleAddBullet.create = function create(properties) {
-            return new BattleAddBullet(properties);
-        };
-
-        /**
-         * Encodes the specified BattleAddBullet message. Does not implicitly {@link world.BattleAddBullet.verify|verify} messages.
-         * @function encode
-         * @memberof world.BattleAddBullet
-         * @static
-         * @param {world.IBattleAddBullet} message BattleAddBullet message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        BattleAddBullet.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.srcEid != null && Object.hasOwnProperty.call(message, "srcEid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.srcEid);
-            if (message.dstEid != null && Object.hasOwnProperty.call(message, "dstEid"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.dstEid);
-            if (message.bulletId != null && Object.hasOwnProperty.call(message, "bulletId"))
-                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.bulletId);
-            if (message.duration != null && Object.hasOwnProperty.call(message, "duration"))
-                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.duration);
-            return writer;
-        };
-
-        /**
-         * Encodes the specified BattleAddBullet message, length delimited. Does not implicitly {@link world.BattleAddBullet.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof world.BattleAddBullet
-         * @static
-         * @param {world.IBattleAddBullet} message BattleAddBullet message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        BattleAddBullet.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a BattleAddBullet message from the specified reader or buffer.
-         * @function decode
-         * @memberof world.BattleAddBullet
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {world.BattleAddBullet} BattleAddBullet
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        BattleAddBullet.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.BattleAddBullet();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1: {
-                        message.srcEid = reader.uint32();
-                        break;
-                    }
-                case 2: {
-                        message.dstEid = reader.uint32();
-                        break;
-                    }
-                case 3: {
-                        message.bulletId = reader.uint32();
-                        break;
-                    }
-                case 4: {
-                        message.duration = reader.uint32();
-                        break;
-                    }
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes a BattleAddBullet message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof world.BattleAddBullet
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {world.BattleAddBullet} BattleAddBullet
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        BattleAddBullet.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a BattleAddBullet message.
-         * @function verify
-         * @memberof world.BattleAddBullet
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        BattleAddBullet.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.srcEid != null && message.hasOwnProperty("srcEid"))
-                if (!$util.isInteger(message.srcEid))
-                    return "srcEid: integer expected";
-            if (message.dstEid != null && message.hasOwnProperty("dstEid"))
-                if (!$util.isInteger(message.dstEid))
-                    return "dstEid: integer expected";
-            if (message.bulletId != null && message.hasOwnProperty("bulletId"))
-                if (!$util.isInteger(message.bulletId))
-                    return "bulletId: integer expected";
-            if (message.duration != null && message.hasOwnProperty("duration"))
-                if (!$util.isInteger(message.duration))
-                    return "duration: integer expected";
-            return null;
-        };
-
-        /**
-         * Creates a BattleAddBullet message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof world.BattleAddBullet
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {world.BattleAddBullet} BattleAddBullet
-         */
-        BattleAddBullet.fromObject = function fromObject(object) {
-            if (object instanceof $root.world.BattleAddBullet)
-                return object;
-            var message = new $root.world.BattleAddBullet();
-            if (object.srcEid != null)
-                message.srcEid = object.srcEid >>> 0;
-            if (object.dstEid != null)
-                message.dstEid = object.dstEid >>> 0;
-            if (object.bulletId != null)
-                message.bulletId = object.bulletId >>> 0;
-            if (object.duration != null)
-                message.duration = object.duration >>> 0;
-            return message;
-        };
-
-        /**
-         * Creates a plain object from a BattleAddBullet message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof world.BattleAddBullet
-         * @static
-         * @param {world.BattleAddBullet} message BattleAddBullet
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        BattleAddBullet.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.srcEid = 0;
-                object.dstEid = 0;
-                object.bulletId = 0;
-                object.duration = 0;
-            }
-            if (message.srcEid != null && message.hasOwnProperty("srcEid"))
-                object.srcEid = message.srcEid;
-            if (message.dstEid != null && message.hasOwnProperty("dstEid"))
-                object.dstEid = message.dstEid;
-            if (message.bulletId != null && message.hasOwnProperty("bulletId"))
-                object.bulletId = message.bulletId;
-            if (message.duration != null && message.hasOwnProperty("duration"))
-                object.duration = message.duration;
-            return object;
-        };
-
-        /**
-         * Converts this BattleAddBullet to JSON.
-         * @function toJSON
-         * @memberof world.BattleAddBullet
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        BattleAddBullet.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        /**
-         * Gets the default type url for BattleAddBullet
-         * @function getTypeUrl
-         * @memberof world.BattleAddBullet
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        BattleAddBullet.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/world.BattleAddBullet";
-        };
-
-        return BattleAddBullet;
-    })();
-
-    world.BattleAddBuffAction = (function() {
-
-        /**
-         * Properties of a BattleAddBuffAction.
-         * @memberof world
-         * @interface IBattleAddBuffAction
-         * @property {number|null} [srcEid] BattleAddBuffAction srcEid
-         * @property {number|null} [dstEid] BattleAddBuffAction dstEid
-         * @property {number|null} [buffId] BattleAddBuffAction buffId
-         */
-
-        /**
-         * Constructs a new BattleAddBuffAction.
-         * @memberof world
-         * @classdesc Represents a BattleAddBuffAction.
-         * @implements IBattleAddBuffAction
-         * @constructor
-         * @param {world.IBattleAddBuffAction=} [properties] Properties to set
-         */
-        function BattleAddBuffAction(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * BattleAddBuffAction srcEid.
-         * @member {number} srcEid
-         * @memberof world.BattleAddBuffAction
-         * @instance
-         */
-        BattleAddBuffAction.prototype.srcEid = 0;
-
-        /**
-         * BattleAddBuffAction dstEid.
-         * @member {number} dstEid
-         * @memberof world.BattleAddBuffAction
-         * @instance
-         */
-        BattleAddBuffAction.prototype.dstEid = 0;
-
-        /**
-         * BattleAddBuffAction buffId.
-         * @member {number} buffId
-         * @memberof world.BattleAddBuffAction
-         * @instance
-         */
-        BattleAddBuffAction.prototype.buffId = 0;
-
-        /**
-         * Creates a new BattleAddBuffAction instance using the specified properties.
-         * @function create
-         * @memberof world.BattleAddBuffAction
-         * @static
-         * @param {world.IBattleAddBuffAction=} [properties] Properties to set
-         * @returns {world.BattleAddBuffAction} BattleAddBuffAction instance
-         */
-        BattleAddBuffAction.create = function create(properties) {
-            return new BattleAddBuffAction(properties);
-        };
-
-        /**
-         * Encodes the specified BattleAddBuffAction message. Does not implicitly {@link world.BattleAddBuffAction.verify|verify} messages.
-         * @function encode
-         * @memberof world.BattleAddBuffAction
-         * @static
-         * @param {world.IBattleAddBuffAction} message BattleAddBuffAction message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        BattleAddBuffAction.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.srcEid != null && Object.hasOwnProperty.call(message, "srcEid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.srcEid);
-            if (message.dstEid != null && Object.hasOwnProperty.call(message, "dstEid"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.dstEid);
-            if (message.buffId != null && Object.hasOwnProperty.call(message, "buffId"))
-                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.buffId);
-            return writer;
-        };
-
-        /**
-         * Encodes the specified BattleAddBuffAction message, length delimited. Does not implicitly {@link world.BattleAddBuffAction.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof world.BattleAddBuffAction
-         * @static
-         * @param {world.IBattleAddBuffAction} message BattleAddBuffAction message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        BattleAddBuffAction.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a BattleAddBuffAction message from the specified reader or buffer.
-         * @function decode
-         * @memberof world.BattleAddBuffAction
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {world.BattleAddBuffAction} BattleAddBuffAction
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        BattleAddBuffAction.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.BattleAddBuffAction();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1: {
-                        message.srcEid = reader.uint32();
-                        break;
-                    }
-                case 2: {
-                        message.dstEid = reader.uint32();
-                        break;
-                    }
-                case 3: {
-                        message.buffId = reader.uint32();
-                        break;
-                    }
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes a BattleAddBuffAction message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof world.BattleAddBuffAction
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {world.BattleAddBuffAction} BattleAddBuffAction
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        BattleAddBuffAction.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a BattleAddBuffAction message.
-         * @function verify
-         * @memberof world.BattleAddBuffAction
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        BattleAddBuffAction.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.srcEid != null && message.hasOwnProperty("srcEid"))
-                if (!$util.isInteger(message.srcEid))
-                    return "srcEid: integer expected";
-            if (message.dstEid != null && message.hasOwnProperty("dstEid"))
-                if (!$util.isInteger(message.dstEid))
-                    return "dstEid: integer expected";
-            if (message.buffId != null && message.hasOwnProperty("buffId"))
-                if (!$util.isInteger(message.buffId))
-                    return "buffId: integer expected";
-            return null;
-        };
-
-        /**
-         * Creates a BattleAddBuffAction message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof world.BattleAddBuffAction
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {world.BattleAddBuffAction} BattleAddBuffAction
-         */
-        BattleAddBuffAction.fromObject = function fromObject(object) {
-            if (object instanceof $root.world.BattleAddBuffAction)
-                return object;
-            var message = new $root.world.BattleAddBuffAction();
-            if (object.srcEid != null)
-                message.srcEid = object.srcEid >>> 0;
-            if (object.dstEid != null)
-                message.dstEid = object.dstEid >>> 0;
-            if (object.buffId != null)
-                message.buffId = object.buffId >>> 0;
-            return message;
-        };
-
-        /**
-         * Creates a plain object from a BattleAddBuffAction message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof world.BattleAddBuffAction
-         * @static
-         * @param {world.BattleAddBuffAction} message BattleAddBuffAction
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        BattleAddBuffAction.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.srcEid = 0;
-                object.dstEid = 0;
-                object.buffId = 0;
-            }
-            if (message.srcEid != null && message.hasOwnProperty("srcEid"))
-                object.srcEid = message.srcEid;
-            if (message.dstEid != null && message.hasOwnProperty("dstEid"))
-                object.dstEid = message.dstEid;
-            if (message.buffId != null && message.hasOwnProperty("buffId"))
-                object.buffId = message.buffId;
-            return object;
-        };
-
-        /**
-         * Converts this BattleAddBuffAction to JSON.
-         * @function toJSON
-         * @memberof world.BattleAddBuffAction
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        BattleAddBuffAction.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        /**
-         * Gets the default type url for BattleAddBuffAction
-         * @function getTypeUrl
-         * @memberof world.BattleAddBuffAction
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        BattleAddBuffAction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/world.BattleAddBuffAction";
-        };
-
-        return BattleAddBuffAction;
-    })();
-
-    world.BattleDelBuffAction = (function() {
-
-        /**
-         * Properties of a BattleDelBuffAction.
-         * @memberof world
-         * @interface IBattleDelBuffAction
-         * @property {number|null} [srcEid] BattleDelBuffAction srcEid
-         * @property {number|null} [dstEid] BattleDelBuffAction dstEid
-         * @property {number|null} [buffId] BattleDelBuffAction buffId
-         */
-
-        /**
-         * Constructs a new BattleDelBuffAction.
-         * @memberof world
-         * @classdesc Represents a BattleDelBuffAction.
-         * @implements IBattleDelBuffAction
-         * @constructor
-         * @param {world.IBattleDelBuffAction=} [properties] Properties to set
-         */
-        function BattleDelBuffAction(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * BattleDelBuffAction srcEid.
-         * @member {number} srcEid
-         * @memberof world.BattleDelBuffAction
-         * @instance
-         */
-        BattleDelBuffAction.prototype.srcEid = 0;
-
-        /**
-         * BattleDelBuffAction dstEid.
-         * @member {number} dstEid
-         * @memberof world.BattleDelBuffAction
-         * @instance
-         */
-        BattleDelBuffAction.prototype.dstEid = 0;
-
-        /**
-         * BattleDelBuffAction buffId.
-         * @member {number} buffId
-         * @memberof world.BattleDelBuffAction
-         * @instance
-         */
-        BattleDelBuffAction.prototype.buffId = 0;
-
-        /**
-         * Creates a new BattleDelBuffAction instance using the specified properties.
-         * @function create
-         * @memberof world.BattleDelBuffAction
-         * @static
-         * @param {world.IBattleDelBuffAction=} [properties] Properties to set
-         * @returns {world.BattleDelBuffAction} BattleDelBuffAction instance
-         */
-        BattleDelBuffAction.create = function create(properties) {
-            return new BattleDelBuffAction(properties);
-        };
-
-        /**
-         * Encodes the specified BattleDelBuffAction message. Does not implicitly {@link world.BattleDelBuffAction.verify|verify} messages.
-         * @function encode
-         * @memberof world.BattleDelBuffAction
-         * @static
-         * @param {world.IBattleDelBuffAction} message BattleDelBuffAction message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        BattleDelBuffAction.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.srcEid != null && Object.hasOwnProperty.call(message, "srcEid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.srcEid);
-            if (message.dstEid != null && Object.hasOwnProperty.call(message, "dstEid"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.dstEid);
-            if (message.buffId != null && Object.hasOwnProperty.call(message, "buffId"))
-                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.buffId);
-            return writer;
-        };
-
-        /**
-         * Encodes the specified BattleDelBuffAction message, length delimited. Does not implicitly {@link world.BattleDelBuffAction.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof world.BattleDelBuffAction
-         * @static
-         * @param {world.IBattleDelBuffAction} message BattleDelBuffAction message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        BattleDelBuffAction.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a BattleDelBuffAction message from the specified reader or buffer.
-         * @function decode
-         * @memberof world.BattleDelBuffAction
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {world.BattleDelBuffAction} BattleDelBuffAction
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        BattleDelBuffAction.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.BattleDelBuffAction();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1: {
-                        message.srcEid = reader.uint32();
-                        break;
-                    }
-                case 2: {
-                        message.dstEid = reader.uint32();
-                        break;
-                    }
-                case 3: {
-                        message.buffId = reader.uint32();
-                        break;
-                    }
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes a BattleDelBuffAction message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof world.BattleDelBuffAction
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {world.BattleDelBuffAction} BattleDelBuffAction
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        BattleDelBuffAction.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a BattleDelBuffAction message.
-         * @function verify
-         * @memberof world.BattleDelBuffAction
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        BattleDelBuffAction.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.srcEid != null && message.hasOwnProperty("srcEid"))
-                if (!$util.isInteger(message.srcEid))
-                    return "srcEid: integer expected";
-            if (message.dstEid != null && message.hasOwnProperty("dstEid"))
-                if (!$util.isInteger(message.dstEid))
-                    return "dstEid: integer expected";
-            if (message.buffId != null && message.hasOwnProperty("buffId"))
-                if (!$util.isInteger(message.buffId))
-                    return "buffId: integer expected";
-            return null;
-        };
-
-        /**
-         * Creates a BattleDelBuffAction message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof world.BattleDelBuffAction
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {world.BattleDelBuffAction} BattleDelBuffAction
-         */
-        BattleDelBuffAction.fromObject = function fromObject(object) {
-            if (object instanceof $root.world.BattleDelBuffAction)
-                return object;
-            var message = new $root.world.BattleDelBuffAction();
-            if (object.srcEid != null)
-                message.srcEid = object.srcEid >>> 0;
-            if (object.dstEid != null)
-                message.dstEid = object.dstEid >>> 0;
-            if (object.buffId != null)
-                message.buffId = object.buffId >>> 0;
-            return message;
-        };
-
-        /**
-         * Creates a plain object from a BattleDelBuffAction message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof world.BattleDelBuffAction
-         * @static
-         * @param {world.BattleDelBuffAction} message BattleDelBuffAction
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        BattleDelBuffAction.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.srcEid = 0;
-                object.dstEid = 0;
-                object.buffId = 0;
-            }
-            if (message.srcEid != null && message.hasOwnProperty("srcEid"))
-                object.srcEid = message.srcEid;
-            if (message.dstEid != null && message.hasOwnProperty("dstEid"))
-                object.dstEid = message.dstEid;
-            if (message.buffId != null && message.hasOwnProperty("buffId"))
-                object.buffId = message.buffId;
-            return object;
-        };
-
-        /**
-         * Converts this BattleDelBuffAction to JSON.
-         * @function toJSON
-         * @memberof world.BattleDelBuffAction
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        BattleDelBuffAction.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        /**
-         * Gets the default type url for BattleDelBuffAction
-         * @function getTypeUrl
-         * @memberof world.BattleDelBuffAction
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        BattleDelBuffAction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/world.BattleDelBuffAction";
-        };
-
-        return BattleDelBuffAction;
-    })();
-
-    world.BattleStopAction = (function() {
-
-        /**
-         * Properties of a BattleStopAction.
-         * @memberof world
-         * @interface IBattleStopAction
-         * @property {number|null} [fighterEid] BattleStopAction fighterEid
-         * @property {number|null} [battleEid] BattleStopAction battleEid
-         */
-
-        /**
-         * Constructs a new BattleStopAction.
-         * @memberof world
-         * @classdesc Represents a BattleStopAction.
-         * @implements IBattleStopAction
-         * @constructor
-         * @param {world.IBattleStopAction=} [properties] Properties to set
-         */
-        function BattleStopAction(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * BattleStopAction fighterEid.
-         * @member {number} fighterEid
-         * @memberof world.BattleStopAction
-         * @instance
-         */
-        BattleStopAction.prototype.fighterEid = 0;
-
-        /**
-         * BattleStopAction battleEid.
-         * @member {number} battleEid
-         * @memberof world.BattleStopAction
-         * @instance
-         */
-        BattleStopAction.prototype.battleEid = 0;
-
-        /**
-         * Creates a new BattleStopAction instance using the specified properties.
-         * @function create
-         * @memberof world.BattleStopAction
-         * @static
-         * @param {world.IBattleStopAction=} [properties] Properties to set
-         * @returns {world.BattleStopAction} BattleStopAction instance
-         */
-        BattleStopAction.create = function create(properties) {
-            return new BattleStopAction(properties);
-        };
-
-        /**
-         * Encodes the specified BattleStopAction message. Does not implicitly {@link world.BattleStopAction.verify|verify} messages.
-         * @function encode
-         * @memberof world.BattleStopAction
-         * @static
-         * @param {world.IBattleStopAction} message BattleStopAction message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        BattleStopAction.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.fighterEid != null && Object.hasOwnProperty.call(message, "fighterEid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.fighterEid);
-            if (message.battleEid != null && Object.hasOwnProperty.call(message, "battleEid"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.battleEid);
-            return writer;
-        };
-
-        /**
-         * Encodes the specified BattleStopAction message, length delimited. Does not implicitly {@link world.BattleStopAction.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof world.BattleStopAction
-         * @static
-         * @param {world.IBattleStopAction} message BattleStopAction message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        BattleStopAction.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a BattleStopAction message from the specified reader or buffer.
-         * @function decode
-         * @memberof world.BattleStopAction
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {world.BattleStopAction} BattleStopAction
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        BattleStopAction.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.BattleStopAction();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1: {
-                        message.fighterEid = reader.uint32();
-                        break;
-                    }
-                case 2: {
-                        message.battleEid = reader.uint32();
-                        break;
-                    }
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes a BattleStopAction message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof world.BattleStopAction
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {world.BattleStopAction} BattleStopAction
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        BattleStopAction.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a BattleStopAction message.
-         * @function verify
-         * @memberof world.BattleStopAction
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        BattleStopAction.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.fighterEid != null && message.hasOwnProperty("fighterEid"))
-                if (!$util.isInteger(message.fighterEid))
-                    return "fighterEid: integer expected";
-            if (message.battleEid != null && message.hasOwnProperty("battleEid"))
-                if (!$util.isInteger(message.battleEid))
-                    return "battleEid: integer expected";
-            return null;
-        };
-
-        /**
-         * Creates a BattleStopAction message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof world.BattleStopAction
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {world.BattleStopAction} BattleStopAction
-         */
-        BattleStopAction.fromObject = function fromObject(object) {
-            if (object instanceof $root.world.BattleStopAction)
-                return object;
-            var message = new $root.world.BattleStopAction();
-            if (object.fighterEid != null)
-                message.fighterEid = object.fighterEid >>> 0;
-            if (object.battleEid != null)
-                message.battleEid = object.battleEid >>> 0;
-            return message;
-        };
-
-        /**
-         * Creates a plain object from a BattleStopAction message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof world.BattleStopAction
-         * @static
-         * @param {world.BattleStopAction} message BattleStopAction
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        BattleStopAction.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.fighterEid = 0;
-                object.battleEid = 0;
-            }
-            if (message.fighterEid != null && message.hasOwnProperty("fighterEid"))
-                object.fighterEid = message.fighterEid;
-            if (message.battleEid != null && message.hasOwnProperty("battleEid"))
-                object.battleEid = message.battleEid;
-            return object;
-        };
-
-        /**
-         * Converts this BattleStopAction to JSON.
-         * @function toJSON
-         * @memberof world.BattleStopAction
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        BattleStopAction.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        /**
-         * Gets the default type url for BattleStopAction
-         * @function getTypeUrl
-         * @memberof world.BattleStopAction
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        BattleStopAction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/world.BattleStopAction";
-        };
-
-        return BattleStopAction;
-    })();
-
-    world.AddBoxAction = (function() {
-
-        /**
-         * Properties of an AddBoxAction.
-         * @memberof world
-         * @interface IAddBoxAction
-         * @property {number|null} [troopEid] AddBoxAction troopEid
-         * @property {number|null} [boxEid] AddBoxAction boxEid
-         */
-
-        /**
-         * Constructs a new AddBoxAction.
-         * @memberof world
-         * @classdesc Represents an AddBoxAction.
-         * @implements IAddBoxAction
-         * @constructor
-         * @param {world.IAddBoxAction=} [properties] Properties to set
-         */
-        function AddBoxAction(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * AddBoxAction troopEid.
-         * @member {number} troopEid
-         * @memberof world.AddBoxAction
-         * @instance
-         */
-        AddBoxAction.prototype.troopEid = 0;
-
-        /**
-         * AddBoxAction boxEid.
-         * @member {number} boxEid
-         * @memberof world.AddBoxAction
-         * @instance
-         */
-        AddBoxAction.prototype.boxEid = 0;
-
-        /**
-         * Creates a new AddBoxAction instance using the specified properties.
-         * @function create
-         * @memberof world.AddBoxAction
-         * @static
-         * @param {world.IAddBoxAction=} [properties] Properties to set
-         * @returns {world.AddBoxAction} AddBoxAction instance
-         */
-        AddBoxAction.create = function create(properties) {
-            return new AddBoxAction(properties);
-        };
-
-        /**
-         * Encodes the specified AddBoxAction message. Does not implicitly {@link world.AddBoxAction.verify|verify} messages.
-         * @function encode
-         * @memberof world.AddBoxAction
-         * @static
-         * @param {world.IAddBoxAction} message AddBoxAction message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        AddBoxAction.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.troopEid != null && Object.hasOwnProperty.call(message, "troopEid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.troopEid);
-            if (message.boxEid != null && Object.hasOwnProperty.call(message, "boxEid"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.boxEid);
-            return writer;
-        };
-
-        /**
-         * Encodes the specified AddBoxAction message, length delimited. Does not implicitly {@link world.AddBoxAction.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof world.AddBoxAction
-         * @static
-         * @param {world.IAddBoxAction} message AddBoxAction message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        AddBoxAction.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes an AddBoxAction message from the specified reader or buffer.
-         * @function decode
-         * @memberof world.AddBoxAction
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {world.AddBoxAction} AddBoxAction
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        AddBoxAction.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.AddBoxAction();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1: {
-                        message.troopEid = reader.uint32();
-                        break;
-                    }
-                case 2: {
-                        message.boxEid = reader.uint32();
-                        break;
-                    }
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes an AddBoxAction message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof world.AddBoxAction
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {world.AddBoxAction} AddBoxAction
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        AddBoxAction.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies an AddBoxAction message.
-         * @function verify
-         * @memberof world.AddBoxAction
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        AddBoxAction.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.troopEid != null && message.hasOwnProperty("troopEid"))
-                if (!$util.isInteger(message.troopEid))
-                    return "troopEid: integer expected";
-            if (message.boxEid != null && message.hasOwnProperty("boxEid"))
-                if (!$util.isInteger(message.boxEid))
-                    return "boxEid: integer expected";
-            return null;
-        };
-
-        /**
-         * Creates an AddBoxAction message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof world.AddBoxAction
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {world.AddBoxAction} AddBoxAction
-         */
-        AddBoxAction.fromObject = function fromObject(object) {
-            if (object instanceof $root.world.AddBoxAction)
-                return object;
-            var message = new $root.world.AddBoxAction();
-            if (object.troopEid != null)
-                message.troopEid = object.troopEid >>> 0;
-            if (object.boxEid != null)
-                message.boxEid = object.boxEid >>> 0;
-            return message;
-        };
-
-        /**
-         * Creates a plain object from an AddBoxAction message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof world.AddBoxAction
-         * @static
-         * @param {world.AddBoxAction} message AddBoxAction
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        AddBoxAction.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.troopEid = 0;
-                object.boxEid = 0;
-            }
-            if (message.troopEid != null && message.hasOwnProperty("troopEid"))
-                object.troopEid = message.troopEid;
-            if (message.boxEid != null && message.hasOwnProperty("boxEid"))
-                object.boxEid = message.boxEid;
-            return object;
-        };
-
-        /**
-         * Converts this AddBoxAction to JSON.
-         * @function toJSON
-         * @memberof world.AddBoxAction
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        AddBoxAction.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        /**
-         * Gets the default type url for AddBoxAction
-         * @function getTypeUrl
-         * @memberof world.AddBoxAction
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        AddBoxAction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/world.AddBoxAction";
-        };
-
-        return AddBoxAction;
-    })();
-
-    world.DropBoxAction = (function() {
-
-        /**
-         * Properties of a DropBoxAction.
-         * @memberof world
-         * @interface IDropBoxAction
-         * @property {number|null} [troopEid] DropBoxAction troopEid
-         * @property {number|null} [campEid] DropBoxAction campEid
-         */
-
-        /**
-         * Constructs a new DropBoxAction.
-         * @memberof world
-         * @classdesc Represents a DropBoxAction.
-         * @implements IDropBoxAction
-         * @constructor
-         * @param {world.IDropBoxAction=} [properties] Properties to set
-         */
-        function DropBoxAction(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * DropBoxAction troopEid.
-         * @member {number} troopEid
-         * @memberof world.DropBoxAction
-         * @instance
-         */
-        DropBoxAction.prototype.troopEid = 0;
-
-        /**
-         * DropBoxAction campEid.
-         * @member {number} campEid
-         * @memberof world.DropBoxAction
-         * @instance
-         */
-        DropBoxAction.prototype.campEid = 0;
-
-        /**
-         * Creates a new DropBoxAction instance using the specified properties.
-         * @function create
-         * @memberof world.DropBoxAction
-         * @static
-         * @param {world.IDropBoxAction=} [properties] Properties to set
-         * @returns {world.DropBoxAction} DropBoxAction instance
-         */
-        DropBoxAction.create = function create(properties) {
-            return new DropBoxAction(properties);
-        };
-
-        /**
-         * Encodes the specified DropBoxAction message. Does not implicitly {@link world.DropBoxAction.verify|verify} messages.
-         * @function encode
-         * @memberof world.DropBoxAction
-         * @static
-         * @param {world.IDropBoxAction} message DropBoxAction message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        DropBoxAction.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.troopEid != null && Object.hasOwnProperty.call(message, "troopEid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.troopEid);
-            if (message.campEid != null && Object.hasOwnProperty.call(message, "campEid"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.campEid);
-            return writer;
-        };
-
-        /**
-         * Encodes the specified DropBoxAction message, length delimited. Does not implicitly {@link world.DropBoxAction.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof world.DropBoxAction
-         * @static
-         * @param {world.IDropBoxAction} message DropBoxAction message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        DropBoxAction.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a DropBoxAction message from the specified reader or buffer.
-         * @function decode
-         * @memberof world.DropBoxAction
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {world.DropBoxAction} DropBoxAction
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        DropBoxAction.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.DropBoxAction();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1: {
-                        message.troopEid = reader.uint32();
-                        break;
-                    }
-                case 2: {
-                        message.campEid = reader.uint32();
-                        break;
-                    }
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes a DropBoxAction message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof world.DropBoxAction
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {world.DropBoxAction} DropBoxAction
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        DropBoxAction.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a DropBoxAction message.
-         * @function verify
-         * @memberof world.DropBoxAction
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        DropBoxAction.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.troopEid != null && message.hasOwnProperty("troopEid"))
-                if (!$util.isInteger(message.troopEid))
-                    return "troopEid: integer expected";
-            if (message.campEid != null && message.hasOwnProperty("campEid"))
-                if (!$util.isInteger(message.campEid))
-                    return "campEid: integer expected";
-            return null;
-        };
-
-        /**
-         * Creates a DropBoxAction message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof world.DropBoxAction
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {world.DropBoxAction} DropBoxAction
-         */
-        DropBoxAction.fromObject = function fromObject(object) {
-            if (object instanceof $root.world.DropBoxAction)
-                return object;
-            var message = new $root.world.DropBoxAction();
-            if (object.troopEid != null)
-                message.troopEid = object.troopEid >>> 0;
-            if (object.campEid != null)
-                message.campEid = object.campEid >>> 0;
-            return message;
-        };
-
-        /**
-         * Creates a plain object from a DropBoxAction message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof world.DropBoxAction
-         * @static
-         * @param {world.DropBoxAction} message DropBoxAction
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        DropBoxAction.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.troopEid = 0;
-                object.campEid = 0;
-            }
-            if (message.troopEid != null && message.hasOwnProperty("troopEid"))
-                object.troopEid = message.troopEid;
-            if (message.campEid != null && message.hasOwnProperty("campEid"))
-                object.campEid = message.campEid;
-            return object;
-        };
-
-        /**
-         * Converts this DropBoxAction to JSON.
-         * @function toJSON
-         * @memberof world.DropBoxAction
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        DropBoxAction.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        /**
-         * Gets the default type url for DropBoxAction
-         * @function getTypeUrl
-         * @memberof world.DropBoxAction
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        DropBoxAction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/world.DropBoxAction";
-        };
-
-        return DropBoxAction;
-    })();
-
-    world.PickItemAction = (function() {
-
-        /**
-         * Properties of a PickItemAction.
-         * @memberof world
-         * @interface IPickItemAction
-         * @property {number|null} [troopEid] PickItemAction troopEid
-         * @property {number|null} [itemEid] PickItemAction itemEid
-         */
-
-        /**
-         * Constructs a new PickItemAction.
-         * @memberof world
-         * @classdesc Represents a PickItemAction.
-         * @implements IPickItemAction
-         * @constructor
-         * @param {world.IPickItemAction=} [properties] Properties to set
-         */
-        function PickItemAction(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * PickItemAction troopEid.
-         * @member {number} troopEid
-         * @memberof world.PickItemAction
-         * @instance
-         */
-        PickItemAction.prototype.troopEid = 0;
-
-        /**
-         * PickItemAction itemEid.
-         * @member {number} itemEid
-         * @memberof world.PickItemAction
-         * @instance
-         */
-        PickItemAction.prototype.itemEid = 0;
-
-        /**
-         * Creates a new PickItemAction instance using the specified properties.
-         * @function create
-         * @memberof world.PickItemAction
-         * @static
-         * @param {world.IPickItemAction=} [properties] Properties to set
-         * @returns {world.PickItemAction} PickItemAction instance
-         */
-        PickItemAction.create = function create(properties) {
-            return new PickItemAction(properties);
-        };
-
-        /**
-         * Encodes the specified PickItemAction message. Does not implicitly {@link world.PickItemAction.verify|verify} messages.
-         * @function encode
-         * @memberof world.PickItemAction
-         * @static
-         * @param {world.IPickItemAction} message PickItemAction message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        PickItemAction.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.troopEid != null && Object.hasOwnProperty.call(message, "troopEid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.troopEid);
-            if (message.itemEid != null && Object.hasOwnProperty.call(message, "itemEid"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.itemEid);
-            return writer;
-        };
-
-        /**
-         * Encodes the specified PickItemAction message, length delimited. Does not implicitly {@link world.PickItemAction.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof world.PickItemAction
-         * @static
-         * @param {world.IPickItemAction} message PickItemAction message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        PickItemAction.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a PickItemAction message from the specified reader or buffer.
-         * @function decode
-         * @memberof world.PickItemAction
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {world.PickItemAction} PickItemAction
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        PickItemAction.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.PickItemAction();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1: {
-                        message.troopEid = reader.uint32();
-                        break;
-                    }
-                case 2: {
-                        message.itemEid = reader.uint32();
-                        break;
-                    }
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes a PickItemAction message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof world.PickItemAction
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {world.PickItemAction} PickItemAction
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        PickItemAction.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a PickItemAction message.
-         * @function verify
-         * @memberof world.PickItemAction
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        PickItemAction.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.troopEid != null && message.hasOwnProperty("troopEid"))
-                if (!$util.isInteger(message.troopEid))
-                    return "troopEid: integer expected";
-            if (message.itemEid != null && message.hasOwnProperty("itemEid"))
-                if (!$util.isInteger(message.itemEid))
-                    return "itemEid: integer expected";
-            return null;
-        };
-
-        /**
-         * Creates a PickItemAction message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof world.PickItemAction
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {world.PickItemAction} PickItemAction
-         */
-        PickItemAction.fromObject = function fromObject(object) {
-            if (object instanceof $root.world.PickItemAction)
-                return object;
-            var message = new $root.world.PickItemAction();
-            if (object.troopEid != null)
-                message.troopEid = object.troopEid >>> 0;
-            if (object.itemEid != null)
-                message.itemEid = object.itemEid >>> 0;
-            return message;
-        };
-
-        /**
-         * Creates a plain object from a PickItemAction message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof world.PickItemAction
-         * @static
-         * @param {world.PickItemAction} message PickItemAction
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        PickItemAction.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.troopEid = 0;
-                object.itemEid = 0;
-            }
-            if (message.troopEid != null && message.hasOwnProperty("troopEid"))
-                object.troopEid = message.troopEid;
-            if (message.itemEid != null && message.hasOwnProperty("itemEid"))
-                object.itemEid = message.itemEid;
-            return object;
-        };
-
-        /**
-         * Converts this PickItemAction to JSON.
-         * @function toJSON
-         * @memberof world.PickItemAction
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        PickItemAction.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        /**
-         * Gets the default type url for PickItemAction
-         * @function getTypeUrl
-         * @memberof world.PickItemAction
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        PickItemAction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/world.PickItemAction";
-        };
-
-        return PickItemAction;
-    })();
-
-    world.InviteSoldierAction = (function() {
-
-        /**
-         * Properties of an InviteSoldierAction.
-         * @memberof world
-         * @interface IInviteSoldierAction
-         * @property {number|null} [troopEid] InviteSoldierAction troopEid
-         * @property {number|null} [soldierEid] InviteSoldierAction soldierEid
-         */
-
-        /**
-         * Constructs a new InviteSoldierAction.
-         * @memberof world
-         * @classdesc Represents an InviteSoldierAction.
-         * @implements IInviteSoldierAction
-         * @constructor
-         * @param {world.IInviteSoldierAction=} [properties] Properties to set
-         */
-        function InviteSoldierAction(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * InviteSoldierAction troopEid.
-         * @member {number} troopEid
-         * @memberof world.InviteSoldierAction
-         * @instance
-         */
-        InviteSoldierAction.prototype.troopEid = 0;
-
-        /**
-         * InviteSoldierAction soldierEid.
-         * @member {number} soldierEid
-         * @memberof world.InviteSoldierAction
-         * @instance
-         */
-        InviteSoldierAction.prototype.soldierEid = 0;
-
-        /**
-         * Creates a new InviteSoldierAction instance using the specified properties.
-         * @function create
-         * @memberof world.InviteSoldierAction
-         * @static
-         * @param {world.IInviteSoldierAction=} [properties] Properties to set
-         * @returns {world.InviteSoldierAction} InviteSoldierAction instance
-         */
-        InviteSoldierAction.create = function create(properties) {
-            return new InviteSoldierAction(properties);
-        };
-
-        /**
-         * Encodes the specified InviteSoldierAction message. Does not implicitly {@link world.InviteSoldierAction.verify|verify} messages.
-         * @function encode
-         * @memberof world.InviteSoldierAction
-         * @static
-         * @param {world.IInviteSoldierAction} message InviteSoldierAction message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        InviteSoldierAction.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.troopEid != null && Object.hasOwnProperty.call(message, "troopEid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.troopEid);
-            if (message.soldierEid != null && Object.hasOwnProperty.call(message, "soldierEid"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.soldierEid);
-            return writer;
-        };
-
-        /**
-         * Encodes the specified InviteSoldierAction message, length delimited. Does not implicitly {@link world.InviteSoldierAction.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof world.InviteSoldierAction
-         * @static
-         * @param {world.IInviteSoldierAction} message InviteSoldierAction message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        InviteSoldierAction.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes an InviteSoldierAction message from the specified reader or buffer.
-         * @function decode
-         * @memberof world.InviteSoldierAction
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {world.InviteSoldierAction} InviteSoldierAction
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        InviteSoldierAction.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.InviteSoldierAction();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1: {
-                        message.troopEid = reader.uint32();
-                        break;
-                    }
-                case 2: {
-                        message.soldierEid = reader.uint32();
-                        break;
-                    }
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes an InviteSoldierAction message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof world.InviteSoldierAction
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {world.InviteSoldierAction} InviteSoldierAction
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        InviteSoldierAction.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies an InviteSoldierAction message.
-         * @function verify
-         * @memberof world.InviteSoldierAction
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        InviteSoldierAction.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.troopEid != null && message.hasOwnProperty("troopEid"))
-                if (!$util.isInteger(message.troopEid))
-                    return "troopEid: integer expected";
-            if (message.soldierEid != null && message.hasOwnProperty("soldierEid"))
-                if (!$util.isInteger(message.soldierEid))
-                    return "soldierEid: integer expected";
-            return null;
-        };
-
-        /**
-         * Creates an InviteSoldierAction message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof world.InviteSoldierAction
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {world.InviteSoldierAction} InviteSoldierAction
-         */
-        InviteSoldierAction.fromObject = function fromObject(object) {
-            if (object instanceof $root.world.InviteSoldierAction)
-                return object;
-            var message = new $root.world.InviteSoldierAction();
-            if (object.troopEid != null)
-                message.troopEid = object.troopEid >>> 0;
-            if (object.soldierEid != null)
-                message.soldierEid = object.soldierEid >>> 0;
-            return message;
-        };
-
-        /**
-         * Creates a plain object from an InviteSoldierAction message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof world.InviteSoldierAction
-         * @static
-         * @param {world.InviteSoldierAction} message InviteSoldierAction
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        InviteSoldierAction.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.troopEid = 0;
-                object.soldierEid = 0;
-            }
-            if (message.troopEid != null && message.hasOwnProperty("troopEid"))
-                object.troopEid = message.troopEid;
-            if (message.soldierEid != null && message.hasOwnProperty("soldierEid"))
-                object.soldierEid = message.soldierEid;
-            return object;
-        };
-
-        /**
-         * Converts this InviteSoldierAction to JSON.
-         * @function toJSON
-         * @memberof world.InviteSoldierAction
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        InviteSoldierAction.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        /**
-         * Gets the default type url for InviteSoldierAction
-         * @function getTypeUrl
-         * @memberof world.InviteSoldierAction
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        InviteSoldierAction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/world.InviteSoldierAction";
-        };
-
-        return InviteSoldierAction;
+        return StopBattleAction;
     })();
 
     world.EntityAction = (function() {
@@ -29117,16 +36622,9 @@ $root.world = (function() {
          * @property {world.IAddEntityAction|null} [addEntity] EntityAction addEntity
          * @property {world.IDelEntityAction|null} [delEntity] EntityAction delEntity
          * @property {world.IMoveAction|null} [move] EntityAction move
-         * @property {world.IAddBoxAction|null} [addBox] EntityAction addBox
-         * @property {world.IDropBoxAction|null} [dropBox] EntityAction dropBox
-         * @property {world.IPickItemAction|null} [pickItem] EntityAction pickItem
-         * @property {world.IInviteSoldierAction|null} [inviteSoldier] EntityAction inviteSoldier
-         * @property {world.IBattleStartAction|null} [battleStart] EntityAction battleStart
-         * @property {world.IBattleSkillAction|null} [battleSkill] EntityAction battleSkill
-         * @property {world.IBattleAddBuffAction|null} [battleAddBuff] EntityAction battleAddBuff
-         * @property {world.IBattleDelBuffAction|null} [battleDelBuff] EntityAction battleDelBuff
-         * @property {world.IBattleStopAction|null} [battleStop] EntityAction battleStop
-         * @property {world.IBattleSubHpAction|null} [battleSubHp] EntityAction battleSubHp
+         * @property {world.IStartBattleAction|null} [startBattle] EntityAction startBattle
+         * @property {world.ILeaveBattleAction|null} [leaveBattle] EntityAction leaveBattle
+         * @property {world.IStopBattleAction|null} [stopBattle] EntityAction stopBattle
          */
 
         /**
@@ -29177,84 +36675,28 @@ $root.world = (function() {
         EntityAction.prototype.move = null;
 
         /**
-         * EntityAction addBox.
-         * @member {world.IAddBoxAction|null|undefined} addBox
+         * EntityAction startBattle.
+         * @member {world.IStartBattleAction|null|undefined} startBattle
          * @memberof world.EntityAction
          * @instance
          */
-        EntityAction.prototype.addBox = null;
+        EntityAction.prototype.startBattle = null;
 
         /**
-         * EntityAction dropBox.
-         * @member {world.IDropBoxAction|null|undefined} dropBox
+         * EntityAction leaveBattle.
+         * @member {world.ILeaveBattleAction|null|undefined} leaveBattle
          * @memberof world.EntityAction
          * @instance
          */
-        EntityAction.prototype.dropBox = null;
+        EntityAction.prototype.leaveBattle = null;
 
         /**
-         * EntityAction pickItem.
-         * @member {world.IPickItemAction|null|undefined} pickItem
+         * EntityAction stopBattle.
+         * @member {world.IStopBattleAction|null|undefined} stopBattle
          * @memberof world.EntityAction
          * @instance
          */
-        EntityAction.prototype.pickItem = null;
-
-        /**
-         * EntityAction inviteSoldier.
-         * @member {world.IInviteSoldierAction|null|undefined} inviteSoldier
-         * @memberof world.EntityAction
-         * @instance
-         */
-        EntityAction.prototype.inviteSoldier = null;
-
-        /**
-         * EntityAction battleStart.
-         * @member {world.IBattleStartAction|null|undefined} battleStart
-         * @memberof world.EntityAction
-         * @instance
-         */
-        EntityAction.prototype.battleStart = null;
-
-        /**
-         * EntityAction battleSkill.
-         * @member {world.IBattleSkillAction|null|undefined} battleSkill
-         * @memberof world.EntityAction
-         * @instance
-         */
-        EntityAction.prototype.battleSkill = null;
-
-        /**
-         * EntityAction battleAddBuff.
-         * @member {world.IBattleAddBuffAction|null|undefined} battleAddBuff
-         * @memberof world.EntityAction
-         * @instance
-         */
-        EntityAction.prototype.battleAddBuff = null;
-
-        /**
-         * EntityAction battleDelBuff.
-         * @member {world.IBattleDelBuffAction|null|undefined} battleDelBuff
-         * @memberof world.EntityAction
-         * @instance
-         */
-        EntityAction.prototype.battleDelBuff = null;
-
-        /**
-         * EntityAction battleStop.
-         * @member {world.IBattleStopAction|null|undefined} battleStop
-         * @memberof world.EntityAction
-         * @instance
-         */
-        EntityAction.prototype.battleStop = null;
-
-        /**
-         * EntityAction battleSubHp.
-         * @member {world.IBattleSubHpAction|null|undefined} battleSubHp
-         * @memberof world.EntityAction
-         * @instance
-         */
-        EntityAction.prototype.battleSubHp = null;
+        EntityAction.prototype.stopBattle = null;
 
         /**
          * Creates a new EntityAction instance using the specified properties.
@@ -29288,26 +36730,12 @@ $root.world = (function() {
                 $root.world.DelEntityAction.encode(message.delEntity, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
             if (message.move != null && Object.hasOwnProperty.call(message, "move"))
                 $root.world.MoveAction.encode(message.move, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
-            if (message.addBox != null && Object.hasOwnProperty.call(message, "addBox"))
-                $root.world.AddBoxAction.encode(message.addBox, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
-            if (message.dropBox != null && Object.hasOwnProperty.call(message, "dropBox"))
-                $root.world.DropBoxAction.encode(message.dropBox, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
-            if (message.pickItem != null && Object.hasOwnProperty.call(message, "pickItem"))
-                $root.world.PickItemAction.encode(message.pickItem, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
-            if (message.inviteSoldier != null && Object.hasOwnProperty.call(message, "inviteSoldier"))
-                $root.world.InviteSoldierAction.encode(message.inviteSoldier, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
-            if (message.battleSkill != null && Object.hasOwnProperty.call(message, "battleSkill"))
-                $root.world.BattleSkillAction.encode(message.battleSkill, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
-            if (message.battleStart != null && Object.hasOwnProperty.call(message, "battleStart"))
-                $root.world.BattleStartAction.encode(message.battleStart, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
-            if (message.battleAddBuff != null && Object.hasOwnProperty.call(message, "battleAddBuff"))
-                $root.world.BattleAddBuffAction.encode(message.battleAddBuff, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
-            if (message.battleDelBuff != null && Object.hasOwnProperty.call(message, "battleDelBuff"))
-                $root.world.BattleDelBuffAction.encode(message.battleDelBuff, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
-            if (message.battleStop != null && Object.hasOwnProperty.call(message, "battleStop"))
-                $root.world.BattleStopAction.encode(message.battleStop, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
-            if (message.battleSubHp != null && Object.hasOwnProperty.call(message, "battleSubHp"))
-                $root.world.BattleSubHpAction.encode(message.battleSubHp, writer.uint32(/* id 25, wireType 2 =*/202).fork()).ldelim();
+            if (message.startBattle != null && Object.hasOwnProperty.call(message, "startBattle"))
+                $root.world.StartBattleAction.encode(message.startBattle, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+            if (message.leaveBattle != null && Object.hasOwnProperty.call(message, "leaveBattle"))
+                $root.world.LeaveBattleAction.encode(message.leaveBattle, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
+            if (message.stopBattle != null && Object.hasOwnProperty.call(message, "stopBattle"))
+                $root.world.StopBattleAction.encode(message.stopBattle, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
             return writer;
         };
 
@@ -29358,44 +36786,16 @@ $root.world = (function() {
                         message.move = $root.world.MoveAction.decode(reader, reader.uint32());
                         break;
                     }
-                case 13: {
-                        message.addBox = $root.world.AddBoxAction.decode(reader, reader.uint32());
-                        break;
-                    }
-                case 14: {
-                        message.dropBox = $root.world.DropBoxAction.decode(reader, reader.uint32());
-                        break;
-                    }
-                case 15: {
-                        message.pickItem = $root.world.PickItemAction.decode(reader, reader.uint32());
-                        break;
-                    }
-                case 16: {
-                        message.inviteSoldier = $root.world.InviteSoldierAction.decode(reader, reader.uint32());
-                        break;
-                    }
                 case 21: {
-                        message.battleStart = $root.world.BattleStartAction.decode(reader, reader.uint32());
-                        break;
-                    }
-                case 20: {
-                        message.battleSkill = $root.world.BattleSkillAction.decode(reader, reader.uint32());
+                        message.startBattle = $root.world.StartBattleAction.decode(reader, reader.uint32());
                         break;
                     }
                 case 22: {
-                        message.battleAddBuff = $root.world.BattleAddBuffAction.decode(reader, reader.uint32());
+                        message.leaveBattle = $root.world.LeaveBattleAction.decode(reader, reader.uint32());
                         break;
                     }
                 case 23: {
-                        message.battleDelBuff = $root.world.BattleDelBuffAction.decode(reader, reader.uint32());
-                        break;
-                    }
-                case 24: {
-                        message.battleStop = $root.world.BattleStopAction.decode(reader, reader.uint32());
-                        break;
-                    }
-                case 25: {
-                        message.battleSubHp = $root.world.BattleSubHpAction.decode(reader, reader.uint32());
+                        message.stopBattle = $root.world.StopBattleAction.decode(reader, reader.uint32());
                         break;
                     }
                 default:
@@ -29451,55 +36851,20 @@ $root.world = (function() {
                 if (error)
                     return "move." + error;
             }
-            if (message.addBox != null && message.hasOwnProperty("addBox")) {
-                var error = $root.world.AddBoxAction.verify(message.addBox);
+            if (message.startBattle != null && message.hasOwnProperty("startBattle")) {
+                var error = $root.world.StartBattleAction.verify(message.startBattle);
                 if (error)
-                    return "addBox." + error;
+                    return "startBattle." + error;
             }
-            if (message.dropBox != null && message.hasOwnProperty("dropBox")) {
-                var error = $root.world.DropBoxAction.verify(message.dropBox);
+            if (message.leaveBattle != null && message.hasOwnProperty("leaveBattle")) {
+                var error = $root.world.LeaveBattleAction.verify(message.leaveBattle);
                 if (error)
-                    return "dropBox." + error;
+                    return "leaveBattle." + error;
             }
-            if (message.pickItem != null && message.hasOwnProperty("pickItem")) {
-                var error = $root.world.PickItemAction.verify(message.pickItem);
+            if (message.stopBattle != null && message.hasOwnProperty("stopBattle")) {
+                var error = $root.world.StopBattleAction.verify(message.stopBattle);
                 if (error)
-                    return "pickItem." + error;
-            }
-            if (message.inviteSoldier != null && message.hasOwnProperty("inviteSoldier")) {
-                var error = $root.world.InviteSoldierAction.verify(message.inviteSoldier);
-                if (error)
-                    return "inviteSoldier." + error;
-            }
-            if (message.battleStart != null && message.hasOwnProperty("battleStart")) {
-                var error = $root.world.BattleStartAction.verify(message.battleStart);
-                if (error)
-                    return "battleStart." + error;
-            }
-            if (message.battleSkill != null && message.hasOwnProperty("battleSkill")) {
-                var error = $root.world.BattleSkillAction.verify(message.battleSkill);
-                if (error)
-                    return "battleSkill." + error;
-            }
-            if (message.battleAddBuff != null && message.hasOwnProperty("battleAddBuff")) {
-                var error = $root.world.BattleAddBuffAction.verify(message.battleAddBuff);
-                if (error)
-                    return "battleAddBuff." + error;
-            }
-            if (message.battleDelBuff != null && message.hasOwnProperty("battleDelBuff")) {
-                var error = $root.world.BattleDelBuffAction.verify(message.battleDelBuff);
-                if (error)
-                    return "battleDelBuff." + error;
-            }
-            if (message.battleStop != null && message.hasOwnProperty("battleStop")) {
-                var error = $root.world.BattleStopAction.verify(message.battleStop);
-                if (error)
-                    return "battleStop." + error;
-            }
-            if (message.battleSubHp != null && message.hasOwnProperty("battleSubHp")) {
-                var error = $root.world.BattleSubHpAction.verify(message.battleSubHp);
-                if (error)
-                    return "battleSubHp." + error;
+                    return "stopBattle." + error;
             }
             return null;
         };
@@ -29533,55 +36898,20 @@ $root.world = (function() {
                     throw TypeError(".world.EntityAction.move: object expected");
                 message.move = $root.world.MoveAction.fromObject(object.move);
             }
-            if (object.addBox != null) {
-                if (typeof object.addBox !== "object")
-                    throw TypeError(".world.EntityAction.addBox: object expected");
-                message.addBox = $root.world.AddBoxAction.fromObject(object.addBox);
+            if (object.startBattle != null) {
+                if (typeof object.startBattle !== "object")
+                    throw TypeError(".world.EntityAction.startBattle: object expected");
+                message.startBattle = $root.world.StartBattleAction.fromObject(object.startBattle);
             }
-            if (object.dropBox != null) {
-                if (typeof object.dropBox !== "object")
-                    throw TypeError(".world.EntityAction.dropBox: object expected");
-                message.dropBox = $root.world.DropBoxAction.fromObject(object.dropBox);
+            if (object.leaveBattle != null) {
+                if (typeof object.leaveBattle !== "object")
+                    throw TypeError(".world.EntityAction.leaveBattle: object expected");
+                message.leaveBattle = $root.world.LeaveBattleAction.fromObject(object.leaveBattle);
             }
-            if (object.pickItem != null) {
-                if (typeof object.pickItem !== "object")
-                    throw TypeError(".world.EntityAction.pickItem: object expected");
-                message.pickItem = $root.world.PickItemAction.fromObject(object.pickItem);
-            }
-            if (object.inviteSoldier != null) {
-                if (typeof object.inviteSoldier !== "object")
-                    throw TypeError(".world.EntityAction.inviteSoldier: object expected");
-                message.inviteSoldier = $root.world.InviteSoldierAction.fromObject(object.inviteSoldier);
-            }
-            if (object.battleStart != null) {
-                if (typeof object.battleStart !== "object")
-                    throw TypeError(".world.EntityAction.battleStart: object expected");
-                message.battleStart = $root.world.BattleStartAction.fromObject(object.battleStart);
-            }
-            if (object.battleSkill != null) {
-                if (typeof object.battleSkill !== "object")
-                    throw TypeError(".world.EntityAction.battleSkill: object expected");
-                message.battleSkill = $root.world.BattleSkillAction.fromObject(object.battleSkill);
-            }
-            if (object.battleAddBuff != null) {
-                if (typeof object.battleAddBuff !== "object")
-                    throw TypeError(".world.EntityAction.battleAddBuff: object expected");
-                message.battleAddBuff = $root.world.BattleAddBuffAction.fromObject(object.battleAddBuff);
-            }
-            if (object.battleDelBuff != null) {
-                if (typeof object.battleDelBuff !== "object")
-                    throw TypeError(".world.EntityAction.battleDelBuff: object expected");
-                message.battleDelBuff = $root.world.BattleDelBuffAction.fromObject(object.battleDelBuff);
-            }
-            if (object.battleStop != null) {
-                if (typeof object.battleStop !== "object")
-                    throw TypeError(".world.EntityAction.battleStop: object expected");
-                message.battleStop = $root.world.BattleStopAction.fromObject(object.battleStop);
-            }
-            if (object.battleSubHp != null) {
-                if (typeof object.battleSubHp !== "object")
-                    throw TypeError(".world.EntityAction.battleSubHp: object expected");
-                message.battleSubHp = $root.world.BattleSubHpAction.fromObject(object.battleSubHp);
+            if (object.stopBattle != null) {
+                if (typeof object.stopBattle !== "object")
+                    throw TypeError(".world.EntityAction.stopBattle: object expected");
+                message.stopBattle = $root.world.StopBattleAction.fromObject(object.stopBattle);
             }
             return message;
         };
@@ -29604,16 +36934,9 @@ $root.world = (function() {
                 object.addEntity = null;
                 object.delEntity = null;
                 object.move = null;
-                object.addBox = null;
-                object.dropBox = null;
-                object.pickItem = null;
-                object.inviteSoldier = null;
-                object.battleSkill = null;
-                object.battleStart = null;
-                object.battleAddBuff = null;
-                object.battleDelBuff = null;
-                object.battleStop = null;
-                object.battleSubHp = null;
+                object.startBattle = null;
+                object.leaveBattle = null;
+                object.stopBattle = null;
             }
             if (message.action != null && message.hasOwnProperty("action"))
                 object.action = message.action;
@@ -29623,26 +36946,12 @@ $root.world = (function() {
                 object.delEntity = $root.world.DelEntityAction.toObject(message.delEntity, options);
             if (message.move != null && message.hasOwnProperty("move"))
                 object.move = $root.world.MoveAction.toObject(message.move, options);
-            if (message.addBox != null && message.hasOwnProperty("addBox"))
-                object.addBox = $root.world.AddBoxAction.toObject(message.addBox, options);
-            if (message.dropBox != null && message.hasOwnProperty("dropBox"))
-                object.dropBox = $root.world.DropBoxAction.toObject(message.dropBox, options);
-            if (message.pickItem != null && message.hasOwnProperty("pickItem"))
-                object.pickItem = $root.world.PickItemAction.toObject(message.pickItem, options);
-            if (message.inviteSoldier != null && message.hasOwnProperty("inviteSoldier"))
-                object.inviteSoldier = $root.world.InviteSoldierAction.toObject(message.inviteSoldier, options);
-            if (message.battleSkill != null && message.hasOwnProperty("battleSkill"))
-                object.battleSkill = $root.world.BattleSkillAction.toObject(message.battleSkill, options);
-            if (message.battleStart != null && message.hasOwnProperty("battleStart"))
-                object.battleStart = $root.world.BattleStartAction.toObject(message.battleStart, options);
-            if (message.battleAddBuff != null && message.hasOwnProperty("battleAddBuff"))
-                object.battleAddBuff = $root.world.BattleAddBuffAction.toObject(message.battleAddBuff, options);
-            if (message.battleDelBuff != null && message.hasOwnProperty("battleDelBuff"))
-                object.battleDelBuff = $root.world.BattleDelBuffAction.toObject(message.battleDelBuff, options);
-            if (message.battleStop != null && message.hasOwnProperty("battleStop"))
-                object.battleStop = $root.world.BattleStopAction.toObject(message.battleStop, options);
-            if (message.battleSubHp != null && message.hasOwnProperty("battleSubHp"))
-                object.battleSubHp = $root.world.BattleSubHpAction.toObject(message.battleSubHp, options);
+            if (message.startBattle != null && message.hasOwnProperty("startBattle"))
+                object.startBattle = $root.world.StartBattleAction.toObject(message.startBattle, options);
+            if (message.leaveBattle != null && message.hasOwnProperty("leaveBattle"))
+                object.leaveBattle = $root.world.LeaveBattleAction.toObject(message.leaveBattle, options);
+            if (message.stopBattle != null && message.hasOwnProperty("stopBattle"))
+                object.stopBattle = $root.world.StopBattleAction.toObject(message.stopBattle, options);
             return object;
         };
 

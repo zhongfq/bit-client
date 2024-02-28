@@ -17,7 +17,7 @@
   "_$comp": [
     {
       "_$type": "8ec8d58e-0274-4530-b51e-70ae7f42e46a",
-      "scriptPath": "../src/system/box/box-mediator.ts"
+      "scriptPath": "../src/system/chest/chest-mediator.ts"
     }
   ],
   "_$child": [
@@ -100,14 +100,24 @@
       "centerX": 3,
       "bgColor": "rgba(255, 255, 255, 1)",
       "itemTemplate": {
-        "_$ref": "m3d8u5lu",
+        "_$ref": "dcpi39t3",
         "_$tmpl": "itemRender"
       },
       "repeatX": 5,
       "repeatY": 1,
       "spaceX": 44,
       "selectEnable": true,
-      "selectedIndex": 0
+      "selectedIndex": 0,
+      "_$child": [
+        {
+          "_$id": "dcpi39t3",
+          "_$prefab": "1ebcfa56-61d8-408c-9cbf-af7de6ab500a",
+          "name": "chest-item",
+          "active": true,
+          "x": 352.0000000000001,
+          "y": -104
+        }
+      ]
     },
     {
       "_$id": "0vsgof0v",
@@ -139,14 +149,6 @@
       ]
     },
     {
-      "_$id": "m3d8u5lu",
-      "_$prefab": "1ebcfa56-61d8-408c-9cbf-af7de6ab500a",
-      "name": "item-box",
-      "active": true,
-      "x": 339,
-      "y": 611
-    },
-    {
       "_$id": "stlnkvxm",
       "_$var": true,
       "_$type": "Box",
@@ -154,7 +156,52 @@
       "x": 71,
       "y": 341,
       "width": 210,
-      "height": 581
+      "height": 581,
+      "_$child": [
+        {
+          "_$id": "cj9gahgp",
+          "_$var": true,
+          "_$type": "SpineSkeleton",
+          "name": "spineHero",
+          "x": 122,
+          "y": 359,
+          "width": 0,
+          "height": 0,
+          "scaleX": 5,
+          "scaleY": 5,
+          "source": "res://e9ee76c8-a5bd-4894-8e43-22a1d38aa47f",
+          "skinName": "default",
+          "animationName": "idle",
+          "preview": true,
+          "externalSkins": []
+        }
+      ]
+    },
+    {
+      "_$id": "sn19yq1j",
+      "_$type": "Box",
+      "name": "Box",
+      "x": 287,
+      "y": 296,
+      "width": 432,
+      "height": 612,
+      "_$child": [
+        {
+          "_$id": "77e883x4",
+          "_$var": true,
+          "_$type": "SpineSkeleton",
+          "name": "spineShest",
+          "x": 181.0000000000001,
+          "y": 361.0000000000001,
+          "width": 110,
+          "height": 115,
+          "source": "res://ae66d20f-a66a-48ee-a33f-329501468c10",
+          "skinName": "default",
+          "animationName": "chest2_remind",
+          "loop": false,
+          "preview": true
+        }
+      ]
     }
   ]
 }

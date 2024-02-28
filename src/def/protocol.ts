@@ -19,12 +19,32 @@ export const opcode = {
         s2c_discard_item: 0x1707,
         notify_items: 0x1790,
     },
+    battle: {
+        c2s_enter: 0x1600,
+        s2c_enter: 0x1601,
+        c2s_launch_skill: 0x1602,
+        s2c_launch_skill: 0x1603,
+        notify_start: 0x1690,
+        notify_end: 0x1691,
+        notify_debug: 0x1692,
+    },
     chat: {
         c2s_load: 0x1E00,
         s2c_load: 0x1E01,
         c2s_send: 0x1E02,
         s2c_send: 0x1E03,
         notify: 0x1E90,
+    },
+    chest: {
+        c2s_load: 0x1F00,
+        s2c_load: 0x1F01,
+        c2s_open_chest: 0x1F02,
+        s2c_open_chest: 0x1F03,
+        c2s_score_receive: 0x1F04,
+        s2c_score_receive: 0x1F05,
+        c2s_switch_hero: 0x1F06,
+        s2c_switch_hero: 0x1F07,
+        notify: 0x1F90,
     },
     connection: {
         connected: 0x00F1,
@@ -166,7 +186,7 @@ export const enum errcode {
     TRACEBACK = 0xA003,
     API_NOT_FOUND = 0xA004,
     PASSWORD_ERROR = 0xA005,
-};
+}
 
 export const errname = {
     0x0000: "OK",
@@ -327,6 +347,48 @@ export const registerProtocols = () => {
         decode: proto.bag.notify_items.decode,
     });
     register({
+        op: opcode.battle.c2s_enter,
+        typeURL: proto.battle.c2s_enter.getTypeUrl(),
+        encode: proto.battle.c2s_enter.encode,
+        decode: proto.battle.c2s_enter.decode,
+    });
+    register({
+        op: opcode.battle.s2c_enter,
+        typeURL: proto.battle.s2c_enter.getTypeUrl(),
+        encode: proto.battle.s2c_enter.encode,
+        decode: proto.battle.s2c_enter.decode,
+    });
+    register({
+        op: opcode.battle.c2s_launch_skill,
+        typeURL: proto.battle.c2s_launch_skill.getTypeUrl(),
+        encode: proto.battle.c2s_launch_skill.encode,
+        decode: proto.battle.c2s_launch_skill.decode,
+    });
+    register({
+        op: opcode.battle.s2c_launch_skill,
+        typeURL: proto.battle.s2c_launch_skill.getTypeUrl(),
+        encode: proto.battle.s2c_launch_skill.encode,
+        decode: proto.battle.s2c_launch_skill.decode,
+    });
+    register({
+        op: opcode.battle.notify_start,
+        typeURL: proto.battle.notify_start.getTypeUrl(),
+        encode: proto.battle.notify_start.encode,
+        decode: proto.battle.notify_start.decode,
+    });
+    register({
+        op: opcode.battle.notify_end,
+        typeURL: proto.battle.notify_end.getTypeUrl(),
+        encode: proto.battle.notify_end.encode,
+        decode: proto.battle.notify_end.decode,
+    });
+    register({
+        op: opcode.battle.notify_debug,
+        typeURL: proto.battle.notify_debug.getTypeUrl(),
+        encode: proto.battle.notify_debug.encode,
+        decode: proto.battle.notify_debug.decode,
+    });
+    register({
         op: opcode.chat.c2s_load,
         typeURL: proto.chat.c2s_load.getTypeUrl(),
         encode: proto.chat.c2s_load.encode,
@@ -355,6 +417,60 @@ export const registerProtocols = () => {
         typeURL: proto.chat.notify.getTypeUrl(),
         encode: proto.chat.notify.encode,
         decode: proto.chat.notify.decode,
+    });
+    register({
+        op: opcode.chest.c2s_load,
+        typeURL: proto.chest.c2s_load.getTypeUrl(),
+        encode: proto.chest.c2s_load.encode,
+        decode: proto.chest.c2s_load.decode,
+    });
+    register({
+        op: opcode.chest.s2c_load,
+        typeURL: proto.chest.s2c_load.getTypeUrl(),
+        encode: proto.chest.s2c_load.encode,
+        decode: proto.chest.s2c_load.decode,
+    });
+    register({
+        op: opcode.chest.c2s_open_chest,
+        typeURL: proto.chest.c2s_open_chest.getTypeUrl(),
+        encode: proto.chest.c2s_open_chest.encode,
+        decode: proto.chest.c2s_open_chest.decode,
+    });
+    register({
+        op: opcode.chest.s2c_open_chest,
+        typeURL: proto.chest.s2c_open_chest.getTypeUrl(),
+        encode: proto.chest.s2c_open_chest.encode,
+        decode: proto.chest.s2c_open_chest.decode,
+    });
+    register({
+        op: opcode.chest.c2s_score_receive,
+        typeURL: proto.chest.c2s_score_receive.getTypeUrl(),
+        encode: proto.chest.c2s_score_receive.encode,
+        decode: proto.chest.c2s_score_receive.decode,
+    });
+    register({
+        op: opcode.chest.s2c_score_receive,
+        typeURL: proto.chest.s2c_score_receive.getTypeUrl(),
+        encode: proto.chest.s2c_score_receive.encode,
+        decode: proto.chest.s2c_score_receive.decode,
+    });
+    register({
+        op: opcode.chest.c2s_switch_hero,
+        typeURL: proto.chest.c2s_switch_hero.getTypeUrl(),
+        encode: proto.chest.c2s_switch_hero.encode,
+        decode: proto.chest.c2s_switch_hero.decode,
+    });
+    register({
+        op: opcode.chest.s2c_switch_hero,
+        typeURL: proto.chest.s2c_switch_hero.getTypeUrl(),
+        encode: proto.chest.s2c_switch_hero.encode,
+        decode: proto.chest.s2c_switch_hero.decode,
+    });
+    register({
+        op: opcode.chest.notify,
+        typeURL: proto.chest.notify.getTypeUrl(),
+        encode: proto.chest.notify.encode,
+        decode: proto.chest.notify.decode,
     });
     register({
         op: opcode.dungeon.c2s_load,

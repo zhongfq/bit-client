@@ -1,17 +1,20 @@
 {
     "chest": [
         {
+            "desc": "{1}概率为{2}",
             "id": 1,
             "open_max_num": 10,
             "open_score": 1,
             "reward": [
                 {
                     "count": 100,
-                    "id": 30601
+                    "id": 30601,
+                    "prob": 80
                 },
                 {
                     "count": 1,
-                    "id": 10201
+                    "id": 10201,
+                    "prob": 20
                 }
             ],
             "reward_score": 5,
@@ -24,11 +27,13 @@
             "reward": [
                 {
                     "count": 100,
-                    "id": 30701
+                    "id": 30701,
+                    "prob": 80
                 },
                 {
                     "count": 1,
-                    "id": 10202
+                    "id": 10202,
+                    "prob": 20
                 }
             ],
             "reward_score": 10,
@@ -41,11 +46,13 @@
             "reward": [
                 {
                     "count": 15,
-                    "id": 30301
+                    "id": 30301,
+                    "prob": 60
                 },
                 {
                     "count": 100,
-                    "id": 20602
+                    "id": 20602,
+                    "prob": 40
                 }
             ],
             "reward_score": 30,
@@ -58,11 +65,13 @@
             "reward": [
                 {
                     "count": 15,
-                    "id": 30301
+                    "id": 30301,
+                    "prob": 80.2
                 },
                 {
                     "count": 100,
-                    "id": 20603
+                    "id": 20603,
+                    "prob": 19.8
                 }
             ],
             "reward_score": 50,
@@ -75,37 +84,35 @@
             "reward": [
                 {
                     "count": 15,
-                    "id": 30301
+                    "id": 30301,
+                    "prob": 80.2
                 },
                 {
                     "count": 100,
-                    "id": 20603
+                    "id": 20603,
+                    "prob": 19.8
                 }
             ],
             "reward_score": 80,
             "sort": 5
         }
     ],
-    "hero": [
-        {
+    "hero": {
+        "103": {
             "hero_id": 103,
-            "id": 1,
             "sort": 1
         },
-        {
+        "105": {
             "hero_id": 105,
-            "id": 2,
             "sort": 2
         },
-        {
+        "108": {
             "hero_id": 108,
-            "id": 3,
             "sort": 3
         },
-        {
+        "113": {
             "hero_id": 113,
-            "id": 4,
             "sort": 4
         }
-    ]
+    }
 }

@@ -10,6 +10,7 @@ export class HomeUIBase extends Laya.Scene {
     public btnMail!: Laya.Button;
     public btnShop!: Laya.Button;
     public btnNotice!: Laya.Button;
+    public btnBag!: Laya.Button;
     public boxTask!: HomeTaskBoxUI;
     public imgHeadIcon!: Laya.Image;
     public labelName!: Laya.Label;
@@ -22,6 +23,6 @@ export class HomeUIBase extends Laya.Scene {
     public boxNode!: ChestUI;
     public btnBox!: Laya.Button;
     public btnUnion!: Laya.Button;
-    public btnBag!: Laya.Button;
     public btnWorld!: Laya.Button;
 }
+

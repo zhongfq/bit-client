@@ -1,5 +1,23 @@
 // AUTO GENERATED, DON'T NOT MODIFY!
 
+// file: design/chest.xlsx
+export interface GeneratedChestrow {
+    id: number;
+    sort: number;
+    icon?: string;
+    open_max_num: number;
+    open_score: number;
+    reward_score: number;
+    reward: any;
+    desc?: string;
+}
+
+// file: design/chest.xlsx
+export interface GeneratedChestHeroRow {
+    hero_id: number;
+    sort: number;
+}
+
 // file: design/item.xlsx
 export interface GeneratedItemRow {
     id: number;
