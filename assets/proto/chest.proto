@@ -23,6 +23,7 @@ message s2c_load {
     uint32 hero_id = 2; //当前使用的武将
     repeated ChestInfo chests = 3; //宝箱数据
     ScoreInfo score = 4; //积分数据
+    repeated uint32 hero_ids = 5;//当前拥有的武将
 }
 
 //开宝箱
@@ -31,7 +32,7 @@ message c2s_open_chest {
 }
 message s2c_open_chest {
     uint32 err = 1;
-    ChestInfo ches = 2; //宝箱数据
+    ChestInfo chests = 2; //宝箱数据
     ScoreInfo score = 3; //积分数据
 }
 
@@ -55,7 +56,12 @@ message s2c_switch_hero {
 
 
 // 通知箱子数据变化
-message notify {
-    repeated ChestInfo ches = 1; //宝箱数据
+message notify_chest {
+    repeated ChestInfo chests = 1; //宝箱数据
     ScoreInfo score = 2; //积分数据
+}
+
+// 通知武将数据变化
+message notify_chest_hero {
+    repeated uint32 hero_ids = 1; //武将id列表
 }

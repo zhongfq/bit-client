@@ -20,7 +20,7 @@ export class ChestService extends Service<NetworkService> {
         this.handle(opcode.chest.s2c_open_chest, this._onOpenChest);
         this.handle(opcode.chest.s2c_score_receive, this._onScoreReceive);
         this.handle(opcode.chest.s2c_switch_hero, this._onSwitchHero);
-        this.handle(opcode.chest.notify, this._noNotify);
+        // this.handle(opcode.chest.notify, this._noNotify);
     }
 
     private _onLoad(data: proto.chest.s2c_load) {
@@ -41,7 +41,7 @@ export class ChestService extends Service<NetworkService> {
 
     private _onSwitchHero(data: proto.chest.s2c_switch_hero) {}
 
-    private _noNotify(data: proto.chest.notify) {}
+    // private _noNotify(data: proto.chest.notify) {}
 
     // ------------------------------------------------------------------------
     // rpc call

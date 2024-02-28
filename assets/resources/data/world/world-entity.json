@@ -2,7 +2,7 @@
     "models": {
         "101": {
             "id": 101,
-            "res": "resources/prefab/battle/roles/mc01.lh"
+            "res": "resources/prefab/battle/roles/hero01.lh"
         },
         "102": {
             "id": 102,
@@ -14,11 +14,11 @@
         },
         "106": {
             "id": 106,
-            "res": "resources/prefab/battle/roles/mc01.lh"
+            "res": "resources/prefab/battle/roles/hero01.lh"
         },
         "209": {
             "id": 209,
-            "res": "resources/prefab/battle/roles/mc01.lh"
+            "res": "resources/prefab/battle/roles/hero01.lh"
         },
         "212": {
             "id": 212,

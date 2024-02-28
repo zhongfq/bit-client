@@ -12071,6 +12071,7 @@ $root.chest = (function() {
          * @property {number|null} [heroId] s2c_load heroId
          * @property {Array.<chest.IChestInfo>|null} [chests] s2c_load chests
          * @property {chest.IScoreInfo|null} [score] s2c_load score
+         * @property {Array.<number>|null} [heroIds] s2c_load heroIds
          */
 
         /**
@@ -12083,6 +12084,7 @@ $root.chest = (function() {
          */
         function s2c_load(properties) {
             this.chests = [];
+            this.heroIds = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -12122,6 +12124,14 @@ $root.chest = (function() {
         s2c_load.prototype.score = null;
 
         /**
+         * s2c_load heroIds.
+         * @member {Array.<number>} heroIds
+         * @memberof chest.s2c_load
+         * @instance
+         */
+        s2c_load.prototype.heroIds = $util.emptyArray;
+
+        /**
          * Creates a new s2c_load instance using the specified properties.
          * @function create
          * @memberof chest.s2c_load
@@ -12154,6 +12164,12 @@ $root.chest = (function() {
                     $root.chest.ChestInfo.encode(message.chests[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
             if (message.score != null && Object.hasOwnProperty.call(message, "score"))
                 $root.chest.ScoreInfo.encode(message.score, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            if (message.heroIds != null && message.heroIds.length) {
+                writer.uint32(/* id 5, wireType 2 =*/42).fork();
+                for (var i = 0; i < message.heroIds.length; ++i)
+                    writer.uint32(message.heroIds[i]);
+                writer.ldelim();
+            }
             return writer;
         };
 
@@ -12204,6 +12220,17 @@ $root.chest = (function() {
                     }
                 case 4: {
                         message.score = $root.chest.ScoreInfo.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 5: {
+                        if (!(message.heroIds && message.heroIds.length))
+                            message.heroIds = [];
+                        if ((tag & 7) === 2) {
+                            var end2 = reader.uint32() + reader.pos;
+                            while (reader.pos < end2)
+                                message.heroIds.push(reader.uint32());
+                        } else
+                            message.heroIds.push(reader.uint32());
                         break;
                     }
                 default:
@@ -12261,6 +12288,13 @@ $root.chest = (function() {
                 if (error)
                     return "score." + error;
             }
+            if (message.heroIds != null && message.hasOwnProperty("heroIds")) {
+                if (!Array.isArray(message.heroIds))
+                    return "heroIds: array expected";
+                for (var i = 0; i < message.heroIds.length; ++i)
+                    if (!$util.isInteger(message.heroIds[i]))
+                        return "heroIds: integer[] expected";
+            }
             return null;
         };
 
@@ -12295,6 +12329,13 @@ $root.chest = (function() {
                     throw TypeError(".chest.s2c_load.score: object expected");
                 message.score = $root.chest.ScoreInfo.fromObject(object.score);
             }
+            if (object.heroIds) {
+                if (!Array.isArray(object.heroIds))
+                    throw TypeError(".chest.s2c_load.heroIds: array expected");
+                message.heroIds = [];
+                for (var i = 0; i < object.heroIds.length; ++i)
+                    message.heroIds[i] = object.heroIds[i] >>> 0;
+            }
             return message;
         };
 
@@ -12311,8 +12352,10 @@ $root.chest = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.arrays || options.defaults)
+            if (options.arrays || options.defaults) {
                 object.chests = [];
+                object.heroIds = [];
+            }
             if (options.defaults) {
                 object.err = 0;
                 object.heroId = 0;
@@ -12329,6 +12372,11 @@ $root.chest = (function() {
             }
             if (message.score != null && message.hasOwnProperty("score"))
                 object.score = $root.chest.ScoreInfo.toObject(message.score, options);
+            if (message.heroIds && message.heroIds.length) {
+                object.heroIds = [];
+                for (var j = 0; j < message.heroIds.length; ++j)
+                    object.heroIds[j] = message.heroIds[j];
+            }
             return object;
         };
 
@@ -12571,7 +12619,7 @@ $root.chest = (function() {
          * @memberof chest
          * @interface Is2c_open_chest
          * @property {number|null} [err] s2c_open_chest err
-         * @property {chest.IChestInfo|null} [ches] s2c_open_chest ches
+         * @property {chest.IChestInfo|null} [chests] s2c_open_chest chests
          * @property {chest.IScoreInfo|null} [score] s2c_open_chest score
          */
 
@@ -12599,12 +12647,12 @@ $root.chest = (function() {
         s2c_open_chest.prototype.err = 0;
 
         /**
-         * s2c_open_chest ches.
-         * @member {chest.IChestInfo|null|undefined} ches
+         * s2c_open_chest chests.
+         * @member {chest.IChestInfo|null|undefined} chests
          * @memberof chest.s2c_open_chest
          * @instance
          */
-        s2c_open_chest.prototype.ches = null;
+        s2c_open_chest.prototype.chests = null;
 
         /**
          * s2c_open_chest score.
@@ -12640,8 +12688,8 @@ $root.chest = (function() {
                 writer = $Writer.create();
             if (message.err != null && Object.hasOwnProperty.call(message, "err"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
-            if (message.ches != null && Object.hasOwnProperty.call(message, "ches"))
-                $root.chest.ChestInfo.encode(message.ches, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            if (message.chests != null && Object.hasOwnProperty.call(message, "chests"))
+                $root.chest.ChestInfo.encode(message.chests, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
             if (message.score != null && Object.hasOwnProperty.call(message, "score"))
                 $root.chest.ScoreInfo.encode(message.score, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
             return writer;
@@ -12683,7 +12731,7 @@ $root.chest = (function() {
                         break;
                     }
                 case 2: {
-                        message.ches = $root.chest.ChestInfo.decode(reader, reader.uint32());
+                        message.chests = $root.chest.ChestInfo.decode(reader, reader.uint32());
                         break;
                     }
                 case 3: {
@@ -12728,10 +12776,10 @@ $root.chest = (function() {
             if (message.err != null && message.hasOwnProperty("err"))
                 if (!$util.isInteger(message.err))
                     return "err: integer expected";
-            if (message.ches != null && message.hasOwnProperty("ches")) {
-                var error = $root.chest.ChestInfo.verify(message.ches);
+            if (message.chests != null && message.hasOwnProperty("chests")) {
+                var error = $root.chest.ChestInfo.verify(message.chests);
                 if (error)
-                    return "ches." + error;
+                    return "chests." + error;
             }
             if (message.score != null && message.hasOwnProperty("score")) {
                 var error = $root.chest.ScoreInfo.verify(message.score);
@@ -12755,10 +12803,10 @@ $root.chest = (function() {
             var message = new $root.chest.s2c_open_chest();
             if (object.err != null)
                 message.err = object.err >>> 0;
-            if (object.ches != null) {
-                if (typeof object.ches !== "object")
-                    throw TypeError(".chest.s2c_open_chest.ches: object expected");
-                message.ches = $root.chest.ChestInfo.fromObject(object.ches);
+            if (object.chests != null) {
+                if (typeof object.chests !== "object")
+                    throw TypeError(".chest.s2c_open_chest.chests: object expected");
+                message.chests = $root.chest.ChestInfo.fromObject(object.chests);
             }
             if (object.score != null) {
                 if (typeof object.score !== "object")
@@ -12783,13 +12831,13 @@ $root.chest = (function() {
             var object = {};
             if (options.defaults) {
                 object.err = 0;
-                object.ches = null;
+                object.chests = null;
                 object.score = null;
             }
             if (message.err != null && message.hasOwnProperty("err"))
                 object.err = message.err;
-            if (message.ches != null && message.hasOwnProperty("ches"))
-                object.ches = $root.chest.ChestInfo.toObject(message.ches, options);
+            if (message.chests != null && message.hasOwnProperty("chests"))
+                object.chests = $root.chest.ChestInfo.toObject(message.chests, options);
             if (message.score != null && message.hasOwnProperty("score"))
                 object.score = $root.chest.ScoreInfo.toObject(message.score, options);
             return object;
@@ -13637,26 +13685,26 @@ $root.chest = (function() {
         return s2c_switch_hero;
     })();
 
-    chest.notify = (function() {
+    chest.notify_chest = (function() {
 
         /**
-         * Properties of a notify.
+         * Properties of a notify_chest.
          * @memberof chest
-         * @interface Inotify
-         * @property {Array.<chest.IChestInfo>|null} [ches] notify ches
-         * @property {chest.IScoreInfo|null} [score] notify score
+         * @interface Inotify_chest
+         * @property {Array.<chest.IChestInfo>|null} [chests] notify_chest chests
+         * @property {chest.IScoreInfo|null} [score] notify_chest score
          */
 
         /**
-         * Constructs a new notify.
+         * Constructs a new notify_chest.
          * @memberof chest
-         * @classdesc Represents a notify.
-         * @implements Inotify
+         * @classdesc Represents a notify_chest.
+         * @implements Inotify_chest
          * @constructor
-         * @param {chest.Inotify=} [properties] Properties to set
+         * @param {chest.Inotify_chest=} [properties] Properties to set
          */
-        function notify(properties) {
-            this.ches = [];
+        function notify_chest(properties) {
+            this.chests = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -13664,88 +13712,88 @@ $root.chest = (function() {
         }
 
         /**
-         * notify ches.
-         * @member {Array.<chest.IChestInfo>} ches
-         * @memberof chest.notify
+         * notify_chest chests.
+         * @member {Array.<chest.IChestInfo>} chests
+         * @memberof chest.notify_chest
          * @instance
          */
-        notify.prototype.ches = $util.emptyArray;
+        notify_chest.prototype.chests = $util.emptyArray;
 
         /**
-         * notify score.
+         * notify_chest score.
          * @member {chest.IScoreInfo|null|undefined} score
-         * @memberof chest.notify
+         * @memberof chest.notify_chest
          * @instance
          */
-        notify.prototype.score = null;
+        notify_chest.prototype.score = null;
 
         /**
-         * Creates a new notify instance using the specified properties.
+         * Creates a new notify_chest instance using the specified properties.
          * @function create
-         * @memberof chest.notify
+         * @memberof chest.notify_chest
          * @static
-         * @param {chest.Inotify=} [properties] Properties to set
-         * @returns {chest.notify} notify instance
+         * @param {chest.Inotify_chest=} [properties] Properties to set
+         * @returns {chest.notify_chest} notify_chest instance
          */
-        notify.create = function create(properties) {
-            return new notify(properties);
+        notify_chest.create = function create(properties) {
+            return new notify_chest(properties);
         };
 
         /**
-         * Encodes the specified notify message. Does not implicitly {@link chest.notify.verify|verify} messages.
+         * Encodes the specified notify_chest message. Does not implicitly {@link chest.notify_chest.verify|verify} messages.
          * @function encode
-         * @memberof chest.notify
+         * @memberof chest.notify_chest
          * @static
-         * @param {chest.Inotify} message notify message or plain object to encode
+         * @param {chest.Inotify_chest} message notify_chest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        notify.encode = function encode(message, writer) {
+        notify_chest.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.ches != null && message.ches.length)
-                for (var i = 0; i < message.ches.length; ++i)
-                    $root.chest.ChestInfo.encode(message.ches[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.chests != null && message.chests.length)
+                for (var i = 0; i < message.chests.length; ++i)
+                    $root.chest.ChestInfo.encode(message.chests[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
             if (message.score != null && Object.hasOwnProperty.call(message, "score"))
                 $root.chest.ScoreInfo.encode(message.score, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
             return writer;
         };
 
         /**
-         * Encodes the specified notify message, length delimited. Does not implicitly {@link chest.notify.verify|verify} messages.
+         * Encodes the specified notify_chest message, length delimited. Does not implicitly {@link chest.notify_chest.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof chest.notify
+         * @memberof chest.notify_chest
          * @static
-         * @param {chest.Inotify} message notify message or plain object to encode
+         * @param {chest.Inotify_chest} message notify_chest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        notify.encodeDelimited = function encodeDelimited(message, writer) {
+        notify_chest.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
         /**
-         * Decodes a notify message from the specified reader or buffer.
+         * Decodes a notify_chest message from the specified reader or buffer.
          * @function decode
-         * @memberof chest.notify
+         * @memberof chest.notify_chest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {chest.notify} notify
+         * @returns {chest.notify_chest} notify_chest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        notify.decode = function decode(reader, length) {
+        notify_chest.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chest.notify();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chest.notify_chest();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1: {
-                        if (!(message.ches && message.ches.length))
-                            message.ches = [];
-                        message.ches.push($root.chest.ChestInfo.decode(reader, reader.uint32()));
+                        if (!(message.chests && message.chests.length))
+                            message.chests = [];
+                        message.chests.push($root.chest.ChestInfo.decode(reader, reader.uint32()));
                         break;
                     }
                 case 2: {
@@ -13761,39 +13809,39 @@ $root.chest = (function() {
         };
 
         /**
-         * Decodes a notify message from the specified reader or buffer, length delimited.
+         * Decodes a notify_chest message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof chest.notify
+         * @memberof chest.notify_chest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {chest.notify} notify
+         * @returns {chest.notify_chest} notify_chest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        notify.decodeDelimited = function decodeDelimited(reader) {
+        notify_chest.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
         /**
-         * Verifies a notify message.
+         * Verifies a notify_chest message.
          * @function verify
-         * @memberof chest.notify
+         * @memberof chest.notify_chest
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        notify.verify = function verify(message) {
+        notify_chest.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.ches != null && message.hasOwnProperty("ches")) {
-                if (!Array.isArray(message.ches))
-                    return "ches: array expected";
-                for (var i = 0; i < message.ches.length; ++i) {
-                    var error = $root.chest.ChestInfo.verify(message.ches[i]);
+            if (message.chests != null && message.hasOwnProperty("chests")) {
+                if (!Array.isArray(message.chests))
+                    return "chests: array expected";
+                for (var i = 0; i < message.chests.length; ++i) {
+                    var error = $root.chest.ChestInfo.verify(message.chests[i]);
                     if (error)
-                        return "ches." + error;
+                        return "chests." + error;
                 }
             }
             if (message.score != null && message.hasOwnProperty("score")) {
@@ -13805,56 +13853,56 @@ $root.chest = (function() {
         };
 
         /**
-         * Creates a notify message from a plain object. Also converts values to their respective internal types.
+         * Creates a notify_chest message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof chest.notify
+         * @memberof chest.notify_chest
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {chest.notify} notify
+         * @returns {chest.notify_chest} notify_chest
          */
-        notify.fromObject = function fromObject(object) {
-            if (object instanceof $root.chest.notify)
+        notify_chest.fromObject = function fromObject(object) {
+            if (object instanceof $root.chest.notify_chest)
                 return object;
-            var message = new $root.chest.notify();
-            if (object.ches) {
-                if (!Array.isArray(object.ches))
-                    throw TypeError(".chest.notify.ches: array expected");
-                message.ches = [];
-                for (var i = 0; i < object.ches.length; ++i) {
-                    if (typeof object.ches[i] !== "object")
-                        throw TypeError(".chest.notify.ches: object expected");
-                    message.ches[i] = $root.chest.ChestInfo.fromObject(object.ches[i]);
+            var message = new $root.chest.notify_chest();
+            if (object.chests) {
+                if (!Array.isArray(object.chests))
+                    throw TypeError(".chest.notify_chest.chests: array expected");
+                message.chests = [];
+                for (var i = 0; i < object.chests.length; ++i) {
+                    if (typeof object.chests[i] !== "object")
+                        throw TypeError(".chest.notify_chest.chests: object expected");
+                    message.chests[i] = $root.chest.ChestInfo.fromObject(object.chests[i]);
                 }
             }
             if (object.score != null) {
                 if (typeof object.score !== "object")
-                    throw TypeError(".chest.notify.score: object expected");
+                    throw TypeError(".chest.notify_chest.score: object expected");
                 message.score = $root.chest.ScoreInfo.fromObject(object.score);
             }
             return message;
         };
 
         /**
-         * Creates a plain object from a notify message. Also converts values to other types if specified.
+         * Creates a plain object from a notify_chest message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof chest.notify
+         * @memberof chest.notify_chest
          * @static
-         * @param {chest.notify} message notify
+         * @param {chest.notify_chest} message notify_chest
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        notify.toObject = function toObject(message, options) {
+        notify_chest.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.arrays || options.defaults)
-                object.ches = [];
+                object.chests = [];
             if (options.defaults)
                 object.score = null;
-            if (message.ches && message.ches.length) {
-                object.ches = [];
-                for (var j = 0; j < message.ches.length; ++j)
-                    object.ches[j] = $root.chest.ChestInfo.toObject(message.ches[j], options);
+            if (message.chests && message.chests.length) {
+                object.chests = [];
+                for (var j = 0; j < message.chests.length; ++j)
+                    object.chests[j] = $root.chest.ChestInfo.toObject(message.chests[j], options);
             }
             if (message.score != null && message.hasOwnProperty("score"))
                 object.score = $root.chest.ScoreInfo.toObject(message.score, options);
@@ -13862,32 +13910,259 @@ $root.chest = (function() {
         };
 
         /**
-         * Converts this notify to JSON.
+         * Converts this notify_chest to JSON.
          * @function toJSON
-         * @memberof chest.notify
+         * @memberof chest.notify_chest
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        notify.prototype.toJSON = function toJSON() {
+        notify_chest.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
         /**
-         * Gets the default type url for notify
+         * Gets the default type url for notify_chest
          * @function getTypeUrl
-         * @memberof chest.notify
+         * @memberof chest.notify_chest
          * @static
          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns {string} The default type url
          */
-        notify.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        notify_chest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/chest.notify";
+            return typeUrlPrefix + "/chest.notify_chest";
         };
 
-        return notify;
+        return notify_chest;
+    })();
+
+    chest.notify_chest_hero = (function() {
+
+        /**
+         * Properties of a notify_chest_hero.
+         * @memberof chest
+         * @interface Inotify_chest_hero
+         * @property {Array.<number>|null} [heroIds] notify_chest_hero heroIds
+         */
+
+        /**
+         * Constructs a new notify_chest_hero.
+         * @memberof chest
+         * @classdesc Represents a notify_chest_hero.
+         * @implements Inotify_chest_hero
+         * @constructor
+         * @param {chest.Inotify_chest_hero=} [properties] Properties to set
+         */
+        function notify_chest_hero(properties) {
+            this.heroIds = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * notify_chest_hero heroIds.
+         * @member {Array.<number>} heroIds
+         * @memberof chest.notify_chest_hero
+         * @instance
+         */
+        notify_chest_hero.prototype.heroIds = $util.emptyArray;
+
+        /**
+         * Creates a new notify_chest_hero instance using the specified properties.
+         * @function create
+         * @memberof chest.notify_chest_hero
+         * @static
+         * @param {chest.Inotify_chest_hero=} [properties] Properties to set
+         * @returns {chest.notify_chest_hero} notify_chest_hero instance
+         */
+        notify_chest_hero.create = function create(properties) {
+            return new notify_chest_hero(properties);
+        };
+
+        /**
+         * Encodes the specified notify_chest_hero message. Does not implicitly {@link chest.notify_chest_hero.verify|verify} messages.
+         * @function encode
+         * @memberof chest.notify_chest_hero
+         * @static
+         * @param {chest.Inotify_chest_hero} message notify_chest_hero message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        notify_chest_hero.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.heroIds != null && message.heroIds.length) {
+                writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                for (var i = 0; i < message.heroIds.length; ++i)
+                    writer.uint32(message.heroIds[i]);
+                writer.ldelim();
+            }
+            return writer;
+        };
+
+        /**
+         * Encodes the specified notify_chest_hero message, length delimited. Does not implicitly {@link chest.notify_chest_hero.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof chest.notify_chest_hero
+         * @static
+         * @param {chest.Inotify_chest_hero} message notify_chest_hero message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        notify_chest_hero.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a notify_chest_hero message from the specified reader or buffer.
+         * @function decode
+         * @memberof chest.notify_chest_hero
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {chest.notify_chest_hero} notify_chest_hero
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        notify_chest_hero.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chest.notify_chest_hero();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        if (!(message.heroIds && message.heroIds.length))
+                            message.heroIds = [];
+                        if ((tag & 7) === 2) {
+                            var end2 = reader.uint32() + reader.pos;
+                            while (reader.pos < end2)
+                                message.heroIds.push(reader.uint32());
+                        } else
+                            message.heroIds.push(reader.uint32());
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a notify_chest_hero message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof chest.notify_chest_hero
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {chest.notify_chest_hero} notify_chest_hero
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        notify_chest_hero.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a notify_chest_hero message.
+         * @function verify
+         * @memberof chest.notify_chest_hero
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        notify_chest_hero.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.heroIds != null && message.hasOwnProperty("heroIds")) {
+                if (!Array.isArray(message.heroIds))
+                    return "heroIds: array expected";
+                for (var i = 0; i < message.heroIds.length; ++i)
+                    if (!$util.isInteger(message.heroIds[i]))
+                        return "heroIds: integer[] expected";
+            }
+            return null;
+        };
+
+        /**
+         * Creates a notify_chest_hero message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof chest.notify_chest_hero
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {chest.notify_chest_hero} notify_chest_hero
+         */
+        notify_chest_hero.fromObject = function fromObject(object) {
+            if (object instanceof $root.chest.notify_chest_hero)
+                return object;
+            var message = new $root.chest.notify_chest_hero();
+            if (object.heroIds) {
+                if (!Array.isArray(object.heroIds))
+                    throw TypeError(".chest.notify_chest_hero.heroIds: array expected");
+                message.heroIds = [];
+                for (var i = 0; i < object.heroIds.length; ++i)
+                    message.heroIds[i] = object.heroIds[i] >>> 0;
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a notify_chest_hero message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof chest.notify_chest_hero
+         * @static
+         * @param {chest.notify_chest_hero} message notify_chest_hero
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        notify_chest_hero.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.heroIds = [];
+            if (message.heroIds && message.heroIds.length) {
+                object.heroIds = [];
+                for (var j = 0; j < message.heroIds.length; ++j)
+                    object.heroIds[j] = message.heroIds[j];
+            }
+            return object;
+        };
+
+        /**
+         * Converts this notify_chest_hero to JSON.
+         * @function toJSON
+         * @memberof chest.notify_chest_hero
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        notify_chest_hero.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for notify_chest_hero
+         * @function getTypeUrl
+         * @memberof chest.notify_chest_hero
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        notify_chest_hero.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/chest.notify_chest_hero";
+        };
+
+        return notify_chest_hero;
     })();
 
     return chest;

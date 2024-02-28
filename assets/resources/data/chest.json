@@ -1,7 +1,6 @@
 {
     "chest": [
         {
-            "desc": "{1}概率为{2}",
             "id": 1,
             "open_max_num": 10,
             "open_score": 1,
