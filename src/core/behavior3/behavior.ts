@@ -5,7 +5,7 @@ export type Constructor<T = unknown> = new (...args: any[]) => T;
 export const enum Status {
     FAIL = "FAIL", // 失败
     SUCCESS = "SUCCESS", // 成功
-    RUNNING = "running", // 运行中
+    RUNNING = "RUNNING", // 运行中
 }
 
 export interface Result {
@@ -57,6 +57,8 @@ export interface NodeData {
 const NODE_YIELD = "YIELD";
 
 export class Node {
+    private static tmpArgs: ValueType[] = [];
+
     readonly tree: Tree;
     readonly name: string;
     readonly id: number;
@@ -66,6 +68,7 @@ export class Node {
     readonly children: Node[] = [];
 
     private _process: Process;
+    private _yield: string;
 
     constructor(data: NodeData, tree: Tree) {
         this.tree = tree;
@@ -85,24 +88,25 @@ export class Node {
         }
         this._process = process;
         this._process.check(this);
+        this._yield = Env.makePrivateKey(this, "yield");
     }
 
     run(env: Env) {
-        if (env.getInnerVar(this, NODE_YIELD) === undefined) {
+        if (env.getVar(this._yield) === undefined) {
             env.pushStack(this);
         }
 
-        const vars: ValueType[] = [];
+        Node.tmpArgs.length = 0;
         this.data.input?.forEach((varName) => {
-            vars.push(env.getVar(varName));
+            Node.tmpArgs.push(env.getVar(varName));
         });
 
-        const ret = this._process.run(this, env, ...vars);
+        const ret = this._process.run(this, env, ...Node.tmpArgs);
         if (ret.status != Status.RUNNING) {
-            env.delInnerVar(this, NODE_YIELD);
+            env.setVar(this._yield, undefined);
             env.popStack();
-        } else if (env.getInnerVar(this, NODE_YIELD) === undefined) {
-            env.setInnerVar(this, NODE_YIELD, true);
+        } else if (env.getVar(this._yield) === undefined) {
+            env.setVar(this._yield, true);
         }
 
         this.data.output?.forEach((varName, i) => {
@@ -115,7 +119,9 @@ export class Node {
         if (this.data.debug) {
             let varStr = "";
             for (const k in env.vars) {
-                varStr += `${k}:${env.vars[k]},`;
+                if (!Env.isPrivateKey(k)) {
+                    varStr += `${k}:${env.vars[k]},`;
+                }
             }
             console.log(
                 `[DEBUG] behavior3 -> ${this.name}: tree:${this.tree.name}, node:${this.id}, ` +
@@ -127,12 +133,12 @@ export class Node {
     }
 
     yield(env: Env, value?: ValueType) {
-        env.setInnerVar(this, NODE_YIELD, value ?? true);
+        env.setVar(this._yield, value ?? true);
         return Result.RUNNING;
     }
 
     resume(env: Env): ValueType {
-        return env.getInnerVar(this, NODE_YIELD);
+        return env.getVar(this._yield);
     }
 }
 
@@ -165,7 +171,6 @@ export class Context {
 
 export class Env {
     private _vars: ValueMap = {};
-    private _innerVars: ValueMap = {};
     private _stack: Node[] = [];
 
     readonly context: Context;
@@ -180,19 +185,8 @@ export class Env {
         return this._vars;
     }
 
-    get innerVars() {
-        return this._innerVars;
-    }
-
     get stack() {
         return this._stack;
-    }
-
-    interrupt() {
-        if (this._stack.length) {
-            this._stack.length = 0;
-            this._innerVars = {};
-        }
     }
 
     eval(code: string) {
@@ -204,23 +198,11 @@ export class Env {
     }
 
     setVar(k: string, v: ValueType) {
-        this._vars[k] = v;
-    }
-
-    delVar(k: string) {
-        delete this._vars[k];
-    }
-
-    getInnerVar(node: Node, k: string) {
-        return this._innerVars[this._toKey(node, k)];
-    }
-
-    setInnerVar(node: Node, k: string, v: ValueType) {
-        this._innerVars[this._toKey(node, k)] = v;
-    }
-
-    delInnerVar(node: Node, k: string) {
-        delete this._innerVars[this._toKey(node, k)];
+        if (v === undefined) {
+            delete this._vars[k];
+        } else {
+            this._vars[k] = v;
+        }
     }
 
     pushStack(node: Node) {
@@ -231,8 +213,12 @@ export class Env {
         return this._stack.pop();
     }
 
-    private _toKey(node: Node, k: string) {
-        return `${node.id}_${k}`;
+    static makePrivateKey(node: Node, k: string) {
+        return `__private_Node#${node.id}_${k}`;
+    }
+
+    static isPrivateKey(k: string) {
+        return k.indexOf("__private") === 0;
     }
 }
 
@@ -256,7 +242,16 @@ export class Tree {
     }
 
     interrupt(env: Env) {
-        env.interrupt();
+        const stack = env.stack;
+        const vars = env.vars;
+        if (stack.length > 0) {
+            stack.length = 0;
+            for (const k in vars) {
+                if (Env.isPrivateKey(k)) {
+                    delete vars[k];
+                }
+            }
+        }
     }
 
     run(env: Env) {
