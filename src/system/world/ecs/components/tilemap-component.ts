@@ -19,6 +19,18 @@ export class TilemapComponent extends ecs.SingletonComponent {
         out.y = 0;
         return out;
     }
+
+    static readonly STATIC_BASE_WIDTH = 256;
+    static readonly STATIC_BASE_HEIGHT = 256;
+    static readonly STATIC_SCALE = 2;
+
+    static readonly STATIC_CFG_MAP: Map<number, Tilemap.StaticConfig> = new Map([
+        [51, { resName: "map_Grassland_Tree_01", offsetY: 0.33846 }],
+        [52, { resName: "map_Grassland_Tree_02", offsetY: 0.40402 }],
+        [53, { resName: "map_Grassland_Tree_03", offsetY: 0.40269 }],
+        [49, { resName: "map_Grassland_hill_01", offsetY: 0.60341 }],
+        [50, { resName: "map_Grassland_hill_02", offsetY: 0.42114 }],
+    ]);
 }
 
 export namespace Tilemap {
@@ -42,8 +54,8 @@ export namespace Tilemap {
 
     export enum LayerName {
         Ground = "ground",
-        Block = "block",
         Static = "static",
+        Block = "block",
     }
 
     export enum LayerType {
@@ -74,5 +86,10 @@ export namespace Tilemap {
         name: string;
         type: string;
         value: number;
+    }
+
+    export interface StaticConfig {
+        resName: string;
+        offsetY: number;
     }
 }

@@ -2,6 +2,7 @@
   "uuid": "e6c83ab3-9193-44ce-bb87-4f1f8d056b5a",
   "importer": {
     "sRGB": true,
+    "premultiplyAlpha": true,
     "generateMipmap": true
   }
 }
