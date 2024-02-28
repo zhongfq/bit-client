@@ -119,6 +119,57 @@
         "y": 0
       }
     },
+    "sb_fight_Blood3.png": {
+      "frame": {
+        "idx": 0,
+        "x": 210,
+        "y": 272,
+        "w": 40,
+        "h": 4
+      },
+      "sourceSize": {
+        "w": 42,
+        "h": 6
+      },
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1
+      }
+    },
+    "sb_fight_Blood3Bg.png": {
+      "frame": {
+        "idx": 0,
+        "x": 198,
+        "y": 281,
+        "w": 42,
+        "h": 6
+      },
+      "sourceSize": {
+        "w": 42,
+        "h": 6
+      },
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    "sb_fight_Blood4.png": {
+      "frame": {
+        "idx": 0,
+        "x": 196,
+        "y": 182,
+        "w": 40,
+        "h": 4
+      },
+      "sourceSize": {
+        "w": 42,
+        "h": 6
+      },
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1
+      }
+    },
     "sb_fight_energy.png": {
       "frame": {
         "idx": 0,

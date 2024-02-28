@@ -15,7 +15,11 @@ import {
     MovementType,
     TransformComponent,
 } from "../components/movement-component";
-import { AnimationComponent, HeroInfoComponent } from "../components/render-component";
+import {
+    AnimationComponent,
+    HeroInfoComponent,
+    SoliderInfoComponent,
+} from "../components/render-component";
 import { TilemapComponent } from "../components/tilemap-component";
 import {
     CharacterAnimation,
@@ -27,6 +31,7 @@ import {
 } from "../components/troop-component";
 
 const PREFAB_HERO_INFO = "resources/prefab/battle/ui/hero-info.lh";
+const PREFAB_SOLDIER_INFO = "resources/prefab/battle/ui/soldier-info.lh";
 
 const formation: Readonly<IVector3Like>[] = [
     { x: -0.6, y: 0, z: 0 },
@@ -490,6 +495,9 @@ export class CommandSystem extends ecs.System {
             soldier.offset = offset;
             soldier.index = i;
             hero.soldiers.push(soldier);
+
+            const info = entity.addComponent(SoliderInfoComponent);
+            info.path = PREFAB_SOLDIER_INFO;
         }
     }
 

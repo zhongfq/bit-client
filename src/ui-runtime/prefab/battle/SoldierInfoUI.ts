@@ -1,14 +1,10 @@
-import { HeroInfoUIBase } from "./HeroInfoUI.generated";
+import { HpStyle } from "./HeroInfoUI";
+import { SoldierInfoUIBase } from "./SoldierInfoUI.generated";
 
 const { regClass } = Laya;
 
-export const enum HpStyle {
-    GREEN,
-    RED,
-}
-
 @regClass()
-export class HeroInfoUI extends HeroInfoUIBase {
+export class SoldierInfoUI extends SoldierInfoUIBase {
     private _hpInitWidth: number = 0;
 
     override onAwake(): void {

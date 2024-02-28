@@ -1,5 +1,6 @@
 import { ecs } from "../../../../core/ecs";
 import { HeroInfoUI, HpStyle } from "../../../../ui-runtime/prefab/battle/HeroInfoUI";
+import { SoldierInfoUI } from "../../../../ui-runtime/prefab/battle/SoldierInfoUI";
 
 export class Renderable3D extends ecs.Component {
     path: string = "";
@@ -19,5 +20,10 @@ export class ShadowComponent extends ecs.Component {}
 
 export class HeroInfoComponent extends Renderable2D {
     declare view: HeroInfoUI | null;
+    hpStyle: HpStyle = HpStyle.GREEN;
+}
+
+export class SoliderInfoComponent extends Renderable2D {
+    declare view: SoldierInfoUI | null;
     hpStyle: HpStyle = HpStyle.GREEN;
 }

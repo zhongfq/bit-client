@@ -1,8 +1,13 @@
 import { ecs } from "../../../../core/ecs";
 import { HeroInfoUI } from "../../../../ui-runtime/prefab/battle/HeroInfoUI";
+import { SoldierInfoUI } from "../../../../ui-runtime/prefab/battle/SoldierInfoUI";
 import { WorldContext } from "../../world-context";
-import { MovementComponent, TransformComponent } from "../components/movement-component";
-import { AnimationComponent, HeroInfoComponent } from "../components/render-component";
+import { TransformComponent } from "../components/movement-component";
+import {
+    AnimationComponent,
+    HeroInfoComponent,
+    SoliderInfoComponent,
+} from "../components/render-component";
 import { HeroComponent, OwnerComponent } from "../components/troop-component";
 
 export class RenderSystem extends ecs.System {
@@ -15,6 +20,8 @@ export class RenderSystem extends ecs.System {
             this._loadAnimation(component);
         } else if (component instanceof HeroInfoComponent) {
             this._loadHeroInfo(component);
+        } else if (component instanceof SoliderInfoComponent) {
+            this._loadSoiderInfo(component);
         }
     }
 
@@ -34,7 +41,10 @@ export class RenderSystem extends ecs.System {
             this._updatePosition(anim);
         });
         this.ecs.getComponents(HeroInfoComponent).forEach((info) => {
-            this._updateInfoPosition(info);
+            this._updateHeroInfoPosition(info);
+        });
+        this.ecs.getComponents(SoliderInfoComponent).forEach((info) => {
+            this._updateSoldierInfoPosition(info);
         });
     }
 
@@ -63,7 +73,7 @@ export class RenderSystem extends ecs.System {
         }
     }
 
-    private _updateInfoPosition(info: HeroInfoComponent) {
+    private _updateHeroInfoPosition(info: HeroInfoComponent) {
         const animation = info.getComponent(AnimationComponent)!;
         if (!animation.view || !info.view) {
             return;
@@ -73,6 +83,19 @@ export class RenderSystem extends ecs.System {
         this.context.camera.worldToViewportPoint(animation.view.transform.position, p);
         // TODO: 高度差值待定
         info.view.pos(p.x - info.view.width / 2, p.y - 170, true);
+        Laya.Pool.free(p);
+    }
+
+    private _updateSoldierInfoPosition(info: SoliderInfoComponent) {
+        const animation = info.getComponent(AnimationComponent)!;
+        if (!animation.view || !info.view) {
+            return;
+        }
+
+        const p = Laya.Pool.obtain(Laya.Vector4);
+        this.context.camera.worldToViewportPoint(animation.view.transform.position, p);
+        // TODO: 高度差值待定
+        info.view.pos(p.x - info.view.width / 2, p.y - 50, true);
         Laya.Pool.free(p);
     }
 
@@ -95,5 +118,15 @@ export class RenderSystem extends ecs.System {
         info.view.heroName.text = owner.name;
         info.view.setHpStyle(info.hpStyle);
         info.view.updateHp(hero.hp / hero.maxHp);
+    }
+
+    private async _loadSoiderInfo(info: SoliderInfoComponent) {
+        const soldier = info.getComponent(HeroComponent)!;
+        const owner = info.getComponent(OwnerComponent)!;
+        const prefab: Laya.Prefab = await Laya.loader.load(info.path, Laya.Loader.HIERARCHY);
+        info.view = prefab.create() as SoldierInfoUI;
+        this.context.owner.troops.addChild(info.view);
+        info.view.setHpStyle(info.hpStyle);
+        // info.view.updateHp(soldier.hp / soldier.maxHp);
     }
 }
