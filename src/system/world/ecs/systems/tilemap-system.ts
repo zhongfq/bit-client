@@ -11,7 +11,7 @@ export class TilemapSystem extends ecs.System {
     }
 
     private async _init() {
-        const worldMap = await Laya.loader.fetch("resources/data/world-map.json", "json") as Tilemap.WorldMap;
+        const worldMap = await Laya.loader.fetch("resources/data/world-map/world-map1.json", "json") as Tilemap.WorldMap;
         worldMap.layers.forEach(layer => {
             if (!layer.data) {
                 return;
