@@ -13,8 +13,6 @@ interface UBBData {
 
 const tlBBCodeStr = ["<color=", "<size=", "<b>", "<i>", "<u>", "<on click", "<outline color"];
 export class StringUtil {
-    public static __cname: string = "StringUtil";
-
     /**
      *
      * @param str 类似 "{0}年{1}月{2}日"

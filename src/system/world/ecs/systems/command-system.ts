@@ -111,16 +111,16 @@ export class CommandSystem extends ecs.System {
                     this._moveEntity(cmd.move as proto.world.MoveAction);
                     break;
                 case ACTION.BATTLE_SKILL:
-                    this._startAttack(cmd.battleSkill as proto.world.BattleSkillAction);
+                    // this._startAttack(cmd.battleSkill as proto.world.BattleSkillAction);
                     break;
                 case ACTION.BATTLE_START:
-                    this._startBattle(cmd.battleStart as proto.world.BattleStartAction);
+                    // this._startBattle(cmd.battleStart as proto.world.BattleStartAction);
                     break;
                 case ACTION.BATTLE_STOP:
-                    this._stopBattle(cmd.battleStop as proto.world.BattleStopAction);
+                    // this._stopBattle(cmd.battleStop as proto.world.BattleStopAction);
                     break;
                 case ACTION.BATTLE_SUB_HP:
-                    this._subHp(cmd.battleSubHp as proto.world.BattleSubHpAction);
+                    // this._subHp(cmd.battleSubHp as proto.world.BattleSubHpAction);
                     break;
             }
         }
@@ -263,16 +263,16 @@ export class CommandSystem extends ecs.System {
         }
     }
 
-    private _startAttack(cmd: proto.world.BattleSkillAction) {
-        const entity = this.ecs.getEntity(cmd.srcEid);
-        if (!entity) {
-            console.warn(`entity not found: eid=${cmd.srcEid}`);
-            return;
-        }
-        const character = entity.getComponent(HeroComponent)!;
-        this.playAnimation(character, CharacterAnimation.ATTACK);
-        this._towardToTarget(cmd.srcEid, cmd.dstEid);
-    }
+    // private _startAttack(cmd: proto.world.BattleSkillAction) {
+    //     const entity = this.ecs.getEntity(cmd.srcEid);
+    //     if (!entity) {
+    //         console.warn(`entity not found: eid=${cmd.srcEid}`);
+    //         return;
+    //     }
+    //     const character = entity.getComponent(HeroComponent)!;
+    //     this.playAnimation(character, CharacterAnimation.ATTACK);
+    //     this._towardToTarget(cmd.srcEid, cmd.dstEid);
+    // }
 
     private _towardToTarget(eid1: number, eid2: number) {
         const transform1 = this.ecs.getComponent(eid1, TransformComponent);
@@ -284,74 +284,74 @@ export class CommandSystem extends ecs.System {
         }
     }
 
-    private _startBattle(action: proto.world.BattleStartAction) {
-        this._joinBattle(action.battleEid, action.fighterEid);
-    }
+    // private _startBattle(action: proto.world.BattleStartAction) {
+    //     this._joinBattle(action.battleEid, action.fighterEid);
+    // }
 
-    private _stopBattle(action: proto.world.BattleStopAction) {
-        const entity = this.ecs.getEntity(action.fighterEid);
-        if (entity) {
-            const animation = entity.getComponent(AnimationComponent)!;
-            const hero = entity.getComponent(HeroComponent)!;
-            hero.attackTarget = 0;
-            hero.soldiers.forEach((soldier) => {
-                soldier.attack.target = null;
-                soldier.order = SoliderOrder.RETURN;
-            });
-            const movement = entity.getComponent(MovementComponent)!;
-            if (movement.type === MovementType.WHEEL) {
-                const transform = animation.getComponent(TransformComponent)!;
-                transform.rotation = MathUtil.toDegree(
-                    Math.atan2(-movement.speed.z, movement.speed.x)
-                );
-                transform.flag |= TransformComponent.ROTATION;
-            }
-        } else {
-            console.warn(`entity not found in 'stop battle': ${action.fighterEid}`);
-        }
+    // private _stopBattle(action: proto.world.BattleStopAction) {
+    //     const entity = this.ecs.getEntity(action.fighterEid);
+    //     if (entity) {
+    //         const animation = entity.getComponent(AnimationComponent)!;
+    //         const hero = entity.getComponent(HeroComponent)!;
+    //         hero.attackTarget = 0;
+    //         hero.soldiers.forEach((soldier) => {
+    //             soldier.attack.target = null;
+    //             soldier.order = SoliderOrder.RETURN;
+    //         });
+    //         const movement = entity.getComponent(MovementComponent)!;
+    //         if (movement.type === MovementType.WHEEL) {
+    //             const transform = animation.getComponent(TransformComponent)!;
+    //             transform.rotation = MathUtil.toDegree(
+    //                 Math.atan2(-movement.speed.z, movement.speed.x)
+    //             );
+    //             transform.flag |= TransformComponent.ROTATION;
+    //         }
+    //     } else {
+    //         console.warn(`entity not found in 'stop battle': ${action.fighterEid}`);
+    //     }
 
-        const battle = this.ecs.getComponent(action.battleEid, BattleComponent);
-        if (battle) {
-            const idx = battle.fighterEids.indexOf(action.fighterEid);
-            if (idx >= 0) {
-                battle.fighterEids.splice(idx, 1);
-            }
-        } else {
-            console.warn(`battle not found in 'stop battle': ${action.battleEid}`);
-        }
-    }
+    //     const battle = this.ecs.getComponent(action.battleEid, BattleComponent);
+    //     if (battle) {
+    //         const idx = battle.fighterEids.indexOf(action.fighterEid);
+    //         if (idx >= 0) {
+    //             battle.fighterEids.splice(idx, 1);
+    //         }
+    //     } else {
+    //         console.warn(`battle not found in 'stop battle': ${action.battleEid}`);
+    //     }
+    // }
 
-    private _subHp(action: proto.world.BattleSubHpAction) {
-        const hero = this.ecs.getComponent(action.dstEid, HeroComponent);
-        if (!hero) {
-            console.warn(`sub hp: hero not found: ${action.dstEid}`);
-            return;
-        }
-        hero.hp = action.curHp;
-        const soldiers = hero.soldiers;
-        const count = soldiers.length - Math.ceil((hero.hp / hero.maxHp) * hero.formation.length);
-        if (count > 0) {
-            const arr = soldiers.slice(0, Math.max(4, count));
-            for (let i = 0; i < count; i++) {
-                const idx = MathUtil.randomInt(0, arr.length - 1);
-                const dieSoldier = arr.splice(idx, 1)[0];
-                const soldier = soldiers.pop();
-                if (soldier) {
-                    soldier.offset = dieSoldier.offset;
-                    soldier.index = dieSoldier.index;
-                    soldier.attack.target = null;
-                    soldier.order = SoliderOrder.RUSH;
-                    dieSoldier.attack.position.cloneTo(soldier.attack.position);
-                    soldiers[soldier.index] = soldier;
-                }
-                this.ecs.removeEntity(dieSoldier.eid);
-            }
-        }
-        const info = hero.getComponent(HeroInfoComponent);
-        if (info?.view) {
-            info.view.updateHp(hero.hp / hero.maxHp);
-        }
-    }
+    // private _subHp(action: proto.world.BattleSubHpAction) {
+    //     const hero = this.ecs.getComponent(action.dstEid, HeroComponent);
+    //     if (!hero) {
+    //         console.warn(`sub hp: hero not found: ${action.dstEid}`);
+    //         return;
+    //     }
+    //     hero.hp = action.curHp;
+    //     const soldiers = hero.soldiers;
+    //     const count = soldiers.length - Math.ceil((hero.hp / hero.maxHp) * hero.formation.length);
+    //     if (count > 0) {
+    //         const arr = soldiers.slice(0, Math.max(4, count));
+    //         for (let i = 0; i < count; i++) {
+    //             const idx = MathUtil.randomInt(0, arr.length - 1);
+    //             const dieSoldier = arr.splice(idx, 1)[0];
+    //             const soldier = soldiers.pop();
+    //             if (soldier) {
+    //                 soldier.offset = dieSoldier.offset;
+    //                 soldier.index = dieSoldier.index;
+    //                 soldier.attack.target = null;
+    //                 soldier.order = SoliderOrder.RUSH;
+    //                 dieSoldier.attack.position.cloneTo(soldier.attack.position);
+    //                 soldiers[soldier.index] = soldier;
+    //             }
+    //             this.ecs.removeEntity(dieSoldier.eid);
+    //         }
+    //     }
+    //     const info = hero.getComponent(HeroInfoComponent);
+    //     if (info?.view) {
+    //         info.view.updateHp(hero.hp / hero.maxHp);
+    //     }
+    // }
 
     private _findAttackTarget(battle: BattleComponent, fightEid: number) {
         const fighterOwner = this.ecs.getComponent(fightEid, OwnerComponent);

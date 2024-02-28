@@ -19,7 +19,7 @@ export class VirtuallyList extends Laya.Script {
     @property({ type: Laya.Prefab })
     public cellPrefab!: Laya.Prefab; //节点的预制体
 
-    onAwake(): void {
+    override onAwake(): void {
         const node = this._createNode();
         const count = Math.ceil(this.owner.height / node.height) + 2;
         for (let i = 0; i < count; i++) {

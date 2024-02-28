@@ -9,11 +9,11 @@ const { regClass, property } = Laya;
 
 @regClass()
 export class AllianceMediator extends Mediator {
-    owner!: AllianceUI;
+    declare owner: AllianceUI;
 
     private _alliances: AllianceRow[] = [];
 
-    onAwake(): void {
+    override onAwake(): void {
         let labels = "";
         for (const data of TableUtil.getRows(app.service.table.alliance, {})) {
             this._alliances.push(data);

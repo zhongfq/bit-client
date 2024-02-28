@@ -7,9 +7,9 @@ const { regClass, property } = Laya;
 
 @regClass()
 export class MailInfoMediator extends Mediator {
-    owner!: MailInfoUI;
+    declare owner: MailInfoUI;
 
-    onAwake(): void {
+    override onAwake(): void {
         this.initUIEvent();
         this.updateInfo();
         this.updateList();
@@ -41,7 +41,9 @@ export class MailInfoMediator extends Mediator {
     //刷新界面信息
     updateInfo() {
         const title = this.owner.refData ? this.owner.refData.title : this.owner.oepnData.title;
-        const content = this.owner.refData ? this.owner.refData.content : this.owner.oepnData.content;
+        const content = this.owner.refData
+            ? this.owner.refData.content
+            : this.owner.oepnData.content;
         this.owner.labelTitle.text = title;
         this.owner.labelContent.text = content;
         if (

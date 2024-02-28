@@ -10,7 +10,7 @@ export class RenderSystem extends ecs.System {
         super();
     }
 
-    onAddComponent(component: ecs.Component): void {
+    override onAddComponent(component: ecs.Component): void {
         if (component instanceof AnimationComponent) {
             this._loadAnimation(component);
         } else if (component instanceof HeroInfoComponent) {
@@ -18,7 +18,7 @@ export class RenderSystem extends ecs.System {
         }
     }
 
-    onRemoveComponent(component: ecs.Component): void {
+    override onRemoveComponent(component: ecs.Component): void {
         if (component instanceof AnimationComponent) {
             component.view?.destroy(true);
             component.view = null;

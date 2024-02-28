@@ -15,7 +15,7 @@ export class ChestItemMediator extends Mediator {
     declare owner: ChestItemUI;
     declare selectedIndex: number;
 
-    onAwake(): void {}
+    override onAwake(): void {}
 
     onListRender(item: Laya.Sprite, index: number) {
         // item.updateInfo(item.dataSource);

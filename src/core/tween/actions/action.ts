@@ -105,7 +105,7 @@ export class FiniteTimeAction extends Action {
         this._duration = duration;
     }
 
-    clone(): FiniteTimeAction {
+    override clone(): FiniteTimeAction {
         return new FiniteTimeAction();
     }
 }
@@ -138,31 +138,31 @@ export class Speed extends Action {
         return true;
     }
 
-    clone(): Speed {
+    override clone(): Speed {
         const action = new Speed();
         action.initWithAction(this._innerAction!.clone(), this._speed);
         return action;
     }
 
-    startWithTarget(target: any): void {
+    override startWithTarget(target: any): void {
         Action.prototype.startWithTarget.call(this, target);
         this._innerAction!.startWithTarget(target);
     }
 
-    stop(): void {
+    override stop(): void {
         this._innerAction!.stop();
         Action.prototype.stop.call(this);
     }
 
-    step(dt: number): void {
+    override step(dt: number): void {
         this._innerAction!.step(dt * this._speed);
     }
 
-    isDone(): boolean {
+    override isDone(): boolean {
         return this._innerAction!.isDone();
     }
 
-    reverse(): Speed {
+    override reverse(): Speed {
         return new Speed(this._innerAction!.reverse()!, this._speed);
     }
 

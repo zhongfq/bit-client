@@ -5,9 +5,9 @@ const { regClass, property } = Laya;
 
 @regClass()
 export class LoginServerListMediator extends Mediator {
-    owner!: LoginServerUI;
+    declare owner: LoginServerUI;
 
-    onStart(): void {
+    override onStart(): void {
         this.owner.listServer.mouseHandler = new Laya.Handler(this, this.listClick);
         this.owner.listServer.renderHandler = new Laya.Handler(this, this.itemUpdate);
         this.owner.btnClose.on(Laya.Event.CLICK, () => {

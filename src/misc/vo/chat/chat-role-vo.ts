@@ -11,7 +11,7 @@ import { MoneyRow } from "../../../def/table";
  * 道具
  */
 export class ChatRoleVo extends VO<any, chat.ChatRole> {
-    get id(): number {
+    override get id(): number {
         if (this._cmd) {
             return Number(this._cmd.rid);
         }

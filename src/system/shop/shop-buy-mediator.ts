@@ -10,12 +10,12 @@ const { regClass, property } = Laya;
 
 @regClass()
 export class ShopBuyMediator extends Mediator {
-    owner!: ShopBuyUI;
+    declare owner: ShopBuyUI;
 
     private itemVo!: GoodsVo; //购买道具
     private costVo!: GoodsVo; //货币道具
 
-    onAwake(): void {
+    override onAwake(): void {
         this.itemVo = VoUtil.createVo(this.owner.openData.shopItem.refData.items[0].id);
         this.initUIEvent();
         this.initInfo();

@@ -6,12 +6,12 @@ import { AlertUIBase } from "./AlertUI.generated";
 export class AlertUI extends AlertUIBase {
     args!: AlertArgs;
 
-    open(closeOther?: boolean | undefined, param?: any): void {
+    override open(closeOther?: boolean | undefined, param?: any): void {
         this.args = param;
         super.open(closeOther, param);
     }
 
-    close(type?: string | undefined): void {
+    override close(type?: string | undefined): void {
         if (!type) {
             Laya.Dialog.manager.close(this);
         }

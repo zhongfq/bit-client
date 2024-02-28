@@ -10,10 +10,10 @@ const { regClass, property } = Laya;
 
 @regClass()
 export class BagMediator extends Mediator {
-    owner!: BagUI;
+    declare owner: BagUI;
     itemListData!: ItemVo[];
 
-    onAwake(): void {
+    override onAwake(): void {
         this.initUIEvent();
         this.initServiceEvent();
         this.updateList();

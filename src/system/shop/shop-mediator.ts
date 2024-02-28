@@ -12,11 +12,11 @@ import { Shop1Row } from "../../def/table";
 const { regClass, property } = Laya;
 @regClass()
 export class ShopMediator extends Mediator {
-    owner!: ShopUI;
+    declare owner: ShopUI;
     shopInfoData!: proto.shop.s2c_load; //商城信息
     itemListData!: ShopItem[]; //商城道具列表
 
-    onAwake(): void {
+    override onAwake(): void {
         this.initUIEvent();
         this.callShopLoad();
     }

@@ -160,13 +160,13 @@ export class TweenAction extends ActionInterval {
         this.initWithDuration(duration);
     }
 
-    clone(): TweenAction {
+    override clone(): TweenAction {
         const action = new TweenAction(this._duration, this._originProps, this._opts);
         this._cloneDecoration(action);
         return action;
     }
 
-    startWithTarget(target: Record<string, unknown>): void {
+    override startWithTarget(target: Record<string, unknown>): void {
         ActionInterval.prototype.startWithTarget.call(this, target);
 
         const relative = !!this._opts.relative;
@@ -207,7 +207,7 @@ export class TweenAction extends ActionInterval {
         }
     }
 
-    update(t: number): void {
+    override update(t: number): void {
         const target = this.target;
         if (!target) return;
 

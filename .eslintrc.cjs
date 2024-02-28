@@ -10,6 +10,7 @@ module.exports = {
     parser: "@typescript-eslint/parser",
     rules: {
         "@typescript-eslint/no-namespace": "off",
+        "@typescript-eslint/no-shadow": "error",
 
         // TODO:
         "@typescript-eslint/no-explicit-any": "off",

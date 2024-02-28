@@ -14,7 +14,7 @@ export class TaskMediator extends Mediator {
     declare owner: TaskUI;
     private tlTaskData: TaskVo[] = [];
 
-    onAwake(): void {
+    override onAwake(): void {
         this.initUIEvent();
         this.initServiceEvent();
         this.tlTaskData.push(app.service.task.mainTask);

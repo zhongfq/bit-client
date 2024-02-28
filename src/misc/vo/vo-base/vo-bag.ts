@@ -11,7 +11,6 @@ VO封装了缓存cmd跟配置表ref，原则上每个缓存cmd都必须封装成
 export type BagEventType = "OnChanged" | "OnRemove" | "OnAdd" | "OnUpdate";
 
 export abstract class VoBag<T extends VO<any, any>> {
-    public static __cname: string = "VOBagSubset";
     protected bag = new Map<string | number, T>();
 
     protected onDestroy(): void {}

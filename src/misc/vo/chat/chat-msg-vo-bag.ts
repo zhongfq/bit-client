@@ -20,7 +20,7 @@ export class ChatMsgVoBag extends VoBag<ChatMsgVo> {
         }
     }
 
-    protected add(t: ChatMsgVo) {
+    protected override add(t: ChatMsgVo) {
         this.bag.set(this.bag.size + 1, t);
     }
 

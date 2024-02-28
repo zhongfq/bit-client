@@ -17,7 +17,7 @@ export class TroopSystem extends ecs.System {
         super();
     }
 
-    onAddComponent(component: ecs.Component): void {}
+    override onAddComponent(component: ecs.Component): void {}
 
     update(dt: number): void {
         const currTimer = Laya.timer.currTimer;

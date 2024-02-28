@@ -4,5 +4,5 @@ const { regClass } = Laya;
 
 @regClass()
 export class HomeUI extends HomeUIBase {
-    onAwake(): void {}
+    override onAwake(): void {}
 }

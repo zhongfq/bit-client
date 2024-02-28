@@ -9,7 +9,7 @@ import { ChatCellUIBase } from "./ChatCellUI.generated";
 export class ChatCellUI extends ChatCellUIBase {
     msgData!: ChatMsgVo;
 
-    set_dataSource(data: any) {
+    override set_dataSource(data: any) {
         super.set_dataSource(data);
         this.msgData = data;
         this.updateInfo();

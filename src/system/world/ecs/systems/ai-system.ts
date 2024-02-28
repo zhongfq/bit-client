@@ -13,7 +13,7 @@ export class AISystem extends ecs.System {
         super();
     }
 
-    onAddComponent(component: ecs.Component): void {
+    override onAddComponent(component: ecs.Component): void {
         if (component instanceof SoldierComponent) {
             // const ai = component.addComponent(AiComponent);
             // ai.tree = new TroopAi();

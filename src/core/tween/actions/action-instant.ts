@@ -22,40 +22,41 @@
  THE SOFTWARE.
 */
 
+import { Callback } from "../../dispatcher";
 import { FiniteTimeAction, Action } from "./action";
 
 export class ActionInstant extends FiniteTimeAction {
-    isDone(): boolean {
+    override isDone(): boolean {
         return true;
     }
 
-    step(dt: any): void {
+    override step(dt: any): void {
         this.update(1);
     }
 
-    update(dt: number): void {
+    override update(dt: number): void {
         // nothing
     }
 
-    reverse(): Action {
+    override reverse(): Action {
         return this.clone();
     }
 
-    clone(): ActionInstant {
+    override clone(): ActionInstant {
         return new ActionInstant();
     }
 }
 
 export class Show extends ActionInstant {
-    update(dt: any): void {
+    override update(dt: any): void {
         (this.target as Laya.Sprite).visible = true;
     }
 
-    reverse(): Hide {
+    override reverse(): Hide {
         return new Hide();
     }
 
-    clone(): Show {
+    override clone(): Show {
         return new Show();
     }
 }
@@ -65,15 +66,15 @@ export function show(): ActionInstant {
 }
 
 export class Hide extends ActionInstant {
-    update(dt: any): void {
+    override update(dt: any): void {
         (this.target as Laya.Sprite).visible = false;
     }
 
-    reverse(): Show {
+    override reverse(): Show {
         return new Show();
     }
 
-    clone(): Hide {
+    override clone(): Hide {
         return new Hide();
     }
 }
@@ -83,16 +84,16 @@ export function hide(): ActionInstant {
 }
 
 export class ToggleVisibility extends ActionInstant {
-    update(dt: any): void {
+    override update(dt: any): void {
         const target = this.target as Laya.Sprite;
         target.visible = !target.visible;
     }
 
-    reverse(): ToggleVisibility {
+    override reverse(): ToggleVisibility {
         return new ToggleVisibility();
     }
 
-    clone(): ToggleVisibility {
+    override clone(): ToggleVisibility {
         return new ToggleVisibility();
     }
 }
@@ -109,7 +110,7 @@ export class RemoveSelf extends ActionInstant {
         isNeedCleanUp !== undefined && this.init(isNeedCleanUp);
     }
 
-    update(dt: any): void {
+    override update(dt: any): void {
         this.target?.removeSelf();
         if (this._isNeedCleanUp) {
             this.target?.destroy(true);
@@ -121,11 +122,11 @@ export class RemoveSelf extends ActionInstant {
         return true;
     }
 
-    reverse(): RemoveSelf {
+    override reverse(): RemoveSelf {
         return new RemoveSelf(this._isNeedCleanUp);
     }
 
-    clone(): RemoveSelf {
+    override clone(): RemoveSelf {
         return new RemoveSelf(this._isNeedCleanUp);
     }
 }
@@ -136,10 +137,10 @@ export function removeSelf(isNeedCleanUp: boolean): ActionInstant {
 
 export class CallFunc extends ActionInstant {
     private _selectorTarget = null;
-    private _function: Function | null = null;
+    private _function: Callback | null = null;
     private _data = null;
 
-    constructor(selector?: Function, selectorTarget?: any, data?: any) {
+    constructor(selector?: Callback, selectorTarget?: any, data?: any) {
         super();
         this.initWithFunction(selector, selectorTarget, data);
     }
@@ -163,7 +164,7 @@ export class CallFunc extends ActionInstant {
         }
     }
 
-    update(dt: any): void {
+    override update(dt: any): void {
         this.execute();
     }
 
@@ -180,14 +181,14 @@ export class CallFunc extends ActionInstant {
         }
     }
 
-    clone(): CallFunc {
+    override clone(): CallFunc {
         const action = new CallFunc();
         action.initWithFunction(this._function, this._selectorTarget, this._data);
         return action;
     }
 }
 
-export function callFunc(selector: Function, selectorTarget?: any, data?: any): ActionInstant {
+export function callFunc(selector: Callback, selectorTarget?: any, data?: any): ActionInstant {
     return new CallFunc(selector, selectorTarget, data);
 }
 
@@ -208,7 +209,7 @@ export class SetAction extends ActionInstant {
         return true;
     }
 
-    update(): void {
+    override update(): void {
         const props = this._props;
         const target = this.target as any;
         for (const name in props) {
@@ -216,7 +217,7 @@ export class SetAction extends ActionInstant {
         }
     }
 
-    clone(): SetAction {
+    override clone(): SetAction {
         const action = new SetAction();
         action.init(this._props);
         return action;

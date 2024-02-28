@@ -13,7 +13,7 @@ export class homeTaskMediator extends Mediator {
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
     declare owner: HomeTaskBoxUI;
 
-    onAwake(): void {
+    override onAwake(): void {
         this.initEvent();
         this.owner.on(Laya.Event.CLICK, this, () => {
             app.ui.show(ui.TASK);

@@ -7,5 +7,5 @@ export class ChatUI extends ChatUIBase {
     addNum = 0;
     tlChatCell: ChatCellUI[] = [];
 
-    onAwake(): void {}
+    override onAwake(): void {}
 }

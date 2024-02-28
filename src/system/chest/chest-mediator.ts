@@ -15,7 +15,7 @@ export class ChestMediator extends Mediator {
     declare owner: ChestUI;
     declare selectedIndex: number;
 
-    onAwake(): void {
+    override onAwake(): void {
         this.initUIEvent();
         this.initServiceEvent();
         this.updateList();

@@ -13,13 +13,13 @@ export class ItemTipsUI extends ItemTipsUIBase {
     data!: Iitem_Tips_Param;
 
     // isShowEffect = false;
-    onAwake(): void {
+    override onAwake(): void {
         this.Sprite.on(Laya.Event.CLICK, () => {
             this.close();
         });
     }
 
-    open(closeOther?: boolean | undefined, param?: any): void {
+    override open(closeOther?: boolean | undefined, param?: any): void {
         this.data = param.itemTipsParam;
         if (param.x < Laya.stage.width * 0.5) {
             this.Image.anchorX = 0;
@@ -51,7 +51,7 @@ export class ItemTipsUI extends ItemTipsUIBase {
         Laya.Dialog.lock(false);
     }
 
-    onOpened(param: any): void {
+    override onOpened(param: any): void {
         this.iconItem.updateGoods(this.data.vo);
         // this.itemNumber.text = "当前拥有："+this.data.vo.goodsNumber;
         // this.itemDesc.text = this.data.vo.desc;

@@ -10,7 +10,7 @@ export interface OpenData {
 export class ShopBuyUI extends ShopBuyUIBase {
     openData!: OpenData;
 
-    open(closeOther?: boolean | undefined, param?: any): void {
+    override open(closeOther?: boolean | undefined, param?: any): void {
         this.openData = param;
         super.open(closeOther, param);
     }

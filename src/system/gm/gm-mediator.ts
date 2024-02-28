@@ -9,10 +9,10 @@ interface GmCmdData {
 }
 @regClass()
 export class GmMediator extends Mediator {
-    owner!: GmUI;
+    declare owner: GmUI;
     listData!: GmCmdData[];
 
-    onAwake(): void {
+    override onAwake(): void {
         this.owner.listEdict.mouseHandler = new Laya.Handler(this, this.onListClick);
         this.owner.listEdict.renderHandler = new Laya.Handler(this, this.updateItem);
         this.owner.listEdict.selectHandler = new Laya.Handler(this, this.onListClick);

@@ -14,10 +14,10 @@ const { regClass, property } = Laya;
 
 @regClass()
 export class ChatMediator extends Mediator {
-    owner!: ChatUI;
+    declare owner: ChatUI;
     emojiData!: EmojiRow[];
 
-    onAwake(): void {
+    override onAwake(): void {
         this.owner.boxEmoji.visible = false;
         this.emojiData = TableUtil.getRows(app.service.table.emoji, {});
         this.initUIEvent();
@@ -25,7 +25,7 @@ export class ChatMediator extends Mediator {
         this.initInfo();
     }
 
-    onStart(): void {
+    override onStart(): void {
         this.updateList();
     }
 

@@ -6,7 +6,7 @@ import { ToastUIBase } from "./ToastUI.generated";
 export class ToastUI extends ToastUIBase {
     args!: ToastArgs;
 
-    open(closeOther?: boolean | undefined, param?: any): void {
+    override open(closeOther?: boolean | undefined, param?: any): void {
         this.args = param;
         super.open(closeOther, param);
         console.log("xxxdfa open");

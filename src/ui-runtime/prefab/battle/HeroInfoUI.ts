@@ -11,11 +11,11 @@ export const enum HpStyle {
 export class HeroInfoUI extends HeroInfoUIBase {
     private _hpInitWidth: number = 0;
 
-    onAwake(): void {
+    override onAwake(): void {
         // this._hpInitWidth = this.hp.width;
     }
 
-    onEnable(): void {
+    override onEnable(): void {
         const autoBitmap = this.hpBar.graphics as Laya.AutoBitmap;
         const tex = autoBitmap.source;
         console.log(tex);

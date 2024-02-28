@@ -12,11 +12,11 @@ const { regClass } = Laya;
 
 @regClass()
 export class MailMediator extends Mediator {
-    owner!: MailUI;
+    declare owner: MailUI;
 
     itemListData!: proto.mail.MailInfo[]; //邮件列表数据
 
-    onAwake(): void {
+    override onAwake(): void {
         this.initUIEvent();
         this.updateList();
     }

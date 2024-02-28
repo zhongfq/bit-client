@@ -17,7 +17,7 @@ export class TaskVo extends VO<TaskMainRow | TaskBranchRow | TaskDailyRow, task.
         return this._ref ? this._ref.id : 0;
     }
 
-    get id(): number {
+    override get id(): number {
         if (this._cmd) {
             return Number(this._cmd.id);
         }

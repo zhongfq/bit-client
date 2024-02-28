@@ -28,7 +28,7 @@ export class Mediator extends Laya.Script {
         target.on(toEventType(type), thisArg, callback);
     }
 
-    onDestroy() {
+    override onDestroy() {
         for (const listener of this._listeners) {
             const { type, target, callback, thisArg } = listener;
             target.off(toEventType(type), thisArg, callback);
@@ -42,7 +42,7 @@ export class Mediator extends Laya.Script {
 
     onCreate?(args?: any): void;
 
-    onUpdate(): void {
+    override onUpdate(): void {
         this.timer.update(Laya.timer.delta / 1000);
     }
 }

@@ -9,7 +9,7 @@ import { GoodsVo } from "./goods-vo";
  * 道具
  */
 export class ItemVo extends GoodsVo<ItemRow, bag.Item> {
-    refTable!: ItemTable;
+    declare refTable: ItemTable;
 
     //#region 重载
     get refId(): number {
@@ -56,7 +56,7 @@ export class ItemVo extends GoodsVo<ItemRow, bag.Item> {
         return `resources/atlas/imgFrame/img_icon_frame_${this.quality}.png`;
     }
 
-    onGetNumber(): number {
+    override onGetNumber(): number {
         if (this._cmd) {
             return this._cmd.num ? this._cmd.num : 0;
         }

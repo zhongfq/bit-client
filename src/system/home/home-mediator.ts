@@ -15,12 +15,12 @@ import { TableUtil } from "../table/table-util";
 
 @regClass()
 export class MainMediator extends Mediator {
-    owner!: HomeUI;
+    declare owner: HomeUI;
     iframeElement: any;
     divElement: any;
 
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
-    onAwake(): void {
+    override onAwake(): void {
         this.initBtn();
         this._initServiceEvent();
         this._initChat();
@@ -64,7 +64,7 @@ export class MainMediator extends Mediator {
         this.owner.progressBarExp.value = exp / lvRow!.upgrade_exp;
     }
 
-    onKeyDown(evt: Laya.Event): void {
+    override onKeyDown(evt: Laya.Event): void {
         if (evt.ctrlKey && evt.keyCode == Laya.Keyboard.B) {
             app.ui.show(ui.GM);
         }

@@ -4,7 +4,7 @@ import { IconUIBase } from "./IconUI.generated";
 
 @regClass()
 export class IconUI extends IconUIBase {
-    onAwake(): void {}
+    override onAwake(): void {}
 
     public updateGoods(vo?: GoodsVo) {
         if (vo) {

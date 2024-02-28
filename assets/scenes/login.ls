@@ -101,18 +101,6 @@
       "maxChars": 0,
       "prompt": "输入用户名...",
       "promptColor": "#A9A9A9"
-    },
-    {
-      "_$id": "ukpbg5qd",
-      "_$type": "Image",
-      "name": "Image",
-      "x": 426,
-      "y": -155,
-      "width": 750,
-      "height": 1628,
-      "skin": "res://1a651625-8ba6-4ea3-9138-7204ab83f4aa",
-      "useSourceSize": true,
-      "color": "#ffffff"
     }
   ]
 }

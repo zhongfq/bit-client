@@ -10,7 +10,7 @@ export abstract class GoodsVo<IRef = any, Cmd = any> extends VO<IRef, Cmd> {
     //获取物品refId
     abstract get refId(): number;
     //获取物品数据库id
-    abstract get id(): number;
+    abstract override get id(): number;
     //物品类型
     abstract get goodsType(): number;
     //获取描述

@@ -11,7 +11,7 @@ export class LoadingMediator extends Laya.Script {
     virtualProgress: number = 0;
     progress: number = 0;
 
-    onAwake(): void {
+    override onAwake(): void {
         this.owner.progress.changeHandler = new Laya.Handler(this, (val: number) => {
             if (val == 1) {
                 app.ui.replace(ui.HOME_SCENE);
@@ -43,7 +43,7 @@ export class LoadingMediator extends Laya.Script {
         this.progress = 100;
     }
 
-    onUpdate(): void {
+    override onUpdate(): void {
         this.updateProg();
         this.updateView();
     }

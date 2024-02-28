@@ -19,7 +19,7 @@ export class ImageBar extends ImageBarBase {
         }
     }
 
-    render(ctx: Laya.Context, x: number, y: number): void {
+    override render(ctx: Laya.Context, x: number, y: number): void {
         const bitmap = this.graphics as Laya.AutoBitmap;
         if (bitmap.source && bitmap.uv.length === 0) {
             for (let i = 0; i < bitmap.source.uv.length; i++) {
@@ -34,7 +34,7 @@ export class ImageBar extends ImageBarBase {
         super.render(ctx, x, y);
     }
 
-    protected createChildren(): void {
+    protected override createChildren(): void {
         const bitmap = new Laya.AutoBitmap();
         bitmap.uv = [];
         this.setGraphics(bitmap, true);

@@ -11,7 +11,7 @@ export class WorldMediator extends Laya.Script {
     private _initPosition: Laya.Point = new Laya.Point();
     private _pressStart: Laya.Point | null = null;
 
-    onAwake() {
+    override onAwake() {
         this._initPosition.setTo(this.owner.joystick.x, this.owner.joystick.y);
         this.owner.joystickGroup.on(Laya.Event.MOUSE_DOWN, this, this.onJoysticHandler);
         this.owner.joystickGroup.on(Laya.Event.MOUSE_MOVE, this, this.onJoysticHandler);

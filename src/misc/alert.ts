@@ -3,7 +3,7 @@ import { AlertUI } from "../ui-runtime/prefab/misc/AlertUI";
 
 @Laya.regClass()
 export class AlertMediator extends Mediator {
-    onStart(): void {
+    override onStart(): void {
         const owner = this.owner as AlertUI;
         const args = owner.args;
 

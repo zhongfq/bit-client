@@ -57,7 +57,7 @@ export class WorldContext extends Mediator {
         return (this._camera ||= this.scene3D.getChildByName("Main Camera") as Laya.Camera);
     }
 
-    onAwake(): void {
+    override onAwake(): void {
         this._ecs = new ecs.World();
         this._ecs.addSingletonComponent(CameraComponent);
         this._ecs.addSingletonComponent(JoystickComponent);
@@ -86,7 +86,7 @@ export class WorldContext extends Mediator {
         // });
     }
 
-    async onStart() {
+    override async onStart() {
         await app.service.gm.requestGM("setup_troop 1 101 1 10");
         await app.service.gm.requestGM("join_world");
 
@@ -95,7 +95,7 @@ export class WorldContext extends Mediator {
         await app.service.world.requestChangeViewport({ x: 0, y: 0 });
     }
 
-    onUpdate(): void {
+    override onUpdate(): void {
         super.onUpdate();
         this._ecs.update(Laya.timer.delta / 1000);
     }

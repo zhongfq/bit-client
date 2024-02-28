@@ -9,7 +9,7 @@ export class JoystickSystem extends ecs.System {
         super();
     }
 
-    onCreate() {
+    override onCreate() {
         const joystick = this.ecs.getSingletonComponent(JoystickComponent)!;
         const owner = this.context.owner;
         joystick.initX = owner.joystick.x;

@@ -35,6 +35,7 @@ import { removeSelf, show, hide, callFunc, SetAction } from "./actions/action-in
 import { Action, FiniteTimeAction } from "./actions/action";
 import { TweenSystem } from "./tween-system";
 import { TweenAction } from "./tween-action";
+import { Callback } from "../dispatcher";
 
 export type TweenEasing =
     | "linear"
@@ -188,7 +189,7 @@ export class Tween<T> {
         return this;
     }
 
-    call(callback: Function): Tween<T> {
+    call(callback: Callback): Tween<T> {
         const action = callFunc(callback);
         this._actions.push(action);
         return this;

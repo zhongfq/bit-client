@@ -18,14 +18,13 @@ import { ShopService } from "./system/shop/shop-service";
 import { TableService } from "./system/table/table-service";
 import { TaskService } from "./system/task/task-service";
 import { UserService } from "./system/user/user-service";
-import { Renderable2D } from "./system/world/ecs/components/render-component";
 import { WorldService } from "./system/world/world-service";
 
 const { regClass, property } = Laya;
 
 @regClass()
 export class Main extends AppBase {
-    onAwake(): void {
+    override onAwake(): void {
         ui.register();
 
         const rt = new Laya.RenderTexture2D(1024, 1024);
@@ -128,6 +127,21 @@ class App {
         this._service = new ServiceManager();
 
         app.ui.open(ui.LOGIN_SCENE);
+
+        // new BehaviorTest().start();
+    }
+
+    async test() {
+        const t = this.trace();
+        const t1 = this.trace();
+        console.log(t);
+        console.log(t1);
+        console.log(t == t1, t === t1);
+        console.log("test");
+    }
+
+    async trace() {
+        return 0;
     }
 }
 

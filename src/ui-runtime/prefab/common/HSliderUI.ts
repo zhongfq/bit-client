@@ -6,7 +6,7 @@ import { HSliderUIBase } from "./HSliderUI.generated";
 export class HSliderUI extends HSliderUIBase {
     _onSliderChange!: Callback;
 
-    onAwake(): void {
+    override onAwake(): void {
         super.onAwake();
         this.on(Laya.Event.CLICK, () => {});
 

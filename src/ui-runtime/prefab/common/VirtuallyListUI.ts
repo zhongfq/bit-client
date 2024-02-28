@@ -6,7 +6,7 @@ import { VirtuallyListUIBase } from "./VirtuallyListUI.generated";
 export class VirtuallyListUI extends VirtuallyListUIBase {
     rectangle!: Laya.Rectangle;
 
-    onAwake(): void {
+    override onAwake(): void {
         this.rectangle = new Laya.Rectangle(0, 0, this.width, this.height);
         this.scrollRect = this.rectangle;
     }

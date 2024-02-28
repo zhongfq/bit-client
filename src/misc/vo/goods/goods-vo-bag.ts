@@ -5,8 +5,6 @@ import { GoodsVo } from "./goods-vo";
  * GoodsBag
  */
 export abstract class GoodsVoBag<T extends GoodsVo = GoodsVo> extends VoBag<T> {
-    static __cname: string = "GoodsBag";
-
     /**
      * 根据refId跟goodsType创建一个只有ref的VO
      */

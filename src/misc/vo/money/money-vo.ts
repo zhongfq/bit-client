@@ -9,7 +9,7 @@ import { GoodsVo } from "../goods/goods-vo";
  * 道具
  */
 export class MoneyVo extends GoodsVo<MoneyRow, proto.money.MoneyItem> {
-    refTable!: ItemTable;
+    declare refTable: ItemTable;
 
     //#region 重载
     get refId(): number {
@@ -39,7 +39,7 @@ export class MoneyVo extends GoodsVo<MoneyRow, proto.money.MoneyItem> {
         return this._ref ? this._ref.name : "";
     }
 
-    protected onGetNumber(): number {
+    protected override onGetNumber(): number {
         if (this._cmd) {
             return this._cmd.num ? this._cmd.num : 0;
         }

@@ -12,7 +12,7 @@ export class ButtonCommont extends Laya.Script {
     curScaleY!: number;
 
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
-    onAwake(): void {
+    override onAwake(): void {
         this.curScaleX = this.owner.scaleX;
         this.curScaleY = this.owner.scaleY;
         this.owner.on(Laya.Event.MOUSE_DOWN, () => {
