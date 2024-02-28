@@ -1,0 +1,232 @@
+{
+  "_$ver": 1,
+  "_$id": "zcgqj8oe",
+  "_$type": "Sprite3D",
+  "name": "Sprite3D",
+  "_$child": [
+    {
+      "_$id": "ml5iu72i",
+      "_$type": "Sprite3D",
+      "name": "Plane",
+      "transform": {
+        "localScale": {
+          "_$type": "Vector3",
+          "x": 5,
+          "y": 5,
+          "z": 5
+        }
+      },
+      "_$comp": [
+        {
+          "_$type": "MeshFilter",
+          "sharedMesh": {
+            "_$uuid": "4a4afb22-ef83-40a2-a6a8-212a2d20c52f",
+            "_$type": "Mesh"
+          }
+        },
+        {
+          "_$type": "MeshRenderer",
+          "sharedMaterials": [
+            {
+              "_$uuid": "6f90bbb0-bcb2-4311-8a9d-3d8277522098",
+              "_$type": "Material"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "uwawdwhl",
+      "_$type": "Sprite3D",
+      "name": "Objs",
+      "_$child": [
+        {
+          "_$id": "rv4ruo21",
+          "_$type": "Sprite3D",
+          "name": "Obj1",
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": -1.629854440689087,
+              "y": 0.38591355085372925,
+              "z": 1.3351843357086182
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": 0.7071067811865475,
+              "w": 0.7071067811865476
+            }
+          },
+          "_$comp": [
+            {
+              "_$type": "MeshFilter",
+              "sharedMesh": {
+                "_$uuid": "4a4afb22-ef83-40a2-a6a8-212a2d20c52f",
+                "_$type": "Mesh"
+              }
+            },
+            {
+              "_$type": "MeshRenderer",
+              "sharedMaterials": [
+                {
+                  "_$uuid": "66bd603c-6d51-4891-9509-7df11d94c31f",
+                  "_$type": "Material"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_$id": "4ld52ix5",
+          "_$type": "Sprite3D",
+          "name": "Obj2",
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": -1.3061916828155518,
+              "y": 0.46933743357658386,
+              "z": 0.6088409423828125
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": 0.7071067811865475,
+              "w": 0.7071067811865476
+            }
+          },
+          "_$comp": [
+            {
+              "_$type": "MeshFilter",
+              "sharedMesh": {
+                "_$uuid": "4a4afb22-ef83-40a2-a6a8-212a2d20c52f",
+                "_$type": "Mesh"
+              }
+            },
+            {
+              "_$type": "MeshRenderer",
+              "sharedMaterials": [
+                {
+                  "_$uuid": "97b9d1b3-315d-4077-ab1f-c11e2610a406",
+                  "_$type": "Material"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_$id": "meuh8r6l",
+          "_$type": "Sprite3D",
+          "name": "Obj3",
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": -0.3563767671585083,
+              "y": 0.47747769951820374,
+              "z": 1.3628406524658203
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": 0.7071067811865475,
+              "w": 0.7071067811865476
+            }
+          },
+          "_$comp": [
+            {
+              "_$type": "MeshFilter",
+              "sharedMesh": {
+                "_$uuid": "4a4afb22-ef83-40a2-a6a8-212a2d20c52f",
+                "_$type": "Mesh"
+              }
+            },
+            {
+              "_$type": "MeshRenderer",
+              "sharedMaterials": [
+                {
+                  "_$uuid": "11f14e7a-36ba-493d-ba4b-c4826ccc2978",
+                  "_$type": "Material"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_$id": "orqdmcit",
+          "_$type": "Sprite3D",
+          "name": "Obj4",
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": 0.8041908409798316,
+              "y": 0.69662,
+              "z": 0.49297336225606303
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": 0.7071067811865475,
+              "w": 0.7071067811865476
+            },
+            "localScale": {
+              "_$type": "Vector3",
+              "x": 1.5,
+              "y": 1.5,
+              "z": 1.5
+            }
+          },
+          "_$comp": [
+            {
+              "_$type": "MeshFilter",
+              "sharedMesh": {
+                "_$uuid": "4a4afb22-ef83-40a2-a6a8-212a2d20c52f",
+                "_$type": "Mesh"
+              }
+            },
+            {
+              "_$type": "MeshRenderer",
+              "sharedMaterials": [
+                {
+                  "_$uuid": "99da8ca9-3c7f-483a-af44-c7ed11930423",
+                  "_$type": "Material"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_$id": "hizlog2g",
+          "_$type": "Sprite3D",
+          "name": "Obj5",
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": 1.2395932478495963,
+              "y": 0.47278517484664895,
+              "z": 1.595525333936429
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": 0.7071067811865475,
+              "w": 0.7071067811865476
+            }
+          },
+          "_$comp": [
+            {
+              "_$type": "MeshFilter",
+              "sharedMesh": {
+                "_$uuid": "4a4afb22-ef83-40a2-a6a8-212a2d20c52f",
+                "_$type": "Mesh"
+              }
+            },
+            {
+              "_$type": "MeshRenderer",
+              "sharedMaterials": [
+                {
+                  "_$uuid": "fff90830-af1b-4115-aeed-f735544d4c1c",
+                  "_$type": "Material"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

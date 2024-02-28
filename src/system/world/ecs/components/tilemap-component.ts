@@ -22,9 +22,17 @@ export class TilemapComponent extends ecs.SingletonComponent {
 
     static readonly STATIC_BASE_WIDTH = 256;
     static readonly STATIC_BASE_HEIGHT = 256;
-    static readonly STATIC_SCALE = 2;
+    static readonly STATIC_SCALE = 3;
 
     static readonly STATIC_CFG_MAP: Map<number, Tilemap.StaticConfig> = new Map([
+        [51, { resName: "map_Grassland_Tree_01", offsetY: 0.38591 }],
+        [52, { resName: "map_Grassland_Tree_02", offsetY: 0.46933 }],
+        [53, { resName: "map_Grassland_Tree_03", offsetY: 0.47747 }],
+        [49, { resName: "map_Grassland_hill_01", offsetY: 0.69662 }],
+        [50, { resName: "map_Grassland_hill_02", offsetY: 0.47278 }],
+    ]);
+
+    static readonly STATIC_CFG_MAP_UI3D: Map<number, Tilemap.StaticConfig> = new Map([
         [51, { resName: "map_Grassland_Tree_01", offsetY: 0.33846 }],
         [52, { resName: "map_Grassland_Tree_02", offsetY: 0.40402 }],
         [53, { resName: "map_Grassland_Tree_03", offsetY: 0.40269 }],

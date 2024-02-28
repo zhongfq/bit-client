@@ -76,7 +76,7 @@ export class TilemapSystem extends ecs.System {
 
     private async _initStatic(worldMap: Tilemap.WorldMap, layer: Tilemap.Layer) {
 
-        const prefab: Laya.Prefab = await Laya.loader.load("resources/prefab/world-map/static-ui3d/static-obj.lh", Laya.Loader.HIERARCHY);
+        const prefab: Laya.Prefab = await Laya.loader.load("resources/prefab/world-map/static/static-obj.lh", Laya.Loader.HIERARCHY);
 
         for (let i = 0; i < layer.data.length; i++) {
             const gid = layer.data[i];
@@ -84,6 +84,44 @@ export class TilemapSystem extends ecs.System {
                 continue;
             }
             const cfg = TilemapComponent.STATIC_CFG_MAP.get(gid);
+            if (!cfg) {
+                continue;
+            }
+            const staticObj = prefab.create() as Laya.Sprite3D;
+
+            const pos = staticObj.transform.position;
+            pos.x = i % worldMap.width;
+            pos.y = cfg.offsetY * TilemapComponent.STATIC_SCALE;
+            pos.z = Math.floor(i / worldMap.width);
+            staticObj.transform.position = pos;
+
+            const renderer = staticObj.getChildAt(0).getComponent(Laya.MeshRenderer);
+            const mat = new Laya.BlinnPhongMaterial();
+            const path = StringUtil.format("resources/texture/world-map/static/{0}.png", cfg.resName);
+            const texture = await Laya.loader.load(path, Laya.Loader.TEXTURE2D) as Laya.Texture2D;
+            mat.albedoTexture = texture;
+            mat.renderMode = Laya.MaterialRenderMode.RENDERMODE_TRANSPARENT;
+            renderer.material = mat;
+
+            const scaleX = (texture.width / TilemapComponent.STATIC_BASE_WIDTH) * TilemapComponent.STATIC_SCALE;
+            const scaleZ = (texture.height / TilemapComponent.STATIC_BASE_HEIGHT) * TilemapComponent.STATIC_SCALE;
+            staticObj.transform.localScaleX = scaleX;
+            staticObj.transform.localScaleZ = scaleZ;
+
+            this.context.scene3D.addChild(staticObj);
+        }
+    }
+
+    private async _initStaticUI3D(worldMap: Tilemap.WorldMap, layer: Tilemap.Layer) {
+
+        const prefab: Laya.Prefab = await Laya.loader.load("resources/prefab/world-map/static-ui3d/static-obj.lh", Laya.Loader.HIERARCHY);
+
+        for (let i = 0; i < layer.data.length; i++) {
+            const gid = layer.data[i];
+            if (!gid) {
+                continue;
+            }
+            const cfg = TilemapComponent.STATIC_CFG_MAP_UI3D.get(gid);
             if (!cfg) {
                 continue;
             }
