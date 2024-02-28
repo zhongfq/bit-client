@@ -1,0 +1,164 @@
+{
+  "_$ver": 1,
+  "_$id": "zcgqj8oe",
+  "_$type": "Sprite3D",
+  "name": "Sprite3D",
+  "_$child": [
+    {
+      "_$id": "ml5iu72i",
+      "_$type": "Sprite3D",
+      "name": "Plane",
+      "transform": {
+        "localScale": {
+          "_$type": "Vector3",
+          "x": 5,
+          "y": 5,
+          "z": 5
+        }
+      },
+      "_$comp": [
+        {
+          "_$type": "MeshFilter",
+          "sharedMesh": {
+            "_$uuid": "4a4afb22-ef83-40a2-a6a8-212a2d20c52f",
+            "_$type": "Mesh"
+          }
+        },
+        {
+          "_$type": "MeshRenderer",
+          "sharedMaterials": [
+            {
+              "_$uuid": "6f90bbb0-bcb2-4311-8a9d-3d8277522098",
+              "_$type": "Material"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "2vw0rxjj",
+      "_$type": "Sprite3D",
+      "name": "UI3D1",
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": -1.805305975221606,
+          "y": 0.3384608341001514,
+          "z": -1.2520346182251023
+        }
+      },
+      "_$comp": [
+        {
+          "_$type": "UI3D",
+          "prefab": {
+            "_$uuid": "2bb50f46-f156-456c-bc69-aa0c1024fe2b",
+            "_$type": "Prefab"
+          },
+          "resolutionRate": 256,
+          "renderMode": 2
+        }
+      ]
+    },
+    {
+      "_$id": "01zjowwv",
+      "_$type": "Sprite3D",
+      "name": "UI3D2",
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": -1.4452297698238723,
+          "y": 0.4040292731595587,
+          "z": -0.3478597644094925
+        }
+      },
+      "_$comp": [
+        {
+          "_$type": "UI3D",
+          "prefab": {
+            "_$uuid": "758c2250-bc23-4465-9d4c-2fb6b98b8f20",
+            "_$type": "Prefab"
+          },
+          "resolutionRate": 256,
+          "renderMode": 2
+        }
+      ]
+    },
+    {
+      "_$id": "pz2dvcpp",
+      "_$type": "Sprite3D",
+      "name": "UI3D3",
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": -0.35946694457744677,
+          "y": 0.4026947006055209,
+          "z": -0.06744036383443086
+        }
+      },
+      "_$comp": [
+        {
+          "_$type": "UI3D",
+          "prefab": {
+            "_$uuid": "1c917f0d-f49c-4989-81d9-f5a9aef3e56a",
+            "_$type": "Prefab"
+          },
+          "resolutionRate": 256,
+          "renderMode": 2
+        }
+      ]
+    },
+    {
+      "_$id": "v6ghlh3y",
+      "_$type": "Sprite3D",
+      "name": "UI3D4",
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": 0.29552049407741365,
+          "y": 0.60341,
+          "z": 1.4517521055046612
+        }
+      },
+      "_$comp": [
+        {
+          "_$type": "UI3D",
+          "prefab": {
+            "_$uuid": "ccd97b7b-ebc1-488a-8d94-562f8bf82fbf",
+            "_$type": "Prefab"
+          },
+          "resolutionRate": 256,
+          "scale": {
+            "_$type": "Vector2",
+            "x": 1.5,
+            "y": 1.5
+          },
+          "renderMode": 2
+        }
+      ]
+    },
+    {
+      "_$id": "1i2tvk2y",
+      "_$type": "Sprite3D",
+      "name": "UI3D5",
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": -1.2715487933668717,
+          "y": 0.42114746570587136,
+          "z": 1.3004843733894746
+        }
+      },
+      "_$comp": [
+        {
+          "_$type": "UI3D",
+          "prefab": {
+            "_$uuid": "0df963f8-9831-4c39-b182-acc100fe3cd1",
+            "_$type": "Prefab"
+          },
+          "resolutionRate": 256,
+          "renderMode": 2
+        }
+      ]
+    }
+  ]
+}
