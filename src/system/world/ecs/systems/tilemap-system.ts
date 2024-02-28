@@ -48,7 +48,7 @@ export class TilemapSystem extends ecs.System {
             pos.z = Math.floor(i / worldMap.width);
             tile.transform.position = pos;
 
-            const mat = new Laya.BlinnPhongMaterial();
+            const mat = new Laya.BlinnPhongMaterial(); // 使用 UnlitMaterial 时 tilingOffset 会失效
             const path = atlas.frames[gid - 1].url;
             const tex = Laya.loader.getRes(path) as Laya.Texture;
             mat.albedoTexture = texture;
@@ -96,7 +96,7 @@ export class TilemapSystem extends ecs.System {
             staticObj.transform.position = pos;
 
             const renderer = staticObj.getChildAt(0).getComponent(Laya.MeshRenderer);
-            const mat = new Laya.BlinnPhongMaterial();
+            const mat = new Laya.UnlitMaterial();
             const path = StringUtil.format("resources/texture/world-map/static/{0}.png", cfg.resName);
             const texture = await Laya.loader.load(path, Laya.Loader.TEXTURE2D) as Laya.Texture2D;
             mat.albedoTexture = texture;
@@ -107,6 +107,9 @@ export class TilemapSystem extends ecs.System {
             const scaleZ = (texture.height / TilemapComponent.STATIC_BASE_HEIGHT) * TilemapComponent.STATIC_SCALE;
             staticObj.transform.localScaleX = scaleX;
             staticObj.transform.localScaleZ = scaleZ;
+
+            const rotateX = this.context.camera.transform.localRotationEulerX;
+            staticObj.transform.localRotationEulerX = -rotateX;
 
             this.context.scene3D.addChild(staticObj);
         }
