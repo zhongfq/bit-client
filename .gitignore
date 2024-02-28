@@ -7,6 +7,3 @@ node_modules
 bin/js/bundles
 bin/js/bundle.js
 bin/js/bundle.js.map
-
-src/core/behavior3/behavior-test.ts
-src/core/behavior3/behavior-test.ts.meta
