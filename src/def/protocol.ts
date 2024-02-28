@@ -44,7 +44,8 @@ export const opcode = {
         s2c_score_receive: 0x1F05,
         c2s_switch_hero: 0x1F06,
         s2c_switch_hero: 0x1F07,
-        notify: 0x1F90,
+        notify_chest: 0x1F90,
+        notify_chest_hero: 0x1F91,
     },
     connection: {
         connected: 0x00F1,
@@ -467,10 +468,16 @@ export const registerProtocols = () => {
         decode: proto.chest.s2c_switch_hero.decode,
     });
     register({
-        op: opcode.chest.notify,
-        typeURL: proto.chest.notify.getTypeUrl(),
-        encode: proto.chest.notify.encode,
-        decode: proto.chest.notify.decode,
+        op: opcode.chest.notify_chest,
+        typeURL: proto.chest.notify_chest.getTypeUrl(),
+        encode: proto.chest.notify_chest.encode,
+        decode: proto.chest.notify_chest.decode,
+    });
+    register({
+        op: opcode.chest.notify_chest_hero,
+        typeURL: proto.chest.notify_chest_hero.getTypeUrl(),
+        encode: proto.chest.notify_chest_hero.encode,
+        decode: proto.chest.notify_chest_hero.decode,
     });
     register({
         op: opcode.dungeon.c2s_load,

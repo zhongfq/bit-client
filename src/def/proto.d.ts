@@ -5186,6 +5186,9 @@ declare namespace proto {
 
             /** s2c_load score */
             score?: (chest.IScoreInfo|null);
+
+            /** s2c_load heroIds */
+            heroIds?: (number[]|null);
         }
 
         /** Represents a s2c_load. */
@@ -5208,6 +5211,9 @@ declare namespace proto {
 
             /** s2c_load score. */
             public score?: (chest.IScoreInfo|null);
+
+            /** s2c_load heroIds. */
+            public heroIds: number[];
 
             /**
              * Creates a new s2c_load instance using the specified properties.
@@ -5390,8 +5396,8 @@ declare namespace proto {
             /** s2c_open_chest err */
             err?: (number|null);
 
-            /** s2c_open_chest ches */
-            ches?: (chest.IChestInfo|null);
+            /** s2c_open_chest chests */
+            chests?: (chest.IChestInfo|null);
 
             /** s2c_open_chest score */
             score?: (chest.IScoreInfo|null);
@@ -5409,8 +5415,8 @@ declare namespace proto {
             /** s2c_open_chest err. */
             public err: number;
 
-            /** s2c_open_chest ches. */
-            public ches?: (chest.IChestInfo|null);
+            /** s2c_open_chest chests. */
+            public chests?: (chest.IChestInfo|null);
 
             /** s2c_open_chest score. */
             public score?: (chest.IScoreInfo|null);
@@ -5881,103 +5887,200 @@ declare namespace proto {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
-        /** Properties of a notify. */
-        interface Inotify {
+        /** Properties of a notify_chest. */
+        interface Inotify_chest {
 
-            /** notify ches */
-            ches?: (chest.IChestInfo[]|null);
+            /** notify_chest chests */
+            chests?: (chest.IChestInfo[]|null);
 
-            /** notify score */
+            /** notify_chest score */
             score?: (chest.IScoreInfo|null);
         }
 
-        /** Represents a notify. */
-        class notify implements Inotify {
+        /** Represents a notify_chest. */
+        class notify_chest implements Inotify_chest {
 
             /**
-             * Constructs a new notify.
+             * Constructs a new notify_chest.
              * @param [properties] Properties to set
              */
-            constructor(properties?: chest.Inotify);
+            constructor(properties?: chest.Inotify_chest);
 
-            /** notify ches. */
-            public ches: chest.IChestInfo[];
+            /** notify_chest chests. */
+            public chests: chest.IChestInfo[];
 
-            /** notify score. */
+            /** notify_chest score. */
             public score?: (chest.IScoreInfo|null);
 
             /**
-             * Creates a new notify instance using the specified properties.
+             * Creates a new notify_chest instance using the specified properties.
              * @param [properties] Properties to set
-             * @returns notify instance
+             * @returns notify_chest instance
              */
-            public static create(properties?: chest.Inotify): chest.notify;
+            public static create(properties?: chest.Inotify_chest): chest.notify_chest;
 
             /**
-             * Encodes the specified notify message. Does not implicitly {@link chest.notify.verify|verify} messages.
-             * @param message notify message or plain object to encode
+             * Encodes the specified notify_chest message. Does not implicitly {@link chest.notify_chest.verify|verify} messages.
+             * @param message notify_chest message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: chest.Inotify, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: chest.Inotify_chest, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified notify message, length delimited. Does not implicitly {@link chest.notify.verify|verify} messages.
-             * @param message notify message or plain object to encode
+             * Encodes the specified notify_chest message, length delimited. Does not implicitly {@link chest.notify_chest.verify|verify} messages.
+             * @param message notify_chest message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: chest.Inotify, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: chest.Inotify_chest, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Decodes a notify message from the specified reader or buffer.
+             * Decodes a notify_chest message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
-             * @returns notify
+             * @returns notify_chest
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): chest.notify;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): chest.notify_chest;
 
             /**
-             * Decodes a notify message from the specified reader or buffer, length delimited.
+             * Decodes a notify_chest message from the specified reader or buffer, length delimited.
              * @param reader Reader or buffer to decode from
-             * @returns notify
+             * @returns notify_chest
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): chest.notify;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): chest.notify_chest;
 
             /**
-             * Verifies a notify message.
+             * Verifies a notify_chest message.
              * @param message Plain object to verify
              * @returns `null` if valid, otherwise the reason why it is not
              */
             public static verify(message: { [k: string]: any }): (string|null);
 
             /**
-             * Creates a notify message from a plain object. Also converts values to their respective internal types.
+             * Creates a notify_chest message from a plain object. Also converts values to their respective internal types.
              * @param object Plain object
-             * @returns notify
+             * @returns notify_chest
              */
-            public static fromObject(object: { [k: string]: any }): chest.notify;
+            public static fromObject(object: { [k: string]: any }): chest.notify_chest;
 
             /**
-             * Creates a plain object from a notify message. Also converts values to other types if specified.
-             * @param message notify
+             * Creates a plain object from a notify_chest message. Also converts values to other types if specified.
+             * @param message notify_chest
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: chest.notify, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: chest.notify_chest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
-             * Converts this notify to JSON.
+             * Converts this notify_chest to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
 
             /**
-             * Gets the default type url for notify
+             * Gets the default type url for notify_chest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a notify_chest_hero. */
+        interface Inotify_chest_hero {
+
+            /** notify_chest_hero heroIds */
+            heroIds?: (number[]|null);
+        }
+
+        /** Represents a notify_chest_hero. */
+        class notify_chest_hero implements Inotify_chest_hero {
+
+            /**
+             * Constructs a new notify_chest_hero.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: chest.Inotify_chest_hero);
+
+            /** notify_chest_hero heroIds. */
+            public heroIds: number[];
+
+            /**
+             * Creates a new notify_chest_hero instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns notify_chest_hero instance
+             */
+            public static create(properties?: chest.Inotify_chest_hero): chest.notify_chest_hero;
+
+            /**
+             * Encodes the specified notify_chest_hero message. Does not implicitly {@link chest.notify_chest_hero.verify|verify} messages.
+             * @param message notify_chest_hero message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: chest.Inotify_chest_hero, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified notify_chest_hero message, length delimited. Does not implicitly {@link chest.notify_chest_hero.verify|verify} messages.
+             * @param message notify_chest_hero message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: chest.Inotify_chest_hero, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a notify_chest_hero message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns notify_chest_hero
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): chest.notify_chest_hero;
+
+            /**
+             * Decodes a notify_chest_hero message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns notify_chest_hero
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): chest.notify_chest_hero;
+
+            /**
+             * Verifies a notify_chest_hero message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a notify_chest_hero message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns notify_chest_hero
+             */
+            public static fromObject(object: { [k: string]: any }): chest.notify_chest_hero;
+
+            /**
+             * Creates a plain object from a notify_chest_hero message. Also converts values to other types if specified.
+             * @param message notify_chest_hero
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: chest.notify_chest_hero, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this notify_chest_hero to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for notify_chest_hero
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
