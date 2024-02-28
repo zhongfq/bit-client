@@ -1,7 +1,9 @@
 import { Constructor, ConstructorType } from "./dispatcher";
 
+type EaseFunc = (t: number, b: number, c: number, d: number, ...any: any[]) => number;
+
 export class Tween {
-    static to<T>(target: T, props: ConstructorType<T>, duration: number, ease?: Function) {
+    static to<T>(target: T, props: ConstructorType<T>, duration: number, ease?: EaseFunc) {
         return Laya.Tween.to(target, props, duration, ease);
     }
 }
