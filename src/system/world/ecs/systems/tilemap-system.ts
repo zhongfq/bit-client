@@ -23,9 +23,6 @@ export class TilemapSystem extends ecs.System {
                 case Tilemap.LayerName.Static:
                     this._initStatic(worldMap, layer);
                     break;
-                case Tilemap.LayerName.Block:
-                    this._initBlock(worldMap, layer);
-                    break;
                 default:
                     break;
             }
@@ -62,16 +59,6 @@ export class TilemapSystem extends ecs.System {
 
             this.context.scene3D.addChild(tile);
         }
-
-        // 打印测试
-        // for (let i = 0; i < atlas.frames.length; i++) {
-        //     const frame = atlas.frames[i];
-        //     let str = "";
-        //     for (let j = 0; j < frame.uvrect.length; j++) {
-        //         str += frame.uvrect[j] + " ";
-        //     }
-        //     console.log(str);
-        // }
     }
 
     private async _initStatic(worldMap: Tilemap.WorldMap, layer: Tilemap.Layer) {
@@ -113,51 +100,6 @@ export class TilemapSystem extends ecs.System {
 
             this.context.scene3D.addChild(staticObj);
         }
-    }
-
-    private async _initStaticUI3D(worldMap: Tilemap.WorldMap, layer: Tilemap.Layer) {
-
-        const prefab: Laya.Prefab = await Laya.loader.load("resources/prefab/world-map/static-ui3d/static-obj.lh", Laya.Loader.HIERARCHY);
-
-        for (let i = 0; i < layer.data.length; i++) {
-            const gid = layer.data[i];
-            if (!gid) {
-                continue;
-            }
-            const cfg = TilemapComponent.STATIC_CFG_MAP_UI3D.get(gid);
-            if (!cfg) {
-                continue;
-            }
-            const staticObj = prefab.create() as Laya.Sprite3D;
-
-            const pos = staticObj.transform.position;
-            pos.x = i % worldMap.width;
-            pos.y = cfg.offsetY * TilemapComponent.STATIC_SCALE;
-            pos.z = Math.floor(i / worldMap.width);
-            staticObj.transform.position = pos;
-
-            const ui3d = staticObj.getChildAt(0).getComponent(Laya.UI3D);
-            const uiRoot = ui3d.sprite as Laya.Box;
-            const uiSprite = ui3d.sprite.getChildAt(0) as Laya.Sprite;
-            const path = StringUtil.format("resources/texture/world-map/static/{0}.png", cfg.resName);
-            const texture = await Laya.loader.load(path, Laya.Loader.IMAGE) as Laya.Texture;
-            uiSprite.texture = texture;
-
-            const srcWidth = texture.sourceWidth;
-            const srcHeight = texture.sourceHeight;
-            const scaleX = (srcWidth / TilemapComponent.STATIC_BASE_WIDTH) * TilemapComponent.STATIC_SCALE;
-            const scaleY = (srcHeight / TilemapComponent.STATIC_BASE_HEIGHT) * TilemapComponent.STATIC_SCALE;
-            uiRoot.size(srcWidth, srcHeight);
-            uiSprite.size(srcWidth, srcHeight);
-            ui3d.scale = new Laya.Vector2(scaleX, scaleY);
-            ui3d.resolutionRate = Math.max(srcWidth / scaleX, srcHeight / scaleY);
-
-            this.context.scene3D.addChild(staticObj);
-        }
-    }
-
-    private _initBlock(worldMap: Tilemap.WorldMap, layer: Tilemap.Layer) {
-
     }
 
     update(dt: number): void {

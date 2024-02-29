@@ -20,8 +20,14 @@ export class TilemapComponent extends ecs.SingletonComponent {
         return out;
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    static readonly TILE_WIDTH = 128;
+    static readonly TILE_HEIGHT = 128;
+
     static readonly STATIC_BASE_WIDTH = 256;
     static readonly STATIC_BASE_HEIGHT = 256;
+
     static readonly STATIC_SCALE = 3;
 
     static readonly STATIC_CFG_MAP: Map<number, Tilemap.StaticConfig> = new Map([
@@ -30,14 +36,6 @@ export class TilemapComponent extends ecs.SingletonComponent {
         [53, { resName: "map_Grassland_Tree_03", offsetY: 0.47747 }],
         [49, { resName: "map_Grassland_hill_01", offsetY: 0.69662 }],
         [50, { resName: "map_Grassland_hill_02", offsetY: 0.47278 }],
-    ]);
-
-    static readonly STATIC_CFG_MAP_UI3D: Map<number, Tilemap.StaticConfig> = new Map([
-        [51, { resName: "map_Grassland_Tree_01", offsetY: 0.33846 }],
-        [52, { resName: "map_Grassland_Tree_02", offsetY: 0.40402 }],
-        [53, { resName: "map_Grassland_Tree_03", offsetY: 0.40269 }],
-        [49, { resName: "map_Grassland_hill_01", offsetY: 0.60341 }],
-        [50, { resName: "map_Grassland_hill_02", offsetY: 0.42114 }],
     ]);
 }
 
@@ -62,7 +60,10 @@ export namespace Tilemap {
 
     export enum LayerName {
         Ground = "ground",
+        Road = "road",
+        River = "river",
         Static = "static",
+        Dynamic = "dynamic",
         Block = "block",
     }
 
