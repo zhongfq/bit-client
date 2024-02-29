@@ -37,8 +37,8 @@ export class Wait extends Process {
             type: "Action",
             desc: "等待",
             args: [
-                ["ms", "int", "时间/毫秒"],
-                ["random", "int?", "随机范围"],
+                { name: "ms", type: "int", desc: "时间/毫秒" },
+                { name: "random", type: "int?", desc: "随机范围" },
             ],
         };
     }

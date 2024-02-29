@@ -31,7 +31,7 @@ export class Wait extends Process {
             name: "Wait",
             type: "Action",
             desc: "等待",
-            args: [["time", "int", "时间/tick"]],
+            args: [{ name: "time", type: "int", desc: "时间/tick" }],
         };
     }
 }

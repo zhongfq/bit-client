@@ -16,7 +16,7 @@ export class Log extends Process {
             name: "Log",
             type: "Action",
             desc: "打印日志",
-            args: [["str", "string", "日志"]],
+            args: [{ name: "str", type: "string", desc: "日志" }],
         };
     }
 }
