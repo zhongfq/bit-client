@@ -39,6 +39,7 @@ export class LoadingMediator extends Laya.Script {
 
         await app.service.mail.load();
         await app.service.chat.load({ channel: ChatConf.CHAT_CHANNEL.WORLD });
+        await app.service.chest.load();
         await Laya.loader.load("resources/texture/emoji/emoji.atlas");
         this.progress = 100;
     }

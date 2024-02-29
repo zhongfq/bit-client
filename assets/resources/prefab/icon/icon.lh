@@ -79,12 +79,38 @@
       "width": 76,
       "height": 24,
       "drawCallOptimize": true,
-      "text": "111",
+      "text": "",
       "fontSize": 20,
       "color": "#FFFFFF",
       "align": "center",
       "valign": "middle",
       "padding": "0,0,0,0"
+    },
+    {
+      "_$id": "nh9n32v6",
+      "_$type": "Image",
+      "name": "selectBox",
+      "y": 1,
+      "width": 108,
+      "height": 107,
+      "visible": false,
+      "centerX": 0,
+      "skin": "res://2746a5c1-1212-413c-bb35-0a4cd4ef7e11",
+      "color": "#ffffff"
+    },
+    {
+      "_$id": "f5gymt6o",
+      "_$var": true,
+      "_$type": "Image",
+      "name": "imgLock",
+      "x": 30,
+      "y": 33,
+      "width": 48,
+      "height": 48,
+      "visible": false,
+      "skin": "res://fdf318e7-d619-4f70-9a23-ce4e582a89cc",
+      "useSourceSize": true,
+      "color": "#ffffff"
     }
   ]
 }

@@ -7,12 +7,15 @@ import { VoUtil } from "../../misc/vo-util";
 import { ItemBag } from "../../misc/vo/goods/item-vo-bag";
 
 export class ChestService extends Service<NetworkService> {
-    // static readonly ITEM_UPDATE = "item-update";
+    static readonly CHEST_UPDATE = "chest-update";
+    static readonly CHEST_SCORE_UPDATE = "chest-score-update";
+    static readonly CHEST_Hero_UPDATE = "chest-hero-update";
 
     // readonly itemBag = VoUtil.createGoodsBag(ItemBag); //创建道具背包
-    scoreInfo: proto.chest.ScoreInfo | null = null; //积分数据
-    chestInfo: Map<number, proto.chest.ChestInfo> = new Map();
+    scoreInfo!: proto.chest.ScoreInfo; //积分数据
+    chestInfo: Map<number, number> = new Map();
     heroId!: number;
+    heroIds: number[] = [];
 
     constructor(network: NetworkService) {
         super(network);
@@ -20,34 +23,48 @@ export class ChestService extends Service<NetworkService> {
         this.handle(opcode.chest.s2c_open_chest, this._onOpenChest);
         this.handle(opcode.chest.s2c_score_receive, this._onScoreReceive);
         this.handle(opcode.chest.s2c_switch_hero, this._onSwitchHero);
-        // this.handle(opcode.chest.notify, this._noNotify);
+        this.handle(opcode.chest.notify_chest, this._noNotify);
+        this.handle(opcode.chest.notify_chest_hero, this._noNotify);
     }
 
     private _onLoad(data: proto.chest.s2c_load) {
         if (data.err === errcode.OK) {
             if (data.score) {
                 this.scoreInfo = data.score as proto.chest.ScoreInfo;
+            } else {
+                console.error("宝箱积分数据出现异常");
             }
             for (const chest of data.chests) {
-                this.chestInfo.set(Number(chest.id), chest as proto.chest.ChestInfo);
+                this.chestInfo.set(Number(chest.id), chest.num ? chest.num : 0);
             }
             this.heroId = data.heroId;
+            this.heroIds = data.heroIds;
         }
     }
 
-    private _onOpenChest(data: proto.chest.s2c_open_chest) {}
+    private _onOpenChest(data: proto.chest.s2c_open_chest) {
+        this.scoreInfo = data.score as proto.chest.ScoreInfo;
+        const cmdChest = data.chest as proto.chest.ChestInfo;
+        if (data.chest) {
+            this.chestInfo.set(cmdChest.id, cmdChest.num ? cmdChest.num : 0);
+        }
+    }
 
-    private _onScoreReceive(data: proto.chest.s2c_score_receive) {}
+    private _onScoreReceive(data: proto.chest.s2c_score_receive) {
+        this.scoreInfo = data.score as proto.chest.ScoreInfo;
+    }
 
     private _onSwitchHero(data: proto.chest.s2c_switch_hero) {}
 
-    // private _noNotify(data: proto.chest.notify) {}
+    private _noNotify(data: proto.chest.notify_chest) {}
+
+    private _updateScore(data: proto.chest.ScoreInfo) {}
 
     // ------------------------------------------------------------------------
     // rpc call
     // ------------------------------------------------------------------------
-    public async load(data: proto.bag.Ic2s_load) {
-        return await this._network.call(proto.bag.c2s_load.create(data), proto.bag.s2c_load);
+    public async load() {
+        return await this._network.call(proto.chest.c2s_load.create(), proto.chest.s2c_load);
     }
 
     /**
@@ -65,9 +82,9 @@ export class ChestService extends Service<NetworkService> {
      *请求领取积分
      * @param data
      */
-    public async requestScoreReceive(data: proto.chest.Ic2s_score_receive) {
+    public async requestScoreReceive() {
         return await this._network.call(
-            proto.chest.c2s_score_receive.create(data),
+            proto.chest.c2s_score_receive.create(),
             proto.chest.s2c_score_receive
         );
     }
@@ -76,7 +93,7 @@ export class ChestService extends Service<NetworkService> {
      *请求切换武将
      * @param data
      */
-    public async requestSwitchHero(data: proto.chest.c2s_switch_hero) {
+    public async requestSwitchHero(data: proto.chest.Ic2s_switch_hero) {
         return await this._network.call(
             proto.chest.c2s_switch_hero.create(data),
             proto.chest.s2c_switch_hero

@@ -5396,11 +5396,14 @@ declare namespace proto {
             /** s2c_open_chest err */
             err?: (number|null);
 
-            /** s2c_open_chest chests */
-            chests?: (chest.IChestInfo|null);
+            /** s2c_open_chest chest */
+            chest?: (chest.IChestInfo|null);
 
             /** s2c_open_chest score */
             score?: (chest.IScoreInfo|null);
+
+            /** s2c_open_chest rewards */
+            rewards?: (bag.IItem[]|null);
         }
 
         /** Represents a s2c_open_chest. */
@@ -5415,11 +5418,14 @@ declare namespace proto {
             /** s2c_open_chest err. */
             public err: number;
 
-            /** s2c_open_chest chests. */
-            public chests?: (chest.IChestInfo|null);
+            /** s2c_open_chest chest. */
+            public chest?: (chest.IChestInfo|null);
 
             /** s2c_open_chest score. */
             public score?: (chest.IScoreInfo|null);
+
+            /** s2c_open_chest rewards. */
+            public rewards: bag.IItem[];
 
             /**
              * Creates a new s2c_open_chest instance using the specified properties.

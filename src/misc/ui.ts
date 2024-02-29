@@ -8,7 +8,7 @@ export enum ui {
     TOAST = -2,
     ALERT = -1,
 
-    app,
+    APP,
     LOADING,
     LOGIN_SCENE,
     LOADING_SCENE,
@@ -46,7 +46,7 @@ export enum ui {
 export namespace ui {
     export const register = () => {
         app.ui.register({
-            id: ui.app,
+            id: ui.APP,
             url: "scenes/app.ls",
         });
         app.ui.register({

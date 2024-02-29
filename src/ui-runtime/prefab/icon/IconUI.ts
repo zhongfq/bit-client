@@ -10,7 +10,7 @@ export class IconUI extends IconUIBase {
         if (vo) {
             this.imgIcon.skin = vo.iconUrl;
             this.imgQuality.skin = vo.qualitySkin;
-            this.labelNumber.text = vo.goodsNumber.toString();
+            // this.labelNumber.text = vo.goodsNumber.toString();
             // this.labelNumber.text = vo.goodsNumber?.toString();
             // this.iconImage.text = vo.cmd?vo.cmd.num.toString():"0";
         }

@@ -10,5 +10,6 @@ export class IconUIBase extends Laya.Box {
     public imgIcon!: Laya.Image;
     public imgRedPoint!: Laya.Image;
     public labelNumber!: Laya.Label;
+    public imgLock!: Laya.Image;
 }
 

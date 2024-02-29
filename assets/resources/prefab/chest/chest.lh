@@ -22,22 +22,6 @@
   ],
   "_$child": [
     {
-      "_$id": "uhoqz1w2",
-      "_$var": true,
-      "_$type": "Button",
-      "name": "btnBoxReward",
-      "x": 9,
-      "y": 155,
-      "width": 120,
-      "height": 40,
-      "_mouseState": 2,
-      "left": 9,
-      "top": 155,
-      "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
-      "label": "箱子积分",
-      "labelSize": 20
-    },
-    {
       "_$id": "qfkmg54f",
       "_$type": "Image",
       "name": "Image",
@@ -120,31 +104,68 @@
       ]
     },
     {
-      "_$id": "0vsgof0v",
+      "_$id": "kool4fhv",
       "_$var": true,
-      "_$type": "Sprite",
-      "name": "Sprite",
-      "x": 12,
-      "y": 49,
-      "width": 100,
-      "height": 100,
-      "_gcmds": [
+      "_$type": "Box",
+      "name": "boxReward",
+      "x": 11.999999999999833,
+      "y": 48.999999999999964,
+      "width": 109,
+      "height": 81,
+      "_$child": [
         {
-          "_$type": "DrawRectCmd",
-          "x": 0,
-          "y": 0,
-          "width": 1,
-          "height": 1,
-          "percent": true,
-          "lineWidth": 1,
-          "lineColor": "#000000",
-          "fillColor": "#FFFFFF"
-        }
-      ],
-      "_$comp": [
+          "_$id": "76ah75mj",
+          "_$var": true,
+          "_$type": "SpineSkeleton",
+          "name": "spineShestReward",
+          "x": 46.0000000000004,
+          "y": 71.00000000000045,
+          "width": 0,
+          "height": 0,
+          "scaleX": 0.5,
+          "scaleY": 0.5,
+          "hitArea": {
+            "_$type": "HitArea",
+            "_hitCmds": [],
+            "_unHitCmds": []
+          },
+          "_filters": [],
+          "source": "res://1a3c38e0-eeff-455c-8d3d-324e1bdb1140",
+          "skinName": "default",
+          "animationName": "chest2_remind",
+          "preview": true
+        },
         {
-          "_$type": "Animator2D",
-          "controllerLayers": []
+          "_$id": "nkr6o8zy",
+          "_$type": "Image",
+          "name": "Image",
+          "x": 3,
+          "y": 118,
+          "width": 107,
+          "height": 33,
+          "anchorY": 1,
+          "skin": "res://2123a790-201a-4900-8885-b7ef9a27cfba",
+          "color": "#ffffff",
+          "_$child": [
+            {
+              "_$id": "zknweyiv",
+              "_$var": true,
+              "_$type": "Label",
+              "name": "labelScore",
+              "x": -6,
+              "y": 3,
+              "width": 120,
+              "height": 28,
+              "centerX": 0,
+              "centerY": 0,
+              "text": "0/80",
+              "fontSize": 22,
+              "color": "#FFFFFF",
+              "align": "center",
+              "valign": "middle",
+              "padding": "0,0,0,0"
+            }
+          ]
         }
       ]
     },
@@ -195,7 +216,7 @@
           "y": 361.0000000000001,
           "width": 110,
           "height": 115,
-          "source": "res://ae66d20f-a66a-48ee-a33f-329501468c10",
+          "source": "res://1a3c38e0-eeff-455c-8d3d-324e1bdb1140",
           "skinName": "default",
           "animationName": "chest2_remind",
           "loop": false,

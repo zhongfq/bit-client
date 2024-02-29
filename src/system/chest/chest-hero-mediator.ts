@@ -8,6 +8,10 @@ import { ChestUI } from "../../ui-runtime/prefab/chest/ChestUI";
 import { ui } from "../../misc/ui";
 import { ChestItemUI } from "../../ui-runtime/prefab/chest/ChestItemUI";
 import { ChestHeroUI } from "../../ui-runtime/prefab/chest/ChestHeroUI";
+import { HeroVo } from "../../misc/vo/goods/hero-vo";
+import { hero } from "../../def/proto";
+import { IconNode } from "../../misc/icon/icon-node";
+import { IconUI } from "../../ui-runtime/prefab/icon/IconUI";
 
 const { regClass, property } = Laya;
 
@@ -38,18 +42,25 @@ export class ChestHeroMediator extends Mediator {
         // });
     }
 
-    onListRender(item: ChestItemUI, index: number) {
-        // item.updateInfo(item.dataSource);
+    onListRender(item: IconUI, index: number) {
+        item.updateGoods(this.owner.listItem.array[index].heroVo);
+        item.imgLock.visible = this.owner.listItem.array[index].isLock;
         // item.getChildByName("imgIcon");
-        item.labelNum.text = "x0";
+        // item.labelNum.text = "x0";
     }
 
     updateList() {
         const listData = [];
-        for (const chestRow of app.service.table.chest.chest) {
-            listData.push({ row: chestRow, cmd: app.service.chest.chestInfo.get(chestRow.id) });
+        for (const key in app.service.table.chest.hero) {
+            const row = app.service.table.chest.hero[key];
+            const heroVo = new HeroVo();
+            heroVo.initByTableRow(app.service.table.hero[row.hero_id]);
+            listData.push({
+                heroVo: heroVo,
+                isLock: app.service.chest.heroIds.indexOf(row.hero_id) < 0,
+            });
         }
-        this.owner.listItem.array = listData;
-        this.selectedIndex = this.owner.listItem.selectedIndex;
+        this.owner.listItem.array = listData; //app.service.table.chest.hero;
+        // this.selectedIndex = this.owner.listItem.selectedIndex;
     }
 }

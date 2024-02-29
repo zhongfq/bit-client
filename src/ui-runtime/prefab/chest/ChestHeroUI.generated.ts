@@ -8,6 +8,5 @@ import { IconUI } from "../icon/IconUI";
 export class ChestHeroUIBase extends Laya.Dialog {
     public listItem!: Laya.List;
     public iconNode!: IconUI;
-    public btnClose!: Laya.Button;
 }
 

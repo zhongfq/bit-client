@@ -21,7 +21,6 @@
       "name": "Panel",
       "width": 750,
       "height": 1334,
-      "visible": false,
       "_mouseState": 2,
       "left": 0,
       "right": 0,
@@ -545,19 +544,6 @@
       ]
     },
     {
-      "_$id": "0juog0qc",
-      "_$prefab": "de548129-37fd-4bea-8be1-f98a06289f58",
-      "_$var": true,
-      "name": "boxNode",
-      "active": false,
-      "x": 0,
-      "y": 0,
-      "visible": false,
-      "left": 0,
-      "top": 0,
-      "bottom": 0
-    },
-    {
       "_$id": "zq8gp5y7",
       "_$type": "HBox",
       "name": "底部按钮",
@@ -649,6 +635,47 @@
           "labelSize": 27,
           "labelBold": true,
           "labelColors": "#c800ff,#c800ff,#c800ff"
+        }
+      ]
+    },
+    {
+      "_$id": "cibyk9jb",
+      "_$var": true,
+      "_$type": "ViewStack",
+      "name": "ViewStack",
+      "x": -2,
+      "y": 0.9999999999998863,
+      "width": 750,
+      "height": 1220,
+      "_mouseState": 2,
+      "mouseThrough": true,
+      "selectedIndex": null,
+      "_$child": [
+        {
+          "_$id": "0juog0qc",
+          "_$prefab": "de548129-37fd-4bea-8be1-f98a06289f58",
+          "_$var": true,
+          "name": "item0",
+          "active": true,
+          "x": 0,
+          "y": 0,
+          "visible": false,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "bottom": 0,
+          "width": 750,
+          "_$child": [
+            {
+              "_$override": "5dol2ueu",
+              "y": 881,
+              "x": 332
+            },
+            {
+              "_$override": "0omkcmda",
+              "y": 1018
+            }
+          ]
         }
       ]
     }

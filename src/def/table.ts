@@ -74,7 +74,10 @@ export type BattleBuffTable = {
 //-----------------------------------------------------------------------------
 // 武将
 //-----------------------------------------------------------------------------
-export interface HeroRow extends GeneratedHeroRow {}
+export interface HeroRow extends GeneratedHeroRow {
+    quality: number;
+    icon: string;
+}
 export type HeroTable = {
     [k: string]: HeroRow;
 };

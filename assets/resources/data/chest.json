@@ -99,19 +99,13 @@
     "hero": {
         "103": {
             "hero_id": 103,
-            "sort": 1
+            "sort": 1,
+            "spine_source": "Chest_Role_001"
         },
         "105": {
             "hero_id": 105,
-            "sort": 2
-        },
-        "108": {
-            "hero_id": 108,
-            "sort": 3
-        },
-        "113": {
-            "hero_id": 113,
-            "sort": 4
+            "sort": 2,
+            "spine_source": "Chest_Role_002"
         }
     }
 }

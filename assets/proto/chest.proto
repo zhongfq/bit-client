@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+import "bag.proto";
+
 package chest;
 
 //宝箱数据
@@ -32,16 +34,16 @@ message c2s_open_chest {
 }
 message s2c_open_chest {
     uint32 err = 1;
-    ChestInfo chests = 2; //宝箱数据
+    ChestInfo chest = 2; //宝箱数据
     ScoreInfo score = 3; //积分数据
+    repeated bag.Item rewards = 4;//奖励
 }
 
 //积分领取
 message c2s_score_receive {
-    
 }
 message s2c_score_receive {
-    uint32 err = 1;
+    uint32 err = 1; // OK, CHEST_SCORE_NOT_ENOUGH
     ScoreInfo score = 2; //积分数据
 }
 

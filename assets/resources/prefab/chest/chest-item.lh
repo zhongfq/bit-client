@@ -68,6 +68,7 @@
       "y": 1,
       "width": 90,
       "height": 90,
+      "visible": false,
       "centerX": 0,
       "skin": "res://2746a5c1-1212-413c-bb35-0a4cd4ef7e11",
       "useSourceSize": true,

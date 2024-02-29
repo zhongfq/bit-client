@@ -12619,8 +12619,9 @@ $root.chest = (function() {
          * @memberof chest
          * @interface Is2c_open_chest
          * @property {number|null} [err] s2c_open_chest err
-         * @property {chest.IChestInfo|null} [chests] s2c_open_chest chests
+         * @property {chest.IChestInfo|null} [chest] s2c_open_chest chest
          * @property {chest.IScoreInfo|null} [score] s2c_open_chest score
+         * @property {Array.<bag.IItem>|null} [rewards] s2c_open_chest rewards
          */
 
         /**
@@ -12632,6 +12633,7 @@ $root.chest = (function() {
          * @param {chest.Is2c_open_chest=} [properties] Properties to set
          */
         function s2c_open_chest(properties) {
+            this.rewards = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -12647,12 +12649,12 @@ $root.chest = (function() {
         s2c_open_chest.prototype.err = 0;
 
         /**
-         * s2c_open_chest chests.
-         * @member {chest.IChestInfo|null|undefined} chests
+         * s2c_open_chest chest.
+         * @member {chest.IChestInfo|null|undefined} chest
          * @memberof chest.s2c_open_chest
          * @instance
          */
-        s2c_open_chest.prototype.chests = null;
+        s2c_open_chest.prototype.chest = null;
 
         /**
          * s2c_open_chest score.
@@ -12661,6 +12663,14 @@ $root.chest = (function() {
          * @instance
          */
         s2c_open_chest.prototype.score = null;
+
+        /**
+         * s2c_open_chest rewards.
+         * @member {Array.<bag.IItem>} rewards
+         * @memberof chest.s2c_open_chest
+         * @instance
+         */
+        s2c_open_chest.prototype.rewards = $util.emptyArray;
 
         /**
          * Creates a new s2c_open_chest instance using the specified properties.
@@ -12688,10 +12698,13 @@ $root.chest = (function() {
                 writer = $Writer.create();
             if (message.err != null && Object.hasOwnProperty.call(message, "err"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
-            if (message.chests != null && Object.hasOwnProperty.call(message, "chests"))
-                $root.chest.ChestInfo.encode(message.chests, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            if (message.chest != null && Object.hasOwnProperty.call(message, "chest"))
+                $root.chest.ChestInfo.encode(message.chest, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
             if (message.score != null && Object.hasOwnProperty.call(message, "score"))
                 $root.chest.ScoreInfo.encode(message.score, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            if (message.rewards != null && message.rewards.length)
+                for (var i = 0; i < message.rewards.length; ++i)
+                    $root.bag.Item.encode(message.rewards[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
             return writer;
         };
 
@@ -12731,11 +12744,17 @@ $root.chest = (function() {
                         break;
                     }
                 case 2: {
-                        message.chests = $root.chest.ChestInfo.decode(reader, reader.uint32());
+                        message.chest = $root.chest.ChestInfo.decode(reader, reader.uint32());
                         break;
                     }
                 case 3: {
                         message.score = $root.chest.ScoreInfo.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 4: {
+                        if (!(message.rewards && message.rewards.length))
+                            message.rewards = [];
+                        message.rewards.push($root.bag.Item.decode(reader, reader.uint32()));
                         break;
                     }
                 default:
@@ -12776,15 +12795,24 @@ $root.chest = (function() {
             if (message.err != null && message.hasOwnProperty("err"))
                 if (!$util.isInteger(message.err))
                     return "err: integer expected";
-            if (message.chests != null && message.hasOwnProperty("chests")) {
-                var error = $root.chest.ChestInfo.verify(message.chests);
+            if (message.chest != null && message.hasOwnProperty("chest")) {
+                var error = $root.chest.ChestInfo.verify(message.chest);
                 if (error)
-                    return "chests." + error;
+                    return "chest." + error;
             }
             if (message.score != null && message.hasOwnProperty("score")) {
                 var error = $root.chest.ScoreInfo.verify(message.score);
                 if (error)
                     return "score." + error;
+            }
+            if (message.rewards != null && message.hasOwnProperty("rewards")) {
+                if (!Array.isArray(message.rewards))
+                    return "rewards: array expected";
+                for (var i = 0; i < message.rewards.length; ++i) {
+                    var error = $root.bag.Item.verify(message.rewards[i]);
+                    if (error)
+                        return "rewards." + error;
+                }
             }
             return null;
         };
@@ -12803,15 +12831,25 @@ $root.chest = (function() {
             var message = new $root.chest.s2c_open_chest();
             if (object.err != null)
                 message.err = object.err >>> 0;
-            if (object.chests != null) {
-                if (typeof object.chests !== "object")
-                    throw TypeError(".chest.s2c_open_chest.chests: object expected");
-                message.chests = $root.chest.ChestInfo.fromObject(object.chests);
+            if (object.chest != null) {
+                if (typeof object.chest !== "object")
+                    throw TypeError(".chest.s2c_open_chest.chest: object expected");
+                message.chest = $root.chest.ChestInfo.fromObject(object.chest);
             }
             if (object.score != null) {
                 if (typeof object.score !== "object")
                     throw TypeError(".chest.s2c_open_chest.score: object expected");
                 message.score = $root.chest.ScoreInfo.fromObject(object.score);
+            }
+            if (object.rewards) {
+                if (!Array.isArray(object.rewards))
+                    throw TypeError(".chest.s2c_open_chest.rewards: array expected");
+                message.rewards = [];
+                for (var i = 0; i < object.rewards.length; ++i) {
+                    if (typeof object.rewards[i] !== "object")
+                        throw TypeError(".chest.s2c_open_chest.rewards: object expected");
+                    message.rewards[i] = $root.bag.Item.fromObject(object.rewards[i]);
+                }
             }
             return message;
         };
@@ -12829,17 +12867,24 @@ $root.chest = (function() {
             if (!options)
                 options = {};
             var object = {};
+            if (options.arrays || options.defaults)
+                object.rewards = [];
             if (options.defaults) {
                 object.err = 0;
-                object.chests = null;
+                object.chest = null;
                 object.score = null;
             }
             if (message.err != null && message.hasOwnProperty("err"))
                 object.err = message.err;
-            if (message.chests != null && message.hasOwnProperty("chests"))
-                object.chests = $root.chest.ChestInfo.toObject(message.chests, options);
+            if (message.chest != null && message.hasOwnProperty("chest"))
+                object.chest = $root.chest.ChestInfo.toObject(message.chest, options);
             if (message.score != null && message.hasOwnProperty("score"))
                 object.score = $root.chest.ScoreInfo.toObject(message.score, options);
+            if (message.rewards && message.rewards.length) {
+                object.rewards = [];
+                for (var j = 0; j < message.rewards.length; ++j)
+                    object.rewards[j] = $root.bag.Item.toObject(message.rewards[j], options);
+            }
             return object;
         };
 

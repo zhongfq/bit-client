@@ -16,6 +16,7 @@ export interface GeneratedChestrow {
 export interface GeneratedChestHeroRow {
     hero_id: number;
     sort: number;
+    spine_source: string;
 }
 
 // file: design/item.xlsx

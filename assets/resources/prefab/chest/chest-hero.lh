@@ -1,19 +1,26 @@
 {
   "_$ver": 1,
   "_$id": "sxpq9fzh",
+  "_$runtime": "res://0d316ad3-9042-46ba-9a0c-05550b115320",
   "_$type": "Dialog",
   "name": "Dialog",
-  "width": 511,
-  "height": 753,
+  "width": 442,
+  "height": 601,
   "_mouseState": 2,
   "isModal": true,
+  "_$comp": [
+    {
+      "_$type": "43c8144a-7694-47b9-8d45-04b00565e593",
+      "scriptPath": "../src/system/chest/chest-hero-mediator.ts"
+    }
+  ],
   "_$child": [
     {
       "_$id": "2kdo09if",
       "_$type": "Image",
       "name": "Image",
-      "width": 511,
-      "height": 753,
+      "width": 442,
+      "height": 601,
       "left": 0,
       "right": 0,
       "top": 0,
@@ -29,8 +36,8 @@
       "name": "listItem",
       "x": 5,
       "y": 53,
-      "width": 501,
-      "height": 689,
+      "width": 432,
+      "height": 537,
       "_mouseState": 2,
       "left": 5,
       "right": 5,
@@ -59,10 +66,9 @@
     },
     {
       "_$id": "6ee7kogk",
-      "_$var": true,
       "_$type": "Button",
-      "name": "btnClose",
-      "x": 470,
+      "name": "close",
+      "x": 401,
       "y": 7,
       "width": 32,
       "height": 32,
@@ -77,7 +83,7 @@
       "_$id": "vyoq14nb",
       "_$type": "Label",
       "name": "Label",
-      "x": 196,
+      "x": 161,
       "y": 10,
       "width": 120,
       "height": 28,

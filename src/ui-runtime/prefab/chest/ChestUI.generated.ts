@@ -5,11 +5,12 @@
  * resources/prefab/chest/chest.lh
  */
 export class ChestUIBase extends Laya.Box {
-    public btnBoxReward!: Laya.Button;
     public labelBoxDesc!: Laya.Label;
     public btnOpenBox!: Laya.Button;
     public listBox!: Laya.List;
-    public Sprite!: Laya.Sprite;
+    public boxReward!: Laya.Box;
+    public spineShestReward!: Laya.SpineSkeleton;
+    public labelScore!: Laya.Label;
     public boxHero!: Laya.Box;
     public spineHero!: Laya.SpineSkeleton;
     public spineShest!: Laya.SpineSkeleton;
