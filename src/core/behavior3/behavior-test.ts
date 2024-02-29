@@ -1,15 +1,5 @@
 import { Callback } from "../dispatcher";
-import {
-    Context,
-    Env,
-    Node,
-    Process,
-    ProcessDescriptor,
-    Result,
-    Status,
-    Tree,
-    TreeData,
-} from "./behavior";
+import { Context, Env, Node, Process, ProcessDescriptor, Status, Tree, TreeData } from "./behavior";
 import { builtinNodes } from "./nodes/builtin-nodes";
 
 interface Role {
@@ -31,12 +21,12 @@ class RoleEnv extends Env {
 class Attack extends Process {
     override run(node: Node, env: Env, enemy?: Role) {
         if (!enemy) {
-            return Result.FAIL;
+            return Status.FAILURE;
         }
         console.log("Do Attack");
         enemy.hp -= 100;
         env.setVar("ATTACKING", true);
-        return Result.SUCCESS;
+        return Status.SUCCESS;
     }
 
     get descriptor(): ProcessDescriptor {
@@ -46,10 +36,8 @@ class Attack extends Process {
 
 class GetHp extends Process {
     override run(node: Node, env: RoleEnv) {
-        return {
-            status: Status.SUCCESS,
-            results: [(env.owner as Role).hp],
-        } as Result;
+        env.lastRet.results = [(env.owner as Role).hp];
+        return Status.SUCCESS;
     }
 
     get descriptor(): ProcessDescriptor {
@@ -60,7 +48,7 @@ class GetHp extends Process {
 class Idle extends Process {
     override run(node: Node, env: Env) {
         console.log("Do Idle");
-        return Result.SUCCESS;
+        return Status.SUCCESS;
     }
 
     get descriptor(): ProcessDescriptor {
@@ -74,7 +62,7 @@ class MoveToPos extends Process {
         const args = node.args as Position;
         owner.x = args.x;
         owner.y = args.y;
-        return Result.SUCCESS;
+        return Status.SUCCESS;
     }
 
     get descriptor(): ProcessDescriptor {
@@ -87,14 +75,14 @@ class MoveToTarget extends Process {
 
     override run(node: Node, env: RoleEnv, target?: Role) {
         if (!target) {
-            return Result.FAIL;
+            return Status.FAILURE;
         }
         const owner = env.owner as Role;
         const { x, y } = owner;
         const { x: tx, y: ty } = target;
         if (Math.abs(x - tx) < MoveToTarget.SPEED && Math.abs(y - ty) < MoveToTarget.SPEED) {
             console.log("Moving reach target");
-            return Result.SUCCESS;
+            return Status.SUCCESS;
         }
 
         console.log(`Moving (${x}, ${y}) => (${tx}, ${ty})`);
@@ -137,12 +125,10 @@ class FindEnemy extends Process {
             return Math.abs(x - tx) <= w && Math.abs(y - ty) <= h;
         }, args.count ?? -1);
         if (list.length) {
-            return {
-                status: Status.SUCCESS,
-                results: list,
-            };
+            env.lastRet.results = list;
+            return Status.SUCCESS;
         } else {
-            return Result.FAIL;
+            return Status.FAILURE;
         }
     }
 
@@ -233,52 +219,260 @@ const heroTree = {
         children: [
             {
                 id: 2,
+                name: "Once",
+                args: {},
+                children: [
+                    {
+                        id: 3,
+                        name: "AlwaysFail",
+                        args: {},
+                        children: [
+                            {
+                                id: 4,
+                                name: "Sequence",
+                                args: {},
+                                children: [
+                                    {
+                                        id: 5,
+                                        name: "Log",
+                                        args: {
+                                            str: "B: test sequeue1",
+                                        },
+                                    },
+                                    {
+                                        id: 6,
+                                        name: "Log",
+                                        args: {
+                                            str: "B: test sequeue2",
+                                        },
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        id: 7,
+                        name: "AlwaysFail",
+                        args: {},
+                        children: [
+                            {
+                                id: 8,
+                                name: "Sequence",
+                                args: {},
+                                debug: false,
+                                children: [
+                                    {
+                                        id: 9,
+                                        name: "Log",
+                                        args: {
+                                            str: "A: test sequeue1",
+                                        },
+                                    },
+                                    {
+                                        id: 10,
+                                        name: "AlwaysFail",
+                                        args: {},
+                                        children: [
+                                            {
+                                                id: 11,
+                                                name: "Log",
+                                                args: {
+                                                    str: "A: test fail",
+                                                },
+                                            },
+                                        ],
+                                    },
+                                    {
+                                        id: 12,
+                                        name: "Log",
+                                        args: {
+                                            str: "A: test sequeue2",
+                                        },
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        id: 13,
+                        name: "AlwaysFail",
+                        args: {},
+                        children: [
+                            {
+                                id: 14,
+                                name: "Selector",
+                                args: {},
+                                children: [
+                                    {
+                                        id: 15,
+                                        name: "AlwaysFail",
+                                        args: {},
+                                        children: [
+                                            {
+                                                id: 16,
+                                                name: "Log",
+                                                args: {
+                                                    str: "C: test fail",
+                                                },
+                                            },
+                                        ],
+                                    },
+                                    {
+                                        id: 17,
+                                        name: "Log",
+                                        args: {
+                                            str: "C: test sequeue1",
+                                        },
+                                    },
+                                    {
+                                        id: 18,
+                                        name: "Log",
+                                        args: {
+                                            str: "C: test sequeue2",
+                                        },
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        id: 19,
+                        name: "AlwaysFail",
+                        args: {},
+                        children: [
+                            {
+                                id: 20,
+                                name: "Parallel",
+                                args: {},
+                                children: [
+                                    {
+                                        id: 21,
+                                        name: "Log",
+                                        args: {
+                                            str: "D: test sequeue1",
+                                        },
+                                    },
+                                    {
+                                        id: 22,
+                                        name: "AlwaysFail",
+                                        args: {},
+                                        children: [
+                                            {
+                                                id: 23,
+                                                name: "Log",
+                                                args: {
+                                                    str: "D: test fail",
+                                                },
+                                            },
+                                        ],
+                                    },
+                                    {
+                                        id: 24,
+                                        name: "Log",
+                                        args: {
+                                            str: "D: test sequeue2",
+                                        },
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                ],
+            },
+            {
+                id: 25,
                 name: "Sequence",
                 desc: "攻击",
                 args: {},
                 children: [
                     {
-                        id: 3,
+                        id: 26,
                         name: "FindEnemy",
-                        args: { x: 0, y: 0, w: 100, h: 50 },
+                        args: {
+                            x: 0,
+                            y: 0,
+                            w: 100,
+                            h: 50,
+                        },
                         output: ["enemy"],
                     },
-                    { id: 4, name: "Attack", args: {}, input: ["enemy"] },
-                    { id: 5, name: "Wait", args: { time: 10 } },
+                    {
+                        id: 27,
+                        name: "Attack",
+                        args: {},
+                        input: ["enemy"],
+                    },
+                    {
+                        id: 28,
+                        name: "Wait",
+                        args: {
+                            time: 10,
+                        },
+                    },
                 ],
             },
             {
-                id: 6,
+                id: 29,
                 name: "Sequence",
                 desc: "移动",
                 args: {},
                 children: [
                     {
-                        id: 7,
+                        id: 30,
                         name: "FindEnemy",
-                        args: { w: 1000, h: 500, x: 0, y: 0 },
+                        args: {
+                            w: 1000,
+                            h: 500,
+                            x: 0,
+                            y: 0,
+                        },
                         output: ["enemy"],
                     },
-                    { id: 8, name: "MoveToTarget", args: {}, input: ["enemy"] },
+                    {
+                        id: 31,
+                        name: "MoveToTarget",
+                        args: {},
+                        input: ["enemy"],
+                    },
                 ],
             },
             {
-                id: 9,
+                id: 32,
                 name: "Sequence",
                 desc: "逃跑",
                 args: {},
                 children: [
-                    { id: 10, name: "GetHp", args: {}, output: ["hp"] },
-                    { id: 11, name: "Check", args: { value: "hp > 50" }, debug: true },
-                    { id: 12, name: "MoveToPos", args: { x: 0, y: 0 } },
+                    {
+                        id: 33,
+                        name: "GetHp",
+                        args: {},
+                        output: ["hp"],
+                    },
+                    {
+                        id: 34,
+                        name: "Check",
+                        args: {
+                            value: "hp > 50",
+                        },
+                    },
+                    {
+                        id: 35,
+                        name: "MoveToPos",
+                        args: {
+                            x: 0,
+                            y: 0,
+                        },
+                    },
                 ],
             },
-            { id: 13, name: "Idle" },
+            {
+                id: 36,
+                name: "Idle",
+            },
         ],
     },
     desc: "英雄测试AI",
 };
-
 const monsterTree = {
     name: "monster",
     root: {
@@ -289,32 +483,27 @@ const monsterTree = {
         children: [
             {
                 id: 2,
-                name: "GetHp",
+                name: "Selector",
                 args: {},
-                output: ["hp"],
-                debug: true,
-            },
-            {
-                id: 3,
-                name: "IfElse",
-                args: {},
-                debug: true,
                 children: [
                     {
-                        id: 4,
-                        name: "Check",
-                        args: {
-                            value: "hp > 50",
-                        },
-                        input: [""],
-                        debug: true,
-                    },
-                    {
-                        id: 5,
+                        id: 3,
                         name: "Sequence",
                         args: {},
-                        debug: false,
                         children: [
+                            {
+                                id: 4,
+                                name: "GetHp",
+                                args: {},
+                                output: ["hp"],
+                            },
+                            {
+                                id: 5,
+                                name: "Check",
+                                args: {
+                                    value: "hp > 50",
+                                },
+                            },
                             {
                                 id: 6,
                                 name: "Log",

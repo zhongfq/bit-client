@@ -2,8 +2,8 @@ import { Constructor, Process } from "../behavior";
 import { Log } from "./actions/log";
 import { Wait } from "./actions/wait";
 import { Foreach } from "./composites/foreach";
-import { Ifelse } from "./composites/ifelse";
 import { Loop } from "./composites/loop";
+import { Once } from "./composites/once";
 import { Parallel } from "./composites/parallel";
 import { Selector } from "./composites/selector";
 import { Sequence } from "./composites/sequence";
@@ -13,16 +13,16 @@ import { AlwaysSuccess } from "./decorators/always-success";
 import { Not } from "./decorators/not";
 
 export const builtinNodes: Constructor<Process>[] = [
-    Log,
-    Wait,
+    AlwaysFail,
+    AlwaysSuccess,
+    Check,
     Foreach,
-    Ifelse,
+    Log,
     Loop,
+    Not,
+    Once,
     Parallel,
     Selector,
     Sequence,
-    Check,
-    AlwaysFail,
-    AlwaysSuccess,
-    Not,
+    Wait,
 ];

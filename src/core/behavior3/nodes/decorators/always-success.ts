@@ -1,4 +1,4 @@
-import { Env, Node, Process, Result, Status } from "../../behavior";
+import { Env, Node, Process, Status } from "../../behavior";
 
 export class AlwaysSuccess extends Process {
     override check(node: Node): void {
@@ -10,16 +10,16 @@ export class AlwaysSuccess extends Process {
     override run(node: Node, env: Env) {
         const isYield = node.resume(env);
         if (typeof isYield === "boolean") {
-            if (env.lastStatus === Status.RUNNING) {
-                return Result.RUNNING;
+            if (env.lastRet.status === Status.RUNNING) {
+                return Status.RUNNING;
             }
-            return Result.SUCCESS;
+            return Status.SUCCESS;
         }
-        const ret = node.children[0].run(env);
-        if (ret.status === Status.RUNNING) {
+        const status = node.children[0].run(env);
+        if (status === Status.RUNNING) {
             return node.yield(env);
         }
-        return Result.SUCCESS;
+        return Status.SUCCESS;
     }
 
     override get descriptor() {

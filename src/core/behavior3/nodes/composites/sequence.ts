@@ -1,4 +1,4 @@
-import { Env, Node, Process, Result, Status } from "../../behavior";
+import { Env, Node, Process, Status } from "../../behavior";
 
 export class Sequence extends Process {
     override run(node: Node, env: Env) {
@@ -6,25 +6,23 @@ export class Sequence extends Process {
         let i = 0;
 
         if (typeof last === "number") {
-            if (env.lastStatus === Status.RUNNING) {
-                return Result.RUNNING;
-            } else if (env.lastStatus === Status.SUCCESS) {
-                return Result.SUCCESS;
-            } else {
+            if (env.lastRet.status === Status.SUCCESS) {
                 i = last + 1;
+            } else {
+                return env.lastRet.status;
             }
         }
 
         for (; i < node.children.length; i++) {
-            const ret = node.children[i].run(env);
-            if (ret.status === Status.FAIL) {
-                return Result.FAIL;
-            } else if (ret.status === Status.RUNNING) {
+            const status = node.children[i].run(env);
+            if (status === Status.FAILURE) {
+                return Status.FAILURE;
+            } else if (status === Status.RUNNING) {
                 return node.yield(env, i);
             }
         }
 
-        return Result.SUCCESS;
+        return Status.SUCCESS;
     }
 
     override get descriptor() {

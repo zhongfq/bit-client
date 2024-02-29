@@ -1,4 +1,4 @@
-import { Env, Node, Process, Result, Status } from "../../behavior";
+import { Env, Node, Process, Status } from "../../behavior";
 
 export class Parallel extends Process {
     override run(node: Node, env: Env) {
@@ -6,20 +6,20 @@ export class Parallel extends Process {
         let i = 0;
 
         if (typeof last === "number") {
-            if (env.lastStatus === Status.RUNNING) {
-                return Result.RUNNING;
+            if (env.lastRet.status === Status.RUNNING) {
+                return Status.RUNNING;
             }
             i = last + 1;
         }
 
         for (; i < node.children.length; i++) {
-            const ret = node.children[i].run(env);
-            if (ret.status === Status.RUNNING) {
+            const status = node.children[i].run(env);
+            if (status === Status.RUNNING) {
                 return node.yield(env, i);
             }
         }
 
-        return Result.SUCCESS;
+        return Status.SUCCESS;
     }
 
     override get descriptor() {

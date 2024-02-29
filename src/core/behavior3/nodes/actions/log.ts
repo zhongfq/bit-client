@@ -1,4 +1,4 @@
-import { Env, Node, Process, Result } from "../../behavior";
+import { Env, Node, Process, Status } from "../../behavior";
 
 interface LogArgs {
     str: string;
@@ -8,7 +8,7 @@ export class Log extends Process {
     override run(node: Node, env: Env) {
         const args = node.args as LogArgs;
         console.log("behavior3 -> log:", args.str);
-        return Result.SUCCESS;
+        return Status.SUCCESS;
     }
 
     override get descriptor() {

@@ -1,4 +1,4 @@
-import { Env, Node, Process, Result } from "../../behavior";
+import { Env, Node, Process, Status } from "../../behavior";
 
 interface CheckArgs {
     value: string;
@@ -19,7 +19,7 @@ export class Check extends Process {
         if (typeof value === "number") {
             throw new Error(`code error: ${args.value}`);
         } else {
-            return value ? Result.SUCCESS : Result.FAIL;
+            return value ? Status.SUCCESS : Status.FAILURE;
         }
     }
 

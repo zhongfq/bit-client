@@ -3,20 +3,9 @@ import { ExpressionEvaluator, ValueMap, ValueType } from "./expression-evaluator
 export type Constructor<T = unknown> = new (...args: any[]) => T;
 
 export const enum Status {
-    FAIL = "FAIL", // 失败
-    SUCCESS = "SUCCESS", // 成功
-    RUNNING = "RUNNING", // 运行中
-}
-
-export interface Result {
-    status: Status;
-    results?: ValueType[];
-}
-
-export namespace Result {
-    export const FAIL: Readonly<Result> = { status: Status.FAIL };
-    export const RUNNING: Readonly<Result> = { status: Status.RUNNING };
-    export const SUCCESS: Readonly<Result> = { status: Status.SUCCESS };
+    FAILURE = "failure", // 失败
+    SUCCESS = "success", // 成功
+    RUNNING = "running", // 运行中
 }
 
 export interface ProcessDescriptor {
@@ -30,16 +19,16 @@ export interface ProcessDescriptor {
 }
 
 export abstract class Process {
-    run(node: Node, env: Env, ...any: ValueType[]): Readonly<Result> {
-        return Result.FAIL;
+    check(node: Node): void {}
+
+    run(node: Node, env: Env, ...any: ValueType[]): Status {
+        return Status.FAILURE;
     }
 
     abstract get descriptor(): ProcessDescriptor;
 
-    check(node: Node): void {}
-
     protected error(node: Node, msg: string) {
-        throw new Error(`${node.tree.name}#${node.id}: ${msg}`);
+        throw new Error(`${node.tree.name}->${node.name}#${node.id}: ${msg}`);
     }
 }
 
@@ -53,8 +42,6 @@ export interface NodeData {
     input?: string[];
     output?: string[];
 }
-
-const NODE_YIELD = "YIELD";
 
 export class Node {
     private static tmpArgs: ValueType[] = [];
@@ -101,20 +88,19 @@ export class Node {
             Node.tmpArgs.push(env.getVar(varName));
         });
 
-        const ret = this._process.run(this, env, ...Node.tmpArgs);
-        if (ret.status != Status.RUNNING) {
+        env.lastRet.results = null;
+
+        const status = this._process.run(this, env, ...Node.tmpArgs);
+        if (status != Status.RUNNING) {
+            this.data.output?.forEach((varName, i) => {
+                const varValue = env.lastRet.results?.[i];
+                env.setVar(varName, varValue);
+            });
             env.setVar(this._yield, undefined);
             env.popStack();
-        } else if (env.getVar(this._yield) === undefined) {
-            env.setVar(this._yield, true);
         }
 
-        this.data.output?.forEach((varName, i) => {
-            const varValue = ret.results?.[i];
-            env.setVar(varName, varValue);
-        });
-
-        env.lastStatus = ret.status;
+        env.lastRet.status = status;
 
         if (this.data.debug) {
             let varStr = "";
@@ -125,16 +111,16 @@ export class Node {
             }
             console.log(
                 `[DEBUG] behavior3 -> ${this.name}: tree:${this.tree.name}, node:${this.id}, ` +
-                    `ret:${ret.status}, vars:{${varStr}}`
+                    `ret:${status}, vars:{${varStr}}`
             );
         }
 
-        return ret;
+        return status;
     }
 
     yield(env: Env, value?: ValueType) {
         env.setVar(this._yield, value ?? true);
-        return Result.RUNNING;
+        return Status.RUNNING;
     }
 
     resume(env: Env): ValueType {
@@ -175,7 +161,7 @@ export class Env {
 
     readonly context: Context;
 
-    lastStatus: Status = Status.SUCCESS;
+    lastRet: { status: Status; results?: ValueType[] | null } = { status: Status.SUCCESS };
 
     constructor(context: Context) {
         this.context = context;
@@ -213,12 +199,20 @@ export class Env {
         return this._stack.pop();
     }
 
+    static makePublicKey(node: Node, k: string) {
+        return `__public_Node#${node.id}_${k}`;
+    }
+
+    static isPublicKey(k: string) {
+        return k.indexOf("__public_") === 0;
+    }
+
     static makePrivateKey(node: Node, k: string) {
         return `__private_Node#${node.id}_${k}`;
     }
 
     static isPrivateKey(k: string) {
-        return k.indexOf("__private") === 0;
+        return k.indexOf("__private_") === 0;
     }
 }
 
@@ -232,8 +226,6 @@ export class Tree {
     readonly name: string;
     readonly root: Node;
     readonly context: Context;
-
-    tick: number = 0;
 
     constructor(name: string, data: TreeData, context: Context) {
         this.name = name;
@@ -258,14 +250,13 @@ export class Tree {
         if (env.stack.length > 0) {
             while (env.stack.length) {
                 const lastNode = env.stack[env.stack.length - 1];
-                const ret = lastNode.run(env);
-                if (ret.status === Status.RUNNING) {
+                const status = lastNode.run(env);
+                if (status === Status.RUNNING) {
                     break;
                 }
             }
         } else {
             this.root.run(env);
         }
-        ++this.tick;
     }
 }

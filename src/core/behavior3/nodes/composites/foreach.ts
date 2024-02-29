@@ -1,4 +1,4 @@
-import { Env, Node, Process, Result, Status } from "../../behavior";
+import { Env, Node, Process, Status } from "../../behavior";
 import { ValueType } from "../../expression-evaluator";
 
 export class Foreach extends Process {
@@ -17,8 +17,8 @@ export class Foreach extends Process {
         if (last instanceof Array) {
             i = last[0];
             j = last[1];
-            if (env.lastStatus === Status.RUNNING) {
-                return Result.RUNNING;
+            if (env.lastRet.status === Status.RUNNING) {
+                return Status.RUNNING;
             } else {
                 j++;
                 if (j >= node.children.length) {
@@ -31,8 +31,8 @@ export class Foreach extends Process {
         for (; i < arr.length; i++) {
             env.setVar(node.data.output![0], arr[i]);
             for (; j < node.children.length; j++) {
-                const ret = node.children[j].run(env);
-                if (ret.status === Status.RUNNING) {
+                const status = node.children[j].run(env);
+                if (status === Status.RUNNING) {
                     if (last instanceof Array) {
                         last[0] = i;
                         last[1] = j;
@@ -44,7 +44,7 @@ export class Foreach extends Process {
             }
         }
 
-        return Result.SUCCESS;
+        return Status.SUCCESS;
     }
 
     override get descriptor() {

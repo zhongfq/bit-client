@@ -1,14 +1,15 @@
-import { Env, Node, Process, Status } from "../../behavior";
+import { Env, Node, Process, Status } from "../../../../../core/behavior3/behavior";
 
 interface WaitArgs {
-    time: number;
+    ms: number;
+    random?: number;
 }
 
 export class Wait extends Process {
     override check(node: Node): void {
         const args = node.args as WaitArgs;
-        if (typeof args.time !== "number") {
-            this.error(node, `args.time is not a number`);
+        if (typeof args.ms !== "number") {
+            this.error(node, `args.ms is not a number`);
         }
     }
 
@@ -22,7 +23,11 @@ export class Wait extends Process {
             }
         } else {
             const args = node.args as WaitArgs;
-            return node.yield(env, env.context.time + args.time);
+            let ms = args.ms;
+            if (typeof args.random === "number") {
+                ms += (Math.random() - 0.5) * args.random;
+            }
+            return node.yield(env, env.context.time + ms);
         }
     }
 
@@ -31,7 +36,10 @@ export class Wait extends Process {
             name: "Wait",
             type: "Action",
             desc: "等待",
-            args: [["time", "int", "时间/tick"]],
+            args: [
+                ["ms", "int", "时间/毫秒"],
+                ["random", "int?", "随机范围"],
+            ],
         };
     }
 }

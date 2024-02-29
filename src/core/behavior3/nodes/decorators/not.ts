@@ -1,4 +1,4 @@
-import { Env, Node, Process, Result, Status } from "../../behavior";
+import { Env, Node, Process, Status } from "../../behavior";
 
 export class Not extends Process {
     override check(node: Node): void {
@@ -10,21 +10,21 @@ export class Not extends Process {
     override run(node: Node, env: Env) {
         const isYield = node.resume(env);
         if (typeof isYield === "boolean") {
-            if (env.lastStatus === Status.RUNNING) {
-                return Result.RUNNING;
+            if (env.lastRet.status === Status.RUNNING) {
+                return Status.RUNNING;
             } else {
-                return this._retNot(env.lastStatus);
+                return this._retNot(env.lastRet.status);
             }
         }
-        const ret = node.children[0].run(env);
-        if (ret.status === Status.RUNNING) {
+        const status = node.children[0].run(env);
+        if (status === Status.RUNNING) {
             return node.yield(env);
         }
-        return this._retNot(ret.status);
+        return this._retNot(status);
     }
 
     private _retNot(status: Status) {
-        return status === Status.FAIL ? Result.SUCCESS : Result.FAIL;
+        return status === Status.FAILURE ? Status.SUCCESS : Status.FAILURE;
     }
 
     override get descriptor() {
