@@ -1,23 +1,23 @@
-import { Env, Node, Process, ProcessDescriptor, Status } from "../../behavior";
+import { b3 } from "../../behavior";
 
-export class Once extends Process {
-    override check(node: Node): void {}
+export class Once extends b3.Process {
+    override check(node: b3.Node): void {}
 
-    override run(node: Node, env: Env) {
-        const onceKey = Env.makePublicKey(node, "once");
+    override run(node: b3.Node, env: b3.Env) {
+        const onceKey = b3.Env.makePublicKey(node, "once");
         if (env.getVar(onceKey) === true) {
-            return Status.FAILURE;
+            return b3.Status.FAILURE;
         }
 
         for (let i = 0; i < node.children.length; i++) {
             const status = node.children[i].run(env);
-            if (status === Status.RUNNING) {
+            if (status === b3.Status.RUNNING) {
                 this.error(node, "this child should not return running status");
             }
         }
 
         env.setVar(onceKey, true);
-        return Status.FAILURE;
+        return b3.Status.FAILURE;
     }
 
     override get descriptor() {

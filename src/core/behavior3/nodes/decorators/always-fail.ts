@@ -1,25 +1,25 @@
-import { Env, Node, Process, Status } from "../../behavior";
+import { b3 } from "../../behavior";
 
-export class AlwaysFail extends Process {
-    override check(node: Node): void {
+export class AlwaysFail extends b3.Process {
+    override check(node: b3.Node): void {
         if (node.children.length == 0) {
             this.error(node, `at least one children`);
         }
     }
 
-    override run(node: Node, env: Env) {
+    override run(node: b3.Node, env: b3.Env) {
         const isYield = node.resume(env);
         if (typeof isYield === "boolean") {
-            if (env.lastRet.status === Status.RUNNING) {
-                return Status.RUNNING;
+            if (env.lastRet.status === b3.Status.RUNNING) {
+                return b3.Status.RUNNING;
             }
-            return Status.FAILURE;
+            return b3.Status.FAILURE;
         }
         const status = node.children[0].run(env);
-        if (status === Status.RUNNING) {
+        if (status === b3.Status.RUNNING) {
             return node.yield(env);
         }
-        return Status.FAILURE;
+        return b3.Status.FAILURE;
     }
 
     override get descriptor() {

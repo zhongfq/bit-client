@@ -1,17 +1,11 @@
-import {
-    Env,
-    Node,
-    Process,
-    ProcessDescriptor,
-    Status,
-} from "../../../../../core/behavior3/behavior";
+import { b3 } from "../../../../../core/behavior3/behavior";
 
-export class NormalAttack extends Process {
-    override run(node: Node, env: Env, ...any: unknown[]): Status {
-        return Status.FAILURE;
+export class NormalAttack extends b3.Process {
+    override run(node: b3.Node, env: b3.Env, ...any: unknown[]) {
+        return b3.Status.FAILURE;
     }
 
-    override get descriptor(): ProcessDescriptor {
+    override get descriptor() {
         return {
             name: "NormalAttack",
             type: "Action",

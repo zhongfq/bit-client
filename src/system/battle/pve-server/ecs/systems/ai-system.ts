@@ -1,4 +1,4 @@
-import { Env, TreeData } from "../../../../../core/behavior3/behavior";
+import { b3 } from "../../../../../core/behavior3/behavior";
 import { ecs } from "../../../../../core/ecs";
 import { PveServer } from "../../pve-server";
 import { AiComponent } from "../components/ai-component";
@@ -35,7 +35,7 @@ export class AiSystem extends ecs.System {
         const tree = await this.context.loadAiTree(ai.res);
         if (tree) {
             ai.tree = tree;
-            ai.env = new Env(this.context);
+            ai.env = new b3.Env(this.context);
         }
     }
 }

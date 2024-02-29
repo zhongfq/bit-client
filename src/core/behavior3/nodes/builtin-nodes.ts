@@ -1,4 +1,4 @@
-import { Constructor, Process } from "../behavior";
+import { b3 } from "../behavior";
 import { Log } from "./actions/log";
 import { Wait } from "./actions/wait";
 import { Foreach } from "./composites/foreach";
@@ -12,7 +12,7 @@ import { AlwaysFail } from "./decorators/always-fail";
 import { AlwaysSuccess } from "./decorators/always-success";
 import { Not } from "./decorators/not";
 
-export const builtinNodes: Constructor<Process>[] = [
+export const builtinNodes: b3.Constructor<b3.Process>[] = [
     AlwaysFail,
     AlwaysSuccess,
     Check,

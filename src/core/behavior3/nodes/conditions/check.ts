@@ -1,11 +1,11 @@
-import { Env, Node, Process, Status } from "../../behavior";
+import { b3 } from "../../behavior";
 
 interface CheckArgs {
     value: string;
 }
 
-export class Check extends Process {
-    override check(node: Node): void {
+export class Check extends b3.Process {
+    override check(node: b3.Node): void {
         const args = node.args as CheckArgs;
         if (typeof args.value !== "string" || args.value.length == 0) {
             this.error(node, `args.value is not a expr string`);
@@ -13,13 +13,13 @@ export class Check extends Process {
         node.tree.context.compileExpr(args.value);
     }
 
-    override run(node: Node, env: Env) {
+    override run(node: b3.Node, env: b3.Env) {
         const args = node.args as CheckArgs;
         const value = env.eval(args.value);
         if (typeof value === "number") {
             throw new Error(`code error: ${args.value}`);
         } else {
-            return value ? Status.SUCCESS : Status.FAILURE;
+            return value ? b3.Status.SUCCESS : b3.Status.FAILURE;
         }
     }
 

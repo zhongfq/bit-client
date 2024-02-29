@@ -1,5 +1,5 @@
 import { Callback } from "../dispatcher";
-import { Context, Env, Node, Process, ProcessDescriptor, Status, Tree, TreeData } from "./behavior";
+import { b3 } from "./behavior";
 import { builtinNodes } from "./nodes/builtin-nodes";
 
 interface Role {
@@ -13,76 +13,76 @@ interface Position {
     y: number;
 }
 
-class RoleEnv extends Env {
+class RoleEnv extends b3.Env {
     declare context: RoleContext;
     owner!: Role;
 }
 
-class Attack extends Process {
-    override run(node: Node, env: Env, enemy?: Role) {
+class Attack extends b3.Process {
+    override run(node: b3.Node, env: b3.Env, enemy?: Role) {
         if (!enemy) {
-            return Status.FAILURE;
+            return b3.Status.FAILURE;
         }
         console.log("Do Attack");
         enemy.hp -= 100;
         env.setVar("ATTACKING", true);
-        return Status.SUCCESS;
+        return b3.Status.SUCCESS;
     }
 
-    get descriptor(): ProcessDescriptor {
-        return { name: "Attack" } as ProcessDescriptor;
+    get descriptor() {
+        return { name: "Attack" } as b3.ProcessDescriptor;
     }
 }
 
-class GetHp extends Process {
-    override run(node: Node, env: RoleEnv) {
+class GetHp extends b3.Process {
+    override run(node: b3.Node, env: RoleEnv) {
         env.lastRet.results = [(env.owner as Role).hp];
-        return Status.SUCCESS;
+        return b3.Status.SUCCESS;
     }
 
-    get descriptor(): ProcessDescriptor {
-        return { name: "GetHp" } as ProcessDescriptor;
+    get descriptor() {
+        return { name: "GetHp" } as b3.ProcessDescriptor;
     }
 }
 
-class Idle extends Process {
-    override run(node: Node, env: Env) {
+class Idle extends b3.Process {
+    override run(node: b3.Node, env: b3.Env) {
         console.log("Do Idle");
-        return Status.SUCCESS;
+        return b3.Status.SUCCESS;
     }
 
-    get descriptor(): ProcessDescriptor {
-        return { name: "Idle" } as ProcessDescriptor;
+    get descriptor() {
+        return { name: "Idle" } as b3.ProcessDescriptor;
     }
 }
 
-class MoveToPos extends Process {
-    override run(node: Node, env: RoleEnv) {
+class MoveToPos extends b3.Process {
+    override run(node: b3.Node, env: RoleEnv) {
         const owner = env.owner as Role;
         const args = node.args as Position;
         owner.x = args.x;
         owner.y = args.y;
-        return Status.SUCCESS;
+        return b3.Status.SUCCESS;
     }
 
-    get descriptor(): ProcessDescriptor {
-        return { name: "MoveToPos" } as ProcessDescriptor;
+    get descriptor() {
+        return { name: "MoveToPos" } as b3.ProcessDescriptor;
     }
 }
 
-class MoveToTarget extends Process {
+class MoveToTarget extends b3.Process {
     static SPEED = 50;
 
-    override run(node: Node, env: RoleEnv, target?: Role) {
+    override run(node: b3.Node, env: RoleEnv, target?: Role) {
         if (!target) {
-            return Status.FAILURE;
+            return b3.Status.FAILURE;
         }
         const owner = env.owner as Role;
         const { x, y } = owner;
         const { x: tx, y: ty } = target;
         if (Math.abs(x - tx) < MoveToTarget.SPEED && Math.abs(y - ty) < MoveToTarget.SPEED) {
             console.log("Moving reach target");
-            return Status.SUCCESS;
+            return b3.Status.SUCCESS;
         }
 
         console.log(`Moving (${x}, ${y}) => (${tx}, ${ty})`);
@@ -98,8 +98,8 @@ class MoveToTarget extends Process {
         return node.yield(env);
     }
 
-    get descriptor(): ProcessDescriptor {
-        return { name: "MoveToTarget" } as ProcessDescriptor;
+    get descriptor() {
+        return { name: "MoveToTarget" } as b3.ProcessDescriptor;
     }
 }
 
@@ -109,8 +109,8 @@ interface FindEnemyArgs {
     count?: number;
 }
 
-class FindEnemy extends Process {
-    override run(node: Node, env: RoleEnv) {
+class FindEnemy extends b3.Process {
+    override run(node: b3.Node, env: RoleEnv) {
         const args = node.args as FindEnemyArgs;
         const x = env.owner.x;
         const y = env.owner.y;
@@ -126,18 +126,18 @@ class FindEnemy extends Process {
         }, args.count ?? -1);
         if (list.length) {
             env.lastRet.results = list;
-            return Status.SUCCESS;
+            return b3.Status.SUCCESS;
         } else {
-            return Status.FAILURE;
+            return b3.Status.FAILURE;
         }
     }
 
-    get descriptor(): ProcessDescriptor {
-        return { name: "FindEnemy" } as ProcessDescriptor;
+    get descriptor() {
+        return { name: "FindEnemy" } as b3.ProcessDescriptor;
     }
 }
 
-class RoleContext extends Context {
+class RoleContext extends b3.Context {
     avators: Role[] = [];
 
     find(func: Callback, count: number) {
@@ -173,7 +173,7 @@ export class BehaviorTest {
     testHero(context: RoleContext) {
         console.log("====================test hero=============================");
         // -- test hero
-        const tree = new Tree("hero", heroTree as TreeData, context);
+        const tree = new b3.Tree("hero", heroTree as b3.TreeData, context);
         const env = new RoleEnv(context);
         env.owner = context.avators[1];
         tree.run(env);
@@ -193,7 +193,7 @@ export class BehaviorTest {
 
     testMonster(context: RoleContext) {
         console.log("====================test monster=============================");
-        const tree = new Tree("monster", monsterTree as TreeData, context);
+        const tree = new b3.Tree("monster", monsterTree as b3.TreeData, context);
         const env = new RoleEnv(context);
         env.owner = context.avators[0];
         env.owner.hp = 100;

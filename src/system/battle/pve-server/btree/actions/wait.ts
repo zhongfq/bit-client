@@ -1,25 +1,25 @@
-import { Env, Node, Process, Status } from "../../../../../core/behavior3/behavior";
+import { b3 } from "../../../../../core/behavior3/behavior";
 
 interface WaitArgs {
     ms: number;
     random?: number;
 }
 
-export class Wait extends Process {
-    override check(node: Node): void {
+export class Wait extends b3.Process {
+    override check(node: b3.Node): void {
         const args = node.args as WaitArgs;
         if (typeof args.ms !== "number") {
             this.error(node, `args.ms is not a number`);
         }
     }
 
-    override run(node: Node, env: Env) {
+    override run(node: b3.Node, env: b3.Env) {
         const t = node.resume(env);
         if (typeof t === "number") {
             if (env.context.time >= t) {
-                return Status.SUCCESS;
+                return b3.Status.SUCCESS;
             } else {
-                return Status.RUNNING;
+                return b3.Status.RUNNING;
             }
         } else {
             const args = node.args as WaitArgs;
