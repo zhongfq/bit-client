@@ -7,9 +7,7 @@ import {
 } from "../../../../../core/behavior3/behavior";
 
 export class NormalAttack extends Process {
-    override check(node: Node): void {}
-
-    override run(node: Node, env: Env) {
+    override run(node: Node, env: Env, ...any: unknown[]): Status {
         return Status.FAILURE;
     }
 

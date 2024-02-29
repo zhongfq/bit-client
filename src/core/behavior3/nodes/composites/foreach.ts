@@ -1,5 +1,4 @@
 import { Env, Node, Process, Status } from "../../behavior";
-import { ValueType } from "../../expression-evaluator";
 
 export class Foreach extends Process {
     override check(node: Node): void {
@@ -9,7 +8,7 @@ export class Foreach extends Process {
         }
     }
 
-    override run(node: Node, env: Env, arr: ValueType[]) {
+    override run(node: Node, env: Env, arr: unknown[]) {
         let last = node.resume(env);
         let i: number = 0;
         let j: number = 0;

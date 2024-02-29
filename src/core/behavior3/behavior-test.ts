@@ -259,7 +259,7 @@ const heroTree = {
                                 id: 8,
                                 name: "Sequence",
                                 args: {},
-                                debug: false,
+                                debug: true,
                                 children: [
                                     {
                                         id: 9,
@@ -395,6 +395,7 @@ const heroTree = {
                             h: 50,
                         },
                         output: ["enemy"],
+                        debug: true,
                     },
                     {
                         id: 27,
