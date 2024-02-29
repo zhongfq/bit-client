@@ -998,6 +998,7 @@ declare global {
 
             sendMessageToPanel(panelId: string, cmd: string, ...args: Array<any>): Promise<any>;
             postMessageToPanel(panelId: string, cmd: string, ...args: Array<any>): Promise<void>;
+            runUIScript(command: string, ...params: any[]): Promise<any>;
 
             alert(msg: string, type?: "none" | "info" | "error" | "question" | "warning"): Promise<void>;
 
@@ -1269,16 +1270,17 @@ declare global {
             readonly customAssetFilters: Record<string, IAssetFilter>;
             readonly onAssetChanged: IDelegate<(asset: IAssetInfo, flag: AssetChangedFlag) => void>;
 
-            getAllAssetsInDir(folderAsset: IAssetInfo, types?: Array<AssetType>, customFilter?: string): Array<IAssetInfo>;
+            getAllAssetsInDir(folderAsset: IAssetInfo, types?: ReadonlyArray<AssetType>, customFilter?: string): Array<IAssetInfo>;
 
             readonly resourceDirs: Readonly<Set<IAssetInfo>>;
-            getAllAssetsInResourceDir(types?: Array<AssetType>, customFilter?: string): Array<IAssetInfo>;
+            getAllAssetsInResourceDir(types?: ReadonlyArray<AssetType>, customFilter?: string): Array<IAssetInfo>;
 
-            getChildrenAssets(folderAsset: IAssetInfo, types: Array<AssetType>, matchSubType?: boolean, customFilter?: string): IAssetInfo[];
-            findAssets(keyword: string, types?: Array<AssetType>, matchSubType?: boolean, customFilter?: string, limit?: number): IAssetInfo[];
+            getChildrenAssets(folderAsset: IAssetInfo, types: ReadonlyArray<AssetType>, matchSubType?: boolean, customFilter?: string): IAssetInfo[];
+            findAssets(keyword: string, types?: ReadonlyArray<AssetType>, matchSubType?: boolean, customFilter?: string, limit?: number): IAssetInfo[];
+            filterAssets(assetIds: ReadonlyArray<string>, types?: ReadonlyArray<AssetType>, matchSubType?: boolean, customFilter?: string): IAssetInfo[];
 
             getAsset(idOrPath: string, allowResourcesSearch?: boolean): IAssetInfo;
-            getAssetsByType(types?: Array<AssetType>, matchSubType?: boolean): Array<IAssetInfo>;
+            getAssetsByType(types?: ReadonlyArray<AssetType>, matchSubType?: boolean): Array<IAssetInfo>;
 
             createFileAsset(filePath: string, metaData?: any, allowOverwrite?: boolean): IAssetInfo;
             createFolderAsset(folderPath: string): IAssetInfo;
@@ -1768,6 +1770,7 @@ declare global {
             send(channel: string, ...args: any[]): void;
             transfer(channel: string, transfer: Transferable[], ...args: any[]): void;
             invoke(channel: string, ...args: any[]): Promise<any>;
+            callHandler(channel: string, ...args: any[]): Promise<any>;
         }
         export type ExecResult = { code: number, error: string, output: string };
         export type ExecProgressCallback = (output: string, part: string) => void;

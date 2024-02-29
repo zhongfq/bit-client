@@ -12129,16 +12129,6 @@ declare module Laya {
         set restitutionCombine(value: PhysicsCombineMode);
         get restitutionCombine(): PhysicsCombineMode;
         /**
-         * 用于连续碰撞检测(CCD)的速度阈值,当物体移动速度小于该值时不进行CCD检测,防止快速移动物体(例如:子弹)错误的穿过其它物体,0表示禁止。
-         */
-        get ccdMotionThreshold(): number;
-        set ccdMotionThreshold(value: number);
-        /**
-         * 获取用于进入连续碰撞检测(CCD)范围的球半径。
-         */
-        get ccdSweptSphereRadius(): number;
-        set ccdSweptSphereRadius(value: number);
-        /**
          * 碰撞形状。
          */
         get colliderShape(): Physics3DColliderShape;
@@ -12171,6 +12161,12 @@ declare module Laya {
         maxSubSteps: number;
         /**物理模拟器帧的间隔时间。*/
         fixedTimeStep: number;
+        /**是否开启连续碰撞检测 */
+        enableCCD: boolean;
+        /**连续碰撞检测阈值 */
+        ccdThreshold: number;
+        /**连续碰撞检测球半径 */
+        ccdSphereRadius: number;
     }
     /**
      * <code>PhysicsUpdateList</code> 类用于实现物理更新队列。
@@ -12245,6 +12241,11 @@ declare module Laya {
          */
         get trigger(): boolean;
         set trigger(value: boolean);
+        /**
+         * 碰撞检测模式
+         */
+        get collisionDetectionMode(): number;
+        set collisionDetectionMode(value: number);
         constructor();
         protected _onAdded(): void;
         protected _onDestroy(): void;
@@ -23874,12 +23875,14 @@ declare module Laya {
         priority?: number;
         group?: string;
         cache?: boolean;
+        ignoreCache?: boolean;
         noRetry?: boolean;
         silent?: boolean;
         useWorkerLoader?: boolean;
         constructParams?: TextureConstructParams;
         propertyParams?: TexturePropertyParams;
         blob?: ArrayBuffer;
+        initiator?: ILoadTask;
         [key: string]: any;
     }
     interface ILoadURL extends ILoadOptions {
@@ -24012,7 +24015,7 @@ declare module Laya {
          * @param priority	(default = 0)加载的优先级，数字越大优先级越高，优先级高的优先加载。
          * @param cache		是否缓存。
          * @param group		分组，方便对资源进行管理。
-         * @param ignoreCache	参数已废弃。
+         * @param ignoreCache	是否忽略缓存。
          * @param useWorkerLoader(default = false)是否使用worker加载（只针对IMAGE类型和ATLAS类型，并且浏览器支持的情况下生效）
          * @return Promise对象
          */
@@ -25077,8 +25080,6 @@ declare module Laya {
      */
     class DistanceJoint extends JointBase {
         /**@private */
-        private static _tempP;
-        /**@private */
         private static _temp;
         /**[首次设置有效]关节的自身刚体*/
         selfBody: RigidBody;
@@ -25993,6 +25994,12 @@ declare module Laya {
         maxSubSteps: number;
         /**物理模拟器帧的间隔时间:通过减少fixedTimeStep可增加模拟精度，默认是1.0 / 60.0。*/
         fixedTimeStep: number;
+        /**是否开启连续碰撞检测 */
+        enableCCD: boolean;
+        /**连续碰撞检测阈值 */
+        ccdThreshold: number;
+        /**连续碰撞检测球半径 */
+        ccdSphereRadius: number;
         /**delta */
         dt: number;
         protected _updateCount: number;
@@ -26102,6 +26109,8 @@ declare module Laya {
         setBounciness(value: number): void;
         setfriction(value: number): void;
         setRollingFriction(value: number): void;
+        setCcdMotionThreshold(value: number): void;
+        setCcdSweptSphereRadius(value: number): void;
     }
     class btRigidBodyCollider extends btCollider implements IDynamicCollider {
         constructor(manager: btPhysicsManager);
@@ -27155,34 +27164,35 @@ declare module Laya {
         Collider_BounceCombine = 7,
         Collider_FrictionCombine = 8,
         Collider_EventFilter = 9,
-        RigidBody_CanKinematic = 10,
-        RigidBody_AllowSleep = 11,
-        RigidBody_Gravity = 12,
-        RigidBody_LinearDamp = 13,
-        RigidBody_AngularDamp = 14,
-        RigidBody_LinearVelocity = 15,
-        RigidBody_AngularVelocity = 16,
-        RigidBody_Mass = 17,
-        RigidBody_WorldPosition = 18,
-        RigidBody_WorldOrientation = 19,
-        RigidBody_InertiaTensor = 20,
-        RigidBody_MassCenter = 21,
-        RigidBody_MaxAngularVelocity = 22,
-        RigidBody_MaxDepenetrationVelocity = 23,
-        RigidBody_SleepThreshold = 24,
-        RigidBody_SleepAngularVelocity = 25,
-        RigidBody_SolverIterations = 26,
-        RigidBody_AllowDetectionMode = 27,
-        RigidBody_AllowKinematic = 28,
-        RigidBody_AllowCharacter = 29,
-        RigidBody_LinearFactor = 30,
-        RigidBody_AngularFactor = 31,
-        RigidBody_ApplyForce = 32,
-        RigidBody_ClearForce = 33,
-        RigidBody_ApplyForceWithOffset = 34,
-        RigidBody_ApplyTorque = 35,
-        RigidBody_ApplyImpulse = 36,
-        RigidBody_ApplyTorqueImpulse = 37
+        Collider_CollisionDetectionMode = 10,
+        RigidBody_CanKinematic = 11,
+        RigidBody_AllowSleep = 12,
+        RigidBody_Gravity = 13,
+        RigidBody_LinearDamp = 14,
+        RigidBody_AngularDamp = 15,
+        RigidBody_LinearVelocity = 16,
+        RigidBody_AngularVelocity = 17,
+        RigidBody_Mass = 18,
+        RigidBody_WorldPosition = 19,
+        RigidBody_WorldOrientation = 20,
+        RigidBody_InertiaTensor = 21,
+        RigidBody_MassCenter = 22,
+        RigidBody_MaxAngularVelocity = 23,
+        RigidBody_MaxDepenetrationVelocity = 24,
+        RigidBody_SleepThreshold = 25,
+        RigidBody_SleepAngularVelocity = 26,
+        RigidBody_SolverIterations = 27,
+        RigidBody_AllowDetectionMode = 28,
+        RigidBody_AllowKinematic = 29,
+        RigidBody_AllowCharacter = 30,
+        RigidBody_LinearFactor = 31,
+        RigidBody_AngularFactor = 32,
+        RigidBody_ApplyForce = 33,
+        RigidBody_ClearForce = 34,
+        RigidBody_ApplyForceWithOffset = 35,
+        RigidBody_ApplyTorque = 36,
+        RigidBody_ApplyImpulse = 37,
+        RigidBody_ApplyTorqueImpulse = 38
     }
     enum EJointCapable {
         Joint_Anchor = 0,
@@ -27688,6 +27698,8 @@ declare module Laya {
         _dynamicUpdateList: PhysicsUpdateList;
         /**fixedTimeStep */
         fixedTime: number;
+        /** enable CCD */
+        enableCCD: boolean;
         _pxcontrollerManager: any;
         private _gravity;
         constructor(physicsSettings: PhysicsSettings);
@@ -37373,7 +37385,7 @@ declare module Laya {
          * @param max 滚动条最大位置值。
          * @param value 滚动条当前位置值。
          */
-        setScroll(min: number, max: number, value: number): void;
+        setScroll(min: number, max: number, value?: number): void;
         /**
          * 获取或设置表示最高滚动位置的数字。
          */
@@ -37618,7 +37630,7 @@ declare module Laya {
          * @param max 滑块的最小值。
          * @param value 滑块的当前值。
          */
-        setSlider(min: number, max: number, value: number): void;
+        setSlider(min: number, max: number, value?: number): void;
         /**
          * 滑动的刻度值，滑动数值为tick的整数倍。默认值为1。
          */

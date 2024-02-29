@@ -808,7 +808,7 @@ declare module gui {
         set title(value: string);
         get templateVars(): Record<string, string>;
         set templateVars(value: Record<string, any> | boolean);
-        setVar(name: string, value: string): this;
+        setVar(name: string, value: any): this;
         get style(): TextStyle;
         set html(value: boolean);
         get html(): boolean;

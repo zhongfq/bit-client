@@ -254,6 +254,7 @@ declare global {
             openFile?: string;
             openURL?: string;
             runScript?: string;
+            scriptArgs?: string[];
             [index: string]: any;
         }
         export interface IQRCodeDialog extends IDialog {
@@ -476,7 +477,25 @@ declare global {
             createNodeByAsset(assetId: string, props?: Record<string, any>, parentNode?: IMyNode, options?: ICreateNodeOptions): Promise<IMyNode>;
             deleteNode(node: IMyNode): any;
             addNode(parentNode: IMyNode, node: IMyNode, index?: number, worldPositionStays?: boolean): Promise<void>;
+            /**
+             * 在Scene进程执行脚本。可以执行使用了@Laya.regClass或@EditorEnv.regClass装饰的类的静态函数。
+             * @param command 
+             * @param params 
+             */
             runScript(command: string, ...params: any[]): Promise<any>;
+            /**
+             * 功能和runScript相同，差别在于runScript只将命令发送到编辑状态的场景进程，而runScriptMax会优先发送到播放状态的场景进程。如果场景不在播放状态，则和runScript行为相同。
+             * @param command
+             * @param params 
+             */
+            runScriptMax(command: string, ...params: any[]): Promise<any>;
+            /**
+             * 执行节点或者组件上的一个函数
+             * @param nodeId 
+             * @param componentId 
+             * @param functionName 
+             * @param args 
+             */
             runNodeScript(nodeId: string, componentId: string, functionName: string, ...args: any[]): Promise<any>;
             runBatch(func: () => void, options?: { noHistory?: boolean, noPush?: boolean }): void;
             findNodes(keyword: string, maxResults?: number): Promise<Array<IMyNode>>;
@@ -586,6 +605,7 @@ declare global {
             send(channel: string, ...args: any[]): void;
             transfer(channel: string, transfer: Transferable[], ...args: any[]): void;
             invoke(channel: string, ...args: any[]): Promise<any>;
+            callHandler(channel: string, ...args: any[]): Promise<any>;
         }
         export interface IMenuItem {
             /**
@@ -1337,6 +1357,12 @@ declare global {
              * 失败返回null
              */
             function getPath(fromObj: Object, toObj: Object, result?: Array<string>): Array<string>;
+
+            /**
+             * 执行一个函数，在此函数里如果有涉及到对任何被监听对象的修改，都不会触发变化回调函数
+             * @param callback
+             */
+            function runUntrace(callback: () => void): void;
         }
 
         export interface IDataUtils {
@@ -1560,7 +1586,7 @@ declare global {
             readonly port: IMyMessagePort;
             getVersionOfType(type: AssetType): number;
 
-            getFolderContent(folderAssetId: string, types?: Array<AssetType>, matchSubType?: boolean, customFilter?: string): Promise<IAssetInfo[]>;
+            getFolderContent(folderAssetId: string, types?: ReadonlyArray<AssetType>, matchSubType?: boolean, customFilter?: string): Promise<IAssetInfo[]>;
             getAsset(assetIdOrPath: string, allowResourcesSearch?: boolean): Promise<IAssetInfo>;
             getAssetSync(assetIdOrPath: string): IAssetInfo;
             getAssetsInPath(assetId: string): Promise<Array<IAssetInfo>>;
@@ -1583,14 +1609,16 @@ declare global {
             getFileIcon(ext: string): string;
             getFolderIcon(name: string): [string, string];
 
-            reimport(assets: Array<IAssetInfo>): void;
-            unpack(assets: Array<IAssetInfo>): void;
+            reimport(assets: ReadonlyArray<IAssetInfo>): void;
+            unpack(assets: ReadonlyArray<IAssetInfo>): void;
 
-            search(keyword: string, types?: Array<AssetType>, matchSubType?: boolean, customFilter?: string): Promise<Array<IAssetInfo>>;
+            search(keyword: string, types?: ReadonlyArray<AssetType>, matchSubType?: boolean, customFilter?: string): Promise<Array<IAssetInfo>>;
+            filter(assetIds: ReadonlyArray<string>, types?: ReadonlyArray<AssetType>, matchSubType?: boolean, customFilter?: string): Promise<Array<IAssetInfo>>;
+
             rename(assetId: string, newName: string): Promise<number>;
-            move(sourceAssetIds: string[], targetFolderId: string, conflictResolution?: "keepBoth" | "replace"): Promise<void>;
-            copy(sourceAssetIds: string[], targetFolderId: string, conflictResolution?: "keepBoth" | "replace"): Promise<void>;
-            delete(assets: Array<IAssetInfo>): Promise<void>;
+            move(sourceAssetIds: ReadonlyArray<string>, targetFolderId: string, conflictResolution?: "keepBoth" | "replace"): Promise<void>;
+            copy(sourceAssetIds: ReadonlyArray<string>, targetFolderId: string, conflictResolution?: "keepBoth" | "replace"): Promise<void>;
+            delete(assets: ReadonlyArray<IAssetInfo>): Promise<void>;
 
             createTempAsset(fileName: string): Promise<IAssetInfo>;
             refreshFolder(folderAsset: IAssetInfo): void;
@@ -2263,7 +2291,6 @@ declare global {
             memberProps: Array<FPropertyDescriptor>;
             _inheritedFlag: number;
             _flag: number;
-            _noneTestHiddenFlag: boolean;
             _readonlyFlag: boolean;
             _hotUpdateTime: number;
             _statusKey: string;
@@ -2290,6 +2317,25 @@ declare global {
             private onClickButton;
             private handleHotkey;
             refresh(): void;
+        }
+
+        export class VecField extends PropertyField {
+            protected _input: gui.Widget;
+            protected _inputs: Array<NumericInput>;
+            protected _members: Array<FPropertyDescriptor>;
+            protected _axes: Array<any>;
+            create(res?: "Vec2Field" | "Vec3Field" | "Vec4Field"): IPropertyFieldCreateResult;
+            protected onSubmit(index: number, num: number): void;
+            refresh(): void;
+        }
+        export class Vec2Field extends VecField {
+            create(): IPropertyFieldCreateResult;
+        }
+        export class Vec3Field extends VecField {
+            create(): IPropertyFieldCreateResult;
+        }
+        export class Vec4Field extends VecField {
+            create(): IPropertyFieldCreateResult;
         }
 
 
