@@ -141,9 +141,11 @@ export class Context {
         return expr;
     }
 
-    registerProcess<T extends Process>(cls: Constructor<T>) {
-        const process = new cls();
-        this._processResolvers[process.descriptor.name] = process;
+    registerProcess<T extends Process>(...args: Constructor<T>[]) {
+        for (const cls of args) {
+            const process = new cls();
+            this._processResolvers[process.descriptor.name] = process;
+        }
     }
 
     resolveProcess(name: string) {
@@ -184,6 +186,12 @@ export class Env {
         } else {
             this._vars.set(k, v);
         }
+    }
+
+    clear() {
+        this._stack.length = 0;
+        this._vars.clear();
+        this.lastRet.results = null;
     }
 
     static makePublicKey(node: Node, k: string) {

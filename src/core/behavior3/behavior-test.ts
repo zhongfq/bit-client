@@ -148,9 +148,7 @@ class RoleContext extends Context {
 export class BehaviorTest {
     start() {
         const context = new RoleContext();
-        builtinNodes.forEach((value) => {
-            context.registerProcess(value);
-        });
+        context.registerProcess(...builtinNodes);
         context.registerProcess(Attack);
         context.registerProcess(GetHp);
         context.registerProcess(Idle);
