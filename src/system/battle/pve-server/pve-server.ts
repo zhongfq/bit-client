@@ -2,6 +2,8 @@ import { b3 } from "../../../core/behavior3/behavior";
 import { builtinNodes } from "../../../core/behavior3/nodes/builtin-nodes";
 import { ecs } from "../../../core/ecs";
 import { Loader } from "../../../core/loader";
+import { RoleComponent } from "./ecs/components/role-component";
+import { WoodComponent } from "./ecs/components/wood-component";
 
 export class PveServer extends b3.Context {
     private _loader: Loader = new Loader();
@@ -40,4 +42,24 @@ export class PveServer extends b3.Context {
 
         return tree;
     }
+
+    findTargets(role: RoleComponent, etype: number, x: number, y: number, w: number, h: number) {}
+
+    //-------------------------------------------------------------------------
+    //------------------------------接收命令-----------------------------------
+    //-------------------------------------------------------------------------
+    moveStart(id: number, degree: number) {}
+
+    moveStop(id: number) {}
+
+    //-------------------------------------------------------------------------
+    //------------------------------发送命令-----------------------------------
+    //-------------------------------------------------------------------------
+    chopTree(role: RoleComponent, wood: WoodComponent) {}
+
+    launchSkill(role: RoleComponent, target?: RoleComponent) {}
+
+    createRole() {}
+
+    createWood() {}
 }

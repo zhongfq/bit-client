@@ -27,6 +27,10 @@ export namespace b3 {
         protected error(node: Node, msg: string) {
             throw new Error(`${node.tree.name}->${node.name}#${node.id}: ${msg}`);
         }
+
+        protected warn(node: Node, msg: string) {
+            console.warn(`${node.tree.name}->${node.name}#${node.id}: ${msg}`);
+        }
     }
 
     export interface NodeData {
