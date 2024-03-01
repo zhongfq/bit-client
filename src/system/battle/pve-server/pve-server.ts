@@ -5,16 +5,19 @@ import { Loader } from "../../../core/loader";
 import { RoleComponent } from "./ecs/components/role-component";
 import { WoodComponent } from "./ecs/components/wood-component";
 
-export class PveServer extends b3.Context {
+export class PveServer extends b3.Context implements ICommandReceiver {
     private _loader: Loader = new Loader();
     private _ecs: ecs.World;
+    private _sender: ICommandSender;
 
     private _aiTrees: Map<string, b3.Tree> = new Map();
 
-    constructor() {
+    constructor(sender: ICommandSender) {
         super();
 
         this._initBehavior3();
+
+        this._sender = sender;
 
         this._ecs = new ecs.World();
     }
@@ -46,14 +49,16 @@ export class PveServer extends b3.Context {
     findTargets(role: RoleComponent, etype: number, x: number, y: number, w: number, h: number) {}
 
     //-------------------------------------------------------------------------
-    //------------------------------接收命令-----------------------------------
+    //------------------------------ICommandReceiver---------------------------
     //-------------------------------------------------------------------------
-    moveStart(id: number, degree: number) {}
+    moveStart(eid: number, degree: number) {}
 
-    moveStop(id: number) {}
+    moveChange(eid: number, degree: number) {}
+
+    moveStop(eid: number) {}
 
     //-------------------------------------------------------------------------
-    //------------------------------发送命令-----------------------------------
+    //------------------------------ICommandSender-----------------------------
     //-------------------------------------------------------------------------
     chopTree(role: RoleComponent, wood: WoodComponent) {}
 
@@ -62,4 +67,14 @@ export class PveServer extends b3.Context {
     createRole() {}
 
     createWood() {}
+}
+
+export interface ICommandReceiver {
+    moveStart(id: number, degree: number): void;
+    moveChange(eid: number, degree: number): void;
+    moveStop(id: number): void;
+}
+
+export interface ICommandSender {
+    chopTree(eid: number, target: number): void;
 }

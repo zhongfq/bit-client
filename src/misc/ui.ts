@@ -15,6 +15,8 @@ export enum ui {
     HOME_SCENE,
     WORLD_SCENE,
 
+    PVE,
+
     TEST1,
     TEST2,
 
@@ -85,6 +87,11 @@ export namespace ui {
             id: ui.ITEM_SYNTHESIS,
             url: "resources/prefab/bag/item-synthesis.lh",
             blockInput: true,
+        });
+
+        app.ui.register({
+            id: ui.PVE,
+            url: "scenes/pve.ls",
         });
 
         app.ui.register({
