@@ -12,9 +12,11 @@ export class LoadingMediator extends Laya.Script {
     progress: number = 0;
 
     override onAwake(): void {
+        let isOpen = false;
         this.owner.progress.changeHandler = new Laya.Handler(this, (val: number) => {
-            if (val == 1) {
+            if (val == 1 && !isOpen) {
                 app.ui.replace(ui.HOME_SCENE);
+                isOpen = true;
             }
             if (val < 1 && Math.round(val * 100) == 100) {
                 this.owner.progress.value = 1;
