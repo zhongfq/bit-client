@@ -124,6 +124,7 @@ export class UIManager {
     open(id: number, args?: any) {
         const descriptor = this._checkDescriptor(id);
         if (descriptor) {
+            console.log("open scene:", descriptor.url);
             Laya.Scene.load(descriptor.url)
                 .then((scene) => {
                     this._activeScene(this.top, false);
@@ -138,6 +139,7 @@ export class UIManager {
     replace(id: number, args?: any) {
         const descriptor = this._checkDescriptor(id);
         if (descriptor) {
+            console.log("replace scene:", descriptor.url);
             Laya.Scene.load(descriptor.url)
                 .then((scene) => {
                     const topScene = this.top;
