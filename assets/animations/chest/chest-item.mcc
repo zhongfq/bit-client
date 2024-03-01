@@ -10,21 +10,6 @@
       "blendingMode": 0,
       "states": [
         {
-          "name": "1",
-          "clip": {
-            "_$uuid": "e1d32fc2-6b63-44bb-a45d-1bc348d4c6aa"
-          },
-          "loop": -1,
-          "speed": 1,
-          "clipEnd": 1,
-          "x": 542.3908350908353,
-          "y": 53.89569320303558,
-          "id": "0",
-          "cycleOffset": 0,
-          "clipStart": 0,
-          "yoyo": false
-        },
-        {
           "x": 6,
           "y": 99,
           "_isLooping": 0,
@@ -34,9 +19,7 @@
           "clipEnd": 1,
           "soloTransitions": [
             {
-              "id": "1",
-              "exitByTime": true,
-              "exitTime": 1
+              "id": "0"
             }
           ]
         },
@@ -50,17 +33,30 @@
           "clipEnd": 1
         },
         {
-          "x": 600,
-          "y": 317,
+          "x": 334,
+          "y": 547,
+          "_isLooping": 0,
+          "id": "0",
+          "name": "1",
+          "speed": 1,
+          "clipEnd": 1,
+          "clip": {
+            "_$uuid": "f12650ef-a32c-4017-abd9-116770ff32c0"
+          },
+          "loop": -1
+        },
+        {
+          "x": 642,
+          "y": 435,
           "_isLooping": 0,
           "id": "1",
           "name": "2",
           "speed": 1,
           "clipEnd": 1,
-          "loop": -1,
           "clip": {
-            "_$uuid": "3cfe8620-d0ac-4880-a1d6-def37a25caf1"
-          }
+            "_$uuid": "107c4bdd-2bd2-4b60-9194-47787f6a1309"
+          },
+          "loop": -1
         }
       ],
       "defaultWeight": 1

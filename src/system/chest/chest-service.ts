@@ -23,8 +23,8 @@ export class ChestService extends Service<NetworkService> {
         this.handle(opcode.chest.s2c_open_chest, this._onOpenChest);
         this.handle(opcode.chest.s2c_score_receive, this._onScoreReceive);
         this.handle(opcode.chest.s2c_switch_hero, this._onSwitchHero);
-        this.handle(opcode.chest.notify_chest, this._noNotify);
-        this.handle(opcode.chest.notify_chest_hero, this._noNotify);
+        this.handle(opcode.chest.notify_chest, this._noNotify_chest);
+        this.handle(opcode.chest.notify_chest_hero, this._noNotify_Hero);
     }
 
     private _onLoad(data: proto.chest.s2c_load) {
@@ -56,7 +56,19 @@ export class ChestService extends Service<NetworkService> {
 
     private _onSwitchHero(data: proto.chest.s2c_switch_hero) {}
 
-    private _noNotify(data: proto.chest.notify_chest) {}
+    private _noNotify_chest(data: proto.chest.notify_chest) {
+        for (const chest of data.chests) {
+            this.chestInfo.set(Number(chest.id), Number(chest.num));
+        }
+        this.event(ChestService.CHEST_UPDATE);
+    }
+
+    private _noNotify_Hero(data: proto.chest.notify_chest_hero) {
+        for (const id of data.heroIds) {
+            this.heroIds.push(id);
+        }
+        this.event(ChestService.CHEST_Hero_UPDATE);
+    }
 
     private _updateScore(data: proto.chest.ScoreInfo) {}
 

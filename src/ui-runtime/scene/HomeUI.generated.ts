@@ -20,10 +20,10 @@ export class HomeUIBase extends Laya.Scene {
     public labelExp!: Laya.Label;
     public boxChat!: Laya.Box;
     public labelMsg!: Laya.Label;
+    public ViewStack!: Laya.ViewStack;
+    public item0!: ChestUI;
     public btnBox!: Laya.Button;
     public btnUnion!: Laya.Button;
     public btnWorld!: Laya.Button;
-    public ViewStack!: Laya.ViewStack;
-    public item0!: ChestUI;
 }
 

@@ -6,6 +6,7 @@
  */
 export class ChestItemUIBase extends Laya.Box {
     public imgIcon!: Laya.Image;
+    public imgHigh!: Laya.Image;
     public labelNum!: Laya.Label;
 }
 

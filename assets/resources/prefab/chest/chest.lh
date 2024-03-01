@@ -22,6 +22,19 @@
   ],
   "_$child": [
     {
+      "_$id": "tvoplcri",
+      "_$type": "Image",
+      "name": "imgBg",
+      "y": -102,
+      "width": 750,
+      "height": 1538,
+      "centerX": 0,
+      "centerY": 0,
+      "skin": "res://33491c26-3ab1-420e-bce4-bd2bc703c7bc",
+      "useSourceSize": true,
+      "color": "#ffffff"
+    },
+    {
       "_$id": "qfkmg54f",
       "_$type": "Image",
       "name": "Image",
@@ -69,37 +82,54 @@
       "centerX": 17,
       "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
       "label": "打开宝箱",
-      "labelSize": 20
+      "labelSize": 20,
+      "labelAlign": "center",
+      "labelVAlign": "middle"
     },
     {
-      "_$id": "0omkcmda",
-      "_$var": true,
-      "_$type": "List",
-      "name": "listBox",
-      "x": 58,
-      "y": 1056,
-      "width": 641,
-      "height": 141,
+      "_$id": "8osszoo9",
+      "_$type": "Image",
+      "name": "imgListBg",
+      "x": 59.00000000000005,
+      "y": 1068,
+      "width": 659,
+      "height": 174,
       "_mouseState": 2,
-      "centerX": 3,
-      "bgColor": "rgba(255, 255, 255, 1)",
-      "itemTemplate": {
-        "_$ref": "dcpi39t3",
-        "_$tmpl": "itemRender"
-      },
-      "repeatX": 5,
-      "repeatY": 1,
-      "spaceX": 44,
-      "selectEnable": true,
-      "selectedIndex": 0,
+      "skin": "res://f03a6b6c-cf42-42fb-abfc-5301f5dcc932",
+      "sizeGrid": "30,24,31,25,0",
+      "color": "#ffffff",
       "_$child": [
         {
-          "_$id": "dcpi39t3",
-          "_$prefab": "1ebcfa56-61d8-408c-9cbf-af7de6ab500a",
-          "name": "chest-item",
-          "active": true,
-          "x": 352.0000000000001,
-          "y": -104
+          "_$id": "0omkcmda",
+          "_$var": true,
+          "_$type": "List",
+          "name": "listBox",
+          "width": 659,
+          "height": 174,
+          "_mouseState": 2,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "bottom": 0,
+          "itemTemplate": {
+            "_$ref": "dcpi39t3",
+            "_$tmpl": "itemRender"
+          },
+          "repeatX": 5,
+          "repeatY": 1,
+          "spaceX": 44,
+          "selectEnable": true,
+          "selectedIndex": 0,
+          "_$child": [
+            {
+              "_$id": "dcpi39t3",
+              "_$prefab": "1ebcfa56-61d8-408c-9cbf-af7de6ab500a",
+              "name": "chest-item",
+              "active": true,
+              "x": 352.0000000000001,
+              "y": -104
+            }
+          ]
         }
       ]
     },
@@ -113,6 +143,32 @@
       "width": 109,
       "height": 81,
       "_$child": [
+        {
+          "_$id": "8at63j3n",
+          "_$var": true,
+          "_$type": "Image",
+          "name": "imgShestReward",
+          "x": -20,
+          "y": -38,
+          "width": 300,
+          "height": 256,
+          "scaleX": 0.5,
+          "scaleY": 0.5,
+          "visible": false,
+          "skin": "res://707e6d59-f7fd-4fbe-b4ee-ba170183bbb8",
+          "useSourceSize": true,
+          "color": "#ffffff",
+          "_$comp": [
+            {
+              "_$type": "Animator2D",
+              "controller": {
+                "_$uuid": "cdc6022c-5b29-4747-b2f4-ce82cbc5cf0c",
+                "_$type": "AnimationController2D"
+              },
+              "controllerLayers": []
+            }
+          ]
+        },
         {
           "_$id": "76ah75mj",
           "_$var": true,
@@ -133,7 +189,7 @@
           "source": "res://1a3c38e0-eeff-455c-8d3d-324e1bdb1140",
           "skinName": "default",
           "animationName": "chest2_remind",
-          "preview": true
+          "loop": false
         },
         {
           "_$id": "nkr6o8zy",

@@ -9,6 +9,7 @@ export class ChestUIBase extends Laya.Box {
     public btnOpenBox!: Laya.Button;
     public listBox!: Laya.List;
     public boxReward!: Laya.Box;
+    public imgShestReward!: Laya.Image;
     public spineShestReward!: Laya.SpineSkeleton;
     public labelScore!: Laya.Label;
     public boxHero!: Laya.Box;

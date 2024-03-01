@@ -37,14 +37,28 @@ export class ChestMediator extends Mediator {
         this.owner.listBox.selectHandler = new Laya.Handler(this, this.onSelect);
         this.owner.btnOpenBox.on(Laya.Event.CLICK, this, this.openBox);
         this.owner.boxReward.on(Laya.Event.CLICK, () => {
-            const cellData = this.owner.listBox.selectedItem as ListCellData;
-            if (cellData.cmdNum && cellData.cmdNum > 0) {
+            const chestRewardRow = TableUtil.getRow(app.service.table.chest.chest, {
+                id: app.service.chest.scoreInfo.scoreChestId,
+            }) as ChestRow;
+            if (app.service.chest.scoreInfo.score >= chestRewardRow.reward_score) {
                 app.service.chest.requestScoreReceive().then(() => {
+                    const cell = this.owner.listBox.selectedItem as ListCellData;
+                    if (
+                        cell.row.id == chestRewardRow.id &&
+                        (!cell.cmdNum || cell.cmdNum < chestRewardRow.open_max_num)
+                    ) {
+                        this.owner.spineShest.visible = true;
+                        this.owner.spineShest.play("chest2_down", false);
+                    }
+                    this.owner.imgShestReward
+                        .getComponent(Laya.Animator2D)
+                        .play(chestRewardRow.id.toString());
                     this._updateScore();
                     this._updateList();
+                    this._updateBtnOpen();
                 });
             } else {
-                app.ui.toast("宝箱不足");
+                app.ui.toast("积分不足");
             }
         });
         this.owner.boxHero.on(Laya.Event.CLICK, () => {
@@ -78,23 +92,21 @@ export class ChestMediator extends Mediator {
                         this.owner.spineShest.play("chest2_up", false);
                         this.owner.spineShest.once(Laya.Event.STOPPED, this, () => {
                             this.owner.spineShest.play("chest2_down", false);
+                            this._updateScore();
+                            this._updateList();
+                            this._updateBtnOpen();
                         });
                     });
-                    this._updateScore();
-                    this._updateList();
-                    this._updateBtnOpen();
                 }
             });
     }
 
     private onSelect(index: number) {
-        const cell = this.owner.listBox.cells[this.selectedIndex];
-        const ani = cell.getComponent(Laya.Animator2D);
-        ani.play("2");
+        const cell = this.owner.listBox.cells[this.selectedIndex] as ChestItemUI;
+        cell.normal();
         this.selectedIndex = this.owner.listBox.selectedIndex;
-        const cell2 = this.owner.listBox.cells[this.selectedIndex];
-        const ani2 = cell2.getComponent(Laya.Animator2D);
-        ani2.play("1");
+        const cell2 = this.owner.listBox.cells[this.selectedIndex] as ChestItemUI;
+        cell2.hightlight();
         this._updateBtnOpen();
     }
 
@@ -144,6 +156,8 @@ export class ChestMediator extends Mediator {
             item.labelNum.text = this.listData[index].cmdNum
                 ? `x${this.listData[index].cmdNum}`
                 : "x0";
+            item.imgIcon.skin = `resources/atlas/chest/icon_chest_${this.listData[index].row.id}_n.png`;
+            item.imgHigh.skin = `resources/atlas/chest/icon_chest_${this.listData[index].row.id}_s.png`;
         }
     }
 
@@ -158,8 +172,7 @@ export class ChestMediator extends Mediator {
         this.owner.listBox.array = this.listData;
         this.selectedIndex = this.owner.listBox.selectedIndex;
 
-        const cell = this.owner.listBox.cells[this.selectedIndex];
-        const ani = cell.getComponent(Laya.Animator2D);
-        ani.play("1");
+        const cell = this.owner.listBox.cells[this.selectedIndex] as ChestItemUI;
+        cell.hightlight();
     }
 }

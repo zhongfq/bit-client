@@ -330,7 +330,9 @@
       "_mouseState": 2,
       "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
       "label": "邮件",
-      "labelSize": 20
+      "labelSize": 20,
+      "labelAlign": "center",
+      "labelVAlign": "middle"
     },
     {
       "_$id": "pauk1fot",
@@ -344,7 +346,9 @@
       "_mouseState": 2,
       "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
       "label": "商城",
-      "labelSize": 20
+      "labelSize": 20,
+      "labelAlign": "center",
+      "labelVAlign": "middle"
     },
     {
       "_$id": "a2ce0771",
@@ -358,7 +362,9 @@
       "_mouseState": 2,
       "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
       "label": "公告",
-      "labelSize": 20
+      "labelSize": 20,
+      "labelAlign": "center",
+      "labelVAlign": "middle"
     },
     {
       "_$id": "wwbzy29m",
@@ -375,7 +381,9 @@
       "label": "背包",
       "labelSize": 27,
       "labelBold": true,
-      "labelColors": "#03ff30,#03ff30,#03ff30"
+      "labelColors": "#03ff30,#03ff30,#03ff30",
+      "labelAlign": "center",
+      "labelVAlign": "middle"
     },
     {
       "_$id": "wcf9dgzw",
@@ -544,107 +552,12 @@
       ]
     },
     {
-      "_$id": "zq8gp5y7",
-      "_$type": "HBox",
-      "name": "底部按钮",
-      "y": 1218,
-      "width": 750,
-      "height": 116,
-      "_mouseState": 2,
-      "bottom": 0,
-      "space": 32,
-      "_$child": [
-        {
-          "_$id": "jqfka8in",
-          "_$var": true,
-          "_$type": "Button",
-          "name": "btnBox",
-          "x": 462,
-          "y": 7,
-          "width": 122,
-          "height": 102,
-          "_mouseState": 2,
-          "stateNum": 2,
-          "skin": "res://ce5a829b-8092-41e9-a3c2-dbcbfebc6562",
-          "label": "宝箱",
-          "labelSize": 27,
-          "labelBold": true,
-          "labelColors": "#00d5ff,#00d5ff,#00d5ff"
-        },
-        {
-          "_$id": "dbwirl39",
-          "_$var": true,
-          "_$type": "Button",
-          "name": "btnUnion",
-          "x": 616,
-          "y": 6,
-          "width": 122,
-          "height": 102,
-          "_mouseState": 2,
-          "stateNum": 2,
-          "skin": "res://ce5a829b-8092-41e9-a3c2-dbcbfebc6562",
-          "label": "联盟",
-          "labelSize": 27,
-          "labelBold": true,
-          "labelColors": "#ffaf00,#ffaf00,#ffaf00"
-        },
-        {
-          "_$id": "fnv7023a",
-          "_$type": "Button",
-          "name": "btnSoldier",
-          "x": 154,
-          "y": 6,
-          "width": 122,
-          "height": 102,
-          "_mouseState": 2,
-          "stateNum": 2,
-          "skin": "res://ce5a829b-8092-41e9-a3c2-dbcbfebc6562",
-          "label": "士兵",
-          "labelSize": 27,
-          "labelBold": true,
-          "labelColors": "#ffffff,#ffffff,#ffffff"
-        },
-        {
-          "_$id": "x8pytyyk",
-          "_$type": "Button",
-          "name": "btnLead",
-          "y": 4.000000000000227,
-          "width": 122,
-          "height": 102,
-          "_mouseState": 2,
-          "stateNum": 2,
-          "skin": "res://ce5a829b-8092-41e9-a3c2-dbcbfebc6562",
-          "label": "主角",
-          "labelSize": 27,
-          "labelBold": true,
-          "labelColors": "#ff0000,#ff0000,#ff0000"
-        },
-        {
-          "_$id": "cq2e94vq",
-          "_$var": true,
-          "_$type": "Button",
-          "name": "btnWorld",
-          "x": 308,
-          "y": 6,
-          "width": 122,
-          "height": 102,
-          "_mouseState": 2,
-          "stateNum": 2,
-          "skin": "res://ce5a829b-8092-41e9-a3c2-dbcbfebc6562",
-          "label": "世界",
-          "labelSize": 27,
-          "labelBold": true,
-          "labelColors": "#c800ff,#c800ff,#c800ff"
-        }
-      ]
-    },
-    {
       "_$id": "cibyk9jb",
       "_$var": true,
       "_$type": "ViewStack",
       "name": "ViewStack",
-      "x": -2,
-      "y": 0.9999999999998863,
+      "x": -1.9999999999999991,
+      "y": 0.999999999999926,
       "width": 750,
       "height": 1220,
       "_mouseState": 2,
@@ -673,9 +586,114 @@
             },
             {
               "_$override": "0omkcmda",
-              "y": 1018
+              "y": 0
             }
           ]
+        }
+      ]
+    },
+    {
+      "_$id": "zq8gp5y7",
+      "_$type": "HBox",
+      "name": "底部按钮",
+      "y": 1218,
+      "width": 750,
+      "height": 116,
+      "_mouseState": 2,
+      "bottom": 0,
+      "space": 32,
+      "_$child": [
+        {
+          "_$id": "jqfka8in",
+          "_$var": true,
+          "_$type": "Button",
+          "name": "btnBox",
+          "x": 462,
+          "y": 7,
+          "width": 122,
+          "height": 102,
+          "_mouseState": 2,
+          "stateNum": 2,
+          "skin": "res://ce5a829b-8092-41e9-a3c2-dbcbfebc6562",
+          "label": "宝箱",
+          "labelSize": 27,
+          "labelBold": true,
+          "labelColors": "#00d5ff,#00d5ff,#00d5ff",
+          "labelAlign": "center",
+          "labelVAlign": "middle"
+        },
+        {
+          "_$id": "dbwirl39",
+          "_$var": true,
+          "_$type": "Button",
+          "name": "btnUnion",
+          "x": 616,
+          "y": 6,
+          "width": 122,
+          "height": 102,
+          "_mouseState": 2,
+          "stateNum": 2,
+          "skin": "res://ce5a829b-8092-41e9-a3c2-dbcbfebc6562",
+          "label": "联盟",
+          "labelSize": 27,
+          "labelBold": true,
+          "labelColors": "#ffaf00,#ffaf00,#ffaf00",
+          "labelAlign": "center",
+          "labelVAlign": "middle"
+        },
+        {
+          "_$id": "fnv7023a",
+          "_$type": "Button",
+          "name": "btnSoldier",
+          "x": 154,
+          "y": 6,
+          "width": 122,
+          "height": 102,
+          "_mouseState": 2,
+          "stateNum": 2,
+          "skin": "res://ce5a829b-8092-41e9-a3c2-dbcbfebc6562",
+          "label": "士兵",
+          "labelSize": 27,
+          "labelBold": true,
+          "labelColors": "#ffffff,#ffffff,#ffffff",
+          "labelAlign": "center",
+          "labelVAlign": "middle"
+        },
+        {
+          "_$id": "x8pytyyk",
+          "_$type": "Button",
+          "name": "btnLead",
+          "y": 4.000000000000227,
+          "width": 122,
+          "height": 102,
+          "_mouseState": 2,
+          "stateNum": 2,
+          "skin": "res://ce5a829b-8092-41e9-a3c2-dbcbfebc6562",
+          "label": "主角",
+          "labelSize": 27,
+          "labelBold": true,
+          "labelColors": "#ff0000,#ff0000,#ff0000",
+          "labelAlign": "center",
+          "labelVAlign": "middle"
+        },
+        {
+          "_$id": "cq2e94vq",
+          "_$var": true,
+          "_$type": "Button",
+          "name": "btnWorld",
+          "x": 308,
+          "y": 6,
+          "width": 122,
+          "height": 102,
+          "_mouseState": 2,
+          "stateNum": 2,
+          "skin": "res://ce5a829b-8092-41e9-a3c2-dbcbfebc6562",
+          "label": "世界",
+          "labelSize": 27,
+          "labelBold": true,
+          "labelColors": "#c800ff,#c800ff,#c800ff",
+          "labelAlign": "center",
+          "labelVAlign": "middle"
         }
       ]
     }
