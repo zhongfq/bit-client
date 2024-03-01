@@ -40,6 +40,8 @@ export enum ui {
 
     CHEST_HERO,
 
+    REWARD,
+
     GM,
 }
 
@@ -160,6 +162,12 @@ export namespace ui {
             blockInput: true,
         });
 
+        app.ui.register({
+            id: ui.REWARD,
+            autoClose: false,
+            url: "resources/prefab/common/dialog/reward.lh",
+            blockInput: true,
+        });
         app.ui.register({
             id: ui.GM,
             url: "resources/prefab/gm/gm.lh",

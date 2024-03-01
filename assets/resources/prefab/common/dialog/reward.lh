@@ -1,0 +1,97 @@
+{
+  "_$ver": 1,
+  "_$id": "sxpq9fzh",
+  "_$runtime": "res://f496e055-e5be-4249-b829-6d429c8ff04a",
+  "_$type": "Dialog",
+  "name": "Dialog",
+  "width": 447,
+  "height": 388,
+  "_mouseState": 2,
+  "isModal": true,
+  "_$child": [
+    {
+      "_$id": "2kdo09if",
+      "_$type": "Image",
+      "name": "Image",
+      "width": 447,
+      "height": 388,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "bottom": 0,
+      "skin": "res://3225dc27-5bcb-446e-8b66-27df87624835",
+      "sizeGrid": "50,30,50,30,0",
+      "color": "#ffffff"
+    },
+    {
+      "_$id": "yccd3eik",
+      "_$var": true,
+      "_$type": "List",
+      "name": "listItem",
+      "x": 5,
+      "y": 53,
+      "width": 437,
+      "height": 324,
+      "_mouseState": 2,
+      "left": 5,
+      "right": 5,
+      "top": 53,
+      "bottom": 11,
+      "itemTemplate": {
+        "_$ref": "2inskcaa",
+        "_$tmpl": "itemRender"
+      },
+      "repeatX": 5,
+      "repeatY": 3,
+      "spaceX": 2,
+      "spaceY": 3,
+      "scrollType": 2,
+      "selectEnable": true,
+      "_$child": [
+        {
+          "_$id": "2inskcaa",
+          "_$prefab": "296a5627-8151-43ef-8283-ced0d50d81a8",
+          "_$var": true,
+          "name": "iconNode",
+          "active": true,
+          "x": 2.6645352591003757e-15,
+          "y": 2.842170943040401e-14
+        }
+      ]
+    },
+    {
+      "_$id": "6ee7kogk",
+      "_$type": "Button",
+      "name": "close",
+      "x": 406,
+      "y": 7,
+      "width": 32,
+      "height": 32,
+      "_mouseState": 2,
+      "right": 9,
+      "top": 7,
+      "skin": "res://60a9086c-a9c2-4e01-a563-355c117b509e",
+      "label": "",
+      "labelSize": 20,
+      "labelAlign": "center",
+      "labelVAlign": "middle"
+    },
+    {
+      "_$id": "vyoq14nb",
+      "_$type": "Label",
+      "name": "Label",
+      "x": 164,
+      "y": 10,
+      "width": 120,
+      "height": 28,
+      "top": 10,
+      "centerX": 0,
+      "text": "恭喜获得",
+      "fontSize": 20,
+      "color": "#FFFFFF",
+      "align": "center",
+      "valign": "middle",
+      "padding": "0,0,0,0"
+    }
+  ]
+}

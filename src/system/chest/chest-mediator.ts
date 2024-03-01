@@ -91,6 +91,7 @@ export class ChestMediator extends Mediator {
                         this.owner.spineHero.play("idle", true);
                         this.owner.spineShest.play("chest2_up", false);
                         this.owner.spineShest.once(Laya.Event.STOPPED, this, () => {
+                            app.ui.show(ui.REWARD, data.rewards);
                             this.owner.spineShest.play("chest2_down", false);
                             this._updateScore();
                             this._updateList();
