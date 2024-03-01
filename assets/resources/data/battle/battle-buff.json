@@ -1,0 +1,92 @@
+{
+    "buff": [
+        {
+            "id": 1,
+            "res": "prefab/battle/buff/buff-default",
+            "type": "ATTR"
+        },
+        {
+            "id": 2,
+            "res": "prefab/battle/buff/buff-default",
+            "type": "WATER"
+        },
+        {
+            "id": 3,
+            "res": "prefab/battle/buff/buff-default",
+            "type": "FIRE"
+        },
+        {
+            "id": 4,
+            "res": "prefab/battle/buff/buff-bleed",
+            "type": "BLOOD"
+        },
+        {
+            "ban_actions": [
+                "MOVE",
+                "ATTACK",
+                "SKILL",
+                "CHASE"
+            ],
+            "id": 5,
+            "res": "prefab/battle/buff/buff-vertigo",
+            "type": "DIZZINESS"
+        },
+        {
+            "ban_actions": [
+                "MOVE"
+            ],
+            "id": 6,
+            "res": "prefab/battle/buff/buff-default",
+            "type": "LOCK_FEED"
+        },
+        {
+            "ban_actions": [
+                "SKILL"
+            ],
+            "id": 7,
+            "res": "prefab/battle/buff/buff-silence",
+            "type": "SILENCE"
+        },
+        {
+            "ban_actions": [
+                "CHASE"
+            ],
+            "id": 8,
+            "res": "prefab/battle/buff/buff-default",
+            "type": "DISARM"
+        },
+        {
+            "id": 9,
+            "res": "prefab/battle/buff/buff-default",
+            "type": "CONFUSION"
+        },
+        {
+            "id": 10,
+            "res": "prefab/battle/buff/buff-sleep",
+            "type": "SLEEP"
+        },
+        {
+            "id": 11,
+            "res": "prefab/battle/buff/buff-default",
+            "type": "SLOW_MOVE"
+        },
+        {
+            "id": 12,
+            "res": "prefab/battle/buff/buff-default",
+            "type": "SLOW_ATTACK"
+        },
+        {
+            "id": 13,
+            "res": "prefab/battle/buff/buff-default",
+            "type": "CTL_FREE"
+        },
+        {
+            "ban_actions": [
+                "HURT"
+            ],
+            "id": 14,
+            "res": "prefab/battle/buff/buff-bleed",
+            "type": "INVINCIBLE"
+        }
+    ]
+}

@@ -7,7 +7,7 @@ import {
     GeneratedAttrRow,
     GeneratedBattleBuffRow,
     GeneratedChestHeroRow,
-    GeneratedChestrow,
+    GeneratedChestRow,
     GeneratedEmojiRow,
     GeneratedEquipColorRow,
     GeneratedEquipItemsRow,
@@ -21,7 +21,7 @@ import {
     GeneratedRoleLevelRow,
     GeneratedShop1Row,
     GeneratedShop2Row,
-    GeneratedShopconfigRow,
+    GeneratedShopConfigRow,
     GeneratedSkillRow,
     GeneratedSoldierRow,
     GeneratedTaskBranchRow,
@@ -124,7 +124,7 @@ export type MailTable = {
 //-----------------------------------------------------------------------------
 // 商城
 //-----------------------------------------------------------------------------
-export interface ShopconfigRow extends GeneratedShopconfigRow {}
+export interface ShopconfigRow extends GeneratedShopConfigRow {}
 export interface Shop1Row extends GeneratedShop1Row {
     cost?: any[];
 }
@@ -167,7 +167,7 @@ export type RoleTable = {
 //-----------------------------------------------------------------------------
 // 用户
 //-----------------------------------------------------------------------------
-export interface ChestRow extends GeneratedChestrow {}
+export interface ChestRow extends GeneratedChestRow {}
 export interface ChestHeroRow extends GeneratedChestHeroRow {}
 export type ChestTable = {
     chest: ChestRow[];

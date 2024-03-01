@@ -1,143 +1,187 @@
 {
     "101": {
         "attack_range": 100,
+        "battle_entity": 101,
         "enable": 1,
         "id": 101,
         "job": 1,
-        "model": 101,
         "name": "肉盾(徐晃)",
-        "type": 1
+        "skill1": 10101,
+        "skill2": 10102,
+        "type": 1,
+        "world_entity": 101
     },
     "102": {
         "attack_range": 500,
+        "battle_entity": 102,
         "enable": 1,
         "id": 102,
         "job": 2,
-        "model": 101,
         "name": "法师(周瑜)",
-        "type": 1
+        "skill1": 10201,
+        "skill2": 10202,
+        "type": 1,
+        "world_entity": 102
     },
     "103": {
         "attack_range": 450,
+        "battle_entity": 102,
         "enable": 1,
         "id": 103,
         "job": 3,
-        "model": 101,
         "name": "辅助(小乔)",
-        "type": 1
+        "skill1": 10301,
+        "skill2": 10302,
+        "type": 1,
+        "world_entity": 103
     },
     "104": {
         "attack_range": 500,
+        "battle_entity": 103,
         "enable": 1,
         "id": 104,
         "job": 4,
-        "model": 101,
         "name": "远程(夏候渊)",
-        "type": 1
+        "skill1": 10401,
+        "skill2": 10402,
+        "type": 1,
+        "world_entity": 104
     },
     "105": {
         "attack_range": 120,
+        "battle_entity": 103,
         "enable": 1,
         "id": 105,
         "job": 5,
-        "model": 101,
         "name": "战士(关羽)",
-        "type": 1
+        "skill1": 10501,
+        "skill2": 10502,
+        "type": 1,
+        "world_entity": 105
     },
     "106": {
         "attack_range": 100,
+        "battle_entity": 104,
         "enable": 1,
         "id": 106,
         "job": 1,
-        "model": 101,
         "name": "战士(周泰)",
-        "type": 1
+        "skill1": 10601,
+        "skill2": 10602,
+        "type": 1,
+        "world_entity": 106
     },
     "107": {
         "attack_range": 110,
+        "battle_entity": 104,
         "enable": 1,
         "id": 107,
         "job": 5,
-        "model": 101,
         "name": "战士(孙策)",
-        "type": 1
+        "skill1": 10701,
+        "skill2": 10702,
+        "type": 1,
+        "world_entity": 107
     },
     "108": {
         "attack_range": 450,
+        "battle_entity": 105,
         "enable": 1,
         "id": 108,
         "job": 2,
-        "model": 101,
         "name": "法师(诸葛亮)",
-        "type": 1
+        "skill1": 10801,
+        "skill2": 10802,
+        "type": 1,
+        "world_entity": 108
     },
     "109": {
         "attack_range": 500,
+        "battle_entity": 105,
         "enable": 1,
         "id": 109,
         "job": 4,
-        "model": 101,
         "name": "远程(黄忠)",
-        "type": 1
+        "skill1": 10901,
+        "skill2": 10902,
+        "type": 1,
+        "world_entity": 109
     },
     "110": {
         "attack_range": 120,
+        "battle_entity": 106,
         "enable": 1,
         "id": 110,
         "job": 2,
-        "model": 101,
         "name": "战士(魏延)",
-        "type": 1
+        "skill1": 11001,
+        "skill2": 11002,
+        "type": 1,
+        "world_entity": 110
     },
     "111": {
         "attack_range": 100,
+        "battle_entity": 106,
         "enable": 1,
         "id": 111,
         "job": 1,
-        "model": 101,
         "name": "战士(曹仁)",
-        "type": 1
+        "skill1": 11101,
+        "skill2": 11102,
+        "type": 1,
+        "world_entity": 111
     },
     "112": {
         "attack_range": 500,
+        "battle_entity": 107,
         "enable": 1,
         "id": 112,
         "job": 4,
-        "model": 101,
         "name": "远程(孙尚香)",
-        "type": 1
+        "skill1": 11201,
+        "skill2": 11202,
+        "type": 1,
+        "world_entity": 112
     },
     "113": {
         "attack_range": 450,
+        "battle_entity": 107,
         "enable": 1,
         "id": 113,
         "job": 3,
-        "model": 101,
         "name": "远程(蔡文姬)",
-        "type": 1
+        "skill1": 11301,
+        "skill2": 11302,
+        "type": 1,
+        "world_entity": 113
     },
     "301": {
         "attack_range": 100,
+        "battle_entity": 108,
         "id": 301,
         "job": 1,
-        "model": 101,
         "name": "兔子",
-        "type": 2
+        "skill1": 1,
+        "type": 2,
+        "world_entity": 114
     },
     "302": {
         "attack_range": 100,
+        "battle_entity": 108,
         "id": 302,
         "job": 1,
-        "model": 101,
         "name": "蟹",
-        "type": 2
+        "skill1": 1,
+        "type": 2,
+        "world_entity": 115
     },
     "401": {
         "attack_range": 100,
+        "battle_entity": 109,
         "id": 401,
         "job": 1,
-        "model": 101,
         "name": "树",
-        "type": 3
+        "type": 3,
+        "world_entity": 116
     }
 }

@@ -1,24 +1,5 @@
 // AUTO GENERATED, DON'T NOT MODIFY!
 
-// file: design/chest.xlsx
-export interface GeneratedChestrow {
-    id: number;
-    sort: number;
-    icon?: string;
-    open_max_num: number;
-    open_score: number;
-    reward_score: number;
-    reward: any;
-    desc?: string;
-}
-
-// file: design/chest.xlsx
-export interface GeneratedChestHeroRow {
-    hero_id: number;
-    sort: number;
-    spine_source: string;
-}
-
 // file: design/item.xlsx
 export interface GeneratedItemRow {
     id: number;
@@ -54,16 +35,23 @@ export interface GeneratedHeroRow {
     id: number;
     name: string;
     type: number;
-    model: number;
+    battle_entity: number;
+    world_entity: number;
     enable?: number;
     job: number;
     attack_range: number;
+    skill1?: number;
+    skill2?: number;
+    skill3?: number;
+    skill4?: number;
 }
 
 // file: design/soldier.xlsx
 export interface GeneratedSoldierRow {
     id: number;
-    model: number;
+    battle_enity: number;
+    skill1?: number;
+    skill2?: number;
 }
 
 // file: design/equip.xlsx
@@ -237,6 +225,33 @@ export interface GeneratedRandomNameRow {
     femalename?: string;
 }
 
+// file: design/battle/battle_entity.xlsx
+export interface GeneratedBattleEntityEtypeRow {
+    etype: number;
+    define: string;
+}
+
+// file: design/battle/battle_entity.xlsx
+export interface GeneratedBattleEntityEntityRow {
+    id: number;
+    etype: number;
+    res: string;
+}
+
+// file: design/battle/battle_demo.xlsx
+export interface GeneratedBattleDemoRow {
+    key: string;
+    hero_ids: any;
+}
+
+// file: design/battle/battle_buff.xlsx
+export interface GeneratedBattleBuffRow {
+    id: number;
+    type: string;
+    res: string;
+    ban_actions?: any;
+}
+
 // file: design/world/world_map.xlsx
 export interface GeneratedWorldMapMapsRow {
     id: number;
@@ -251,20 +266,6 @@ export interface GeneratedWorldMapStatesRow {
     aid?: number;
     next_state?: number;
     pass_cond?: any;
-}
-
-// file: design/world/battle_demo.xlsx
-export interface GeneratedBattleDemoRow {
-    key: string;
-    hero_ids: any;
-}
-
-// file: design/world/battle_buff.xlsx
-export interface GeneratedBattleBuffRow {
-    id: number;
-    type: string;
-    res: string;
-    ban_actions?: any;
 }
 
 // file: design/world/world_entity.xlsx
@@ -365,7 +366,7 @@ export interface GeneratedDungeonRow {
 }
 
 // file: design/activity/shop.xlsx
-export interface GeneratedShopconfigRow {
+export interface GeneratedShopConfigRow {
     id: number;
     type: number;
     open_id?: number;
@@ -398,4 +399,23 @@ export interface GeneratedShop2Row {
 export interface GeneratedEmojiRow {
     id: number;
     icon: string;
+}
+
+// file: design/chest.xlsx
+export interface GeneratedChestRow {
+    id: number;
+    sort: number;
+    icon?: string;
+    open_max_num: number;
+    open_score: number;
+    reward_score: number;
+    reward: any;
+    desc?: string;
+}
+
+// file: design/chest.xlsx
+export interface GeneratedChestHeroRow {
+    hero_id: number;
+    sort: number;
+    spine_source: string;
 }

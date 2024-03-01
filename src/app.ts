@@ -26,18 +26,6 @@ const { regClass, property } = Laya;
 export class Main extends AppBase {
     override onAwake(): void {
         ui.register();
-
-        const rt = new Laya.RenderTexture2D(1024, 1024);
-        const sprite = new Laya.Sprite();
-
-        const img = new Laya.Image("resources/atlas/bag/img_hd.png");
-        sprite.addChild(img);
-
-        const img2 = new Laya.Image("resources/atlas/bag/img_bg100.png");
-        sprite.addChild(img2);
-        sprite.drawToTexture(1024, 1024, 0, 0, rt);
-
-        // this.addChild(img);
         app.init();
     }
 }
@@ -129,6 +117,9 @@ class App {
         app.ui.open(ui.LOGIN_SCENE);
 
         // new BehaviorTest().start();
+
+        // TODO: rm, use nodejs to write file
+        // console.log(ExportNodes.stringify());
     }
 
     async test() {
