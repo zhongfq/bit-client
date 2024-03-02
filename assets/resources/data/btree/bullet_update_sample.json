@@ -1,0 +1,43 @@
+{
+  "name": "bullet_update_sample",
+  "root": {
+    "id": 1,
+    "name": "Sequence",
+    "args": {},
+    "debug": true,
+    "children": [
+      {
+        "id": 2,
+        "name": "FindEnemy",
+        "args": {
+          "w": 100,
+          "h": 1000
+        },
+        "output": [
+          "enemy"
+        ],
+        "debug": true
+      },
+      {
+        "id": 3,
+        "name": "NormalHurt",
+        "args": {},
+        "input": [
+          "enemy"
+        ]
+      },
+      {
+        "id": 4,
+        "name": "AddBuff",
+        "args": {
+          "buff_id": 1004
+        },
+        "input": [
+          "enemy"
+        ],
+        "debug": true
+      }
+    ]
+  },
+  "desc": "子弹更新示例"
+}

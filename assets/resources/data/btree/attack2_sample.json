@@ -1,0 +1,66 @@
+{
+  "name": "attack2_sample",
+  "root": {
+    "id": 1,
+    "name": "Sequence",
+    "desc": "远程普攻示例",
+    "args": {},
+    "children": [
+      {
+        "id": 2,
+        "name": "Wait",
+        "args": {
+          "ms": 500
+        }
+      },
+      {
+        "id": 3,
+        "name": "GetSkillTarget",
+        "args": {},
+        "output": [
+          "target"
+        ],
+        "debug": false
+      },
+      {
+        "id": 4,
+        "name": "GetPos",
+        "args": {},
+        "input": [
+          "target"
+        ],
+        "output": [
+          "pos"
+        ]
+      },
+      {
+        "id": 5,
+        "name": "CreateBullet",
+        "args": {
+          "entity_id": 50001,
+          "dst_x": 500,
+          "dst_y": 0,
+          "src_x": 0,
+          "src_y": 0,
+          "speed": 300,
+          "h": 50,
+          "update_btree": "bullet_update_sample",
+          "update_ms": 100
+        },
+        "input": [
+          "target",
+          "pos"
+        ],
+        "debug": false
+      },
+      {
+        "id": 6,
+        "name": "Wait",
+        "args": {
+          "ms": 50000
+        }
+      }
+    ]
+  },
+  "desc": "远程普攻示例"
+}

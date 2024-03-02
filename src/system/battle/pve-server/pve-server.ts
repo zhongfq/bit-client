@@ -6,7 +6,7 @@ import { MathUtil } from "../../../core/utils/math-util";
 import { BattleConf } from "../../../def/battle";
 import { formation } from "../../../def/formation";
 import { MovementComponent, TransformComponent } from "./ecs/components/movement-component";
-import { RoleComponent, HeroComponent } from "./ecs/components/role-component";
+import { RoleComponent, HeroComponent, SoldierComponent } from "./ecs/components/role-component";
 import { TreeComponent } from "./ecs/components/tree-component";
 import { RoleCreator, TreeCreator } from "./pve-defs";
 
@@ -72,6 +72,7 @@ export class PveServer extends b3.Context implements ICommandReceiver {
         transform.position.z = 6;
 
         entity.addComponent(MovementComponent);
+        entity.addComponent(HeroComponent);
 
         this._sender.createRole({
             eid: role.eid,
@@ -83,30 +84,33 @@ export class PveServer extends b3.Context implements ICommandReceiver {
         });
         this._sender.focus(role.eid);
 
-        const hero = entity.addComponent(HeroComponent);
-
-        // this._loadSoliders(hero);
+        this._loadSoliders(role);
     }
 
-    private _loadSoliders(leader: HeroComponent) {
-        leader.formation = formation;
-        leader.formation.forEach((value, idx) => {
+    private _loadSoliders(leader: RoleComponent) {
+        leader.hero!.formation = formation;
+        leader.hero!.formation.forEach((value, idx) => {
             const entity = this._ecs.createEntity();
 
             const role = entity.addComponent(RoleComponent);
-            role.tid = 101;
+            role.tid = idx >= 6 ? 40004 : 40002;
             role.hp = 200;
             role.maxHp = 200;
 
+            const solider = entity.addComponent(SoldierComponent);
+            solider.index = idx;
+            solider.offset = value;
+            leader.hero!.soldiers.push(solider);
+
             const transform = entity.addComponent(TransformComponent);
-            transform.position.x = 6;
-            transform.position.z = 6;
+            transform.position.x = value.x + leader.transform.position.x;
+            transform.position.z = value.z + leader.transform.position.z;
 
             entity.addComponent(MovementComponent);
 
             this._sender.createRole({
                 eid: role.eid,
-                etype: BattleConf.ENTITY_TYPE.HERO,
+                etype: BattleConf.ENTITY_TYPE.SOLDIER,
                 tid: role.tid,
                 hp: role.hp,
                 maxHp: role.maxHp,

@@ -18,9 +18,10 @@ export class RoleComponent extends ecs.Component {
     tid: number = 0;
 
     // 缓存组件方便快速访问？
-    private _movement: MovementComponent | null = null;
-    private _transform: TransformComponent | null = null;
-    private _skill: LauncherComponent | null = null;
+    private _movement?: MovementComponent;
+    private _transform?: TransformComponent;
+    private _skill?: LauncherComponent;
+    private _hero?: HeroComponent;
 
     get movement() {
         return (this._movement ||= this.getComponent(MovementComponent)!);
@@ -33,15 +34,25 @@ export class RoleComponent extends ecs.Component {
     get launcher() {
         return (this._skill ||= this.getComponent(LauncherComponent)!);
     }
+
+    get hero() {
+        return (this._hero ||= this.getComponent(HeroComponent));
+    }
 }
 
 export class SoldierComponent extends ecs.Component {
-    leader!: HeroComponent;
+    leader!: RoleComponent;
     index: number = 0;
     offset!: IVector3Like;
+
+    private _role?: RoleComponent;
+
+    get role() {
+        return (this._role ||= this.getComponent(RoleComponent)!);
+    }
 }
 
 export class HeroComponent extends ecs.Component {
     formation!: Readonly<IVector3Like>[];
-    soldiers: Map<number, SoldierComponent> = new Map();
+    soldiers: SoldierComponent[] = [];
 }

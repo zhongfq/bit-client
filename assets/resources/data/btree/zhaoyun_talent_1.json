@@ -1,0 +1,20 @@
+{
+  "name": "zhaoyun_talent_1",
+  "root": {
+    "id": 1,
+    "name": "AddBuff",
+    "desc": "单体加攻击力",
+    "args": {
+      "buff_id": 1,
+      "duration_ms": 99999999,
+      "DEF": null,
+      "ATK": 10
+    },
+    "input": [
+      "",
+      ""
+    ],
+    "children": []
+  },
+  "desc": "赵云天赋1"
+}

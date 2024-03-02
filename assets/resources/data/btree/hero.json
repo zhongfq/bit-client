@@ -1,0 +1,142 @@
+{
+  "name": "hero",
+  "root": {
+    "id": 1,
+    "name": "Selector",
+    "desc": "英雄测试AI",
+    "args": {},
+    "children": [
+      {
+        "id": 2,
+        "name": "Sequence",
+        "desc": "撤退",
+        "args": {},
+        "children": [
+          {
+            "id": 3,
+            "name": "CheckCmd",
+            "args": {
+              "retreat": true
+            },
+            "debug": true
+          },
+          {
+            "id": 4,
+            "name": "Selector",
+            "args": {},
+            "children": [
+              {
+                "id": 5,
+                "name": "CheckAndRecoverHp",
+                "args": {}
+              },
+              {
+                "id": 6,
+                "name": "MoveForward",
+                "args": {
+                  "anti": true
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "name": "Sequence",
+        "desc": "放技能",
+        "args": {},
+        "children": [
+          {
+            "id": 8,
+            "name": "CheckCmd",
+            "args": {
+              "retreat": false,
+              "launch": true
+            }
+          },
+          {
+            "id": 9,
+            "name": "LaunchSkill",
+            "desc": "大招",
+            "args": {
+              "idx": 2
+            },
+            "input": [
+              ""
+            ]
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "name": "Selector",
+        "desc": "冲啊",
+        "args": {},
+        "children": [
+          {
+            "id": 11,
+            "name": "Sequence",
+            "desc": "普攻",
+            "args": {},
+            "children": [
+              {
+                "id": 12,
+                "name": "FindEnemy",
+                "args": {
+                  "attack": true
+                },
+                "output": [
+                  "enemy"
+                ],
+                "debug": true
+              },
+              {
+                "id": 13,
+                "name": "NormalAttack",
+                "args": {},
+                "input": [
+                  "enemy"
+                ]
+              }
+            ]
+          },
+          {
+            "id": 14,
+            "name": "Sequence",
+            "args": {},
+            "children": [
+              {
+                "id": 15,
+                "name": "FindEnemy",
+                "args": {
+                  "w": 1200,
+                  "h": 1000,
+                  "attack": false
+                },
+                "output": [
+                  "target"
+                ],
+                "debug": true
+              },
+              {
+                "id": 16,
+                "name": "MoveToAtkPos",
+                "args": {},
+                "input": [
+                  "target"
+                ]
+              }
+            ]
+          },
+          {
+            "id": 17,
+            "name": "MoveForward",
+            "args": {}
+          }
+        ]
+      }
+    ]
+  },
+  "desc": "英雄测试AI"
+}

@@ -236,6 +236,7 @@ export interface GeneratedBattleEntityEntityRow {
     id: number;
     etype: number;
     res: string;
+    pve_ai: string;
 }
 
 // file: design/battle/battle_demo.xlsx

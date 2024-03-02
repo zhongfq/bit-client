@@ -1,0 +1,44 @@
+{
+  "name": "attack_sample",
+  "root": {
+    "id": 1,
+    "name": "Sequence",
+    "desc": "普攻",
+    "args": {},
+    "children": [
+      {
+        "id": 2,
+        "name": "Wait",
+        "args": {
+          "ms": 800,
+          "random": null
+        }
+      },
+      {
+        "id": 3,
+        "name": "GetSkillTarget",
+        "args": {},
+        "output": [
+          "target"
+        ]
+      },
+      {
+        "id": 4,
+        "name": "NormalHurt",
+        "args": {},
+        "input": [
+          "target"
+        ]
+      },
+      {
+        "id": 5,
+        "name": "Wait",
+        "args": {
+          "ms": 800,
+          "random": null
+        }
+      }
+    ]
+  },
+  "desc": "普攻示例"
+}

@@ -1,0 +1,10 @@
+{
+  "name": "empty",
+  "root": {
+    "id": 1,
+    "name": "Sequence",
+    "desc": "啥也不干",
+    "args": {}
+  },
+  "desc": "啥也不干"
+}
