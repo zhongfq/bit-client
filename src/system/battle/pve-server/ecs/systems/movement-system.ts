@@ -8,6 +8,7 @@ export class MovementSystem extends ecs.System {
     }
 
     override update(dt: number): void {
+        dt /= 1000;
         this.ecs.getComponents(MovementComponent).forEach((movement) => {
             const transform = movement.getComponent(TransformComponent)!;
             const position = transform.position;

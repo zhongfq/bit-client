@@ -68,6 +68,8 @@ export class PveServer extends b3.Context implements ICommandReceiver {
         role.maxHp = 200;
 
         const transform = entity.addComponent(TransformComponent);
+        transform.position.x = 6;
+        transform.position.z = 6;
 
         entity.addComponent(MovementComponent);
 

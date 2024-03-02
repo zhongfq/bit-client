@@ -1,26 +1,26 @@
 {
     "40001": {
-        "battle_enity": 40001,
+        "battle_entity": 40001,
         "id": 40001,
         "skill1": 10101
     },
     "40002": {
-        "battle_enity": 40002,
+        "battle_entity": 40002,
         "id": 40002,
         "skill1": 10101
     },
     "40003": {
-        "battle_enity": 40003,
+        "battle_entity": 40003,
         "id": 40003,
         "skill1": 10101
     },
     "40004": {
-        "battle_enity": 40004,
+        "battle_entity": 40004,
         "id": 40004,
         "skill1": 10101
     },
     "40005": {
-        "battle_enity": 40005,
+        "battle_entity": 40005,
         "id": 40005,
         "skill1": 10101
     }

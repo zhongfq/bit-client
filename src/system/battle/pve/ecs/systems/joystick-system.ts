@@ -59,9 +59,9 @@ export class JoystickSystem extends ecs.System {
             if (Math.abs(joystick.degree - degree) >= 5) {
                 joystick.degree = degree;
                 if (joystick.running) {
-                    this.context.sender.moveChange(this.context.focusRole, rad);
+                    this.context.sender.moveChange(this.context.focusRole, degree);
                 } else {
-                    this.context.sender.moveStart(this.context.focusRole, rad);
+                    this.context.sender.moveStart(this.context.focusRole, degree);
                     joystick.running = true;
                 }
             }

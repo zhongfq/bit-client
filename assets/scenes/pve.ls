@@ -116,6 +116,27 @@
               "maxBounces": null
             }
           ]
+        },
+        {
+          "_$id": "gzvs0bzb",
+          "_$type": "Sprite3D",
+          "name": "grounds"
+        },
+        {
+          "_$id": "6k31wdq5",
+          "_$type": "Sprite3D",
+          "name": "shadows",
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "y": 0.1
+            }
+          }
+        },
+        {
+          "_$id": "6coid9rf",
+          "_$type": "Sprite3D",
+          "name": "roles"
         }
       ]
     },

@@ -49,7 +49,7 @@ export interface GeneratedHeroRow {
 // file: design/soldier.xlsx
 export interface GeneratedSoldierRow {
     id: number;
-    battle_enity: number;
+    battle_entity: number;
     skill1?: number;
     skill2?: number;
 }

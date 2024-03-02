@@ -118,39 +118,6 @@
           ]
         },
         {
-          "_$id": "5l41upqc",
-          "_$type": "Sprite3D",
-          "name": "Plane",
-          "active": false,
-          "transform": {
-            "localScale": {
-              "_$type": "Vector3",
-              "x": 120,
-              "y": 1,
-              "z": 120
-            }
-          },
-          "_$comp": [
-            {
-              "_$type": "MeshFilter",
-              "sharedMesh": {
-                "_$uuid": "4a4afb22-ef83-40a2-a6a8-212a2d20c52f",
-                "_$type": "Mesh"
-              }
-            },
-            {
-              "_$type": "MeshRenderer",
-              "receiveShadow": true,
-              "sharedMaterials": [
-                {
-                  "_$uuid": "99a6624d-620b-4eff-8aa4-dc5eeafed83d",
-                  "_$type": "Material"
-                }
-              ]
-            }
-          ]
-        },
-        {
           "_$id": "x0wshm8x",
           "_$prefab": "07bf69d2-0e5d-4e63-b5ab-cd4f13595967",
           "name": "mc01",

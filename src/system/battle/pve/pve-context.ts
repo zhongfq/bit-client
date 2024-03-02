@@ -54,7 +54,6 @@ export class PveContext extends Mediator implements ICommandSender {
         this._ecs.addSystem(new CameraSystem(this));
         this._ecs.addSystem(new RenderSystem(this));
         this._ecs.addSystem(new TilemapSystem(this));
-
         this._pveServer = new PveServer(this);
         this._sender = new CommandSender(this._pveServer);
     }
@@ -66,7 +65,7 @@ export class PveContext extends Mediator implements ICommandSender {
     override onUpdate() {
         super.onUpdate();
         this._pveServer.update(Laya.timer.delta);
-        this._ecs.update(Laya.timer.delta);
+        this._ecs.update(Laya.timer.delta / 1000);
     }
 
     private get _commandSystem() {
@@ -78,6 +77,7 @@ export class PveContext extends Mediator implements ICommandSender {
     // ------------------------------------------------------------------------
     focus(eid: number) {
         this.focusRole = eid;
+        this._commandSystem.focus(eid);
     }
 
     createRole(data: RoleCreator) {
@@ -119,11 +119,17 @@ export class PveContext extends Mediator implements ICommandSender {
 }
 
 class CommandSender implements ICommandReceiver {
-    constructor(readonly pveServer: PveServer) {}
+    constructor(readonly server: PveServer) {}
 
-    moveStart(eid: number, degree: number) {}
+    moveStart(eid: number, degree: number) {
+        this.server.moveStart(eid, degree);
+    }
 
-    moveChange(eid: number, degree: number) {}
+    moveChange(eid: number, degree: number) {
+        this.server.moveChange(eid, degree);
+    }
 
-    moveStop(eid: number) {}
+    moveStop(eid: number) {
+        this.server.moveStop(eid);
+    }
 }
