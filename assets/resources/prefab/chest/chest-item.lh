@@ -25,7 +25,7 @@
               "name": "2",
               "clipStart": 0,
               "clip": {
-                "_$uuid": "3cfe8620-d0ac-4880-a1d6-def37a25caf1",
+                "_$uuid": "107c4bdd-2bd2-4b60-9194-47787f6a1309",
                 "_$type": "AnimationClip2D"
               },
               "soloTransitions": []
@@ -35,13 +35,13 @@
               "name": "1",
               "clipStart": 0,
               "clip": {
-                "_$uuid": "e1d32fc2-6b63-44bb-a45d-1bc348d4c6aa",
+                "_$uuid": "f12650ef-a32c-4017-abd9-116770ff32c0",
                 "_$type": "AnimationClip2D"
               },
               "soloTransitions": []
             }
           ],
-          "defaultStateName": "2"
+          "defaultStateName": "1"
         }
       ]
     }

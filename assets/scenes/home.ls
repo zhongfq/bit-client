@@ -319,6 +319,22 @@
       ]
     },
     {
+      "_$id": "jt4u99cs",
+      "_$var": true,
+      "_$type": "Button",
+      "name": "btnPve",
+      "x": 12,
+      "y": 668,
+      "width": 120,
+      "height": 40,
+      "_mouseState": 2,
+      "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
+      "label": "PVE",
+      "labelSize": 20,
+      "labelAlign": "center",
+      "labelVAlign": "middle"
+    },
+    {
       "_$id": "dm7xey62",
       "_$var": true,
       "_$type": "Button",
