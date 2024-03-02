@@ -7,10 +7,15 @@ import { Tilemap, TilemapComponent } from "../components/tilemap-component";
 
 export class TilemapSystem extends ecs.System {
 
-    private _world!: Tilemap.World;
-
     private static readonly TICK = 200;
     private _lastTime: number = 0;
+
+    private _hasInit: boolean = false;
+
+    private _world!: Tilemap.World;
+
+    private _atlasMap: Map<Tilemap.AtlasName, Tilemap.TileSet> = new Map();
+    private _textureMap: Map<Tilemap.TextureName, Map<number, Tilemap.Tile>> = new Map();
 
     private _lastRect: Laya.Rectangle = Laya.Rectangle.create();
     private _curRect: Laya.Rectangle = Laya.Rectangle.create();
@@ -18,7 +23,7 @@ export class TilemapSystem extends ecs.System {
     private _addArr: string[] = [];
     private _delArr: string[] = [];
 
-    private _totalMap: Map<string, Map<string, Tilemap.Element>> = new Map();
+    private _totalMap: Map<string, Map<Tilemap.LayerName, Tilemap.Element>> = new Map();
 
     constructor(readonly context: WorldContext) {
         super();
@@ -26,15 +31,29 @@ export class TilemapSystem extends ecs.System {
     }
 
     private async _init() {
-        if (!this._world) {
-            this._world = await Laya.loader.fetch("resources/data/world-map/world.json", "json") as Tilemap.World;
-            this._world.maps.forEach(info => {
-                [info.x, info.y] = this._transMapPos(info);
-                [info.width, info.height] = [TilemapComponent.MAP_WIDTH, TilemapComponent.MAP_HEIGHT];
-
-                console.log(info.fileName, info.x, info.y);
-            });
+        if (this._hasInit) {
+            return
         }
+        this._hasInit = true;
+
+        this._world = await Laya.loader.fetch("resources/data/world-map/world.json", "json") as Tilemap.World;
+        this._world.maps.forEach(info => {
+            [info.x, info.y] = this._transMapPos(info);
+            [info.width, info.height] = [TilemapComponent.MAP_WIDTH, TilemapComponent.MAP_HEIGHT];
+        });
+
+        const tilesetRef = await Laya.loader.fetch("resources/data/world-map/world-tileset-ref.json", "json") as Tilemap.WorldMap;
+        tilesetRef.tilesets.forEach(tileset => {
+            if (tileset.tiles?.length > 0) {
+                const map = new Map<number, Tilemap.Tile>()
+                tileset.tiles.forEach(tile => {
+                    map.set(tileset.firstgid + tile.id, tile);
+                })
+                this._textureMap.set(tileset.name as Tilemap.TextureName, map);
+            } else {
+                this._atlasMap.set(tileset.name as Tilemap.AtlasName, tileset);
+            }
+        })
     }
 
     private _transMapPos(info: Tilemap.MapInfo) {
@@ -54,80 +73,28 @@ export class TilemapSystem extends ecs.System {
         return [pos.x, pos.y];
     }
 
-    private async _initGround(worldMap: Tilemap.WorldMap, layer: Tilemap.Layer) {
-
-        const atlas: Laya.AtlasResource = await Laya.loader.load("resources/texture/world-map/ground/ground.atlas", Laya.Loader.ATLAS);
-        const texture: Laya.Texture2D = await Laya.loader.load("resources/texture/world-map/ground/ground.png", Laya.Loader.TEXTURE2D);
-        const prefab: Laya.Prefab = await Laya.loader.load("resources/prefab/world-map/ground/ground-tile.lh", Laya.Loader.HIERARCHY);
-
-        for (let i = 0; i < layer.data.length; i++) {
-            const gid = layer.data[i];
-            const tile = prefab.create() as Laya.Sprite3D;
-
-            const pos = tile.transform.position;
-            pos.x = i % worldMap.width;
-            pos.y = 0;
-            pos.z = Math.floor(i / worldMap.width);
-            tile.transform.position = pos;
-
-            const mat = new Laya.BlinnPhongMaterial(); // 使用 UnlitMaterial 时 tilingOffset 会失效
-            const path = atlas.frames[gid - 1].url;
-            const tex = Laya.loader.getRes(path) as Laya.Texture;
-            mat.albedoTexture = texture;
-            mat.tilingOffset.x = tex.uvrect[2]; // 瓦片宽度
-            mat.tilingOffset.y = tex.uvrect[3]; // 瓦片高度
-            mat.tilingOffset.z = tex.uvrect[0]; // X坐标偏移
-            mat.tilingOffset.w = (1 - mat.tilingOffset.y) - tex.uvrect[1]; // Y坐标偏移（拿到的偏移值是基于左上角的，这里转成右下角的）
-
-            const renderer = tile.getChildAt(0).getComponent(Laya.MeshRenderer);
-            renderer.material = mat;
-
-            this.context.scene3D.addChild(tile);
-        }
+    public getAtlasFrameIdx(atlasName: Tilemap.AtlasName, gid: number): number {
+        const tileset = this._atlasMap.get(atlasName);
+        return gid - (tileset?.firstgid || 1);
     }
 
-    private async _initStatic(worldMap: Tilemap.WorldMap, layer: Tilemap.Layer) {
-
-        const prefab: Laya.Prefab = await Laya.loader.load("resources/prefab/world-map/static/static-obj.lh", Laya.Loader.HIERARCHY);
-
-        for (let i = 0; i < layer.data.length; i++) {
-            const gid = layer.data[i];
-            if (!gid) {
-                continue;
-            }
-            const cfg = TilemapComponent.STATIC_CFG_MAP.get(gid);
-            if (!cfg) {
-                continue;
-            }
-            const staticObj = prefab.create() as Laya.Sprite3D;
-
-            const pos = staticObj.transform.position;
-            pos.x = i % worldMap.width;
-            pos.y = cfg.offsetY * TilemapComponent.STATIC_SCALE;
-            pos.z = Math.floor(i / worldMap.width);
-            staticObj.transform.position = pos;
-
-            const renderer = staticObj.getChildAt(0).getComponent(Laya.MeshRenderer);
-            const mat = new Laya.UnlitMaterial();
-            const path = StringUtil.format("resources/texture/world-map/static/{0}.png", cfg.resName);
-            const texture = await Laya.loader.load(path, Laya.Loader.TEXTURE2D) as Laya.Texture2D;
-            mat.albedoTexture = texture;
-            mat.renderMode = Laya.MaterialRenderMode.RENDERMODE_TRANSPARENT;
-            renderer.material = mat;
-
-            const scaleX = (texture.width / TilemapComponent.STATIC_BASE_WIDTH) * TilemapComponent.STATIC_SCALE;
-            const scaleZ = (texture.height / TilemapComponent.STATIC_BASE_HEIGHT) * TilemapComponent.STATIC_SCALE;
-            staticObj.transform.localScaleX = scaleX;
-            staticObj.transform.localScaleZ = scaleZ;
-
-            const rotateX = this.context.camera.transform.localRotationEulerX;
-            staticObj.transform.localRotationEulerX = -rotateX;
-
-            this.context.scene3D.addChild(staticObj);
-        }
+    public getTextureResName(textureName: Tilemap.TextureName, gid: number): string {
+        const map = this._textureMap.get(textureName);
+        const tile = map?.get(gid);
+        return tile?.image.split('/').at(-1)?.split('.').at(0) || "";
     }
 
-    update(dt: number): void {
+    public getTextureOffsetY(textureName: Tilemap.TextureName, gid: number): number {
+        const map = this._textureMap.get(textureName);
+        const tile = map?.get(gid);
+        let offsetY = 0;
+        tile?.properties?.forEach(prop => {
+            if (prop.name == "offsetY") { offsetY = prop.value; return; }
+        })
+        return offsetY;
+    }
+
+    public update(dt: number): void {
         const curTime = Laya.timer.currTimer;
         if (curTime - this._lastTime < TilemapSystem.TICK) {
             return;
@@ -135,7 +102,10 @@ export class TilemapSystem extends ecs.System {
         this._lastTime = curTime;
 
         const camera = this.ecs.getSingletonComponent(CameraComponent)!;
-        const transform = this.ecs.getComponent(camera.focus as number, TransformComponent)!;
+        const transform = this.ecs.getComponent(camera?.focus as number, TransformComponent)!;
+        if (!transform?.position) {
+            return;
+        }
         const curX = Math.floor(transform.position.x - TilemapComponent.VISION_WIDTH / 2);
         const curY = Math.floor(transform.position.z - TilemapComponent.VISION_HEIGHT / 2);
         this._curRect.setTo(curX, curY, TilemapComponent.VISION_WIDTH, TilemapComponent.VISION_HEIGHT);
@@ -208,7 +178,9 @@ export class TilemapSystem extends ecs.System {
                         return;
                     }
                     const gid = layer.data[idx];
-
+                    if (!gid || gid == 0) {
+                        return;
+                    }
                     let element: Tilemap.Element | undefined = undefined;
                     switch (layer.name) {
                         case Tilemap.LayerName.Ground:
@@ -221,9 +193,9 @@ export class TilemapSystem extends ecs.System {
                             break;
                     }
                     if (element) {
-                        element.init(x, y, gid);
-                        element.draw(this.context);
-                        elements?.set(layer.name, element);
+                        element.init(this, x, y, gid);
+                        element.draw();
+                        elements?.set(layer.name as Tilemap.LayerName, element);
                     }
                 })
             }

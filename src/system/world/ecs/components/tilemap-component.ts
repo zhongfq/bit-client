@@ -2,6 +2,7 @@ import { ecs } from "../../../../core/ecs";
 import { IVector3Like } from "../../../../core/laya";
 import { StringUtil } from "../../../../core/utils/string-util";
 import { WorldContext } from "../../world-context";
+import { TilemapSystem } from "../systems/tilemap-system";
 
 export class TilemapComponent extends ecs.SingletonComponent {
     static readonly RATE = 1;
@@ -37,14 +38,6 @@ export class TilemapComponent extends ecs.SingletonComponent {
     static readonly STATIC_BASE_HEIGHT = 256; // 静态物体贴图基准宽度（单位：像素）
 
     static readonly STATIC_SCALE = 3; // 静态物体缩放
-
-    static readonly STATIC_CFG_MAP: Map<number, Tilemap.StaticConfig> = new Map([
-        [51, { resName: "map_Grassland_Tree_01", offsetY: 0.38591 }],
-        [52, { resName: "map_Grassland_Tree_02", offsetY: 0.46933 }],
-        [53, { resName: "map_Grassland_Tree_03", offsetY: 0.47747 }],
-        [49, { resName: "map_Grassland_hill_01", offsetY: 0.69662 }],
-        [50, { resName: "map_Grassland_hill_02", offsetY: 0.47278 }],
-    ]);
 
     static readonly XY_TO_KEY = (x: number, y: number) => { return x + '_' + y; };
     static readonly KEY_TO_XY = (key: string) => { const arr = key.split('_'); return [Number(arr[0]), Number(arr[1])] };
@@ -99,20 +92,22 @@ export namespace Tilemap {
     }
 
     export interface TileSet {
+        name: string;
         firstgid: number;
         tilecount: number;
         image: string;
-        imageheight: number;
         imagewidth: number;
-        tiles: Tile[];
+        imageheight: number;
         properties: Propertie[];
+        tiles: Tile[];
     }
 
     export interface Tile {
         id: number;
         image: string;
-        imageheight: number;
         imagewidth: number;
+        imageheight: number;
+        properties: Propertie[];
     }
 
     export interface Propertie {
@@ -121,9 +116,22 @@ export namespace Tilemap {
         value: number;
     }
 
-    ///////////////////////////////////////////////////////////////////////////////
+    export enum AtlasName {
+        Ground = "ground",
+        Road = "road",
+        River = "river",
+    }
+
+    export enum TextureName {
+        Static = "static",
+        Dynamic = "dynamic",
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     export abstract class Element {
+        protected system!: TilemapSystem;
+
         protected x!: number;
         protected y!: number;
         protected gid!: number;
@@ -132,7 +140,8 @@ export namespace Tilemap {
             return Laya.Pool.getItemByClass(sign, cls);
         }
 
-        init(x: number, y: number, gid: number): void {
+        init(system: TilemapSystem, x: number, y: number, gid: number): void {
+            this.system = system;
             this.x = x; this.y = y; this.gid = gid;
         }
 
@@ -141,40 +150,31 @@ export namespace Tilemap {
             Laya.Pool.recoverByClass(this);
         }
 
-        abstract draw(context: WorldContext): void;
+        abstract draw(): void;
         abstract reset(): void;
     }
 
     export class GroundElement extends Element {
-
-        private static atlas: Laya.AtlasResource;
-        private static texture: Laya.Texture2D;
-        private static prefab: Laya.Prefab;
-
         private _tile?: Laya.Sprite3D;
 
-        override async draw(context: WorldContext) {
-            if (!GroundElement.atlas) {
-                GroundElement.atlas = await Laya.loader.load("resources/texture/world-map/ground/ground.atlas", Laya.Loader.ATLAS);
-            }
-            if (!GroundElement.texture) {
-                GroundElement.texture = await Laya.loader.load("resources/texture/world-map/ground/ground.png", Laya.Loader.TEXTURE2D);
-            }
-            if (!GroundElement.prefab) {
-                GroundElement.prefab = await Laya.loader.load("resources/prefab/world-map/ground/ground-tile.lh", Laya.Loader.HIERARCHY);
-            }
-            this._tile = GroundElement.prefab.create() as Laya.Sprite3D;
+        override async draw() {
+            const atlas = await Laya.loader.load("resources/texture/world-map/ground/ground.atlas", Laya.Loader.ATLAS);
+            const texture = await Laya.loader.load("resources/texture/world-map/ground/ground.png", Laya.Loader.TEXTURE2D);
+            const prefab = await Laya.loader.load("resources/prefab/world-map/ground/ground-tile.lh", Laya.Loader.HIERARCHY);
+
+            this._tile = prefab.create() as Laya.Sprite3D;
 
             const pos = this._tile.transform.position;
             pos.x = this.x;
             pos.y = 0;
-            pos.z = this.y
+            pos.z = this.y;
             this._tile.transform.position = pos;
 
             const mat = new Laya.BlinnPhongMaterial(); // 使用 UnlitMaterial 时 tilingOffset 会失效
-            const path = GroundElement.atlas.frames[this.gid - 1].url;
+            const idx = this.system.getAtlasFrameIdx(AtlasName.Ground, this.gid);
+            const path = atlas.frames[idx].url;
             const tex = Laya.loader.getRes(path) as Laya.Texture;
-            mat.albedoTexture = GroundElement.texture;
+            mat.albedoTexture = texture;
             mat.tilingOffset.x = tex.uvrect[2]; // 瓦片宽度
             mat.tilingOffset.y = tex.uvrect[3]; // 瓦片高度
             mat.tilingOffset.z = tex.uvrect[0]; // X坐标偏移
@@ -183,7 +183,7 @@ export namespace Tilemap {
             const renderer = this._tile.getChildAt(0).getComponent(Laya.MeshRenderer);
             renderer.material = mat;
 
-            context.scene3D.addChild(this._tile);
+            this.system.context.scene3D.addChild(this._tile);
         }
 
         override reset() {
@@ -192,29 +192,23 @@ export namespace Tilemap {
     }
 
     export class StaticElement extends Element {
-
-        private static prefab: Laya.Prefab;
         private _staticObj?: Laya.Sprite3D;
 
-        override async draw(context: WorldContext) {
-            if (!StaticElement.prefab) {
-                StaticElement.prefab = await Laya.loader.load("resources/prefab/world-map/static/static-obj.lh", Laya.Loader.HIERARCHY);
-            }
-            const cfg = TilemapComponent.STATIC_CFG_MAP.get(this.gid);
-            if (!cfg) {
-                return;
-            }
-            this._staticObj = StaticElement.prefab.create() as Laya.Sprite3D;
+        override async draw() {
+            const prefab = await Laya.loader.load("resources/prefab/world-map/static/static-obj.lh", Laya.Loader.HIERARCHY);
+
+            this._staticObj = prefab.create() as Laya.Sprite3D;
 
             const pos = this._staticObj.transform.position;
             pos.x = this.x;
-            pos.y = cfg.offsetY * TilemapComponent.STATIC_SCALE;
+            pos.y = this.system.getTextureOffsetY(TextureName.Static, this.gid) * TilemapComponent.STATIC_SCALE;
             pos.z = this.y;
             this._staticObj.transform.position = pos;
 
             const renderer = this._staticObj.getChildAt(0).getComponent(Laya.MeshRenderer);
             const mat = new Laya.UnlitMaterial();
-            const path = StringUtil.format("resources/texture/world-map/static/{0}.png", cfg.resName);
+            const resName = this.system.getTextureResName(TextureName.Static, this.gid);
+            const path = StringUtil.format("resources/texture/world-map/static/{0}.png", resName);
             const texture = await Laya.loader.load(path, Laya.Loader.TEXTURE2D) as Laya.Texture2D;
             mat.albedoTexture = texture;
             mat.renderMode = Laya.MaterialRenderMode.RENDERMODE_TRANSPARENT;
@@ -225,19 +219,14 @@ export namespace Tilemap {
             this._staticObj.transform.localScaleX = scaleX;
             this._staticObj.transform.localScaleZ = scaleZ;
 
-            const rotateX = context.camera.transform.localRotationEulerX;
+            const rotateX = this.system.context.camera.transform.localRotationEulerX;
             this._staticObj.transform.localRotationEulerX = -rotateX;
 
-            context.scene3D.addChild(this._staticObj);
+            this.system.context.scene3D.addChild(this._staticObj);
         }
 
         override reset() {
             this._staticObj?.removeSelf();
         }
-    }
-
-    export interface StaticConfig {
-        resName: string;
-        offsetY: number;
     }
 }
