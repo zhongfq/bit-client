@@ -37,7 +37,6 @@ export type Track = {
 
 export const enum MovementType {
     NONE,
-    PATH,
     WHEEL,
     TARGET,
 }
@@ -55,11 +54,6 @@ class RotationInterpolation {
     rate: number = 1;
 }
 
-class PositionInterpolation extends Laya.Vector3 {
-    percent: number = 1;
-    rate: number = 1;
-}
-
 export class MovementComponent extends ecs.Component {
     type: MovementType = MovementType.NONE;
     velocity: number = 1;
@@ -67,16 +61,10 @@ export class MovementComponent extends ecs.Component {
     target: Laya.Vector3 | null = null;
     speed: Laya.Vector3 = new Laya.Vector3();
 
-    // 路点方式移动
-    paths: Laya.Vector2[] = [];
-
     // 轨迹方式移动
     track: Track | null = null;
     trackType: TrackType = TrackType.NONE;
 
     // 改变角度
     rotationInterpolation: RotationInterpolation = new RotationInterpolation();
-
-    // 位置差
-    positionInterpolation: PositionInterpolation = new PositionInterpolation();
 }

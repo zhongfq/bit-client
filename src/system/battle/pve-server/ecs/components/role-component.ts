@@ -10,6 +10,12 @@ export class RoleEnv extends b3.Env {
 }
 
 export class RoleComponent extends ecs.Component {
+    maxHp: number = 0;
+    hp: number = 0;
+
+    // 在表格中的定义
+    tid: number = 0;
+
     // 缓存组件方便快速访问？
     private _movement: MovementComponent | null = null;
     private _transform: TransformComponent | null = null;

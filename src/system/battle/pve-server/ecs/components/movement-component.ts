@@ -6,6 +6,7 @@ export class TransformComponent extends ecs.Component {
 }
 
 export class MovementComponent extends ecs.Component {
+    velocity: number = 1;
     target: Laya.Vector3 | null = null;
     speed: Laya.Vector3 = new Laya.Vector3();
 }

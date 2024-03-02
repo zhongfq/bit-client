@@ -39,7 +39,7 @@ export class JoystickSystem extends ecs.System {
             owner.joystick.alpha = 0.3;
             owner.indicator.x = 0;
             owner.indicator.y = 0;
-            this.context.moveStop(this.context.mainRole);
+            this.context.sender.moveStop(this.context.focusRole);
         } else {
             const maxOffset = owner.joystick.width / 2;
             const current = owner.joystickGroup.getMousePoint();
@@ -59,9 +59,9 @@ export class JoystickSystem extends ecs.System {
             if (Math.abs(joystick.degree - degree) >= 5) {
                 joystick.degree = degree;
                 if (joystick.running) {
-                    this.context.moveChange(this.context.mainRole, rad);
+                    this.context.sender.moveChange(this.context.focusRole, rad);
                 } else {
-                    this.context.moveStart(this.context.mainRole, rad);
+                    this.context.sender.moveStart(this.context.focusRole, rad);
                     joystick.running = true;
                 }
             }

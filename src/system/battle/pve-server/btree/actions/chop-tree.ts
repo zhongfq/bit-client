@@ -1,9 +1,9 @@
 import { b3 } from "../../../../../core/behavior3/behavior";
 import { RoleEnv } from "../../ecs/components/role-component";
-import { WoodComponent } from "../../ecs/components/wood-component";
+import { TreeComponent } from "../../ecs/components/tree-component";
 
 export class ChopTree extends b3.Process {
-    override run(node: b3.Node, env: RoleEnv, wood?: WoodComponent) {
+    override run(node: b3.Node, env: RoleEnv, wood?: TreeComponent) {
         if (!wood) {
             this.warn(node, "not found wood");
             return b3.Status.SUCCESS;

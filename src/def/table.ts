@@ -6,6 +6,7 @@ import {
     GeneratedAllianceRow,
     GeneratedAttrRow,
     GeneratedBattleBuffRow,
+    GeneratedBattleEntityEntityRow,
     GeneratedChestHeroRow,
     GeneratedChestRow,
     GeneratedEmojiRow,
@@ -62,8 +63,9 @@ export type WorldEntityTable = {
         [k: string]: WorldEntityModelsRow;
     };
 };
+
 //-----------------------------------------------------------------------------
-// Buff
+// 战斗相关
 //-----------------------------------------------------------------------------
 export interface BattleBuffRow extends GeneratedBattleBuffRow {}
 export type BattleBuffTable = {
@@ -71,6 +73,13 @@ export type BattleBuffTable = {
         [k: string]: BattleBuffRow;
     };
 };
+
+export interface BattleEntityRow extends GeneratedBattleEntityEntityRow {}
+
+export type BattleEntityTable = {
+    entity: { [k: string]: BattleEntityRow };
+};
+
 //-----------------------------------------------------------------------------
 // 武将
 //-----------------------------------------------------------------------------

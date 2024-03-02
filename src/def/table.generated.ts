@@ -241,7 +241,11 @@ export interface GeneratedBattleEntityEntityRow {
 // file: design/battle/battle_demo.xlsx
 export interface GeneratedBattleDemoRow {
     key: string;
-    hero_ids: any;
+    hero_id: number;
+    soldiers1: any;
+    soldiers2: any;
+    soldiers3: any;
+    soldiers4: any;
 }
 
 // file: design/battle/battle_buff.xlsx

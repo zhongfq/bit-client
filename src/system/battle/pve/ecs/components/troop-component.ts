@@ -22,13 +22,13 @@ export enum SoliderOrder {
     RETURN, // 归队
 }
 
-export enum CharacterAnimation {
+export enum RoleAnimation {
     IDLE = "idle",
     RUN = "run",
     ATTACK = "attack",
 }
 
-export abstract class CharacterComponent extends ecs.Component {
+export class RoleComponent extends ecs.Component {
     // 缓存组件方便快速访问？
     private _movement: MovementComponent | null = null;
     private _transform: TransformComponent | null = null;
@@ -45,6 +45,10 @@ export abstract class CharacterComponent extends ecs.Component {
     get animation() {
         return (this._animation ||= this.getComponent(AnimationComponent)!);
     }
+
+    tid: number = 0;
+    hp: number = 0;
+    maxHp: number = 0;
 }
 
 type SoliderAttack = {
@@ -53,7 +57,7 @@ type SoliderAttack = {
     position: Laya.Vector3;
 };
 
-export class SoldierComponent extends CharacterComponent {
+export class SoldierComponent extends ecs.Component {
     order: SoliderOrder = SoliderOrder.IDLE;
     leader!: number;
     offset!: IVector3Like;
@@ -64,7 +68,7 @@ export class SoldierComponent extends CharacterComponent {
     attack: SoliderAttack = { target: null, time: 0, position: new Laya.Vector3() };
 }
 
-export class HeroComponent extends CharacterComponent {
+export class HeroComponent extends ecs.Component {
     formation!: Readonly<IVector3Like>[];
     soldiers: SoldierComponent[] = [];
     hp: number = 0;

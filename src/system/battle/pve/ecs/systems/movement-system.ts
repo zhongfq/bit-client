@@ -41,26 +41,6 @@ export class MovementSystem extends ecs.System {
         const speed = movement.speed;
         const target = movement.target;
 
-        if (movement.type === MovementType.PATH && !target) {
-            if (movement.paths.length > 1) {
-                const p1 = movement.paths.shift();
-                const p2 = movement.paths[0];
-            }
-        }
-
-        if (movement.positionInterpolation.percent < 1) {
-            const interpolation = movement.positionInterpolation;
-            const last = interpolation.percent;
-            let ratio = last + dt * interpolation.rate;
-            if (ratio > 1) {
-                ratio = 1;
-            }
-            const step = ratio - last;
-            interpolation.percent = ratio;
-            position.x += interpolation.x * step;
-            position.z += interpolation.z * step;
-        }
-
         position.x += speed.x * dt;
         position.z += speed.z * dt;
         transform.flag |= TransformComponent.POSITION;
