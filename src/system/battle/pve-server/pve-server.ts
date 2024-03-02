@@ -4,9 +4,9 @@ import { ecs } from "../../../core/ecs";
 import { Loader } from "../../../core/loader";
 import { MathUtil } from "../../../core/utils/math-util";
 import { BattleConf } from "../../../def/battle";
-import { WorldConf } from "../../../def/world";
+import { formation } from "../../../def/formation";
 import { MovementComponent, TransformComponent } from "./ecs/components/movement-component";
-import { RoleComponent } from "./ecs/components/role-component";
+import { RoleComponent, HeroComponent } from "./ecs/components/role-component";
 import { TreeComponent } from "./ecs/components/tree-component";
 import { RoleCreator, TreeCreator } from "./pve-defs";
 
@@ -82,6 +82,37 @@ export class PveServer extends b3.Context implements ICommandReceiver {
             positioin: transform.position,
         });
         this._sender.focus(role.eid);
+
+        const hero = entity.addComponent(HeroComponent);
+
+        // this._loadSoliders(hero);
+    }
+
+    private _loadSoliders(leader: HeroComponent) {
+        leader.formation = formation;
+        leader.formation.forEach((value, idx) => {
+            const entity = this._ecs.createEntity();
+
+            const role = entity.addComponent(RoleComponent);
+            role.tid = 101;
+            role.hp = 200;
+            role.maxHp = 200;
+
+            const transform = entity.addComponent(TransformComponent);
+            transform.position.x = 6;
+            transform.position.z = 6;
+
+            entity.addComponent(MovementComponent);
+
+            this._sender.createRole({
+                eid: role.eid,
+                etype: BattleConf.ENTITY_TYPE.HERO,
+                tid: role.tid,
+                hp: role.hp,
+                maxHp: role.maxHp,
+                positioin: transform.position,
+            });
+        });
     }
 
     moveStart(eid: number, degree: number) {

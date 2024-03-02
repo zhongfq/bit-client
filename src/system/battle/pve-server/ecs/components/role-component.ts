@@ -1,5 +1,6 @@
 import { b3 } from "../../../../../core/behavior3/behavior";
 import { ecs } from "../../../../../core/ecs";
+import { IVector3Like } from "../../../../../core/laya";
 import { PveServer } from "../../pve-server";
 import { MovementComponent, TransformComponent } from "./movement-component";
 import { LauncherComponent } from "./skill-component";
@@ -32,4 +33,15 @@ export class RoleComponent extends ecs.Component {
     get launcher() {
         return (this._skill ||= this.getComponent(LauncherComponent)!);
     }
+}
+
+export class SoldierComponent extends ecs.Component {
+    leader!: HeroComponent;
+    index: number = 0;
+    offset!: IVector3Like;
+}
+
+export class HeroComponent extends ecs.Component {
+    formation!: Readonly<IVector3Like>[];
+    soldiers: Map<number, SoldierComponent> = new Map();
 }
