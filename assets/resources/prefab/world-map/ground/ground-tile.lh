@@ -8,11 +8,18 @@
       "_$id": "cp8i9232",
       "_$type": "Sprite3D",
       "name": "Plane",
+      "transform": {
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": -0.7071067811865475,
+          "w": 0.7071067811865476
+        }
+      },
       "_$comp": [
         {
           "_$type": "MeshFilter",
           "sharedMesh": {
-            "_$uuid": "4a4afb22-ef83-40a2-a6a8-212a2d20c52f",
+            "_$uuid": "7e9b0d09-b83c-425d-adf1-3d319f026e38",
             "_$type": "Mesh"
           }
         },

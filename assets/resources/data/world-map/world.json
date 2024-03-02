@@ -32,36 +32,36 @@
             "fileName": "tmx/world-map5.tmx",
             "height": 3200,
             "width": 6400,
-            "x": -6400,
-            "y": 0
+            "x": 3200,
+            "y": 4800
         },
         {
             "fileName": "tmx/world-map6.tmx",
             "height": 3200,
             "width": 6400,
-            "x": -3200,
-            "y": -1600
+            "x": 6400,
+            "y": 6400
         },
         {
             "fileName": "tmx/world-map7.tmx",
             "height": 3200,
             "width": 6400,
-            "x": 0,
-            "y": -3200
+            "x": 3200,
+            "y": 8000
         },
         {
             "fileName": "tmx/world-map8.tmx",
             "height": 3200,
             "width": 6400,
-            "x": 3200,
-            "y": -1600
+            "x": 6400,
+            "y": 9600
         },
         {
             "fileName": "tmx/world-map9.tmx",
             "height": 3200,
             "width": 6400,
-            "x": 6400,
-            "y": 0
+            "x": 9600,
+            "y": 8000
         }
     ],
     "onlyShowAdjacentMaps": false,
