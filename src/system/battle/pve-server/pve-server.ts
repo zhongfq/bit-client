@@ -1,3 +1,4 @@
+import { app } from "../../../app";
 import { b3 } from "../../../core/behavior3/behavior";
 import { builtinNodes } from "../../../core/behavior3/nodes/builtin-nodes";
 import { ecs } from "../../../core/ecs";
@@ -5,9 +6,15 @@ import { Loader } from "../../../core/loader";
 import { MathUtil } from "../../../core/utils/math-util";
 import { BattleConf } from "../../../def/battle";
 import { formation } from "../../../def/formation";
+import { NormalAttack } from "./btree/actions/normal-attack";
+import { Wait } from "./btree/actions/wait";
+import { AiComponent } from "./ecs/components/ai-component";
 import { MovementComponent, TransformComponent } from "./ecs/components/movement-component";
 import { RoleComponent, HeroComponent, SoldierComponent } from "./ecs/components/role-component";
 import { TreeComponent } from "./ecs/components/tree-component";
+import { AiSystem } from "./ecs/systems/ai-system";
+import { MovementSystem } from "./ecs/systems/movement-system";
+import { SkillSystem } from "./ecs/systems/skill-system";
 import { RoleCreator, TreeCreator } from "./pve-defs";
 
 export class PveServer extends b3.Context implements ICommandReceiver {
@@ -25,10 +32,15 @@ export class PveServer extends b3.Context implements ICommandReceiver {
         this._sender = sender;
 
         this._ecs = new ecs.World();
+        this._ecs.addSystem(new AiSystem(this));
+        this._ecs.addSystem(new MovementSystem(this));
+        this._ecs.addSystem(new SkillSystem(this));
     }
 
     private _initBehavior3() {
         this.registerProcess(...builtinNodes);
+        this.registerProcess(Wait);
+        this.registerProcess(NormalAttack);
     }
 
     update(delta: number) {
@@ -105,6 +117,12 @@ export class PveServer extends b3.Context implements ICommandReceiver {
             const transform = entity.addComponent(TransformComponent);
             transform.position.x = value.x + leader.transform.position.x;
             transform.position.z = value.z + leader.transform.position.z;
+
+            const table = app.service.table;
+            const soldierRow = table.soldier[role.tid];
+            const entityRow = table.battleEntity.entity[soldierRow.battle_entity];
+            const ai = entity.addComponent(AiComponent);
+            ai.res = `resources/data/btree/${entityRow.pve_ai}.json`;
 
             entity.addComponent(MovementComponent);
 
