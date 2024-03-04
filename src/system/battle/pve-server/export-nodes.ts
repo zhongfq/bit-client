@@ -13,6 +13,7 @@ import { BackTeam } from "./btree/actions/back-team";
 import { ChopTree } from "./btree/actions/chop-tree";
 import { FollowHero } from "./btree/actions/follow-hero";
 import { Wait } from "./btree/actions/wait";
+import { FindOneTarget } from "./btree/conditions/find-one-target";
 import { FindTargets } from "./btree/conditions/find-targets";
 
 export class ExportNodes {
@@ -36,6 +37,7 @@ export class ExportNodes {
                 new BackTeam().descriptor,
                 new ChopTree().descriptor,
                 new FindTargets().descriptor,
+                new FindOneTarget().descriptor,
                 new FollowHero().descriptor,
                 new Wait().descriptor,
             ],
