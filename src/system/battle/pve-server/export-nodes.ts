@@ -19,6 +19,8 @@ import { GetPos } from "./btree/actions/get-pos";
 import { GetSkillTarget } from "./btree/actions/get-skill-target";
 import { LaunchSkill } from "./btree/actions/launch-skill";
 import { MoveForward } from "./btree/actions/move-forward";
+import { MoveToAtkPos } from "./btree/actions/move-to-atk-pos";
+import { MoveToPos } from "./btree/actions/move-to-pos";
 import { NormalAttack } from "./btree/actions/normal-attack";
 import { Wait } from "./btree/actions/wait";
 import { FindOneTarget } from "./btree/conditions/find-one-target";
@@ -52,6 +54,8 @@ export class ExportNodes {
                 new GetSkillTarget().descriptor,
                 new LaunchSkill().descriptor,
                 new MoveForward().descriptor,
+                new MoveToPos().descriptor,
+                new MoveToAtkPos().descriptor,
                 new NormalAttack().descriptor,
                 new Wait().descriptor,
 

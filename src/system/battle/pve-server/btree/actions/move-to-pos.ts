@@ -1,22 +1,23 @@
 import { b3 } from "../../../../../core/behavior3/behavior";
 import { RoleComponent, RoleEnv } from "../../ecs/components/role-component";
 
-export class LaunchSkill extends b3.Process {
+export class MoveToPos extends b3.Process {
     override run(node: b3.Node, env: RoleEnv, target?: RoleComponent[] | RoleComponent) {
         return b3.Status.SUCCESS;
     }
 
     override get descriptor() {
         return {
-            name: "LaunchSkill",
+            name: "MoveToPos",
             type: "Action",
-            desc: "释放技能",
+            desc: "移动到坐标点",
             args: [
-                { name: "idx", type: "int", desc: "技能编号" },
+                { name: "x", type: "int?", desc: "x" },
+                { name: "y", type: "int?", desc: "y" },
             ],
-            input: ["{目标}"],
+            input: ["坐标"],
             doc: `
-                + 目标可以是单个实体，也可以是数组`,
+                + 优先输入变量`,
         };
     }
 }

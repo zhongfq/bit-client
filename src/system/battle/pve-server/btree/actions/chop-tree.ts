@@ -19,7 +19,7 @@ export class ChopTree extends b3.Process {
             name: "ChopTree",
             type: "Action",
             desc: "砍树",
-            input: ["{目标}"],
+            input: ["目标"],
         };
     }
 }

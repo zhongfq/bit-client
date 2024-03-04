@@ -11,10 +11,8 @@ export class MoveToAtkPos extends b3.Process {
             name: "MoveToAtkPos",
             type: "Action",
             desc: "释放技能",
-            args: [
-                { name: "idx", type: "int", desc: "技能编号" },
-            ],
-            input: ["{目标}"],
+            args: [{ name: "idx", type: "int", desc: "技能编号" }],
+            input: ["目标"],
             doc: `
                 + 目标可以是单个实体，也可以是数组`,
         };
