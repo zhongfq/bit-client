@@ -9,7 +9,9 @@ import { Check } from "../../../core/behavior3/nodes/conditions/check";
 import { AlwaysFail } from "../../../core/behavior3/nodes/decorators/always-fail";
 import { AlwaysSuccess } from "../../../core/behavior3/nodes/decorators/always-success";
 import { Not } from "../../../core/behavior3/nodes/decorators/not";
+import { BackTeam } from "./btree/actions/back-team";
 import { ChopTree } from "./btree/actions/chop-tree";
+import { FollowHero } from "./btree/actions/follow-hero";
 import { Wait } from "./btree/actions/wait";
 import { FindTargets } from "./btree/conditions/find-targets";
 
@@ -31,8 +33,10 @@ export class ExportNodes {
                 new Sequence().descriptor,
 
                 // 自定义节点
+                new BackTeam().descriptor,
                 new ChopTree().descriptor,
                 new FindTargets().descriptor,
+                new FollowHero().descriptor,
                 new Wait().descriptor,
             ],
             null,

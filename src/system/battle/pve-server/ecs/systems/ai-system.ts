@@ -4,6 +4,10 @@ import { PveServer } from "../../pve-server";
 import { AiComponent } from "../components/ai-component";
 
 export class AiSystem extends ecs.System {
+    private static readonly TICK = 100;
+
+    private _time: number = 0;
+
     constructor(readonly context: PveServer) {
         super();
     }
@@ -24,11 +28,15 @@ export class AiSystem extends ecs.System {
     }
 
     override update(dt: number): void {
-        this.ecs.getComponents(AiComponent).forEach((ai) => {
-            if (ai.tree && ai.env) {
-                ai.tree.run(ai.env);
-            }
-        });
+        const currTimer = Laya.timer.currTimer;
+        if (currTimer - this._time > AiSystem.TICK) {
+            this.ecs.getComponents(AiComponent).forEach((ai) => {
+                if (ai.tree && ai.env) {
+                    ai.tree.run(ai.env);
+                }
+            });
+            this._time = currTimer;
+        }
     }
 
     private async _loadAi(ai: AiComponent) {

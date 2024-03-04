@@ -57,7 +57,7 @@
         "40002": {
             "etype": 2,
             "id": 40002,
-            "pve_ai": "dun",
+            "pve_ai": "soldier",
             "res": "resources/prefab/battle/roles/bing-dao.lh"
         },
         "40003": {
@@ -69,7 +69,7 @@
         "40004": {
             "etype": 2,
             "id": 40004,
-            "pve_ai": "gong",
+            "pve_ai": "soldier",
             "res": "resources/prefab/battle/roles/bing-gong.lh"
         },
         "40005": {

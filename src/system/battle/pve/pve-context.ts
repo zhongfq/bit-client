@@ -64,7 +64,7 @@ export class PveContext extends Mediator implements ICommandSender {
 
     override onUpdate() {
         super.onUpdate();
-        this._pveServer.update(Laya.timer.delta);
+        this._pveServer.update(Laya.timer.delta / 1000);
         this._ecs.update(Laya.timer.delta / 1000);
     }
 
