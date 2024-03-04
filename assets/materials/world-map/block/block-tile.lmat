@@ -3,10 +3,10 @@
   "props": {
     "textures": [
       {
-        "path": "res://cfcab5c7-ca6b-4a9c-9828-3cb2fe6c9f2e",
+        "path": "res://66022e8d-f203-4572-acae-df4a2334894e",
         "constructParams": [
-          256,
-          256,
+          128,
+          128,
           1,
           true,
           false,
@@ -18,10 +18,10 @@
           "wrapModeV": 1,
           "anisoLevel": 4
         },
-        "name": "u_DiffuseTexture"
+        "name": "u_AlbedoTexture"
       }
     ],
-    "type": "BLINNPHONG",
+    "type": "Unlit",
     "renderQueue": 3000,
     "materialRenderMode": 2,
     "u_AlphaTestValue": 0.5,
@@ -35,32 +35,21 @@
     "s_BlendDstAlpha": 0,
     "s_DepthTest": 1,
     "s_DepthWrite": false,
+    "u_AlbedoColor": [
+      1,
+      1,
+      1,
+      0.7686274509803922
+    ],
     "u_TilingOffset": [
       1,
       1,
       0,
       0
     ],
-    "u_DiffuseColor": [
-      1,
-      1,
-      1,
-      1
-    ],
-    "u_MaterialSpecular": [
-      1,
-      1,
-      1,
-      1
-    ],
-    "u_Shininess": 0.078125,
-    "u_TransmissionRate": 0,
-    "u_BackDiffuse": 0,
-    "u_BackScale": 0,
-    "u_AlbedoIntensity": 1,
     "defines": [
-      "Gamma_u_DiffuseTexture",
-      "DIFFUSEMAP"
+      "ADDTIVEFOG",
+      "ALBEDOTEXTURE"
     ]
   }
 }

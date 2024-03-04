@@ -1,0 +1,105 @@
+{
+  "_$ver": 1,
+  "_$id": "zcgqj8oe",
+  "_$type": "Sprite3D",
+  "name": "Sprite3D",
+  "_$child": [
+    {
+      "_$id": "ml5iu72i",
+      "_$type": "Sprite3D",
+      "name": "Plane",
+      "transform": {
+        "localScale": {
+          "_$type": "Vector3",
+          "x": 10,
+          "y": 10,
+          "z": 10
+        }
+      },
+      "_$comp": [
+        {
+          "_$type": "MeshFilter",
+          "sharedMesh": {
+            "_$uuid": "4a4afb22-ef83-40a2-a6a8-212a2d20c52f",
+            "_$type": "Mesh"
+          }
+        },
+        {
+          "_$type": "MeshRenderer",
+          "sharedMaterials": [
+            {
+              "_$uuid": "6f90bbb0-bcb2-4311-8a9d-3d8277522098",
+              "_$type": "Material"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "pghbqr7m",
+      "_$prefab": "fde79713-58f5-47f2-931f-35003899737d",
+      "name": "block-tile",
+      "active": true,
+      "layer": 0,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": -0.35638,
+          "y": 0.01,
+          "z": 1.33518
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    {
+      "_$id": "r60qor3k",
+      "_$prefab": "7879a8a7-7449-47e6-81e4-6f0e208a6efc",
+      "name": "static-obj",
+      "active": true,
+      "layer": 0,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": -0.42482062902132656,
+          "y": 0.3983670811096396,
+          "z": 1.5566482270134567
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0.7071067811865475,
+          "y": 0,
+          "z": 0,
+          "w": 0.7071067811865476
+        }
+      }
+    },
+    {
+      "_$id": "1u89fdo2",
+      "_$prefab": "815006e1-36b2-4dda-afdf-b02d19e39332",
+      "name": "dynamic-obj",
+      "active": true,
+      "layer": 0,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": -2.3525257110595703,
+          "y": 0.9615139692364658,
+          "z": 1.2624566555023193
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0.7071067811865475,
+          "y": 0,
+          "z": 0,
+          "w": 0.7071067811865476
+        }
+      }
+    }
+  ]
+}

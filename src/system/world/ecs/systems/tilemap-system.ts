@@ -186,14 +186,26 @@ export class TilemapSystem extends ecs.System {
                         case Tilemap.LayerName.Ground:
                             element = Tilemap.Element.create("Tilemap.GroundElement", Tilemap.GroundElement);
                             break;
+                        case Tilemap.LayerName.Road:
+                            element = Tilemap.Element.create("Tilemap.RoadElement", Tilemap.RoadElement);
+                            break;
+                        case Tilemap.LayerName.River:
+                            element = Tilemap.Element.create("Tilemap.RiverElement", Tilemap.RiverElement);
+                            break;
                         case Tilemap.LayerName.Static:
                             element = Tilemap.Element.create('Tilemap.StaticElement', Tilemap.StaticElement);
+                            break;
+                        case Tilemap.LayerName.Dynamic:
+                            element = Tilemap.Element.create('Tilemap.DynamicElement', Tilemap.DynamicElement);
+                            break;
+                        case Tilemap.LayerName.Block:
+                            element = Tilemap.Element.create('Tilemap.BlockElement', Tilemap.BlockElement);
                             break;
                         default:
                             break;
                     }
                     if (element) {
-                        element.init(this, x, y, gid);
+                        element.init(this, x, y, gid, layer.name);
                         element.draw();
                         elements?.set(layer.name as Tilemap.LayerName, element);
                     }

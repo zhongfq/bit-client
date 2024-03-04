@@ -1,19 +1,25 @@
 {
   "_$ver": 1,
-  "_$id": "r60qor3k",
+  "_$id": "1u89fdo2",
   "_$type": "Sprite3D",
-  "name": "static-obj",
+  "name": "dynamic-obj",
   "transform": {
     "localPosition": {
       "_$type": "Vector3",
-      "x": -0.42482062902132656,
-      "y": 0.3983670811096396,
-      "z": 1.5566482270134567
+      "x": -2.352525818901819,
+      "y": 0.9183045094181469,
+      "z": 1.262456675072538
     },
     "localRotation": {
       "_$type": "Quaternion",
       "x": 0.7071067811865475,
       "w": 0.7071067811865476
+    },
+    "localScale": {
+      "_$type": "Vector3",
+      "x": 2,
+      "y": 2,
+      "z": 2
     }
   },
   "_$child": [
@@ -22,6 +28,10 @@
       "_$type": "Sprite3D",
       "name": "Plane",
       "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "y": 1.1102230246251565e-16
+        },
         "localRotation": {
           "_$type": "Quaternion",
           "x": -0.7071067811865475,
@@ -40,7 +50,7 @@
           "_$type": "MeshRenderer",
           "sharedMaterials": [
             {
-              "_$uuid": "b45a869d-0a89-4559-8326-f93fef6d9b74",
+              "_$uuid": "99e51702-8cf6-4b6a-9b4a-ef77d2528316",
               "_$type": "Material"
             }
           ]
