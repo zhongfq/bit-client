@@ -23,7 +23,7 @@ export class FindTargets extends b3.Process {
             type: "Condition",
             desc: "给定的范围内查找多个目标",
             args: [
-                { name: "etype", type: "int", desc: "类型" },
+                { name: "etype", type: "int?", desc: "类型" },
                 { name: "friend", type: "boolean?", desc: "友方" },
                 { name: "attack", type: "boolean?", desc: "普攻范围" },
                 { name: "skill", type: "boolean?", desc: "技能范围" },
