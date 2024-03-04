@@ -7,18 +7,9 @@
     "children": [
       {
         "id": 2,
-        "name": "Log",
-        "args": {
-          "str": "ai runnint"
-        }
-      },
-      {
-        "id": 3,
-        "name": "Wait",
-        "args": {
-          "time": 3,
-          "random": 1
-        }
+        "name": "FollowHero",
+        "desc": "士兵以阵型位置跟随主将",
+        "args": {}
       }
     ]
   },

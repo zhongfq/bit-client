@@ -5,6 +5,7 @@
  * scenes/pve.ls
  */
 export class PveUIBase extends Laya.Scene {
+    public debug!: Laya.Sprite;
     public troops!: Laya.Box;
     public labels!: Laya.Box;
     public joystickGroup!: Laya.Box;

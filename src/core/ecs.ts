@@ -262,6 +262,7 @@ export namespace ecs {
     }
 
     export abstract class SingletonComponent {
+        // eslint-disable-next-line @typescript-eslint/no-shadow
         constructor(readonly ecs?: World) {}
     }
 
@@ -270,6 +271,7 @@ export namespace ecs {
 
         etype: number = 0;
 
+        // eslint-disable-next-line @typescript-eslint/no-shadow
         constructor(eid: number, readonly ecs: World) {
             this._eid = eid;
         }
@@ -308,6 +310,7 @@ export namespace ecs {
 
         onDestroy() {}
 
+        // eslint-disable-next-line @typescript-eslint/no-shadow
         __setECS(ecs: World) {
             this._ecs = ecs;
         }

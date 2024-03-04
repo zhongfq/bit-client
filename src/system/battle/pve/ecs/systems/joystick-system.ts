@@ -33,7 +33,7 @@ export class JoystickSystem extends ecs.System {
         } else if (e.type === Laya.Event.MOUSE_UP) {
             joystick.pressStart?.recover();
             joystick.pressStart = null;
-            joystick.running = false;
+            joystick.degree = Number.MAX_VALUE;
             owner.joystick.x = joystick.initX;
             owner.joystick.y = joystick.initY;
             owner.joystick.alpha = 0.3;
@@ -58,12 +58,7 @@ export class JoystickSystem extends ecs.System {
             const degree = Math.floor((MathUtil.toDegree(rad) + 360) % 360);
             if (Math.abs(joystick.degree - degree) >= 5) {
                 joystick.degree = degree;
-                if (joystick.running) {
-                    this.context.sender.moveChange(this.context.focusRole, degree);
-                } else {
-                    this.context.sender.moveStart(this.context.focusRole, degree);
-                    joystick.running = true;
-                }
+                this.context.sender.moveStart(this.context.focusRole, degree);
             }
         }
     }

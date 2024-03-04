@@ -8,7 +8,8 @@ import { CommandSystem } from "./command-system";
 const tmpVector3 = new Laya.Vector3();
 
 export class TroopSystem extends ecs.System {
-    private static readonly TICK = 100;
+    static readonly TICK = 100;
+
     private static readonly ATTACK_INTERVAL = 1000;
 
     private _time: number = 0;
