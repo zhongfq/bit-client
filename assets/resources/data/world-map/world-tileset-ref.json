@@ -26,6 +26,11 @@
          "spacing":0,
          "tilecount":48,
          "tileheight":128,
+         "tileoffset":
+            {
+             "x":0,
+             "y":32
+            },
          "tilewidth":128,
          "wangsets":[
                 {
@@ -335,26 +340,50 @@
          "margin":0,
          "name":"dynamic",
          "spacing":0,
-         "tilecount":1,
+         "tilecount":3,
          "tileheight":512,
          "tiles":[
                 {
                  "id":0,
-                 "image":"..\/..\/..\/..\/..\/others\/res\/\u573a\u666f\/map_Grassland_Tiled\/Tiled\/texture\/dynamic\/map_biulding_castle01.png",
+                 "image":"..\/..\/..\/..\/..\/others\/res\/\u573a\u666f\/map_Grassland_Tiled\/Tiled\/texture\/dynamic\/building_castle01@1,2_5,5.png",
                  "imageheight":512,
                  "imagewidth":512,
                  "properties":[
                         {
                          "name":"offsetY",
                          "type":"float",
-                         "value":0
+                         "value":0.96151
+                        }]
+                }, 
+                {
+                 "id":1,
+                 "image":"..\/..\/..\/..\/..\/others\/res\/\u573a\u666f\/map_Grassland_Tiled\/Tiled\/texture\/dynamic\/map_gather_wood1-1.png",
+                 "imageheight":256,
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"offsetY",
+                         "type":"float",
+                         "value":0.48325
+                        }]
+                }, 
+                {
+                 "id":2,
+                 "image":"..\/..\/..\/..\/..\/others\/res\/\u573a\u666f\/map_Grassland_Tiled\/Tiled\/texture\/dynamic\/map_gather_wood1-2.png",
+                 "imageheight":256,
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"offsetY",
+                         "type":"float",
+                         "value":0.4137
                         }]
                 }],
          "tilewidth":512
         }, 
         {
          "columns":8,
-         "firstgid":55,
+         "firstgid":57,
          "grid":
             {
              "height":64,
@@ -369,11 +398,16 @@
          "spacing":0,
          "tilecount":48,
          "tileheight":128,
+         "tileoffset":
+            {
+             "x":0,
+             "y":32
+            },
          "tilewidth":128
         }, 
         {
          "columns":8,
-         "firstgid":103,
+         "firstgid":105,
          "grid":
             {
              "height":64,
@@ -388,6 +422,11 @@
          "spacing":0,
          "tilecount":48,
          "tileheight":128,
+         "tileoffset":
+            {
+             "x":0,
+             "y":32
+            },
          "tilewidth":128
         }],
  "tilewidth":128,
