@@ -29,7 +29,9 @@ export class Main extends AppBase {
     override onAwake(): void {
         // new BehaviorTest().start();
 
-        // TODO: rm, use nodejs to write file
+        if (Laya.Browser.onPC) {
+            Laya.stage.scaleMode = Laya.Stage.SCALE_SHOWALL;
+        }
         console.log(new ExportNodes().stringify());
 
         ui.register();
