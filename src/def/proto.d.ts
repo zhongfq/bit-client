@@ -4984,8 +4984,8 @@ declare namespace proto {
             /** ScoreInfo score */
             score?: (number|null);
 
-            /** ScoreInfo scoreChestId */
-            scoreChestId?: (number|null);
+            /** ScoreInfo scoreId */
+            scoreId?: (number|null);
         }
 
         /** Represents a ScoreInfo. */
@@ -5000,8 +5000,8 @@ declare namespace proto {
             /** ScoreInfo score. */
             public score: number;
 
-            /** ScoreInfo scoreChestId. */
-            public scoreChestId: number;
+            /** ScoreInfo scoreId. */
+            public scoreId: number;
 
             /**
              * Creates a new ScoreInfo instance using the specified properties.

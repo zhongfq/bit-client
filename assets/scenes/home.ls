@@ -481,6 +481,39 @@
       ]
     },
     {
+      "_$id": "otxo47w2",
+      "_$prefab": "20edd97f-adc2-4d26-adb5-0fe75fd0a991",
+      "name": "monye-box",
+      "active": true,
+      "x": 583,
+      "y": 129,
+      "visible": true,
+      "right": 0,
+      "top": 129
+    },
+    {
+      "_$id": "jsaiqtuo",
+      "_$prefab": "43743938-b950-4688-a0ec-3b6e102e1496",
+      "name": "activity-box",
+      "active": true,
+      "x": 0,
+      "y": 128,
+      "visible": true,
+      "left": 0,
+      "top": 128
+    },
+    {
+      "_$id": "vm6knnc0",
+      "_$type": "Box",
+      "name": "常用功能",
+      "x": 455,
+      "y": 1017,
+      "width": 292,
+      "height": 103,
+      "right": 3,
+      "bottom": 214
+    },
+    {
       "_$id": "cibyk9jb",
       "_$var": true,
       "_$type": "ViewStack",
@@ -625,39 +658,6 @@
           "labelVAlign": "middle"
         }
       ]
-    },
-    {
-      "_$id": "otxo47w2",
-      "_$prefab": "20edd97f-adc2-4d26-adb5-0fe75fd0a991",
-      "name": "monye-box",
-      "active": true,
-      "x": 583,
-      "y": 129,
-      "visible": true,
-      "right": 0,
-      "top": 129
-    },
-    {
-      "_$id": "jsaiqtuo",
-      "_$prefab": "43743938-b950-4688-a0ec-3b6e102e1496",
-      "name": "activity-box",
-      "active": true,
-      "x": 0,
-      "y": 127,
-      "visible": true,
-      "left": 0,
-      "top": 127
-    },
-    {
-      "_$id": "vm6knnc0",
-      "_$type": "Box",
-      "name": "常用功能",
-      "x": 455,
-      "y": 1017,
-      "width": 292,
-      "height": 103,
-      "right": 3,
-      "bottom": 214
     }
   ]
 }

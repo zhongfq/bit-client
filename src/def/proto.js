@@ -11666,7 +11666,7 @@ $root.chest = (function() {
          * @memberof chest
          * @interface IScoreInfo
          * @property {number|null} [score] ScoreInfo score
-         * @property {number|null} [scoreChestId] ScoreInfo scoreChestId
+         * @property {number|null} [scoreId] ScoreInfo scoreId
          */
 
         /**
@@ -11693,12 +11693,12 @@ $root.chest = (function() {
         ScoreInfo.prototype.score = 0;
 
         /**
-         * ScoreInfo scoreChestId.
-         * @member {number} scoreChestId
+         * ScoreInfo scoreId.
+         * @member {number} scoreId
          * @memberof chest.ScoreInfo
          * @instance
          */
-        ScoreInfo.prototype.scoreChestId = 0;
+        ScoreInfo.prototype.scoreId = 0;
 
         /**
          * Creates a new ScoreInfo instance using the specified properties.
@@ -11726,8 +11726,8 @@ $root.chest = (function() {
                 writer = $Writer.create();
             if (message.score != null && Object.hasOwnProperty.call(message, "score"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.score);
-            if (message.scoreChestId != null && Object.hasOwnProperty.call(message, "scoreChestId"))
-                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.scoreChestId);
+            if (message.scoreId != null && Object.hasOwnProperty.call(message, "scoreId"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.scoreId);
             return writer;
         };
 
@@ -11767,7 +11767,7 @@ $root.chest = (function() {
                         break;
                     }
                 case 5: {
-                        message.scoreChestId = reader.uint32();
+                        message.scoreId = reader.uint32();
                         break;
                     }
                 default:
@@ -11808,9 +11808,9 @@ $root.chest = (function() {
             if (message.score != null && message.hasOwnProperty("score"))
                 if (!$util.isInteger(message.score))
                     return "score: integer expected";
-            if (message.scoreChestId != null && message.hasOwnProperty("scoreChestId"))
-                if (!$util.isInteger(message.scoreChestId))
-                    return "scoreChestId: integer expected";
+            if (message.scoreId != null && message.hasOwnProperty("scoreId"))
+                if (!$util.isInteger(message.scoreId))
+                    return "scoreId: integer expected";
             return null;
         };
 
@@ -11828,8 +11828,8 @@ $root.chest = (function() {
             var message = new $root.chest.ScoreInfo();
             if (object.score != null)
                 message.score = object.score >>> 0;
-            if (object.scoreChestId != null)
-                message.scoreChestId = object.scoreChestId >>> 0;
+            if (object.scoreId != null)
+                message.scoreId = object.scoreId >>> 0;
             return message;
         };
 
@@ -11848,12 +11848,12 @@ $root.chest = (function() {
             var object = {};
             if (options.defaults) {
                 object.score = 0;
-                object.scoreChestId = 0;
+                object.scoreId = 0;
             }
             if (message.score != null && message.hasOwnProperty("score"))
                 object.score = message.score;
-            if (message.scoreChestId != null && message.hasOwnProperty("scoreChestId"))
-                object.scoreChestId = message.scoreChestId;
+            if (message.scoreId != null && message.hasOwnProperty("scoreId"))
+                object.scoreId = message.scoreId;
             return object;
         };
 

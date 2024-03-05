@@ -13,7 +13,7 @@ message ChestInfo {
 //积分数据
 message ScoreInfo {
     uint32 score = 4; //积分
-    uint32 score_chest_id = 5;//当前积分奖励宝箱ID
+    uint32 score_id = 5;//当前积分ID
 }
 
 
