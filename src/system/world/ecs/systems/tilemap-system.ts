@@ -1,5 +1,4 @@
 import { ecs } from "../../../../core/ecs";
-import { StringUtil } from "../../../../core/utils/string-util";
 import { WorldContext } from "../../world-context";
 import { CameraComponent } from "../components/camera-component";
 import { TransformComponent } from "../components/movement-component";
@@ -7,12 +6,186 @@ import { Tilemap, TilemapComponent } from "../components/tilemap-component";
 
 export class TilemapSystem extends ecs.System {
 
+    /**
+     * 添加动态元素
+     * @param eid 实体ID
+     * @param x X坐标
+     * @param y Y坐标
+     * @returns 动态元素的唯一ID
+     */
+    public addDynamicElement(eid: number, x: number, y: number): number {
+        const uids: number[] = [];
+        this._tryAdd(x, y, Tilemap.LayerName.Dynamic, eid, uids);
+        return uids[0];
+    }
+
+    /**
+     * 跟据唯一ID删除动态元素
+     * @param uid 唯一ID
+     */
+    public delDynamicElementByUid(uid: number): void {
+        const element = this._allMap.get(uid);
+        if (element) {
+            this._tryDel(element.x, element.y, Tilemap.LayerName.Dynamic);
+        }
+    }
+
+    /**
+     * 根据实体ID删除动态元素
+     * @param eid 实体ID
+     */
+    public delDynamicElementByEid(eid: number): void {
+        for (const element of this._allMap.values()) {
+            if (element.eid == eid && element.layerName == Tilemap.LayerName.Dynamic) {
+                this._tryDel(element.x, element.y, Tilemap.LayerName.Dynamic);
+                return;
+            }
+        }
+    }
+
+    /**
+     * 根据唯一ID获取动态元素
+     * @param uid 唯一ID
+     * @returns 动态元素对象
+     */
+    public getDynamicElementByUid(uid: number): Tilemap.DynamicElement | undefined {
+        const element = this._allMap.get(uid);
+        if (element?.layerName == Tilemap.LayerName.Dynamic) {
+            return element as Tilemap.DynamicElement;
+        }
+        return undefined;
+    }
+
+    /**
+     * 根据实体ID获取动态元素
+     * @param eid 实体ID
+     * @returns 动态元素对象
+     */
+    public getDynamicElementByEid(eid: number): Tilemap.DynamicElement | undefined {
+        for (const element of this._allMap.values()) {
+            if (element.eid == eid && element.layerName == Tilemap.LayerName.Dynamic) {
+                return element as Tilemap.DynamicElement;
+            }
+        }
+        return undefined;
+    }
+
+    /**
+     * 根据唯一ID获取元素
+     * @param uid 唯一ID
+     * @returns 元素对象
+     */
+    public getElementByUid(uid: number): Tilemap.Element | undefined {
+        return this._allMap.get(uid);
+    }
+
+    /**
+     * 根据坐标获取元素
+     * @param x X坐标
+     * @param y Y坐标
+     * @param layerName 层级名称
+     * @returns 元素对象
+     */
+    public getElementByPos(x: number, y: number, layerName: Tilemap.LayerName): Tilemap.Element | undefined {
+        for (const [layer, uidMap] of this._posMap) {
+            if (layer != layerName) {
+                continue;
+            }
+            const uid = uidMap.get(TilemapComponent.XY_TO_KEY(x, y)) || 0;
+            const element = this._allMap.get(uid);
+            return element;
+        }
+        return undefined;
+    }
+
+    /**
+     * 根据矩形范围获取元素列表
+     * @param x X坐标
+     * @param y Y坐标
+     * @param width 矩形宽度
+     * @param height 矩形高度
+     * @param layerName 层级名称
+     * @returns 元素对象列表
+     */
+    public getElementsByRect(x: number, y: number, width: number, height: number, layerName: Tilemap.LayerName): Tilemap.Element[] {
+        const elements: Tilemap.Element[] = [];
+        for (let $x = x; $x < x + width; $x++) {
+            for (let $y = y; $y < y + height; $y++) {
+                const element = this.getElementByPos($x, $y, layerName);
+                if (element) {
+                    elements.push(element);
+                }
+            }
+        }
+        return elements;
+    }
+
+    /**
+     * 根据层级名称获取元素列表
+     * @param layerName 层级名称
+     * @returns 元素对象列表
+     */
+    public getElementsByLayer(layerName: Tilemap.LayerName): Tilemap.Element[] {
+        const elements: Tilemap.Element[] = [];
+        for (const [layer, uidMap] of this._posMap) {
+            if (layer != layerName) {
+                continue;
+            }
+            for (const uid of uidMap.values()) {
+                const element = this._allMap.get(uid);
+                if (element) {
+                    elements.push(element);
+                }
+            }
+        }
+        return elements;
+    }
+
+    /**
+     * 根据GID获取图集序列帧的序号
+     * @param atlasName 图集名称
+     * @param gid 资源ID
+     * @returns 
+     */
+    public getAtlasFrameIdx(atlasName: Tilemap.AtlasName, gid: number): number {
+        const tileset = this._atlasMap.get(atlasName);
+        return gid - (tileset?.firstgid || 1);
+    }
+
+    /**
+     * 根据GID获取纹理资源名称
+     * @param textureName 纹理名称
+     * @param gid 资源ID
+     * @returns 
+     */
+    public getTextureResName(textureName: Tilemap.TextureName, gid: number): string {
+        const map = this._textureMap.get(textureName);
+        const tile = map?.get(gid);
+        return tile?.image.split('/').at(-1)?.split('.').at(0) || "";
+    }
+
+    /**
+     * 根据GID获取纹理高度偏移
+     * @param textureName 纹理名称
+     * @param gid 资源ID
+     * @returns 
+     */
+    public getTextureOffsetY(textureName: Tilemap.TextureName, gid: number): number {
+        const map = this._textureMap.get(textureName);
+        const tile = map?.get(gid);
+        let offsetY = 0;
+        tile?.properties?.forEach(prop => {
+            if (prop.name == "offsetY") { offsetY = prop.value; return; }
+        })
+        return offsetY;
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     private static readonly TICK = 200;
     private _lastTime: number = 0;
 
-    private _hasInit: boolean = false;
-
-    private _world!: Tilemap.World;
+    private _world: Tilemap.World | undefined;
 
     private _atlasMap: Map<Tilemap.AtlasName, Tilemap.TileSet> = new Map();
     private _textureMap: Map<Tilemap.TextureName, Map<number, Tilemap.Tile>> = new Map();
@@ -20,22 +193,17 @@ export class TilemapSystem extends ecs.System {
     private _lastRect: Laya.Rectangle = Laya.Rectangle.create();
     private _curRect: Laya.Rectangle = Laya.Rectangle.create();
 
-    private _addArr: string[] = [];
-    private _delArr: string[] = [];
+    private _addArr: number[][] = [];
+    private _delArr: number[][] = [];
 
-    private _totalMap: Map<string, Map<Tilemap.LayerName, Tilemap.Element>> = new Map();
+    private _allMap: Map<number, Tilemap.Element> = new Map();
+    private _posMap: Map<Tilemap.LayerName, Map<string, number>> = new Map();
 
     constructor(readonly context: WorldContext) {
         super();
-        this._init();
     }
 
-    private async _init() {
-        if (this._hasInit) {
-            return
-        }
-        this._hasInit = true;
-
+    public override async onCreate() {
         this._world = await Laya.loader.fetch("resources/data/world-map/world.json", "json") as Tilemap.World;
         this._world.maps.forEach(info => {
             [info.x, info.y] = this._transMapPos(info);
@@ -56,6 +224,21 @@ export class TilemapSystem extends ecs.System {
         })
     }
 
+    public override onDestroy() {
+        this._allMap.forEach(element => {
+            element.recover();
+        })
+        this._world = undefined;
+        this._atlasMap.clear();
+        this._textureMap.clear();
+        this._lastRect.reset();
+        this._curRect.reset();
+        this._addArr = [];
+        this._delArr = [];
+        this._allMap.clear();
+        this._posMap.clear();
+    }
+
     private _transMapPos(info: Tilemap.MapInfo) {
         const scale = Math.sqrt((TilemapComponent.TILE_HEIGHT * 2) ** 2 / 2);
 
@@ -71,27 +254,6 @@ export class TilemapSystem extends ecs.System {
         const pos = new Laya.Vector2(info.x + info.width / 2, info.y);
         Laya.Vector2.transformCoordinate(pos, invertMat, pos);
         return [pos.x, pos.y];
-    }
-
-    public getAtlasFrameIdx(atlasName: Tilemap.AtlasName, gid: number): number {
-        const tileset = this._atlasMap.get(atlasName);
-        return gid - (tileset?.firstgid || 1);
-    }
-
-    public getTextureResName(textureName: Tilemap.TextureName, gid: number): string {
-        const map = this._textureMap.get(textureName);
-        const tile = map?.get(gid);
-        return tile?.image.split('/').at(-1)?.split('.').at(0) || "";
-    }
-
-    public getTextureOffsetY(textureName: Tilemap.TextureName, gid: number): number {
-        const map = this._textureMap.get(textureName);
-        const tile = map?.get(gid);
-        let offsetY = 0;
-        tile?.properties?.forEach(prop => {
-            if (prop.name == "offsetY") { offsetY = prop.value; return; }
-        })
-        return offsetY;
     }
 
     public update(dt: number): void {
@@ -121,7 +283,7 @@ export class TilemapSystem extends ecs.System {
             for (let x = curX; x < curX + this._curRect.width; x++) {
                 for (let y = curY; y < curY + this._curRect.height; y++) {
                     if (!this._lastRect.contains(x, y)) {
-                        this._addArr.push(TilemapComponent.XY_TO_KEY(x, y));
+                        this._addArr.push([x, y]);
                     }
                 }
             }
@@ -129,99 +291,96 @@ export class TilemapSystem extends ecs.System {
             for (let x = lastX; x < lastX + this._lastRect.width; x++) {
                 for (let y = lastY; y < lastY + this._lastRect.height; y++) {
                     if (!this._curRect.contains(x, y)) {
-                        this._delArr.push(TilemapComponent.XY_TO_KEY(x, y));
+                        this._delArr.push([x, y]);
                     }
                 }
             }
         } else {
             for (let x = curX; x < curX + this._curRect.width; x++) {
                 for (let y = curY; y < curY + this._curRect.height; y++) {
-                    this._addArr.push(TilemapComponent.XY_TO_KEY(x, y));
+                    this._addArr.push([x, y]);
                 }
             }
         }
         this._lastRect.copyFrom(this._curRect);
 
         for (let i = 0; i < this._addArr.length; i++) {
-            const key = this._addArr[i];
-            this._tryAdd(key);
+            const [x, y] = this._addArr[i];
+            this._tryAdd(x, y);
         }
 
         for (let i = 0; i < this._delArr.length; i++) {
-            const key = this._delArr[i];
-            this._tryDel(key);
+            const [x, y] = this._delArr[i];
+            this._tryDel(x, y);
         }
     }
 
-    private _tryAdd(key: string) {
-        const [x, y] = TilemapComponent.KEY_TO_XY(key);
+    private async _tryAdd(x: number, y: number, filterLayer?: Tilemap.LayerName, eid?: number, outUids?: number[]) {
 
-        let elements = this._totalMap.get(key);
-        if (!elements) {
-            elements = new Map();
-            this._totalMap.set(key, elements);
-        }
+        for (let i = 0; i < this._world!.maps.length; i++) {
+            const info = this._world!.maps[i];
 
-        this._world.maps.forEach(async (info: Tilemap.MapInfo) => {
-
-            if (info.x <= x && x < info.x + info.width &&
-                info.y <= y && y < info.y + info.height) {
-
-                if (!info.worldMap) {
-                    const realFileName = info.fileName.split('/').at(-1)?.replace('.tmx', '.json');
-                    info.worldMap = await Laya.loader.fetch("resources/data/world-map/" + realFileName, "json") as Tilemap.WorldMap;
-                }
-
-                const idx = (y - info.y) * info.width + (x - info.x);
-                info.worldMap.layers.forEach(layer => {
-                    if (!layer.data) {
-                        return;
-                    }
-                    const gid = layer.data[idx];
-                    if (!gid || gid == 0) {
-                        return;
-                    }
-                    let element: Tilemap.Element | undefined = undefined;
-                    switch (layer.name) {
-                        case Tilemap.LayerName.Ground:
-                            element = Tilemap.Element.create("Tilemap.GroundElement", Tilemap.GroundElement);
-                            break;
-                        case Tilemap.LayerName.Road:
-                            element = Tilemap.Element.create("Tilemap.RoadElement", Tilemap.RoadElement);
-                            break;
-                        case Tilemap.LayerName.River:
-                            element = Tilemap.Element.create("Tilemap.RiverElement", Tilemap.RiverElement);
-                            break;
-                        case Tilemap.LayerName.Static:
-                            element = Tilemap.Element.create('Tilemap.StaticElement', Tilemap.StaticElement);
-                            break;
-                        case Tilemap.LayerName.Dynamic:
-                            element = Tilemap.Element.create('Tilemap.DynamicElement', Tilemap.DynamicElement);
-                            break;
-                        case Tilemap.LayerName.Block:
-                            element = Tilemap.Element.create('Tilemap.BlockElement', Tilemap.BlockElement);
-                            break;
-                        default:
-                            break;
-                    }
-                    if (element) {
-                        element.init(this, x, y, gid, layer.name);
-                        element.draw();
-                        elements?.set(layer.name as Tilemap.LayerName, element);
-                    }
-                })
+            const inRect = info.x <= x && x < info.x + info.width && info.y <= y && y < info.y + info.height;
+            if (!inRect) {
+                continue;
             }
-        })
+
+            if (!info.worldMap) {
+                const realFileName = info.fileName.split('/').at(-1)?.replace('.tmx', '.json');
+                info.worldMap = await Laya.loader.fetch("resources/data/world-map/" + realFileName, "json") as Tilemap.WorldMap;
+            }
+
+            const idx = (y - info.y) * info.width + (x - info.x);
+
+            for (let j = 0; j < info.worldMap.layers.length; j++) {
+                const layer = info.worldMap.layers[j];
+                if (!layer.data) {
+                    continue;
+                }
+                const layerName = layer.name as Tilemap.LayerName;
+                if (filterLayer && layerName != filterLayer) {
+                    continue;
+                }
+                const gid = layer.data[idx];
+                if (!gid || gid == 0) {
+                    continue;
+                }
+                const cls = Tilemap.LayerToCls(layerName);
+                if (!cls) {
+                    continue;
+                }
+                const element = Tilemap.Element.create(cls.name, cls);
+                if (element) {
+                    element.init(this, x, y, gid, layerName, eid);
+                    this._allMap.set(element.uid, element);
+
+                    let uidMap = this._posMap.get(layerName);
+                    if (!uidMap) {
+                        uidMap = new Map();
+                        this._posMap.set(layerName, uidMap);
+                    }
+                    uidMap?.set(TilemapComponent.XY_TO_KEY(x, y), element.uid);
+
+                    if (layerName != Tilemap.LayerName.Block) {
+                        element.draw();
+                    }
+                    outUids?.push(element.uid);
+                }
+            }
+        }
     }
 
-    private _tryDel(key: string) {
-        const elements = this._totalMap.get(key);
-        if (elements) {
-            elements.forEach((element) => {
-                element.recover();
-            })
-            elements.clear();
-        }
-        this._totalMap.delete(key);
+    private _tryDel(x: number, y: number, filterLayer?: Tilemap.LayerName) {
+        this._posMap.forEach((uidMap, layerName) => {
+            if (filterLayer && layerName != filterLayer) {
+                return;
+            }
+            const key = TilemapComponent.XY_TO_KEY(x, y);
+            const uid = uidMap.get(key) || 0;
+            const element = this._allMap.get(uid);
+            element?.recover();
+            uidMap.delete(key);
+            this._allMap.delete(uid);
+        })
     }
 }
