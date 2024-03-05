@@ -8,7 +8,7 @@ export class Foreach extends b3.Process {
         }
     }
 
-    override run(node: b3.Node, env: b3.Env, arr: unknown[]) {
+    override run(node: b3.Node, env: b3.TreeEnv, arr: unknown[]) {
         let last = node.resume(env);
         let i: number = 0;
         let j: number = 0;

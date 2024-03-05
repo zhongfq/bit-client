@@ -65,16 +65,11 @@ export class CommandSystem extends ecs.System {
 
     createTree(data: TreeCreator) {}
 
-    moveStart(character: RoleComponent, degree: number, velocity: number) {
-        this.moveChange(character, degree, velocity);
-    }
-
-    moveChange(character: RoleComponent, degree: number, velocity: number) {
+    moveStart(character: RoleComponent, speed: Laya.Vector3) {
         const { movement } = character;
         movement.type = MovementType.WHEEL;
-        movement.velocity = velocity;
-        TilemapComponent.degree2Speed(degree, velocity, movement.speed);
-        this._setRotation(character, movement.speed.x, movement.speed.z);
+        movement.speed.cloneFrom(speed);
+        this._setRotation(character, speed);
         this.playAnimation(character, RoleAnimation.RUN);
     }
 
@@ -108,8 +103,8 @@ export class CommandSystem extends ecs.System {
         }
     }
 
-    private _setRotation(character: RoleComponent, x: number, z: number) {
-        const rad = Math.atan2(-z, x);
+    private _setRotation(character: RoleComponent, speed: Laya.Vector3) {
+        const rad = Math.atan2(-speed.z, speed.x);
         const dest = (rad * 180) / Math.PI;
         const { movement, transform } = character;
         let offset = dest - transform.rotation;

@@ -12,14 +12,6 @@ export class TilemapComponent extends ecs.SingletonComponent {
         return out;
     }
 
-    static degree2Speed(deg: number, velocity: number, out: IVector3Like) {
-        const rad = (deg / 180) * Math.PI;
-        out.x = Math.cos(rad) * velocity * TilemapComponent.RATE;
-        out.z = Math.sin(rad) * velocity * TilemapComponent.RATE;
-        out.y = 0;
-        return out;
-    }
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     static readonly TILE_WIDTH = 128;

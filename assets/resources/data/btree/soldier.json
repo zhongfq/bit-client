@@ -2,23 +2,150 @@
   "name": "soldier",
   "root": {
     "id": 1,
-    "name": "Sequence",
+    "name": "Selector",
     "desc": "新建行为树",
+    "args": {},
     "children": [
       {
         "id": 2,
-        "name": "Log",
-        "args": {
-          "str": "ai runnint"
-        }
+        "name": "Sequence",
+        "desc": "脱战",
+        "args": {},
+        "children": [
+          {
+            "id": 3,
+            "name": "unknow",
+            "desc": "判断主将脱战范围",
+            "args": {}
+          },
+          {
+            "id": 4,
+            "name": "Check",
+            "args": {
+              "value": "fight_time > 2"
+            }
+          },
+          {
+            "id": 5,
+            "name": "Clear",
+            "desc": "清除交战时间",
+            "args": {},
+            "output": [
+              "fight_time"
+            ]
+          },
+          {
+            "id": 6,
+            "name": "BackTeam",
+            "desc": "执行归队（可能挂起）",
+            "args": {}
+          }
+        ]
       },
       {
-        "id": 3,
-        "name": "Wait",
-        "args": {
-          "time": 3,
-          "random": 1
-        }
+        "id": 7,
+        "name": "Sequence",
+        "desc": "普攻",
+        "args": {},
+        "children": [
+          {
+            "id": 8,
+            "name": "FindOneTarget",
+            "args": {
+              "attack": true,
+              "radius": null,
+              "skill": false
+            },
+            "output": [
+              "enemy"
+            ],
+            "children": []
+          },
+          {
+            "id": 9,
+            "name": "AlwaysSuccess",
+            "desc": "设置交战时间",
+            "args": {},
+            "children": [
+              {
+                "id": 10,
+                "name": "Sequence",
+                "args": {},
+                "children": [
+                  {
+                    "id": 11,
+                    "name": "IsNull",
+                    "args": {},
+                    "input": [
+                      "fight_time"
+                    ],
+                    "children": []
+                  },
+                  {
+                    "id": 12,
+                    "name": "GetTime",
+                    "desc": "设置交战时间",
+                    "args": {},
+                    "output": [
+                      "fight_time"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 13,
+            "name": "NormalAttack",
+            "args": {},
+            "input": [
+              "enemy"
+            ]
+          }
+        ]
+      },
+      {
+        "id": 14,
+        "name": "Sequence",
+        "desc": "找目标",
+        "args": {},
+        "children": [
+          {
+            "id": 15,
+            "name": "FindOneTarget",
+            "args": {
+              "radius": 6
+            },
+            "output": [
+              ""
+            ]
+          },
+          {
+            "id": 16,
+            "name": "GetPos",
+            "args": {},
+            "input": [
+              ""
+            ],
+            "output": [
+              ""
+            ]
+          },
+          {
+            "id": 17,
+            "name": "MoveToPos",
+            "args": {},
+            "input": [
+              ""
+            ]
+          }
+        ]
+      },
+      {
+        "id": 18,
+        "name": "FollowHero",
+        "desc": "士兵以阵型位置跟随主将",
+        "args": {}
       }
     ]
   },

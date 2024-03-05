@@ -1,7 +1,7 @@
 import { b3 } from "../../behavior";
 
 export class Sequence extends b3.Process {
-    override run(node: b3.Node, env: b3.Env) {
+    override run(node: b3.Node, env: b3.TreeEnv) {
         const last = node.resume(env);
         let i = 0;
 

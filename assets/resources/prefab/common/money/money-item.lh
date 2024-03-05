@@ -1,0 +1,56 @@
+{
+  "_$ver": 1,
+  "_$id": "dnfumekb",
+  "_$type": "Box",
+  "name": "Box",
+  "width": 161,
+  "height": 34,
+  "_$child": [
+    {
+      "_$id": "06oeqp9w",
+      "_$type": "Image",
+      "name": "imgBg",
+      "width": 161,
+      "height": 34,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "bottom": 0,
+      "skin": "res://2123a790-201a-4900-8885-b7ef9a27cfba",
+      "color": "#ffffff",
+      "_$child": [
+        {
+          "_$id": "uy1zfhbv",
+          "_$var": true,
+          "_$type": "Image",
+          "name": "imgIcon",
+          "x": -3,
+          "y": -3,
+          "width": 40,
+          "height": 40,
+          "skin": "res://279e2ccb-c459-4b59-ade8-9303a3ee609a",
+          "useSourceSize": true,
+          "color": "#ffffff"
+        },
+        {
+          "_$id": "2axgc46u",
+          "_$var": true,
+          "_$type": "Label",
+          "name": "labelNum",
+          "x": 41,
+          "y": 3,
+          "width": 120,
+          "height": 28,
+          "right": 0,
+          "centerY": 0,
+          "text": "Label",
+          "fontSize": 20,
+          "color": "#FFFFFF",
+          "align": "right",
+          "valign": "middle",
+          "padding": "0,0,0,0"
+        }
+      ]
+    }
+  ]
+}

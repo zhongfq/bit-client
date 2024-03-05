@@ -56,7 +56,6 @@ class RotationInterpolation {
 
 export class MovementComponent extends ecs.Component {
     type: MovementType = MovementType.NONE;
-    velocity: number = 1;
 
     target: Laya.Vector3 | null = null;
     speed: Laya.Vector3 = new Laya.Vector3();

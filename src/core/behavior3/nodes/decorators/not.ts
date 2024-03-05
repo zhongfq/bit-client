@@ -7,7 +7,7 @@ export class Not extends b3.Process {
         }
     }
 
-    override run(node: b3.Node, env: b3.Env) {
+    override run(node: b3.Node, env: b3.TreeEnv) {
         const isYield = node.resume(env);
         if (typeof isYield === "boolean") {
             if (env.lastRet.status === b3.Status.RUNNING) {

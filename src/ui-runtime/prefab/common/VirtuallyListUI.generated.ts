@@ -2,7 +2,7 @@
 
 
 /**
- * resources/prefab/common/list/list.lh
+ * resources/prefab/common/list/virtually-list-new.lh
  */
 export class VirtuallyListUIBase extends Laya.Box {
 }

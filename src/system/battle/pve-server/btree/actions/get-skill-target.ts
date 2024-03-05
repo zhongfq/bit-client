@@ -10,15 +10,13 @@ export class GetSkillTarget extends b3.Process {
         return {
             name: "GetSkillTarget",
             type: "Action",
-            desc: "释放技能",
-            args: [
-                { name: "multi", type: "boolean?", desc: "多个目标" },
-            ],
+            desc: "获取技能目标",
+            args: [{ name: "multi", type: "boolean?", desc: "多个目标" }],
             input: ["目标单位"],
             doc: `
-            + 此节点只能在技能行为树使用!
-            + 默认返回单个目标
-            + 如果勾选多个目标，返回数组
+                + 此节点只能在技能行为树使用!
+                + 默认返回单个目标
+                + 如果勾选多个目标，返回数组
             `,
         };
     }

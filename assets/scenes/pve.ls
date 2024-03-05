@@ -152,6 +152,14 @@
       "bottom": 0,
       "_$child": [
         {
+          "_$id": "btet9mlg",
+          "_$var": true,
+          "_$type": "Sprite",
+          "name": "debug",
+          "width": 100,
+          "height": 100
+        },
+        {
           "_$id": "iqohvf4b",
           "_$var": true,
           "_$type": "Box",

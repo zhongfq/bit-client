@@ -13,13 +13,13 @@ interface Position {
     y: number;
 }
 
-class RoleEnv extends b3.Env {
+class RoleEnv extends b3.TreeEnv {
     declare context: RoleContext;
     owner!: Role;
 }
 
 class Attack extends b3.Process {
-    override run(node: b3.Node, env: b3.Env, enemy?: Role) {
+    override run(node: b3.Node, env: b3.TreeEnv, enemy?: Role) {
         if (!enemy) {
             return b3.Status.FAILURE;
         }
@@ -36,7 +36,7 @@ class Attack extends b3.Process {
 
 class GetHp extends b3.Process {
     override run(node: b3.Node, env: RoleEnv) {
-        env.lastRet.results = [(env.owner as Role).hp];
+        env.lastRet.results.push((env.owner as Role).hp);
         return b3.Status.SUCCESS;
     }
 
@@ -46,7 +46,7 @@ class GetHp extends b3.Process {
 }
 
 class Idle extends b3.Process {
-    override run(node: b3.Node, env: b3.Env) {
+    override run(node: b3.Node, env: b3.TreeEnv) {
         console.log("Do Idle");
         return b3.Status.SUCCESS;
     }
@@ -125,7 +125,7 @@ class FindEnemy extends b3.Process {
             return Math.abs(x - tx) <= w && Math.abs(y - ty) <= h;
         }, args.count ?? -1);
         if (list.length) {
-            env.lastRet.results = list;
+            env.lastRet.results.push(...list);
             return b3.Status.SUCCESS;
         } else {
             return b3.Status.FAILURE;

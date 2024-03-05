@@ -3,7 +3,7 @@ import { b3 } from "../../../../../core/behavior3/behavior";
 export class BackTeam extends b3.Process {
     override check(node: b3.Node) {}
 
-    override run(node: b3.Node, env: b3.Env) {
+    override run(node: b3.Node, env: b3.TreeEnv) {
         return b3.Status.FAILURE;
     }
 

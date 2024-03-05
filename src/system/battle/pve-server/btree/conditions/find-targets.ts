@@ -13,7 +13,7 @@ interface FindTargetsArgs {
 export class FindTargets extends b3.Process {
     override check(node: b3.Node) {}
 
-    override run(node: b3.Node, env: b3.Env, ...any: unknown[]) {
+    override run(node: b3.Node, env: b3.TreeEnv, ...any: unknown[]) {
         return b3.Status.FAILURE;
     }
 

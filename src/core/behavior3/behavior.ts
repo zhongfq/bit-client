@@ -20,7 +20,7 @@ export namespace b3 {
     export abstract class Process {
         check(node: Node): void {}
 
-        abstract run(node: Node, env: Env, ...any: unknown[]): Status;
+        abstract run(node: Node, env: TreeEnv, ...any: unknown[]): Status;
 
         abstract get descriptor(): ProcessDescriptor;
 
@@ -76,10 +76,10 @@ export namespace b3 {
             }
             this._process = process;
             this._process.check(this);
-            this._yield = Env.makePrivateKey(this, "yield");
+            this._yield = TreeEnv.makePrivateKey(this, "yield");
         }
 
-        run(env: Env) {
+        run(env: TreeEnv) {
             if (env.getVar(this._yield) === undefined) {
                 env.stack.push(this);
             }
@@ -89,12 +89,12 @@ export namespace b3 {
                 Node.tmpInputArgs.push(env.getVar(varName));
             });
 
-            env.lastRet.results = null;
+            env.lastRet.results.length = 0;
 
             const status = this._process.run(this, env, ...Node.tmpInputArgs);
             if (status != Status.RUNNING) {
                 this.data.output?.forEach((varName, i) => {
-                    const varValue = env.lastRet.results?.[i];
+                    const varValue = env.lastRet.results[i];
                     env.setVar(varName, varValue);
                 });
                 env.setVar(this._yield, undefined);
@@ -106,7 +106,7 @@ export namespace b3 {
             if (this.data.debug) {
                 let varStr = "";
                 for (const k of env.vars.keys()) {
-                    if (!(Env.isPrivateKey(k) || Env.isPublicKey(k))) {
+                    if (!(TreeEnv.isPrivateKey(k) || TreeEnv.isPublicKey(k))) {
                         varStr += `${k}:${env.vars.get(k)}, `;
                     }
                 }
@@ -119,29 +119,29 @@ export namespace b3 {
             return status;
         }
 
-        yield(env: Env, value?: unknown) {
+        yield(env: TreeEnv, value?: unknown) {
             env.setVar(this._yield, value ?? true);
             return Status.RUNNING;
         }
 
-        resume(env: Env): unknown {
+        resume(env: TreeEnv): unknown {
             return env.getVar(this._yield);
         }
     }
 
     export class Context {
-        private _processResolvers: { [k: string]: Process | undefined } = {};
-        private _exps: { [k: string]: ExpressionEvaluator | undefined } = {};
+        protected _processResolvers: Map<string, Process> = new Map();
+        protected _exps: Map<string, ExpressionEvaluator> = new Map();
 
         time: number = 0;
 
         constructor() {}
 
         compileExpr(code: string) {
-            let expr = this._exps[code];
+            let expr = this._exps.get(code);
             if (!expr) {
                 expr = new ExpressionEvaluator(code);
-                this._exps[code] = expr;
+                this._exps.set(code, expr);
             }
             return expr;
         }
@@ -149,19 +149,20 @@ export namespace b3 {
         registerProcess<T extends Process>(...args: Constructor<T>[]) {
             for (const cls of args) {
                 const process = new cls();
-                this._processResolvers[process.descriptor.name] = process;
+                this._processResolvers.set(process.descriptor.name, process);
             }
         }
 
         resolveProcess(name: string) {
-            return this._processResolvers[name];
+            return this._processResolvers.get(name);
         }
     }
 
-    export class Env {
+    export class TreeEnv {
         readonly context: Context;
-        readonly lastRet: { status: Status; results?: unknown[] | null } = {
+        readonly lastRet: { status: Status; readonly results: unknown[] } = {
             status: Status.SUCCESS,
+            results: [],
         };
 
         private _vars: Map<string, unknown> = new Map();
@@ -198,7 +199,7 @@ export namespace b3 {
         clear() {
             this._stack.length = 0;
             this._vars.clear();
-            this.lastRet.results = null;
+            this.lastRet.results.length = 0;
         }
 
         static makePublicKey(node: Node, k: string) {
@@ -235,20 +236,20 @@ export namespace b3 {
             this.root = new Node(data.root, this);
         }
 
-        interrupt(env: Env) {
+        interrupt(env: TreeEnv) {
             const stack = env.stack;
             const vars = env.vars;
             if (stack.length > 0) {
                 stack.length = 0;
                 for (const key of vars.keys()) {
-                    if (Env.isPrivateKey(key)) {
+                    if (TreeEnv.isPrivateKey(key)) {
                         vars.delete(key);
                     }
                 }
             }
         }
 
-        run(env: Env) {
+        run(env: TreeEnv) {
             const stack = env.stack;
             if (stack.length > 0) {
                 while (stack.length > 0) {
@@ -261,6 +262,10 @@ export namespace b3 {
             } else {
                 this.root.run(env);
             }
+        }
+
+        isRunning(env: TreeEnv) {
+            return env.stack.length > 0;
         }
     }
 
@@ -281,7 +286,7 @@ export namespace b3 {
             this._postfix = this._convertToPostfix(tokens);
         }
 
-        evaluate(args: Map<string, unknown>): number | boolean {
+        evaluate(args: Map<string, unknown>): unknown {
             const stack: TokenType[] = [];
 
             this._args = args;
@@ -327,7 +332,7 @@ export namespace b3 {
 
             this._args = null;
 
-            return stack.pop() as number;
+            return stack.pop();
         }
 
         private _toObject(token: ScalarType) {

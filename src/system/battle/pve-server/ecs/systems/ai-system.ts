@@ -1,15 +1,25 @@
 import { b3 } from "../../../../../core/behavior3/behavior";
+import { builtinNodes } from "../../../../../core/behavior3/nodes/builtin-nodes";
 import { ecs } from "../../../../../core/ecs";
+import { FollowHero } from "../../btree/actions/follow-hero";
+import { NormalAttack } from "../../btree/actions/normal-attack";
+import { Wait } from "../../btree/actions/wait";
 import { PveServer } from "../../pve-server";
 import { AiComponent } from "../components/ai-component";
+import { RoleComponent, RoleEnv } from "../components/role-component";
 
 export class AiSystem extends ecs.System {
-    private static readonly TICK = 100;
+    static readonly TICK = 0.1;
 
     private _time: number = 0;
 
     constructor(readonly context: PveServer) {
         super();
+
+        context.registerProcess(...builtinNodes);
+        context.registerProcess(Wait);
+        context.registerProcess(NormalAttack);
+        context.registerProcess(FollowHero);
     }
 
     override onAddComponent(component: ecs.Component): void {
@@ -28,7 +38,7 @@ export class AiSystem extends ecs.System {
     }
 
     override update(dt: number): void {
-        const currTimer = Laya.timer.currTimer;
+        const currTimer = this.context.time;
         if (currTimer - this._time > AiSystem.TICK) {
             this.ecs.getComponents(AiComponent).forEach((ai) => {
                 if (ai.tree && ai.env) {
@@ -43,7 +53,7 @@ export class AiSystem extends ecs.System {
         const tree = await this.context.loadAiTree(ai.res);
         if (tree) {
             ai.tree = tree;
-            ai.env = new b3.Env(this.context);
+            ai.env = new RoleEnv(this.context, ai.getComponent(RoleComponent)!);
         }
     }
 }

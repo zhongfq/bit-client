@@ -1,5 +1,6 @@
 import { appBase as AppBase } from "./app.generated";
 import { Constructor } from "./core/dispatcher";
+import { IVector3Like } from "./core/laya";
 import { Loader } from "./core/loader";
 import { Service } from "./core/service";
 import { TweenSystem } from "./core/tween/tween-system";
@@ -7,6 +8,7 @@ import { UIManager } from "./core/ui-manager";
 import { opcode } from "./def/protocol";
 import { ui } from "./misc/ui";
 import { BagService } from "./system/bag/bag-service";
+import { ExportNodes } from "./system/battle/pve-server/export-nodes";
 import { ChatService } from "./system/chat/chat-service";
 import { ChestService } from "./system/chest/chest-service";
 import { GmService } from "./system/gm/gm-service";
@@ -25,6 +27,11 @@ const { regClass, property } = Laya;
 @regClass()
 export class Main extends AppBase {
     override onAwake(): void {
+        // new BehaviorTest().start();
+
+        // TODO: rm, use nodejs to write file
+        console.log(new ExportNodes().stringify());
+
         ui.register();
         app.init();
     }
@@ -116,10 +123,16 @@ class App {
 
         app.ui.open(ui.LOGIN_SCENE);
 
-        // new BehaviorTest().start();
+        const t: unknown = "";
 
-        // TODO: rm, use nodejs to write file
-        // console.log(ExportNodes.stringify());
+        console.log("tcheck", t ? "true" : "false");
+
+        const offset = new Laya.Vector3(-0.6, 0, 0);
+        const transform = new Laya.Transform3D();
+        transform.localRotationEulerY = 90;
+        const out = new Laya.Vector3();
+        transform.localToGlobal(offset, out);
+        console.log(out);
     }
 
     async test() {

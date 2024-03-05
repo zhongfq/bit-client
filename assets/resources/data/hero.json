@@ -1,6 +1,6 @@
 {
     "101": {
-        "attack_range": 100,
+        "attack_radius": 1,
         "battle_entity": 101,
         "enable": 1,
         "id": 101,
@@ -8,11 +8,12 @@
         "name": "肉盾(徐晃)",
         "skill1": 10101,
         "skill2": 10102,
+        "skill_radius": 1,
         "type": 1,
         "world_entity": 101
     },
     "102": {
-        "attack_range": 500,
+        "attack_radius": 5,
         "battle_entity": 102,
         "enable": 1,
         "id": 102,
@@ -20,11 +21,12 @@
         "name": "法师(周瑜)",
         "skill1": 10201,
         "skill2": 10202,
+        "skill_radius": 5,
         "type": 1,
         "world_entity": 102
     },
     "103": {
-        "attack_range": 450,
+        "attack_radius": 4.5,
         "battle_entity": 102,
         "enable": 1,
         "id": 103,
@@ -32,11 +34,12 @@
         "name": "辅助(小乔)",
         "skill1": 10301,
         "skill2": 10302,
+        "skill_radius": 4.5,
         "type": 1,
         "world_entity": 103
     },
     "104": {
-        "attack_range": 500,
+        "attack_radius": 5,
         "battle_entity": 103,
         "enable": 1,
         "id": 104,
@@ -44,11 +47,12 @@
         "name": "远程(夏候渊)",
         "skill1": 10401,
         "skill2": 10402,
+        "skill_radius": 5,
         "type": 1,
         "world_entity": 104
     },
     "105": {
-        "attack_range": 120,
+        "attack_radius": 1.2,
         "battle_entity": 103,
         "enable": 1,
         "id": 105,
@@ -56,11 +60,12 @@
         "name": "战士(关羽)",
         "skill1": 10501,
         "skill2": 10502,
+        "skill_radius": 1.2,
         "type": 1,
         "world_entity": 105
     },
     "106": {
-        "attack_range": 100,
+        "attack_radius": 1,
         "battle_entity": 104,
         "enable": 1,
         "id": 106,
@@ -68,11 +73,12 @@
         "name": "战士(周泰)",
         "skill1": 10601,
         "skill2": 10602,
+        "skill_radius": 1,
         "type": 1,
         "world_entity": 106
     },
     "107": {
-        "attack_range": 110,
+        "attack_radius": 1.1,
         "battle_entity": 104,
         "enable": 1,
         "id": 107,
@@ -80,11 +86,12 @@
         "name": "战士(孙策)",
         "skill1": 10701,
         "skill2": 10702,
+        "skill_radius": 1.1,
         "type": 1,
         "world_entity": 107
     },
     "108": {
-        "attack_range": 450,
+        "attack_radius": 4.5,
         "battle_entity": 105,
         "enable": 1,
         "id": 108,
@@ -92,11 +99,12 @@
         "name": "法师(诸葛亮)",
         "skill1": 10801,
         "skill2": 10802,
+        "skill_radius": 4.5,
         "type": 1,
         "world_entity": 108
     },
     "109": {
-        "attack_range": 500,
+        "attack_radius": 5,
         "battle_entity": 105,
         "enable": 1,
         "id": 109,
@@ -104,11 +112,12 @@
         "name": "远程(黄忠)",
         "skill1": 10901,
         "skill2": 10902,
+        "skill_radius": 5,
         "type": 1,
         "world_entity": 109
     },
     "110": {
-        "attack_range": 120,
+        "attack_radius": 1.2,
         "battle_entity": 106,
         "enable": 1,
         "id": 110,
@@ -116,11 +125,12 @@
         "name": "战士(魏延)",
         "skill1": 11001,
         "skill2": 11002,
+        "skill_radius": 1.2,
         "type": 1,
         "world_entity": 110
     },
     "111": {
-        "attack_range": 100,
+        "attack_radius": 1,
         "battle_entity": 106,
         "enable": 1,
         "id": 111,
@@ -128,11 +138,12 @@
         "name": "战士(曹仁)",
         "skill1": 11101,
         "skill2": 11102,
+        "skill_radius": 1,
         "type": 1,
         "world_entity": 111
     },
     "112": {
-        "attack_range": 500,
+        "attack_radius": 5,
         "battle_entity": 107,
         "enable": 1,
         "id": 112,
@@ -140,11 +151,12 @@
         "name": "远程(孙尚香)",
         "skill1": 11201,
         "skill2": 11202,
+        "skill_radius": 5,
         "type": 1,
         "world_entity": 112
     },
     "113": {
-        "attack_range": 450,
+        "attack_radius": 4.5,
         "battle_entity": 107,
         "enable": 1,
         "id": 113,
@@ -152,35 +164,39 @@
         "name": "远程(蔡文姬)",
         "skill1": 11301,
         "skill2": 11302,
+        "skill_radius": 4.5,
         "type": 1,
         "world_entity": 113
     },
     "301": {
-        "attack_range": 100,
+        "attack_radius": 1,
         "battle_entity": 108,
         "id": 301,
         "job": 1,
         "name": "兔子",
         "skill1": 1,
+        "skill_radius": 1,
         "type": 2,
         "world_entity": 114
     },
     "302": {
-        "attack_range": 100,
+        "attack_radius": 1,
         "battle_entity": 108,
         "id": 302,
         "job": 1,
         "name": "蟹",
         "skill1": 1,
+        "skill_radius": 1,
         "type": 2,
         "world_entity": 115
     },
     "401": {
-        "attack_range": 100,
+        "attack_radius": 1,
         "battle_entity": 109,
         "id": 401,
         "job": 1,
         "name": "树",
+        "skill_radius": 1,
         "type": 3,
         "world_entity": 116
     }

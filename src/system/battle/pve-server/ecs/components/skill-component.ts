@@ -1,7 +1,7 @@
 import { b3 } from "../../../../../core/behavior3/behavior";
 import { ecs } from "../../../../../core/ecs";
 
-export class SkillEnv extends b3.Env {
+export class SkillEnv extends b3.TreeEnv {
     owner!: Skill;
 
     constructor(context: b3.Context) {

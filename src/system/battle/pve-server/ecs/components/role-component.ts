@@ -5,9 +5,15 @@ import { PveServer } from "../../pve-server";
 import { MovementComponent, TransformComponent } from "./movement-component";
 import { LauncherComponent } from "./skill-component";
 
-export class RoleEnv extends b3.Env {
+export class RoleEnv extends b3.TreeEnv {
     declare context: PveServer;
-    owner!: RoleComponent;
+    owner: RoleComponent;
+
+    constructor(context: PveServer, owner: RoleComponent) {
+        super(context);
+
+        this.owner = owner;
+    }
 }
 
 export class RoleComponent extends ecs.Component {
@@ -21,7 +27,7 @@ export class RoleComponent extends ecs.Component {
     private _movement?: MovementComponent;
     private _transform?: TransformComponent;
     private _skill?: LauncherComponent;
-    private _hero?: HeroComponent;
+    private _troop?: TroopComponent;
 
     get movement() {
         return (this._movement ||= this.getComponent(MovementComponent)!);
@@ -35,13 +41,13 @@ export class RoleComponent extends ecs.Component {
         return (this._skill ||= this.getComponent(LauncherComponent)!);
     }
 
-    get hero() {
-        return (this._hero ||= this.getComponent(HeroComponent));
+    get troop() {
+        return (this._troop ||= this.getComponent(TroopComponent));
     }
 }
 
 export class SoldierComponent extends ecs.Component {
-    leader!: RoleComponent;
+    hero!: RoleComponent;
     index: number = 0;
     offset!: IVector3Like;
 
@@ -52,7 +58,13 @@ export class SoldierComponent extends ecs.Component {
     }
 }
 
-export class HeroComponent extends ecs.Component {
+export class TroopComponent extends ecs.Component {
     formation!: Readonly<IVector3Like>[];
     soldiers: SoldierComponent[] = [];
+
+    private _role?: RoleComponent;
+
+    get role() {
+        return (this._role ||= this.getComponent(RoleComponent)!);
+    }
 }

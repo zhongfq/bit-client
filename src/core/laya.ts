@@ -45,6 +45,7 @@ declare global {
         interface Vector3 {
             clone(): Vector3;
             cloneTo(value: IVector3Like): IVector3Like;
+            cloneFrom(value: IVector3Like): void;
         }
 
         namespace Pool {
@@ -58,6 +59,14 @@ Laya.Vector2.prototype.normalize = function () {
     Laya.Vector2.normalize(this, this);
 };
 
+Object.defineProperty(Laya.Vector2.prototype, "length", {
+    get() {
+        const { x, y } = this as Laya.Vector2;
+        return Math.sqrt(x * x + y * y);
+    },
+    configurable: true,
+});
+
 Laya.Vector2.transformCoordinate = function (
     coordinate: Laya.Vector2,
     transform: Laya.Matrix3x3,
@@ -69,13 +78,11 @@ Laya.Vector2.transformCoordinate = function (
     result.y = x * transformElem[1] + y * transformElem[4] + transformElem[7];
 };
 
-Object.defineProperty(Laya.Vector2.prototype, "length", {
-    get() {
-        const { x, y } = this as Laya.Vector2;
-        return Math.sqrt(x * x + y * y);
-    },
-    configurable: true,
-});
+Laya.Vector3.prototype.cloneFrom = function (value: IVector3Like) {
+    this.x = value.x;
+    this.y = value.y;
+    this.z = value.z;
+};
 
 Laya.Pool.obtain = function <T>(cls: Constructor<T>): T {
     return Laya.Pool.createByClass(cls);
