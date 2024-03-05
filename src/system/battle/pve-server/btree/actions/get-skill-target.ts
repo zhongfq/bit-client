@@ -12,7 +12,7 @@ export class GetSkillTarget extends b3.Process {
             type: "Action",
             desc: "获取技能目标",
             args: [{ name: "multi", type: "boolean?", desc: "多个目标" }],
-            input: ["目标单位"],
+            output: ["目标单位"],
             doc: `
                 + 此节点只能在技能行为树使用!
                 + 默认返回单个目标

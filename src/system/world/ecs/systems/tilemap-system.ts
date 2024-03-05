@@ -6,7 +6,6 @@ import { TransformComponent } from "../components/movement-component";
 import { Tilemap, TilemapComponent } from "../components/tilemap-component";
 
 export class TilemapSystem extends ecs.System {
-
     private static readonly TICK = 200;
     private _lastTime: number = 0;
 
@@ -32,35 +31,44 @@ export class TilemapSystem extends ecs.System {
 
     private async _init() {
         if (this._hasInit) {
-            return
+            return;
         }
         this._hasInit = true;
 
-        this._world = await Laya.loader.fetch("resources/data/world-map/world.json", "json") as Tilemap.World;
-        this._world.maps.forEach(info => {
+        this._world = (await Laya.loader.fetch(
+            "resources/data/world-map/world.json",
+            "json"
+        )) as Tilemap.World;
+        this._world.maps.forEach((info) => {
             [info.x, info.y] = this._transMapPos(info);
             [info.width, info.height] = [TilemapComponent.MAP_WIDTH, TilemapComponent.MAP_HEIGHT];
         });
 
-        const tilesetRef = await Laya.loader.fetch("resources/data/world-map/world-tileset-ref.json", "json") as Tilemap.WorldMap;
-        tilesetRef.tilesets.forEach(tileset => {
+        const tilesetRef = (await Laya.loader.fetch(
+            "resources/data/world-map/world-tileset-ref.json",
+            "json"
+        )) as Tilemap.WorldMap;
+        tilesetRef.tilesets.forEach((tileset) => {
             if (tileset.tiles?.length > 0) {
-                const map = new Map<number, Tilemap.Tile>()
-                tileset.tiles.forEach(tile => {
+                const map = new Map<number, Tilemap.Tile>();
+                tileset.tiles.forEach((tile) => {
                     map.set(tileset.firstgid + tile.id, tile);
-                })
+                });
                 this._textureMap.set(tileset.name as Tilemap.TextureName, map);
             } else {
                 this._atlasMap.set(tileset.name as Tilemap.AtlasName, tileset);
             }
-        })
+        });
     }
 
     private _transMapPos(info: Tilemap.MapInfo) {
         const scale = Math.sqrt((TilemapComponent.TILE_HEIGHT * 2) ** 2 / 2);
 
         const mat = new Laya.Matrix3x3();
-        mat.translate(new Laya.Vector2((TilemapComponent.MAP_HEIGHT * TilemapComponent.TILE_WIDTH) / 2, 0), mat);
+        mat.translate(
+            new Laya.Vector2((TilemapComponent.MAP_HEIGHT * TilemapComponent.TILE_WIDTH) / 2, 0),
+            mat
+        );
         mat.scale(new Laya.Vector2(1, 0.5), mat);
         mat.rotate(Math.PI / 4, mat);
         mat.scale(new Laya.Vector2(scale, scale), mat);
@@ -81,16 +89,19 @@ export class TilemapSystem extends ecs.System {
     public getTextureResName(textureName: Tilemap.TextureName, gid: number): string {
         const map = this._textureMap.get(textureName);
         const tile = map?.get(gid);
-        return tile?.image.split('/').at(-1)?.split('.').at(0) || "";
+        return tile?.image.split("/").at(-1)?.split(".").at(0) || "";
     }
 
     public getTextureOffsetY(textureName: Tilemap.TextureName, gid: number): number {
         const map = this._textureMap.get(textureName);
         const tile = map?.get(gid);
         let offsetY = 0;
-        tile?.properties?.forEach(prop => {
-            if (prop.name == "offsetY") { offsetY = prop.value; return; }
-        })
+        tile?.properties?.forEach((prop) => {
+            if (prop.name == "offsetY") {
+                offsetY = prop.value;
+                return;
+            }
+        });
         return offsetY;
     }
 
@@ -108,7 +119,12 @@ export class TilemapSystem extends ecs.System {
         }
         const curX = Math.floor(transform.position.x - TilemapComponent.VISION_WIDTH / 2);
         const curY = Math.floor(transform.position.z - TilemapComponent.VISION_HEIGHT / 2);
-        this._curRect.setTo(curX, curY, TilemapComponent.VISION_WIDTH, TilemapComponent.VISION_HEIGHT);
+        this._curRect.setTo(
+            curX,
+            curY,
+            TilemapComponent.VISION_WIDTH,
+            TilemapComponent.VISION_HEIGHT
+        );
 
         if (this._curRect.equals(this._lastRect)) {
             return;
@@ -163,17 +179,17 @@ export class TilemapSystem extends ecs.System {
         }
 
         this._world.maps.forEach(async (info: Tilemap.MapInfo) => {
-
-            if (info.x <= x && x < info.x + info.width &&
-                info.y <= y && y < info.y + info.height) {
-
+            if (info.x <= x && x < info.x + info.width && info.y <= y && y < info.y + info.height) {
                 if (!info.worldMap) {
-                    const realFileName = info.fileName.split('/').at(-1)?.replace('.tmx', '.json');
-                    info.worldMap = await Laya.loader.fetch("resources/data/world-map/" + realFileName, "json") as Tilemap.WorldMap;
+                    const realFileName = info.fileName.split("/").at(-1)?.replace(".tmx", ".json");
+                    info.worldMap = (await Laya.loader.fetch(
+                        "resources/data/world-map/" + realFileName,
+                        "json"
+                    )) as Tilemap.WorldMap;
                 }
 
                 const idx = (y - info.y) * info.width + (x - info.x);
-                info.worldMap.layers.forEach(layer => {
+                info.worldMap.layers.forEach((layer) => {
                     if (!layer.data) {
                         return;
                     }
@@ -184,22 +200,40 @@ export class TilemapSystem extends ecs.System {
                     let element: Tilemap.Element | undefined = undefined;
                     switch (layer.name) {
                         case Tilemap.LayerName.Ground:
-                            element = Tilemap.Element.create("Tilemap.GroundElement", Tilemap.GroundElement);
+                            element = Tilemap.Element.create(
+                                "Tilemap.GroundElement",
+                                Tilemap.GroundElement
+                            );
                             break;
                         case Tilemap.LayerName.Road:
-                            element = Tilemap.Element.create("Tilemap.RoadElement", Tilemap.RoadElement);
+                            element = Tilemap.Element.create(
+                                "Tilemap.RoadElement",
+                                Tilemap.RoadElement
+                            );
                             break;
                         case Tilemap.LayerName.River:
-                            element = Tilemap.Element.create("Tilemap.RiverElement", Tilemap.RiverElement);
+                            element = Tilemap.Element.create(
+                                "Tilemap.RiverElement",
+                                Tilemap.RiverElement
+                            );
                             break;
                         case Tilemap.LayerName.Static:
-                            element = Tilemap.Element.create('Tilemap.StaticElement', Tilemap.StaticElement);
+                            element = Tilemap.Element.create(
+                                "Tilemap.StaticElement",
+                                Tilemap.StaticElement
+                            );
                             break;
                         case Tilemap.LayerName.Dynamic:
-                            element = Tilemap.Element.create('Tilemap.DynamicElement', Tilemap.DynamicElement);
+                            element = Tilemap.Element.create(
+                                "Tilemap.DynamicElement",
+                                Tilemap.DynamicElement
+                            );
                             break;
                         case Tilemap.LayerName.Block:
-                            element = Tilemap.Element.create('Tilemap.BlockElement', Tilemap.BlockElement);
+                            element = Tilemap.Element.create(
+                                "Tilemap.BlockElement",
+                                Tilemap.BlockElement
+                            );
                             break;
                         default:
                             break;
@@ -209,9 +243,9 @@ export class TilemapSystem extends ecs.System {
                         element.draw();
                         elements?.set(layer.name as Tilemap.LayerName, element);
                     }
-                })
+                });
             }
-        })
+        });
     }
 
     private _tryDel(key: string) {
@@ -219,7 +253,7 @@ export class TilemapSystem extends ecs.System {
         if (elements) {
             elements.forEach((element) => {
                 element.recover();
-            })
+            });
             elements.clear();
         }
         this._totalMap.delete(key);

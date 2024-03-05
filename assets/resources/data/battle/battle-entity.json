@@ -1,82 +1,108 @@
 {
     "entity": {
         "101": {
+            "attack_radius": 1,
             "etype": 1,
             "id": 101,
             "pve_ai": "hero",
-            "res": "resources/prefab/battle/roles/hero01.lh"
+            "res": "resources/prefab/battle/roles/hero01.lh",
+            "skill_radius": 3
         },
         "102": {
+            "attack_radius": 1,
             "etype": 1,
             "id": 102,
             "pve_ai": "hero",
-            "res": "resources/prefab/battle/roles/hero02.lh"
+            "res": "resources/prefab/battle/roles/hero02.lh",
+            "skill_radius": 3
         },
         "105": {
+            "attack_radius": 1,
             "etype": 1,
             "id": 105,
             "pve_ai": "hero",
-            "res": "resources/prefab/battle/roles/hero03.lh"
+            "res": "resources/prefab/battle/roles/hero03.lh",
+            "skill_radius": 3
         },
         "106": {
+            "attack_radius": 2.5,
             "etype": 1,
             "id": 106,
             "pve_ai": "hero",
-            "res": "resources/prefab/battle/roles/hero04.lh"
+            "res": "resources/prefab/battle/roles/hero04.lh",
+            "skill_radius": 5
         },
         "209": {
+            "attack_radius": 2.5,
             "etype": 1,
             "id": 209,
             "pve_ai": "hero",
-            "res": "resources/prefab/battle/roles/hero05.lh"
+            "res": "resources/prefab/battle/roles/hero05.lh",
+            "skill_radius": 5
         },
         "212": {
+            "attack_radius": 2.5,
             "etype": 1,
             "id": 212,
             "pve_ai": "hero",
-            "res": "resources/prefab/battle/roles/hero06.lh"
+            "res": "resources/prefab/battle/roles/hero06.lh",
+            "skill_radius": 5
         },
         "401": {
+            "attack_radius": 4,
             "etype": 1,
             "id": 401,
             "pve_ai": "hero",
-            "res": "resources/prefab/battle/roles/hero07.lh"
+            "res": "resources/prefab/battle/roles/hero07.lh",
+            "skill_radius": 8
         },
         "404": {
+            "attack_radius": 4,
             "etype": 1,
             "id": 404,
             "pve_ai": "hero",
-            "res": "resources/prefab/battle/roles/hero08.lh"
+            "res": "resources/prefab/battle/roles/hero08.lh",
+            "skill_radius": 8
         },
         "40001": {
+            "attack_radius": 1,
             "etype": 2,
             "id": 40001,
             "pve_ai": "hero",
-            "res": "prefab/war/role/xibing1"
+            "res": "prefab/war/role/xibing1",
+            "skill_radius": 3
         },
         "40002": {
+            "attack_radius": 1,
             "etype": 2,
             "id": 40002,
             "pve_ai": "soldier",
-            "res": "resources/prefab/battle/roles/bing-dao.lh"
+            "res": "resources/prefab/battle/roles/bing-dao.lh",
+            "skill_radius": 3
         },
         "40003": {
+            "attack_radius": 1.5,
             "etype": 2,
             "id": 40003,
             "pve_ai": "hero",
-            "res": "prefab/battle/role/xb-qiangbing"
+            "res": "prefab/battle/role/xb-qiangbing",
+            "skill_radius": 3
         },
         "40004": {
+            "attack_radius": 4,
             "etype": 2,
             "id": 40004,
             "pve_ai": "soldier",
-            "res": "resources/prefab/battle/roles/bing-gong.lh"
+            "res": "resources/prefab/battle/roles/bing-gong.lh",
+            "skill_radius": 8
         },
         "40005": {
+            "attack_radius": 4,
             "etype": 2,
             "id": 40005,
             "pve_ai": "hero",
-            "res": "prefab/battle/role/jx-gongchengche"
+            "res": "prefab/battle/role/jx-gongchengche",
+            "skill_radius": 8
         },
         "50001": {
             "etype": 3,

@@ -125,6 +125,7 @@ export interface GeneratedMoneyRow {
 export interface GeneratedSkillRow {
     id: number;
     type: number;
+    lanuch_btree: string;
     anim?: string;
     cd?: number;
 }
@@ -240,6 +241,8 @@ export interface GeneratedBattleEntityEntityRow {
     etype: number;
     res: string;
     pve_ai: string;
+    attack_radius?: number;
+    skill_radius?: number;
 }
 
 // file: design/battle/battle_demo.xlsx
