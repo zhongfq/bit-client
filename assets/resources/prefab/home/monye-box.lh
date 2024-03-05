@@ -1,0 +1,50 @@
+{
+  "_$ver": 1,
+  "_$id": "2zigi34u",
+  "_$runtime": "res://54dec8bd-2547-4c62-970b-98cdc5d7e735",
+  "_$type": "Box",
+  "name": "boxMonye",
+  "x": 583,
+  "y": 129,
+  "width": 167,
+  "height": 200,
+  "_mouseState": 2,
+  "_$comp": [
+    {
+      "_$type": "27698402-8a59-4836-b836-c4b37e80f7fd",
+      "scriptPath": "../src/system/home/home-monye-mediator.ts"
+    }
+  ],
+  "_$child": [
+    {
+      "_$id": "3ux87mow",
+      "_$var": true,
+      "_$type": "List",
+      "name": "listMonye",
+      "width": 167,
+      "height": 200,
+      "_mouseState": 2,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "bottom": 0,
+      "itemTemplate": {
+        "_$ref": "0o6sherk",
+        "_$tmpl": "itemRender"
+      },
+      "repeatX": 1,
+      "repeatY": 6,
+      "spaceY": 4,
+      "_$child": [
+        {
+          "_$id": "0o6sherk",
+          "_$prefab": "148a6d54-97ac-4354-a774-12a01dad2732",
+          "name": "money-item",
+          "active": true,
+          "x": 0,
+          "y": 0
+        }
+      ]
+    }
+  ]
+}

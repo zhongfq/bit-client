@@ -1,0 +1,109 @@
+{
+  "_$ver": 1,
+  "_$id": "kr0rnlrc",
+  "_$runtime": "res://f3798f16-e06c-45bf-885b-63f337668f7b",
+  "_$type": "Box",
+  "name": "user-Info",
+  "width": 281,
+  "height": 122,
+  "left": 0,
+  "top": 0,
+  "bgColor": "rgba(115, 112, 112, 1)",
+  "_$comp": [
+    {
+      "_$type": "24adaeaa-6f7f-4d79-ae95-28301a70b1a3",
+      "scriptPath": "../src/system/home/home-user-mediator.ts"
+    }
+  ],
+  "_$child": [
+    {
+      "_$id": "7giq1x30",
+      "_$var": true,
+      "_$type": "Image",
+      "name": "imgHeadIcon",
+      "width": 90,
+      "height": 90,
+      "skin": "res://384d2e2c-e01f-4afe-a5b5-593056ae62f5",
+      "useSourceSize": true,
+      "color": "#ffffff"
+    },
+    {
+      "_$id": "ahevrzex",
+      "_$var": true,
+      "_$type": "Label",
+      "name": "labelName",
+      "x": 98,
+      "y": 8,
+      "width": 166,
+      "height": 28,
+      "text": "哈哈哈哈哈",
+      "fontSize": 22,
+      "color": "#FFFFFF",
+      "valign": "middle",
+      "padding": "0,0,0,0"
+    },
+    {
+      "_$id": "cj35h1xg",
+      "_$var": true,
+      "_$type": "Label",
+      "name": "labelPower",
+      "x": 100,
+      "y": 37,
+      "width": 166,
+      "height": 28,
+      "text": "123456",
+      "fontSize": 22,
+      "color": "#FFFFFF",
+      "valign": "middle",
+      "padding": "0,0,0,0"
+    },
+    {
+      "_$id": "redvhc5d",
+      "_$var": true,
+      "_$type": "Label",
+      "name": "labelLv",
+      "x": 97,
+      "y": 62,
+      "width": 28,
+      "height": 28,
+      "text": "1",
+      "fontSize": 22,
+      "color": "#FFFFFF",
+      "align": "center",
+      "valign": "middle",
+      "padding": "0,0,0,0"
+    },
+    {
+      "_$id": "70f3bxsi",
+      "_$var": true,
+      "_$type": "ProgressBar",
+      "name": "progressBarExp",
+      "x": 124,
+      "y": 65,
+      "width": 118,
+      "height": 22,
+      "skin": "res://ae3de75e-ee9f-478d-9f8b-ede75a4fc296",
+      "value": 0,
+      "_$child": [
+        {
+          "_$id": "rp5ez8by",
+          "_$var": true,
+          "_$type": "Label",
+          "name": "labelExp",
+          "x": 45,
+          "y": -3,
+          "width": 28,
+          "height": 28,
+          "centerX": 0,
+          "centerY": 0,
+          "text": "1",
+          "fontSize": 22,
+          "color": "#FFFFFF",
+          "align": "center",
+          "valign": "middle",
+          "padding": "0,0,0,0"
+        }
+      ]
+    }
+  ]
+}

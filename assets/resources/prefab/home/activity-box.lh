@@ -1,0 +1,28 @@
+{
+  "_$ver": 1,
+  "_$id": "n6q5j4fs",
+  "_$runtime": "res://0ba59700-fce2-473f-a13f-a02d1a57196c",
+  "_$type": "Box",
+  "name": "activity-box",
+  "y": 127,
+  "width": 101,
+  "height": 575,
+  "left": 0,
+  "top": 127,
+  "_$child": [
+    {
+      "_$id": "pjn2ljox",
+      "_$var": true,
+      "_$type": "List",
+      "name": "listActivity",
+      "width": 101,
+      "height": 575,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "bottom": 0,
+      "repeatX": 1,
+      "repeatY": 1
+    }
+  ]
+}

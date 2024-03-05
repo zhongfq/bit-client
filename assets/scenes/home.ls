@@ -405,112 +405,22 @@
       "_$id": "wcf9dgzw",
       "_$prefab": "c2dde787-3f08-42c0-9f89-503e855e1cf2",
       "_$var": true,
-      "name": "boxTask",
+      "name": "task-box",
       "active": true,
       "x": 42,
       "y": 1037,
       "visible": true
     },
     {
-      "_$id": "kr0rnlrc",
-      "_$type": "Box",
-      "name": "角色信息",
-      "width": 281,
-      "height": 122,
+      "_$id": "e4j1h8ry",
+      "_$prefab": "65dc71f1-7ce2-4486-9705-b5c43e0fee4d",
+      "name": "user-box",
+      "active": true,
+      "x": 0,
+      "y": 0,
+      "visible": true,
       "left": 0,
-      "top": 0,
-      "bgColor": "rgba(115, 112, 112, 1)",
-      "_$child": [
-        {
-          "_$id": "7giq1x30",
-          "_$var": true,
-          "_$type": "Image",
-          "name": "imgHeadIcon",
-          "width": 90,
-          "height": 90,
-          "skin": "res://384d2e2c-e01f-4afe-a5b5-593056ae62f5",
-          "useSourceSize": true,
-          "color": "#ffffff"
-        },
-        {
-          "_$id": "ahevrzex",
-          "_$var": true,
-          "_$type": "Label",
-          "name": "labelName",
-          "x": 98,
-          "y": 8,
-          "width": 166,
-          "height": 28,
-          "text": "哈哈哈哈哈",
-          "fontSize": 22,
-          "color": "#FFFFFF",
-          "valign": "middle",
-          "padding": "0,0,0,0"
-        },
-        {
-          "_$id": "cj35h1xg",
-          "_$var": true,
-          "_$type": "Label",
-          "name": "labelPower",
-          "x": 100,
-          "y": 37,
-          "width": 166,
-          "height": 28,
-          "text": "123456",
-          "fontSize": 22,
-          "color": "#FFFFFF",
-          "valign": "middle",
-          "padding": "0,0,0,0"
-        },
-        {
-          "_$id": "redvhc5d",
-          "_$var": true,
-          "_$type": "Label",
-          "name": "labelLv",
-          "x": 97,
-          "y": 62,
-          "width": 28,
-          "height": 28,
-          "text": "1",
-          "fontSize": 22,
-          "color": "#FFFFFF",
-          "align": "center",
-          "valign": "middle",
-          "padding": "0,0,0,0"
-        },
-        {
-          "_$id": "70f3bxsi",
-          "_$var": true,
-          "_$type": "ProgressBar",
-          "name": "progressBarExp",
-          "x": 124,
-          "y": 65,
-          "width": 118,
-          "height": 22,
-          "skin": "res://ae3de75e-ee9f-478d-9f8b-ede75a4fc296",
-          "value": 0,
-          "_$child": [
-            {
-              "_$id": "rp5ez8by",
-              "_$var": true,
-              "_$type": "Label",
-              "name": "labelExp",
-              "x": 45,
-              "y": -3,
-              "width": 28,
-              "height": 28,
-              "centerX": 0,
-              "centerY": 0,
-              "text": "1",
-              "fontSize": 22,
-              "color": "#FFFFFF",
-              "align": "center",
-              "valign": "middle",
-              "padding": "0,0,0,0"
-            }
-          ]
-        }
-      ]
+      "top": 0
     },
     {
       "_$id": "11lmckwk",
@@ -717,73 +627,26 @@
       ]
     },
     {
-      "_$id": "2zigi34u",
-      "_$type": "Box",
-      "name": "资源信息",
+      "_$id": "otxo47w2",
+      "_$prefab": "20edd97f-adc2-4d26-adb5-0fe75fd0a991",
+      "name": "monye-box",
+      "active": true,
       "x": 583,
       "y": 129,
-      "width": 167,
-      "height": 200,
-      "_mouseState": 2,
+      "visible": true,
       "right": 0,
-      "top": 129,
-      "_$child": [
-        {
-          "_$id": "3ux87mow",
-          "_$type": "List",
-          "name": "List",
-          "width": 167,
-          "height": 200,
-          "_mouseState": 2,
-          "left": 0,
-          "right": 0,
-          "top": 0,
-          "bottom": 0,
-          "itemTemplate": {
-            "_$ref": "0o6sherk",
-            "_$tmpl": "itemRender"
-          },
-          "repeatX": 1,
-          "repeatY": 6,
-          "spaceY": 4,
-          "_$child": [
-            {
-              "_$id": "0o6sherk",
-              "_$prefab": "148a6d54-97ac-4354-a774-12a01dad2732",
-              "name": "money-item",
-              "active": true,
-              "x": 0,
-              "y": 0
-            }
-          ]
-        }
-      ]
+      "top": 129
     },
     {
-      "_$id": "n6q5j4fs",
-      "_$type": "Box",
-      "name": "活动信息",
-      "x": -2,
+      "_$id": "jsaiqtuo",
+      "_$prefab": "43743938-b950-4688-a0ec-3b6e102e1496",
+      "name": "activity-box",
+      "active": true,
+      "x": 0,
       "y": 127,
-      "width": 101,
-      "height": 575,
-      "left": -2,
-      "top": 127,
-      "_$child": [
-        {
-          "_$id": "pjn2ljox",
-          "_$type": "List",
-          "name": "List",
-          "width": 101,
-          "height": 575,
-          "left": 0,
-          "right": 0,
-          "top": 0,
-          "bottom": 0,
-          "repeatX": 1,
-          "repeatY": 1
-        }
-      ]
+      "visible": true,
+      "left": 0,
+      "top": 127
     },
     {
       "_$id": "vm6knnc0",

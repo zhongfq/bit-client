@@ -24,7 +24,6 @@ export class MainMediator extends Mediator {
         this.initBtn();
         this._initServiceEvent();
         this._initChat();
-        this._initRoleInfo();
     }
 
     private _initServiceEvent() {
@@ -49,19 +48,6 @@ export class MainMediator extends Mediator {
             });
             this.owner.labelMsg.text = `${role.cmd?.name}:${ubbStr}`;
         }
-    }
-
-    private _initRoleInfo() {
-        const profiInfo = app.service.user.profileInfo;
-        const lvRow = TableUtil.getRow(app.service.table.role.level, {
-            lv: app.service.user.profileInfo.lv,
-        });
-        const exp = profiInfo.exp || 0;
-        this.owner.labelName.text = app.service.user.profileInfo.name;
-        // this.owner.labelPower.text = app.service.user.profileInfo.power;
-        this.owner.labelLv.text = app.service.user.profileInfo.lv.toString();
-        this.owner.labelExp.text = (exp / lvRow!.upgrade_exp) * 100 + "%";
-        this.owner.progressBarExp.value = exp / lvRow!.upgrade_exp;
     }
 
     override onKeyDown(evt: Laya.Event): void {
