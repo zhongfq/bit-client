@@ -68,12 +68,12 @@
             "attack_radius": 1,
             "etype": 2,
             "id": 40001,
-            "pve_ai": "hero",
-            "res": "prefab/war/role/xibing1",
+            "pve_ai": "monster",
+            "res": "resources/prefab/battle/roles/bing-dao.lh",
             "skill_radius": 3
         },
         "40002": {
-            "attack_radius": 1,
+            "attack_radius": 0.75,
             "etype": 2,
             "id": 40002,
             "pve_ai": "soldier",
@@ -89,7 +89,7 @@
             "skill_radius": 3
         },
         "40004": {
-            "attack_radius": 4,
+            "attack_radius": 2,
             "etype": 2,
             "id": 40004,
             "pve_ai": "soldier",

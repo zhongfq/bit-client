@@ -1,10 +1,12 @@
 import { ecs } from "../../../../../core/ecs";
 import { IVector3Like } from "../../../../../core/laya";
-import { SoldierRow } from "../../../../../def/table";
+import { BattleEntityRow, SoldierRow } from "../../../../../def/table";
 import { MovementComponent, TransformComponent } from "./movement-component";
 import { SkillComponent } from "./skill-component";
 
 export class ElementComponent extends ecs.Component {
+    data!: BattleEntityRow;
+
     maxHp: number = 0;
     hp: number = 0;
 

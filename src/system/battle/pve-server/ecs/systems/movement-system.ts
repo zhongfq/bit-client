@@ -1,12 +1,14 @@
 import { ecs } from "../../../../../core/ecs";
 import { PveServer } from "../../pve-server";
-import { MovementComponent, TransformComponent } from "../components/movement-component";
 import { ElementComponent } from "../components/element-component";
+import { MovementComponent, TransformComponent } from "../components/movement-component";
 
 export class MovementSystem extends ecs.System {
     constructor(readonly context: PveServer) {
         super();
     }
+
+    override onRemoveComponent(component: ecs.Component): void {}
 
     override update(dt: number): void {
         this.ecs.getComponents(MovementComponent).forEach((movement) => {

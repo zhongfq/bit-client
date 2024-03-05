@@ -1,4 +1,6 @@
 import { b3 } from "../../../../../core/behavior3/behavior";
+import { BattleConf } from "../../../../../def/battle";
+import { AiTreeEnv } from "../../ecs/components/ai-component";
 
 interface FindTargetsArgs {
     radius?: number;
@@ -12,10 +14,38 @@ interface FindTargetsArgs {
 export class FindTargets extends b3.Process {
     override check(node: b3.Node) {}
 
-    override run(node: b3.Node, env: b3.TreeEnv) {
-        const args = node.args as FindTargets;
+    override run(node: b3.Node, env: AiTreeEnv) {
+        const args = node.args as FindTargetsArgs;
+        const findHero = args.hero;
+        const findSoldier = args.soldier;
+        const findWood = args.wood;
+        let radius = args.radius ?? 0;
+        if (args.attack) {
+            radius = env.owner.data.attack_radius ?? radius;
+        } else if (args.skill) {
+            radius = env.owner.data.skill_radius ?? radius;
+        }
+        const ETYPE = BattleConf.ENTITY_TYPE;
+        const positioin = env.owner.transform.position;
+        const arr = env.context.find((element) => {
+            const etype = element.entity.etype;
+            if (
+                ((findHero && etype === ETYPE.HERO) ||
+                    (findSoldier && etype === ETYPE.SOLDIER) ||
+                    (findWood && etype === ETYPE.WOOD)) &&
+                element.aid !== env.owner.aid
+            ) {
+                return Laya.Vector3.distance(element.transform.position, positioin) < radius;
+            }
 
-        return b3.Status.FAILURE;
+            return false;
+        });
+        if (arr && arr.length > 0) {
+            env.lastRet.results.push(arr);
+            return b3.Status.SUCCESS;
+        } else {
+            return b3.Status.FAILURE;
+        }
     }
 
     override get descriptor() {

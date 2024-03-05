@@ -28,6 +28,7 @@ export class PveServer extends b3.Context {
     private _transform3D: Laya.Transform3D = new Laya.Transform3D();
 
     private _aiTrees: Map<string, b3.Tree> = new Map();
+    private _map: Map<number, ElementComponent> = new Map();
 
     constructor(sender: ICommandSender) {
         super();
@@ -49,9 +50,31 @@ export class PveServer extends b3.Context {
         return this._ecs;
     }
 
+    private _calcIndex(positioin: Laya.Vector3) {
+        const x = Math.abs(positioin.x * 20) << 16;
+        const y = Math.abs(positioin.z * 20) << 16;
+        return x | y;
+    }
+
+    findAtPosition(positioin: Laya.Vector3) {
+        const idx = this._calcIndex(positioin);
+        return this._map.get(idx);
+    }
+
     update(delta: number) {
         this.time += delta;
         this._ecs.update(delta);
+
+        // 更新位置索引
+        this.ecs.getComponents(TransformComponent).forEach((transform) => {
+            const idx = this._calcIndex(transform.position);
+            const map = this._map;
+            if (idx !== transform.index) {
+                map.delete(transform.index);
+                map.set(idx, transform.getComponent(ElementComponent)!);
+            }
+        });
+
         this._drawDebug();
     }
 
@@ -101,11 +124,13 @@ export class PveServer extends b3.Context {
     start() {
         // 创建主角
         const entity = this._ecs.createEntity();
+        entity.etype = BattleConf.ENTITY_TYPE.HERO;
 
         const element = entity.addComponent(ElementComponent);
         element.tid = 101;
         element.hp = 200;
         element.maxHp = 200;
+        element.aid = 1;
 
         const transform = entity.addComponent(TransformComponent);
         transform.position.x = 6;
@@ -114,9 +139,11 @@ export class PveServer extends b3.Context {
         entity.addComponent(MovementComponent);
         entity.addComponent(TroopComponent);
 
-        const skill = entity.addComponent(SkillComponent);
         const table = app.service.table;
         const heroRow = table.hero[element.tid];
+        element.data = table.battleEntity.entity[heroRow.battle_entity];
+
+        const skill = entity.addComponent(SkillComponent);
         if (heroRow.skill1) {
             skill.skills.push(new Skill(table.skill[heroRow.skill1], element));
         }
@@ -132,7 +159,7 @@ export class PveServer extends b3.Context {
 
         this._sender.createElement({
             eid: element.eid,
-            etype: BattleConf.ENTITY_TYPE.HERO,
+            etype: element.entity.etype,
             tid: element.tid,
             hp: element.hp,
             maxHp: element.maxHp,
@@ -141,6 +168,8 @@ export class PveServer extends b3.Context {
         this._sender.focus(element.eid);
 
         this._loadSoliders(element);
+
+        this._createMonsters();
     }
 
     private _loadSoliders(hero: ElementComponent) {
@@ -152,9 +181,13 @@ export class PveServer extends b3.Context {
             element.tid = idx >= 4 ? 40004 : 40002;
             element.hp = 200;
             element.maxHp = 200;
+            element.aid = 1;
+            entity.etype = BattleConf.ENTITY_TYPE.SOLDIER;
 
             const table = app.service.table;
             const soldierRow = table.soldier[element.tid];
+
+            element.data = table.battleEntity.entity[soldierRow.battle_entity];
 
             const soldier = entity.addComponent(SoldierComponent);
             soldier.index = idx;
@@ -183,13 +216,59 @@ export class PveServer extends b3.Context {
 
             this._sender.createElement({
                 eid: element.eid,
-                etype: BattleConf.ENTITY_TYPE.SOLDIER,
+                etype: element.entity.etype,
                 tid: element.tid,
                 hp: element.hp,
                 maxHp: element.maxHp,
                 positioin: transform.position,
             });
         });
+    }
+
+    private _createMonsters() {
+        const arr = [new Laya.Vector3(10, 0, 12)];
+        for (const p of arr) {
+            const entity = this._ecs.createEntity();
+
+            const element = entity.addComponent(ElementComponent);
+            element.tid = 40002;
+            element.hp = 200;
+            element.maxHp = 200;
+            element.aid = 2;
+            entity.etype = BattleConf.ENTITY_TYPE.HERO;
+
+            const table = app.service.table;
+            const heroRow = table.hero[element.tid];
+
+            element.data = table.battleEntity.entity[heroRow.battle_entity];
+
+            const skill = entity.addComponent(SkillComponent);
+            if (heroRow.skill1) {
+                skill.skills.push(new Skill(table.skill[heroRow.skill1], element));
+            }
+            if (heroRow.skill2) {
+                skill.skills.push(new Skill(table.skill[heroRow.skill2], element));
+            }
+
+            const transform = entity.addComponent(TransformComponent);
+            transform.position.x = p.x;
+            transform.position.z = p.z;
+
+            const entityRow = table.battleEntity.entity[heroRow.battle_entity];
+            const ai = entity.addComponent(AiComponent);
+            ai.res = `resources/data/btree/${entityRow.pve_ai}.json`;
+
+            entity.addComponent(MovementComponent);
+
+            this._sender.createElement({
+                eid: element.eid,
+                etype: element.entity.etype,
+                tid: element.tid,
+                hp: element.hp,
+                maxHp: element.maxHp,
+                positioin: transform.position,
+            });
+        }
     }
 
     moveStart(element: ElementComponent, speed: Laya.Vector3) {

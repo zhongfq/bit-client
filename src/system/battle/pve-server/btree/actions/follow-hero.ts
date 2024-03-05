@@ -46,6 +46,10 @@ export class FollowHero extends b3.Process {
             } else {
                 movement.velocity = velocity;
             }
+            // TODO: 需要定义最大的归队速度
+            if (movement.velocity > 2) {
+                movement.velocity = 2;
+            }
             tmpSpeed.x = movement.velocity * Math.cos(rad);
             tmpSpeed.z = movement.velocity * Math.sin(rad);
             env.context.moveStart(env.owner, tmpSpeed);

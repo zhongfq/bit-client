@@ -4,19 +4,21 @@ import { ElementComponent } from "../../ecs/components/element-component";
 
 export class NormalAttack extends b3.Process {
     override run(node: b3.Node, env: AiTreeEnv, target?: ElementComponent[] | ElementComponent) {
-        if (target instanceof Array) {
-            for (const v of target) {
-                env.context.launchSkill(env.owner, v);
-            }
-            if (target.length > 0) {
-                return b3.Status.SUCCESS;
-            }
-        } else {
-            env.context.launchSkill(env.owner, target);
-            return b3.Status.SUCCESS;
-        }
+        // if (target instanceof Array) {
+        //     for (const v of target) {
+        //         env.context.launchSkill(env.owner, v);
+        //     }
+        //     if (target.length > 0) {
+        //         return b3.Status.SUCCESS;
+        //     }
+        // } else {
+        //     env.context.launchSkill(env.owner, target);
+        //     return b3.Status.SUCCESS;
+        // }
 
-        return b3.Status.FAILURE;
+        env.context.playAnim(env.owner, "attack");
+
+        return b3.Status.SUCCESS;
     }
 
     override get descriptor() {

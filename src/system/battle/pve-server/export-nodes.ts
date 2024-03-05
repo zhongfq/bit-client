@@ -16,6 +16,7 @@ import { AlwaysFail } from "../../../core/behavior3/nodes/decorators/always-fail
 import { AlwaysSuccess } from "../../../core/behavior3/nodes/decorators/always-success";
 import { Not } from "../../../core/behavior3/nodes/decorators/not";
 import { AddBuff } from "./btree/actions/add-buff";
+import { AdjustPos } from "./btree/actions/adjust-pos";
 import { BackTeam } from "./btree/actions/back-team";
 import { ChopWood } from "./btree/actions/chop-tree";
 import { CreateBullet } from "./btree/actions/create-bullet";
@@ -27,6 +28,7 @@ import { GetSkillTarget } from "./btree/actions/get-skill-target";
 import { Hurt } from "./btree/actions/hurt";
 import { LaunchSkill } from "./btree/actions/launch-skill";
 import { MoveForward } from "./btree/actions/move-forward";
+import { MoveStop } from "./btree/actions/move-stop";
 import { MoveToAtkPos } from "./btree/actions/move-to-atk-pos";
 import { MoveToPos } from "./btree/actions/move-to-pos";
 import { NormalAttack } from "./btree/actions/normal-attack";
@@ -40,6 +42,7 @@ export class ExportNodes extends b3.Context {
         this.registerProcess(...builtinNodes);
         this.registerProcess<b3.Process>(
             AddBuff,
+            AdjustPos,
             BackTeam,
             ChopWood,
             CreateBullet,
@@ -53,6 +56,7 @@ export class ExportNodes extends b3.Context {
             Hurt,
             LaunchSkill,
             MoveForward,
+            MoveStop,
             MoveToAtkPos,
             MoveToPos,
             NormalAttack,
