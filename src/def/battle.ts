@@ -10,7 +10,7 @@ export const BattleConf = {
         PVP: 2,
     },
     BORDER: {
-        BOTTOM: 150,
+        BOTTOM: -150,
         LEFT: -150,
         RIGHT: 150,
         TOP: 150,

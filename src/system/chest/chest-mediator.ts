@@ -4,7 +4,7 @@ import { ChestUI } from "../../ui-runtime/prefab/chest/ChestUI";
 import { ui } from "../../misc/ui";
 import { ChestItemUI } from "../../ui-runtime/prefab/chest/ChestItemUI";
 import proto from "../../def/proto";
-import { ChestRow } from "../../def/table";
+import { ChestRow, ChestScoreRow } from "../../def/table";
 import { HeroVo } from "../../misc/vo/goods/hero-vo";
 import { ChestService } from "./chest-service";
 import { Util } from "../../core/utils/util";
@@ -37,22 +37,22 @@ export class ChestMediator extends Mediator {
         this.owner.listBox.selectHandler = new Laya.Handler(this, this.onSelect);
         this.owner.btnOpenBox.on(Laya.Event.CLICK, this, this.openBox);
         this.owner.boxReward.on(Laya.Event.CLICK, () => {
-            const chestRewardRow = TableUtil.getRow(app.service.table.chest.chest, {
-                id: app.service.chest.scoreInfo.scoreChestId,
-            }) as ChestRow;
-            if (app.service.chest.scoreInfo.score >= chestRewardRow.reward_score) {
+            const chestScoreRow = TableUtil.getRow(app.service.table.chest.score, {
+                id: app.service.chest.scoreInfo.scoreId,
+            }) as ChestScoreRow;
+            if (app.service.chest.scoreInfo.score >= chestScoreRow.reward_score) {
                 app.service.chest.requestScoreReceive().then(() => {
                     const cell = this.owner.listBox.selectedItem as ListCellData;
                     if (
-                        cell.row.id == chestRewardRow.id &&
-                        (!cell.cmdNum || cell.cmdNum < chestRewardRow.open_max_num)
+                        cell.row.id == chestScoreRow.chest_id &&
+                        (!cell.cmdNum || cell.cmdNum < cell.row.open_max_num)
                     ) {
                         this.owner.spineShest.visible = true;
                         this.owner.spineShest.play("chest2_down", false);
                     }
                     this.owner.imgShestReward
                         .getComponent(Laya.Animator2D)
-                        .play(chestRewardRow.id.toString());
+                        .play(chestScoreRow.chest_id.toString());
                     this._updateScore();
                     this._updateList();
                     this._updateBtnOpen();
@@ -109,12 +109,13 @@ export class ChestMediator extends Mediator {
         const cell2 = this.owner.listBox.cells[this.selectedIndex] as ChestItemUI;
         cell2.hightlight();
         this._updateBtnOpen();
+        this.owner.spineShest.play("chest2_down", false);
     }
 
     private _updateScore() {
         const score = app.service.chest.scoreInfo.score;
         const chesRow = TableUtil.getRow(app.service.table.chest.chest, {
-            id: app.service.chest.scoreInfo.scoreChestId,
+            id: app.service.chest.scoreInfo.scoreId,
         });
         const scoreMax = chesRow ? chesRow.reward_score : 0;
         this.owner.boxReward.gray = score < scoreMax;
@@ -128,7 +129,6 @@ export class ChestMediator extends Mediator {
         const cellData = this.owner.listBox.selectedItem as ListCellData;
         if (cellData.cmdNum && cellData.cmdNum > 0) {
             this.owner.spineShest.visible = true;
-            this.owner.spineShest.play("chest2_down", false);
             const num =
                 cellData.cmdNum < cellData.row.open_max_num
                     ? cellData.cmdNum

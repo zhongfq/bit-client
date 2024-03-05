@@ -107,5 +107,67 @@
             "sort": 2,
             "spine_source": "Chest_Role_002"
         }
-    }
+    },
+    "score": [
+        {
+            "chest_id": 1,
+            "id": 1,
+            "reward_score": 5,
+            "sort": 1
+        },
+        {
+            "chest_id": 2,
+            "id": 2,
+            "reward_score": 10,
+            "sort": 2
+        },
+        {
+            "chest_id": 1,
+            "id": 3,
+            "reward_score": 30,
+            "sort": 3
+        },
+        {
+            "chest_id": 2,
+            "id": 4,
+            "reward_score": 10,
+            "sort": 4
+        },
+        {
+            "chest_id": 3,
+            "id": 5,
+            "reward_score": 30,
+            "sort": 5
+        },
+        {
+            "chest_id": 2,
+            "id": 6,
+            "reward_score": 50,
+            "sort": 6
+        },
+        {
+            "chest_id": 3,
+            "id": 7,
+            "reward_score": 30,
+            "sort": 7
+        },
+        {
+            "chest_id": 4,
+            "id": 8,
+            "reward_score": 50,
+            "sort": 8
+        },
+        {
+            "chest_id": 3,
+            "id": 9,
+            "reward_score": 30,
+            "sort": 9
+        },
+        {
+            "chest_id": 5,
+            "id": 10,
+            "reward_score": 80,
+            "sort": 10
+        }
+    ]
 }

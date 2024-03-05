@@ -430,3 +430,11 @@ export interface GeneratedChestHeroRow {
     sort: number;
     spine_source: string;
 }
+
+// file: design/chest.xlsx
+export interface GeneratedChestScoreRow {
+    id: number;
+    sort: number;
+    reward_score: number;
+    chest_id: number;
+}

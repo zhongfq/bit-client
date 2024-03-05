@@ -9,6 +9,7 @@ import {
     GeneratedBattleEntityEntityRow,
     GeneratedChestHeroRow,
     GeneratedChestRow,
+    GeneratedChestScoreRow,
     GeneratedEmojiRow,
     GeneratedEquipColorRow,
     GeneratedEquipItemsRow,
@@ -174,11 +175,13 @@ export type RoleTable = {
     conf: RoleConfRow[];
 };
 //-----------------------------------------------------------------------------
-// 用户
+// 宝箱
 //-----------------------------------------------------------------------------
 export interface ChestRow extends GeneratedChestRow {}
 export interface ChestHeroRow extends GeneratedChestHeroRow {}
+export interface ChestScoreRow extends GeneratedChestScoreRow {}
 export type ChestTable = {
     chest: ChestRow[];
     hero: ChestHeroRow[];
+    score: ChestScoreRow[];
 };
