@@ -1,0 +1,43 @@
+{
+  "name": "attack",
+  "root": {
+    "id": 1,
+    "name": "Sequence",
+    "desc": "普通攻击",
+    "args": {},
+    "children": [
+      {
+        "id": 2,
+        "name": "Wait",
+        "args": {
+          "time": 0.2
+        }
+      },
+      {
+        "id": 3,
+        "name": "GetSkillTarget",
+        "args": {},
+        "input": [
+          "enemy"
+        ]
+      },
+      {
+        "id": 4,
+        "name": "Hurt",
+        "args": {},
+        "input": [
+          "enemy"
+        ]
+      },
+      {
+        "id": 5,
+        "name": "Wait",
+        "args": {
+          "time": 0.2,
+          "random": null
+        }
+      }
+    ]
+  },
+  "desc": "通用普攻"
+}

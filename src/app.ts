@@ -27,6 +27,11 @@ const { regClass, property } = Laya;
 @regClass()
 export class Main extends AppBase {
     override onAwake(): void {
+        // new BehaviorTest().start();
+
+        // TODO: rm, use nodejs to write file
+        console.log(new ExportNodes().stringify());
+
         ui.register();
         app.init();
     }
@@ -121,11 +126,6 @@ class App {
         const t: unknown = "";
 
         console.log("tcheck", t ? "true" : "false");
-
-        // new BehaviorTest().start();
-
-        // TODO: rm, use nodejs to write file
-        console.log(ExportNodes.stringify());
 
         const offset = new Laya.Vector3(-0.6, 0, 0);
         const transform = new Laya.Transform3D();

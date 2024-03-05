@@ -13,7 +13,7 @@ export class Check extends b3.Process {
         node.tree.context.compileExpr(args.value);
     }
 
-    override run(node: b3.Node, env: b3.Env) {
+    override run(node: b3.Node, env: b3.TreeEnv) {
         const args = node.args as CheckArgs;
         const value = env.eval(args.value);
         return value ? b3.Status.SUCCESS : b3.Status.FAILURE;

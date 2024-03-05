@@ -1,6 +1,8 @@
+import { b3 } from "../../../core/behavior3/behavior";
 import { Clear } from "../../../core/behavior3/nodes/actions/clear";
-import { Log } from "../../../core/behavior3/nodes/actions/log";
 import { GetTime } from "../../../core/behavior3/nodes/actions/get-time";
+import { Log } from "../../../core/behavior3/nodes/actions/log";
+import { builtinNodes } from "../../../core/behavior3/nodes/builtin-nodes";
 import { Foreach } from "../../../core/behavior3/nodes/composites/foreach";
 import { Loop } from "../../../core/behavior3/nodes/composites/loop";
 import { Once } from "../../../core/behavior3/nodes/composites/once";
@@ -21,6 +23,7 @@ import { DelBuff } from "./btree/actions/del-buff";
 import { FollowHero } from "./btree/actions/follow-hero";
 import { GetPos } from "./btree/actions/get-pos";
 import { GetSkillTarget } from "./btree/actions/get-skill-target";
+import { Hurt } from "./btree/actions/hurt";
 import { LaunchSkill } from "./btree/actions/launch-skill";
 import { MoveForward } from "./btree/actions/move-forward";
 import { MoveToAtkPos } from "./btree/actions/move-to-atk-pos";
@@ -30,49 +33,34 @@ import { Wait } from "./btree/actions/wait";
 import { FindOneTarget } from "./btree/conditions/find-one-target";
 import { FindTargets } from "./btree/conditions/find-targets";
 
-export class ExportNodes {
-    static stringify() {
-        let str = JSON.stringify(
-            [
-                // 内置节点
-                new AlwaysFail().descriptor,
-                new AlwaysSuccess().descriptor,
-                new Check().descriptor,
-                new Clear().descriptor,
-                new Foreach().descriptor,
-                new GetTime().descriptor,
-                new Log().descriptor,
-                new Loop().descriptor,
-                new Not().descriptor,
-                new Once().descriptor,
-                new Parallel().descriptor,
-                new Selector().descriptor,
-                new Sequence().descriptor,
-                new NotNull().descriptor,
-                new IsNull().descriptor,
-
-                // 自定义节点
-                new AddBuff().descriptor,
-                new BackTeam().descriptor,
-                new ChopTree().descriptor,
-                new CreateBullet().descriptor,
-                new DelBuff().descriptor,
-                new FollowHero().descriptor,
-                new GetPos().descriptor,
-                new GetSkillTarget().descriptor,
-                new LaunchSkill().descriptor,
-                new MoveForward().descriptor,
-                new MoveToPos().descriptor,
-                new MoveToAtkPos().descriptor,
-                new NormalAttack().descriptor,
-                new Wait().descriptor,
-
-                new FindTargets().descriptor,
-                new FindOneTarget().descriptor,
-            ],
-            null,
-            2
+export class ExportNodes extends b3.Context {
+    stringify() {
+        this.registerProcess(...builtinNodes);
+        this.registerProcess<b3.Process>(
+            AddBuff,
+            BackTeam,
+            ChopTree,
+            CreateBullet,
+            DelBuff,
+            FindOneTarget,
+            FindTargets,
+            FollowHero,
+            GetPos,
+            GetSkillTarget,
+            Hurt,
+            LaunchSkill,
+            MoveForward,
+            MoveToAtkPos,
+            MoveToPos,
+            NormalAttack,
+            Wait
         );
+        const descriptors: b3.ProcessDescriptor[] = [];
+        for (const v of this._processResolvers.values()) {
+            descriptors.push(v.descriptor);
+        }
+        descriptors.sort((a, b) => a.name.localeCompare(b.name));
+        let str = JSON.stringify(descriptors, null, 2);
         str = str.replace(/"doc": "\\n +/g, '"doc": "');
         str = str.replace(/\\n +/g, "\\n");
         return str;

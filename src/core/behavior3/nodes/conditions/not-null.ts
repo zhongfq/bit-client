@@ -1,7 +1,7 @@
 import { b3 } from "../../behavior";
 
 export class NotNull extends b3.Process {
-    override run(node: b3.Node, env: b3.Env, value: unknown) {
+    override run(node: b3.Node, env: b3.TreeEnv, value: unknown) {
         if (value === undefined || value === null) {
             return b3.Status.FAILURE;
         } else {

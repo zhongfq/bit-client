@@ -5,7 +5,7 @@ interface LogArgs {
 }
 
 export class Log extends b3.Process {
-    override run(node: b3.Node, env: b3.Env) {
+    override run(node: b3.Node, env: b3.TreeEnv) {
         const args = node.args as LogArgs;
         console.log("behavior3 -> log:", args.str);
         return b3.Status.SUCCESS;

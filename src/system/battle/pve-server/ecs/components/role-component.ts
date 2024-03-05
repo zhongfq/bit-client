@@ -5,7 +5,7 @@ import { PveServer } from "../../pve-server";
 import { MovementComponent, TransformComponent } from "./movement-component";
 import { LauncherComponent } from "./skill-component";
 
-export class RoleEnv extends b3.Env {
+export class RoleEnv extends b3.TreeEnv {
     declare context: PveServer;
     owner: RoleComponent;
 
