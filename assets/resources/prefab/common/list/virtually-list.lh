@@ -15,7 +15,19 @@
       "cellPrefab": {
         "_$uuid": "b31a6d6e-b58d-4ef0-9d12-d657c47e1d78",
         "_$type": "Prefab"
-      }
+      },
+      "type": null
+    }
+  ],
+  "_$child": [
+    {
+      "_$id": "fi2efgd5",
+      "_$type": "Panel",
+      "name": "Panel",
+      "x": 106,
+      "y": 106,
+      "width": 200,
+      "height": 200
     }
   ]
 }

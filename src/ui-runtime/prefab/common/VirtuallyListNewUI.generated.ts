@@ -4,6 +4,6 @@
 /**
  * resources/prefab/common/list/virtually-list-new.lh
  */
-export class VirtuallyListUIBase extends Laya.Box {
+export class VirtuallyListNewUIBase extends Laya.Box {
 }
 
