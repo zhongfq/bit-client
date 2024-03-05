@@ -1,3 +1,4 @@
+import { Constructor } from "../../../../core/dispatcher";
 import { ecs } from "../../../../core/ecs";
 import { IVector3Like } from "../../../../core/laya";
 import { StringUtil } from "../../../../core/utils/string-util";
@@ -24,8 +25,8 @@ export class TilemapComponent extends ecs.SingletonComponent {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    static readonly VISION_WIDTH = 15; // 视野宽度（单位：米）
-    static readonly VISION_HEIGHT = 30; // 视野高度（单位：米）
+    static readonly VISION_WIDTH = 25; // 视野宽度（单位：米）
+    static readonly VISION_HEIGHT = 25; // 视野高度（单位：米）
 
     static readonly MAP_WIDTH = 50; // 地图块宽度（单位：米）
     static readonly MAP_HEIGHT = 50; // 地图块高度（单位：米）
@@ -38,8 +39,8 @@ export class TilemapComponent extends ecs.SingletonComponent {
 
     static readonly STATIC_SCALE = 3; // 静态物体缩放
 
-    static readonly XY_TO_KEY = (x: number, y: number) => { return x + '_' + y; };
-    static readonly KEY_TO_XY = (key: string) => { const arr = key.split('_'); return [Number(arr[0]), Number(arr[1])] };
+    static readonly XY_TO_KEY = (x: number, y: number) => { return Math.floor(x) + '_' + Math.floor(y); };
+    static readonly KEY_TO_XY = (key: string) => { const arr = key.split('_'); return [Math.floor(Number(arr[0])), Math.floor(Number(arr[1]))] };
 }
 
 export namespace Tilemap {
@@ -74,6 +75,13 @@ export namespace Tilemap {
         data: number[];
     }
 
+    export enum LayerType {
+        TileLayer = "tilelayer",
+        ObjectGroup = "objectgroup",
+        ImageLayer = "imagelayer",
+        Group = "group",
+    }
+
     export enum LayerName {
         Ground = "ground",
         Road = "road",
@@ -83,11 +91,22 @@ export namespace Tilemap {
         Block = "block",
     }
 
-    export enum LayerType {
-        TileLayer = "tilelayer",
-        ObjectGroup = "objectgroup",
-        ImageLayer = "imagelayer",
-        Group = "group",
+    export function LayerToCls(layerName: string): Constructor<Tilemap.Element> | null {
+        switch (layerName) {
+            case Tilemap.LayerName.Ground:
+                return Tilemap.GroundElement;
+            // case Tilemap.LayerName.Road:
+            //     return Tilemap.RoadElement;
+            // case Tilemap.LayerName.River:
+            //     return Tilemap.RiverElement;
+            case Tilemap.LayerName.Static:
+                return Tilemap.StaticElement;
+            case Tilemap.LayerName.Dynamic:
+                return Tilemap.DynamicElement;
+            case Tilemap.LayerName.Block:
+                return Tilemap.BlockElement;
+        }
+        return null;
     }
 
     export interface TileSet {
@@ -126,7 +145,7 @@ export namespace Tilemap {
         Dynamic = "dynamic",
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     export abstract class Element {
         private static UID: number = 0;
@@ -137,18 +156,20 @@ export namespace Tilemap {
         public y!: number;
         public gid!: number;
         public layerName!: string;
+        public eid?: number;
 
-        public static create<T>(sign: string, cls: new () => T): T {
+        public static create<T>(sign: string, cls: Constructor<T>): T {
             return Laya.Pool.getItemByClass(sign, cls);
         }
 
-        public init(system: TilemapSystem, x: number, y: number, gid: number, layerName: string): void {
+        public init(system: TilemapSystem, x: number, y: number, gid: number, layerName: string, eid?: number): void {
             this.uid = --Element.UID;
             this.system = system;
             this.x = x;
             this.y = y;
             this.gid = gid;
             this.layerName = layerName;
+            this.eid = eid;
         }
 
         public recover(): void {
