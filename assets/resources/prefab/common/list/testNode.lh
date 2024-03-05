@@ -1,9 +1,10 @@
 {
   "_$ver": 1,
   "_$id": "lvhoz1xw",
+  "_$runtime": "res://331b1ab5-9c21-434f-a693-fbfc5d9dcad2",
   "_$type": "Box",
   "name": "Box",
-  "width": 315,
+  "width": 100,
   "height": 116,
   "bgColor": "rgba(150, 59, 59, 1)",
   "_$child": [
@@ -11,7 +12,7 @@
       "_$id": "wa2ng9qy",
       "_$type": "Sprite",
       "name": "Sprite",
-      "width": 315,
+      "width": 100,
       "height": 116,
       "_gcmds": [
         {
@@ -41,14 +42,16 @@
       "_$var": true,
       "_$type": "Label",
       "name": "Label",
-      "x": 92,
       "y": 44,
       "width": 120,
       "height": 28,
+      "left": 0,
+      "centerY": 0,
       "text": "Label",
       "fontSize": 20,
       "color": "rgba(13, 13, 13, 1)",
-      "valign": "top",
+      "align": "center",
+      "valign": "middle",
       "padding": "0,0,0,0"
     }
   ]

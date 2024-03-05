@@ -1,0 +1,25 @@
+{
+  "_$ver": 1,
+  "_$id": "gs7nt5w0",
+  "_$runtime": "res://ddef8ea6-7839-48a9-b4e2-3702474a1a1d",
+  "_$type": "Box",
+  "name": "virtuallyList",
+  "x": 200,
+  "y": 400,
+  "width": 400,
+  "height": 400,
+  "_mouseState": 2,
+  "_$comp": [
+    {
+      "_$type": "bb264e76-1c01-47d4-a43d-7a59a75169b7",
+      "scriptPath": "../src/core/virtuallyList/virtually-list-new.ts",
+      "cellPrefab": null,
+      "alignH": 0,
+      "alignV": 0,
+      "spaceX": 0,
+      "spaceY": null,
+      "cellNumX": 1,
+      "cellNumY": 1
+    }
+  ]
+}

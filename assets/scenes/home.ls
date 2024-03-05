@@ -503,7 +503,7 @@
       "name": "boxChat",
       "x": 53,
       "y": 1132,
-      "width": 534,
+      "width": 687,
       "height": 54,
       "bottom": 148,
       "_$child": [
@@ -511,10 +511,12 @@
           "_$id": "e4yd92vr",
           "_$type": "Image",
           "name": "bg",
-          "x": 6.394884621840902e-14,
-          "y": -2.2737367544323206e-13,
-          "width": 530,
-          "height": 48,
+          "width": 687,
+          "height": 54,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "bottom": 0,
           "skin": "res://2123a790-201a-4900-8885-b7ef9a27cfba",
           "color": "#ffffff"
         },
@@ -523,9 +525,10 @@
           "_$type": "Image",
           "name": "Image",
           "x": 6.394884621840902e-14,
-          "y": -2.2737367544323206e-13,
+          "y": 3,
           "width": 48,
           "height": 48,
+          "centerY": 0,
           "skin": "res://9aee6d3e-fba9-4d3a-ae26-0cb0895d267a",
           "useSourceSize": true,
           "color": "#ffffff"
@@ -537,7 +540,7 @@
           "name": "labelMsg",
           "x": 48,
           "y": 40,
-          "width": 474,
+          "width": 625,
           "height": 21,
           "anchorY": 1,
           "text": "",
@@ -696,6 +699,86 @@
           "labelVAlign": "middle"
         }
       ]
+    },
+    {
+      "_$id": "2zigi34u",
+      "_$type": "Box",
+      "name": "资源信息",
+      "x": 583,
+      "y": 129,
+      "width": 167,
+      "height": 200,
+      "_mouseState": 2,
+      "right": 0,
+      "top": 129,
+      "_$child": [
+        {
+          "_$id": "3ux87mow",
+          "_$type": "List",
+          "name": "List",
+          "width": 167,
+          "height": 200,
+          "_mouseState": 2,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "bottom": 0,
+          "itemTemplate": {
+            "_$ref": "0o6sherk",
+            "_$tmpl": "itemRender"
+          },
+          "repeatX": 1,
+          "repeatY": 6,
+          "spaceY": 4,
+          "_$child": [
+            {
+              "_$id": "0o6sherk",
+              "_$prefab": "148a6d54-97ac-4354-a774-12a01dad2732",
+              "name": "money-item",
+              "active": true,
+              "x": 0,
+              "y": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "n6q5j4fs",
+      "_$type": "Box",
+      "name": "活动信息",
+      "x": -2,
+      "y": 127,
+      "width": 101,
+      "height": 575,
+      "left": -2,
+      "top": 127,
+      "_$child": [
+        {
+          "_$id": "pjn2ljox",
+          "_$type": "List",
+          "name": "List",
+          "width": 101,
+          "height": 575,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "bottom": 0,
+          "repeatX": 1,
+          "repeatY": 1
+        }
+      ]
+    },
+    {
+      "_$id": "vm6knnc0",
+      "_$type": "Box",
+      "name": "常用功能",
+      "x": 455,
+      "y": 1017,
+      "width": 292,
+      "height": 103,
+      "right": 3,
+      "bottom": 214
     }
   ]
 }

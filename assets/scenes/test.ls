@@ -109,6 +109,42 @@
           ]
         }
       ]
+    },
+    {
+      "_$id": "b7llpcxx",
+      "_$prefab": "1554834d-3378-439e-ac1d-084b8faa5d0f",
+      "name": "virtually-list-new",
+      "active": true,
+      "x": 191,
+      "y": 567,
+      "visible": true,
+      "bgColor": null,
+      "height": 400,
+      "width": 400,
+      "_$comp": [
+        {
+          "_$override": "bb264e76-1c01-47d4-a43d-7a59a75169b7",
+          "cellPrefab": {
+            "_$uuid": "6669a2c4-94a0-4dc2-a23f-3b83a3823fc1",
+            "_$type": "Prefab"
+          },
+          "cellNumX": 1,
+          "spaceY": 10,
+          "spaceX": 0,
+          "alignV": 0,
+          "alignH": 1,
+          "scrollType": 2
+        }
+      ]
+    },
+    {
+      "_$id": "ckndqtdx",
+      "_$prefab": "6669a2c4-94a0-4dc2-a23f-3b83a3823fc1",
+      "name": "testNode",
+      "active": true,
+      "x": -12,
+      "y": 863,
+      "visible": true
     }
   ]
 }

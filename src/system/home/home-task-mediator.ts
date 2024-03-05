@@ -37,9 +37,16 @@ export class homeTaskMediator extends Mediator {
         this.owner.labelDesc.text = taskInfo.ref.desc || "";
         this.owner.labelValue.text = `${taskInfo.cmd.num}/${taskInfo.cmd.max}`;
         this.owner.ProgressBar.value = Number(taskInfo.cmd.num) / Number(taskInfo.cmd.max);
+
         if (taskInfo.cmd.num >= taskInfo.cmd.max && taskInfo.ref.receive_type) {
             //完成任务
-            app.service.task.requestReceiveReward({ taskIds: [taskInfo.cmd.id] });
+            this.owner.mouseEnabled = false;
+            this.owner.labelDesc.text = "完成";
+            Laya.timer.frameOnce(3000, this, () => {
+                if (taskInfo.cmd) {
+                    app.service.task.requestReceiveReward({ taskIds: [taskInfo.cmd.id] });
+                }
+            });
         }
     }
     //组件被启用后执行，例如节点被添加到舞台后
