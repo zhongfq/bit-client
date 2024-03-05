@@ -1,7 +1,7 @@
 import { app } from "../../../../../app";
 import { ecs } from "../../../../../core/ecs";
 import { BattleConf } from "../../../../../def/battle";
-import { RoleCreator, TreeCreator } from "../../../pve-server/pve-defs";
+import { ElementCreator } from "../../../pve-server/pve-defs";
 import { PveContext } from "../../pve-context";
 import { CameraComponent } from "../components/camera-component";
 import {
@@ -12,7 +12,7 @@ import {
 } from "../components/movement-component";
 import { AnimationComponent, ShadowComponent } from "../components/render-component";
 import { TilemapComponent } from "../components/tilemap-component";
-import { RoleAnimation, RoleComponent } from "../components/troop-component";
+import { ElementAnimation, ElementComponent } from "../components/troop-component";
 
 export class CommandSystem extends ecs.System {
     constructor(readonly context: PveContext) {
@@ -26,7 +26,7 @@ export class CommandSystem extends ecs.System {
         camera.focus = eid;
     }
 
-    createRole(data: RoleCreator) {
+    createElement(data: ElementCreator) {
         const ETYPE = BattleConf.ENTITY_TYPE;
 
         const entity = this.ecs.createEntity(data.eid);
@@ -35,10 +35,10 @@ export class CommandSystem extends ecs.System {
         const movement = entity.addComponent(MovementComponent);
         movement.rotationInterpolation.rate = InterpolationRate.ROTATION;
 
-        const role = entity.addComponent(RoleComponent);
-        role.tid = data.tid;
-        role.hp = data.hp;
-        role.maxHp = data.maxHp;
+        const element = entity.addComponent(ElementComponent);
+        element.tid = data.tid;
+        element.hp = data.hp;
+        element.maxHp = data.maxHp;
 
         const transform = entity.addComponent(TransformComponent);
         TilemapComponent.grid2Pixel(data.positioin.x, data.positioin.z, transform.position);
@@ -56,24 +56,24 @@ export class CommandSystem extends ecs.System {
             const entityRow = table.battleEntity.entity[soldierRow.battle_entity];
             animation.res = entityRow.res;
         } else {
-            throw new Error(`unsupport etype for create role: ${data.etype}`);
+            throw new Error(`unsupport etype for create element: ${data.etype}`);
         }
 
         const shadow = entity.addComponent(ShadowComponent);
         shadow.res = "resources/prefab/battle/ui/role-shadow.lh";
     }
 
-    createTree(data: TreeCreator) {}
+    createWood(data: ElementCreator) {}
 
-    moveStart(character: RoleComponent, speed: Laya.Vector3) {
+    moveStart(character: ElementComponent, speed: Laya.Vector3) {
         const { movement } = character;
         movement.type = MovementType.WHEEL;
         movement.speed.cloneFrom(speed);
         this._setRotation(character, speed);
-        this.playAnim(character, RoleAnimation.RUN);
+        this.playAnim(character, ElementAnimation.RUN);
     }
 
-    moveStop(character: RoleComponent) {
+    moveStop(character: ElementComponent) {
         const { movement } = character;
         movement.type = MovementType.NONE;
         movement.speed.x = 0;
@@ -81,29 +81,29 @@ export class CommandSystem extends ecs.System {
         movement.speed.z = 0;
         movement.track = null;
         movement.target = null;
-        this.playAnim(character, RoleAnimation.IDLE);
+        this.playAnim(character, ElementAnimation.IDLE);
     }
 
-    playAnim(character: RoleComponent, name: RoleAnimation) {
+    playAnim(character: ElementComponent, name: ElementAnimation) {
         const animator = character.animation.animator;
         if (animator) {
             switch (name) {
-                case RoleAnimation.ATTACK:
-                    animator.setParamsTrigger(RoleAnimation.ATTACK);
+                case ElementAnimation.ATTACK:
+                    animator.setParamsTrigger(ElementAnimation.ATTACK);
                     break;
-                case RoleAnimation.IDLE:
-                    animator.setParamsBool(RoleAnimation.RUN, false);
-                    animator.setParamsBool(RoleAnimation.IDLE, true);
+                case ElementAnimation.IDLE:
+                    animator.setParamsBool(ElementAnimation.RUN, false);
+                    animator.setParamsBool(ElementAnimation.IDLE, true);
                     break;
-                case RoleAnimation.RUN:
-                    animator.setParamsBool(RoleAnimation.IDLE, false);
-                    animator.setParamsBool(RoleAnimation.RUN, true);
+                case ElementAnimation.RUN:
+                    animator.setParamsBool(ElementAnimation.IDLE, false);
+                    animator.setParamsBool(ElementAnimation.RUN, true);
                     break;
             }
         }
     }
 
-    private _setRotation(character: RoleComponent, speed: Laya.Vector3) {
+    private _setRotation(character: ElementComponent, speed: Laya.Vector3) {
         const rad = Math.atan2(-speed.z, speed.x);
         const dest = (rad * 180) / Math.PI;
         const { movement, transform } = character;

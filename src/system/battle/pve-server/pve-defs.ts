@@ -1,4 +1,4 @@
-export interface RoleCreator {
+export interface ElementCreator {
     eid: number;
     etype: number;
 
@@ -6,13 +6,4 @@ export interface RoleCreator {
     maxHp: number;
     hp: number;
     positioin: Laya.Vector3;
-}
-
-export interface TreeCreator {
-    eid: number;
-    etype: number;
-
-    wid: number;
-    hp: number;
-    maxHp: number;
 }

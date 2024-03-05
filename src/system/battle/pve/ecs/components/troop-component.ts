@@ -9,26 +9,13 @@ export class OwnerComponent extends ecs.Component {
     name: string = "";
 }
 
-export enum TroopType {
-    PLAYER,
-    SOLDIER,
-}
-
-export enum SoliderOrder {
-    IDLE,
-    MOVE,
-    RUSH, // 快速移动到指定位置
-    FIGHT, // 战斗中
-    RETURN, // 归队
-}
-
-export enum RoleAnimation {
+export enum ElementAnimation {
     IDLE = "idle",
     RUN = "run",
     ATTACK = "attack",
 }
 
-export class RoleComponent extends ecs.Component {
+export class ElementComponent extends ecs.Component {
     // 缓存组件方便快速访问？
     private _movement: MovementComponent | null = null;
     private _transform: TransformComponent | null = null;
@@ -58,7 +45,6 @@ type SoliderAttack = {
 };
 
 export class SoldierComponent extends ecs.Component {
-    order: SoliderOrder = SoliderOrder.IDLE;
     leader!: number;
     offset!: IVector3Like;
     index: number = 0;

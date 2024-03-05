@@ -1,7 +1,7 @@
 import { ecs } from "../../../../../core/ecs";
 import { PveServer } from "../../pve-server";
 import { MovementComponent, TransformComponent } from "../components/movement-component";
-import { RoleComponent } from "../components/role-component";
+import { ElementComponent } from "../components/element-component";
 
 export class MovementSystem extends ecs.System {
     constructor(readonly context: PveServer) {
@@ -34,7 +34,7 @@ export class MovementSystem extends ecs.System {
                 if (changed) {
                     if (speed.x === 0 && speed.z === 0) {
                         movement.target = null;
-                        this.context.moveStop(movement.getComponent(RoleComponent)!);
+                        this.context.moveStop(movement.getComponent(ElementComponent)!);
                     }
                 }
             }

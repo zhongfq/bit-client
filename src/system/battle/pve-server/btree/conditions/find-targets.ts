@@ -1,11 +1,10 @@
 import { b3 } from "../../../../../core/behavior3/behavior";
 
 interface FindTargetsArgs {
-    x?: number;
-    y?: number;
-    w?: number;
-    h?: number;
-    etype?: number;
+    radius?: number;
+    hero?: boolean;
+    soldier?: boolean;
+    wood?: boolean;
     attack?: boolean;
     skill?: boolean;
 }
@@ -13,7 +12,9 @@ interface FindTargetsArgs {
 export class FindTargets extends b3.Process {
     override check(node: b3.Node) {}
 
-    override run(node: b3.Node, env: b3.TreeEnv, ...any: unknown[]) {
+    override run(node: b3.Node, env: b3.TreeEnv) {
+        const args = node.args as FindTargets;
+
         return b3.Status.FAILURE;
     }
 
@@ -23,7 +24,9 @@ export class FindTargets extends b3.Process {
             type: "Condition",
             desc: "给定的范围内查找多个目标",
             args: [
-                { name: "etype", type: "int?", desc: "类型" },
+                { name: "hero", type: "boolean?", desc: "找英雄" },
+                { name: "soldier", type: "boolean?", desc: "找士兵" },
+                { name: "wood", type: "boolean?", desc: "找树" },
                 { name: "friend", type: "boolean?", desc: "友方" },
                 { name: "attack", type: "boolean?", desc: "普攻范围" },
                 { name: "skill", type: "boolean?", desc: "技能范围" },

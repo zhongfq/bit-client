@@ -15,8 +15,8 @@ import { Wait } from "../../btree/actions/wait";
 import { FindOneTarget } from "../../btree/conditions/find-one-target";
 import { FindTargets } from "../../btree/conditions/find-targets";
 import { PveServer } from "../../pve-server";
-import { AiComponent } from "../components/ai-component";
-import { RoleComponent, RoleTreeEnv } from "../components/role-component";
+import { AiComponent, AiTreeEnv } from "../components/ai-component";
+import { ElementComponent } from "../components/element-component";
 import { SkillComponent } from "../components/skill-component";
 
 export class AiSystem extends ecs.System {
@@ -80,7 +80,7 @@ export class AiSystem extends ecs.System {
         const tree = await this.context.loadAiTree(ai.res);
         if (tree) {
             ai.tree = tree;
-            ai.env = new RoleTreeEnv(this.context, ai.getComponent(RoleComponent)!);
+            ai.env = new AiTreeEnv(this.context, ai.getComponent(ElementComponent)!);
         }
     }
 }

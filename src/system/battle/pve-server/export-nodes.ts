@@ -17,7 +17,7 @@ import { AlwaysSuccess } from "../../../core/behavior3/nodes/decorators/always-s
 import { Not } from "../../../core/behavior3/nodes/decorators/not";
 import { AddBuff } from "./btree/actions/add-buff";
 import { BackTeam } from "./btree/actions/back-team";
-import { ChopTree } from "./btree/actions/chop-tree";
+import { ChopWood } from "./btree/actions/chop-tree";
 import { CreateBullet } from "./btree/actions/create-bullet";
 import { DelBuff } from "./btree/actions/del-buff";
 import { FollowHero } from "./btree/actions/follow-hero";
@@ -41,7 +41,7 @@ export class ExportNodes extends b3.Context {
         this.registerProcess<b3.Process>(
             AddBuff,
             BackTeam,
-            ChopTree,
+            ChopWood,
             CreateBullet,
             DelBuff,
             FindOneTarget,

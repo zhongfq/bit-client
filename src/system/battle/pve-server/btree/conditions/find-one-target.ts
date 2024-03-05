@@ -1,20 +1,17 @@
 import { b3 } from "../../../../../core/behavior3/behavior";
+import { FindTargets } from "./find-targets";
 
-interface FindOneTargetArgs {
-    x?: number;
-    y?: number;
-    w?: number;
-    h?: number;
-    etype?: number;
-    attack?: boolean;
-    skill?: boolean;
-}
-
-export class FindOneTarget extends b3.Process {
+export class FindOneTarget extends FindTargets {
     override check(node: b3.Node) {}
 
-    override run(node: b3.Node, env: b3.TreeEnv, ...any: unknown[]) {
-        return b3.Status.FAILURE;
+    override run(node: b3.Node, env: b3.TreeEnv) {
+        const status = super.run(node, env);
+        if (status === b3.Status.SUCCESS) {
+            const target = (env.lastRet.results[0] as Array<unknown>)[0];
+            env.lastRet.results.length = 0;
+            env.lastRet.results.push(target);
+        }
+        return status;
     }
 
     override get descriptor() {

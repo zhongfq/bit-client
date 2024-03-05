@@ -1,12 +1,12 @@
 import { ecs } from "../../../core/ecs";
 import { Mediator } from "../../../core/ui-mediator";
 import { PveUI } from "../../../ui-runtime/scene/PveUI";
-import { RoleCreator, TreeCreator } from "../pve-server/pve-defs";
+import { ElementCreator } from "../pve-server/pve-defs";
 import { ICommandSender, PveServer } from "../pve-server/pve-server";
 import { CameraComponent } from "./ecs/components/camera-component";
 import { JoystickComponent } from "./ecs/components/joystick-component";
 import { TilemapComponent } from "./ecs/components/tilemap-component";
-import { RoleAnimation, RoleComponent } from "./ecs/components/troop-component";
+import { ElementAnimation, ElementComponent } from "./ecs/components/troop-component";
 import { CameraSystem } from "./ecs/systems/camera-system";
 import { CommandSystem } from "./ecs/systems/command-system";
 import { JoystickSystem } from "./ecs/systems/joystick-system";
@@ -81,42 +81,42 @@ export class PveContext extends Mediator implements ICommandSender {
         this._commandSystem.focus(eid);
     }
 
-    createRole(data: RoleCreator) {
-        this._commandSystem.createRole(data);
+    createElement(data: ElementCreator) {
+        this._commandSystem.createElement(data);
     }
 
-    createTree(data: TreeCreator) {
-        this._commandSystem.createTree(data);
+    createTree(data: ElementCreator) {
+        this._commandSystem.createWood(data);
     }
 
     chopTree(eid: number, target: number) {}
 
     moveStart(eid: number, speed: Laya.Vector3) {
-        const role = this._ecs.getComponent(eid, RoleComponent);
-        if (!role) {
+        const element = this._ecs.getComponent(eid, ElementComponent);
+        if (!element) {
             console.warn(`not found entity: ${eid}`);
             return;
         }
-        this._commandSystem.moveStart(role, speed);
+        this._commandSystem.moveStart(element, speed);
     }
 
     moveStop(eid: number) {
-        const role = this._ecs.getComponent(eid, RoleComponent);
-        if (!role) {
+        const element = this._ecs.getComponent(eid, ElementComponent);
+        if (!element) {
             console.warn(`not found entity: ${eid}`);
             return;
         }
-        this._commandSystem.moveStop(role);
+        this._commandSystem.moveStop(element);
     }
 
     playAnim(eid: number, anim: string) {
-        const role = this._ecs.getComponent(eid, RoleComponent);
-        if (!role) {
+        const element = this._ecs.getComponent(eid, ElementComponent);
+        if (!element) {
             console.warn(`not found entity: ${eid}`);
             return;
         }
         if (anim === "attack") {
-            this._commandSystem.playAnim(role, RoleAnimation.ATTACK);
+            this._commandSystem.playAnim(element, ElementAnimation.ATTACK);
         } else {
             console.error(`TODO: play anim '${anim}'`);
         }
