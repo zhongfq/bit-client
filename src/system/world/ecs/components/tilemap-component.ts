@@ -259,11 +259,12 @@ export namespace Tilemap {
 
             this._staticObj = prefab.create() as Laya.Sprite3D;
 
-            const pos = this._staticObj.transform.position;
+            const transform = this._staticObj.transform;
+            const pos = transform.position;
             pos.x = this.x;
             pos.y = this.system.getTextureOffsetY(TextureName.Static, this.gid) * TilemapComponent.STATIC_SCALE;
             pos.z = this.y;
-            this._staticObj.transform.position = pos;
+            transform.position = pos;
 
             const renderer = this._staticObj.getChildAt(0).getComponent(Laya.MeshRenderer);
             const mat = new Laya.UnlitMaterial();
@@ -276,11 +277,12 @@ export namespace Tilemap {
 
             const scaleX = (texture.width / TilemapComponent.STATIC_BASE_WIDTH) * TilemapComponent.STATIC_SCALE;
             const scaleZ = (texture.height / TilemapComponent.STATIC_BASE_HEIGHT) * TilemapComponent.STATIC_SCALE;
-            this._staticObj.transform.localScaleX = scaleX;
-            this._staticObj.transform.localScaleZ = scaleZ;
+            transform.localScaleX = scaleX;
+            transform.localScaleZ = scaleZ;
 
-            const rotateX = this.system.context.camera.transform.localRotationEulerX;
-            this._staticObj.transform.localRotationEulerX = -rotateX;
+            const cameraTrans = this.system.context.camera.transform;
+            transform.localRotationEulerX = -cameraTrans.localRotationEulerX;
+            transform.localRotationEulerY = cameraTrans.localRotationEulerY;
 
             this.system.context.scene3D.addChild(this._staticObj);
         }
@@ -298,11 +300,12 @@ export namespace Tilemap {
 
             this._dynamicObj = prefab.create() as Laya.Sprite3D;
 
-            const pos = this._dynamicObj.transform.position;
+            const transform = this._dynamicObj.transform;
+            const pos = transform.position;
             pos.x = this.x;
             pos.y = this.system.getTextureOffsetY(TextureName.Dynamic, this.gid) * TilemapComponent.STATIC_SCALE;
             pos.z = this.y;
-            this._dynamicObj.transform.position = pos;
+            transform.position = pos;
 
             const renderer = this._dynamicObj.getChildAt(0).getComponent(Laya.MeshRenderer);
             const mat = new Laya.UnlitMaterial();
@@ -315,11 +318,12 @@ export namespace Tilemap {
 
             const scaleX = (texture.width / TilemapComponent.STATIC_BASE_WIDTH) * TilemapComponent.STATIC_SCALE;
             const scaleZ = (texture.height / TilemapComponent.STATIC_BASE_HEIGHT) * TilemapComponent.STATIC_SCALE;
-            this._dynamicObj.transform.localScaleX = scaleX;
-            this._dynamicObj.transform.localScaleZ = scaleZ;
+            transform.localScaleX = scaleX;
+            transform.localScaleZ = scaleZ;
 
-            const rotateX = this.system.context.camera.transform.localRotationEulerX;
-            this._dynamicObj.transform.localRotationEulerX = -rotateX;
+            const cameraTrans = this.system.context.camera.transform;
+            transform.localRotationEulerX = -cameraTrans.localRotationEulerX;
+            transform.localRotationEulerY = cameraTrans.localRotationEulerY;
 
             this.system.context.scene3D.addChild(this._dynamicObj);
         }
