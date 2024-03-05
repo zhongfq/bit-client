@@ -8,21 +8,26 @@
     "children": [
       {
         "id": 2,
+        "name": "PlaySkillAnim",
+        "args": {}
+      },
+      {
+        "id": 3,
         "name": "Wait",
         "args": {
           "time": 0.2
         }
       },
       {
-        "id": 3,
+        "id": 4,
         "name": "GetSkillTarget",
         "args": {},
-        "input": [
+        "output": [
           "enemy"
         ]
       },
       {
-        "id": 4,
+        "id": 5,
         "name": "Hurt",
         "args": {},
         "input": [
@@ -30,7 +35,7 @@
         ]
       },
       {
-        "id": 5,
+        "id": 6,
         "name": "Wait",
         "args": {
           "time": 0.2,

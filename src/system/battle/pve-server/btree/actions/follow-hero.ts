@@ -1,6 +1,6 @@
 import { b3 } from "../../../../../core/behavior3/behavior";
 import { MathUtil } from "../../../../../core/utils/math-util";
-import { RoleEnv, SoldierComponent, TroopComponent } from "../../ecs/components/role-component";
+import { RoleTreeEnv, SoldierComponent, TroopComponent } from "../../ecs/components/role-component";
 import { AiSystem } from "../../ecs/systems/ai-system";
 
 const tmpTarget = new Laya.Vector3();
@@ -9,7 +9,7 @@ const tmpSpeed = new Laya.Vector3();
 export class FollowHero extends b3.Process {
     override check(node: b3.Node) {}
 
-    override run(node: b3.Node, env: RoleEnv) {
+    override run(node: b3.Node, env: RoleTreeEnv) {
         const soldier = env.owner.getComponent(SoldierComponent);
         if (!soldier) {
             console.warn(`'SoldierComponent' not found `);

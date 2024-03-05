@@ -1,8 +1,8 @@
 import { b3 } from "../../../../../core/behavior3/behavior";
-import { RoleComponent, RoleEnv } from "../../ecs/components/role-component";
+import { RoleComponent, RoleTreeEnv } from "../../ecs/components/role-component";
 
 export class LaunchSkill extends b3.Process {
-    override run(node: b3.Node, env: RoleEnv, target?: RoleComponent[] | RoleComponent) {
+    override run(node: b3.Node, env: RoleTreeEnv, target?: RoleComponent[] | RoleComponent) {
         return b3.Status.SUCCESS;
     }
 

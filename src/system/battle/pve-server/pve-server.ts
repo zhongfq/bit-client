@@ -106,16 +106,16 @@ export class PveServer extends b3.Context {
         const table = app.service.table;
         const heroRow = table.hero[role.tid];
         if (heroRow.skill1) {
-            skill.skills.push(new Skill(table.skill[heroRow.skill1]));
+            skill.skills.push(new Skill(table.skill[heroRow.skill1], role));
         }
         if (heroRow.skill2) {
-            skill.skills.push(new Skill(table.skill[heroRow.skill2]));
+            skill.skills.push(new Skill(table.skill[heroRow.skill2], role));
         }
         if (heroRow.skill3) {
-            skill.skills.push(new Skill(table.skill[heroRow.skill3]));
+            skill.skills.push(new Skill(table.skill[heroRow.skill3], role));
         }
         if (heroRow.skill4) {
-            skill.skills.push(new Skill(table.skill[heroRow.skill4]));
+            skill.skills.push(new Skill(table.skill[heroRow.skill4], role));
         }
 
         this._sender.createRole({
@@ -153,10 +153,10 @@ export class PveServer extends b3.Context {
 
             const skill = entity.addComponent(SkillComponent);
             if (soldierRow.skill1) {
-                skill.skills.push(new Skill(table.skill[soldierRow.skill1]));
+                skill.skills.push(new Skill(table.skill[soldierRow.skill1], role));
             }
             if (soldierRow.skill2) {
-                skill.skills.push(new Skill(table.skill[soldierRow.skill2]));
+                skill.skills.push(new Skill(table.skill[soldierRow.skill2], role));
             }
 
             const transform = entity.addComponent(TransformComponent);
@@ -194,6 +194,10 @@ export class PveServer extends b3.Context {
         this._sender.moveStop(role.eid);
     }
 
+    playAnim(role: RoleComponent, anim: string) {
+        this._sender.playAnim(role.eid, anim);
+    }
+
     //-------------------------------------------------------------------------
     //------------------------------ICommandSender-----------------------------
     //-------------------------------------------------------------------------
@@ -212,6 +216,8 @@ export interface ICommandSender {
     chopTree(eid: number, target: number): void;
     moveStart(eid: number, speed: Laya.Vector3): void;
     moveStop(eid: number): void;
+
+    playAnim(eid: number, anim: string): void;
 
     drawDebug(x: number, z: number, radius: number): void;
 }

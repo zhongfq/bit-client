@@ -7,7 +7,6 @@
         "job": 1,
         "name": "肉盾(徐晃)",
         "skill1": 1,
-        "skill2": 10102,
         "skill_radius": 1,
         "type": 1,
         "world_entity": 101
@@ -20,7 +19,6 @@
         "job": 2,
         "name": "法师(周瑜)",
         "skill1": 1,
-        "skill2": 10202,
         "skill_radius": 5,
         "type": 1,
         "world_entity": 102
@@ -33,7 +31,6 @@
         "job": 3,
         "name": "辅助(小乔)",
         "skill1": 1,
-        "skill2": 10302,
         "skill_radius": 4.5,
         "type": 1,
         "world_entity": 103
@@ -46,7 +43,6 @@
         "job": 4,
         "name": "远程(夏候渊)",
         "skill1": 1,
-        "skill2": 10402,
         "skill_radius": 5,
         "type": 1,
         "world_entity": 104
@@ -59,7 +55,6 @@
         "job": 5,
         "name": "战士(关羽)",
         "skill1": 1,
-        "skill2": 10502,
         "skill_radius": 1.2,
         "type": 1,
         "world_entity": 105
@@ -72,7 +67,6 @@
         "job": 1,
         "name": "战士(周泰)",
         "skill1": 1,
-        "skill2": 10602,
         "skill_radius": 1,
         "type": 1,
         "world_entity": 106
@@ -85,7 +79,6 @@
         "job": 5,
         "name": "战士(孙策)",
         "skill1": 1,
-        "skill2": 10702,
         "skill_radius": 1.1,
         "type": 1,
         "world_entity": 107
@@ -98,7 +91,6 @@
         "job": 2,
         "name": "法师(诸葛亮)",
         "skill1": 1,
-        "skill2": 10802,
         "skill_radius": 4.5,
         "type": 1,
         "world_entity": 108
@@ -111,7 +103,6 @@
         "job": 4,
         "name": "远程(黄忠)",
         "skill1": 1,
-        "skill2": 10902,
         "skill_radius": 5,
         "type": 1,
         "world_entity": 109
@@ -124,7 +115,6 @@
         "job": 2,
         "name": "战士(魏延)",
         "skill1": 1,
-        "skill2": 11002,
         "skill_radius": 1.2,
         "type": 1,
         "world_entity": 110
@@ -137,7 +127,6 @@
         "job": 1,
         "name": "战士(曹仁)",
         "skill1": 1,
-        "skill2": 11102,
         "skill_radius": 1,
         "type": 1,
         "world_entity": 111
@@ -150,7 +139,6 @@
         "job": 4,
         "name": "远程(孙尚香)",
         "skill1": 1,
-        "skill2": 11202,
         "skill_radius": 5,
         "type": 1,
         "world_entity": 112
@@ -163,7 +151,6 @@
         "job": 3,
         "name": "远程(蔡文姬)",
         "skill1": 1,
-        "skill2": 11302,
         "skill_radius": 4.5,
         "type": 1,
         "world_entity": 113

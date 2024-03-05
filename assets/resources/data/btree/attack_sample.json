@@ -10,7 +10,7 @@
         "id": 2,
         "name": "Wait",
         "args": {
-          "ms": 800,
+          "time": 0.5,
           "random": null
         }
       },
@@ -19,23 +19,23 @@
         "name": "GetSkillTarget",
         "args": {},
         "output": [
-          "target"
+          "enemy"
         ]
       },
       {
         "id": 4,
-        "name": "NormalHurt",
+        "name": "Hurt",
         "args": {},
         "input": [
-          "target"
+          "enemy"
         ]
       },
       {
         "id": 5,
         "name": "Wait",
         "args": {
-          "ms": 800,
-          "random": null
+          "random": null,
+          "time": 0.5
         }
       }
     ]

@@ -6,7 +6,7 @@ import { PveServer } from "../../pve-server";
 import { MovementComponent, TransformComponent } from "./movement-component";
 import { SkillComponent } from "./skill-component";
 
-export class RoleEnv extends b3.TreeEnv {
+export class RoleTreeEnv extends b3.TreeEnv {
     declare context: PveServer;
     owner: RoleComponent;
 
@@ -39,8 +39,8 @@ export class RoleComponent extends ecs.Component {
         return (this._transform ||= this.getComponent(TransformComponent)!);
     }
 
-    get launcher() {
-        return (this._skill ||= this.getComponent(SkillComponent)!);
+    get skill() {
+        return (this._skill ||= this.getComponent(SkillComponent));
     }
 
     get troop() {

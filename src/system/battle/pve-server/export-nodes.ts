@@ -30,6 +30,7 @@ import { MoveForward } from "./btree/actions/move-forward";
 import { MoveToAtkPos } from "./btree/actions/move-to-atk-pos";
 import { MoveToPos } from "./btree/actions/move-to-pos";
 import { NormalAttack } from "./btree/actions/normal-attack";
+import { PlaySkillAnim } from "./btree/actions/play-skill-anim";
 import { Wait } from "./btree/actions/wait";
 import { FindOneTarget } from "./btree/conditions/find-one-target";
 import { FindTargets } from "./btree/conditions/find-targets";
@@ -46,6 +47,7 @@ export class ExportNodes extends b3.Context {
             FindOneTarget,
             FindTargets,
             FollowHero,
+            GetHeroDistance,
             GetPos,
             GetSkillTarget,
             Hurt,
@@ -54,7 +56,7 @@ export class ExportNodes extends b3.Context {
             MoveToAtkPos,
             MoveToPos,
             NormalAttack,
-            GetHeroDistance,
+            PlaySkillAnim,
             Wait
         );
         const descriptors: b3.ProcessDescriptor[] = [];

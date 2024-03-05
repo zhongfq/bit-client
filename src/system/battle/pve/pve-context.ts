@@ -6,7 +6,7 @@ import { ICommandSender, PveServer } from "../pve-server/pve-server";
 import { CameraComponent } from "./ecs/components/camera-component";
 import { JoystickComponent } from "./ecs/components/joystick-component";
 import { TilemapComponent } from "./ecs/components/tilemap-component";
-import { RoleComponent } from "./ecs/components/troop-component";
+import { RoleAnimation, RoleComponent } from "./ecs/components/troop-component";
 import { CameraSystem } from "./ecs/systems/camera-system";
 import { CommandSystem } from "./ecs/systems/command-system";
 import { JoystickSystem } from "./ecs/systems/joystick-system";
@@ -107,6 +107,19 @@ export class PveContext extends Mediator implements ICommandSender {
             return;
         }
         this._commandSystem.moveStop(role);
+    }
+
+    playAnim(eid: number, anim: string) {
+        const role = this._ecs.getComponent(eid, RoleComponent);
+        if (!role) {
+            console.warn(`not found entity: ${eid}`);
+            return;
+        }
+        if (anim === "attack") {
+            this._commandSystem.playAnim(role, RoleAnimation.ATTACK);
+        } else {
+            console.error(`TODO: play anim '${anim}'`);
+        }
     }
 
     drawDebug(x: number, z: number, radius: number) {

@@ -70,7 +70,7 @@ export class CommandSystem extends ecs.System {
         movement.type = MovementType.WHEEL;
         movement.speed.cloneFrom(speed);
         this._setRotation(character, speed);
-        this.playAnimation(character, RoleAnimation.RUN);
+        this.playAnim(character, RoleAnimation.RUN);
     }
 
     moveStop(character: RoleComponent) {
@@ -81,10 +81,10 @@ export class CommandSystem extends ecs.System {
         movement.speed.z = 0;
         movement.track = null;
         movement.target = null;
-        this.playAnimation(character, RoleAnimation.IDLE);
+        this.playAnim(character, RoleAnimation.IDLE);
     }
 
-    playAnimation(character: RoleComponent, name: RoleAnimation) {
+    playAnim(character: RoleComponent, name: RoleAnimation) {
         const animator = character.animation.animator;
         if (animator) {
             switch (name) {
