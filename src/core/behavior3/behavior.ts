@@ -89,12 +89,12 @@ export namespace b3 {
                 Node.tmpInputArgs.push(env.getVar(varName));
             });
 
-            env.lastRet.results = null;
+            env.lastRet.results.length = 0;
 
             const status = this._process.run(this, env, ...Node.tmpInputArgs);
             if (status != Status.RUNNING) {
                 this.data.output?.forEach((varName, i) => {
-                    const varValue = env.lastRet.results?.[i];
+                    const varValue = env.lastRet.results[i];
                     env.setVar(varName, varValue);
                 });
                 env.setVar(this._yield, undefined);
@@ -160,8 +160,9 @@ export namespace b3 {
 
     export class Env {
         readonly context: Context;
-        readonly lastRet: { status: Status; results?: unknown[] | null } = {
+        readonly lastRet: { status: Status; readonly results: unknown[] } = {
             status: Status.SUCCESS,
+            results: [],
         };
 
         private _vars: Map<string, unknown> = new Map();
@@ -198,7 +199,7 @@ export namespace b3 {
         clear() {
             this._stack.length = 0;
             this._vars.clear();
-            this.lastRet.results = null;
+            this.lastRet.results.length = 0;
         }
 
         static makePublicKey(node: Node, k: string) {
@@ -281,7 +282,7 @@ export namespace b3 {
             this._postfix = this._convertToPostfix(tokens);
         }
 
-        evaluate(args: Map<string, unknown>): number | boolean {
+        evaluate(args: Map<string, unknown>): unknown {
             const stack: TokenType[] = [];
 
             this._args = args;
@@ -327,7 +328,7 @@ export namespace b3 {
 
             this._args = null;
 
-            return stack.pop() as number;
+            return stack.pop();
         }
 
         private _toObject(token: ScalarType) {

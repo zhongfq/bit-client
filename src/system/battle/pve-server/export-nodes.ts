@@ -1,4 +1,6 @@
+import { Clear } from "../../../core/behavior3/nodes/actions/clear";
 import { Log } from "../../../core/behavior3/nodes/actions/log";
+import { GetTime } from "../../../core/behavior3/nodes/actions/get-time";
 import { Foreach } from "../../../core/behavior3/nodes/composites/foreach";
 import { Loop } from "../../../core/behavior3/nodes/composites/loop";
 import { Once } from "../../../core/behavior3/nodes/composites/once";
@@ -6,6 +8,8 @@ import { Parallel } from "../../../core/behavior3/nodes/composites/parallel";
 import { Selector } from "../../../core/behavior3/nodes/composites/selector";
 import { Sequence } from "../../../core/behavior3/nodes/composites/sequence";
 import { Check } from "../../../core/behavior3/nodes/conditions/check";
+import { IsNull } from "../../../core/behavior3/nodes/conditions/is-null";
+import { NotNull } from "../../../core/behavior3/nodes/conditions/not-null";
 import { AlwaysFail } from "../../../core/behavior3/nodes/decorators/always-fail";
 import { AlwaysSuccess } from "../../../core/behavior3/nodes/decorators/always-success";
 import { Not } from "../../../core/behavior3/nodes/decorators/not";
@@ -34,7 +38,9 @@ export class ExportNodes {
                 new AlwaysFail().descriptor,
                 new AlwaysSuccess().descriptor,
                 new Check().descriptor,
+                new Clear().descriptor,
                 new Foreach().descriptor,
+                new GetTime().descriptor,
                 new Log().descriptor,
                 new Loop().descriptor,
                 new Not().descriptor,
@@ -42,6 +48,8 @@ export class ExportNodes {
                 new Parallel().descriptor,
                 new Selector().descriptor,
                 new Sequence().descriptor,
+                new NotNull().descriptor,
+                new IsNull().descriptor,
 
                 // 自定义节点
                 new AddBuff().descriptor,

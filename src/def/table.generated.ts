@@ -39,7 +39,8 @@ export interface GeneratedHeroRow {
     world_entity: number;
     enable?: number;
     job: number;
-    attack_range: number;
+    attack_radius: number;
+    skill_radius: number;
     skill1?: number;
     skill2?: number;
     skill3?: number;
@@ -51,6 +52,8 @@ export interface GeneratedSoldierRow {
     id: number;
     battle_entity: number;
     skill1?: number;
+    attack_radius: number;
+    skill_radius: number;
     skill2?: number;
 }
 

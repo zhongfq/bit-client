@@ -118,10 +118,14 @@ class App {
 
         app.ui.open(ui.LOGIN_SCENE);
 
+        const t: unknown = "";
+
+        console.log("tcheck", t ? "true" : "false");
+
         // new BehaviorTest().start();
 
         // TODO: rm, use nodejs to write file
-        // console.log(ExportNodes.stringify());
+        console.log(ExportNodes.stringify());
 
         const offset = new Laya.Vector3(-0.6, 0, 0);
         const transform = new Laya.Transform3D();

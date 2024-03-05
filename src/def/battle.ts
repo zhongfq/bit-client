@@ -35,10 +35,9 @@ export const BattleConf = {
         UPDATE_ENTITY: 2,
     },
     ENTITY_TYPE: {
-        BULLET: 4,
-        HERO: 2,
-        KING: 1,
-        SOLDIER: 3,
+        BULLET: 3,
+        HERO: 1,
+        SOLDIER: 2,
     },
     LOGIC_FPS: 10,
     MAX_CARD_CARRY: 8,
