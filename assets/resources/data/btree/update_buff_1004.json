@@ -1,0 +1,28 @@
+{
+  "name": "update_buff_1004",
+  "root": {
+    "id": 1,
+    "name": "Sequence",
+    "desc": "新建行为树",
+    "args": {},
+    "children": [
+      {
+        "id": 2,
+        "name": "GetSkillTarget",
+        "args": {},
+        "output": [
+          "enemy"
+        ]
+      },
+      {
+        "id": 3,
+        "name": "NormalHurt",
+        "args": {},
+        "input": [
+          "enemy"
+        ]
+      }
+    ]
+  },
+  "desc": "BUFF1004更新"
+}

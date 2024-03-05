@@ -1,0 +1,82 @@
+{
+  "name": "zhaoyun_talent_3",
+  "root": {
+    "id": 1,
+    "name": "Parallel",
+    "desc": "敌人多攻高",
+    "args": {},
+    "children": [
+      {
+        "id": 2,
+        "name": "Sequence",
+        "args": {},
+        "children": [
+          {
+            "id": 3,
+            "name": "FindEnemyList",
+            "args": {},
+            "output": [
+              "enemy_list",
+              "count"
+            ]
+          },
+          {
+            "id": 4,
+            "name": "AddBuff",
+            "args": {
+              "buff_id": 1,
+              "duration_ms": null,
+              "buff_uid": "zhaoyun3"
+            },
+            "input": [
+              "",
+              "count"
+            ]
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "name": "ListenHeroCountChange",
+        "args": {
+          "sequence": true
+        },
+        "children": [
+          {
+            "id": 6,
+            "name": "DelBuff",
+            "args": {
+              "buff_uid": "zhaoyun3"
+            },
+            "input": [
+              ""
+            ]
+          },
+          {
+            "id": 7,
+            "name": "FindEnemyList",
+            "args": {},
+            "output": [
+              "",
+              "count"
+            ]
+          },
+          {
+            "id": 8,
+            "name": "AddBuff",
+            "args": {
+              "buff_id": 1,
+              "duration_ms": null,
+              "buff_uid": "zhaoyun3"
+            },
+            "input": [
+              "",
+              "count"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "desc": "赵云天赋3"
+}

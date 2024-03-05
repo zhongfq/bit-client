@@ -1,0 +1,59 @@
+{
+  "name": "xiaoqiao_skill_1",
+  "root": {
+    "id": 1,
+    "name": "Parallel",
+    "desc": "新建行为树",
+    "args": {},
+    "children": [
+      {
+        "id": 2,
+        "name": "Wait",
+        "args": {
+          "ms": 500
+        }
+      },
+      {
+        "id": 3,
+        "name": "FindEnemyList",
+        "args": {},
+        "output": [
+          "list",
+          ""
+        ]
+      },
+      {
+        "id": 4,
+        "name": "ForEach",
+        "args": {},
+        "input": [
+          "list"
+        ],
+        "output": [
+          "enemy"
+        ],
+        "children": [
+          {
+            "id": 5,
+            "name": "NormalHurt",
+            "args": {},
+            "input": [
+              "enemy"
+            ]
+          },
+          {
+            "id": 6,
+            "name": "SubMp",
+            "args": {
+              "sub": 50
+            },
+            "input": [
+              "enemy"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "desc": "小乔大招"
+}

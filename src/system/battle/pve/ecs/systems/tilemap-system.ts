@@ -67,7 +67,7 @@ export class TilemapSystem extends ecs.System {
             const renderer = tile.getChildAt(0).getComponent(Laya.MeshRenderer);
             renderer.material = mat;
 
-            this.context.scene3D.addChild(tile);
+            this.context.owner.grounds.addChild(tile);
         }
     }
 
@@ -117,7 +117,7 @@ export class TilemapSystem extends ecs.System {
             const rotateX = this.context.camera.transform.localRotationEulerX;
             staticObj.transform.localRotationEulerX = -rotateX;
 
-            this.context.scene3D.addChild(staticObj);
+            this.context.owner.grounds.addChild(staticObj);
         }
     }
 

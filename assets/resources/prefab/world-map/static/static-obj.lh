@@ -1,9 +1,15 @@
 {
   "_$ver": 1,
-  "_$id": "m7asut4l",
+  "_$id": "r60qor3k",
   "_$type": "Sprite3D",
-  "name": "Sprite3D",
+  "name": "static-obj",
   "transform": {
+    "localPosition": {
+      "_$type": "Vector3",
+      "x": -0.42482062902132656,
+      "y": 0.3983670811096396,
+      "z": 1.5566482270134567
+    },
     "localRotation": {
       "_$type": "Quaternion",
       "x": 0.7071067811865475,
@@ -15,11 +21,18 @@
       "_$id": "h25r3f48",
       "_$type": "Sprite3D",
       "name": "Plane",
+      "transform": {
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": -0.7071067811865475,
+          "w": 0.7071067811865476
+        }
+      },
       "_$comp": [
         {
           "_$type": "MeshFilter",
           "sharedMesh": {
-            "_$uuid": "4a4afb22-ef83-40a2-a6a8-212a2d20c52f",
+            "_$uuid": "7e9b0d09-b83c-425d-adf1-3d319f026e38",
             "_$type": "Mesh"
           }
         },

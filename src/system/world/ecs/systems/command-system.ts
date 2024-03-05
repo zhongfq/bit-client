@@ -32,6 +32,7 @@ import {
 
 const PREFAB_HERO_INFO = "resources/prefab/battle/ui/hero-info.lh";
 const PREFAB_SOLDIER_INFO = "resources/prefab/battle/ui/soldier-info.lh";
+const PREFAB_ROLE_SHADOW = "resources/prefab/battle/ui/role-shadow.lh";
 
 const formation: Readonly<IVector3Like>[] = [
     { x: -0.6, y: 0, z: 0 },

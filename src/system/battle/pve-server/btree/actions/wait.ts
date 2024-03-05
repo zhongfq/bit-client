@@ -1,14 +1,14 @@
 import { b3 } from "../../../../../core/behavior3/behavior";
 
 interface WaitArgs {
-    ms: number;
+    time: number;
     random?: number;
 }
 
 export class Wait extends b3.Process {
     override check(node: b3.Node): void {
         const args = node.args as WaitArgs;
-        if (typeof args.ms !== "number") {
+        if (typeof args.time !== "number") {
             this.error(node, `args.ms is not a number`);
         }
     }
@@ -23,11 +23,11 @@ export class Wait extends b3.Process {
             }
         } else {
             const args = node.args as WaitArgs;
-            let ms = args.ms;
+            let expired = args.time;
             if (typeof args.random === "number") {
-                ms += (Math.random() - 0.5) * args.random;
+                expired += (Math.random() - 0.5) * args.random;
             }
-            return node.yield(env, env.context.time + ms);
+            return node.yield(env, env.context.time + expired);
         }
     }
 
@@ -37,7 +37,7 @@ export class Wait extends b3.Process {
             type: "Action",
             desc: "等待",
             args: [
-                { name: "ms", type: "int", desc: "时间/毫秒" },
+                { name: "time", type: "int", desc: "时间/秒" },
                 { name: "random", type: "int?", desc: "随机范围" },
             ],
         };

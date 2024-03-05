@@ -1,0 +1,20 @@
+{
+  "name": "zhaoyun_talent_2",
+  "root": {
+    "id": 1,
+    "name": "AddBuff",
+    "desc": "单体加护甲",
+    "args": {
+      "buff_id": 1,
+      "duration_ms": 99999999,
+      "ATK": null,
+      "DEF": 20
+    },
+    "input": [
+      "",
+      ""
+    ],
+    "children": []
+  },
+  "desc": "赵云天赋2"
+}

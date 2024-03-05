@@ -71,6 +71,9 @@ export class MainMediator extends Mediator {
     }
 
     initBtn() {
+        this.owner.btnPve.on(Laya.Event.CLICK, () => {
+            app.ui.replace(ui.PVE);
+        });
         this.owner.btnBag.on(Laya.Event.CLICK, () => {
             app.ui.show(ui.BAG);
         });
@@ -82,8 +85,7 @@ export class MainMediator extends Mediator {
             app.ui.show(ui.SHOP);
         });
         this.owner.btnWorld.on(Laya.Event.CLICK, () => {
-            // app.ui.replace(ui.WORLD_SCENE);
-            app.ui.replace(ui.PVE);
+            app.ui.replace(ui.WORLD_SCENE);
         });
         this.owner.boxChat.on(Laya.Event.CLICK, () => {
             app.ui.show(ui.CHAT);

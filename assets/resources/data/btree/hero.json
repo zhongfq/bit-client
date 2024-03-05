@@ -1,0 +1,81 @@
+{
+  "name": "hero",
+  "root": {
+    "id": 1,
+    "name": "Selector",
+    "desc": "英雄测试AI",
+    "args": {},
+    "children": [
+      {
+        "id": 2,
+        "name": "Sequence",
+        "desc": "普攻",
+        "args": {},
+        "children": [
+          {
+            "id": 3,
+            "name": "FindOneTarget",
+            "args": {
+              "attack": true
+            },
+            "output": [
+              "enemy"
+            ]
+          },
+          {
+            "id": 4,
+            "name": "NormalAttack",
+            "args": {},
+            "input": [
+              "enemy"
+            ]
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "name": "Sequence",
+        "desc": "找最近的目标",
+        "args": {},
+        "children": [
+          {
+            "id": 6,
+            "name": "FindOneTarget",
+            "args": {
+              "radius": 20
+            },
+            "output": [
+              "enemy"
+            ]
+          },
+          {
+            "id": 7,
+            "name": "GetPos",
+            "args": {},
+            "input": [
+              "enemy"
+            ],
+            "output": [
+              "pos"
+            ]
+          },
+          {
+            "id": 8,
+            "name": "MoveToPos",
+            "args": {},
+            "input": [
+              ""
+            ]
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "name": "MoveForward",
+        "desc": "冲啊",
+        "args": {}
+      }
+    ]
+  },
+  "desc": "英雄测试AI"
+}

@@ -7,6 +7,7 @@ import { ChestUI } from "../prefab/chest/ChestUI";
  * scenes/home.ls
  */
 export class HomeUIBase extends Laya.Scene {
+    public btnPve!: Laya.Button;
     public btnMail!: Laya.Button;
     public btnShop!: Laya.Button;
     public btnNotice!: Laya.Button;

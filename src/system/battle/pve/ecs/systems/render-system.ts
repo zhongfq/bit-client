@@ -6,6 +6,7 @@ import { TransformComponent } from "../components/movement-component";
 import {
     AnimationComponent,
     HeroInfoComponent,
+    ShadowComponent,
     SoliderInfoComponent,
 } from "../components/render-component";
 import { HeroComponent, OwnerComponent } from "../components/troop-component";
@@ -22,6 +23,8 @@ export class RenderSystem extends ecs.System {
             this._loadHeroInfo(component);
         } else if (component instanceof SoliderInfoComponent) {
             this._loadSoiderInfo(component);
+        } else if (component instanceof ShadowComponent) {
+            this._loadShadow(component);
         }
     }
 
@@ -31,6 +34,9 @@ export class RenderSystem extends ecs.System {
             component.view = null;
             component.animator = null;
         } else if (component instanceof HeroInfoComponent) {
+            component.view?.destroy(true);
+            component.view = null;
+        } else if (component instanceof ShadowComponent) {
             component.view?.destroy(true);
             component.view = null;
         }
@@ -57,7 +63,15 @@ export class RenderSystem extends ecs.System {
         const targetTransform = anim.view.transform;
 
         if (transform.flag & TransformComponent.POSITION) {
-            targetTransform.localPosition = transform.position;
+            // 更新阴影位置
+            const shadow = anim.getComponent(ShadowComponent);
+            if (shadow?.view) {
+                const positioin = transform.position;
+                positioin.cloneTo(shadow.view.transform.position);
+                shadow.view.transform.position = positioin;
+            }
+
+            targetTransform.position = transform.position;
             transform.flag &= ~TransformComponent.POSITION;
         }
 
@@ -100,19 +114,19 @@ export class RenderSystem extends ecs.System {
     }
 
     private async _loadAnimation(anim: AnimationComponent) {
-        if (anim.path) {
-            const prefab: Laya.Prefab = await Laya.loader.load(anim.path, Laya.Loader.HIERARCHY);
+        if (anim.res) {
+            const prefab: Laya.Prefab = await Laya.loader.load(anim.res, Laya.Loader.HIERARCHY);
             anim.view = prefab.create() as Laya.Sprite3D;
             anim.animator = anim.view.getChildByName("anim").getComponent(Laya.Animator);
             (anim.animator.owner as Laya.Sprite3D).transform.localRotationEulerY = 90;
-            this.context.scene3D.addChild(anim.view);
+            this.context.owner.roles.addChild(anim.view);
         }
     }
 
     private async _loadHeroInfo(info: HeroInfoComponent) {
         const hero = info.getComponent(HeroComponent)!;
         const owner = info.getComponent(OwnerComponent)!;
-        const prefab: Laya.Prefab = await Laya.loader.load(info.path, Laya.Loader.HIERARCHY);
+        const prefab: Laya.Prefab = await Laya.loader.load(info.res, Laya.Loader.HIERARCHY);
         info.view = prefab.create() as HeroInfoUI;
         this.context.owner.troops.addChild(info.view);
         info.view.heroName.text = owner.name;
@@ -123,10 +137,17 @@ export class RenderSystem extends ecs.System {
     private async _loadSoiderInfo(info: SoliderInfoComponent) {
         const soldier = info.getComponent(HeroComponent)!;
         const owner = info.getComponent(OwnerComponent)!;
-        const prefab: Laya.Prefab = await Laya.loader.load(info.path, Laya.Loader.HIERARCHY);
+        const prefab: Laya.Prefab = await Laya.loader.load(info.res, Laya.Loader.HIERARCHY);
         info.view = prefab.create() as SoldierInfoUI;
         this.context.owner.troops.addChild(info.view);
         info.view.setHpStyle(info.hpStyle);
         // info.view.updateHp(soldier.hp / soldier.maxHp);
+    }
+
+    private async _loadShadow(shadow: ShadowComponent) {
+        const prefab: Laya.Prefab = await Laya.loader.load(shadow.res, Laya.Loader.HIERARCHY);
+        shadow.view = prefab.create() as Laya.Sprite3D;
+        shadow.view.transform.localPositionY = 0.01;
+        this.context.owner.shadows.addChild(shadow.view);
     }
 }

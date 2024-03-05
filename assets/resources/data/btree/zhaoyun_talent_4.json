@@ -1,0 +1,56 @@
+{
+  "name": "zhaoyun_talent_4",
+  "root": {
+    "id": 1,
+    "name": "ListenUnderAttack",
+    "desc": "血量低时闪避高",
+    "args": {
+      "selector": true
+    },
+    "children": [
+      {
+        "id": 2,
+        "name": "Sequence",
+        "args": {},
+        "children": [
+          {
+            "id": 3,
+            "name": "CheckHp",
+            "args": {
+              "percent": 50,
+              "le": true
+            },
+            "debug": false
+          },
+          {
+            "id": 4,
+            "name": "AddBuff",
+            "args": {
+              "buff_id": 1,
+              "DODGE": 10,
+              "buff_uid": "zhaoyun4"
+            },
+            "input": [
+              "",
+              ""
+            ],
+            "output": [
+              "buff_uid"
+            ]
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "name": "DelBuff",
+        "args": {
+          "buff_id": "zhaoyun4"
+        },
+        "input": [
+          ""
+        ]
+      }
+    ]
+  },
+  "desc": "赵云天赋4"
+}

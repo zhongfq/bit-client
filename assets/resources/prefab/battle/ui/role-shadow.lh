@@ -1,0 +1,37 @@
+{
+  "_$ver": 1,
+  "_$id": "xvbxrqkk",
+  "_$type": "Sprite3D",
+  "name": "role-shadow",
+  "_$child": [
+    {
+      "_$id": "5p0s4uzb",
+      "_$type": "Sprite3D",
+      "name": "Plane",
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "y": 0.01
+        }
+      },
+      "_$comp": [
+        {
+          "_$type": "MeshFilter",
+          "sharedMesh": {
+            "_$uuid": "4a4afb22-ef83-40a2-a6a8-212a2d20c52f",
+            "_$type": "Mesh"
+          }
+        },
+        {
+          "_$type": "MeshRenderer",
+          "sharedMaterials": [
+            {
+              "_$uuid": "bf30c9f7-da3d-44f0-b3be-2f6d870125d0",
+              "_$type": "Material"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

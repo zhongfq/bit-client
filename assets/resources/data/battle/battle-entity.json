@@ -3,126 +3,151 @@
         "101": {
             "etype": 1,
             "id": 101,
+            "pve_ai": "hero",
             "res": "resources/prefab/battle/roles/hero01.lh"
         },
         "102": {
             "etype": 1,
             "id": 102,
-            "res": "resources/prefab/battle/roles/mc02.lh"
+            "pve_ai": "hero",
+            "res": "resources/prefab/battle/roles/hero02.lh"
         },
         "105": {
             "etype": 1,
             "id": 105,
-            "res": "resources/prefab/battle/roles/mc03.lh"
+            "pve_ai": "hero",
+            "res": "resources/prefab/battle/roles/hero03.lh"
         },
         "106": {
             "etype": 1,
             "id": 106,
-            "res": "resources/prefab/battle/roles/hero01.lh"
+            "pve_ai": "hero",
+            "res": "resources/prefab/battle/roles/hero04.lh"
         },
         "209": {
             "etype": 1,
             "id": 209,
-            "res": "resources/prefab/battle/roles/hero01.lh"
+            "pve_ai": "hero",
+            "res": "resources/prefab/battle/roles/hero05.lh"
         },
         "212": {
             "etype": 1,
             "id": 212,
-            "res": "resources/prefab/battle/roles/mc01.lh"
+            "pve_ai": "hero",
+            "res": "resources/prefab/battle/roles/hero06.lh"
         },
         "401": {
             "etype": 1,
             "id": 401,
-            "res": "resources/prefab/battle/roles/mc01.lh"
+            "pve_ai": "hero",
+            "res": "resources/prefab/battle/roles/hero07.lh"
         },
         "404": {
             "etype": 1,
             "id": 404,
-            "res": "resources/prefab/battle/roles/mc01.lh"
+            "pve_ai": "hero",
+            "res": "resources/prefab/battle/roles/hero08.lh"
         },
         "40001": {
             "etype": 2,
             "id": 40001,
+            "pve_ai": "hero",
             "res": "prefab/war/role/xibing1"
         },
         "40002": {
             "etype": 2,
             "id": 40002,
-            "res": "prefab/war/role/xibing2"
+            "pve_ai": "soldier",
+            "res": "resources/prefab/battle/roles/bing-dao.lh"
         },
         "40003": {
             "etype": 2,
             "id": 40003,
+            "pve_ai": "hero",
             "res": "prefab/battle/role/xb-qiangbing"
         },
         "40004": {
             "etype": 2,
             "id": 40004,
-            "res": "prefab/battle/role/xb-gongbing"
+            "pve_ai": "soldier",
+            "res": "resources/prefab/battle/roles/bing-gong.lh"
         },
         "40005": {
             "etype": 2,
             "id": 40005,
+            "pve_ai": "hero",
             "res": "prefab/battle/role/jx-gongchengche"
         },
         "50001": {
             "etype": 3,
             "id": 50001,
+            "pve_ai": "hero",
             "res": "prefab/battle/bullet/jiantou"
         },
         "50002": {
             "etype": 3,
             "id": 50002,
+            "pve_ai": "hero",
             "res": "prefab/battle/bullet/fengniu"
         },
         "50003": {
             "etype": 3,
             "id": 50003,
+            "pve_ai": "hero",
             "res": "prefab/battle/bullet/houjianpao"
         },
         "50004": {
             "etype": 3,
             "id": 50004,
+            "pve_ai": "hero",
             "res": "prefab/battle/bullet/longjuanfeng"
         },
         "50005": {
             "etype": 3,
             "id": 50005,
+            "pve_ai": "hero",
             "res": "prefab/battle/bullet/bailong"
         },
         "50006": {
             "etype": 3,
             "id": 50006,
+            "pve_ai": "hero",
             "res": "prefab/battle/bullet/bishan"
         },
         "50007": {
             "etype": 3,
             "id": 50007,
+            "pve_ai": "hero",
             "res": "prefab/battle/bullet/yunshi"
         },
         "50008": {
             "etype": 3,
             "id": 50008,
+            "pve_ai": "hero",
             "res": "prefab/battle/bullet/lvbu-skill"
         },
         "50009": {
             "etype": 3,
             "id": 50009,
+            "pve_ai": "hero",
             "res": "prefab/battle/bullet/zhouyu-attack"
         },
         "50010": {
             "etype": 3,
             "id": 50010,
+            "pve_ai": "hero",
             "res": "prefab/battle/bullet/zhugeliang-attack"
         },
         "50011": {
             "etype": 3,
             "id": 50011,
+            "pve_ai": "hero",
             "res": "prefab/battle/bullet/xiaoqiao-attack"
         },
         "50012": {
             "etype": 3,
             "id": 50012,
+            "pve_ai": "hero",
             "res": "prefab/battle/bullet/guanyu-skill"
         }
     },

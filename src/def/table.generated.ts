@@ -39,7 +39,8 @@ export interface GeneratedHeroRow {
     world_entity: number;
     enable?: number;
     job: number;
-    attack_range: number;
+    attack_radius: number;
+    skill_radius: number;
     skill1?: number;
     skill2?: number;
     skill3?: number;
@@ -49,8 +50,10 @@ export interface GeneratedHeroRow {
 // file: design/soldier.xlsx
 export interface GeneratedSoldierRow {
     id: number;
-    battle_enity: number;
+    battle_entity: number;
     skill1?: number;
+    attack_radius: number;
+    skill_radius: number;
     skill2?: number;
 }
 
@@ -236,6 +239,7 @@ export interface GeneratedBattleEntityEntityRow {
     id: number;
     etype: number;
     res: string;
+    pve_ai: string;
 }
 
 // file: design/battle/battle_demo.xlsx

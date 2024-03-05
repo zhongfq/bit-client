@@ -1,0 +1,51 @@
+{
+  "name": "sunce_talent_3",
+  "root": {
+    "id": 1,
+    "name": "ListenDie",
+    "desc": "敌人多攻高",
+    "args": {
+      "sequence": true
+    },
+    "input": [
+      ""
+    ],
+    "children": [
+      {
+        "id": 2,
+        "name": "FindFriendList",
+        "args": {},
+        "output": [
+          "list",
+          ""
+        ]
+      },
+      {
+        "id": 3,
+        "name": "ForEach",
+        "args": {},
+        "input": [
+          "list"
+        ],
+        "output": [
+          "hero"
+        ],
+        "children": [
+          {
+            "id": 4,
+            "name": "AddBuff",
+            "args": {
+              "buff_id": 1,
+              "ATK": 200
+            },
+            "input": [
+              "hero",
+              ""
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "desc": "孙策天赋3"
+}

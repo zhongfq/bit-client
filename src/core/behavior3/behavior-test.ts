@@ -36,7 +36,7 @@ class Attack extends b3.Process {
 
 class GetHp extends b3.Process {
     override run(node: b3.Node, env: RoleEnv) {
-        env.lastRet.results = [(env.owner as Role).hp];
+        env.lastRet.results.push((env.owner as Role).hp);
         return b3.Status.SUCCESS;
     }
 
@@ -125,7 +125,7 @@ class FindEnemy extends b3.Process {
             return Math.abs(x - tx) <= w && Math.abs(y - ty) <= h;
         }, args.count ?? -1);
         if (list.length) {
-            env.lastRet.results = list;
+            env.lastRet.results.push(...list);
             return b3.Status.SUCCESS;
         } else {
             return b3.Status.FAILURE;

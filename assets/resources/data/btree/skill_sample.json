@@ -1,0 +1,10 @@
+{
+  "name": "skill_sample",
+  "root": {
+    "id": 1,
+    "name": "Sequence",
+    "desc": "关羽ai",
+    "args": {}
+  },
+  "desc": "大招示例"
+}

@@ -2,7 +2,7 @@ import { ecs } from "../../../core/ecs";
 import { Mediator } from "../../../core/ui-mediator";
 import { PveUI } from "../../../ui-runtime/scene/PveUI";
 import { RoleCreator, TreeCreator } from "../pve-server/pve-defs";
-import { ICommandReceiver, ICommandSender, PveServer } from "../pve-server/pve-server";
+import { ICommandSender, PveServer } from "../pve-server/pve-server";
 import { CameraComponent } from "./ecs/components/camera-component";
 import { JoystickComponent } from "./ecs/components/joystick-component";
 import { TilemapComponent } from "./ecs/components/tilemap-component";
@@ -54,7 +54,6 @@ export class PveContext extends Mediator implements ICommandSender {
         this._ecs.addSystem(new CameraSystem(this));
         this._ecs.addSystem(new RenderSystem(this));
         this._ecs.addSystem(new TilemapSystem(this));
-
         this._pveServer = new PveServer(this);
         this._sender = new CommandSender(this._pveServer);
     }
@@ -64,9 +63,10 @@ export class PveContext extends Mediator implements ICommandSender {
     }
 
     override onUpdate() {
+        this.owner.debug.graphics.clear();
         super.onUpdate();
-        this._pveServer.update(Laya.timer.delta);
-        this._ecs.update(Laya.timer.delta);
+        this._pveServer.update(Laya.timer.delta / 1000);
+        this._ecs.update(Laya.timer.delta / 1000);
     }
 
     private get _commandSystem() {
@@ -78,6 +78,7 @@ export class PveContext extends Mediator implements ICommandSender {
     // ------------------------------------------------------------------------
     focus(eid: number) {
         this.focusRole = eid;
+        this._commandSystem.focus(eid);
     }
 
     createRole(data: RoleCreator) {
@@ -90,22 +91,13 @@ export class PveContext extends Mediator implements ICommandSender {
 
     chopTree(eid: number, target: number) {}
 
-    moveStart(eid: number, degree: number, velocity: number) {
+    moveStart(eid: number, speed: Laya.Vector3) {
         const role = this._ecs.getComponent(eid, RoleComponent);
         if (!role) {
             console.warn(`not found entity: ${eid}`);
             return;
         }
-        this._commandSystem.moveStart(role, degree, velocity);
-    }
-
-    moveChange(eid: number, degree: number, velocity: number) {
-        const role = this._ecs.getComponent(eid, RoleComponent);
-        if (!role) {
-            console.warn(`not found entity: ${eid}`);
-            return;
-        }
-        this._commandSystem.moveChange(role, degree, velocity);
+        this._commandSystem.moveStart(role, speed);
     }
 
     moveStop(eid: number) {
@@ -116,14 +108,25 @@ export class PveContext extends Mediator implements ICommandSender {
         }
         this._commandSystem.moveStop(role);
     }
+
+    drawDebug(x: number, z: number, radius: number) {
+        const outPos = Laya.Pool.obtain(Laya.Vector4);
+        const inPos = Laya.Pool.obtain(Laya.Vector3);
+        inPos.x = x;
+        inPos.z = z;
+        this.camera.worldToViewportPoint(inPos, outPos);
+        this.owner.debug.graphics.drawCircle(outPos.x, outPos.y, radius, null, 0xff0000, 2);
+    }
 }
 
-class CommandSender implements ICommandReceiver {
-    constructor(readonly pveServer: PveServer) {}
+class CommandSender {
+    constructor(readonly server: PveServer) {}
 
-    moveStart(eid: number, degree: number) {}
+    moveStart(eid: number, degree: number) {
+        this.server.receiver.moveStart(eid, degree);
+    }
 
-    moveChange(eid: number, degree: number) {}
-
-    moveStop(eid: number) {}
+    moveStop(eid: number) {
+        this.server.receiver.moveStop(eid);
+    }
 }

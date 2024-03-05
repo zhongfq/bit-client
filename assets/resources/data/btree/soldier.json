@@ -1,0 +1,17 @@
+{
+  "name": "soldier",
+  "root": {
+    "id": 1,
+    "name": "Sequence",
+    "desc": "新建行为树",
+    "children": [
+      {
+        "id": 2,
+        "name": "FollowHero",
+        "desc": "士兵以阵型位置跟随主将",
+        "args": {}
+      }
+    ]
+  },
+  "desc": "士兵"
+}

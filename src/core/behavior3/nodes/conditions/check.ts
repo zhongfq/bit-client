@@ -16,11 +16,7 @@ export class Check extends b3.Process {
     override run(node: b3.Node, env: b3.Env) {
         const args = node.args as CheckArgs;
         const value = env.eval(args.value);
-        if (typeof value === "number") {
-            throw new Error(`code error: ${args.value}`);
-        } else {
-            return value ? b3.Status.SUCCESS : b3.Status.FAILURE;
-        }
+        return value ? b3.Status.SUCCESS : b3.Status.FAILURE;
     }
 
     override get descriptor() {
