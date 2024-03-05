@@ -8,6 +8,7 @@ import { formation } from "../../../def/formation";
 import { AiComponent } from "./ecs/components/ai-component";
 import { MovementComponent, TransformComponent } from "./ecs/components/movement-component";
 import { RoleComponent, SoldierComponent, TroopComponent } from "./ecs/components/role-component";
+import { Skill, SkillComponent } from "./ecs/components/skill-component";
 import { TreeComponent } from "./ecs/components/tree-component";
 import { AiSystem } from "./ecs/systems/ai-system";
 import { MovementSystem } from "./ecs/systems/movement-system";
@@ -68,7 +69,7 @@ export class PveServer extends b3.Context {
 
     private _drawDebug() {
         this._ecs.getComponents(TransformComponent).forEach((value) => {
-            this._sender.drawDebug(value.position.x, value.position.z, 10);
+            this._sender.drawDebug(value.position.x, value.position.z, 5);
         });
     }
 
@@ -101,6 +102,22 @@ export class PveServer extends b3.Context {
         entity.addComponent(MovementComponent);
         entity.addComponent(TroopComponent);
 
+        const skill = entity.addComponent(SkillComponent);
+        const table = app.service.table;
+        const heroRow = table.hero[role.tid];
+        if (heroRow.skill1) {
+            skill.skills.push(new Skill(table.skill[heroRow.skill1]));
+        }
+        if (heroRow.skill2) {
+            skill.skills.push(new Skill(table.skill[heroRow.skill2]));
+        }
+        if (heroRow.skill3) {
+            skill.skills.push(new Skill(table.skill[heroRow.skill3]));
+        }
+        if (heroRow.skill4) {
+            skill.skills.push(new Skill(table.skill[heroRow.skill4]));
+        }
+
         this._sender.createRole({
             eid: role.eid,
             etype: BattleConf.ENTITY_TYPE.HERO,
@@ -120,22 +137,32 @@ export class PveServer extends b3.Context {
             const entity = this._ecs.createEntity();
 
             const role = entity.addComponent(RoleComponent);
-            role.tid = idx >= 6 ? 40004 : 40002;
+            role.tid = idx >= 4 ? 40004 : 40002;
             role.hp = 200;
             role.maxHp = 200;
 
-            const solider = entity.addComponent(SoldierComponent);
-            solider.index = idx;
-            solider.offset = value;
-            solider.hero = hero;
-            hero.troop!.soldiers.push(solider);
+            const table = app.service.table;
+            const soldierRow = table.soldier[role.tid];
+
+            const soldier = entity.addComponent(SoldierComponent);
+            soldier.index = idx;
+            soldier.offset = value;
+            soldier.hero = hero;
+            soldier.data = soldierRow;
+            hero.troop!.soldiers.push(soldier);
+
+            const skill = entity.addComponent(SkillComponent);
+            if (soldierRow.skill1) {
+                skill.skills.push(new Skill(table.skill[soldierRow.skill1]));
+            }
+            if (soldierRow.skill2) {
+                skill.skills.push(new Skill(table.skill[soldierRow.skill2]));
+            }
 
             const transform = entity.addComponent(TransformComponent);
             transform.position.x = value.x + hero.transform.position.x;
             transform.position.z = value.z + hero.transform.position.z;
 
-            const table = app.service.table;
-            const soldierRow = table.soldier[role.tid];
             const entityRow = table.battleEntity.entity[soldierRow.battle_entity];
             const ai = entity.addComponent(AiComponent);
             ai.res = `resources/data/btree/${entityRow.pve_ai}.json`;
@@ -165,15 +192,6 @@ export class PveServer extends b3.Context {
         movement.speed.y = 0;
         movement.speed.z = 0;
         this._sender.moveStop(role.eid);
-    }
-
-    private _calcSpeed(role: RoleComponent, degree: number) {
-        const rad = MathUtil.toRadian(degree);
-        const movement = role.movement;
-        const transform = role.transform;
-        movement.speed.x = movement.velocity * Math.cos(rad);
-        movement.speed.z = movement.velocity * Math.sin(rad);
-        transform.rotation = degree;
     }
 
     //-------------------------------------------------------------------------

@@ -10,10 +10,10 @@ export const BattleConf = {
         PVP: 2,
     },
     BORDER: {
-        BOTTOM: 0,
-        LEFT: 0,
-        RIGHT: 1200,
-        TOP: 460,
+        BOTTOM: 150,
+        LEFT: -150,
+        RIGHT: 150,
+        TOP: 150,
     },
     CARD_SLOT_COUNT: 3,
     COMMAND: {

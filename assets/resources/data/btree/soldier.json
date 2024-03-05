@@ -14,19 +14,37 @@
         "children": [
           {
             "id": 3,
-            "name": "unknow",
-            "desc": "判断主将脱战范围",
-            "args": {}
+            "name": "GetHeroDistance",
+            "desc": "计算与主将之间的距离",
+            "args": {},
+            "output": [
+              "distance"
+            ]
           },
           {
             "id": 4,
+            "name": "Check",
+            "args": {
+              "value": "distance > 8"
+            }
+          },
+          {
+            "id": 5,
+            "name": "NotNull",
+            "args": {},
+            "input": [
+              "fight_time"
+            ]
+          },
+          {
+            "id": 6,
             "name": "Check",
             "args": {
               "value": "fight_time > 2"
             }
           },
           {
-            "id": 5,
+            "id": 7,
             "name": "Clear",
             "desc": "清除交战时间",
             "args": {},
@@ -35,7 +53,7 @@
             ]
           },
           {
-            "id": 6,
+            "id": 8,
             "name": "BackTeam",
             "desc": "执行归队（可能挂起）",
             "args": {}
@@ -43,13 +61,13 @@
         ]
       },
       {
-        "id": 7,
+        "id": 9,
         "name": "Sequence",
         "desc": "普攻",
         "args": {},
         "children": [
           {
-            "id": 8,
+            "id": 10,
             "name": "FindOneTarget",
             "args": {
               "attack": true,
@@ -62,18 +80,18 @@
             "children": []
           },
           {
-            "id": 9,
+            "id": 11,
             "name": "AlwaysSuccess",
             "desc": "设置交战时间",
             "args": {},
             "children": [
               {
-                "id": 10,
+                "id": 12,
                 "name": "Sequence",
                 "args": {},
                 "children": [
                   {
-                    "id": 11,
+                    "id": 13,
                     "name": "IsNull",
                     "args": {},
                     "input": [
@@ -82,7 +100,7 @@
                     "children": []
                   },
                   {
-                    "id": 12,
+                    "id": 14,
                     "name": "GetTime",
                     "desc": "设置交战时间",
                     "args": {},
@@ -95,7 +113,7 @@
             ]
           },
           {
-            "id": 13,
+            "id": 15,
             "name": "NormalAttack",
             "args": {},
             "input": [
@@ -105,13 +123,13 @@
         ]
       },
       {
-        "id": 14,
+        "id": 16,
         "name": "Sequence",
         "desc": "找目标",
         "args": {},
         "children": [
           {
-            "id": 15,
+            "id": 17,
             "name": "FindOneTarget",
             "args": {
               "radius": 6
@@ -121,7 +139,7 @@
             ]
           },
           {
-            "id": 16,
+            "id": 18,
             "name": "GetPos",
             "args": {},
             "input": [
@@ -132,7 +150,7 @@
             ]
           },
           {
-            "id": 17,
+            "id": 19,
             "name": "MoveToPos",
             "args": {},
             "input": [
@@ -142,7 +160,7 @@
         ]
       },
       {
-        "id": 18,
+        "id": 20,
         "name": "FollowHero",
         "desc": "士兵以阵型位置跟随主将",
         "args": {}

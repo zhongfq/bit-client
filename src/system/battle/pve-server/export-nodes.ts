@@ -21,6 +21,7 @@ import { ChopTree } from "./btree/actions/chop-tree";
 import { CreateBullet } from "./btree/actions/create-bullet";
 import { DelBuff } from "./btree/actions/del-buff";
 import { FollowHero } from "./btree/actions/follow-hero";
+import { GetHeroDistance } from "./btree/actions/get-hero-distance";
 import { GetPos } from "./btree/actions/get-pos";
 import { GetSkillTarget } from "./btree/actions/get-skill-target";
 import { Hurt } from "./btree/actions/hurt";
@@ -53,6 +54,7 @@ export class ExportNodes extends b3.Context {
             MoveToAtkPos,
             MoveToPos,
             NormalAttack,
+            GetHeroDistance,
             Wait
         );
         const descriptors: b3.ProcessDescriptor[] = [];
