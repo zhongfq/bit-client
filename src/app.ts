@@ -31,6 +31,7 @@ export class Main extends AppBase {
 
         if (Laya.Browser.onPC) {
             Laya.stage.scaleMode = Laya.Stage.SCALE_SHOWALL;
+            Laya.stage.alignH = Laya.Stage.ALIGN_CENTER;
         }
         console.log(new ExportNodes().stringify());
 
