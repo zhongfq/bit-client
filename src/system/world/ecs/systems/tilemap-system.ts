@@ -123,9 +123,18 @@ export class TilemapSystem extends ecs.System {
             if (layer != layerName) {
                 continue;
             }
-            const uid = uidMap.get(TilemapComponent.XY_TO_KEY(x, y)) || 0;
-            const element = this._allMap.get(uid);
-            return element;
+            if (layerName == Tilemap.LayerName.Static || layerName == Tilemap.LayerName.Dynamic) {
+                for (const uid of uidMap.values()) {
+                    const element = this._allMap.get(uid) as Tilemap.ObjElement;
+                    if (element && TilemapComponent.IN_RECT(x, y, element.x, element.y, element.width, element.height)) {
+                        return element;
+                    }
+                }
+            } else {
+                const uid = uidMap.get(TilemapComponent.XY_TO_KEY(x, y)) || 0;
+                const element = this._allMap.get(uid);
+                return element;
+            }
         }
         return undefined;
     }
@@ -339,7 +348,7 @@ export class TilemapSystem extends ecs.System {
         for (let i = 0; i < this._world!.maps.length; i++) {
             const info = this._world!.maps[i];
 
-            const inRect = info.x <= x && x < info.x + info.width && info.y <= y && y < info.y + info.height;
+            const inRect = TilemapComponent.IN_RECT(x, y, info.x, info.y, info.width, info.height);
             if (!inRect) {
                 continue;
             }

@@ -37,6 +37,10 @@ export class TilemapComponent extends ecs.SingletonComponent {
     static readonly XY_TO_KEY = (x: number, y: number) => { return Math.floor(x) + '_' + Math.floor(y); };
     static readonly KEY_TO_XY = (key: string) => { const arr = key.split('_'); return [Math.floor(Number(arr[0])), Math.floor(Number(arr[1]))] };
 
+    static readonly IN_RECT = (x: number, y: number, rectX: number, rectY: number, rectW: number, rectH: number) => {
+        return rectX <= x && x < rectX + rectW && rectY <= y && y < rectY + rectH;
+    }
+
     static readonly STATIC_TEXTURE_CFG: Map<string, Tilemap.TextureCfg> = new Map([
         ["map_Grassland_hill_01", { tileX: 1, tileY: 3, tileW: 4, tileH: 4, offsetX: 1.44996, offsetY: 1.49997, offsetZ: 1.51993, scale: 4.5 }],
         ["map_Grassland_hill_02", { tileX: 1, tileY: 2, tileW: 3, tileH: 3, offsetX: 1.21997, offsetY: 1.49997, offsetZ: 1.32993, scale: 3 }],
@@ -303,9 +307,15 @@ export namespace Tilemap {
 
     export abstract class ObjElement extends Element {
         private _obj?: Laya.Sprite3D;
+        private _realX: number = 0;
+        private _realY: number = 0;
         private _width: number = 0;
         private _height: number = 0;
         private _blocks: number[] = [];
+
+        public override get x(): number { return this._realX; }
+
+        public override get y(): number { return this._realY; }
 
         public get width(): number { return this._width; }
 
@@ -324,10 +334,13 @@ export namespace Tilemap {
             const resName = this.system.getTextureResName(this.getTextureName(), this.gid);
             const textureCfg = this.getTextureCfg().get(resName);
 
+            this._realX = Math.floor(super.x - (textureCfg?.tileX || 0));
+            this._realY = Math.floor(super.y - (textureCfg?.tileY || 0));
+
             const objPos = this._obj.transform.position;
-            objPos.x = Math.floor(this.x - (textureCfg?.tileX || 0));
+            objPos.x = this._realX;
             objPos.y = 0;
-            objPos.z = Math.floor(this.y - (textureCfg?.tileY || 0));
+            objPos.z = this._realY;
             this._obj.transform.position = objPos;
 
             const spritePos = sprite.transform.localPosition;
@@ -355,8 +368,6 @@ export namespace Tilemap {
 
             this._obj.name = this.x + '_' + this.y + ' | ' + resName;
             this.system.getRoot().getChildByName(this.layerName).addChild(this._obj);
-
-            this.showBlock();
         }
 
         public showBlock() {
@@ -364,11 +375,12 @@ export namespace Tilemap {
                 return
             }
             if (this._blocks.length == 0) {
-                const objPos = this._obj.transform.position;
-                for (let $x = objPos.x; $x < objPos.x + this.width; $x++) {
-                    for (let $y = objPos.z; $y < objPos.z + this.height; $y++) {
-                        const uid = this.system.addElement($x, $y, LayerName.Block);
-                        this._blocks.push(uid);
+                for (let $x = this.x; $x < this.x + this.width; $x++) {
+                    for (let $y = this.y; $y < this.y + this.height; $y++) {
+                        const element = this.system.getElementByPos($x, $y, LayerName.Block);
+                        if (element) {
+                            this._blocks.push(element.uid);
+                        }
                     }
                 }
             }
@@ -381,9 +393,8 @@ export namespace Tilemap {
         public hideBlock() {
             this._blocks.forEach(uid => {
                 const element = this.system.getElementByUid(uid);
-                element?.recover();
+                element?.erase();
             })
-            this._blocks = [];
         }
 
         public override erase() {

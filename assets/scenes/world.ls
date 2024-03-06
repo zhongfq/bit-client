@@ -239,6 +239,18 @@
           ]
         }
       ]
+    },
+    {
+      "_$id": "ko0vuzvu",
+      "_$var": true,
+      "_$type": "Box",
+      "name": "mapClickArea",
+      "width": 750,
+      "height": 1334,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "bottom": 0
     }
   ]
 }

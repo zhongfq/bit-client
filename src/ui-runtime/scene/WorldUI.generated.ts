@@ -10,5 +10,6 @@ export class WorldUIBase extends Laya.Scene {
     public joystickGroup!: Laya.Box;
     public joystick!: Laya.Box;
     public indicator!: Laya.Image;
+    public mapClickArea!: Laya.Box;
 }
 
