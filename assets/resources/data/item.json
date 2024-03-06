@@ -10,7 +10,7 @@
                 5
             ]
         ],
-        "bag_id": 1,
+        "bag_id": 2,
         "desc": "这是宝箱1",
         "discard": 1,
         "icon": "icon1",
@@ -33,7 +33,7 @@
                 6
             ]
         ],
-        "bag_id": 1,
+        "bag_id": 2,
         "desc": "这是宝箱2",
         "discard": 1,
         "icon": "icon2",
@@ -56,7 +56,7 @@
                 7
             ]
         ],
-        "bag_id": 1,
+        "bag_id": 2,
         "desc": "这是宝箱3",
         "discard": 1,
         "icon": "icon3",
@@ -79,7 +79,7 @@
                 8
             ]
         ],
-        "bag_id": 1,
+        "bag_id": 2,
         "desc": "这是宝箱4",
         "discard": 1,
         "expired": 10,
@@ -88,6 +88,29 @@
         "main_type": 1,
         "name": "宝箱4",
         "quality": 4,
+        "stack": 1,
+        "sub_type": 1,
+        "use": 1
+    },
+    "10105": {
+        "args": [
+            [
+                10201,
+                10
+            ],
+            [
+                10202,
+                9
+            ]
+        ],
+        "bag_id": 2,
+        "desc": "这是宝箱5",
+        "discard": 1,
+        "icon": "icon5",
+        "id": 10105,
+        "main_type": 1,
+        "name": "宝箱5",
+        "quality": 5,
         "stack": 1,
         "sub_type": 1,
         "use": 1
