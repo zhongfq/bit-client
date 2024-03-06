@@ -16,6 +16,9 @@ export class ElementComponent extends ecs.Component {
     // 阵营
     aid: number = 0;
 
+    // 用于目标按距离排序
+    tmpDistance: number = 0;
+
     // 缓存组件方便快速访问？
     private _movement?: MovementComponent;
     private _transform?: TransformComponent;

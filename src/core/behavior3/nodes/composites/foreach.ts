@@ -28,7 +28,7 @@ export class Foreach extends b3.Process {
         }
 
         for (; i < arr.length; i++) {
-            env.setVar(node.data.output![0], arr[i]);
+            env.setValue(node.data.output![0], arr[i]);
             for (; j < node.children.length; j++) {
                 const status = node.children[j].run(env);
                 if (status === b3.Status.RUNNING) {

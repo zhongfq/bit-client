@@ -19,6 +19,7 @@ import { TowardToTarget } from "../../btree/actions/toward-to-target";
 import { Wait } from "../../btree/actions/wait";
 import { FindOneTarget } from "../../btree/conditions/find-one-target";
 import { FindTargets } from "../../btree/conditions/find-targets";
+import { IsFreeStance } from "../../btree/conditions/is-free-stance";
 import { PveServer } from "../../pve-server";
 import { AiComponent, AiTreeEnv } from "../components/ai-component";
 import { ElementComponent } from "../components/element-component";
@@ -26,8 +27,6 @@ import { SkillComponent } from "../components/skill-component";
 
 export class AiSystem extends ecs.System {
     static readonly TICK = 0.1;
-
-    private _time: number = 0;
 
     constructor(readonly context: PveServer) {
         super();
@@ -43,6 +42,7 @@ export class AiSystem extends ecs.System {
         context.registerProcess(GetPos);
         context.registerProcess(GetSkillTarget);
         context.registerProcess(Hurt);
+        context.registerProcess(IsFreeStance);
         context.registerProcess(MoveStop);
         context.registerProcess(MoveToAtkPos);
         context.registerProcess(MoveToPos);
@@ -70,20 +70,17 @@ export class AiSystem extends ecs.System {
     }
 
     override update(dt: number): void {
-        const currTimer = this.context.time;
-        if (currTimer - this._time > AiSystem.TICK) {
-            this._time = currTimer;
-            this.ecs.getComponents(AiComponent).forEach((ai) => {
-                for (const v of ai.getComponent(SkillComponent)!.skills) {
-                    if (v.running) {
-                        return;
-                    }
+        const time = this.context.time;
+        this.ecs.getComponents(AiComponent).forEach((ai) => {
+            for (const v of ai.getComponent(SkillComponent)!.skills) {
+                if (v.running) {
+                    return;
                 }
-                if (ai.tree && ai.env) {
-                    ai.tree.run(ai.env);
-                }
-            });
-        }
+            }
+            if (time - ai.lastUpdate > AiSystem.TICK && ai.tree && ai.env) {
+                ai.tree.run(ai.env);
+            }
+        });
     }
 
     private async _loadAi(ai: AiComponent) {

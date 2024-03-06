@@ -50,33 +50,24 @@ export class PveServer extends b3.Context {
         return this._ecs;
     }
 
-    private _calcIndex(positioin: Laya.Vector3) {
-        const x = Math.round(positioin.x * 2) << 16;
-        const z = Math.round(positioin.z * 2);
-        return x | z;
-    }
-
-    findAtStance(positioin: Laya.Vector3) {
-        const idx = this._calcIndex(positioin);
-        return this._stanceMap.get(idx);
+    isFreeStance(element: ElementComponent, positioin: Laya.Vector3) {
+        for (const target of this._stanceMap.values()) {
+            if (target.aid === element.aid && target !== element) {
+                const distance = Laya.Vector3.distance(target.transform.position, positioin);
+                if (distance < 0.3) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     clearStance(element: ElementComponent) {
-        const index = element.transform.index;
-        if (index) {
-            this._stanceMap.delete(index);
-            element.transform.index = undefined;
-        }
+        this._stanceMap.delete(element.eid);
     }
 
     setStance(element: ElementComponent) {
-        const oldIndex = element.transform.index;
-        const newIndex = this._calcIndex(element.transform.position);
-        if (oldIndex) {
-            this._stanceMap.delete(oldIndex);
-        }
-        element.transform.index = newIndex;
-        this._stanceMap.set(newIndex, element);
+        this._stanceMap.set(element.eid, element);
     }
 
     update(delta: number) {
@@ -234,7 +225,7 @@ export class PveServer extends b3.Context {
     }
 
     private _createMonsters() {
-        const arr = [new Laya.Vector3(10, 0, 12)];
+        const arr = [new Laya.Vector3(10, 0, 12), new Laya.Vector3(11, 0, 13)];
         for (const p of arr) {
             const entity = this._ecs.createEntity();
 
@@ -279,7 +270,8 @@ export class PveServer extends b3.Context {
         }
     }
 
-    moveStart(element: ElementComponent, speed: Laya.Vector3) {
+    moveStart(element: ElementComponent, speed: Laya.Vector3, target?: Laya.Vector3) {
+        element.movement.target = target;
         element.movement.speed.cloneFrom(speed);
         element.transform.rotation = MathUtil.toDegree(Math.atan2(speed.z, speed.x));
         this._sender.moveStart(element.eid, speed);

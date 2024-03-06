@@ -76,17 +76,17 @@ export namespace b3 {
             }
             this._process = process;
             this._process.check(this);
-            this._yield = TreeEnv.makePrivateKey(this, "yield");
+            this._yield = TreeEnv.makeTempVar(this, "yield");
         }
 
         run(env: TreeEnv) {
-            if (env.getVar(this._yield) === undefined) {
+            if (env.getValue(this._yield) === undefined) {
                 env.stack.push(this);
             }
 
             Node.tmpInputArgs.length = 0;
             this.data.input?.forEach((varName) => {
-                Node.tmpInputArgs.push(env.getVar(varName));
+                Node.tmpInputArgs.push(env.getValue(varName));
             });
 
             env.lastRet.results.length = 0;
@@ -95,11 +95,11 @@ export namespace b3 {
             if (status != Status.RUNNING) {
                 this.data.output?.forEach((varName, i) => {
                     const varValue = env.lastRet.results[i];
-                    env.setVar(varName, varValue);
+                    env.setValue(varName, varValue);
                 });
-                env.setVar(this._yield, undefined);
+                env.setValue(this._yield, undefined);
                 env.stack.pop();
-            } else if (env.getVar(this._yield) === undefined) {
+            } else if (env.getValue(this._yield) === undefined) {
                 throw new Error(`${this.name}#${this.id}: should use Node.yield`);
             }
 
@@ -108,7 +108,7 @@ export namespace b3 {
             if (this.data.debug) {
                 let varStr = "";
                 for (const k of env.vars.keys()) {
-                    if (!(TreeEnv.isPrivateKey(k) || TreeEnv.isPublicKey(k))) {
+                    if (!(TreeEnv.isTempVar(k) || TreeEnv.isPrivateVar(k))) {
                         varStr += `${k}:${env.vars.get(k)}, `;
                     }
                 }
@@ -122,12 +122,12 @@ export namespace b3 {
         }
 
         yield(env: TreeEnv, value?: unknown) {
-            env.setVar(this._yield, value ?? true);
+            env.setValue(this._yield, value ?? true);
             return Status.RUNNING;
         }
 
         resume(env: TreeEnv): unknown {
-            return env.getVar(this._yield);
+            return env.getValue(this._yield);
         }
     }
 
@@ -167,7 +167,7 @@ export namespace b3 {
             results: [],
         };
 
-        private _vars: Map<string, unknown> = new Map();
+        private _values: Map<string, unknown> = new Map();
         private _stack: Node[] = [];
 
         constructor(context: Context) {
@@ -175,7 +175,7 @@ export namespace b3 {
         }
 
         get vars() {
-            return this._vars;
+            return this._values;
         }
 
         get stack() {
@@ -183,41 +183,49 @@ export namespace b3 {
         }
 
         eval(code: string) {
-            return this.context.compileExpr(code).evaluate(this._vars);
+            return this.context.compileExpr(code).evaluate(this._values);
         }
 
-        getVar(k: string) {
-            return this._vars.get(k);
+        getValue(k: string) {
+            return this._values.get(k);
         }
 
-        setVar(k: string, v: unknown) {
+        setValue(k: string, v: unknown) {
             if (v === undefined) {
-                this._vars.delete(k);
+                this._values.delete(k);
             } else {
-                this._vars.set(k, v);
+                this._values.set(k, v);
             }
         }
 
         clear() {
             this._stack.length = 0;
-            this._vars.clear();
+            this._values.clear();
             this.lastRet.results.length = 0;
         }
 
-        static makePublicKey(node: Node, k: string) {
-            return `__public_Node#${node.id}_${k}`;
+        static makePrivateVar(k: string): string;
+
+        static makePrivateVar(node: Node, k: string): string;
+
+        static makePrivateVar(node: Node | string, k?: string) {
+            if (typeof node === "string") {
+                return `__PRIVATE_VAR_${node}`;
+            } else {
+                return `__PRIVATE_VAR_NODE#${node.id}_${k}`;
+            }
         }
 
-        static isPublicKey(k: string) {
-            return k.indexOf("__public_") === 0;
+        static isPrivateVar(k: string) {
+            return k.indexOf("__PRIVATE_VAR_") === 0;
         }
 
-        static makePrivateKey(node: Node, k: string) {
-            return `__private_Node#${node.id}_${k}`;
+        static makeTempVar(node: Node, k: string) {
+            return `__TEMP_VAR_NODE#${node.id}_${k}`;
         }
 
-        static isPrivateKey(k: string) {
-            return k.indexOf("__private_") === 0;
+        static isTempVar(k: string) {
+            return k.indexOf("__TEMP_VAR_") === 0;
         }
     }
 
@@ -244,7 +252,7 @@ export namespace b3 {
             if (stack.length > 0) {
                 stack.length = 0;
                 for (const key of vars.keys()) {
-                    if (TreeEnv.isPrivateKey(key)) {
+                    if (TreeEnv.isTempVar(key)) {
                         vars.delete(key);
                     }
                 }

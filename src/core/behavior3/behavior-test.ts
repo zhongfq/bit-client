@@ -25,7 +25,7 @@ class Attack extends b3.Process {
         }
         console.log("Do Attack");
         enemy.hp -= 100;
-        env.setVar("ATTACKING", true);
+        env.setValue("ATTACKING", true);
         return b3.Status.SUCCESS;
     }
 

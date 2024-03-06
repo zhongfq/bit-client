@@ -39,6 +39,7 @@ import { TowardToTarget } from "./btree/actions/toward-to-target";
 import { Wait } from "./btree/actions/wait";
 import { FindOneTarget } from "./btree/conditions/find-one-target";
 import { FindTargets } from "./btree/conditions/find-targets";
+import { IsFreeStance } from "./btree/conditions/is-free-stance";
 
 export class ExportNodes extends b3.Context {
     stringify() {
@@ -58,6 +59,7 @@ export class ExportNodes extends b3.Context {
             GetPos,
             GetSkillTarget,
             Hurt,
+            IsFreeStance,
             LaunchSkill,
             MoveForward,
             MoveStop,
