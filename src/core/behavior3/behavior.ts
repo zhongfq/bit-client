@@ -99,6 +99,8 @@ export namespace b3 {
                 });
                 env.setVar(this._yield, undefined);
                 env.stack.pop();
+            } else if (env.getVar(this._yield) === undefined) {
+                throw new Error(`${this.name}#${this.id}: should use Node.yield`);
             }
 
             env.lastRet.status = status;

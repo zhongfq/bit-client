@@ -1,12 +1,12 @@
 import { ecs } from "../../../core/ecs";
 import { Mediator } from "../../../core/ui-mediator";
 import { PveUI } from "../../../ui-runtime/scene/PveUI";
-import { RoleCreator, TreeCreator } from "../pve-server/pve-defs";
+import { ElementCreator } from "../pve-server/pve-defs";
 import { ICommandSender, PveServer } from "../pve-server/pve-server";
 import { CameraComponent } from "./ecs/components/camera-component";
 import { JoystickComponent } from "./ecs/components/joystick-component";
 import { TilemapComponent } from "./ecs/components/tilemap-component";
-import { RoleAnimation, RoleComponent } from "./ecs/components/troop-component";
+import { ElementAnimation, ElementComponent } from "./ecs/components/troop-component";
 import { CameraSystem } from "./ecs/systems/camera-system";
 import { CommandSystem } from "./ecs/systems/command-system";
 import { JoystickSystem } from "./ecs/systems/joystick-system";
@@ -15,7 +15,7 @@ import { RenderSystem } from "./ecs/systems/render-system";
 import { TilemapSystem } from "./ecs/systems/tilemap-system";
 
 @Laya.regClass()
-export class PveContext extends Mediator implements ICommandSender {
+export class PveContext extends Mediator {
     declare owner: PveUI;
 
     focusRole: number = 0;
@@ -54,7 +54,7 @@ export class PveContext extends Mediator implements ICommandSender {
         this._ecs.addSystem(new CameraSystem(this));
         this._ecs.addSystem(new RenderSystem(this));
         this._ecs.addSystem(new TilemapSystem(this));
-        this._pveServer = new PveServer(this);
+        this._pveServer = new PveServer(this._ecs.getSystem(CommandSystem)!);
         this._sender = new CommandSender(this._pveServer);
     }
 
@@ -67,68 +67,6 @@ export class PveContext extends Mediator implements ICommandSender {
         super.onUpdate();
         this._pveServer.update(Laya.timer.delta / 1000);
         this._ecs.update(Laya.timer.delta / 1000);
-    }
-
-    private get _commandSystem() {
-        return this._ecs.getSystem(CommandSystem)!;
-    }
-
-    // ------------------------------------------------------------------------
-    // ICommandSender
-    // ------------------------------------------------------------------------
-    focus(eid: number) {
-        this.focusRole = eid;
-        this._commandSystem.focus(eid);
-    }
-
-    createRole(data: RoleCreator) {
-        this._commandSystem.createRole(data);
-    }
-
-    createTree(data: TreeCreator) {
-        this._commandSystem.createTree(data);
-    }
-
-    chopTree(eid: number, target: number) {}
-
-    moveStart(eid: number, speed: Laya.Vector3) {
-        const role = this._ecs.getComponent(eid, RoleComponent);
-        if (!role) {
-            console.warn(`not found entity: ${eid}`);
-            return;
-        }
-        this._commandSystem.moveStart(role, speed);
-    }
-
-    moveStop(eid: number) {
-        const role = this._ecs.getComponent(eid, RoleComponent);
-        if (!role) {
-            console.warn(`not found entity: ${eid}`);
-            return;
-        }
-        this._commandSystem.moveStop(role);
-    }
-
-    playAnim(eid: number, anim: string) {
-        const role = this._ecs.getComponent(eid, RoleComponent);
-        if (!role) {
-            console.warn(`not found entity: ${eid}`);
-            return;
-        }
-        if (anim === "attack") {
-            this._commandSystem.playAnim(role, RoleAnimation.ATTACK);
-        } else {
-            console.error(`TODO: play anim '${anim}'`);
-        }
-    }
-
-    drawDebug(x: number, z: number, radius: number) {
-        const outPos = Laya.Pool.obtain(Laya.Vector4);
-        const inPos = Laya.Pool.obtain(Laya.Vector3);
-        inPos.x = x;
-        inPos.z = z;
-        this.camera.worldToViewportPoint(inPos, outPos);
-        this.owner.debug.graphics.drawCircle(outPos.x, outPos.y, radius, null, 0xff0000, 2);
     }
 }
 

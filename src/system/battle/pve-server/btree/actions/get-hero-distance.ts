@@ -1,8 +1,8 @@
 import { b3 } from "../../../../../core/behavior3/behavior";
-import { RoleTreeEnv } from "../../ecs/components/role-component";
+import { AiTreeEnv } from "../../ecs/components/ai-component";
 
 export class GetHeroDistance extends b3.Process {
-    override run(node: b3.Node, env: RoleTreeEnv) {
+    override run(node: b3.Node, env: AiTreeEnv) {
         const hero = env.owner.soldier!.hero;
         env.lastRet.results.push(
             Laya.Vector3.distance(hero.transform.position, env.owner.transform.position)

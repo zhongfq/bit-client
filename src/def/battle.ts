@@ -38,6 +38,7 @@ export const BattleConf = {
         BULLET: 3,
         HERO: 1,
         SOLDIER: 2,
+        WOOD: 4,
     },
     LOGIC_FPS: 10,
     MAX_CARD_CARRY: 8,

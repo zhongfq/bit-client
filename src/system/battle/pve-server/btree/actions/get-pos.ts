@@ -1,8 +1,14 @@
 import { b3 } from "../../../../../core/behavior3/behavior";
-import { RoleComponent, RoleTreeEnv } from "../../ecs/components/role-component";
+import { AiTreeEnv } from "../../ecs/components/ai-component";
+import { ElementComponent } from "../../ecs/components/element-component";
 
 export class GetPos extends b3.Process {
-    override run(node: b3.Node, env: RoleTreeEnv, target?: RoleComponent[] | RoleComponent) {
+    override run(node: b3.Node, env: AiTreeEnv, target?: unknown) {
+        if (target instanceof Array) {
+            this.error(node, "target is array");
+        }
+        const element = target as ElementComponent;
+        env.lastRet.results.push(element.transform.position);
         return b3.Status.SUCCESS;
     }
 

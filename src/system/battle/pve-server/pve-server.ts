@@ -7,13 +7,16 @@ import { BattleConf } from "../../../def/battle";
 import { formation } from "../../../def/formation";
 import { AiComponent } from "./ecs/components/ai-component";
 import { MovementComponent, TransformComponent } from "./ecs/components/movement-component";
-import { RoleComponent, SoldierComponent, TroopComponent } from "./ecs/components/role-component";
+import {
+    ElementComponent,
+    SoldierComponent,
+    TroopComponent,
+} from "./ecs/components/element-component";
 import { Skill, SkillComponent } from "./ecs/components/skill-component";
-import { TreeComponent } from "./ecs/components/tree-component";
 import { AiSystem } from "./ecs/systems/ai-system";
 import { MovementSystem } from "./ecs/systems/movement-system";
 import { SkillSystem } from "./ecs/systems/skill-system";
-import { RoleCreator, TreeCreator } from "./pve-defs";
+import { ElementCreator } from "./pve-defs";
 
 export class PveServer extends b3.Context {
     private _ecs: ecs.World;
@@ -25,6 +28,7 @@ export class PveServer extends b3.Context {
     private _transform3D: Laya.Transform3D = new Laya.Transform3D();
 
     private _aiTrees: Map<string, b3.Tree> = new Map();
+    private _stanceMap: Map<number, ElementComponent> = new Map();
 
     constructor(sender: ICommandSender) {
         super();
@@ -46,9 +50,39 @@ export class PveServer extends b3.Context {
         return this._ecs;
     }
 
+    private _calcIndex(positioin: Laya.Vector3) {
+        const x = Math.round(positioin.x * 2) << 16;
+        const z = Math.round(positioin.z * 2);
+        return x | z;
+    }
+
+    findAtStance(positioin: Laya.Vector3) {
+        const idx = this._calcIndex(positioin);
+        return this._stanceMap.get(idx);
+    }
+
+    clearStance(element: ElementComponent) {
+        const index = element.transform.index;
+        if (index) {
+            this._stanceMap.delete(index);
+            element.transform.index = undefined;
+        }
+    }
+
+    setStance(element: ElementComponent) {
+        const oldIndex = element.transform.index;
+        const newIndex = this._calcIndex(element.transform.position);
+        if (oldIndex) {
+            this._stanceMap.delete(oldIndex);
+        }
+        element.transform.index = newIndex;
+        this._stanceMap.set(newIndex, element);
+    }
+
     update(delta: number) {
         this.time += delta;
         this._ecs.update(delta);
+
         this._drawDebug();
     }
 
@@ -73,9 +107,18 @@ export class PveServer extends b3.Context {
         });
     }
 
-    findTargets(role: RoleComponent, etype: number, x: number, y: number, w: number, h: number) {}
+    find(filter: (element: ElementComponent) => boolean) {
+        let arr: ElementComponent[] | null = null;
+        for (const v of this.ecs.getComponents(ElementComponent).values()) {
+            if (filter(v)) {
+                arr ||= [];
+                arr.push(v);
+            }
+        }
+        return arr;
+    }
 
-    calcSoldierPosition(hero: RoleComponent, solider: SoldierComponent, out: Laya.Vector3) {
+    calcSoldierPosition(hero: ElementComponent, solider: SoldierComponent, out: Laya.Vector3) {
         const t3d = this._transform3D;
         t3d.localPosition = hero.transform.position;
         t3d.localRotationEulerY = -hero.transform.rotation;
@@ -89,11 +132,13 @@ export class PveServer extends b3.Context {
     start() {
         // 创建主角
         const entity = this._ecs.createEntity();
+        entity.etype = BattleConf.ENTITY_TYPE.HERO;
 
-        const role = entity.addComponent(RoleComponent);
-        role.tid = 101;
-        role.hp = 200;
-        role.maxHp = 200;
+        const element = entity.addComponent(ElementComponent);
+        element.tid = 101;
+        element.hp = 200;
+        element.maxHp = 200;
+        element.aid = 1;
 
         const transform = entity.addComponent(TransformComponent);
         transform.position.x = 6;
@@ -102,47 +147,55 @@ export class PveServer extends b3.Context {
         entity.addComponent(MovementComponent);
         entity.addComponent(TroopComponent);
 
-        const skill = entity.addComponent(SkillComponent);
         const table = app.service.table;
-        const heroRow = table.hero[role.tid];
+        const heroRow = table.hero[element.tid];
+        element.data = table.battleEntity.entity[heroRow.battle_entity];
+
+        const skill = entity.addComponent(SkillComponent);
         if (heroRow.skill1) {
-            skill.skills.push(new Skill(table.skill[heroRow.skill1], role));
+            skill.skills.push(new Skill(table.skill[heroRow.skill1], element));
         }
         if (heroRow.skill2) {
-            skill.skills.push(new Skill(table.skill[heroRow.skill2], role));
+            skill.skills.push(new Skill(table.skill[heroRow.skill2], element));
         }
         if (heroRow.skill3) {
-            skill.skills.push(new Skill(table.skill[heroRow.skill3], role));
+            skill.skills.push(new Skill(table.skill[heroRow.skill3], element));
         }
         if (heroRow.skill4) {
-            skill.skills.push(new Skill(table.skill[heroRow.skill4], role));
+            skill.skills.push(new Skill(table.skill[heroRow.skill4], element));
         }
 
-        this._sender.createRole({
-            eid: role.eid,
-            etype: BattleConf.ENTITY_TYPE.HERO,
-            tid: role.tid,
-            hp: role.hp,
-            maxHp: role.maxHp,
+        this._sender.createElement({
+            eid: element.eid,
+            etype: element.entity.etype,
+            tid: element.tid,
+            hp: element.hp,
+            maxHp: element.maxHp,
             positioin: transform.position,
         });
-        this._sender.focus(role.eid);
+        this._sender.focus(element.eid);
 
-        this._loadSoliders(role);
+        this._loadSoliders(element);
+
+        this._createMonsters();
     }
 
-    private _loadSoliders(hero: RoleComponent) {
+    private _loadSoliders(hero: ElementComponent) {
         hero.troop!.formation = formation;
         hero.troop!.formation.forEach((value, idx) => {
             const entity = this._ecs.createEntity();
 
-            const role = entity.addComponent(RoleComponent);
-            role.tid = idx >= 4 ? 40004 : 40002;
-            role.hp = 200;
-            role.maxHp = 200;
+            const element = entity.addComponent(ElementComponent);
+            element.tid = idx >= 4 ? 40004 : 40002;
+            element.hp = 200;
+            element.maxHp = 200;
+            element.aid = 1;
+            entity.etype = BattleConf.ENTITY_TYPE.SOLDIER;
 
             const table = app.service.table;
-            const soldierRow = table.soldier[role.tid];
+            const soldierRow = table.soldier[element.tid];
+
+            element.data = table.battleEntity.entity[soldierRow.battle_entity];
 
             const soldier = entity.addComponent(SoldierComponent);
             soldier.index = idx;
@@ -153,10 +206,10 @@ export class PveServer extends b3.Context {
 
             const skill = entity.addComponent(SkillComponent);
             if (soldierRow.skill1) {
-                skill.skills.push(new Skill(table.skill[soldierRow.skill1], role));
+                skill.skills.push(new Skill(table.skill[soldierRow.skill1], element));
             }
             if (soldierRow.skill2) {
-                skill.skills.push(new Skill(table.skill[soldierRow.skill2], role));
+                skill.skills.push(new Skill(table.skill[soldierRow.skill2], element));
             }
 
             const transform = entity.addComponent(TransformComponent);
@@ -169,53 +222,104 @@ export class PveServer extends b3.Context {
 
             entity.addComponent(MovementComponent);
 
-            this._sender.createRole({
-                eid: role.eid,
-                etype: BattleConf.ENTITY_TYPE.SOLDIER,
-                tid: role.tid,
-                hp: role.hp,
-                maxHp: role.maxHp,
+            this._sender.createElement({
+                eid: element.eid,
+                etype: element.entity.etype,
+                tid: element.tid,
+                hp: element.hp,
+                maxHp: element.maxHp,
                 positioin: transform.position,
             });
         });
     }
 
-    moveStart(role: RoleComponent, speed: Laya.Vector3) {
-        role.movement.speed.cloneFrom(speed);
-        role.transform.rotation = MathUtil.toDegree(Math.atan2(speed.z, speed.x));
-        this._sender.moveStart(role.eid, speed);
+    private _createMonsters() {
+        const arr = [new Laya.Vector3(10, 0, 12)];
+        for (const p of arr) {
+            const entity = this._ecs.createEntity();
+
+            const element = entity.addComponent(ElementComponent);
+            element.tid = 40002;
+            element.hp = 200;
+            element.maxHp = 200;
+            element.aid = 2;
+            entity.etype = BattleConf.ENTITY_TYPE.HERO;
+
+            const table = app.service.table;
+            const heroRow = table.hero[element.tid];
+
+            element.data = table.battleEntity.entity[heroRow.battle_entity];
+
+            const skill = entity.addComponent(SkillComponent);
+            if (heroRow.skill1) {
+                skill.skills.push(new Skill(table.skill[heroRow.skill1], element));
+            }
+            if (heroRow.skill2) {
+                skill.skills.push(new Skill(table.skill[heroRow.skill2], element));
+            }
+
+            const transform = entity.addComponent(TransformComponent);
+            transform.position.x = p.x;
+            transform.position.z = p.z;
+
+            const entityRow = table.battleEntity.entity[heroRow.battle_entity];
+            const ai = entity.addComponent(AiComponent);
+            ai.res = `resources/data/btree/${entityRow.pve_ai}.json`;
+
+            entity.addComponent(MovementComponent);
+
+            this._sender.createElement({
+                eid: element.eid,
+                etype: element.entity.etype,
+                tid: element.tid,
+                hp: element.hp,
+                maxHp: element.maxHp,
+                positioin: transform.position,
+            });
+        }
     }
 
-    moveStop(role: RoleComponent) {
-        const movement = role.movement;
+    moveStart(element: ElementComponent, speed: Laya.Vector3) {
+        element.movement.speed.cloneFrom(speed);
+        element.transform.rotation = MathUtil.toDegree(Math.atan2(speed.z, speed.x));
+        this._sender.moveStart(element.eid, speed);
+    }
+
+    moveStop(element: ElementComponent) {
+        const movement = element.movement;
         movement.speed.x = 0;
         movement.speed.y = 0;
         movement.speed.z = 0;
-        this._sender.moveStop(role.eid);
+        this._sender.moveStop(element.eid);
     }
 
-    playAnim(role: RoleComponent, anim: string) {
-        this._sender.playAnim(role.eid, anim);
+    towardTo(element: ElementComponent, target: ElementComponent) {
+        this._sender.towardTo(element.eid, target.eid);
+    }
+
+    playAnim(element: ElementComponent, anim: string) {
+        this._sender.playAnim(element.eid, anim);
     }
 
     //-------------------------------------------------------------------------
     //------------------------------ICommandSender-----------------------------
     //-------------------------------------------------------------------------
-    chopTree(role: RoleComponent, wood: TreeComponent) {}
+    chopTree(element: ElementComponent, wood: ElementComponent) {}
 
-    launchSkill(role: RoleComponent, target?: RoleComponent) {}
+    launchSkill(element: ElementComponent, target?: ElementComponent) {}
 
     createWood() {}
 }
 
 export interface ICommandSender {
     focus(eid: number): void;
-    createRole(data: RoleCreator): void;
-    createTree(data: TreeCreator): void;
+    createElement(data: ElementCreator): void;
 
-    chopTree(eid: number, target: number): void;
+    chopWood(eid: number, target: number): void;
     moveStart(eid: number, speed: Laya.Vector3): void;
     moveStop(eid: number): void;
+
+    towardTo(eid: number, target: number): void;
 
     playAnim(eid: number, anim: string): void;
 
@@ -228,26 +332,26 @@ class CommandReceiver {
     constructor(readonly server: PveServer) {}
 
     moveStart(eid: number, degree: number) {
-        const role = this.server.ecs.getComponent(eid, RoleComponent);
-        if (!role) {
-            console.warn(`not found role: ${eid}`);
+        const element = this.server.ecs.getComponent(eid, ElementComponent);
+        if (!element) {
+            console.warn(`not found element: ${eid}`);
             return;
         }
 
         const rad = MathUtil.toRadian(degree);
-        const movement = role.movement;
+        const movement = element.movement;
         const speed = CommandReceiver._tmpSpeed;
         speed.x = movement.velocity * Math.cos(rad);
         speed.z = movement.velocity * Math.sin(rad);
-        this.server.moveStart(role, speed);
+        this.server.moveStart(element, speed);
     }
 
     moveStop(eid: number) {
-        const role = this.server.ecs.getComponent(eid, RoleComponent);
-        if (!role) {
-            console.warn(`not found role: ${eid}`);
+        const element = this.server.ecs.getComponent(eid, ElementComponent);
+        if (!element) {
+            console.warn(`not found element: ${eid}`);
             return;
         }
-        this.server.moveStop(role);
+        this.server.moveStop(element);
     }
 }

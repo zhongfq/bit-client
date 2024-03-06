@@ -1,20 +1,18 @@
 import { b3 } from "../../../../../core/behavior3/behavior";
+import { AiTreeEnv } from "../../ecs/components/ai-component";
+import { FindTargets } from "./find-targets";
 
-interface FindOneTargetArgs {
-    x?: number;
-    y?: number;
-    w?: number;
-    h?: number;
-    etype?: number;
-    attack?: boolean;
-    skill?: boolean;
-}
-
-export class FindOneTarget extends b3.Process {
+export class FindOneTarget extends FindTargets {
     override check(node: b3.Node) {}
 
-    override run(node: b3.Node, env: b3.TreeEnv, ...any: unknown[]) {
-        return b3.Status.FAILURE;
+    override run(node: b3.Node, env: AiTreeEnv) {
+        const status = super.run(node, env);
+        if (status === b3.Status.SUCCESS) {
+            const target = (env.lastRet.results[0] as Array<unknown>)[0];
+            env.lastRet.results.length = 0;
+            env.lastRet.results.push(target);
+        }
+        return status;
     }
 
     override get descriptor() {
@@ -23,7 +21,9 @@ export class FindOneTarget extends b3.Process {
             type: "Condition",
             desc: "给定的范围内查找1个目标",
             args: [
-                { name: "etype", type: "int?", desc: "类型" },
+                { name: "hero", type: "boolean?", desc: "找英雄" },
+                { name: "soldier", type: "boolean?", desc: "找士兵" },
+                { name: "wood", type: "boolean?", desc: "找树" },
                 { name: "friend", type: "boolean?", desc: "友方" },
                 { name: "attack", type: "boolean?", desc: "普攻范围" },
                 { name: "skill", type: "boolean?", desc: "技能范围" },

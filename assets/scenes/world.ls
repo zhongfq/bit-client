@@ -118,6 +118,43 @@
               "maxBounces": null
             }
           ]
+        },
+        {
+          "_$id": "gv9f1ij7",
+          "_$type": "Sprite3D",
+          "name": "world-map",
+          "_$child": [
+            {
+              "_$id": "6uciuwqk",
+              "_$type": "Sprite3D",
+              "name": "ground"
+            },
+            {
+              "_$id": "84vbe93m",
+              "_$type": "Sprite3D",
+              "name": "road"
+            },
+            {
+              "_$id": "vkuzj9h2",
+              "_$type": "Sprite3D",
+              "name": "river"
+            },
+            {
+              "_$id": "44rludnu",
+              "_$type": "Sprite3D",
+              "name": "block"
+            },
+            {
+              "_$id": "99ogd8y7",
+              "_$type": "Sprite3D",
+              "name": "static"
+            },
+            {
+              "_$id": "x1v03yz5",
+              "_$type": "Sprite3D",
+              "name": "dynamic"
+            }
+          ]
         }
       ]
     },
