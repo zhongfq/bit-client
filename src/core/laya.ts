@@ -6,6 +6,51 @@ export class Tween {
     static to<T>(target: T, props: ConstructorType<T>, duration: number, ease?: EaseFunc) {
         return Laya.Tween.to(target, props, duration, ease);
     }
+
+    /**
+     * 
+     * @param target 执行动作的目标
+     * @param speed 速度
+     * @param points 用于计算贝塞尔曲线的坐标，2次贝塞尔3个point 3次4个point，目前最大支持3次
+     * @param inSertCount 运动轨迹的坐标数量 >=5,值越大 轨迹越明显
+     */
+    static toBezier(target: any, speed: number, points: Laya.Point[],inSertCount:number = 5) {
+        const _points = [];
+        for (const point of points) {
+            _points.push(point.x);
+            _points.push(point.y);
+        }
+        const bezierPoints = Laya.Bezier.I.getBezierPoints(
+            _points,
+            inSertCount,
+            _points.length > 2 * 3 ? 3 : 2
+        );
+        function to(num: number) {
+            const distance = new Laya.Point(bezierPoints[num - 2], bezierPoints[num - 2]).distance(
+                bezierPoints[num],
+                bezierPoints[num + 1]
+            );
+            return Laya.Tween.to(
+                target,
+                { x: bezierPoints[num], y: bezierPoints[num + 1] },
+                distance / speed,
+                null,
+                Laya.Handler.create(
+                    null,
+                    () => {
+                        if (num + 2 >= bezierPoints.length) {
+                            return;
+                        } else {
+                            to(num + 2);
+                        }
+                    },
+                    null,
+                    true
+                )
+            );
+        }
+        to(2);
+    }
 }
 
 export interface IVector2Like {
