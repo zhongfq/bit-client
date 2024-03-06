@@ -4,8 +4,8 @@ export class Once extends b3.Process {
     override check(node: b3.Node): void {}
 
     override run(node: b3.Node, env: b3.TreeEnv) {
-        const onceKey = b3.TreeEnv.makePublicKey(node, "once");
-        if (env.getVar(onceKey) === true) {
+        const onceKey = b3.TreeEnv.makePrivateVar(node, "once");
+        if (env.getValue(onceKey) === true) {
             return b3.Status.FAILURE;
         }
 
@@ -16,7 +16,7 @@ export class Once extends b3.Process {
             }
         }
 
-        env.setVar(onceKey, true);
+        env.setValue(onceKey, true);
         return b3.Status.FAILURE;
     }
 

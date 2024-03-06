@@ -1,6 +1,7 @@
 import { b3 } from "../../../../../core/behavior3/behavior";
 import { BattleConf } from "../../../../../def/battle";
 import { AiTreeEnv } from "../../ecs/components/ai-component";
+import { ElementComponent } from "../../ecs/components/element-component";
 
 interface FindTargetsArgs {
     radius?: number;
@@ -35,12 +36,19 @@ export class FindTargets extends b3.Process {
                     (findWood && etype === ETYPE.WOOD)) &&
                 element.aid !== env.owner.aid
             ) {
-                return Laya.Vector3.distance(element.transform.position, positioin) < radius;
+                const distance = Laya.Vector3.distance(element.transform.position, positioin);
+                if (distance < radius) {
+                    element.tmpDistance = distance;
+                    return true;
+                } else {
+                    return false;
+                }
             }
 
             return false;
         });
         if (arr && arr.length > 0) {
+            arr.sort((a, b) => a.tmpDistance - b.tmpDistance);
             env.lastRet.results.push(arr);
             return b3.Status.SUCCESS;
         } else {
