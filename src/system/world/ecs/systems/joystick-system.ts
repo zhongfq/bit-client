@@ -14,9 +14,9 @@ export class JoystickSystem extends ecs.System {
         const owner = this.context.owner;
         joystick.initX = owner.joystick.x;
         joystick.initY = owner.joystick.y;
-        owner.joystickGroup.on(Laya.Event.MOUSE_DOWN, this, this.onJoysticHandler);
-        owner.joystickGroup.on(Laya.Event.MOUSE_MOVE, this, this.onJoysticHandler);
-        owner.joystickGroup.on(Laya.Event.MOUSE_UP, this, this.onJoysticHandler);
+        owner.joystickArea.on(Laya.Event.MOUSE_DOWN, this, this.onJoysticHandler);
+        owner.joystickArea.on(Laya.Event.MOUSE_MOVE, this, this.onJoysticHandler);
+        owner.joystickArea.on(Laya.Event.MOUSE_UP, this, this.onJoysticHandler);
     }
 
     onJoysticHandler(e: Laya.Event) {

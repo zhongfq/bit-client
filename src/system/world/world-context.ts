@@ -51,7 +51,7 @@ export class WorldContext extends Mediator {
         this._ecs.addSystem(new RenderSystem(this));
         this._ecs.addSystem(new TilemapSystem(this));
 
-        // this.owner.mapClickArea.on(Laya.Event.CLICK, this, this.onMapClickHandler);
+        this.owner.mapClickArea.on(Laya.Event.CLICK, this, this.onMapClickHandler);
     }
 
     override async onStart() {
