@@ -99,9 +99,5 @@ export class WorldContext extends Mediator {
             element.showBlock();
             this._selectedDynamicElement = element.uid;
         }
-
-        console.log("mouse", point.x, point.y);
-        console.log("origin", ray.origin.x, ray.origin.y, ray.origin.z);
-        console.log("direction", ray.direction.x, ray.direction.y, ray.direction.z);
     }
 }

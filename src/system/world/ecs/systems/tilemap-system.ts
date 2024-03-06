@@ -119,14 +119,12 @@ export class TilemapSystem extends ecs.System {
      * @returns 元素对象
      */
     public getElementByPos(x: number, y: number, layerName: Tilemap.LayerName): Tilemap.Element | undefined {
-        for (const [layer, uidMap] of this._posMap) {
-            if (layer != layerName) {
-                continue;
-            }
+        const uidMap = this._posMap.get(layerName);
+        if (uidMap) {
             if (layerName == Tilemap.LayerName.Static || layerName == Tilemap.LayerName.Dynamic) {
                 for (const uid of uidMap.values()) {
                     const element = this._allMap.get(uid) as Tilemap.ObjElement;
-                    if (element && TilemapComponent.IN_RECT(x, y, element.x, element.y, element.width, element.height)) {
+                    if (element && TilemapComponent.IN_RECT(x, y, element.realX, element.realY, element.width, element.height)) {
                         return element;
                     }
                 }
@@ -168,10 +166,8 @@ export class TilemapSystem extends ecs.System {
      */
     public getElementsByLayer(layerName: Tilemap.LayerName): Tilemap.Element[] {
         const elements: Tilemap.Element[] = [];
-        for (const [layer, uidMap] of this._posMap) {
-            if (layer != layerName) {
-                continue;
-            }
+        const uidMap = this._posMap.get(layerName);
+        if (uidMap) {
             for (const uid of uidMap.values()) {
                 const element = this._allMap.get(uid);
                 if (element) {
@@ -180,6 +176,17 @@ export class TilemapSystem extends ecs.System {
             }
         }
         return elements;
+    }
+
+    /**
+     * 指定位置是否阻挡块
+     * @param x X坐标
+     * @param y Y坐标
+     */
+    public isBlock(x: number, y: number): boolean {
+        const uidMap = this._posMap.get(Tilemap.LayerName.Block);
+        const uid = uidMap?.get(TilemapComponent.XY_TO_KEY(x, y));
+        return Boolean(uid);
     }
 
     /**
@@ -224,6 +231,8 @@ export class TilemapSystem extends ecs.System {
 
     private _allMap: Map<number, Tilemap.Element> = new Map();
     private _posMap: Map<Tilemap.LayerName, Map<string, number>> = new Map();
+
+    public showBlocks: Map<string, boolean> = new Map();
 
     constructor(readonly context: WorldContext) {
         super();
@@ -393,9 +402,7 @@ export class TilemapSystem extends ecs.System {
                     uidMap.set(key, element.uid);
                     this._allMap.set(element.uid, element);
 
-                    if (layerName != Tilemap.LayerName.Block) {
-                        element.draw();
-                    }
+                    element.draw();
                 }
                 outUids?.push(element.uid);
             }

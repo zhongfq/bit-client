@@ -311,11 +311,10 @@ export namespace Tilemap {
         private _realY: number = 0;
         private _width: number = 0;
         private _height: number = 0;
-        private _blocks: number[] = [];
 
-        public override get x(): number { return this._realX; }
+        public get realX(): number { return this._realX; }
 
-        public override get y(): number { return this._realY; }
+        public get realY(): number { return this._realY; }
 
         public get width(): number { return this._width; }
 
@@ -334,8 +333,8 @@ export namespace Tilemap {
             const resName = this.system.getTextureResName(this.getTextureName(), this.gid);
             const textureCfg = this.getTextureCfg().get(resName);
 
-            this._realX = Math.floor(super.x - (textureCfg?.tileX || 0));
-            this._realY = Math.floor(super.y - (textureCfg?.tileY || 0));
+            this._realX = Math.floor(this.x - (textureCfg?.tileX || 0));
+            this._realY = Math.floor(this.y - (textureCfg?.tileY || 0));
 
             const objPos = this._obj.transform.position;
             objPos.x = this._realX;
@@ -366,35 +365,28 @@ export namespace Tilemap {
             this._width = textureCfg?.tileW || 1;
             this._height = textureCfg?.tileH || 1;
 
-            this._obj.name = this.x + '_' + this.y + ' | ' + resName;
+            this._obj.name = this.realX + '_' + this.realY + ' | ' + resName;
             this.system.getRoot().getChildByName(this.layerName).addChild(this._obj);
         }
 
         public showBlock() {
-            if (!this._obj) {
-                return
-            }
-            if (this._blocks.length == 0) {
-                for (let $x = this.x; $x < this.x + this.width; $x++) {
-                    for (let $y = this.y; $y < this.y + this.height; $y++) {
-                        const element = this.system.getElementByPos($x, $y, LayerName.Block);
-                        if (element) {
-                            this._blocks.push(element.uid);
-                        }
-                    }
+            for (let $x = this.realX; $x < this.realX + this.width; $x++) {
+                for (let $y = this.realY; $y < this.realY + this.height; $y++) {
+                    this.system.showBlocks.set(TilemapComponent.XY_TO_KEY($x, $y), true);
+                    const element = this.system.getElementByPos($x, $y, LayerName.Block);
+                    element?.draw();
                 }
             }
-            this._blocks.forEach(uid => {
-                const element = this.system.getElementByUid(uid);
-                element?.draw();
-            })
         }
 
         public hideBlock() {
-            this._blocks.forEach(uid => {
-                const element = this.system.getElementByUid(uid);
-                element?.erase();
-            })
+            for (let $x = this.realX; $x < this.realX + this.width; $x++) {
+                for (let $y = this.realY; $y < this.realY + this.height; $y++) {
+                    this.system.showBlocks.delete(TilemapComponent.XY_TO_KEY($x, $y));
+                    const element = this.system.getElementByPos($x, $y, LayerName.Block);
+                    element?.erase();
+                }
+            }
         }
 
         public override erase() {
@@ -403,7 +395,6 @@ export namespace Tilemap {
             this._obj = undefined;
             this._width = 0;
             this._height = 0;
-            this._blocks = [];
         }
 
         protected abstract getPrefabPath(): string;
@@ -453,6 +444,10 @@ export namespace Tilemap {
 
         public override async draw() {
             if (this._blockTile) {
+                return;
+            }
+            const key = TilemapComponent.XY_TO_KEY(this.x, this.y);
+            if (!this.system.showBlocks.get(key)) {
                 return;
             }
             const prefab = await Laya.loader.load("resources/prefab/world-map/block/block-tile.lh", Laya.Loader.HIERARCHY);
