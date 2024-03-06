@@ -3,24 +3,1102 @@
   "_$id": "zcgqj8oe",
   "_$type": "Sprite3D",
   "name": "Sprite3D",
+  "transform": {
+    "localPosition": {
+      "_$type": "Vector3",
+      "x": 0.5,
+      "z": 0.5
+    }
+  },
   "_$child": [
     {
-      "_$id": "ml5iu72i",
-      "_$type": "Sprite3D",
-      "name": "Plane",
+      "_$id": "nynhp6tr",
+      "_$type": "Camera",
+      "name": "Main Camera",
       "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": 15,
+          "y": 20,
+          "z": 15
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": -0.353553390161346,
+          "y": 0.35355339102520156,
+          "z": 0.14644661044949214,
+          "w": 0.8535533904143634
+        }
+      },
+      "orthographicVerticalSize": 10,
+      "fieldOfView": 28,
+      "nearPlane": 0.3,
+      "farPlane": 1000,
+      "clearFlag": 1,
+      "clearColor": {
+        "_$type": "Color",
+        "r": 0.3921,
+        "g": 0.5843,
+        "b": 0.9294
+      },
+      "cullingMask": 2147483647,
+      "normalizedViewport": {
+        "_$type": "Viewport",
+        "width": 1,
+        "height": 1
+      },
+      "depthTextureFormat": 35
+    },
+    {
+      "_$id": "mzpx3v7p",
+      "_$type": "Sprite3D",
+      "name": "Tiles",
+      "_$child": [
+        {
+          "_$id": "ml5iu72i",
+          "_$type": "Sprite3D",
+          "name": "Tiles00",
+          "transform": {
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": -0.7071067811865475,
+              "w": 0.7071067811865476
+            },
+            "localScale": {
+              "_$type": "Vector3",
+              "x": 0.95,
+              "y": 0.95,
+              "z": 1
+            }
+          },
+          "_$comp": [
+            {
+              "_$type": "MeshFilter",
+              "sharedMesh": {
+                "_$uuid": "7e9b0d09-b83c-425d-adf1-3d319f026e38",
+                "_$type": "Mesh"
+              }
+            },
+            {
+              "_$type": "MeshRenderer",
+              "sharedMaterials": [
+                {
+                  "_$uuid": "cbf682ab-f478-46d1-b278-c5a04e3ed99a",
+                  "_$type": "Material"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_$id": "juqgvkwq",
+          "_$type": "Sprite3D",
+          "name": "Tiles01",
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "z": 1
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": -0.7071067811865475,
+              "w": 0.7071067811865476
+            },
+            "localScale": {
+              "_$type": "Vector3",
+              "x": 0.95,
+              "y": 0.95,
+              "z": 1
+            }
+          },
+          "_$comp": [
+            {
+              "_$type": "MeshFilter",
+              "sharedMesh": {
+                "_$uuid": "7e9b0d09-b83c-425d-adf1-3d319f026e38",
+                "_$type": "Mesh"
+              }
+            },
+            {
+              "_$type": "MeshRenderer",
+              "sharedMaterials": [
+                {
+                  "_$uuid": "cbf682ab-f478-46d1-b278-c5a04e3ed99a",
+                  "_$type": "Material"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_$id": "xpi3ydjn",
+          "_$type": "Sprite3D",
+          "name": "Tiles02",
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "z": 2
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": -0.7071067811865475,
+              "w": 0.7071067811865476
+            },
+            "localScale": {
+              "_$type": "Vector3",
+              "x": 0.95,
+              "y": 0.95,
+              "z": 1
+            }
+          },
+          "_$comp": [
+            {
+              "_$type": "MeshFilter",
+              "sharedMesh": {
+                "_$uuid": "7e9b0d09-b83c-425d-adf1-3d319f026e38",
+                "_$type": "Mesh"
+              }
+            },
+            {
+              "_$type": "MeshRenderer",
+              "sharedMaterials": [
+                {
+                  "_$uuid": "cbf682ab-f478-46d1-b278-c5a04e3ed99a",
+                  "_$type": "Material"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_$id": "5ifjdwe0",
+          "_$type": "Sprite3D",
+          "name": "Tiles03",
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "z": 3
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": -0.7071067811865475,
+              "w": 0.7071067811865476
+            },
+            "localScale": {
+              "_$type": "Vector3",
+              "x": 0.95,
+              "y": 0.95,
+              "z": 1
+            }
+          },
+          "_$comp": [
+            {
+              "_$type": "MeshFilter",
+              "sharedMesh": {
+                "_$uuid": "7e9b0d09-b83c-425d-adf1-3d319f026e38",
+                "_$type": "Mesh"
+              }
+            },
+            {
+              "_$type": "MeshRenderer",
+              "sharedMaterials": [
+                {
+                  "_$uuid": "cbf682ab-f478-46d1-b278-c5a04e3ed99a",
+                  "_$type": "Material"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_$id": "t5yrea0w",
+          "_$type": "Sprite3D",
+          "name": "Tiles04",
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "z": 4
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": -0.7071067811865475,
+              "w": 0.7071067811865476
+            },
+            "localScale": {
+              "_$type": "Vector3",
+              "x": 0.95,
+              "y": 0.95,
+              "z": 1
+            }
+          },
+          "_$comp": [
+            {
+              "_$type": "MeshFilter",
+              "sharedMesh": {
+                "_$uuid": "7e9b0d09-b83c-425d-adf1-3d319f026e38",
+                "_$type": "Mesh"
+              }
+            },
+            {
+              "_$type": "MeshRenderer",
+              "sharedMaterials": [
+                {
+                  "_$uuid": "cbf682ab-f478-46d1-b278-c5a04e3ed99a",
+                  "_$type": "Material"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_$id": "o7m14gyb",
+          "_$type": "Sprite3D",
+          "name": "Tiles10",
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": 1
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": -0.7071067811865475,
+              "w": 0.7071067811865476
+            },
+            "localScale": {
+              "_$type": "Vector3",
+              "x": 0.95,
+              "y": 0.95,
+              "z": 1
+            }
+          },
+          "_$comp": [
+            {
+              "_$type": "MeshFilter",
+              "sharedMesh": {
+                "_$uuid": "7e9b0d09-b83c-425d-adf1-3d319f026e38",
+                "_$type": "Mesh"
+              }
+            },
+            {
+              "_$type": "MeshRenderer",
+              "sharedMaterials": [
+                {
+                  "_$uuid": "cbf682ab-f478-46d1-b278-c5a04e3ed99a",
+                  "_$type": "Material"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_$id": "nvdzr2rf",
+          "_$type": "Sprite3D",
+          "name": "Tiles11",
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": 1,
+              "z": 1
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": -0.7071067811865475,
+              "w": 0.7071067811865476
+            },
+            "localScale": {
+              "_$type": "Vector3",
+              "x": 0.95,
+              "y": 0.95,
+              "z": 1
+            }
+          },
+          "_$comp": [
+            {
+              "_$type": "MeshFilter",
+              "sharedMesh": {
+                "_$uuid": "7e9b0d09-b83c-425d-adf1-3d319f026e38",
+                "_$type": "Mesh"
+              }
+            },
+            {
+              "_$type": "MeshRenderer",
+              "sharedMaterials": [
+                {
+                  "_$uuid": "cbf682ab-f478-46d1-b278-c5a04e3ed99a",
+                  "_$type": "Material"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_$id": "qnarv8qv",
+          "_$type": "Sprite3D",
+          "name": "Tiles12",
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": 1,
+              "z": 2
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": -0.7071067811865475,
+              "w": 0.7071067811865476
+            },
+            "localScale": {
+              "_$type": "Vector3",
+              "x": 0.95,
+              "y": 0.95,
+              "z": 1
+            }
+          },
+          "_$comp": [
+            {
+              "_$type": "MeshFilter",
+              "sharedMesh": {
+                "_$uuid": "7e9b0d09-b83c-425d-adf1-3d319f026e38",
+                "_$type": "Mesh"
+              }
+            },
+            {
+              "_$type": "MeshRenderer",
+              "sharedMaterials": [
+                {
+                  "_$uuid": "cbf682ab-f478-46d1-b278-c5a04e3ed99a",
+                  "_$type": "Material"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_$id": "kux42cbu",
+          "_$type": "Sprite3D",
+          "name": "Tiles13",
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": 1,
+              "z": 3
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": -0.7071067811865475,
+              "w": 0.7071067811865476
+            },
+            "localScale": {
+              "_$type": "Vector3",
+              "x": 0.95,
+              "y": 0.95,
+              "z": 1
+            }
+          },
+          "_$comp": [
+            {
+              "_$type": "MeshFilter",
+              "sharedMesh": {
+                "_$uuid": "7e9b0d09-b83c-425d-adf1-3d319f026e38",
+                "_$type": "Mesh"
+              }
+            },
+            {
+              "_$type": "MeshRenderer",
+              "sharedMaterials": [
+                {
+                  "_$uuid": "cbf682ab-f478-46d1-b278-c5a04e3ed99a",
+                  "_$type": "Material"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_$id": "pndadh2w",
+          "_$type": "Sprite3D",
+          "name": "Tiles14",
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": 1,
+              "z": 4
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": -0.7071067811865475,
+              "w": 0.7071067811865476
+            },
+            "localScale": {
+              "_$type": "Vector3",
+              "x": 0.95,
+              "y": 0.95,
+              "z": 1
+            }
+          },
+          "_$comp": [
+            {
+              "_$type": "MeshFilter",
+              "sharedMesh": {
+                "_$uuid": "7e9b0d09-b83c-425d-adf1-3d319f026e38",
+                "_$type": "Mesh"
+              }
+            },
+            {
+              "_$type": "MeshRenderer",
+              "sharedMaterials": [
+                {
+                  "_$uuid": "cbf682ab-f478-46d1-b278-c5a04e3ed99a",
+                  "_$type": "Material"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_$id": "0sc0bq6r",
+          "_$type": "Sprite3D",
+          "name": "Tiles20",
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": 2
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": -0.7071067811865475,
+              "w": 0.7071067811865476
+            },
+            "localScale": {
+              "_$type": "Vector3",
+              "x": 0.95,
+              "y": 0.95,
+              "z": 1
+            }
+          },
+          "_$comp": [
+            {
+              "_$type": "MeshFilter",
+              "sharedMesh": {
+                "_$uuid": "7e9b0d09-b83c-425d-adf1-3d319f026e38",
+                "_$type": "Mesh"
+              }
+            },
+            {
+              "_$type": "MeshRenderer",
+              "sharedMaterials": [
+                {
+                  "_$uuid": "cbf682ab-f478-46d1-b278-c5a04e3ed99a",
+                  "_$type": "Material"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_$id": "bpxkwfsw",
+          "_$type": "Sprite3D",
+          "name": "Tiles21",
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": 2,
+              "z": 1
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": -0.7071067811865475,
+              "w": 0.7071067811865476
+            },
+            "localScale": {
+              "_$type": "Vector3",
+              "x": 0.95,
+              "y": 0.95,
+              "z": 1
+            }
+          },
+          "_$comp": [
+            {
+              "_$type": "MeshFilter",
+              "sharedMesh": {
+                "_$uuid": "7e9b0d09-b83c-425d-adf1-3d319f026e38",
+                "_$type": "Mesh"
+              }
+            },
+            {
+              "_$type": "MeshRenderer",
+              "sharedMaterials": [
+                {
+                  "_$uuid": "cbf682ab-f478-46d1-b278-c5a04e3ed99a",
+                  "_$type": "Material"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_$id": "2ji5pufv",
+          "_$type": "Sprite3D",
+          "name": "Tiles22",
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": 2,
+              "z": 2
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": -0.7071067811865475,
+              "w": 0.7071067811865476
+            },
+            "localScale": {
+              "_$type": "Vector3",
+              "x": 0.95,
+              "y": 0.95,
+              "z": 1
+            }
+          },
+          "_$comp": [
+            {
+              "_$type": "MeshFilter",
+              "sharedMesh": {
+                "_$uuid": "7e9b0d09-b83c-425d-adf1-3d319f026e38",
+                "_$type": "Mesh"
+              }
+            },
+            {
+              "_$type": "MeshRenderer",
+              "sharedMaterials": [
+                {
+                  "_$uuid": "cbf682ab-f478-46d1-b278-c5a04e3ed99a",
+                  "_$type": "Material"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_$id": "q6e1hokb",
+          "_$type": "Sprite3D",
+          "name": "Tiles23",
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": 2,
+              "z": 3
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": -0.7071067811865475,
+              "w": 0.7071067811865476
+            },
+            "localScale": {
+              "_$type": "Vector3",
+              "x": 0.95,
+              "y": 0.95,
+              "z": 1
+            }
+          },
+          "_$comp": [
+            {
+              "_$type": "MeshFilter",
+              "sharedMesh": {
+                "_$uuid": "7e9b0d09-b83c-425d-adf1-3d319f026e38",
+                "_$type": "Mesh"
+              }
+            },
+            {
+              "_$type": "MeshRenderer",
+              "sharedMaterials": [
+                {
+                  "_$uuid": "cbf682ab-f478-46d1-b278-c5a04e3ed99a",
+                  "_$type": "Material"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_$id": "dx85lt4q",
+          "_$type": "Sprite3D",
+          "name": "Tiles24",
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": 2,
+              "z": 4
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": -0.7071067811865475,
+              "w": 0.7071067811865476
+            },
+            "localScale": {
+              "_$type": "Vector3",
+              "x": 0.95,
+              "y": 0.95,
+              "z": 1
+            }
+          },
+          "_$comp": [
+            {
+              "_$type": "MeshFilter",
+              "sharedMesh": {
+                "_$uuid": "7e9b0d09-b83c-425d-adf1-3d319f026e38",
+                "_$type": "Mesh"
+              }
+            },
+            {
+              "_$type": "MeshRenderer",
+              "sharedMaterials": [
+                {
+                  "_$uuid": "cbf682ab-f478-46d1-b278-c5a04e3ed99a",
+                  "_$type": "Material"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_$id": "la8lqdp7",
+          "_$type": "Sprite3D",
+          "name": "Tiles30",
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": 3
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": -0.7071067811865475,
+              "w": 0.7071067811865476
+            },
+            "localScale": {
+              "_$type": "Vector3",
+              "x": 0.95,
+              "y": 0.95,
+              "z": 1
+            }
+          },
+          "_$comp": [
+            {
+              "_$type": "MeshFilter",
+              "sharedMesh": {
+                "_$uuid": "7e9b0d09-b83c-425d-adf1-3d319f026e38",
+                "_$type": "Mesh"
+              }
+            },
+            {
+              "_$type": "MeshRenderer",
+              "sharedMaterials": [
+                {
+                  "_$uuid": "cbf682ab-f478-46d1-b278-c5a04e3ed99a",
+                  "_$type": "Material"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_$id": "7nns2hbi",
+          "_$type": "Sprite3D",
+          "name": "Tiles31",
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": 3,
+              "z": 1
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": -0.7071067811865475,
+              "w": 0.7071067811865476
+            },
+            "localScale": {
+              "_$type": "Vector3",
+              "x": 0.95,
+              "y": 0.95,
+              "z": 1
+            }
+          },
+          "_$comp": [
+            {
+              "_$type": "MeshFilter",
+              "sharedMesh": {
+                "_$uuid": "7e9b0d09-b83c-425d-adf1-3d319f026e38",
+                "_$type": "Mesh"
+              }
+            },
+            {
+              "_$type": "MeshRenderer",
+              "sharedMaterials": [
+                {
+                  "_$uuid": "cbf682ab-f478-46d1-b278-c5a04e3ed99a",
+                  "_$type": "Material"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_$id": "sk41q0iz",
+          "_$type": "Sprite3D",
+          "name": "Tiles32",
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": 3,
+              "z": 2
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": -0.7071067811865475,
+              "w": 0.7071067811865476
+            },
+            "localScale": {
+              "_$type": "Vector3",
+              "x": 0.95,
+              "y": 0.95,
+              "z": 1
+            }
+          },
+          "_$comp": [
+            {
+              "_$type": "MeshFilter",
+              "sharedMesh": {
+                "_$uuid": "7e9b0d09-b83c-425d-adf1-3d319f026e38",
+                "_$type": "Mesh"
+              }
+            },
+            {
+              "_$type": "MeshRenderer",
+              "sharedMaterials": [
+                {
+                  "_$uuid": "cbf682ab-f478-46d1-b278-c5a04e3ed99a",
+                  "_$type": "Material"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_$id": "ohsfefjg",
+          "_$type": "Sprite3D",
+          "name": "Tiles33",
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": 3,
+              "z": 3
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": -0.7071067811865475,
+              "w": 0.7071067811865476
+            },
+            "localScale": {
+              "_$type": "Vector3",
+              "x": 0.95,
+              "y": 0.95,
+              "z": 1
+            }
+          },
+          "_$comp": [
+            {
+              "_$type": "MeshFilter",
+              "sharedMesh": {
+                "_$uuid": "7e9b0d09-b83c-425d-adf1-3d319f026e38",
+                "_$type": "Mesh"
+              }
+            },
+            {
+              "_$type": "MeshRenderer",
+              "sharedMaterials": [
+                {
+                  "_$uuid": "cbf682ab-f478-46d1-b278-c5a04e3ed99a",
+                  "_$type": "Material"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_$id": "sbmzkvgk",
+          "_$type": "Sprite3D",
+          "name": "Tiles34",
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": 3,
+              "z": 4
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": -0.7071067811865475,
+              "w": 0.7071067811865476
+            },
+            "localScale": {
+              "_$type": "Vector3",
+              "x": 0.95,
+              "y": 0.95,
+              "z": 1
+            }
+          },
+          "_$comp": [
+            {
+              "_$type": "MeshFilter",
+              "sharedMesh": {
+                "_$uuid": "7e9b0d09-b83c-425d-adf1-3d319f026e38",
+                "_$type": "Mesh"
+              }
+            },
+            {
+              "_$type": "MeshRenderer",
+              "sharedMaterials": [
+                {
+                  "_$uuid": "cbf682ab-f478-46d1-b278-c5a04e3ed99a",
+                  "_$type": "Material"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_$id": "dfieik1s",
+          "_$type": "Sprite3D",
+          "name": "Tiles40",
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": 4
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": -0.7071067811865475,
+              "w": 0.7071067811865476
+            },
+            "localScale": {
+              "_$type": "Vector3",
+              "x": 0.95,
+              "y": 0.95,
+              "z": 1
+            }
+          },
+          "_$comp": [
+            {
+              "_$type": "MeshFilter",
+              "sharedMesh": {
+                "_$uuid": "7e9b0d09-b83c-425d-adf1-3d319f026e38",
+                "_$type": "Mesh"
+              }
+            },
+            {
+              "_$type": "MeshRenderer",
+              "sharedMaterials": [
+                {
+                  "_$uuid": "cbf682ab-f478-46d1-b278-c5a04e3ed99a",
+                  "_$type": "Material"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_$id": "7niy0h0k",
+          "_$type": "Sprite3D",
+          "name": "Tiles41",
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": 4,
+              "z": 1
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": -0.7071067811865475,
+              "w": 0.7071067811865476
+            },
+            "localScale": {
+              "_$type": "Vector3",
+              "x": 0.95,
+              "y": 0.95,
+              "z": 1
+            }
+          },
+          "_$comp": [
+            {
+              "_$type": "MeshFilter",
+              "sharedMesh": {
+                "_$uuid": "7e9b0d09-b83c-425d-adf1-3d319f026e38",
+                "_$type": "Mesh"
+              }
+            },
+            {
+              "_$type": "MeshRenderer",
+              "sharedMaterials": [
+                {
+                  "_$uuid": "cbf682ab-f478-46d1-b278-c5a04e3ed99a",
+                  "_$type": "Material"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_$id": "vf726bt2",
+          "_$type": "Sprite3D",
+          "name": "Tiles42",
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": 4,
+              "z": 2
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": -0.7071067811865475,
+              "w": 0.7071067811865476
+            },
+            "localScale": {
+              "_$type": "Vector3",
+              "x": 0.95,
+              "y": 0.95,
+              "z": 1
+            }
+          },
+          "_$comp": [
+            {
+              "_$type": "MeshFilter",
+              "sharedMesh": {
+                "_$uuid": "7e9b0d09-b83c-425d-adf1-3d319f026e38",
+                "_$type": "Mesh"
+              }
+            },
+            {
+              "_$type": "MeshRenderer",
+              "sharedMaterials": [
+                {
+                  "_$uuid": "cbf682ab-f478-46d1-b278-c5a04e3ed99a",
+                  "_$type": "Material"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_$id": "2825v13s",
+          "_$type": "Sprite3D",
+          "name": "Tiles43",
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": 4,
+              "z": 3
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": -0.7071067811865475,
+              "w": 0.7071067811865476
+            },
+            "localScale": {
+              "_$type": "Vector3",
+              "x": 0.95,
+              "y": 0.95,
+              "z": 1
+            }
+          },
+          "_$comp": [
+            {
+              "_$type": "MeshFilter",
+              "sharedMesh": {
+                "_$uuid": "7e9b0d09-b83c-425d-adf1-3d319f026e38",
+                "_$type": "Mesh"
+              }
+            },
+            {
+              "_$type": "MeshRenderer",
+              "sharedMaterials": [
+                {
+                  "_$uuid": "cbf682ab-f478-46d1-b278-c5a04e3ed99a",
+                  "_$type": "Material"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_$id": "27gkai7a",
+          "_$type": "Sprite3D",
+          "name": "Tiles44",
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": 4,
+              "z": 4
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": -0.7071067811865475,
+              "w": 0.7071067811865476
+            },
+            "localScale": {
+              "_$type": "Vector3",
+              "x": 0.95,
+              "y": 0.95,
+              "z": 1
+            }
+          },
+          "_$comp": [
+            {
+              "_$type": "MeshFilter",
+              "sharedMesh": {
+                "_$uuid": "7e9b0d09-b83c-425d-adf1-3d319f026e38",
+                "_$type": "Mesh"
+              }
+            },
+            {
+              "_$type": "MeshRenderer",
+              "sharedMaterials": [
+                {
+                  "_$uuid": "cbf682ab-f478-46d1-b278-c5a04e3ed99a",
+                  "_$type": "Material"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "6ekxmjrr",
+      "_$type": "Sprite3D",
+      "name": "Obj1",
+      "active": false,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": 1.44996,
+          "y": 1.49997,
+          "z": 1.51993
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": -0.3535533905932738,
+          "y": 0.3535533905932738,
+          "z": 0.14644660940672624,
+          "w": 0.8535533905932737
+        },
         "localScale": {
           "_$type": "Vector3",
-          "x": 10,
-          "y": 10,
-          "z": 10
+          "x": 4.5,
+          "y": 4.5,
+          "z": 4.5
         }
       },
       "_$comp": [
         {
           "_$type": "MeshFilter",
           "sharedMesh": {
-            "_$uuid": "4a4afb22-ef83-40a2-a6a8-212a2d20c52f",
+            "_$uuid": "7e9b0d09-b83c-425d-adf1-3d319f026e38",
             "_$type": "Mesh"
           }
         },
@@ -28,7 +1106,7 @@
           "_$type": "MeshRenderer",
           "sharedMaterials": [
             {
-              "_$uuid": "6f90bbb0-bcb2-4311-8a9d-3d8277522098",
+              "_$uuid": "6c78e890-7806-4043-a573-2d185c79b1d8",
               "_$type": "Material"
             }
           ]
@@ -36,70 +1114,94 @@
       ]
     },
     {
-      "_$id": "pghbqr7m",
-      "_$prefab": "fde79713-58f5-47f2-931f-35003899737d",
-      "name": "block-tile",
-      "active": true,
-      "layer": 0,
+      "_$id": "r5m558g2",
+      "_$type": "Sprite3D",
+      "name": "Obj2",
+      "active": false,
       "transform": {
         "localPosition": {
           "_$type": "Vector3",
-          "x": -0.35638,
-          "y": 0.01,
-          "z": 1.33518
+          "x": 0.39992,
+          "y": 1.21985,
+          "z": 0.32989
         },
         "localRotation": {
           "_$type": "Quaternion",
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
+          "x": -0.35355339059327384,
+          "y": 0.3535533905932738,
+          "z": 0.14644660940672632,
+          "w": 0.8535533905932737
+        },
+        "localScale": {
+          "_$type": "Vector3",
+          "x": 3,
+          "y": 3,
+          "z": 3
         }
-      }
+      },
+      "_$comp": [
+        {
+          "_$type": "MeshFilter",
+          "sharedMesh": {
+            "_$uuid": "7e9b0d09-b83c-425d-adf1-3d319f026e38",
+            "_$type": "Mesh"
+          }
+        },
+        {
+          "_$type": "MeshRenderer",
+          "sharedMaterials": [
+            {
+              "_$uuid": "2910a8d3-a6de-4ea4-8932-8097d7caf23e",
+              "_$type": "Material"
+            }
+          ]
+        }
+      ]
     },
     {
-      "_$id": "r60qor3k",
-      "_$prefab": "7879a8a7-7449-47e6-81e4-6f0e208a6efc",
-      "name": "static-obj",
-      "active": true,
-      "layer": 0,
+      "_$id": "iwwq3rju",
+      "_$type": "Sprite3D",
+      "name": "Obj3",
+      "active": false,
       "transform": {
         "localPosition": {
           "_$type": "Vector3",
-          "x": -0.42482062902132656,
-          "y": 0.3983670811096396,
-          "z": 1.5566482270134567
+          "x": 2.99976,
+          "y": 1.91956,
+          "z": 1.97982
         },
         "localRotation": {
           "_$type": "Quaternion",
-          "x": 0.7071067811865475,
-          "y": 0,
-          "z": 0,
-          "w": 0.7071067811865476
-        }
-      }
-    },
-    {
-      "_$id": "1u89fdo2",
-      "_$prefab": "815006e1-36b2-4dda-afdf-b02d19e39332",
-      "name": "dynamic-obj",
-      "active": true,
-      "layer": 0,
-      "transform": {
-        "localPosition": {
+          "x": -0.3535533905932738,
+          "y": 0.35355339059327384,
+          "z": 0.14644660940672627,
+          "w": 0.8535533905932737
+        },
+        "localScale": {
           "_$type": "Vector3",
-          "x": -2.3525257110595703,
-          "y": 0.9615139692364658,
-          "z": 1.2624566555023193
-        },
-        "localRotation": {
-          "_$type": "Quaternion",
-          "x": 0.7071067811865475,
-          "y": 0,
-          "z": 0,
-          "w": 0.7071067811865476
+          "x": 6,
+          "y": 6,
+          "z": 1
         }
-      }
+      },
+      "_$comp": [
+        {
+          "_$type": "MeshFilter",
+          "sharedMesh": {
+            "_$uuid": "7e9b0d09-b83c-425d-adf1-3d319f026e38",
+            "_$type": "Mesh"
+          }
+        },
+        {
+          "_$type": "MeshRenderer",
+          "sharedMaterials": [
+            {
+              "_$uuid": "f23ad095-1b12-4818-a1fd-be4bc49baaef",
+              "_$type": "Material"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

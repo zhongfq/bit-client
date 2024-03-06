@@ -5,17 +5,19 @@ const { regClass, property } = Laya;
 
 @regClass()
 export class WorldMediator extends Laya.Script {
-    //declare owner : Laya.Sprite3D;
     declare owner: WorldUI;
 
+    private _initHeight: number = 0;
     private _initPosition: Laya.Point = new Laya.Point();
     private _pressStart: Laya.Point | null = null;
 
     override onAwake() {
+        this._initHeight = this.owner.joystickArea.height;
         this._initPosition.setTo(this.owner.joystick.x, this.owner.joystick.y);
-        this.owner.joystickGroup.on(Laya.Event.MOUSE_DOWN, this, this.onJoysticHandler);
-        this.owner.joystickGroup.on(Laya.Event.MOUSE_MOVE, this, this.onJoysticHandler);
-        this.owner.joystickGroup.on(Laya.Event.MOUSE_UP, this, this.onJoysticHandler);
+
+        this.owner.joystickArea.on(Laya.Event.MOUSE_DOWN, this, this.onJoysticHandler);
+        this.owner.joystickArea.on(Laya.Event.MOUSE_MOVE, this, this.onJoysticHandler);
+        this.owner.joystickArea.on(Laya.Event.MOUSE_UP, this, this.onJoysticHandler);
     }
 
     onJoysticHandler(e: Laya.Event) {
@@ -30,6 +32,7 @@ export class WorldMediator extends Laya.Script {
             joystick.x = this._pressStart.x;
             joystick.y = this._pressStart.y;
             joystick.alpha = 1;
+            this.owner.joystickArea.height = Laya.stage.height;
         } else if (e.type === Laya.Event.MOUSE_UP) {
             this._pressStart?.recover();
             this._pressStart = null;
@@ -38,7 +41,7 @@ export class WorldMediator extends Laya.Script {
             joystick.alpha = 0.3;
             indicator.x = 0;
             indicator.y = 0;
-            // cameraController.stopRun();
+            this.owner.joystickArea.height = this._initHeight;
         } else {
             const maxOffset = joystick.width / 2;
             const current = this.owner.joystickGroup.getMousePoint();
@@ -52,10 +55,6 @@ export class WorldMediator extends Laya.Script {
             }
             indicator.x = current.x;
             indicator.y = current.y;
-
-            const rad = Math.atan2(-current.y, current.x);
-            // app.service.world.requestTroopMoveBy(this.)
-            // cameraController.setTargetRoation((rad * 180) / Math.PI);
         }
     }
 }

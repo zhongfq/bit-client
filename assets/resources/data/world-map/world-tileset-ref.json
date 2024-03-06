@@ -270,61 +270,31 @@
                  "id":0,
                  "image":"..\/..\/..\/..\/..\/others\/res\/\u573a\u666f\/map_Grassland_Tiled\/Tiled\/texture\/static\/map_Grassland_hill_01.png",
                  "imageheight":384,
-                 "imagewidth":384,
-                 "properties":[
-                        {
-                         "name":"offsetY",
-                         "type":"float",
-                         "value":0.69662
-                        }]
+                 "imagewidth":384
                 }, 
                 {
                  "id":1,
                  "image":"..\/..\/..\/..\/..\/others\/res\/\u573a\u666f\/map_Grassland_Tiled\/Tiled\/texture\/static\/map_Grassland_hill_02.png",
                  "imageheight":256,
-                 "imagewidth":256,
-                 "properties":[
-                        {
-                         "name":"offsetY",
-                         "type":"float",
-                         "value":0.47278
-                        }]
+                 "imagewidth":256
                 }, 
                 {
                  "id":2,
                  "image":"..\/..\/..\/..\/..\/others\/res\/\u573a\u666f\/map_Grassland_Tiled\/Tiled\/texture\/static\/map_Grassland_Tree_01.png",
                  "imageheight":256,
-                 "imagewidth":256,
-                 "properties":[
-                        {
-                         "name":"offsetY",
-                         "type":"float",
-                         "value":0.38591
-                        }]
+                 "imagewidth":256
                 }, 
                 {
                  "id":3,
                  "image":"..\/..\/..\/..\/..\/others\/res\/\u573a\u666f\/map_Grassland_Tiled\/Tiled\/texture\/static\/map_Grassland_Tree_02.png",
                  "imageheight":256,
-                 "imagewidth":256,
-                 "properties":[
-                        {
-                         "name":"offsetY",
-                         "type":"float",
-                         "value":0.46933
-                        }]
+                 "imagewidth":256
                 }, 
                 {
                  "id":4,
                  "image":"..\/..\/..\/..\/..\/others\/res\/\u573a\u666f\/map_Grassland_Tiled\/Tiled\/texture\/static\/map_Grassland_Tree_03.png",
                  "imageheight":256,
-                 "imagewidth":256,
-                 "properties":[
-                        {
-                         "name":"offsetY",
-                         "type":"float",
-                         "value":0.47747
-                        }]
+                 "imagewidth":256
                 }],
          "tilewidth":384
         }, 
@@ -347,37 +317,19 @@
                  "id":0,
                  "image":"..\/..\/..\/..\/..\/others\/res\/\u573a\u666f\/map_Grassland_Tiled\/Tiled\/texture\/dynamic\/building_castle01@1,2_5,5.png",
                  "imageheight":512,
-                 "imagewidth":512,
-                 "properties":[
-                        {
-                         "name":"offsetY",
-                         "type":"float",
-                         "value":0.96151
-                        }]
+                 "imagewidth":512
                 }, 
                 {
                  "id":1,
                  "image":"..\/..\/..\/..\/..\/others\/res\/\u573a\u666f\/map_Grassland_Tiled\/Tiled\/texture\/dynamic\/map_gather_wood1-1.png",
                  "imageheight":256,
-                 "imagewidth":256,
-                 "properties":[
-                        {
-                         "name":"offsetY",
-                         "type":"float",
-                         "value":0.48325
-                        }]
+                 "imagewidth":256
                 }, 
                 {
                  "id":2,
                  "image":"..\/..\/..\/..\/..\/others\/res\/\u573a\u666f\/map_Grassland_Tiled\/Tiled\/texture\/dynamic\/map_gather_wood1-2.png",
                  "imageheight":256,
-                 "imagewidth":256,
-                 "properties":[
-                        {
-                         "name":"offsetY",
-                         "type":"float",
-                         "value":0.4137
-                        }]
+                 "imagewidth":256
                 }],
          "tilewidth":512
         }, 

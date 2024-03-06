@@ -118,6 +118,43 @@
               "maxBounces": null
             }
           ]
+        },
+        {
+          "_$id": "gv9f1ij7",
+          "_$type": "Sprite3D",
+          "name": "world-map",
+          "_$child": [
+            {
+              "_$id": "6uciuwqk",
+              "_$type": "Sprite3D",
+              "name": "ground"
+            },
+            {
+              "_$id": "84vbe93m",
+              "_$type": "Sprite3D",
+              "name": "road"
+            },
+            {
+              "_$id": "vkuzj9h2",
+              "_$type": "Sprite3D",
+              "name": "river"
+            },
+            {
+              "_$id": "44rludnu",
+              "_$type": "Sprite3D",
+              "name": "block"
+            },
+            {
+              "_$id": "99ogd8y7",
+              "_$type": "Sprite3D",
+              "name": "static"
+            },
+            {
+              "_$id": "x1v03yz5",
+              "_$type": "Sprite3D",
+              "name": "dynamic"
+            }
+          ]
         }
       ]
     },
@@ -155,24 +192,54 @@
       ]
     },
     {
+      "_$id": "ko0vuzvu",
+      "_$var": true,
+      "_$type": "Box",
+      "name": "mapClickArea",
+      "width": 750,
+      "height": 1334,
+      "_mouseState": 2,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "bottom": 0
+    },
+    {
       "_$id": "v4tw4ryv",
       "_$var": true,
       "_$type": "Box",
       "name": "joystickGroup",
       "width": 750,
       "height": 1334,
+      "_mouseState": 2,
+      "mouseThrough": true,
       "left": 0,
       "right": 0,
+      "top": 0,
+      "bottom": 0,
       "_$child": [
+        {
+          "_$id": "t4swvue7",
+          "_$var": true,
+          "_$type": "Box",
+          "name": "joystickArea",
+          "y": 934,
+          "width": 750,
+          "height": 400,
+          "_mouseState": 2,
+          "left": 0,
+          "right": 0,
+          "bottom": 0
+        },
         {
           "_$id": "5vgwnpv2",
           "_$var": true,
           "_$type": "Box",
           "name": "joystick",
           "x": 375,
-          "y": 996,
+          "y": 1112,
           "width": 256,
-          "height": 256,
+          "height": 222,
           "_$child": [
             {
               "_$id": "r5mvo69m",
