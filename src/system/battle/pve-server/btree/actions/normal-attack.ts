@@ -3,21 +3,13 @@ import { AiTreeEnv } from "../../ecs/components/ai-component";
 import { ElementComponent } from "../../ecs/components/element-component";
 
 export class NormalAttack extends b3.Process {
-    override run(node: b3.Node, env: AiTreeEnv, target?: ElementComponent[] | ElementComponent) {
-        // if (target instanceof Array) {
-        //     for (const v of target) {
-        //         env.context.launchSkill(env.owner, v);
-        //     }
-        //     if (target.length > 0) {
-        //         return b3.Status.SUCCESS;
-        //     }
-        // } else {
-        //     env.context.launchSkill(env.owner, target);
-        //     return b3.Status.SUCCESS;
-        // }
-
+    override run(node: b3.Node, env: AiTreeEnv, target?: unknown) {
+        if (target instanceof Array) {
+            this.error(node, "target is array");
+        } else if (!(target instanceof ElementComponent)) {
+            this.error(node, "target is not an ElementComponent");
+        }
         env.context.playAnim(env.owner, "attack");
-
         return b3.Status.SUCCESS;
     }
 

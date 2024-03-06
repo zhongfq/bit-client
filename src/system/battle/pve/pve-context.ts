@@ -15,7 +15,7 @@ import { RenderSystem } from "./ecs/systems/render-system";
 import { TilemapSystem } from "./ecs/systems/tilemap-system";
 
 @Laya.regClass()
-export class PveContext extends Mediator implements ICommandSender {
+export class PveContext extends Mediator {
     declare owner: PveUI;
 
     focusRole: number = 0;
@@ -54,7 +54,7 @@ export class PveContext extends Mediator implements ICommandSender {
         this._ecs.addSystem(new CameraSystem(this));
         this._ecs.addSystem(new RenderSystem(this));
         this._ecs.addSystem(new TilemapSystem(this));
-        this._pveServer = new PveServer(this);
+        this._pveServer = new PveServer(this._ecs.getSystem(CommandSystem)!);
         this._sender = new CommandSender(this._pveServer);
     }
 
@@ -67,68 +67,6 @@ export class PveContext extends Mediator implements ICommandSender {
         super.onUpdate();
         this._pveServer.update(Laya.timer.delta / 1000);
         this._ecs.update(Laya.timer.delta / 1000);
-    }
-
-    private get _commandSystem() {
-        return this._ecs.getSystem(CommandSystem)!;
-    }
-
-    // ------------------------------------------------------------------------
-    // ICommandSender
-    // ------------------------------------------------------------------------
-    focus(eid: number) {
-        this.focusRole = eid;
-        this._commandSystem.focus(eid);
-    }
-
-    createElement(data: ElementCreator) {
-        this._commandSystem.createElement(data);
-    }
-
-    createTree(data: ElementCreator) {
-        this._commandSystem.createWood(data);
-    }
-
-    chopTree(eid: number, target: number) {}
-
-    moveStart(eid: number, speed: Laya.Vector3) {
-        const element = this._ecs.getComponent(eid, ElementComponent);
-        if (!element) {
-            console.warn(`not found entity: ${eid}`);
-            return;
-        }
-        this._commandSystem.moveStart(element, speed);
-    }
-
-    moveStop(eid: number) {
-        const element = this._ecs.getComponent(eid, ElementComponent);
-        if (!element) {
-            console.warn(`not found entity: ${eid}`);
-            return;
-        }
-        this._commandSystem.moveStop(element);
-    }
-
-    playAnim(eid: number, anim: string) {
-        const element = this._ecs.getComponent(eid, ElementComponent);
-        if (!element) {
-            console.warn(`not found entity: ${eid}`);
-            return;
-        }
-        if (anim === "attack") {
-            this._commandSystem.playAnim(element, ElementAnimation.ATTACK);
-        } else {
-            console.error(`TODO: play anim '${anim}'`);
-        }
-    }
-
-    drawDebug(x: number, z: number, radius: number) {
-        const outPos = Laya.Pool.obtain(Laya.Vector4);
-        const inPos = Laya.Pool.obtain(Laya.Vector3);
-        inPos.x = x;
-        inPos.z = z;
-        this.camera.worldToViewportPoint(inPos, outPos);
-        this.owner.debug.graphics.drawCircle(outPos.x, outPos.y, radius, null, 0xff0000, 2);
     }
 }
 

@@ -15,26 +15,27 @@ export class MovementSystem extends ecs.System {
             const transform = movement.getComponent(TransformComponent)!;
             const position = transform.position;
             const { speed, target } = movement;
+            const { x: speedX, z: speedZ } = speed;
 
-            position.x += speed.x * dt;
-            position.z += speed.z * dt;
+            position.x += speedX * dt;
+            position.z += speedZ * dt;
 
             if (target) {
                 const offsetX = target.x - position.x;
                 const offsetZ = target.z - position.z;
                 let changed = false;
-                if (offsetX === 0 || offsetX * speed.x < 0) {
+                if (offsetX === 0 || offsetX * speedX < 0) {
                     position.x = target.x;
                     speed.x = 0;
                     changed = true;
                 }
-                if (offsetZ === 0 || offsetZ * speed.z < 0) {
+                if (offsetZ === 0 || offsetZ * speedZ < 0) {
                     position.z = target.z;
                     speed.z = 0;
                     changed = true;
                 }
                 if (changed) {
-                    if (speed.x === 0 && speed.z === 0) {
+                    if (speedX === 0 && speedZ === 0) {
                         movement.target = null;
                         this.context.moveStop(movement.getComponent(ElementComponent)!);
                     }

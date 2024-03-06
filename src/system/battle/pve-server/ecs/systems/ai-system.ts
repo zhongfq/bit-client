@@ -3,6 +3,7 @@ import { builtinNodes } from "../../../../../core/behavior3/nodes/builtin-nodes"
 import { ecs } from "../../../../../core/ecs";
 import { AdjustPos } from "../../btree/actions/adjust-pos";
 import { BackTeam } from "../../btree/actions/back-team";
+import { ClearStance } from "../../btree/actions/clear-stance";
 import { FollowHero } from "../../btree/actions/follow-hero";
 import { GetHeroDistance } from "../../btree/actions/get-hero-distance";
 import { GetPos } from "../../btree/actions/get-pos";
@@ -13,6 +14,8 @@ import { MoveToAtkPos } from "../../btree/actions/move-to-atk-pos";
 import { MoveToPos } from "../../btree/actions/move-to-pos";
 import { NormalAttack } from "../../btree/actions/normal-attack";
 import { PlaySkillAnim } from "../../btree/actions/play-skill-anim";
+import { SetStance } from "../../btree/actions/set-stance";
+import { TowardToTarget } from "../../btree/actions/toward-to-target";
 import { Wait } from "../../btree/actions/wait";
 import { FindOneTarget } from "../../btree/conditions/find-one-target";
 import { FindTargets } from "../../btree/conditions/find-targets";
@@ -32,6 +35,7 @@ export class AiSystem extends ecs.System {
         context.registerProcess(...builtinNodes);
         context.registerProcess(AdjustPos);
         context.registerProcess(BackTeam);
+        context.registerProcess(ClearStance);
         context.registerProcess(FindOneTarget);
         context.registerProcess(FindTargets);
         context.registerProcess(FollowHero);
@@ -45,6 +49,8 @@ export class AiSystem extends ecs.System {
         context.registerProcess(NormalAttack);
         context.registerProcess(NormalAttack);
         context.registerProcess(PlaySkillAnim);
+        context.registerProcess(SetStance);
+        context.registerProcess(TowardToTarget);
         context.registerProcess(Wait);
     }
 

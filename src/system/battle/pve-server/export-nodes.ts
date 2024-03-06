@@ -19,6 +19,7 @@ import { AddBuff } from "./btree/actions/add-buff";
 import { AdjustPos } from "./btree/actions/adjust-pos";
 import { BackTeam } from "./btree/actions/back-team";
 import { ChopWood } from "./btree/actions/chop-tree";
+import { ClearStance } from "./btree/actions/clear-stance";
 import { CreateBullet } from "./btree/actions/create-bullet";
 import { DelBuff } from "./btree/actions/del-buff";
 import { FollowHero } from "./btree/actions/follow-hero";
@@ -33,6 +34,8 @@ import { MoveToAtkPos } from "./btree/actions/move-to-atk-pos";
 import { MoveToPos } from "./btree/actions/move-to-pos";
 import { NormalAttack } from "./btree/actions/normal-attack";
 import { PlaySkillAnim } from "./btree/actions/play-skill-anim";
+import { SetStance } from "./btree/actions/set-stance";
+import { TowardToTarget } from "./btree/actions/toward-to-target";
 import { Wait } from "./btree/actions/wait";
 import { FindOneTarget } from "./btree/conditions/find-one-target";
 import { FindTargets } from "./btree/conditions/find-targets";
@@ -45,6 +48,7 @@ export class ExportNodes extends b3.Context {
             AdjustPos,
             BackTeam,
             ChopWood,
+            ClearStance,
             CreateBullet,
             DelBuff,
             FindOneTarget,
@@ -61,6 +65,8 @@ export class ExportNodes extends b3.Context {
             MoveToPos,
             NormalAttack,
             PlaySkillAnim,
+            SetStance,
+            TowardToTarget,
             Wait
         );
         const descriptors: b3.ProcessDescriptor[] = [];

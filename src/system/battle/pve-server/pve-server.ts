@@ -28,7 +28,7 @@ export class PveServer extends b3.Context {
     private _transform3D: Laya.Transform3D = new Laya.Transform3D();
 
     private _aiTrees: Map<string, b3.Tree> = new Map();
-    private _map: Map<number, ElementComponent> = new Map();
+    private _stanceMap: Map<number, ElementComponent> = new Map();
 
     constructor(sender: ICommandSender) {
         super();
@@ -51,29 +51,37 @@ export class PveServer extends b3.Context {
     }
 
     private _calcIndex(positioin: Laya.Vector3) {
-        const x = Math.abs(positioin.x * 20) << 16;
-        const y = Math.abs(positioin.z * 20) << 16;
-        return x | y;
+        const x = Math.round(positioin.x * 2) << 16;
+        const z = Math.round(positioin.z * 2);
+        return x | z;
     }
 
-    findAtPosition(positioin: Laya.Vector3) {
+    findAtStance(positioin: Laya.Vector3) {
         const idx = this._calcIndex(positioin);
-        return this._map.get(idx);
+        return this._stanceMap.get(idx);
+    }
+
+    clearStance(element: ElementComponent) {
+        const index = element.transform.index;
+        if (index) {
+            this._stanceMap.delete(index);
+            element.transform.index = undefined;
+        }
+    }
+
+    setStance(element: ElementComponent) {
+        const oldIndex = element.transform.index;
+        const newIndex = this._calcIndex(element.transform.position);
+        if (oldIndex) {
+            this._stanceMap.delete(oldIndex);
+        }
+        element.transform.index = newIndex;
+        this._stanceMap.set(newIndex, element);
     }
 
     update(delta: number) {
         this.time += delta;
         this._ecs.update(delta);
-
-        // 更新位置索引
-        this.ecs.getComponents(TransformComponent).forEach((transform) => {
-            const idx = this._calcIndex(transform.position);
-            const map = this._map;
-            if (idx !== transform.index) {
-                map.delete(transform.index);
-                map.set(idx, transform.getComponent(ElementComponent)!);
-            }
-        });
 
         this._drawDebug();
     }
@@ -285,6 +293,10 @@ export class PveServer extends b3.Context {
         this._sender.moveStop(element.eid);
     }
 
+    towardTo(element: ElementComponent, target: ElementComponent) {
+        this._sender.towardTo(element.eid, target.eid);
+    }
+
     playAnim(element: ElementComponent, anim: string) {
         this._sender.playAnim(element.eid, anim);
     }
@@ -302,11 +314,12 @@ export class PveServer extends b3.Context {
 export interface ICommandSender {
     focus(eid: number): void;
     createElement(data: ElementCreator): void;
-    createTree(data: ElementCreator): void;
 
-    chopTree(eid: number, target: number): void;
+    chopWood(eid: number, target: number): void;
     moveStart(eid: number, speed: Laya.Vector3): void;
     moveStop(eid: number): void;
+
+    towardTo(eid: number, target: number): void;
 
     playAnim(eid: number, anim: string): void;
 

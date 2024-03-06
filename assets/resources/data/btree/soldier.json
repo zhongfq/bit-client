@@ -85,60 +85,73 @@
           },
           {
             "id": 11,
-            "name": "AlwaysSuccess",
-            "desc": "设置交战时间",
-            "args": {},
-            "children": [
-              {
-                "id": 12,
-                "name": "Sequence",
-                "args": {},
-                "children": [
-                  {
-                    "id": 13,
-                    "name": "IsNull",
-                    "args": {},
-                    "input": [
-                      "fight_time"
-                    ],
-                    "children": []
-                  },
-                  {
-                    "id": 14,
-                    "name": "GetTime",
-                    "desc": "设置交战时间",
-                    "args": {},
-                    "output": [
-                      "fight_time"
-                    ]
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "id": 15,
-            "name": "MoveStop",
-            "desc": "停止移动",
-            "args": {}
-          },
-          {
-            "id": 16,
             "name": "Selector",
             "args": {},
             "children": [
               {
-                "id": 17,
+                "id": 12,
                 "name": "AdjustPos",
                 "args": {}
               },
               {
-                "id": 18,
+                "id": 13,
                 "name": "Sequence",
                 "args": {},
                 "children": [
                   {
+                    "id": 14,
+                    "name": "AlwaysSuccess",
+                    "desc": "设置交战时间",
+                    "args": {},
+                    "children": [
+                      {
+                        "id": 15,
+                        "name": "Sequence",
+                        "args": {},
+                        "children": [
+                          {
+                            "id": 16,
+                            "name": "IsNull",
+                            "args": {},
+                            "input": [
+                              "fight_time"
+                            ],
+                            "children": []
+                          },
+                          {
+                            "id": 17,
+                            "name": "GetTime",
+                            "desc": "设置交战时间",
+                            "args": {},
+                            "output": [
+                              "fight_time"
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": 18,
+                    "name": "SetStance",
+                    "args": {}
+                  },
+                  {
                     "id": 19,
+                    "name": "MoveStop",
+                    "desc": "停止移动",
+                    "args": {}
+                  },
+                  {
+                    "id": 20,
+                    "name": "TowardToTarget",
+                    "args": {},
+                    "input": [
+                      "enemy"
+                    ]
+                  },
+                  {
+                    "id": 21,
                     "name": "NormalAttack",
                     "args": {},
                     "input": [
@@ -146,12 +159,17 @@
                     ]
                   },
                   {
-                    "id": 20,
+                    "id": 22,
                     "name": "Wait",
                     "args": {
                       "time": 1.5,
                       "random": 0.5
                     }
+                  },
+                  {
+                    "id": 23,
+                    "name": "ClearStance",
+                    "args": {}
                   }
                 ]
               }
@@ -160,13 +178,13 @@
         ]
       },
       {
-        "id": 21,
+        "id": 24,
         "name": "Sequence",
         "desc": "找目标",
         "args": {},
         "children": [
           {
-            "id": 22,
+            "id": 25,
             "name": "FindOneTarget",
             "args": {
               "radius": 3,
@@ -178,7 +196,7 @@
             ]
           },
           {
-            "id": 23,
+            "id": 26,
             "name": "GetPos",
             "args": {},
             "input": [
@@ -189,7 +207,7 @@
             ]
           },
           {
-            "id": 24,
+            "id": 27,
             "name": "MoveToPos",
             "args": {},
             "input": [
@@ -199,7 +217,7 @@
         ]
       },
       {
-        "id": 25,
+        "id": 28,
         "name": "FollowHero",
         "desc": "士兵以阵型位置跟随主将",
         "args": {}

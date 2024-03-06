@@ -23,8 +23,8 @@ export class BackTeam extends b3.Process {
         const p0 = transform.position;
         env.context.calcSoldierPosition(leader, soldier, p1);
         const distance = Laya.Vector3.distance(p1, p0);
-        // 与阵型位置在1格内认为已经归队了，剩下交给 FollowHero 节点
-        if (distance <= 1) {
+        // 与阵型位置在0.5格内认为已经归队了，剩下交给 FollowHero 节点
+        if (distance <= 0.5) {
             return b3.Status.SUCCESS;
         } else {
             const rad = Math.atan2(p1.z - p0.z, p1.x - p0.x);
