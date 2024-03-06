@@ -1,41 +1,20 @@
 {
   "_$ver": 1,
-  "_$id": "1u89fdo2",
+  "_$id": "zftgmsz0",
   "_$type": "Sprite3D",
   "name": "dynamic-obj",
-  "transform": {
-    "localPosition": {
-      "_$type": "Vector3",
-      "x": -2.352525818901819,
-      "y": 0.9183045094181469,
-      "z": 1.262456675072538
-    },
-    "localRotation": {
-      "_$type": "Quaternion",
-      "x": 0.7071067811865475,
-      "w": 0.7071067811865476
-    },
-    "localScale": {
-      "_$type": "Vector3",
-      "x": 2,
-      "y": 2,
-      "z": 2
-    }
-  },
   "_$child": [
     {
       "_$id": "h25r3f48",
       "_$type": "Sprite3D",
       "name": "Plane",
       "transform": {
-        "localPosition": {
-          "_$type": "Vector3",
-          "y": 1.1102230246251565e-16
-        },
         "localRotation": {
           "_$type": "Quaternion",
-          "x": -0.7071067811865475,
-          "w": 0.7071067811865476
+          "x": -0.3535533905932738,
+          "y": 0.3535533905932738,
+          "z": 0.1464466094067263,
+          "w": 0.8535533905932737
         }
       },
       "_$comp": [
