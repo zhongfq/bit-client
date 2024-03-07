@@ -10,50 +10,62 @@ interface GmCmdData {
     instruct: string;
 }
 interface SwitchData {
-    name:string
-    func:Callback;
+    name: string;
+    func: Callback;
 }
 @regClass()
 export class GmMediator extends Mediator {
     declare owner: GmUI;
     listGmData!: GmCmdData[];
     listSwitchData!: SwitchData[];
-    isShowStat:boolean = false;
+    isShowStat: boolean = false;
 
     override onAwake(): void {
-        this._initEvent()
+        this._initEvent();
         this.updateList();
     }
-    
-    private _initEvent(){
-        //-------------------------------------gm指令列表
-        this.owner.listGm.mouseHandler = new Laya.Handler(this, (evn: Laya.Event, index: number)=>{
-            if (evn.type == Laya.Event.CLICK) {
-                this.owner.textInput.text = this.listGmData[index].instruct;
-            }
-        });
-        this.owner.listGm.renderHandler = new Laya.Handler(this, (cell: Laya.Node, index: number)=>{
 
-            (cell.getChildByName("Label") as Laya.Label).text = this.listGmData[index].name;
-        });
-        this.owner.listGm.selectHandler = new Laya.Handler(this, (evn: Laya.Event, index: number)=>{
-            if (evn.type == Laya.Event.CLICK) {
-                this.owner.textInput.text = this.listGmData[index].instruct;
+    private _initEvent() {
+        //-------------------------------------gm指令列表
+        this.owner.listGm.mouseHandler = new Laya.Handler(
+            this,
+            (evn: Laya.Event, index: number) => {
+                if (evn.type == Laya.Event.CLICK) {
+                    this.owner.textInput.text = this.listGmData[index].instruct;
+                }
             }
-        });
+        );
+        this.owner.listGm.renderHandler = new Laya.Handler(
+            this,
+            (cell: Laya.Node, index: number) => {
+                (cell.getChildByName("Label") as Laya.Label).text = this.listGmData[index].name;
+            }
+        );
+        this.owner.listGm.selectHandler = new Laya.Handler(
+            this,
+            (evn: Laya.Event, index: number) => {
+                if (evn.type == Laya.Event.CLICK) {
+                    this.owner.textInput.text = this.listGmData[index].instruct;
+                }
+            }
+        );
         //-------------------------------------gm指令列表
 
-        
         //-------------------------------------功能开关列表
-        this.owner.listSwitch.mouseHandler = new Laya.Handler(this, (evn: Laya.Event, index: number)=>{
-            if (evn.type == Laya.Event.CLICK) {
-                this.listSwitchData[index].func(index);
+        this.owner.listSwitch.mouseHandler = new Laya.Handler(
+            this,
+            (evn: Laya.Event, index: number) => {
+                if (evn.type == Laya.Event.CLICK) {
+                    this.listSwitchData[index].func(index);
+                }
             }
-        });
-        this.owner.listSwitch.renderHandler = new Laya.Handler(this, (cell: Laya.Node, index: number)=>{
-
-            (cell.getChildByName("Label") as Laya.Label).text = this.listSwitchData[index].name;
-        });
+        );
+        this.owner.listSwitch.renderHandler = new Laya.Handler(
+            this,
+            (cell: Laya.Node, index: number) => {
+                (cell.getChildByName("Label") as Laya.Label).text = this.listSwitchData[index].name;
+            }
+        );
         //-------------------------------------功能开关列表
 
         this.owner.btnUse.on(Laya.Event.CLICK, () => {
@@ -63,15 +75,14 @@ export class GmMediator extends Mediator {
         this.owner.btnReset.on(Laya.Event.CLICK, () => {
             app.service.gm.requestGM("reset");
         });
-        this.owner.Tab.selectHandler = new Laya.Handler(this,(index:number)=>{
+        this.owner.Tab.selectHandler = new Laya.Handler(this, (index: number) => {
             this.owner.ViewStack.selectedIndex = index;
-        })
+        });
     }
 
     onTabSelect(index: number) {
         this.updateList();
     }
-
 
     updateList() {
         this.listGmData = [];
@@ -91,14 +102,16 @@ export class GmMediator extends Mediator {
         this.listGmData.push({ name: "修改主城位置1:X,2:Y", instruct: " change_castle_pos 1 2" });
         this.owner.listGm.array = this.listGmData;
 
-        this.listSwitchData = []
-        this.listSwitchData.push({name:"统计信息:关",func:(index:number)=>{
-            this.isShowStat = !this.isShowStat
-            this.isShowStat?Laya.Stat.show():Laya.Stat.hide()
-            this.listSwitchData[index].name = "统计信息:"+(this.isShowStat?"关":"开");
-            this.owner.listSwitch.refresh();
-            
-        }})
+        this.listSwitchData = [];
+        this.listSwitchData.push({
+            name: "统计信息:开",
+            func: (index: number) => {
+                this.isShowStat = !this.isShowStat;
+                this.isShowStat ? Laya.Stat.show() : Laya.Stat.hide();
+                this.listSwitchData[index].name = "统计信息:" + (this.isShowStat ? "关" : "开");
+                this.owner.listSwitch.refresh();
+            },
+        });
         this.owner.listSwitch.array = this.listSwitchData;
 
         // this.owner.l
