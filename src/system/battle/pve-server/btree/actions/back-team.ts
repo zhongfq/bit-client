@@ -2,6 +2,7 @@ import { b3 } from "../../../../../core/behavior3/behavior";
 import { AiTreeEnv } from "../../ecs/components/ai-component";
 import { SoldierComponent } from "../../ecs/components/element-component";
 import { AiSystem } from "../../ecs/systems/ai-system";
+import { PveDef } from "../../pve-defs";
 
 const tmpTarget = new Laya.Vector3();
 const tmpSpeed = new Laya.Vector3();
@@ -37,9 +38,8 @@ export class BackTeam extends b3.Process {
             } else {
                 movement.velocity = velocity;
             }
-            // TODO: 需要定义最大的归队速度
-            if (movement.velocity > 3) {
-                movement.velocity = 3;
+            if (movement.velocity > PveDef.MAX_BACK_SPEED) {
+                movement.velocity = PveDef.MAX_BACK_SPEED;
             }
             tmpSpeed.x = movement.velocity * Math.cos(rad);
             tmpSpeed.z = movement.velocity * Math.sin(rad);

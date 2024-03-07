@@ -48,7 +48,6 @@ export class SoldierComponent extends ecs.Component {
     leader!: number;
     offset!: IVector3Like;
     index: number = 0;
-    velocity: number = 0;
 
     // 攻击的小兵对象
     attack: SoliderAttack = { target: null, time: 0, position: new Laya.Vector3() };

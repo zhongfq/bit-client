@@ -5,26 +5,6 @@ import { StringUtil } from "../../../../../core/utils/string-util";
 import { TilemapSystem } from "../systems/tilemap-system";
 
 export class TilemapComponent extends ecs.SingletonComponent {
-    static readonly RATE = 1;
-
-    static grid2Pixel(x: number, z: number, out: IVector3Like) {
-        // TODO
-        out.x = x * TilemapComponent.RATE;
-        out.z = z * TilemapComponent.RATE;
-        out.y = 0;
-        return out;
-    }
-
-    static degree2Speed(deg: number, velocity: number, out: IVector3Like) {
-        const rad = (deg / 180) * Math.PI;
-        out.x = Math.cos(rad) * velocity * TilemapComponent.RATE;
-        out.z = Math.sin(rad) * velocity * TilemapComponent.RATE;
-        out.y = 0;
-        return out;
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     static readonly VISION_WIDTH = 25; // 视野宽度（单位：米）
     static readonly VISION_HEIGHT = 25; // 视野高度（单位：米）
 

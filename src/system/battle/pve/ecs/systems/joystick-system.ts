@@ -57,7 +57,7 @@ export class JoystickSystem extends ecs.System {
             owner.indicator.x = current.x;
             owner.indicator.y = current.y;
 
-            const rad = Math.atan2(current.y, current.x);
+            const rad = Math.atan2(current.y, current.x) - Math.PI / 4;
             const degree = Math.floor((MathUtil.toDegree(rad) + 360) % 360);
             if (Math.abs(joystick.degree - degree) >= 5) {
                 joystick.degree = degree;

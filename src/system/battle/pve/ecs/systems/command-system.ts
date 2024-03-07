@@ -43,7 +43,7 @@ export class CommandSystem extends ecs.System implements ICommandSender {
         element.maxHp = data.maxHp;
 
         const transform = entity.addComponent(TransformComponent);
-        TilemapComponent.grid2Pixel(data.positioin.x, data.positioin.z, transform.position);
+        transform.position.cloneFrom(data.positioin);
         transform.flag |= TransformComponent.POSITION;
 
         const animation = entity.addComponent(AnimationComponent);

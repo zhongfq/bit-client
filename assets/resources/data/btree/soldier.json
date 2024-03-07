@@ -225,7 +225,9 @@
           {
             "id": 29,
             "name": "MoveToPos",
-            "args": {},
+            "args": {
+              "rate": 1.5
+            },
             "input": [
               "pos"
             ]
