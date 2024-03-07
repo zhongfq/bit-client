@@ -195,10 +195,10 @@ export namespace Tilemap {
         switch (layerName) {
             case Tilemap.LayerName.Ground:
                 return Tilemap.GroundElement;
-            // case Tilemap.LayerName.Road:
-            //     return Tilemap.RoadElement;
-            // case Tilemap.LayerName.River:
-            //     return Tilemap.RiverElement;
+            case Tilemap.LayerName.Road:
+                return Tilemap.RoadElement;
+            case Tilemap.LayerName.River:
+                return Tilemap.RiverElement;
             case Tilemap.LayerName.Static:
                 return Tilemap.StaticElement;
             case Tilemap.LayerName.Dynamic:
@@ -330,6 +330,10 @@ export namespace Tilemap {
             if (this._tile) {
                 return;
             }
+            const idx = this.system.getAtlasFrameIdx(this.getAtlasName(), this.gid);
+            if (idx == 0 && this.ignoreFirstFrame()) {
+                return;
+            }
             const [atlasPath, texturePath, prefabPath] = this.getResPaths();
             const atlas = await Laya.loader.load(atlasPath, Laya.Loader.ATLAS);
             const texture = await Laya.loader.load(texturePath, Laya.Loader.TEXTURE2D);
@@ -339,12 +343,11 @@ export namespace Tilemap {
 
             const pos = this._tile.transform.position;
             pos.x = this.x;
-            pos.y = 0;
+            pos.y = this.getOffsetY();
             pos.z = this.y;
             this._tile.transform.position = pos;
 
             const mat = new Laya.BlinnPhongMaterial(); // 使用 UnlitMaterial 时 tilingOffset 会失效
-            const idx = this.system.getAtlasFrameIdx(this.getAtlasName(), this.gid);
             const path = atlas.frames[idx].url;
             const tex = Laya.loader.getRes(path) as Laya.Texture;
             mat.albedoTexture = texture;
@@ -352,6 +355,7 @@ export namespace Tilemap {
             mat.tilingOffset.y = tex.uvrect[3]; // 瓦片高度
             mat.tilingOffset.z = tex.uvrect[0]; // X坐标偏移
             mat.tilingOffset.w = 1 - mat.tilingOffset.y - tex.uvrect[1]; // Y坐标偏移（拿到的偏移值是基于左上角的，这里转成右下角的）
+            mat.renderMode = this.getRenderMode();
 
             const renderer = this._tile.getChildAt(0).getComponent(Laya.MeshRenderer);
             renderer.material = mat;
@@ -367,6 +371,9 @@ export namespace Tilemap {
 
         protected abstract getAtlasName(): AtlasName;
         protected abstract getResPaths(): string[];
+        protected abstract getOffsetY(): number;
+        protected abstract getRenderMode(): Laya.MaterialRenderMode;
+        protected abstract ignoreFirstFrame(): boolean;
     }
 
     export class GroundElement extends TileElemet {
@@ -374,12 +381,24 @@ export namespace Tilemap {
             return AtlasName.Ground;
         }
 
-        protected override getResPaths() {
+        protected override getResPaths(): string[] {
             return [
                 "resources/texture/world-map/ground/ground.atlas",
                 "resources/texture/world-map/ground/ground.png",
                 "resources/prefab/world-map/ground/ground-tile.lh",
             ];
+        }
+
+        protected override getOffsetY(): number {
+            return -0.01;
+        }
+
+        protected override getRenderMode(): Laya.MaterialRenderMode {
+            return Laya.MaterialRenderMode.RENDERMODE_OPAQUE;
+        }
+
+        protected override ignoreFirstFrame(): boolean {
+            return false;
         }
     }
 
@@ -388,12 +407,24 @@ export namespace Tilemap {
             return AtlasName.Road;
         }
 
-        protected override getResPaths() {
+        protected override getResPaths(): string[] {
             return [
                 "resources/texture/world-map/road/road.atlas",
                 "resources/texture/world-map/road/road.png",
                 "resources/prefab/world-map/road/road-tile.lh",
             ];
+        }
+
+        protected override getOffsetY(): number {
+            return 0;
+        }
+
+        protected override getRenderMode(): Laya.MaterialRenderMode {
+            return Laya.MaterialRenderMode.RENDERMODE_TRANSPARENT;
+        }
+
+        protected override ignoreFirstFrame(): boolean {
+            return true;
         }
     }
 
@@ -402,12 +433,24 @@ export namespace Tilemap {
             return AtlasName.River;
         }
 
-        protected override getResPaths() {
+        protected override getResPaths(): string[] {
             return [
                 "resources/texture/world-map/river/river.atlas",
                 "resources/texture/world-map/river/river.png",
                 "resources/prefab/world-map/river/river-tile.lh",
             ];
+        }
+
+        protected override getOffsetY(): number {
+            return 0;
+        }
+
+        protected override getRenderMode(): Laya.MaterialRenderMode {
+            return Laya.MaterialRenderMode.RENDERMODE_TRANSPARENT;
+        }
+
+        protected override ignoreFirstFrame(): boolean {
+            return true;
         }
     }
 
@@ -573,7 +616,7 @@ export namespace Tilemap {
 
             const pos = this._blockTile.transform.position;
             pos.x = this.x;
-            pos.y = 0.01;
+            pos.y = 0;
             pos.z = this.y;
             this._blockTile.transform.position = pos;
 
