@@ -31,7 +31,6 @@
     },
     {
       "_$id": "6ee7kogk",
-      "_$var": true,
       "_$type": "Button",
       "name": "close",
       "x": 470,
