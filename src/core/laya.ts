@@ -8,7 +8,14 @@ export class Tween {
     }
 
     /**
-     * 
+     * Laya.timer.once(1000, this, () => {
+            Tween.toBezier(this, 8, [
+                new Laya.Point(50, 1000),
+                new Laya.Point(100, 500),
+                new Laya.Point(350, 500),
+                new Laya.Point(500, 1000),
+            ],12);
+        });
      * @param target 执行动作的目标
      * @param speed 速度
      * @param points 用于计算贝塞尔曲线的坐标，2次贝塞尔3个point 3次4个point，目前最大支持3次

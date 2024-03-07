@@ -165,7 +165,65 @@
                 "_$uuid": "cdc6022c-5b29-4747-b2f4-ce82cbc5cf0c",
                 "_$type": "AnimationController2D"
               },
-              "controllerLayers": []
+              "controllerLayers": [
+                {
+                  "_$type": "AnimatorControllerLayer2D",
+                  "name": "Base Layer",
+                  "states": [
+                    {
+                      "_$type": "AnimatorState2D",
+                      "name": "10101",
+                      "clipStart": 0,
+                      "clip": {
+                        "_$uuid": "89278ee5-2283-446a-ac8f-373e00ceef92",
+                        "_$type": "AnimationClip2D"
+                      },
+                      "soloTransitions": []
+                    },
+                    {
+                      "_$type": "AnimatorState2D",
+                      "name": "10102",
+                      "clipStart": 0,
+                      "clip": {
+                        "_$uuid": "e78450e1-7d99-4b68-82e7-621d21248d99",
+                        "_$type": "AnimationClip2D"
+                      },
+                      "soloTransitions": []
+                    },
+                    {
+                      "_$type": "AnimatorState2D",
+                      "name": "10103",
+                      "clipStart": 0,
+                      "clip": {
+                        "_$uuid": "04e03151-046f-48c1-b289-6a6c643a393a",
+                        "_$type": "AnimationClip2D"
+                      },
+                      "soloTransitions": []
+                    },
+                    {
+                      "_$type": "AnimatorState2D",
+                      "name": "10104",
+                      "clipStart": 0,
+                      "clip": {
+                        "_$uuid": "404eca41-89f1-4d52-84d0-0805d94127db",
+                        "_$type": "AnimationClip2D"
+                      },
+                      "soloTransitions": []
+                    },
+                    {
+                      "_$type": "AnimatorState2D",
+                      "name": "10105",
+                      "clipStart": 0,
+                      "clip": {
+                        "_$uuid": "5f14ef60-b6b9-477f-82ad-37107daafcc8",
+                        "_$type": "AnimationClip2D"
+                      },
+                      "soloTransitions": []
+                    }
+                  ],
+                  "defaultStateName": "10101"
+                }
+              ]
             }
           ]
         },

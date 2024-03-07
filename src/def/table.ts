@@ -181,7 +181,7 @@ export interface ChestRow extends GeneratedChestRow {}
 export interface ChestHeroRow extends GeneratedChestHeroRow {}
 export interface ChestScoreRow extends GeneratedChestScoreRow {}
 export type ChestTable = {
-    chest: ChestRow[];
+    chest: {[k:number] : ChestRow};
     hero: ChestHeroRow[];
     score: ChestScoreRow[];
 };

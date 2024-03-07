@@ -19,7 +19,9 @@
           "clipEnd": 1,
           "soloTransitions": [
             {
-              "id": "0"
+              "id": "0",
+              "exitByTime": true,
+              "exitTime": 1
             }
           ]
         },
@@ -59,9 +61,11 @@
           "loop": -1
         }
       ],
-      "defaultWeight": 1
+      "defaultWeight": 1,
+      "stageX": -83,
+      "stageY": 66
     }
   ],
-  "layerW": 150,
+  "layerW": 242,
   "animatorParams": []
 }

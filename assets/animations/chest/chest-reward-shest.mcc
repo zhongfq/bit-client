@@ -37,7 +37,7 @@
           "y": 475,
           "_isLooping": 0,
           "id": "1",
-          "name": "5",
+          "name": "10105",
           "speed": 1,
           "clipEnd": 1,
           "clip": {
@@ -50,7 +50,7 @@
           "y": 299,
           "_isLooping": 0,
           "id": "2",
-          "name": "4",
+          "name": "10104",
           "speed": 1,
           "clipEnd": 1,
           "clip": {
@@ -63,7 +63,7 @@
           "y": 201,
           "_isLooping": 0,
           "id": "3",
-          "name": "3",
+          "name": "10103",
           "speed": 1,
           "clipEnd": 1,
           "clip": {
@@ -76,7 +76,7 @@
           "y": 546,
           "_isLooping": 0,
           "id": "4",
-          "name": "2",
+          "name": "10102",
           "speed": 1,
           "clipEnd": 1,
           "clip": {
@@ -89,7 +89,7 @@
           "y": 589,
           "_isLooping": 0,
           "id": "5",
-          "name": "1",
+          "name": "10101",
           "speed": 1,
           "clipEnd": 1,
           "clip": {
@@ -98,7 +98,9 @@
           "loop": -1
         }
       ],
-      "defaultWeight": 1
+      "defaultWeight": 1,
+      "stageX": -223,
+      "stageY": 86
     }
   ],
   "layerW": 150
