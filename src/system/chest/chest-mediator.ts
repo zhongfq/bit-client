@@ -114,12 +114,15 @@ export class ChestMediator extends Mediator {
 
     private _updateScore() {
         const score = app.service.chest.scoreInfo.score;
+        const scoreRow = app.service.table.chest.score[app.service.chest.scoreInfo.scoreId]
         const chesRow = TableUtil.getRow(app.service.table.chest.chest, {
-            id: app.service.chest.scoreInfo.scoreId,
+            id: scoreRow.chest_id,
         });
         const scoreMax = chesRow ? chesRow.reward_score : 0;
         this.owner.boxReward.gray = score < scoreMax;
         this.owner.labelScore.text = `${score}/${scoreMax}`;
+        console.log(app.service.table.chest.hero[app.service.chest.heroId]);
+
         this.owner.spineHero.source = `animations/spine/${
             app.service.table.chest.hero[app.service.chest.heroId].spine_source
         }.skel`;
@@ -157,17 +160,20 @@ export class ChestMediator extends Mediator {
             item.labelNum.text = this.listData[index].cmdNum
                 ? `x${this.listData[index].cmdNum}`
                 : "x0";
-            item.imgIcon.skin = `resources/atlas/chest/icon_chest_${this.listData[index].row.id}_n.png`;
-            item.imgHigh.skin = `resources/atlas/chest/icon_chest_${this.listData[index].row.id}_s.png`;
+            console.log(this.listData[index].row.icon);
+            
+            item.imgIcon.skin =  `resources/atlas/chest/${this.listData[index].row.icon}_n.png`;
+            item.imgHigh.skin = `resources/atlas/chest/${this.listData[index].row.icon}_s.png`;
         }
     }
 
     private _updateList() {
         this.listData = [];
-        for (const chestRow of app.service.table.chest.chest) {
+        for (const key in  app.service.table.chest.chest) {
+            const row = app.service.table.chest.chest[key]
             this.listData.push({
-                row: chestRow,
-                cmdNum: app.service.chest.chestInfo.get(chestRow.id),
+                row: row,
+                cmdNum: app.service.chest.chestInfo.get(row.id),
             });
         }
         this.owner.listBox.array = this.listData;
@@ -176,4 +182,4 @@ export class ChestMediator extends Mediator {
         const cell = this.owner.listBox.cells[this.selectedIndex] as ChestItemUI;
         cell.hightlight();
     }
-}
+} 

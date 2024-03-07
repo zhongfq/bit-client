@@ -416,7 +416,7 @@ export interface GeneratedEmojiRow {
 export interface GeneratedChestRow {
     id: number;
     sort: number;
-    icon?: string;
+    icon: string;
     open_max_num: number;
     open_score: number;
     reward_score: number;
