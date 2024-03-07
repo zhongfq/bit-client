@@ -13,7 +13,6 @@ export enum ui {
     LOGIN_SCENE,
     LOADING_SCENE,
     HOME_SCENE,
-    WORLD_SCENE,
 
     PVE,
 
@@ -70,10 +69,6 @@ export namespace ui {
             id: ui.LOADING_SCENE,
             autoClose: true,
             url: "scenes/loading.ls",
-        });
-        app.ui.register({
-            id: ui.WORLD_SCENE,
-            url: "scenes/world.ls",
         });
         app.ui.register({
             id: ui.BAG,

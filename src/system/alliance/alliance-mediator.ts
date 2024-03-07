@@ -35,7 +35,6 @@ export class AllianceMediator extends Mediator {
                 await app.service.gm.requestGM(
                     `change_alliance ${this._alliances[selectedIndex].id}`
                 );
-                app.ui.replace(ui.WORLD_SCENE);
             }
         });
         //service Event

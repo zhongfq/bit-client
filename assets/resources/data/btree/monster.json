@@ -2,7 +2,7 @@
   "name": "monster",
   "root": {
     "id": 1,
-    "name": "Sequence",
+    "name": "Selector",
     "desc": "怪物测试AI",
     "args": {},
     "children": []

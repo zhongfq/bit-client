@@ -1,6 +1,5 @@
 import { b3 } from "../../../../../core/behavior3/behavior";
 import { AiTreeEnv } from "../../ecs/components/ai-component";
-import { ElementComponent } from "../../ecs/components/element-component";
 
 interface MoveToPosArgs {
     x?: number;

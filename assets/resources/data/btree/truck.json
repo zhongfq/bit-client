@@ -1,0 +1,23 @@
+{
+  "name": "truck",
+  "root": {
+    "id": 1,
+    "name": "Selector",
+    "desc": "新建行为树",
+    "args": {},
+    "children": [
+      {
+        "id": 2,
+        "name": "unknow",
+        "desc": "检查我方是否有战斗",
+        "args": {}
+      },
+      {
+        "id": 3,
+        "name": "FollowHero",
+        "args": {}
+      }
+    ]
+  },
+  "desc": "资源车"
+}

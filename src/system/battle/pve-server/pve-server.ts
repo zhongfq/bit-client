@@ -62,6 +62,15 @@ export class PveServer extends b3.Context {
         return true;
     }
 
+    isTroopFighting(element: ElementComponent) {
+        for (const target of this._stanceMap.values()) {
+            if (target.aid === element.aid) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     clearStance(element: ElementComponent) {
         this._stanceMap.delete(element.eid);
     }

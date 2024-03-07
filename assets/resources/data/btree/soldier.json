@@ -170,8 +170,8 @@
                     "id": 23,
                     "name": "Wait",
                     "args": {
-                      "time": 1.5,
-                      "random": 0.5
+                      "time": 1,
+                      "random": null
                     }
                   }
                 ]
@@ -196,6 +196,11 @@
         "children": [
           {
             "id": 26,
+            "name": "ClearStance",
+            "args": {}
+          },
+          {
+            "id": 27,
             "name": "FindOneTarget",
             "args": {
               "radius": 3,
@@ -205,11 +210,6 @@
             "output": [
               "enemy"
             ]
-          },
-          {
-            "id": 27,
-            "name": "ClearStance",
-            "args": {}
           },
           {
             "id": 28,

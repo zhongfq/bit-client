@@ -20,7 +20,6 @@ import { ShopService } from "./system/shop/shop-service";
 import { TableService } from "./system/table/table-service";
 import { TaskService } from "./system/task/task-service";
 import { UserService } from "./system/user/user-service";
-import { WorldService } from "./system/world/world-service";
 
 const { regClass, property } = Laya;
 
@@ -45,7 +44,6 @@ class ServiceManager {
     readonly table: TableService;
     readonly user: UserService;
     readonly login: LoginService;
-    readonly world: WorldService;
     readonly bag: BagService;
     readonly gm: GmService;
     readonly task: TaskService;
@@ -61,7 +59,6 @@ class ServiceManager {
         this.network = this.newService(NetworkService);
         this.user = this.newService(UserService);
         this.login = this.newService(LoginService);
-        this.world = this.newService(WorldService);
         this.table = this.newService(TableService);
         this.bag = this.newService(BagService);
         this.gm = this.newService(GmService);
