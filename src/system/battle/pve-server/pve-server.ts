@@ -292,7 +292,7 @@ export class PveServer extends b3.Context {
         movement.velocity.x = 0;
         movement.velocity.y = 0;
         movement.velocity.z = 0;
-        this._sender.moveStop(element.eid);
+        this._sender.moveStop(element.eid, element.transform.position);
     }
 
     towardTo(element: ElementComponent, target: ElementComponent) {
@@ -319,7 +319,7 @@ export interface ICommandSender {
 
     chopWood(eid: number, target: number): void;
     moveStart(eid: number, velocity: Laya.Vector3): void;
-    moveStop(eid: number): void;
+    moveStop(eid: number, position: Laya.Vector3): void;
 
     towardTo(eid: number, target: number): void;
 
@@ -333,7 +333,7 @@ class CommandReceiver {
 
     constructor(readonly server: PveServer) {}
 
-    moveStart(eid: number, degree: number) {
+    joystickStart(eid: number, degree: number) {
         const element = this.server.ecs.getComponent(eid, ElementComponent);
         if (!element) {
             console.warn(`not found element: ${eid}`);
@@ -348,7 +348,7 @@ class CommandReceiver {
         this.server.moveStart(element, velocity);
     }
 
-    moveStop(eid: number) {
+    joystickStop(eid: number) {
         const element = this.server.ecs.getComponent(eid, ElementComponent);
         if (!element) {
             console.warn(`not found element: ${eid}`);
