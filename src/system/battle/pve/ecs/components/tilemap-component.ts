@@ -290,7 +290,7 @@ export namespace Tilemap {
         }
 
         public get eid(): number {
-            return this._eid || 0;
+            return this._eid ?? 0;
         }
 
         public static create<T>(sign: string, cls: Constructor<T>): T {
@@ -447,8 +447,8 @@ export namespace Tilemap {
             const resName = this.system.getTextureResName(this.getTextureName(), this.gid);
             const textureCfg = this.getTextureCfg().get(resName);
 
-            this._realX = Math.floor(this.x - (textureCfg?.tileX || 0));
-            this._realY = Math.floor(this.y - (textureCfg?.tileY || 0));
+            this._realX = Math.floor(this.x - (textureCfg?.tileX ?? 0));
+            this._realY = Math.floor(this.y - (textureCfg?.tileY ?? 0));
 
             const objPos = this._obj.transform.position;
             objPos.x = this._realX;
@@ -457,13 +457,13 @@ export namespace Tilemap {
             this._obj.transform.position = objPos;
 
             const spritePos = sprite.transform.localPosition;
-            spritePos.x = textureCfg?.offsetX || 0;
-            spritePos.y = textureCfg?.offsetY || 0;
-            spritePos.z = textureCfg?.offsetZ || 0;
+            spritePos.x = textureCfg?.offsetX ?? 0;
+            spritePos.y = textureCfg?.offsetY ?? 0;
+            spritePos.z = textureCfg?.offsetZ ?? 0;
             sprite.transform.localPosition = spritePos;
 
-            sprite.transform.localScaleX = textureCfg?.scale || 1;
-            sprite.transform.localScaleY = textureCfg?.scale || 1;
+            sprite.transform.localScaleX = textureCfg?.scale ?? 1;
+            sprite.transform.localScaleY = textureCfg?.scale ?? 1;
 
             const cameraTrans = this.system.context.camera.transform;
             sprite.transform.localRotationEulerX = cameraTrans.localRotationEulerX;
@@ -476,8 +476,8 @@ export namespace Tilemap {
             mat.renderMode = Laya.MaterialRenderMode.RENDERMODE_TRANSPARENT;
             renderer.material = mat;
 
-            this._width = textureCfg?.tileW || 1;
-            this._height = textureCfg?.tileH || 1;
+            this._width = textureCfg?.tileW ?? 1;
+            this._height = textureCfg?.tileH ?? 1;
 
             this._obj.name = this.realX + "_" + this.realY + " | " + resName;
             this.system.getRoot().getChildByName(this.layerName).addChild(this._obj);

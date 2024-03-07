@@ -142,7 +142,7 @@ export class TilemapSystem extends ecs.System {
                     }
                 }
             } else {
-                const uid = uidMap.get(TilemapComponent.XY_TO_KEY(x, y)) || 0;
+                const uid = uidMap.get(TilemapComponent.XY_TO_KEY(x, y)) ?? 0;
                 const element = this._allMap.get(uid);
                 return element;
             }
@@ -216,7 +216,7 @@ export class TilemapSystem extends ecs.System {
      */
     public getAtlasFrameIdx(atlasName: Tilemap.AtlasName, gid: number): number {
         const tileset = this._atlasMap.get(atlasName);
-        return gid - (tileset?.firstgid || 1);
+        return gid - (tileset?.firstgid ?? 1);
     }
 
     /**
@@ -228,7 +228,7 @@ export class TilemapSystem extends ecs.System {
     public getTextureResName(textureName: Tilemap.TextureName, gid: number): string {
         const map = this._textureMap.get(textureName);
         const tile = map?.get(gid);
-        return tile?.image.split("/").at(-1)?.split(".").at(0) || "";
+        return tile?.image.split("/").at(-1)?.split(".").at(0) ?? "";
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -436,7 +436,7 @@ export class TilemapSystem extends ecs.System {
                     this._posMap.set(layerName, uidMap);
                 }
                 const key = TilemapComponent.XY_TO_KEY(x, y);
-                const uid = uidMap.get(key) || 0;
+                const uid = uidMap.get(key) ?? 0;
 
                 let element = this._allMap.get(uid);
                 if (!element) {
@@ -459,7 +459,7 @@ export class TilemapSystem extends ecs.System {
                 return;
             }
             const key = TilemapComponent.XY_TO_KEY(x, y);
-            const uid = uidMap.get(key) || 0;
+            const uid = uidMap.get(key) ?? 0;
             const element = this._allMap.get(uid);
             element?.recover();
             uidMap.delete(key);
