@@ -63,7 +63,7 @@
               "attack": true
             },
             "output": [
-              ""
+              "enemy"
             ]
           },
           {
@@ -123,7 +123,7 @@
               },
               {
                 "id": 18,
-                "name": "AdjustPos",
+                "name": "AdjustStance",
                 "args": {},
                 "input": [
                   "enemy"
