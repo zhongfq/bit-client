@@ -33,7 +33,7 @@
       "_$id": "6ee7kogk",
       "_$var": true,
       "_$type": "Button",
-      "name": "btnClose",
+      "name": "close",
       "x": 470,
       "y": 7,
       "width": 32,
@@ -43,7 +43,9 @@
       "top": 7,
       "skin": "res://60a9086c-a9c2-4e01-a563-355c117b509e",
       "label": "",
-      "labelSize": 20
+      "labelSize": 20,
+      "labelAlign": "center",
+      "labelVAlign": "middle"
     },
     {
       "_$id": "vyoq14nb",
@@ -97,57 +99,9 @@
       "_mouseState": 2,
       "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
       "label": "发送",
-      "labelSize": 20
-    },
-    {
-      "_$id": "b47bk0gr",
-      "_$var": true,
-      "_$type": "List",
-      "name": "listEdict",
-      "x": 28,
-      "y": 146,
-      "width": 456,
-      "height": 445,
-      "_mouseState": 2,
-      "itemTemplate": {
-        "_$ref": "vqf7ka0n",
-        "_$tmpl": "itemRender"
-      },
-      "repeatX": 1,
-      "repeatY": 10,
-      "spaceY": 5,
-      "selectEnable": true,
-      "_$child": [
-        {
-          "_$id": "vqf7ka0n",
-          "_$type": "Box",
-          "name": "Box",
-          "width": 458,
-          "height": 43,
-          "bgColor": "rgba(0, 0, 0, 1)",
-          "_$child": [
-            {
-              "_$id": "xqi6cb3q",
-              "_$var": true,
-              "_$type": "Label",
-              "name": "Label",
-              "x": 195,
-              "y": 10,
-              "width": 69,
-              "height": 24,
-              "centerX": 0,
-              "centerY": 0,
-              "text": "啊啊啊",
-              "fontSize": 23,
-              "color": "#FFFFFF",
-              "fitContent": "yes",
-              "align": "center",
-              "valign": "middle",
-              "padding": "0,0,0,0"
-            }
-          ]
-        }
-      ]
+      "labelSize": 20,
+      "labelAlign": "center",
+      "labelVAlign": "middle"
     },
     {
       "_$id": "dvvmi0h9",
@@ -161,7 +115,170 @@
       "_mouseState": 2,
       "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
       "label": "重置账号",
-      "labelSize": 20
+      "labelSize": 20,
+      "labelAlign": "center",
+      "labelVAlign": "middle"
+    },
+    {
+      "_$id": "gps5ywfe",
+      "_$var": true,
+      "_$type": "Tab",
+      "name": "Tab",
+      "x": 15,
+      "y": 629,
+      "width": 266,
+      "height": 52,
+      "_mouseState": 2,
+      "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
+      "labels": "功能开关,GM指令",
+      "space": 10,
+      "selectedIndex": 0,
+      "labelFont": null,
+      "labelBold": true,
+      "labelColors": "#ffffff,#ffffff,#000000",
+      "labelStroke": null,
+      "labelStrokeColor": null,
+      "labelAlign": null,
+      "strokeColors": null
+    },
+    {
+      "_$id": "mvvex0vq",
+      "_$var": true,
+      "_$type": "ViewStack",
+      "name": "ViewStack",
+      "x": 28,
+      "y": 146,
+      "width": 459,
+      "height": 476,
+      "_mouseState": 2,
+      "selectedIndex": 0,
+      "_$child": [
+        {
+          "_$id": "d77k5m8p",
+          "_$type": "Box",
+          "name": "item0",
+          "width": 459,
+          "height": 476,
+          "_mouseState": 2,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "bottom": 0,
+          "_$child": [
+            {
+              "_$id": "8m21uo32",
+              "_$var": true,
+              "_$type": "List",
+              "name": "listSwitch",
+              "width": 459,
+              "height": 476,
+              "_mouseState": 2,
+              "itemTemplate": {
+                "_$ref": "h5efdeh2",
+                "_$tmpl": "itemRender"
+              },
+              "repeatX": 1,
+              "repeatY": 10,
+              "spaceY": 5,
+              "selectEnable": true,
+              "_$child": [
+                {
+                  "_$id": "h5efdeh2",
+                  "_$type": "Box",
+                  "name": "Box",
+                  "width": 458,
+                  "height": 43,
+                  "bgColor": "rgba(0, 0, 0, 1)",
+                  "_$child": [
+                    {
+                      "_$id": "vut36bxs",
+                      "_$var": true,
+                      "_$type": "Label",
+                      "name": "Label",
+                      "x": 195,
+                      "y": 10,
+                      "width": 69,
+                      "height": 24,
+                      "centerX": 0,
+                      "centerY": 0,
+                      "text": "啊啊啊",
+                      "fontSize": 23,
+                      "color": "#FFFFFF",
+                      "fitContent": "yes",
+                      "align": "center",
+                      "valign": "middle",
+                      "padding": "0,0,0,0"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_$id": "ow6tj0xu",
+          "_$type": "Box",
+          "name": "item1",
+          "width": 459,
+          "height": 476,
+          "visible": false,
+          "_mouseState": 2,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "bottom": 0,
+          "_$child": [
+            {
+              "_$id": "b47bk0gr",
+              "_$var": true,
+              "_$type": "List",
+              "name": "listGm",
+              "width": 459,
+              "height": 476,
+              "_mouseState": 2,
+              "itemTemplate": {
+                "_$ref": "vqf7ka0n",
+                "_$tmpl": "itemRender"
+              },
+              "repeatX": 1,
+              "repeatY": 10,
+              "spaceY": 5,
+              "selectEnable": true,
+              "_$child": [
+                {
+                  "_$id": "vqf7ka0n",
+                  "_$type": "Box",
+                  "name": "Box",
+                  "width": 458,
+                  "height": 43,
+                  "bgColor": "rgba(0, 0, 0, 1)",
+                  "_$child": [
+                    {
+                      "_$id": "xqi6cb3q",
+                      "_$var": true,
+                      "_$type": "Label",
+                      "name": "Label",
+                      "x": 195,
+                      "y": 10,
+                      "width": 69,
+                      "height": 24,
+                      "centerX": 0,
+                      "centerY": 0,
+                      "text": "啊啊啊",
+                      "fontSize": 23,
+                      "color": "#FFFFFF",
+                      "fitContent": "yes",
+                      "align": "center",
+                      "valign": "middle",
+                      "padding": "0,0,0,0"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }

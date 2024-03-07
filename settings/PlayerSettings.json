@@ -27,7 +27,6 @@
   "splash": {
     "fit": "center"
   },
-  "stat": true,
   "vConsole": true,
   "alertGlobalError": true
 }
