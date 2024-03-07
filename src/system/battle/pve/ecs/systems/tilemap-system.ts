@@ -258,8 +258,6 @@ export class TilemapSystem extends ecs.System {
     }
 
     public override async onCreate() {
-        console.log("onCreate");
-
         this._root = this.context.scene3D.getChildByName("world-map") as Laya.Sprite3D;
 
         this._world = (await Laya.loader.fetch(
@@ -397,8 +395,6 @@ export class TilemapSystem extends ecs.System {
         eid?: number,
         outUids?: number[]
     ) {
-        console.log("666", this._world);
-
         for (let i = 0; i < this._world!.maps.length; i++) {
             const info = this._world!.maps[i];
 
