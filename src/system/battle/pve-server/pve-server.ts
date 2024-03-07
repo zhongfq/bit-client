@@ -280,18 +280,18 @@ export class PveServer extends b3.Context {
         }
     }
 
-    moveStart(element: ElementComponent, speed: Laya.Vector3, target?: Laya.Vector3) {
+    moveStart(element: ElementComponent, velocity: Laya.Vector3, target?: Laya.Vector3) {
         element.movement.target = target;
-        element.movement.speed.cloneFrom(speed);
-        element.transform.rotation = MathUtil.toDegree(Math.atan2(speed.z, speed.x));
-        this._sender.moveStart(element.eid, speed);
+        element.movement.velocity.cloneFrom(velocity);
+        element.transform.rotation = MathUtil.toDegree(Math.atan2(velocity.z, velocity.x));
+        this._sender.moveStart(element.eid, velocity);
     }
 
     moveStop(element: ElementComponent) {
         const movement = element.movement;
-        movement.speed.x = 0;
-        movement.speed.y = 0;
-        movement.speed.z = 0;
+        movement.velocity.x = 0;
+        movement.velocity.y = 0;
+        movement.velocity.z = 0;
         this._sender.moveStop(element.eid);
     }
 
@@ -318,7 +318,7 @@ export interface ICommandSender {
     createElement(data: ElementCreator): void;
 
     chopWood(eid: number, target: number): void;
-    moveStart(eid: number, speed: Laya.Vector3): void;
+    moveStart(eid: number, velocity: Laya.Vector3): void;
     moveStop(eid: number): void;
 
     towardTo(eid: number, target: number): void;
@@ -329,7 +329,7 @@ export interface ICommandSender {
 }
 
 class CommandReceiver {
-    private static _tmpSpeed: Laya.Vector3 = new Laya.Vector3();
+    private static _tmpVelocity: Laya.Vector3 = new Laya.Vector3();
 
     constructor(readonly server: PveServer) {}
 
@@ -342,10 +342,10 @@ class CommandReceiver {
 
         const rad = MathUtil.toRadian(degree);
         const movement = element.movement;
-        const speed = CommandReceiver._tmpSpeed;
-        speed.x = movement.velocity * Math.cos(rad);
-        speed.z = movement.velocity * Math.sin(rad);
-        this.server.moveStart(element, speed);
+        const velocity = CommandReceiver._tmpVelocity;
+        velocity.x = movement.speed * Math.cos(rad);
+        velocity.z = movement.speed * Math.sin(rad);
+        this.server.moveStart(element, velocity);
     }
 
     moveStop(eid: number) {

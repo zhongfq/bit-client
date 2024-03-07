@@ -2,14 +2,15 @@ import { b3 } from "../../../../../core/behavior3/behavior";
 import { MathUtil } from "../../../../../core/utils/math-util";
 import { AiTreeEnv } from "../../ecs/components/ai-component";
 import { ElementComponent } from "../../ecs/components/element-component";
+import { PveDef } from "../../pve-defs";
 
-const tmpSpeed = new Laya.Vector3();
+const tmpVelocity = new Laya.Vector3();
 const tmpDir = new Laya.Vector3();
 
 export const LAST_ADJUST_DIR = b3.TreeEnv.makePrivateVar("lastAdjustDir");
 
 // 可以通过预定位置的方式进行优化
-export class AdjustPos extends b3.Process {
+export class AdjustStance extends b3.Process {
     override run(node: b3.Node, env: AiTreeEnv, enemy: ElementComponent) {
         const owner = env.owner;
         let p1 = node.resume(env) as Laya.Vector3 | undefined;
@@ -51,18 +52,17 @@ export class AdjustPos extends b3.Process {
             return b3.Status.SUCCESS;
         } else if (!running) {
             const rad = Math.atan2(p1.z - p0.z, p1.x - p0.x);
-            // TODO: 定义速度
-            const velocity = 1.5;
-            tmpSpeed.x = velocity * Math.cos(rad);
-            tmpSpeed.z = velocity * Math.sin(rad);
-            env.context.moveStart(env.owner, tmpSpeed, p1);
+            const speed = Math.max(PveDef.MOVE_SPEED, owner.movement.speed);
+            tmpVelocity.x = speed * Math.cos(rad);
+            tmpVelocity.z = speed * Math.sin(rad);
+            env.context.moveStart(env.owner, tmpVelocity, p1);
         }
         return node.yield(env, p1);
     }
 
     override get descriptor() {
         return {
-            name: "AdjustPos",
+            name: "AdjustStance",
             type: "Action",
             desc: "根据目标调整攻击站位",
             input: ["目标"],

@@ -5,7 +5,7 @@ export class BackSpawnpoint extends b3.Process {
     override check(node: b3.Node) {}
 
     override run(node: b3.Node, env: AiTreeEnv) {
-        let speed = node.resume(env) as Laya.Vector3 | undefined;
+        let velocity = node.resume(env) as Laya.Vector3 | undefined;
 
         const movement = env.owner.movement;
         const transform = env.owner.transform;
@@ -16,14 +16,14 @@ export class BackSpawnpoint extends b3.Process {
 
         if (distance <= 0.01) {
             return b3.Status.SUCCESS;
-        } else if (!speed) {
+        } else if (!velocity) {
             const rad = Math.atan2(p1.z - p0.z, p1.x - p0.x);
-            speed = new Laya.Vector3();
-            speed.x = movement.velocity * Math.cos(rad);
-            speed.z = movement.velocity * Math.sin(rad);
-            env.context.moveStart(env.owner, speed, p1);
+            velocity = new Laya.Vector3();
+            velocity.x = movement.speed * Math.cos(rad);
+            velocity.z = movement.speed * Math.sin(rad);
+            env.context.moveStart(env.owner, velocity, p1);
         }
-        return node.yield(env, speed);
+        return node.yield(env, velocity);
     }
 
     override get descriptor() {

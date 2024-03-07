@@ -8,7 +8,7 @@ export class TransformComponent extends ecs.Component {
 }
 
 export class MovementComponent extends ecs.Component {
-    velocity: number = PveDef.MOVE_SPEED;
+    speed: number = PveDef.MOVE_SPEED;
     target?: Laya.Vector3;
-    speed: Laya.Vector3 = new Laya.Vector3();
+    velocity: Laya.Vector3 = new Laya.Vector3();
 }

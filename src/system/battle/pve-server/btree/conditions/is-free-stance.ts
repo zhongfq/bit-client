@@ -1,7 +1,7 @@
 import { b3 } from "../../../../../core/behavior3/behavior";
 import { AiTreeEnv } from "../../ecs/components/ai-component";
 import { ElementComponent } from "../../ecs/components/element-component";
-import { LAST_ADJUST_DIR } from "../actions/adjust-pos";
+import { LAST_ADJUST_DIR } from "../actions/adjust-stance";
 
 export class IsFreeStance extends b3.Process {
     override run(node: b3.Node, env: AiTreeEnv, enemy: ElementComponent) {

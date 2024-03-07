@@ -8,7 +8,7 @@ interface MoveToPosArgs {
     rate?: number;
 }
 
-const tmpSpeed = new Laya.Vector3();
+const tmpVelocity = new Laya.Vector3();
 
 export class MoveToPos extends b3.Process {
     override run(node: b3.Node, env: AiTreeEnv, target?: Laya.Vector3) {
@@ -20,9 +20,9 @@ export class MoveToPos extends b3.Process {
         const p0 = env.owner.transform.position;
         const p1 = target as Laya.Vector3;
         const rad = Math.atan2(p1.z - p0.z, p1.x - p0.x);
-        tmpSpeed.x = speed * Math.cos(rad);
-        tmpSpeed.z = speed * Math.sin(rad);
-        env.context.moveStart(env.owner, tmpSpeed);
+        tmpVelocity.x = speed * Math.cos(rad);
+        tmpVelocity.z = speed * Math.sin(rad);
+        env.context.moveStart(env.owner, tmpVelocity, p1);
         return b3.Status.SUCCESS;
     }
 

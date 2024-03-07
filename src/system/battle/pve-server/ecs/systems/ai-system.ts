@@ -1,7 +1,7 @@
 import { b3 } from "../../../../../core/behavior3/behavior";
 import { builtinNodes } from "../../../../../core/behavior3/nodes/builtin-nodes";
 import { ecs } from "../../../../../core/ecs";
-import { AdjustPos } from "../../btree/actions/adjust-pos";
+import { AdjustStance } from "../../btree/actions/adjust-stance";
 import { BackTeam } from "../../btree/actions/back-team";
 import { ClearStance } from "../../btree/actions/clear-stance";
 import { FollowHero } from "../../btree/actions/follow-hero";
@@ -35,7 +35,7 @@ export class AiSystem extends ecs.System {
         super();
 
         context.registerProcess(...builtinNodes);
-        context.registerProcess(AdjustPos);
+        context.registerProcess(AdjustStance);
         context.registerProcess(BackSpawnpoint);
         context.registerProcess(BackTeam);
         context.registerProcess(CalcHeroDistance);

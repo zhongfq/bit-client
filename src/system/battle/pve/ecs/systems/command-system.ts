@@ -77,13 +77,13 @@ export class CommandSystem extends ecs.System implements ICommandSender {
 
     chopWood(eid: number, target: number) {}
 
-    moveStart(eid: number, speed: Laya.Vector3) {
+    moveStart(eid: number, velocity: Laya.Vector3) {
         const element = this._findElement(eid);
         if (element) {
             const { movement } = element;
             movement.type = MovementType.WHEEL;
-            movement.speed.cloneFrom(speed);
-            this._setRotation(element, speed.x, speed.z);
+            movement.velocity.cloneFrom(velocity);
+            this._setRotation(element, velocity.x, velocity.z);
             this.playAnim(element.eid, ElementAnimation.RUN);
         }
     }
@@ -93,9 +93,9 @@ export class CommandSystem extends ecs.System implements ICommandSender {
         if (element) {
             const { movement } = element;
             movement.type = MovementType.NONE;
-            movement.speed.x = 0;
-            movement.speed.y = 0;
-            movement.speed.z = 0;
+            movement.velocity.x = 0;
+            movement.velocity.y = 0;
+            movement.velocity.z = 0;
             movement.track = null;
             movement.target = null;
             this.playAnim(eid, ElementAnimation.IDLE);

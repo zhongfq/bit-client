@@ -58,7 +58,7 @@ export class MovementComponent extends ecs.Component {
     type: MovementType = MovementType.NONE;
 
     target: Laya.Vector3 | null = null;
-    speed: Laya.Vector3 = new Laya.Vector3();
+    velocity: Laya.Vector3 = new Laya.Vector3();
 
     // 轨迹方式移动
     track: Track | null = null;

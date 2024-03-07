@@ -14,36 +14,36 @@ export class MovementSystem extends ecs.System {
         this.ecs.getComponents(MovementComponent).forEach((movement) => {
             const transform = movement.getComponent(TransformComponent)!;
             const position = transform.position;
-            const { speed, target } = movement;
-            let { x: speedX, z: speedZ } = speed;
+            const { velocity, target } = movement;
+            let { x: velX, z: velZ } = velocity;
 
-            position.x += speedX * dt;
-            position.z += speedZ * dt;
+            position.x += velX * dt;
+            position.z += velZ * dt;
 
             if (target) {
                 const offsetX = target.x - position.x;
                 const offsetZ = target.z - position.z;
                 let changed = false;
-                if (offsetX === 0 || offsetX * speedX < 0) {
+                if (offsetX === 0 || offsetX * velX < 0) {
                     position.x = target.x;
-                    speedX = 0;
-                    speed.x = 0;
+                    velX = 0;
+                    velocity.x = 0;
                     changed = true;
                 }
-                if (offsetZ === 0 || offsetZ * speedZ < 0) {
+                if (offsetZ === 0 || offsetZ * velZ < 0) {
                     position.z = target.z;
-                    speedZ = 0;
-                    speed.z = 0;
+                    velZ = 0;
+                    velocity.z = 0;
                     changed = true;
                 }
                 if (changed) {
-                    if (speedX === 0 && speedZ === 0) {
+                    if (velX === 0 && velZ === 0) {
                         movement.target = undefined;
                         this.context.moveStop(movement.getComponent(ElementComponent)!);
                     } else {
                         this.context.moveStart(
                             movement.getComponent(ElementComponent)!,
-                            speed,
+                            velocity,
                             movement.target
                         );
                     }

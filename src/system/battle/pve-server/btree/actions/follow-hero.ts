@@ -5,7 +5,7 @@ import { AiSystem } from "../../ecs/systems/ai-system";
 import { PveDef } from "../../pve-defs";
 
 const tmpTarget = new Laya.Vector3();
-const tmpSpeed = new Laya.Vector3();
+const tmpVelocity = new Laya.Vector3();
 
 export class FollowHero extends b3.Process {
     override check(node: b3.Node) {}
@@ -25,34 +25,34 @@ export class FollowHero extends b3.Process {
         env.context.calcSoldierPosition(leader, soldier, p1);
         const distance = Laya.Vector3.distance(p1, p0);
         if (distance <= 0.05) {
-            if (movement.speed.x !== 0 || movement.speed.z !== 0) {
-                movement.speed.x = 0;
-                movement.speed.y = 0;
-                movement.speed.z = 0;
+            if (movement.velocity.x !== 0 || movement.velocity.z !== 0) {
+                movement.velocity.x = 0;
+                movement.velocity.y = 0;
+                movement.velocity.z = 0;
 
-                if (leader.movement.speed.x === 0 && leader.movement.speed.z === 0) {
+                if (leader.movement.velocity.x === 0 && leader.movement.velocity.z === 0) {
                     env.context.moveStop(env.owner);
                 } else {
-                    env.context.moveStart(env.owner, movement.speed);
+                    env.context.moveStart(env.owner, movement.velocity);
                 }
             }
         } else {
             const rad = Math.atan2(p1.z - p0.z, p1.x - p0.x);
             const velocity = distance / AiSystem.TICK;
-            if (movement.velocity < leader.movement.velocity) {
-                movement.velocity = leader.movement.velocity;
+            if (movement.speed < leader.movement.speed) {
+                movement.speed = leader.movement.speed;
             }
-            if (movement.velocity < velocity) {
-                movement.velocity += 0.1;
+            if (movement.speed < velocity) {
+                movement.speed += 0.1;
             } else {
-                movement.velocity = velocity;
+                movement.speed = velocity;
             }
-            if (movement.velocity > PveDef.MAX_FOLLOW_SPEED) {
-                movement.velocity = PveDef.MAX_FOLLOW_SPEED;
+            if (movement.speed > PveDef.MAX_FOLLOW_SPEED) {
+                movement.speed = PveDef.MAX_FOLLOW_SPEED;
             }
-            tmpSpeed.x = movement.velocity * Math.cos(rad);
-            tmpSpeed.z = movement.velocity * Math.sin(rad);
-            env.context.moveStart(env.owner, tmpSpeed);
+            tmpVelocity.x = movement.speed * Math.cos(rad);
+            tmpVelocity.z = movement.speed * Math.sin(rad);
+            env.context.moveStart(env.owner, tmpVelocity);
         }
 
         return b3.Status.SUCCESS;

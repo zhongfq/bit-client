@@ -28,35 +28,35 @@ export class MovementSystem extends ecs.System {
                 // TODO
                 /* empty */
             } else {
-                this._updateWithSpeed(movement, dt);
+                this._updateWithVelocity(movement, dt);
             }
         });
     }
 
     private _updateWithTrack(movement: MovementComponent, dt: number) {}
 
-    private _updateWithSpeed(movement: MovementComponent, dt: number) {
+    private _updateWithVelocity(movement: MovementComponent, dt: number) {
         const transform = movement.getComponent(TransformComponent)!;
         const position = transform.position;
-        const speed = movement.speed;
+        const velocity = movement.velocity;
         const target = movement.target;
 
-        position.x += speed.x * dt;
-        position.z += speed.z * dt;
+        position.x += velocity.x * dt;
+        position.z += velocity.z * dt;
         transform.flag |= TransformComponent.POSITION;
 
         if (target) {
             const offsetX = target.x - position.x;
             const offsetZ = target.z - position.z;
-            if (offsetX === 0 || offsetX * speed.x < 0) {
+            if (offsetX === 0 || offsetX * velocity.x < 0) {
                 position.x = target.x;
-                speed.x = 0;
+                velocity.x = 0;
             }
-            if (offsetZ === 0 || offsetZ * speed.z < 0) {
+            if (offsetZ === 0 || offsetZ * velocity.z < 0) {
                 position.z = target.z;
-                speed.z = 0;
+                velocity.z = 0;
             }
-            if (speed.x === 0 && speed.z === 0) {
+            if (velocity.x === 0 && velocity.z === 0) {
                 movement.target = null;
                 movement.type == MovementType.NONE;
             }

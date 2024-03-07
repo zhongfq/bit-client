@@ -5,7 +5,7 @@ import { AiSystem } from "../../ecs/systems/ai-system";
 import { PveDef } from "../../pve-defs";
 
 const tmpTarget = new Laya.Vector3();
-const tmpSpeed = new Laya.Vector3();
+const tmpVelocity = new Laya.Vector3();
 
 export class BackTeam extends b3.Process {
     override check(node: b3.Node) {}
@@ -29,21 +29,21 @@ export class BackTeam extends b3.Process {
             return b3.Status.SUCCESS;
         } else {
             const rad = Math.atan2(p1.z - p0.z, p1.x - p0.x);
-            const velocity = distance / AiSystem.TICK;
-            if (movement.velocity < leader.movement.velocity) {
-                movement.velocity = leader.movement.velocity;
+            const speed = distance / AiSystem.TICK;
+            if (movement.speed < leader.movement.speed) {
+                movement.speed = leader.movement.speed;
             }
-            if (movement.velocity < velocity) {
-                movement.velocity += 0.2;
+            if (movement.speed < speed) {
+                movement.speed += 0.2;
             } else {
-                movement.velocity = velocity;
+                movement.speed = speed;
             }
-            if (movement.velocity > PveDef.MAX_BACK_SPEED) {
-                movement.velocity = PveDef.MAX_BACK_SPEED;
+            if (movement.speed > PveDef.MAX_BACK_SPEED) {
+                movement.speed = PveDef.MAX_BACK_SPEED;
             }
-            tmpSpeed.x = movement.velocity * Math.cos(rad);
-            tmpSpeed.z = movement.velocity * Math.sin(rad);
-            env.context.moveStart(env.owner, tmpSpeed);
+            tmpVelocity.x = movement.speed * Math.cos(rad);
+            tmpVelocity.z = movement.speed * Math.sin(rad);
+            env.context.moveStart(env.owner, tmpVelocity);
             return node.yield(env);
         }
     }
