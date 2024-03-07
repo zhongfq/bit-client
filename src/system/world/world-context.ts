@@ -23,7 +23,6 @@ export class WorldContext extends Mediator {
     private _camera!: Laya.Camera;
 
     troop!: proto.troop.Troop;
-    _selectedDynamicElement?: number;
 
     get scene() {
         return this.owner.scene;
@@ -50,8 +49,6 @@ export class WorldContext extends Mediator {
         this._ecs.addSystem(new CameraSystem(this));
         this._ecs.addSystem(new RenderSystem(this));
         this._ecs.addSystem(new TilemapSystem(this));
-
-        this.owner.mapClickArea.on(Laya.Event.CLICK, this, this.onMapClickHandler);
     }
 
     override async onStart() {
@@ -66,38 +63,5 @@ export class WorldContext extends Mediator {
     override onUpdate(): void {
         super.onUpdate();
         this._ecs.update(Laya.timer.delta / 1000);
-    }
-
-    onMapClickHandler() {
-        const tilemapSystem = this._ecs.getSystem(TilemapSystem);
-
-        if (this._selectedDynamicElement) {
-            const element = tilemapSystem?.getDynamicElementByUid(this._selectedDynamicElement);
-            if (element) {
-                element.hideBlock();
-            }
-        }
-
-        const point = new Laya.Vector2();
-        point.x = Laya.stage.mouseX;
-        point.y = Laya.stage.mouseY;
-
-        const ray = new Laya.Ray(new Laya.Vector3(), new Laya.Vector3());
-        this.camera.viewportPointToRay(point, ray);
-
-        const t = -ray.origin.y / ray.direction.y;
-        ray.direction.scale(t, ray.direction);
-
-        const groundPos = new Laya.Vector3();
-        ray.origin.vadd(ray.direction, groundPos);
-
-        const x = Math.floor(groundPos.x + 0.5);
-        const y = Math.floor(groundPos.z + 0.5);
-
-        const element = tilemapSystem?.getElementByPos(x, y, Tilemap.LayerName.Dynamic) as Tilemap.DynamicElement;
-        if (element) {
-            element.showBlock();
-            this._selectedDynamicElement = element.uid;
-        }
     }
 }

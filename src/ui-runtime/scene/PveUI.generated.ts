@@ -8,7 +8,9 @@ export class PveUIBase extends Laya.Scene {
     public debug!: Laya.Sprite;
     public troops!: Laya.Box;
     public labels!: Laya.Box;
+    public mapClickArea!: Laya.Box;
     public joystickGroup!: Laya.Box;
+    public joystickArea!: Laya.Box;
     public joystick!: Laya.Box;
     public indicator!: Laya.Image;
 }

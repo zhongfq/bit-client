@@ -5,7 +5,7 @@ import { ElementCreator } from "../pve-server/pve-defs";
 import { ICommandSender, PveServer } from "../pve-server/pve-server";
 import { CameraComponent } from "./ecs/components/camera-component";
 import { JoystickComponent } from "./ecs/components/joystick-component";
-import { TilemapComponent } from "./ecs/components/tilemap-component";
+import { Tilemap, TilemapComponent } from "./ecs/components/tilemap-component";
 import { ElementAnimation, ElementComponent } from "./ecs/components/troop-component";
 import { CameraSystem } from "./ecs/systems/camera-system";
 import { CommandSystem } from "./ecs/systems/command-system";
@@ -26,6 +26,8 @@ export class PveContext extends Mediator {
 
     private _ecs!: ecs.World;
     private _camera!: Laya.Camera;
+
+    private _selectedDynamicElement?: number;
 
     get scene() {
         return this.owner.scene;
@@ -56,6 +58,8 @@ export class PveContext extends Mediator {
         this._ecs.addSystem(new TilemapSystem(this));
         this._pveServer = new PveServer(this._ecs.getSystem(CommandSystem)!);
         this._sender = new CommandSender(this._pveServer);
+
+        this.owner.mapClickArea.on(Laya.Event.CLICK, this, this.onMapClickHandler);
     }
 
     override async onStart() {
@@ -68,10 +72,43 @@ export class PveContext extends Mediator {
         this._pveServer.update(Laya.timer.delta / 1000);
         this._ecs.update(Laya.timer.delta / 1000);
     }
+
+    onMapClickHandler() {
+        const tilemapSystem = this._ecs.getSystem(TilemapSystem);
+
+        if (this._selectedDynamicElement) {
+            const element = tilemapSystem?.getDynamicElementByUid(this._selectedDynamicElement);
+            if (element) {
+                element.hideBlock();
+            }
+        }
+
+        const point = new Laya.Vector2();
+        point.x = Laya.stage.mouseX;
+        point.y = Laya.stage.mouseY;
+
+        const ray = new Laya.Ray(new Laya.Vector3(), new Laya.Vector3());
+        this.camera.viewportPointToRay(point, ray);
+
+        const t = -ray.origin.y / ray.direction.y;
+        ray.direction.scale(t, ray.direction);
+
+        const groundPos = new Laya.Vector3();
+        ray.origin.vadd(ray.direction, groundPos);
+
+        const x = Math.floor(groundPos.x + 0.5);
+        const y = Math.floor(groundPos.z + 0.5);
+
+        const element = tilemapSystem?.getElementByPos(x, y, Tilemap.LayerName.Dynamic) as Tilemap.DynamicElement;
+        if (element) {
+            element.showBlock();
+            this._selectedDynamicElement = element.uid;
+        }
+    }
 }
 
 class CommandSender {
-    constructor(readonly server: PveServer) {}
+    constructor(readonly server: PveServer) { }
 
     moveStart(eid: number, degree: number) {
         this.server.receiver.moveStart(eid, degree);

@@ -1,3 +1,5 @@
+/////////////////// 已废弃，待删 ///////////////////
+
 import { Constructor } from "../../../../core/dispatcher";
 import { ecs } from "../../../../core/ecs";
 import { IVector3Like } from "../../../../core/laya";

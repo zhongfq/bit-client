@@ -13,6 +13,7 @@ export class JoystickSystem extends ecs.System {
         const owner = this.context.owner;
         joystick.initX = owner.joystick.x;
         joystick.initY = owner.joystick.y;
+        joystick.initHeight = owner.joystickArea.height;
         owner.joystickGroup.on(Laya.Event.MOUSE_DOWN, this, this.onJoysticHandler);
         owner.joystickGroup.on(Laya.Event.MOUSE_MOVE, this, this.onJoysticHandler);
         owner.joystickGroup.on(Laya.Event.MOUSE_UP, this, this.onJoysticHandler);
@@ -30,6 +31,7 @@ export class JoystickSystem extends ecs.System {
             owner.joystick.x = joystick.pressStart.x;
             owner.joystick.y = joystick.pressStart.y;
             owner.joystick.alpha = 1;
+            owner.joystickArea.height = Laya.stage.height;
         } else if (e.type === Laya.Event.MOUSE_UP) {
             joystick.pressStart?.recover();
             joystick.pressStart = null;
@@ -39,6 +41,7 @@ export class JoystickSystem extends ecs.System {
             owner.joystick.alpha = 0.3;
             owner.indicator.x = 0;
             owner.indicator.y = 0;
+            owner.joystickArea.height = joystick.initHeight;
             this.context.sender.moveStop(this.context.focusRole);
         } else {
             const maxOffset = owner.joystick.width / 2;

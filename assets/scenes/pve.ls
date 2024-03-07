@@ -59,8 +59,10 @@
             },
             "localRotation": {
               "_$type": "Quaternion",
-              "x": -0.3826834323650898,
-              "w": 0.9238795325112867
+              "x": -0.35355339059327384,
+              "y": 0.3535533905932738,
+              "z": 0.14644660940672627,
+              "w": 0.8535533905932737
             }
           },
           "orthographicVerticalSize": 10,
@@ -114,6 +116,43 @@
               "strength": null,
               "angle": null,
               "maxBounces": null
+            }
+          ]
+        },
+        {
+          "_$id": "9cn0erx3",
+          "_$type": "Sprite3D",
+          "name": "world-map",
+          "_$child": [
+            {
+              "_$id": "cfkdchry",
+              "_$type": "Sprite3D",
+              "name": "ground"
+            },
+            {
+              "_$id": "q0n4rvkj",
+              "_$type": "Sprite3D",
+              "name": "road"
+            },
+            {
+              "_$id": "u0aqbvan",
+              "_$type": "Sprite3D",
+              "name": "river"
+            },
+            {
+              "_$id": "xq0fb4r6",
+              "_$type": "Sprite3D",
+              "name": "block"
+            },
+            {
+              "_$id": "6w7bh8dm",
+              "_$type": "Sprite3D",
+              "name": "static"
+            },
+            {
+              "_$id": "utfqvaky",
+              "_$type": "Sprite3D",
+              "name": "dynamic"
             }
           ]
         },
@@ -182,27 +221,57 @@
       ]
     },
     {
-      "_$id": "v4tw4ryv",
+      "_$id": "jwwt2ii4",
+      "_$var": true,
+      "_$type": "Box",
+      "name": "mapClickArea",
+      "width": 750,
+      "height": 1334,
+      "_mouseState": 2,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "bottom": 0
+    },
+    {
+      "_$id": "j3fe4zmr",
       "_$var": true,
       "_$type": "Box",
       "name": "joystickGroup",
       "width": 750,
       "height": 1334,
+      "_mouseState": 2,
+      "mouseThrough": true,
       "left": 0,
       "right": 0,
+      "top": 0,
+      "bottom": 0,
       "_$child": [
         {
-          "_$id": "5vgwnpv2",
+          "_$id": "wajye5rt",
+          "_$var": true,
+          "_$type": "Box",
+          "name": "joystickArea",
+          "y": 934,
+          "width": 750,
+          "height": 400,
+          "_mouseState": 2,
+          "left": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        {
+          "_$id": "ms0qcu1u",
           "_$var": true,
           "_$type": "Box",
           "name": "joystick",
           "x": 375,
-          "y": 996,
+          "y": 1112,
           "width": 256,
-          "height": 256,
+          "height": 222,
           "_$child": [
             {
-              "_$id": "r5mvo69m",
+              "_$id": "w5xlte0u",
               "_$type": "Image",
               "name": "Image",
               "width": 256,
@@ -214,7 +283,7 @@
               "color": "#ffffff"
             },
             {
-              "_$id": "hgjzota1",
+              "_$id": "tl3xohw8",
               "_$var": true,
               "_$type": "Image",
               "name": "indicator",

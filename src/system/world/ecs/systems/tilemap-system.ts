@@ -1,3 +1,5 @@
+/////////////////// 已废弃，待删 ///////////////////
+
 import { ecs } from "../../../../core/ecs";
 import { WorldContext } from "../../world-context";
 import { CameraComponent } from "../components/camera-component";
