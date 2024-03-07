@@ -99,7 +99,11 @@ export class PveContext extends Mediator {
         const x = Math.floor(groundPos.x + 0.5);
         const y = Math.floor(groundPos.z + 0.5);
 
-        const element = tilemapSystem?.getElementByPos(x, y, Tilemap.LayerName.Dynamic) as Tilemap.DynamicElement;
+        const element = tilemapSystem?.getElementByPos(
+            x,
+            y,
+            Tilemap.LayerName.Dynamic
+        ) as Tilemap.DynamicElement;
         if (element) {
             element.showBlock();
             this._selectedDynamicElement = element.uid;
@@ -108,7 +112,7 @@ export class PveContext extends Mediator {
 }
 
 class CommandSender {
-    constructor(readonly server: PveServer) { }
+    constructor(readonly server: PveServer) {}
 
     moveStart(eid: number, degree: number) {
         this.server.receiver.moveStart(eid, degree);

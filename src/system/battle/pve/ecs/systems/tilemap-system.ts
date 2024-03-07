@@ -5,7 +5,6 @@ import { TransformComponent } from "../components/movement-component";
 import { Tilemap, TilemapComponent } from "../components/tilemap-component";
 
 export class TilemapSystem extends ecs.System {
-
     /**
      * 获取地图根节点
      * @returns 根节点
@@ -118,13 +117,27 @@ export class TilemapSystem extends ecs.System {
      * @param layerName 层级名称
      * @returns 元素对象
      */
-    public getElementByPos(x: number, y: number, layerName: Tilemap.LayerName): Tilemap.Element | undefined {
+    public getElementByPos(
+        x: number,
+        y: number,
+        layerName: Tilemap.LayerName
+    ): Tilemap.Element | undefined {
         const uidMap = this._posMap.get(layerName);
         if (uidMap) {
             if (layerName == Tilemap.LayerName.Static || layerName == Tilemap.LayerName.Dynamic) {
                 for (const uid of uidMap.values()) {
                     const element = this._allMap.get(uid) as Tilemap.ObjElement;
-                    if (element && TilemapComponent.IN_RECT(x, y, element.realX, element.realY, element.width, element.height)) {
+                    if (
+                        element &&
+                        TilemapComponent.IN_RECT(
+                            x,
+                            y,
+                            element.realX,
+                            element.realY,
+                            element.width,
+                            element.height
+                        )
+                    ) {
                         return element;
                     }
                 }
@@ -146,7 +159,13 @@ export class TilemapSystem extends ecs.System {
      * @param layerName 层级名称
      * @returns 元素对象列表
      */
-    public getElementsByRect(x: number, y: number, width: number, height: number, layerName: Tilemap.LayerName): Tilemap.Element[] {
+    public getElementsByRect(
+        x: number,
+        y: number,
+        width: number,
+        height: number,
+        layerName: Tilemap.LayerName
+    ): Tilemap.Element[] {
         const elements: Tilemap.Element[] = [];
         for (let $x = x; $x < x + width; $x++) {
             for (let $y = y; $y < y + height; $y++) {
@@ -193,7 +212,7 @@ export class TilemapSystem extends ecs.System {
      * 根据GID获取图集序列帧的序号
      * @param atlasName 图集名称
      * @param gid 资源ID
-     * @returns 
+     * @returns
      */
     public getAtlasFrameIdx(atlasName: Tilemap.AtlasName, gid: number): number {
         const tileset = this._atlasMap.get(atlasName);
@@ -204,12 +223,12 @@ export class TilemapSystem extends ecs.System {
      * 根据GID获取纹理资源名称
      * @param textureName 纹理名称
      * @param gid 资源ID
-     * @returns 
+     * @returns
      */
     public getTextureResName(textureName: Tilemap.TextureName, gid: number): string {
         const map = this._textureMap.get(textureName);
         const tile = map?.get(gid);
-        return tile?.image.split('/').at(-1)?.split('.').at(0) || "";
+        return tile?.image.split("/").at(-1)?.split(".").at(0) || "";
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -239,34 +258,40 @@ export class TilemapSystem extends ecs.System {
     }
 
     public override async onCreate() {
-        console.log("onCreate")
+        console.log("onCreate");
 
-        this._root = this.context.scene3D.getChildByName('world-map') as Laya.Sprite3D;
+        this._root = this.context.scene3D.getChildByName("world-map") as Laya.Sprite3D;
 
-        this._world = await Laya.loader.fetch("resources/data/world-map/world.json", "json") as Tilemap.World;
-        this._world.maps.forEach(info => {
+        this._world = (await Laya.loader.fetch(
+            "resources/data/world-map/world.json",
+            "json"
+        )) as Tilemap.World;
+        this._world.maps.forEach((info) => {
             [info.x, info.y] = this._transMapPos(info);
             [info.width, info.height] = [TilemapComponent.MAP_WIDTH, TilemapComponent.MAP_HEIGHT];
         });
 
-        const tilesetRef = await Laya.loader.fetch("resources/data/world-map/world-tileset-ref.json", "json") as Tilemap.WorldMap;
-        tilesetRef.tilesets.forEach(tileset => {
+        const tilesetRef = (await Laya.loader.fetch(
+            "resources/data/world-map/world-tileset-ref.json",
+            "json"
+        )) as Tilemap.WorldMap;
+        tilesetRef.tilesets.forEach((tileset) => {
             if (tileset.tiles?.length > 0) {
-                const map = new Map<number, Tilemap.Tile>()
-                tileset.tiles.forEach(tile => {
+                const map = new Map<number, Tilemap.Tile>();
+                tileset.tiles.forEach((tile) => {
                     map.set(tileset.firstgid + tile.id, tile);
-                })
+                });
                 this._textureMap.set(tileset.name as Tilemap.TextureName, map);
             } else {
                 this._atlasMap.set(tileset.name as Tilemap.AtlasName, tileset);
             }
-        })
+        });
     }
 
     public override onDestroy() {
-        this._allMap.forEach(element => {
+        this._allMap.forEach((element) => {
             element.recover();
-        })
+        });
         this._world = undefined;
         this._atlasMap.clear();
         this._textureMap.clear();
@@ -282,7 +307,10 @@ export class TilemapSystem extends ecs.System {
         const scale = Math.sqrt((TilemapComponent.TILE_HEIGHT * 2) ** 2 / 2);
 
         const mat = new Laya.Matrix3x3();
-        mat.translate(new Laya.Vector2((TilemapComponent.MAP_HEIGHT * TilemapComponent.TILE_WIDTH) / 2, 0), mat);
+        mat.translate(
+            new Laya.Vector2((TilemapComponent.MAP_HEIGHT * TilemapComponent.TILE_WIDTH) / 2, 0),
+            mat
+        );
         mat.scale(new Laya.Vector2(1, 0.5), mat);
         mat.rotate(Math.PI / 4, mat);
         mat.scale(new Laya.Vector2(scale, scale), mat);
@@ -312,7 +340,12 @@ export class TilemapSystem extends ecs.System {
         }
         const curX = Math.floor(transform.position.x - TilemapComponent.VISION_WIDTH / 2);
         const curY = Math.floor(transform.position.z - TilemapComponent.VISION_HEIGHT / 2);
-        this._curRect.setTo(curX, curY, TilemapComponent.VISION_WIDTH, TilemapComponent.VISION_HEIGHT);
+        this._curRect.setTo(
+            curX,
+            curY,
+            TilemapComponent.VISION_WIDTH,
+            TilemapComponent.VISION_HEIGHT
+        );
 
         if (this._curRect.equals(this._lastRect)) {
             return;
@@ -357,8 +390,13 @@ export class TilemapSystem extends ecs.System {
         }
     }
 
-    private async _tryAdd(x: number, y: number, filterLayer?: Tilemap.LayerName, eid?: number, outUids?: number[]) {
-
+    private async _tryAdd(
+        x: number,
+        y: number,
+        filterLayer?: Tilemap.LayerName,
+        eid?: number,
+        outUids?: number[]
+    ) {
         console.log("666", this._world);
 
         for (let i = 0; i < this._world!.maps.length; i++) {
@@ -370,8 +408,11 @@ export class TilemapSystem extends ecs.System {
             }
 
             if (!info.worldMap) {
-                const realFileName = info.fileName.split('/').at(-1)?.replace('.tmx', '.json');
-                info.worldMap = await Laya.loader.fetch("resources/data/world-map/" + realFileName, "json") as Tilemap.WorldMap;
+                const realFileName = info.fileName.split("/").at(-1)?.replace(".tmx", ".json");
+                info.worldMap = (await Laya.loader.fetch(
+                    "resources/data/world-map/" + realFileName,
+                    "json"
+                )) as Tilemap.WorldMap;
             }
 
             const idx = (y - info.y) * info.width + (x - info.x);
@@ -427,6 +468,6 @@ export class TilemapSystem extends ecs.System {
             element?.recover();
             uidMap.delete(key);
             this._allMap.delete(uid);
-        })
+        });
     }
 }

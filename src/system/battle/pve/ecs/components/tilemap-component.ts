@@ -34,41 +34,148 @@ export class TilemapComponent extends ecs.SingletonComponent {
     static readonly TILE_WIDTH = 128; // 瓦片宽度（单位：像素）
     static readonly TILE_HEIGHT = 64; // 瓦片高度（单位：像素）
 
-    static readonly XY_TO_KEY = (x: number, y: number) => { return Math.floor(x) + '_' + Math.floor(y); };
-    static readonly KEY_TO_XY = (key: string) => { const arr = key.split('_'); return [Math.floor(Number(arr[0])), Math.floor(Number(arr[1]))] };
+    static readonly XY_TO_KEY = (x: number, y: number) => {
+        return Math.floor(x) + "_" + Math.floor(y);
+    };
+    static readonly KEY_TO_XY = (key: string) => {
+        const arr = key.split("_");
+        return [Math.floor(Number(arr[0])), Math.floor(Number(arr[1]))];
+    };
 
-    static readonly IN_RECT = (x: number, y: number, rectX: number, rectY: number, rectW: number, rectH: number) => {
+    static readonly IN_RECT = (
+        x: number,
+        y: number,
+        rectX: number,
+        rectY: number,
+        rectW: number,
+        rectH: number
+    ) => {
         return rectX <= x && x < rectX + rectW && rectY <= y && y < rectY + rectH;
-    }
+    };
 
     static readonly STATIC_TEXTURE_CFG: Map<string, Tilemap.TextureCfg> = new Map([
-        ["map_Grassland_hill_01", { tileX: 1, tileY: 3, tileW: 4, tileH: 4, offsetX: 1.44996, offsetY: 1.49997, offsetZ: 1.51993, scale: 4.5 }],
-        ["map_Grassland_hill_02", { tileX: 1, tileY: 2, tileW: 3, tileH: 3, offsetX: 1.21997, offsetY: 1.49997, offsetZ: 1.32993, scale: 3 }],
-        ["map_Grassland_Tree_01", { tileX: 0, tileY: 1, tileW: 2, tileH: 2, offsetX: 0.51987, offsetY: 1.22977, offsetZ: 0.48983, scale: 3 }],
-        ["map_Grassland_Tree_02", { tileX: 1, tileY: 2, tileW: 3, tileH: 3, offsetX: 1.43997, offsetY: 1.34993, offsetZ: 1.39997, scale: 3 }],
-        ["map_Grassland_Tree_03", { tileX: 1, tileY: 2, tileW: 3, tileH: 3, offsetX: 1.55997, offsetY: 1.24993, offsetZ: 1.41997, scale: 3 }],
-    ])
+        [
+            "map_Grassland_hill_01",
+            {
+                tileX: 1,
+                tileY: 3,
+                tileW: 4,
+                tileH: 4,
+                offsetX: 1.44996,
+                offsetY: 1.49997,
+                offsetZ: 1.51993,
+                scale: 4.5,
+            },
+        ],
+        [
+            "map_Grassland_hill_02",
+            {
+                tileX: 1,
+                tileY: 2,
+                tileW: 3,
+                tileH: 3,
+                offsetX: 1.21997,
+                offsetY: 1.49997,
+                offsetZ: 1.32993,
+                scale: 3,
+            },
+        ],
+        [
+            "map_Grassland_Tree_01",
+            {
+                tileX: 0,
+                tileY: 1,
+                tileW: 2,
+                tileH: 2,
+                offsetX: 0.51987,
+                offsetY: 1.22977,
+                offsetZ: 0.48983,
+                scale: 3,
+            },
+        ],
+        [
+            "map_Grassland_Tree_02",
+            {
+                tileX: 1,
+                tileY: 2,
+                tileW: 3,
+                tileH: 3,
+                offsetX: 1.43997,
+                offsetY: 1.34993,
+                offsetZ: 1.39997,
+                scale: 3,
+            },
+        ],
+        [
+            "map_Grassland_Tree_03",
+            {
+                tileX: 1,
+                tileY: 2,
+                tileW: 3,
+                tileH: 3,
+                offsetX: 1.55997,
+                offsetY: 1.24993,
+                offsetZ: 1.41997,
+                scale: 3,
+            },
+        ],
+    ]);
 
     static readonly DYNAMIC_TEXTURE_CFG: Map<string, Tilemap.TextureCfg> = new Map([
-        ["building_castle01@1,2_5,5", { tileX: 3, tileY: 5, tileW: 5, tileH: 5, offsetX: 3.14974, offsetY: 2.09952, offsetZ: 2.18969, scale: 6 }],
-        ["map_gather_wood1-1", { tileX: 0, tileY: 1, tileW: 2, tileH: 2, offsetX: 0.39992, offsetY: 1.21985, offsetZ: 0.32989, scale: 3 }],
-        ["map_gather_wood1-2", { tileX: 0, tileY: 1, tileW: 2, tileH: 2, offsetX: 0.39992, offsetY: 1.21985, offsetZ: 0.32989, scale: 3 }],
-    ])
+        [
+            "building_castle01@1,2_5,5",
+            {
+                tileX: 3,
+                tileY: 5,
+                tileW: 5,
+                tileH: 5,
+                offsetX: 3.14974,
+                offsetY: 2.09952,
+                offsetZ: 2.18969,
+                scale: 6,
+            },
+        ],
+        [
+            "map_gather_wood1-1",
+            {
+                tileX: 0,
+                tileY: 1,
+                tileW: 2,
+                tileH: 2,
+                offsetX: 0.39992,
+                offsetY: 1.21985,
+                offsetZ: 0.32989,
+                scale: 3,
+            },
+        ],
+        [
+            "map_gather_wood1-2",
+            {
+                tileX: 0,
+                tileY: 1,
+                tileW: 2,
+                tileH: 2,
+                offsetX: 0.39992,
+                offsetY: 1.21985,
+                offsetZ: 0.32989,
+                scale: 3,
+            },
+        ],
+    ]);
 }
 
 export namespace Tilemap {
-
     export interface World {
         maps: MapInfo[];
     }
 
     export interface MapInfo {
-        fileName: string,
-        x: number,
-        y: number,
-        width: number,
-        height: number,
-        worldMap?: WorldMap,
+        fileName: string;
+        x: number;
+        y: number;
+        width: number;
+        height: number;
+        worldMap?: WorldMap;
     }
 
     export interface WorldMap {
@@ -182,23 +289,42 @@ export namespace Tilemap {
         private _layerName!: string;
         private _eid?: number;
 
-        public get uid(): number { return this._uid; }
+        public get uid(): number {
+            return this._uid;
+        }
 
-        public get x(): number { return this._x; }
+        public get x(): number {
+            return this._x;
+        }
 
-        public get y(): number { return this._y; }
+        public get y(): number {
+            return this._y;
+        }
 
-        public get gid(): number { return this._gid; }
+        public get gid(): number {
+            return this._gid;
+        }
 
-        public get layerName(): string { return this._layerName; }
+        public get layerName(): string {
+            return this._layerName;
+        }
 
-        public get eid(): number { return this._eid || 0; }
+        public get eid(): number {
+            return this._eid || 0;
+        }
 
         public static create<T>(sign: string, cls: Constructor<T>): T {
             return Laya.Pool.getItemByClass(sign, cls);
         }
 
-        public init(system: TilemapSystem, x: number, y: number, gid: number, layerName: string, eid?: number): void {
+        public init(
+            system: TilemapSystem,
+            x: number,
+            y: number,
+            gid: number,
+            layerName: string,
+            eid?: number
+        ): void {
             this._uid = --Element.UID;
             this.system = system;
             this._x = x;
@@ -245,12 +371,12 @@ export namespace Tilemap {
             mat.tilingOffset.x = tex.uvrect[2]; // 瓦片宽度
             mat.tilingOffset.y = tex.uvrect[3]; // 瓦片高度
             mat.tilingOffset.z = tex.uvrect[0]; // X坐标偏移
-            mat.tilingOffset.w = (1 - mat.tilingOffset.y) - tex.uvrect[1]; // Y坐标偏移（拿到的偏移值是基于左上角的，这里转成右下角的）
+            mat.tilingOffset.w = 1 - mat.tilingOffset.y - tex.uvrect[1]; // Y坐标偏移（拿到的偏移值是基于左上角的，这里转成右下角的）
 
             const renderer = this._tile.getChildAt(0).getComponent(Laya.MeshRenderer);
             renderer.material = mat;
 
-            this._tile.name = this.x + '_' + this.y;
+            this._tile.name = this.x + "_" + this.y;
             this.system.getRoot().getChildByName(this.layerName).addChild(this._tile);
         }
 
@@ -272,7 +398,7 @@ export namespace Tilemap {
             return [
                 "resources/texture/world-map/ground/ground.atlas",
                 "resources/texture/world-map/ground/ground.png",
-                "resources/prefab/world-map/ground/ground-tile.lh"
+                "resources/prefab/world-map/ground/ground-tile.lh",
             ];
         }
     }
@@ -286,7 +412,7 @@ export namespace Tilemap {
             return [
                 "resources/texture/world-map/road/road.atlas",
                 "resources/texture/world-map/road/road.png",
-                "resources/prefab/world-map/road/road-tile.lh"
+                "resources/prefab/world-map/road/road-tile.lh",
             ];
         }
     }
@@ -300,7 +426,7 @@ export namespace Tilemap {
             return [
                 "resources/texture/world-map/river/river.atlas",
                 "resources/texture/world-map/river/river.png",
-                "resources/prefab/world-map/river/river-tile.lh"
+                "resources/prefab/world-map/river/river-tile.lh",
             ];
         }
     }
@@ -312,17 +438,25 @@ export namespace Tilemap {
         private _width: number = 0;
         private _height: number = 0;
 
-        public get realX(): number { return this._realX; }
+        public get realX(): number {
+            return this._realX;
+        }
 
-        public get realY(): number { return this._realY; }
+        public get realY(): number {
+            return this._realY;
+        }
 
-        public get width(): number { return this._width; }
+        public get width(): number {
+            return this._width;
+        }
 
-        public get height(): number { return this._height; }
+        public get height(): number {
+            return this._height;
+        }
 
         public override async draw() {
             if (this._obj) {
-                return
+                return;
             }
             const prefab = await Laya.loader.load(this.getPrefabPath(), Laya.Loader.HIERARCHY);
 
@@ -357,7 +491,7 @@ export namespace Tilemap {
 
             const mat = new Laya.UnlitMaterial();
             const path = StringUtil.format(this.getTexturePath(), resName);
-            const texture = await Laya.loader.load(path, Laya.Loader.TEXTURE2D) as Laya.Texture2D;
+            const texture = (await Laya.loader.load(path, Laya.Loader.TEXTURE2D)) as Laya.Texture2D;
             mat.albedoTexture = texture;
             mat.renderMode = Laya.MaterialRenderMode.RENDERMODE_TRANSPARENT;
             renderer.material = mat;
@@ -365,7 +499,7 @@ export namespace Tilemap {
             this._width = textureCfg?.tileW || 1;
             this._height = textureCfg?.tileH || 1;
 
-            this._obj.name = this.realX + '_' + this.realY + ' | ' + resName;
+            this._obj.name = this.realX + "_" + this.realY + " | " + resName;
             this.system.getRoot().getChildByName(this.layerName).addChild(this._obj);
         }
 
@@ -450,7 +584,10 @@ export namespace Tilemap {
             if (!this.system.showBlocks.get(key)) {
                 return;
             }
-            const prefab = await Laya.loader.load("resources/prefab/world-map/block/block-tile.lh", Laya.Loader.HIERARCHY);
+            const prefab = await Laya.loader.load(
+                "resources/prefab/world-map/block/block-tile.lh",
+                Laya.Loader.HIERARCHY
+            );
 
             this._blockTile = prefab.create() as Laya.Sprite3D;
 
@@ -460,7 +597,7 @@ export namespace Tilemap {
             pos.z = this.y;
             this._blockTile.transform.position = pos;
 
-            this._blockTile.name = this.x + '_' + this.y;
+            this._blockTile.name = this.x + "_" + this.y;
             this.system.getRoot().getChildByName(this.layerName).addChild(this._blockTile);
         }
 
