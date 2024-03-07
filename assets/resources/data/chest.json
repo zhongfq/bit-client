@@ -1,7 +1,6 @@
 {
     "chest": {
         "10101": {
-            "icon": "icon_chest_1",
             "id": 10101,
             "open_max_num": 10,
             "open_score": 1,
@@ -21,7 +20,6 @@
             "sort": 1
         },
         "10102": {
-            "icon": "icon_chest_2",
             "id": 10102,
             "open_max_num": 10,
             "open_score": 5,
@@ -41,7 +39,6 @@
             "sort": 2
         },
         "10103": {
-            "icon": "icon_chest_3",
             "id": 10103,
             "open_max_num": 10,
             "open_score": 15,
@@ -61,7 +58,6 @@
             "sort": 3
         },
         "10104": {
-            "icon": "icon_chest_4",
             "id": 10104,
             "open_max_num": 3,
             "open_score": 45,
@@ -81,7 +77,6 @@
             "sort": 4
         },
         "10105": {
-            "icon": "icon_chest_5",
             "id": 10105,
             "open_max_num": 1,
             "open_score": 0,

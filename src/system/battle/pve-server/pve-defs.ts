@@ -9,7 +9,7 @@ export interface ElementCreator {
     eid: number;
     etype: number;
 
-    tid: number;
+    tid: number; // id in battle_entity.xlsx
     maxHp: number;
     hp: number;
     positioin: Laya.Vector3;

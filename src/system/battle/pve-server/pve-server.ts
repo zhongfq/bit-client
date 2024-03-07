@@ -149,7 +149,7 @@ export class PveServer extends b3.Context {
 
         const table = app.service.table;
         const heroRow = table.hero[element.tid];
-        element.data = table.battleEntity.entity[heroRow.battle_entity];
+        element.data = table.battleEntity[heroRow.battle_entity];
 
         const skill = entity.addComponent(SkillComponent);
         if (heroRow.skill1) {
@@ -168,7 +168,7 @@ export class PveServer extends b3.Context {
         this._sender.createElement({
             eid: element.eid,
             etype: element.entity.etype,
-            tid: element.tid,
+            tid: element.data.id,
             hp: element.hp,
             maxHp: element.maxHp,
             positioin: transform.position,
@@ -195,7 +195,7 @@ export class PveServer extends b3.Context {
             const table = app.service.table;
             const soldierRow = table.soldier[element.tid];
 
-            element.data = table.battleEntity.entity[soldierRow.battle_entity];
+            element.data = table.battleEntity[soldierRow.battle_entity];
 
             const soldier = entity.addComponent(SoldierComponent);
             soldier.index = idx;
@@ -216,7 +216,7 @@ export class PveServer extends b3.Context {
             transform.position.x = value.x + hero.transform.position.x;
             transform.position.z = value.z + hero.transform.position.z;
 
-            const entityRow = table.battleEntity.entity[soldierRow.battle_entity];
+            const entityRow = table.battleEntity[soldierRow.battle_entity];
             const ai = entity.addComponent(AiComponent);
             ai.res = `resources/data/btree/${entityRow.pve_ai}.json`;
 
@@ -225,7 +225,7 @@ export class PveServer extends b3.Context {
             this._sender.createElement({
                 eid: element.eid,
                 etype: element.entity.etype,
-                tid: element.tid,
+                tid: element.data.id,
                 hp: element.hp,
                 maxHp: element.maxHp,
                 positioin: transform.position,
@@ -249,7 +249,7 @@ export class PveServer extends b3.Context {
             const table = app.service.table;
             const heroRow = table.hero[element.tid];
 
-            element.data = table.battleEntity.entity[heroRow.battle_entity];
+            element.data = table.battleEntity[heroRow.battle_entity];
 
             const skill = entity.addComponent(SkillComponent);
             if (heroRow.skill1) {
@@ -263,7 +263,7 @@ export class PveServer extends b3.Context {
             transform.position.x = p.x;
             transform.position.z = p.z;
 
-            const entityRow = table.battleEntity.entity[heroRow.battle_entity];
+            const entityRow = table.battleEntity[heroRow.battle_entity];
             const ai = entity.addComponent(AiComponent);
             ai.res = `resources/data/btree/${entityRow.pve_ai}.json`;
 
@@ -272,7 +272,7 @@ export class PveServer extends b3.Context {
             this._sender.createElement({
                 eid: element.eid,
                 etype: element.entity.etype,
-                tid: element.tid,
+                tid: element.data.id,
                 hp: element.hp,
                 maxHp: element.maxHp,
                 positioin: transform.position,

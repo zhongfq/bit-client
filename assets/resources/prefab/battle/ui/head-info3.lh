@@ -1,12 +1,12 @@
 {
   "_$ver": 1,
   "_$id": "l8sccbg4",
-  "_$runtime": "res://2dac9f71-4db6-4528-95a0-5e4c4f0df9a2",
+  "_$runtime": "res://e1e1480d-a43b-4a20-bca0-420db37e8de1",
   "_$preloads": [
     "res://fc02b4ee-cd32-4c4a-9e39-0825a002d739"
   ],
   "_$type": "Box",
-  "name": "Box",
+  "name": "hero-info3",
   "width": 42,
   "height": 6,
   "_$child": [
@@ -23,7 +23,6 @@
     {
       "_$id": "rjs8pshf",
       "_$prefab": "7fd1a163-f140-41df-806c-a9338fbb3412",
-      "_$var": true,
       "name": "hpBar",
       "active": true,
       "x": 0,

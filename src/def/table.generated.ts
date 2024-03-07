@@ -230,19 +230,15 @@ export interface GeneratedRandomNameRow {
 }
 
 // file: design/battle/battle_entity.xlsx
-export interface GeneratedBattleEntityEtypeRow {
-    etype: number;
-    define: string;
-}
-
-// file: design/battle/battle_entity.xlsx
-export interface GeneratedBattleEntityEntityRow {
+export interface GeneratedBattleEntityRow {
     id: number;
     etype: number;
     res: string;
     pve_ai: string;
     attack_radius?: number;
     skill_radius?: number;
+    info_style?: number;
+    info_offset?: number;
 }
 
 // file: design/battle/battle_demo.xlsx
@@ -416,7 +412,7 @@ export interface GeneratedEmojiRow {
 export interface GeneratedChestRow {
     id: number;
     sort: number;
-    icon: string;
+    icon?: string;
     open_max_num: number;
     open_score: number;
     reward_score: number;

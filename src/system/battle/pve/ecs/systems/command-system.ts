@@ -11,9 +11,17 @@ import {
     MovementType,
     TransformComponent,
 } from "../components/movement-component";
-import { AnimationComponent, ShadowComponent } from "../components/render-component";
-import { TilemapComponent } from "../components/tilemap-component";
+import {
+    AnimationComponent,
+    HeadInfoComponent,
+    ShadowComponent,
+} from "../components/render-component";
 import { ElementAnimation, ElementComponent } from "../components/troop-component";
+
+const PREFAB_HEAD_INFO1 = "resources/prefab/battle/ui/head-info1.lh";
+const PREFAB_HEAD_INFO2 = "resources/prefab/battle/ui/head-info2.lh";
+const PREFAB_HEAD_INFO3 = "resources/prefab/battle/ui/head-info3.lh";
+const PREFAB_ROLE_SHADOW = "resources/prefab/battle/ui/role-shadow.lh";
 
 export class CommandSystem extends ecs.System implements ICommandSender {
     constructor(readonly context: PveContext) {
@@ -29,40 +37,49 @@ export class CommandSystem extends ecs.System implements ICommandSender {
     }
 
     createElement(data: ElementCreator) {
+        const table = app.service.table;
         const ETYPE = BattleConf.ENTITY_TYPE;
+
+        const entityRow = table.battleEntity[data.tid];
 
         const entity = this.ecs.createEntity(data.eid);
         entity.etype = data.etype;
 
-        const movement = entity.addComponent(MovementComponent);
-        movement.rotationInterpolation.rate = InterpolationRate.ROTATION;
-
         const element = entity.addComponent(ElementComponent);
         element.tid = data.tid;
-        element.hp = data.hp;
-        element.maxHp = data.maxHp;
 
         const transform = entity.addComponent(TransformComponent);
         transform.position.cloneFrom(data.positioin);
         transform.flag |= TransformComponent.POSITION;
 
         const animation = entity.addComponent(AnimationComponent);
-        if (data.etype === ETYPE.HERO) {
-            const table = app.service.table;
-            const heroRow = table.hero[data.tid];
-            const entityRow = table.battleEntity.entity[heroRow.battle_entity];
-            animation.res = entityRow.res;
-        } else if (data.etype === ETYPE.SOLDIER) {
-            const table = app.service.table;
-            const soldierRow = table.soldier[data.tid];
-            const entityRow = table.battleEntity.entity[soldierRow.battle_entity];
-            animation.res = entityRow.res;
-        } else {
-            throw new Error(`unsupport etype for create element: ${data.etype}`);
+        animation.res = entityRow.res;
+
+        if (entityRow.info_style) {
+            const info = entity.addComponent(HeadInfoComponent);
+            info.data.hp = data.hp;
+            info.data.maxHp = data.maxHp;
+            info.data.offset = entityRow.info_offset ?? 0;
+            if (entityRow.info_style === 1) {
+                info.res = PREFAB_HEAD_INFO1;
+            } else if (entityRow.info_style === 2) {
+                info.res = PREFAB_HEAD_INFO2;
+            } else if (entityRow.info_style === 3) {
+                info.res = PREFAB_HEAD_INFO3;
+            }
         }
 
-        const shadow = entity.addComponent(ShadowComponent);
-        shadow.res = "resources/prefab/battle/ui/role-shadow.lh";
+        if (
+            data.etype === ETYPE.HERO ||
+            data.etype === ETYPE.MONSTER ||
+            data.etype === ETYPE.SOLDIER
+        ) {
+            const shadow = entity.addComponent(ShadowComponent);
+            shadow.res = PREFAB_ROLE_SHADOW;
+
+            const movement = entity.addComponent(MovementComponent);
+            movement.rotationInterpolation.rate = InterpolationRate.ROTATION;
+        }
     }
 
     private _findElement(eid: number) {

@@ -34,8 +34,6 @@ export class ElementComponent extends ecs.Component {
     }
 
     tid: number = 0;
-    hp: number = 0;
-    maxHp: number = 0;
 }
 
 type SoliderAttack = {

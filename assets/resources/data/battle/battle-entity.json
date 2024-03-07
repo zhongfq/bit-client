@@ -1,198 +1,204 @@
 {
-    "entity": {
-        "101": {
-            "attack_radius": 1,
-            "etype": 1,
-            "id": 101,
-            "pve_ai": "hero",
-            "res": "resources/prefab/battle/roles/hero01.lh",
-            "skill_radius": 3
-        },
-        "102": {
-            "attack_radius": 1,
-            "etype": 1,
-            "id": 102,
-            "pve_ai": "hero",
-            "res": "resources/prefab/battle/roles/hero02.lh",
-            "skill_radius": 3
-        },
-        "105": {
-            "attack_radius": 1,
-            "etype": 1,
-            "id": 105,
-            "pve_ai": "hero",
-            "res": "resources/prefab/battle/roles/hero03.lh",
-            "skill_radius": 3
-        },
-        "106": {
-            "attack_radius": 2.5,
-            "etype": 1,
-            "id": 106,
-            "pve_ai": "hero",
-            "res": "resources/prefab/battle/roles/hero04.lh",
-            "skill_radius": 5
-        },
-        "209": {
-            "attack_radius": 2.5,
-            "etype": 1,
-            "id": 209,
-            "pve_ai": "hero",
-            "res": "resources/prefab/battle/roles/hero05.lh",
-            "skill_radius": 5
-        },
-        "212": {
-            "attack_radius": 2.5,
-            "etype": 1,
-            "id": 212,
-            "pve_ai": "hero",
-            "res": "resources/prefab/battle/roles/hero06.lh",
-            "skill_radius": 5
-        },
-        "401": {
-            "attack_radius": 4,
-            "etype": 1,
-            "id": 401,
-            "pve_ai": "hero",
-            "res": "resources/prefab/battle/roles/hero07.lh",
-            "skill_radius": 8
-        },
-        "404": {
-            "attack_radius": 4,
-            "etype": 1,
-            "id": 404,
-            "pve_ai": "hero",
-            "res": "resources/prefab/battle/roles/hero08.lh",
-            "skill_radius": 8
-        },
-        "40001": {
-            "attack_radius": 1,
-            "etype": 2,
-            "id": 40001,
-            "pve_ai": "monster",
-            "res": "resources/prefab/battle/roles/bing-dao.lh",
-            "skill_radius": 3
-        },
-        "40002": {
-            "attack_radius": 0.75,
-            "etype": 2,
-            "id": 40002,
-            "pve_ai": "soldier",
-            "res": "resources/prefab/battle/roles/bing-dao.lh",
-            "skill_radius": 3
-        },
-        "40003": {
-            "attack_radius": 1.5,
-            "etype": 2,
-            "id": 40003,
-            "pve_ai": "hero",
-            "res": "prefab/battle/role/xb-qiangbing",
-            "skill_radius": 3
-        },
-        "40004": {
-            "attack_radius": 2,
-            "etype": 2,
-            "id": 40004,
-            "pve_ai": "soldier",
-            "res": "resources/prefab/battle/roles/bing-gong.lh",
-            "skill_radius": 8
-        },
-        "40005": {
-            "attack_radius": 4,
-            "etype": 2,
-            "id": 40005,
-            "pve_ai": "hero",
-            "res": "prefab/battle/role/jx-gongchengche",
-            "skill_radius": 8
-        },
-        "50001": {
-            "etype": 3,
-            "id": 50001,
-            "pve_ai": "hero",
-            "res": "prefab/battle/bullet/jiantou"
-        },
-        "50002": {
-            "etype": 3,
-            "id": 50002,
-            "pve_ai": "hero",
-            "res": "prefab/battle/bullet/fengniu"
-        },
-        "50003": {
-            "etype": 3,
-            "id": 50003,
-            "pve_ai": "hero",
-            "res": "prefab/battle/bullet/houjianpao"
-        },
-        "50004": {
-            "etype": 3,
-            "id": 50004,
-            "pve_ai": "hero",
-            "res": "prefab/battle/bullet/longjuanfeng"
-        },
-        "50005": {
-            "etype": 3,
-            "id": 50005,
-            "pve_ai": "hero",
-            "res": "prefab/battle/bullet/bailong"
-        },
-        "50006": {
-            "etype": 3,
-            "id": 50006,
-            "pve_ai": "hero",
-            "res": "prefab/battle/bullet/bishan"
-        },
-        "50007": {
-            "etype": 3,
-            "id": 50007,
-            "pve_ai": "hero",
-            "res": "prefab/battle/bullet/yunshi"
-        },
-        "50008": {
-            "etype": 3,
-            "id": 50008,
-            "pve_ai": "hero",
-            "res": "prefab/battle/bullet/lvbu-skill"
-        },
-        "50009": {
-            "etype": 3,
-            "id": 50009,
-            "pve_ai": "hero",
-            "res": "prefab/battle/bullet/zhouyu-attack"
-        },
-        "50010": {
-            "etype": 3,
-            "id": 50010,
-            "pve_ai": "hero",
-            "res": "prefab/battle/bullet/zhugeliang-attack"
-        },
-        "50011": {
-            "etype": 3,
-            "id": 50011,
-            "pve_ai": "hero",
-            "res": "prefab/battle/bullet/xiaoqiao-attack"
-        },
-        "50012": {
-            "etype": 3,
-            "id": 50012,
-            "pve_ai": "hero",
-            "res": "prefab/battle/bullet/guanyu-skill"
-        }
+    "101": {
+        "attack_radius": 1,
+        "etype": 1,
+        "id": 101,
+        "info_offset": 170,
+        "info_style": 1,
+        "pve_ai": "hero",
+        "res": "resources/prefab/battle/roles/hero01.lh",
+        "skill_radius": 3
     },
-    "etype": [
-        {
-            "define": "HERO",
-            "etype": 1
-        },
-        {
-            "define": "SOLDIER",
-            "etype": 2
-        },
-        {
-            "define": "BULLET",
-            "etype": 3
-        },
-        {
-            "define": "WOOD",
-            "etype": 4
-        }
-    ]
+    "102": {
+        "attack_radius": 1,
+        "etype": 1,
+        "id": 102,
+        "info_offset": 170,
+        "info_style": 1,
+        "pve_ai": "hero",
+        "res": "resources/prefab/battle/roles/hero02.lh",
+        "skill_radius": 3
+    },
+    "105": {
+        "attack_radius": 1,
+        "etype": 1,
+        "id": 105,
+        "info_offset": 170,
+        "info_style": 1,
+        "pve_ai": "hero",
+        "res": "resources/prefab/battle/roles/hero03.lh",
+        "skill_radius": 3
+    },
+    "106": {
+        "attack_radius": 2.5,
+        "etype": 1,
+        "id": 106,
+        "info_offset": 170,
+        "info_style": 1,
+        "pve_ai": "hero",
+        "res": "resources/prefab/battle/roles/hero04.lh",
+        "skill_radius": 5
+    },
+    "209": {
+        "attack_radius": 2.5,
+        "etype": 1,
+        "id": 209,
+        "info_offset": 170,
+        "info_style": 1,
+        "pve_ai": "hero",
+        "res": "resources/prefab/battle/roles/hero05.lh",
+        "skill_radius": 5
+    },
+    "212": {
+        "attack_radius": 2.5,
+        "etype": 1,
+        "id": 212,
+        "info_offset": 170,
+        "info_style": 1,
+        "pve_ai": "hero",
+        "res": "resources/prefab/battle/roles/hero06.lh",
+        "skill_radius": 5
+    },
+    "401": {
+        "attack_radius": 4,
+        "etype": 1,
+        "id": 401,
+        "info_offset": 170,
+        "info_style": 1,
+        "pve_ai": "hero",
+        "res": "resources/prefab/battle/roles/hero07.lh",
+        "skill_radius": 8
+    },
+    "404": {
+        "attack_radius": 4,
+        "etype": 1,
+        "id": 404,
+        "info_offset": 170,
+        "info_style": 1,
+        "pve_ai": "hero",
+        "res": "resources/prefab/battle/roles/hero08.lh",
+        "skill_radius": 8
+    },
+    "40001": {
+        "attack_radius": 1,
+        "etype": 3,
+        "id": 40001,
+        "info_offset": 55,
+        "info_style": 3,
+        "pve_ai": "monster",
+        "res": "resources/prefab/battle/roles/bing-dao.lh",
+        "skill_radius": 3
+    },
+    "40002": {
+        "attack_radius": 0.5,
+        "etype": 2,
+        "id": 40002,
+        "info_offset": 55,
+        "info_style": 3,
+        "pve_ai": "soldier",
+        "res": "resources/prefab/battle/roles/bing-dao.lh",
+        "skill_radius": 3
+    },
+    "40003": {
+        "attack_radius": 1.5,
+        "etype": 2,
+        "id": 40003,
+        "info_offset": 55,
+        "info_style": 3,
+        "pve_ai": "hero",
+        "res": "prefab/battle/role/xb-qiangbing",
+        "skill_radius": 3
+    },
+    "40004": {
+        "attack_radius": 2,
+        "etype": 2,
+        "id": 40004,
+        "info_offset": 55,
+        "info_style": 3,
+        "pve_ai": "soldier",
+        "res": "resources/prefab/battle/roles/bing-gong.lh",
+        "skill_radius": 8
+    },
+    "40005": {
+        "attack_radius": 4,
+        "etype": 2,
+        "id": 40005,
+        "info_offset": 55,
+        "info_style": 3,
+        "pve_ai": "hero",
+        "res": "prefab/battle/role/jx-gongchengche",
+        "skill_radius": 8
+    },
+    "50001": {
+        "etype": 4,
+        "id": 50001,
+        "pve_ai": "hero",
+        "res": "prefab/battle/bullet/jiantou"
+    },
+    "50002": {
+        "etype": 4,
+        "id": 50002,
+        "pve_ai": "hero",
+        "res": "prefab/battle/bullet/fengniu"
+    },
+    "50003": {
+        "etype": 4,
+        "id": 50003,
+        "pve_ai": "hero",
+        "res": "prefab/battle/bullet/houjianpao"
+    },
+    "50004": {
+        "etype": 4,
+        "id": 50004,
+        "pve_ai": "hero",
+        "res": "prefab/battle/bullet/longjuanfeng"
+    },
+    "50005": {
+        "etype": 4,
+        "id": 50005,
+        "pve_ai": "hero",
+        "res": "prefab/battle/bullet/bailong"
+    },
+    "50006": {
+        "etype": 4,
+        "id": 50006,
+        "pve_ai": "hero",
+        "res": "prefab/battle/bullet/bishan"
+    },
+    "50007": {
+        "etype": 4,
+        "id": 50007,
+        "pve_ai": "hero",
+        "res": "prefab/battle/bullet/yunshi"
+    },
+    "50008": {
+        "etype": 4,
+        "id": 50008,
+        "pve_ai": "hero",
+        "res": "prefab/battle/bullet/lvbu-skill"
+    },
+    "50009": {
+        "etype": 4,
+        "id": 50009,
+        "pve_ai": "hero",
+        "res": "prefab/battle/bullet/zhouyu-attack"
+    },
+    "50010": {
+        "etype": 4,
+        "id": 50010,
+        "pve_ai": "hero",
+        "res": "prefab/battle/bullet/zhugeliang-attack"
+    },
+    "50011": {
+        "etype": 4,
+        "id": 50011,
+        "pve_ai": "hero",
+        "res": "prefab/battle/bullet/xiaoqiao-attack"
+    },
+    "50012": {
+        "etype": 4,
+        "id": 50012,
+        "pve_ai": "hero",
+        "res": "prefab/battle/bullet/guanyu-skill"
+    }
 }

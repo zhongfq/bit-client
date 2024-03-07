@@ -6,7 +6,7 @@ import {
     GeneratedAllianceRow,
     GeneratedAttrRow,
     GeneratedBattleBuffRow,
-    GeneratedBattleEntityEntityRow,
+    GeneratedBattleEntityRow,
     GeneratedChestHeroRow,
     GeneratedChestRow,
     GeneratedChestScoreRow,
@@ -75,10 +75,10 @@ export type BattleBuffTable = {
     };
 };
 
-export interface BattleEntityRow extends GeneratedBattleEntityEntityRow {}
+export interface BattleEntityRow extends GeneratedBattleEntityRow {}
 
 export type BattleEntityTable = {
-    entity: { [k: string]: BattleEntityRow };
+    [k: string]: BattleEntityRow;
 };
 
 //-----------------------------------------------------------------------------
@@ -181,7 +181,7 @@ export interface ChestRow extends GeneratedChestRow {}
 export interface ChestHeroRow extends GeneratedChestHeroRow {}
 export interface ChestScoreRow extends GeneratedChestScoreRow {}
 export type ChestTable = {
-    chest: {[k:number] : ChestRow};
+    chest: { [k: number]: ChestRow };
     hero: ChestHeroRow[];
     score: ChestScoreRow[];
 };
