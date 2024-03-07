@@ -114,11 +114,11 @@ export class PveContext extends Mediator {
 class CommandSender {
     constructor(readonly server: PveServer) {}
 
-    moveStart(eid: number, degree: number) {
-        this.server.receiver.moveStart(eid, degree);
+    joystickStart(eid: number, degree: number) {
+        this.server.receiver.joystickStart(eid, degree);
     }
 
-    moveStop(eid: number) {
-        this.server.receiver.moveStop(eid);
+    joystickStop(eid: number) {
+        this.server.receiver.joystickStop(eid);
     }
 }

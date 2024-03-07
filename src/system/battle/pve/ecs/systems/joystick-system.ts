@@ -42,7 +42,7 @@ export class JoystickSystem extends ecs.System {
             owner.indicator.x = 0;
             owner.indicator.y = 0;
             owner.joystickArea.height = joystick.initHeight;
-            this.context.sender.moveStop(this.context.focusRole);
+            this.context.sender.joystickStop(this.context.focusRole);
         } else {
             const maxOffset = owner.joystick.width / 2;
             const current = owner.joystickGroup.getMousePoint();
@@ -61,7 +61,7 @@ export class JoystickSystem extends ecs.System {
             const degree = Math.floor((MathUtil.toDegree(rad) + 360) % 360);
             if (Math.abs(joystick.degree - degree) >= 5) {
                 joystick.degree = degree;
-                this.context.sender.moveStart(this.context.focusRole, degree);
+                this.context.sender.joystickStart(this.context.focusRole, degree);
             }
         }
     }

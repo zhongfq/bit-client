@@ -88,16 +88,18 @@ export class CommandSystem extends ecs.System implements ICommandSender {
         }
     }
 
-    moveStop(eid: number) {
+    moveStop(eid: number, position: Laya.Vector3) {
         const element = this._findElement(eid);
         if (element) {
-            const { movement } = element;
+            const { movement, transform } = element;
             movement.type = MovementType.NONE;
             movement.velocity.x = 0;
             movement.velocity.y = 0;
             movement.velocity.z = 0;
             movement.track = null;
             movement.target = null;
+            transform.position.cloneFrom(position);
+            transform.flag |= TransformComponent.POSITION;
             this.playAnim(eid, ElementAnimation.IDLE);
         }
     }
