@@ -52,7 +52,10 @@ export class AdjustStance extends b3.Process {
             return b3.Status.SUCCESS;
         } else if (!running) {
             const rad = Math.atan2(p1.z - p0.z, p1.x - p0.x);
-            const speed = Math.max(PveDef.MOVE_SPEED, owner.movement.speed);
+            const speed = Math.min(
+                PveDef.MAX_ADJUST_SPEED,
+                Math.max(PveDef.MOVE_SPEED, owner.movement.speed)
+            );
             tmpVelocity.x = speed * Math.cos(rad);
             tmpVelocity.z = speed * Math.sin(rad);
             env.context.moveStart(env.owner, tmpVelocity, p1);
