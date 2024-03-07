@@ -5,7 +5,7 @@ import { AdjustPos } from "../../btree/actions/adjust-pos";
 import { BackTeam } from "../../btree/actions/back-team";
 import { ClearStance } from "../../btree/actions/clear-stance";
 import { FollowHero } from "../../btree/actions/follow-hero";
-import { GetHeroDistance } from "../../btree/actions/get-hero-distance";
+import { CalcHeroDistance } from "../../btree/actions/calc-hero-distance";
 import { GetPos } from "../../btree/actions/get-pos";
 import { GetSkillTarget } from "../../btree/actions/get-skill-target";
 import { Hurt } from "../../btree/actions/hurt";
@@ -20,10 +20,13 @@ import { Wait } from "../../btree/actions/wait";
 import { FindOneTarget } from "../../btree/conditions/find-one-target";
 import { FindTargets } from "../../btree/conditions/find-targets";
 import { IsFreeStance } from "../../btree/conditions/is-free-stance";
+import { IsTroopFighting } from "../../btree/conditions/is-troop-fighting";
 import { PveServer } from "../../pve-server";
 import { AiComponent, AiTreeEnv } from "../components/ai-component";
 import { ElementComponent } from "../components/element-component";
 import { SkillComponent } from "../components/skill-component";
+import { CalcSpawnDistance } from "../../btree/actions/calc-spawnpoint-distance";
+import { BackSpawnpoint } from "../../btree/actions/back-spawnpoint";
 
 export class AiSystem extends ecs.System {
     static readonly TICK = 0.1;
@@ -33,16 +36,19 @@ export class AiSystem extends ecs.System {
 
         context.registerProcess(...builtinNodes);
         context.registerProcess(AdjustPos);
+        context.registerProcess(BackSpawnpoint);
         context.registerProcess(BackTeam);
+        context.registerProcess(CalcHeroDistance);
+        context.registerProcess(CalcSpawnDistance);
         context.registerProcess(ClearStance);
         context.registerProcess(FindOneTarget);
         context.registerProcess(FindTargets);
         context.registerProcess(FollowHero);
-        context.registerProcess(GetHeroDistance);
         context.registerProcess(GetPos);
         context.registerProcess(GetSkillTarget);
         context.registerProcess(Hurt);
         context.registerProcess(IsFreeStance);
+        context.registerProcess(IsTroopFighting);
         context.registerProcess(MoveStop);
         context.registerProcess(MoveToAtkPos);
         context.registerProcess(MoveToPos);

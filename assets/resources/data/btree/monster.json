@@ -5,7 +5,181 @@
     "name": "Selector",
     "desc": "怪物测试AI",
     "args": {},
-    "children": []
+    "children": [
+      {
+        "id": 2,
+        "name": "Sequence",
+        "desc": "脱战",
+        "args": {},
+        "children": [
+          {
+            "id": 3,
+            "name": "CalcSpawnDistance",
+            "desc": "获取与出生点之间的距离",
+            "args": {},
+            "output": [
+              "distance"
+            ]
+          },
+          {
+            "id": 4,
+            "name": "Check",
+            "args": {
+              "value": "distance > 5"
+            }
+          },
+          {
+            "id": 5,
+            "name": "ClearStance",
+            "args": {}
+          },
+          {
+            "id": 6,
+            "name": "BackSpawnpoint",
+            "desc": "回归出生点(挂起检测)",
+            "args": {}
+          },
+          {
+            "id": 7,
+            "name": "Wait",
+            "args": {
+              "time": 1
+            }
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "name": "Sequence",
+        "desc": "普攻",
+        "args": {},
+        "children": [
+          {
+            "id": 9,
+            "name": "FindOneTarget",
+            "args": {
+              "hero": true,
+              "soldier": true,
+              "attack": true
+            },
+            "output": [
+              ""
+            ]
+          },
+          {
+            "id": 10,
+            "name": "Selector",
+            "args": {},
+            "children": [
+              {
+                "id": 11,
+                "name": "Sequence",
+                "args": {},
+                "children": [
+                  {
+                    "id": 12,
+                    "name": "IsFreeStance",
+                    "args": {},
+                    "input": [
+                      ""
+                    ]
+                  },
+                  {
+                    "id": 13,
+                    "name": "SetStance",
+                    "args": {}
+                  },
+                  {
+                    "id": 14,
+                    "name": "MoveStop",
+                    "desc": "停止移动",
+                    "args": {}
+                  },
+                  {
+                    "id": 15,
+                    "name": "TowardToTarget",
+                    "args": {},
+                    "input": [
+                      "enemy"
+                    ]
+                  },
+                  {
+                    "id": 16,
+                    "name": "NormalAttack",
+                    "args": {},
+                    "input": [
+                      "enemy"
+                    ]
+                  },
+                  {
+                    "id": 17,
+                    "name": "Wait",
+                    "args": {
+                      "time": 1,
+                      "random": null
+                    }
+                  }
+                ]
+              },
+              {
+                "id": 18,
+                "name": "AdjustPos",
+                "args": {},
+                "input": [
+                  "enemy"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 19,
+        "name": "Sequence",
+        "desc": "找目标",
+        "args": {},
+        "children": [
+          {
+            "id": 20,
+            "name": "ClearStance",
+            "args": {}
+          },
+          {
+            "id": 21,
+            "name": "FindOneTarget",
+            "args": {
+              "radius": 3,
+              "hero": true,
+              "soldier": true
+            },
+            "output": [
+              "enemy"
+            ]
+          },
+          {
+            "id": 22,
+            "name": "GetPos",
+            "args": {},
+            "input": [
+              "enemy"
+            ],
+            "output": [
+              "pos"
+            ]
+          },
+          {
+            "id": 23,
+            "name": "MoveToPos",
+            "args": {
+              "rate": 1.5
+            },
+            "input": [
+              "pos"
+            ]
+          }
+        ]
+      }
+    ]
   },
-  "desc": "怪物测试AI"
+  "desc": "怪物"
 }

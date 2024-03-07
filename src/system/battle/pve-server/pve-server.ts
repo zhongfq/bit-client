@@ -243,6 +243,7 @@ export class PveServer extends b3.Context {
             element.hp = 200;
             element.maxHp = 200;
             element.aid = 2;
+            element.spawnpoint.cloneFrom(p);
             entity.etype = BattleConf.ENTITY_TYPE.HERO;
 
             const table = app.service.table;

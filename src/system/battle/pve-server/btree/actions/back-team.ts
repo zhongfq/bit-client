@@ -54,7 +54,7 @@ export class BackTeam extends b3.Process {
             type: "Action",
             desc: "士兵归队",
             doc: `
-                + 士兵归队，归队过程中，主执行其它命令`,
+                + 士兵归队，归队过程中不执行其它命令`,
         };
     }
 }

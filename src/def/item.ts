@@ -1,7 +1,7 @@
 export const ItemConf = {
     BAG_TYPE: {
+        CHEST: 2,
         ITEM: 1,
-        PET: 2,
     },
     FIRST_ITEM_UID: 1000000,
     ITEM_SUB_TYPE: {

@@ -1,7 +1,7 @@
 {
-    "chest": [
-        {
-            "id": 1,
+    "chest": {
+        "10101": {
+            "id": 10101,
             "open_max_num": 10,
             "open_score": 1,
             "reward": [
@@ -19,8 +19,8 @@
             "reward_score": 5,
             "sort": 1
         },
-        {
-            "id": 2,
+        "10102": {
+            "id": 10102,
             "open_max_num": 10,
             "open_score": 5,
             "reward": [
@@ -38,8 +38,8 @@
             "reward_score": 10,
             "sort": 2
         },
-        {
-            "id": 3,
+        "10103": {
+            "id": 10103,
             "open_max_num": 10,
             "open_score": 15,
             "reward": [
@@ -57,8 +57,8 @@
             "reward_score": 30,
             "sort": 3
         },
-        {
-            "id": 4,
+        "10104": {
+            "id": 10104,
             "open_max_num": 3,
             "open_score": 45,
             "reward": [
@@ -76,8 +76,8 @@
             "reward_score": 50,
             "sort": 4
         },
-        {
-            "id": 5,
+        "10105": {
+            "id": 10105,
             "open_max_num": 1,
             "open_score": 0,
             "reward": [
@@ -95,7 +95,7 @@
             "reward_score": 80,
             "sort": 5
         }
-    ],
+    },
     "hero": {
         "103": {
             "hero_id": 103,
@@ -110,61 +110,61 @@
     },
     "score": [
         {
-            "chest_id": 1,
+            "chest_id": 10101,
             "id": 1,
             "reward_score": 5,
             "sort": 1
         },
         {
-            "chest_id": 2,
+            "chest_id": 10102,
             "id": 2,
             "reward_score": 10,
             "sort": 2
         },
         {
-            "chest_id": 1,
+            "chest_id": 10101,
             "id": 3,
             "reward_score": 30,
             "sort": 3
         },
         {
-            "chest_id": 2,
+            "chest_id": 10102,
             "id": 4,
             "reward_score": 10,
             "sort": 4
         },
         {
-            "chest_id": 3,
+            "chest_id": 10103,
             "id": 5,
             "reward_score": 30,
             "sort": 5
         },
         {
-            "chest_id": 2,
+            "chest_id": 10102,
             "id": 6,
             "reward_score": 50,
             "sort": 6
         },
         {
-            "chest_id": 3,
+            "chest_id": 10103,
             "id": 7,
             "reward_score": 30,
             "sort": 7
         },
         {
-            "chest_id": 4,
+            "chest_id": 10104,
             "id": 8,
             "reward_score": 50,
             "sort": 8
         },
         {
-            "chest_id": 3,
+            "chest_id": 10103,
             "id": 9,
             "reward_score": 30,
             "sort": 9
         },
         {
-            "chest_id": 5,
+            "chest_id": 10105,
             "id": 10,
             "reward_score": 80,
             "sort": 10

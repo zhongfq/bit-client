@@ -63,7 +63,6 @@ export class FollowHero extends b3.Process {
             name: "FollowHero",
             type: "Action",
             desc: "跟随主将",
-            args: [{ name: "rate", type: "int?", desc: "速率" }],
             doc: `
                 + 跟随自身主将`,
         };

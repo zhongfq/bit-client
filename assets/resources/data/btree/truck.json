@@ -8,7 +8,7 @@
     "children": [
       {
         "id": 2,
-        "name": "unknow",
+        "name": "IsTroopFighting",
         "desc": "检查我方是否有战斗",
         "args": {}
       },

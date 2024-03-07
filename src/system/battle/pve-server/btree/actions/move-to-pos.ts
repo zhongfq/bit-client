@@ -34,7 +34,7 @@ export class MoveToPos extends b3.Process {
             args: [
                 { name: "x", type: "int?", desc: "x" },
                 { name: "y", type: "int?", desc: "y" },
-                { name: "rate", type: "int?", desc: "速率" },
+                { name: "rate", type: "float?", desc: "速率" },
             ],
             input: ["坐标"],
             doc: `
