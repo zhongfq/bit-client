@@ -535,7 +535,7 @@ export class TilemapSystem extends ecs.System {
                 props.set(prop.name, prop.value);
             });
             props.set("realX", realX);
-            props.set("realX", realY);
+            props.set("realY", realY);
         } else {
             console.warn("该层没有数据", layer.name);
             return undefined;
