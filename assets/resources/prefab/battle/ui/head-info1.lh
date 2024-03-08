@@ -35,7 +35,8 @@
     {
       "_$id": "srew1rbn",
       "_$prefab": "7fd1a163-f140-41df-806c-a9338fbb3412",
-      "name": "hpBar",
+      "_$var": true,
+      "name": "hp",
       "active": true,
       "x": 78,
       "y": 65,
@@ -48,7 +49,8 @@
     {
       "_$id": "bsb7ugpf",
       "_$prefab": "7fd1a163-f140-41df-806c-a9338fbb3412",
-      "name": "mpBar",
+      "_$var": true,
+      "name": "mp",
       "active": true,
       "x": 78,
       "y": 74,

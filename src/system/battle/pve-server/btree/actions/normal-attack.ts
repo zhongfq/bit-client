@@ -11,7 +11,7 @@ export class NormalAttack extends b3.Process {
         }
         const skill = env.owner.skill?.skills[0];
         if (skill && skill.env && skill.tree) {
-            skill.env.setValue("enemy", target);
+            skill.env.setValue("__skill_target__", target);
             skill.running = true;
         }
         return b3.Status.SUCCESS;

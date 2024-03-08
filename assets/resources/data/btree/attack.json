@@ -22,6 +22,14 @@
       },
       {
         "id": 4,
+        "name": "GetSkillTarget",
+        "args": {},
+        "output": [
+          "enemy"
+        ]
+      },
+      {
+        "id": 5,
         "name": "Hurt",
         "args": {},
         "input": [
@@ -29,7 +37,7 @@
         ]
       },
       {
-        "id": 5,
+        "id": 6,
         "name": "Wait",
         "args": {
           "time": 1,

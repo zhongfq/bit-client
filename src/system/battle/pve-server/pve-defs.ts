@@ -14,3 +14,10 @@ export interface ElementCreator {
     hp: number;
     position: Laya.Vector3;
 }
+
+export interface UpdateHp {
+    hp: number;
+    maxHp: number;
+    subHp?: number;
+    isCrit?: boolean;
+}

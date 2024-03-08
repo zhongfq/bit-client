@@ -16,7 +16,7 @@ import { Skill, SkillComponent } from "./ecs/components/skill-component";
 import { AiSystem } from "./ecs/systems/ai-system";
 import { MovementSystem } from "./ecs/systems/movement-system";
 import { SkillSystem } from "./ecs/systems/skill-system";
-import { ElementCreator } from "./pve-defs";
+import { ElementCreator, UpdateHp } from "./pve-defs";
 
 const _tmpVelocity = new Laya.Vector3();
 
@@ -30,7 +30,7 @@ export class PveServer extends b3.Context {
 
     private _aiTrees: Map<string, b3.Tree> = new Map();
     private _stanceMap: Map<number, ElementComponent> = new Map();
-    private _monsterMap: Map<string, ElementComponent> = new Map();
+    private _elements: Map<string, ElementComponent> = new Map();
 
     constructor(sender: ICommandSender) {
         super();
@@ -239,6 +239,7 @@ export class PveServer extends b3.Context {
     }
 
     removeElement(element: ElementComponent) {
+        this._elements.delete(element.key);
         this.ecs.removeEntity(element.eid);
         this._sender.removeElement(element.eid);
     }
@@ -266,8 +267,32 @@ export class PveServer extends b3.Context {
         this._sender.playAnim(element.eid, anim);
     }
 
-    hurt(skill: Skill, enemy: ElementComponent, ratio: number = 1) {
-        console.log("hurt", skill.data.lanuch_btree, enemy.eid);
+    private _calcHurt(skill: Skill, enemy: ElementComponent, ratio: number) {
+        const isCrit = Math.ceil(Math.random() * 10000) % 5 === 0;
+        const subHp = isCrit ? 25 : 10;
+        enemy.hp -= 10;
+        if (enemy.hp < 0) {
+            enemy.hp = 0;
+        }
+        this._sender.updateHp(enemy.eid, {
+            hp: enemy.hp,
+            maxHp: enemy.maxHp,
+            subHp: subHp,
+            isCrit: isCrit,
+        });
+        if (enemy.hp <= 0) {
+            this.removeElement(enemy);
+        }
+    }
+
+    hurt(skill: Skill, enemy: ElementComponent | ElementComponent[], ratio: number = 1) {
+        if (enemy instanceof Array) {
+            for (const v of enemy) {
+                this._calcHurt(skill, v, ratio);
+            }
+        } else {
+            this._calcHurt(skill, enemy, ratio);
+        }
     }
 
     private _toElementKey(tid: number, position: Laya.Vector3) {
@@ -330,7 +355,7 @@ export class PveServer extends b3.Context {
 
     addMonster(tid: number, position: Laya.Vector3) {
         const key = this._toElementKey(tid, position);
-        if (this._monsterMap.has(key)) {
+        if (this._elements.has(key)) {
             console.log(`monster duplicate with key '${key}'`);
             return;
         }
@@ -344,7 +369,7 @@ export class PveServer extends b3.Context {
         element.spawnpoint.cloneFrom(position);
         entity.etype = BattleConf.ENTITY_TYPE.HERO;
 
-        this._monsterMap.set(key, element);
+        this._elements.set(key, element);
 
         const table = app.service.table;
         const heroRow = table.hero[element.tid];
@@ -381,9 +406,8 @@ export class PveServer extends b3.Context {
 
     removeMonster(tid: number, position: Laya.Vector3) {
         const key = this._toElementKey(tid, position);
-        const monster = this._monsterMap.get(key);
+        const monster = this._elements.get(key);
         if (monster) {
-            this._monsterMap.delete(key);
             this.removeElement(monster);
         }
     }
@@ -397,6 +421,8 @@ export interface ICommandSender {
     chopWood(eid: number, target: number): void;
     moveStart(eid: number, velocity: Laya.Vector3): void;
     moveStop(eid: number, position: Laya.Vector3): void;
+
+    updateHp(eid: number, info: UpdateHp): void;
 
     towardTo(eid: number, target: number): void;
 

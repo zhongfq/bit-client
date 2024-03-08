@@ -22,6 +22,9 @@ export class ElementComponent extends ecs.Component {
     // 出生点
     spawnpoint: Laya.Vector3 = new Laya.Vector3();
 
+    // 按出点生成的关键信息
+    key: string = "";
+
     // 缓存组件方便快速访问？
     private _movement?: MovementComponent;
     private _transform?: TransformComponent;

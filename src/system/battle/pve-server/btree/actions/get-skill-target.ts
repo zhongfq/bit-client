@@ -3,7 +3,8 @@ import { AiTreeEnv } from "../../ecs/components/ai-component";
 import { ElementComponent } from "../../ecs/components/element-component";
 
 export class GetSkillTarget extends b3.Process {
-    override run(node: b3.Node, env: AiTreeEnv, target?: ElementComponent[] | ElementComponent) {
+    override run(node: b3.Node, env: AiTreeEnv) {
+        env.lastRet.results.push(env.getValue("__skill_target__"));
         return b3.Status.SUCCESS;
     }
 

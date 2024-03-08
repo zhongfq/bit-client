@@ -1,7 +1,7 @@
 import { app } from "../../../../../app";
 import { ecs } from "../../../../../core/ecs";
 import { BattleConf } from "../../../../../def/battle";
-import { ElementCreator } from "../../../pve-server/pve-defs";
+import { ElementCreator, UpdateHp } from "../../../pve-server/pve-defs";
 import { ICommandSender } from "../../../pve-server/pve-server";
 import { PveContext } from "../../pve-context";
 import { CameraComponent } from "../components/camera-component";
@@ -153,6 +153,18 @@ export class CommandSystem extends ecs.System implements ICommandSender {
                         animator.setParamsBool(ElementAnimation.RUN, true);
                         break;
                 }
+            }
+        }
+    }
+
+    updateHp(eid: number, data: UpdateHp): void {
+        const element = this._findElement(eid);
+        if (element) {
+            const info = element.getComponent(HeadInfoComponent);
+            if (info && info.view) {
+                info.data.hp = data.hp;
+                info.data.maxHp = data.maxHp;
+                info.view.update(info.data);
             }
         }
     }
