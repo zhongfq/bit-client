@@ -266,6 +266,10 @@ export class PveServer extends b3.Context {
         this._sender.playAnim(element.eid, anim);
     }
 
+    hurt(skill: Skill, enemy: ElementComponent, ratio: number = 1) {
+        console.log("hurt", skill.data.lanuch_btree, enemy.eid);
+    }
+
     private _toElementKey(tid: number, position: Laya.Vector3) {
         return tid.toFixed(0) + "_" + position.x.toFixed(2) + "_" + position.z.toFixed(2);
     }

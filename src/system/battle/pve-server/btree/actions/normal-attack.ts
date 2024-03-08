@@ -14,7 +14,6 @@ export class NormalAttack extends b3.Process {
             skill.env.setValue("enemy", target);
             skill.running = true;
         }
-        env.context.playAnim(env.owner, "attack");
         return b3.Status.SUCCESS;
     }
 
