@@ -153,6 +153,16 @@
               "_$id": "utfqvaky",
               "_$type": "Sprite3D",
               "name": "dynamic"
+            },
+            {
+              "_$id": "mb1yyfs0",
+              "_$type": "Sprite3D",
+              "name": "building"
+            },
+            {
+              "_$id": "ly13d9uo",
+              "_$type": "Sprite3D",
+              "name": "monster"
             }
           ]
         },

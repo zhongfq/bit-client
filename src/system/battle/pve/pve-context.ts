@@ -73,6 +73,27 @@ export class PveContext extends Mediator {
         this._ecs.update(Laya.timer.delta / 1000);
     }
 
+    onTileMapAddElement(element: Tilemap.Element) {
+        if (element instanceof Tilemap.MonsterElement) {
+            console.log("AddMonster", element.x, element.y, element.id);
+        }
+    }
+
+    onTileMapDelElement(element: Tilemap.Element) {
+        if (element instanceof Tilemap.MonsterElement) {
+            console.log("DelMonster", element.x, element.y, element.id);
+        }
+    }
+
+    // testFunc() {
+    //     const tilemapSystem = this._ecs.getSystem(TilemapSystem);
+    //     const elements = tilemapSystem?.getElementsByLayer(Tilemap.LayerName.Monster);
+    //     elements?.forEach((element) => {
+    //         const monsterElement = element as Tilemap.MonsterElement;
+    //         console.log(monsterElement.x, monsterElement.y, monsterElement.id);
+    //     });
+    // }
+
     onMapClickHandler() {
         const tilemapSystem = this._ecs.getSystem(TilemapSystem);
 

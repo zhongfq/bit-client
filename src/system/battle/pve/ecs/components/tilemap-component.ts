@@ -5,6 +5,8 @@ import { StringUtil } from "../../../../../core/utils/string-util";
 import { TilemapSystem } from "../systems/tilemap-system";
 
 export class TilemapComponent extends ecs.SingletonComponent {
+    static readonly DEBUG_MODE = false; // 调试模式
+
     static readonly VISION_WIDTH = 25; // 视野宽度（单位：米）
     static readonly VISION_HEIGHT = 25; // 视野高度（单位：米）
 
@@ -168,11 +170,23 @@ export namespace Tilemap {
     }
 
     export interface Layer {
+        id: number;
         name: string;
-        type: string;
+        type: LayerType;
         width: number;
         height: number;
-        data: number[];
+        data?: number[];
+        objects?: Obj[];
+    }
+
+    export interface Obj {
+        id: number;
+        name: string;
+        x: number;
+        y: number;
+        width: number;
+        height: number;
+        properties?: Propertie[];
     }
 
     export enum LayerType {
@@ -189,6 +203,8 @@ export namespace Tilemap {
         Static = "static",
         Dynamic = "dynamic",
         Block = "block",
+        Building = "building",
+        Monster = "monster",
     }
 
     export function LayerToCls(layerName: string): Constructor<Tilemap.Element> | null {
@@ -205,6 +221,10 @@ export namespace Tilemap {
                 return Tilemap.DynamicElement;
             case Tilemap.LayerName.Block:
                 return Tilemap.BlockElement;
+            case Tilemap.LayerName.Building:
+                return Tilemap.BuildingElement;
+            case Tilemap.LayerName.Monster:
+                return Tilemap.MonsterElement;
         }
         return null;
     }
@@ -216,7 +236,7 @@ export namespace Tilemap {
         image: string;
         imagewidth: number;
         imageheight: number;
-        properties: Propertie[];
+        properties?: Propertie[];
         tiles: Tile[];
     }
 
@@ -225,13 +245,13 @@ export namespace Tilemap {
         image: string;
         imagewidth: number;
         imageheight: number;
-        properties: Propertie[];
+        properties?: Propertie[];
     }
 
     export interface Propertie {
         name: string;
         type: string;
-        value: number;
+        value: any;
     }
 
     export enum AtlasName {
@@ -265,7 +285,7 @@ export namespace Tilemap {
         private _uid!: number;
         private _x!: number;
         private _y!: number;
-        private _gid!: number;
+        private _props!: Map<string, any>;
         private _layerName!: string;
         private _eid?: number;
 
@@ -281,8 +301,8 @@ export namespace Tilemap {
             return this._y;
         }
 
-        public get gid(): number {
-            return this._gid;
+        public get props(): Map<string, any> {
+            return this._props;
         }
 
         public get layerName(): string {
@@ -301,7 +321,7 @@ export namespace Tilemap {
             system: TilemapSystem,
             x: number,
             y: number,
-            gid: number,
+            props: Map<string, any>,
             layerName: string,
             eid?: number
         ): void {
@@ -309,7 +329,7 @@ export namespace Tilemap {
             this.system = system;
             this._x = x;
             this._y = y;
-            this._gid = gid;
+            this._props = props;
             this._layerName = layerName;
             this._eid = eid;
         }
@@ -330,7 +350,7 @@ export namespace Tilemap {
             if (this._tile) {
                 return;
             }
-            const idx = this.system.getAtlasFrameIdx(this.getAtlasName(), this.gid);
+            const idx = this.system.getAtlasFrameIdx(this.getAtlasName(), this.props.get("gid"));
             if (idx == 0 && this.ignoreFirstFrame()) {
                 return;
             }
@@ -359,6 +379,11 @@ export namespace Tilemap {
 
             const renderer = this._tile.getChildAt(0).getComponent(Laya.MeshRenderer);
             renderer.material = mat;
+
+            if (TilemapComponent.DEBUG_MODE) {
+                this._tile.transform.localScaleX = 0.98;
+                this._tile.transform.localScaleZ = 0.98;
+            }
 
             this._tile.name = this.x + "_" + this.y;
             this.system.getRoot().getChildByName(this.layerName).addChild(this._tile);
@@ -454,8 +479,8 @@ export namespace Tilemap {
         }
     }
 
-    export abstract class ObjElement extends Element {
-        private _obj?: Laya.Sprite3D;
+    export abstract class BoardElement extends Element {
+        private _board?: Laya.Sprite3D;
         private _realX: number = 0;
         private _realY: number = 0;
         private _width: number = 0;
@@ -478,26 +503,29 @@ export namespace Tilemap {
         }
 
         public override async draw() {
-            if (this._obj) {
+            if (this._board) {
                 return;
             }
             const prefab = await Laya.loader.load(this.getPrefabPath(), Laya.Loader.HIERARCHY);
 
-            this._obj = prefab.create() as Laya.Sprite3D;
+            this._board = prefab.create() as Laya.Sprite3D;
 
-            const sprite = this._obj.getChildAt(0) as Laya.Sprite3D;
+            const sprite = this._board.getChildAt(0) as Laya.Sprite3D;
             const renderer = sprite.getComponent(Laya.MeshRenderer);
-            const resName = this.system.getTextureResName(this.getTextureName(), this.gid);
+            const resName = this.system.getTextureResName(
+                this.getTextureName(),
+                this.props.get("gid")
+            );
             const textureCfg = this.getTextureCfg().get(resName);
 
             this._realX = Math.floor(this.x - (textureCfg?.tileX ?? 0));
             this._realY = Math.floor(this.y - (textureCfg?.tileY ?? 0));
 
-            const objPos = this._obj.transform.position;
+            const objPos = this._board.transform.position;
             objPos.x = this._realX;
             objPos.y = 0;
             objPos.z = this._realY;
-            this._obj.transform.position = objPos;
+            this._board.transform.position = objPos;
 
             const spritePos = sprite.transform.localPosition;
             spritePos.x = textureCfg?.offsetX ?? 0;
@@ -522,8 +550,8 @@ export namespace Tilemap {
             this._width = textureCfg?.tileW ?? 1;
             this._height = textureCfg?.tileH ?? 1;
 
-            this._obj.name = this.realX + "_" + this.realY + " | " + resName;
-            this.system.getRoot().getChildByName(this.layerName).addChild(this._obj);
+            this._board.name = this.realX + "_" + this.realY + " | " + resName;
+            this.system.getRoot().getChildByName(this.layerName).addChild(this._board);
         }
 
         public showBlock() {
@@ -548,8 +576,8 @@ export namespace Tilemap {
 
         public override erase() {
             this.hideBlock();
-            this._obj?.removeSelf();
-            this._obj = undefined;
+            this._board?.removeSelf();
+            this._board = undefined;
             this._width = 0;
             this._height = 0;
         }
@@ -560,7 +588,7 @@ export namespace Tilemap {
         protected abstract getTextureCfg(): Map<string, Tilemap.TextureCfg>;
     }
 
-    export class StaticElement extends ObjElement {
+    export class StaticElement extends BoardElement {
         protected override getPrefabPath(): string {
             return "resources/prefab/world-map/static/static-obj.lh";
         }
@@ -578,7 +606,7 @@ export namespace Tilemap {
         }
     }
 
-    export class DynamicElement extends ObjElement {
+    export class DynamicElement extends BoardElement {
         protected override getPrefabPath(): string {
             return "resources/prefab/world-map/dynamic/dynamic-obj.lh";
         }
@@ -627,6 +655,53 @@ export namespace Tilemap {
         public override erase() {
             this._blockTile?.removeSelf();
             this._blockTile = undefined;
+        }
+    }
+
+    export abstract class ObjectElement extends Element {
+        private _debugObj?: Laya.Sprite3D;
+
+        public override async draw() {
+            if (this._debugObj) {
+                return;
+            }
+            if (!TilemapComponent.DEBUG_MODE) {
+                return;
+            }
+            const prefab = await Laya.loader.load(
+                "resources/prefab/world-map/test/debug-obj.lh",
+                Laya.Loader.HIERARCHY
+            );
+
+            this._debugObj = prefab.create() as Laya.Sprite3D;
+
+            const pos = this._debugObj.transform.position;
+            pos.x = this.x;
+            pos.y = 0;
+            pos.z = this.y;
+            this._debugObj.transform.position = pos;
+
+            this._debugObj.name = this.x + "_" + this.y;
+            this.system.getRoot().getChildByName(this.layerName).addChild(this._debugObj);
+        }
+
+        public override erase() {
+            this._debugObj?.removeSelf();
+            this._debugObj = undefined;
+        }
+
+        protected abstract get id(): number;
+    }
+
+    export class BuildingElement extends ObjectElement {
+        public get id(): number {
+            return this.props.get("id");
+        }
+    }
+
+    export class MonsterElement extends ObjectElement {
+        public get id(): number {
+            return this.props.get("id");
         }
     }
 }

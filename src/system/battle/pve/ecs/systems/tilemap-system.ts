@@ -126,7 +126,7 @@ export class TilemapSystem extends ecs.System {
         if (uidMap) {
             if (layerName == Tilemap.LayerName.Static || layerName == Tilemap.LayerName.Dynamic) {
                 for (const uid of uidMap.values()) {
-                    const element = this._allMap.get(uid) as Tilemap.ObjElement;
+                    const element = this._allMap.get(uid) as Tilemap.BoardElement;
                     if (
                         element &&
                         TilemapComponent.IN_RECT(
@@ -318,7 +318,8 @@ export class TilemapSystem extends ecs.System {
 
         const pos = new Laya.Vector2(info.x + info.width / 2, info.y);
         Laya.Vector2.transformCoordinate(pos, invertMat, pos);
-        return [pos.x, pos.y];
+
+        return [Math.floor(pos.x), Math.floor(pos.y)];
     }
 
     public update(dt: number): void {
@@ -411,19 +412,15 @@ export class TilemapSystem extends ecs.System {
                 )) as Tilemap.WorldMap;
             }
 
-            const idx = (y - info.y) * info.width + (x - info.x);
-
             for (let j = 0; j < info.worldMap.layers.length; j++) {
                 const layer = info.worldMap.layers[j];
-                if (!layer.data) {
-                    continue;
-                }
                 const layerName = layer.name as Tilemap.LayerName;
+
                 if (filterLayer && layerName != filterLayer) {
                     continue;
                 }
-                const gid = layer.data[idx];
-                if (!gid || gid == 0) {
+                const props = this._getProps(info, layer, x, y);
+                if (!props) {
                     continue;
                 }
                 const cls = Tilemap.LayerToCls(layerName);
@@ -441,16 +438,57 @@ export class TilemapSystem extends ecs.System {
                 let element = this._allMap.get(uid);
                 if (!element) {
                     element = Tilemap.Element.create(cls.name, cls);
-                    element.init(this, x, y, gid, layerName, eid);
+                    element.init(this, x, y, props, layerName, eid);
 
                     uidMap.set(key, element.uid);
                     this._allMap.set(element.uid, element);
 
                     element.draw();
+
+                    this.context.onTileMapAddElement(element);
                 }
                 outUids?.push(element.uid);
             }
         }
+    }
+
+    private _getProps(
+        info: Tilemap.MapInfo,
+        layer: Tilemap.Layer,
+        x: number,
+        y: number
+    ): Map<string, any> | undefined {
+        const props = new Map<string, any>();
+
+        if (layer.data) {
+            const idx = (y - info.y) * info.width + (x - info.x);
+            const gid = layer.data[idx];
+            if (!gid || gid == 0) {
+                return undefined;
+            }
+            props.set("gid", gid);
+        } else if (layer.objects) {
+            let targetObj;
+            for (const obj of layer.objects) {
+                const objX = Math.floor(info.x + obj.x / 64);
+                const objY = Math.floor(info.y + obj.y / 64);
+                if (objX == x && objY == y) {
+                    targetObj = obj;
+                    break;
+                }
+            }
+            if (!targetObj) {
+                return undefined;
+            }
+            targetObj.properties?.forEach((prop) => {
+                props.set(prop.name, prop.value);
+            });
+        } else {
+            console.warn("该层没有数据", layer.name);
+            return undefined;
+        }
+
+        return props;
     }
 
     private _tryDel(x: number, y: number, filterLayer?: Tilemap.LayerName) {
@@ -461,7 +499,11 @@ export class TilemapSystem extends ecs.System {
             const key = TilemapComponent.XY_TO_KEY(x, y);
             const uid = uidMap.get(key) ?? 0;
             const element = this._allMap.get(uid);
-            element?.recover();
+
+            if (element) {
+                this.context.onTileMapDelElement(element);
+                element.recover();
+            }
             uidMap.delete(key);
             this._allMap.delete(uid);
         });
