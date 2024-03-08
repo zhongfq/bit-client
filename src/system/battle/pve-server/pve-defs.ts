@@ -12,5 +12,5 @@ export interface ElementCreator {
     tid: number; // id in battle_entity.xlsx
     maxHp: number;
     hp: number;
-    positioin: Laya.Vector3;
+    position: Laya.Vector3;
 }

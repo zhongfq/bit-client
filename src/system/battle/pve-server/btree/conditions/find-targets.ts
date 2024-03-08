@@ -27,7 +27,7 @@ export class FindTargets extends b3.Process {
             radius = env.owner.data.skill_radius ?? radius;
         }
         const ETYPE = BattleConf.ENTITY_TYPE;
-        const positioin = env.owner.transform.position;
+        const position = env.owner.transform.position;
         const arr = env.context.find((element) => {
             const etype = element.entity.etype;
             if (
@@ -36,7 +36,7 @@ export class FindTargets extends b3.Process {
                     (findWood && etype === ETYPE.WOOD)) &&
                 element.aid !== env.owner.aid
             ) {
-                const distance = Laya.Vector3.distance(element.transform.position, positioin);
+                const distance = Laya.Vector3.distance(element.transform.position, position);
                 if (distance < radius) {
                     element.tmpDistance = distance;
                     return true;

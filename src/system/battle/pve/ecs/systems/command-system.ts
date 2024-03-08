@@ -49,7 +49,7 @@ export class CommandSystem extends ecs.System implements ICommandSender {
         element.tid = data.tid;
 
         const transform = entity.addComponent(TransformComponent);
-        transform.position.cloneFrom(data.positioin);
+        transform.position.cloneFrom(data.position);
         transform.flag |= TransformComponent.POSITION;
 
         const animation = entity.addComponent(AnimationComponent);
@@ -80,6 +80,10 @@ export class CommandSystem extends ecs.System implements ICommandSender {
             const movement = entity.addComponent(MovementComponent);
             movement.rotationInterpolation.rate = InterpolationRate.ROTATION;
         }
+    }
+
+    removeElement(eid: number): void {
+        this.ecs.removeEntity(eid);
     }
 
     private _findElement(eid: number) {
