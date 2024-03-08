@@ -659,7 +659,61 @@ export namespace Tilemap {
     }
 
     export abstract class ObjectElement extends Element {
+        protected abstract get id(): number;
+    }
+
+    export class BuildingElement extends ObjectElement {
+        private _debugObjs: Laya.Sprite3D[] = [];
+
+        public get id(): number {
+            return this.props.get("id");
+        }
+
+        public override async draw() {
+            // if (this._debugObjs.length > 0) {
+            //     return;
+            // }
+            // if (!TilemapComponent.DEBUG_MODE) {
+            //     return;
+            // }
+            // const prefab = await Laya.loader.load(
+            //     "resources/prefab/world-map/test/debug-obj.lh",
+            //     Laya.Loader.HIERARCHY
+            // );
+            // const dynamicElement = this.system.buildingToDynamicElemnt(this.uid);
+            // for (let i = dynamicElement?.x; )
+            // this._debugObj = prefab.create() as Laya.Sprite3D;
+            // const pos = this._debugObj.transform.position;
+            // pos.x = this.x;
+            // pos.y = 0;
+            // pos.z = this.y;
+            // this._debugObj.transform.position = pos;
+            // this._debugObj.name = this.x + "_" + this.y;
+            // this.system.getRoot().getChildByName(this.layerName).addChild(this._debugObj);
+        }
+
+        public override erase() {
+            // this._debugObjs.forEach((obj) => {
+            //     obj.removeSelf();
+            // });
+            // this._debugObjs = [];
+        }
+    }
+
+    export class MonsterElement extends ObjectElement {
         private _debugObj?: Laya.Sprite3D;
+
+        public get id(): number {
+            return this.props.get("id");
+        }
+
+        public get realX(): number {
+            return this.props.get("realX");
+        }
+
+        public get realY(): number {
+            return this.props.get("realY");
+        }
 
         public override async draw() {
             if (this._debugObj) {
@@ -688,20 +742,6 @@ export namespace Tilemap {
         public override erase() {
             this._debugObj?.removeSelf();
             this._debugObj = undefined;
-        }
-
-        protected abstract get id(): number;
-    }
-
-    export class BuildingElement extends ObjectElement {
-        public get id(): number {
-            return this.props.get("id");
-        }
-    }
-
-    export class MonsterElement extends ObjectElement {
-        public get id(): number {
-            return this.props.get("id");
         }
     }
 }

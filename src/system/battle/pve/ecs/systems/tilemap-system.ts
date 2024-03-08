@@ -208,6 +208,40 @@ export class TilemapSystem extends ecs.System {
     }
 
     /**
+     * 获取动态元素所在区域内的建筑对象列表
+     * @param uid 动态元素唯一id
+     */
+    public dynamicToBuildingElements(uid: number): Tilemap.BuildingElement[] {
+        const element = this._allMap.get(uid);
+        if (element instanceof Tilemap.DynamicElement) {
+            return this.getElementsByRect(
+                element.realX,
+                element.realY,
+                element.width,
+                element.height,
+                Tilemap.LayerName.Building
+            ) as Tilemap.BuildingElement[];
+        }
+        return [];
+    }
+
+    /**
+     * 获取建筑对象所在位置的动态元素
+     * @param uid 建筑对象唯一id
+     */
+    public buildingToDynamicElemnt(uid: number): Tilemap.DynamicElement | undefined {
+        const element = this._allMap.get(uid);
+        if (element instanceof Tilemap.BuildingElement) {
+            return this.getElementByPos(
+                element.x,
+                element.y,
+                Tilemap.LayerName.Dynamic
+            ) as Tilemap.DynamicElement;
+        }
+        return undefined;
+    }
+
+    /**
      * 指定位置是否阻挡块
      * @param x X坐标
      * @param y Y坐标
@@ -479,9 +513,16 @@ export class TilemapSystem extends ecs.System {
             props.set("gid", gid);
         } else if (layer.objects) {
             let targetObj;
+            let objX, objY;
+            let realX, realY;
+
             for (const obj of layer.objects) {
-                const objX = Math.floor(info.x + obj.x / 64);
-                const objY = Math.floor(info.y + obj.y / 64);
+                objX = Math.floor(info.x + obj.x / 64);
+                objY = Math.floor(info.y + obj.y / 64);
+
+                realX = Math.max(Math.floor((info.x + obj.x / 64 - 0.5) * 100) / 100, 0);
+                realY = Math.max(Math.floor((info.y + obj.y / 64 - 0.5) * 100) / 100, 0);
+
                 if (objX == x && objY == y) {
                     targetObj = obj;
                     break;
@@ -493,6 +534,8 @@ export class TilemapSystem extends ecs.System {
             targetObj.properties?.forEach((prop) => {
                 props.set(prop.name, prop.value);
             });
+            props.set("realX", realX);
+            props.set("realX", realY);
         } else {
             console.warn("该层没有数据", layer.name);
             return undefined;
