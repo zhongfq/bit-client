@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font>
+  <info autoScaleSize="true" size="16" lineHeight="0"/>
+  <chars>
+    <char id="48" img="res://8130c823-1427-43c5-b2c1-34d8a59a4d78" x="0" y="0" width="16" height="21" xoffset="2" yoffset="1" xadvance="15"/>
+    <char id="49" img="res://4d0e1b2e-1c94-4502-9305-e22bace13ab4" x="71" y="0" width="10" height="21" xoffset="4" yoffset="1" xadvance="13"/>
+    <char id="50" img="res://108e1327-3b8f-4321-bac2-f5e7d30e71db" x="36" y="23" width="15" height="21" xoffset="2" yoffset="1" xadvance="15"/>
+    <char id="51" img="res://4dca1463-8309-4a84-b069-5772da804795" x="53" y="23" width="15" height="21" xoffset="3" yoffset="1" xadvance="15"/>
+    <char id="52" img="res://dc7042e3-63a1-4aa7-ba1f-6ec3c4f91738" x="18" y="0" width="16" height="21" xoffset="2" yoffset="1" xadvance="15"/>
+    <char id="53" img="res://8310fddc-d5c1-46d5-af1a-f84aa1224b81" x="54" y="0" width="15" height="21" xoffset="3" yoffset="1" xadvance="13"/>
+    <char id="54" img="res://11eed96d-e844-4b58-8a87-15ceab758907" x="36" y="0" width="16" height="21" xoffset="2" yoffset="1" xadvance="16"/>
+    <char id="55" img="res://0c29f943-70ae-448d-8520-43939254d500" x="70" y="23" width="14" height="21" xoffset="3" yoffset="1" xadvance="15"/>
+    <char id="56" img="res://97a7cf61-af83-46c4-a284-f9c19e2e31ee" x="0" y="23" width="16" height="21" xoffset="2" yoffset="1" xadvance="15"/>
+    <char id="57" img="res://f1d79f5e-7040-4113-8378-4e2c75dfbfd1" x="18" y="23" width="16" height="21" xoffset="2" yoffset="1" xadvance="15"/>
+  </chars>
+</font>

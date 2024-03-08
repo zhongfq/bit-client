@@ -89,7 +89,7 @@ export class TableService extends Service<NetworkService> {
         const dataRow = TableUtil.getRow(this.item, { id: refId });
         if (dataRow) {
             if (dataRow.sub_type == ItemConf.ITEM_TYPE.MONEY) {
-                return app.service.user.monye.get(refId);
+                return app.service.user.money.get(refId);
             } else {
                 return app.service.bag.itemBag;
             }

@@ -46,7 +46,7 @@ export class MainMediator extends Mediator {
                     return match;
                 }
             });
-            this.owner.labelMsg.text = `${role.cmd?.name}:${ubbStr}`;
+            // this.owner.labelMsg.text = `${role.cmd?.name}:${ubbStr}`;
         }
     }
 
@@ -70,24 +70,9 @@ export class MainMediator extends Mediator {
             app.service.shop.load({ shopId: 1 });
             app.ui.show(ui.SHOP);
         });
-        this.owner.btnWorld.on(Laya.Event.CLICK, () => {
-            app.ui.replace(ui.PVE);
-        });
-        this.owner.boxChat.on(Laya.Event.CLICK, () => {
-            app.ui.show(ui.CHAT);
-        });
-        this.owner.btnUnion.on(Laya.Event.CLICK, () => {
-            // this.setViewStackFunc.runWith(-1);
-            this.owner.ViewStack.selectedIndex = -1;
-        });
-        this.owner.btnBox.on(Laya.Event.CLICK, () => {
-            // this.owner.ViewStack.selectedIndex = 0;
-            // Laya.Handler;
-            this.owner.ViewStack.selectedIndex = 0;
-            // this.owner.boxNode.visible = true;
-            // this.owner.boxNode.active = true;
-            // this;
-        });
+        // this.owner.chat_box.on(Laya.Event.CLICK, () => {
+        //     app.ui.show(ui.CHAT);
+        // });
         // this.owner.List.array = ["1111", "1111", "1111", "1111", "1111"];
     }
 }

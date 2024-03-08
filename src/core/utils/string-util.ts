@@ -126,7 +126,7 @@ export class StringUtil {
     /**
      * 过滤数组字 例如：forbidNumber（110000，100000，10000）=》 11万 （数字大于10万过滤）
      * @param num  数字
-     * @param limitNumb 限制都少
+     * @param limitNumb 限制多少
      * @param convertNumber 转换值 （目前支持万，千） 默认 万
      */
     static forbidNumber(
@@ -137,12 +137,12 @@ export class StringUtil {
         if (num >= limitNum) {
             let limitStr: string;
             if (convertNumber == 10000) {
-                limitStr = "W";
+                limitStr = "万";
             } else if (convertNumber == 1000) {
-                limitStr = "K";
+                limitStr = "千";
             } else {
                 convertNumber = 10000;
-                limitStr = "W";
+                limitStr = "万";
             }
             const n = Math.floor(num / convertNumber);
             return n.toString() + limitStr;

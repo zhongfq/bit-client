@@ -4,11 +4,9 @@
   "_$runtime": "res://f3798f16-e06c-45bf-885b-63f337668f7b",
   "_$type": "Box",
   "name": "user-Info",
-  "width": 281,
-  "height": 122,
-  "left": 0,
-  "top": 0,
-  "bgColor": "rgba(115, 112, 112, 1)",
+  "width": 678,
+  "height": 137,
+  "_mouseState": 2,
   "_$comp": [
     {
       "_$type": "24adaeaa-6f7f-4d79-ae95-28301a70b1a3",
@@ -17,91 +15,170 @@
   ],
   "_$child": [
     {
-      "_$id": "7giq1x30",
-      "_$var": true,
+      "_$id": "aqfoxalw",
       "_$type": "Image",
-      "name": "imgHeadIcon",
-      "width": 90,
-      "height": 90,
-      "skin": "res://384d2e2c-e01f-4afe-a5b5-593056ae62f5",
+      "name": "Image(3)",
+      "x": 99,
+      "y": 28,
+      "width": 114,
+      "height": 45,
+      "scaleX": 2,
+      "scaleY": 2,
+      "skin": "res://3b984303-49bc-41ed-87a6-60fed996f67e",
       "useSourceSize": true,
       "color": "#ffffff"
     },
     {
-      "_$id": "ahevrzex",
-      "_$var": true,
-      "_$type": "Label",
-      "name": "labelName",
-      "x": 98,
-      "y": 8,
-      "width": 166,
-      "height": 28,
-      "text": "哈哈哈哈哈",
-      "fontSize": 22,
-      "color": "#FFFFFF",
-      "valign": "middle",
-      "padding": "0,0,0,0"
-    },
-    {
-      "_$id": "cj35h1xg",
-      "_$var": true,
-      "_$type": "Label",
-      "name": "labelPower",
-      "x": 100,
-      "y": 37,
-      "width": 166,
-      "height": 28,
-      "text": "123456",
-      "fontSize": 22,
-      "color": "#FFFFFF",
-      "valign": "middle",
-      "padding": "0,0,0,0"
-    },
-    {
-      "_$id": "redvhc5d",
-      "_$var": true,
-      "_$type": "Label",
-      "name": "labelLv",
-      "x": 97,
-      "y": 62,
-      "width": 28,
-      "height": 28,
-      "text": "1",
-      "fontSize": 22,
-      "color": "#FFFFFF",
-      "align": "center",
-      "valign": "middle",
-      "padding": "0,0,0,0"
-    },
-    {
-      "_$id": "70f3bxsi",
-      "_$var": true,
-      "_$type": "ProgressBar",
-      "name": "progressBarExp",
-      "x": 124,
-      "y": 65,
-      "width": 118,
-      "height": 22,
-      "skin": "res://ae3de75e-ee9f-478d-9f8b-ede75a4fc296",
-      "value": 0,
+      "_$id": "4mgeydpn",
+      "_$type": "Image",
+      "name": "Image(1)",
+      "x": 108,
+      "y": 3,
+      "width": 192,
+      "height": 72,
+      "skin": "res://0b2488d2-7f28-4e3a-aadb-04bc3d9c4974",
+      "useSourceSize": true,
+      "color": "#ffffff",
       "_$child": [
         {
-          "_$id": "rp5ez8by",
+          "_$id": "ahevrzex",
           "_$var": true,
           "_$type": "Label",
-          "name": "labelExp",
-          "x": 45,
-          "y": -3,
-          "width": 28,
+          "name": "labelName",
+          "x": 21,
+          "y": 13,
+          "width": 166,
           "height": 28,
-          "centerX": 0,
-          "centerY": 0,
-          "text": "1",
+          "visible": false,
+          "left": 21,
+          "text": "哈哈哈哈哈",
           "fontSize": 22,
-          "color": "#FFFFFF",
-          "align": "center",
+          "color": "rgba(155, 102, 0, 1)",
+          "bold": true,
           "valign": "middle",
-          "padding": "0,0,0,0"
+          "padding": "0,0,0,0",
+          "underlineColor": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "_$id": "dcs8715r",
+          "_$type": "Image",
+          "name": "Image",
+          "x": -108,
+          "y": -3,
+          "width": 128,
+          "height": 146,
+          "left": -108,
+          "top": -3,
+          "skin": "res://465d66f4-2ea2-44ff-a83f-7fb694a293fe",
+          "useSourceSize": true,
+          "color": "#ffffff",
+          "_$child": [
+            {
+              "_$id": "kvifgjqj",
+              "_$type": "Image",
+              "name": "Image",
+              "x": 14,
+              "y": 7,
+              "width": 100,
+              "height": 100,
+              "centerX": 0,
+              "skin": "res://0264acb1-0b64-4632-90f6-89e52f51fa5f",
+              "useSourceSize": true,
+              "color": "#ffffff",
+              "_$child": [
+                {
+                  "_$id": "7giq1x30",
+                  "_$var": true,
+                  "_$type": "Image",
+                  "name": "imgHeadIcon",
+                  "x": 3,
+                  "y": -5,
+                  "width": 95,
+                  "height": 99,
+                  "centerX": 0,
+                  "centerY": -6,
+                  "skin": "res://bc4a7acd-9380-4ead-a2a4-3aea447b7c94",
+                  "useSourceSize": true,
+                  "color": "#ffffff"
+                }
+              ]
+            },
+            {
+              "_$id": "f1m569ld",
+              "_$type": "Image",
+              "name": "Image(2)",
+              "x": 113,
+              "y": 59,
+              "width": 36,
+              "height": 36,
+              "skin": "res://ab8e72f5-ac48-4bef-8ca1-548d46368964",
+              "useSourceSize": true,
+              "color": "#ffffff"
+            },
+            {
+              "_$id": "cj35h1xg",
+              "_$var": true,
+              "_$type": "Label",
+              "name": "labelPower",
+              "x": 145,
+              "y": 60,
+              "width": 243,
+              "height": 27,
+              "text": "1234",
+              "font": "res://5c42925e-9bc4-4c76-8d3c-ab11de620e22",
+              "fontSize": 16,
+              "color": "#FFFFFF",
+              "valign": "middle",
+              "leading": 0,
+              "padding": "0,0,0,0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "6vlolmeg",
+      "_$prefab": "148a6d54-97ac-4354-a774-12a01dad2732",
+      "_$var": true,
+      "name": "moneyDiamond",
+      "active": true,
+      "x": 321,
+      "y": 14,
+      "visible": true,
+      "left": 321,
+      "_$child": [
+        {
+          "_$override": "y1lp02t0",
+          "visible": true
+        },
+        {
+          "_$override": "uy1zfhbv",
+          "skin": "res://3f104cfa-2e9c-420a-a941-cb780d2497f1"
+        },
+        {
+          "_$override": "2axgc46u",
+          "align": "left"
+        }
+      ]
+    },
+    {
+      "_$id": "rt2v4ac1",
+      "_$prefab": "148a6d54-97ac-4354-a774-12a01dad2732",
+      "_$var": true,
+      "name": "moneyCoin",
+      "active": true,
+      "x": 492,
+      "y": 13.5,
+      "visible": true,
+      "left": 492,
+      "_$child": [
+        {
+          "_$override": "uy1zfhbv",
+          "skin": "res://f6690169-ea3e-4f15-934b-152a9d8768e4"
+        },
+        {
+          "_$override": "2axgc46u",
+          "align": "left"
         }
       ]
     }

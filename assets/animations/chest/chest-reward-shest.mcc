@@ -99,8 +99,8 @@
         }
       ],
       "defaultWeight": 1,
-      "stageX": -223,
-      "stageY": 86
+      "stageX": 10,
+      "stageY": 105
     }
   ],
   "layerW": 150

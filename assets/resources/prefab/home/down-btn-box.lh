@@ -1,0 +1,65 @@
+{
+  "_$ver": 1,
+  "_$id": "xlbg1tbz",
+  "_$runtime": "res://9009675b-6feb-4216-a741-b53b345e7bba",
+  "_$type": "Box",
+  "name": "Box",
+  "y": 1190,
+  "width": 750,
+  "height": 144,
+  "_mouseState": 2,
+  "left": 0,
+  "right": 0,
+  "bottom": 0,
+  "_$comp": [
+    {
+      "_$type": "c5e278fe-6f1a-4512-8b60-450c717e4ed0",
+      "scriptPath": "../src/system/home/home-down-btn-mediator.ts"
+    }
+  ],
+  "_$child": [
+    {
+      "_$id": "t510az5e",
+      "_$type": "Image",
+      "name": "imgBg",
+      "width": 750,
+      "height": 144,
+      "centerX": 0,
+      "centerY": 0,
+      "skin": "res://cf477b5e-c31c-4a52-b74f-af5aff73f0b6",
+      "useSourceSize": true,
+      "color": "#ffffff"
+    },
+    {
+      "_$id": "ge84qhhe",
+      "_$var": true,
+      "_$type": "List",
+      "name": "listDownBtn",
+      "width": 750,
+      "height": 144,
+      "_mouseState": 2,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "bottom": 0,
+      "itemTemplate": {
+        "_$ref": "q9lbx9fm",
+        "_$tmpl": "itemRender"
+      },
+      "repeatX": 5,
+      "repeatY": 1,
+      "spaceX": 2,
+      "selectEnable": true,
+      "_$child": [
+        {
+          "_$id": "q9lbx9fm",
+          "_$prefab": "49acf14b-826d-4141-9ddb-15b99edb95ba",
+          "name": "down-btn-item",
+          "active": true,
+          "x": 0,
+          "y": 0
+        }
+      ]
+    }
+  ]
+}

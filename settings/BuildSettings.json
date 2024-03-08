@@ -1,11 +1,16 @@
 {
   "name": "bit-client",
+  "outputPath": "E:\\SVN\\client\\trunk",
   "minifyJS": true,
-  "startupScene": "res://06960274-3085-4eb0-ad1d-24b08a67cfd7",
-  "includedScenes": [],
+  "startupScene": "res://9b931ecf-fde9-44dd-acf3-15f8dc807965",
+  "includedScenes": [
+    "res://cbf6cc44-4848-4c09-a57b-4703e09bde09",
+    "res://7cf5999e-1f6f-49d3-bbb8-314f4d7c49d5",
+    "res://f2e0d290-e95a-423d-8f92-132ad51b499d",
+    "res://62364ea8-cfd7-4e3c-9a50-618e93f05f45"
+  ],
   "copyBinFiles": false,
   "excludeFilesRule": [],
-  "enableSubpackages": true,
   "subpackages": [
     {
       "path": "resources/prefab",

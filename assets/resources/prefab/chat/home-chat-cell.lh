@@ -1,0 +1,87 @@
+{
+  "_$ver": 1,
+  "_$id": "hb6d4jmr",
+  "_$runtime": "res://acf9dec6-04a5-450a-b3af-af28db2dc887",
+  "_$type": "Box",
+  "name": "Box",
+  "width": 650,
+  "height": 35,
+  "_$comp": [
+    {
+      "_$type": "Animator2D",
+      "controller": {
+        "_$uuid": "33240c21-3c21-4ac2-8621-f87e3d19c57a",
+        "_$type": "AnimationController2D"
+      },
+      "controllerLayers": [
+        {
+          "_$type": "AnimatorControllerLayer2D",
+          "name": "Base Layer",
+          "states": [
+            {
+              "_$type": "AnimatorState2D",
+              "name": "chat-cell-self",
+              "clipStart": 0,
+              "clip": {
+                "_$uuid": "538e9b8c-8d36-48a0-afb5-ec3a75db4469",
+                "_$type": "AnimationClip2D"
+              },
+              "loop": 1,
+              "soloTransitions": []
+            },
+            {
+              "_$type": "AnimatorState2D",
+              "name": "chat-cell",
+              "clipStart": 0,
+              "clip": {
+                "_$uuid": "0fe5f1fb-d52d-40ed-8780-05279889d7c4",
+                "_$type": "AnimationClip2D"
+              },
+              "loop": 1,
+              "soloTransitions": []
+            }
+          ],
+          "defaultStateName": "chat-cell"
+        }
+      ]
+    }
+  ],
+  "_$child": [
+    {
+      "_$id": "946tj7ky",
+      "_$var": true,
+      "_$type": "Label",
+      "name": "labelMsgType",
+      "width": 48,
+      "height": 21,
+      "left": 0,
+      "top": 0,
+      "text": "世界",
+      "fontSize": 20,
+      "color": "rgba(0, 0, 0, 1)",
+      "fitContent": "height",
+      "ubb": true,
+      "valign": "top",
+      "wordWrap": true,
+      "padding": "0,0,0,0"
+    },
+    {
+      "_$id": "et438jwb",
+      "_$var": true,
+      "_$type": "Label",
+      "name": "labelMsg",
+      "x": 43,
+      "width": 601,
+      "height": 21,
+      "top": 0,
+      "text": "aaaa啊啊啊啊啊是的",
+      "fontSize": 20,
+      "color": "rgba(0, 0, 0, 1)",
+      "fitContent": "height",
+      "ubb": true,
+      "valign": "top",
+      "wordWrap": true,
+      "padding": "0,0,0,0"
+    }
+  ]
+}

@@ -2,11 +2,10 @@
 
 
 /**
- * ../src/ui-runtime/prefab/home/boxTask.lh
+ * resources/prefab/home/task-box.lh
  */
 export class HomeTaskBoxUIBase extends Laya.Box {
     public imgIcon!: Laya.Image;
-    public ProgressBar!: Laya.ProgressBar;
     public labelDesc!: Laya.Label;
     public labelValue!: Laya.Label;
 }

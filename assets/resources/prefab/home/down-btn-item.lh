@@ -1,0 +1,60 @@
+{
+  "_$ver": 1,
+  "_$id": "m3d8u5lu",
+  "_$runtime": "res://3f168d89-cfc9-4d88-ad4e-df8db784d2b3",
+  "_$type": "Box",
+  "name": "down-btn-item",
+  "x": 339,
+  "y": 611,
+  "width": 148,
+  "height": 148,
+  "_mouseState": 2,
+  "_$child": [
+    {
+      "_$id": "0jaivhzj",
+      "_$var": true,
+      "_$type": "Image",
+      "name": "imgIcon",
+      "x": 28,
+      "y": 28,
+      "width": 92,
+      "height": 92,
+      "centerX": 0,
+      "centerY": 0,
+      "skin": "res://f10a525a-218d-49bf-929a-95eed3509c46",
+      "color": "#ffffff",
+      "_$child": [
+        {
+          "_$id": "sod02qbd",
+          "_$var": true,
+          "_$type": "Image",
+          "name": "imgText",
+          "x": 14,
+          "y": 56,
+          "width": 64,
+          "height": 36,
+          "bottom": 0,
+          "centerX": 0,
+          "skin": "res://675bcf34-2b99-4659-ad76-1bd9fb613450",
+          "useSourceSize": true,
+          "color": "#ffffff"
+        }
+      ]
+    },
+    {
+      "_$id": "l5lr7h9h",
+      "_$var": true,
+      "_$type": "Image",
+      "name": "selectBox",
+      "width": 148,
+      "height": 148,
+      "visible": false,
+      "_mouseState": 2,
+      "centerX": 0,
+      "centerY": 0,
+      "skin": "res://eab88349-e227-487a-9054-15d2bcd79d83",
+      "useSourceSize": true,
+      "color": "#ffffff"
+    }
+  ]
+}

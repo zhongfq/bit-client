@@ -50,7 +50,7 @@ export class VoUtil {
         const refData = TableUtil.getRow(app.service.table.item, { id: refId });
         if (refData?.sub_type == ItemConf.ITEM_TYPE.MONEY) {
             const args = (refData as ItemMoneyRow).args;
-            return app.service.user.monye.get(args.money_id);
+            return app.service.user.money.get(args.money_id);
         } else {
             return app.service.bag.itemBag.getByRef(refId);
         }

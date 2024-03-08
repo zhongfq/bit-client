@@ -10,7 +10,7 @@ export class UserService extends Service<NetworkService> {
     static readonly MONEY_UPDATE = "money-update";
     uid: number = 0;
     rid: number = 0;
-    monye: Map<number, MoneyVo> = new Map<number, MoneyVo>();
+    money: Map<number, MoneyVo> = new Map<number, MoneyVo>();
     profileInfo!: proto.profile.ProfileInfo;
 
     constructor(network: NetworkService) {
@@ -39,7 +39,7 @@ export class UserService extends Service<NetworkService> {
             for (const item of data.items) {
                 const vo = new MoneyVo();
                 vo.initByCmd(item as proto.money.MoneyItem);
-                this.monye.set(item.id!, vo);
+                this.money.set(item.id!, vo);
             }
             this.event(UserService.MONEY_UPDATE);
         }
@@ -55,7 +55,7 @@ export class UserService extends Service<NetworkService> {
         for (const item of data.items) {
             const vo = new MoneyVo();
             vo.initByCmd(item as proto.money.MoneyItem);
-            this.monye.set(item.id!, vo);
+            this.money.set(item.id!, vo);
         }
     }
 

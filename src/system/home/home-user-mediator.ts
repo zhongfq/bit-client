@@ -1,5 +1,7 @@
 import { app } from "../../app";
 import { Mediator } from "../../core/ui-mediator";
+import { MoneyConf } from "../../def/money";
+import { money } from "../../def/proto";
 import { ui } from "../../misc/ui";
 import { HomeUserBoxUI } from "../../ui-runtime/prefab/home/HomeUserBoxUI";
 import { TableUtil } from "../table/table-util";
@@ -31,8 +33,12 @@ export class homeUserMediator extends Mediator {
         const exp = profiInfo.exp || 0;
         this.owner.labelName.text = app.service.user.profileInfo.name;
         // this.owner.labelPower.text = app.service.user.profileInfo.power;
-        this.owner.labelLv.text = app.service.user.profileInfo.lv.toString();
-        this.owner.labelExp.text = (exp / lvRow!.upgrade_exp) * 100 + "%";
-        this.owner.progressBarExp.value = exp / lvRow!.upgrade_exp;
+        // this.owner.labelLv.text = app.service.user.profileInfo.lv.toString();
+        // this.owner.labelExp.text = (exp / lvRow!.upgrade_exp) * 100 + "%";
+        // this.owner.progressBarExp.value = exp / lvRow!.upgrade_exp;
+        const diamondNum = app.service.user.money.get(MoneyConf.MONEY_ID.DIAMOND)?.goodsNumberStr;
+        this.owner.moneyDiamond.labelNum.text = diamondNum ? diamondNum : "0";
+        const coinNum = app.service.user.money.get(MoneyConf.MONEY_ID.COIN)?.goodsNumberStr;
+        this.owner.moneyCoin.labelNum.text = coinNum ? coinNum : "0";
     }
 }

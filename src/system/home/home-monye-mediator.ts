@@ -1,11 +1,8 @@
 import { app } from "../../app";
 import { Mediator } from "../../core/ui-mediator";
-import proto from "../../def/proto";
-import { ui } from "../../misc/ui";
 import { MoneyVo } from "../../misc/vo/money/money-vo";
 import { HomeMonyeBoxUI } from "../../ui-runtime/prefab/home/HomeMonyeBoxUI";
 import { HomeMonyeItemUI } from "../../ui-runtime/prefab/home/HomeMonyeItemUI";
-import { TaskService } from "../task/task-service";
 
 const { regClass, property } = Laya;
 
@@ -34,8 +31,11 @@ export class homeMonyeMediator extends Mediator {
     }
 
     updateInfo() {
-        for (const [_, monye] of app.service.user.monye) {
-            this._monyeInfo.push(monye);
+        // const listData = [];
+        let moneyId = 0;
+        for (const [_, money] of app.service.user.money) {
+            moneyId > money.id ? this._monyeInfo.push(money) : this._monyeInfo.unshift(money);
+            moneyId = money.id;
         }
         this.owner.listMonye.array = this._monyeInfo;
     }
