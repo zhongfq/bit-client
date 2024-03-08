@@ -1,0 +1,43 @@
+{
+  "_$ver": 1,
+  "_$id": "trbfi64d",
+  "_$type": "Sprite",
+  "name": "Sprite",
+  "width": 124,
+  "height": 36,
+  "_$child": [
+    {
+      "_$id": "a3kxv25s",
+      "_$type": "Sprite",
+      "name": "anim",
+      "width": 126,
+      "height": 35,
+      "_$child": [
+        {
+          "_$id": "n9v2ty9n",
+          "_$type": "Image",
+          "name": "Image",
+          "width": 124,
+          "height": 36,
+          "skin": "res://fc02b4ee-cd32-4c4a-9e39-0825a002d739@Ui_Fight_InjuredXBg",
+          "useSourceSize": true,
+          "color": "#ffffff"
+        },
+        {
+          "_$id": "m6o29o71",
+          "_$type": "Text",
+          "name": "hp",
+          "x": 41,
+          "y": 4,
+          "width": 89,
+          "height": 23,
+          "text": "256",
+          "font": "res://4c944033-20b5-4981-964f-fa3b43f497c5",
+          "fontSize": 30,
+          "color": "#FFFFFF",
+          "leading": 2
+        }
+      ]
+    }
+  ]
+}

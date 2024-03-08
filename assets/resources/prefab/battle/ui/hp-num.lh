@@ -1,0 +1,31 @@
+{
+  "_$ver": 1,
+  "_$id": "sg5075rq",
+  "_$type": "Sprite",
+  "name": "Sprite",
+  "width": 90,
+  "height": 23,
+  "_$child": [
+    {
+      "_$id": "ivx83oo5",
+      "_$type": "Sprite",
+      "name": "anim",
+      "width": 90,
+      "height": 22,
+      "_$child": [
+        {
+          "_$id": "m6o29o71",
+          "_$type": "Text",
+          "name": "hp",
+          "width": 89,
+          "height": 23,
+          "text": "256",
+          "font": "res://21d18c4b-1869-47b0-9fd8-4a08f1f93cbe",
+          "fontSize": 20,
+          "color": "#FFFFFF",
+          "leading": 2
+        }
+      ]
+    }
+  ]
+}

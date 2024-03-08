@@ -1,6 +1,7 @@
 import { app } from "../../../app";
 import { ecs } from "../../../core/ecs";
 import { Mediator } from "../../../core/ui-mediator";
+import { Event } from "../../../misc/event";
 import { PveUI } from "../../../ui-runtime/scene/PveUI";
 import { ElementCreator } from "../pve-server/pve-defs";
 import { ICommandSender, PveServer } from "../pve-server/pve-server";
@@ -61,7 +62,12 @@ export class PveContext extends Mediator {
         this._sender = new CommandSender(this._pveServer);
 
         this.owner.mapClickArea.on(Laya.Event.CLICK, this, this.onMapClickHandler);
-        this.on(app.service.gm, "TILEMAP_DEBUG_MODE_UPDATE", this.onTilemapDebugModeUpdate, this);
+        this.on(
+            app.service.gm,
+            Event.TILEMAP_DEBUG_MODE_UPDATE,
+            this.onTilemapDebugModeUpdate,
+            this
+        );
     }
 
     override async onStart() {
@@ -86,15 +92,6 @@ export class PveContext extends Mediator {
             console.log("DelMonster", element.x, element.y, element.id);
         }
     }
-
-    // testFunc() {
-    //     const tilemapSystem = this._ecs.getSystem(TilemapSystem);
-    //     const elements = tilemapSystem?.getElementsByLayer(Tilemap.LayerName.Monster);
-    //     elements?.forEach((element) => {
-    //         const monsterElement = element as Tilemap.MonsterElement;
-    //         console.log(monsterElement.x, monsterElement.y, monsterElement.id);
-    //     });
-    // }
 
     onMapClickHandler() {
         const tilemapSystem = this._ecs.getSystem(TilemapSystem);
