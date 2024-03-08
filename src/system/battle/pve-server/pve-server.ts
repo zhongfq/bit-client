@@ -268,6 +268,10 @@ export class PveServer extends b3.Context {
     }
 
     private _calcHurt(skill: Skill, enemy: ElementComponent, ratio: number) {
+        if (enemy.hp <= 0) {
+            return;
+        }
+
         const isCrit = Math.ceil(Math.random() * 10000) % 5 === 0;
         const subHp = isCrit ? 25 : 10;
         enemy.hp -= 10;
@@ -356,7 +360,6 @@ export class PveServer extends b3.Context {
     addMonster(tid: number, position: Laya.Vector3) {
         const key = this._toElementKey(tid, position);
         if (this._elements.has(key)) {
-            console.log(`monster duplicate with key '${key}'`);
             return;
         }
 
@@ -366,6 +369,7 @@ export class PveServer extends b3.Context {
         element.hp = 200;
         element.maxHp = 200;
         element.aid = 2;
+        element.key = key;
         element.spawnpoint.cloneFrom(position);
         entity.etype = BattleConf.ENTITY_TYPE.HERO;
 

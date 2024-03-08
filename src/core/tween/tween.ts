@@ -97,7 +97,8 @@ type AllowedNames<Base, Type> = FlagExcludedType<Base, Type>[keyof Base];
 type KeyPartial<T, K extends keyof T> = { [P in K]?: T[P] };
 type OmitType<Base, Type> = KeyPartial<Base, AllowedNames<Base, Type>>;
 // eslint-disable-next-line @typescript-eslint/ban-types
-type ConstructorType<T> = OmitType<T, Function>;
+type ConstructorType<T> = { [K in keyof T]?: T[K] };
+// type ConstructorType<T> = OmitType<T, Function>;
 
 export class Tween<T> {
     private _actions: Action[] = [];

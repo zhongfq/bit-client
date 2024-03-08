@@ -1,6 +1,8 @@
 import { app } from "../../../../../app";
 import { ecs } from "../../../../../core/ecs";
+import { tween } from "../../../../../core/tween/tween";
 import { BattleConf } from "../../../../../def/battle";
+import { res } from "../../../../../misc/res";
 import { ElementCreator, UpdateHp } from "../../../pve-server/pve-defs";
 import { ICommandSender } from "../../../pve-server/pve-server";
 import { PveContext } from "../../pve-context";
@@ -165,6 +167,32 @@ export class CommandSystem extends ecs.System implements ICommandSender {
                 info.data.hp = data.hp;
                 info.data.maxHp = data.maxHp;
                 info.view.update(info.data);
+
+                let prefab: Laya.Prefab | undefined;
+                if (data.isCrit) {
+                    prefab = Laya.loader.getRes(res.BATTLE_HP_NUM_X);
+                } else {
+                    prefab = Laya.loader.getRes(res.BATTLE_HP_NUM);
+                }
+                if (prefab) {
+                    const pos = new Laya.Vector4();
+                    this.context.camera.worldToViewportPoint(element.transform.position, pos);
+                    const hpui = prefab.create() as Laya.Sprite;
+                    hpui.pos(pos.x - info.view.width / 2, pos.y - info.data.offset, true);
+                    this.context.owner.labels.addChild(hpui);
+                    hpui.scaleX = 0.5;
+                    hpui.scaleY = 0.5;
+                    tween(hpui)
+                        .to(0.3, { scaleX: 1, scaleY: 1 }, { easing: "bounceOut" })
+                        .delay(0.5)
+                        .call(() => {
+                            tween(hpui)
+                                .to(0.5, { y: hpui.y - 50 })
+                                .start();
+                            tween(hpui).to(0.5, { alpha: 0 }).removeSelf().start();
+                        })
+                        .start();
+                }
             }
         }
     }

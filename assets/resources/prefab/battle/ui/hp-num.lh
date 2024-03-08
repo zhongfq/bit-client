@@ -10,19 +10,23 @@
       "_$id": "ivx83oo5",
       "_$type": "Sprite",
       "name": "anim",
-      "width": 90,
+      "x": -34,
+      "y": -10,
+      "width": 99,
       "height": 22,
       "_$child": [
         {
           "_$id": "m6o29o71",
           "_$type": "Text",
           "name": "hp",
+          "x": -7,
           "width": 89,
           "height": 23,
           "text": "256",
           "font": "res://21d18c4b-1869-47b0-9fd8-4a08f1f93cbe",
           "fontSize": 20,
           "color": "#FFFFFF",
+          "align": "center",
           "leading": 2
         }
       ]

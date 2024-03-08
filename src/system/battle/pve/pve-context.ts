@@ -2,6 +2,7 @@ import { app } from "../../../app";
 import { ecs } from "../../../core/ecs";
 import { Mediator } from "../../../core/ui-mediator";
 import { Event } from "../../../misc/event";
+import { res } from "../../../misc/res";
 import { PveUI } from "../../../ui-runtime/scene/PveUI";
 import { PveServer } from "../pve-server/pve-server";
 import { CameraComponent } from "./ecs/components/camera-component";
@@ -66,6 +67,9 @@ export class PveContext extends Mediator {
             this.onTilemapDebugModeUpdate,
             this
         );
+
+        Laya.loader.load(res.BATTLE_HP_NUM);
+        Laya.loader.load(res.BATTLE_HP_NUM_X);
     }
 
     override async onStart() {
