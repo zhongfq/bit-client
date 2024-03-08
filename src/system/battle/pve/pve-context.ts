@@ -84,12 +84,20 @@ export class PveContext extends Mediator {
     onTileMapAddElement(element: Tilemap.Element) {
         if (element instanceof Tilemap.MonsterElement) {
             console.log("AddMonster", element.x, element.y, element.id);
+            const position = new Laya.Vector3();
+            position.x = element.realX;
+            position.z = element.realY;
+            this.sender.addMonster(element.id, position);
         }
     }
 
     onTileMapDelElement(element: Tilemap.Element) {
         if (element instanceof Tilemap.MonsterElement) {
             console.log("DelMonster", element.x, element.y, element.id);
+            const position = new Laya.Vector3();
+            position.x = element.realX;
+            position.z = element.realY;
+            this.sender.removeMonster(element.id, position);
         }
     }
 
@@ -152,10 +160,18 @@ class CommandSender {
     constructor(readonly server: PveServer) {}
 
     joystickStart(eid: number, degree: number) {
-        this.server.receiver.joystickStart(eid, degree);
+        this.server.joystickStart(eid, degree);
     }
 
     joystickStop(eid: number) {
-        this.server.receiver.joystickStop(eid);
+        this.server.joystickStop(eid);
+    }
+
+    addMonster(tid: number, position: Laya.Vector3) {
+        this.server.addMonster(tid, position);
+    }
+
+    removeMonster(tid: number, position: Laya.Vector3) {
+        this.server.removeMonster(tid, position);
     }
 }

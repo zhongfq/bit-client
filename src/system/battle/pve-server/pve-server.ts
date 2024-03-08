@@ -18,23 +18,24 @@ import { MovementSystem } from "./ecs/systems/movement-system";
 import { SkillSystem } from "./ecs/systems/skill-system";
 import { ElementCreator } from "./pve-defs";
 
+const _tmpVelocity = new Laya.Vector3();
+
 export class PveServer extends b3.Context {
     private _ecs: ecs.World;
 
     private _loader: Loader = new Loader();
     private _sender: ICommandSender;
-    private _receiver: CommandReceiver;
 
     private _transform3D: Laya.Transform3D = new Laya.Transform3D();
 
     private _aiTrees: Map<string, b3.Tree> = new Map();
     private _stanceMap: Map<number, ElementComponent> = new Map();
+    private _monsterMap: Map<string, ElementComponent> = new Map();
 
     constructor(sender: ICommandSender) {
         super();
 
         this._sender = sender;
-        this._receiver = new CommandReceiver(this);
 
         this._ecs = new ecs.World();
         this._ecs.addSystem(new AiSystem(this));
@@ -42,18 +43,14 @@ export class PveServer extends b3.Context {
         this._ecs.addSystem(new SkillSystem(this));
     }
 
-    get receiver() {
-        return this._receiver;
-    }
-
     get ecs() {
         return this._ecs;
     }
 
-    isFreeStance(element: ElementComponent, positioin: Laya.Vector3) {
+    isFreeStance(element: ElementComponent, position: Laya.Vector3) {
         for (const target of this._stanceMap.values()) {
             if (target.aid === element.aid && target !== element) {
-                const distance = Laya.Vector3.distance(target.transform.position, positioin);
+                const distance = Laya.Vector3.distance(target.transform.position, position);
                 if (distance < 0.3) {
                     return false;
                 }
@@ -171,13 +168,11 @@ export class PveServer extends b3.Context {
             tid: element.data.id,
             hp: element.hp,
             maxHp: element.maxHp,
-            positioin: transform.position,
+            position: transform.position,
         });
         this._sender.focus(element.eid);
 
         this._loadSoliders(element);
-
-        this._createMonsters();
     }
 
     private _loadSoliders(hero: ElementComponent) {
@@ -228,56 +223,14 @@ export class PveServer extends b3.Context {
                 tid: element.data.id,
                 hp: element.hp,
                 maxHp: element.maxHp,
-                positioin: transform.position,
+                position: transform.position,
             });
         });
     }
 
-    private _createMonsters() {
-        const arr = [new Laya.Vector3(10, 0, 12), new Laya.Vector3(11, 0, 13)];
-        for (const p of arr) {
-            const entity = this._ecs.createEntity();
-
-            const element = entity.addComponent(ElementComponent);
-            element.tid = 40002;
-            element.hp = 200;
-            element.maxHp = 200;
-            element.aid = 2;
-            element.spawnpoint.cloneFrom(p);
-            entity.etype = BattleConf.ENTITY_TYPE.HERO;
-
-            const table = app.service.table;
-            const heroRow = table.hero[element.tid];
-
-            element.data = table.battleEntity[heroRow.battle_entity];
-
-            const skill = entity.addComponent(SkillComponent);
-            if (heroRow.skill1) {
-                skill.skills.push(new Skill(table.skill[heroRow.skill1], element));
-            }
-            if (heroRow.skill2) {
-                skill.skills.push(new Skill(table.skill[heroRow.skill2], element));
-            }
-
-            const transform = entity.addComponent(TransformComponent);
-            transform.position.x = p.x;
-            transform.position.z = p.z;
-
-            const entityRow = table.battleEntity[heroRow.battle_entity];
-            const ai = entity.addComponent(AiComponent);
-            ai.res = `resources/data/btree/${entityRow.pve_ai}.json`;
-
-            entity.addComponent(MovementComponent);
-
-            this._sender.createElement({
-                eid: element.eid,
-                etype: element.entity.etype,
-                tid: element.data.id,
-                hp: element.hp,
-                maxHp: element.maxHp,
-                positioin: transform.position,
-            });
-        }
+    removeElement(element: ElementComponent) {
+        this.ecs.removeEntity(element.eid);
+        this._sender.removeElement(element.eid);
     }
 
     moveStart(element: ElementComponent, velocity: Laya.Vector3, target?: Laya.Vector3) {
@@ -303,6 +256,10 @@ export class PveServer extends b3.Context {
         this._sender.playAnim(element.eid, anim);
     }
 
+    private _toElementKey(tid: number, position: Laya.Vector3) {
+        return tid.toFixed(0) + "_" + position.x.toFixed(2) + "_" + position.z.toFixed(2);
+    }
+
     //-------------------------------------------------------------------------
     //------------------------------ICommandSender-----------------------------
     //-------------------------------------------------------------------------
@@ -311,11 +268,97 @@ export class PveServer extends b3.Context {
     launchSkill(element: ElementComponent, target?: ElementComponent) {}
 
     createWood() {}
+
+    //-------------------------------------------------------------------------
+    // 接收前端指令
+    //-------------------------------------------------------------------------
+    joystickStart(eid: number, degree: number) {
+        const element = this.ecs.getComponent(eid, ElementComponent);
+        if (!element) {
+            console.warn(`not found element: ${eid}`);
+            return;
+        }
+
+        const rad = MathUtil.toRadian(degree);
+        const movement = element.movement;
+        _tmpVelocity.x = movement.speed * Math.cos(rad);
+        _tmpVelocity.z = movement.speed * Math.sin(rad);
+        this.moveStart(element, _tmpVelocity);
+    }
+
+    joystickStop(eid: number) {
+        const element = this.ecs.getComponent(eid, ElementComponent);
+        if (!element) {
+            console.warn(`not found element: ${eid}`);
+            return;
+        }
+        this.moveStop(element);
+    }
+
+    addMonster(tid: number, position: Laya.Vector3) {
+        const key = this._toElementKey(tid, position);
+        if (this._monsterMap.has(key)) {
+            console.log(`monster duplicate with key '${key}'`);
+            return;
+        }
+
+        const entity = this._ecs.createEntity();
+        const element = entity.addComponent(ElementComponent);
+        element.tid = tid;
+        element.hp = 200;
+        element.maxHp = 200;
+        element.aid = 2;
+        element.spawnpoint.cloneFrom(position);
+        entity.etype = BattleConf.ENTITY_TYPE.HERO;
+
+        this._monsterMap.set(key, element);
+
+        const table = app.service.table;
+        const heroRow = table.hero[element.tid];
+
+        element.data = table.battleEntity[heroRow.battle_entity];
+
+        const skill = entity.addComponent(SkillComponent);
+        if (heroRow.skill1) {
+            skill.skills.push(new Skill(table.skill[heroRow.skill1], element));
+        }
+        if (heroRow.skill2) {
+            skill.skills.push(new Skill(table.skill[heroRow.skill2], element));
+        }
+
+        const transform = entity.addComponent(TransformComponent);
+        transform.position.x = position.x;
+        transform.position.z = position.z;
+
+        const entityRow = table.battleEntity[heroRow.battle_entity];
+        const ai = entity.addComponent(AiComponent);
+        ai.res = `resources/data/btree/${entityRow.pve_ai}.json`;
+
+        entity.addComponent(MovementComponent);
+
+        this._sender.createElement({
+            eid: element.eid,
+            etype: element.entity.etype,
+            tid: element.data.id,
+            hp: element.hp,
+            maxHp: element.maxHp,
+            position: transform.position,
+        });
+    }
+
+    removeMonster(tid: number, position: Laya.Vector3) {
+        const key = this._toElementKey(tid, position);
+        const monster = this._monsterMap.get(key);
+        if (monster) {
+            this.removeElement(monster);
+        }
+    }
 }
 
 export interface ICommandSender {
     focus(eid: number): void;
     createElement(data: ElementCreator): void;
+    removeElement(eid: number): void;
 
     chopWood(eid: number, target: number): void;
     moveStart(eid: number, velocity: Laya.Vector3): void;
@@ -326,34 +369,4 @@ export interface ICommandSender {
     playAnim(eid: number, anim: string): void;
 
     drawDebug(x: number, z: number, radius: number): void;
-}
-
-class CommandReceiver {
-    private static _tmpVelocity: Laya.Vector3 = new Laya.Vector3();
-
-    constructor(readonly server: PveServer) {}
-
-    joystickStart(eid: number, degree: number) {
-        const element = this.server.ecs.getComponent(eid, ElementComponent);
-        if (!element) {
-            console.warn(`not found element: ${eid}`);
-            return;
-        }
-
-        const rad = MathUtil.toRadian(degree);
-        const movement = element.movement;
-        const velocity = CommandReceiver._tmpVelocity;
-        velocity.x = movement.speed * Math.cos(rad);
-        velocity.z = movement.speed * Math.sin(rad);
-        this.server.moveStart(element, velocity);
-    }
-
-    joystickStop(eid: number) {
-        const element = this.server.ecs.getComponent(eid, ElementComponent);
-        if (!element) {
-            console.warn(`not found element: ${eid}`);
-            return;
-        }
-        this.server.moveStop(element);
-    }
 }
