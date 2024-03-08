@@ -38,7 +38,7 @@
         "id": 6,
         "name": "Wait",
         "args": {
-          "time": 0.2,
+          "time": 1,
           "random": null
         }
       }

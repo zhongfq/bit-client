@@ -105,16 +105,17 @@ export namespace b3 {
 
             env.lastRet.status = status;
 
-            if (this.data.debug) {
+            if (this.data.debug || env.debug) {
                 let varStr = "";
                 for (const k of env.vars.keys()) {
                     if (!(TreeEnv.isTempVar(k) || TreeEnv.isPrivateVar(k))) {
                         varStr += `${k}:${env.vars.get(k)}, `;
                     }
                 }
+                const indent = env.debug ? " ".repeat(env.stack.length) : "";
                 console.log(
-                    `[DEBUG] behavior3 -> ${this.name}: tree:${this.tree.name}, node:${this.id}, ` +
-                        `status:${status}, vars:{${varStr}}`
+                    `[DEBUG] behavior3 -> ${indent}${this.name}: tree:${this.tree.name}, ` +
+                        `node:${this.id}, status:${status}, vars:{${varStr}}`
                 );
             }
 
@@ -169,6 +170,8 @@ export namespace b3 {
 
         private _values: Map<string, unknown> = new Map();
         private _stack: Node[] = [];
+
+        debug: boolean = false;
 
         constructor(context: Context) {
             this.context = context;
@@ -261,6 +264,9 @@ export namespace b3 {
 
         run(env: TreeEnv) {
             const stack = env.stack;
+            if (env.debug) {
+                console.log(`---------------- debug ai: ${this.name} --------------------`);
+            }
             if (stack.length > 0) {
                 while (stack.length > 0) {
                     const node = stack[env.stack.length - 1];

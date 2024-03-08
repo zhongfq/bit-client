@@ -100,7 +100,12 @@ export class PveServer extends b3.Context {
 
     private _drawDebug() {
         this._ecs.getComponents(TransformComponent).forEach((value) => {
-            this._sender.drawDebug(value.position.x, value.position.z, 5);
+            const ai = value.getComponent(AiComponent);
+            if (ai && ai.env?.debug) {
+                this._sender.drawDebug(value.position.x, value.position.z, 5, 0x00ff00);
+            } else {
+                this._sender.drawDebug(value.position.x, value.position.z, 5, 0xff0000);
+            }
         });
     }
 
@@ -147,6 +152,11 @@ export class PveServer extends b3.Context {
         const table = app.service.table;
         const heroRow = table.hero[element.tid];
         element.data = table.battleEntity[heroRow.battle_entity];
+
+        const entityRow = table.battleEntity[heroRow.battle_entity];
+        const ai = entity.addComponent(AiComponent);
+        ai.res = `resources/data/btree/${entityRow.pve_ai}.json`;
+        ai.active = false;
 
         const skill = entity.addComponent(SkillComponent);
         if (heroRow.skill1) {
@@ -279,11 +289,28 @@ export class PveServer extends b3.Context {
             return;
         }
 
+        const ai = element.getComponent(AiComponent)!;
+        if (ai.tree && ai.env) {
+            ai.tree.interrupt(ai.env);
+        }
+        ai.active = false;
+
         const rad = MathUtil.toRadian(degree);
         const movement = element.movement;
         _tmpVelocity.x = movement.speed * Math.cos(rad);
         _tmpVelocity.z = movement.speed * Math.sin(rad);
         this.moveStart(element, _tmpVelocity);
+    }
+
+    click(x: number, z: number) {
+        this.ecs.getComponents(ElementComponent).forEach((element) => {
+            const ai = element.getComponent(AiComponent);
+            const p1 = new Laya.Vector3(x, 0, z);
+            const p2 = element.transform.position;
+            if (Laya.Vector3.distance(p1, p2) < 0.2 && ai && ai.env) {
+                ai.env.debug = !ai.env.debug;
+            }
+        });
     }
 
     joystickStop(eid: number) {
@@ -292,6 +319,8 @@ export class PveServer extends b3.Context {
             console.warn(`not found element: ${eid}`);
             return;
         }
+        const ai = element.getComponent(AiComponent)!;
+        // ai.active = true;
         this.moveStop(element);
     }
 
@@ -350,6 +379,7 @@ export class PveServer extends b3.Context {
         const key = this._toElementKey(tid, position);
         const monster = this._monsterMap.get(key);
         if (monster) {
+            this._monsterMap.delete(key);
             this.removeElement(monster);
         }
     }
@@ -368,5 +398,5 @@ export interface ICommandSender {
 
     playAnim(eid: number, anim: string): void;
 
-    drawDebug(x: number, z: number, radius: number): void;
+    drawDebug(x: number, z: number, radius: number, color: number): void;
 }

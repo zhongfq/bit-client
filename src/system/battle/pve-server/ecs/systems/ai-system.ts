@@ -83,7 +83,7 @@ export class AiSystem extends ecs.System {
                     return;
                 }
             }
-            if (time - ai.lastUpdate > ai.tick && ai.tree && ai.env) {
+            if (ai.active && time - ai.lastUpdate > ai.tick && ai.tree && ai.env) {
                 ai.tree.run(ai.env);
                 ai.lastUpdate = time;
             }

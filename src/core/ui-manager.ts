@@ -115,7 +115,7 @@ export class UIManager {
 
         const descriptor = this._checkDescriptor(scene.url);
         if (descriptor?.autoClose) {
-            scene.destroy(true);
+            scene.destroy();
         }
         //TODO 切换场景会导致资源消失
         // Laya.Scene.gc();

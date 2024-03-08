@@ -5,7 +5,7 @@
         "id": 101,
         "info_offset": 170,
         "info_style": 1,
-        "pve_ai": "hero",
+        "pve_ai": "pve_hero",
         "res": "resources/prefab/battle/roles/hero01.lh",
         "skill_radius": 3
     },
@@ -15,7 +15,7 @@
         "id": 102,
         "info_offset": 170,
         "info_style": 1,
-        "pve_ai": "hero",
+        "pve_ai": "pve_hero",
         "res": "resources/prefab/battle/roles/hero02.lh",
         "skill_radius": 3
     },
@@ -25,7 +25,7 @@
         "id": 105,
         "info_offset": 170,
         "info_style": 1,
-        "pve_ai": "hero",
+        "pve_ai": "pve_hero",
         "res": "resources/prefab/battle/roles/hero03.lh",
         "skill_radius": 3
     },
@@ -35,7 +35,7 @@
         "id": 106,
         "info_offset": 170,
         "info_style": 1,
-        "pve_ai": "hero",
+        "pve_ai": "pve_hero",
         "res": "resources/prefab/battle/roles/hero04.lh",
         "skill_radius": 5
     },
@@ -45,7 +45,7 @@
         "id": 209,
         "info_offset": 170,
         "info_style": 1,
-        "pve_ai": "hero",
+        "pve_ai": "pve_hero",
         "res": "resources/prefab/battle/roles/hero05.lh",
         "skill_radius": 5
     },
@@ -55,7 +55,7 @@
         "id": 212,
         "info_offset": 170,
         "info_style": 1,
-        "pve_ai": "hero",
+        "pve_ai": "pve_hero",
         "res": "resources/prefab/battle/roles/hero06.lh",
         "skill_radius": 5
     },
@@ -65,7 +65,7 @@
         "id": 401,
         "info_offset": 170,
         "info_style": 1,
-        "pve_ai": "hero",
+        "pve_ai": "pve_hero",
         "res": "resources/prefab/battle/roles/hero07.lh",
         "skill_radius": 8
     },
@@ -75,7 +75,7 @@
         "id": 404,
         "info_offset": 170,
         "info_style": 1,
-        "pve_ai": "hero",
+        "pve_ai": "pve_hero",
         "res": "resources/prefab/battle/roles/hero08.lh",
         "skill_radius": 8
     },

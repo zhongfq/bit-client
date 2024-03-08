@@ -15,6 +15,7 @@ export class SkillTreeEnv extends b3.TreeEnv {
 }
 
 export class Skill {
+    lastUpdate: number = 0;
     data: SkillRow;
     res: string;
     tree: b3.Tree | null = null;

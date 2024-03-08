@@ -157,13 +157,13 @@ export class CommandSystem extends ecs.System implements ICommandSender {
         }
     }
 
-    drawDebug(x: number, z: number, radius: number) {
+    drawDebug(x: number, z: number, radius: number, color: number) {
         const outPos = Laya.Pool.obtain(Laya.Vector4);
         const inPos = Laya.Pool.obtain(Laya.Vector3);
         inPos.x = x;
         inPos.z = z;
         this.context.camera.worldToViewportPoint(inPos, outPos);
-        this.context.owner.debug.graphics.drawCircle(outPos.x, outPos.y, radius, null, 0xff0000, 2);
+        this.context.owner.debug.graphics.drawCircle(outPos.x, outPos.y, radius, null, color, 2);
     }
 
     private _setRotation(character: ElementComponent, x: number, z: number) {

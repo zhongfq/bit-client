@@ -3,6 +3,8 @@ import { PveServer } from "../../pve-server";
 import { SkillComponent, SkillTreeEnv } from "../components/skill-component";
 
 export class SkillSystem extends ecs.System {
+    static readonly TICK = 0.1;
+
     constructor(readonly context: PveServer) {
         super();
     }
@@ -14,10 +16,13 @@ export class SkillSystem extends ecs.System {
     }
 
     override update(dt: number) {
+        const time = this.context.time;
+
         this.ecs.getComponents(SkillComponent).forEach((skill) => {
             for (const v of skill.skills) {
-                if (v.running && v.tree && v.env) {
+                if (v.running && time - v.lastUpdate > SkillSystem.TICK && v.tree && v.env) {
                     v.tree.run(v.env);
+                    v.lastUpdate = time;
                     v.running = v.tree.isRunning(v.env);
                 }
             }

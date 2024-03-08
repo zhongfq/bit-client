@@ -9,6 +9,11 @@ export class NormalAttack extends b3.Process {
         } else if (!(target instanceof ElementComponent)) {
             this.error(node, "target is not an ElementComponent");
         }
+        const skill = env.owner.skill?.skills[0];
+        if (skill && skill.env && skill.tree) {
+            skill.env.setValue("enemy", target);
+            skill.running = true;
+        }
         env.context.playAnim(env.owner, "attack");
         return b3.Status.SUCCESS;
     }

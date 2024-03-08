@@ -173,19 +173,11 @@
                     "input": [
                       "enemy"
                     ]
-                  },
-                  {
-                    "id": 24,
-                    "name": "Wait",
-                    "args": {
-                      "time": 1,
-                      "random": null
-                    }
                   }
                 ]
               },
               {
-                "id": 25,
+                "id": 24,
                 "name": "AdjustStance",
                 "args": {},
                 "input": [
@@ -197,18 +189,18 @@
         ]
       },
       {
-        "id": 26,
+        "id": 25,
         "name": "Sequence",
         "desc": "找目标",
         "args": {},
         "children": [
           {
-            "id": 27,
+            "id": 26,
             "name": "ClearStance",
             "args": {}
           },
           {
-            "id": 28,
+            "id": 27,
             "name": "FindOneTarget",
             "args": {
               "radius": 3,
@@ -220,7 +212,7 @@
             ]
           },
           {
-            "id": 29,
+            "id": 28,
             "name": "GetPos",
             "args": {},
             "input": [
@@ -231,7 +223,7 @@
             ]
           },
           {
-            "id": 30,
+            "id": 29,
             "name": "MoveToPos",
             "args": {
               "rate": 1.5
@@ -243,7 +235,7 @@
         ]
       },
       {
-        "id": 31,
+        "id": 30,
         "name": "FollowHero",
         "desc": "士兵以阵型位置跟随主将",
         "args": {}

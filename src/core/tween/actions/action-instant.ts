@@ -113,7 +113,7 @@ export class RemoveSelf extends ActionInstant {
     override update(dt: any): void {
         this.target?.removeSelf();
         if (this._isNeedCleanUp) {
-            this.target?.destroy(true);
+            this.target?.destroy();
         }
     }
 

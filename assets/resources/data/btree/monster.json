@@ -110,19 +110,11 @@
                     "input": [
                       "enemy"
                     ]
-                  },
-                  {
-                    "id": 17,
-                    "name": "Wait",
-                    "args": {
-                      "time": 1,
-                      "random": null
-                    }
                   }
                 ]
               },
               {
-                "id": 18,
+                "id": 17,
                 "name": "AdjustStance",
                 "args": {},
                 "input": [
@@ -134,18 +126,18 @@
         ]
       },
       {
-        "id": 19,
+        "id": 18,
         "name": "Sequence",
         "desc": "找目标",
         "args": {},
         "children": [
           {
-            "id": 20,
+            "id": 19,
             "name": "ClearStance",
             "args": {}
           },
           {
-            "id": 21,
+            "id": 20,
             "name": "FindOneTarget",
             "args": {
               "radius": 3,
@@ -157,7 +149,7 @@
             ]
           },
           {
-            "id": 22,
+            "id": 21,
             "name": "GetPos",
             "args": {},
             "input": [
@@ -168,7 +160,7 @@
             ]
           },
           {
-            "id": 23,
+            "id": 22,
             "name": "MoveToPos",
             "args": {
               "rate": 1.5

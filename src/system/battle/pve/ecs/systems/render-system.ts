@@ -28,14 +28,14 @@ export class RenderSystem extends ecs.System {
 
     override onRemoveComponent(component: ecs.Component): void {
         if (component instanceof AnimationComponent) {
-            component.view?.destroy(true);
+            component.view?.destroy();
             component.view = null;
             component.animator = null;
         } else if (component instanceof HeadInfoComponent) {
-            component.view?.destroy(true);
+            component.view?.destroy();
             component.view = null;
         } else if (component instanceof ShadowComponent) {
-            component.view?.destroy(true);
+            component.view?.destroy();
             component.view = null;
         }
     }

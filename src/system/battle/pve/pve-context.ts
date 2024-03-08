@@ -124,6 +124,8 @@ export class PveContext extends Mediator {
         const groundPos = new Laya.Vector3();
         ray.origin.vadd(ray.direction, groundPos);
 
+        this.sender.click(groundPos.x, groundPos.z);
+
         const x = Math.floor(groundPos.x + 0.5);
         const y = Math.floor(groundPos.z + 0.5);
 
@@ -173,5 +175,9 @@ class CommandSender {
 
     removeMonster(tid: number, position: Laya.Vector3) {
         this.server.removeMonster(tid, position);
+    }
+
+    click(x: number, z: number) {
+        this.server.click(x, z);
     }
 }

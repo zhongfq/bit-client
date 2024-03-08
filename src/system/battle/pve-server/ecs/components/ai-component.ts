@@ -15,6 +15,7 @@ export class AiTreeEnv extends b3.TreeEnv {
 }
 
 export class AiComponent extends ecs.Component {
+    active: boolean = true;
     lastUpdate: number = 0;
     res: string = "";
     tick: number = 0;
