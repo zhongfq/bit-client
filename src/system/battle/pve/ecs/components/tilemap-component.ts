@@ -346,11 +346,15 @@ export namespace Tilemap {
     export abstract class TileElemet extends Element {
         private _tile?: Laya.Sprite3D;
 
+        public get gid(): number {
+            return this.props.get("gid");
+        }
+
         public override async draw() {
             if (this._tile) {
                 return;
             }
-            const idx = this.system.getAtlasFrameIdx(this.getAtlasName(), this.props.get("gid"));
+            const idx = this.system.getAtlasFrameIdx(this.getAtlasName(), this.gid);
             if (idx == 0 && this.ignoreFirstFrame()) {
                 return;
             }
@@ -481,17 +485,17 @@ export namespace Tilemap {
 
     export abstract class BoardElement extends Element {
         private _board?: Laya.Sprite3D;
-        private _realX: number = 0;
-        private _realY: number = 0;
+        private _startX: number = 0;
+        private _startY: number = 0;
         private _width: number = 0;
         private _height: number = 0;
 
-        public get realX(): number {
-            return this._realX;
+        public get startX(): number {
+            return this._startX;
         }
 
-        public get realY(): number {
-            return this._realY;
+        public get startY(): number {
+            return this._startY;
         }
 
         public get width(): number {
@@ -500,6 +504,10 @@ export namespace Tilemap {
 
         public get height(): number {
             return this._height;
+        }
+
+        public get gid(): number {
+            return this.props.get("gid");
         }
 
         public override async draw() {
@@ -512,19 +520,16 @@ export namespace Tilemap {
 
             const sprite = this._board.getChildAt(0) as Laya.Sprite3D;
             const renderer = sprite.getComponent(Laya.MeshRenderer);
-            const resName = this.system.getTextureResName(
-                this.getTextureName(),
-                this.props.get("gid")
-            );
+            const resName = this.system.getTextureResName(this.getTextureName(), this.gid);
             const textureCfg = this.getTextureCfg().get(resName);
 
-            this._realX = Math.floor(this.x - (textureCfg?.tileX ?? 0));
-            this._realY = Math.floor(this.y - (textureCfg?.tileY ?? 0));
+            this._startX = Math.floor(this.x - (textureCfg?.tileX ?? 0));
+            this._startY = Math.floor(this.y - (textureCfg?.tileY ?? 0));
 
             const objPos = this._board.transform.position;
-            objPos.x = this._realX;
+            objPos.x = this._startX;
             objPos.y = 0;
-            objPos.z = this._realY;
+            objPos.z = this._startY;
             this._board.transform.position = objPos;
 
             const spritePos = sprite.transform.localPosition;
@@ -550,13 +555,13 @@ export namespace Tilemap {
             this._width = textureCfg?.tileW ?? 1;
             this._height = textureCfg?.tileH ?? 1;
 
-            this._board.name = this.realX + "_" + this.realY + " | " + resName;
+            this._board.name = this.startX + "_" + this.startY + " | " + resName;
             this.system.getRoot().getChildByName(this.layerName).addChild(this._board);
         }
 
         public showBlock() {
-            for (let $x = this.realX; $x < this.realX + this.width; $x++) {
-                for (let $y = this.realY; $y < this.realY + this.height; $y++) {
+            for (let $x = this.startX; $x < this.startX + this.width; $x++) {
+                for (let $y = this.startY; $y < this.startY + this.height; $y++) {
                     this.system.showBlocks.set(TilemapComponent.XY_TO_KEY($x, $y), true);
                     const element = this.system.getElementByPos($x, $y, LayerName.Block);
                     element?.draw();
@@ -565,8 +570,8 @@ export namespace Tilemap {
         }
 
         public hideBlock() {
-            for (let $x = this.realX; $x < this.realX + this.width; $x++) {
-                for (let $y = this.realY; $y < this.realY + this.height; $y++) {
+            for (let $x = this.startX; $x < this.startX + this.width; $x++) {
+                for (let $y = this.startY; $y < this.startY + this.height; $y++) {
                     this.system.showBlocks.delete(TilemapComponent.XY_TO_KEY($x, $y));
                     const element = this.system.getElementByPos($x, $y, LayerName.Block);
                     element?.erase();
@@ -644,7 +649,7 @@ export namespace Tilemap {
 
             const pos = this._blockTile.transform.position;
             pos.x = this.x;
-            pos.y = 0;
+            pos.y = 0.01;
             pos.z = this.y;
             this._blockTile.transform.position = pos;
 
@@ -659,50 +664,6 @@ export namespace Tilemap {
     }
 
     export abstract class ObjectElement extends Element {
-        protected abstract get id(): number;
-    }
-
-    export class BuildingElement extends ObjectElement {
-        private _debugObjs: Laya.Sprite3D[] = [];
-
-        public get id(): number {
-            return this.props.get("id");
-        }
-
-        public override async draw() {
-            // if (this._debugObjs.length > 0) {
-            //     return;
-            // }
-            // if (!TilemapComponent.DEBUG_MODE) {
-            //     return;
-            // }
-            // const prefab = await Laya.loader.load(
-            //     "resources/prefab/world-map/test/debug-obj.lh",
-            //     Laya.Loader.HIERARCHY
-            // );
-            // const dynamicElement = this.system.buildingToDynamicElemnt(this.uid);
-            // for (let i = dynamicElement?.x; )
-            // this._debugObj = prefab.create() as Laya.Sprite3D;
-            // const pos = this._debugObj.transform.position;
-            // pos.x = this.x;
-            // pos.y = 0;
-            // pos.z = this.y;
-            // this._debugObj.transform.position = pos;
-            // this._debugObj.name = this.x + "_" + this.y;
-            // this.system.getRoot().getChildByName(this.layerName).addChild(this._debugObj);
-        }
-
-        public override erase() {
-            // this._debugObjs.forEach((obj) => {
-            //     obj.removeSelf();
-            // });
-            // this._debugObjs = [];
-        }
-    }
-
-    export class MonsterElement extends ObjectElement {
-        private _debugObj?: Laya.Sprite3D;
-
         public get id(): number {
             return this.props.get("id");
         }
@@ -714,6 +675,53 @@ export namespace Tilemap {
         public get realY(): number {
             return this.props.get("realY");
         }
+    }
+
+    export class BuildingElement extends ObjectElement {
+        private _debugObjs: Laya.Sprite3D[] = [];
+
+        public override async draw() {
+            if (this._debugObjs.length > 0) {
+                return;
+            }
+            if (!TilemapComponent.DEBUG_MODE) {
+                return;
+            }
+            const dynamicElement = this.system.buildingToDynamicElemnt(this.uid);
+            if (!dynamicElement) {
+                return;
+            }
+            const prefab = await Laya.loader.load(
+                "resources/prefab/world-map/test/debug-obj.lh",
+                Laya.Loader.HIERARCHY
+            );
+            for (let i = 0; i < dynamicElement.width; i++) {
+                for (let j = 0; j < dynamicElement.height; j++) {
+                    const debugObj = prefab.create() as Laya.Sprite3D;
+                    this._debugObjs.push(debugObj);
+
+                    const pos = debugObj.transform.position;
+                    pos.x = dynamicElement.startX + i;
+                    pos.y = 0;
+                    pos.z = dynamicElement.startY + j;
+                    debugObj.transform.position = pos;
+
+                    debugObj.name = this.x + "_" + this.y + " (" + i + "," + j + ")";
+                    this.system.getRoot().getChildByName(this.layerName).addChild(debugObj);
+                }
+            }
+        }
+
+        public override erase() {
+            this._debugObjs.forEach((obj) => {
+                obj.removeSelf();
+            });
+            this._debugObjs = [];
+        }
+    }
+
+    export class MonsterElement extends ObjectElement {
+        private _debugObj?: Laya.Sprite3D;
 
         public override async draw() {
             if (this._debugObj) {

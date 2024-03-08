@@ -132,7 +132,19 @@ export class PveContext extends Mediator {
 
     onTilemapDebugModeUpdate() {
         const tilemapSystem = this._ecs.getSystem(TilemapSystem);
-        tilemapSystem?.redrawAll();
+        const allMap = tilemapSystem?.getAllMap();
+        allMap?.forEach((element) => {
+            if (element instanceof Tilemap.TileElemet) {
+                element.erase();
+                element.draw();
+            }
+        });
+        allMap?.forEach((element) => {
+            if (element instanceof Tilemap.ObjectElement) {
+                element.erase();
+                element.draw();
+            }
+        });
     }
 }
 

@@ -14,13 +14,10 @@ export class TilemapSystem extends ecs.System {
     }
 
     /**
-     * 全部重绘
+     *  获取元素映射总表
      */
-    public redrawAll(): void {
-        this._allMap.forEach((element) => {
-            element.erase();
-            element.draw();
-        });
+    public getAllMap(): Map<number, Tilemap.Element> {
+        return this._allMap;
     }
 
     /**
@@ -142,8 +139,8 @@ export class TilemapSystem extends ecs.System {
                         TilemapComponent.IN_RECT(
                             x,
                             y,
-                            element.realX,
-                            element.realY,
+                            element.startX,
+                            element.startY,
                             element.width,
                             element.height
                         )
@@ -215,8 +212,8 @@ export class TilemapSystem extends ecs.System {
         const element = this._allMap.get(uid);
         if (element instanceof Tilemap.DynamicElement) {
             return this.getElementsByRect(
-                element.realX,
-                element.realY,
+                element.startX,
+                element.startY,
                 element.width,
                 element.height,
                 Tilemap.LayerName.Building
