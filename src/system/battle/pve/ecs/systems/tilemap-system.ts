@@ -14,6 +14,16 @@ export class TilemapSystem extends ecs.System {
     }
 
     /**
+     * 全部重绘
+     */
+    public redrawAll(): void {
+        this._allMap.forEach((element) => {
+            element.erase();
+            element.draw();
+        });
+    }
+
+    /**
      * 添加动态元素
      * @param eid 实体ID
      * @param x X坐标

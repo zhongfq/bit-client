@@ -1,3 +1,4 @@
+import { app } from "../../../app";
 import { ecs } from "../../../core/ecs";
 import { Mediator } from "../../../core/ui-mediator";
 import { PveUI } from "../../../ui-runtime/scene/PveUI";
@@ -60,6 +61,7 @@ export class PveContext extends Mediator {
         this._sender = new CommandSender(this._pveServer);
 
         this.owner.mapClickArea.on(Laya.Event.CLICK, this, this.onMapClickHandler);
+        this.on(app.service.gm, "TILEMAP_DEBUG_MODE_UPDATE", this.onTilemapDebugModeUpdate, this);
     }
 
     override async onStart() {
@@ -129,6 +131,11 @@ export class PveContext extends Mediator {
             element.showBlock();
             this._selectedDynamicElement = element.uid;
         }
+    }
+
+    onTilemapDebugModeUpdate() {
+        const tilemapSystem = this._ecs.getSystem(TilemapSystem);
+        tilemapSystem?.redrawAll();
     }
 }
 

@@ -5,7 +5,7 @@ import { StringUtil } from "../../../../../core/utils/string-util";
 import { TilemapSystem } from "../systems/tilemap-system";
 
 export class TilemapComponent extends ecs.SingletonComponent {
-    static readonly DEBUG_MODE = false; // 调试模式
+    static DEBUG_MODE = false; // 调试模式
 
     static readonly VISION_WIDTH = 25; // 视野宽度（单位：米）
     static readonly VISION_HEIGHT = 25; // 视野高度（单位：米）

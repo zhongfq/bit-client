@@ -3,6 +3,7 @@ import { Callback } from "../../core/dispatcher";
 import { CallFunc } from "../../core/tween/actions/action-instant";
 import { Mediator } from "../../core/ui-mediator";
 import { GmUI } from "../../ui-runtime/prefab/gm/GmUI";
+import { TilemapComponent } from "../battle/pve/ecs/components/tilemap-component";
 
 const { regClass, property } = Laya;
 interface GmCmdData {
@@ -109,6 +110,17 @@ export class GmMediator extends Mediator {
                 this.isShowStat = !this.isShowStat;
                 this.isShowStat ? Laya.Stat.show() : Laya.Stat.hide();
                 this.listSwitchData[index].name = "统计信息:" + (this.isShowStat ? "关" : "开");
+                this.owner.listSwitch.refresh();
+            },
+        });
+        this.listSwitchData.push({
+            name: "地图调试:开",
+            func: (index: number) => {
+                TilemapComponent.DEBUG_MODE = !TilemapComponent.DEBUG_MODE;
+                app.service.gm.event("TILEMAP_DEBUG_MODE_UPDATE");
+
+                this.listSwitchData[index].name =
+                    "地图调试:" + (TilemapComponent.DEBUG_MODE ? "关" : "开");
                 this.owner.listSwitch.refresh();
             },
         });
