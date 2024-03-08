@@ -1,3 +1,4 @@
+import { app } from "../../app";
 import { Mediator } from "../../core/ui-mediator";
 import { ui } from "../../misc/ui";
 import { HomeDownBtnBoxUI } from "../../ui-runtime/prefab/home/HomeDownBtnBoxUI";
@@ -44,7 +45,13 @@ export class HomeDownBtnMediator extends Mediator {
         this.owner.listDownBtn.array = [
             { iconSkin: "icon_main_1", textSkin: "text_main_1", func: () => {} },
             { iconSkin: "icon_main_2", textSkin: "text_main_2", func: () => {} },
-            { iconSkin: "icon_main_3", textSkin: "text_main_3", func: () => {} },
+            {
+                iconSkin: "icon_main_3",
+                textSkin: "text_main_3",
+                func: () => {
+                    app.ui.replace(ui.PVE);
+                },
+            },
             {
                 iconSkin: "icon_main_4",
                 textSkin: "text_main_4",
