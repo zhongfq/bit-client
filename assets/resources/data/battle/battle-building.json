@@ -1,0 +1,30 @@
+{
+    "10001": {
+        "battle_entity": 60001,
+        "fresh_time": 0,
+        "id": 10001,
+        "max_hp": 5000,
+        "obstacle_size": 5
+    },
+    "20001": {
+        "battle_entity": 70001,
+        "fresh_time": 60,
+        "id": 20001,
+        "max_hp": 100,
+        "obstacle_size": 2
+    },
+    "20002": {
+        "battle_entity": 70002,
+        "fresh_time": 60,
+        "id": 20002,
+        "max_hp": 50,
+        "obstacle_size": 2
+    },
+    "20003": {
+        "battle_entity": 70003,
+        "fresh_time": 60,
+        "id": 20003,
+        "max_hp": 200,
+        "obstacle_size": 2
+    }
+}
