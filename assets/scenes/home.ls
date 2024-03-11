@@ -196,7 +196,18 @@
       "visible": true,
       "left": -2,
       "right": 0,
-      "bottom": 121
+      "bottom": 121,
+      "_$child": [
+        {
+          "_$override": "9g62io8z",
+          "_$comp": [
+            {
+              "_$override": "bb264e76-1c01-47d4-a43d-7a59a75169b7",
+              "scrollType": 2
+            }
+          ]
+        }
+      ]
     },
     {
       "_$id": "cibyk9jb",

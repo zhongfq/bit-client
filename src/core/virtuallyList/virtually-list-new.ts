@@ -75,7 +75,7 @@ export class VirtuallyListNew extends Laya.Script {
             this._createNode();
         }
         //-------------------------------------------------|
-        this.setArrayData([1, 2, 3, 4, 5, 6, 7, 8]);
+        // this.setArrayData([1, 2, 3, 4, 5, 6, 7, 8]);
         // this.setArrayData([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
         Laya.timer.once(3000, this, () => {
             // console.log("11111111111111111111111111111111");
@@ -247,7 +247,7 @@ export class VirtuallyListNew extends Laya.Script {
     /**
      *设置数据
      */
-    setArrayData(val: any[], type?: ListCreateDataType) {
+    setArrayData(val: any[]) {
         this._data = val;
         this._initRect();
         this._addNode();
@@ -257,6 +257,14 @@ export class VirtuallyListNew extends Laya.Script {
         if (this.alignV == AlignV.RIGHT) {
             this.owner.scrollRect.x = -this.owner.width;
         }
+    }
+
+    scrollTop() {
+        this.owner.scrollRect.y = 0;
+    }
+
+    scrollDown() {
+        this.owner.scrollRect.y = this._contentRect.y;
     }
 
     addData(val: any, isFist?: boolean) {

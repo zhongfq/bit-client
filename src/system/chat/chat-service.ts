@@ -7,7 +7,10 @@ import { ChatMsgVoBag } from "../../misc/vo/chat/chat-msg-vo-bag";
 import { ChatRoleVo } from "../../misc/vo/chat/chat-role-vo";
 import { ChatRoleVoBag } from "../../misc/vo/chat/chat-role-vo-bag";
 import { NetworkService } from "../network/network-service";
-
+export interface ChatCellData {
+    msg: ChatMsgVo;
+    role: ChatRoleVo;
+}
 export class ChatService extends Service<NetworkService> {
     static readonly CHAT_UPDATE = "chat-update";
     chatRoleVoBag = VoUtil.createBag(ChatRoleVoBag);

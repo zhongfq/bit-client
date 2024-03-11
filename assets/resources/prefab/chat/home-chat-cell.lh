@@ -6,46 +6,6 @@
   "name": "Box",
   "width": 650,
   "height": 35,
-  "_$comp": [
-    {
-      "_$type": "Animator2D",
-      "controller": {
-        "_$uuid": "33240c21-3c21-4ac2-8621-f87e3d19c57a",
-        "_$type": "AnimationController2D"
-      },
-      "controllerLayers": [
-        {
-          "_$type": "AnimatorControllerLayer2D",
-          "name": "Base Layer",
-          "states": [
-            {
-              "_$type": "AnimatorState2D",
-              "name": "chat-cell-self",
-              "clipStart": 0,
-              "clip": {
-                "_$uuid": "538e9b8c-8d36-48a0-afb5-ec3a75db4469",
-                "_$type": "AnimationClip2D"
-              },
-              "loop": 1,
-              "soloTransitions": []
-            },
-            {
-              "_$type": "AnimatorState2D",
-              "name": "chat-cell",
-              "clipStart": 0,
-              "clip": {
-                "_$uuid": "0fe5f1fb-d52d-40ed-8780-05279889d7c4",
-                "_$type": "AnimationClip2D"
-              },
-              "loop": 1,
-              "soloTransitions": []
-            }
-          ],
-          "defaultStateName": "chat-cell"
-        }
-      ]
-    }
-  ],
   "_$child": [
     {
       "_$id": "946tj7ky",
@@ -58,8 +18,9 @@
       "top": 0,
       "text": "世界",
       "fontSize": 20,
-      "color": "rgba(0, 0, 0, 1)",
+      "color": "rgba(255, 255, 255, 1)",
       "fitContent": "height",
+      "bold": true,
       "ubb": true,
       "valign": "top",
       "wordWrap": true,
@@ -70,14 +31,15 @@
       "_$var": true,
       "_$type": "Label",
       "name": "labelMsg",
-      "x": 43,
-      "width": 601,
+      "x": 49,
+      "width": 594,
       "height": 21,
       "top": 0,
       "text": "aaaa啊啊啊啊啊是的",
       "fontSize": 20,
-      "color": "rgba(0, 0, 0, 1)",
+      "color": "rgba(255, 255, 255, 1)",
       "fitContent": "height",
+      "bold": true,
       "ubb": true,
       "valign": "top",
       "wordWrap": true,

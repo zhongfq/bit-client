@@ -1,5 +1,5 @@
 const { regClass } = Laya;
-import { ListCreateDataType, VirtuallyList } from "../../../core/virtuallyList/virtually-list";
+import { VirtuallyListNew } from "../../../core/virtuallyList/virtually-list-new";
 import { VirtuallyListNewUIBase } from "./VirtuallyListNewUI.generated";
 
 @regClass()
@@ -11,11 +11,19 @@ export class VirtuallyListNewUI extends VirtuallyListNewUIBase {
         this.scrollRect = this.rectangle;
     }
 
-    setArrayData(val: any[], type: ListCreateDataType) {
-        this.getComponent(VirtuallyList).setArrayData(val, type);
+    setArrayData(val: any[]) {
+        this.getComponent(VirtuallyListNew).setArrayData(val);
     }
 
-    addData(val: any) {
-        this.getComponent(VirtuallyList).addData(val);
+    addData(val: any, isFist?: boolean) {
+        this.getComponent(VirtuallyListNew).addData(val, isFist);
+    }
+
+    scrollTop() {
+        this.getComponent(VirtuallyListNew).scrollTop();
+    }
+
+    scrollDown() {
+        this.getComponent(VirtuallyListNew).scrollDown();
     }
 }

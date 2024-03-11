@@ -2,14 +2,22 @@
   "_$ver": 1,
   "_$id": "efcys1k5",
   "_$var": true,
+  "_$runtime": "res://0a1cd8a5-c3be-43f4-abe6-ecea74889443",
   "_$type": "Box",
   "name": "chat-box",
   "y": 1118,
   "width": 750,
   "height": 92,
+  "_mouseState": 2,
   "left": 0,
   "right": 0,
   "bottom": 124,
+  "_$comp": [
+    {
+      "_$type": "17991247-d70b-40a2-aac5-8810589f459e",
+      "scriptPath": "../src/system/home/home-chat-mediator.ts"
+    }
+  ],
   "_$child": [
     {
       "_$id": "rfyqwsx8",
@@ -26,29 +34,10 @@
       "color": "#ffffff"
     },
     {
-      "_$id": "df274zvp",
-      "_$var": true,
-      "_$type": "Label",
-      "name": "labelMsg",
-      "x": 48,
-      "y": 40,
-      "width": 625,
-      "height": 21,
-      "anchorY": 1,
-      "text": "",
-      "fontSize": 20,
-      "color": "#FFFFFF",
-      "fitContent": "height",
-      "ubb": true,
-      "valign": "bottom",
-      "wordWrap": true,
-      "padding": "0,0,0,0"
-    },
-    {
       "_$id": "9g62io8z",
       "_$prefab": "1554834d-3378-439e-ac1d-084b8faa5d0f",
       "_$var": true,
-      "name": "virtually-list-new",
+      "name": "virtuallyList",
       "active": true,
       "x": 8,
       "y": 5,
@@ -66,6 +55,23 @@
           }
         }
       ]
+    },
+    {
+      "_$id": "0kvyip7n",
+      "_$var": true,
+      "_$type": "Button",
+      "name": "btn",
+      "width": 750,
+      "height": 54,
+      "_mouseState": 2,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "skin": "",
+      "label": "",
+      "labelSize": 20,
+      "labelAlign": "center",
+      "labelVAlign": "middle"
     }
   ]
 }
