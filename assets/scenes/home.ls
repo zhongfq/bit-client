@@ -117,6 +117,35 @@
       "labelVAlign": "middle"
     },
     {
+      "_$id": "i5cbtifb",
+      "_$var": true,
+      "_$type": "Button",
+      "name": "btnEdge",
+      "x": 705,
+      "y": 507,
+      "width": 76,
+      "height": 152,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "_mouseState": 2,
+      "right": 7,
+      "top": 431,
+      "stateNum": 1,
+      "skin": "res://2027c9cd-6f9c-4617-80ca-4e28752d2298",
+      "label": "",
+      "labelSize": 20,
+      "labelAlign": "center",
+      "labelVAlign": "middle",
+      "_$comp": [
+        {
+          "_$type": "542323df-0cff-4e4c-a3af-a9f57b3977f7",
+          "scriptPath": "../src/core/button/ButtonCommont.ts",
+          "sclaeX": 0.8,
+          "sclaeY": 0.8
+        }
+      ]
+    },
+    {
       "_$id": "wcf9dgzw",
       "_$prefab": "c2dde787-3f08-42c0-9f89-503e855e1cf2",
       "_$var": true,
@@ -234,9 +263,21 @@
           "height": 1334
         },
         {
+          "_$id": "alrzx2pw",
+          "_$prefab": "a6580351-aeeb-44b8-9183-cacf97aa5f8a",
+          "name": "item1",
+          "active": true,
+          "x": 0,
+          "y": 0,
+          "visible": false,
+          "left": 0,
+          "top": 0,
+          "bottom": 0
+        },
+        {
           "_$id": "3n6gdyap",
           "_$prefab": "de548129-37fd-4bea-8be1-f98a06289f58",
-          "name": "item1",
+          "name": "item2",
           "active": true,
           "x": 0,
           "y": 0,
@@ -258,35 +299,6 @@
       "left": 0,
       "right": 0,
       "bottom": 0
-    },
-    {
-      "_$id": "i5cbtifb",
-      "_$var": true,
-      "_$type": "Button",
-      "name": "btnEdge",
-      "x": 705,
-      "y": 507,
-      "width": 76,
-      "height": 152,
-      "anchorX": 0.5,
-      "anchorY": 0.5,
-      "_mouseState": 2,
-      "right": 7,
-      "top": 431,
-      "stateNum": 1,
-      "skin": "res://2027c9cd-6f9c-4617-80ca-4e28752d2298",
-      "label": "",
-      "labelSize": 20,
-      "labelAlign": "center",
-      "labelVAlign": "middle",
-      "_$comp": [
-        {
-          "_$type": "542323df-0cff-4e4c-a3af-a9f57b3977f7",
-          "scriptPath": "../src/core/button/ButtonCommont.ts",
-          "sclaeX": 0.8,
-          "sclaeY": 0.8
-        }
-      ]
     }
   ]
 }

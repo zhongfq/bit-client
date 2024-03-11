@@ -20,11 +20,12 @@
       "_$var": true,
       "_$type": "Image",
       "name": "imgBg",
+      "y": -108,
       "width": 750,
-      "height": 1334,
+      "height": 1550,
       "centerX": 0,
       "centerY": 0,
-      "skin": "res://79970b5b-ceed-4dba-9c31-9ff38c1f92e0",
+      "skin": "res://d49d51f6-a212-4d94-adf7-ba04d2d9ab4f",
       "color": "#ffffff"
     },
     {

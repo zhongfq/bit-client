@@ -10,6 +10,7 @@ export class LoadingMediator extends Laya.Script {
     declare owner: LoadingUI;
     virtualProgress: number = 0;
     progress: number = 0;
+    isOpen: boolean = false;
 
     override onAwake(): void {
         let isOpen = false;
@@ -19,14 +20,14 @@ export class LoadingMediator extends Laya.Script {
                 isOpen = true;
             }
             if (val < 1 && Math.round(val * 100) == 100) {
-                this.owner.progress.value = 1;
+                this.owner.imgBar.value = 1;
             }
         });
         this._starGame();
     }
 
     async _starGame() {
-        this.owner.progress.value = 0;
+        this.owner.imgBar.value = 0;
         await app.service.user.loadProfile();
         await app.service.table.load();
         this.progress = 20;
@@ -52,8 +53,13 @@ export class LoadingMediator extends Laya.Script {
     }
 
     updateView() {
-        this.owner.progress.value = this.virtualProgress * 0.01;
-        this.owner.progress.bar.sizeGrid;
+        if (this.isOpen) return;
+        this.owner.imgBar.value = this.virtualProgress * 0.01;
+        if (this.owner.imgBar.value < 1 && Math.round(this.owner.imgBar.value * 100) == 100) {
+            this.owner.imgBar.value = 1;
+            this.isOpen = true;
+            app.ui.replace(ui.HOME_SCENE);
+        }
     }
 
     updateProg() {

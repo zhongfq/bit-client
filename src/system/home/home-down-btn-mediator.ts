@@ -52,7 +52,15 @@ export class HomeDownBtnMediator extends Mediator {
                         this.owner.listDownBtn.selectedIndex == 0 ? 0 : -1;
                 },
             },
-            { iconSkin: "icon_main_2", textSkin: "text_main_2", func: () => {} },
+            {
+                iconSkin: "icon_main_2",
+                textSkin: "text_main_2",
+                func: () => {
+                    const home = this.owner.parent as HomeUI;
+                    home.viewStack.selectedIndex =
+                        this.owner.listDownBtn.selectedIndex == 1 ? 1 : -1;
+                },
+            },
             {
                 iconSkin: "icon_main_3",
                 textSkin: "text_main_3",
@@ -66,7 +74,7 @@ export class HomeDownBtnMediator extends Mediator {
                 func: () => {
                     const home = this.owner.parent as HomeUI;
                     home.viewStack.selectedIndex =
-                        this.owner.listDownBtn.selectedIndex == 3 ? 1 : -1;
+                        this.owner.listDownBtn.selectedIndex == 3 ? 2 : -1;
                 },
             },
             { iconSkin: "icon_main_5", textSkin: "text_main_5", func: () => {} },
