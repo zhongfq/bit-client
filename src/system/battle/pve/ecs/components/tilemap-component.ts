@@ -10,8 +10,8 @@ export class TilemapComponent extends ecs.SingletonComponent {
     static readonly VISION_WIDTH = 25; // 视野宽度（单位：米）
     static readonly VISION_HEIGHT = 25; // 视野高度（单位：米）
 
-    static readonly MAP_WIDTH = 50; // 地图块宽度（单位：米）
-    static readonly MAP_HEIGHT = 50; // 地图块高度（单位：米）
+    static readonly MAP_WIDTH = 50; // 地图块宽度（仅第一块，单位：米）
+    static readonly MAP_HEIGHT = 50; // 地图块高度（仅第一块，单位：米）
 
     static readonly TILE_WIDTH = 128; // 瓦片宽度（单位：像素）
     static readonly TILE_HEIGHT = 64; // 瓦片高度（单位：像素）

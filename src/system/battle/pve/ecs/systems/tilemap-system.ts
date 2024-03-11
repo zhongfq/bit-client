@@ -309,7 +309,10 @@ export class TilemapSystem extends ecs.System {
         )) as Tilemap.World;
         this._world.maps.forEach((info) => {
             [info.x, info.y] = this._transMapPos(info);
-            [info.width, info.height] = [TilemapComponent.MAP_WIDTH, TilemapComponent.MAP_HEIGHT];
+            [info.width, info.height] = [
+                info.width / TilemapComponent.TILE_WIDTH,
+                info.height / TilemapComponent.TILE_HEIGHT,
+            ];
         });
 
         const tilesetRef = (await Laya.loader.fetch(
