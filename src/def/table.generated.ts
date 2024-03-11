@@ -266,6 +266,15 @@ export interface GeneratedBattleBuffRow {
     ban_actions?: any;
 }
 
+// file: design/battle/battle_building.xlsx
+export interface GeneratedBattleBuildingRow {
+    id: number;
+    battle_entity: number;
+    obstacle_size: number;
+    max_hp: number;
+    fresh_time: number;
+}
+
 // file: design/world/world_map.xlsx
 export interface GeneratedWorldMapMapsRow {
     id: number;
@@ -301,37 +310,23 @@ export interface GeneratedWorldEntityModelsRow {
 }
 
 // file: design/world/world_building.xlsx
-export interface GeneratedWorldBuildingCastleRow {
-    id: number;
-    etype: number;
-    fill_size: number;
-    obstacle_size: number;
-    name: string;
-    building_desc?: string;
-    type_desc: string;
-    max_hp: number;
-}
-
-// file: design/world/world_building.xlsx
 export interface GeneratedWorldBuildingCityRow {
     id: number;
     etype: number;
-    portal?: number;
-    fill_size: number;
-    obstacle_size: number;
-    coll_radius: number;
-    public_sight_radius: number;
-    lv: number;
-    declare_cost: any;
-    gameplay: number;
+    width: number;
+    height: number;
     name: string;
-    building_desc: string;
-    type_desc: string;
-    select_effect_lv: number;
-    max_hp: number;
-    touch_mail: number;
-    alliance_mail: number;
-    tips_pic: string;
+    building_desc?: string;
+}
+
+// file: design/world/world_building.xlsx
+export interface GeneratedWorldBuildingMineRow {
+    id: number;
+    etype: number;
+    width: number;
+    height: number;
+    name: string;
+    building_desc?: string;
 }
 
 // file: design/world/world_season.xlsx

@@ -200,5 +200,29 @@
         "id": 50012,
         "pve_ai": "hero",
         "res": "prefab/battle/bullet/guanyu-skill"
+    },
+    "60001": {
+        "etype": 5,
+        "id": 60001,
+        "pve_ai": "hero",
+        "res": "resources/prefab/battle/roles/bing-dao.lh"
+    },
+    "70001": {
+        "etype": 6,
+        "id": 70001,
+        "pve_ai": "hero",
+        "res": "resources/prefab/battle/roles/bing-dao.lh"
+    },
+    "70002": {
+        "etype": 7,
+        "id": 70002,
+        "pve_ai": "hero",
+        "res": "resources/prefab/battle/roles/bing-dao.lh"
+    },
+    "70003": {
+        "etype": 8,
+        "id": 70003,
+        "pve_ai": "hero",
+        "res": "resources/prefab/battle/roles/bing-dao.lh"
     }
 }
