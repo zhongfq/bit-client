@@ -292,6 +292,8 @@ export class TilemapSystem extends ecs.System {
     private _allMap: Map<number, Tilemap.Element> = new Map();
     private _posMap: Map<Tilemap.LayerName, Map<string, number>> = new Map();
 
+    private _transMat: Laya.Matrix3x3 | undefined;
+
     public showBlocks: Map<string, boolean> = new Map();
 
     constructor(readonly context: PveContext) {
@@ -343,6 +345,17 @@ export class TilemapSystem extends ecs.System {
     }
 
     private _transMapPos(info: Tilemap.MapInfo) {
+        const mat = this._getTransMat();
+        const pos = new Laya.Vector2(info.x + info.width / 2, info.y);
+        Laya.Vector2.transformCoordinate(pos, mat, pos);
+
+        return [Math.floor(pos.x), Math.floor(pos.y)];
+    }
+
+    private _getTransMat() {
+        if (this._transMat) {
+            return this._transMat;
+        }
         const scale = Math.sqrt((TilemapComponent.TILE_HEIGHT * 2) ** 2 / 2);
 
         const mat = new Laya.Matrix3x3();
@@ -357,10 +370,8 @@ export class TilemapSystem extends ecs.System {
         const invertMat = new Laya.Matrix3x3();
         mat.invert(invertMat);
 
-        const pos = new Laya.Vector2(info.x + info.width / 2, info.y);
-        Laya.Vector2.transformCoordinate(pos, invertMat, pos);
-
-        return [Math.floor(pos.x), Math.floor(pos.y)];
+        this._transMat = invertMat;
+        return invertMat;
     }
 
     public update(dt: number): void {
