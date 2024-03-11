@@ -43,7 +43,15 @@ export class HomeDownBtnMediator extends Mediator {
 
     updateInfo() {
         this.owner.listDownBtn.array = [
-            { iconSkin: "icon_main_1", textSkin: "text_main_1", func: () => {} },
+            {
+                iconSkin: "icon_main_1",
+                textSkin: "text_main_1",
+                func: () => {
+                    const home = this.owner.parent as HomeUI;
+                    home.viewStack.selectedIndex =
+                        this.owner.listDownBtn.selectedIndex == 0 ? 0 : -1;
+                },
+            },
             { iconSkin: "icon_main_2", textSkin: "text_main_2", func: () => {} },
             {
                 iconSkin: "icon_main_3",
@@ -57,8 +65,8 @@ export class HomeDownBtnMediator extends Mediator {
                 textSkin: "text_main_4",
                 func: () => {
                     const home = this.owner.parent as HomeUI;
-                    home.ViewStack.selectedIndex =
-                        this.owner.listDownBtn.selectedIndex == 3 ? 0 : -1;
+                    home.viewStack.selectedIndex =
+                        this.owner.listDownBtn.selectedIndex == 3 ? 1 : -1;
                 },
             },
             { iconSkin: "icon_main_5", textSkin: "text_main_5", func: () => {} },

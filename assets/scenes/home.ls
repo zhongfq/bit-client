@@ -19,11 +19,10 @@
       "_$id": "kaffipmj",
       "_$type": "Image",
       "name": "Image",
-      "x": -4,
       "y": -108,
       "width": 750,
       "height": 1550,
-      "centerX": -4,
+      "centerX": 0,
       "centerY": 0,
       "skin": "res://d49d51f6-a212-4d94-adf7-ba04d2d9ab4f",
       "useSourceSize": true,
@@ -210,43 +209,41 @@
       ]
     },
     {
-      "_$id": "cibyk9jb",
+      "_$id": "90f9o1ol",
       "_$var": true,
       "_$type": "ViewStack",
-      "name": "ViewStack",
+      "name": "viewStack",
       "x": -1.9999999999999991,
       "y": 0.999999999999926,
-      "width": 750,
-      "height": 1220,
+      "width": 0,
+      "height": 0,
       "_mouseState": 2,
-      "mouseThrough": true,
       "selectedIndex": null,
       "_$child": [
         {
-          "_$id": "0juog0qc",
-          "_$prefab": "de548129-37fd-4bea-8be1-f98a06289f58",
-          "_$var": true,
+          "_$id": "9fjwxjsd",
+          "_$prefab": "6175ee58-db21-4d7a-8ed4-3342368b1e2b",
           "name": "item0",
           "active": true,
           "x": 0,
           "y": 0,
           "visible": false,
           "left": 0,
-          "right": 0,
           "top": 0,
           "bottom": 0,
-          "width": 750,
-          "_$child": [
-            {
-              "_$override": "5dol2ueu",
-              "y": 803,
-              "x": 332
-            },
-            {
-              "_$override": "0omkcmda",
-              "y": 0
-            }
-          ]
+          "height": 1334
+        },
+        {
+          "_$id": "3n6gdyap",
+          "_$prefab": "de548129-37fd-4bea-8be1-f98a06289f58",
+          "name": "item1",
+          "active": true,
+          "x": 0,
+          "y": 0,
+          "visible": false,
+          "left": 0,
+          "top": 0,
+          "bottom": 0
         }
       ]
     },
@@ -261,6 +258,35 @@
       "left": 0,
       "right": 0,
       "bottom": 0
+    },
+    {
+      "_$id": "i5cbtifb",
+      "_$var": true,
+      "_$type": "Button",
+      "name": "btnEdge",
+      "x": 705,
+      "y": 507,
+      "width": 76,
+      "height": 152,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "_mouseState": 2,
+      "right": 7,
+      "top": 431,
+      "stateNum": 1,
+      "skin": "res://2027c9cd-6f9c-4617-80ca-4e28752d2298",
+      "label": "",
+      "labelSize": 20,
+      "labelAlign": "center",
+      "labelVAlign": "middle",
+      "_$comp": [
+        {
+          "_$type": "542323df-0cff-4e4c-a3af-a9f57b3977f7",
+          "scriptPath": "../src/core/button/ButtonCommont.ts",
+          "sclaeX": 0.8,
+          "sclaeY": 0.8
+        }
+      ]
     }
   ]
 }

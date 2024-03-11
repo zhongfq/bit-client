@@ -241,6 +241,13 @@ export interface GeneratedBattleEntityRow {
     info_offset?: number;
 }
 
+// file: design/battle/battle_scene.xlsx
+export interface GeneratedBattleSceneRow {
+    id: number;
+    max_slot: number;
+    max_wait_list: number;
+}
+
 // file: design/battle/battle_demo.xlsx
 export interface GeneratedBattleDemoRow {
     key: string;
@@ -412,7 +419,7 @@ export interface GeneratedEmojiRow {
 export interface GeneratedChestRow {
     id: number;
     sort: number;
-    icon?: string;
+    icon: string;
     open_max_num: number;
     open_score: number;
     reward_score: number;

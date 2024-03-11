@@ -2,7 +2,6 @@
 
 import { HomeTaskBoxUI } from "../prefab/home/HomeTaskBoxUI";
 import { HomeChatBoxUI } from "../prefab/home/HomeChatBoxUI";
-import { ChestUI } from "../prefab/chest/ChestUI";
 
 /**
  * scenes/home.ls
@@ -15,7 +14,7 @@ export class HomeUIBase extends Laya.Scene {
     public btnBag!: Laya.Button;
     public task_box!: HomeTaskBoxUI;
     public chat_box!: HomeChatBoxUI;
-    public ViewStack!: Laya.ViewStack;
-    public item0!: ChestUI;
+    public viewStack!: Laya.ViewStack;
+    public btnEdge!: Laya.Button;
 }
 

@@ -1,0 +1,12 @@
+{
+    "1": {
+        "id": 1,
+        "max_slot": 5,
+        "max_wait_list": 99
+    },
+    "2": {
+        "id": 2,
+        "max_slot": 10,
+        "max_wait_list": 99
+    }
+}

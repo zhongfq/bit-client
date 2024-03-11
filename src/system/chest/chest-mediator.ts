@@ -6,8 +6,6 @@ import { ChestItemUI } from "../../ui-runtime/prefab/chest/ChestItemUI";
 import proto from "../../def/proto";
 import { ChestRow, ChestScoreRow } from "../../def/table";
 import { HeroVo } from "../../misc/vo/goods/hero-vo";
-import { ChestService } from "./chest-service";
-import { Util } from "../../core/utils/util";
 import { TableUtil } from "../table/table-util";
 
 const { regClass, property } = Laya;
@@ -53,9 +51,7 @@ export class ChestMediator extends Mediator {
                     this.owner.imgShestReward
                         .getComponent(Laya.Animator2D)
                         .play(chestScoreRow.chest_id.toString());
-                    this._updateScore();
-                    this._updateList();
-                    this._updateBtnOpen();
+                    this.initInfo();
                 });
             } else {
                 app.ui.toast("积分不足");
@@ -93,9 +89,7 @@ export class ChestMediator extends Mediator {
                         this.owner.spineShest.once(Laya.Event.STOPPED, this, () => {
                             app.ui.show(ui.REWARD, data.rewards);
                             this.owner.spineShest.play("chest2_down", false);
-                            this._updateScore();
-                            this._updateList();
-                            this._updateBtnOpen();
+                            this.initInfo();
                         });
                     });
                 }
@@ -114,7 +108,7 @@ export class ChestMediator extends Mediator {
 
     private _updateScore() {
         const score = app.service.chest.scoreInfo.score;
-        const scoreRow = app.service.table.chest.score[app.service.chest.scoreInfo.scoreId]
+        const scoreRow = app.service.table.chest.score[app.service.chest.scoreInfo.scoreId];
         const chesRow = TableUtil.getRow(app.service.table.chest.chest, {
             id: scoreRow.chest_id,
         });
@@ -161,16 +155,16 @@ export class ChestMediator extends Mediator {
                 ? `x${this.listData[index].cmdNum}`
                 : "x0";
             console.log(this.listData[index].row.icon);
-            
-            item.imgIcon.skin =  `resources/atlas/chest/${this.listData[index].row.icon}_n.png`;
+
+            item.imgIcon.skin = `resources/atlas/chest/${this.listData[index].row.icon}_n.png`;
             item.imgHigh.skin = `resources/atlas/chest/${this.listData[index].row.icon}_s.png`;
         }
     }
 
     private _updateList() {
         this.listData = [];
-        for (const key in  app.service.table.chest.chest) {
-            const row = app.service.table.chest.chest[key]
+        for (const key in app.service.table.chest.chest) {
+            const row = app.service.table.chest.chest[key];
             this.listData.push({
                 row: row,
                 cmdNum: app.service.chest.chestInfo.get(row.id),
@@ -182,4 +176,4 @@ export class ChestMediator extends Mediator {
         const cell = this.owner.listBox.cells[this.selectedIndex] as ChestItemUI;
         cell.hightlight();
     }
-} 
+}
