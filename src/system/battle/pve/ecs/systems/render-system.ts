@@ -7,7 +7,6 @@ import {
     HeadInfoComponent,
     ShadowComponent,
 } from "../components/render-component";
-import { HeroComponent, OwnerComponent } from "../components/troop-component";
 
 const tmpInfoVector4 = new Laya.Vector4();
 
@@ -43,6 +42,7 @@ export class RenderSystem extends ecs.System {
     update(dt: number): void {
         this.ecs.getComponents(AnimationComponent).forEach((anim) => {
             this._updatePosition(anim);
+            this._updateAnim(anim);
         });
         this.ecs.getComponents(HeadInfoComponent).forEach((info) => {
             this._updateHeadInfoPos(info);
@@ -73,6 +73,18 @@ export class RenderSystem extends ecs.System {
         if (transform.flag & TransformComponent.ROTATION) {
             targetTransform.localRotationEulerY = transform.rotation;
             transform.flag &= ~TransformComponent.ROTATION;
+        }
+    }
+
+    private _updateAnim(anim: AnimationComponent) {
+        const animator = anim.animator;
+        if (!anim.loop && animator) {
+            const playState = animator.getControllerLayer(0).getCurrentPlayState();
+            if (playState.currentState?.name === anim.name && playState.normalizedTime >= 1) {
+                anim.loop = true;
+                anim.name = anim.normal;
+                animator.crossFade(anim.name, 0.15);
+            }
         }
     }
 

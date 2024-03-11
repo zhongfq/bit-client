@@ -137,24 +137,31 @@ export class CommandSystem extends ecs.System implements ICommandSender {
         }
     }
 
+    private _playCrossFade(element: ElementComponent, name: string, loop: boolean): void {
+        const animation = element.animation;
+        const animator = animation.animator;
+        if (animator && animation.name !== name) {
+            animation.name = name;
+            animation.loop = loop;
+            animator.crossFade(name, 0.15);
+        }
+    }
+
     playAnim(eid: number, name: ElementAnimation) {
         const element = this._findElement(eid);
         if (element) {
-            const animator = element.animation.animator;
-            if (animator) {
-                switch (name) {
-                    case ElementAnimation.ATTACK:
-                        animator.setParamsTrigger(ElementAnimation.ATTACK);
-                        break;
-                    case ElementAnimation.IDLE:
-                        animator.setParamsBool(ElementAnimation.RUN, false);
-                        animator.setParamsBool(ElementAnimation.IDLE, true);
-                        break;
-                    case ElementAnimation.RUN:
-                        animator.setParamsBool(ElementAnimation.IDLE, false);
-                        animator.setParamsBool(ElementAnimation.RUN, true);
-                        break;
-                }
+            switch (name) {
+                case ElementAnimation.ATTACK:
+                    this._playCrossFade(element, "attack", false);
+                    break;
+                case ElementAnimation.IDLE:
+                    element.animation.normal = "idle";
+                    this._playCrossFade(element, "idle", true);
+                    break;
+                case ElementAnimation.RUN:
+                    element.animation.normal = "run";
+                    this._playCrossFade(element, "run", true);
+                    break;
             }
         }
     }

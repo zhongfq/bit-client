@@ -3,19 +3,19 @@
   "props": {
     "textures": [
       {
-        "path": "res://1da4ff5b-6771-435a-a7b0-64256f46d111",
+        "path": "res://09125e91-00da-47ed-912e-864be155ca3d",
         "constructParams": [
           1024,
           1024,
-          4,
+          3,
           true,
           false,
           false
         ],
         "propertyParams": {
           "filterMode": 1,
-          "wrapModeU": 1,
-          "wrapModeV": 1,
+          "wrapModeU": 0,
+          "wrapModeV": 0,
           "anisoLevel": 4
         },
         "name": "u_AlbedoTexture"

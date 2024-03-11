@@ -13,48 +13,6 @@
       "states": [
         {
           "_$type": "AnimatorState",
-          "name": "attack",
-          "speed": 1,
-          "clipStart": 0,
-          "clipEnd": 1,
-          "x": 586,
-          "y": 144,
-          "clip": {
-            "_$uuid": "d01f801f-194b-40ce-b8e8-548f3d0c7b7b"
-          },
-          "id": "0",
-          "soloTransitions": [
-            {
-              "id": "1",
-              "exitByTime": true,
-              "transduration": 0.15,
-              "exitTime": 0.85,
-              "conditions": [
-                {
-                  "type": 0,
-                  "id": 1,
-                  "checkValue": true
-                }
-              ]
-            },
-            {
-              "id": "2",
-              "exitByTime": true,
-              "transduration": 0.15,
-              "exitTime": 0.85,
-              "conditions": [
-                {
-                  "type": 0,
-                  "id": 0,
-                  "checkValue": true
-                }
-              ]
-            }
-          ],
-          "_isLooping": 1
-        },
-        {
-          "_$type": "AnimatorState",
           "name": "idle",
           "speed": 1,
           "clipStart": 0,
@@ -62,77 +20,10 @@
           "x": 247.49149999999997,
           "y": 97.29404,
           "clip": {
-            "_$uuid": "750961a3-29e0-41ed-b42a-5190fe3aadb9"
+            "_$uuid": "4e112ac4-a074-44b0-826a-3642cb06e8a1"
           },
           "id": "1",
-          "soloTransitions": [
-            {
-              "id": "2",
-              "exitByTime": true,
-              "transduration": 0.15,
-              "exitTime": 0.1,
-              "conditions": [
-                {
-                  "type": 0,
-                  "id": 0,
-                  "checkValue": true
-                }
-              ]
-            },
-            {
-              "id": "0",
-              "exitByTime": true,
-              "transduration": 0.15,
-              "exitTime": 0.1,
-              "conditions": [
-                {
-                  "type": 0,
-                  "id": 2
-                }
-              ]
-            }
-          ],
-          "_isLooping": 1
-        },
-        {
-          "_$type": "AnimatorState",
-          "name": "run",
-          "speed": 1,
-          "clipStart": 0,
-          "clipEnd": 1,
-          "x": 258,
-          "y": 240,
-          "clip": {
-            "_$uuid": "82586f2a-51e1-4d34-8e9b-83c69ce3afdc"
-          },
-          "id": "2",
-          "soloTransitions": [
-            {
-              "id": "1",
-              "exitByTime": true,
-              "transduration": 0.15,
-              "exitTime": 0.1,
-              "conditions": [
-                {
-                  "type": 0,
-                  "id": 1,
-                  "checkValue": true
-                }
-              ]
-            },
-            {
-              "id": "0",
-              "exitByTime": true,
-              "transduration": 0.15,
-              "exitTime": 0.1,
-              "conditions": [
-                {
-                  "type": 0,
-                  "id": 2
-                }
-              ]
-            }
-          ],
+          "soloTransitions": [],
           "_isLooping": 1
         },
         {
@@ -156,63 +47,37 @@
           "name": "任何状态",
           "speed": 1,
           "clipEnd": 1,
-          "x": 473,
-          "y": 278,
-          "soloTransitions": [
-            {
-              "id": "3",
-              "exitByTime": true,
-              "transduration": 0.15,
-              "exitTime": 0.85,
-              "conditions": [
-                {
-                  "type": 0,
-                  "id": 3
-                }
-              ]
-            }
-          ]
+          "x": 477,
+          "y": 423,
+          "soloTransitions": []
         },
         {
-          "x": 201,
-          "y": 379,
-          "_isLooping": 2,
-          "id": "3",
-          "name": "die",
+          "x": 260,
+          "y": 272,
+          "_isLooping": 1,
+          "id": "0",
+          "name": "run",
           "speed": 1,
           "clipEnd": 1,
           "clip": {
-            "_$uuid": "918ba272-787b-4275-8340-b80df73aba19"
+            "_$uuid": "dc42b22a-a85f-495d-8337-b1ac61f83f0f"
+          }
+        },
+        {
+          "x": 536,
+          "y": 173,
+          "_isLooping": 2,
+          "id": "2",
+          "name": "attack",
+          "speed": 1,
+          "clipEnd": 1,
+          "clip": {
+            "_$uuid": "aa6069b0-28e0-4361-90a4-c7eb55f2461c"
           }
         }
       ]
     }
   ],
   "layerW": 150,
-  "animatorParams": [
-    {
-      "id": 0,
-      "name": "run",
-      "type": 1,
-      "val": false
-    },
-    {
-      "id": 1,
-      "name": "idle",
-      "type": 1,
-      "val": true
-    },
-    {
-      "id": 2,
-      "name": "attack",
-      "type": 2,
-      "val": 0
-    },
-    {
-      "id": 3,
-      "name": "die",
-      "type": 2,
-      "val": false
-    }
-  ]
+  "animatorParams": []
 }

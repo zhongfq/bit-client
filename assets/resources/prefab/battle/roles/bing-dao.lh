@@ -5,14 +5,10 @@
   "name": "mc01",
   "_$child": [
     {
-      "_$id": "j14ik8tv",
+      "_$id": "4mkenfnk",
       "_$type": "Sprite3D",
       "name": "anim",
       "transform": {
-        "localRotation": {
-          "_$type": "Quaternion",
-          "w": -1
-        },
         "localScale": {
           "_$type": "Vector3",
           "x": 0.4,
@@ -30,26 +26,15 @@
           "controllerLayers": [
             {
               "_$type": "AnimatorControllerLayer",
-              "name": "Base Layer",
+              "name": "die",
               "states": [
-                {
-                  "_$type": "AnimatorState",
-                  "name": "die",
-                  "_isLooping": 2,
-                  "clipStart": 0,
-                  "clip": {
-                    "_$uuid": "4e571d5e-71b0-4ada-8049-19336f966337",
-                    "_$type": "AnimationClip"
-                  },
-                  "soloTransitions": []
-                },
                 {
                   "_$type": "AnimatorState",
                   "name": "run",
                   "_isLooping": 1,
                   "clipStart": 0,
                   "clip": {
-                    "_$uuid": "30966398-4ea0-469b-9541-7f92aefc4d63",
+                    "_$uuid": "c08969f3-d68a-4051-9f9b-b5fc66b73bd0",
                     "_$type": "AnimationClip"
                   },
                   "soloTransitions": []
@@ -60,7 +45,7 @@
                   "_isLooping": 1,
                   "clipStart": 0,
                   "clip": {
-                    "_$uuid": "5b60a641-0722-4f32-b361-f999a19e7307",
+                    "_$uuid": "d73a87f5-e3c1-4675-8636-0577693be44c",
                     "_$type": "AnimationClip"
                   },
                   "soloTransitions": []
@@ -68,10 +53,10 @@
                 {
                   "_$type": "AnimatorState",
                   "name": "attack",
-                  "_isLooping": 1,
+                  "_isLooping": 2,
                   "clipStart": 0,
                   "clip": {
-                    "_$uuid": "04145be7-5fb3-46a3-88c5-ab23e978319d",
+                    "_$uuid": "aa6069b0-28e0-4361-90a4-c7eb55f2461c",
                     "_$type": "AnimationClip"
                   },
                   "soloTransitions": []
@@ -84,267 +69,344 @@
       ],
       "_$child": [
         {
-          "_$id": "oi1qhsoq",
+          "_$id": "yedb5hez",
           "_$type": "Sprite3D",
-          "name": "Body_Sword shield_01",
+          "name": "body_level1",
           "transform": {
             "localRotation": {
               "_$type": "Quaternion",
-              "x": 0.7071067811865476,
-              "w": -0.7071067811865476
+              "w": -1
             }
           },
-          "_$comp": [
+          "_$child": [
             {
-              "_$type": "MeshFilter",
-              "sharedMesh": {
-                "_$uuid": "452f9b68-93da-4a71-bc0e-7892c9e834e0",
-                "_$type": "Mesh"
-              }
+              "_$id": "6z05fp8w",
+              "_$type": "Sprite3D",
+              "name": "Body_Sword shield_01",
+              "transform": {
+                "localRotation": {
+                  "_$type": "Quaternion",
+                  "x": 0.7071067811865476,
+                  "w": -0.7071067811865476
+                }
+              },
+              "_$comp": [
+                {
+                  "_$type": "MeshFilter",
+                  "sharedMesh": {
+                    "_$uuid": "415cf7e0-c293-44bf-933e-2917fd720a2d",
+                    "_$type": "Mesh"
+                  }
+                },
+                {
+                  "_$type": "SkinnedMeshRenderer",
+                  "receiveShadow": true,
+                  "castShadow": true,
+                  "sharedMaterials": [
+                    {
+                      "_$uuid": "8f1698b6-5fa9-4326-a510-624a2ca4b5ad",
+                      "_$type": "Material"
+                    }
+                  ],
+                  "_bones": [
+                    {
+                      "_$ref": "66lsjf24"
+                    },
+                    {
+                      "_$ref": "y41ye203"
+                    },
+                    {
+                      "_$ref": "bzh3qhuu"
+                    },
+                    {
+                      "_$ref": "zvnjkotf"
+                    },
+                    {
+                      "_$ref": "ioecfr8v"
+                    },
+                    {
+                      "_$ref": "y31c1c1s"
+                    },
+                    {
+                      "_$ref": "wv1hc8li"
+                    },
+                    {
+                      "_$ref": "chmybuxt"
+                    },
+                    {
+                      "_$ref": "krpsh4s3"
+                    },
+                    {
+                      "_$ref": "wgrndtjd"
+                    },
+                    {
+                      "_$ref": "ob4ixb92"
+                    },
+                    {
+                      "_$ref": "bke1fwar"
+                    },
+                    {
+                      "_$ref": "0bz13ubp"
+                    },
+                    {
+                      "_$ref": "2d7d1z13"
+                    },
+                    {
+                      "_$ref": "kdram810"
+                    },
+                    {
+                      "_$ref": "7lodwa9a"
+                    },
+                    {
+                      "_$ref": "0joms8kz"
+                    },
+                    {
+                      "_$ref": "wezndroz"
+                    }
+                  ],
+                  "rootBone": {
+                    "_$ref": "y41ye203"
+                  },
+                  "localBounds": {
+                    "_$type": "Bounds",
+                    "min": {
+                      "_$type": "Vector3"
+                    },
+                    "max": {
+                      "_$type": "Vector3"
+                    }
+                  }
+                }
+              ]
             },
             {
-              "_$type": "SkinnedMeshRenderer",
-              "castShadow": true,
-              "sharedMaterials": [
-                {
-                  "_$uuid": "8f1698b6-5fa9-4326-a510-624a2ca4b5ad",
-                  "_$type": "Material"
+              "_$id": "24n4f78m",
+              "_$type": "Sprite3D",
+              "name": "Head_Sword shield_01",
+              "transform": {
+                "localPosition": {
+                  "_$type": "Vector3",
+                  "x": -0.01694161,
+                  "y": 1.081394,
+                  "z": 0.1284582
+                },
+                "localRotation": {
+                  "_$type": "Quaternion",
+                  "x": 0.6231953338022193,
+                  "y": 0.01098955883265428,
+                  "z": -0.013606758554647044,
+                  "w": -0.7818706169472286
+                },
+                "localScale": {
+                  "_$type": "Vector3",
+                  "x": 0.8299999,
+                  "y": 0.8300002,
+                  "z": 0.83
                 }
-              ],
-              "_bones": [
-                {
-                  "_$ref": "fxlgci9v"
-                },
-                {
-                  "_$ref": "f8mhul7v"
-                },
-                {
-                  "_$ref": "tos4y59o"
-                },
-                {
-                  "_$ref": "7nncjhft"
-                },
-                {
-                  "_$ref": "b5kwwe1u"
-                },
-                {
-                  "_$ref": "bxuccwii"
-                },
-                {
-                  "_$ref": "bpzdn1v6"
-                },
-                {
-                  "_$ref": "gxjbufd1"
-                },
-                {
-                  "_$ref": "sepe4hg2"
-                },
-                {
-                  "_$ref": "t8bxwgid"
-                },
-                {
-                  "_$ref": "0my285u8"
-                },
-                {
-                  "_$ref": "d0x9xhja"
-                },
-                {
-                  "_$ref": "wnv4bhrd"
-                },
-                {
-                  "_$ref": "ciwdshlx"
-                },
-                {
-                  "_$ref": "zk3by36x"
-                },
-                {
-                  "_$ref": "lx2xz41a"
-                },
-                {
-                  "_$ref": "1npzm7m6"
-                },
-                {
-                  "_$ref": "ky39yhrz"
-                }
-              ],
-              "rootBone": {
-                "_$ref": "f8mhul7v"
               },
-              "localBounds": {
-                "_$type": "Bounds",
-                "min": {
-                  "_$type": "Vector3"
+              "_$comp": [
+                {
+                  "_$type": "MeshFilter",
+                  "sharedMesh": {
+                    "_$uuid": "e8e175cd-5bce-4c71-92bc-8ddc5a44f396",
+                    "_$type": "Mesh"
+                  }
                 },
-                "max": {
-                  "_$type": "Vector3"
+                {
+                  "_$type": "SkinnedMeshRenderer",
+                  "receiveShadow": true,
+                  "castShadow": true,
+                  "sharedMaterials": [
+                    {
+                      "_$uuid": "8f1698b6-5fa9-4326-a510-624a2ca4b5ad",
+                      "_$type": "Material"
+                    }
+                  ],
+                  "_bones": [
+                    {
+                      "_$ref": "z0lwq3bo"
+                    }
+                  ],
+                  "rootBone": {
+                    "_$ref": "z0lwq3bo"
+                  },
+                  "localBounds": {
+                    "_$type": "Bounds",
+                    "min": {
+                      "_$type": "Vector3"
+                    },
+                    "max": {
+                      "_$type": "Vector3"
+                    }
+                  }
                 }
-              }
+              ]
             }
           ]
         },
         {
-          "_$id": "lakeu9n8",
+          "_$id": "7dyfqfqj",
           "_$type": "Sprite3D",
           "name": "BoneInfantry001",
           "transform": {
             "localPosition": {
               "_$type": "Vector3",
-              "x": 0.04603073,
-              "y": 0.3450016,
-              "z": 0.008317418
+              "x": 0.018122337758541107,
+              "y": 0.3178337812423706,
+              "z": 0.003274574177339673
             },
             "localRotation": {
               "_$type": "Quaternion",
-              "x": 0.3015652908770122,
-              "y": 0.5750098826047351,
-              "z": 0.6395766806514529,
-              "w": -0.4115381875500996
-            },
-            "localScale": {
-              "_$type": "Vector3",
-              "x": 0.9999999,
-              "y": 0.9999999,
-              "z": 0.9999999
+              "x": 0.3015653192996979,
+              "y": 0.5751005641243134,
+              "z": 0.6395868099023638,
+              "w": -0.41146216910602323
             }
           },
           "_$child": [
             {
-              "_$id": "f8mhul7v",
+              "_$id": "y41ye203",
               "_$type": "Sprite3D",
               "name": "BoneInfantry001 Pelvis",
               "transform": {
                 "localRotation": {
                   "_$type": "Quaternion",
-                  "x": 0.5028409043105156,
-                  "y": 0.49714210426166366,
-                  "z": 0.4971423042616654,
-                  "w": -0.5028422043105268
+                  "x": -0.5028409361839294,
+                  "y": -0.4971919720478244,
+                  "z": -0.49722249432387766,
+                  "w": 0.5028038878483689
+                },
+                "localScale": {
+                  "_$type": "Vector3",
+                  "x": 1.0000001192092896,
+                  "y": 1,
+                  "z": 1
                 }
               },
               "_$child": [
                 {
-                  "_$id": "tos4y59o",
+                  "_$id": "bzh3qhuu",
                   "_$type": "Sprite3D",
                   "name": "BoneInfantry001 Spine",
                   "transform": {
                     "localPosition": {
                       "_$type": "Vector3",
-                      "x": 0.1293127,
-                      "y": -0.001749063,
-                      "z": 0.0001212559
+                      "x": 0.12928950786590576,
+                      "y": -0.0017484902637079358,
+                      "z": 0.00011967658792855218
                     },
                     "localRotation": {
                       "_$type": "Quaternion",
-                      "x": 0.20597000150813777,
-                      "y": 0.02648943019395888,
-                      "z": 0.00003839190028111024,
-                      "w": -0.978199707162499
+                      "x": 0.203102707862854,
+                      "y": -0.004270202014572371,
+                      "z": 0.045930765541862276,
+                      "w": -0.9780702656063138
                     },
                     "localScale": {
                       "_$type": "Vector3",
-                      "x": 0.9999999,
-                      "y": 0.9999999,
-                      "z": 0.9999998
+                      "x": 1,
+                      "y": 1,
+                      "z": 0.9999999403953552
                     }
                   },
                   "_$child": [
                     {
-                      "_$id": "gxjbufd1",
+                      "_$id": "chmybuxt",
                       "_$type": "Sprite3D",
                       "name": "BoneInfantry001 L Thigh",
                       "transform": {
                         "localPosition": {
                           "_$type": "Vector3",
-                          "x": -0.1217848,
-                          "y": -0.05677978,
-                          "z": 0.1365669
+                          "x": -0.12744304537773132,
+                          "y": -0.06601080298423767,
+                          "z": 0.12689067423343658
                         },
                         "localRotation": {
                           "_$type": "Quaternion",
-                          "x": 0.5452180727866346,
-                          "y": 0.7637531618789345,
-                          "z": 0.2774115861536085,
-                          "w": -0.20606108971491222
+                          "x": 0.5876076221466064,
+                          "y": 0.7326740777951837,
+                          "z": 0.2676105460966488,
+                          "w": -0.2175416038079302
                         },
                         "localScale": {
                           "_$type": "Vector3",
-                          "x": 0.9999999,
+                          "x": 1,
                           "y": 1,
-                          "z": 1
+                          "z": 0.9999998211860657
                         }
                       },
                       "_$child": [
                         {
-                          "_$id": "sepe4hg2",
+                          "_$id": "krpsh4s3",
                           "_$type": "Sprite3D",
                           "name": "BoneInfantry001 L Calf",
                           "transform": {
                             "localPosition": {
                               "_$type": "Vector3",
-                              "x": 0.1681753,
-                              "z": 2.422333e-8
+                              "x": 0.16817538440227509
                             },
                             "localRotation": {
                               "_$type": "Quaternion",
-                              "x": -5.218443698290859e-9,
-                              "y": -8.823932489836195e-9,
-                              "z": 0.47692637242606134,
-                              "w": -0.8789432491830844
+                              "x": -2.282467015390921e-8,
+                              "y": 6.992205925371309e-9,
+                              "z": 0.6085981774405947,
+                              "w": -0.7934785809434215
                             },
                             "localScale": {
                               "_$type": "Vector3",
-                              "x": 0.9999998,
-                              "y": 0.9999999,
-                              "z": 0.9999999
+                              "x": 0.9999999403953552,
+                              "y": 1.0000001192092896,
+                              "z": 1.0000001192092896
                             }
                           },
                           "_$child": [
                             {
-                              "_$id": "bpzdn1v6",
+                              "_$id": "wv1hc8li",
                               "_$type": "Sprite3D",
                               "name": "BoneInfantry001 L Foot",
                               "transform": {
                                 "localPosition": {
                                   "_$type": "Vector3",
-                                  "x": 0.1555263,
-                                  "y": 1.211166e-8
+                                  "x": 0.15552619099617004,
+                                  "y": -1.907348590179936e-8,
+                                  "z": 1.907348590179936e-8
                                 },
                                 "localRotation": {
                                   "_$type": "Quaternion",
-                                  "x": 0.1330574997993551,
-                                  "y": 0.0100312599848733,
-                                  "z": 0.016529569975074133,
-                                  "w": -0.9909196985057365
+                                  "x": 0.13157448172569275,
+                                  "y": 0.017619326711527324,
+                                  "z": -0.03185104579429635,
+                                  "w": -0.9906377848804225
                                 },
                                 "localScale": {
                                   "_$type": "Vector3",
-                                  "x": 0.9999999,
-                                  "y": 0.9999999,
-                                  "z": 1
+                                  "x": 0.9999998211860657,
+                                  "y": 0.9999999403953552,
+                                  "z": 0.9999999403953552
                                 }
                               },
                               "_$child": [
                                 {
-                                  "_$id": "t8bxwgid",
+                                  "_$id": "wgrndtjd",
                                   "_$type": "Sprite3D",
                                   "name": "BoneInfantry001 L Toe0",
                                   "transform": {
                                     "localPosition": {
                                       "_$type": "Vector3",
-                                      "x": 0.1146728,
-                                      "y": 0.1618776
+                                      "x": 0.11467286199331284,
+                                      "y": 0.1618775874376297
                                     },
                                     "localRotation": {
                                       "_$type": "Quaternion",
-                                      "x": 1.4568339868615546e-7,
-                                      "y": -2.4978579774730886e-7,
-                                      "z": -0.711125893586717,
-                                      "w": -0.7030646936594169
+                                      "x": 4.0561619130130566e-7,
+                                      "y": -7.720836947555655e-8,
+                                      "z": -0.7113448515304279,
+                                      "w": -0.7028431561884793
                                     },
                                     "localScale": {
                                       "_$type": "Vector3",
                                       "x": 1,
-                                      "y": 0.9999999,
+                                      "y": 0.9999999403953552,
                                       "z": 1
                                     }
                                   }
@@ -356,291 +418,157 @@
                       ]
                     },
                     {
-                      "_$id": "2m0ltqs3",
+                      "_$id": "vdqv5nhk",
                       "_$type": "Sprite3D",
                       "name": "BoneInfantry001 Neck",
                       "transform": {
                         "localPosition": {
                           "_$type": "Vector3",
-                          "x": 0.3773309,
-                          "y": -0.00008134193,
-                          "z": 9.083748e-9
+                          "x": 0.3773309290409088,
+                          "y": -0.00008134841482387856,
+                          "z": -2.38418573772492e-9
                         },
                         "localRotation": {
                           "_$type": "Quaternion",
-                          "x": 2.6665298884409585e-9,
-                          "y": 2.2367299064224087e-8,
-                          "z": -0.005699421761554509,
-                          "w": -0.9999837581638931
+                          "x": -8.48792680585575e-9,
+                          "y": 1.857837794716488e-8,
+                          "z": -0.0056994250044172245,
+                          "w": -0.9999837581454105
+                        },
+                        "localScale": {
+                          "_$type": "Vector3",
+                          "x": 1,
+                          "y": 1,
+                          "z": 0.9999999403953552
                         }
                       },
                       "_$child": [
                         {
-                          "_$id": "g2re1qaa",
+                          "_$id": "z0lwq3bo",
                           "_$type": "Sprite3D",
                           "name": "BoneInfantry001 Head",
                           "transform": {
                             "localPosition": {
                               "_$type": "Vector3",
-                              "x": 0.1218286,
-                              "y": -0.004995225,
-                              "z": -1.81675e-8
+                              "x": 0.10990425199270248,
+                              "y": -0.001966605195775628,
+                              "z": 4.76837147544984e-9
                             },
                             "localRotation": {
                               "_$type": "Quaternion",
-                              "x": -0.4440235912003523,
-                              "y": 0.013747919727544092,
-                              "z": 0.003288841934821818,
-                              "w": -0.8959035822450067
+                              "x": -0.44220268726348877,
+                              "y": 0.03198401162915697,
+                              "z": -0.0489015189692717,
+                              "w": -0.895040760147013
                             },
                             "localScale": {
                               "_$type": "Vector3",
-                              "x": 0.9999999,
-                              "y": 0.9999999,
-                              "z": 0.9999999
+                              "x": 0.9999998807907104,
+                              "y": 1,
+                              "z": 0.9999998807907104
                             }
-                          },
-                          "_$child": [
-                            {
-                              "_$id": "t74bfmgn",
-                              "_$type": "Sprite3D",
-                              "name": "Head_Sword shield_01",
-                              "transform": {
-                                "localPosition": {
-                                  "_$type": "Vector3",
-                                  "x": 0.1476732,
-                                  "y": 0.02901755,
-                                  "z": 0.000002231574
-                                },
-                                "localRotation": {
-                                  "_$type": "Quaternion",
-                                  "x": -0.7070990974303868,
-                                  "y": -0.0032941169880291088,
-                                  "z": -0.7070990974303868,
-                                  "w": 0.003298729988012345
-                                },
-                                "localScale": {
-                                  "_$type": "Vector3",
-                                  "x": 0.8299999,
-                                  "y": 0.8300001,
-                                  "z": 0.83
-                                }
-                              },
-                              "_$comp": [
-                                {
-                                  "_$type": "MeshFilter",
-                                  "sharedMesh": {
-                                    "_$uuid": "8fcbb5a0-374b-439c-b87f-effd74720ff0",
-                                    "_$type": "Mesh"
-                                  }
-                                },
-                                {
-                                  "_$type": "MeshRenderer",
-                                  "castShadow": true,
-                                  "sharedMaterials": [
-                                    {
-                                      "_$uuid": "8f1698b6-5fa9-4326-a510-624a2ca4b5ad",
-                                      "_$type": "Material"
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
+                          }
                         },
                         {
-                          "_$id": "zk3by36x",
+                          "_$id": "kdram810",
                           "_$type": "Sprite3D",
                           "name": "BoneInfantry001 L Clavicle",
                           "transform": {
                             "localPosition": {
                               "_$type": "Vector3",
-                              "x": 0.02187725,
-                              "y": -0.0001857324,
-                              "z": 0.08724848
+                              "x": 0.021877212449908257,
+                              "y": -0.00018568515952210873,
+                              "z": 0.0872485339641571
                             },
                             "localRotation": {
                               "_$type": "Quaternion",
-                              "x": 0.5683110546982709,
-                              "y": 0.1437842885385357,
-                              "z": 0.8028026360062642,
-                              "w": 0.1088877913202371
+                              "x": 0.5683110952377319,
+                              "y": 0.14378420788248256,
+                              "z": 0.8028230855876686,
+                              "w": 0.10889065189344224
                             },
                             "localScale": {
                               "_$type": "Vector3",
-                              "x": 0.9999999,
-                              "y": 0.9999999,
-                              "z": 0.9999999
+                              "x": 1,
+                              "y": 1,
+                              "z": 0.9999998807907104
                             }
                           },
                           "_$child": [
                             {
-                              "_$id": "ky39yhrz",
+                              "_$id": "wezndroz",
                               "_$type": "Sprite3D",
                               "name": "BoneInfantry001 L UpperArm",
                               "transform": {
                                 "localPosition": {
                                   "_$type": "Vector3",
-                                  "x": 0.2762494
+                                  "x": 0.27624934911727905,
+                                  "y": 1.4305114426349519e-8
                                 },
                                 "localRotation": {
                                   "_$type": "Quaternion",
-                                  "x": -0.006530004465767922,
-                                  "y": -0.09096008255838274,
-                                  "z": -0.19435408409952296,
-                                  "w": -0.9766832200956893
+                                  "x": -0.03666810691356659,
+                                  "y": -0.13620065256262018,
+                                  "z": -0.2014766920292994,
+                                  "w": -0.969284258878587
                                 },
                                 "localScale": {
                                   "_$type": "Vector3",
-                                  "x": 0.9999999,
+                                  "x": 0.9999999403953552,
                                   "y": 1,
-                                  "z": 0.9999999
+                                  "z": 1
                                 }
                               },
                               "_$child": [
                                 {
-                                  "_$id": "lx2xz41a",
+                                  "_$id": "7lodwa9a",
                                   "_$type": "Sprite3D",
                                   "name": "BoneInfantry001 L Forearm",
                                   "transform": {
                                     "localPosition": {
                                       "_$type": "Vector3",
-                                      "x": 0.1805582,
-                                      "y": -2.422333e-8,
-                                      "z": 9.689331e-8
+                                      "x": 0.18055815994739532,
+                                      "z": -7.629394360719743e-8
                                     },
                                     "localRotation": {
                                       "_$type": "Quaternion",
-                                      "x": 3.537623848303842e-9,
-                                      "y": -4.199811819908689e-8,
-                                      "z": 0.645259972330733,
-                                      "w": -0.7639630672406488
+                                      "x": 2.4536689124943223e-8,
+                                      "y": -4.022930255587198e-8,
+                                      "z": 0.6452599189577658,
+                                      "w": -0.7639631123206247
                                     },
                                     "localScale": {
                                       "_$type": "Vector3",
-                                      "x": 0.9999999,
+                                      "x": 0.9999999403953552,
                                       "y": 1,
-                                      "z": 0.9999999
+                                      "z": 0.9999999403953552
                                     }
                                   },
                                   "_$child": [
                                     {
-                                      "_$id": "1npzm7m6",
+                                      "_$id": "0joms8kz",
                                       "_$type": "Sprite3D",
                                       "name": "BoneInfantry001 L Hand",
                                       "transform": {
                                         "localPosition": {
                                           "_$type": "Vector3",
-                                          "x": 0.1540441,
-                                          "z": -1.937866e-7
+                                          "x": 0.15404413640499115,
+                                          "y": 5.7220457705398076e-8
                                         },
                                         "localRotation": {
                                           "_$type": "Quaternion",
-                                          "x": 0.7059296994934743,
-                                          "y": 0.20934309984979005,
-                                          "z": -0.32805199976461286,
-                                          "w": -0.5917943995753698
+                                          "x": 0.705929696559906,
+                                          "y": 0.20934308997587112,
+                                          "z": -0.32805197307186473,
+                                          "w": -0.5917944611819824
                                         },
                                         "localScale": {
                                           "_$type": "Vector3",
-                                          "x": 1,
-                                          "y": 0.9999999,
-                                          "z": 1
+                                          "x": 0.9999999403953552,
+                                          "y": 0.9999998807907104,
+                                          "z": 0.9999998807907104
                                         }
-                                      },
-                                      "_$child": [
-                                        {
-                                          "_$id": "xwzecqp9",
-                                          "_$type": "Sprite3D",
-                                          "name": "BoneInfantry_Arrow1",
-                                          "transform": {
-                                            "localPosition": {
-                                              "_$type": "Vector3",
-                                              "x": 0.08469231,
-                                              "y": 0.007988914,
-                                              "z": -0.08417393
-                                            },
-                                            "localRotation": {
-                                              "_$type": "Quaternion",
-                                              "x": -0.41798788651630875,
-                                              "y": -0.5074108836316508,
-                                              "z": 0.6476353791082091,
-                                              "w": -0.385212587573593
-                                            }
-                                          }
-                                        },
-                                        {
-                                          "_$id": "1r3iyc7l",
-                                          "_$type": "Sprite3D",
-                                          "name": "BoneInfantry_Arrow2",
-                                          "transform": {
-                                            "localPosition": {
-                                              "_$type": "Vector3",
-                                              "x": 0.09288082,
-                                              "y": 0.0310078,
-                                              "z": 0.07166985
-                                            },
-                                            "localRotation": {
-                                              "_$type": "Quaternion",
-                                              "x": 0.368891101105622,
-                                              "y": -0.5276345015813998,
-                                              "z": 0.592441801775637,
-                                              "w": 0.48428700145148085
-                                            },
-                                            "localScale": {
-                                              "_$type": "Vector3",
-                                              "x": 1,
-                                              "y": 1,
-                                              "z": 0.9999999
-                                            }
-                                          }
-                                        },
-                                        {
-                                          "_$id": "17p4yao7",
-                                          "_$type": "Sprite3D",
-                                          "name": "Weapon_SwordShield_Shield01",
-                                          "transform": {
-                                            "localPosition": {
-                                              "_$type": "Vector3",
-                                              "x": 0.02398107,
-                                              "y": -0.05107915,
-                                              "z": 0.01161134
-                                            },
-                                            "localRotation": {
-                                              "_$type": "Quaternion",
-                                              "x": -0.22238009584504473,
-                                              "y": 0.6403119880363948,
-                                              "z": -0.14698519725372491,
-                                              "w": -0.7203769865404585
-                                            },
-                                            "localScale": {
-                                              "_$type": "Vector3",
-                                              "x": 1,
-                                              "y": 0.9999998,
-                                              "z": 1
-                                            }
-                                          },
-                                          "_$comp": [
-                                            {
-                                              "_$type": "MeshFilter",
-                                              "sharedMesh": {
-                                                "_$uuid": "f2f64d32-2ccc-42e0-bb33-3230eb302b63",
-                                                "_$type": "Mesh"
-                                              }
-                                            },
-                                            {
-                                              "_$type": "MeshRenderer",
-                                              "castShadow": true,
-                                              "sharedMaterials": [
-                                                {
-                                                  "_$uuid": "8f1698b6-5fa9-4326-a510-624a2ca4b5ad",
-                                                  "_$type": "Material"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
+                                      }
                                     }
                                   ]
                                 }
@@ -649,147 +577,98 @@
                           ]
                         },
                         {
-                          "_$id": "0my285u8",
+                          "_$id": "ob4ixb92",
                           "_$type": "Sprite3D",
                           "name": "BoneInfantry001 R Clavicle",
                           "transform": {
                             "localPosition": {
                               "_$type": "Vector3",
-                              "x": 0.02187725,
-                              "y": -0.0001852297,
-                              "z": -0.0872485
+                              "x": 0.021877212449908257,
+                              "y": -0.0001852083223639056,
+                              "z": -0.08724849671125412
                             },
                             "localRotation": {
                               "_$type": "Quaternion",
-                              "x": -0.7072823303752839,
-                              "y": 0.008340470358193812,
-                              "z": 0.706881930358088,
-                              "w": 0.0002796897120116876
+                              "x": -0.7072823643684387,
+                              "y": 0.008340940395373657,
+                              "z": 0.7062525158450412,
+                              "w": 0.0002798173699065348
                             },
                             "localScale": {
                               "_$type": "Vector3",
-                              "x": 0.9999999,
-                              "y": 0.9999999,
-                              "z": 0.9999998
+                              "x": 1,
+                              "y": 0.9999998807907104,
+                              "z": 0.9999998211860657
                             }
                           },
                           "_$child": [
                             {
-                              "_$id": "ciwdshlx",
+                              "_$id": "2d7d1z13",
                               "_$type": "Sprite3D",
                               "name": "BoneInfantry001 R UpperArm",
                               "transform": {
                                 "localPosition": {
                                   "_$type": "Vector3",
-                                  "x": 0.2762495,
-                                  "y": 6.055832e-9
+                                  "x": 0.27624937891960144,
+                                  "y": 9.53674295089968e-9,
+                                  "z": -7.629394360719743e-8
                                 },
                                 "localRotation": {
                                   "_$type": "Quaternion",
-                                  "x": 0.0806824918297236,
-                                  "y": 0.17291440392136584,
-                                  "z": 0.19831350449736856,
-                                  "w": -0.9613858218023799
+                                  "x": 0.12493254989385605,
+                                  "y": 0.14190946677796856,
+                                  "z": 0.18673538241524984,
+                                  "w": -0.9640453745540977
+                                },
+                                "localScale": {
+                                  "_$type": "Vector3",
+                                  "x": 1,
+                                  "y": 1.0000001192092896,
+                                  "z": 1.0000001192092896
                                 }
                               },
                               "_$child": [
                                 {
-                                  "_$id": "wnv4bhrd",
+                                  "_$id": "0bz13ubp",
                                   "_$type": "Sprite3D",
                                   "name": "BoneInfantry001 R Forearm",
                                   "transform": {
                                     "localPosition": {
                                       "_$type": "Vector3",
-                                      "x": 0.1805581,
-                                      "y": -2.422333e-8
+                                      "x": 0.18055815994739532
                                     },
                                     "localRotation": {
                                       "_$type": "Quaternion",
-                                      "x": -6.604723810344797e-9,
-                                      "y": 3.4480129009900182e-9,
-                                      "z": 0.46278438671110717,
-                                      "w": -0.8864708745449138
-                                    },
-                                    "localScale": {
-                                      "_$type": "Vector3",
-                                      "x": 1,
-                                      "y": 0.9999998,
-                                      "z": 1
+                                      "x": -2.137159560433588e-9,
+                                      "y": 6.835384169789906e-8,
+                                      "z": 0.4627126152473052,
+                                      "w": -0.8865083393239992
                                     }
                                   },
                                   "_$child": [
                                     {
-                                      "_$id": "d0x9xhja",
+                                      "_$id": "bke1fwar",
                                       "_$type": "Sprite3D",
                                       "name": "BoneInfantry001 R Hand",
                                       "transform": {
                                         "localPosition": {
                                           "_$type": "Vector3",
-                                          "x": 0.1540441,
-                                          "y": 2.422333e-8,
-                                          "z": -9.689331e-8
+                                          "x": 0.15404412150382996
                                         },
                                         "localRotation": {
                                           "_$type": "Quaternion",
-                                          "x": -0.7057797707585465,
-                                          "y": -0.038429218407823165,
-                                          "z": -0.0465086980730789,
-                                          "w": -0.705857670755319
+                                          "x": -0.7057797908782959,
+                                          "y": -0.03842926581603253,
+                                          "z": -0.04650883913589452,
+                                          "w": -0.7053736550859893
                                         },
                                         "localScale": {
                                           "_$type": "Vector3",
-                                          "x": 1,
-                                          "y": 0.9999999,
-                                          "z": 1
+                                          "x": 0.9999999403953552,
+                                          "y": 0.9999999403953552,
+                                          "z": 0.9999998807907104
                                         }
-                                      },
-                                      "_$child": [
-                                        {
-                                          "_$id": "c44qq4m4",
-                                          "_$type": "Sprite3D",
-                                          "name": "Weapon_SwordShield_Sword01",
-                                          "transform": {
-                                            "localPosition": {
-                                              "_$type": "Vector3",
-                                              "x": 0.08056311,
-                                              "y": 0.02502725,
-                                              "z": 0.09385907
-                                            },
-                                            "localRotation": {
-                                              "_$type": "Quaternion",
-                                              "x": -0.7017509724447345,
-                                              "y": -0.060643797618733696,
-                                              "z": -0.6950667727071993,
-                                              "w": 0.14404889434371212
-                                            },
-                                            "localScale": {
-                                              "_$type": "Vector3",
-                                              "x": 0.9999998,
-                                              "y": 1,
-                                              "z": 0.9999999
-                                            }
-                                          },
-                                          "_$comp": [
-                                            {
-                                              "_$type": "MeshFilter",
-                                              "sharedMesh": {
-                                                "_$uuid": "c8de3edb-8d50-4136-9f0c-b1c449f7ce1b",
-                                                "_$type": "Mesh"
-                                              }
-                                            },
-                                            {
-                                              "_$type": "MeshRenderer",
-                                              "castShadow": true,
-                                              "sharedMaterials": [
-                                                {
-                                                  "_$uuid": "8f1698b6-5fa9-4326-a510-624a2ca4b5ad",
-                                                  "_$type": "Material"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
+                                      }
                                     }
                                   ]
                                 }
@@ -800,85 +679,104 @@
                       ]
                     },
                     {
-                      "_$id": "7nncjhft",
+                      "_$id": "zvnjkotf",
                       "_$type": "Sprite3D",
                       "name": "BoneInfantry001 R Thigh",
                       "transform": {
                         "localPosition": {
                           "_$type": "Vector3",
-                          "x": -0.1364525,
-                          "y": 0.05723727,
-                          "z": -0.1219799
+                          "x": -0.13035821914672852,
+                          "y": 0.046515703201293945,
+                          "z": -0.1327066272497177
                         },
                         "localRotation": {
                           "_$type": "Quaternion",
-                          "x": -0.09556086046312474,
-                          "y": 0.9310274045121174,
-                          "z": 0.3092217014986075,
-                          "w": 0.16863580081727406
+                          "x": 0.21324045956134796,
+                          "y": 0.903477313014138,
+                          "z": 0.21520440696908633,
+                          "w": 0.30323290511762735
+                        },
+                        "localScale": {
+                          "_$type": "Vector3",
+                          "x": 0.9999998807907104,
+                          "y": 1,
+                          "z": 0.9999999403953552
                         }
                       },
                       "_$child": [
                         {
-                          "_$id": "b5kwwe1u",
+                          "_$id": "ioecfr8v",
                           "_$type": "Sprite3D",
                           "name": "BoneInfantry001 R Calf",
                           "transform": {
                             "localPosition": {
                               "_$type": "Vector3",
-                              "x": 0.1681754,
-                              "y": 1.211166e-8
+                              "x": 0.1681753545999527,
+                              "y": 1.192092824453539e-8
                             },
                             "localRotation": {
                               "_$type": "Quaternion",
-                              "x": 1.2304569969069198e-8,
-                              "y": 2.7143619931767307e-8,
-                              "z": 0.41287279896213464,
-                              "w": -0.9107886977104909
+                              "x": -4.212023441141355e-8,
+                              "y": -1.4976813123013244e-9,
+                              "z": 0.6805504386494602,
+                              "w": -0.7327012354664251
                             },
                             "localScale": {
                               "_$type": "Vector3",
-                              "x": 0.9999999,
+                              "x": 0.9999998211860657,
                               "y": 1,
-                              "z": 1
+                              "z": 0.9999999403953552
                             }
                           },
                           "_$child": [
                             {
-                              "_$id": "fxlgci9v",
+                              "_$id": "66lsjf24",
                               "_$type": "Sprite3D",
                               "name": "BoneInfantry001 R Foot",
                               "transform": {
                                 "localPosition": {
                                   "_$type": "Vector3",
-                                  "x": 0.1555262
+                                  "x": 0.1555262804031372,
+                                  "y": -9.53674295089968e-9
                                 },
                                 "localRotation": {
                                   "_$type": "Quaternion",
-                                  "x": 0.003756100216806019,
-                                  "y": -0.09075367523839671,
-                                  "z": -0.21975101268425748,
-                                  "w": -0.971318256065502
+                                  "x": 0.09313071519136429,
+                                  "y": -0.26137880027072247,
+                                  "z": -0.36674090674021403,
+                                  "w": -0.8879797151172419
+                                },
+                                "localScale": {
+                                  "_$type": "Vector3",
+                                  "x": 1.000000238418579,
+                                  "y": 1.0000001192092896,
+                                  "z": 1.0000001192092896
                                 }
                               },
                               "_$child": [
                                 {
-                                  "_$id": "bxuccwii",
+                                  "_$id": "y31c1c1s",
                                   "_$type": "Sprite3D",
                                   "name": "BoneInfantry001 R Toe0",
                                   "transform": {
                                     "localPosition": {
                                       "_$type": "Vector3",
-                                      "x": 0.1146729,
-                                      "y": 0.1618776,
-                                      "z": -3.633499e-8
+                                      "x": 0.11467286199331284,
+                                      "y": 0.1618775874376297,
+                                      "z": -1.907348590179936e-8
                                     },
                                     "localRotation": {
                                       "_$type": "Quaternion",
-                                      "x": 0.10288680152418235,
-                                      "y": 0.0483617107164385,
-                                      "z": 0.9372527138846191,
-                                      "w": 0.3295949048826743
+                                      "x": 0.05225679278373718,
+                                      "y": -0.16124547316395657,
+                                      "z": -0.8285388347107484,
+                                      "w": -0.5336599171442178
+                                    },
+                                    "localScale": {
+                                      "_$type": "Vector3",
+                                      "x": 1.0000001192092896,
+                                      "y": 0.9999999403953552,
+                                      "z": 0.9999999403953552
                                     }
                                   }
                                 }
@@ -889,6 +787,203 @@
                       ]
                     }
                   ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_$id": "3yrzuf6b",
+          "_$type": "Sprite3D",
+          "name": "weapon_chop",
+          "transform": {
+            "localRotation": {
+              "_$type": "Quaternion",
+              "w": -1
+            }
+          },
+          "_$child": [
+            {
+              "_$id": "233fmkbm",
+              "_$type": "Sprite3D",
+              "name": "Weapon_axe",
+              "transform": {
+                "localPosition": {
+                  "_$type": "Vector3",
+                  "x": -0.5317721,
+                  "y": 0.6901071,
+                  "z": -0.1621835
+                },
+                "localRotation": {
+                  "_$type": "Quaternion",
+                  "x": 0.6967670348503899,
+                  "y": 0.011462200573308063,
+                  "z": 0.016812090840895005,
+                  "w": -0.7170088358628297
+                }
+              },
+              "_$comp": [
+                {
+                  "_$type": "MeshFilter",
+                  "sharedMesh": {
+                    "_$uuid": "195fb631-0de8-4ba1-938a-82be825486ed",
+                    "_$type": "Mesh"
+                  }
+                },
+                {
+                  "_$type": "SkinnedMeshRenderer",
+                  "receiveShadow": true,
+                  "castShadow": true,
+                  "sharedMaterials": [
+                    {
+                      "_$uuid": "8f1698b6-5fa9-4326-a510-624a2ca4b5ad",
+                      "_$type": "Material"
+                    }
+                  ],
+                  "_bones": [
+                    {
+                      "_$ref": "bke1fwar"
+                    }
+                  ],
+                  "rootBone": {
+                    "_$ref": "bke1fwar"
+                  },
+                  "localBounds": {
+                    "_$type": "Bounds",
+                    "min": {
+                      "_$type": "Vector3"
+                    },
+                    "max": {
+                      "_$type": "Vector3"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_$id": "lkqctem0",
+          "_$type": "Sprite3D",
+          "name": "weapon_attack",
+          "transform": {
+            "localRotation": {
+              "_$type": "Quaternion",
+              "w": -1
+            }
+          },
+          "_$child": [
+            {
+              "_$id": "hf88ods2",
+              "_$type": "Sprite3D",
+              "name": "Weapon_SwordShield_Shield01",
+              "transform": {
+                "localPosition": {
+                  "_$type": "Vector3",
+                  "x": 0.1556546,
+                  "y": 0.5710801,
+                  "z": 0.6169682
+                },
+                "localRotation": {
+                  "_$type": "Quaternion",
+                  "x": 0.7514971338121949,
+                  "y": -0.0804462536195273,
+                  "z": 0.04387084197388571,
+                  "w": -0.6533420293958911
+                }
+              },
+              "_$comp": [
+                {
+                  "_$type": "MeshFilter",
+                  "sharedMesh": {
+                    "_$uuid": "7ba566d3-6518-472c-b1c7-2c08831fb7b6",
+                    "_$type": "Mesh"
+                  }
+                },
+                {
+                  "_$type": "SkinnedMeshRenderer",
+                  "receiveShadow": true,
+                  "castShadow": true,
+                  "sharedMaterials": [
+                    {
+                      "_$uuid": "8f1698b6-5fa9-4326-a510-624a2ca4b5ad",
+                      "_$type": "Material"
+                    }
+                  ],
+                  "_bones": [
+                    {
+                      "_$ref": "0joms8kz"
+                    }
+                  ],
+                  "rootBone": {
+                    "_$ref": "0joms8kz"
+                  },
+                  "localBounds": {
+                    "_$type": "Bounds",
+                    "min": {
+                      "_$type": "Vector3"
+                    },
+                    "max": {
+                      "_$type": "Vector3"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "_$id": "fdfrw6ar",
+              "_$type": "Sprite3D",
+              "name": "Weapon_SwordShield_Sword01",
+              "transform": {
+                "localPosition": {
+                  "_$type": "Vector3",
+                  "x": -0.5317721,
+                  "y": 0.690107,
+                  "z": -0.1621835
+                },
+                "localRotation": {
+                  "_$type": "Quaternion",
+                  "x": -0.2393393904010582,
+                  "y": 0.5728647770246943,
+                  "z": -0.27327388904008176,
+                  "w": -0.7347543705319529
+                }
+              },
+              "_$comp": [
+                {
+                  "_$type": "MeshFilter",
+                  "sharedMesh": {
+                    "_$uuid": "be197a6e-1774-4e5a-ad03-3b26d3416d14",
+                    "_$type": "Mesh"
+                  }
+                },
+                {
+                  "_$type": "SkinnedMeshRenderer",
+                  "receiveShadow": true,
+                  "castShadow": true,
+                  "sharedMaterials": [
+                    {
+                      "_$uuid": "8f1698b6-5fa9-4326-a510-624a2ca4b5ad",
+                      "_$type": "Material"
+                    }
+                  ],
+                  "_bones": [
+                    {
+                      "_$ref": "bke1fwar"
+                    }
+                  ],
+                  "rootBone": {
+                    "_$ref": "bke1fwar"
+                  },
+                  "localBounds": {
+                    "_$type": "Bounds",
+                    "min": {
+                      "_$type": "Vector3"
+                    },
+                    "max": {
+                      "_$type": "Vector3"
+                    }
+                  }
                 }
               ]
             }

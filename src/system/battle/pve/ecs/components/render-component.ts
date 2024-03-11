@@ -16,6 +16,13 @@ export class Renderable2D extends ecs.Component {
 }
 
 export class AnimationComponent extends Renderable3D {
+    // 当前播放的动画
+    name: string = "idle";
+    // 循环播放
+    loop: boolean = true;
+    // 非循环动画完成后的动画
+    normal: string = "idle";
+
     animator?: Laya.Animator | null;
 }
 

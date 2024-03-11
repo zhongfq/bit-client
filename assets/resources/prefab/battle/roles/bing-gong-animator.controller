@@ -23,35 +23,8 @@
             "_$uuid": "0a546ba8-338e-4539-9cc3-05ad0b7df2fa"
           },
           "id": "0",
-          "soloTransitions": [
-            {
-              "id": "1",
-              "exitByTime": true,
-              "transduration": 0.15,
-              "exitTime": 0.85,
-              "conditions": [
-                {
-                  "type": 0,
-                  "id": 1,
-                  "checkValue": true
-                }
-              ]
-            },
-            {
-              "id": "2",
-              "exitByTime": true,
-              "transduration": 0.15,
-              "exitTime": 0.85,
-              "conditions": [
-                {
-                  "type": 0,
-                  "id": 0,
-                  "checkValue": true
-                }
-              ]
-            }
-          ],
-          "_isLooping": 1
+          "soloTransitions": [],
+          "_isLooping": 2
         },
         {
           "_$type": "AnimatorState",
@@ -65,33 +38,7 @@
             "_$uuid": "2c155a9b-5eb4-4646-89ab-f7369f8c1a60"
           },
           "id": "1",
-          "soloTransitions": [
-            {
-              "id": "2",
-              "exitByTime": true,
-              "transduration": 0.15,
-              "exitTime": 0.1,
-              "conditions": [
-                {
-                  "type": 0,
-                  "id": 0,
-                  "checkValue": true
-                }
-              ]
-            },
-            {
-              "id": "0",
-              "exitByTime": true,
-              "transduration": 0.15,
-              "exitTime": 0.1,
-              "conditions": [
-                {
-                  "type": 0,
-                  "id": 2
-                }
-              ]
-            }
-          ],
+          "soloTransitions": [],
           "_isLooping": 1
         },
         {
@@ -106,33 +53,7 @@
             "_$uuid": "82586f2a-51e1-4d34-8e9b-83c69ce3afdc"
           },
           "id": "2",
-          "soloTransitions": [
-            {
-              "id": "1",
-              "exitByTime": true,
-              "transduration": 0.15,
-              "exitTime": 0.1,
-              "conditions": [
-                {
-                  "type": 0,
-                  "id": 1,
-                  "checkValue": true
-                }
-              ]
-            },
-            {
-              "id": "0",
-              "exitByTime": true,
-              "transduration": 0.15,
-              "exitTime": 0.1,
-              "conditions": [
-                {
-                  "type": 0,
-                  "id": 2
-                }
-              ]
-            }
-          ],
+          "soloTransitions": [],
           "_isLooping": 1
         },
         {
@@ -158,20 +79,7 @@
           "clipEnd": 1,
           "x": 473,
           "y": 278,
-          "soloTransitions": [
-            {
-              "id": "3",
-              "exitByTime": true,
-              "transduration": 0.15,
-              "exitTime": 0.85,
-              "conditions": [
-                {
-                  "type": 0,
-                  "id": 3
-                }
-              ]
-            }
-          ]
+          "soloTransitions": []
         },
         {
           "x": 201,
@@ -189,30 +97,5 @@
     }
   ],
   "layerW": 150,
-  "animatorParams": [
-    {
-      "id": 0,
-      "name": "run",
-      "type": 1,
-      "val": false
-    },
-    {
-      "id": 1,
-      "name": "idle",
-      "type": 1,
-      "val": true
-    },
-    {
-      "id": 2,
-      "name": "attack",
-      "type": 2,
-      "val": 0
-    },
-    {
-      "id": 3,
-      "name": "die",
-      "type": 2,
-      "val": false
-    }
-  ]
+  "animatorParams": []
 }
