@@ -26,9 +26,7 @@ export class HomeDownBtnMediator extends Mediator {
             }
         });
         this.owner.btnFight.on(Laya.Event.CLICK, () => {
-            if (this._btnSelected(this.owner.btnFight)) {
-                this._loadAddNode("resources/prefab/role/role.lh");
-            }
+            app.ui.replace(ui.PVP);
         });
         this.owner.btnMain.on(Laya.Event.CLICK, () => {
             if (this._btnSelected(this.owner.btnMain)) {

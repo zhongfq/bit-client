@@ -15,6 +15,7 @@ export enum ui {
     HOME_SCENE,
 
     PVE,
+    PVP,
 
     TEST1,
     TEST2,
@@ -89,6 +90,11 @@ export namespace ui {
         app.ui.register({
             id: ui.PVE,
             url: "scenes/pve.ls",
+        });
+
+        app.ui.register({
+            id: ui.PVP,
+            url: "scenes/pvp.ls",
         });
 
         app.ui.register({
