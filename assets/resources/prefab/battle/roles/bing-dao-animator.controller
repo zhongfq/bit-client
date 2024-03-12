@@ -52,8 +52,8 @@
           "soloTransitions": []
         },
         {
-          "x": 260,
-          "y": 272,
+          "x": 178,
+          "y": 196,
           "_isLooping": 1,
           "id": "0",
           "name": "run",
@@ -64,15 +64,63 @@
           }
         },
         {
-          "x": 536,
-          "y": 173,
+          "x": 428,
+          "y": 59,
           "_isLooping": 2,
           "id": "2",
-          "name": "attack",
+          "name": "attack1",
           "speed": 1,
           "clipEnd": 1,
           "clip": {
             "_$uuid": "aa6069b0-28e0-4361-90a4-c7eb55f2461c"
+          }
+        },
+        {
+          "x": 229,
+          "y": 348,
+          "_isLooping": 2,
+          "id": "3",
+          "name": "die",
+          "speed": 1,
+          "clipEnd": 1,
+          "clip": {
+            "_$uuid": "d73a87f5-e3c1-4675-8636-0577693be44c"
+          }
+        },
+        {
+          "x": 433,
+          "y": 106,
+          "_isLooping": 2,
+          "id": "4",
+          "name": "attack2",
+          "speed": 1,
+          "clipEnd": 1,
+          "clip": {
+            "_$uuid": "44590238-a916-4f09-91c2-44dace8b4144"
+          }
+        },
+        {
+          "x": 175,
+          "y": 246,
+          "_isLooping": 1,
+          "id": "5",
+          "name": "rush",
+          "speed": 1,
+          "clipEnd": 1,
+          "clip": {
+            "_$uuid": "c08969f3-d68a-4051-9f9b-b5fc66b73bd0"
+          }
+        },
+        {
+          "x": 435,
+          "y": 190,
+          "_isLooping": 2,
+          "id": "6",
+          "name": "chop",
+          "speed": 1,
+          "clipEnd": 1,
+          "clip": {
+            "_$uuid": "8b90da0f-5ea7-4f16-8735-3119a31260a7"
           }
         }
       ]

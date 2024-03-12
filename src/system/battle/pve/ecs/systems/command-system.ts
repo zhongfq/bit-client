@@ -100,6 +100,13 @@ export class CommandSystem extends ecs.System implements ICommandSender {
 
     chopWood(eid: number, target: number) {}
 
+    rushStart(eid: number) {
+        const element = this._findElement(eid);
+        if (element) {
+            element.animation.rushing = true;
+        }
+    }
+
     moveStart(eid: number, velocity: Laya.Vector3) {
         const element = this._findElement(eid);
         if (element) {
@@ -137,13 +144,19 @@ export class CommandSystem extends ecs.System implements ICommandSender {
         }
     }
 
-    private _playCrossFade(element: ElementComponent, name: string, loop: boolean): void {
+    private _playCrossFade(
+        element: ElementComponent,
+        name: string,
+        clip: string,
+        loop: boolean
+    ): void {
         const animation = element.animation;
         const animator = animation.animator;
-        if (animator && animation.name !== name) {
-            animation.name = name;
+        if (animator && animation.current.name !== name && animation.current.clip !== clip) {
+            animation.current.name = name;
+            animation.current.clip = clip;
             animation.loop = loop;
-            animator.crossFade(name, 0.15);
+            animator.crossFade(clip, 0.15);
         }
     }
 
@@ -151,17 +164,31 @@ export class CommandSystem extends ecs.System implements ICommandSender {
         const element = this._findElement(eid);
         if (element) {
             switch (name) {
-                case ElementAnimation.ATTACK:
-                    this._playCrossFade(element, "attack", false);
+                case ElementAnimation.ATTACK: {
+                    const idx = (Math.round(Math.random() * 1000) % 2) + 1;
+                    this._playCrossFade(element, name, "attack" + idx, false);
                     break;
+                }
                 case ElementAnimation.IDLE:
-                    element.animation.normal = "idle";
-                    this._playCrossFade(element, "idle", true);
+                    element.animation.rushing = false;
+                    element.animation.default.name = name;
+                    element.animation.default.clip = "idle";
+                    this._playCrossFade(element, name, "idle", true);
                     break;
-                case ElementAnimation.RUN:
-                    element.animation.normal = "run";
-                    this._playCrossFade(element, "run", true);
+                case ElementAnimation.RUN: {
+                    const clip = element.animation.rushing ? "rush" : "run";
+                    element.animation.default.name = name;
+                    element.animation.default.clip = clip;
+                    this._playCrossFade(element, name, clip, true);
                     break;
+                }
+                case ElementAnimation.DIE:
+                    element.animation.default.name = "";
+                    element.animation.default.clip = "";
+                    this._playCrossFade(element, name, "die", false);
+                    break;
+                case ElementAnimation.CHOP:
+                    this._playCrossFade(element, name, "chop", false);
             }
         }
     }

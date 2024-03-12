@@ -6,6 +6,7 @@ interface MoveToPosArgs {
     x?: number;
     y?: number;
     rate?: number;
+    rushing?: boolean;
 }
 
 const tmpVelocity = new Laya.Vector3();
@@ -22,6 +23,9 @@ export class MoveToPos extends b3.Process {
         const rad = Math.atan2(p1.z - p0.z, p1.x - p0.x);
         tmpVelocity.x = speed * Math.cos(rad);
         tmpVelocity.z = speed * Math.sin(rad);
+        if (args.rushing) {
+            env.context.rushStart(env.owner);
+        }
         env.context.moveStart(env.owner, tmpVelocity, p1);
         return b3.Status.SUCCESS;
     }
@@ -35,6 +39,7 @@ export class MoveToPos extends b3.Process {
                 { name: "x", type: "int?", desc: "x" },
                 { name: "y", type: "int?", desc: "y" },
                 { name: "rate", type: "float?", desc: "速率" },
+                { name: "rushing", type: "boolean?", desc: "冲锋" },
             ],
             input: ["坐标"],
             doc: `

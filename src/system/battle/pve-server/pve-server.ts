@@ -244,6 +244,10 @@ export class PveServer extends b3.Context {
         this._sender.removeElement(element.eid);
     }
 
+    rushStart(element: ElementComponent): void {
+        this._sender.rushStart(element.eid);
+    }
+
     moveStart(element: ElementComponent, velocity: Laya.Vector3, target?: Laya.Vector3) {
         element.movement.target = target;
         element.movement.velocity.cloneFrom(velocity);
@@ -423,6 +427,8 @@ export interface ICommandSender {
     removeElement(eid: number): void;
 
     chopWood(eid: number, target: number): void;
+
+    rushStart(eid: number): void;
     moveStart(eid: number, velocity: Laya.Vector3): void;
     moveStop(eid: number, position: Laya.Vector3): void;
 

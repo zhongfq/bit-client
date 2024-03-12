@@ -13,12 +13,12 @@
       "states": [
         {
           "_$type": "AnimatorState",
-          "name": "attack",
+          "name": "attack1",
           "speed": 1,
           "clipStart": 0,
           "clipEnd": 1,
-          "x": 586,
-          "y": 144,
+          "x": 510,
+          "y": 62,
           "clip": {
             "_$uuid": "0a546ba8-338e-4539-9cc3-05ad0b7df2fa"
           },
@@ -47,8 +47,8 @@
           "speed": 1,
           "clipStart": 0,
           "clipEnd": 1,
-          "x": 258,
-          "y": 240,
+          "x": 246,
+          "y": 165,
           "clip": {
             "_$uuid": "82586f2a-51e1-4d34-8e9b-83c69ce3afdc"
           },
@@ -77,8 +77,8 @@
           "name": "任何状态",
           "speed": 1,
           "clipEnd": 1,
-          "x": 473,
-          "y": 278,
+          "x": 550,
+          "y": 489,
           "soloTransitions": []
         },
         {
@@ -91,6 +91,48 @@
           "clipEnd": 1,
           "clip": {
             "_$uuid": "918ba272-787b-4275-8340-b80df73aba19"
+          }
+        },
+        {
+          "x": 242,
+          "y": 218,
+          "_isLooping": 1,
+          "id": "4",
+          "name": "rush",
+          "speed": 1,
+          "clipEnd": 1,
+          "_$type": "AnimatorState",
+          "clipStart": 0,
+          "clip": {
+            "_$uuid": "82586f2a-51e1-4d34-8e9b-83c69ce3afdc"
+          }
+        },
+        {
+          "x": 511,
+          "y": 118,
+          "_isLooping": 2,
+          "id": "5",
+          "name": "attack2",
+          "speed": 1,
+          "clipEnd": 1,
+          "_$type": "AnimatorState",
+          "clipStart": 0,
+          "clip": {
+            "_$uuid": "0a546ba8-338e-4539-9cc3-05ad0b7df2fa"
+          }
+        },
+        {
+          "x": 500,
+          "y": 284,
+          "_isLooping": 2,
+          "id": "6",
+          "name": "chop",
+          "speed": 1,
+          "clipEnd": 1,
+          "_$type": "AnimatorState",
+          "clipStart": 0,
+          "clip": {
+            "_$uuid": "0a546ba8-338e-4539-9cc3-05ad0b7df2fa"
           }
         }
       ]

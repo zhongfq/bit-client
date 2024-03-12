@@ -13,12 +13,12 @@
       "states": [
         {
           "_$type": "AnimatorState",
-          "name": "attack",
+          "name": "attack1",
           "speed": 1,
           "clipStart": 0,
           "clipEnd": 1,
-          "x": 586,
-          "y": 144,
+          "x": 570,
+          "y": 77,
           "clip": {
             "_$uuid": "04145be7-5fb3-46a3-88c5-ab23e978319d"
           },
@@ -47,8 +47,8 @@
           "speed": 1,
           "clipStart": 0,
           "clipEnd": 1,
-          "x": 258,
-          "y": 240,
+          "x": 242,
+          "y": 177,
           "clip": {
             "_$uuid": "30966398-4ea0-469b-9541-7f92aefc4d63"
           },
@@ -77,8 +77,8 @@
           "name": "任何状态",
           "speed": 1,
           "clipEnd": 1,
-          "x": 473,
-          "y": 278,
+          "x": 577,
+          "y": 444,
           "soloTransitions": []
         },
         {
@@ -91,6 +91,48 @@
           "clipEnd": 1,
           "clip": {
             "_$uuid": "4e571d5e-71b0-4ada-8049-19336f966337"
+          }
+        },
+        {
+          "x": 245,
+          "y": 232,
+          "_isLooping": 1,
+          "id": "4",
+          "name": "rush",
+          "speed": 1,
+          "clipEnd": 1,
+          "_$type": "AnimatorState",
+          "clipStart": 0,
+          "clip": {
+            "_$uuid": "30966398-4ea0-469b-9541-7f92aefc4d63"
+          }
+        },
+        {
+          "x": 568,
+          "y": 126,
+          "_isLooping": 2,
+          "id": "5",
+          "name": "attack2",
+          "speed": 1,
+          "clipEnd": 1,
+          "_$type": "AnimatorState",
+          "clipStart": 0,
+          "clip": {
+            "_$uuid": "04145be7-5fb3-46a3-88c5-ab23e978319d"
+          }
+        },
+        {
+          "x": 456,
+          "y": 259,
+          "_isLooping": 2,
+          "id": "6",
+          "name": "chop",
+          "speed": 1,
+          "clipEnd": 1,
+          "_$type": "AnimatorState",
+          "clipStart": 0,
+          "clip": {
+            "_$uuid": "04145be7-5fb3-46a3-88c5-ab23e978319d"
           }
         }
       ]

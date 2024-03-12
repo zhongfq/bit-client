@@ -13,6 +13,8 @@ export enum ElementAnimation {
     IDLE = "idle",
     RUN = "run",
     ATTACK = "attack",
+    DIE = "die",
+    CHOP = "chop",
 }
 
 export class ElementComponent extends ecs.Component {

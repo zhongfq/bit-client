@@ -15,13 +15,20 @@ export class Renderable2D extends ecs.Component {
     view?: Laya.Sprite | null;
 }
 
+interface AnimationState {
+    name: string;
+    clip: string;
+}
+
 export class AnimationComponent extends Renderable3D {
     // 当前播放的动画
-    name: string = "idle";
+    current: AnimationState = { name: "idle", clip: "idle" };
+    // 非循环动画完成后的动画
+    default: AnimationState = { name: "idle", clip: "idle" };
     // 循环播放
     loop: boolean = true;
-    // 非循环动画完成后的动画
-    normal: string = "idle";
+    // 冲锋状态
+    rushing: boolean = false;
 
     animator?: Laya.Animator | null;
 }

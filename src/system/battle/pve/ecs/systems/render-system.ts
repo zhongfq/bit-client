@@ -78,12 +78,16 @@ export class RenderSystem extends ecs.System {
 
     private _updateAnim(anim: AnimationComponent) {
         const animator = anim.animator;
-        if (!anim.loop && animator) {
+        if (!anim.loop && anim.default.name && animator) {
             const playState = animator.getControllerLayer(0).getCurrentPlayState();
-            if (playState.currentState?.name === anim.name && playState.normalizedTime >= 1) {
+            if (
+                playState.currentState?.name === anim.current.clip &&
+                playState.normalizedTime >= 1
+            ) {
                 anim.loop = true;
-                anim.name = anim.normal;
-                animator.crossFade(anim.name, 0.15);
+                anim.current.name = anim.default.name;
+                anim.current.clip = anim.default.clip;
+                animator.crossFade(anim.current.clip, 0.15);
             }
         }
     }
