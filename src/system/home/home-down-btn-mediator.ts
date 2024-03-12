@@ -1,7 +1,7 @@
 import { app } from "../../app";
 import { Mediator } from "../../core/ui-mediator";
 import { ui } from "../../misc/ui";
-import { HomeDownBtnBoxUI } from "../../ui-runtime/prefab/home/HomeDownBtnBoxUI";
+import { HomeDownBtnBoxNewUI } from "../../ui-runtime/prefab/home/HomeDownBtnBoxNewUI";
 import { HomeDownBtnItemUI } from "../../ui-runtime/prefab/home/HomeDownBtnItemUI";
 import { HomeUI } from "../../ui-runtime/scene/HomeUI";
 
@@ -10,74 +10,63 @@ const { regClass, property } = Laya;
 @regClass()
 export class HomeDownBtnMediator extends Mediator {
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
-    declare owner: HomeDownBtnBoxUI;
-    listBtnIndex: number = -1;
+    declare owner: HomeDownBtnBoxNewUI;
+
+    private _currentBtn: HomeDownBtnItemUI | null = null;
+    private _currentBox: Laya.Node | null = null;
 
     override onAwake(): void {
-        this.owner.listDownBtn.renderHandler = new Laya.Handler(
-            this,
-            (item: HomeDownBtnItemUI, index: number) => {
-                item.imgIcon.skin = `resources/atlas/home/${
-                    this.owner.listDownBtn.getItem(index).iconSkin
-                }.png`;
-                item.imgText.skin = `resources/atlas/home/${
-                    this.owner.listDownBtn.getItem(index).textSkin
-                }.png`;
-            }
-        );
-        this.owner.listDownBtn.mouseHandler = new Laya.Handler(this, (e: Event, index: number) => {
-            if (e.type == Laya.Event.CLICK) {
-                if (index == this.listBtnIndex) {
-                    this.owner.listDownBtn.selectedIndex = this.listBtnIndex = -1;
-                } else {
-                    this.listBtnIndex = index;
-                }
-                this.owner.listDownBtn.getItem(index).func();
-            }
-        });
         this.initEvent();
-        this.updateInfo();
     }
 
-    initEvent() {}
+    initEvent() {
+        this.owner.btnChest.on(Laya.Event.CLICK, () => {
+            if (this._btnSelected(this.owner.btnChest)) {
+                this._loadAddNode("resources/prefab/chest/chest.lh");
+            }
+        });
+        this.owner.btnFight.on(Laya.Event.CLICK, () => {
+            if (this._btnSelected(this.owner.btnFight)) {
+                this._loadAddNode("resources/prefab/role/role.lh");
+            }
+        });
+        this.owner.btnMain.on(Laya.Event.CLICK, () => {
+            if (this._btnSelected(this.owner.btnMain)) {
+                app.ui.replace(ui.PVE);
+            }
+        });
+        this.owner.btnSoldier.on(Laya.Event.CLICK, () => {
+            if (this._btnSelected(this.owner.btnSoldier)) {
+                this._loadAddNode("resources/prefab/soldier/soldier.lh");
+            }
+        });
+        this.owner.btnUnion.on(Laya.Event.CLICK, () => {});
+    }
 
-    updateInfo() {
-        this.owner.listDownBtn.array = [
-            {
-                iconSkin: "icon_main_1",
-                textSkin: "text_main_1",
-                func: () => {
-                    const home = this.owner.parent as HomeUI;
-                    home.viewStack.selectedIndex =
-                        this.owner.listDownBtn.selectedIndex == 0 ? 0 : -1;
-                },
-            },
-            {
-                iconSkin: "icon_main_2",
-                textSkin: "text_main_2",
-                func: () => {
-                    const home = this.owner.parent as HomeUI;
-                    home.viewStack.selectedIndex =
-                        this.owner.listDownBtn.selectedIndex == 1 ? 1 : -1;
-                },
-            },
-            {
-                iconSkin: "icon_main_3",
-                textSkin: "text_main_3",
-                func: () => {
-                    app.ui.replace(ui.PVE);
-                },
-            },
-            {
-                iconSkin: "icon_main_4",
-                textSkin: "text_main_4",
-                func: () => {
-                    const home = this.owner.parent as HomeUI;
-                    home.viewStack.selectedIndex =
-                        this.owner.listDownBtn.selectedIndex == 3 ? 2 : -1;
-                },
-            },
-            { iconSkin: "icon_main_5", textSkin: "text_main_5", func: () => {} },
-        ];
+    private _btnSelected(btn: HomeDownBtnItemUI): boolean {
+        this._currentBox?.destroy();
+        if (this._currentBtn == btn) {
+            this._currentBtn.selected = !this._currentBtn.selected;
+            this._currentBtn = null;
+            return false;
+        } else {
+            if (this._currentBtn) {
+                this._currentBtn.selected = !this._currentBtn.selected;
+                this._currentBtn = btn;
+                this._currentBtn.selected = !this._currentBtn.selected;
+            } else {
+                this._currentBtn = btn;
+                this._currentBtn.selected = !this._currentBtn.selected;
+            }
+        }
+        return this._currentBtn.selected;
+    }
+
+    private _loadAddNode(url: string) {
+        Laya.loader.load(url, undefined).then((prefab: Laya.Prefab) => {
+            this._currentBox = prefab.create();
+            const homeScene = this.owner.parent as HomeUI;
+            homeScene.boxUI.addChild(this._currentBox);
+        });
     }
 }

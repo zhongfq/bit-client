@@ -11,10 +11,11 @@
   ],
   "copyBinFiles": false,
   "excludeFilesRule": [],
+  "enableVersion": true,
+  "enableSubpackages": true,
   "subpackages": [
     {
       "path": "resources/prefab",
-      "remote": true,
       "remoteUrl": "http://10.168.69.32:2840/",
       "autoLoad": true
     },

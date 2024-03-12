@@ -1,7 +1,7 @@
 {
   "_$ver": 1,
   "_$id": "xlbg1tbz",
-  "_$runtime": "res://9009675b-6feb-4216-a741-b53b345e7bba",
+  "_$runtime": "res://69fdfddd-a7ad-451c-a53e-cc274fec5781",
   "_$type": "Box",
   "name": "Box",
   "y": 1190,
@@ -13,8 +13,8 @@
   "bottom": 0,
   "_$comp": [
     {
-      "_$type": "c5e278fe-6f1a-4512-8b60-450c717e4ed0",
-      "scriptPath": "../src/system/home/home-down-btn-mediator.ts"
+      "_$type": "0a3369c7-c077-49a5-9fa6-ef91c9db26dc",
+      "scriptPath": "../src/system/home/home-down-btn-new-mediator.ts"
     }
   ],
   "_$child": [
@@ -31,33 +31,103 @@
       "color": "#ffffff"
     },
     {
-      "_$id": "ge84qhhe",
-      "_$var": true,
-      "_$type": "List",
-      "name": "listDownBtn",
+      "_$id": "car1y4a0",
+      "_$type": "HBox",
+      "name": "HBox",
       "width": 750,
       "height": 144,
       "_mouseState": 2,
-      "left": 0,
-      "right": 0,
-      "top": 0,
-      "bottom": 0,
-      "itemTemplate": {
-        "_$ref": "q9lbx9fm",
-        "_$tmpl": "itemRender"
-      },
-      "repeatX": 5,
-      "repeatY": 1,
-      "spaceX": 2,
-      "selectEnable": true,
+      "space": 4,
       "_$child": [
         {
-          "_$id": "q9lbx9fm",
+          "_$id": "03kp3tw8",
           "_$prefab": "49acf14b-826d-4141-9ddb-15b99edb95ba",
-          "name": "down-btn-item",
+          "_$var": true,
+          "name": "btnFight",
           "active": true,
           "x": 0,
-          "y": 0
+          "y": -4,
+          "visible": true,
+          "_$child": [
+            {
+              "_$override": "0jaivhzj",
+              "skin": "res://ccb56c8f-883c-44bf-8d1e-30a292e66672"
+            },
+            {
+              "_$override": "sod02qbd",
+              "skin": "res://cb83aec1-0b8c-4821-9373-15da065128ab"
+            }
+          ]
+        },
+        {
+          "_$id": "e6ac436l",
+          "_$prefab": "49acf14b-826d-4141-9ddb-15b99edb95ba",
+          "_$var": true,
+          "name": "btnSoldier",
+          "active": true,
+          "x": 152,
+          "y": -4,
+          "visible": true
+        },
+        {
+          "_$id": "rla0mlw5",
+          "_$prefab": "49acf14b-826d-4141-9ddb-15b99edb95ba",
+          "_$var": true,
+          "name": "btnMain",
+          "active": true,
+          "x": 304,
+          "y": -4,
+          "visible": true,
+          "_$child": [
+            {
+              "_$override": "0jaivhzj",
+              "skin": "res://885dd826-21a8-4392-b7d7-5da935c84b57"
+            },
+            {
+              "_$override": "sod02qbd",
+              "skin": "res://1dc83d66-d42f-40d4-adc8-6227521ae956"
+            }
+          ]
+        },
+        {
+          "_$id": "nag3uyxl",
+          "_$prefab": "49acf14b-826d-4141-9ddb-15b99edb95ba",
+          "_$var": true,
+          "name": "btnChest",
+          "active": true,
+          "x": 456,
+          "y": -4,
+          "visible": true,
+          "_$child": [
+            {
+              "_$override": "0jaivhzj",
+              "skin": "res://3e517507-6980-4da6-b548-4118b962c4a1"
+            },
+            {
+              "_$override": "sod02qbd",
+              "skin": "res://a85e9852-5f67-4c4b-8332-aaf5e8b505a2"
+            }
+          ]
+        },
+        {
+          "_$id": "oihkwws8",
+          "_$prefab": "49acf14b-826d-4141-9ddb-15b99edb95ba",
+          "_$var": true,
+          "name": "btnUnion",
+          "active": true,
+          "x": 608,
+          "y": -4,
+          "visible": true,
+          "_$child": [
+            {
+              "_$override": "0jaivhzj",
+              "skin": "res://142987d5-4d6a-4f02-ac6c-c27cfc65be17"
+            },
+            {
+              "_$override": "sod02qbd",
+              "skin": "res://013b35d4-ae95-4cf0-8c0e-6101a7da90a8"
+            }
+          ]
         }
       ]
     }

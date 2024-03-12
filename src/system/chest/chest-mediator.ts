@@ -7,6 +7,8 @@ import proto from "../../def/proto";
 import { ChestRow, ChestScoreRow } from "../../def/table";
 import { HeroVo } from "../../misc/vo/goods/hero-vo";
 import { TableUtil } from "../table/table-util";
+import { tween } from "../../core/tween/tween";
+import { Tween } from "../../core/laya";
 
 const { regClass, property } = Laya;
 type ListCellData = {
@@ -48,9 +50,7 @@ export class ChestMediator extends Mediator {
                         this.owner.spineShest.visible = true;
                         this.owner.spineShest.play("chest2_down", false);
                     }
-                    this.owner.imgShestReward
-                        .getComponent(Laya.Animator2D)
-                        .play(chestScoreRow.chest_id.toString());
+                    this._playRewardChestTween(chestScoreRow.chest_id);
                     this.initInfo();
                 });
             } else {
@@ -104,6 +104,33 @@ export class ChestMediator extends Mediator {
         cell2.hightlight();
         this._updateBtnOpen();
         this.owner.spineShest.play("chest2_down", false);
+    }
+
+    private _playRewardChestTween(chestId: number) {
+        let chestIcon = "";
+        const index = this.owner.listBox.array.findIndex((val: ListCellData) => {
+            if (val.row.id == chestId) {
+                chestIcon = val.row.icon;
+                return true;
+            }
+            return false;
+        });
+        this.owner.imgShestReward.skin = `resources/atlas/chest/${chestIcon}_n.png`;
+        const point = (this.owner.listBox.getCell(index) as Laya.Sprite).localToGlobal(
+            new Laya.Point(0, 0),
+            false,
+            this.owner.imgShestReward
+        );
+        this.owner.imgShestReward.visible = true;
+        Tween.toBezier(
+            this.owner.imgShestReward,
+            3,
+            [new Laya.Point(-20, -38), new Laya.Point(300, -600), point],
+            () => {
+                this.owner.imgShestReward.visible = false;
+                this.owner.imgShestReward.pos(-20, -38);
+            }
+        );
     }
 
     private _updateScore() {

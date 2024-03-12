@@ -238,58 +238,19 @@
       ]
     },
     {
-      "_$id": "90f9o1ol",
+      "_$id": "doiz955b",
       "_$var": true,
-      "_$type": "ViewStack",
-      "name": "viewStack",
-      "x": -1.9999999999999991,
-      "y": 0.999999999999926,
-      "width": 0,
-      "height": 0,
-      "_mouseState": 2,
-      "selectedIndex": null,
-      "_$child": [
-        {
-          "_$id": "9fjwxjsd",
-          "_$prefab": "6175ee58-db21-4d7a-8ed4-3342368b1e2b",
-          "name": "item0",
-          "active": true,
-          "x": 0,
-          "y": 0,
-          "visible": false,
-          "left": 0,
-          "top": 0,
-          "bottom": 0,
-          "height": 1334
-        },
-        {
-          "_$id": "alrzx2pw",
-          "_$prefab": "a6580351-aeeb-44b8-9183-cacf97aa5f8a",
-          "name": "item1",
-          "active": true,
-          "x": 0,
-          "y": 0,
-          "visible": false,
-          "left": 0,
-          "top": 0,
-          "bottom": 0
-        },
-        {
-          "_$id": "3n6gdyap",
-          "_$prefab": "de548129-37fd-4bea-8be1-f98a06289f58",
-          "name": "item2",
-          "active": true,
-          "x": 0,
-          "y": 0,
-          "visible": false,
-          "left": 0,
-          "top": 0,
-          "bottom": 0
-        }
-      ]
+      "_$type": "Box",
+      "name": "boxUI",
+      "width": 750,
+      "height": 1211,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "bottom": 123
     },
     {
-      "_$id": "vdlwqttz",
+      "_$id": "wmyfoz1d",
       "_$prefab": "a2698c95-41ec-440d-a998-408eeeab733b",
       "name": "down-btn-box",
       "active": true,

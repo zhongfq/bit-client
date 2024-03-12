@@ -13,21 +13,9 @@ export class TestNodeUI extends TestNodeUIBase {
     }
 
     override onAwake(): void {
-        this.points = Laya.Bezier.I.getBezierPoints([50, 1000, 255, 500, 500, 1000], 5, 2);
-        Laya.timer.once(1000, this, () => {
-            Tween.toBezier(this, 8, [
-                new Laya.Point(50, 1000),
-                new Laya.Point(100, 500),
-                new Laya.Point(350, 500),
-                new Laya.Point(500, 1000),
-            ],12);
-        });
-
         // this.points = Laya.Bezier.I.getBezierPoints([50, 1000, 218, 513, 550, 1000], 5, 2);
         // const b = 1;
-
         // this.Sprite_1.graphics.drawCurves(10, 58, [0, 1000, 250, 50, 500, 1000], "#ff0000", 3);
-
         // 0:
         // 50
         // 1:
