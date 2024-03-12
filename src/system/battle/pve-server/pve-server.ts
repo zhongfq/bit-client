@@ -17,6 +17,7 @@ import { AiSystem } from "./ecs/systems/ai-system";
 import { MovementSystem } from "./ecs/systems/movement-system";
 import { SkillSystem } from "./ecs/systems/skill-system";
 import { ElementCreator, UpdateHp } from "./pve-defs";
+import { ElementAnimation } from "../pve/ecs/components/troop-component";
 
 const _tmpVelocity = new Laya.Vector3();
 
@@ -307,18 +308,27 @@ export class PveServer extends b3.Context {
         }
     }
 
+    collect(element: ElementComponent, target: ElementComponent) {
+        this._sender.playAnim(element.eid, ElementAnimation.CHOP);
+
+        const subHp = 10;
+        target.hp -= subHp;
+        if (target.hp < 0) {
+            target.hp = 0;
+        }
+        this._sender.updateHp(target.eid, {
+            hp: target.hp,
+            maxHp: target.maxHp,
+            subHp: subHp,
+        });
+        if (target.hp <= 0) {
+            this.removeElement(target); // TODO: 临时代码
+        }
+    }
+
     private _toElementKey(tid: number, position: Laya.Vector3) {
         return tid.toFixed(0) + "_" + position.x.toFixed(2) + "_" + position.z.toFixed(2);
     }
-
-    //-------------------------------------------------------------------------
-    //------------------------------ICommandSender-----------------------------
-    //-------------------------------------------------------------------------
-    chopTree(element: ElementComponent, wood: ElementComponent) {}
-
-    launchSkill(element: ElementComponent, target?: ElementComponent) {}
-
-    createWood() {}
 
     //-------------------------------------------------------------------------
     // 接收前端指令
@@ -525,8 +535,6 @@ export interface ICommandSender {
     focus(eid: number): void;
     createElement(data: ElementCreator): void;
     removeElement(eid: number): void;
-
-    chopWood(eid: number, target: number): void;
 
     rushStart(eid: number): void;
     moveStart(eid: number, velocity: Laya.Vector3): void;

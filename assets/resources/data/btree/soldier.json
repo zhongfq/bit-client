@@ -104,7 +104,9 @@
               {
                 "id": 14,
                 "name": "Sequence",
+                "desc": "通用普通攻击",
                 "args": {},
+                "path": "normal_attack.json",
                 "children": [
                   {
                     "id": 15,
@@ -191,7 +193,7 @@
       {
         "id": 25,
         "name": "Sequence",
-        "desc": "找目标",
+        "desc": "找敌人",
         "args": {},
         "children": [
           {
@@ -237,6 +239,143 @@
       },
       {
         "id": 30,
+        "name": "Sequence",
+        "desc": "采集",
+        "args": {},
+        "children": [
+          {
+            "id": 31,
+            "name": "FindOneTarget",
+            "args": {
+              "attack": false,
+              "radius": 1,
+              "skill": false,
+              "soldier": false,
+              "hero": false,
+              "wood": true,
+              "friend": false,
+              "collection": true
+            },
+            "output": [
+              "collection"
+            ],
+            "children": []
+          },
+          {
+            "id": 32,
+            "name": "Selector",
+            "args": {},
+            "children": [
+              {
+                "id": 33,
+                "name": "Sequence",
+                "children": [
+                  {
+                    "id": 34,
+                    "name": "IsFreeStance",
+                    "args": {},
+                    "input": [
+                      ""
+                    ]
+                  },
+                  {
+                    "id": 35,
+                    "name": "SetStance",
+                    "args": {}
+                  },
+                  {
+                    "id": 36,
+                    "name": "MoveStop",
+                    "desc": "停止移动",
+                    "args": {}
+                  },
+                  {
+                    "id": 37,
+                    "name": "TowardToTarget",
+                    "args": {},
+                    "input": [
+                      "collection"
+                    ]
+                  },
+                  {
+                    "id": 38,
+                    "name": "Collect",
+                    "args": {},
+                    "input": [
+                      "collection"
+                    ]
+                  },
+                  {
+                    "id": 39,
+                    "name": "Wait",
+                    "args": {
+                      "time": 1
+                    }
+                  }
+                ]
+              },
+              {
+                "id": 40,
+                "name": "AdjustStance",
+                "args": {},
+                "input": [
+                  "collection"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 41,
+        "name": "Sequence",
+        "desc": "找采集物",
+        "args": {},
+        "children": [
+          {
+            "id": 42,
+            "name": "ClearStance",
+            "args": {}
+          },
+          {
+            "id": 43,
+            "name": "FindOneTarget",
+            "args": {
+              "radius": 3,
+              "hero": false,
+              "soldier": false,
+              "collection": true
+            },
+            "output": [
+              "collection"
+            ]
+          },
+          {
+            "id": 44,
+            "name": "GetPos",
+            "args": {},
+            "input": [
+              "collection"
+            ],
+            "output": [
+              "pos"
+            ]
+          },
+          {
+            "id": 45,
+            "name": "MoveToPos",
+            "args": {
+              "rate": 1.5,
+              "rushing": true
+            },
+            "input": [
+              "pos"
+            ]
+          }
+        ]
+      },
+      {
+        "id": 46,
         "name": "FollowHero",
         "desc": "士兵以阵型位置跟随主将",
         "args": {}

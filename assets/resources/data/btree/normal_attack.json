@@ -1,0 +1,80 @@
+{
+  "name": "normal_attack",
+  "root": {
+    "id": 1,
+    "name": "Sequence",
+    "desc": "通用普通攻击",
+    "args": {},
+    "children": [
+      {
+        "id": 2,
+        "name": "IsFreeStance",
+        "args": {},
+        "input": [
+          ""
+        ]
+      },
+      {
+        "id": 3,
+        "name": "AlwaysSuccess",
+        "desc": "设置交战时间",
+        "args": {},
+        "children": [
+          {
+            "id": 4,
+            "name": "Sequence",
+            "args": {},
+            "children": [
+              {
+                "id": 5,
+                "name": "IsNull",
+                "args": {},
+                "input": [
+                  "fight_time"
+                ],
+                "children": []
+              },
+              {
+                "id": 6,
+                "name": "GetTime",
+                "desc": "设置交战时间",
+                "args": {},
+                "output": [
+                  "fight_time"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "name": "SetStance",
+        "args": {}
+      },
+      {
+        "id": 8,
+        "name": "MoveStop",
+        "desc": "停止移动",
+        "args": {}
+      },
+      {
+        "id": 9,
+        "name": "TowardToTarget",
+        "args": {},
+        "input": [
+          "enemy"
+        ]
+      },
+      {
+        "id": 10,
+        "name": "NormalAttack",
+        "args": {},
+        "input": [
+          "enemy"
+        ]
+      }
+    ]
+  },
+  "desc": "通用普通攻击"
+}

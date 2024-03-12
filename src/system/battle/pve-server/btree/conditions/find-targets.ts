@@ -7,7 +7,7 @@ interface FindTargetsArgs {
     radius?: number;
     hero?: boolean;
     soldier?: boolean;
-    wood?: boolean;
+    collection?: boolean;
     attack?: boolean;
     skill?: boolean;
 }
@@ -19,7 +19,7 @@ export class FindTargets extends b3.Process {
         const args = node.args as FindTargetsArgs;
         const findHero = args.hero;
         const findSoldier = args.soldier;
-        const findWood = args.wood;
+        const findCollection = args.collection;
         let radius = args.radius ?? 0;
         if (args.attack) {
             radius = env.owner.data.attack_radius ?? radius;
@@ -33,8 +33,10 @@ export class FindTargets extends b3.Process {
             if (
                 ((findHero && etype === ETYPE.HERO) ||
                     (findSoldier && etype === ETYPE.SOLDIER) ||
-                    (findWood && etype === ETYPE.WOOD)) &&
-                element.aid !== env.owner.aid
+                    (findCollection &&
+                        (etype === ETYPE.WOOD || etype == ETYPE.FOOD || etype == ETYPE.STONE))) &&
+                element.aid !== env.owner.aid &&
+                element.hp > 0
             ) {
                 const distance = Laya.Vector3.distance(element.transform.position, position);
                 if (distance < radius) {
@@ -64,7 +66,7 @@ export class FindTargets extends b3.Process {
             args: [
                 { name: "hero", type: "boolean?", desc: "找英雄" },
                 { name: "soldier", type: "boolean?", desc: "找士兵" },
-                { name: "wood", type: "boolean?", desc: "找树" },
+                { name: "collection", type: "boolean?", desc: "找采集物" },
                 { name: "friend", type: "boolean?", desc: "友方" },
                 { name: "attack", type: "boolean?", desc: "普攻范围" },
                 { name: "skill", type: "boolean?", desc: "技能范围" },

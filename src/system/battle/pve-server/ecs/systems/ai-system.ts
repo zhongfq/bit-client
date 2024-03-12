@@ -27,6 +27,7 @@ import { ElementComponent } from "../components/element-component";
 import { SkillComponent } from "../components/skill-component";
 import { CalcSpawnDistance } from "../../btree/actions/calc-spawnpoint-distance";
 import { BackSpawnpoint } from "../../btree/actions/back-spawnpoint";
+import { Collect } from "../../btree/actions/collect";
 
 export class AiSystem extends ecs.System {
     static readonly TICK = 0.1;
@@ -58,6 +59,7 @@ export class AiSystem extends ecs.System {
         context.registerProcess(SetStance);
         context.registerProcess(TowardToTarget);
         context.registerProcess(Wait);
+        context.registerProcess(Collect);
     }
 
     override onAddComponent(component: ecs.Component): void {

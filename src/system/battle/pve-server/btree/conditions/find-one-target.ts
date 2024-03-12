@@ -23,7 +23,7 @@ export class FindOneTarget extends FindTargets {
             args: [
                 { name: "hero", type: "boolean?", desc: "找英雄" },
                 { name: "soldier", type: "boolean?", desc: "找士兵" },
-                { name: "wood", type: "boolean?", desc: "找树" },
+                { name: "collection", type: "boolean?", desc: "找采集物" },
                 { name: "friend", type: "boolean?", desc: "友方" },
                 { name: "attack", type: "boolean?", desc: "普攻范围" },
                 { name: "skill", type: "boolean?", desc: "技能范围" },

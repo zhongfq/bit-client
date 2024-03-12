@@ -2,23 +2,20 @@ import { b3 } from "../../../../../core/behavior3/behavior";
 import { AiTreeEnv } from "../../ecs/components/ai-component";
 import { ElementComponent } from "../../ecs/components/element-component";
 
-export class ChopWood extends b3.Process {
-    override run(node: b3.Node, env: AiTreeEnv, wood?: ElementComponent) {
-        if (!wood) {
-            this.warn(node, "not found wood");
-            return b3.Status.SUCCESS;
+export class Collect extends b3.Process {
+    override run(node: b3.Node, env: AiTreeEnv, target?: unknown) {
+        if (!(target instanceof ElementComponent)) {
+            this.error(node, `target '${target}' is not an ElementComponent`);
         }
-
-        env.context.chopTree(env.owner, wood);
-
+        env.context.collect(env.owner, target as ElementComponent);
         return b3.Status.SUCCESS;
     }
 
     override get descriptor() {
         return {
-            name: "ChopTree",
+            name: "Collect",
             type: "Action",
-            desc: "砍树",
+            desc: "采集",
             input: ["目标"],
         };
     }

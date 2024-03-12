@@ -109,10 +109,6 @@ export class CommandSystem extends ecs.System implements ICommandSender {
         return element;
     }
 
-    createWood(data: ElementCreator) {}
-
-    chopWood(eid: number, target: number) {}
-
     rushStart(eid: number) {
         const element = this._findElement(eid);
         if (element) {
