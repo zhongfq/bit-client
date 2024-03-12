@@ -1,12 +1,17 @@
+import { app } from "../../../../../app";
 import { ecs } from "../../../../../core/ecs";
 import { HeadInfoUI } from "../../../../../ui-runtime/prefab/battle/HeadInfoUI";
 import { PveContext } from "../../pve-context";
 import { TransformComponent } from "../components/movement-component";
 import {
     AnimationComponent,
+    BoardComponent,
     HeadInfoComponent,
     ShadowComponent,
 } from "../components/render-component";
+import { TilemapComponent } from "../components/tilemap-component";
+import { ElementComponent } from "../components/troop-component";
+import { TilemapSystem } from "./tilemap-system";
 
 const tmpInfoVector4 = new Laya.Vector4();
 
@@ -22,6 +27,8 @@ export class RenderSystem extends ecs.System {
             this._loadHeadInfo(component);
         } else if (component instanceof ShadowComponent) {
             this._loadShadow(component);
+        } else if (component instanceof BoardComponent) {
+            this._loadBoard(component);
         }
     }
 
@@ -36,6 +43,9 @@ export class RenderSystem extends ecs.System {
         } else if (component instanceof ShadowComponent) {
             component.view?.destroy();
             component.view = null;
+        } else if (component instanceof BoardComponent) {
+            const tilemapSystem = this.ecs.getSystem(TilemapSystem);
+            tilemapSystem?.delDynamicElementByEid(component.eid);
         }
     }
 
@@ -128,5 +138,25 @@ export class RenderSystem extends ecs.System {
         shadow.view = prefab.create() as Laya.Sprite3D;
         shadow.view.transform.localPositionY = 0.01;
         this.context.owner.shadows.addChild(shadow.view);
+    }
+
+    private async _loadBoard(board: BoardComponent) {
+        const transform = board.getComponent(TransformComponent);
+        if (!transform) {
+            return;
+        }
+        const element = board.getComponent(ElementComponent);
+        if (!element) {
+            return;
+        }
+        const table = app.service.table;
+        const buildingRow = table.battleBuilding[element.tableId];
+        const textureCfg = TilemapComponent.DYNAMIC_TEXTURE_CFG.get(buildingRow.texture_key);
+
+        const x = Math.floor(transform.position.x + (textureCfg?.tileX ?? 0));
+        const y = Math.floor(transform.position.z + (textureCfg?.tileY ?? 0));
+
+        const tilemapSystem = this.ecs.getSystem(TilemapSystem);
+        tilemapSystem?.addDynamicElement(board.eid, x, y);
     }
 }

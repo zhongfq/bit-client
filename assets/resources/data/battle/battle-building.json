@@ -4,27 +4,49 @@
         "fresh_time": 0,
         "id": 10001,
         "max_hp": 5000,
-        "obstacle_size": 5
+        "obstacle_size": 5,
+        "texture_key": "map_biulding_castle01"
     },
     "20001": {
         "battle_entity": 70001,
+        "die_hide": 0,
         "fresh_time": 60,
+        "hp_state": [
+            100,
+            50,
+            0
+        ],
         "id": 20001,
         "max_hp": 100,
-        "obstacle_size": 2
+        "obstacle_size": 2,
+        "texture_key": "map_gather_wood1-1"
     },
     "20002": {
         "battle_entity": 70002,
+        "die_hide": 1,
         "fresh_time": 60,
+        "hp_state": [
+            100,
+            50,
+            0
+        ],
         "id": 20002,
         "max_hp": 50,
-        "obstacle_size": 2
+        "obstacle_size": 2,
+        "texture_key": "map_gather_wood1-1"
     },
     "20003": {
         "battle_entity": 70003,
+        "die_hide": 1,
         "fresh_time": 60,
+        "hp_state": [
+            100,
+            50,
+            0
+        ],
         "id": 20003,
         "max_hp": 200,
-        "obstacle_size": 2
+        "obstacle_size": 2,
+        "texture_key": "map_gather_wood1-1"
     }
 }

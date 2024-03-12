@@ -18,6 +18,7 @@ import {
     RoleTable,
     ChestTable,
     BattleEntityTable,
+    BattleBuildingTable,
 } from "../../def/table";
 import { ItemConf } from "../../def/item";
 import { VoBag } from "../../misc/vo/vo-base/vo-bag";
@@ -27,6 +28,7 @@ import { TableUtil } from "./table-util";
 const JSON_ALLIANCE_TABLE = "resources/data/alliance.json";
 const JSON_ATTR_TABLE = "resources/data/attr.json";
 const JSON_BATTLE_ENTITY_TABLE = "resources/data/battle/battle-entity.json";
+const JSON_BATTLE_BUILDING_TABLE = "resources/data/battle/battle-building.json";
 const JSON_BUFF_TABLE = "resources/data/battle/battle-buff.json";
 const JSON_CHEST_TABLE = "resources/data/chest.json";
 const JSON_EMOJI_TABLE = "resources/data/emoji.json";
@@ -47,6 +49,7 @@ export class TableService extends Service<NetworkService> {
     attr!: AttrTable;
     battleBuff!: BattleBuffTable;
     battleEntity!: BattleEntityTable;
+    battleBuilding!: BattleBuildingTable;
     chest!: ChestTable;
     emoji!: EmojiTable;
     equip!: EquipTable;
@@ -70,6 +73,7 @@ export class TableService extends Service<NetworkService> {
         this.alliance = await app.loader.loadJson(JSON_ALLIANCE_TABLE);
         this.attr = await app.loader.loadJson(JSON_ATTR_TABLE);
         this.battleEntity = await app.loader.loadJson(JSON_BATTLE_ENTITY_TABLE);
+        this.battleBuilding = await app.loader.loadJson(JSON_BATTLE_BUILDING_TABLE);
         this.chest = await app.loader.loadJson(JSON_CHEST_TABLE);
         this.emoji = await app.loader.loadJson(JSON_EMOJI_TABLE);
         this.equip = await app.loader.loadJson(JSON_EQUIP_TABLE);

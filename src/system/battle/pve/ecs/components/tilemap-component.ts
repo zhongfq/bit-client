@@ -105,7 +105,7 @@ export class TilemapComponent extends ecs.SingletonComponent {
 
     static readonly DYNAMIC_TEXTURE_CFG: Map<string, Tilemap.TextureCfg> = new Map([
         [
-            "building_castle01@1,2_5,5",
+            "map_biulding_castle01",
             {
                 tileX: 3,
                 tileY: 5,
@@ -122,24 +122,11 @@ export class TilemapComponent extends ecs.SingletonComponent {
             {
                 tileX: 0,
                 tileY: 1,
-                tileW: 2,
-                tileH: 2,
-                offsetX: 0.39992,
-                offsetY: 1.21985,
-                offsetZ: 0.32989,
-                scale: 3,
-            },
-        ],
-        [
-            "map_gather_wood1-2",
-            {
-                tileX: 0,
-                tileY: 1,
-                tileW: 2,
-                tileH: 2,
-                offsetX: 0.39992,
-                offsetY: 1.21985,
-                offsetZ: 0.32989,
+                tileW: 1,
+                tileH: 1,
+                offsetX: -0.06037,
+                offsetY: 1.0398,
+                offsetZ: -0.12026,
                 scale: 3,
             },
         ],

@@ -1117,13 +1117,12 @@
       "_$id": "r5m558g2",
       "_$type": "Sprite3D",
       "name": "Obj2",
-      "active": false,
       "transform": {
         "localPosition": {
           "_$type": "Vector3",
-          "x": 0.39992,
-          "y": 1.21985,
-          "z": 0.32989
+          "x": -0.06037,
+          "y": 1.0398,
+          "z": -0.12026
         },
         "localRotation": {
           "_$type": "Quaternion",

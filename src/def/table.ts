@@ -7,6 +7,7 @@ import {
     GeneratedAttrRow,
     GeneratedBattleBuffRow,
     GeneratedBattleEntityRow,
+    GeneratedBattleBuildingRow,
     GeneratedChestHeroRow,
     GeneratedChestRow,
     GeneratedChestScoreRow,
@@ -79,6 +80,12 @@ export interface BattleEntityRow extends GeneratedBattleEntityRow {}
 
 export type BattleEntityTable = {
     [k: string]: BattleEntityRow;
+};
+
+export interface BattleBuildingRow extends GeneratedBattleBuildingRow {}
+
+export type BattleBuildingTable = {
+    [k: string]: BattleBuildingRow;
 };
 
 //-----------------------------------------------------------------------------

@@ -29,7 +29,15 @@ export class TilemapSystem extends ecs.System {
      */
     public addDynamicElement(eid: number, x: number, y: number): number {
         const uids: number[] = [];
-        this._tryAdd(x, y, Tilemap.LayerName.Dynamic, eid, uids);
+        this._tryAdd(
+            x,
+            y,
+            (layerName: string) => {
+                return layerName == Tilemap.LayerName.Dynamic;
+            },
+            eid,
+            uids
+        );
         return uids[0];
     }
 
@@ -40,7 +48,9 @@ export class TilemapSystem extends ecs.System {
     public delDynamicElementByUid(uid: number): void {
         const element = this._allMap.get(uid);
         if (element) {
-            this._tryDel(element.x, element.y, Tilemap.LayerName.Dynamic);
+            this._tryDel(element.x, element.y, (layerName: string) => {
+                return layerName == Tilemap.LayerName.Dynamic;
+            });
         }
     }
 
@@ -51,7 +61,9 @@ export class TilemapSystem extends ecs.System {
     public delDynamicElementByEid(eid: number): void {
         for (const element of this._allMap.values()) {
             if (element.eid == eid && element.layerName == Tilemap.LayerName.Dynamic) {
-                this._tryDel(element.x, element.y, Tilemap.LayerName.Dynamic);
+                this._tryDel(element.x, element.y, (layerName: string) => {
+                    return layerName == Tilemap.LayerName.Dynamic;
+                });
                 return;
             }
         }
@@ -93,7 +105,15 @@ export class TilemapSystem extends ecs.System {
      */
     public addElement(x: number, y: number, layerName: Tilemap.LayerName): number {
         const uids: number[] = [];
-        this._tryAdd(x, y, layerName, undefined, uids);
+        this._tryAdd(
+            x,
+            y,
+            ($layerName: string) => {
+                return $layerName == layerName;
+            },
+            undefined,
+            uids
+        );
         return uids[0];
     }
 
@@ -104,7 +124,9 @@ export class TilemapSystem extends ecs.System {
     public delElementByUid(uid: number): void {
         const element = this._allMap.get(uid);
         if (element) {
-            this._tryDel(element.x, element.y, element.layerName as Tilemap.LayerName);
+            this._tryDel(element.x, element.y, ($layerName: string) => {
+                return $layerName == element.layerName;
+            });
         }
     }
 
@@ -435,19 +457,23 @@ export class TilemapSystem extends ecs.System {
 
         for (let i = 0; i < this._addArr.length; i++) {
             const [x, y] = this._addArr[i];
-            this._tryAdd(x, y);
+            this._tryAdd(x, y, (layerName: string) => {
+                return layerName != Tilemap.LayerName.Dynamic;
+            });
         }
 
         for (let i = 0; i < this._delArr.length; i++) {
             const [x, y] = this._delArr[i];
-            this._tryDel(x, y);
+            this._tryDel(x, y, (layerName: string) => {
+                return layerName != Tilemap.LayerName.Dynamic;
+            });
         }
     }
 
     private async _tryAdd(
         x: number,
         y: number,
-        filterLayer?: Tilemap.LayerName,
+        filterFunc?: (layerName: string) => boolean,
         eid?: number,
         outUids?: number[]
     ) {
@@ -471,7 +497,7 @@ export class TilemapSystem extends ecs.System {
                 const layer = info.worldMap.layers[j];
                 const layerName = layer.name as Tilemap.LayerName;
 
-                if (filterLayer && layerName != filterLayer) {
+                if (filterFunc && !filterFunc(layerName)) {
                     continue;
                 }
                 const props = this._getProps(info, layer, x, y);
@@ -555,9 +581,9 @@ export class TilemapSystem extends ecs.System {
         return props;
     }
 
-    private _tryDel(x: number, y: number, filterLayer?: Tilemap.LayerName) {
+    private _tryDel(x: number, y: number, filterFunc?: (layerName: string) => boolean) {
         this._posMap.forEach((uidMap, layerName) => {
-            if (filterLayer && layerName != filterLayer) {
+            if (filterFunc && !filterFunc(layerName)) {
                 return;
             }
             const key = TilemapComponent.XY_TO_KEY(x, y);

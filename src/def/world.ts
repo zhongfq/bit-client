@@ -6,7 +6,6 @@ export const WorldConf = {
         ITEM: "item",
         MOVE: "move",
         OWNER: "owner",
-        PLAYER: "player",
         POS: "pos",
         STATE: "state",
         TROOP: "troop",
@@ -47,8 +46,10 @@ export const WorldConf = {
             5: "troop",
             6: "bag",
         },
-        4: {
-            1: "player",
+        3: {
+            1: "pos",
+            2: "owner",
+            3: "building",
         },
         5: {
             1: "pos",
@@ -95,7 +96,6 @@ export const WorldConf = {
         DROP_ITEM: 7,
         MINE: 10,
         MONSTER: 6,
-        PLAYER: 4,
         SOLDIER: 9,
         TROOP: 2,
     },

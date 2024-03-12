@@ -18,7 +18,7 @@
              "orientation":"isometric",
              "width":128
             },
-         "image":"..\/..\/..\/..\/..\/others\/res\/\u573a\u666f\/map_Grassland_Tiled\/Tiled\/atlas\/ground.png",
+         "image":"..\/atlas\/ground.png",
          "imageheight":768,
          "imagewidth":1024,
          "margin":0,
@@ -268,31 +268,31 @@
          "tiles":[
                 {
                  "id":0,
-                 "image":"..\/..\/..\/..\/..\/others\/res\/\u573a\u666f\/map_Grassland_Tiled\/Tiled\/texture\/static\/map_Grassland_hill_01.png",
+                 "image":"..\/texture\/static\/map_Grassland_hill_01.png",
                  "imageheight":384,
                  "imagewidth":384
                 }, 
                 {
                  "id":1,
-                 "image":"..\/..\/..\/..\/..\/others\/res\/\u573a\u666f\/map_Grassland_Tiled\/Tiled\/texture\/static\/map_Grassland_hill_02.png",
+                 "image":"..\/texture\/static\/map_Grassland_hill_02.png",
                  "imageheight":256,
                  "imagewidth":256
                 }, 
                 {
                  "id":2,
-                 "image":"..\/..\/..\/..\/..\/others\/res\/\u573a\u666f\/map_Grassland_Tiled\/Tiled\/texture\/static\/map_Grassland_Tree_01.png",
+                 "image":"..\/texture\/static\/map_Grassland_Tree_01.png",
                  "imageheight":256,
                  "imagewidth":256
                 }, 
                 {
                  "id":3,
-                 "image":"..\/..\/..\/..\/..\/others\/res\/\u573a\u666f\/map_Grassland_Tiled\/Tiled\/texture\/static\/map_Grassland_Tree_02.png",
+                 "image":"..\/texture\/static\/map_Grassland_Tree_02.png",
                  "imageheight":256,
                  "imagewidth":256
                 }, 
                 {
                  "id":4,
-                 "image":"..\/..\/..\/..\/..\/others\/res\/\u573a\u666f\/map_Grassland_Tiled\/Tiled\/texture\/static\/map_Grassland_Tree_03.png",
+                 "image":"..\/texture\/static\/map_Grassland_Tree_03.png",
                  "imageheight":256,
                  "imagewidth":256
                 }],
@@ -310,24 +310,30 @@
          "margin":0,
          "name":"dynamic",
          "spacing":0,
-         "tilecount":3,
+         "tilecount":4,
          "tileheight":512,
          "tiles":[
                 {
                  "id":0,
-                 "image":"..\/..\/..\/..\/..\/others\/res\/\u573a\u666f\/map_Grassland_Tiled\/Tiled\/texture\/dynamic\/building_castle01@1,2_5,5.png",
+                 "image":"..\/texture\/dynamic\/map_biulding_castle01.png",
                  "imageheight":512,
                  "imagewidth":512
                 }, 
                 {
                  "id":1,
-                 "image":"..\/..\/..\/..\/..\/others\/res\/\u573a\u666f\/map_Grassland_Tiled\/Tiled\/texture\/dynamic\/map_gather_wood1-1.png",
+                 "image":"..\/texture\/dynamic\/map_gather_wood1-1.png",
                  "imageheight":256,
                  "imagewidth":256
                 }, 
                 {
-                 "id":2,
-                 "image":"..\/..\/..\/..\/..\/others\/res\/\u573a\u666f\/map_Grassland_Tiled\/Tiled\/texture\/dynamic\/map_gather_wood1-2.png",
+                 "id":3,
+                 "image":"..\/texture\/dynamic\/map_gather_wood1-2.png",
+                 "imageheight":256,
+                 "imagewidth":256
+                }, 
+                {
+                 "id":4,
+                 "image":"..\/texture\/dynamic\/map_gather_wood1-3.png",
                  "imageheight":256,
                  "imagewidth":256
                 }],
@@ -335,14 +341,14 @@
         }, 
         {
          "columns":4,
-         "firstgid":57,
+         "firstgid":59,
          "grid":
             {
              "height":64,
              "orientation":"isometric",
              "width":128
             },
-         "image":"..\/..\/..\/..\/..\/others\/res\/\u573a\u666f\/map_Grassland_Tiled\/Tiled\/atlas\/road.png",
+         "image":"..\/atlas\/road.png",
          "imageheight":1024,
          "imagewidth":512,
          "margin":0,
@@ -502,14 +508,14 @@
         }, 
         {
          "columns":4,
-         "firstgid":89,
+         "firstgid":91,
          "grid":
             {
              "height":64,
              "orientation":"isometric",
              "width":128
             },
-         "image":"..\/..\/..\/..\/..\/others\/res\/\u573a\u666f\/map_Grassland_Tiled\/Tiled\/atlas\/river.png",
+         "image":"..\/atlas\/river.png",
          "imageheight":1024,
          "imagewidth":512,
          "margin":0,

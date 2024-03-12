@@ -15,6 +15,7 @@ import {
 } from "../components/movement-component";
 import {
     AnimationComponent,
+    BoardComponent,
     HeadInfoComponent,
     ShadowComponent,
 } from "../components/render-component";
@@ -42,20 +43,23 @@ export class CommandSystem extends ecs.System implements ICommandSender {
         const table = app.service.table;
         const ETYPE = BattleConf.ENTITY_TYPE;
 
-        const entityRow = table.battleEntity[data.tid];
+        const entityRow = table.battleEntity[data.entityId];
 
         const entity = this.ecs.createEntity(data.eid);
         entity.etype = data.etype;
 
         const element = entity.addComponent(ElementComponent);
-        element.tid = data.tid;
+        element.entityId = data.entityId;
+        element.tableId = data.tableId;
 
         const transform = entity.addComponent(TransformComponent);
         transform.position.cloneFrom(data.position);
         transform.flag |= TransformComponent.POSITION;
 
-        const animation = entity.addComponent(AnimationComponent);
-        animation.res = entityRow.res;
+        if (data.animation) {
+            const animation = entity.addComponent(AnimationComponent);
+            animation.res = entityRow.res;
+        }
 
         if (entityRow.info_style) {
             const info = entity.addComponent(HeadInfoComponent);
@@ -81,6 +85,15 @@ export class CommandSystem extends ecs.System implements ICommandSender {
 
             const movement = entity.addComponent(MovementComponent);
             movement.rotationInterpolation.rate = InterpolationRate.ROTATION;
+        }
+
+        if (
+            data.etype == ETYPE.BUILDING ||
+            data.etype == ETYPE.WOOD ||
+            data.etype == ETYPE.FOOD ||
+            data.etype == ETYPE.STONE
+        ) {
+            entity.addComponent(BoardComponent);
         }
     }
 

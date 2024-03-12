@@ -3,12 +3,12 @@
   "props": {
     "textures": [
       {
-        "path": "res://cb0d51d4-2aec-4b52-84cd-5d68b4ed225c",
+        "path": "res://88ea3464-0731-45d6-aac7-86773a3828c1",
         "constructParams": [
           256,
-          256,
+          288,
           1,
-          true,
+          false,
           false,
           true
         ],

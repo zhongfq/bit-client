@@ -1,6 +1,7 @@
 import { app } from "../../../app";
 import { ecs } from "../../../core/ecs";
 import { Mediator } from "../../../core/ui-mediator";
+import { BattleConf } from "../../../def/battle";
 import { Event } from "../../../misc/event";
 import { res } from "../../../misc/res";
 import { PveUI } from "../../../ui-runtime/scene/PveUI";
@@ -86,20 +87,46 @@ export class PveContext extends Mediator {
     onTileMapAddElement(element: Tilemap.Element) {
         if (element instanceof Tilemap.MonsterElement) {
             console.log("AddMonster", element.x, element.y, element.id);
-            const position = new Laya.Vector3();
-            position.x = element.realX;
-            position.z = element.realY;
+            const position = new Laya.Vector3(element.realX, 0, element.realY);
             this.sender.addMonster(element.id, position);
+        } else if (element instanceof Tilemap.BuildingElement) {
+            const table = app.service.table;
+            const buildingRow = table.battleBuilding[element.id];
+            const entityRow = table.battleEntity[buildingRow.battle_entity];
+            const position = new Laya.Vector3(element.x, 0, element.y);
+            switch (entityRow.etype) {
+                case BattleConf.ENTITY_TYPE.BUILDING:
+                    this.sender.addBuilding(element.id, position);
+                    break;
+                case BattleConf.ENTITY_TYPE.WOOD:
+                case BattleConf.ENTITY_TYPE.FOOD:
+                case BattleConf.ENTITY_TYPE.STONE:
+                    this.sender.addCollection(element.id, position);
+                    break;
+            }
         }
     }
 
     onTileMapDelElement(element: Tilemap.Element) {
         if (element instanceof Tilemap.MonsterElement) {
             console.log("DelMonster", element.x, element.y, element.id);
-            const position = new Laya.Vector3();
-            position.x = element.realX;
-            position.z = element.realY;
+            const position = new Laya.Vector3(element.realX, 0, element.realY);
             this.sender.removeMonster(element.id, position);
+        } else if (element instanceof Tilemap.BuildingElement) {
+            const table = app.service.table;
+            const buildingRow = table.battleBuilding[element.id];
+            const entityRow = table.battleEntity[buildingRow.battle_entity];
+            const position = new Laya.Vector3(element.x, 0, element.y);
+            switch (entityRow.etype) {
+                case BattleConf.ENTITY_TYPE.BUILDING:
+                    this.sender.removeBuilding(element.id, position);
+                    break;
+                case BattleConf.ENTITY_TYPE.WOOD:
+                case BattleConf.ENTITY_TYPE.FOOD:
+                case BattleConf.ENTITY_TYPE.STONE:
+                    this.sender.removeCollection(element.id, position);
+                    break;
+            }
         }
     }
 
@@ -177,6 +204,22 @@ class CommandSender {
 
     removeMonster(tid: number, position: Laya.Vector3) {
         this.server.removeMonster(tid, position);
+    }
+
+    addBuilding(tid: number, position: Laya.Vector3) {
+        this.server.addBuilding(tid, position);
+    }
+
+    removeBuilding(tid: number, position: Laya.Vector3) {
+        this.server.removeBuilding(tid, position);
+    }
+
+    addCollection(tid: number, position: Laya.Vector3) {
+        this.server.addCollection(tid, position);
+    }
+
+    removeCollection(tid: number, position: Laya.Vector3) {
+        this.server.removeCollection(tid, position);
     }
 
     click(x: number, z: number) {

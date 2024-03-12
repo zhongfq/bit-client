@@ -273,6 +273,9 @@ export interface GeneratedBattleBuildingRow {
     obstacle_size: number;
     max_hp: number;
     fresh_time: number;
+    texture_key: string;
+    hp_state?: any;
+    die_hide?: number;
 }
 
 // file: design/world/world_map.xlsx

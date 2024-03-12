@@ -35,7 +35,8 @@ export class ElementComponent extends ecs.Component {
         return (this._animation ||= this.getComponent(AnimationComponent)!);
     }
 
-    tid: number = 0;
+    entityId: number = 0;
+    tableId: number = 0;
 }
 
 type SoliderAttack = {

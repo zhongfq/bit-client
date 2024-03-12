@@ -175,10 +175,12 @@ export class PveServer extends b3.Context {
         this._sender.createElement({
             eid: element.eid,
             etype: element.entity.etype,
-            tid: element.data.id,
+            entityId: element.data.id,
+            tableId: element.tid,
             hp: element.hp,
             maxHp: element.maxHp,
             position: transform.position,
+            animation: true,
         });
         this._sender.focus(element.eid);
 
@@ -230,10 +232,12 @@ export class PveServer extends b3.Context {
             this._sender.createElement({
                 eid: element.eid,
                 etype: element.entity.etype,
-                tid: element.data.id,
+                entityId: element.data.id,
+                tableId: element.tid,
                 hp: element.hp,
                 maxHp: element.maxHp,
                 position: transform.position,
+                animation: true,
             });
         });
     }
@@ -405,10 +409,12 @@ export class PveServer extends b3.Context {
         this._sender.createElement({
             eid: element.eid,
             etype: element.entity.etype,
-            tid: element.data.id,
+            entityId: element.data.id,
+            tableId: element.tid,
             hp: element.hp,
             maxHp: element.maxHp,
             position: transform.position,
+            animation: true,
         });
     }
 
@@ -417,6 +423,100 @@ export class PveServer extends b3.Context {
         const monster = this._elements.get(key);
         if (monster) {
             this.removeElement(monster);
+        }
+    }
+
+    addBuilding(tid: number, position: Laya.Vector3) {
+        const key = this._toElementKey(tid, position);
+        if (this._elements.has(key)) {
+            return;
+        }
+
+        const table = app.service.table;
+        const buildingRow = table.battleBuilding[tid];
+        const entityRow = table.battleEntity[buildingRow.battle_entity];
+
+        const entity = this._ecs.createEntity();
+        entity.etype = entityRow.etype;
+
+        const element = entity.addComponent(ElementComponent);
+        element.tid = tid;
+        element.hp = buildingRow.max_hp; // TODO: 使用当前的血量
+        element.maxHp = buildingRow.max_hp;
+        element.aid = 1; // TODO: 区分敌我方城建
+        element.key = key;
+        element.spawnpoint.cloneFrom(position);
+        element.data = entityRow;
+
+        this._elements.set(key, element);
+
+        const transform = entity.addComponent(TransformComponent);
+        transform.position.x = position.x;
+        transform.position.z = position.z;
+
+        this._sender.createElement({
+            eid: element.eid,
+            etype: element.entity.etype,
+            entityId: element.data.id,
+            tableId: element.tid,
+            hp: element.hp,
+            maxHp: element.maxHp,
+            position: transform.position,
+        });
+    }
+
+    removeBuilding(tid: number, position: Laya.Vector3) {
+        const key = this._toElementKey(tid, position);
+        const element = this._elements.get(key);
+        if (element) {
+            this.removeElement(element);
+        }
+    }
+
+    addCollection(tid: number, position: Laya.Vector3) {
+        const key = this._toElementKey(tid, position);
+        if (this._elements.has(key)) {
+            return;
+        }
+
+        const table = app.service.table;
+        const buildingRow = table.battleBuilding[tid];
+        const entityRow = table.battleEntity[buildingRow.battle_entity];
+
+        const entity = this._ecs.createEntity();
+        entity.etype = entityRow.etype;
+
+        const element = entity.addComponent(ElementComponent);
+        element.tid = tid;
+        element.hp = buildingRow.max_hp; // TODO: 使用当前的血量
+        element.maxHp = buildingRow.max_hp;
+        element.aid = 2;
+        element.key = key;
+        element.spawnpoint.cloneFrom(position);
+        element.data = entityRow;
+
+        this._elements.set(key, element);
+
+        const transform = entity.addComponent(TransformComponent);
+        transform.position.x = position.x;
+        transform.position.z = position.z;
+
+        this._sender.createElement({
+            eid: element.eid,
+            etype: element.entity.etype,
+            entityId: element.data.id,
+            tableId: element.tid,
+            hp: element.hp,
+            maxHp: element.maxHp,
+            position: transform.position,
+        });
+    }
+
+    removeCollection(tid: number, position: Laya.Vector3) {
+        const key = this._toElementKey(tid, position);
+        const element = this._elements.get(key);
+        if (element) {
+            this.removeElement(element);
         }
     }
 }

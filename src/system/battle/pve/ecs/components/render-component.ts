@@ -35,6 +35,8 @@ export class AnimationComponent extends Renderable3D {
 
 export class ShadowComponent extends Renderable3D {}
 
+export class BoardComponent extends Renderable3D {}
+
 export class HeadInfoComponent extends Renderable2D {
     declare view: HeadInfoUI | null;
     data: HeadInfoData = {

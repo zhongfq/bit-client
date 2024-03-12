@@ -9,10 +9,12 @@ export interface ElementCreator {
     eid: number;
     etype: number;
 
-    tid: number; // id in battle_entity.xlsx
+    entityId: number; // id in battle_entity.xlsx
+    tableId: number; // 配置表id
     maxHp: number;
     hp: number;
     position: Laya.Vector3;
+    animation?: boolean;
 }
 
 export interface UpdateHp {
