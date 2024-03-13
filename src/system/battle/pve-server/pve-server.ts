@@ -18,6 +18,7 @@ import { MovementSystem } from "./ecs/systems/movement-system";
 import { SkillSystem } from "./ecs/systems/skill-system";
 import { ElementCreator, UpdateHp } from "./pve-defs";
 import { ElementAnimation } from "../pve/ecs/components/troop-component";
+import { CacheData, CacheSystem } from "./ecs/systems/cache-system";
 
 const _tmpVelocity = new Laya.Vector3();
 
@@ -42,6 +43,7 @@ export class PveServer extends b3.Context {
         this._ecs.addSystem(new AiSystem(this));
         this._ecs.addSystem(new MovementSystem(this));
         this._ecs.addSystem(new SkillSystem(this));
+        this._ecs.addSystem(new CacheSystem(this));
     }
 
     get ecs() {
@@ -144,8 +146,8 @@ export class PveServer extends b3.Context {
         element.aid = 1;
 
         const transform = entity.addComponent(TransformComponent);
-        transform.position.x = 6;
-        transform.position.z = 6;
+        transform.position.x = 21;
+        transform.position.z = 43;
 
         entity.addComponent(MovementComponent);
         entity.addComponent(TroopComponent);
@@ -247,6 +249,11 @@ export class PveServer extends b3.Context {
         this._elements.delete(element.key);
         this.ecs.removeEntity(element.eid);
         this._sender.removeElement(element.eid);
+
+        const cacheSys = this.ecs.getSystem(CacheSystem);
+        if (element.hp < element.maxHp) {
+            cacheSys?.setOutVision(element, true);
+        }
     }
 
     rushStart(element: ElementComponent): void {
@@ -295,6 +302,9 @@ export class PveServer extends b3.Context {
         });
         if (enemy.hp <= 0) {
             this.removeElement(enemy);
+
+            const cacheSys = this.ecs.getSystem(CacheSystem);
+            cacheSys?.setReliveTime(enemy, Laya.timer.currTimer + 10 * 1000); // TODO：复活时间读配置表
         }
     }
 
@@ -309,20 +319,49 @@ export class PveServer extends b3.Context {
     }
 
     collect(element: ElementComponent, target: ElementComponent) {
+        if (target.hp <= 0) {
+            return;
+        }
         this._sender.playAnim(element.eid, ElementAnimation.CHOP);
 
         const subHp = 10;
-        target.hp -= subHp;
-        if (target.hp < 0) {
-            target.hp = 0;
-        }
+        target.hp = Math.max(0, target.hp - subHp);
+
         this._sender.updateHp(target.eid, {
             hp: target.hp,
             maxHp: target.maxHp,
             subHp: subHp,
         });
+
         if (target.hp <= 0) {
-            this.removeElement(target); // TODO: 临时代码
+            const cacheSys = this.ecs.getSystem(CacheSystem);
+            const table = app.service.table;
+            const buildingRow = table.battleBuilding[target.tid];
+            cacheSys?.setReliveTime(target, Laya.timer.currTimer + 5000); // buildingRow.fresh_time * 1000
+        }
+    }
+
+    relive(e: ElementComponent) {
+        const cacheSys = this.ecs.getSystem(CacheSystem);
+        if (cacheSys?.isOutVision(e.key) === true) {
+            return;
+        }
+        const etype = e.data.etype;
+        const ETYPE = BattleConf.ENTITY_TYPE;
+
+        if (etype == ETYPE.WOOD || etype == ETYPE.FOOD || etype == ETYPE.STONE) {
+            const element = this._elements.get(e.key);
+            if (element) {
+                element.hp = e.hp;
+                element.maxHp = e.maxHp;
+                this._sender.updateHp(element.eid, {
+                    hp: element.hp,
+                    maxHp: element.maxHp,
+                    subHp: 0,
+                });
+            }
+        } else if (etype == ETYPE.MONSTER) {
+            this.addMonster(e.tid, e.spawnpoint);
         }
     }
 
@@ -380,17 +419,27 @@ export class PveServer extends b3.Context {
         if (this._elements.has(key)) {
             return;
         }
+        const cacheSys = this.ecs.getSystem(CacheSystem);
+        if (cacheSys?.canRelive(key) === false) {
+            return;
+        }
 
         const entity = this._ecs.createEntity();
+        entity.etype = BattleConf.ENTITY_TYPE.HERO;
+
         const element = entity.addComponent(ElementComponent);
+        const cacheData = cacheSys?.getCache(key);
+
         element.tid = tid;
-        element.hp = 200;
-        element.maxHp = 200;
+        element.hp = cacheData?.element.hp ?? 200;
+        element.maxHp = cacheData?.element.maxHp ?? 200;
         element.aid = 2;
         element.key = key;
         element.spawnpoint.cloneFrom(position);
-        entity.etype = BattleConf.ENTITY_TYPE.HERO;
 
+        if (cacheData) {
+            cacheSys?.setOutVision(cacheData.element, undefined);
+        }
         this._elements.set(key, element);
 
         const table = app.service.table;
@@ -430,15 +479,19 @@ export class PveServer extends b3.Context {
 
     removeMonster(tid: number, position: Laya.Vector3) {
         const key = this._toElementKey(tid, position);
-        const monster = this._elements.get(key);
-        if (monster) {
-            this.removeElement(monster);
+        const element = this._elements.get(key);
+        if (element) {
+            this.removeElement(element);
         }
     }
 
     addBuilding(tid: number, position: Laya.Vector3) {
         const key = this._toElementKey(tid, position);
         if (this._elements.has(key)) {
+            return;
+        }
+        const cacheSys = this.ecs.getSystem(CacheSystem);
+        if (cacheSys?.canRelive(key) === false) {
             return;
         }
 
@@ -450,14 +503,19 @@ export class PveServer extends b3.Context {
         entity.etype = entityRow.etype;
 
         const element = entity.addComponent(ElementComponent);
+        const cacheData = cacheSys?.getCache(key);
+
         element.tid = tid;
-        element.hp = buildingRow.max_hp; // TODO: 使用当前的血量
-        element.maxHp = buildingRow.max_hp;
+        element.hp = cacheData?.element.hp ?? buildingRow.max_hp;
+        element.maxHp = cacheData?.element.maxHp ?? buildingRow.max_hp;
         element.aid = 1; // TODO: 区分敌我方城建
         element.key = key;
         element.spawnpoint.cloneFrom(position);
         element.data = entityRow;
 
+        if (cacheData) {
+            cacheSys?.setOutVision(cacheData.element, undefined);
+        }
         this._elements.set(key, element);
 
         const transform = entity.addComponent(TransformComponent);
@@ -488,6 +546,8 @@ export class PveServer extends b3.Context {
         if (this._elements.has(key)) {
             return;
         }
+        const cacheSys = this.ecs.getSystem(CacheSystem);
+        const cacheData = cacheSys?.getCache(key);
 
         const table = app.service.table;
         const buildingRow = table.battleBuilding[tid];
@@ -498,13 +558,16 @@ export class PveServer extends b3.Context {
 
         const element = entity.addComponent(ElementComponent);
         element.tid = tid;
-        element.hp = buildingRow.max_hp; // TODO: 使用当前的血量
-        element.maxHp = buildingRow.max_hp;
+        element.hp = cacheData?.element.hp ?? buildingRow.max_hp;
+        element.maxHp = cacheData?.element.maxHp ?? buildingRow.max_hp;
         element.aid = 2;
         element.key = key;
         element.spawnpoint.cloneFrom(position);
         element.data = entityRow;
 
+        if (cacheData) {
+            cacheSys?.setOutVision(cacheData.element, undefined);
+        }
         this._elements.set(key, element);
 
         const transform = entity.addComponent(TransformComponent);
