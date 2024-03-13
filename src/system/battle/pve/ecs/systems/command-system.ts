@@ -20,6 +20,7 @@ import {
     HeadInfoComponent,
     ShadowComponent,
 } from "../components/render-component";
+import { TilemapComponent } from "../components/tilemap-component";
 import { ElementAnimation, ElementComponent } from "../components/troop-component";
 
 const PREFAB_HEAD_INFO1 = "resources/prefab/battle/ui/head-info1.lh";
@@ -245,14 +246,37 @@ export class CommandSystem extends ecs.System implements ICommandSender {
             }
             const etype = element.entity.etype;
             const ETYPE = BattleConf.ENTITY_TYPE;
+
             if (etype == ETYPE.WOOD || etype == ETYPE.FOOD || etype == ETYPE.STONE) {
-                // const tilemap = this.ecs.getSingletonComponent(TilemapComponent)!;
-                // const dynamicElement = tilemap?.getDynamicElementByEid(eid);
-                // if (data.hp > 0) {
-                //     console.log("111");
-                // } else {
-                //     console.log("22222222222");
-                // }
+                const tilemap = this.ecs.getSingletonComponent(TilemapComponent)!;
+                const dynamicElement = tilemap.getDynamicElementByEid(eid);
+                const buildingRow = app.service.table.battleBuilding[element.tableId];
+                const stateArr = buildingRow.hp_state as Array<number>;
+                const textureArr = buildingRow.hp_texture as Array<string>;
+
+                let textureName = undefined;
+                if (data.hp > 0) {
+                    for (let i = 0; i < stateArr.length - 1; i++) {
+                        const hp = stateArr[i];
+                        const nextHp = stateArr[i + 1];
+                        if (hp >= data.hp && data.hp > nextHp) {
+                            textureName = textureArr[i];
+                            break;
+                        }
+                    }
+                } else {
+                    if (buildingRow.die_hide) {
+                        textureName = undefined;
+                    } else {
+                        textureName = textureArr.at(-1);
+                    }
+                }
+                if (textureName) {
+                    dynamicElement?.draw();
+                    dynamicElement?.setTexture(textureName);
+                } else {
+                    dynamicElement?.erase();
+                }
             }
         }
     }

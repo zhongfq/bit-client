@@ -215,6 +215,7 @@ export abstract class TMBoardElement extends TMElement {
     private _startY: number = 0;
     private _width: number = 0;
     private _height: number = 0;
+    private _resName: string = "";
 
     public get startX(): number {
         return this._startX;
@@ -245,7 +246,6 @@ export abstract class TMBoardElement extends TMElement {
         this._board = prefab.create() as Laya.Sprite3D;
 
         const sprite = this._board.getChildAt(0) as Laya.Sprite3D;
-        const renderer = sprite.getComponent(Laya.MeshRenderer);
         const resName = this._tilemap.getTextureResName(this.getTextureName(), this.gid);
         const textureCfg = this.getTextureCfg().get(resName);
 
@@ -271,6 +271,22 @@ export abstract class TMBoardElement extends TMElement {
         sprite.transform.localRotationEulerX = cameraTrans.localRotationEulerX;
         sprite.transform.localRotationEulerY = cameraTrans.localRotationEulerY;
 
+        this.setTexture(resName);
+
+        this._width = textureCfg?.tileW ?? 1;
+        this._height = textureCfg?.tileH ?? 1;
+
+        this._board.name = this.startX + "_" + this.startY + " | " + resName;
+        this._tilemap.getRoot().getChildByName(this.layerName).addChild(this._board);
+    }
+
+    public async setTexture(resName: string) {
+        if (!this._board || this._resName == resName) {
+            return;
+        }
+        const sprite = this._board.getChildAt(0) as Laya.Sprite3D;
+        const renderer = sprite.getComponent(Laya.MeshRenderer);
+
         const mat = new Laya.UnlitMaterial();
         const path = StringUtil.format(this.getTexturePath(), resName);
         const texture = (await Laya.loader.load(path, Laya.Loader.TEXTURE2D)) as Laya.Texture2D;
@@ -278,11 +294,7 @@ export abstract class TMBoardElement extends TMElement {
         mat.renderMode = Laya.MaterialRenderMode.RENDERMODE_TRANSPARENT;
         renderer.material = mat;
 
-        this._width = textureCfg?.tileW ?? 1;
-        this._height = textureCfg?.tileH ?? 1;
-
-        this._board.name = this.startX + "_" + this.startY + " | " + resName;
-        this._tilemap.getRoot().getChildByName(this.layerName).addChild(this._board);
+        this._resName = resName;
     }
 
     public showBlock() {
@@ -309,8 +321,11 @@ export abstract class TMBoardElement extends TMElement {
         this.hideBlock();
         this._board?.removeSelf();
         this._board = undefined;
+        this._startX = 0;
+        this._startY = 0;
         this._width = 0;
         this._height = 0;
+        this._resName = "";
     }
 
     protected abstract getPrefabPath(): string;

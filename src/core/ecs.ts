@@ -22,7 +22,7 @@ export namespace ecs {
         private _singletons: Map<Constructor<any>, SingletonComponent>;
         private _creatingCompontes: Component[] = [];
         private _timers: Timer[] = [];
-        private _delays: Map<string, Timer> = new Map();
+        private _delays: Map<string | number, Timer> = new Map();
         private _time: number = 0;
 
         public constructor() {
@@ -75,7 +75,7 @@ export namespace ecs {
                 }
             });
             this._delays.forEach((timer, key) => {
-                if (timer.time >= this._time) {
+                if (timer.time <= this._time) {
                     this._delays.delete(key);
                     this._execCallback(timer.callback, timer.thisArg);
                 }
@@ -100,7 +100,7 @@ export namespace ecs {
             });
         }
 
-        public delay(time: number, key: string, callback: Callback, thisArg?: unknown) {
+        public delay(time: number, key: string | number, callback: Callback, thisArg?: unknown) {
             if (this._delays.has(key)) {
                 console.warn(`ecs.delay: overwrite the delay callback with key ${key}`);
             }

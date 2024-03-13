@@ -16,6 +16,11 @@
             50,
             0
         ],
+        "hp_texture": [
+            "map_gather_wood1-1",
+            "map_gather_wood1-2",
+            "map_gather_wood1-3"
+        ],
         "id": 20001,
         "max_hp": 100,
         "obstacle_size": 2,
@@ -30,6 +35,11 @@
             50,
             0
         ],
+        "hp_texture": [
+            "map_gather_wood1-1",
+            "map_gather_wood1-2",
+            "map_gather_wood1-3"
+        ],
         "id": 20002,
         "max_hp": 50,
         "obstacle_size": 2,
@@ -43,6 +53,11 @@
             100,
             50,
             0
+        ],
+        "hp_texture": [
+            "map_gather_wood1-1",
+            "map_gather_wood1-2",
+            "map_gather_wood1-3"
         ],
         "id": 20003,
         "max_hp": 200,

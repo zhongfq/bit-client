@@ -284,6 +284,7 @@ export interface GeneratedBattleBuildingRow {
     fresh_time: number;
     texture_key: string;
     hp_state?: any;
+    hp_texture?: any;
     die_hide?: number;
 }
 

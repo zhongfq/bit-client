@@ -307,8 +307,10 @@ export class PveServer extends b3.Context {
             isCrit: isCrit,
         });
         if (enemy.hp <= 0) {
-            this.removeElement(enemy, false);
-
+            this.playAnim(enemy, ElementAnimation.DIE);
+            this.ecs.delay(2, enemy.eid, () => {
+                this.removeElement(enemy, false);
+            });
             const cacheSys = this.ecs.getSystem(CacheSystem);
             cacheSys?.setReliveTime(enemy, Laya.timer.currTimer + 10 * 1000); // TODO：复活时间读配置表
         }
@@ -343,7 +345,7 @@ export class PveServer extends b3.Context {
             const cacheSys = this.ecs.getSystem(CacheSystem);
             const table = app.service.table;
             const buildingRow = table.battleBuilding[target.tid];
-            cacheSys?.setReliveTime(target, Laya.timer.currTimer + 5000); // buildingRow.fresh_time * 1000
+            cacheSys?.setReliveTime(target, Laya.timer.currTimer + buildingRow.fresh_time * 1000);
         }
     }
 
