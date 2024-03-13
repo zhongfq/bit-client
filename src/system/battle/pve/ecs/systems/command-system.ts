@@ -20,7 +20,9 @@ import {
     HeadInfoComponent,
     ShadowComponent,
 } from "../components/render-component";
+import { TilemapComponent } from "../components/tilemap-component";
 import { ElementAnimation, ElementComponent } from "../components/troop-component";
+import { TilemapSystem } from "./tilemap-system";
 
 const PREFAB_HEAD_INFO1 = "resources/prefab/battle/ui/head-info1.lh";
 const PREFAB_HEAD_INFO2 = "resources/prefab/battle/ui/head-info2.lh";
@@ -242,6 +244,17 @@ export class CommandSystem extends ecs.System implements ICommandSender {
                         })
                         .start();
                 }
+            }
+            const etype = element.entity.etype;
+            const ETYPE = BattleConf.ENTITY_TYPE;
+            if (etype == ETYPE.WOOD || etype == ETYPE.FOOD || etype == ETYPE.STONE) {
+                // const tilemap = this.ecs.getSingletonComponent(TilemapComponent)!;
+                // const dynamicElement = tilemap?.getDynamicElementByEid(eid);
+                // if (data.hp > 0) {
+                //     console.log("111");
+                // } else {
+                //     console.log("22222222222");
+                // }
             }
         }
     }
