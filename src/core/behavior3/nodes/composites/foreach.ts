@@ -1,14 +1,14 @@
 import { b3 } from "../../behavior";
 
 export class Foreach extends b3.Process {
-    override check(node: b3.Node): void {
+    public override check(node: b3.Node): void {
         const varName = node.data.output?.[0];
         if (!varName) {
             this.error(node, `args.time is not a number`);
         }
     }
 
-    override run(node: b3.Node, env: b3.TreeEnv, arr: unknown[]) {
+    public override run(node: b3.Node, env: b3.TreeEnv, arr: unknown[]) {
         let last = node.resume(env);
         let i: number = 0;
         let j: number = 0;
@@ -46,7 +46,7 @@ export class Foreach extends b3.Process {
         return b3.Status.SUCCESS;
     }
 
-    override get descriptor() {
+    public override get descriptor() {
         return {
             name: "ForEach",
             type: "Composite",

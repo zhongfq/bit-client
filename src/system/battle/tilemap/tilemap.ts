@@ -320,9 +320,9 @@ export class Tilemap {
 
     public showBlocks: Map<string, boolean> = new Map();
 
-    constructor(readonly context: ITMContext) {}
+    public constructor(public readonly context: ITMContext) {}
 
-    get isReady() {
+    public get isReady() {
         return !!this._root && !!this._world;
     }
 

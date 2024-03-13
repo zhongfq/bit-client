@@ -14,12 +14,12 @@ interface Position {
 }
 
 class RoleEnv extends b3.TreeEnv {
-    declare context: RoleContext;
-    owner!: Role;
+    public declare context: RoleContext;
+    public owner!: Role;
 }
 
 class Attack extends b3.Process {
-    override run(node: b3.Node, env: b3.TreeEnv, enemy?: Role) {
+    public override run(node: b3.Node, env: b3.TreeEnv, enemy?: Role) {
         if (!enemy) {
             return b3.Status.FAILURE;
         }
@@ -29,35 +29,35 @@ class Attack extends b3.Process {
         return b3.Status.SUCCESS;
     }
 
-    get descriptor() {
+    public get descriptor() {
         return { name: "Attack" } as b3.ProcessDescriptor;
     }
 }
 
 class GetHp extends b3.Process {
-    override run(node: b3.Node, env: RoleEnv) {
+    public override run(node: b3.Node, env: RoleEnv) {
         env.lastRet.results.push((env.owner as Role).hp);
         return b3.Status.SUCCESS;
     }
 
-    get descriptor() {
+    public get descriptor() {
         return { name: "GetHp" } as b3.ProcessDescriptor;
     }
 }
 
 class Idle extends b3.Process {
-    override run(node: b3.Node, env: b3.TreeEnv) {
+    public override run(node: b3.Node, env: b3.TreeEnv) {
         console.log("Do Idle");
         return b3.Status.SUCCESS;
     }
 
-    get descriptor() {
+    public get descriptor() {
         return { name: "Idle" } as b3.ProcessDescriptor;
     }
 }
 
 class MoveToPos extends b3.Process {
-    override run(node: b3.Node, env: RoleEnv) {
+    public override run(node: b3.Node, env: RoleEnv) {
         const owner = env.owner as Role;
         const args = node.args as Position;
         owner.x = args.x;
@@ -65,15 +65,15 @@ class MoveToPos extends b3.Process {
         return b3.Status.SUCCESS;
     }
 
-    get descriptor() {
+    public get descriptor() {
         return { name: "MoveToPos" } as b3.ProcessDescriptor;
     }
 }
 
 class MoveToTarget extends b3.Process {
-    static SPEED = 50;
+    public static SPEED = 50;
 
-    override run(node: b3.Node, env: RoleEnv, target?: Role) {
+    public override run(node: b3.Node, env: RoleEnv, target?: Role) {
         if (!target) {
             return b3.Status.FAILURE;
         }
@@ -98,7 +98,7 @@ class MoveToTarget extends b3.Process {
         return node.yield(env);
     }
 
-    get descriptor() {
+    public get descriptor() {
         return { name: "MoveToTarget" } as b3.ProcessDescriptor;
     }
 }
@@ -110,7 +110,7 @@ interface FindEnemyArgs {
 }
 
 class FindEnemy extends b3.Process {
-    override run(node: b3.Node, env: RoleEnv) {
+    public override run(node: b3.Node, env: RoleEnv) {
         const args = node.args as FindEnemyArgs;
         const x = env.owner.x;
         const y = env.owner.y;
@@ -132,21 +132,21 @@ class FindEnemy extends b3.Process {
         }
     }
 
-    get descriptor() {
+    public get descriptor() {
         return { name: "FindEnemy" } as b3.ProcessDescriptor;
     }
 }
 
 class RoleContext extends b3.Context {
-    avators: Role[] = [];
+    public avators: Role[] = [];
 
-    find(func: Callback, count: number) {
+    public find(func: Callback, count: number) {
         return this.avators.filter((value) => func(value));
     }
 }
 
 export class BehaviorTest {
-    start() {
+    public start() {
         const context = new RoleContext();
         context.registerProcess(...builtinNodes);
         context.registerProcess(Attack);
@@ -170,7 +170,7 @@ export class BehaviorTest {
         this.testMonster(context);
     }
 
-    testHero(context: RoleContext) {
+    public testHero(context: RoleContext) {
         console.log("====================test hero=============================");
         // -- test hero
         const tree = new b3.Tree("hero", heroTree as b3.TreeData, context);
@@ -191,7 +191,7 @@ export class BehaviorTest {
         tree.run(env);
     }
 
-    testMonster(context: RoleContext) {
+    public testMonster(context: RoleContext) {
         console.log("====================test monster=============================");
         const tree = new b3.Tree("monster", monsterTree as b3.TreeData, context);
         const env = new RoleEnv(context);

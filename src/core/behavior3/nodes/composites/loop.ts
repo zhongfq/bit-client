@@ -5,7 +5,7 @@ interface LoopArgs {
 }
 
 export class Loop extends b3.Process {
-    override run(node: b3.Node, env: b3.TreeEnv, count?: number) {
+    public override run(node: b3.Node, env: b3.TreeEnv, count?: number) {
         count = count ?? (node.args as LoopArgs).count;
 
         let last = node.resume(env);
@@ -43,7 +43,7 @@ export class Loop extends b3.Process {
         return b3.Status.SUCCESS;
     }
 
-    override get descriptor() {
+    public override get descriptor() {
         return {
             name: "Loop",
             type: "Composite",

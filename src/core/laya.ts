@@ -3,7 +3,7 @@ import { Callback, Constructor, ConstructorType } from "./dispatcher";
 type EaseFunc = (t: number, b: number, c: number, d: number, ...any: any[]) => number;
 
 export class Tween {
-    static to<T>(target: T, props: ConstructorType<T>, duration: number, ease?: EaseFunc) {
+    public static to<T>(target: T, props: ConstructorType<T>, duration: number, ease?: EaseFunc) {
         return Laya.Tween.to(target, props, duration, ease);
     }
 
@@ -21,7 +21,7 @@ export class Tween {
      * @param points 用于计算贝塞尔曲线的坐标，2次贝塞尔3个point 3次4个point，目前最大支持3次
      * @param inSertCount 运动轨迹的坐标数量 >=5,值越大 轨迹越明显
      */
-    static toBezier(
+    public static toBezier(
         target: any,
         speed: number,
         points: Laya.Point[],

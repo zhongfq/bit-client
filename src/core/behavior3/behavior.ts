@@ -18,11 +18,11 @@ export namespace b3 {
     }
 
     export abstract class Process {
-        check(node: Node): void {}
+        public check(node: Node): void {}
 
-        abstract run(node: Node, env: TreeEnv, ...any: unknown[]): Status;
+        public abstract run(node: Node, env: TreeEnv, ...any: unknown[]): Status;
 
-        abstract get descriptor(): ProcessDescriptor;
+        public abstract get descriptor(): ProcessDescriptor;
 
         protected error(node: Node, msg: string) {
             throw new Error(`${node.tree.name}->${node.name}#${node.id}: ${msg}`);
@@ -47,18 +47,18 @@ export namespace b3 {
     export class Node {
         private static tmpInputArgs: unknown[] = [];
 
-        readonly tree: Tree;
-        readonly name: string;
-        readonly id: number;
-        readonly info: string;
-        readonly args: unknown;
-        readonly data: NodeData;
-        readonly children: Node[] = [];
+        public readonly tree: Tree;
+        public readonly name: string;
+        public readonly id: number;
+        public readonly info: string;
+        public readonly args: unknown;
+        public readonly data: NodeData;
+        public readonly children: Node[] = [];
 
         private _process: Process;
         private _yield: string;
 
-        constructor(data: NodeData, tree: Tree) {
+        public constructor(data: NodeData, tree: Tree) {
             this.tree = tree;
             this.name = data.name;
             this.id = data.id;
@@ -79,7 +79,7 @@ export namespace b3 {
             this._yield = TreeEnv.makeTempVar(this, "yield");
         }
 
-        run(env: TreeEnv) {
+        public run(env: TreeEnv) {
             if (env.getValue(this._yield) === undefined) {
                 env.stack.push(this);
             }
@@ -122,12 +122,12 @@ export namespace b3 {
             return status;
         }
 
-        yield(env: TreeEnv, value?: unknown) {
+        public yield(env: TreeEnv, value?: unknown) {
             env.setValue(this._yield, value ?? true);
             return Status.RUNNING;
         }
 
-        resume(env: TreeEnv): unknown {
+        public resume(env: TreeEnv): unknown {
             return env.getValue(this._yield);
         }
     }
@@ -136,11 +136,11 @@ export namespace b3 {
         protected _processResolvers: Map<string, Process> = new Map();
         protected _exps: Map<string, ExpressionEvaluator> = new Map();
 
-        time: number = 0;
+        public time: number = 0;
 
-        constructor() {}
+        public constructor() {}
 
-        compileExpr(code: string) {
+        public compileExpr(code: string) {
             let expr = this._exps.get(code);
             if (!expr) {
                 expr = new ExpressionEvaluator(code);
@@ -149,21 +149,21 @@ export namespace b3 {
             return expr;
         }
 
-        registerProcess<T extends Process>(...args: Constructor<T>[]) {
+        public registerProcess<T extends Process>(...args: Constructor<T>[]) {
             for (const cls of args) {
                 const process = new cls();
                 this._processResolvers.set(process.descriptor.name, process);
             }
         }
 
-        resolveProcess(name: string) {
+        public resolveProcess(name: string) {
             return this._processResolvers.get(name);
         }
     }
 
     export class TreeEnv {
-        readonly context: Context;
-        readonly lastRet: { status: Status; readonly results: unknown[] } = {
+        public readonly context: Context;
+        public readonly lastRet: { status: Status; readonly results: unknown[] } = {
             status: Status.SUCCESS,
             results: [],
         };
@@ -171,29 +171,29 @@ export namespace b3 {
         private _values: Map<string, unknown> = new Map();
         private _stack: Node[] = [];
 
-        debug: boolean = false;
+        public debug: boolean = false;
 
-        constructor(context: Context) {
+        public constructor(context: Context) {
             this.context = context;
         }
 
-        get vars() {
+        public get vars() {
             return this._values;
         }
 
-        get stack() {
+        public get stack() {
             return this._stack;
         }
 
-        eval(code: string) {
+        public eval(code: string) {
             return this.context.compileExpr(code).evaluate(this._values);
         }
 
-        getValue(k: string) {
+        public getValue(k: string) {
             return this._values.get(k);
         }
 
-        setValue(k: string, v: unknown) {
+        public setValue(k: string, v: unknown) {
             if (v === undefined) {
                 this._values.delete(k);
             } else {
@@ -201,17 +201,17 @@ export namespace b3 {
             }
         }
 
-        clear() {
+        public clear() {
             this._stack.length = 0;
             this._values.clear();
             this.lastRet.results.length = 0;
         }
 
-        static makePrivateVar(k: string): string;
+        public static makePrivateVar(k: string): string;
 
-        static makePrivateVar(node: Node, k: string): string;
+        public static makePrivateVar(node: Node, k: string): string;
 
-        static makePrivateVar(node: Node | string, k?: string) {
+        public static makePrivateVar(node: Node | string, k?: string) {
             if (typeof node === "string") {
                 return `__PRIVATE_VAR_${node}`;
             } else {
@@ -219,15 +219,15 @@ export namespace b3 {
             }
         }
 
-        static isPrivateVar(k: string) {
+        public static isPrivateVar(k: string) {
             return k.indexOf("__PRIVATE_VAR_") === 0;
         }
 
-        static makeTempVar(node: Node, k: string) {
+        public static makeTempVar(node: Node, k: string) {
             return `__TEMP_VAR_NODE#${node.id}_${k}`;
         }
 
-        static isTempVar(k: string) {
+        public static isTempVar(k: string) {
             return k.indexOf("__TEMP_VAR_") === 0;
         }
     }
@@ -239,17 +239,17 @@ export namespace b3 {
     }
 
     export class Tree {
-        readonly name: string;
-        readonly root: Node;
-        readonly context: Context;
+        public readonly name: string;
+        public readonly root: Node;
+        public readonly context: Context;
 
-        constructor(name: string, data: TreeData, context: Context) {
+        public constructor(name: string, data: TreeData, context: Context) {
             this.name = name;
             this.context = context;
             this.root = new Node(data.root, this);
         }
 
-        interrupt(env: TreeEnv) {
+        public interrupt(env: TreeEnv) {
             const stack = env.stack;
             const vars = env.vars;
             if (stack.length > 0) {
@@ -262,7 +262,7 @@ export namespace b3 {
             }
         }
 
-        run(env: TreeEnv) {
+        public run(env: TreeEnv) {
             const stack = env.stack;
             if (env.debug) {
                 console.log(`---------------- debug ai: ${this.name} --------------------`);
@@ -280,7 +280,7 @@ export namespace b3 {
             }
         }
 
-        isRunning(env: TreeEnv) {
+        public isRunning(env: TreeEnv) {
             return env.stack.length > 0;
         }
     }
@@ -293,7 +293,7 @@ export namespace b3 {
         private _postfix: TokenType[];
         private _args: Map<string, unknown> | null = null;
 
-        constructor(expression: string) {
+        public constructor(expression: string) {
             expression = expression.replace(/\s/g, "");
             const tokens = expression.match(/\d+\.\d+|\w+|\d+|>=|<=|==|>|<|[-+*/().]/g);
             if (!tokens) {
@@ -302,7 +302,7 @@ export namespace b3 {
             this._postfix = this._convertToPostfix(tokens);
         }
 
-        evaluate(args: Map<string, unknown>): unknown {
+        public evaluate(args: Map<string, unknown>): unknown {
             const stack: TokenType[] = [];
 
             this._args = args;

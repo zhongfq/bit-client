@@ -5,7 +5,7 @@ interface CheckArgs {
 }
 
 export class Check extends b3.Process {
-    override check(node: b3.Node): void {
+    public override check(node: b3.Node): void {
         const args = node.args as CheckArgs;
         if (typeof args.value !== "string" || args.value.length == 0) {
             this.error(node, `args.value is not a expr string`);
@@ -13,13 +13,13 @@ export class Check extends b3.Process {
         node.tree.context.compileExpr(args.value);
     }
 
-    override run(node: b3.Node, env: b3.TreeEnv) {
+    public override run(node: b3.Node, env: b3.TreeEnv) {
         const args = node.args as CheckArgs;
         const value = env.eval(args.value);
         return value ? b3.Status.SUCCESS : b3.Status.FAILURE;
     }
 
-    override get descriptor() {
+    public override get descriptor() {
         return {
             name: "Check",
             type: "Condition",

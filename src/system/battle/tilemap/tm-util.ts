@@ -13,26 +13,27 @@ import {
 } from "./tm-element";
 
 export class TMUtil {
-    static DEBUG_MODE = false; // 调试模式
+    public static DEBUG_MODE = false; // 调试模式
 
-    static readonly VISION_WIDTH = 25; // 视野宽度（单位：米）
-    static readonly VISION_HEIGHT = 25; // 视野高度（单位：米）
+    public static readonly VISION_WIDTH = 25; // 视野宽度（单位：米）
+    public static readonly VISION_HEIGHT = 25; // 视野高度（单位：米）
 
-    static readonly MAP_WIDTH = 50; // 地图块宽度（仅第一块，单位：米）
-    static readonly MAP_HEIGHT = 50; // 地图块高度（仅第一块，单位：米）
+    public static readonly MAP_WIDTH = 50; // 地图块宽度（仅第一块，单位：米）
+    public static readonly MAP_HEIGHT = 50; // 地图块高度（仅第一块，单位：米）
 
-    static readonly TILE_WIDTH = 128; // 瓦片宽度（单位：像素）
-    static readonly TILE_HEIGHT = 64; // 瓦片高度（单位：像素）
+    public static readonly TILE_WIDTH = 128; // 瓦片宽度（单位：像素）
+    public static readonly TILE_HEIGHT = 64; // 瓦片高度（单位：像素）
 
-    static readonly XY_TO_KEY = (x: number, y: number) => {
+    public static readonly XY_TO_KEY = (x: number, y: number) => {
         return Math.floor(x) + "_" + Math.floor(y);
     };
-    static readonly KEY_TO_XY = (key: string) => {
+
+    public static readonly KEY_TO_XY = (key: string) => {
         const arr = key.split("_");
         return [Math.floor(Number(arr[0])), Math.floor(Number(arr[1]))];
     };
 
-    static readonly IN_RECT = (
+    public static readonly IN_RECT = (
         x: number,
         y: number,
         rectX: number,
@@ -43,7 +44,7 @@ export class TMUtil {
         return rectX <= x && x < rectX + rectW && rectY <= y && y < rectY + rectH;
     };
 
-    static readonly STATIC_TEXTURE_CFG: Map<string, TMTextureCfg> = new Map([
+    public static readonly STATIC_TEXTURE_CFG: Map<string, TMTextureCfg> = new Map([
         [
             "map_Grassland_hill_01",
             {
@@ -111,7 +112,7 @@ export class TMUtil {
         ],
     ]);
 
-    static readonly DYNAMIC_TEXTURE_CFG: Map<string, TMTextureCfg> = new Map([
+    public static readonly DYNAMIC_TEXTURE_CFG: Map<string, TMTextureCfg> = new Map([
         [
             "map_biulding_castle01",
             {
@@ -140,7 +141,7 @@ export class TMUtil {
         ],
     ]);
 
-    static layerToCls(layerName: string): Constructor<TMElement> | null {
+    public static layerToCls(layerName: string): Constructor<TMElement> | null {
         switch (layerName) {
             case TMLayerName.Ground:
                 return TMGroundElement;

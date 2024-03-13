@@ -61,11 +61,11 @@ export class UIManager {
         return null;
     }
 
-    register(descriptor: UIDescriptor) {
+    public register(descriptor: UIDescriptor) {
         this._descriptors[descriptor.id] = descriptor;
     }
 
-    get top() {
+    public get top() {
         const root = Laya.Scene.root;
         for (let i = root.numChildren - 1; i >= 0; i--) {
             const scene = root.getChildAt(i);
@@ -121,7 +121,7 @@ export class UIManager {
         // Laya.Scene.gc();
     }
 
-    open(id: number, args?: any) {
+    public open(id: number, args?: any) {
         const descriptor = this._checkDescriptor(id);
         if (descriptor) {
             console.log("open scene:", descriptor.url);
@@ -136,7 +136,7 @@ export class UIManager {
         }
     }
 
-    replace(id: number, args?: any) {
+    public replace(id: number, args?: any) {
         const descriptor = this._checkDescriptor(id);
         if (descriptor) {
             console.log("replace scene:", descriptor.url);
@@ -154,7 +154,7 @@ export class UIManager {
         }
     }
 
-    closeTo(id: number) {
+    public closeTo(id: number) {
         const descriptor = this._checkDescriptor(id);
         if (descriptor) {
             const root = Laya.Scene.root;
@@ -180,11 +180,11 @@ export class UIManager {
         }
     }
 
-    closeTop() {
+    public closeTop() {
         this.top?.close();
     }
 
-    async show(id: number, args?: any) {
+    public async show(id: number, args?: any) {
         const descriptor = this._checkDescriptor(id);
         if (descriptor) {
             const dialog = await Laya.Dialog.open(descriptor.url, false, args);
@@ -194,11 +194,16 @@ export class UIManager {
         }
     }
 
-    alert(args: UIAlertArgs): void;
+    public alert(args: UIAlertArgs): void;
 
-    alert(title: string, message: string, yes: Callback, no?: Callback): void;
+    public alert(title: string, message: string, yes: Callback, no?: Callback): void;
 
-    alert(titleOrArgs: string | UIAlertArgs, message?: string, yes?: Callback, no?: Callback) {
+    public alert(
+        titleOrArgs: string | UIAlertArgs,
+        message?: string,
+        yes?: Callback,
+        no?: Callback
+    ) {
         if (typeof titleOrArgs == "string") {
             this.show(UIALERT_ID, {
                 title: titleOrArgs,
@@ -211,11 +216,11 @@ export class UIManager {
         }
     }
 
-    toast(args: UIAlertArgs): void;
+    public toast(args: UIAlertArgs): void;
 
-    toast(message: string, duration?: number, x?: number, y?: number): void;
+    public toast(message: string, duration?: number, x?: number, y?: number): void;
 
-    toast(messageOrArgs: string | UIAlertArgs, duration?: number, x?: number, y?: number) {
+    public toast(messageOrArgs: string | UIAlertArgs, duration?: number, x?: number, y?: number) {
         if (typeof messageOrArgs == "string") {
             this.show(UITOAST_ID, {
                 title: messageOrArgs,

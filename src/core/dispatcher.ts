@@ -20,11 +20,11 @@ export const toEventType = (type: string | number) => {
 };
 
 export class Dispatcher extends Laya.EventDispatcher {
-    override event(type: number, data?: any): boolean;
+    public override event(type: number, data?: any): boolean;
 
-    override event(type: string, data?: any): boolean;
+    public override event(type: string, data?: any): boolean;
 
-    override event(type: string | number, data?: any): boolean {
+    public override event(type: string | number, data?: any): boolean {
         return super.event(toEventType(type), data);
     }
 }

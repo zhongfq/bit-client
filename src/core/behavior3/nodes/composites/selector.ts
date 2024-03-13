@@ -1,7 +1,7 @@
 import { b3 } from "../../behavior";
 
 export class Selector extends b3.Process {
-    override run(node: b3.Node, env: b3.TreeEnv) {
+    public override run(node: b3.Node, env: b3.TreeEnv) {
         const last = node.resume(env);
         let i = 0;
 
@@ -25,7 +25,7 @@ export class Selector extends b3.Process {
         return b3.Status.FAILURE;
     }
 
-    override get descriptor() {
+    public override get descriptor() {
         return {
             name: "Selector",
             type: "Composite",

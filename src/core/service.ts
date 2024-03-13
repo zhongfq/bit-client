@@ -3,13 +3,13 @@ import { Callback, Dispatcher, toEventType } from "./dispatcher";
 export class Service<T extends Dispatcher> extends Dispatcher {
     protected _network: T;
 
-    constructor(network: T) {
+    public constructor(network: T) {
         super();
 
         this._network = network;
     }
 
-    destroy?(): void;
+    public destroy?(): void;
 
     protected handle(type: string | number, callback: Callback) {
         if (!this._network) {

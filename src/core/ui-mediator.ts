@@ -11,14 +11,19 @@ type Listener = {
 export class Mediator extends Laya.Script {
     private _timer: Timer;
 
-    constructor() {
+    public constructor() {
         super();
         this._timer = new Timer();
     }
 
     protected _listeners: Listener[] = [];
 
-    on(target: Laya.EventDispatcher, type: string | number, callback: Callback, thisArg?: unknown) {
+    public on(
+        target: Laya.EventDispatcher,
+        type: string | number,
+        callback: Callback,
+        thisArg?: unknown
+    ) {
         this._listeners.push({
             type,
             target,
@@ -28,7 +33,7 @@ export class Mediator extends Laya.Script {
         target.on(toEventType(type), thisArg, callback);
     }
 
-    override onDestroy() {
+    public override onDestroy() {
         for (const listener of this._listeners) {
             const { type, target, callback, thisArg } = listener;
             target.off(toEventType(type), thisArg, callback);
@@ -36,13 +41,13 @@ export class Mediator extends Laya.Script {
         super.onDestroy();
     }
 
-    get timer() {
+    public get timer() {
         return this._timer;
     }
 
-    onCreate?(args?: any): void;
+    public onCreate?(args?: any): void;
 
-    override onUpdate(): void {
+    public override onUpdate(): void {
         this.timer.update(Laya.timer.delta / 1000);
     }
 }

@@ -2,20 +2,20 @@
 declare var wx: any;
 
 export class Socket {
-    static readonly CONNECTING = WebSocket.CONNECTING;
-    static readonly OPEN = WebSocket.OPEN;
-    static readonly CLOSING = WebSocket.CLOSING;
-    static readonly CLOSED = WebSocket.CLOSED;
+    public static readonly CONNECTING = WebSocket.CONNECTING;
+    public static readonly OPEN = WebSocket.OPEN;
+    public static readonly CLOSING = WebSocket.CLOSING;
+    public static readonly CLOSED = WebSocket.CLOSED;
 
-    onclose: ((this: Socket, ev: CloseEvent) => any) | null = null;
-    onerror: ((this: Socket, ev: Event) => any) | null = null;
-    onmessage: ((this: Socket, ev: MessageEvent) => any) | null = null;
-    onopen: ((this: Socket, ev: Event) => any) | null = null;
+    public onclose: ((this: Socket, ev: CloseEvent) => any) | null = null;
+    public onerror: ((this: Socket, ev: Event) => any) | null = null;
+    public onmessage: ((this: Socket, ev: MessageEvent) => any) | null = null;
+    public onopen: ((this: Socket, ev: Event) => any) | null = null;
 
     private _ws: WebSocket | null = null;
     private _wxs: any;
 
-    constructor(readonly url: string, protocols?: string | string[]) {
+    public constructor(public readonly url: string, protocols?: string | string[]) {
         if (Laya.Browser.onMiniGame || Laya.Browser.onTTMiniGame) {
             console.log("connect to wx:", url);
             this._wxs = wx.connectSocket({ url, protocols, tcpNoDelay: true });
@@ -34,48 +34,48 @@ export class Socket {
         }
     }
 
-    get binaryType(): BinaryType {
+    public get binaryType(): BinaryType {
         if (this._ws) {
             return this._ws.binaryType;
         }
         return "blob";
     }
 
-    set binaryType(value: BinaryType) {
+    public set binaryType(value: BinaryType) {
         if (this._ws) {
             this._ws.binaryType = value;
         }
     }
 
-    get bufferedAmount(): number {
+    public get bufferedAmount(): number {
         if (this._ws) {
             return this._ws.bufferedAmount;
         }
         return 0;
     }
 
-    get protocol(): string {
+    public get protocol(): string {
         if (this._ws) {
             return this._ws.protocol;
         }
         return "";
     }
 
-    get readyState(): number {
+    public get readyState(): number {
         if (this._ws) {
             return this._ws.readyState;
         }
         return 0;
     }
 
-    get extensions(): string {
+    public get extensions(): string {
         if (this._ws) {
             return this._ws.extensions;
         }
         return "";
     }
 
-    close(code?: number, reason?: string): void {
+    public close(code?: number, reason?: string): void {
         if (this._ws) {
             this._ws.close(code, reason);
         } else if (this._wxs) {
@@ -83,7 +83,7 @@ export class Socket {
         }
     }
 
-    send(data: string | ArrayBuffer): void {
+    public send(data: string | ArrayBuffer): void {
         if (this._ws) {
             this._ws.send(data);
         } else if (this._wxs) {

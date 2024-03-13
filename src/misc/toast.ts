@@ -4,7 +4,7 @@ import { ToastUI } from "../ui-runtime/prefab/misc/ToastUI";
 
 @Laya.regClass()
 export class ToastMediator extends Mediator {
-    override onStart(): void {
+    public override onStart(): void {
         const owner = this.owner as ToastUI;
         const args = owner.args;
 

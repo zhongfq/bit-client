@@ -1,9 +1,9 @@
 import { b3 } from "../../behavior";
 
 export class Once extends b3.Process {
-    override check(node: b3.Node): void {}
+    public override check(node: b3.Node): void {}
 
-    override run(node: b3.Node, env: b3.TreeEnv) {
+    public override run(node: b3.Node, env: b3.TreeEnv) {
         const onceKey = b3.TreeEnv.makePrivateVar(node, "once");
         if (env.getValue(onceKey) === true) {
             return b3.Status.FAILURE;
@@ -20,7 +20,7 @@ export class Once extends b3.Process {
         return b3.Status.FAILURE;
     }
 
-    override get descriptor() {
+    public override get descriptor() {
         return {
             name: "Once",
             type: "Composite",

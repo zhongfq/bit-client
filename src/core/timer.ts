@@ -22,7 +22,7 @@ export class Timer {
     private _delayer!: LinkedList;
     private _scheduler!: LinkedList;
 
-    constructor() {
+    public constructor() {
         this.clear();
     }
 

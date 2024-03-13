@@ -24,7 +24,7 @@ export namespace ecs {
         private _timers: Timer[] = [];
         private _time: number = 0;
 
-        constructor() {
+        public constructor() {
             this._systems = [];
             this._namedSystems = new Map();
             this._caches = new Map();
@@ -33,7 +33,7 @@ export namespace ecs {
             this._singletons = new Map();
         }
 
-        destroy() {
+        public destroy() {
             for (const eid of Array.from(this._entities.keys())) {
                 this.removeEntity(eid);
             }
@@ -45,18 +45,18 @@ export namespace ecs {
             this._components.clear();
         }
 
-        addSystem(sys: System) {
+        public addSystem(sys: System) {
             this._namedSystems.set(sys.constructor as Constructor<any>, sys);
             this._systems.push(sys);
             sys.__setECS(this);
             sys.onCreate();
         }
 
-        getSystem<T extends System>(cls: Constructor<T>) {
+        public getSystem<T extends System>(cls: Constructor<T>) {
             return this._namedSystems.get(cls) as T | undefined;
         }
 
-        update(dt: number) {
+        public update(dt: number) {
             this._time += dt;
             this._timers.forEach((timer) => {
                 timer.time += dt;
@@ -80,7 +80,7 @@ export namespace ecs {
             }
         }
 
-        schedule(interval: number, callback: Callback, thisArg?: unknown, delay?: number) {
+        public schedule(interval: number, callback: Callback, thisArg?: unknown, delay?: number) {
             this._timers.push({
                 interval: interval,
                 time: -(delay ?? 0),
@@ -89,7 +89,7 @@ export namespace ecs {
             });
         }
 
-        select(sys: System) {
+        public select(sys: System) {
             let entities = this._caches.get(sys);
             if (!entities) {
                 entities = [];
@@ -103,7 +103,7 @@ export namespace ecs {
             return entities;
         }
 
-        createEntity(eid: number | null = null) {
+        public createEntity(eid: number | null = null) {
             eid = eid ?? --this._eid;
             let entity = this._entities.get(eid);
             if (!entity) {
@@ -115,15 +115,15 @@ export namespace ecs {
             return entity;
         }
 
-        get time() {
+        public get time() {
             return this._time;
         }
 
-        getEntity(eid: number) {
+        public getEntity(eid: number) {
             return this._entities.get(eid);
         }
 
-        removeEntity(eid: number) {
+        public removeEntity(eid: number) {
             const entity = this.getEntity(eid);
             if (entity) {
                 const components = entity.getComponents();
@@ -139,7 +139,7 @@ export namespace ecs {
             }
         }
 
-        addSingletonComponent<T extends SingletonComponent>(
+        public addSingletonComponent<T extends SingletonComponent>(
             cls: Constructor<T>,
             ...args: unknown[]
         ) {
@@ -151,11 +151,11 @@ export namespace ecs {
             return component as T;
         }
 
-        getSingletonComponent<T extends SingletonComponent>(cls: Constructor<T>) {
+        public getSingletonComponent<T extends SingletonComponent>(cls: Constructor<T>) {
             return this._singletons.get(cls) as T | undefined;
         }
 
-        getComponents<T extends Component>(cls: Constructor<T>) {
+        public getComponents<T extends Component>(cls: Constructor<T>) {
             let components = this._components.get(cls);
             if (!components) {
                 components = new Map<number, T>();
@@ -164,23 +164,23 @@ export namespace ecs {
             return components as Map<number, T>;
         }
 
-        addComponent<T extends Component>(eid: number, cls: Constructor<T>) {
+        public addComponent<T extends Component>(eid: number, cls: Constructor<T>) {
             const entity = this.getEntity(eid);
             if (entity) {
                 return this.__addComponent(entity, cls);
             }
         }
 
-        getComponent<T extends Component>(eid: number, cls: Constructor<T>) {
+        public getComponent<T extends Component>(eid: number, cls: Constructor<T>) {
             return this.__getComponent(eid, cls);
         }
 
-        removeComponent<T extends Component>(eid: number, cls: Constructor<T>) {
+        public removeComponent<T extends Component>(eid: number, cls: Constructor<T>) {
             return this.__removeComponent(eid, cls);
         }
 
         // internal use
-        __addComponent<T extends Component>(entity: Entity, cls: Constructor<T>) {
+        public __addComponent<T extends Component>(entity: Entity, cls: Constructor<T>) {
             let components = this._components.get(cls);
             if (!components) {
                 components = new Map();
@@ -195,17 +195,17 @@ export namespace ecs {
             return component as T;
         }
 
-        __hasComponent<T extends Component>(eid: number, cls: Constructor<T>) {
+        public __hasComponent<T extends Component>(eid: number, cls: Constructor<T>) {
             const components = this._components.get(cls);
             return components?.has(eid) ?? false;
         }
 
-        __getComponent<T extends Component>(eid: number, cls: Constructor<T>) {
+        public __getComponent<T extends Component>(eid: number, cls: Constructor<T>) {
             const components = this._components.get(cls);
             return components?.get(eid) as T | undefined;
         }
 
-        __removeComponent<T extends Component>(eid: number, cls: Constructor<T>) {
+        public __removeComponent<T extends Component>(eid: number, cls: Constructor<T>) {
             const components = this._components.get(cls);
             const component = components?.get(eid);
             if (component) {
@@ -214,7 +214,7 @@ export namespace ecs {
             return components?.delete(eid);
         }
 
-        __getComponents(entity: Entity) {
+        public __getComponents(entity: Entity) {
             const components: Component[] = [];
             for (const value of this._components.values()) {
                 const component = value.get(entity.eid);
@@ -229,37 +229,37 @@ export namespace ecs {
     export abstract class Component {
         protected _entity: Entity;
 
-        constructor(entity: Entity) {
+        public constructor(entity: Entity) {
             this._entity = entity;
         }
 
-        reset?(): void;
+        public reset?(): void;
 
-        get entity() {
+        public get entity() {
             return this._entity;
         }
 
-        get eid() {
+        public get eid() {
             return this.entity.eid;
         }
 
-        addComponent<T extends Component>(cls: Constructor<T>): T {
+        public addComponent<T extends Component>(cls: Constructor<T>): T {
             return this.entity.addComponent(cls);
         }
 
-        hasComponent<T extends Component>(cls: Constructor<T>): boolean {
+        public hasComponent<T extends Component>(cls: Constructor<T>): boolean {
             return this.entity.hasComponent(cls);
         }
 
-        removeComponent<T extends Component>(cls: Constructor<T>) {
+        public removeComponent<T extends Component>(cls: Constructor<T>) {
             return this.entity.removeComponent(cls);
         }
 
-        getComponent<T extends Component>(cls: Constructor<T>): T | undefined {
+        public getComponent<T extends Component>(cls: Constructor<T>): T | undefined {
             return this.entity.getComponent(cls);
         }
 
-        getComponents(): Component[] {
+        public getComponents(): Component[] {
             return this.entity.getComponents();
         }
     }
@@ -271,34 +271,34 @@ export namespace ecs {
     export class Entity {
         protected _eid: number;
 
-        etype: number = 0;
+        public etype: number = 0;
 
         // eslint-disable-next-line @typescript-eslint/no-shadow
-        constructor(eid: number, readonly ecs: World) {
+        public constructor(eid: number, public readonly ecs: World) {
             this._eid = eid;
         }
 
-        get eid() {
+        public get eid() {
             return this._eid;
         }
 
-        addComponent<T extends Component>(cls: Constructor<T>): T {
+        public addComponent<T extends Component>(cls: Constructor<T>): T {
             return this.ecs.__addComponent(this, cls);
         }
 
-        hasComponent<T extends Component>(cls: Constructor<T>): boolean {
+        public hasComponent<T extends Component>(cls: Constructor<T>): boolean {
             return this.ecs.__hasComponent(this._eid, cls);
         }
 
-        removeComponent<T extends Component>(cls: Constructor<T>) {
+        public removeComponent<T extends Component>(cls: Constructor<T>) {
             return this.ecs.__removeComponent(this._eid, cls);
         }
 
-        getComponent<T extends Component>(cls: Constructor<T>): T | undefined {
+        public getComponent<T extends Component>(cls: Constructor<T>): T | undefined {
             return this.ecs.__getComponent(this._eid, cls);
         }
 
-        getComponents(): Component[] {
+        public getComponents(): Component[] {
             return this.ecs.__getComponents(this);
         }
     }
@@ -306,33 +306,33 @@ export namespace ecs {
     export abstract class System {
         private _ecs!: World;
 
-        constructor() {}
+        public constructor() {}
 
-        onCreate() {}
+        public onCreate() {}
 
-        onDestroy() {}
+        public onDestroy() {}
 
         // eslint-disable-next-line @typescript-eslint/no-shadow
-        __setECS(ecs: World) {
+        public __setECS(ecs: World) {
             this._ecs = ecs;
         }
 
-        get ecs() {
+        public get ecs() {
             return this._ecs;
         }
 
-        filter(entity: Entity) {
+        public filter(entity: Entity) {
             return true;
         }
 
-        abstract update(dt: number): void;
+        public abstract update(dt: number): void;
 
-        onAddComponent?(component: Component): void;
+        public onAddComponent?(component: Component): void;
 
-        onRemoveComponent?(component: Component): void;
+        public onRemoveComponent?(component: Component): void;
 
-        onAddEntity?(entity: Entity): void;
+        public onAddEntity?(entity: Entity): void;
 
-        onRemoveEntity?(entity: Entity): void;
+        public onRemoveEntity?(entity: Entity): void;
     }
 }
