@@ -82,11 +82,10 @@ export class ActionInterval extends FiniteTimeAction {
         return action;
     }
 
-    public easing(easeObj: any): ActionInterval {
+    public easing(...args: any): ActionInterval {
         if (this._easeList) this._easeList.length = 0;
         else this._easeList = [];
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-        for (let i = 0; i < arguments.length; i++) this._easeList.push(arguments[i]);
+        for (let i = 0; i < arguments.length; i++) this._easeList.push(args[i]);
         return this;
     }
 
@@ -195,10 +194,10 @@ export class Sequence extends ActionInterval {
 
     public constructor(...actions: FiniteTimeAction[]);
 
-    public constructor(tempArray: any) {
+    public constructor(tempArray: any, ...args: any) {
         super();
 
-        const paramArray = tempArray instanceof Array ? tempArray : arguments;
+        const paramArray = tempArray instanceof Array ? tempArray : [tempArray, ...args];
         if (paramArray.length === 1) {
             //errorID(1019);
             return;
@@ -315,8 +314,8 @@ export class Sequence extends ActionInterval {
     }
 }
 
-export function sequence(/* Multiple Arguments */ tempArray: any): ActionInterval {
-    const paramArray = tempArray instanceof Array ? tempArray : arguments;
+export function sequence(/* Multiple Arguments */ tempArray: any, ...args: any): ActionInterval {
+    const paramArray = tempArray instanceof Array ? tempArray : [tempArray, ...args];
     if (paramArray.length === 1) {
         return paramArray[0] as ActionInterval;
     }
@@ -527,10 +526,10 @@ export class Spawn extends ActionInterval {
     private _one: ActionInterval | null = null;
     private _two: ActionInterval | null = null;
 
-    public constructor(tempArray?: any) {
+    public constructor(tempArray?: any, ...args: any) {
         super();
 
-        const paramArray = tempArray instanceof Array ? tempArray : arguments;
+        const paramArray = tempArray instanceof Array ? tempArray : [tempArray, ...args];
         if (paramArray.length === 1) {
             //errorID(1020);
             return;
@@ -610,8 +609,8 @@ export class Spawn extends ActionInterval {
     }
 }
 
-export function spawn(/* Multiple Arguments */ tempArray: any): FiniteTimeAction {
-    const paramArray = tempArray instanceof Array ? tempArray : arguments;
+export function spawn(/* Multiple Arguments */ tempArray: any, ...args: any): FiniteTimeAction {
+    const paramArray = tempArray instanceof Array ? tempArray : [tempArray, ...args];
     if (paramArray.length === 1) {
         // errorID(1020);
         // eslint-disable-next-line @typescript-eslint/no-unsafe-return
