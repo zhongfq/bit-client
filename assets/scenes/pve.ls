@@ -308,6 +308,23 @@
           ]
         }
       ]
+    },
+    {
+      "_$id": "10rp2d11",
+      "_$var": true,
+      "_$type": "Button",
+      "name": "btnBack",
+      "x": 11,
+      "y": 9,
+      "width": 87,
+      "height": 86,
+      "_mouseState": 2,
+      "stateNum": 1,
+      "skin": "res://eab88349-e227-487a-9054-15d2bcd79d83",
+      "label": "",
+      "labelSize": 20,
+      "labelAlign": "center",
+      "labelVAlign": "middle"
     }
   ]
 }

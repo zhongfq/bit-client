@@ -111,7 +111,7 @@ export class UIManager {
     private _doCloseScene(scene: Laya.Scene) {
         scene.offAllCaller(this);
 
-        scene.removeSelf();
+        scene.close();
 
         const descriptor = this._checkDescriptor(scene.url);
         if (descriptor?.autoClose) {
