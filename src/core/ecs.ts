@@ -139,10 +139,13 @@ export namespace ecs {
             }
         }
 
-        addSingletonComponent<T extends SingletonComponent>(cls: Constructor<T>) {
+        addSingletonComponent<T extends SingletonComponent>(
+            cls: Constructor<T>,
+            ...args: unknown[]
+        ) {
             let component = this._singletons.get(cls);
             if (!component) {
-                component = new cls(this);
+                component = new cls(this, ...args);
                 this._singletons.set(cls, component);
             }
             return component as T;
@@ -261,9 +264,8 @@ export namespace ecs {
         }
     }
 
-    export abstract class SingletonComponent {
-        // eslint-disable-next-line @typescript-eslint/no-shadow
-        constructor(readonly ecs?: World) {}
+    export interface SingletonComponent {
+        ecs: ecs.World;
     }
 
     export class Entity {

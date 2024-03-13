@@ -6,9 +6,18 @@ import { Event } from "../../../misc/event";
 import { res } from "../../../misc/res";
 import { PveUI } from "../../../ui-runtime/scene/PveUI";
 import { PveServer } from "../pve-server/pve-server";
+import { TMLayerName } from "../tilemap/tm-def";
+import {
+    TMBuildingElement,
+    TMDynamicElement,
+    TMElement,
+    TMMonsterElement,
+    TMObjectElement,
+    TMTileElemet,
+} from "../tilemap/tm-element";
 import { CameraComponent } from "./ecs/components/camera-component";
 import { JoystickComponent } from "./ecs/components/joystick-component";
-import { Tilemap, TilemapComponent } from "./ecs/components/tilemap-component";
+import { TilemapComponent } from "./ecs/components/tilemap-component";
 import { CameraSystem } from "./ecs/systems/camera-system";
 import { CommandSystem } from "./ecs/systems/command-system";
 import { JoystickSystem } from "./ecs/systems/joystick-system";
@@ -51,7 +60,7 @@ export class PveContext extends Mediator {
         this._ecs = new ecs.World();
         this._ecs.addSingletonComponent(CameraComponent);
         this._ecs.addSingletonComponent(JoystickComponent);
-        this._ecs.addSingletonComponent(TilemapComponent);
+        this._ecs.addSingletonComponent(TilemapComponent, this);
         this._ecs.addSystem(new JoystickSystem(this));
         this._ecs.addSystem(new CommandSystem(this));
         this._ecs.addSystem(new MovementSystem(this));
@@ -84,12 +93,12 @@ export class PveContext extends Mediator {
         this._ecs.update(Laya.timer.delta / 1000);
     }
 
-    onTileMapAddElement(element: Tilemap.Element) {
-        if (element instanceof Tilemap.MonsterElement) {
+    onAddElement(element: TMElement) {
+        if (element instanceof TMMonsterElement) {
             console.log("AddMonster", element.x, element.y, element.id);
             const position = new Laya.Vector3(element.realX, 0, element.realY);
             this.sender.addMonster(element.id, position);
-        } else if (element instanceof Tilemap.BuildingElement) {
+        } else if (element instanceof TMBuildingElement) {
             const table = app.service.table;
             const buildingRow = table.battleBuilding[element.id];
             const entityRow = table.battleEntity[buildingRow.battle_entity];
@@ -107,12 +116,12 @@ export class PveContext extends Mediator {
         }
     }
 
-    onTileMapDelElement(element: Tilemap.Element) {
-        if (element instanceof Tilemap.MonsterElement) {
+    onDelElement(element: TMElement) {
+        if (element instanceof TMMonsterElement) {
             console.log("DelMonster", element.x, element.y, element.id);
             const position = new Laya.Vector3(element.realX, 0, element.realY);
             this.sender.removeMonster(element.id, position);
-        } else if (element instanceof Tilemap.BuildingElement) {
+        } else if (element instanceof TMBuildingElement) {
             const table = app.service.table;
             const buildingRow = table.battleBuilding[element.id];
             const entityRow = table.battleEntity[buildingRow.battle_entity];
@@ -131,10 +140,11 @@ export class PveContext extends Mediator {
     }
 
     onMapClickHandler() {
-        const tilemapSystem = this._ecs.getSystem(TilemapSystem);
+        const tilemap = this._ecs.getSingletonComponent(TilemapComponent)!;
 
         if (this._selectedDynamicElement) {
-            const element = tilemapSystem?.getDynamicElementByUid(this._selectedDynamicElement);
+            tilemap.ecs;
+            const element = tilemap.getDynamicElementByUid(this._selectedDynamicElement);
             if (element) {
                 element.hideBlock();
             }
@@ -158,11 +168,7 @@ export class PveContext extends Mediator {
         const x = Math.floor(groundPos.x + 0.5);
         const y = Math.floor(groundPos.z + 0.5);
 
-        const element = tilemapSystem?.getElementByPos(
-            x,
-            y,
-            Tilemap.LayerName.Dynamic
-        ) as Tilemap.DynamicElement;
+        const element = tilemap.getElementByPos(x, y, TMLayerName.Dynamic) as TMDynamicElement;
         if (element) {
             element.showBlock();
             this._selectedDynamicElement = element.uid;
@@ -170,16 +176,16 @@ export class PveContext extends Mediator {
     }
 
     onTilemapDebugModeUpdate() {
-        const tilemapSystem = this._ecs.getSystem(TilemapSystem);
-        const allMap = tilemapSystem?.getAllMap();
+        const tilemap = this._ecs.getSingletonComponent(TilemapComponent)!;
+        const allMap = tilemap.getAllMap();
         allMap?.forEach((element) => {
-            if (element instanceof Tilemap.TileElemet) {
+            if (element instanceof TMTileElemet) {
                 element.erase();
                 element.draw();
             }
         });
         allMap?.forEach((element) => {
-            if (element instanceof Tilemap.ObjectElement) {
+            if (element instanceof TMObjectElement) {
                 element.erase();
                 element.draw();
             }

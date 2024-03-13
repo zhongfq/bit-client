@@ -3,7 +3,7 @@ import { Callback } from "../../core/dispatcher";
 import { Mediator } from "../../core/ui-mediator";
 import { Event } from "../../misc/event";
 import { GmUI } from "../../ui-runtime/prefab/gm/GmUI";
-import { TilemapComponent } from "../battle/pve/ecs/components/tilemap-component";
+import { TMUtil } from "../battle/tilemap/tm-util";
 
 const { regClass, property } = Laya;
 interface GmCmdData {
@@ -116,11 +116,10 @@ export class GmMediator extends Mediator {
         this.listSwitchData.push({
             name: "地图调试:开",
             func: (index: number) => {
-                TilemapComponent.DEBUG_MODE = !TilemapComponent.DEBUG_MODE;
+                TMUtil.DEBUG_MODE = !TMUtil.DEBUG_MODE;
                 app.service.gm.event(Event.TILEMAP_DEBUG_MODE_UPDATE);
 
-                this.listSwitchData[index].name =
-                    "地图调试:" + (TilemapComponent.DEBUG_MODE ? "关" : "开");
+                this.listSwitchData[index].name = "地图调试:" + (TMUtil.DEBUG_MODE ? "关" : "开");
                 this.owner.listSwitch.refresh();
             },
         });

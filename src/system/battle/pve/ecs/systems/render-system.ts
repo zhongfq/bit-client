@@ -1,6 +1,7 @@
 import { app } from "../../../../../app";
 import { ecs } from "../../../../../core/ecs";
 import { HeadInfoUI } from "../../../../../ui-runtime/prefab/battle/HeadInfoUI";
+import { TMUtil } from "../../../tilemap/tm-util";
 import { PveContext } from "../../pve-context";
 import { TransformComponent } from "../components/movement-component";
 import {
@@ -44,8 +45,8 @@ export class RenderSystem extends ecs.System {
             component.view?.destroy();
             component.view = null;
         } else if (component instanceof BoardComponent) {
-            const tilemapSystem = this.ecs.getSystem(TilemapSystem);
-            tilemapSystem?.delDynamicElementByEid(component.eid);
+            const tilemap = this.ecs.getSingletonComponent(TilemapComponent)!;
+            tilemap.delDynamicElementByEid(component.eid);
         }
     }
 
@@ -151,12 +152,12 @@ export class RenderSystem extends ecs.System {
         }
         const table = app.service.table;
         const buildingRow = table.battleBuilding[element.tableId];
-        const textureCfg = TilemapComponent.DYNAMIC_TEXTURE_CFG.get(buildingRow.texture_key);
+        const textureCfg = TMUtil.DYNAMIC_TEXTURE_CFG.get(buildingRow.texture_key);
 
         const x = Math.floor(transform.position.x + (textureCfg?.tileX ?? 0));
         const y = Math.floor(transform.position.z + (textureCfg?.tileY ?? 0));
 
-        const tilemapSystem = this.ecs.getSystem(TilemapSystem);
-        tilemapSystem?.addDynamicElement(board.eid, x, y);
+        const tilemap = this.ecs.getSingletonComponent(TilemapComponent)!;
+        tilemap.addDynamicElement(board.eid, x, y);
     }
 }
