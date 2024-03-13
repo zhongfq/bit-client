@@ -245,13 +245,13 @@ export class PveServer extends b3.Context {
         });
     }
 
-    removeElement(element: ElementComponent) {
+    removeElement(element: ElementComponent, outVision: boolean) {
         this._elements.delete(element.key);
         this.ecs.removeEntity(element.eid);
         this._sender.removeElement(element.eid);
 
-        const cacheSys = this.ecs.getSystem(CacheSystem);
-        if (element.hp < element.maxHp) {
+        if (outVision && element.hp < element.maxHp) {
+            const cacheSys = this.ecs.getSystem(CacheSystem);
             cacheSys?.setOutVision(element, true);
         }
     }
@@ -301,7 +301,7 @@ export class PveServer extends b3.Context {
             isCrit: isCrit,
         });
         if (enemy.hp <= 0) {
-            this.removeElement(enemy);
+            this.removeElement(enemy, false);
 
             const cacheSys = this.ecs.getSystem(CacheSystem);
             cacheSys?.setReliveTime(enemy, Laya.timer.currTimer + 10 * 1000); // TODO：复活时间读配置表
@@ -481,7 +481,7 @@ export class PveServer extends b3.Context {
         const key = this._toElementKey(tid, position);
         const element = this._elements.get(key);
         if (element) {
-            this.removeElement(element);
+            this.removeElement(element, true);
         }
     }
 
@@ -537,7 +537,7 @@ export class PveServer extends b3.Context {
         const key = this._toElementKey(tid, position);
         const element = this._elements.get(key);
         if (element) {
-            this.removeElement(element);
+            this.removeElement(element, true);
         }
     }
 
@@ -589,7 +589,7 @@ export class PveServer extends b3.Context {
         const key = this._toElementKey(tid, position);
         const element = this._elements.get(key);
         if (element) {
-            this.removeElement(element);
+            this.removeElement(element, true);
         }
     }
 }
