@@ -1,8 +1,8 @@
 import { ecs } from "../../../../../core/ecs";
 
 export class CameraComponent implements ecs.SingletonComponent {
-    focus: Laya.Vector3 = new Laya.Vector3();
+    public focus: Laya.Vector3 = new Laya.Vector3();
 
     // eslint-disable-next-line @typescript-eslint/no-shadow
-    constructor(readonly ecs: ecs.World) {}
+    public constructor(public readonly ecs: ecs.World) {}
 }

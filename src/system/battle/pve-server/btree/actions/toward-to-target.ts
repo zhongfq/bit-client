@@ -3,7 +3,7 @@ import { AiTreeEnv } from "../../ecs/components/ai-component";
 import { ElementComponent } from "../../ecs/components/element-component";
 
 export class TowardToTarget extends b3.Process {
-    override run(node: b3.Node, env: AiTreeEnv, target?: unknown) {
+    public override run(node: b3.Node, env: AiTreeEnv, target?: unknown) {
         if (!(target instanceof ElementComponent)) {
             this.error(node, `target '${target}' is not an ElementComponent`);
         }
@@ -11,7 +11,7 @@ export class TowardToTarget extends b3.Process {
         return b3.Status.SUCCESS;
     }
 
-    override get descriptor() {
+    public override get descriptor() {
         return {
             name: "TowardToTarget",
             type: "Action",

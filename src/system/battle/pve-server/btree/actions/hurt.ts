@@ -7,9 +7,9 @@ interface HurtArgs {
 }
 
 export class Hurt extends b3.Process {
-    override check(node: b3.Node) {}
+    public override check(node: b3.Node) {}
 
-    override run(node: b3.Node, env: SkillTreeEnv, target: unknown) {
+    public override run(node: b3.Node, env: SkillTreeEnv, target: unknown) {
         if (target instanceof ElementComponent || target instanceof Array) {
             const args = node.args as HurtArgs;
             const ratio = args.add ?? 1;
@@ -20,7 +20,7 @@ export class Hurt extends b3.Process {
         return b3.Status.SUCCESS;
     }
 
-    override get descriptor(): b3.ProcessDescriptor {
+    public override get descriptor(): b3.ProcessDescriptor {
         return {
             name: "Hurt",
             type: "Action",

@@ -1,8 +1,8 @@
 export class PveDef {
-    static readonly MOVE_SPEED = 1;
-    static readonly MAX_FOLLOW_SPEED = PveDef.MOVE_SPEED * 2;
-    static readonly MAX_ADJUST_SPEED = PveDef.MOVE_SPEED * 2;
-    static readonly MAX_BACK_SPEED = PveDef.MOVE_SPEED * 3;
+    public static readonly MOVE_SPEED = 1;
+    public static readonly MAX_FOLLOW_SPEED = PveDef.MOVE_SPEED * 2;
+    public static readonly MAX_ADJUST_SPEED = PveDef.MOVE_SPEED * 2;
+    public static readonly MAX_BACK_SPEED = PveDef.MOVE_SPEED * 3;
 }
 
 export interface ElementCreator {

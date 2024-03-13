@@ -4,7 +4,7 @@ import { ElementComponent } from "../../ecs/components/element-component";
 import { LAST_ADJUST_DIR } from "../actions/adjust-stance";
 
 export class IsFreeStance extends b3.Process {
-    override run(node: b3.Node, env: AiTreeEnv, enemy: ElementComponent) {
+    public override run(node: b3.Node, env: AiTreeEnv, enemy: ElementComponent) {
         const owner = env.owner;
         if (env.context.isFreeStance(owner, owner.transform.position)) {
             env.setValue(LAST_ADJUST_DIR, undefined);
@@ -14,7 +14,7 @@ export class IsFreeStance extends b3.Process {
         }
     }
 
-    override get descriptor() {
+    public override get descriptor() {
         return {
             name: "IsFreeStance",
             type: "Condition",

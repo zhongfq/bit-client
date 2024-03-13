@@ -6,14 +6,14 @@ interface WaitArgs {
 }
 
 export class Wait extends b3.Process {
-    override check(node: b3.Node): void {
+    public override check(node: b3.Node): void {
         const args = node.args as WaitArgs;
         if (typeof args.time !== "number") {
             this.error(node, `args.ms is not a number`);
         }
     }
 
-    override run(node: b3.Node, env: b3.TreeEnv) {
+    public override run(node: b3.Node, env: b3.TreeEnv) {
         const t = node.resume(env);
         if (typeof t === "number") {
             if (env.context.time >= t) {
@@ -31,7 +31,7 @@ export class Wait extends b3.Process {
         }
     }
 
-    override get descriptor() {
+    public override get descriptor() {
         return {
             name: "Wait",
             type: "Action",

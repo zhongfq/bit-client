@@ -4,11 +4,11 @@ import { PveContext } from "../../pve-context";
 import { JoystickComponent } from "../components/joystick-component";
 
 export class JoystickSystem extends ecs.System {
-    constructor(readonly context: PveContext) {
+    public constructor(public readonly context: PveContext) {
         super();
     }
 
-    override onCreate() {
+    public override onCreate() {
         const joystick = this.ecs.getSingletonComponent(JoystickComponent)!;
         const owner = this.context.owner;
         joystick.initX = owner.joystick.x;
@@ -19,7 +19,7 @@ export class JoystickSystem extends ecs.System {
         owner.joystickGroup.on(Laya.Event.MOUSE_UP, this, this.onJoysticHandler);
     }
 
-    onJoysticHandler(e: Laya.Event) {
+    public onJoysticHandler(e: Laya.Event) {
         const joystick = this.ecs.getSingletonComponent(JoystickComponent)!;
         const owner = this.context.owner;
         if (!(joystick.pressStart || e.type === Laya.Event.MOUSE_DOWN)) {
@@ -66,5 +66,5 @@ export class JoystickSystem extends ecs.System {
         }
     }
 
-    update(dt: number) {}
+    public update(dt: number) {}
 }

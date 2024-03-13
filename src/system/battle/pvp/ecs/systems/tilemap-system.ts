@@ -9,16 +9,16 @@ export class TilemapSystem extends ecs.System {
 
     private _lastTick = 0;
 
-    constructor(readonly context: PvpContext) {
+    public constructor(public readonly context: PvpContext) {
         super();
     }
 
-    override onCreate() {
+    public override onCreate() {
         const tilemap = this.ecs.getSingletonComponent(TilemapComponent)!;
         tilemap.onCreate();
     }
 
-    override update(dt: number) {
+    public override update(dt: number) {
         const tilemap = this.ecs.getSingletonComponent(TilemapComponent)!;
         const curr = Laya.timer.currTimer;
         if (tilemap.isReady && curr - this._lastTick >= TilemapSystem.TICK) {

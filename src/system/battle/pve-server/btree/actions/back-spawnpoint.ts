@@ -2,9 +2,9 @@ import { b3 } from "../../../../../core/behavior3/behavior";
 import { AiTreeEnv } from "../../ecs/components/ai-component";
 
 export class BackSpawnpoint extends b3.Process {
-    override check(node: b3.Node) {}
+    public override check(node: b3.Node) {}
 
-    override run(node: b3.Node, env: AiTreeEnv) {
+    public override run(node: b3.Node, env: AiTreeEnv) {
         let velocity = node.resume(env) as Laya.Vector3 | undefined;
 
         const movement = env.owner.movement;
@@ -26,7 +26,7 @@ export class BackSpawnpoint extends b3.Process {
         return node.yield(env, velocity);
     }
 
-    override get descriptor() {
+    public override get descriptor() {
         return {
             name: "BackSpawnpoint",
             type: "Action",

@@ -20,9 +20,7 @@ import {
     HeadInfoComponent,
     ShadowComponent,
 } from "../components/render-component";
-import { TilemapComponent } from "../components/tilemap-component";
 import { ElementAnimation, ElementComponent } from "../components/troop-component";
-import { TilemapSystem } from "./tilemap-system";
 
 const PREFAB_HEAD_INFO1 = "resources/prefab/battle/ui/head-info1.lh";
 const PREFAB_HEAD_INFO2 = "resources/prefab/battle/ui/head-info2.lh";
@@ -30,19 +28,19 @@ const PREFAB_HEAD_INFO3 = "resources/prefab/battle/ui/head-info3.lh";
 const PREFAB_ROLE_SHADOW = "resources/prefab/battle/ui/role-shadow.lh";
 
 export class CommandSystem extends ecs.System implements ICommandSender {
-    constructor(readonly context: PveContext) {
+    public constructor(public readonly context: PveContext) {
         super();
     }
 
-    override update(dt: number): void {}
+    public override update(dt: number): void {}
 
-    focus(eid: number) {
+    public focus(eid: number) {
         const camera = this.ecs.getSingletonComponent(CameraComponent)!;
         this.context.focusRole = eid;
         camera.focus = eid;
     }
 
-    createElement(data: ElementCreator) {
+    public createElement(data: ElementCreator) {
         const table = app.service.table;
         const ETYPE = BattleConf.ENTITY_TYPE;
 
@@ -103,7 +101,7 @@ export class CommandSystem extends ecs.System implements ICommandSender {
         }
     }
 
-    removeElement(eid: number): void {
+    public removeElement(eid: number): void {
         this.ecs.removeEntity(eid);
     }
 
@@ -115,14 +113,14 @@ export class CommandSystem extends ecs.System implements ICommandSender {
         return element;
     }
 
-    rushStart(eid: number) {
+    public rushStart(eid: number) {
         const element = this._findElement(eid);
         if (element) {
             element.animation.rushing = true;
         }
     }
 
-    moveStart(eid: number, velocity: Laya.Vector3) {
+    public moveStart(eid: number, velocity: Laya.Vector3) {
         const element = this._findElement(eid);
         if (element) {
             const { movement } = element;
@@ -133,7 +131,7 @@ export class CommandSystem extends ecs.System implements ICommandSender {
         }
     }
 
-    moveStop(eid: number, position: Laya.Vector3) {
+    public moveStop(eid: number, position: Laya.Vector3) {
         const element = this._findElement(eid);
         if (element) {
             const { movement, transform } = element;
@@ -149,7 +147,7 @@ export class CommandSystem extends ecs.System implements ICommandSender {
         }
     }
 
-    towardTo(eid: number, target: number) {
+    public towardTo(eid: number, target: number) {
         const element1 = this._findElement(eid);
         const element2 = this._findElement(target);
         if (element1 && element2) {
@@ -175,7 +173,7 @@ export class CommandSystem extends ecs.System implements ICommandSender {
         }
     }
 
-    playAnim(eid: number, name: ElementAnimation) {
+    public playAnim(eid: number, name: ElementAnimation) {
         const element = this._findElement(eid);
         if (element) {
             switch (name) {
@@ -208,7 +206,7 @@ export class CommandSystem extends ecs.System implements ICommandSender {
         }
     }
 
-    updateHp(eid: number, data: UpdateHp): void {
+    public updateHp(eid: number, data: UpdateHp): void {
         const element = this._findElement(eid);
         if (element && data.subHp) {
             const info = element.getComponent(HeadInfoComponent);
@@ -259,7 +257,7 @@ export class CommandSystem extends ecs.System implements ICommandSender {
         }
     }
 
-    drawDebug(x: number, z: number, radius: number, color: number) {
+    public drawDebug(x: number, z: number, radius: number, color: number) {
         const outPos = Laya.Pool.obtain(Laya.Vector4);
         const inPos = Laya.Pool.obtain(Laya.Vector3);
         inPos.x = x;

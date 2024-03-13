@@ -12,7 +12,7 @@ interface MoveToPosArgs {
 const tmpVelocity = new Laya.Vector3();
 
 export class MoveToPos extends b3.Process {
-    override run(node: b3.Node, env: AiTreeEnv, target?: Laya.Vector3) {
+    public override run(node: b3.Node, env: AiTreeEnv, target?: Laya.Vector3) {
         if (!target || !(target instanceof Laya.Vector3)) {
             this.error(node, "no target position to move");
         }
@@ -30,7 +30,7 @@ export class MoveToPos extends b3.Process {
         return b3.Status.SUCCESS;
     }
 
-    override get descriptor() {
+    public override get descriptor() {
         return {
             name: "MoveToPos",
             type: "Action",

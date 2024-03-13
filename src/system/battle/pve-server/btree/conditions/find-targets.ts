@@ -13,9 +13,9 @@ interface FindTargetsArgs {
 }
 
 export class FindTargets extends b3.Process {
-    override check(node: b3.Node) {}
+    public override check(node: b3.Node) {}
 
-    override run(node: b3.Node, env: AiTreeEnv) {
+    public override run(node: b3.Node, env: AiTreeEnv) {
         const args = node.args as FindTargetsArgs;
         const findHero = args.hero;
         const findSoldier = args.soldier;
@@ -58,7 +58,7 @@ export class FindTargets extends b3.Process {
         }
     }
 
-    override get descriptor() {
+    public override get descriptor() {
         return {
             name: "FindTargets",
             type: "Condition",

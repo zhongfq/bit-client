@@ -8,9 +8,9 @@ const tmpTarget = new Laya.Vector3();
 const tmpVelocity = new Laya.Vector3();
 
 export class FollowHero extends b3.Process {
-    override check(node: b3.Node) {}
+    public override check(node: b3.Node) {}
 
-    override run(node: b3.Node, env: AiTreeEnv) {
+    public override run(node: b3.Node, env: AiTreeEnv) {
         const soldier = env.owner.getComponent(SoldierComponent);
         if (!soldier) {
             console.warn(`'SoldierComponent' not found `);
@@ -58,7 +58,7 @@ export class FollowHero extends b3.Process {
         return b3.Status.SUCCESS;
     }
 
-    override get descriptor() {
+    public override get descriptor() {
         return {
             name: "FollowHero",
             type: "Action",

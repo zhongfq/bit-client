@@ -2,11 +2,11 @@ import { b3 } from "../../../core/behavior3/behavior";
 import { PveServer } from "./pve-server";
 
 export class ExportNodes extends PveServer {
-    constructor() {
+    public constructor() {
         super(null!);
     }
 
-    stringify() {
+    public stringify() {
         const descriptors: b3.ProcessDescriptor[] = [];
         for (const v of this._processResolvers.values()) {
             descriptors.push(v.descriptor);

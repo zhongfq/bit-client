@@ -4,9 +4,9 @@ import { MovementComponent, TransformComponent } from "./movement-component";
 import { AnimationComponent } from "./render-component";
 
 export class OwnerComponent extends ecs.Component {
-    rid: number = 0;
-    aid: number = 0;
-    name: string = "";
+    public rid: number = 0;
+    public aid: number = 0;
+    public name: string = "";
 }
 
 export enum ElementAnimation {
@@ -23,20 +23,20 @@ export class ElementComponent extends ecs.Component {
     private _transform: TransformComponent | null = null;
     private _animation: AnimationComponent | null = null;
 
-    get movement() {
+    public get movement() {
         return (this._movement ||= this.getComponent(MovementComponent)!);
     }
 
-    get transform() {
+    public get transform() {
         return (this._transform ||= this.getComponent(TransformComponent)!);
     }
 
-    get animation() {
+    public get animation() {
         return (this._animation ||= this.getComponent(AnimationComponent)!);
     }
 
-    entityId: number = 0;
-    tableId: number = 0;
+    public entityId: number = 0;
+    public tableId: number = 0;
 }
 
 type SoliderAttack = {
@@ -46,20 +46,20 @@ type SoliderAttack = {
 };
 
 export class SoldierComponent extends ecs.Component {
-    leader!: number;
-    offset!: IVector3Like;
-    index: number = 0;
+    public leader!: number;
+    public offset!: IVector3Like;
+    public index: number = 0;
 
     // 攻击的小兵对象
-    attack: SoliderAttack = { target: null, time: 0, position: new Laya.Vector3() };
+    public attack: SoliderAttack = { target: null, time: 0, position: new Laya.Vector3() };
 }
 
 export class HeroComponent extends ecs.Component {
-    formation!: Readonly<IVector3Like>[];
-    soldiers: SoldierComponent[] = [];
-    hp: number = 0;
-    maxHp: number = 0;
+    public formation!: Readonly<IVector3Like>[];
+    public soldiers: SoldierComponent[] = [];
+    public hp: number = 0;
+    public maxHp: number = 0;
 
     // 攻击的主角对象
-    attackTarget: number = 0;
+    public attackTarget: number = 0;
 }

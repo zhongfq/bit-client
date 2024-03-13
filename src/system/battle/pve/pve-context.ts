@@ -27,9 +27,9 @@ import { TilemapSystem } from "./ecs/systems/tilemap-system";
 
 @Laya.regClass()
 export class PveContext extends Mediator implements ITMContext {
-    declare owner: PveUI;
+    public declare owner: PveUI;
 
-    focusRole: number = 0;
+    public focusRole: number = 0;
 
     private _sender!: CommandSender;
 
@@ -40,27 +40,27 @@ export class PveContext extends Mediator implements ITMContext {
 
     private _selectedDynamicElement?: number;
 
-    get scene() {
+    public get scene() {
         return this.owner.scene;
     }
 
-    get scene3D() {
+    public get scene3D() {
         return this.owner.scene3D;
     }
 
-    get camera() {
+    public get camera() {
         return (this._camera ||= this.scene3D.getChildByName("Main Camera") as Laya.Camera);
     }
 
-    get sender() {
+    public get sender() {
         return this._sender;
     }
 
-    get mapDir() {
+    public get mapDir() {
         return "resources/data/tilemap/pve";
     }
 
-    override onAwake() {
+    public override onAwake() {
         this._ecs = new ecs.World();
         this._ecs.addSingletonComponent(CameraComponent);
         this._ecs.addSingletonComponent(JoystickComponent);
@@ -86,18 +86,18 @@ export class PveContext extends Mediator implements ITMContext {
         Laya.loader.load(res.BATTLE_HP_NUM_X);
     }
 
-    override async onStart() {
+    public override async onStart() {
         this._pveServer.start();
     }
 
-    override onUpdate() {
+    public override onUpdate() {
         this.owner.debug.graphics.clear();
         super.onUpdate();
         this._pveServer.update(Laya.timer.delta / 1000);
         this._ecs.update(Laya.timer.delta / 1000);
     }
 
-    onAddElement(element: TMElement) {
+    public onAddElement(element: TMElement) {
         if (element instanceof TMMonsterElement) {
             const position = new Laya.Vector3(element.realX, 0, element.realY);
             this.sender.addMonster(element.id, position);
@@ -119,7 +119,7 @@ export class PveContext extends Mediator implements ITMContext {
         }
     }
 
-    onDelElement(element: TMElement) {
+    public onDelElement(element: TMElement) {
         if (element instanceof TMMonsterElement) {
             const position = new Laya.Vector3(element.realX, 0, element.realY);
             this.sender.removeMonster(element.id, position);
@@ -141,7 +141,7 @@ export class PveContext extends Mediator implements ITMContext {
         }
     }
 
-    onMapClickHandler() {
+    public onMapClickHandler() {
         const tilemap = this._ecs.getSingletonComponent(TilemapComponent)!;
 
         if (this._selectedDynamicElement) {
@@ -177,7 +177,7 @@ export class PveContext extends Mediator implements ITMContext {
         }
     }
 
-    onTilemapDebugModeUpdate() {
+    public onTilemapDebugModeUpdate() {
         const tilemap = this._ecs.getSingletonComponent(TilemapComponent)!;
         const allMap = tilemap.getAllMap();
         allMap.forEach((element) => {
@@ -196,41 +196,41 @@ export class PveContext extends Mediator implements ITMContext {
 }
 
 class CommandSender {
-    constructor(readonly server: PveServer) {}
+    public constructor(public readonly server: PveServer) {}
 
-    joystickStart(eid: number, degree: number) {
+    public joystickStart(eid: number, degree: number) {
         this.server.joystickStart(eid, degree);
     }
 
-    joystickStop(eid: number) {
+    public joystickStop(eid: number) {
         this.server.joystickStop(eid);
     }
 
-    addMonster(tid: number, position: Laya.Vector3) {
+    public addMonster(tid: number, position: Laya.Vector3) {
         this.server.addMonster(tid, position);
     }
 
-    removeMonster(tid: number, position: Laya.Vector3) {
+    public removeMonster(tid: number, position: Laya.Vector3) {
         this.server.removeMonster(tid, position);
     }
 
-    addBuilding(tid: number, position: Laya.Vector3) {
+    public addBuilding(tid: number, position: Laya.Vector3) {
         this.server.addBuilding(tid, position);
     }
 
-    removeBuilding(tid: number, position: Laya.Vector3) {
+    public removeBuilding(tid: number, position: Laya.Vector3) {
         this.server.removeBuilding(tid, position);
     }
 
-    addCollection(tid: number, position: Laya.Vector3) {
+    public addCollection(tid: number, position: Laya.Vector3) {
         this.server.addCollection(tid, position);
     }
 
-    removeCollection(tid: number, position: Laya.Vector3) {
+    public removeCollection(tid: number, position: Laya.Vector3) {
         this.server.removeCollection(tid, position);
     }
 
-    click(x: number, z: number) {
+    public click(x: number, z: number) {
         this.server.click(x, z);
     }
 }

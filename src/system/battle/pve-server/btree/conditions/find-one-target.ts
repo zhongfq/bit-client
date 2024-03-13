@@ -3,9 +3,9 @@ import { AiTreeEnv } from "../../ecs/components/ai-component";
 import { FindTargets } from "./find-targets";
 
 export class FindOneTarget extends FindTargets {
-    override check(node: b3.Node) {}
+    public override check(node: b3.Node) {}
 
-    override run(node: b3.Node, env: AiTreeEnv) {
+    public override run(node: b3.Node, env: AiTreeEnv) {
         const status = super.run(node, env);
         if (status === b3.Status.SUCCESS) {
             const target = (env.lastRet.results[0] as Array<unknown>)[0];
@@ -15,7 +15,7 @@ export class FindOneTarget extends FindTargets {
         return status;
     }
 
-    override get descriptor() {
+    public override get descriptor() {
         return {
             name: "FindOneTarget",
             type: "Condition",

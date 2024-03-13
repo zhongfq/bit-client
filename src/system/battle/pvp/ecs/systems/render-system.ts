@@ -16,11 +16,11 @@ import { TilemapComponent } from "../components/tilemap-component";
 const tmpInfoVector4 = new Laya.Vector4();
 
 export class RenderSystem extends ecs.System {
-    constructor(readonly context: PvpContext) {
+    public constructor(public readonly context: PvpContext) {
         super();
     }
 
-    override onAddComponent(component: ecs.Component): void {
+    public override onAddComponent(component: ecs.Component): void {
         if (component instanceof AnimationComponent) {
             this._loadAnimation(component);
         } else if (component instanceof HeadInfoComponent) {
@@ -32,7 +32,7 @@ export class RenderSystem extends ecs.System {
         }
     }
 
-    override onRemoveComponent(component: ecs.Component): void {
+    public override onRemoveComponent(component: ecs.Component): void {
         if (component instanceof AnimationComponent) {
             component.view?.destroy();
             component.view = null;
@@ -49,7 +49,7 @@ export class RenderSystem extends ecs.System {
         }
     }
 
-    update(dt: number): void {
+    public update(dt: number): void {
         this.ecs.getComponents(AnimationComponent).forEach((anim) => {
             this._updatePosition(anim);
             this._updateAnim(anim);

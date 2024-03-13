@@ -1,12 +1,12 @@
 import { ecs } from "../../../../../core/ecs";
 
 export class TransformComponent extends ecs.Component {
-    static readonly POSITION = 1 << 0;
-    static readonly ROTATION = 1 << 1;
+    public static readonly POSITION = 1 << 0;
+    public static readonly ROTATION = 1 << 1;
 
-    flag: number = 0;
-    position: Laya.Vector3 = new Laya.Vector3();
-    rotation: number = 0;
+    public flag: number = 0;
+    public position: Laya.Vector3 = new Laya.Vector3();
+    public rotation: number = 0;
 }
 
 export const enum TrackType {
@@ -18,9 +18,9 @@ export const enum TrackType {
 
 export class TrackVector3 extends Laya.Vector3 {
     /** 与前一个坐标点的距离差 */
-    offset: number = 0;
+    public offset: number = 0;
 
-    constructor(x?: number, y?: number, z?: number, offset?: number) {
+    public constructor(x?: number, y?: number, z?: number, offset?: number) {
         super(x, y, z);
         this.offset = offset ?? 0;
     }
@@ -42,28 +42,28 @@ export const enum MovementType {
 }
 
 export class InterpolationRate {
-    static readonly POSITION = 5;
-    static readonly ROTATION = 7;
-    static readonly SOLDIER_POSITION = 5;
-    static readonly SOLDIER_ROTATION = 4;
+    public static readonly POSITION = 5;
+    public static readonly ROTATION = 7;
+    public static readonly SOLDIER_POSITION = 5;
+    public static readonly SOLDIER_ROTATION = 4;
 }
 
 class RotationInterpolation {
-    rotation: number = 0;
-    percent: number = 1;
-    rate: number = 1;
+    public rotation: number = 0;
+    public percent: number = 1;
+    public rate: number = 1;
 }
 
 export class MovementComponent extends ecs.Component {
-    type: MovementType = MovementType.NONE;
+    public type: MovementType = MovementType.NONE;
 
-    target: Laya.Vector3 | null = null;
-    velocity: Laya.Vector3 = new Laya.Vector3();
+    public target: Laya.Vector3 | null = null;
+    public velocity: Laya.Vector3 = new Laya.Vector3();
 
     // 轨迹方式移动
-    track: Track | null = null;
-    trackType: TrackType = TrackType.NONE;
+    public track: Track | null = null;
+    public trackType: TrackType = TrackType.NONE;
 
     // 改变角度
-    rotationInterpolation: RotationInterpolation = new RotationInterpolation();
+    public rotationInterpolation: RotationInterpolation = new RotationInterpolation();
 }

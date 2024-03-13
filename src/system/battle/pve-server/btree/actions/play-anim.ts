@@ -2,7 +2,7 @@ import { b3 } from "../../../../../core/behavior3/behavior";
 import { SkillTreeEnv } from "../../ecs/components/skill-component";
 
 export class PlayAnim extends b3.Process {
-    override run(node: b3.Node, env: SkillTreeEnv) {
+    public override run(node: b3.Node, env: SkillTreeEnv) {
         if (!(env instanceof SkillTreeEnv)) {
             this.error(node, `env is not a SkillTreeEnv`);
         }
@@ -13,7 +13,7 @@ export class PlayAnim extends b3.Process {
         return b3.Status.SUCCESS;
     }
 
-    override get descriptor() {
+    public override get descriptor() {
         return {
             name: "PlayAnim",
             type: "Action",

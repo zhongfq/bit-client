@@ -11,7 +11,7 @@ export const LAST_ADJUST_DIR = b3.TreeEnv.makePrivateVar("lastAdjustDir");
 
 // 可以通过预定位置的方式进行优化
 export class AdjustStance extends b3.Process {
-    override run(node: b3.Node, env: AiTreeEnv, enemy: ElementComponent) {
+    public override run(node: b3.Node, env: AiTreeEnv, enemy: ElementComponent) {
         const owner = env.owner;
         let p1 = node.resume(env) as Laya.Vector3 | undefined;
         let running = !!p1;
@@ -63,7 +63,7 @@ export class AdjustStance extends b3.Process {
         return node.yield(env, p1);
     }
 
-    override get descriptor() {
+    public override get descriptor() {
         return {
             name: "AdjustStance",
             type: "Action",

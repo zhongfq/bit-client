@@ -10,11 +10,11 @@ import {
 const tmpVector3 = new Laya.Vector3();
 
 export class MovementSystem extends ecs.System {
-    constructor(readonly context: PveContext) {
+    public constructor(public readonly context: PveContext) {
         super();
     }
 
-    update(dt: number): void {
+    public update(dt: number): void {
         this.ecs.getComponents(MovementComponent).forEach((movement) => {
             if (movement.rotationInterpolation.percent < 1) {
                 this._updateRotation(movement, dt);

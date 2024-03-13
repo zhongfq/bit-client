@@ -3,7 +3,7 @@ import { AiTreeEnv } from "../../ecs/components/ai-component";
 import { ElementComponent } from "../../ecs/components/element-component";
 
 export class GetPos extends b3.Process {
-    override run(node: b3.Node, env: AiTreeEnv, target?: unknown) {
+    public override run(node: b3.Node, env: AiTreeEnv, target?: unknown) {
         if (target instanceof Array) {
             this.error(node, "target is array");
         }
@@ -12,7 +12,7 @@ export class GetPos extends b3.Process {
         return b3.Status.SUCCESS;
     }
 
-    override get descriptor() {
+    public override get descriptor() {
         return {
             name: "GetPos",
             type: "Action",

@@ -5,20 +5,20 @@ import { Loader } from "../../../core/loader";
 import { MathUtil } from "../../../core/utils/math-util";
 import { BattleConf } from "../../../def/battle";
 import { formation } from "../../../def/formation";
+import { ElementAnimation } from "../pve/ecs/components/troop-component";
 import { AiComponent } from "./ecs/components/ai-component";
-import { MovementComponent, TransformComponent } from "./ecs/components/movement-component";
 import {
     ElementComponent,
     SoldierComponent,
     TroopComponent,
 } from "./ecs/components/element-component";
+import { MovementComponent, TransformComponent } from "./ecs/components/movement-component";
 import { Skill, SkillComponent } from "./ecs/components/skill-component";
 import { AiSystem } from "./ecs/systems/ai-system";
+import { CacheSystem } from "./ecs/systems/cache-system";
 import { MovementSystem } from "./ecs/systems/movement-system";
 import { SkillSystem } from "./ecs/systems/skill-system";
 import { ElementCreator, UpdateHp } from "./pve-defs";
-import { ElementAnimation } from "../pve/ecs/components/troop-component";
-import { CacheData, CacheSystem } from "./ecs/systems/cache-system";
 
 const _tmpVelocity = new Laya.Vector3();
 
@@ -34,7 +34,7 @@ export class PveServer extends b3.Context {
     private _stanceMap: Map<number, ElementComponent> = new Map();
     private _elements: Map<string, ElementComponent> = new Map();
 
-    constructor(sender: ICommandSender) {
+    public constructor(sender: ICommandSender) {
         super();
 
         this._sender = sender;
@@ -46,11 +46,11 @@ export class PveServer extends b3.Context {
         this._ecs.addSystem(new CacheSystem(this));
     }
 
-    get ecs() {
+    public get ecs() {
         return this._ecs;
     }
 
-    isFreeStance(element: ElementComponent, position: Laya.Vector3) {
+    public isFreeStance(element: ElementComponent, position: Laya.Vector3) {
         for (const target of this._stanceMap.values()) {
             if (target.aid === element.aid && target !== element) {
                 const distance = Laya.Vector3.distance(target.transform.position, position);
@@ -62,7 +62,7 @@ export class PveServer extends b3.Context {
         return true;
     }
 
-    isTroopFighting(element: ElementComponent) {
+    public isTroopFighting(element: ElementComponent) {
         for (const target of this._stanceMap.values()) {
             if (target.aid === element.aid) {
                 return true;
@@ -71,22 +71,22 @@ export class PveServer extends b3.Context {
         return false;
     }
 
-    clearStance(element: ElementComponent) {
+    public clearStance(element: ElementComponent) {
         this._stanceMap.delete(element.eid);
     }
 
-    setStance(element: ElementComponent) {
+    public setStance(element: ElementComponent) {
         this._stanceMap.set(element.eid, element);
     }
 
-    update(delta: number) {
+    public update(delta: number) {
         this.time += delta;
         this._ecs.update(delta);
 
         this._drawDebug();
     }
 
-    async loadAiTree(res: string) {
+    public async loadAiTree(res: string) {
         let tree = this._aiTrees.get(res);
         if (!tree) {
             const data = (await this._loader.loadJson(res)) as b3.TreeData;
@@ -112,7 +112,7 @@ export class PveServer extends b3.Context {
         });
     }
 
-    find(filter: (element: ElementComponent) => boolean) {
+    public find(filter: (element: ElementComponent) => boolean) {
         let arr: ElementComponent[] | null = null;
         for (const v of this.ecs.getComponents(ElementComponent).values()) {
             if (filter(v)) {
@@ -123,7 +123,11 @@ export class PveServer extends b3.Context {
         return arr;
     }
 
-    calcSoldierPosition(hero: ElementComponent, solider: SoldierComponent, out: Laya.Vector3) {
+    public calcSoldierPosition(
+        hero: ElementComponent,
+        solider: SoldierComponent,
+        out: Laya.Vector3
+    ) {
         const t3d = this._transform3D;
         t3d.localPosition = hero.transform.position;
         t3d.localRotationEulerY = -hero.transform.rotation;
@@ -134,7 +138,7 @@ export class PveServer extends b3.Context {
     //-------------------------------------------------------------------------
     //------------------------------ICommandReceiver---------------------------
     //-------------------------------------------------------------------------
-    start() {
+    public start() {
         // 创建主角
         const entity = this._ecs.createEntity();
         entity.etype = BattleConf.ENTITY_TYPE.HERO;
@@ -247,7 +251,7 @@ export class PveServer extends b3.Context {
         });
     }
 
-    removeElement(element: ElementComponent, outVision: boolean) {
+    public removeElement(element: ElementComponent, outVision: boolean) {
         this._elements.delete(element.key);
         this.ecs.removeEntity(element.eid);
         this._sender.removeElement(element.eid);
@@ -258,18 +262,18 @@ export class PveServer extends b3.Context {
         }
     }
 
-    rushStart(element: ElementComponent): void {
+    public rushStart(element: ElementComponent): void {
         this._sender.rushStart(element.eid);
     }
 
-    moveStart(element: ElementComponent, velocity: Laya.Vector3, target?: Laya.Vector3) {
+    public moveStart(element: ElementComponent, velocity: Laya.Vector3, target?: Laya.Vector3) {
         element.movement.target = target;
         element.movement.velocity.cloneFrom(velocity);
         element.transform.rotation = MathUtil.toDegree(Math.atan2(velocity.z, velocity.x));
         this._sender.moveStart(element.eid, velocity);
     }
 
-    moveStop(element: ElementComponent) {
+    public moveStop(element: ElementComponent) {
         const movement = element.movement;
         movement.velocity.x = 0;
         movement.velocity.y = 0;
@@ -277,11 +281,11 @@ export class PveServer extends b3.Context {
         this._sender.moveStop(element.eid, element.transform.position);
     }
 
-    towardTo(element: ElementComponent, target: ElementComponent) {
+    public towardTo(element: ElementComponent, target: ElementComponent) {
         this._sender.towardTo(element.eid, target.eid);
     }
 
-    playAnim(element: ElementComponent, anim: string) {
+    public playAnim(element: ElementComponent, anim: string) {
         this._sender.playAnim(element.eid, anim);
     }
 
@@ -310,7 +314,7 @@ export class PveServer extends b3.Context {
         }
     }
 
-    hurt(skill: Skill, enemy: ElementComponent | ElementComponent[], ratio: number = 1) {
+    public hurt(skill: Skill, enemy: ElementComponent | ElementComponent[], ratio: number = 1) {
         if (enemy instanceof Array) {
             for (const v of enemy) {
                 this._calcHurt(skill, v, ratio);
@@ -320,7 +324,7 @@ export class PveServer extends b3.Context {
         }
     }
 
-    collect(element: ElementComponent, target: ElementComponent) {
+    public collect(element: ElementComponent, target: ElementComponent) {
         if (target.hp <= 0) {
             return;
         }
@@ -343,7 +347,7 @@ export class PveServer extends b3.Context {
         }
     }
 
-    relive(e: ElementComponent) {
+    public relive(e: ElementComponent) {
         const cacheSys = this.ecs.getSystem(CacheSystem);
         if (cacheSys?.isOutVision(e.key) === true) {
             return;
@@ -374,7 +378,7 @@ export class PveServer extends b3.Context {
     //-------------------------------------------------------------------------
     // 接收前端指令
     //-------------------------------------------------------------------------
-    joystickStart(eid: number, degree: number) {
+    public joystickStart(eid: number, degree: number) {
         const element = this.ecs.getComponent(eid, ElementComponent);
         if (!element) {
             console.warn(`not found element: ${eid}`);
@@ -394,7 +398,7 @@ export class PveServer extends b3.Context {
         this.moveStart(element, _tmpVelocity);
     }
 
-    click(x: number, z: number) {
+    public click(x: number, z: number) {
         this.ecs.getComponents(ElementComponent).forEach((element) => {
             const ai = element.getComponent(AiComponent);
             const p1 = new Laya.Vector3(x, 0, z);
@@ -405,7 +409,7 @@ export class PveServer extends b3.Context {
         });
     }
 
-    joystickStop(eid: number) {
+    public joystickStop(eid: number) {
         const element = this.ecs.getComponent(eid, ElementComponent);
         if (!element) {
             console.warn(`not found element: ${eid}`);
@@ -416,7 +420,7 @@ export class PveServer extends b3.Context {
         this.moveStop(element);
     }
 
-    addMonster(tid: number, position: Laya.Vector3) {
+    public addMonster(tid: number, position: Laya.Vector3) {
         const key = this._toElementKey(tid, position);
         if (this._elements.has(key)) {
             return;
@@ -480,7 +484,7 @@ export class PveServer extends b3.Context {
         });
     }
 
-    removeMonster(tid: number, position: Laya.Vector3) {
+    public removeMonster(tid: number, position: Laya.Vector3) {
         const key = this._toElementKey(tid, position);
         const element = this._elements.get(key);
         if (element) {
@@ -488,7 +492,7 @@ export class PveServer extends b3.Context {
         }
     }
 
-    addBuilding(tid: number, position: Laya.Vector3) {
+    public addBuilding(tid: number, position: Laya.Vector3) {
         const key = this._toElementKey(tid, position);
         if (this._elements.has(key)) {
             return;
@@ -537,7 +541,7 @@ export class PveServer extends b3.Context {
         });
     }
 
-    removeBuilding(tid: number, position: Laya.Vector3) {
+    public removeBuilding(tid: number, position: Laya.Vector3) {
         const key = this._toElementKey(tid, position);
         const element = this._elements.get(key);
         if (element) {
@@ -545,7 +549,7 @@ export class PveServer extends b3.Context {
         }
     }
 
-    addCollection(tid: number, position: Laya.Vector3) {
+    public addCollection(tid: number, position: Laya.Vector3) {
         const key = this._toElementKey(tid, position);
         if (this._elements.has(key)) {
             return;
@@ -590,7 +594,7 @@ export class PveServer extends b3.Context {
         });
     }
 
-    removeCollection(tid: number, position: Laya.Vector3) {
+    public removeCollection(tid: number, position: Laya.Vector3) {
         const key = this._toElementKey(tid, position);
         const element = this._elements.get(key);
         if (element) {

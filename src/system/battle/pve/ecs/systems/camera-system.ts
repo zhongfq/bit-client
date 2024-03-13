@@ -7,11 +7,11 @@ export class CameraSystem extends ecs.System {
     private _ray: Laya.Ray = new Laya.Ray(new Laya.Vector3(), new Laya.Vector3());
     private _rayMat: Laya.Matrix4x4 = new Laya.Matrix4x4();
 
-    constructor(readonly context: PveContext) {
+    public constructor(public readonly context: PveContext) {
         super();
     }
 
-    update(dt: number): void {
+    public update(dt: number): void {
         const component = this.ecs.getSingletonComponent(CameraComponent);
         if (!component?.focus) {
             return;
