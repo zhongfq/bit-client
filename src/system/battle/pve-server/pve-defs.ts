@@ -9,11 +9,15 @@ export interface ElementCreator {
     eid: number;
     etype: number;
 
+    // 同盟id
+    aid: number;
+
     entityId: number; // id in battle_entity.xlsx
     tableId: number; // 配置表id
     maxHp: number;
     hp: number;
     position: Laya.Vector3;
+
     animation?: boolean;
 }
 

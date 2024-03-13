@@ -22,7 +22,6 @@
     },
     {
       "_$id": "mcrhdujx",
-      "_$var": true,
       "_$type": "Image",
       "name": "avatar",
       "x": -13,
@@ -36,7 +35,6 @@
     {
       "_$id": "srew1rbn",
       "_$prefab": "7fd1a163-f140-41df-806c-a9338fbb3412",
-      "_$var": true,
       "name": "hp",
       "active": true,
       "x": 69,
@@ -49,7 +47,6 @@
     },
     {
       "_$id": "8ykwi4ls",
-      "_$var": true,
       "_$type": "Label",
       "name": "hpTxt",
       "x": 76,
@@ -65,7 +62,6 @@
     },
     {
       "_$id": "fkxjvp36",
-      "_$var": true,
       "_$type": "Label",
       "name": "heroName",
       "x": 70,

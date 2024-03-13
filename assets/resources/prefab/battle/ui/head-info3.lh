@@ -23,7 +23,6 @@
     {
       "_$id": "rjs8pshf",
       "_$prefab": "7fd1a163-f140-41df-806c-a9338fbb3412",
-      "_$var": true,
       "name": "hp",
       "active": true,
       "x": 0,

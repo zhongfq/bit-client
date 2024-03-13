@@ -24,6 +24,7 @@ export type HeadInfoData = {
 export class HeadInfoUI extends HeadInfoUIBase {
     private _data?: HeadInfoData;
 
+    private _bg?: Laya.Image;
     private _hp?: ImageBar;
     private _hpTxt?: Laya.Label;
     private _mp?: ImageBar;
@@ -39,11 +40,22 @@ export class HeadInfoUI extends HeadInfoUIBase {
     update(data: HeadInfoData) {
         this._data = data;
         if (!this._hp) {
-            this._hp = this.getChildByName("hp") as ImageBar;
-            this._mp = this.getChildByName("mp") as ImageBar;
-            this._hpTxt = this.getChildByName("hpTxt") as Laya.Label;
-            this._name = this.getChildByName("username") as Laya.Label;
-            this._avatar = this.getChildByName("avatar") as Laya.Image;
+            this._bg = this.getChildByName("bg") as Laya.Image | undefined;
+            this._hp = this.getChildByName("hp") as ImageBar | undefined;
+            this._mp = this.getChildByName("mp") as ImageBar | undefined;
+            this._hpTxt = this.getChildByName("hpTxt") as Laya.Label | undefined;
+            this._name = this.getChildByName("username") as Laya.Label | undefined;
+            this._avatar = this.getChildByName("avatar") as Laya.Image | undefined;
+
+            if (this._data.style === HeadInfoStyle.ENEMY) {
+                const atlasPath = "resources/texture/battle/battle-troop";
+                if (this._bg) {
+                    this._bg.skin = `${atlasPath}/ui_fight_RoleInfoBg2.png`;
+                }
+                if (this._hp) {
+                    this._hp.skin = `${atlasPath}/sb_fight_Blood4.png`;
+                }
+            }
         }
         if (this._hp) {
             this._hp.value = Math.max(0, Math.min(1, data.hp / data.maxHp));

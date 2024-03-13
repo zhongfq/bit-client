@@ -176,6 +176,7 @@ export class PveServer extends b3.Context {
         this._sender.createElement({
             eid: element.eid,
             etype: element.entity.etype,
+            aid: element.aid,
             entityId: element.data.id,
             tableId: element.tid,
             hp: element.hp,
@@ -233,6 +234,7 @@ export class PveServer extends b3.Context {
             this._sender.createElement({
                 eid: element.eid,
                 etype: element.entity.etype,
+                aid: element.aid,
                 entityId: element.data.id,
                 tableId: element.tid,
                 hp: element.hp,
@@ -419,6 +421,7 @@ export class PveServer extends b3.Context {
         this._sender.createElement({
             eid: element.eid,
             etype: element.entity.etype,
+            aid: element.aid,
             entityId: element.data.id,
             tableId: element.tid,
             hp: element.hp,
@@ -467,6 +470,7 @@ export class PveServer extends b3.Context {
         this._sender.createElement({
             eid: element.eid,
             etype: element.entity.etype,
+            aid: element.aid,
             entityId: element.data.id,
             tableId: element.tid,
             hp: element.hp,
@@ -514,6 +518,7 @@ export class PveServer extends b3.Context {
         this._sender.createElement({
             eid: element.eid,
             etype: element.entity.etype,
+            aid: element.aid,
             entityId: element.data.id,
             tableId: element.tid,
             hp: element.hp,

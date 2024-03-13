@@ -1,11 +1,11 @@
 import { app } from "../../../app";
 import { Mediator } from "../../../core/ui-mediator";
 import { ui } from "../../../misc/ui";
-import { PveUI } from "../../../ui-runtime/scene/PveUI";
+import { PvpUI } from "../../../ui-runtime/scene/PvpUI";
 
 @Laya.regClass()
 export class PvpMediator extends Mediator {
-    declare owner: PveUI;
+    declare owner: PvpUI;
 
     override onAwake() {
         this.owner.btnBack.on(Laya.Event.CLICK, () => {

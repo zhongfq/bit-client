@@ -3,6 +3,7 @@ import { ecs } from "../../../../../core/ecs";
 import { tween } from "../../../../../core/tween/tween";
 import { BattleConf } from "../../../../../def/battle";
 import { res } from "../../../../../misc/res";
+import { HeadInfoStyle } from "../../../../../ui-runtime/prefab/battle/HeadInfoUI";
 import { ElementCreator, UpdateHp } from "../../../pve-server/pve-defs";
 import { ICommandSender } from "../../../pve-server/pve-server";
 import { PveContext } from "../../pve-context";
@@ -66,6 +67,9 @@ export class CommandSystem extends ecs.System implements ICommandSender {
             info.data.hp = data.hp;
             info.data.maxHp = data.maxHp;
             info.data.offset = entityRow.info_offset ?? 0;
+            if (data.aid === 2) {
+                info.data.style = HeadInfoStyle.ENEMY;
+            }
             if (entityRow.info_style === 1) {
                 info.res = PREFAB_HEAD_INFO1;
             } else if (entityRow.info_style === 2) {
@@ -204,7 +208,7 @@ export class CommandSystem extends ecs.System implements ICommandSender {
 
     updateHp(eid: number, data: UpdateHp): void {
         const element = this._findElement(eid);
-        if (element) {
+        if (element && data.subHp) {
             const info = element.getComponent(HeadInfoComponent);
             if (info && info.view) {
                 info.data.hp = data.hp;
@@ -221,6 +225,8 @@ export class CommandSystem extends ecs.System implements ICommandSender {
                     const pos = new Laya.Vector4();
                     this.context.camera.worldToViewportPoint(element.transform.position, pos);
                     const hpui = prefab.create() as Laya.Sprite;
+                    const hpTxt = hpui.getChildByName("anim").getChildByName("hp") as Laya.Text;
+                    hpTxt.text = data.subHp.toFixed();
                     hpui.pos(pos.x - info.view.width / 2, pos.y - info.data.offset, true);
                     this.context.owner.labels.addChild(hpui);
                     hpui.scaleX = 0.5;

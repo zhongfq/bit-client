@@ -99,7 +99,6 @@ export class PveContext extends Mediator implements ITMContext {
 
     onAddElement(element: TMElement) {
         if (element instanceof TMMonsterElement) {
-            console.log("AddMonster", element.x, element.y, element.id);
             const position = new Laya.Vector3(element.realX, 0, element.realY);
             this.sender.addMonster(element.id, position);
         } else if (element instanceof TMBuildingElement) {
@@ -122,7 +121,6 @@ export class PveContext extends Mediator implements ITMContext {
 
     onDelElement(element: TMElement) {
         if (element instanceof TMMonsterElement) {
-            console.log("DelMonster", element.x, element.y, element.id);
             const position = new Laya.Vector3(element.realX, 0, element.realY);
             this.sender.removeMonster(element.id, position);
         } else if (element instanceof TMBuildingElement) {
@@ -182,13 +180,13 @@ export class PveContext extends Mediator implements ITMContext {
     onTilemapDebugModeUpdate() {
         const tilemap = this._ecs.getSingletonComponent(TilemapComponent)!;
         const allMap = tilemap.getAllMap();
-        allMap?.forEach((element) => {
+        allMap.forEach((element) => {
             if (element instanceof TMTileElemet) {
                 element.erase();
                 element.draw();
             }
         });
-        allMap?.forEach((element) => {
+        allMap.forEach((element) => {
             if (element instanceof TMObjectElement) {
                 element.erase();
                 element.draw();
