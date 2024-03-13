@@ -31,6 +31,7 @@ import {
     GeneratedTaskDailyRow,
     GeneratedTaskMainRow,
     GeneratedWorldEntityModelsRow,
+    GeneratedSoldierPendantRow,
 } from "./table.generated";
 //-----------------------------------------------------------------------------通用接口----------|
 //通用奖励接口
@@ -102,8 +103,10 @@ export type HeroTable = {
 // 兵种
 //-----------------------------------------------------------------------------
 export interface SoldierRow extends GeneratedSoldierRow {}
+export interface SoldierPendantRow extends GeneratedSoldierPendantRow {}
 export type SoldierTable = {
-    [k: string]: SoldierRow;
+    soldier: { [k: number]: SoldierRow };
+    pendant: { [k: number]: SoldierPendantRow };
 };
 //-----------------------------------------------------------------------------
 // 技能

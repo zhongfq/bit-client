@@ -1,0 +1,39 @@
+{
+  "_$ver": 1,
+  "_$id": "kdn9vhny",
+  "_$runtime": "res://5463a79c-fa41-441f-a316-76aff9686928",
+  "_$type": "Box",
+  "name": "Box",
+  "width": 721,
+  "height": 876,
+  "_mouseState": 2,
+  "_$child": [
+    {
+      "_$id": "k2gtgtv2",
+      "_$var": true,
+      "_$type": "List",
+      "name": "listAttr",
+      "x": 12,
+      "y": 444,
+      "width": 696,
+      "height": 426,
+      "_mouseState": 2,
+      "itemTemplate": {
+        "_$ref": "iztu98e4",
+        "_$tmpl": "itemRender"
+      },
+      "repeatX": 1,
+      "repeatY": 4,
+      "_$child": [
+        {
+          "_$id": "iztu98e4",
+          "_$prefab": "2ff6b098-6686-4278-a915-dde1c7ea2045",
+          "name": "soldier-train-item",
+          "active": true,
+          "x": 0,
+          "y": 0
+        }
+      ]
+    }
+  ]
+}

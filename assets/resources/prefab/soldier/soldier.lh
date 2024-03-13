@@ -98,46 +98,35 @@
       "y": 196,
       "width": 721,
       "height": 876,
+      "_mouseState": 2,
       "selectedIndex": 0,
       "_$child": [
         {
-          "_$id": "zte72dim",
-          "_$prefab": "21640d9e-d8d0-4ada-a150-7495a3e3fcd7",
+          "_$id": "ys424880",
+          "_$prefab": "320364eb-cab6-462c-b92e-ce4f2b6c40d2",
           "name": "item0",
           "active": true,
           "x": 0,
           "y": 0,
-          "visible": true,
-          "left": 0,
-          "right": 0,
-          "top": 0,
-          "bottom": 0
+          "visible": true
         },
         {
-          "_$id": "a65hzg9k",
-          "_$prefab": "14757d3c-eec4-4ca7-a9dc-832ce199d40c",
+          "_$id": "j9ns1q93",
+          "_$prefab": "b16e8621-db2f-4898-a827-75a5966e23e9",
           "name": "item1",
           "active": true,
           "x": 0,
           "y": 0,
-          "visible": false,
-          "left": 0,
-          "right": 0,
-          "top": 0,
-          "bottom": 0
+          "visible": false
         },
         {
-          "_$id": "k6lwjhjf",
-          "_$prefab": "505caf11-727b-41e7-9066-f2ea65168d86",
+          "_$id": "9n4xypsy",
+          "_$prefab": "fb70e9b6-b0ff-4836-a1cc-080bb1214d0f",
           "name": "item2",
           "active": true,
           "x": 0,
           "y": 0,
-          "visible": false,
-          "left": 0,
-          "right": 0,
-          "top": 0,
-          "bottom": 0
+          "visible": false
         }
       ]
     }

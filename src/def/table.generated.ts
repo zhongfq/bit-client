@@ -63,7 +63,28 @@ export interface GeneratedSoldierRow {
     skill1?: number;
     attack_radius: number;
     skill_radius: number;
-    skill2?: number;
+    skill2: number;
+    position: number;
+    quality: number;
+    icon: string;
+    up_lv_num: number;
+    max_lv: number;
+    attr: any;
+}
+
+// file: design/soldier.xlsx
+export interface GeneratedSoldierPendantRow {
+    id: number;
+    name: string;
+    battle_entity: number;
+    skill1: number;
+    skill2: number;
+    position: number;
+    quality: number;
+    skill_id: number;
+    icon: string;
+    up_star_num: number;
+    max_star: number;
 }
 
 // file: design/equip.xlsx
@@ -253,6 +274,7 @@ export interface GeneratedBattleEntityRow {
 // file: design/battle/battle_scene.xlsx
 export interface GeneratedBattleSceneRow {
     id: number;
+    battle_type: number;
     max_slot: number;
     max_wait_list: number;
 }
@@ -448,31 +470,4 @@ export interface GeneratedChestScoreRow {
     sort: number;
     reward_score: number;
     chest_id: number;
-}
-
-// file: design/soldier/soldier.xlsx
-export interface GeneratedSoldierRow {
-    id: number;
-    name: string;
-    position: number;
-    quality: number;
-    skill_id: number;
-    icon: string;
-    model: string;
-    attr: any;
-    up_lv_num: number;
-    max_lv: number;
-}
-
-// file: design/soldier/soldier.xlsx
-export interface GeneratedSoldierPendantRow {
-    id: number;
-    name: string;
-    position: number;
-    quality: number;
-    skill_id: number;
-    icon: string;
-    model: string;
-    up_star_num: number;
-    max_star: number;
 }

@@ -208,7 +208,7 @@ export class PveServer extends b3.Context {
             entity.etype = BattleConf.ENTITY_TYPE.SOLDIER;
 
             const table = app.service.table;
-            const soldierRow = table.soldier[element.tid];
+            const soldierRow = table.soldier.soldier[element.tid];
 
             element.data = table.battleEntity[soldierRow.battle_entity];
 

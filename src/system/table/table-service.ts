@@ -87,6 +87,7 @@ export class TableService extends Service<NetworkService> {
         this.soldier = await app.loader.loadJson(JSON_SOLDIER_TABLE);
         this.task = await app.loader.loadJson(JSON_TASK_TABLE);
         this.worldEntity = await app.loader.loadJson(JSON_ENTITY_TABLE);
+        this.worldEntity = await app.loader.loadJson(JSON_ENTITY_TABLE);
     }
 
     public getVo(refId: number) {
