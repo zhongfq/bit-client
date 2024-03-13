@@ -94,7 +94,7 @@ export class TweenAction extends ActionInterval {
     private _props: any;
     private _originProps: any;
 
-    constructor(duration: number, props: any, opts?: ITweenOption) {
+    public constructor(duration: number, props: any, opts?: ITweenOption) {
         super();
         if (opts == null) {
             opts = Object.create(null);
@@ -160,13 +160,13 @@ export class TweenAction extends ActionInterval {
         this.initWithDuration(duration);
     }
 
-    override clone(): TweenAction {
+    public override clone(): TweenAction {
         const action = new TweenAction(this._duration, this._originProps, this._opts);
         this._cloneDecoration(action);
         return action;
     }
 
-    override startWithTarget(target: Record<string, unknown>): void {
+    public override startWithTarget(target: Record<string, unknown>): void {
         ActionInterval.prototype.startWithTarget.call(this, target);
 
         const relative = !!this._opts.relative;
@@ -207,7 +207,7 @@ export class TweenAction extends ActionInterval {
         }
     }
 
-    override update(t: number): void {
+    public override update(t: number): void {
         const target = this.target;
         if (!target) return;
 
@@ -250,7 +250,7 @@ export class TweenAction extends ActionInterval {
         }
     }
 
-    progress(start: number, end: number, current: number, t: number): number {
+    public progress(start: number, end: number, current: number, t: number): number {
         return (current = start + (end - start) * t);
     }
 }

@@ -10,11 +10,11 @@ import { VO } from "../../misc/vo/vo-base/vo";
 import { GoodsVo } from "../../misc/vo/goods/goods-vo";
 
 export class BagService extends Service<NetworkService> {
-    static readonly ITEM_UPDATE = "item-update";
+    public static readonly ITEM_UPDATE = "item-update";
 
-    readonly itemBag = VoUtil.createGoodsBag(ItemBag); //创建道具背包
+    public readonly itemBag = VoUtil.createGoodsBag(ItemBag); //创建道具背包
 
-    constructor(network: NetworkService) {
+    public constructor(network: NetworkService) {
         super(network);
         this.handle(opcode.bag.s2c_load, this._onLoad);
         this.handle(opcode.bag.s2c_use_item, this._onUseItem);

@@ -3,21 +3,21 @@ import { PveServer } from "../../pve-server";
 import { ElementComponent } from "../components/element-component";
 
 export class CacheData {
-    element!: ElementComponent;
-    reliveTime: number | undefined;
-    outVision: boolean | undefined;
+    public element!: ElementComponent;
+    public reliveTime: number | undefined;
+    public outVision: boolean | undefined;
 }
 
 export class CacheSystem extends ecs.System {
-    constructor(readonly context: PveServer) {
+    public constructor(public readonly context: PveServer) {
         super();
     }
 
-    getCache(key: string): CacheData | undefined {
+    public getCache(key: string): CacheData | undefined {
         return this._cacheMap.get(key);
     }
 
-    canRelive(key: string): boolean | undefined {
+    public canRelive(key: string): boolean | undefined {
         const data = this.getCache(key);
         if (!data || data.reliveTime === undefined) {
             return undefined;
@@ -25,14 +25,14 @@ export class CacheSystem extends ecs.System {
         return data.reliveTime <= Laya.timer.currTimer;
     }
 
-    setReliveTime(element: ElementComponent, reliveTime: number | undefined) {
+    public setReliveTime(element: ElementComponent, reliveTime: number | undefined) {
         let data = this.getCache(element.key);
         data = data ?? this._tryAdd(element);
         data.reliveTime = reliveTime;
         this._tryDel(data);
     }
 
-    isOutVision(key: string): boolean | undefined {
+    public isOutVision(key: string): boolean | undefined {
         const data = this.getCache(key);
         if (!data || data.outVision === undefined) {
             return undefined;
@@ -40,14 +40,14 @@ export class CacheSystem extends ecs.System {
         return data.outVision === true;
     }
 
-    setOutVision(element: ElementComponent, outVision: boolean | undefined) {
+    public setOutVision(element: ElementComponent, outVision: boolean | undefined) {
         let data = this.getCache(element.key);
         data = data ?? this._tryAdd(element);
         data.outVision = outVision;
         this._tryDel(data);
     }
 
-    override update(dt: number): void {
+    public override update(dt: number): void {
         this._cacheMap.forEach((data) => {
             const key = data.element.key;
             if (this.canRelive(key) === true) {

@@ -7,8 +7,8 @@ export class JoystickComponent implements ecs.SingletonComponent {
 
     public degree: number = Number.MAX_VALUE;
 
-    pressStart: Laya.Point | null = null;
+    public pressStart: Laya.Point | null = null;
 
     // eslint-disable-next-line @typescript-eslint/no-shadow
-    constructor(readonly ecs: ecs.World) {}
+    public constructor(public readonly ecs: ecs.World) {}
 }

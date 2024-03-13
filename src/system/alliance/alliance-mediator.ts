@@ -9,11 +9,11 @@ const { regClass, property } = Laya;
 
 @regClass()
 export class AllianceMediator extends Mediator {
-    declare owner: AllianceUI;
+    public declare owner: AllianceUI;
 
     private _alliances: AllianceRow[] = [];
 
-    override onAwake(): void {
+    public override onAwake(): void {
         let labels = "";
         for (const data of TableUtil.getRows(app.service.table.alliance, {})) {
             this._alliances.push(data);
@@ -24,7 +24,7 @@ export class AllianceMediator extends Mediator {
         this.initUiEvent();
     }
 
-    initUiEvent() {
+    public initUiEvent() {
         //UI Event
         this.owner.radioGroup.on(Laya.Event.CHANGE, () => {});
         this.owner.btnClose.on(Laya.Event.CLICK, () => {});

@@ -5,25 +5,25 @@ import { MovementComponent, TransformComponent } from "./movement-component";
 import { SkillComponent } from "./skill-component";
 
 export class ElementComponent extends ecs.Component {
-    data!: BattleEntityRow;
+    public data!: BattleEntityRow;
 
-    maxHp: number = 0;
-    hp: number = 0;
+    public maxHp: number = 0;
+    public hp: number = 0;
 
     // 在表格中的定义
-    tid: number = 0;
+    public tid: number = 0;
 
     // 阵营
-    aid: number = 0;
+    public aid: number = 0;
 
     // 用于目标按距离排序
-    tmpDistance: number = 0;
+    public tmpDistance: number = 0;
 
     // 出生点
-    spawnpoint: Laya.Vector3 = new Laya.Vector3();
+    public spawnpoint: Laya.Vector3 = new Laya.Vector3();
 
     // 按出点生成的关键信息
-    key: string = "";
+    public key: string = "";
 
     // 缓存组件方便快速访问？
     private _movement?: MovementComponent;
@@ -32,47 +32,47 @@ export class ElementComponent extends ecs.Component {
     private _troop?: TroopComponent;
     private _soldier?: SoldierComponent;
 
-    get movement() {
+    public get movement() {
         return (this._movement ||= this.getComponent(MovementComponent)!);
     }
 
-    get transform() {
+    public get transform() {
         return (this._transform ||= this.getComponent(TransformComponent)!);
     }
 
-    get skill() {
+    public get skill() {
         return (this._skill ||= this.getComponent(SkillComponent));
     }
 
-    get troop() {
+    public get troop() {
         return (this._troop ||= this.getComponent(TroopComponent));
     }
 
-    get soldier() {
+    public get soldier() {
         return (this._soldier ||= this.getComponent(SoldierComponent));
     }
 }
 
 export class SoldierComponent extends ecs.Component {
-    data!: SoldierRow;
-    hero!: ElementComponent;
-    index: number = 0;
-    offset!: IVector3Like;
+    public data!: SoldierRow;
+    public hero!: ElementComponent;
+    public index: number = 0;
+    public offset!: IVector3Like;
 
     private _element?: ElementComponent;
 
-    get element() {
+    public get element() {
         return (this._element ||= this.getComponent(ElementComponent)!);
     }
 }
 
 export class TroopComponent extends ecs.Component {
-    formation!: Readonly<IVector3Like>[];
-    soldiers: SoldierComponent[] = [];
+    public formation!: Readonly<IVector3Like>[];
+    public soldiers: SoldierComponent[] = [];
 
     private _element?: ElementComponent;
 
-    get element() {
+    public get element() {
         return (this._element ||= this.getComponent(ElementComponent)!);
     }
 }

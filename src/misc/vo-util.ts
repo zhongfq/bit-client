@@ -20,7 +20,7 @@ export class VoUtil {
      * map
      */
 
-    static createBag<T extends VoBag<VO<any, any>>>(clazz: Constructor<T>): T {
+    public static createBag<T extends VoBag<VO<any, any>>>(clazz: Constructor<T>): T {
         const bag = new clazz();
         return bag;
     }
@@ -28,12 +28,14 @@ export class VoUtil {
     /**
      * 创建一个道具背包(具有增查删改的功能)
      */
-    static createGoodsBag<T extends GoodsVoBag<GoodsVo<any, any>>>(clazz: Constructor<T>): T {
+    public static createGoodsBag<T extends GoodsVoBag<GoodsVo<any, any>>>(
+        clazz: Constructor<T>
+    ): T {
         const bag = this.createBag(clazz);
         return bag;
     }
 
-    static createVo(refId: number): GoodsVo<any> {
+    public static createVo(refId: number): GoodsVo<any> {
         const refData = TableUtil.getRow(app.service.table.item, { id: refId });
         if (refData?.sub_type == ItemConf.ITEM_TYPE.MONEY) {
             const vo = new MoneyVo();
@@ -46,7 +48,7 @@ export class VoUtil {
         }
     }
 
-    static getVo(refId: number) {
+    public static getVo(refId: number) {
         const refData = TableUtil.getRow(app.service.table.item, { id: refId });
         if (refData?.sub_type == ItemConf.ITEM_TYPE.MONEY) {
             const args = (refData as ItemMoneyRow).args;
@@ -56,7 +58,7 @@ export class VoUtil {
         }
     }
 
-    static getNumber(refId: number): number {
+    public static getNumber(refId: number): number {
         const vo = VoUtil.getVo(refId);
         if (vo) {
             return vo.goodsNumber;

@@ -106,16 +106,16 @@ export class Tween<T> {
     private _target: T | null = null;
     private _tag = Action.TAG_INVALID;
 
-    constructor(target?: T | null) {
+    public constructor(target?: T | null) {
         this._target = target === undefined ? null : target;
     }
 
-    tag(tag: number): Tween<T> {
+    public tag(tag: number): Tween<T> {
         this._tag = tag;
         return this;
     }
 
-    then(other: Tween<T>): Tween<T> {
+    public then(other: Tween<T>): Tween<T> {
         if (other instanceof Action) {
             this._actions.push(other.clone());
         } else {
@@ -124,12 +124,12 @@ export class Tween<T> {
         return this;
     }
 
-    target(target: T): Tween<T | undefined> {
+    public target(target: T): Tween<T | undefined> {
         this._target = target;
         return this;
     }
 
-    start(): Tween<T> {
+    public start(): Tween<T> {
         if (!this._target) {
             // warn("Please set target to tween first");
             return this;
@@ -143,26 +143,26 @@ export class Tween<T> {
         return this;
     }
 
-    stop(): Tween<T> {
+    public stop(): Tween<T> {
         if (this._finalAction) {
             TweenSystem.actionManager.removeAction(this._finalAction);
         }
         return this;
     }
 
-    clone(target: T): Tween<T> {
+    public clone(target: T): Tween<T> {
         const action = this._union();
         return tween(target).then(action.clone() as any);
     }
 
-    union(): Tween<T> {
+    public union(): Tween<T> {
         const action = this._union();
         this._actions.length = 0;
         this._actions.push(action);
         return this;
     }
 
-    to(duration: number, props: ConstructorType<T>, opts?: ITweenOption): Tween<T> {
+    public to(duration: number, props: ConstructorType<T>, opts?: ITweenOption): Tween<T> {
         opts = opts || Object.create(null);
         (opts as any).relative = false;
         const action = new TweenAction(duration, props, opts);
@@ -170,7 +170,7 @@ export class Tween<T> {
         return this;
     }
 
-    by(duration: number, props: ConstructorType<T>, opts?: ITweenOption): Tween<T> {
+    public by(duration: number, props: ConstructorType<T>, opts?: ITweenOption): Tween<T> {
         opts = opts || Object.create(null);
         (opts as any).relative = true;
         const action = new TweenAction(duration, props, opts);
@@ -178,37 +178,37 @@ export class Tween<T> {
         return this;
     }
 
-    set(props: ConstructorType<T>): Tween<T> {
+    public set(props: ConstructorType<T>): Tween<T> {
         const action = new SetAction(props);
         this._actions.push(action);
         return this;
     }
 
-    delay(duration: number): Tween<T> {
+    public delay(duration: number): Tween<T> {
         const action = delayTime(duration);
         this._actions.push(action);
         return this;
     }
 
-    call(callback: Callback): Tween<T> {
+    public call(callback: Callback): Tween<T> {
         const action = callFunc(callback);
         this._actions.push(action);
         return this;
     }
 
-    sequence(...args: Tween<T>[]): Tween<T> {
+    public sequence(...args: Tween<T>[]): Tween<T> {
         const action = Tween._wrappedSequence(...args);
         this._actions.push(action);
         return this;
     }
 
-    parallel(...args: Tween<T>[]): Tween<T> {
+    public parallel(...args: Tween<T>[]): Tween<T> {
         const action = Tween._wrappedParallel(...args);
         this._actions.push(action);
         return this;
     }
 
-    repeat(repeatTimes: number, embedTween?: Tween<T>): Tween<T> {
+    public repeat(repeatTimes: number, embedTween?: Tween<T>): Tween<T> {
         /** adapter */
         if (repeatTimes === Infinity) {
             return this.repeatForever(embedTween);
@@ -227,7 +227,7 @@ export class Tween<T> {
         return this;
     }
 
-    repeatForever(embedTween?: Tween<T>): Tween<T> {
+    public repeatForever(embedTween?: Tween<T>): Tween<T> {
         const actions = this._actions;
         let action: any;
 
@@ -241,7 +241,7 @@ export class Tween<T> {
         return this;
     }
 
-    reverseTime(embedTween?: Tween<T>): Tween<T> {
+    public reverseTime(embedTween?: Tween<T>): Tween<T> {
         const actions = this._actions;
         let action: any;
 
@@ -255,41 +255,41 @@ export class Tween<T> {
         return this;
     }
 
-    hide(): Tween<T> {
+    public hide(): Tween<T> {
         const action = hide();
         this._actions.push(action);
         return this;
     }
 
-    show(): Tween<T> {
+    public show(): Tween<T> {
         const action = show();
         this._actions.push(action);
         return this;
     }
 
-    removeSelf(): Tween<T> {
+    public removeSelf(): Tween<T> {
         const action = removeSelf(false);
         this._actions.push(action);
         return this;
     }
 
-    destroySelf(): Tween<T> {
+    public destroySelf(): Tween<T> {
         const action = removeSelf(true);
         this._actions.push(action);
         return this;
     }
 
-    static stopAll(): void {
+    public static stopAll(): void {
         TweenSystem.actionManager.removeAllActions();
     }
 
     // eslint-disable-next-line @typescript-eslint/ban-types
-    static stopAllByTag(tag: number, target?: object): void {
+    public static stopAllByTag(tag: number, target?: object): void {
         TweenSystem.actionManager.removeAllActionsByTag(tag, target as any);
     }
 
     // eslint-disable-next-line @typescript-eslint/ban-types
-    static stopAllByTarget(target?: object): void {
+    public static stopAllByTarget(target?: object): void {
         TweenSystem.actionManager.removeAllActionsFromTarget(target as any);
     }
 

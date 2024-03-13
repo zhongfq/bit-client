@@ -30,9 +30,9 @@ import { BackSpawnpoint } from "../../btree/actions/back-spawnpoint";
 import { Collect } from "../../btree/actions/collect";
 
 export class AiSystem extends ecs.System {
-    static readonly TICK = 0.1;
+    public static readonly TICK = 0.1;
 
-    constructor(readonly context: PveServer) {
+    public constructor(public readonly context: PveServer) {
         super();
 
         context.registerProcess(...builtinNodes);
@@ -62,13 +62,13 @@ export class AiSystem extends ecs.System {
         context.registerProcess(Collect);
     }
 
-    override onAddComponent(component: ecs.Component): void {
+    public override onAddComponent(component: ecs.Component): void {
         if (component instanceof AiComponent) {
             this._loadAi(component);
         }
     }
 
-    override onRemoveComponent(component: ecs.Component): void {
+    public override onRemoveComponent(component: ecs.Component): void {
         if (component instanceof AiComponent) {
             const ai = component;
             ai.env?.clear();
@@ -77,7 +77,7 @@ export class AiSystem extends ecs.System {
         }
     }
 
-    override update(dt: number): void {
+    public override update(dt: number): void {
         const time = this.context.time;
         this.ecs.getComponents(AiComponent).forEach((ai) => {
             for (const v of ai.getComponent(SkillComponent)!.skills) {

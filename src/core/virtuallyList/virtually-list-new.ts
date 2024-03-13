@@ -34,7 +34,7 @@ export enum AlignV {
 
 @regClass()
 export class VirtuallyListNew extends Laya.Script {
-    declare owner: VirtuallyListNewUI;
+    public declare owner: VirtuallyListNewUI;
     private _nodes: Laya.Box[] = []; //预创建
     private _node2Idx: Map<Laya.Sprite, number> = new Map();
     private _mouseX!: number; //横向列表要用
@@ -66,7 +66,7 @@ export class VirtuallyListNew extends Laya.Script {
     @property({ type: Laya.ScrollType, tips: "滚动方向" })
     public scrollType: Laya.ScrollType = 1; //竖向cell数量
 
-    override onAwake(): void {
+    public override onAwake(): void {
         const node = this._createNode();
         const cellNum = this.scrollType == Laya.ScrollType.Vertical ? this.cellNumX : this.cellNumY;
         const count = Math.ceil(this.owner.height / node.height) * cellNum + 2 * cellNum;
@@ -247,7 +247,7 @@ export class VirtuallyListNew extends Laya.Script {
     /**
      *设置数据
      */
-    setArrayData(val: any[]) {
+    public setArrayData(val: any[]) {
         this._data = val;
         this._initRect();
         this._addNode();
@@ -259,15 +259,15 @@ export class VirtuallyListNew extends Laya.Script {
         }
     }
 
-    scrollTop() {
+    public scrollTop() {
         this.owner.scrollRect.y = 0;
     }
 
-    scrollDown() {
+    public scrollDown() {
         this.owner.scrollRect.y = this._contentRect.y;
     }
 
-    addData(val: any, isFist?: boolean) {
+    public addData(val: any, isFist?: boolean) {
         if ((this.cellNumX > 1 || this.cellNumY > 1) && isFist) {
             //多行多列不支持往头部添加数据
             return;

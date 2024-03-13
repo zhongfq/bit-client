@@ -7,16 +7,16 @@ const { regClass, property } = Laya;
 
 @regClass()
 export class ItemBoxUseMediator extends Mediator {
-    declare owner: ItemBoxUseUI;
+    public declare owner: ItemBoxUseUI;
 
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
-    override onAwake(): void {
+    public override onAwake(): void {
         this.initInfo();
         this.initEvent();
     }
 
     //初始化界面信息
-    initInfo() {
+    public initInfo() {
         this.owner.slider_h.min = 1;
         this.owner.slider_h.max = this.owner.data.goodsNumber;
         this.owner.slider_h.value = 1;
@@ -32,17 +32,17 @@ export class ItemBoxUseMediator extends Mediator {
     }
 
     //初始化
-    initEvent() {
+    public initEvent() {
         this.owner.btnClose.on(Laya.Event.CLICK, this.owner.close);
         this.owner.btnSynthesis.on(Laya.Event.CLICK, this, this.onSynthesisBtn);
         this.owner.listItem.renderHandler = new Laya.Handler(this, this.updateItem);
     }
 
-    updateItem(cell: IconUI, index: number) {
+    public updateItem(cell: IconUI, index: number) {
         cell.updateGoods(cell.dataSource);
     }
 
-    onSynthesisBtn() {
+    public onSynthesisBtn() {
         app.service.bag.requestUseItem({
             itemId: this.owner.data.refId,
             num: this.owner.slider_h.value,

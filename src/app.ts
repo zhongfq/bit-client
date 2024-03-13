@@ -25,7 +25,7 @@ const { regClass, property } = Laya;
 
 @regClass()
 export class Main extends AppBase {
-    override onAwake(): void {
+    public override onAwake(): void {
         // new BehaviorTest().start();
 
         if (Laya.Browser.onPC) {
@@ -40,22 +40,22 @@ export class Main extends AppBase {
 }
 
 class ServiceManager {
-    readonly network: NetworkService;
-    readonly table: TableService;
-    readonly user: UserService;
-    readonly login: LoginService;
-    readonly bag: BagService;
-    readonly gm: GmService;
-    readonly task: TaskService;
-    readonly mail: MailService;
-    readonly shop: ShopService;
-    readonly toast: ToastService;
-    readonly chat: ChatService;
-    readonly chest: ChestService;
+    public readonly network: NetworkService;
+    public readonly table: TableService;
+    public readonly user: UserService;
+    public readonly login: LoginService;
+    public readonly bag: BagService;
+    public readonly gm: GmService;
+    public readonly task: TaskService;
+    public readonly mail: MailService;
+    public readonly shop: ShopService;
+    public readonly toast: ToastService;
+    public readonly chat: ChatService;
+    public readonly chest: ChestService;
 
     private _services: Service<NetworkService>[] = [];
 
-    constructor() {
+    public constructor() {
         this.network = this.newService(NetworkService);
         this.user = this.newService(UserService);
         this.login = this.newService(LoginService);
@@ -79,7 +79,7 @@ class ServiceManager {
         return service;
     }
 
-    destroy() {
+    public destroy() {
         this._services.forEach((service) => service.destroy?.());
         this._services.length = 0;
     }
@@ -94,21 +94,21 @@ class App {
     // services
     private _service!: ServiceManager;
 
-    constructor() {}
+    public constructor() {}
 
-    get ui() {
+    public get ui() {
         return this._ui;
     }
 
-    get loader() {
+    public get loader() {
         return this._loader;
     }
 
-    get service() {
+    public get service() {
         return this._service;
     }
 
-    init() {
+    public init() {
         if (App._inited) {
             return;
         }
@@ -135,7 +135,7 @@ class App {
         console.log(out);
     }
 
-    async test() {
+    public async test() {
         const t = this.trace();
         const t1 = this.trace();
         console.log(t);
@@ -144,7 +144,7 @@ class App {
         console.log("test");
     }
 
-    async trace() {
+    public async trace() {
         return 0;
     }
 }

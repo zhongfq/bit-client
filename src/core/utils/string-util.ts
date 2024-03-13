@@ -18,7 +18,7 @@ export class StringUtil {
      * @param str 类似 "{0}年{1}月{2}日"
      * @param args 类似 "2018","2","14"
      */
-    static format(str: string, ...args: any[]): string {
+    public static format(str: string, ...args: any[]): string {
         const reg = /{(\d+)}/gm;
         return str.replace(reg, function (match, name) {
             return args[~~name];
@@ -26,7 +26,7 @@ export class StringUtil {
     }
 
     // 截取一定长度字符串,多于的以...代替 (不包含))
-    static cutString(str: string, count: number) {
+    public static cutString(str: string, count: number) {
         const length = str.length;
         if (length > count) {
             str = str.substr(0, count);
@@ -37,7 +37,7 @@ export class StringUtil {
 
     //截取字符串 包含中文处理
     //(串,长度,增加...)
-    static cutString2(str: string, len: number, hasDot: boolean = true) {
+    public static cutString2(str: string, len: number, hasDot: boolean = true) {
         let newLength = 0;
         let newStr = "";
         const chineseRegex = /[^\u4E00-\u9FA5]/g;
@@ -63,13 +63,13 @@ export class StringUtil {
     }
 
     //字符是否有中文
-    static isCharHaveZH(str: string) {
+    public static isCharHaveZH(str: string) {
         const chineseRegex = /[^\u4E00-\u9FA5]/g;
         return str.match(chineseRegex);
     }
 
     //一个中文算两个长度
-    static getCharLength(str: string) {
+    public static getCharLength(str: string) {
         const chineseRegex = /[^\u4E00-\u9FA5]/g;
         const length = str.replace(chineseRegex, "**").length;
         // console.log(length)
@@ -77,7 +77,7 @@ export class StringUtil {
     }
 
     //一个中文算三个长度
-    static getCharLength2(str: string) {
+    public static getCharLength2(str: string) {
         const chineseRegex = /[^\u4E00-\u9FA5]/g;
         const length = str.replace(chineseRegex, "***").length;
         // console.log(length)
@@ -89,7 +89,7 @@ export class StringUtil {
      * @param str 类似 "%s年%s月%s日"
      * @param args 类似 "2018","2","14"
      */
-    static formatS(str: string, tlStr: string[]) {
+    public static formatS(str: string, tlStr: string[]) {
         if (str == null || str == "" || tlStr == null) {
             return str;
         }
@@ -109,7 +109,7 @@ export class StringUtil {
         return tlStr_new.join("");
     }
 
-    static numbebrToFloatStr(num: number, count: number = 0): string {
+    public static numbebrToFloatStr(num: number, count: number = 0): string {
         let numStr = num.toString();
         if (count != null) {
             const index = numStr.indexOf(".");
@@ -129,7 +129,7 @@ export class StringUtil {
      * @param limitNumb 限制多少
      * @param convertNumber 转换值 （目前支持万，千） 默认 万
      */
-    static forbidNumber(
+    public static forbidNumber(
         num: number,
         limitNum: number = 10000,
         convertNumber: number = 1000
@@ -151,7 +151,7 @@ export class StringUtil {
     }
 
     /**不够位数,在前面填充0 */
-    static paddingNum(num: number, length: number): string {
+    public static paddingNum(num: number, length: number): string {
         const len = (num + "").length;
         const diff = length - len;
         if (diff > 0) {
@@ -160,7 +160,7 @@ export class StringUtil {
         return num.toString();
     }
 
-    static getNumValue(num_: string | number): number {
+    public static getNumValue(num_: string | number): number {
         if (typeof num_ == "string") {
             return parseInt(num_);
         }
@@ -168,7 +168,7 @@ export class StringUtil {
     }
 
     /**自动换行 */
-    static autoNewLine(str: string, length: number): string {
+    public static autoNewLine(str: string, length: number): string {
         const stringArray = [];
         for (let i = 0; i < 10; i++) {
             const len = str.length;
@@ -191,7 +191,7 @@ export class StringUtil {
     }
 
     /**数字转大写字符 0 ~ 9*/
-    static numberToBigNumberStr(num: number): string {
+    public static numberToBigNumberStr(num: number): string {
         let bigString: string = "";
         const tlTag: string[] = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九"];
         bigString = tlTag[num];
@@ -203,7 +203,7 @@ export class StringUtil {
      * @param timestamp 时间戳
      * @returns
      */
-    static convertTimestampToYMD(timestamp: number): string {
+    public static convertTimestampToYMD(timestamp: number): string {
         const date = new Date(timestamp);
         const year = date.getFullYear();
         const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -212,7 +212,7 @@ export class StringUtil {
         return `${year}-${month}-${day}`;
     }
 
-    static str2UBB(str: string, ...args: (UBBData | string | number)[]): string {
+    public static str2UBB(str: string, ...args: (UBBData | string | number)[]): string {
         const reg = /{(\d+)}/gm;
         return str.replace(reg, function (match, name) {
             // return args[~~name];
@@ -227,7 +227,7 @@ export class StringUtil {
         });
     }
 
-    static getUBB(data: UBBData): string {
+    public static getUBB(data: UBBData): string {
         let str = "";
         if (data.image) {
             str += `<img src='${data.image}'`;

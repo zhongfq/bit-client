@@ -31,12 +31,12 @@ import type { ActionInterval } from "./action-interval";
 const ID_COUNTER = 0;
 
 class HashElement {
-    actions: Action[] = [];
-    target: Laya.Node | null = null;
-    actionIndex = 0;
-    currentAction: Action | null = null;
-    paused = false;
-    lock = false;
+    public actions: Action[] = [];
+    public target: Laya.Node | null = null;
+    public actionIndex = 0;
+    public currentAction: Action | null = null;
+    public paused = false;
+    public lock = false;
 }
 
 export class ActionManager {
@@ -65,7 +65,7 @@ export class ActionManager {
         this._elementPool.push(element);
     }
 
-    addAction(action: Action, target: Laya.Node, paused: boolean): void {
+    public addAction(action: Action, target: Laya.Node, paused: boolean): void {
         if (!action || !target) {
             // errorID(1000);
             return;
@@ -91,7 +91,7 @@ export class ActionManager {
         action.startWithTarget(target);
     }
 
-    removeAllActions(): void {
+    public removeAllActions(): void {
         const locTargets = this._arrayTargets;
         for (let i = 0; i < locTargets.length; i++) {
             const element = locTargets[i];
@@ -101,7 +101,7 @@ export class ActionManager {
         this._hashTargets = new Map();
     }
 
-    removeAllActionsFromTarget(target: Laya.Node): void {
+    public removeAllActionsFromTarget(target: Laya.Node): void {
         // explicit null handling
         if (target == null) return;
         const element = this._hashTargets.get(target);
@@ -111,7 +111,7 @@ export class ActionManager {
         }
     }
 
-    removeAction(action: Action): void {
+    public removeAction(action: Action): void {
         // explicit null handling
         if (action == null) return;
         const target = action.getOriginalTarget()!;
@@ -129,7 +129,7 @@ export class ActionManager {
         }
     }
 
-    _removeActionByTag(tag: number, element: any, target?: Laya.Node): void {
+    public _removeActionByTag(tag: number, element: any, target?: Laya.Node): void {
         for (let i = 0, l = element.actions.length; i < l; ++i) {
             const action = element.actions[i];
             if (action && action.getTag() === tag) {
@@ -142,7 +142,7 @@ export class ActionManager {
         }
     }
 
-    _removeAllActionsByTag(tag: number, element: any, target?: Laya.Node): void {
+    public _removeAllActionsByTag(tag: number, element: any, target?: Laya.Node): void {
         for (let i = element.actions.length - 1; i >= 0; --i) {
             const action = element.actions[i];
             if (action && action.getTag() === tag) {
@@ -154,7 +154,7 @@ export class ActionManager {
         }
     }
 
-    removeActionByTag(tag: number, target?: Laya.Node): void {
+    public removeActionByTag(tag: number, target?: Laya.Node): void {
         //if (tag === Action.TAG_INVALID) logID(1002);
 
         const hashTargets = this._hashTargets;
@@ -170,7 +170,7 @@ export class ActionManager {
         }
     }
 
-    removeAllActionsByTag(tag: number, target?: Laya.Node): void {
+    public removeAllActionsByTag(tag: number, target?: Laya.Node): void {
         //if (tag === Action.TAG_INVALID) logID(1002);
 
         const hashTargets = this._hashTargets;
@@ -186,7 +186,7 @@ export class ActionManager {
         }
     }
 
-    getActionByTag(tag: number, target: Laya.Node): Action | null {
+    public getActionByTag(tag: number, target: Laya.Node): Action | null {
         //if (tag === Action.TAG_INVALID) logID(1004);
 
         const element = this._hashTargets.get(target);
@@ -204,7 +204,7 @@ export class ActionManager {
         return null;
     }
 
-    getNumberOfRunningActionsInTarget(target: Laya.Node): number {
+    public getNumberOfRunningActionsInTarget(target: Laya.Node): number {
         const element = this._hashTargets.get(target);
         if (element) {
             return element.actions ? (element.actions.length as number) : 0;
@@ -213,17 +213,17 @@ export class ActionManager {
         return 0;
     }
 
-    pauseTarget(target: Laya.Node): void {
+    public pauseTarget(target: Laya.Node): void {
         const element = this._hashTargets.get(target);
         if (element) element.paused = true;
     }
 
-    resumeTarget(target: Laya.Node): void {
+    public resumeTarget(target: Laya.Node): void {
         const element = this._hashTargets.get(target);
         if (element) element.paused = false;
     }
 
-    pauseAllRunningActions(): Array<Laya.Node> {
+    public pauseAllRunningActions(): Array<Laya.Node> {
         const idsWithActions: Laya.Node[] = [];
         const locTargets = this._arrayTargets;
         for (let i = 0; i < locTargets.length; i++) {
@@ -236,7 +236,7 @@ export class ActionManager {
         return idsWithActions;
     }
 
-    resumeTargets(targetsToResume: Array<Laya.Node>): void {
+    public resumeTargets(targetsToResume: Array<Laya.Node>): void {
         if (!targetsToResume) return;
 
         for (let i = 0; i < targetsToResume.length; i++) {
@@ -244,7 +244,7 @@ export class ActionManager {
         }
     }
 
-    pauseTargets(targetsToPause: Array<Laya.Node>): void {
+    public pauseTargets(targetsToPause: Array<Laya.Node>): void {
         if (!targetsToPause) return;
 
         for (let i = 0; i < targetsToPause.length; i++) {
@@ -285,7 +285,7 @@ export class ActionManager {
         return ret;
     }
 
-    update(dt: number): void {
+    public update(dt: number): void {
         const locTargets = this._arrayTargets;
         let locCurrTarget: HashElement;
         for (let elt = 0; elt < locTargets.length; elt++) {

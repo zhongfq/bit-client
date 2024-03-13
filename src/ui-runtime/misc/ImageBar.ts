@@ -5,11 +5,11 @@ import { ImageBarBase } from "./ImageBar.generated";
 export class ImageBar extends ImageBarBase {
     private _value: number = 1;
 
-    get value() {
+    public get value() {
         return this._value;
     }
 
-    set value(v: number) {
+    public set value(v: number) {
         v = Math.max(0, Math.min(1, v));
         if (this._value != v) {
             this._value = v;
@@ -19,7 +19,7 @@ export class ImageBar extends ImageBarBase {
         }
     }
 
-    override render(ctx: Laya.Context, x: number, y: number): void {
+    public override render(ctx: Laya.Context, x: number, y: number): void {
         const bitmap = this.graphics as Laya.AutoBitmap;
         if (bitmap.source && bitmap.uv.length === 0) {
             for (let i = 0; i < bitmap.source.uv.length; i++) {

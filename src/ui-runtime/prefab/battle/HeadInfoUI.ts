@@ -31,13 +31,13 @@ export class HeadInfoUI extends HeadInfoUIBase {
     private _name?: Laya.Label;
     private _avatar?: Laya.Image;
 
-    override onEnable(): void {
+    public override onEnable(): void {
         if (this._data) {
             this.update(this._data);
         }
     }
 
-    update(data: HeadInfoData) {
+    public update(data: HeadInfoData) {
         this._data = data;
         if (!this._hp) {
             this._bg = this.getChildByName("bg") as Laya.Image | undefined;

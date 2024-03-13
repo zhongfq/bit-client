@@ -8,7 +8,7 @@ export enum ListCreateDataType {
 }
 @regClass()
 export class VirtuallyList extends Laya.Script {
-    declare owner: VirtuallyListUI;
+    public declare owner: VirtuallyListUI;
     private _nodes: Laya.Box[] = []; //预创建
     private _node2Idx: Map<Laya.Sprite, number> = new Map();
     private _mouseX!: number; //横向列表要用
@@ -19,7 +19,7 @@ export class VirtuallyList extends Laya.Script {
     @property({ type: Laya.Prefab })
     public cellPrefab!: Laya.Prefab; //节点的预制体
 
-    override onAwake(): void {
+    public override onAwake(): void {
         const node = this._createNode();
         const count = Math.ceil(this.owner.height / node.height) + 2;
         for (let i = 0; i < count; i++) {
@@ -140,7 +140,7 @@ export class VirtuallyList extends Laya.Script {
     /**
      *设置数据
      */
-    setArrayData(val: any[], type?: ListCreateDataType) {
+    public setArrayData(val: any[], type?: ListCreateDataType) {
         this._data = val;
         this._initRect();
         if (type && type == ListCreateDataType.Down) {
@@ -152,7 +152,7 @@ export class VirtuallyList extends Laya.Script {
         }
     }
 
-    addData(val: any) {
+    public addData(val: any) {
         this._data.push(val);
         const idx = this.backIndex;
         const node = this._nodes.shift();
@@ -219,7 +219,7 @@ export class VirtuallyList extends Laya.Script {
     /**
      *滚动到顶部
      */
-    scrollToUp(type?: ListCreateDataType) {
+    public scrollToUp(type?: ListCreateDataType) {
         this._initRect();
         this._addStarNode();
         this.owner.scrollRect.y = 0;
@@ -229,7 +229,7 @@ export class VirtuallyList extends Laya.Script {
      *滚动到指定位置
      @toIndex 数据索引
      */
-    scrollToIndex(toIndex: number) {
+    public scrollToIndex(toIndex: number) {
         this._initRect();
         let nodeIndex = 0;
         let toIndexY = 0;
@@ -264,7 +264,7 @@ export class VirtuallyList extends Laya.Script {
     /**
      *滚动到底部
      */
-    scrollToDown() {
+    public scrollToDown() {
         this._initRect();
         this._addEndNode();
         this.owner.scrollRect.y -= this.owner.height;

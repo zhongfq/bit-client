@@ -4,9 +4,9 @@ import { ToastUIBase } from "./ToastUI.generated";
 
 @regClass()
 export class ToastUI extends ToastUIBase {
-    args!: ToastArgs;
+    public args!: ToastArgs;
 
-    override open(closeOther?: boolean | undefined, param?: any): void {
+    public override open(closeOther?: boolean | undefined, param?: any): void {
         this.args = param;
         super.open(closeOther, param);
         console.log("xxxdfa open");

@@ -25,9 +25,9 @@
 import { ActionManager } from "./actions/action-manager";
 
 export class TweenSystem {
-    static readonly actionManager = new ActionManager();
+    public static readonly actionManager = new ActionManager();
 
-    static update(dt: number) {
+    public static update(dt: number) {
         TweenSystem.actionManager.update(dt);
     }
 }

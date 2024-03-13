@@ -3,19 +3,19 @@ import { PveServer } from "../../pve-server";
 import { SkillComponent, SkillTreeEnv } from "../components/skill-component";
 
 export class SkillSystem extends ecs.System {
-    static readonly TICK = 0.1;
+    public static readonly TICK = 0.1;
 
-    constructor(readonly context: PveServer) {
+    public constructor(public readonly context: PveServer) {
         super();
     }
 
-    override onAddComponent(component: ecs.Component) {
+    public override onAddComponent(component: ecs.Component) {
         if (component instanceof SkillComponent) {
             this._loadSkill(component);
         }
     }
 
-    override update(dt: number) {
+    public override update(dt: number) {
         const time = this.context.time;
 
         this.ecs.getComponents(SkillComponent).forEach((skill) => {

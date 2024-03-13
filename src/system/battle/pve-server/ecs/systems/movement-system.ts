@@ -4,13 +4,13 @@ import { ElementComponent } from "../components/element-component";
 import { MovementComponent, TransformComponent } from "../components/movement-component";
 
 export class MovementSystem extends ecs.System {
-    constructor(readonly context: PveServer) {
+    public constructor(public readonly context: PveServer) {
         super();
     }
 
-    override onRemoveComponent(component: ecs.Component): void {}
+    public override onRemoveComponent(component: ecs.Component): void {}
 
-    override update(dt: number): void {
+    public override update(dt: number): void {
         this.ecs.getComponents(MovementComponent).forEach((movement) => {
             const transform = movement.getComponent(TransformComponent)!;
             const position = transform.position;

@@ -33,32 +33,32 @@ export class ActionInterval extends FiniteTimeAction {
     protected _easeList: Function[] = [];
     protected _speed = 1;
     protected _repeatForever = false;
-    _repeatMethod = false;
+    public _repeatMethod = false;
     protected _speedMethod = false;
 
-    constructor(d?: number) {
+    public constructor(d?: number) {
         super();
         if (d !== undefined && !Number.isNaN(d)) {
             this.initWithDuration(d);
         }
     }
 
-    getElapsed(): number {
+    public getElapsed(): number {
         return this._elapsed;
     }
 
-    initWithDuration(d: number): boolean {
+    public initWithDuration(d: number): boolean {
         this._duration = d === 0 ? Action.FLT_EPSILON : d;
         this._elapsed = 0;
         this._firstTick = true;
         return true;
     }
 
-    override isDone(): boolean {
+    public override isDone(): boolean {
         return this._elapsed >= this._duration;
     }
 
-    _cloneDecoration(action: ActionInterval): void {
+    protected _cloneDecoration(action: ActionInterval): void {
         action._repeatForever = this._repeatForever;
         action._speed = this._speed;
         action._timesForRepeat = this._timesForRepeat;
@@ -67,7 +67,7 @@ export class ActionInterval extends FiniteTimeAction {
         action._repeatMethod = this._repeatMethod;
     }
 
-    _reverseEaseList(action: ActionInterval): void {
+    protected _reverseEaseList(action: ActionInterval): void {
         if (this._easeList) {
             action._easeList = [];
             for (let i = 0; i < this._easeList.length; i++) {
@@ -76,13 +76,13 @@ export class ActionInterval extends FiniteTimeAction {
         }
     }
 
-    override clone(): ActionInterval {
+    public override clone(): ActionInterval {
         const action = new ActionInterval(this._duration);
         this._cloneDecoration(action);
         return action;
     }
 
-    easing(easeObj: any): ActionInterval {
+    public easing(easeObj: any): ActionInterval {
         if (this._easeList) this._easeList.length = 0;
         else this._easeList = [];
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
@@ -90,11 +90,11 @@ export class ActionInterval extends FiniteTimeAction {
         return this;
     }
 
-    _computeEaseTime(dt: any): any {
+    protected _computeEaseTime(dt: any): any {
         return dt;
     }
 
-    override step(dt: number): void {
+    public override step(dt: number): void {
         if (this._firstTick) {
             this._firstTick = false;
             this._elapsed = 0;
@@ -116,29 +116,29 @@ export class ActionInterval extends FiniteTimeAction {
         }
     }
 
-    override startWithTarget(target: any): void {
+    public override startWithTarget(target: any): void {
         Action.prototype.startWithTarget.call(this, target);
         this._elapsed = 0;
         this._firstTick = true;
     }
 
-    override reverse(): ActionInterval {
+    public override reverse(): ActionInterval {
         //logID(1010);
         return this;
     }
 
-    setAmplitudeRate(amp: any): void {
+    public setAmplitudeRate(amp: any): void {
         // Abstract class needs implementation
         //logID(1011);
     }
 
-    getAmplitudeRate(): number {
+    public getAmplitudeRate(): number {
         // Abstract class needs implementation
         //logID(1012);
         return 0;
     }
 
-    speed(speed: number): Action {
+    public speed(speed: number): Action {
         if (speed <= 0) {
             //logID(1013);
             return this;
@@ -149,16 +149,16 @@ export class ActionInterval extends FiniteTimeAction {
         return this;
     }
 
-    getSpeed(): number {
+    public getSpeed(): number {
         return this._speed;
     }
 
-    setSpeed(speed: number): ActionInterval {
+    public setSpeed(speed: number): ActionInterval {
         this._speed = speed;
         return this;
     }
 
-    repeat(times: number): ActionInterval {
+    public repeat(times: number): ActionInterval {
         times = Math.round(times);
         if (Number.isNaN(times) || times < 1) {
             // logID(1014);
@@ -169,7 +169,7 @@ export class ActionInterval extends FiniteTimeAction {
         return this;
     }
 
-    repeatForever(): ActionInterval {
+    public repeatForever(): ActionInterval {
         this._repeatMethod = true;
         this._timesForRepeat = this.MAX_VALUE;
         this._repeatForever = true;
@@ -178,7 +178,7 @@ export class ActionInterval extends FiniteTimeAction {
 }
 
 export class Sequence extends ActionInterval {
-    static _actionOneTwo = function (
+    public static _actionOneTwo = function (
         actionOne: ActionInterval,
         actionTwo: ActionInterval
     ): Sequence {
@@ -193,9 +193,9 @@ export class Sequence extends ActionInterval {
     private _last = 0;
     private _reversed = false;
 
-    constructor(...actions: FiniteTimeAction[]);
+    public constructor(...actions: FiniteTimeAction[]);
 
-    constructor(tempArray: any) {
+    public constructor(tempArray: any) {
         super();
 
         const paramArray = tempArray instanceof Array ? tempArray : arguments;
@@ -222,7 +222,7 @@ export class Sequence extends ActionInterval {
         }
     }
 
-    initWithTwoActions(actionOne: any, actionTwo: any): boolean {
+    public initWithTwoActions(actionOne: any, actionTwo: any): boolean {
         if (!actionOne || !actionTwo) {
             //errorID(1025);
             return false;
@@ -240,26 +240,26 @@ export class Sequence extends ActionInterval {
         return true;
     }
 
-    override clone(): any {
+    public override clone(): any {
         const action = new Sequence();
         this._cloneDecoration(action as ActionInterval);
         action.initWithTwoActions(this._actions[0].clone(), this._actions[1].clone());
         return action as any;
     }
 
-    override startWithTarget(target: any): void {
+    public override startWithTarget(target: any): void {
         ActionInterval.prototype.startWithTarget.call(this, target);
         this._split = this._actions[0]._duration / this._duration;
         this._split *= this._actions[0]._repeatMethod ? this._actions[0]._timesForRepeat : 1;
         this._last = -1;
     }
 
-    override stop(): void {
+    public override stop(): void {
         if (this._last !== -1) this._actions[this._last].stop();
         Action.prototype.stop.call(this);
     }
 
-    override update(dt: number): void {
+    public override update(dt: number): void {
         let new_t: number;
         let found = 0;
         const locSplit = this._split;
@@ -303,7 +303,7 @@ export class Sequence extends ActionInterval {
         this._last = found;
     }
 
-    override reverse(): any {
+    public override reverse(): any {
         const action = Sequence._actionOneTwo(
             this._actions[1].reverse(),
             this._actions[0].reverse()
@@ -346,12 +346,12 @@ export class Repeat extends ActionInterval {
     private _actionInstant = false;
     private _innerAction: FiniteTimeAction | null = null;
 
-    constructor(action?: any, times?: any) {
+    public constructor(action?: any, times?: any) {
         super();
         times !== undefined && this.initWithAction(action as FiniteTimeAction, times as number);
     }
 
-    initWithAction(action: FiniteTimeAction, times: number): boolean {
+    public initWithAction(action: FiniteTimeAction, times: number): boolean {
         const duration = action._duration * times;
 
         if (this.initWithDuration(duration)) {
@@ -367,26 +367,26 @@ export class Repeat extends ActionInterval {
         return false;
     }
 
-    override clone(): Repeat {
+    public override clone(): Repeat {
         const action = new Repeat();
         this._cloneDecoration(action);
         action.initWithAction(this._innerAction!.clone(), this._times);
         return action;
     }
 
-    override startWithTarget(target: any): void {
+    public override startWithTarget(target: any): void {
         this._total = 0;
         this._nextDt = this._innerAction!._duration / this._duration;
         ActionInterval.prototype.startWithTarget.call(this, target);
         this._innerAction!.startWithTarget(target);
     }
 
-    override stop(): void {
+    public override stop(): void {
         this._innerAction!.stop();
         Action.prototype.stop.call(this);
     }
 
-    override update(dt: number): void {
+    public override update(dt: number): void {
         dt = this._computeEaseTime(dt);
         const locInnerAction = this._innerAction!;
         const locDuration = this._duration;
@@ -426,24 +426,24 @@ export class Repeat extends ActionInterval {
         }
     }
 
-    override isDone(): boolean {
+    public override isDone(): boolean {
         return this._total === this._times;
     }
 
-    override reverse(): any {
+    public override reverse(): any {
         const action = new Repeat(this._innerAction!.reverse(), this._times);
         this._cloneDecoration(action);
         this._reverseEaseList(action);
         return action as any;
     }
 
-    setInnerAction(action: any): void {
+    public setInnerAction(action: any): void {
         if (this._innerAction !== action) {
             this._innerAction = action;
         }
     }
 
-    getInnerAction(): FiniteTimeAction | null {
+    public getInnerAction(): FiniteTimeAction | null {
         return this._innerAction;
     }
 }
@@ -455,12 +455,12 @@ export function repeat(action: any, times: any): Action {
 export class RepeatForever extends ActionInterval {
     private _innerAction: ActionInterval | null = null;
 
-    constructor(action?: ActionInterval) {
+    public constructor(action?: ActionInterval) {
         super();
         action && this.initWithAction(action);
     }
 
-    initWithAction(action: ActionInterval): boolean {
+    public initWithAction(action: ActionInterval): boolean {
         if (!action) {
             //errorID(1026);
             return false;
@@ -470,19 +470,19 @@ export class RepeatForever extends ActionInterval {
         return true;
     }
 
-    override clone(): RepeatForever {
+    public override clone(): RepeatForever {
         const action = new RepeatForever();
         this._cloneDecoration(action);
         action.initWithAction(this._innerAction!.clone());
         return action;
     }
 
-    override startWithTarget(target: any): void {
+    public override startWithTarget(target: any): void {
         ActionInterval.prototype.startWithTarget.call(this, target);
         this._innerAction!.startWithTarget(target);
     }
 
-    override step(dt: any): void {
+    public override step(dt: any): void {
         const locInnerAction = this._innerAction!;
         locInnerAction.step(dt as number);
         if (locInnerAction.isDone()) {
@@ -491,24 +491,24 @@ export class RepeatForever extends ActionInterval {
         }
     }
 
-    override isDone(): boolean {
+    public override isDone(): boolean {
         return false;
     }
 
-    override reverse(): any {
+    public override reverse(): any {
         const action = new RepeatForever(this._innerAction!.reverse());
         this._cloneDecoration(action);
         this._reverseEaseList(action);
         return action as any;
     }
 
-    setInnerAction(action: any): void {
+    public setInnerAction(action: any): void {
         if (this._innerAction !== action) {
             this._innerAction = action;
         }
     }
 
-    getInnerAction(): ActionInstant | null {
+    public getInnerAction(): ActionInstant | null {
         return this._innerAction;
     }
 }
@@ -518,7 +518,7 @@ export function repeatForever(action?: ActionInterval): ActionInterval {
 }
 
 export class Spawn extends ActionInterval {
-    static _actionOneTwo = function (action1: any, action2: any): Spawn {
+    public static _actionOneTwo = function (action1: any, action2: any): Spawn {
         const pSpawn = new Spawn();
         pSpawn.initWithTwoActions(action1, action2);
         return pSpawn;
@@ -527,7 +527,7 @@ export class Spawn extends ActionInterval {
     private _one: ActionInterval | null = null;
     private _two: ActionInterval | null = null;
 
-    constructor(tempArray?: any) {
+    public constructor(tempArray?: any) {
         super();
 
         const paramArray = tempArray instanceof Array ? tempArray : arguments;
@@ -551,7 +551,7 @@ export class Spawn extends ActionInterval {
         }
     }
 
-    initWithTwoActions(action1: any, action2: any): boolean {
+    public initWithTwoActions(action1: any, action2: any): boolean {
         if (!action1 || !action2) {
             //errorID(1027);
             return false;
@@ -577,32 +577,32 @@ export class Spawn extends ActionInterval {
         return ret;
     }
 
-    override clone(): Spawn {
+    public override clone(): Spawn {
         const action = new Spawn();
         this._cloneDecoration(action);
         action.initWithTwoActions(this._one!.clone(), this._two!.clone());
         return action;
     }
 
-    override startWithTarget(target: any): void {
+    public override startWithTarget(target: any): void {
         ActionInterval.prototype.startWithTarget.call(this, target);
         this._one!.startWithTarget(target);
         this._two!.startWithTarget(target);
     }
 
-    override stop(): void {
+    public override stop(): void {
         this._one!.stop();
         this._two!.stop();
         Action.prototype.stop.call(this);
     }
 
-    override update(dt: any): void {
+    public override update(dt: any): void {
         dt = this._computeEaseTime(dt);
         if (this._one) this._one.update(dt as number);
         if (this._two) this._two.update(dt as number);
     }
 
-    override reverse(): any {
+    public override reverse(): any {
         const action = Spawn._actionOneTwo(this._one!.reverse(), this._two!.reverse());
         this._cloneDecoration(action);
         this._reverseEaseList(action);
@@ -628,16 +628,16 @@ export function spawn(/* Multiple Arguments */ tempArray: any): FiniteTimeAction
 
 class DelayTime extends ActionInterval {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
-    override update(dt: any): void {}
+    public override update(dt: any): void {}
 
-    override reverse(): any {
+    public override reverse(): any {
         const action = new DelayTime(this._duration);
         this._cloneDecoration(action);
         this._reverseEaseList(action);
         return action as any;
     }
 
-    override clone(): DelayTime {
+    public override clone(): DelayTime {
         const action = new DelayTime();
         this._cloneDecoration(action);
         action.initWithDuration(this._duration);
@@ -662,7 +662,7 @@ export function delayTime(d: number): ActionInterval {
 export class ReverseTime extends ActionInterval {
     private _other: ActionInterval | null = null;
 
-    constructor(action?: any) {
+    public constructor(action?: any) {
         super();
         action && this.initWithAction(action as ActionInterval);
     }
@@ -671,7 +671,7 @@ export class ReverseTime extends ActionInterval {
      * @param {FiniteTimeAction} action
      * @return {Boolean}
      */
-    initWithAction(action: ActionInterval): boolean {
+    public initWithAction(action: ActionInterval): boolean {
         if (!action) {
             // errorID(1028);
             return false;
@@ -689,28 +689,28 @@ export class ReverseTime extends ActionInterval {
         return false;
     }
 
-    override clone(): ReverseTime {
+    public override clone(): ReverseTime {
         const action = new ReverseTime();
         this._cloneDecoration(action);
         action.initWithAction(this._other!.clone());
         return action;
     }
 
-    override startWithTarget(target: any): void {
+    public override startWithTarget(target: any): void {
         ActionInterval.prototype.startWithTarget.call(this, target);
         this._other!.startWithTarget(target);
     }
 
-    override update(dt: number): void {
+    public override update(dt: number): void {
         dt = this._computeEaseTime(dt);
         if (this._other) this._other.update(1 - dt);
     }
 
-    override reverse(): any {
+    public override reverse(): any {
         return this._other!.clone() as any;
     }
 
-    override stop(): void {
+    public override stop(): void {
         this._other!.stop();
         Action.prototype.stop.call(this);
     }

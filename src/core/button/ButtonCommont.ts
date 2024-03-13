@@ -2,17 +2,17 @@ const { regClass, property } = Laya;
 
 @regClass()
 export class ButtonCommont extends Laya.Script {
-    declare owner: Laya.Button;
+    public declare owner: Laya.Button;
 
     @property(Number)
     public sclaeX: number = 0.8;
     @property(Number)
     public sclaeY: number = 0.8;
-    curScaleX!: number;
-    curScaleY!: number;
+    public curScaleX!: number;
+    public curScaleY!: number;
 
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
-    override onAwake(): void {
+    public override onAwake(): void {
         this.curScaleX = this.owner.scaleX;
         this.curScaleY = this.owner.scaleY;
         this.owner.on(Laya.Event.MOUSE_DOWN, () => {

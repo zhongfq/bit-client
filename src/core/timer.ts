@@ -51,16 +51,16 @@ export class Timer {
         this._scheduler = { head: entry, tail: entry };
     }
 
-    clear() {
+    public clear() {
         this._clearDelays();
         this._clearSchedules();
     }
 
-    delay(time: number, callback: Callback): void;
+    public delay(time: number, callback: Callback): void;
 
-    delay(time: number, tag: string, callback: Callback): void;
+    public delay(time: number, tag: string, callback: Callback): void;
 
-    delay(time: number, callbackOrTag: string | Callback, callback?: Callback) {
+    public delay(time: number, callbackOrTag: string | Callback, callback?: Callback) {
         let tag: string;
         if (typeof callbackOrTag === "string") {
             tag = callbackOrTag;
@@ -94,7 +94,7 @@ export class Timer {
         next.prev = entry;
     }
 
-    killDelay(tag: string) {
+    public killDelay(tag: string) {
         if (tag !== DEFAULT_TAG) {
             let current = this._delayer.head.next;
             while (current !== this._delayer.head) {
@@ -107,15 +107,15 @@ export class Timer {
         }
     }
 
-    killAll() {
+    public killAll() {
         this._clearDelays();
     }
 
-    schedule(interval: number, callback: Callback): void;
+    public schedule(interval: number, callback: Callback): void;
 
-    schedule(interval: number, tag: string, callback: Callback): void;
+    public schedule(interval: number, tag: string, callback: Callback): void;
 
-    schedule(time: number, callbackOrTag: string | Callback, callback?: Callback) {
+    public schedule(time: number, callbackOrTag: string | Callback, callback?: Callback) {
         let tag: string;
         if (typeof callbackOrTag === "string") {
             tag = callbackOrTag;
@@ -142,7 +142,7 @@ export class Timer {
         next.prev = entry;
     }
 
-    unschedule(tag: string) {
+    public unschedule(tag: string) {
         assert(tag !== DEFAULT_TAG, "tag error");
         let current = this._scheduler.head.next;
         while (current !== this._scheduler.head) {
@@ -153,7 +153,7 @@ export class Timer {
         }
     }
 
-    update(delta: number) {
+    public update(delta: number) {
         const timestamp = this._timestamp + delta;
         this._timestamp = timestamp;
 
