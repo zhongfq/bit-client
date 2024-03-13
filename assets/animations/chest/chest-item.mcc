@@ -19,7 +19,7 @@
           "clipEnd": 1,
           "soloTransitions": [
             {
-              "id": "0",
+              "id": "2",
               "exitByTime": true,
               "exitTime": 1
             }
@@ -59,6 +59,17 @@
             "_$uuid": "107c4bdd-2bd2-4b60-9194-47787f6a1309"
           },
           "loop": -1
+        },
+        {
+          "x": 478,
+          "y": 341,
+          "_isLooping": 0,
+          "id": "2",
+          "name": "New State",
+          "speed": 1,
+          "clipEnd": 1,
+          "loop": -1,
+          "soloTransitions": []
         }
       ],
       "defaultWeight": 1,

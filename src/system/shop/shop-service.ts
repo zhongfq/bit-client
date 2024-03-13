@@ -9,7 +9,7 @@ export interface ShopItem {
     refData: Shop1Row;
 }
 export class ShopService extends Service<NetworkService> {
-    constructor(network: NetworkService) {
+    public constructor(network: NetworkService) {
         super(network);
     }
 

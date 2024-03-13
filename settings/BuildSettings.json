@@ -11,8 +11,6 @@
   ],
   "copyBinFiles": false,
   "excludeFilesRule": [],
-  "enableVersion": true,
-  "enableSubpackages": true,
   "subpackages": [
     {
       "path": "resources/prefab",

@@ -4,9 +4,9 @@ import { HSliderUIBase } from "./HSliderUI.generated";
 
 @regClass()
 export class HSliderUI extends HSliderUIBase {
-    _onSliderChange!: Callback;
+    private _onSliderChange!: Callback;
 
-    override onAwake(): void {
+    public override onAwake(): void {
         super.onAwake();
         this.on(Laya.Event.CLICK, () => {});
 
@@ -16,27 +16,27 @@ export class HSliderUI extends HSliderUIBase {
         this.updateBtnType();
     }
 
-    onChange() {
+    private onChange() {
         if (this._onSliderChange) {
             this._onSliderChange();
         }
         this.updateBtnType();
     }
 
-    onAddBtn() {
+    private onAddBtn() {
         this.value++;
     }
 
-    onMinBtn() {
+    private onMinBtn() {
         this.value--;
     }
 
-    updateBtnType() {
+    private updateBtnType() {
         this.addBtn.disabled = this.value >= this.max;
         this.minBtn.disabled = this.value <= this.min;
     }
 
-    set onSliderChange(func: Callback) {
+    public set onSliderChange(func: Callback) {
         this._onSliderChange = func;
     }
 }

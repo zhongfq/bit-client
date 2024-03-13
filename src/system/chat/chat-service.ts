@@ -12,11 +12,11 @@ export interface ChatCellData {
     role: ChatRoleVo;
 }
 export class ChatService extends Service<NetworkService> {
-    static readonly CHAT_UPDATE = "chat-update";
-    chatRoleVoBag = VoUtil.createBag(ChatRoleVoBag);
-    chatMsgVoBag = VoUtil.createBag(ChatMsgVoBag);
+    public static readonly CHAT_UPDATE = "chat-update";
+    public chatRoleVoBag = VoUtil.createBag(ChatRoleVoBag);
+    public chatMsgVoBag = VoUtil.createBag(ChatMsgVoBag);
 
-    constructor(network: NetworkService) {
+    public constructor(network: NetworkService) {
         super(network);
 
         this.handle(opcode.chat.s2c_load, this._onLoad);
@@ -56,11 +56,11 @@ export class ChatService extends Service<NetworkService> {
      * @param username 登录账号
      * @returns
      */
-    async load(data: chat.Ic2s_load) {
+    public async load(data: chat.Ic2s_load) {
         return await this._network.call(chat.c2s_load.create(data), chat.s2c_load);
     }
 
-    async requestSend(data: chat.Ic2s_send) {
+    public async requestSend(data: chat.Ic2s_send) {
         return await this._network.call(chat.c2s_send.create(data), chat.s2c_send);
     }
 }

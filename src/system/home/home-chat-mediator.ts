@@ -12,14 +12,14 @@ const { regClass, property } = Laya;
 @regClass()
 export class HomeChatMediator extends Mediator {
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
-    declare owner: HomeChatBoxUI;
+    public declare owner: HomeChatBoxUI;
 
-    override onStart(): void {
+    public override onStart(): void {
         this.initEvent();
         this.updateInfo();
     }
 
-    initEvent() {
+    public initEvent() {
         this.owner.btn.on(Laya.Event.CLICK, () => {
             app.ui.show(ui.CHAT);
         });
@@ -29,7 +29,7 @@ export class HomeChatMediator extends Mediator {
         });
     }
 
-    updateInfo() {
+    public updateInfo() {
         const chatMsgs = [];
         for (const msg of app.service.chat.chatMsgVoBag.toArray().reverse()) {
             if (chatMsgs.length >= 2) {
@@ -40,7 +40,7 @@ export class HomeChatMediator extends Mediator {
         this.owner.virtuallyList.setArrayData(chatMsgs);
     }
 
-    addMsg() {
+    public addMsg() {
         const msgList = app.service.chat.chatMsgVoBag.toArray();
         const msg = msgList[msgList.length - 1] as ChatMsgVo;
 

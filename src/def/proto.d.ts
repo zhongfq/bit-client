@@ -9675,6 +9675,1495 @@ declare namespace proto {
         }
     }
 
+    /** Namespace soldier. */
+    namespace soldier {
+
+        /** Properties of a SoldierInfo. */
+        interface ISoldierInfo {
+
+            /** SoldierInfo id */
+            id?: (number|null);
+
+            /** SoldierInfo lv */
+            lv?: (number|null);
+
+            /** SoldierInfo attrs */
+            attrs?: ({ [k: string]: number }|null);
+        }
+
+        /** Represents a SoldierInfo. */
+        class SoldierInfo implements ISoldierInfo {
+
+            /**
+             * Constructs a new SoldierInfo.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: soldier.ISoldierInfo);
+
+            /** SoldierInfo id. */
+            public id: number;
+
+            /** SoldierInfo lv. */
+            public lv: number;
+
+            /** SoldierInfo attrs. */
+            public attrs: { [k: string]: number };
+
+            /**
+             * Creates a new SoldierInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns SoldierInfo instance
+             */
+            public static create(properties?: soldier.ISoldierInfo): soldier.SoldierInfo;
+
+            /**
+             * Encodes the specified SoldierInfo message. Does not implicitly {@link soldier.SoldierInfo.verify|verify} messages.
+             * @param message SoldierInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: soldier.ISoldierInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified SoldierInfo message, length delimited. Does not implicitly {@link soldier.SoldierInfo.verify|verify} messages.
+             * @param message SoldierInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: soldier.ISoldierInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a SoldierInfo message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns SoldierInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): soldier.SoldierInfo;
+
+            /**
+             * Decodes a SoldierInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns SoldierInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): soldier.SoldierInfo;
+
+            /**
+             * Verifies a SoldierInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a SoldierInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns SoldierInfo
+             */
+            public static fromObject(object: { [k: string]: any }): soldier.SoldierInfo;
+
+            /**
+             * Creates a plain object from a SoldierInfo message. Also converts values to other types if specified.
+             * @param message SoldierInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: soldier.SoldierInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this SoldierInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SoldierInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a PendantInfo. */
+        interface IPendantInfo {
+
+            /** PendantInfo id */
+            id?: (number|null);
+
+            /** PendantInfo lv */
+            lv?: (number|null);
+        }
+
+        /** Represents a PendantInfo. */
+        class PendantInfo implements IPendantInfo {
+
+            /**
+             * Constructs a new PendantInfo.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: soldier.IPendantInfo);
+
+            /** PendantInfo id. */
+            public id: number;
+
+            /** PendantInfo lv. */
+            public lv: number;
+
+            /**
+             * Creates a new PendantInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns PendantInfo instance
+             */
+            public static create(properties?: soldier.IPendantInfo): soldier.PendantInfo;
+
+            /**
+             * Encodes the specified PendantInfo message. Does not implicitly {@link soldier.PendantInfo.verify|verify} messages.
+             * @param message PendantInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: soldier.IPendantInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified PendantInfo message, length delimited. Does not implicitly {@link soldier.PendantInfo.verify|verify} messages.
+             * @param message PendantInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: soldier.IPendantInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a PendantInfo message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns PendantInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): soldier.PendantInfo;
+
+            /**
+             * Decodes a PendantInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns PendantInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): soldier.PendantInfo;
+
+            /**
+             * Verifies a PendantInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a PendantInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns PendantInfo
+             */
+            public static fromObject(object: { [k: string]: any }): soldier.PendantInfo;
+
+            /**
+             * Creates a plain object from a PendantInfo message. Also converts values to other types if specified.
+             * @param message PendantInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: soldier.PendantInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this PendantInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for PendantInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a TrainInfo. */
+        interface ITrainInfo {
+
+            /** TrainInfo id */
+            id?: (number|null);
+
+            /** TrainInfo lv */
+            lv?: (number|null);
+        }
+
+        /** Represents a TrainInfo. */
+        class TrainInfo implements ITrainInfo {
+
+            /**
+             * Constructs a new TrainInfo.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: soldier.ITrainInfo);
+
+            /** TrainInfo id. */
+            public id: number;
+
+            /** TrainInfo lv. */
+            public lv: number;
+
+            /**
+             * Creates a new TrainInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns TrainInfo instance
+             */
+            public static create(properties?: soldier.ITrainInfo): soldier.TrainInfo;
+
+            /**
+             * Encodes the specified TrainInfo message. Does not implicitly {@link soldier.TrainInfo.verify|verify} messages.
+             * @param message TrainInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: soldier.ITrainInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified TrainInfo message, length delimited. Does not implicitly {@link soldier.TrainInfo.verify|verify} messages.
+             * @param message TrainInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: soldier.ITrainInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a TrainInfo message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns TrainInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): soldier.TrainInfo;
+
+            /**
+             * Decodes a TrainInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns TrainInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): soldier.TrainInfo;
+
+            /**
+             * Verifies a TrainInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a TrainInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns TrainInfo
+             */
+            public static fromObject(object: { [k: string]: any }): soldier.TrainInfo;
+
+            /**
+             * Creates a plain object from a TrainInfo message. Also converts values to other types if specified.
+             * @param message TrainInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: soldier.TrainInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this TrainInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for TrainInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a c2s_load_soldier. */
+        interface Ic2s_load_soldier {
+        }
+
+        /** Represents a c2s_load_soldier. */
+        class c2s_load_soldier implements Ic2s_load_soldier {
+
+            /**
+             * Constructs a new c2s_load_soldier.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: soldier.Ic2s_load_soldier);
+
+            /**
+             * Creates a new c2s_load_soldier instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns c2s_load_soldier instance
+             */
+            public static create(properties?: soldier.Ic2s_load_soldier): soldier.c2s_load_soldier;
+
+            /**
+             * Encodes the specified c2s_load_soldier message. Does not implicitly {@link soldier.c2s_load_soldier.verify|verify} messages.
+             * @param message c2s_load_soldier message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: soldier.Ic2s_load_soldier, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified c2s_load_soldier message, length delimited. Does not implicitly {@link soldier.c2s_load_soldier.verify|verify} messages.
+             * @param message c2s_load_soldier message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: soldier.Ic2s_load_soldier, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a c2s_load_soldier message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns c2s_load_soldier
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): soldier.c2s_load_soldier;
+
+            /**
+             * Decodes a c2s_load_soldier message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns c2s_load_soldier
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): soldier.c2s_load_soldier;
+
+            /**
+             * Verifies a c2s_load_soldier message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a c2s_load_soldier message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns c2s_load_soldier
+             */
+            public static fromObject(object: { [k: string]: any }): soldier.c2s_load_soldier;
+
+            /**
+             * Creates a plain object from a c2s_load_soldier message. Also converts values to other types if specified.
+             * @param message c2s_load_soldier
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: soldier.c2s_load_soldier, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this c2s_load_soldier to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for c2s_load_soldier
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a s2c_load_soldier. */
+        interface Is2c_load_soldier {
+
+            /** s2c_load_soldier err */
+            err?: (number|null);
+
+            /** s2c_load_soldier soldiers */
+            soldiers?: (soldier.ISoldierInfo[]|null);
+        }
+
+        /** Represents a s2c_load_soldier. */
+        class s2c_load_soldier implements Is2c_load_soldier {
+
+            /**
+             * Constructs a new s2c_load_soldier.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: soldier.Is2c_load_soldier);
+
+            /** s2c_load_soldier err. */
+            public err: number;
+
+            /** s2c_load_soldier soldiers. */
+            public soldiers: soldier.ISoldierInfo[];
+
+            /**
+             * Creates a new s2c_load_soldier instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns s2c_load_soldier instance
+             */
+            public static create(properties?: soldier.Is2c_load_soldier): soldier.s2c_load_soldier;
+
+            /**
+             * Encodes the specified s2c_load_soldier message. Does not implicitly {@link soldier.s2c_load_soldier.verify|verify} messages.
+             * @param message s2c_load_soldier message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: soldier.Is2c_load_soldier, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified s2c_load_soldier message, length delimited. Does not implicitly {@link soldier.s2c_load_soldier.verify|verify} messages.
+             * @param message s2c_load_soldier message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: soldier.Is2c_load_soldier, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a s2c_load_soldier message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns s2c_load_soldier
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): soldier.s2c_load_soldier;
+
+            /**
+             * Decodes a s2c_load_soldier message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns s2c_load_soldier
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): soldier.s2c_load_soldier;
+
+            /**
+             * Verifies a s2c_load_soldier message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a s2c_load_soldier message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns s2c_load_soldier
+             */
+            public static fromObject(object: { [k: string]: any }): soldier.s2c_load_soldier;
+
+            /**
+             * Creates a plain object from a s2c_load_soldier message. Also converts values to other types if specified.
+             * @param message s2c_load_soldier
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: soldier.s2c_load_soldier, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this s2c_load_soldier to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for s2c_load_soldier
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a c2s_load_pendant. */
+        interface Ic2s_load_pendant {
+        }
+
+        /** Represents a c2s_load_pendant. */
+        class c2s_load_pendant implements Ic2s_load_pendant {
+
+            /**
+             * Constructs a new c2s_load_pendant.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: soldier.Ic2s_load_pendant);
+
+            /**
+             * Creates a new c2s_load_pendant instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns c2s_load_pendant instance
+             */
+            public static create(properties?: soldier.Ic2s_load_pendant): soldier.c2s_load_pendant;
+
+            /**
+             * Encodes the specified c2s_load_pendant message. Does not implicitly {@link soldier.c2s_load_pendant.verify|verify} messages.
+             * @param message c2s_load_pendant message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: soldier.Ic2s_load_pendant, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified c2s_load_pendant message, length delimited. Does not implicitly {@link soldier.c2s_load_pendant.verify|verify} messages.
+             * @param message c2s_load_pendant message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: soldier.Ic2s_load_pendant, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a c2s_load_pendant message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns c2s_load_pendant
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): soldier.c2s_load_pendant;
+
+            /**
+             * Decodes a c2s_load_pendant message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns c2s_load_pendant
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): soldier.c2s_load_pendant;
+
+            /**
+             * Verifies a c2s_load_pendant message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a c2s_load_pendant message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns c2s_load_pendant
+             */
+            public static fromObject(object: { [k: string]: any }): soldier.c2s_load_pendant;
+
+            /**
+             * Creates a plain object from a c2s_load_pendant message. Also converts values to other types if specified.
+             * @param message c2s_load_pendant
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: soldier.c2s_load_pendant, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this c2s_load_pendant to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for c2s_load_pendant
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a s2c_load_pendant. */
+        interface Is2c_load_pendant {
+
+            /** s2c_load_pendant err */
+            err?: (number|null);
+
+            /** s2c_load_pendant pendants */
+            pendants?: (soldier.IPendantInfo[]|null);
+        }
+
+        /** Represents a s2c_load_pendant. */
+        class s2c_load_pendant implements Is2c_load_pendant {
+
+            /**
+             * Constructs a new s2c_load_pendant.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: soldier.Is2c_load_pendant);
+
+            /** s2c_load_pendant err. */
+            public err: number;
+
+            /** s2c_load_pendant pendants. */
+            public pendants: soldier.IPendantInfo[];
+
+            /**
+             * Creates a new s2c_load_pendant instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns s2c_load_pendant instance
+             */
+            public static create(properties?: soldier.Is2c_load_pendant): soldier.s2c_load_pendant;
+
+            /**
+             * Encodes the specified s2c_load_pendant message. Does not implicitly {@link soldier.s2c_load_pendant.verify|verify} messages.
+             * @param message s2c_load_pendant message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: soldier.Is2c_load_pendant, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified s2c_load_pendant message, length delimited. Does not implicitly {@link soldier.s2c_load_pendant.verify|verify} messages.
+             * @param message s2c_load_pendant message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: soldier.Is2c_load_pendant, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a s2c_load_pendant message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns s2c_load_pendant
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): soldier.s2c_load_pendant;
+
+            /**
+             * Decodes a s2c_load_pendant message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns s2c_load_pendant
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): soldier.s2c_load_pendant;
+
+            /**
+             * Verifies a s2c_load_pendant message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a s2c_load_pendant message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns s2c_load_pendant
+             */
+            public static fromObject(object: { [k: string]: any }): soldier.s2c_load_pendant;
+
+            /**
+             * Creates a plain object from a s2c_load_pendant message. Also converts values to other types if specified.
+             * @param message s2c_load_pendant
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: soldier.s2c_load_pendant, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this s2c_load_pendant to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for s2c_load_pendant
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a c2s_load_train. */
+        interface Ic2s_load_train {
+        }
+
+        /** Represents a c2s_load_train. */
+        class c2s_load_train implements Ic2s_load_train {
+
+            /**
+             * Constructs a new c2s_load_train.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: soldier.Ic2s_load_train);
+
+            /**
+             * Creates a new c2s_load_train instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns c2s_load_train instance
+             */
+            public static create(properties?: soldier.Ic2s_load_train): soldier.c2s_load_train;
+
+            /**
+             * Encodes the specified c2s_load_train message. Does not implicitly {@link soldier.c2s_load_train.verify|verify} messages.
+             * @param message c2s_load_train message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: soldier.Ic2s_load_train, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified c2s_load_train message, length delimited. Does not implicitly {@link soldier.c2s_load_train.verify|verify} messages.
+             * @param message c2s_load_train message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: soldier.Ic2s_load_train, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a c2s_load_train message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns c2s_load_train
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): soldier.c2s_load_train;
+
+            /**
+             * Decodes a c2s_load_train message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns c2s_load_train
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): soldier.c2s_load_train;
+
+            /**
+             * Verifies a c2s_load_train message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a c2s_load_train message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns c2s_load_train
+             */
+            public static fromObject(object: { [k: string]: any }): soldier.c2s_load_train;
+
+            /**
+             * Creates a plain object from a c2s_load_train message. Also converts values to other types if specified.
+             * @param message c2s_load_train
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: soldier.c2s_load_train, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this c2s_load_train to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for c2s_load_train
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a s2c_load_train. */
+        interface Is2c_load_train {
+
+            /** s2c_load_train err */
+            err?: (number|null);
+
+            /** s2c_load_train trains */
+            trains?: (soldier.ITrainInfo[]|null);
+        }
+
+        /** Represents a s2c_load_train. */
+        class s2c_load_train implements Is2c_load_train {
+
+            /**
+             * Constructs a new s2c_load_train.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: soldier.Is2c_load_train);
+
+            /** s2c_load_train err. */
+            public err: number;
+
+            /** s2c_load_train trains. */
+            public trains: soldier.ITrainInfo[];
+
+            /**
+             * Creates a new s2c_load_train instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns s2c_load_train instance
+             */
+            public static create(properties?: soldier.Is2c_load_train): soldier.s2c_load_train;
+
+            /**
+             * Encodes the specified s2c_load_train message. Does not implicitly {@link soldier.s2c_load_train.verify|verify} messages.
+             * @param message s2c_load_train message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: soldier.Is2c_load_train, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified s2c_load_train message, length delimited. Does not implicitly {@link soldier.s2c_load_train.verify|verify} messages.
+             * @param message s2c_load_train message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: soldier.Is2c_load_train, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a s2c_load_train message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns s2c_load_train
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): soldier.s2c_load_train;
+
+            /**
+             * Decodes a s2c_load_train message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns s2c_load_train
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): soldier.s2c_load_train;
+
+            /**
+             * Verifies a s2c_load_train message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a s2c_load_train message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns s2c_load_train
+             */
+            public static fromObject(object: { [k: string]: any }): soldier.s2c_load_train;
+
+            /**
+             * Creates a plain object from a s2c_load_train message. Also converts values to other types if specified.
+             * @param message s2c_load_train
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: soldier.s2c_load_train, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this s2c_load_train to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for s2c_load_train
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a c2s_soldier_upgrade. */
+        interface Ic2s_soldier_upgrade {
+
+            /** c2s_soldier_upgrade id */
+            id?: (number|null);
+        }
+
+        /** Represents a c2s_soldier_upgrade. */
+        class c2s_soldier_upgrade implements Ic2s_soldier_upgrade {
+
+            /**
+             * Constructs a new c2s_soldier_upgrade.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: soldier.Ic2s_soldier_upgrade);
+
+            /** c2s_soldier_upgrade id. */
+            public id: number;
+
+            /**
+             * Creates a new c2s_soldier_upgrade instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns c2s_soldier_upgrade instance
+             */
+            public static create(properties?: soldier.Ic2s_soldier_upgrade): soldier.c2s_soldier_upgrade;
+
+            /**
+             * Encodes the specified c2s_soldier_upgrade message. Does not implicitly {@link soldier.c2s_soldier_upgrade.verify|verify} messages.
+             * @param message c2s_soldier_upgrade message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: soldier.Ic2s_soldier_upgrade, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified c2s_soldier_upgrade message, length delimited. Does not implicitly {@link soldier.c2s_soldier_upgrade.verify|verify} messages.
+             * @param message c2s_soldier_upgrade message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: soldier.Ic2s_soldier_upgrade, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a c2s_soldier_upgrade message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns c2s_soldier_upgrade
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): soldier.c2s_soldier_upgrade;
+
+            /**
+             * Decodes a c2s_soldier_upgrade message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns c2s_soldier_upgrade
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): soldier.c2s_soldier_upgrade;
+
+            /**
+             * Verifies a c2s_soldier_upgrade message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a c2s_soldier_upgrade message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns c2s_soldier_upgrade
+             */
+            public static fromObject(object: { [k: string]: any }): soldier.c2s_soldier_upgrade;
+
+            /**
+             * Creates a plain object from a c2s_soldier_upgrade message. Also converts values to other types if specified.
+             * @param message c2s_soldier_upgrade
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: soldier.c2s_soldier_upgrade, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this c2s_soldier_upgrade to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for c2s_soldier_upgrade
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a s2c_soldier_upgrade. */
+        interface Is2c_soldier_upgrade {
+
+            /** s2c_soldier_upgrade err */
+            err?: (number|null);
+        }
+
+        /** Represents a s2c_soldier_upgrade. */
+        class s2c_soldier_upgrade implements Is2c_soldier_upgrade {
+
+            /**
+             * Constructs a new s2c_soldier_upgrade.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: soldier.Is2c_soldier_upgrade);
+
+            /** s2c_soldier_upgrade err. */
+            public err: number;
+
+            /**
+             * Creates a new s2c_soldier_upgrade instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns s2c_soldier_upgrade instance
+             */
+            public static create(properties?: soldier.Is2c_soldier_upgrade): soldier.s2c_soldier_upgrade;
+
+            /**
+             * Encodes the specified s2c_soldier_upgrade message. Does not implicitly {@link soldier.s2c_soldier_upgrade.verify|verify} messages.
+             * @param message s2c_soldier_upgrade message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: soldier.Is2c_soldier_upgrade, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified s2c_soldier_upgrade message, length delimited. Does not implicitly {@link soldier.s2c_soldier_upgrade.verify|verify} messages.
+             * @param message s2c_soldier_upgrade message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: soldier.Is2c_soldier_upgrade, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a s2c_soldier_upgrade message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns s2c_soldier_upgrade
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): soldier.s2c_soldier_upgrade;
+
+            /**
+             * Decodes a s2c_soldier_upgrade message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns s2c_soldier_upgrade
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): soldier.s2c_soldier_upgrade;
+
+            /**
+             * Verifies a s2c_soldier_upgrade message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a s2c_soldier_upgrade message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns s2c_soldier_upgrade
+             */
+            public static fromObject(object: { [k: string]: any }): soldier.s2c_soldier_upgrade;
+
+            /**
+             * Creates a plain object from a s2c_soldier_upgrade message. Also converts values to other types if specified.
+             * @param message s2c_soldier_upgrade
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: soldier.s2c_soldier_upgrade, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this s2c_soldier_upgrade to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for s2c_soldier_upgrade
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a c2s_pendant_upgrade. */
+        interface Ic2s_pendant_upgrade {
+
+            /** c2s_pendant_upgrade id */
+            id?: (number|null);
+        }
+
+        /** Represents a c2s_pendant_upgrade. */
+        class c2s_pendant_upgrade implements Ic2s_pendant_upgrade {
+
+            /**
+             * Constructs a new c2s_pendant_upgrade.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: soldier.Ic2s_pendant_upgrade);
+
+            /** c2s_pendant_upgrade id. */
+            public id: number;
+
+            /**
+             * Creates a new c2s_pendant_upgrade instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns c2s_pendant_upgrade instance
+             */
+            public static create(properties?: soldier.Ic2s_pendant_upgrade): soldier.c2s_pendant_upgrade;
+
+            /**
+             * Encodes the specified c2s_pendant_upgrade message. Does not implicitly {@link soldier.c2s_pendant_upgrade.verify|verify} messages.
+             * @param message c2s_pendant_upgrade message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: soldier.Ic2s_pendant_upgrade, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified c2s_pendant_upgrade message, length delimited. Does not implicitly {@link soldier.c2s_pendant_upgrade.verify|verify} messages.
+             * @param message c2s_pendant_upgrade message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: soldier.Ic2s_pendant_upgrade, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a c2s_pendant_upgrade message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns c2s_pendant_upgrade
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): soldier.c2s_pendant_upgrade;
+
+            /**
+             * Decodes a c2s_pendant_upgrade message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns c2s_pendant_upgrade
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): soldier.c2s_pendant_upgrade;
+
+            /**
+             * Verifies a c2s_pendant_upgrade message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a c2s_pendant_upgrade message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns c2s_pendant_upgrade
+             */
+            public static fromObject(object: { [k: string]: any }): soldier.c2s_pendant_upgrade;
+
+            /**
+             * Creates a plain object from a c2s_pendant_upgrade message. Also converts values to other types if specified.
+             * @param message c2s_pendant_upgrade
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: soldier.c2s_pendant_upgrade, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this c2s_pendant_upgrade to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for c2s_pendant_upgrade
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a s2c_pendant_upgrade. */
+        interface Is2c_pendant_upgrade {
+
+            /** s2c_pendant_upgrade err */
+            err?: (number|null);
+        }
+
+        /** Represents a s2c_pendant_upgrade. */
+        class s2c_pendant_upgrade implements Is2c_pendant_upgrade {
+
+            /**
+             * Constructs a new s2c_pendant_upgrade.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: soldier.Is2c_pendant_upgrade);
+
+            /** s2c_pendant_upgrade err. */
+            public err: number;
+
+            /**
+             * Creates a new s2c_pendant_upgrade instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns s2c_pendant_upgrade instance
+             */
+            public static create(properties?: soldier.Is2c_pendant_upgrade): soldier.s2c_pendant_upgrade;
+
+            /**
+             * Encodes the specified s2c_pendant_upgrade message. Does not implicitly {@link soldier.s2c_pendant_upgrade.verify|verify} messages.
+             * @param message s2c_pendant_upgrade message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: soldier.Is2c_pendant_upgrade, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified s2c_pendant_upgrade message, length delimited. Does not implicitly {@link soldier.s2c_pendant_upgrade.verify|verify} messages.
+             * @param message s2c_pendant_upgrade message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: soldier.Is2c_pendant_upgrade, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a s2c_pendant_upgrade message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns s2c_pendant_upgrade
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): soldier.s2c_pendant_upgrade;
+
+            /**
+             * Decodes a s2c_pendant_upgrade message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns s2c_pendant_upgrade
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): soldier.s2c_pendant_upgrade;
+
+            /**
+             * Verifies a s2c_pendant_upgrade message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a s2c_pendant_upgrade message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns s2c_pendant_upgrade
+             */
+            public static fromObject(object: { [k: string]: any }): soldier.s2c_pendant_upgrade;
+
+            /**
+             * Creates a plain object from a s2c_pendant_upgrade message. Also converts values to other types if specified.
+             * @param message s2c_pendant_upgrade
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: soldier.s2c_pendant_upgrade, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this s2c_pendant_upgrade to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for s2c_pendant_upgrade
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a c2s_train_upgrade. */
+        interface Ic2s_train_upgrade {
+
+            /** c2s_train_upgrade id */
+            id?: (number|null);
+
+            /** c2s_train_upgrade num */
+            num?: (number|null);
+        }
+
+        /** Represents a c2s_train_upgrade. */
+        class c2s_train_upgrade implements Ic2s_train_upgrade {
+
+            /**
+             * Constructs a new c2s_train_upgrade.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: soldier.Ic2s_train_upgrade);
+
+            /** c2s_train_upgrade id. */
+            public id: number;
+
+            /** c2s_train_upgrade num. */
+            public num: number;
+
+            /**
+             * Creates a new c2s_train_upgrade instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns c2s_train_upgrade instance
+             */
+            public static create(properties?: soldier.Ic2s_train_upgrade): soldier.c2s_train_upgrade;
+
+            /**
+             * Encodes the specified c2s_train_upgrade message. Does not implicitly {@link soldier.c2s_train_upgrade.verify|verify} messages.
+             * @param message c2s_train_upgrade message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: soldier.Ic2s_train_upgrade, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified c2s_train_upgrade message, length delimited. Does not implicitly {@link soldier.c2s_train_upgrade.verify|verify} messages.
+             * @param message c2s_train_upgrade message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: soldier.Ic2s_train_upgrade, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a c2s_train_upgrade message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns c2s_train_upgrade
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): soldier.c2s_train_upgrade;
+
+            /**
+             * Decodes a c2s_train_upgrade message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns c2s_train_upgrade
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): soldier.c2s_train_upgrade;
+
+            /**
+             * Verifies a c2s_train_upgrade message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a c2s_train_upgrade message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns c2s_train_upgrade
+             */
+            public static fromObject(object: { [k: string]: any }): soldier.c2s_train_upgrade;
+
+            /**
+             * Creates a plain object from a c2s_train_upgrade message. Also converts values to other types if specified.
+             * @param message c2s_train_upgrade
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: soldier.c2s_train_upgrade, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this c2s_train_upgrade to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for c2s_train_upgrade
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a s2c_train_upgrade. */
+        interface Is2c_train_upgrade {
+
+            /** s2c_train_upgrade err */
+            err?: (number|null);
+        }
+
+        /** Represents a s2c_train_upgrade. */
+        class s2c_train_upgrade implements Is2c_train_upgrade {
+
+            /**
+             * Constructs a new s2c_train_upgrade.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: soldier.Is2c_train_upgrade);
+
+            /** s2c_train_upgrade err. */
+            public err: number;
+
+            /**
+             * Creates a new s2c_train_upgrade instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns s2c_train_upgrade instance
+             */
+            public static create(properties?: soldier.Is2c_train_upgrade): soldier.s2c_train_upgrade;
+
+            /**
+             * Encodes the specified s2c_train_upgrade message. Does not implicitly {@link soldier.s2c_train_upgrade.verify|verify} messages.
+             * @param message s2c_train_upgrade message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: soldier.Is2c_train_upgrade, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified s2c_train_upgrade message, length delimited. Does not implicitly {@link soldier.s2c_train_upgrade.verify|verify} messages.
+             * @param message s2c_train_upgrade message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: soldier.Is2c_train_upgrade, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a s2c_train_upgrade message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns s2c_train_upgrade
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): soldier.s2c_train_upgrade;
+
+            /**
+             * Decodes a s2c_train_upgrade message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns s2c_train_upgrade
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): soldier.s2c_train_upgrade;
+
+            /**
+             * Verifies a s2c_train_upgrade message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a s2c_train_upgrade message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns s2c_train_upgrade
+             */
+            public static fromObject(object: { [k: string]: any }): soldier.s2c_train_upgrade;
+
+            /**
+             * Creates a plain object from a s2c_train_upgrade message. Also converts values to other types if specified.
+             * @param message s2c_train_upgrade
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: soldier.s2c_train_upgrade, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this s2c_train_upgrade to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for s2c_train_upgrade
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+    }
+
     /** Namespace task. */
     namespace task {
 

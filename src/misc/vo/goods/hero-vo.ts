@@ -9,14 +9,14 @@ import { GoodsVo } from "./goods-vo";
  * 道具
  */
 export class HeroVo extends GoodsVo<HeroRow, hero.IHero> {
-    declare refTable: HeroTable;
+    public declare refTable: HeroTable;
 
     //#region 重载
-    get refId(): number {
+    public get refId(): number {
         return this._ref ? this._ref.id : 0;
     }
 
-    get id(): number {
+    public get id(): number {
         if (this._cmd) {
             if (this._cmd.uid) {
                 return this._cmd.uid;
@@ -27,37 +27,37 @@ export class HeroVo extends GoodsVo<HeroRow, hero.IHero> {
         return 0;
     }
 
-    getTableRowByCmd(cmd: bag.Item): HeroRow | undefined {
+    public getTableRowByCmd(cmd: bag.Item): HeroRow | undefined {
         const id = cmd.uid ? cmd.uid : cmd.id;
         return TableUtil.getRow<HeroRow>(app.service.table.hero, { id: id });
     }
 
-    get goodsType(): number {
+    public get goodsType(): number {
         return 0; //this.ref.type;
     }
 
-    get desc(): string {
+    public get desc(): string {
         return ""; //this.ref.desc;
     }
 
-    get name(): string {
+    public get name(): string {
         return this._ref ? this._ref.name : "";
     }
 
-    get iconUrl() {
+    public get iconUrl() {
         return this._ref ? `resources/atlas/hero/h/${this._ref.id}.png` : ""; // "atlas/icon/" + this._ref.icon : "";
     }
 
-    get quality(): number {
+    public get quality(): number {
         return 1;
         // return this._ref ? this._ref.quality : 1;
     }
 
-    get qualitySkin(): string {
+    public get qualitySkin(): string {
         return `resources/atlas/imgFrame/img_icon_frame_${this.quality}.png`;
     }
 
-    override onGetNumber(): number {
+    public override onGetNumber(): number {
         return 1;
     }
     //#endregion

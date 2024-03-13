@@ -9,14 +9,14 @@ import { GoodsVo } from "./goods-vo";
  * 道具
  */
 export class ItemVo extends GoodsVo<ItemRow, bag.Item> {
-    declare refTable: ItemTable;
+    public declare refTable: ItemTable;
 
     //#region 重载
-    get refId(): number {
+    public get refId(): number {
         return this._ref ? this._ref.id : 0;
     }
 
-    get id(): number {
+    public get id(): number {
         if (this._cmd) {
             if (this._cmd.uid) {
                 return this._cmd.uid;
@@ -27,36 +27,36 @@ export class ItemVo extends GoodsVo<ItemRow, bag.Item> {
         return 0;
     }
 
-    getTableRowByCmd(cmd: bag.Item): ItemRow | undefined {
+    public getTableRowByCmd(cmd: bag.Item): ItemRow | undefined {
         const id = cmd.uid ? cmd.uid : cmd.id;
         return TableUtil.getRow<ItemRow>(app.service.table.item, { id: id });
     }
 
-    get goodsType(): number {
+    public get goodsType(): number {
         return 0; //this.ref.type;
     }
 
-    get desc(): string {
+    public get desc(): string {
         return ""; //this.ref.desc;
     }
 
-    get name(): string {
+    public get name(): string {
         return this._ref ? this._ref.name : "";
     }
 
-    get iconUrl() {
+    public get iconUrl() {
         return this._ref ? `resources/atlas/icon/${this._ref.icon}.png` : ""; // "atlas/icon/" + this._ref.icon : "";
     }
 
-    get quality(): number {
+    public get quality(): number {
         return this._ref ? this._ref.quality : 1;
     }
 
-    get qualitySkin(): string {
+    public get qualitySkin(): string {
         return `resources/atlas/imgFrame/img_icon_frame_${this.quality}.png`;
     }
 
-    override onGetNumber(): number {
+    public override onGetNumber(): number {
         if (this._cmd) {
             return this._cmd.num ? this._cmd.num : 0;
         }

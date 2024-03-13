@@ -12,17 +12,17 @@ import { Shop1Row } from "../../def/table";
 const { regClass, property } = Laya;
 @regClass()
 export class ShopMediator extends Mediator {
-    declare owner: ShopUI;
-    shopInfoData!: proto.shop.s2c_load; //商城信息
-    itemListData!: ShopItem[]; //商城道具列表
+    public declare owner: ShopUI;
+    public shopInfoData!: proto.shop.s2c_load; //商城信息
+    public itemListData!: ShopItem[]; //商城道具列表
 
-    override onAwake(): void {
+    public override onAwake(): void {
         this.initUIEvent();
         this.callShopLoad();
     }
 
     //初始化UI事件监听
-    initUIEvent() {
+    private initUIEvent() {
         this.owner.btnClose.on(Laya.Event.CLICK, () => {
             this.owner.close();
         });
@@ -31,7 +31,7 @@ export class ShopMediator extends Mediator {
     }
 
     //请求商店数据
-    async callShopLoad() {
+    private async callShopLoad() {
         app.service.shop
             .load({ shopId: ShopConf.SHOP_TYPE.REGULAR })
             .then((data: proto.shop.s2c_load) => {
@@ -41,7 +41,7 @@ export class ShopMediator extends Mediator {
     }
 
     //list点击监听
-    onListClick(evn: Laya.Event, index: number) {
+    private onListClick(evn: Laya.Event, index: number) {
         if (evn.type == Laya.Event.CLICK) {
             const buyData = app.service.shop.getShopItemBuyNum(this.itemListData[index]);
             if (this.itemListData[index].refData.cost) {
@@ -69,12 +69,12 @@ export class ShopMediator extends Mediator {
     }
 
     //购买回调
-    buyBack() {
+    private buyBack() {
         this.callShopLoad();
     }
 
     //listItem刷新
-    updateItem(cell: ShopItemUI, index: number) {
+    private updateItem(cell: ShopItemUI, index: number) {
         const cellData = this.itemListData[index];
         const vo = app.service.bag.itemBag.createByRef(cellData.refData.items[0].id);
         cell.labelName.text = vo.name;
@@ -94,7 +94,7 @@ export class ShopMediator extends Mediator {
     }
 
     //刷新list数据
-    updateList() {
+    private updateList() {
         this.itemListData = [];
         const shopItemList = this.shopInfoData.items as proto.shop.ItemInfo[];
         if (shopItemList) {

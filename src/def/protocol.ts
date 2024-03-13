@@ -94,6 +94,20 @@ export const opcode = {
         c2s_buy: 0x1D02,
         s2c_buy: 0x1D03,
     },
+    soldier: {
+        c2s_load_soldier: 0x2000,
+        s2c_load_soldier: 0x2001,
+        c2s_load_pendant: 0x2002,
+        s2c_load_pendant: 0x2003,
+        c2s_load_train: 0x2004,
+        s2c_load_train: 0x2005,
+        c2s_soldier_upgrade: 0x2006,
+        s2c_soldier_upgrade: 0x2007,
+        c2s_pendant_upgrade: 0x2008,
+        s2c_pendant_upgrade: 0x2009,
+        c2s_train_upgrade: 0x200A,
+        s2c_train_upgrade: 0x200B,
+    },
     task: {
         c2s_load: 0x1B00,
         s2c_load: 0x1B01,
@@ -655,6 +669,78 @@ export const registerProtocols = () => {
         typeURL: proto.shop.s2c_buy.getTypeUrl(),
         encode: proto.shop.s2c_buy.encode,
         decode: proto.shop.s2c_buy.decode,
+    });
+    register({
+        op: opcode.soldier.c2s_load_soldier,
+        typeURL: proto.soldier.c2s_load_soldier.getTypeUrl(),
+        encode: proto.soldier.c2s_load_soldier.encode,
+        decode: proto.soldier.c2s_load_soldier.decode,
+    });
+    register({
+        op: opcode.soldier.s2c_load_soldier,
+        typeURL: proto.soldier.s2c_load_soldier.getTypeUrl(),
+        encode: proto.soldier.s2c_load_soldier.encode,
+        decode: proto.soldier.s2c_load_soldier.decode,
+    });
+    register({
+        op: opcode.soldier.c2s_load_pendant,
+        typeURL: proto.soldier.c2s_load_pendant.getTypeUrl(),
+        encode: proto.soldier.c2s_load_pendant.encode,
+        decode: proto.soldier.c2s_load_pendant.decode,
+    });
+    register({
+        op: opcode.soldier.s2c_load_pendant,
+        typeURL: proto.soldier.s2c_load_pendant.getTypeUrl(),
+        encode: proto.soldier.s2c_load_pendant.encode,
+        decode: proto.soldier.s2c_load_pendant.decode,
+    });
+    register({
+        op: opcode.soldier.c2s_load_train,
+        typeURL: proto.soldier.c2s_load_train.getTypeUrl(),
+        encode: proto.soldier.c2s_load_train.encode,
+        decode: proto.soldier.c2s_load_train.decode,
+    });
+    register({
+        op: opcode.soldier.s2c_load_train,
+        typeURL: proto.soldier.s2c_load_train.getTypeUrl(),
+        encode: proto.soldier.s2c_load_train.encode,
+        decode: proto.soldier.s2c_load_train.decode,
+    });
+    register({
+        op: opcode.soldier.c2s_soldier_upgrade,
+        typeURL: proto.soldier.c2s_soldier_upgrade.getTypeUrl(),
+        encode: proto.soldier.c2s_soldier_upgrade.encode,
+        decode: proto.soldier.c2s_soldier_upgrade.decode,
+    });
+    register({
+        op: opcode.soldier.s2c_soldier_upgrade,
+        typeURL: proto.soldier.s2c_soldier_upgrade.getTypeUrl(),
+        encode: proto.soldier.s2c_soldier_upgrade.encode,
+        decode: proto.soldier.s2c_soldier_upgrade.decode,
+    });
+    register({
+        op: opcode.soldier.c2s_pendant_upgrade,
+        typeURL: proto.soldier.c2s_pendant_upgrade.getTypeUrl(),
+        encode: proto.soldier.c2s_pendant_upgrade.encode,
+        decode: proto.soldier.c2s_pendant_upgrade.decode,
+    });
+    register({
+        op: opcode.soldier.s2c_pendant_upgrade,
+        typeURL: proto.soldier.s2c_pendant_upgrade.getTypeUrl(),
+        encode: proto.soldier.s2c_pendant_upgrade.encode,
+        decode: proto.soldier.s2c_pendant_upgrade.decode,
+    });
+    register({
+        op: opcode.soldier.c2s_train_upgrade,
+        typeURL: proto.soldier.c2s_train_upgrade.getTypeUrl(),
+        encode: proto.soldier.c2s_train_upgrade.encode,
+        decode: proto.soldier.c2s_train_upgrade.decode,
+    });
+    register({
+        op: opcode.soldier.s2c_train_upgrade,
+        typeURL: proto.soldier.s2c_train_upgrade.getTypeUrl(),
+        encode: proto.soldier.s2c_train_upgrade.encode,
+        decode: proto.soldier.s2c_train_upgrade.decode,
     });
     register({
         op: opcode.task.c2s_load,

@@ -4,8 +4,8 @@ import { ChatUIBase } from "./ChatUI.generated";
 
 @regClass()
 export class ChatUI extends ChatUIBase {
-    addNum = 0;
-    tlChatCell: ChatCellUI[] = [];
+    public addNum = 0;
+    public tlChatCell: ChatCellUI[] = [];
 
-    override onAwake(): void {}
+    public override onAwake(): void {}
 }

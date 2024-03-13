@@ -9,15 +9,15 @@ const { regClass, property } = Laya;
 @regClass()
 export class HomeMonyeMediator extends Mediator {
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
-    declare owner: HomeMonyeBoxUI;
+    public declare owner: HomeMonyeBoxUI;
     private _monyeInfo: MoneyVo[] = [];
 
-    override onAwake(): void {
+    public override onAwake(): void {
         this.initEvent();
         this.updateInfo();
     }
 
-    initEvent() {
+    public initEvent() {
         this.owner.listMonye.renderHandler = new Laya.Handler(this, this._updateItem);
 
         // this.on(app.service.task, TaskService.TASK_UPDATE, () => {
@@ -30,7 +30,7 @@ export class HomeMonyeMediator extends Mediator {
         cell.imgIcon.skin = this._monyeInfo[index].iconUrl;
     }
 
-    updateInfo() {
+    public updateInfo() {
         // const listData = [];
         let moneyId = 0;
         for (const [_, money] of app.service.user.money) {

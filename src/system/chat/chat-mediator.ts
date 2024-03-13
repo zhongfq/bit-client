@@ -14,10 +14,10 @@ const { regClass, property } = Laya;
 
 @regClass()
 export class ChatMediator extends Mediator {
-    declare owner: ChatUI;
-    emojiData!: EmojiRow[];
+    public declare owner: ChatUI;
+    public emojiData!: EmojiRow[];
 
-    override onAwake(): void {
+    public override onAwake(): void {
         this.owner.boxEmoji.visible = false;
         this.emojiData = TableUtil.getRows(app.service.table.emoji, {});
         this.initUIEvent();
@@ -25,12 +25,12 @@ export class ChatMediator extends Mediator {
         this.initInfo();
     }
 
-    override onStart(): void {
+    public override onStart(): void {
         this.updateList();
     }
 
     //初始化UI事件监听
-    initUIEvent() {
+    public initUIEvent() {
         this.owner.on(Laya.Event.MOUSE_DOWN, this, (evn: Laya.Event) => {
             const touchPoint = this.owner.globalToLocal(evn.touchPos);
             if (!this.owner.boxEmoji.getBounds().contains(touchPoint.x, touchPoint.y)) {
@@ -50,7 +50,7 @@ export class ChatMediator extends Mediator {
     }
 
     //初始化Service事件监听
-    initServiceEvent() {
+    public initServiceEvent() {
         this.on(app.service.chat, ChatService.CHAT_UPDATE, (data: ChatMsgVo) => {
             // this.owner.listPanel.addData(data);
             // this.owner.listPanel.refreshScrollBar();
@@ -58,7 +58,7 @@ export class ChatMediator extends Mediator {
         });
     }
 
-    initInfo() {
+    public initInfo() {
         this.owner.listEmoji.mouseHandler = new Laya.Handler(
             this,
             (evn: Laya.Event, index: number) => {
@@ -78,18 +78,18 @@ export class ChatMediator extends Mediator {
     }
 
     //列表点击回调
-    onListClick(evn: Laya.Event, index: number) {
+    public onListClick(evn: Laya.Event, index: number) {
         // if (evn.type == Laya.Event.CLICK) {
         // }
     }
 
     //标签点击回调
-    onTabSelect(index: number) {
+    public onTabSelect(index: number) {
         // this.updateList();
     }
 
     //刷新列表
-    updateList() {
+    public updateList() {
         // this.owner.listPanel.setArrayData(
         //     Util.toArray(app.service.chat.chatMsgVoBag.getBag()).reverse()
         // );

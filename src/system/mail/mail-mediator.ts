@@ -12,17 +12,17 @@ const { regClass } = Laya;
 
 @regClass()
 export class MailMediator extends Mediator {
-    declare owner: MailUI;
+    public declare owner: MailUI;
 
-    itemListData!: proto.mail.MailInfo[]; //邮件列表数据
+    public itemListData!: proto.mail.MailInfo[]; //邮件列表数据
 
-    override onAwake(): void {
+    public override onAwake(): void {
         this.initUIEvent();
         this.updateList();
     }
 
     //初始化UI事件监听
-    initUIEvent() {
+    public initUIEvent() {
         this.owner.listMail.renderHandler = new Laya.Handler(this, this.updateItem);
         this.owner.listMail.mouseHandler = new Laya.Handler(this, this.onListClick);
         this.owner.tabMenu.selectHandler = new Laya.Handler(this, this.onTabSelect);
@@ -41,7 +41,7 @@ export class MailMediator extends Mediator {
     }
 
     //列表点击回调
-    onListClick(evn: Laya.Event, index: number) {
+    public onListClick(evn: Laya.Event, index: number) {
         if (evn.type == Laya.Event.CLICK) {
             if (app.service.mail.getMailIsRead(this.itemListData[index].state)) {
                 app.service.mail.requestRead({ mailUids: [this.itemListData[index].uid] });
@@ -51,12 +51,12 @@ export class MailMediator extends Mediator {
     }
 
     //标签点击回调
-    onTabSelect(index: number) {
+    public onTabSelect(index: number) {
         this.updateList();
     }
 
     //listItem刷新回调
-    updateItem(cell: MailUI, index: number) {
+    public updateItem(cell: MailUI, index: number) {
         (cell.getChildByName("labelMailTips") as Laya.Label).text = this.itemListData[index].title;
 
         (cell.getChildByName("labelMailTime") as Laya.Label).text =
@@ -82,7 +82,7 @@ export class MailMediator extends Mediator {
     }
 
     //更新列表
-    updateList() {
+    public updateList() {
         if (this.owner.tabMenu.selectedIndex == 0) {
             this.itemListData = Util.toArray<proto.mail.MailInfo>(app.service.mail.mails);
         }

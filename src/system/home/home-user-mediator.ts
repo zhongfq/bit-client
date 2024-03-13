@@ -12,20 +12,20 @@ const { regClass, property } = Laya;
 @regClass()
 export class HomeUserMediator extends Mediator {
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
-    declare owner: HomeUserBoxUI;
+    public declare owner: HomeUserBoxUI;
 
-    override onAwake(): void {
+    public override onAwake(): void {
         this.initEvent();
         this.updateInfo();
     }
 
-    initEvent() {
+    public initEvent() {
         // this.on(app.service.task, TaskService.TASK_UPDATE, () => {
         //     this.updateInfo();
         // });
     }
 
-    updateInfo() {
+    public updateInfo() {
         const profiInfo = app.service.user.profileInfo;
         const lvRow = TableUtil.getRow(app.service.table.role.level, {
             lv: app.service.user.profileInfo.lv,

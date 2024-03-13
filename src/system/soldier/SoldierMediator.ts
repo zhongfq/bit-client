@@ -1,8 +1,6 @@
 import { Mediator } from "../../core/ui-mediator";
 import { SoldierUI } from "../../ui-runtime/prefab/soldier/SoldierUI";
-
 const { regClass, property } = Laya;
-
 @regClass()
 export class SoldierMediator extends Mediator {
     public declare owner: SoldierUI;

@@ -5,14 +5,14 @@ import { TestNodeUIBase } from "./TestNodeUI.generated";
 
 @regClass()
 export class TestNodeUI extends TestNodeUIBase {
-    points: number[] = [];
+    private points: number[] = [];
 
-    override set_dataSource(data: any) {
+    public override set_dataSource(data: any) {
         super.set_dataSource(data);
         this.Label.text = data;
     }
 
-    override onAwake(): void {
+    public override onAwake(): void {
         // this.points = Laya.Bezier.I.getBezierPoints([50, 1000, 218, 513, 550, 1000], 5, 2);
         // const b = 1;
         // this.Sprite_1.graphics.drawCurves(10, 58, [0, 1000, 250, 50, 500, 1000], "#ff0000", 3);

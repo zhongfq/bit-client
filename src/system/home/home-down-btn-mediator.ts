@@ -10,16 +10,16 @@ const { regClass, property } = Laya;
 @regClass()
 export class HomeDownBtnMediator extends Mediator {
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
-    declare owner: HomeDownBtnBoxNewUI;
+    public declare owner: HomeDownBtnBoxNewUI;
 
     private _currentBtn: HomeDownBtnItemUI | null = null;
     private _currentBox: Laya.Node | null = null;
 
-    override onAwake(): void {
+    public override onAwake(): void {
         this.initEvent();
     }
 
-    initEvent() {
+    private initEvent() {
         this.owner.btnChest.on(Laya.Event.CLICK, () => {
             if (this._btnSelected(this.owner.btnChest)) {
                 this._loadAddNode("resources/prefab/chest/chest.lh");
@@ -42,7 +42,7 @@ export class HomeDownBtnMediator extends Mediator {
     }
 
     private _btnSelected(btn: HomeDownBtnItemUI): boolean {
-        this._currentBox?.destroy();
+        this._currentBox?.destroy(true);
         if (this._currentBtn == btn) {
             this._currentBtn.selected = !this._currentBtn.selected;
             this._currentBtn = null;

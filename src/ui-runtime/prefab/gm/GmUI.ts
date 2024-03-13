@@ -3,5 +3,5 @@ import { GmUIBase } from "./GmUI.generated";
 
 @regClass()
 export class GmUI extends GmUIBase {
-    override onAwake(): void {}
+    public override onAwake(): void {}
 }

@@ -12,12 +12,12 @@ const { regClass, property } = Laya;
 
 @regClass()
 export class ChestItemMediator extends Mediator {
-    declare owner: ChestItemUI;
-    declare selectedIndex: number;
+    public declare owner: ChestItemUI;
+    public declare selectedIndex: number;
 
-    override onAwake(): void {}
+    public override onAwake(): void {}
 
-    onListRender(item: Laya.Sprite, index: number) {
+    public onListRender(item: Laya.Sprite, index: number) {
         // item.updateInfo(item.dataSource);
         // item.getChildByName("imgIcon");
         const a = item.getChildByName("img/labelNum") as Laya.Label;

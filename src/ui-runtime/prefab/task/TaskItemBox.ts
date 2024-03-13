@@ -4,7 +4,7 @@ import { TaskItemBoxBase } from "./TaskItemBox.generated";
 
 @regClass()
 export class TaskItemBox extends TaskItemBoxBase {
-    updateInfo(data: TaskVo) {
+    public updateInfo(data: TaskVo) {
         this.labelName.text = data.name;
         this.labelDesc.text = data.desc;
         if (data.cmd?.finish) {

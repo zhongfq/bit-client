@@ -7,9 +7,9 @@ const { regClass, property } = Laya;
 
 @regClass()
 export class MailInfoMediator extends Mediator {
-    declare owner: MailInfoUI;
+    public declare owner: MailInfoUI;
 
-    override onAwake(): void {
+    public override onAwake(): void {
         this.initUIEvent();
         this.updateInfo();
         this.updateList();
@@ -32,14 +32,14 @@ export class MailInfoMediator extends Mediator {
     }
 
     //listItem更新回调
-    updateItem(cell: IconUI, index: number) {
+    public updateItem(cell: IconUI, index: number) {
         const vo = app.service.bag.itemBag.createByRef(Number(this.owner.rewards[index].id));
         vo.goodsNumber = Number(this.owner.rewards[index].num);
         cell.updateGoods(vo);
     }
 
     //刷新界面信息
-    updateInfo() {
+    public updateInfo() {
         const title = this.owner.refData ? this.owner.refData.title : this.owner.oepnData.title;
         const content = this.owner.refData
             ? this.owner.refData.content
@@ -59,7 +59,7 @@ export class MailInfoMediator extends Mediator {
     }
 
     //更新列表
-    updateList() {
+    public updateList() {
         if (this.owner.rewards && this.owner.rewards.length > 0) {
             this.owner.listItem.visible = true;
             this.owner.listItem.array = this.owner.rewards;

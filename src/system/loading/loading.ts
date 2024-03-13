@@ -7,12 +7,12 @@ import { LoadingUI } from "../../ui-runtime/scene/LoadingUI";
 const { regClass, property } = Laya;
 @regClass()
 export class LoadingMediator extends Laya.Script {
-    declare owner: LoadingUI;
-    virtualProgress: number = 0;
-    progress: number = 0;
-    isOpen: boolean = false;
+    public declare owner: LoadingUI;
+    public virtualProgress: number = 0;
+    public progress: number = 0;
+    public isOpen: boolean = false;
 
-    override onAwake(): void {
+    public override onAwake(): void {
         let isOpen = false;
         this.owner.progress.changeHandler = new Laya.Handler(this, (val: number) => {
             if (val == 1 && !isOpen) {
@@ -26,7 +26,7 @@ export class LoadingMediator extends Laya.Script {
         this._starGame();
     }
 
-    async _starGame() {
+    public async _starGame() {
         this.owner.imgBar.value = 0;
         await app.service.user.loadProfile();
         await app.service.table.load();
@@ -47,12 +47,12 @@ export class LoadingMediator extends Laya.Script {
         this.progress = 100;
     }
 
-    override onUpdate(): void {
+    public override onUpdate(): void {
         this.updateProg();
         this.updateView();
     }
 
-    updateView() {
+    public updateView() {
         if (this.isOpen) return;
         this.owner.imgBar.value = this.virtualProgress * 0.01;
         if (this.owner.imgBar.value < 1 && Math.round(this.owner.imgBar.value * 100) == 100) {
@@ -62,7 +62,7 @@ export class LoadingMediator extends Laya.Script {
         }
     }
 
-    updateProg() {
+    public updateProg() {
         if (this.virtualProgress < 100) {
             this.virtualProgress = this.lerp(this.virtualProgress, this.progress);
         } else {
@@ -70,7 +70,7 @@ export class LoadingMediator extends Laya.Script {
         }
     }
 
-    lerp(cur_value: number, last_value: number) {
+    public lerp(cur_value: number, last_value: number) {
         // console.log(Laya.timer.delta);
         return cur_value + (last_value - cur_value) * Laya.timer.delta * 0.01;
     }

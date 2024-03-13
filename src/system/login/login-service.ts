@@ -7,7 +7,7 @@ export const LOGIN_USERNAME = "login:username";
 export const LOGIN_URL = "login:url";
 
 export class LoginService extends Service<NetworkService> {
-    constructor(network: NetworkService) {
+    public constructor(network: NetworkService) {
         super(network);
 
         this.handle(opcode.connection.connected, this.onConnected);
@@ -20,19 +20,19 @@ export class LoginService extends Service<NetworkService> {
         }
     }
 
-    get username() {
+    public get username() {
         return Laya.LocalStorage.getItem(LOGIN_USERNAME) || "";
     }
 
-    set username(value: string) {
+    public set username(value: string) {
         Laya.LocalStorage.setItem(LOGIN_USERNAME, value);
     }
 
-    get url() {
+    public get url() {
         return Laya.LocalStorage.getItem(LOGIN_URL) || "";
     }
 
-    set url(value: string) {
+    public set url(value: string) {
         Laya.LocalStorage.setItem(LOGIN_URL, value);
     }
 
@@ -44,7 +44,7 @@ export class LoginService extends Service<NetworkService> {
      * @param username 登录账号
      * @returns
      */
-    async login(username: string) {
+    public async login(username: string) {
         return await this._network.call(
             user.c2s_login.create({
                 uid: username,

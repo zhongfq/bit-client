@@ -12,7 +12,7 @@ export class ChatMsgVoBag extends VoBag<ChatMsgVo> {
         return t.id;
     }
 
-    init(msgArray: proto.chat.ChatMessage[]) {
+    public init(msgArray: proto.chat.ChatMessage[]) {
         for (const cmdData of msgArray) {
             const vo = new ChatMsgVo();
             vo.initByCmd(cmdData as proto.chat.ChatMessage);

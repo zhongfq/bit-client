@@ -14,12 +14,12 @@ type ServerInfo = {
 
 @regClass()
 export class LoginMediator extends Mediator {
-    declare owner: LoginUI;
+    public declare owner: LoginUI;
 
     private _tlServerList!: ServerInfo[];
-    serverData!: ServerInfo;
+    public serverData!: ServerInfo;
 
-    override onAwake(): void {
+    public override onAwake(): void {
         const Http = new Laya.HttpRequest();
         Http.once(Laya.Event.COMPLETE, (data: any) => {
             this._tlServerList = JSON.parse(data);
@@ -34,7 +34,7 @@ export class LoginMediator extends Mediator {
         this.owner.inputAccount.text = app.service.login.username;
     }
 
-    onBtnLogin() {
+    public onBtnLogin() {
         console.log("点击了登录按钮");
 
         if (this.owner.inputAccount.text != "") {
@@ -44,7 +44,7 @@ export class LoginMediator extends Mediator {
         }
     }
 
-    onBtnServer() {
+    public onBtnServer() {
         //打开服务器列表
         app.ui.show(ui.LOGIN_SERVER_LIST, {
             back: new Laya.Handler(this, this.onServerDialogClick),
@@ -52,12 +52,12 @@ export class LoginMediator extends Mediator {
         });
     }
 
-    onServerDialogClick(data: ServerInfo) {
+    public onServerDialogClick(data: ServerInfo) {
         this.serverData = data;
         this.updateInfo();
     }
 
-    updateInfo() {
+    public updateInfo() {
         this.owner.labelServerName.text =
             "· " + this.serverData.state_desc + "  " + this.serverData.server_name;
     }

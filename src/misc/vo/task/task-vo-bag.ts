@@ -10,7 +10,7 @@ export class TaskBag extends VoBag<TaskVo> {
         return t.cmd?.id || 0;
     }
 
-    init(data: proto.task.s2c_load) {
+    public init(data: proto.task.s2c_load) {
         for (const cmdData of data.tasks) {
             const vo = new TaskVo();
             vo.initByCmd(cmdData as proto.task.TaskInfo);
@@ -22,7 +22,7 @@ export class TaskBag extends VoBag<TaskVo> {
         return TaskVo;
     }
 
-    createByRef(refId: number) {
+    public createByRef(refId: number) {
         const clazz = this.getVOClass();
         const vo = new clazz();
         const ref = TableUtil.getRow(app.service.table.task, { id: refId });
@@ -31,7 +31,7 @@ export class TaskBag extends VoBag<TaskVo> {
         return vo;
     }
 
-    getByRef(refId: number): TaskVo | null {
+    public getByRef(refId: number): TaskVo | null {
         const tlBag = this.filter(this.getFilterOne(refId));
         if (tlBag) {
             return tlBag[0];
@@ -39,7 +39,7 @@ export class TaskBag extends VoBag<TaskVo> {
         return null;
     }
 
-    getFilterOne(refId: number) {
+    public getFilterOne(refId: number) {
         return (t: TaskVo) => {
             if (t == null) {
                 return false;

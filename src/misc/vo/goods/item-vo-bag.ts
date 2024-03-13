@@ -15,7 +15,7 @@ export class ItemBag extends GoodsVoBag<ItemVo> {
         return t.id;
     }
 
-    init(data: proto.bag.s2c_load) {
+    public init(data: proto.bag.s2c_load) {
         for (const cmdData of data.items) {
             const vo = new ItemVo();
             vo.initByCmd(cmdData as proto.bag.Item);
@@ -27,7 +27,7 @@ export class ItemBag extends GoodsVoBag<ItemVo> {
         return ItemVo;
     }
 
-    createByRef(refId: number): ItemVo {
+    public createByRef(refId: number): ItemVo {
         const clazz = this.getVOClass();
         const vo = new clazz();
         const ref = TableUtil.getRow(app.service.table.item, { id: refId });
@@ -36,7 +36,7 @@ export class ItemBag extends GoodsVoBag<ItemVo> {
         return vo;
     }
 
-    getByRef(refId: number): ItemVo | null {
+    public getByRef(refId: number): ItemVo | null {
         const tlBag = this.filter(this.getFilterOne(refId));
         if (tlBag) {
             return tlBag[0];
@@ -44,7 +44,7 @@ export class ItemBag extends GoodsVoBag<ItemVo> {
         return null;
     }
 
-    getFilterOne(refId: number) {
+    public getFilterOne(refId: number) {
         return (t: ItemVo) => {
             if (t == null) {
                 return false;

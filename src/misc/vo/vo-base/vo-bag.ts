@@ -20,12 +20,12 @@ export abstract class VoBag<T extends VO<any, any>> {
     /**
      * 获取Map
      */
-    getBag(): Map<string | number, T> {
+    public getBag(): Map<string | number, T> {
         const t: string[] = [];
         return this.bag;
     }
 
-    toArray() {
+    public toArray() {
         const ret: Array<T> = [];
         for (const [_, v] of this.bag) {
             ret.push(v);
@@ -36,7 +36,7 @@ export abstract class VoBag<T extends VO<any, any>> {
     /**
      * 以列表的形式获取背包
      */
-    filter(predicate: (value: T, key: string | number) => boolean): Array<T> {
+    public filter(predicate: (value: T, key: string | number) => boolean): Array<T> {
         const ret: Array<T> = [];
         for (const [k, v] of this.bag) {
             if (predicate && !predicate(v, k)) continue;
@@ -45,7 +45,7 @@ export abstract class VoBag<T extends VO<any, any>> {
         return ret;
     }
 
-    find(predicate: (value: T, key: string | number) => boolean) {
+    public find(predicate: (value: T, key: string | number) => boolean) {
         for (const [k, v] of this.bag) {
             if (predicate(v, k)) {
                 return v;
@@ -58,14 +58,14 @@ export abstract class VoBag<T extends VO<any, any>> {
      * @param key
      */
 
-    get(key: string | number) {
+    public get(key: string | number) {
         return this.bag.get(key);
     }
 
     /**
      * 获取第一个
      */
-    getOne(): T | undefined {
+    public getOne(): T | undefined {
         if (this.bag.size > 0) {
             const iter = this.bag.entries();
             const [k, v] = iter.next().value;

@@ -17,23 +17,23 @@ const { regClass, property } = Laya;
 
 @regClass()
 export class ChestHeroMediator extends Mediator {
-    declare owner: ChestHeroUI;
-    declare selectedIndex: number;
+    public declare owner: ChestHeroUI;
+    public declare selectedIndex: number;
 
-    override onAwake(): void {
+    public override onAwake(): void {
         this.initUIEvent();
         this.initServiceEvent();
         this.updateList();
     }
 
-    initUIEvent() {
+    public initUIEvent() {
         this.owner.listItem.renderHandler = new Laya.Handler(this, this.onListRender);
         this.owner.listItem.selectHandler = new Laya.Handler(this, this.onSelect);
     }
 
-    onSelect(index: number) {}
+    public onSelect(index: number) {}
 
-    initServiceEvent() {
+    public initServiceEvent() {
         // this.on(app.service.task, TaskService.TASK_UPDATE, () => {
         //     this.tlTaskData = [];
         //     this.tlTaskData.push(app.service.task.mainTask);
@@ -42,14 +42,14 @@ export class ChestHeroMediator extends Mediator {
         // });
     }
 
-    onListRender(item: IconUI, index: number) {
+    public onListRender(item: IconUI, index: number) {
         item.updateGoods(this.owner.listItem.array[index].heroVo);
         item.imgLock.visible = this.owner.listItem.array[index].isLock;
         // item.getChildByName("imgIcon");
         // item.labelNum.text = "x0";
     }
 
-    updateList() {
+    public updateList() {
         const listData = [];
         for (const key in app.service.table.chest.hero) {
             const row = app.service.table.chest.hero[key];

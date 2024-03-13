@@ -36,6 +36,7 @@ export interface GeneratedRoleTrainRow {
     id: number;
     initial: number;
     grow: number;
+    consume: any;
 }
 
 // file: design/hero.xlsx

@@ -16,12 +16,12 @@ interface SwitchData {
 }
 @regClass()
 export class GmMediator extends Mediator {
-    declare owner: GmUI;
-    listGmData!: GmCmdData[];
-    listSwitchData!: SwitchData[];
-    isShowStat: boolean = false;
+    public declare owner: GmUI;
+    public listGmData!: GmCmdData[];
+    public listSwitchData!: SwitchData[];
+    public isShowStat: boolean = false;
 
-    override onAwake(): void {
+    public override onAwake(): void {
         this._initEvent();
         this.updateList();
     }
@@ -81,11 +81,11 @@ export class GmMediator extends Mediator {
         });
     }
 
-    onTabSelect(index: number) {
+    public onTabSelect(index: number) {
         this.updateList();
     }
 
-    updateList() {
+    public updateList() {
         this.listGmData = [];
 
         this.listGmData.push({ name: "加经验", instruct: "add_exp 99" });

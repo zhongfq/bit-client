@@ -10,21 +10,23 @@ import { TaskMainRow, TaskBranchRow, TaskDailyRow } from "../../../def/table";
  * 道具
  */
 export class TaskVo extends VO<TaskMainRow | TaskBranchRow | TaskDailyRow, task.TaskInfo> {
-    refTable!: ItemTable;
+    public refTable!: ItemTable;
 
     //#region 重载
-    get refId(): number {
+    public get refId(): number {
         return this._ref ? this._ref.id : 0;
     }
 
-    override get id(): number {
+    public override get id(): number {
         if (this._cmd) {
             return Number(this._cmd.id);
         }
         return 0;
     }
 
-    getTableRowByCmd(cmd: task.TaskInfo): TaskMainRow | TaskBranchRow | TaskDailyRow | undefined {
+    public getTableRowByCmd(
+        cmd: task.TaskInfo
+    ): TaskMainRow | TaskBranchRow | TaskDailyRow | undefined {
         return TableUtil.getRow<TaskMainRow | TaskBranchRow | TaskDailyRow>(
             app.service.table.task,
             {
@@ -33,15 +35,15 @@ export class TaskVo extends VO<TaskMainRow | TaskBranchRow | TaskDailyRow, task.
         );
     }
 
-    get goodsType(): number {
+    public get goodsType(): number {
         return 0; //this.ref.type;
     }
 
-    get desc(): string {
+    public get desc(): string {
         return this.ref?.desc || ""; //this.ref.desc;
     }
 
-    get name(): string {
+    public get name(): string {
         return "";
     }
 

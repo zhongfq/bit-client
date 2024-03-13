@@ -7,17 +7,17 @@ import { VoUtil } from "../../misc/vo-util";
 import { ItemBag } from "../../misc/vo/goods/item-vo-bag";
 
 export class ChestService extends Service<NetworkService> {
-    static readonly CHEST_UPDATE = "chest-update";
-    static readonly CHEST_SCORE_UPDATE = "chest-score-update";
-    static readonly CHEST_Hero_UPDATE = "chest-hero-update";
+    public static readonly CHEST_UPDATE = "chest-update";
+    public static readonly CHEST_SCORE_UPDATE = "chest-score-update";
+    public static readonly CHEST_Hero_UPDATE = "chest-hero-update";
 
     // readonly itemBag = VoUtil.createGoodsBag(ItemBag); //创建道具背包
-    scoreInfo!: proto.chest.ScoreInfo; //积分数据
-    chestInfo: Map<number, number> = new Map();
-    heroId!: number;
-    heroIds: number[] = [];
+    public scoreInfo!: proto.chest.ScoreInfo; //积分数据
+    public chestInfo: Map<number, number> = new Map();
+    public heroId!: number;
+    public heroIds: number[] = [];
 
-    constructor(network: NetworkService) {
+    public constructor(network: NetworkService) {
         super(network);
         this.handle(opcode.chest.s2c_load, this._onLoad);
         this.handle(opcode.chest.s2c_open_chest, this._onOpenChest);

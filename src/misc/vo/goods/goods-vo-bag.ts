@@ -8,11 +8,11 @@ export abstract class GoodsVoBag<T extends GoodsVo = GoodsVo> extends VoBag<T> {
     /**
      * 根据refId跟goodsType创建一个只有ref的VO
      */
-    abstract createByRef(refId: number, goodsType?: number): T;
+    public abstract createByRef(refId: number, goodsType?: number): T;
     /**
      * 根据refId跟goodsType获取VO,没有时返回null
      */
-    abstract getByRef(refId: number, goodsType?: number): T | null;
+    public abstract getByRef(refId: number, goodsType?: number): T | null;
     /**
      * 精准筛选出一个的函数。
      */

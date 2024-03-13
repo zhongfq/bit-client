@@ -17,13 +17,14 @@ type ListCellData = {
 };
 @regClass()
 export class ChestMediator extends Mediator {
-    declare owner: ChestUI;
-    declare selectedIndex: number;
+    public declare owner: ChestUI;
+    private declare selectedIndex: number;
     private listData: ListCellData[] = [];
 
-    override onAwake(): void {
+    public override onAwake(): void {
         this.initUIEvent();
         this.initServiceEvent();
+        this.initInfo();
     }
 
     public initInfo() {
@@ -176,7 +177,7 @@ export class ChestMediator extends Mediator {
         // });
     }
 
-    onListRender(item: ChestItemUI, index: number) {
+    private onListRender(item: ChestItemUI, index: number) {
         if (this.listData[index]) {
             item.labelNum.text = this.listData[index].cmdNum
                 ? `x${this.listData[index].cmdNum}`

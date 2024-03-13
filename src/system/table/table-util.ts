@@ -3,7 +3,7 @@ type KeyPairs<T> = {
 };
 
 export class TableUtil {
-    static getRefAll() {}
+    public static getRefAll() {}
 
     private static _isMatch<T>(value: T, filter: KeyPairs<T>) {
         for (const key in filter) {
@@ -14,9 +14,12 @@ export class TableUtil {
         return true;
     }
 
-    static getRow<T>(source: T[], filter: KeyPairs<T>): T | undefined;
+    public static getRow<T>(source: T[], filter: KeyPairs<T>): T | undefined;
 
-    static getRow<T>(source: { [k: number | string]: T }, filter: KeyPairs<T>): T | undefined;
+    public static getRow<T>(
+        source: { [k: number | string]: T },
+        filter: KeyPairs<T>
+    ): T | undefined;
 
     /**
      * 获取表格中的一行
@@ -24,7 +27,7 @@ export class TableUtil {
      * @param filter
      * @returns
      */
-    static getRow<T>(
+    public static getRow<T>(
         source: T[] | { [k: number | string]: T },
         filter: KeyPairs<T>
     ): T | undefined {
@@ -36,9 +39,9 @@ export class TableUtil {
         }
     }
 
-    static getRows<T>(source: T[], filter: KeyPairs<T>): T[];
+    public static getRows<T>(source: T[], filter: KeyPairs<T>): T[];
 
-    static getRows<T>(source: { [k: number | string]: T }, filter: KeyPairs<T>): T[];
+    public static getRows<T>(source: { [k: number | string]: T }, filter: KeyPairs<T>): T[];
 
     /**
      * 获取表格中的多行
@@ -46,7 +49,7 @@ export class TableUtil {
      * @param filter
      * @returns
      */
-    static getRows<T>(source: T[] | { [k: number | string]: T }, filter: KeyPairs<T>): T[] {
+    public static getRows<T>(source: T[] | { [k: number | string]: T }, filter: KeyPairs<T>): T[] {
         if (source instanceof Array) {
             return source.filter((value) => TableUtil._isMatch(value, filter));
         } else {

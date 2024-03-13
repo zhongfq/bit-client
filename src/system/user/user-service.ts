@@ -6,14 +6,14 @@ import { app } from "../../app";
 import { ui } from "../../misc/ui";
 import { MoneyVo } from "../../misc/vo/money/money-vo";
 export class UserService extends Service<NetworkService> {
-    static readonly PROFILE_UPDATE = "profile-update";
-    static readonly MONEY_UPDATE = "money-update";
-    uid: number = 0;
-    rid: number = 0;
-    money: Map<number, MoneyVo> = new Map<number, MoneyVo>();
-    profileInfo!: proto.profile.ProfileInfo;
+    public static readonly PROFILE_UPDATE = "profile-update";
+    public static readonly MONEY_UPDATE = "money-update";
+    public uid: number = 0;
+    public rid: number = 0;
+    public money: Map<number, MoneyVo> = new Map<number, MoneyVo>();
+    public profileInfo!: proto.profile.ProfileInfo;
 
-    constructor(network: NetworkService) {
+    public constructor(network: NetworkService) {
         super(network);
         this.handle(opcode.user.s2c_login, this._onLogin);
         this.handle(opcode.money.s2c_load, this._onLoadMonye);
@@ -69,11 +69,11 @@ export class UserService extends Service<NetworkService> {
         app.ui.replace(ui.LOADING_SCENE);
     }
 
-    async loadMonye() {
+    public async loadMonye() {
         return await this._network.call(proto.money.c2s_load.create(), proto.money.s2c_load);
     }
 
-    async loadProfile() {
+    public async loadProfile() {
         return await this._network.call(proto.profile.c2s_load.create(), proto.profile.s2c_load);
     }
 }

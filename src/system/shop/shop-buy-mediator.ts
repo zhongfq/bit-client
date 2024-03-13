@@ -10,19 +10,19 @@ const { regClass, property } = Laya;
 
 @regClass()
 export class ShopBuyMediator extends Mediator {
-    declare owner: ShopBuyUI;
+    public declare owner: ShopBuyUI;
 
     private itemVo!: GoodsVo; //购买道具
     private costVo!: GoodsVo; //货币道具
 
-    override onAwake(): void {
+    public override onAwake(): void {
         this.itemVo = VoUtil.createVo(this.owner.openData.shopItem.refData.items[0].id);
         this.initUIEvent();
         this.initInfo();
     }
 
     //初始化UI
-    initInfo() {
+    public initInfo() {
         if (this.itemVo) {
             this.itemVo.goodsNumber = this.owner.openData.shopItem.refData.items[0].count;
             this.owner.icon.updateGoods(this.itemVo);
@@ -49,7 +49,7 @@ export class ShopBuyMediator extends Mediator {
     }
 
     //初始化UI事件监听
-    initUIEvent() {
+    public initUIEvent() {
         this.owner.btnClose.on(Laya.Event.CLICK, this.owner, this.owner.close);
         this.owner.slider.onSliderChange = () => {
             this.owner.icon.itemNumber = (
@@ -66,7 +66,7 @@ export class ShopBuyMediator extends Mediator {
     }
 
     //请求购买
-    async callBuy() {
+    public async callBuy() {
         app.service.shop
             .requestBuy({
                 shopId: this.owner.openData.shopId,

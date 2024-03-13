@@ -256,21 +256,45 @@
     ],
     "train": {
         "1001": {
+            "consume": [
+                {
+                    "count": 1,
+                    "id": 10101
+                }
+            ],
             "grow": 10,
             "id": 1001,
             "initial": 100
         },
         "1002": {
+            "consume": [
+                {
+                    "count": 1,
+                    "id": 10101
+                }
+            ],
             "grow": 2,
             "id": 1002,
             "initial": 100
         },
         "1003": {
+            "consume": [
+                {
+                    "count": 1,
+                    "id": 10101
+                }
+            ],
             "grow": 5,
             "id": 1003,
             "initial": 100
         },
         "1004": {
+            "consume": [
+                {
+                    "count": 1,
+                    "id": 10101
+                }
+            ],
             "grow": 1,
             "id": 1004,
             "initial": 100

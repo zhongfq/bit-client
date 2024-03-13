@@ -6,23 +6,23 @@ import { VO } from "../vo-base/vo";
  * 物品基类
  */
 export abstract class GoodsVo<IRef = any, Cmd = any> extends VO<IRef, Cmd> {
-    refTable!: any;
+    public refTable!: any;
     //获取物品refId
-    abstract get refId(): number;
+    public abstract get refId(): number;
     //获取物品数据库id
-    abstract override get id(): number;
+    public abstract override get id(): number;
     //物品类型
-    abstract get goodsType(): number;
+    public abstract get goodsType(): number;
     //获取描述
-    abstract get desc(): string;
+    public abstract get desc(): string;
     //获取图标路径
-    abstract get iconUrl(): string;
+    public abstract get iconUrl(): string;
     //品质
-    abstract get quality(): number;
+    public abstract get quality(): number;
     //品质框资源路径
-    abstract get qualitySkin(): string;
+    public abstract get qualitySkin(): string;
     //名字
-    abstract get name(): string;
+    public abstract get name(): string;
 
     //#region 外部注入数量
     //获取物品数量
@@ -32,11 +32,11 @@ export abstract class GoodsVo<IRef = any, Cmd = any> extends VO<IRef, Cmd> {
 
     private goodsNum: number | null = null;
 
-    get goodsNumberStr(): string {
+    public get goodsNumberStr(): string {
         return "" + this.goodsNumber;
     }
 
-    set goodsNumber(num: number) {
+    public set goodsNumber(num: number) {
         if (typeof num == "string") {
             this.goodsNum = Number(num);
         } else {
@@ -44,7 +44,7 @@ export abstract class GoodsVo<IRef = any, Cmd = any> extends VO<IRef, Cmd> {
         }
     }
 
-    get goodsNumber(): number {
+    public get goodsNumber(): number {
         if (this.goodsNum != null) {
             return this.goodsNum;
         }

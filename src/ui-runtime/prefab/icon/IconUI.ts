@@ -4,7 +4,7 @@ import { IconUIBase } from "./IconUI.generated";
 
 @regClass()
 export class IconUI extends IconUIBase {
-    override onAwake(): void {}
+    public override onAwake(): void {}
 
     public updateGoods(vo?: GoodsVo) {
         if (vo) {
@@ -16,7 +16,7 @@ export class IconUI extends IconUIBase {
         }
     }
 
-    set itemNumber(num: string) {
+    public set itemNumber(num: string) {
         this.labelNumber.text = num;
     }
 }

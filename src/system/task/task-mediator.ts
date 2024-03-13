@@ -11,10 +11,10 @@ const { regClass, property } = Laya;
 
 @regClass()
 export class TaskMediator extends Mediator {
-    declare owner: TaskUI;
+    public declare owner: TaskUI;
     private tlTaskData: TaskVo[] = [];
 
-    override onAwake(): void {
+    public override onAwake(): void {
         this.initUIEvent();
         this.initServiceEvent();
         this.tlTaskData.push(app.service.task.mainTask);
@@ -22,12 +22,12 @@ export class TaskMediator extends Mediator {
         this.updateList();
     }
 
-    initUIEvent() {
+    private initUIEvent() {
         this.owner.listTask.renderHandler = new Laya.Handler(this, this.onListRender);
         this.owner.listTask.mouseHandler = new Laya.Handler(this, this.onListClick);
     }
 
-    initServiceEvent() {
+    private initServiceEvent() {
         this.on(app.service.task, TaskService.TASK_UPDATE, () => {
             this.tlTaskData = [];
             this.tlTaskData.push(app.service.task.mainTask);
@@ -36,7 +36,7 @@ export class TaskMediator extends Mediator {
         });
     }
 
-    onListClick(e: Laya.Event, index: number) {
+    private onListClick(e: Laya.Event, index: number) {
         if (e.type == Laya.Event.CLICK) {
             if (e.target.name === "btnUse") {
                 const taskCmd = this.tlTaskData[index].cmd;
@@ -57,11 +57,11 @@ export class TaskMediator extends Mediator {
         }
     }
 
-    onListRender(item: TaskItemBox, index: number) {
+    private onListRender(item: TaskItemBox, index: number) {
         item.updateInfo(item.dataSource);
     }
 
-    updateList() {
+    private updateList() {
         this.owner.listTask.array = this.tlTaskData;
     }
 }

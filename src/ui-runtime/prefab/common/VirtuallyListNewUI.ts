@@ -4,26 +4,26 @@ import { VirtuallyListNewUIBase } from "./VirtuallyListNewUI.generated";
 
 @regClass()
 export class VirtuallyListNewUI extends VirtuallyListNewUIBase {
-    rectangle!: Laya.Rectangle;
+    public rectangle!: Laya.Rectangle;
 
-    override onAwake(): void {
+    public override onAwake(): void {
         this.rectangle = new Laya.Rectangle(0, 0, this.width, this.height);
         this.scrollRect = this.rectangle;
     }
 
-    setArrayData(val: any[]) {
+    public setArrayData(val: any[]) {
         this.getComponent(VirtuallyListNew).setArrayData(val);
     }
 
-    addData(val: any, isFist?: boolean) {
+    public addData(val: any, isFist?: boolean) {
         this.getComponent(VirtuallyListNew).addData(val, isFist);
     }
 
-    scrollTop() {
+    public scrollTop() {
         this.getComponent(VirtuallyListNew).scrollTop();
     }
 
-    scrollDown() {
+    public scrollDown() {
         this.getComponent(VirtuallyListNew).scrollDown();
     }
 }

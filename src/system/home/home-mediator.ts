@@ -15,12 +15,12 @@ import { TableUtil } from "../table/table-util";
 
 @regClass()
 export class MainMediator extends Mediator {
-    declare owner: HomeUI;
-    iframeElement: any;
-    divElement: any;
+    public declare owner: HomeUI;
+    public iframeElement: any;
+    public divElement: any;
 
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
-    override onAwake(): void {
+    public override onAwake(): void {
         this.initBtn();
         this._initServiceEvent();
         this._initChat();
@@ -50,13 +50,13 @@ export class MainMediator extends Mediator {
         }
     }
 
-    override onKeyDown(evt: Laya.Event): void {
+    public override onKeyDown(evt: Laya.Event): void {
         if (evt.ctrlKey && evt.keyCode == Laya.Keyboard.B) {
             app.ui.show(ui.GM);
         }
     }
 
-    initBtn() {
+    public initBtn() {
         this.owner.btnPve.on(Laya.Event.CLICK, () => {
             app.ui.replace(ui.PVE);
         });

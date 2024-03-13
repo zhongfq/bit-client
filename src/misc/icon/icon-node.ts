@@ -8,14 +8,14 @@ const { regClass, property } = Laya;
 
 @regClass()
 export class IconNode extends Laya.Script {
-    declare owner: IconUI;
+    public declare owner: IconUI;
 
     @property(Boolean)
-    isNoShowTips!: boolean;
+    public isNoShowTips!: boolean;
     private clickBack: Callback | null = null;
 
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
-    override onAwake(): void {
+    public override onAwake(): void {
         this.owner.on(Laya.Event.CLICK, (evn: Laya.Event) => {
             this.onIconClick(evn);
 
@@ -23,7 +23,7 @@ export class IconNode extends Laya.Script {
         });
     }
 
-    onIconClick(evn: Laya.Event) {
+    public onIconClick(evn: Laya.Event) {
         if (this.isNoShowTips && this.clickBack) {
             this.clickBack(evn);
             return;
@@ -58,7 +58,7 @@ export class IconNode extends Laya.Script {
         }
     }
 
-    setClickHandler(func: Callback | null) {
+    public setClickHandler(func: Callback | null) {
         this.clickBack = func;
     }
 }

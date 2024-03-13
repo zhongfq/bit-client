@@ -7,15 +7,15 @@ import { ChatCellUIBase } from "./ChatCellUI.generated";
 
 @regClass()
 export class ChatCellUI extends ChatCellUIBase {
-    msgData!: ChatMsgVo;
+    public msgData!: ChatMsgVo;
 
-    override set_dataSource(data: any) {
+    public override set_dataSource(data: any) {
         super.set_dataSource(data);
         this.msgData = data;
         this.updateInfo();
     }
 
-    updateInfo() {
+    public updateInfo() {
         const role = app.service.chat.chatRoleVoBag.get(this.msgData.cmd!.rid) as ChatRoleVo;
         if (!role) {
             return;

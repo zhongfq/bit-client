@@ -21,10 +21,10 @@ interface UpdateMailData {
  * @unread 未读
  */
 export class MailService extends Service<NetworkService> {
-    static readonly MAIL_UPDATE = "mail-update";
+    public static readonly MAIL_UPDATE = "mail-update";
     private _mail: Map<number, proto.mail.MailInfo> = new Map<number, proto.mail.MailInfo>();
 
-    constructor(network: NetworkService) {
+    public constructor(network: NetworkService) {
         super(network);
         this.handle(opcode.mail.s2c_load, this._onLoad);
         this.handle(opcode.mail.s2c_delete_mails, this._onDeleteMails);
@@ -157,7 +157,7 @@ export class MailService extends Service<NetworkService> {
     // rpc call
     // ------------------------------------------------------------------------
     //一键领取邮件
-    async oneClickReward() {
+    public async oneClickReward() {
         const ids: number[] = [];
         for (const [k, mail] of this._mail) {
             if (
@@ -171,7 +171,7 @@ export class MailService extends Service<NetworkService> {
     }
 
     //一键删除邮件
-    async oneClickDelete() {
+    public async oneClickDelete() {
         const ids: number[] = [];
         for (const [k, mail] of this._mail) {
             if (
@@ -184,22 +184,22 @@ export class MailService extends Service<NetworkService> {
         return await this.requestDeleteMails({ mailUids: ids });
     }
 
-    async load() {
+    public async load() {
         return await this._network.call(proto.mail.c2s_load.create(), proto.mail.s2c_load);
     }
 
-    async requestDeleteMails(data: proto.mail.Ic2s_delete_mails) {
+    public async requestDeleteMails(data: proto.mail.Ic2s_delete_mails) {
         return await this._network.call(
             proto.mail.c2s_delete_mails.create(data),
             proto.mail.s2c_delete_mails
         );
     }
 
-    async requestRead(data: proto.mail.Ic2s_read) {
+    public async requestRead(data: proto.mail.Ic2s_read) {
         return await this._network.call(proto.mail.c2s_read.create(data), proto.mail.s2c_read);
     }
 
-    async requestReceiveReward(data: proto.mail.Ic2s_receive_reward) {
+    public async requestReceiveReward(data: proto.mail.Ic2s_receive_reward) {
         return await this._network.call(
             proto.mail.c2s_receive_reward.create(data),
             proto.mail.s2c_receive_reward

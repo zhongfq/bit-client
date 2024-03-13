@@ -22298,6 +22298,3272 @@ $root.shop = (function() {
     return shop;
 })();
 
+$root.soldier = (function() {
+
+    /**
+     * Namespace soldier.
+     * @exports soldier
+     * @namespace
+     */
+    var soldier = {};
+
+    soldier.SoldierInfo = (function() {
+
+        /**
+         * Properties of a SoldierInfo.
+         * @memberof soldier
+         * @interface ISoldierInfo
+         * @property {number|null} [id] SoldierInfo id
+         * @property {number|null} [lv] SoldierInfo lv
+         * @property {Object.<string,number>|null} [attrs] SoldierInfo attrs
+         */
+
+        /**
+         * Constructs a new SoldierInfo.
+         * @memberof soldier
+         * @classdesc Represents a SoldierInfo.
+         * @implements ISoldierInfo
+         * @constructor
+         * @param {soldier.ISoldierInfo=} [properties] Properties to set
+         */
+        function SoldierInfo(properties) {
+            this.attrs = {};
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * SoldierInfo id.
+         * @member {number} id
+         * @memberof soldier.SoldierInfo
+         * @instance
+         */
+        SoldierInfo.prototype.id = 0;
+
+        /**
+         * SoldierInfo lv.
+         * @member {number} lv
+         * @memberof soldier.SoldierInfo
+         * @instance
+         */
+        SoldierInfo.prototype.lv = 0;
+
+        /**
+         * SoldierInfo attrs.
+         * @member {Object.<string,number>} attrs
+         * @memberof soldier.SoldierInfo
+         * @instance
+         */
+        SoldierInfo.prototype.attrs = $util.emptyObject;
+
+        /**
+         * Creates a new SoldierInfo instance using the specified properties.
+         * @function create
+         * @memberof soldier.SoldierInfo
+         * @static
+         * @param {soldier.ISoldierInfo=} [properties] Properties to set
+         * @returns {soldier.SoldierInfo} SoldierInfo instance
+         */
+        SoldierInfo.create = function create(properties) {
+            return new SoldierInfo(properties);
+        };
+
+        /**
+         * Encodes the specified SoldierInfo message. Does not implicitly {@link soldier.SoldierInfo.verify|verify} messages.
+         * @function encode
+         * @memberof soldier.SoldierInfo
+         * @static
+         * @param {soldier.ISoldierInfo} message SoldierInfo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SoldierInfo.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.id);
+            if (message.lv != null && Object.hasOwnProperty.call(message, "lv"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.lv);
+            if (message.attrs != null && Object.hasOwnProperty.call(message, "attrs"))
+                for (var keys = Object.keys(message.attrs), i = 0; i < keys.length; ++i)
+                    writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 0 =*/8).uint32(keys[i]).uint32(/* id 2, wireType 0 =*/16).uint32(message.attrs[keys[i]]).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified SoldierInfo message, length delimited. Does not implicitly {@link soldier.SoldierInfo.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof soldier.SoldierInfo
+         * @static
+         * @param {soldier.ISoldierInfo} message SoldierInfo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SoldierInfo.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a SoldierInfo message from the specified reader or buffer.
+         * @function decode
+         * @memberof soldier.SoldierInfo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {soldier.SoldierInfo} SoldierInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SoldierInfo.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.soldier.SoldierInfo(), key, value;
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.id = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.lv = reader.uint32();
+                        break;
+                    }
+                case 3: {
+                        if (message.attrs === $util.emptyObject)
+                            message.attrs = {};
+                        var end2 = reader.uint32() + reader.pos;
+                        key = 0;
+                        value = 0;
+                        while (reader.pos < end2) {
+                            var tag2 = reader.uint32();
+                            switch (tag2 >>> 3) {
+                            case 1:
+                                key = reader.uint32();
+                                break;
+                            case 2:
+                                value = reader.uint32();
+                                break;
+                            default:
+                                reader.skipType(tag2 & 7);
+                                break;
+                            }
+                        }
+                        message.attrs[key] = value;
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a SoldierInfo message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof soldier.SoldierInfo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {soldier.SoldierInfo} SoldierInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SoldierInfo.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a SoldierInfo message.
+         * @function verify
+         * @memberof soldier.SoldierInfo
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        SoldierInfo.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isInteger(message.id))
+                    return "id: integer expected";
+            if (message.lv != null && message.hasOwnProperty("lv"))
+                if (!$util.isInteger(message.lv))
+                    return "lv: integer expected";
+            if (message.attrs != null && message.hasOwnProperty("attrs")) {
+                if (!$util.isObject(message.attrs))
+                    return "attrs: object expected";
+                var key = Object.keys(message.attrs);
+                for (var i = 0; i < key.length; ++i) {
+                    if (!$util.key32Re.test(key[i]))
+                        return "attrs: integer key{k:uint32} expected";
+                    if (!$util.isInteger(message.attrs[key[i]]))
+                        return "attrs: integer{k:uint32} expected";
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a SoldierInfo message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof soldier.SoldierInfo
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {soldier.SoldierInfo} SoldierInfo
+         */
+        SoldierInfo.fromObject = function fromObject(object) {
+            if (object instanceof $root.soldier.SoldierInfo)
+                return object;
+            var message = new $root.soldier.SoldierInfo();
+            if (object.id != null)
+                message.id = object.id >>> 0;
+            if (object.lv != null)
+                message.lv = object.lv >>> 0;
+            if (object.attrs) {
+                if (typeof object.attrs !== "object")
+                    throw TypeError(".soldier.SoldierInfo.attrs: object expected");
+                message.attrs = {};
+                for (var keys = Object.keys(object.attrs), i = 0; i < keys.length; ++i)
+                    message.attrs[keys[i]] = object.attrs[keys[i]] >>> 0;
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a SoldierInfo message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof soldier.SoldierInfo
+         * @static
+         * @param {soldier.SoldierInfo} message SoldierInfo
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        SoldierInfo.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.objects || options.defaults)
+                object.attrs = {};
+            if (options.defaults) {
+                object.id = 0;
+                object.lv = 0;
+            }
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            if (message.lv != null && message.hasOwnProperty("lv"))
+                object.lv = message.lv;
+            var keys2;
+            if (message.attrs && (keys2 = Object.keys(message.attrs)).length) {
+                object.attrs = {};
+                for (var j = 0; j < keys2.length; ++j)
+                    object.attrs[keys2[j]] = message.attrs[keys2[j]];
+            }
+            return object;
+        };
+
+        /**
+         * Converts this SoldierInfo to JSON.
+         * @function toJSON
+         * @memberof soldier.SoldierInfo
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        SoldierInfo.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for SoldierInfo
+         * @function getTypeUrl
+         * @memberof soldier.SoldierInfo
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        SoldierInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/soldier.SoldierInfo";
+        };
+
+        return SoldierInfo;
+    })();
+
+    soldier.PendantInfo = (function() {
+
+        /**
+         * Properties of a PendantInfo.
+         * @memberof soldier
+         * @interface IPendantInfo
+         * @property {number|null} [id] PendantInfo id
+         * @property {number|null} [lv] PendantInfo lv
+         */
+
+        /**
+         * Constructs a new PendantInfo.
+         * @memberof soldier
+         * @classdesc Represents a PendantInfo.
+         * @implements IPendantInfo
+         * @constructor
+         * @param {soldier.IPendantInfo=} [properties] Properties to set
+         */
+        function PendantInfo(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * PendantInfo id.
+         * @member {number} id
+         * @memberof soldier.PendantInfo
+         * @instance
+         */
+        PendantInfo.prototype.id = 0;
+
+        /**
+         * PendantInfo lv.
+         * @member {number} lv
+         * @memberof soldier.PendantInfo
+         * @instance
+         */
+        PendantInfo.prototype.lv = 0;
+
+        /**
+         * Creates a new PendantInfo instance using the specified properties.
+         * @function create
+         * @memberof soldier.PendantInfo
+         * @static
+         * @param {soldier.IPendantInfo=} [properties] Properties to set
+         * @returns {soldier.PendantInfo} PendantInfo instance
+         */
+        PendantInfo.create = function create(properties) {
+            return new PendantInfo(properties);
+        };
+
+        /**
+         * Encodes the specified PendantInfo message. Does not implicitly {@link soldier.PendantInfo.verify|verify} messages.
+         * @function encode
+         * @memberof soldier.PendantInfo
+         * @static
+         * @param {soldier.IPendantInfo} message PendantInfo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        PendantInfo.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.id);
+            if (message.lv != null && Object.hasOwnProperty.call(message, "lv"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.lv);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified PendantInfo message, length delimited. Does not implicitly {@link soldier.PendantInfo.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof soldier.PendantInfo
+         * @static
+         * @param {soldier.IPendantInfo} message PendantInfo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        PendantInfo.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a PendantInfo message from the specified reader or buffer.
+         * @function decode
+         * @memberof soldier.PendantInfo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {soldier.PendantInfo} PendantInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        PendantInfo.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.soldier.PendantInfo();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.id = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.lv = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a PendantInfo message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof soldier.PendantInfo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {soldier.PendantInfo} PendantInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        PendantInfo.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a PendantInfo message.
+         * @function verify
+         * @memberof soldier.PendantInfo
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        PendantInfo.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isInteger(message.id))
+                    return "id: integer expected";
+            if (message.lv != null && message.hasOwnProperty("lv"))
+                if (!$util.isInteger(message.lv))
+                    return "lv: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a PendantInfo message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof soldier.PendantInfo
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {soldier.PendantInfo} PendantInfo
+         */
+        PendantInfo.fromObject = function fromObject(object) {
+            if (object instanceof $root.soldier.PendantInfo)
+                return object;
+            var message = new $root.soldier.PendantInfo();
+            if (object.id != null)
+                message.id = object.id >>> 0;
+            if (object.lv != null)
+                message.lv = object.lv >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a PendantInfo message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof soldier.PendantInfo
+         * @static
+         * @param {soldier.PendantInfo} message PendantInfo
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        PendantInfo.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.id = 0;
+                object.lv = 0;
+            }
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            if (message.lv != null && message.hasOwnProperty("lv"))
+                object.lv = message.lv;
+            return object;
+        };
+
+        /**
+         * Converts this PendantInfo to JSON.
+         * @function toJSON
+         * @memberof soldier.PendantInfo
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        PendantInfo.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for PendantInfo
+         * @function getTypeUrl
+         * @memberof soldier.PendantInfo
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        PendantInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/soldier.PendantInfo";
+        };
+
+        return PendantInfo;
+    })();
+
+    soldier.TrainInfo = (function() {
+
+        /**
+         * Properties of a TrainInfo.
+         * @memberof soldier
+         * @interface ITrainInfo
+         * @property {number|null} [id] TrainInfo id
+         * @property {number|null} [lv] TrainInfo lv
+         */
+
+        /**
+         * Constructs a new TrainInfo.
+         * @memberof soldier
+         * @classdesc Represents a TrainInfo.
+         * @implements ITrainInfo
+         * @constructor
+         * @param {soldier.ITrainInfo=} [properties] Properties to set
+         */
+        function TrainInfo(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * TrainInfo id.
+         * @member {number} id
+         * @memberof soldier.TrainInfo
+         * @instance
+         */
+        TrainInfo.prototype.id = 0;
+
+        /**
+         * TrainInfo lv.
+         * @member {number} lv
+         * @memberof soldier.TrainInfo
+         * @instance
+         */
+        TrainInfo.prototype.lv = 0;
+
+        /**
+         * Creates a new TrainInfo instance using the specified properties.
+         * @function create
+         * @memberof soldier.TrainInfo
+         * @static
+         * @param {soldier.ITrainInfo=} [properties] Properties to set
+         * @returns {soldier.TrainInfo} TrainInfo instance
+         */
+        TrainInfo.create = function create(properties) {
+            return new TrainInfo(properties);
+        };
+
+        /**
+         * Encodes the specified TrainInfo message. Does not implicitly {@link soldier.TrainInfo.verify|verify} messages.
+         * @function encode
+         * @memberof soldier.TrainInfo
+         * @static
+         * @param {soldier.ITrainInfo} message TrainInfo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        TrainInfo.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.id);
+            if (message.lv != null && Object.hasOwnProperty.call(message, "lv"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.lv);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified TrainInfo message, length delimited. Does not implicitly {@link soldier.TrainInfo.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof soldier.TrainInfo
+         * @static
+         * @param {soldier.ITrainInfo} message TrainInfo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        TrainInfo.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a TrainInfo message from the specified reader or buffer.
+         * @function decode
+         * @memberof soldier.TrainInfo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {soldier.TrainInfo} TrainInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        TrainInfo.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.soldier.TrainInfo();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.id = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.lv = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a TrainInfo message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof soldier.TrainInfo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {soldier.TrainInfo} TrainInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        TrainInfo.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a TrainInfo message.
+         * @function verify
+         * @memberof soldier.TrainInfo
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        TrainInfo.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isInteger(message.id))
+                    return "id: integer expected";
+            if (message.lv != null && message.hasOwnProperty("lv"))
+                if (!$util.isInteger(message.lv))
+                    return "lv: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a TrainInfo message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof soldier.TrainInfo
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {soldier.TrainInfo} TrainInfo
+         */
+        TrainInfo.fromObject = function fromObject(object) {
+            if (object instanceof $root.soldier.TrainInfo)
+                return object;
+            var message = new $root.soldier.TrainInfo();
+            if (object.id != null)
+                message.id = object.id >>> 0;
+            if (object.lv != null)
+                message.lv = object.lv >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a TrainInfo message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof soldier.TrainInfo
+         * @static
+         * @param {soldier.TrainInfo} message TrainInfo
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        TrainInfo.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.id = 0;
+                object.lv = 0;
+            }
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            if (message.lv != null && message.hasOwnProperty("lv"))
+                object.lv = message.lv;
+            return object;
+        };
+
+        /**
+         * Converts this TrainInfo to JSON.
+         * @function toJSON
+         * @memberof soldier.TrainInfo
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        TrainInfo.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for TrainInfo
+         * @function getTypeUrl
+         * @memberof soldier.TrainInfo
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        TrainInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/soldier.TrainInfo";
+        };
+
+        return TrainInfo;
+    })();
+
+    soldier.c2s_load_soldier = (function() {
+
+        /**
+         * Properties of a c2s_load_soldier.
+         * @memberof soldier
+         * @interface Ic2s_load_soldier
+         */
+
+        /**
+         * Constructs a new c2s_load_soldier.
+         * @memberof soldier
+         * @classdesc Represents a c2s_load_soldier.
+         * @implements Ic2s_load_soldier
+         * @constructor
+         * @param {soldier.Ic2s_load_soldier=} [properties] Properties to set
+         */
+        function c2s_load_soldier(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Creates a new c2s_load_soldier instance using the specified properties.
+         * @function create
+         * @memberof soldier.c2s_load_soldier
+         * @static
+         * @param {soldier.Ic2s_load_soldier=} [properties] Properties to set
+         * @returns {soldier.c2s_load_soldier} c2s_load_soldier instance
+         */
+        c2s_load_soldier.create = function create(properties) {
+            return new c2s_load_soldier(properties);
+        };
+
+        /**
+         * Encodes the specified c2s_load_soldier message. Does not implicitly {@link soldier.c2s_load_soldier.verify|verify} messages.
+         * @function encode
+         * @memberof soldier.c2s_load_soldier
+         * @static
+         * @param {soldier.Ic2s_load_soldier} message c2s_load_soldier message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_load_soldier.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified c2s_load_soldier message, length delimited. Does not implicitly {@link soldier.c2s_load_soldier.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof soldier.c2s_load_soldier
+         * @static
+         * @param {soldier.Ic2s_load_soldier} message c2s_load_soldier message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_load_soldier.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a c2s_load_soldier message from the specified reader or buffer.
+         * @function decode
+         * @memberof soldier.c2s_load_soldier
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {soldier.c2s_load_soldier} c2s_load_soldier
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_load_soldier.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.soldier.c2s_load_soldier();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a c2s_load_soldier message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof soldier.c2s_load_soldier
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {soldier.c2s_load_soldier} c2s_load_soldier
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_load_soldier.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a c2s_load_soldier message.
+         * @function verify
+         * @memberof soldier.c2s_load_soldier
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        c2s_load_soldier.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+
+        /**
+         * Creates a c2s_load_soldier message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof soldier.c2s_load_soldier
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {soldier.c2s_load_soldier} c2s_load_soldier
+         */
+        c2s_load_soldier.fromObject = function fromObject(object) {
+            if (object instanceof $root.soldier.c2s_load_soldier)
+                return object;
+            return new $root.soldier.c2s_load_soldier();
+        };
+
+        /**
+         * Creates a plain object from a c2s_load_soldier message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof soldier.c2s_load_soldier
+         * @static
+         * @param {soldier.c2s_load_soldier} message c2s_load_soldier
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        c2s_load_soldier.toObject = function toObject() {
+            return {};
+        };
+
+        /**
+         * Converts this c2s_load_soldier to JSON.
+         * @function toJSON
+         * @memberof soldier.c2s_load_soldier
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        c2s_load_soldier.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for c2s_load_soldier
+         * @function getTypeUrl
+         * @memberof soldier.c2s_load_soldier
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        c2s_load_soldier.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/soldier.c2s_load_soldier";
+        };
+
+        return c2s_load_soldier;
+    })();
+
+    soldier.s2c_load_soldier = (function() {
+
+        /**
+         * Properties of a s2c_load_soldier.
+         * @memberof soldier
+         * @interface Is2c_load_soldier
+         * @property {number|null} [err] s2c_load_soldier err
+         * @property {Array.<soldier.ISoldierInfo>|null} [soldiers] s2c_load_soldier soldiers
+         */
+
+        /**
+         * Constructs a new s2c_load_soldier.
+         * @memberof soldier
+         * @classdesc Represents a s2c_load_soldier.
+         * @implements Is2c_load_soldier
+         * @constructor
+         * @param {soldier.Is2c_load_soldier=} [properties] Properties to set
+         */
+        function s2c_load_soldier(properties) {
+            this.soldiers = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * s2c_load_soldier err.
+         * @member {number} err
+         * @memberof soldier.s2c_load_soldier
+         * @instance
+         */
+        s2c_load_soldier.prototype.err = 0;
+
+        /**
+         * s2c_load_soldier soldiers.
+         * @member {Array.<soldier.ISoldierInfo>} soldiers
+         * @memberof soldier.s2c_load_soldier
+         * @instance
+         */
+        s2c_load_soldier.prototype.soldiers = $util.emptyArray;
+
+        /**
+         * Creates a new s2c_load_soldier instance using the specified properties.
+         * @function create
+         * @memberof soldier.s2c_load_soldier
+         * @static
+         * @param {soldier.Is2c_load_soldier=} [properties] Properties to set
+         * @returns {soldier.s2c_load_soldier} s2c_load_soldier instance
+         */
+        s2c_load_soldier.create = function create(properties) {
+            return new s2c_load_soldier(properties);
+        };
+
+        /**
+         * Encodes the specified s2c_load_soldier message. Does not implicitly {@link soldier.s2c_load_soldier.verify|verify} messages.
+         * @function encode
+         * @memberof soldier.s2c_load_soldier
+         * @static
+         * @param {soldier.Is2c_load_soldier} message s2c_load_soldier message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_load_soldier.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
+            if (message.soldiers != null && message.soldiers.length)
+                for (var i = 0; i < message.soldiers.length; ++i)
+                    $root.soldier.SoldierInfo.encode(message.soldiers[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified s2c_load_soldier message, length delimited. Does not implicitly {@link soldier.s2c_load_soldier.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof soldier.s2c_load_soldier
+         * @static
+         * @param {soldier.Is2c_load_soldier} message s2c_load_soldier message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_load_soldier.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a s2c_load_soldier message from the specified reader or buffer.
+         * @function decode
+         * @memberof soldier.s2c_load_soldier
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {soldier.s2c_load_soldier} s2c_load_soldier
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_load_soldier.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.soldier.s2c_load_soldier();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.err = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        if (!(message.soldiers && message.soldiers.length))
+                            message.soldiers = [];
+                        message.soldiers.push($root.soldier.SoldierInfo.decode(reader, reader.uint32()));
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a s2c_load_soldier message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof soldier.s2c_load_soldier
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {soldier.s2c_load_soldier} s2c_load_soldier
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_load_soldier.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a s2c_load_soldier message.
+         * @function verify
+         * @memberof soldier.s2c_load_soldier
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        s2c_load_soldier.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.err != null && message.hasOwnProperty("err"))
+                if (!$util.isInteger(message.err))
+                    return "err: integer expected";
+            if (message.soldiers != null && message.hasOwnProperty("soldiers")) {
+                if (!Array.isArray(message.soldiers))
+                    return "soldiers: array expected";
+                for (var i = 0; i < message.soldiers.length; ++i) {
+                    var error = $root.soldier.SoldierInfo.verify(message.soldiers[i]);
+                    if (error)
+                        return "soldiers." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a s2c_load_soldier message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof soldier.s2c_load_soldier
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {soldier.s2c_load_soldier} s2c_load_soldier
+         */
+        s2c_load_soldier.fromObject = function fromObject(object) {
+            if (object instanceof $root.soldier.s2c_load_soldier)
+                return object;
+            var message = new $root.soldier.s2c_load_soldier();
+            if (object.err != null)
+                message.err = object.err >>> 0;
+            if (object.soldiers) {
+                if (!Array.isArray(object.soldiers))
+                    throw TypeError(".soldier.s2c_load_soldier.soldiers: array expected");
+                message.soldiers = [];
+                for (var i = 0; i < object.soldiers.length; ++i) {
+                    if (typeof object.soldiers[i] !== "object")
+                        throw TypeError(".soldier.s2c_load_soldier.soldiers: object expected");
+                    message.soldiers[i] = $root.soldier.SoldierInfo.fromObject(object.soldiers[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a s2c_load_soldier message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof soldier.s2c_load_soldier
+         * @static
+         * @param {soldier.s2c_load_soldier} message s2c_load_soldier
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        s2c_load_soldier.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.soldiers = [];
+            if (options.defaults)
+                object.err = 0;
+            if (message.err != null && message.hasOwnProperty("err"))
+                object.err = message.err;
+            if (message.soldiers && message.soldiers.length) {
+                object.soldiers = [];
+                for (var j = 0; j < message.soldiers.length; ++j)
+                    object.soldiers[j] = $root.soldier.SoldierInfo.toObject(message.soldiers[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this s2c_load_soldier to JSON.
+         * @function toJSON
+         * @memberof soldier.s2c_load_soldier
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        s2c_load_soldier.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for s2c_load_soldier
+         * @function getTypeUrl
+         * @memberof soldier.s2c_load_soldier
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        s2c_load_soldier.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/soldier.s2c_load_soldier";
+        };
+
+        return s2c_load_soldier;
+    })();
+
+    soldier.c2s_load_pendant = (function() {
+
+        /**
+         * Properties of a c2s_load_pendant.
+         * @memberof soldier
+         * @interface Ic2s_load_pendant
+         */
+
+        /**
+         * Constructs a new c2s_load_pendant.
+         * @memberof soldier
+         * @classdesc Represents a c2s_load_pendant.
+         * @implements Ic2s_load_pendant
+         * @constructor
+         * @param {soldier.Ic2s_load_pendant=} [properties] Properties to set
+         */
+        function c2s_load_pendant(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Creates a new c2s_load_pendant instance using the specified properties.
+         * @function create
+         * @memberof soldier.c2s_load_pendant
+         * @static
+         * @param {soldier.Ic2s_load_pendant=} [properties] Properties to set
+         * @returns {soldier.c2s_load_pendant} c2s_load_pendant instance
+         */
+        c2s_load_pendant.create = function create(properties) {
+            return new c2s_load_pendant(properties);
+        };
+
+        /**
+         * Encodes the specified c2s_load_pendant message. Does not implicitly {@link soldier.c2s_load_pendant.verify|verify} messages.
+         * @function encode
+         * @memberof soldier.c2s_load_pendant
+         * @static
+         * @param {soldier.Ic2s_load_pendant} message c2s_load_pendant message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_load_pendant.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified c2s_load_pendant message, length delimited. Does not implicitly {@link soldier.c2s_load_pendant.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof soldier.c2s_load_pendant
+         * @static
+         * @param {soldier.Ic2s_load_pendant} message c2s_load_pendant message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_load_pendant.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a c2s_load_pendant message from the specified reader or buffer.
+         * @function decode
+         * @memberof soldier.c2s_load_pendant
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {soldier.c2s_load_pendant} c2s_load_pendant
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_load_pendant.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.soldier.c2s_load_pendant();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a c2s_load_pendant message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof soldier.c2s_load_pendant
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {soldier.c2s_load_pendant} c2s_load_pendant
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_load_pendant.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a c2s_load_pendant message.
+         * @function verify
+         * @memberof soldier.c2s_load_pendant
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        c2s_load_pendant.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+
+        /**
+         * Creates a c2s_load_pendant message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof soldier.c2s_load_pendant
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {soldier.c2s_load_pendant} c2s_load_pendant
+         */
+        c2s_load_pendant.fromObject = function fromObject(object) {
+            if (object instanceof $root.soldier.c2s_load_pendant)
+                return object;
+            return new $root.soldier.c2s_load_pendant();
+        };
+
+        /**
+         * Creates a plain object from a c2s_load_pendant message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof soldier.c2s_load_pendant
+         * @static
+         * @param {soldier.c2s_load_pendant} message c2s_load_pendant
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        c2s_load_pendant.toObject = function toObject() {
+            return {};
+        };
+
+        /**
+         * Converts this c2s_load_pendant to JSON.
+         * @function toJSON
+         * @memberof soldier.c2s_load_pendant
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        c2s_load_pendant.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for c2s_load_pendant
+         * @function getTypeUrl
+         * @memberof soldier.c2s_load_pendant
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        c2s_load_pendant.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/soldier.c2s_load_pendant";
+        };
+
+        return c2s_load_pendant;
+    })();
+
+    soldier.s2c_load_pendant = (function() {
+
+        /**
+         * Properties of a s2c_load_pendant.
+         * @memberof soldier
+         * @interface Is2c_load_pendant
+         * @property {number|null} [err] s2c_load_pendant err
+         * @property {Array.<soldier.IPendantInfo>|null} [pendants] s2c_load_pendant pendants
+         */
+
+        /**
+         * Constructs a new s2c_load_pendant.
+         * @memberof soldier
+         * @classdesc Represents a s2c_load_pendant.
+         * @implements Is2c_load_pendant
+         * @constructor
+         * @param {soldier.Is2c_load_pendant=} [properties] Properties to set
+         */
+        function s2c_load_pendant(properties) {
+            this.pendants = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * s2c_load_pendant err.
+         * @member {number} err
+         * @memberof soldier.s2c_load_pendant
+         * @instance
+         */
+        s2c_load_pendant.prototype.err = 0;
+
+        /**
+         * s2c_load_pendant pendants.
+         * @member {Array.<soldier.IPendantInfo>} pendants
+         * @memberof soldier.s2c_load_pendant
+         * @instance
+         */
+        s2c_load_pendant.prototype.pendants = $util.emptyArray;
+
+        /**
+         * Creates a new s2c_load_pendant instance using the specified properties.
+         * @function create
+         * @memberof soldier.s2c_load_pendant
+         * @static
+         * @param {soldier.Is2c_load_pendant=} [properties] Properties to set
+         * @returns {soldier.s2c_load_pendant} s2c_load_pendant instance
+         */
+        s2c_load_pendant.create = function create(properties) {
+            return new s2c_load_pendant(properties);
+        };
+
+        /**
+         * Encodes the specified s2c_load_pendant message. Does not implicitly {@link soldier.s2c_load_pendant.verify|verify} messages.
+         * @function encode
+         * @memberof soldier.s2c_load_pendant
+         * @static
+         * @param {soldier.Is2c_load_pendant} message s2c_load_pendant message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_load_pendant.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
+            if (message.pendants != null && message.pendants.length)
+                for (var i = 0; i < message.pendants.length; ++i)
+                    $root.soldier.PendantInfo.encode(message.pendants[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified s2c_load_pendant message, length delimited. Does not implicitly {@link soldier.s2c_load_pendant.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof soldier.s2c_load_pendant
+         * @static
+         * @param {soldier.Is2c_load_pendant} message s2c_load_pendant message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_load_pendant.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a s2c_load_pendant message from the specified reader or buffer.
+         * @function decode
+         * @memberof soldier.s2c_load_pendant
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {soldier.s2c_load_pendant} s2c_load_pendant
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_load_pendant.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.soldier.s2c_load_pendant();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.err = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        if (!(message.pendants && message.pendants.length))
+                            message.pendants = [];
+                        message.pendants.push($root.soldier.PendantInfo.decode(reader, reader.uint32()));
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a s2c_load_pendant message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof soldier.s2c_load_pendant
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {soldier.s2c_load_pendant} s2c_load_pendant
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_load_pendant.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a s2c_load_pendant message.
+         * @function verify
+         * @memberof soldier.s2c_load_pendant
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        s2c_load_pendant.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.err != null && message.hasOwnProperty("err"))
+                if (!$util.isInteger(message.err))
+                    return "err: integer expected";
+            if (message.pendants != null && message.hasOwnProperty("pendants")) {
+                if (!Array.isArray(message.pendants))
+                    return "pendants: array expected";
+                for (var i = 0; i < message.pendants.length; ++i) {
+                    var error = $root.soldier.PendantInfo.verify(message.pendants[i]);
+                    if (error)
+                        return "pendants." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a s2c_load_pendant message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof soldier.s2c_load_pendant
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {soldier.s2c_load_pendant} s2c_load_pendant
+         */
+        s2c_load_pendant.fromObject = function fromObject(object) {
+            if (object instanceof $root.soldier.s2c_load_pendant)
+                return object;
+            var message = new $root.soldier.s2c_load_pendant();
+            if (object.err != null)
+                message.err = object.err >>> 0;
+            if (object.pendants) {
+                if (!Array.isArray(object.pendants))
+                    throw TypeError(".soldier.s2c_load_pendant.pendants: array expected");
+                message.pendants = [];
+                for (var i = 0; i < object.pendants.length; ++i) {
+                    if (typeof object.pendants[i] !== "object")
+                        throw TypeError(".soldier.s2c_load_pendant.pendants: object expected");
+                    message.pendants[i] = $root.soldier.PendantInfo.fromObject(object.pendants[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a s2c_load_pendant message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof soldier.s2c_load_pendant
+         * @static
+         * @param {soldier.s2c_load_pendant} message s2c_load_pendant
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        s2c_load_pendant.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.pendants = [];
+            if (options.defaults)
+                object.err = 0;
+            if (message.err != null && message.hasOwnProperty("err"))
+                object.err = message.err;
+            if (message.pendants && message.pendants.length) {
+                object.pendants = [];
+                for (var j = 0; j < message.pendants.length; ++j)
+                    object.pendants[j] = $root.soldier.PendantInfo.toObject(message.pendants[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this s2c_load_pendant to JSON.
+         * @function toJSON
+         * @memberof soldier.s2c_load_pendant
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        s2c_load_pendant.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for s2c_load_pendant
+         * @function getTypeUrl
+         * @memberof soldier.s2c_load_pendant
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        s2c_load_pendant.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/soldier.s2c_load_pendant";
+        };
+
+        return s2c_load_pendant;
+    })();
+
+    soldier.c2s_load_train = (function() {
+
+        /**
+         * Properties of a c2s_load_train.
+         * @memberof soldier
+         * @interface Ic2s_load_train
+         */
+
+        /**
+         * Constructs a new c2s_load_train.
+         * @memberof soldier
+         * @classdesc Represents a c2s_load_train.
+         * @implements Ic2s_load_train
+         * @constructor
+         * @param {soldier.Ic2s_load_train=} [properties] Properties to set
+         */
+        function c2s_load_train(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Creates a new c2s_load_train instance using the specified properties.
+         * @function create
+         * @memberof soldier.c2s_load_train
+         * @static
+         * @param {soldier.Ic2s_load_train=} [properties] Properties to set
+         * @returns {soldier.c2s_load_train} c2s_load_train instance
+         */
+        c2s_load_train.create = function create(properties) {
+            return new c2s_load_train(properties);
+        };
+
+        /**
+         * Encodes the specified c2s_load_train message. Does not implicitly {@link soldier.c2s_load_train.verify|verify} messages.
+         * @function encode
+         * @memberof soldier.c2s_load_train
+         * @static
+         * @param {soldier.Ic2s_load_train} message c2s_load_train message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_load_train.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified c2s_load_train message, length delimited. Does not implicitly {@link soldier.c2s_load_train.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof soldier.c2s_load_train
+         * @static
+         * @param {soldier.Ic2s_load_train} message c2s_load_train message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_load_train.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a c2s_load_train message from the specified reader or buffer.
+         * @function decode
+         * @memberof soldier.c2s_load_train
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {soldier.c2s_load_train} c2s_load_train
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_load_train.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.soldier.c2s_load_train();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a c2s_load_train message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof soldier.c2s_load_train
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {soldier.c2s_load_train} c2s_load_train
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_load_train.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a c2s_load_train message.
+         * @function verify
+         * @memberof soldier.c2s_load_train
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        c2s_load_train.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+
+        /**
+         * Creates a c2s_load_train message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof soldier.c2s_load_train
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {soldier.c2s_load_train} c2s_load_train
+         */
+        c2s_load_train.fromObject = function fromObject(object) {
+            if (object instanceof $root.soldier.c2s_load_train)
+                return object;
+            return new $root.soldier.c2s_load_train();
+        };
+
+        /**
+         * Creates a plain object from a c2s_load_train message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof soldier.c2s_load_train
+         * @static
+         * @param {soldier.c2s_load_train} message c2s_load_train
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        c2s_load_train.toObject = function toObject() {
+            return {};
+        };
+
+        /**
+         * Converts this c2s_load_train to JSON.
+         * @function toJSON
+         * @memberof soldier.c2s_load_train
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        c2s_load_train.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for c2s_load_train
+         * @function getTypeUrl
+         * @memberof soldier.c2s_load_train
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        c2s_load_train.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/soldier.c2s_load_train";
+        };
+
+        return c2s_load_train;
+    })();
+
+    soldier.s2c_load_train = (function() {
+
+        /**
+         * Properties of a s2c_load_train.
+         * @memberof soldier
+         * @interface Is2c_load_train
+         * @property {number|null} [err] s2c_load_train err
+         * @property {Array.<soldier.ITrainInfo>|null} [trains] s2c_load_train trains
+         */
+
+        /**
+         * Constructs a new s2c_load_train.
+         * @memberof soldier
+         * @classdesc Represents a s2c_load_train.
+         * @implements Is2c_load_train
+         * @constructor
+         * @param {soldier.Is2c_load_train=} [properties] Properties to set
+         */
+        function s2c_load_train(properties) {
+            this.trains = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * s2c_load_train err.
+         * @member {number} err
+         * @memberof soldier.s2c_load_train
+         * @instance
+         */
+        s2c_load_train.prototype.err = 0;
+
+        /**
+         * s2c_load_train trains.
+         * @member {Array.<soldier.ITrainInfo>} trains
+         * @memberof soldier.s2c_load_train
+         * @instance
+         */
+        s2c_load_train.prototype.trains = $util.emptyArray;
+
+        /**
+         * Creates a new s2c_load_train instance using the specified properties.
+         * @function create
+         * @memberof soldier.s2c_load_train
+         * @static
+         * @param {soldier.Is2c_load_train=} [properties] Properties to set
+         * @returns {soldier.s2c_load_train} s2c_load_train instance
+         */
+        s2c_load_train.create = function create(properties) {
+            return new s2c_load_train(properties);
+        };
+
+        /**
+         * Encodes the specified s2c_load_train message. Does not implicitly {@link soldier.s2c_load_train.verify|verify} messages.
+         * @function encode
+         * @memberof soldier.s2c_load_train
+         * @static
+         * @param {soldier.Is2c_load_train} message s2c_load_train message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_load_train.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
+            if (message.trains != null && message.trains.length)
+                for (var i = 0; i < message.trains.length; ++i)
+                    $root.soldier.TrainInfo.encode(message.trains[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified s2c_load_train message, length delimited. Does not implicitly {@link soldier.s2c_load_train.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof soldier.s2c_load_train
+         * @static
+         * @param {soldier.Is2c_load_train} message s2c_load_train message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_load_train.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a s2c_load_train message from the specified reader or buffer.
+         * @function decode
+         * @memberof soldier.s2c_load_train
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {soldier.s2c_load_train} s2c_load_train
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_load_train.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.soldier.s2c_load_train();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.err = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        if (!(message.trains && message.trains.length))
+                            message.trains = [];
+                        message.trains.push($root.soldier.TrainInfo.decode(reader, reader.uint32()));
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a s2c_load_train message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof soldier.s2c_load_train
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {soldier.s2c_load_train} s2c_load_train
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_load_train.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a s2c_load_train message.
+         * @function verify
+         * @memberof soldier.s2c_load_train
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        s2c_load_train.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.err != null && message.hasOwnProperty("err"))
+                if (!$util.isInteger(message.err))
+                    return "err: integer expected";
+            if (message.trains != null && message.hasOwnProperty("trains")) {
+                if (!Array.isArray(message.trains))
+                    return "trains: array expected";
+                for (var i = 0; i < message.trains.length; ++i) {
+                    var error = $root.soldier.TrainInfo.verify(message.trains[i]);
+                    if (error)
+                        return "trains." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a s2c_load_train message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof soldier.s2c_load_train
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {soldier.s2c_load_train} s2c_load_train
+         */
+        s2c_load_train.fromObject = function fromObject(object) {
+            if (object instanceof $root.soldier.s2c_load_train)
+                return object;
+            var message = new $root.soldier.s2c_load_train();
+            if (object.err != null)
+                message.err = object.err >>> 0;
+            if (object.trains) {
+                if (!Array.isArray(object.trains))
+                    throw TypeError(".soldier.s2c_load_train.trains: array expected");
+                message.trains = [];
+                for (var i = 0; i < object.trains.length; ++i) {
+                    if (typeof object.trains[i] !== "object")
+                        throw TypeError(".soldier.s2c_load_train.trains: object expected");
+                    message.trains[i] = $root.soldier.TrainInfo.fromObject(object.trains[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a s2c_load_train message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof soldier.s2c_load_train
+         * @static
+         * @param {soldier.s2c_load_train} message s2c_load_train
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        s2c_load_train.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.trains = [];
+            if (options.defaults)
+                object.err = 0;
+            if (message.err != null && message.hasOwnProperty("err"))
+                object.err = message.err;
+            if (message.trains && message.trains.length) {
+                object.trains = [];
+                for (var j = 0; j < message.trains.length; ++j)
+                    object.trains[j] = $root.soldier.TrainInfo.toObject(message.trains[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this s2c_load_train to JSON.
+         * @function toJSON
+         * @memberof soldier.s2c_load_train
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        s2c_load_train.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for s2c_load_train
+         * @function getTypeUrl
+         * @memberof soldier.s2c_load_train
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        s2c_load_train.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/soldier.s2c_load_train";
+        };
+
+        return s2c_load_train;
+    })();
+
+    soldier.c2s_soldier_upgrade = (function() {
+
+        /**
+         * Properties of a c2s_soldier_upgrade.
+         * @memberof soldier
+         * @interface Ic2s_soldier_upgrade
+         * @property {number|null} [id] c2s_soldier_upgrade id
+         */
+
+        /**
+         * Constructs a new c2s_soldier_upgrade.
+         * @memberof soldier
+         * @classdesc Represents a c2s_soldier_upgrade.
+         * @implements Ic2s_soldier_upgrade
+         * @constructor
+         * @param {soldier.Ic2s_soldier_upgrade=} [properties] Properties to set
+         */
+        function c2s_soldier_upgrade(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * c2s_soldier_upgrade id.
+         * @member {number} id
+         * @memberof soldier.c2s_soldier_upgrade
+         * @instance
+         */
+        c2s_soldier_upgrade.prototype.id = 0;
+
+        /**
+         * Creates a new c2s_soldier_upgrade instance using the specified properties.
+         * @function create
+         * @memberof soldier.c2s_soldier_upgrade
+         * @static
+         * @param {soldier.Ic2s_soldier_upgrade=} [properties] Properties to set
+         * @returns {soldier.c2s_soldier_upgrade} c2s_soldier_upgrade instance
+         */
+        c2s_soldier_upgrade.create = function create(properties) {
+            return new c2s_soldier_upgrade(properties);
+        };
+
+        /**
+         * Encodes the specified c2s_soldier_upgrade message. Does not implicitly {@link soldier.c2s_soldier_upgrade.verify|verify} messages.
+         * @function encode
+         * @memberof soldier.c2s_soldier_upgrade
+         * @static
+         * @param {soldier.Ic2s_soldier_upgrade} message c2s_soldier_upgrade message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_soldier_upgrade.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.id);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified c2s_soldier_upgrade message, length delimited. Does not implicitly {@link soldier.c2s_soldier_upgrade.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof soldier.c2s_soldier_upgrade
+         * @static
+         * @param {soldier.Ic2s_soldier_upgrade} message c2s_soldier_upgrade message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_soldier_upgrade.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a c2s_soldier_upgrade message from the specified reader or buffer.
+         * @function decode
+         * @memberof soldier.c2s_soldier_upgrade
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {soldier.c2s_soldier_upgrade} c2s_soldier_upgrade
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_soldier_upgrade.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.soldier.c2s_soldier_upgrade();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.id = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a c2s_soldier_upgrade message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof soldier.c2s_soldier_upgrade
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {soldier.c2s_soldier_upgrade} c2s_soldier_upgrade
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_soldier_upgrade.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a c2s_soldier_upgrade message.
+         * @function verify
+         * @memberof soldier.c2s_soldier_upgrade
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        c2s_soldier_upgrade.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isInteger(message.id))
+                    return "id: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a c2s_soldier_upgrade message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof soldier.c2s_soldier_upgrade
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {soldier.c2s_soldier_upgrade} c2s_soldier_upgrade
+         */
+        c2s_soldier_upgrade.fromObject = function fromObject(object) {
+            if (object instanceof $root.soldier.c2s_soldier_upgrade)
+                return object;
+            var message = new $root.soldier.c2s_soldier_upgrade();
+            if (object.id != null)
+                message.id = object.id >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a c2s_soldier_upgrade message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof soldier.c2s_soldier_upgrade
+         * @static
+         * @param {soldier.c2s_soldier_upgrade} message c2s_soldier_upgrade
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        c2s_soldier_upgrade.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.id = 0;
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            return object;
+        };
+
+        /**
+         * Converts this c2s_soldier_upgrade to JSON.
+         * @function toJSON
+         * @memberof soldier.c2s_soldier_upgrade
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        c2s_soldier_upgrade.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for c2s_soldier_upgrade
+         * @function getTypeUrl
+         * @memberof soldier.c2s_soldier_upgrade
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        c2s_soldier_upgrade.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/soldier.c2s_soldier_upgrade";
+        };
+
+        return c2s_soldier_upgrade;
+    })();
+
+    soldier.s2c_soldier_upgrade = (function() {
+
+        /**
+         * Properties of a s2c_soldier_upgrade.
+         * @memberof soldier
+         * @interface Is2c_soldier_upgrade
+         * @property {number|null} [err] s2c_soldier_upgrade err
+         */
+
+        /**
+         * Constructs a new s2c_soldier_upgrade.
+         * @memberof soldier
+         * @classdesc Represents a s2c_soldier_upgrade.
+         * @implements Is2c_soldier_upgrade
+         * @constructor
+         * @param {soldier.Is2c_soldier_upgrade=} [properties] Properties to set
+         */
+        function s2c_soldier_upgrade(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * s2c_soldier_upgrade err.
+         * @member {number} err
+         * @memberof soldier.s2c_soldier_upgrade
+         * @instance
+         */
+        s2c_soldier_upgrade.prototype.err = 0;
+
+        /**
+         * Creates a new s2c_soldier_upgrade instance using the specified properties.
+         * @function create
+         * @memberof soldier.s2c_soldier_upgrade
+         * @static
+         * @param {soldier.Is2c_soldier_upgrade=} [properties] Properties to set
+         * @returns {soldier.s2c_soldier_upgrade} s2c_soldier_upgrade instance
+         */
+        s2c_soldier_upgrade.create = function create(properties) {
+            return new s2c_soldier_upgrade(properties);
+        };
+
+        /**
+         * Encodes the specified s2c_soldier_upgrade message. Does not implicitly {@link soldier.s2c_soldier_upgrade.verify|verify} messages.
+         * @function encode
+         * @memberof soldier.s2c_soldier_upgrade
+         * @static
+         * @param {soldier.Is2c_soldier_upgrade} message s2c_soldier_upgrade message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_soldier_upgrade.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified s2c_soldier_upgrade message, length delimited. Does not implicitly {@link soldier.s2c_soldier_upgrade.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof soldier.s2c_soldier_upgrade
+         * @static
+         * @param {soldier.Is2c_soldier_upgrade} message s2c_soldier_upgrade message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_soldier_upgrade.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a s2c_soldier_upgrade message from the specified reader or buffer.
+         * @function decode
+         * @memberof soldier.s2c_soldier_upgrade
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {soldier.s2c_soldier_upgrade} s2c_soldier_upgrade
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_soldier_upgrade.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.soldier.s2c_soldier_upgrade();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.err = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a s2c_soldier_upgrade message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof soldier.s2c_soldier_upgrade
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {soldier.s2c_soldier_upgrade} s2c_soldier_upgrade
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_soldier_upgrade.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a s2c_soldier_upgrade message.
+         * @function verify
+         * @memberof soldier.s2c_soldier_upgrade
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        s2c_soldier_upgrade.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.err != null && message.hasOwnProperty("err"))
+                if (!$util.isInteger(message.err))
+                    return "err: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a s2c_soldier_upgrade message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof soldier.s2c_soldier_upgrade
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {soldier.s2c_soldier_upgrade} s2c_soldier_upgrade
+         */
+        s2c_soldier_upgrade.fromObject = function fromObject(object) {
+            if (object instanceof $root.soldier.s2c_soldier_upgrade)
+                return object;
+            var message = new $root.soldier.s2c_soldier_upgrade();
+            if (object.err != null)
+                message.err = object.err >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a s2c_soldier_upgrade message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof soldier.s2c_soldier_upgrade
+         * @static
+         * @param {soldier.s2c_soldier_upgrade} message s2c_soldier_upgrade
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        s2c_soldier_upgrade.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.err = 0;
+            if (message.err != null && message.hasOwnProperty("err"))
+                object.err = message.err;
+            return object;
+        };
+
+        /**
+         * Converts this s2c_soldier_upgrade to JSON.
+         * @function toJSON
+         * @memberof soldier.s2c_soldier_upgrade
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        s2c_soldier_upgrade.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for s2c_soldier_upgrade
+         * @function getTypeUrl
+         * @memberof soldier.s2c_soldier_upgrade
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        s2c_soldier_upgrade.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/soldier.s2c_soldier_upgrade";
+        };
+
+        return s2c_soldier_upgrade;
+    })();
+
+    soldier.c2s_pendant_upgrade = (function() {
+
+        /**
+         * Properties of a c2s_pendant_upgrade.
+         * @memberof soldier
+         * @interface Ic2s_pendant_upgrade
+         * @property {number|null} [id] c2s_pendant_upgrade id
+         */
+
+        /**
+         * Constructs a new c2s_pendant_upgrade.
+         * @memberof soldier
+         * @classdesc Represents a c2s_pendant_upgrade.
+         * @implements Ic2s_pendant_upgrade
+         * @constructor
+         * @param {soldier.Ic2s_pendant_upgrade=} [properties] Properties to set
+         */
+        function c2s_pendant_upgrade(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * c2s_pendant_upgrade id.
+         * @member {number} id
+         * @memberof soldier.c2s_pendant_upgrade
+         * @instance
+         */
+        c2s_pendant_upgrade.prototype.id = 0;
+
+        /**
+         * Creates a new c2s_pendant_upgrade instance using the specified properties.
+         * @function create
+         * @memberof soldier.c2s_pendant_upgrade
+         * @static
+         * @param {soldier.Ic2s_pendant_upgrade=} [properties] Properties to set
+         * @returns {soldier.c2s_pendant_upgrade} c2s_pendant_upgrade instance
+         */
+        c2s_pendant_upgrade.create = function create(properties) {
+            return new c2s_pendant_upgrade(properties);
+        };
+
+        /**
+         * Encodes the specified c2s_pendant_upgrade message. Does not implicitly {@link soldier.c2s_pendant_upgrade.verify|verify} messages.
+         * @function encode
+         * @memberof soldier.c2s_pendant_upgrade
+         * @static
+         * @param {soldier.Ic2s_pendant_upgrade} message c2s_pendant_upgrade message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_pendant_upgrade.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.id);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified c2s_pendant_upgrade message, length delimited. Does not implicitly {@link soldier.c2s_pendant_upgrade.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof soldier.c2s_pendant_upgrade
+         * @static
+         * @param {soldier.Ic2s_pendant_upgrade} message c2s_pendant_upgrade message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_pendant_upgrade.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a c2s_pendant_upgrade message from the specified reader or buffer.
+         * @function decode
+         * @memberof soldier.c2s_pendant_upgrade
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {soldier.c2s_pendant_upgrade} c2s_pendant_upgrade
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_pendant_upgrade.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.soldier.c2s_pendant_upgrade();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.id = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a c2s_pendant_upgrade message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof soldier.c2s_pendant_upgrade
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {soldier.c2s_pendant_upgrade} c2s_pendant_upgrade
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_pendant_upgrade.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a c2s_pendant_upgrade message.
+         * @function verify
+         * @memberof soldier.c2s_pendant_upgrade
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        c2s_pendant_upgrade.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isInteger(message.id))
+                    return "id: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a c2s_pendant_upgrade message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof soldier.c2s_pendant_upgrade
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {soldier.c2s_pendant_upgrade} c2s_pendant_upgrade
+         */
+        c2s_pendant_upgrade.fromObject = function fromObject(object) {
+            if (object instanceof $root.soldier.c2s_pendant_upgrade)
+                return object;
+            var message = new $root.soldier.c2s_pendant_upgrade();
+            if (object.id != null)
+                message.id = object.id >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a c2s_pendant_upgrade message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof soldier.c2s_pendant_upgrade
+         * @static
+         * @param {soldier.c2s_pendant_upgrade} message c2s_pendant_upgrade
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        c2s_pendant_upgrade.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.id = 0;
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            return object;
+        };
+
+        /**
+         * Converts this c2s_pendant_upgrade to JSON.
+         * @function toJSON
+         * @memberof soldier.c2s_pendant_upgrade
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        c2s_pendant_upgrade.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for c2s_pendant_upgrade
+         * @function getTypeUrl
+         * @memberof soldier.c2s_pendant_upgrade
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        c2s_pendant_upgrade.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/soldier.c2s_pendant_upgrade";
+        };
+
+        return c2s_pendant_upgrade;
+    })();
+
+    soldier.s2c_pendant_upgrade = (function() {
+
+        /**
+         * Properties of a s2c_pendant_upgrade.
+         * @memberof soldier
+         * @interface Is2c_pendant_upgrade
+         * @property {number|null} [err] s2c_pendant_upgrade err
+         */
+
+        /**
+         * Constructs a new s2c_pendant_upgrade.
+         * @memberof soldier
+         * @classdesc Represents a s2c_pendant_upgrade.
+         * @implements Is2c_pendant_upgrade
+         * @constructor
+         * @param {soldier.Is2c_pendant_upgrade=} [properties] Properties to set
+         */
+        function s2c_pendant_upgrade(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * s2c_pendant_upgrade err.
+         * @member {number} err
+         * @memberof soldier.s2c_pendant_upgrade
+         * @instance
+         */
+        s2c_pendant_upgrade.prototype.err = 0;
+
+        /**
+         * Creates a new s2c_pendant_upgrade instance using the specified properties.
+         * @function create
+         * @memberof soldier.s2c_pendant_upgrade
+         * @static
+         * @param {soldier.Is2c_pendant_upgrade=} [properties] Properties to set
+         * @returns {soldier.s2c_pendant_upgrade} s2c_pendant_upgrade instance
+         */
+        s2c_pendant_upgrade.create = function create(properties) {
+            return new s2c_pendant_upgrade(properties);
+        };
+
+        /**
+         * Encodes the specified s2c_pendant_upgrade message. Does not implicitly {@link soldier.s2c_pendant_upgrade.verify|verify} messages.
+         * @function encode
+         * @memberof soldier.s2c_pendant_upgrade
+         * @static
+         * @param {soldier.Is2c_pendant_upgrade} message s2c_pendant_upgrade message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_pendant_upgrade.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified s2c_pendant_upgrade message, length delimited. Does not implicitly {@link soldier.s2c_pendant_upgrade.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof soldier.s2c_pendant_upgrade
+         * @static
+         * @param {soldier.Is2c_pendant_upgrade} message s2c_pendant_upgrade message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_pendant_upgrade.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a s2c_pendant_upgrade message from the specified reader or buffer.
+         * @function decode
+         * @memberof soldier.s2c_pendant_upgrade
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {soldier.s2c_pendant_upgrade} s2c_pendant_upgrade
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_pendant_upgrade.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.soldier.s2c_pendant_upgrade();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.err = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a s2c_pendant_upgrade message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof soldier.s2c_pendant_upgrade
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {soldier.s2c_pendant_upgrade} s2c_pendant_upgrade
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_pendant_upgrade.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a s2c_pendant_upgrade message.
+         * @function verify
+         * @memberof soldier.s2c_pendant_upgrade
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        s2c_pendant_upgrade.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.err != null && message.hasOwnProperty("err"))
+                if (!$util.isInteger(message.err))
+                    return "err: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a s2c_pendant_upgrade message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof soldier.s2c_pendant_upgrade
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {soldier.s2c_pendant_upgrade} s2c_pendant_upgrade
+         */
+        s2c_pendant_upgrade.fromObject = function fromObject(object) {
+            if (object instanceof $root.soldier.s2c_pendant_upgrade)
+                return object;
+            var message = new $root.soldier.s2c_pendant_upgrade();
+            if (object.err != null)
+                message.err = object.err >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a s2c_pendant_upgrade message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof soldier.s2c_pendant_upgrade
+         * @static
+         * @param {soldier.s2c_pendant_upgrade} message s2c_pendant_upgrade
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        s2c_pendant_upgrade.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.err = 0;
+            if (message.err != null && message.hasOwnProperty("err"))
+                object.err = message.err;
+            return object;
+        };
+
+        /**
+         * Converts this s2c_pendant_upgrade to JSON.
+         * @function toJSON
+         * @memberof soldier.s2c_pendant_upgrade
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        s2c_pendant_upgrade.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for s2c_pendant_upgrade
+         * @function getTypeUrl
+         * @memberof soldier.s2c_pendant_upgrade
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        s2c_pendant_upgrade.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/soldier.s2c_pendant_upgrade";
+        };
+
+        return s2c_pendant_upgrade;
+    })();
+
+    soldier.c2s_train_upgrade = (function() {
+
+        /**
+         * Properties of a c2s_train_upgrade.
+         * @memberof soldier
+         * @interface Ic2s_train_upgrade
+         * @property {number|null} [id] c2s_train_upgrade id
+         * @property {number|null} [num] c2s_train_upgrade num
+         */
+
+        /**
+         * Constructs a new c2s_train_upgrade.
+         * @memberof soldier
+         * @classdesc Represents a c2s_train_upgrade.
+         * @implements Ic2s_train_upgrade
+         * @constructor
+         * @param {soldier.Ic2s_train_upgrade=} [properties] Properties to set
+         */
+        function c2s_train_upgrade(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * c2s_train_upgrade id.
+         * @member {number} id
+         * @memberof soldier.c2s_train_upgrade
+         * @instance
+         */
+        c2s_train_upgrade.prototype.id = 0;
+
+        /**
+         * c2s_train_upgrade num.
+         * @member {number} num
+         * @memberof soldier.c2s_train_upgrade
+         * @instance
+         */
+        c2s_train_upgrade.prototype.num = 0;
+
+        /**
+         * Creates a new c2s_train_upgrade instance using the specified properties.
+         * @function create
+         * @memberof soldier.c2s_train_upgrade
+         * @static
+         * @param {soldier.Ic2s_train_upgrade=} [properties] Properties to set
+         * @returns {soldier.c2s_train_upgrade} c2s_train_upgrade instance
+         */
+        c2s_train_upgrade.create = function create(properties) {
+            return new c2s_train_upgrade(properties);
+        };
+
+        /**
+         * Encodes the specified c2s_train_upgrade message. Does not implicitly {@link soldier.c2s_train_upgrade.verify|verify} messages.
+         * @function encode
+         * @memberof soldier.c2s_train_upgrade
+         * @static
+         * @param {soldier.Ic2s_train_upgrade} message c2s_train_upgrade message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_train_upgrade.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.id);
+            if (message.num != null && Object.hasOwnProperty.call(message, "num"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.num);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified c2s_train_upgrade message, length delimited. Does not implicitly {@link soldier.c2s_train_upgrade.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof soldier.c2s_train_upgrade
+         * @static
+         * @param {soldier.Ic2s_train_upgrade} message c2s_train_upgrade message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_train_upgrade.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a c2s_train_upgrade message from the specified reader or buffer.
+         * @function decode
+         * @memberof soldier.c2s_train_upgrade
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {soldier.c2s_train_upgrade} c2s_train_upgrade
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_train_upgrade.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.soldier.c2s_train_upgrade();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.id = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.num = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a c2s_train_upgrade message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof soldier.c2s_train_upgrade
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {soldier.c2s_train_upgrade} c2s_train_upgrade
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_train_upgrade.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a c2s_train_upgrade message.
+         * @function verify
+         * @memberof soldier.c2s_train_upgrade
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        c2s_train_upgrade.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isInteger(message.id))
+                    return "id: integer expected";
+            if (message.num != null && message.hasOwnProperty("num"))
+                if (!$util.isInteger(message.num))
+                    return "num: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a c2s_train_upgrade message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof soldier.c2s_train_upgrade
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {soldier.c2s_train_upgrade} c2s_train_upgrade
+         */
+        c2s_train_upgrade.fromObject = function fromObject(object) {
+            if (object instanceof $root.soldier.c2s_train_upgrade)
+                return object;
+            var message = new $root.soldier.c2s_train_upgrade();
+            if (object.id != null)
+                message.id = object.id >>> 0;
+            if (object.num != null)
+                message.num = object.num >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a c2s_train_upgrade message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof soldier.c2s_train_upgrade
+         * @static
+         * @param {soldier.c2s_train_upgrade} message c2s_train_upgrade
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        c2s_train_upgrade.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.id = 0;
+                object.num = 0;
+            }
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            if (message.num != null && message.hasOwnProperty("num"))
+                object.num = message.num;
+            return object;
+        };
+
+        /**
+         * Converts this c2s_train_upgrade to JSON.
+         * @function toJSON
+         * @memberof soldier.c2s_train_upgrade
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        c2s_train_upgrade.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for c2s_train_upgrade
+         * @function getTypeUrl
+         * @memberof soldier.c2s_train_upgrade
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        c2s_train_upgrade.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/soldier.c2s_train_upgrade";
+        };
+
+        return c2s_train_upgrade;
+    })();
+
+    soldier.s2c_train_upgrade = (function() {
+
+        /**
+         * Properties of a s2c_train_upgrade.
+         * @memberof soldier
+         * @interface Is2c_train_upgrade
+         * @property {number|null} [err] s2c_train_upgrade err
+         */
+
+        /**
+         * Constructs a new s2c_train_upgrade.
+         * @memberof soldier
+         * @classdesc Represents a s2c_train_upgrade.
+         * @implements Is2c_train_upgrade
+         * @constructor
+         * @param {soldier.Is2c_train_upgrade=} [properties] Properties to set
+         */
+        function s2c_train_upgrade(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * s2c_train_upgrade err.
+         * @member {number} err
+         * @memberof soldier.s2c_train_upgrade
+         * @instance
+         */
+        s2c_train_upgrade.prototype.err = 0;
+
+        /**
+         * Creates a new s2c_train_upgrade instance using the specified properties.
+         * @function create
+         * @memberof soldier.s2c_train_upgrade
+         * @static
+         * @param {soldier.Is2c_train_upgrade=} [properties] Properties to set
+         * @returns {soldier.s2c_train_upgrade} s2c_train_upgrade instance
+         */
+        s2c_train_upgrade.create = function create(properties) {
+            return new s2c_train_upgrade(properties);
+        };
+
+        /**
+         * Encodes the specified s2c_train_upgrade message. Does not implicitly {@link soldier.s2c_train_upgrade.verify|verify} messages.
+         * @function encode
+         * @memberof soldier.s2c_train_upgrade
+         * @static
+         * @param {soldier.Is2c_train_upgrade} message s2c_train_upgrade message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_train_upgrade.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified s2c_train_upgrade message, length delimited. Does not implicitly {@link soldier.s2c_train_upgrade.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof soldier.s2c_train_upgrade
+         * @static
+         * @param {soldier.Is2c_train_upgrade} message s2c_train_upgrade message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_train_upgrade.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a s2c_train_upgrade message from the specified reader or buffer.
+         * @function decode
+         * @memberof soldier.s2c_train_upgrade
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {soldier.s2c_train_upgrade} s2c_train_upgrade
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_train_upgrade.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.soldier.s2c_train_upgrade();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.err = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a s2c_train_upgrade message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof soldier.s2c_train_upgrade
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {soldier.s2c_train_upgrade} s2c_train_upgrade
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_train_upgrade.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a s2c_train_upgrade message.
+         * @function verify
+         * @memberof soldier.s2c_train_upgrade
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        s2c_train_upgrade.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.err != null && message.hasOwnProperty("err"))
+                if (!$util.isInteger(message.err))
+                    return "err: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a s2c_train_upgrade message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof soldier.s2c_train_upgrade
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {soldier.s2c_train_upgrade} s2c_train_upgrade
+         */
+        s2c_train_upgrade.fromObject = function fromObject(object) {
+            if (object instanceof $root.soldier.s2c_train_upgrade)
+                return object;
+            var message = new $root.soldier.s2c_train_upgrade();
+            if (object.err != null)
+                message.err = object.err >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a s2c_train_upgrade message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof soldier.s2c_train_upgrade
+         * @static
+         * @param {soldier.s2c_train_upgrade} message s2c_train_upgrade
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        s2c_train_upgrade.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.err = 0;
+            if (message.err != null && message.hasOwnProperty("err"))
+                object.err = message.err;
+            return object;
+        };
+
+        /**
+         * Converts this s2c_train_upgrade to JSON.
+         * @function toJSON
+         * @memberof soldier.s2c_train_upgrade
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        s2c_train_upgrade.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for s2c_train_upgrade
+         * @function getTypeUrl
+         * @memberof soldier.s2c_train_upgrade
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        s2c_train_upgrade.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/soldier.s2c_train_upgrade";
+        };
+
+        return s2c_train_upgrade;
+    })();
+
+    return soldier;
+})();
+
 $root.task = (function() {
 
     /**

@@ -4,9 +4,9 @@ import { ItemBoxUseUIBase } from "./ItemBoxUseUI.generated";
 
 @regClass()
 export class ItemBoxUseUI extends ItemBoxUseUIBase {
-    data!: ItemVo;
+    public data!: ItemVo;
 
-    override open(closeOther?: boolean, param?: any): void {
+    public override open(closeOther?: boolean, param?: any): void {
         this.data = param.vo;
         super.open(closeOther, param);
     }

@@ -45,30 +45,30 @@ const JSON_SOLDIER_TABLE = "resources/data/soldier.json";
 const JSON_TASK_TABLE = "resources/data/task.json";
 
 export class TableService extends Service<NetworkService> {
-    alliance!: AllianceTable;
-    attr!: AttrTable;
-    battleBuff!: BattleBuffTable;
-    battleEntity!: BattleEntityTable;
-    battleBuilding!: BattleBuildingTable;
-    chest!: ChestTable;
-    emoji!: EmojiTable;
-    equip!: EquipTable;
-    hero!: HeroTable;
-    item!: ItemTable;
-    mail!: MailTable;
-    money!: MoneyTable;
-    role!: RoleTable;
-    shop!: ShopTable;
-    skill!: SkillTable;
-    soldier!: SoldierTable;
-    task!: TaskTable;
-    worldEntity!: WorldEntityTable;
+    public alliance!: AllianceTable;
+    public attr!: AttrTable;
+    public battleBuff!: BattleBuffTable;
+    public battleEntity!: BattleEntityTable;
+    public battleBuilding!: BattleBuildingTable;
+    public chest!: ChestTable;
+    public emoji!: EmojiTable;
+    public equip!: EquipTable;
+    public hero!: HeroTable;
+    public item!: ItemTable;
+    public mail!: MailTable;
+    public money!: MoneyTable;
+    public role!: RoleTable;
+    public shop!: ShopTable;
+    public skill!: SkillTable;
+    public soldier!: SoldierTable;
+    public task!: TaskTable;
+    public worldEntity!: WorldEntityTable;
 
-    constructor(network: NetworkService) {
+    public constructor(network: NetworkService) {
         super(network);
     }
 
-    async load() {
+    public async load() {
         // TODO: 处理加载错误
         this.alliance = await app.loader.loadJson(JSON_ALLIANCE_TABLE);
         this.attr = await app.loader.loadJson(JSON_ATTR_TABLE);
@@ -89,7 +89,7 @@ export class TableService extends Service<NetworkService> {
         this.worldEntity = await app.loader.loadJson(JSON_ENTITY_TABLE);
     }
 
-    getVo(refId: number) {
+    public getVo(refId: number) {
         const dataRow = TableUtil.getRow(this.item, { id: refId });
         if (dataRow) {
             if (dataRow.sub_type == ItemConf.ITEM_TYPE.MONEY) {

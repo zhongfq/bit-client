@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+package soldier;
+
+message SoldierInfo {
+    uint32 id = 1; // 士兵id
+    uint32 lv = 2;//等级
+    map<uint32, uint32> attrs = 3; // 属性值
+}
+
+message PendantInfo {
+    uint32 id = 1; // 士兵id
+    uint32 lv = 2;//等级
+}
+
+message TrainInfo {
+    uint32 id = 1; // 属性id
+    uint32 lv = 2;//等级
+}
+// 加载士兵
+message c2s_load_soldier {
+} 
+message s2c_load_soldier {
+    uint32 err = 1; // OK, INVALID_ID
+    repeated SoldierInfo soldiers = 2;
+}
+
+// 加载士兵挂件
+message c2s_load_pendant {
+} 
+message s2c_load_pendant {
+    uint32 err = 1; // OK, INVALID_ID
+    repeated PendantInfo pendants = 2;
+}
+
+// 加载训练属性
+message c2s_load_train {
+} 
+message s2c_load_train {
+    uint32 err = 1; // OK, INVALID_ID
+    repeated TrainInfo trains = 2;
+}
+
+// 升级士兵
+message c2s_soldier_upgrade {
+    uint32 id = 1; // 士兵id
+}
+message s2c_soldier_upgrade {
+    uint32 err = 1; // OK, INVALID_ID
+}
+
+// 升级士兵挂件
+message c2s_pendant_upgrade {
+    uint32 id = 1; // 士兵挂件id
+}
+message s2c_pendant_upgrade {
+    uint32 err = 1; // OK, INVALID_ID
+}
+
+// 训练升级
+message c2s_train_upgrade {
+    uint32 id = 1; // 属性id
+    uint32 num = 2; //升级数量
+}
+message s2c_train_upgrade {
+    uint32 err = 1; // OK, INVALID_ID
+}

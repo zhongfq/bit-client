@@ -6,15 +6,15 @@ import { HomeChatCellUIBase } from "./HomeChatCellUI.generated";
 
 @regClass()
 export class HomeChatCellUI extends HomeChatCellUIBase {
-    msgData!: ChatCellData;
+    public msgData!: ChatCellData;
 
-    override set_dataSource(data: any) {
+    public override set_dataSource(data: any) {
         super.set_dataSource(data);
         this.msgData = data;
         this.updateInfo();
     }
 
-    updateInfo() {
+    public updateInfo() {
         if (!this.msgData.role) {
             return;
         }

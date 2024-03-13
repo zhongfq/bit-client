@@ -14,7 +14,7 @@ export class ChatRoleVoBag extends VoBag<ChatRoleVo> {
         return t.id;
     }
 
-    init(roleArray: proto.chat.ChatRole[]) {
+    public init(roleArray: proto.chat.ChatRole[]) {
         for (const cmdData of roleArray) {
             const vo = new ChatRoleVo();
             vo.initByCmd(cmdData as proto.chat.ChatRole);

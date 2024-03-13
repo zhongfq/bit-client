@@ -5,11 +5,11 @@ import { HomeDownBtnItemUIBase } from "./HomeDownBtnItemUI.generated";
 export class HomeDownBtnItemUI extends HomeDownBtnItemUIBase {
     private _selected: boolean = false;
 
-    get selected() {
+    public get selected() {
         return this._selected;
     }
 
-    set selected(value: boolean) {
+    public set selected(value: boolean) {
         this._selected = value;
         this.selectBox.visible = value;
         this.imgIcon.visible = !value;

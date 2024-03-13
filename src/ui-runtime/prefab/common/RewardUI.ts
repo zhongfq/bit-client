@@ -6,14 +6,14 @@ import { RewardUIBase } from "./RewardUI.generated";
 
 @regClass()
 export class RewardUI extends RewardUIBase {
-    openData: proto.bag.IItem[] = [];
+    public openData: proto.bag.IItem[] = [];
 
-    override open(closeOther?: boolean | undefined, param?: any): void {
+    public override open(closeOther?: boolean | undefined, param?: any): void {
         this.openData = param;
         super.open(closeOther, param);
     }
 
-    override onAwake(): void {
+    public override onAwake(): void {
         this.initUIEvent();
     }
 
@@ -22,12 +22,12 @@ export class RewardUI extends RewardUIBase {
         this._updateList();
     }
 
-    onListRender(cell: IconUI, index: number) {
+    public onListRender(cell: IconUI, index: number) {
         const cellData = this.listItem.array[index];
         cell.updateGoods(cellData);
     }
 
-    _updateList() {
+    private _updateList() {
         const arrayData = [];
         for (const itemData of this.openData) {
             const vo = new ItemVo();

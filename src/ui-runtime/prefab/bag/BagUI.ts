@@ -5,7 +5,7 @@ import { BagUIBase } from "./BagUI.generated";
 
 @regClass()
 export class BagUI extends BagUIBase {
-    override onAwake(): void {
+    public override onAwake(): void {
         this.btnClose.on(Laya.Event.CLICK, () => {
             this.close();
         });

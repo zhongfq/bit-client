@@ -11,14 +11,14 @@ import { MoneyRow } from "../../../def/table";
  * 道具
  */
 export class ChatMsgVo extends VO<any, chat.ChatMessage> {
-    override get id(): number {
+    public override get id(): number {
         if (this._cmd) {
             return Number(this._cmd.rid);
         }
         return 0;
     }
 
-    getTableRowByCmd(cmd: chat.ChatMessage): undefined {
+    public getTableRowByCmd(cmd: chat.ChatMessage): undefined {
         return undefined;
     }
 

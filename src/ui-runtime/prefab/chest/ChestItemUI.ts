@@ -6,7 +6,7 @@ export class ChestItemUI extends ChestItemUIBase {
     /**
      * 取消高亮
      */
-    normal() {
+    public normal() {
         const ani = this.getComponent(Laya.Animator2D);
         ani.play("1");
     }
@@ -14,7 +14,7 @@ export class ChestItemUI extends ChestItemUIBase {
     /**
      * 高亮
      */
-    hightlight() {
+    public hightlight() {
         const ani = this.getComponent(Laya.Animator2D);
         ani.play("2");
     }

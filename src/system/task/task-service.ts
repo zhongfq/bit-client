@@ -11,13 +11,13 @@ import { NetworkService } from "../network/network-service";
 import { TableUtil } from "../table/table-util";
 
 export class TaskService extends Service<NetworkService> {
-    static readonly TASK_UPDATE = "task-update";
-    static readonly TASK_REMOVE = "task-remove";
+    public static readonly TASK_UPDATE = "task-update";
+    public static readonly TASK_REMOVE = "task-remove";
 
-    declare mainTask: TaskVo;
-    branchTaskBag = VoUtil.createBag(TaskBag);
+    public declare mainTask: TaskVo;
+    public branchTaskBag = VoUtil.createBag(TaskBag);
 
-    constructor(network: NetworkService) {
+    public constructor(network: NetworkService) {
         super(network);
         this.handle(opcode.task.s2c_load, this._onLoad);
         this.handle(opcode.task.s2c_receive_reward, this._onreceiveReward);

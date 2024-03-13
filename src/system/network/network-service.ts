@@ -36,13 +36,12 @@ export const register = (descriptor: ProtocolDescriptor) => {
 const HEADER_LENGTH = 6; // |-len(2)-|-op(2)-|-sid(2)-|
 
 export class NetworkService extends Service<NetworkService> {
-    static readonly CONNECTING = Socket.CONNECTING;
-    static readonly OPEN = Socket.OPEN;
-    static readonly CLOSING = Socket.CLOSING;
-    static readonly CLOSED = Socket.CLOSED;
-
-    id?: string;
-    uuid?: string;
+    public static readonly CONNECTING = Socket.CONNECTING;
+    public static readonly OPEN = Socket.OPEN;
+    public static readonly CLOSING = Socket.CLOSING;
+    public static readonly CLOSED = Socket.CLOSED;
+    public id?: string;
+    public uuid?: string;
 
     // 网络延时
     private _rtt: number = -1;
@@ -58,7 +57,7 @@ export class NetworkService extends Service<NetworkService> {
     private _packetSize: number = 0;
     private _ignoredLog: { [k: number]: boolean } = {};
 
-    constructor() {
+    public constructor() {
         super(null!);
         if (Object.keys(protocols).length == 0) {
             registerProtocols();
@@ -66,12 +65,12 @@ export class NetworkService extends Service<NetworkService> {
         Laya.timer.loop(2000, this, this._pingPong);
     }
 
-    override destroy() {
+    public override destroy() {
         Laya.timer.clear(this, this._pingPong);
         this.close();
     }
 
-    connect(url: string) {
+    public connect(url: string) {
         if (this.connected && this._url == url) {
             console.log(`already connect to ${this._url}`);
             return;
@@ -100,11 +99,11 @@ export class NetworkService extends Service<NetworkService> {
         this._socket.onmessage = (e) => this.onMessage(e);
     }
 
-    get connected() {
+    public get connected() {
         return this._status == NetworkService.OPEN;
     }
 
-    get status() {
+    public get status() {
         return this._status;
     }
 
@@ -114,7 +113,7 @@ export class NetworkService extends Service<NetworkService> {
         this._socket = null;
     }
 
-    close() {
+    public close() {
         if (this._socket) {
             this._socket.onclose = null;
             this._socket.onmessage = null;
@@ -125,7 +124,7 @@ export class NetworkService extends Service<NetworkService> {
         }
     }
 
-    get rtt() {
+    public get rtt() {
         return this._rtt;
     }
 
@@ -141,7 +140,7 @@ export class NetworkService extends Service<NetworkService> {
         }
     }
 
-    send<T>(message: T) {
+    public send<T>(message: T) {
         this.trySend(message);
     }
 
@@ -154,7 +153,7 @@ export class NetworkService extends Service<NetworkService> {
     }
 
     // shoud use try catch
-    async call<T, R>(message: T, _: Constructor<R>) {
+    public async call<T, R>(message: T, _: Constructor<R>) {
         return new Promise<R>((resolve, reject) => {
             const typeURL = (message as any).constructor.getTypeUrl();
             const protocol = protocols[typeURL];
@@ -276,7 +275,7 @@ export class NetworkService extends Service<NetworkService> {
         }
     }
 
-    ignoreLog(op: number) {
+    public ignoreLog(op: number) {
         this._ignoredLog[op] = true;
     }
 }
