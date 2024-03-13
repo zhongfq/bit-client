@@ -22,6 +22,7 @@ export namespace ecs {
         private _singletons: Map<Constructor<any>, SingletonComponent>;
         private _creatingCompontes: Component[] = [];
         private _timers: Timer[] = [];
+        private _delays: Map<string, Timer> = new Map();
         private _time: number = 0;
 
         public constructor() {
@@ -56,17 +57,27 @@ export namespace ecs {
             return this._namedSystems.get(cls) as T | undefined;
         }
 
+        private _execCallback(callback: Callback, thisArg: unknown) {
+            if (thisArg) {
+                callback.apply(thisArg);
+            } else {
+                callback();
+            }
+        }
+
         public update(dt: number) {
             this._time += dt;
             this._timers.forEach((timer) => {
                 timer.time += dt;
                 if (timer.time >= timer.interval) {
                     timer.time -= timer.interval;
-                    if (timer.thisArg) {
-                        timer.callback.apply(timer.thisArg);
-                    } else {
-                        timer.callback();
-                    }
+                    this._execCallback(timer.callback, timer.thisArg);
+                }
+            });
+            this._delays.forEach((timer, key) => {
+                if (timer.time >= this._time) {
+                    this._delays.delete(key);
+                    this._execCallback(timer.callback, timer.thisArg);
                 }
             });
             if (this._creatingCompontes.length) {
@@ -87,6 +98,26 @@ export namespace ecs {
                 callback: callback,
                 thisArg: thisArg,
             });
+        }
+
+        public delay(time: number, key: string, callback: Callback, thisArg?: unknown) {
+            if (this._delays.has(key)) {
+                console.warn(`ecs.delay: overwrite the delay callback with key ${key}`);
+            }
+            if (time < 0) {
+                this._execCallback(callback, thisArg);
+                return;
+            }
+            this._delays.set(key, {
+                interval: 0,
+                time: this._time + time,
+                callback: callback,
+                thisArg: thisArg,
+            });
+        }
+
+        public killDelay(key: string) {
+            this._delays.delete(key);
         }
 
         public select(sys: System) {

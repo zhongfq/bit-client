@@ -1,6 +1,5 @@
 import { appBase as AppBase } from "./app.generated";
 import { Constructor } from "./core/dispatcher";
-import { IVector3Like } from "./core/laya";
 import { Loader } from "./core/loader";
 import { Service } from "./core/service";
 import { TweenSystem } from "./core/tween/tween-system";
@@ -9,6 +8,7 @@ import { opcode } from "./def/protocol";
 import { ui } from "./misc/ui";
 import { BagService } from "./system/bag/bag-service";
 import { ExportNodes } from "./system/battle/pve-server/export-nodes";
+import { PvpService } from "./system/battle/pvp/pvp-service";
 import { ChatService } from "./system/chat/chat-service";
 import { ChestService } from "./system/chest/chest-service";
 import { GmService } from "./system/gm/gm-service";
@@ -52,6 +52,7 @@ class ServiceManager {
     public readonly toast: ToastService;
     public readonly chat: ChatService;
     public readonly chest: ChestService;
+    public readonly pvp: PvpService;
 
     private _services: Service<NetworkService>[] = [];
 
@@ -68,6 +69,7 @@ class ServiceManager {
         this.toast = this.newService(ToastService);
         this.chat = this.newService(ChatService);
         this.chest = this.newService(ChestService);
+        this.pvp = this.newService(PvpService);
         // ignore log
         this.network.ignoreLog(opcode.user.c2s_ping);
         this.network.ignoreLog(opcode.user.s2c_ping);
