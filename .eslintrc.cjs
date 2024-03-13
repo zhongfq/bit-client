@@ -11,7 +11,7 @@ module.exports = {
     rules: {
         "@typescript-eslint/no-namespace": "off",
         "@typescript-eslint/no-shadow": "error",
-        "@typescript-eslint/explicit-member-accessibility": "off",
+        "@typescript-eslint/explicit-member-accessibility": "error",
 
         // TODO:
         "@typescript-eslint/no-explicit-any": "off",
