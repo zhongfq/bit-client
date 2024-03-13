@@ -307,6 +307,7 @@ export class PveServer extends b3.Context {
             isCrit: isCrit,
         });
         if (enemy.hp <= 0) {
+            enemy.removeComponent(AiComponent);
             this.playAnim(enemy, ElementAnimation.DIE);
             this.ecs.delay(2, enemy.eid, () => {
                 this.removeElement(enemy, false);

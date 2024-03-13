@@ -216,6 +216,10 @@ export class CommandSystem extends ecs.System implements ICommandSender {
                 info.data.maxHp = data.maxHp;
                 info.view.update(info.data);
 
+                if (data.hp <= 0) {
+                    info.view.visible = false;
+                }
+
                 let prefab: Laya.Prefab | undefined;
                 if (data.isCrit) {
                     prefab = Laya.loader.getRes(res.BATTLE_HP_NUM_X);

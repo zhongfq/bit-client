@@ -32,7 +32,7 @@ export class PvpContext extends Mediator implements ITMContext {
     }
 
     public get mapDir() {
-        return "resources/data/tilemap/pve";
+        return "resources/data/tilemap/pvp";
     }
 
     public onAddElement(element: TMElement): void {}
