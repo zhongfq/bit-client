@@ -330,7 +330,7 @@ export class Tilemap {
         this._root = this.context.scene3D.getChildByName("world-map") as Laya.Sprite3D;
 
         this._world = (await Laya.loader.fetch(
-            "resources/data/world-map/world.json",
+            `${this.context.mapDir}/world.json`,
             "json"
         )) as TMWorld;
         this._world.maps.forEach((info) => {
@@ -342,7 +342,7 @@ export class Tilemap {
         });
 
         const tilesetRef = (await Laya.loader.fetch(
-            "resources/data/world-map/world-tileset-ref.json",
+            `${this.context.mapDir}/world-tileset-ref.json`,
             "json"
         )) as TMWorldMap;
         tilesetRef.tilesets.forEach((tileset) => {
@@ -474,7 +474,7 @@ export class Tilemap {
             if (!info.worldMap) {
                 const realFileName = info.fileName.split("/").at(-1)?.replace(".tmx", ".json");
                 info.worldMap = (await Laya.loader.fetch(
-                    "resources/data/world-map/" + realFileName,
+                    `${this.context.mapDir}/` + realFileName,
                     "json"
                 )) as TMWorldMap;
             }

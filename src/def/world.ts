@@ -7,7 +7,6 @@ export const WorldConf = {
         MOVE: "move",
         OWNER: "owner",
         POS: "pos",
-        STATE: "state",
         TROOP: "troop",
     },
     ENTITY_ACTION: {
@@ -40,11 +39,10 @@ export const WorldConf = {
         },
         2: {
             1: "pos",
-            2: "state",
-            3: "move",
-            4: "owner",
-            5: "troop",
-            6: "bag",
+            2: "move",
+            3: "owner",
+            4: "troop",
+            5: "bag",
         },
         3: {
             1: "pos",
@@ -57,10 +55,9 @@ export const WorldConf = {
         },
         6: {
             1: "pos",
-            2: "state",
-            3: "move",
-            4: "owner",
-            5: "troop",
+            2: "move",
+            3: "owner",
+            4: "troop",
         },
         7: {
             1: "pos",
@@ -80,14 +77,6 @@ export const WorldConf = {
             2: "building",
         },
     },
-    ENTITY_STATE: {
-        FIGHTING: 5,
-        IDLE: 2,
-        MOVE: 3,
-        RETREAT: 6,
-        STANDBY: 1,
-        WAITLIST: 4,
-    },
     ENTITY_TYPE: {
         BATTLE: 5,
         CAMP: 8,
@@ -105,5 +94,13 @@ export const WorldConf = {
         MOVE_TO: 1,
     },
     SAND_WORLD_ID: 101,
+    TROOP_STATE: {
+        FIGHTING: 5,
+        IDLE: 2,
+        INSIDE: 1,
+        MOVE: 3,
+        RETREAT: 6,
+        WAITLIST: 4,
+    },
     VISUAL_FPS: 60,
 }

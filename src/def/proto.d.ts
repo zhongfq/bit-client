@@ -12199,8 +12199,8 @@ declare namespace proto {
             /** TroopComponent cmd */
             cmd?: (number|null);
 
-            /** TroopComponent stayEid */
-            stayEid?: (number|null);
+            /** TroopComponent insideEid */
+            insideEid?: (number|null);
 
             /** TroopComponent homeEid */
             homeEid?: (number|null);
@@ -12213,6 +12213,9 @@ declare namespace proto {
 
             /** TroopComponent hp */
             hp?: (number|null);
+
+            /** TroopComponent state */
+            state?: (number|null);
         }
 
         /** Represents a TroopComponent. */
@@ -12233,8 +12236,8 @@ declare namespace proto {
             /** TroopComponent cmd. */
             public cmd: number;
 
-            /** TroopComponent stayEid. */
-            public stayEid: number;
+            /** TroopComponent insideEid. */
+            public insideEid: number;
 
             /** TroopComponent homeEid. */
             public homeEid: number;
@@ -12247,6 +12250,9 @@ declare namespace proto {
 
             /** TroopComponent hp. */
             public hp: number;
+
+            /** TroopComponent state. */
+            public state: number;
 
             /**
              * Creates a new TroopComponent instance using the specified properties.
@@ -13337,9 +13343,6 @@ declare namespace proto {
             /** Entity pos */
             pos?: (world.IPosition|null);
 
-            /** Entity state */
-            state?: (number|null);
-
             /** Entity timer */
             timer?: (world.ITimerComponent|null);
 
@@ -13382,9 +13385,6 @@ declare namespace proto {
 
             /** Entity pos. */
             public pos?: (world.IPosition|null);
-
-            /** Entity state. */
-            public state: number;
 
             /** Entity timer. */
             public timer?: (world.ITimerComponent|null);
@@ -13788,11 +13788,11 @@ declare namespace proto {
             /** s2c_load mapId */
             mapId?: (number|null);
 
-            /** s2c_load myCastleEid */
-            myCastleEid?: (number|null);
+            /** s2c_load myCityEid */
+            myCityEid?: (number|null);
 
-            /** s2c_load myCastlePos */
-            myCastlePos?: (world.IPosition|null);
+            /** s2c_load myCityPos */
+            myCityPos?: (world.IPosition|null);
         }
 
         /** Represents a s2c_load. */
@@ -13810,11 +13810,11 @@ declare namespace proto {
             /** s2c_load mapId. */
             public mapId: number;
 
-            /** s2c_load myCastleEid. */
-            public myCastleEid: number;
+            /** s2c_load myCityEid. */
+            public myCityEid: number;
 
-            /** s2c_load myCastlePos. */
-            public myCastlePos?: (world.IPosition|null);
+            /** s2c_load myCityPos. */
+            public myCityPos?: (world.IPosition|null);
 
             /**
              * Creates a new s2c_load instance using the specified properties.

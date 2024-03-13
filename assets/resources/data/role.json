@@ -5,203 +5,275 @@
     "level": [
         {
             "lv": 1,
+            "train_max_lv": 100,
             "upgrade_exp": 100
         },
         {
             "lv": 2,
+            "train_max_lv": 100,
             "upgrade_exp": 200
         },
         {
             "lv": 3,
+            "train_max_lv": 100,
             "upgrade_exp": 300
         },
         {
             "lv": 4,
+            "train_max_lv": 100,
             "upgrade_exp": 400
         },
         {
             "lv": 5,
+            "train_max_lv": 100,
             "upgrade_exp": 500
         },
         {
             "lv": 6,
+            "train_max_lv": 100,
             "upgrade_exp": 600
         },
         {
             "lv": 7,
+            "train_max_lv": 100,
             "upgrade_exp": 700
         },
         {
             "lv": 8,
+            "train_max_lv": 100,
             "upgrade_exp": 800
         },
         {
             "lv": 9,
+            "train_max_lv": 100,
             "upgrade_exp": 900
         },
         {
             "lv": 10,
+            "train_max_lv": 100,
             "upgrade_exp": 1000
         },
         {
             "lv": 11,
+            "train_max_lv": 200,
             "upgrade_exp": 1100
         },
         {
             "lv": 12,
+            "train_max_lv": 200,
             "upgrade_exp": 1200
         },
         {
             "lv": 13,
+            "train_max_lv": 200,
             "upgrade_exp": 1300
         },
         {
             "lv": 14,
+            "train_max_lv": 200,
             "upgrade_exp": 1400
         },
         {
             "lv": 15,
+            "train_max_lv": 200,
             "upgrade_exp": 1500
         },
         {
             "lv": 16,
+            "train_max_lv": 200,
             "upgrade_exp": 1600
         },
         {
             "lv": 17,
+            "train_max_lv": 200,
             "upgrade_exp": 1700
         },
         {
             "lv": 18,
+            "train_max_lv": 200,
             "upgrade_exp": 1800
         },
         {
             "lv": 19,
+            "train_max_lv": 200,
             "upgrade_exp": 1900
         },
         {
             "lv": 20,
+            "train_max_lv": 200,
             "upgrade_exp": 2000
         },
         {
             "lv": 21,
+            "train_max_lv": 300,
             "upgrade_exp": 2100
         },
         {
             "lv": 22,
+            "train_max_lv": 300,
             "upgrade_exp": 2200
         },
         {
             "lv": 23,
+            "train_max_lv": 300,
             "upgrade_exp": 2300
         },
         {
             "lv": 24,
+            "train_max_lv": 300,
             "upgrade_exp": 2400
         },
         {
             "lv": 25,
+            "train_max_lv": 300,
             "upgrade_exp": 2500
         },
         {
             "lv": 26,
+            "train_max_lv": 300,
             "upgrade_exp": 2600
         },
         {
             "lv": 27,
+            "train_max_lv": 300,
             "upgrade_exp": 2700
         },
         {
             "lv": 28,
+            "train_max_lv": 300,
             "upgrade_exp": 2800
         },
         {
             "lv": 29,
+            "train_max_lv": 300,
             "upgrade_exp": 2900
         },
         {
             "lv": 30,
+            "train_max_lv": 300,
             "upgrade_exp": 3000
         },
         {
             "lv": 31,
+            "train_max_lv": 400,
             "upgrade_exp": 3100
         },
         {
             "lv": 32,
+            "train_max_lv": 400,
             "upgrade_exp": 3200
         },
         {
             "lv": 33,
+            "train_max_lv": 400,
             "upgrade_exp": 3300
         },
         {
             "lv": 34,
+            "train_max_lv": 400,
             "upgrade_exp": 3400
         },
         {
             "lv": 35,
+            "train_max_lv": 400,
             "upgrade_exp": 3500
         },
         {
             "lv": 36,
+            "train_max_lv": 400,
             "upgrade_exp": 3600
         },
         {
             "lv": 37,
+            "train_max_lv": 400,
             "upgrade_exp": 3700
         },
         {
             "lv": 38,
+            "train_max_lv": 400,
             "upgrade_exp": 3800
         },
         {
             "lv": 39,
+            "train_max_lv": 400,
             "upgrade_exp": 3900
         },
         {
             "lv": 40,
+            "train_max_lv": 400,
             "upgrade_exp": 4000
         },
         {
             "lv": 41,
+            "train_max_lv": 500,
             "upgrade_exp": 4100
         },
         {
             "lv": 42,
+            "train_max_lv": 500,
             "upgrade_exp": 4200
         },
         {
             "lv": 43,
+            "train_max_lv": 500,
             "upgrade_exp": 4300
         },
         {
             "lv": 44,
+            "train_max_lv": 500,
             "upgrade_exp": 4400
         },
         {
             "lv": 45,
+            "train_max_lv": 500,
             "upgrade_exp": 4500
         },
         {
             "lv": 46,
+            "train_max_lv": 500,
             "upgrade_exp": 4600
         },
         {
             "lv": 47,
+            "train_max_lv": 500,
             "upgrade_exp": 4700
         },
         {
             "lv": 48,
+            "train_max_lv": 500,
             "upgrade_exp": 4800
         },
         {
             "lv": 49,
+            "train_max_lv": 500,
             "upgrade_exp": 4900
         },
         {
             "lv": 50,
+            "train_max_lv": 500,
             "upgrade_exp": 5000
         }
-    ]
+    ],
+    "train": {
+        "1001": {
+            "grow": 10,
+            "id": 1001,
+            "initial": 100
+        },
+        "1002": {
+            "grow": 2,
+            "id": 1002,
+            "initial": 100
+        },
+        "1003": {
+            "grow": 5,
+            "id": 1003,
+            "initial": 100
+        },
+        "1004": {
+            "grow": 1,
+            "id": 1004,
+            "initial": 100
+        }
+    }
 }

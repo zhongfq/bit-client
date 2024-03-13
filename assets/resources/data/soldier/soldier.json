@@ -1,0 +1,358 @@
+{
+    "pendant": {
+        "40801": {
+            "icon": "soldier1",
+            "id": 40801,
+            "max_star": 50,
+            "model": "soldier1",
+            "name": "士兵1",
+            "position": 1,
+            "quality": 1,
+            "skill_id": 1,
+            "up_star_num": 5
+        },
+        "40802": {
+            "icon": "soldier2",
+            "id": 40802,
+            "max_star": 50,
+            "model": "soldier2",
+            "name": "士兵2",
+            "position": 2,
+            "quality": 2,
+            "skill_id": 1,
+            "up_star_num": 5
+        },
+        "40803": {
+            "icon": "soldier3",
+            "id": 40803,
+            "max_star": 50,
+            "model": "soldier3",
+            "name": "士兵3",
+            "position": 3,
+            "quality": 3,
+            "skill_id": 1,
+            "up_star_num": 5
+        },
+        "40804": {
+            "icon": "soldier4",
+            "id": 40804,
+            "max_star": 50,
+            "model": "soldier4",
+            "name": "士兵4",
+            "position": 1,
+            "quality": 4,
+            "skill_id": 1,
+            "up_star_num": 5
+        },
+        "40805": {
+            "icon": "soldier5",
+            "id": 40805,
+            "max_star": 50,
+            "model": "soldier5",
+            "name": "士兵5",
+            "position": 2,
+            "quality": 1,
+            "skill_id": 2,
+            "up_star_num": 5
+        },
+        "40806": {
+            "icon": "soldier6",
+            "id": 40806,
+            "max_star": 50,
+            "model": "soldier6",
+            "name": "士兵6",
+            "position": 3,
+            "quality": 2,
+            "skill_id": 2,
+            "up_star_num": 5
+        },
+        "40807": {
+            "icon": "soldier7",
+            "id": 40807,
+            "max_star": 50,
+            "model": "soldier7",
+            "name": "士兵7",
+            "position": 1,
+            "quality": 3,
+            "skill_id": 2,
+            "up_star_num": 5
+        },
+        "40808": {
+            "icon": "soldier8",
+            "id": 40808,
+            "max_star": 50,
+            "model": "soldier8",
+            "name": "士兵8",
+            "position": 2,
+            "quality": 4,
+            "skill_id": 2,
+            "up_star_num": 5
+        }
+    },
+    "soldier": {
+        "40701": {
+            "attr": [
+                [
+                    101,
+                    100,
+                    1
+                ],
+                [
+                    102,
+                    10,
+                    1
+                ],
+                [
+                    103,
+                    50,
+                    1
+                ],
+                [
+                    104,
+                    5,
+                    1
+                ]
+            ],
+            "icon": "soldier1",
+            "id": 40701,
+            "max_lv": 50,
+            "model": "soldier1",
+            "name": "士兵1",
+            "position": 1,
+            "quality": 1,
+            "skill_id": 10101,
+            "up_lv_num": 5
+        },
+        "40702": {
+            "attr": [
+                [
+                    101,
+                    100,
+                    1
+                ],
+                [
+                    102,
+                    10,
+                    1
+                ],
+                [
+                    103,
+                    50,
+                    1
+                ],
+                [
+                    104,
+                    5,
+                    1
+                ]
+            ],
+            "icon": "soldier2",
+            "id": 40702,
+            "max_lv": 50,
+            "model": "soldier2",
+            "name": "士兵2",
+            "position": 2,
+            "quality": 2,
+            "skill_id": 10102,
+            "up_lv_num": 5
+        },
+        "40703": {
+            "attr": [
+                [
+                    101,
+                    100,
+                    1
+                ],
+                [
+                    102,
+                    10,
+                    1
+                ],
+                [
+                    103,
+                    50,
+                    1
+                ],
+                [
+                    104,
+                    5,
+                    1
+                ]
+            ],
+            "icon": "soldier3",
+            "id": 40703,
+            "max_lv": 50,
+            "model": "soldier3",
+            "name": "士兵3",
+            "position": 3,
+            "quality": 3,
+            "skill_id": 10103,
+            "up_lv_num": 5
+        },
+        "40704": {
+            "attr": [
+                [
+                    101,
+                    100,
+                    1
+                ],
+                [
+                    102,
+                    10,
+                    1
+                ],
+                [
+                    103,
+                    50,
+                    1
+                ],
+                [
+                    104,
+                    5,
+                    1
+                ]
+            ],
+            "icon": "soldier4",
+            "id": 40704,
+            "max_lv": 50,
+            "model": "soldier4",
+            "name": "士兵4",
+            "position": 1,
+            "quality": 4,
+            "skill_id": 10104,
+            "up_lv_num": 5
+        },
+        "40705": {
+            "attr": [
+                [
+                    101,
+                    100,
+                    1
+                ],
+                [
+                    102,
+                    10,
+                    1
+                ],
+                [
+                    103,
+                    50,
+                    1
+                ],
+                [
+                    104,
+                    5,
+                    1
+                ]
+            ],
+            "icon": "soldier5",
+            "id": 40705,
+            "max_lv": 50,
+            "model": "soldier5",
+            "name": "士兵5",
+            "position": 2,
+            "quality": 1,
+            "skill_id": 10105,
+            "up_lv_num": 5
+        },
+        "40706": {
+            "attr": [
+                [
+                    101,
+                    100,
+                    1
+                ],
+                [
+                    102,
+                    10,
+                    1
+                ],
+                [
+                    103,
+                    50,
+                    1
+                ],
+                [
+                    104,
+                    5,
+                    1
+                ]
+            ],
+            "icon": "soldier6",
+            "id": 40706,
+            "max_lv": 50,
+            "model": "soldier6",
+            "name": "士兵6",
+            "position": 3,
+            "quality": 2,
+            "skill_id": 10101,
+            "up_lv_num": 5
+        },
+        "40707": {
+            "attr": [
+                [
+                    101,
+                    100,
+                    1
+                ],
+                [
+                    102,
+                    10,
+                    1
+                ],
+                [
+                    103,
+                    50,
+                    1
+                ],
+                [
+                    104,
+                    5,
+                    1
+                ]
+            ],
+            "icon": "soldier7",
+            "id": 40707,
+            "max_lv": 50,
+            "model": "soldier7",
+            "name": "士兵7",
+            "position": 1,
+            "quality": 3,
+            "skill_id": 10102,
+            "up_lv_num": 5
+        },
+        "40708": {
+            "attr": [
+                [
+                    101,
+                    100,
+                    1
+                ],
+                [
+                    102,
+                    10,
+                    1
+                ],
+                [
+                    103,
+                    50,
+                    1
+                ],
+                [
+                    104,
+                    5,
+                    1
+                ]
+            ],
+            "icon": "soldier8",
+            "id": 40708,
+            "max_lv": 50,
+            "model": "soldier8",
+            "name": "士兵8",
+            "position": 2,
+            "quality": 4,
+            "skill_id": 10103,
+            "up_lv_num": 5
+        }
+    }
+}

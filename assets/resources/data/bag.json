@@ -8,5 +8,15 @@
         "id": 2,
         "max_grid": 5,
         "type": 2
+    },
+    "3": {
+        "id": 3,
+        "max_grid": 99,
+        "type": 3
+    },
+    "4": {
+        "id": 4,
+        "max_grid": 99,
+        "type": 4
     }
 }

@@ -22,12 +22,20 @@ export interface GeneratedItemRow {
 export interface GeneratedRoleLevelRow {
     lv: number;
     upgrade_exp: number;
+    train_max_lv: number;
 }
 
 // file: design/role.xlsx
 export interface GeneratedRoleConfRow {
     key: string;
     value?: string;
+}
+
+// file: design/role.xlsx
+export interface GeneratedRoleTrainRow {
+    id: number;
+    initial: number;
+    grow: number;
 }
 
 // file: design/hero.xlsx
@@ -438,4 +446,31 @@ export interface GeneratedChestScoreRow {
     sort: number;
     reward_score: number;
     chest_id: number;
+}
+
+// file: design/soldier/soldier.xlsx
+export interface GeneratedSoldierRow {
+    id: number;
+    name: string;
+    position: number;
+    quality: number;
+    skill_id: number;
+    icon: string;
+    model: string;
+    attr: any;
+    up_lv_num: number;
+    max_lv: number;
+}
+
+// file: design/soldier/soldier.xlsx
+export interface GeneratedSoldierPendantRow {
+    id: number;
+    name: string;
+    position: number;
+    quality: number;
+    skill_id: number;
+    icon: string;
+    model: string;
+    up_star_num: number;
+    max_star: number;
 }

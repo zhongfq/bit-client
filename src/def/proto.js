@@ -27819,11 +27819,12 @@ $root.world = (function() {
          * @property {number|null} [heroId] TroopComponent heroId
          * @property {number|null} [soldierId] TroopComponent soldierId
          * @property {number|null} [cmd] TroopComponent cmd
-         * @property {number|null} [stayEid] TroopComponent stayEid
+         * @property {number|null} [insideEid] TroopComponent insideEid
          * @property {number|null} [homeEid] TroopComponent homeEid
          * @property {number|null} [battleEid] TroopComponent battleEid
          * @property {number|null} [maxHp] TroopComponent maxHp
          * @property {number|null} [hp] TroopComponent hp
+         * @property {number|null} [state] TroopComponent state
          */
 
         /**
@@ -27866,12 +27867,12 @@ $root.world = (function() {
         TroopComponent.prototype.cmd = 0;
 
         /**
-         * TroopComponent stayEid.
-         * @member {number} stayEid
+         * TroopComponent insideEid.
+         * @member {number} insideEid
          * @memberof world.TroopComponent
          * @instance
          */
-        TroopComponent.prototype.stayEid = 0;
+        TroopComponent.prototype.insideEid = 0;
 
         /**
          * TroopComponent homeEid.
@@ -27906,6 +27907,14 @@ $root.world = (function() {
         TroopComponent.prototype.hp = 0;
 
         /**
+         * TroopComponent state.
+         * @member {number} state
+         * @memberof world.TroopComponent
+         * @instance
+         */
+        TroopComponent.prototype.state = 0;
+
+        /**
          * Creates a new TroopComponent instance using the specified properties.
          * @function create
          * @memberof world.TroopComponent
@@ -27935,8 +27944,8 @@ $root.world = (function() {
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.soldierId);
             if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.cmd);
-            if (message.stayEid != null && Object.hasOwnProperty.call(message, "stayEid"))
-                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.stayEid);
+            if (message.insideEid != null && Object.hasOwnProperty.call(message, "insideEid"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.insideEid);
             if (message.homeEid != null && Object.hasOwnProperty.call(message, "homeEid"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.homeEid);
             if (message.battleEid != null && Object.hasOwnProperty.call(message, "battleEid"))
@@ -27945,6 +27954,8 @@ $root.world = (function() {
                 writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.maxHp);
             if (message.hp != null && Object.hasOwnProperty.call(message, "hp"))
                 writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.hp);
+            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.state);
             return writer;
         };
 
@@ -27992,7 +28003,7 @@ $root.world = (function() {
                         break;
                     }
                 case 4: {
-                        message.stayEid = reader.uint32();
+                        message.insideEid = reader.uint32();
                         break;
                     }
                 case 5: {
@@ -28009,6 +28020,10 @@ $root.world = (function() {
                     }
                 case 8: {
                         message.hp = reader.uint32();
+                        break;
+                    }
+                case 9: {
+                        message.state = reader.uint32();
                         break;
                     }
                 default:
@@ -28055,9 +28070,9 @@ $root.world = (function() {
             if (message.cmd != null && message.hasOwnProperty("cmd"))
                 if (!$util.isInteger(message.cmd))
                     return "cmd: integer expected";
-            if (message.stayEid != null && message.hasOwnProperty("stayEid"))
-                if (!$util.isInteger(message.stayEid))
-                    return "stayEid: integer expected";
+            if (message.insideEid != null && message.hasOwnProperty("insideEid"))
+                if (!$util.isInteger(message.insideEid))
+                    return "insideEid: integer expected";
             if (message.homeEid != null && message.hasOwnProperty("homeEid"))
                 if (!$util.isInteger(message.homeEid))
                     return "homeEid: integer expected";
@@ -28070,6 +28085,9 @@ $root.world = (function() {
             if (message.hp != null && message.hasOwnProperty("hp"))
                 if (!$util.isInteger(message.hp))
                     return "hp: integer expected";
+            if (message.state != null && message.hasOwnProperty("state"))
+                if (!$util.isInteger(message.state))
+                    return "state: integer expected";
             return null;
         };
 
@@ -28091,8 +28109,8 @@ $root.world = (function() {
                 message.soldierId = object.soldierId >>> 0;
             if (object.cmd != null)
                 message.cmd = object.cmd >>> 0;
-            if (object.stayEid != null)
-                message.stayEid = object.stayEid >>> 0;
+            if (object.insideEid != null)
+                message.insideEid = object.insideEid >>> 0;
             if (object.homeEid != null)
                 message.homeEid = object.homeEid >>> 0;
             if (object.battleEid != null)
@@ -28101,6 +28119,8 @@ $root.world = (function() {
                 message.maxHp = object.maxHp >>> 0;
             if (object.hp != null)
                 message.hp = object.hp >>> 0;
+            if (object.state != null)
+                message.state = object.state >>> 0;
             return message;
         };
 
@@ -28121,11 +28141,12 @@ $root.world = (function() {
                 object.heroId = 0;
                 object.soldierId = 0;
                 object.cmd = 0;
-                object.stayEid = 0;
+                object.insideEid = 0;
                 object.homeEid = 0;
                 object.battleEid = 0;
                 object.maxHp = 0;
                 object.hp = 0;
+                object.state = 0;
             }
             if (message.heroId != null && message.hasOwnProperty("heroId"))
                 object.heroId = message.heroId;
@@ -28133,8 +28154,8 @@ $root.world = (function() {
                 object.soldierId = message.soldierId;
             if (message.cmd != null && message.hasOwnProperty("cmd"))
                 object.cmd = message.cmd;
-            if (message.stayEid != null && message.hasOwnProperty("stayEid"))
-                object.stayEid = message.stayEid;
+            if (message.insideEid != null && message.hasOwnProperty("insideEid"))
+                object.insideEid = message.insideEid;
             if (message.homeEid != null && message.hasOwnProperty("homeEid"))
                 object.homeEid = message.homeEid;
             if (message.battleEid != null && message.hasOwnProperty("battleEid"))
@@ -28143,6 +28164,8 @@ $root.world = (function() {
                 object.maxHp = message.maxHp;
             if (message.hp != null && message.hasOwnProperty("hp"))
                 object.hp = message.hp;
+            if (message.state != null && message.hasOwnProperty("state"))
+                object.state = message.state;
             return object;
         };
 
@@ -30619,7 +30642,6 @@ $root.world = (function() {
          * @property {number|null} [eid] Entity eid
          * @property {number|null} [etype] Entity etype
          * @property {world.IPosition|null} [pos] Entity pos
-         * @property {number|null} [state] Entity state
          * @property {world.ITimerComponent|null} [timer] Entity timer
          * @property {world.IMoveComponent|null} [move] Entity move
          * @property {world.IBuildingComponent|null} [building] Entity building
@@ -30668,14 +30690,6 @@ $root.world = (function() {
          * @instance
          */
         Entity.prototype.pos = null;
-
-        /**
-         * Entity state.
-         * @member {number} state
-         * @memberof world.Entity
-         * @instance
-         */
-        Entity.prototype.state = 0;
 
         /**
          * Entity timer.
@@ -30771,8 +30785,6 @@ $root.world = (function() {
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.etype);
             if (message.pos != null && Object.hasOwnProperty.call(message, "pos"))
                 $root.world.Position.encode(message.pos, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
-                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.state);
             if (message.timer != null && Object.hasOwnProperty.call(message, "timer"))
                 $root.world.TimerComponent.encode(message.timer, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
             if (message.move != null && Object.hasOwnProperty.call(message, "move"))
@@ -30833,10 +30845,6 @@ $root.world = (function() {
                     }
                 case 3: {
                         message.pos = $root.world.Position.decode(reader, reader.uint32());
-                        break;
-                    }
-                case 4: {
-                        message.state = reader.uint32();
                         break;
                     }
                 case 12: {
@@ -30917,9 +30925,6 @@ $root.world = (function() {
                 if (error)
                     return "pos." + error;
             }
-            if (message.state != null && message.hasOwnProperty("state"))
-                if (!$util.isInteger(message.state))
-                    return "state: integer expected";
             if (message.timer != null && message.hasOwnProperty("timer")) {
                 var error = $root.world.TimerComponent.verify(message.timer);
                 if (error)
@@ -30984,8 +30989,6 @@ $root.world = (function() {
                     throw TypeError(".world.Entity.pos: object expected");
                 message.pos = $root.world.Position.fromObject(object.pos);
             }
-            if (object.state != null)
-                message.state = object.state >>> 0;
             if (object.timer != null) {
                 if (typeof object.timer !== "object")
                     throw TypeError(".world.Entity.timer: object expected");
@@ -31046,7 +31049,6 @@ $root.world = (function() {
                 object.eid = 0;
                 object.etype = 0;
                 object.pos = null;
-                object.state = 0;
                 object.timer = null;
                 object.move = null;
                 object.building = null;
@@ -31062,8 +31064,6 @@ $root.world = (function() {
                 object.etype = message.etype;
             if (message.pos != null && message.hasOwnProperty("pos"))
                 object.pos = $root.world.Position.toObject(message.pos, options);
-            if (message.state != null && message.hasOwnProperty("state"))
-                object.state = message.state;
             if (message.timer != null && message.hasOwnProperty("timer"))
                 object.timer = $root.world.TimerComponent.toObject(message.timer, options);
             if (message.move != null && message.hasOwnProperty("move"))
@@ -31725,8 +31725,8 @@ $root.world = (function() {
          * @interface Is2c_load
          * @property {number|null} [err] s2c_load err
          * @property {number|null} [mapId] s2c_load mapId
-         * @property {number|null} [myCastleEid] s2c_load myCastleEid
-         * @property {world.IPosition|null} [myCastlePos] s2c_load myCastlePos
+         * @property {number|null} [myCityEid] s2c_load myCityEid
+         * @property {world.IPosition|null} [myCityPos] s2c_load myCityPos
          */
 
         /**
@@ -31761,20 +31761,20 @@ $root.world = (function() {
         s2c_load.prototype.mapId = 0;
 
         /**
-         * s2c_load myCastleEid.
-         * @member {number} myCastleEid
+         * s2c_load myCityEid.
+         * @member {number} myCityEid
          * @memberof world.s2c_load
          * @instance
          */
-        s2c_load.prototype.myCastleEid = 0;
+        s2c_load.prototype.myCityEid = 0;
 
         /**
-         * s2c_load myCastlePos.
-         * @member {world.IPosition|null|undefined} myCastlePos
+         * s2c_load myCityPos.
+         * @member {world.IPosition|null|undefined} myCityPos
          * @memberof world.s2c_load
          * @instance
          */
-        s2c_load.prototype.myCastlePos = null;
+        s2c_load.prototype.myCityPos = null;
 
         /**
          * Creates a new s2c_load instance using the specified properties.
@@ -31804,10 +31804,10 @@ $root.world = (function() {
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
             if (message.mapId != null && Object.hasOwnProperty.call(message, "mapId"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.mapId);
-            if (message.myCastleEid != null && Object.hasOwnProperty.call(message, "myCastleEid"))
-                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.myCastleEid);
-            if (message.myCastlePos != null && Object.hasOwnProperty.call(message, "myCastlePos"))
-                $root.world.Position.encode(message.myCastlePos, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            if (message.myCityEid != null && Object.hasOwnProperty.call(message, "myCityEid"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.myCityEid);
+            if (message.myCityPos != null && Object.hasOwnProperty.call(message, "myCityPos"))
+                $root.world.Position.encode(message.myCityPos, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
             return writer;
         };
 
@@ -31851,11 +31851,11 @@ $root.world = (function() {
                         break;
                     }
                 case 3: {
-                        message.myCastleEid = reader.uint32();
+                        message.myCityEid = reader.uint32();
                         break;
                     }
                 case 4: {
-                        message.myCastlePos = $root.world.Position.decode(reader, reader.uint32());
+                        message.myCityPos = $root.world.Position.decode(reader, reader.uint32());
                         break;
                     }
                 default:
@@ -31899,13 +31899,13 @@ $root.world = (function() {
             if (message.mapId != null && message.hasOwnProperty("mapId"))
                 if (!$util.isInteger(message.mapId))
                     return "mapId: integer expected";
-            if (message.myCastleEid != null && message.hasOwnProperty("myCastleEid"))
-                if (!$util.isInteger(message.myCastleEid))
-                    return "myCastleEid: integer expected";
-            if (message.myCastlePos != null && message.hasOwnProperty("myCastlePos")) {
-                var error = $root.world.Position.verify(message.myCastlePos);
+            if (message.myCityEid != null && message.hasOwnProperty("myCityEid"))
+                if (!$util.isInteger(message.myCityEid))
+                    return "myCityEid: integer expected";
+            if (message.myCityPos != null && message.hasOwnProperty("myCityPos")) {
+                var error = $root.world.Position.verify(message.myCityPos);
                 if (error)
-                    return "myCastlePos." + error;
+                    return "myCityPos." + error;
             }
             return null;
         };
@@ -31926,12 +31926,12 @@ $root.world = (function() {
                 message.err = object.err >>> 0;
             if (object.mapId != null)
                 message.mapId = object.mapId >>> 0;
-            if (object.myCastleEid != null)
-                message.myCastleEid = object.myCastleEid >>> 0;
-            if (object.myCastlePos != null) {
-                if (typeof object.myCastlePos !== "object")
-                    throw TypeError(".world.s2c_load.myCastlePos: object expected");
-                message.myCastlePos = $root.world.Position.fromObject(object.myCastlePos);
+            if (object.myCityEid != null)
+                message.myCityEid = object.myCityEid >>> 0;
+            if (object.myCityPos != null) {
+                if (typeof object.myCityPos !== "object")
+                    throw TypeError(".world.s2c_load.myCityPos: object expected");
+                message.myCityPos = $root.world.Position.fromObject(object.myCityPos);
             }
             return message;
         };
@@ -31952,17 +31952,17 @@ $root.world = (function() {
             if (options.defaults) {
                 object.err = 0;
                 object.mapId = 0;
-                object.myCastleEid = 0;
-                object.myCastlePos = null;
+                object.myCityEid = 0;
+                object.myCityPos = null;
             }
             if (message.err != null && message.hasOwnProperty("err"))
                 object.err = message.err;
             if (message.mapId != null && message.hasOwnProperty("mapId"))
                 object.mapId = message.mapId;
-            if (message.myCastleEid != null && message.hasOwnProperty("myCastleEid"))
-                object.myCastleEid = message.myCastleEid;
-            if (message.myCastlePos != null && message.hasOwnProperty("myCastlePos"))
-                object.myCastlePos = $root.world.Position.toObject(message.myCastlePos, options);
+            if (message.myCityEid != null && message.hasOwnProperty("myCityEid"))
+                object.myCityEid = message.myCityEid;
+            if (message.myCityPos != null && message.hasOwnProperty("myCityPos"))
+                object.myCityPos = $root.world.Position.toObject(message.myCityPos, options);
             return object;
         };
 

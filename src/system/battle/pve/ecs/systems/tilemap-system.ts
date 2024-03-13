@@ -1,5 +1,4 @@
 import { ecs } from "../../../../../core/ecs";
-import { Tilemap } from "../../../tilemap/tilemap";
 import { PveContext } from "../../pve-context";
 import { CameraComponent } from "../components/camera-component";
 import { TransformComponent } from "../components/movement-component";

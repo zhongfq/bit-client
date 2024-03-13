@@ -110,6 +110,8 @@ export interface TMTextureCfg {
 export interface ITMContext {
     get scene3D(): Laya.Scene3D;
     get camera(): Laya.Camera;
+    get mapDir(): string;
+
     onAddElement(element: TMElement): void;
     onDelElement(element: TMElement): void;
 }

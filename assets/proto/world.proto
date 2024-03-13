@@ -28,11 +28,12 @@ message TroopComponent {
     uint32 hero_id = 1;
     uint32 soldier_id = 2; // 士兵id
     uint32 cmd = 3; // 当前执行指令
-    uint32 stay_eid = 4; // 当前所处建筑
+    uint32 inside_eid = 4; // 当前所处建筑
     uint32 home_eid = 5; // 归属建筑
     uint32 battle_eid = 6; // 正在参与的战斗
     uint32 max_hp = 7; // 最大血量
     uint32 hp = 8; // 当前血量
+    uint32 state = 9; // 当前状态
 };
 
 message OwnerComponent {
@@ -98,7 +99,6 @@ message Entity {
     uint32 etype = 2;
 
     Position pos = 3;
-    uint32 state = 4;
     TimerComponent timer = 12;
     MoveComponent move = 13;
     BuildingComponent building = 14;
@@ -124,8 +124,8 @@ message c2s_load {
 message s2c_load {
     uint32 err = 1;
     uint32 map_id = 2;
-    uint32 my_castle_eid = 3; // 我的主城id
-    Position my_castle_pos = 4; // 我的主城位置
+    uint32 my_city_eid = 3; // 我的主城id
+    Position my_city_pos = 4; // 我的主城位置
 }
 
 // 客户端视口变更(如果world_uid改变了，会自动离开原地图)

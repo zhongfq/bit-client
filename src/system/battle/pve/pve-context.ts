@@ -6,7 +6,7 @@ import { Event } from "../../../misc/event";
 import { res } from "../../../misc/res";
 import { PveUI } from "../../../ui-runtime/scene/PveUI";
 import { PveServer } from "../pve-server/pve-server";
-import { TMLayerName } from "../tilemap/tm-def";
+import { ITMContext, TMLayerName } from "../tilemap/tm-def";
 import {
     TMBuildingElement,
     TMDynamicElement,
@@ -26,7 +26,7 @@ import { RenderSystem } from "./ecs/systems/render-system";
 import { TilemapSystem } from "./ecs/systems/tilemap-system";
 
 @Laya.regClass()
-export class PveContext extends Mediator {
+export class PveContext extends Mediator implements ITMContext {
     declare owner: PveUI;
 
     focusRole: number = 0;
@@ -54,6 +54,10 @@ export class PveContext extends Mediator {
 
     get sender() {
         return this._sender;
+    }
+
+    get mapDir() {
+        return "resources/data/tilemap/pve";
     }
 
     override onAwake() {
