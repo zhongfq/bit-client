@@ -1,6 +1,6 @@
 import * as b3 from "../../../../../core/behavior3/behavior";
 import { AiTreeEnv } from "../../ecs/components/ai-component";
-import { SoldierComponent } from "../../ecs/components/element-component";
+import { SoldierComponent, TruckComponent } from "../../ecs/components/element-component";
 import { AiSystem } from "../../ecs/systems/ai-system";
 import { PveDef } from "../../pve-defs";
 
@@ -11,18 +11,19 @@ export class FollowHero extends b3.Process {
     public override check(node: b3.Node) {}
 
     public override run(node: b3.Node, env: AiTreeEnv) {
-        const soldier = env.owner.getComponent(SoldierComponent);
-        if (!soldier) {
-            console.warn(`'SoldierComponent' not found `);
+        const follower =
+            env.owner.getComponent(SoldierComponent) || env.owner.getComponent(TruckComponent);
+        if (!follower) {
+            console.warn(`'SoldierComponent | TruckComponent' not found `);
             return b3.Status.SUCCESS;
         }
-        const leader = soldier.hero;
-        const movement = soldier.element.movement;
-        const transform = soldier.element.transform;
+        const leader = follower.hero;
+        const movement = follower.element.movement;
+        const transform = follower.element.transform;
 
         const p1 = tmpTarget;
         const p0 = transform.position;
-        env.context.calcSoldierPosition(leader, soldier, p1);
+        env.context.calcFollowerPosition(leader, follower, p1);
         const distance = Laya.Vector3.distance(p1, p0);
         if (distance <= 0.05) {
             if (movement.velocity.x !== 0 || movement.velocity.z !== 0) {

@@ -80,9 +80,12 @@ export class AiSystem extends ecs.System {
     public override update(dt: number): void {
         const time = this.context.time;
         this.ecs.getComponents(AiComponent).forEach((ai) => {
-            for (const v of ai.getComponent(SkillComponent)!.skills) {
-                if (v.running) {
-                    return;
+            const skillComp = ai.getComponent(SkillComponent);
+            if (skillComp) {
+                for (const v of skillComp.skills) {
+                    if (v.running) {
+                        return;
+                    }
                 }
             }
             if (ai.active && time - ai.lastUpdate > ai.tick && ai.tree && ai.env) {

@@ -9,8 +9,10 @@ import { ElementAnimation } from "../pve/ecs/components/troop-component";
 import { AiComponent } from "./ecs/components/ai-component";
 import {
     ElementComponent,
+    FollowerComponent,
     SoldierComponent,
     TroopComponent,
+    TruckComponent,
 } from "./ecs/components/element-component";
 import { MovementComponent, TransformComponent } from "./ecs/components/movement-component";
 import { Skill, SkillComponent } from "./ecs/components/skill-component";
@@ -21,6 +23,7 @@ import { SkillSystem } from "./ecs/systems/skill-system";
 import { ElementCreator, UpdateHp } from "./pve-defs";
 
 const _tmpVelocity = new Laya.Vector3();
+const SOLDIER_COUNT = 12;
 
 export class PveServer extends b3.Context {
     private _ecs: ecs.World;
@@ -123,15 +126,15 @@ export class PveServer extends b3.Context {
         return arr;
     }
 
-    public calcSoldierPosition(
+    public calcFollowerPosition(
         hero: ElementComponent,
-        solider: SoldierComponent,
+        follower: FollowerComponent,
         out: Laya.Vector3
     ) {
         const t3d = this._transform3D;
         t3d.localPosition = hero.transform.position;
         t3d.localRotationEulerY = -hero.transform.rotation;
-        out.cloneFrom(solider.offset);
+        out.cloneFrom(follower.offset);
         t3d.localToGlobal(out, out);
     }
 
@@ -193,23 +196,26 @@ export class PveServer extends b3.Context {
         this._sender.focus(element.eid);
 
         this._loadSoliders(element);
+        this._loadTrucks(element);
     }
 
     private _loadSoliders(hero: ElementComponent) {
         hero.troop!.formation = formation;
         hero.troop!.formation.forEach((value, idx) => {
+            if (idx >= SOLDIER_COUNT) {
+                return;
+            }
             const entity = this._ecs.createEntity();
+            entity.etype = BattleConf.ENTITY_TYPE.SOLDIER;
 
             const element = entity.addComponent(ElementComponent);
             element.tid = idx >= 4 ? 40704 : 40702;
             element.hp = 200;
             element.maxHp = 200;
             element.aid = 1;
-            entity.etype = BattleConf.ENTITY_TYPE.SOLDIER;
 
             const table = app.service.table;
             const soldierRow = table.soldier.soldier[element.tid];
-
             element.data = table.battleEntity[soldierRow.battle_entity];
 
             const soldier = entity.addComponent(SoldierComponent);
@@ -234,6 +240,49 @@ export class PveServer extends b3.Context {
             const entityRow = table.battleEntity[soldierRow.battle_entity];
             const ai = entity.addComponent(AiComponent);
             ai.res = `resources/data/btree/${entityRow.pve_ai}.json`;
+
+            entity.addComponent(MovementComponent);
+
+            this._sender.createElement({
+                eid: element.eid,
+                etype: element.entity.etype,
+                aid: element.aid,
+                entityId: element.data.id,
+                tableId: element.tid,
+                hp: element.hp,
+                maxHp: element.maxHp,
+                position: transform.position,
+                animation: true,
+            });
+        });
+    }
+
+    private _loadTrucks(hero: ElementComponent) {
+        hero.troop!.formation = formation;
+        hero.troop!.formation.forEach((value, idx) => {
+            if (idx < SOLDIER_COUNT) {
+                return;
+            }
+            const entity = this._ecs.createEntity();
+            entity.etype = BattleConf.ENTITY_TYPE.TRUCK;
+
+            const element = entity.addComponent(ElementComponent);
+            element.aid = 1;
+            element.data = app.service.table.battleEntity[80001];
+
+            const truck = entity.addComponent(TruckComponent);
+            truck.index = idx;
+            truck.offset = value;
+            truck.hero = hero;
+            truck.data = undefined;
+            hero.troop!.trucks.push(truck);
+
+            const transform = entity.addComponent(TransformComponent);
+            transform.position.x = value.x + hero.transform.position.x;
+            transform.position.z = value.z + hero.transform.position.z;
+
+            const ai = entity.addComponent(AiComponent);
+            ai.res = `resources/data/btree/${element.data.pve_ai}.json`;
 
             entity.addComponent(MovementComponent);
 

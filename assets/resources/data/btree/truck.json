@@ -8,12 +8,24 @@
     "children": [
       {
         "id": 2,
-        "name": "IsTroopFighting",
-        "desc": "检查我方是否有战斗",
-        "args": {}
+        "name": "Sequence",
+        "children": [
+          {
+            "id": 3,
+            "name": "IsTroopFighting",
+            "desc": "检查我方是否有战斗",
+            "args": {}
+          },
+          {
+            "id": 4,
+            "name": "MoveStop",
+            "desc": "停止移动",
+            "args": {}
+          }
+        ]
       },
       {
-        "id": 3,
+        "id": 5,
         "name": "FollowHero",
         "args": {}
       }
