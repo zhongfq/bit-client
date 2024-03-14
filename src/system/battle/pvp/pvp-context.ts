@@ -87,74 +87,71 @@ export class PvpContext extends Mediator implements ITMContext {
     private _initMapClickArea() {
         const clickArea = this.owner.mapClickArea;
         let clickEnabled = false;
-        let isClickDown = false;
+        let isDown = false;
 
-        const p0 = new Laya.Vector3();
-        const p1 = new Laya.Vector3();
+        const lastPos = new Laya.Vector2();
+        const currPos = new Laya.Vector2();
+
+        // 计算拖动距离
+        const ray = new Laya.Ray(new Laya.Vector3(), new Laya.Vector3());
+        const lastXZPos = new Laya.Vector3();
+        const currXZPos = new Laya.Vector3();
 
         const selectedTile = this.scene3D.getChildByPath("world-map/selected") as Laya.Sprite3D;
         selectedTile.active = false;
 
         const camera = this._ecs.getSingletonComponent(CameraComponent)!;
-        const mat = new Laya.Matrix4x4();
+
+        const viewportPointToXZ = (point: Laya.Vector2, out: Laya.Vector3) => {
+            this.camera.viewportPointToRay(point, ray);
+            const t = -ray.origin.y / ray.direction.y;
+            ray.direction.scale(t, ray.direction);
+            ray.origin.vadd(ray.direction, out);
+        };
 
         clickArea.on(Laya.Event.MOUSE_DOWN, (e: Laya.Event) => {
             const target = e.target as Laya.Sprite;
             clickEnabled = true;
-            isClickDown = true;
-            Laya.Matrix4x4.createRotationY(
-                MathUtil.toRadian(this.camera.transform.localRotationEulerY),
-                mat
-            );
-            p0.set(target.mouseX, 0, target.mouseY);
-            p1.set(target.mouseX, 0, target.mouseY);
-            Laya.Vector3.transformCoordinate(p0, mat, p0);
-            Laya.Vector3.transformCoordinate(p1, mat, p1);
+            isDown = true;
+            lastPos.setValue(target.mouseX, target.mouseY);
         });
 
         clickArea.on(Laya.Event.MOUSE_MOVE, (e: Laya.Event) => {
-            if (!isClickDown) {
+            if (!isDown) {
                 return;
             }
             const target = e.target as Laya.Sprite;
+            currPos.setValue(target.mouseX, target.mouseY);
             if (!clickEnabled) {
                 if (selectedTile.active) {
                     selectedTile.active = false;
                 }
-                p1.set(target.mouseX, 0, target.mouseY);
-                Laya.Vector3.transformCoordinate(p1, mat, p1);
-                p0.vsub(p1, p0);
-                p0.scale(0.01, p0);
-                camera.focus.vadd(p0, camera.focus);
-                p0.cloneFrom(p1);
-            } else if (Laya.Vector2.distance(p0, p1) > 5) {
+                viewportPointToXZ(lastPos, lastXZPos);
+                viewportPointToXZ(currPos, currXZPos);
+                lastXZPos.vsub(currXZPos, lastXZPos);
+                camera.focus.vadd(lastXZPos, camera.focus);
+                lastPos.cloneFrom(currPos);
+            } else if (Laya.Vector2.distance(lastPos, currPos) > 5) {
                 //判断出问题
                 clickEnabled = false;
-            } else {
-                p1.set(target.mouseX, 0, target.mouseY);
-                Laya.Vector3.transformCoordinate(p1, mat, p1);
             }
         });
 
         clickArea.on(Laya.Event.MOUSE_UP, (e: Laya.Event) => {
-            isClickDown = false;
+            isDown = false;
             if (clickEnabled) {
-                const ray = new Laya.Ray(new Laya.Vector3(), new Laya.Vector3());
-                this.camera.viewportPointToRay(
-                    new Laya.Vector2(e.target.mouseX, e.target.mouseY),
-                    ray
-                );
-                const t = -ray.origin.y / ray.direction.y;
-                ray.direction.scale(t, ray.direction);
-                const groundPos = new Laya.Vector3();
-                ray.origin.vadd(ray.direction, groundPos);
+                viewportPointToXZ(currPos, currXZPos);
 
-                groundPos.x = Math.floor(groundPos.x + 0.5);
-                groundPos.y = selectedTile.transform.position.y;
-                groundPos.z = Math.floor(groundPos.z + 0.5);
+                currXZPos.x = Math.floor(currXZPos.x + 0.5);
+                currXZPos.y = selectedTile.transform.position.y;
+                currXZPos.z = Math.floor(currXZPos.z + 0.5);
                 selectedTile.active = true;
-                selectedTile.transform.position = groundPos;
+                selectedTile.transform.position = currXZPos;
             }
+        });
+
+        clickArea.on(Laya.Event.MOUSE_OUT, (e: Laya.Event) => {
+            isDown = false;
         });
     }
 }
