@@ -140,8 +140,9 @@ export class PvpContext extends Mediator implements ITMContext {
         clickArea.on(Laya.Event.MOUSE_UP, (e: Laya.Event) => {
             isDown = false;
             if (clickEnabled) {
+                const target = e.target as Laya.Sprite;
+                currPos.setValue(target.mouseX, target.mouseY);
                 viewportPointToXZ(currPos, currXZPos);
-
                 currXZPos.x = Math.floor(currXZPos.x + 0.5);
                 currXZPos.y = selectedTile.transform.position.y;
                 currXZPos.z = Math.floor(currXZPos.z + 0.5);
