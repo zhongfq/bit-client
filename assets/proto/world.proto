@@ -57,7 +57,7 @@ message TimerComponent {
 // speed > 0 在移动 #path > 0 在寻路 否则摇杆
 message MoveComponent {
     uint32 start_ms = 2;
-    repeated uint32 path = 3;
+    repeated Position path = 3;
     float speed = 4; // 每秒多少格
     float degree = 5;
 }
@@ -116,8 +116,8 @@ message c2s_load {
 message s2c_load {
     uint32 err = 1;
     uint32 map_id = 2;
-    uint32 my_city_eid = 3; // 我的主城id
-    Position my_city_pos = 4; // 我的主城位置
+    uint32 home_eid = 3; // 我的主城id
+    Position home_pos = 4; // 我的主城位置
 }
 
 // 客户端视口变更(如果world_uid改变了，会自动离开原地图)
@@ -204,7 +204,7 @@ message DelEntityAction {
 }
 message MoveAction {
     uint32 eid = 1;
-    repeated uint32 path = 2;
+    repeated Position path = 2;
     uint32 speed = 3;
     uint32 start_ms = 4;
     Position cur_pos = 5;

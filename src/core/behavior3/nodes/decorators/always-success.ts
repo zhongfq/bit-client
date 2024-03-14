@@ -1,25 +1,25 @@
-import { b3 } from "../../behavior";
+import { Node, Process, Status, TreeEnv } from "../../behavior";
 
-export class AlwaysSuccess extends b3.Process {
-    public override check(node: b3.Node): void {
+export class AlwaysSuccess extends Process {
+    public override check(node: Node): void {
         if (node.children.length == 0) {
             this.error(node, `${node.tree.name}#${node.id}: at least one children`);
         }
     }
 
-    public override run(node: b3.Node, env: b3.TreeEnv) {
+    public override run(node: Node, env: TreeEnv) {
         const isYield = node.resume(env);
         if (typeof isYield === "boolean") {
-            if (env.lastRet.status === b3.Status.RUNNING) {
-                return b3.Status.RUNNING;
+            if (env.lastRet.status === Status.RUNNING) {
+                return Status.RUNNING;
             }
-            return b3.Status.SUCCESS;
+            return Status.SUCCESS;
         }
         const status = node.children[0].run(env);
-        if (status === b3.Status.RUNNING) {
+        if (status === Status.RUNNING) {
             return node.yield(env);
         }
-        return b3.Status.SUCCESS;
+        return Status.SUCCESS;
     }
 
     public override get descriptor() {

@@ -25561,6 +25561,454 @@ $root.soldier = (function() {
         return s2c_train_upgrade;
     })();
 
+    soldier.notify_pendants = (function() {
+
+        /**
+         * Properties of a notify_pendants.
+         * @memberof soldier
+         * @interface Inotify_pendants
+         * @property {Array.<soldier.IPendantInfo>|null} [pendants] notify_pendants pendants
+         */
+
+        /**
+         * Constructs a new notify_pendants.
+         * @memberof soldier
+         * @classdesc Represents a notify_pendants.
+         * @implements Inotify_pendants
+         * @constructor
+         * @param {soldier.Inotify_pendants=} [properties] Properties to set
+         */
+        function notify_pendants(properties) {
+            this.pendants = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * notify_pendants pendants.
+         * @member {Array.<soldier.IPendantInfo>} pendants
+         * @memberof soldier.notify_pendants
+         * @instance
+         */
+        notify_pendants.prototype.pendants = $util.emptyArray;
+
+        /**
+         * Creates a new notify_pendants instance using the specified properties.
+         * @function create
+         * @memberof soldier.notify_pendants
+         * @static
+         * @param {soldier.Inotify_pendants=} [properties] Properties to set
+         * @returns {soldier.notify_pendants} notify_pendants instance
+         */
+        notify_pendants.create = function create(properties) {
+            return new notify_pendants(properties);
+        };
+
+        /**
+         * Encodes the specified notify_pendants message. Does not implicitly {@link soldier.notify_pendants.verify|verify} messages.
+         * @function encode
+         * @memberof soldier.notify_pendants
+         * @static
+         * @param {soldier.Inotify_pendants} message notify_pendants message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        notify_pendants.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.pendants != null && message.pendants.length)
+                for (var i = 0; i < message.pendants.length; ++i)
+                    $root.soldier.PendantInfo.encode(message.pendants[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified notify_pendants message, length delimited. Does not implicitly {@link soldier.notify_pendants.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof soldier.notify_pendants
+         * @static
+         * @param {soldier.Inotify_pendants} message notify_pendants message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        notify_pendants.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a notify_pendants message from the specified reader or buffer.
+         * @function decode
+         * @memberof soldier.notify_pendants
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {soldier.notify_pendants} notify_pendants
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        notify_pendants.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.soldier.notify_pendants();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        if (!(message.pendants && message.pendants.length))
+                            message.pendants = [];
+                        message.pendants.push($root.soldier.PendantInfo.decode(reader, reader.uint32()));
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a notify_pendants message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof soldier.notify_pendants
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {soldier.notify_pendants} notify_pendants
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        notify_pendants.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a notify_pendants message.
+         * @function verify
+         * @memberof soldier.notify_pendants
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        notify_pendants.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.pendants != null && message.hasOwnProperty("pendants")) {
+                if (!Array.isArray(message.pendants))
+                    return "pendants: array expected";
+                for (var i = 0; i < message.pendants.length; ++i) {
+                    var error = $root.soldier.PendantInfo.verify(message.pendants[i]);
+                    if (error)
+                        return "pendants." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a notify_pendants message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof soldier.notify_pendants
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {soldier.notify_pendants} notify_pendants
+         */
+        notify_pendants.fromObject = function fromObject(object) {
+            if (object instanceof $root.soldier.notify_pendants)
+                return object;
+            var message = new $root.soldier.notify_pendants();
+            if (object.pendants) {
+                if (!Array.isArray(object.pendants))
+                    throw TypeError(".soldier.notify_pendants.pendants: array expected");
+                message.pendants = [];
+                for (var i = 0; i < object.pendants.length; ++i) {
+                    if (typeof object.pendants[i] !== "object")
+                        throw TypeError(".soldier.notify_pendants.pendants: object expected");
+                    message.pendants[i] = $root.soldier.PendantInfo.fromObject(object.pendants[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a notify_pendants message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof soldier.notify_pendants
+         * @static
+         * @param {soldier.notify_pendants} message notify_pendants
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        notify_pendants.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.pendants = [];
+            if (message.pendants && message.pendants.length) {
+                object.pendants = [];
+                for (var j = 0; j < message.pendants.length; ++j)
+                    object.pendants[j] = $root.soldier.PendantInfo.toObject(message.pendants[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this notify_pendants to JSON.
+         * @function toJSON
+         * @memberof soldier.notify_pendants
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        notify_pendants.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for notify_pendants
+         * @function getTypeUrl
+         * @memberof soldier.notify_pendants
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        notify_pendants.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/soldier.notify_pendants";
+        };
+
+        return notify_pendants;
+    })();
+
+    soldier.notify_slodiers = (function() {
+
+        /**
+         * Properties of a notify_slodiers.
+         * @memberof soldier
+         * @interface Inotify_slodiers
+         * @property {Array.<soldier.ISoldierInfo>|null} [soldiers] notify_slodiers soldiers
+         */
+
+        /**
+         * Constructs a new notify_slodiers.
+         * @memberof soldier
+         * @classdesc Represents a notify_slodiers.
+         * @implements Inotify_slodiers
+         * @constructor
+         * @param {soldier.Inotify_slodiers=} [properties] Properties to set
+         */
+        function notify_slodiers(properties) {
+            this.soldiers = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * notify_slodiers soldiers.
+         * @member {Array.<soldier.ISoldierInfo>} soldiers
+         * @memberof soldier.notify_slodiers
+         * @instance
+         */
+        notify_slodiers.prototype.soldiers = $util.emptyArray;
+
+        /**
+         * Creates a new notify_slodiers instance using the specified properties.
+         * @function create
+         * @memberof soldier.notify_slodiers
+         * @static
+         * @param {soldier.Inotify_slodiers=} [properties] Properties to set
+         * @returns {soldier.notify_slodiers} notify_slodiers instance
+         */
+        notify_slodiers.create = function create(properties) {
+            return new notify_slodiers(properties);
+        };
+
+        /**
+         * Encodes the specified notify_slodiers message. Does not implicitly {@link soldier.notify_slodiers.verify|verify} messages.
+         * @function encode
+         * @memberof soldier.notify_slodiers
+         * @static
+         * @param {soldier.Inotify_slodiers} message notify_slodiers message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        notify_slodiers.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.soldiers != null && message.soldiers.length)
+                for (var i = 0; i < message.soldiers.length; ++i)
+                    $root.soldier.SoldierInfo.encode(message.soldiers[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified notify_slodiers message, length delimited. Does not implicitly {@link soldier.notify_slodiers.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof soldier.notify_slodiers
+         * @static
+         * @param {soldier.Inotify_slodiers} message notify_slodiers message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        notify_slodiers.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a notify_slodiers message from the specified reader or buffer.
+         * @function decode
+         * @memberof soldier.notify_slodiers
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {soldier.notify_slodiers} notify_slodiers
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        notify_slodiers.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.soldier.notify_slodiers();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        if (!(message.soldiers && message.soldiers.length))
+                            message.soldiers = [];
+                        message.soldiers.push($root.soldier.SoldierInfo.decode(reader, reader.uint32()));
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a notify_slodiers message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof soldier.notify_slodiers
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {soldier.notify_slodiers} notify_slodiers
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        notify_slodiers.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a notify_slodiers message.
+         * @function verify
+         * @memberof soldier.notify_slodiers
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        notify_slodiers.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.soldiers != null && message.hasOwnProperty("soldiers")) {
+                if (!Array.isArray(message.soldiers))
+                    return "soldiers: array expected";
+                for (var i = 0; i < message.soldiers.length; ++i) {
+                    var error = $root.soldier.SoldierInfo.verify(message.soldiers[i]);
+                    if (error)
+                        return "soldiers." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a notify_slodiers message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof soldier.notify_slodiers
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {soldier.notify_slodiers} notify_slodiers
+         */
+        notify_slodiers.fromObject = function fromObject(object) {
+            if (object instanceof $root.soldier.notify_slodiers)
+                return object;
+            var message = new $root.soldier.notify_slodiers();
+            if (object.soldiers) {
+                if (!Array.isArray(object.soldiers))
+                    throw TypeError(".soldier.notify_slodiers.soldiers: array expected");
+                message.soldiers = [];
+                for (var i = 0; i < object.soldiers.length; ++i) {
+                    if (typeof object.soldiers[i] !== "object")
+                        throw TypeError(".soldier.notify_slodiers.soldiers: object expected");
+                    message.soldiers[i] = $root.soldier.SoldierInfo.fromObject(object.soldiers[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a notify_slodiers message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof soldier.notify_slodiers
+         * @static
+         * @param {soldier.notify_slodiers} message notify_slodiers
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        notify_slodiers.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.soldiers = [];
+            if (message.soldiers && message.soldiers.length) {
+                object.soldiers = [];
+                for (var j = 0; j < message.soldiers.length; ++j)
+                    object.soldiers[j] = $root.soldier.SoldierInfo.toObject(message.soldiers[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this notify_slodiers to JSON.
+         * @function toJSON
+         * @memberof soldier.notify_slodiers
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        notify_slodiers.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for notify_slodiers
+         * @function getTypeUrl
+         * @memberof soldier.notify_slodiers
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        notify_slodiers.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/soldier.notify_slodiers";
+        };
+
+        return notify_slodiers;
+    })();
+
     return soldier;
 })();
 
@@ -32289,7 +32737,7 @@ $root.world = (function() {
          * @memberof world
          * @interface IMoveComponent
          * @property {number|null} [startMs] MoveComponent startMs
-         * @property {Array.<number>|null} [path] MoveComponent path
+         * @property {Array.<world.IPosition>|null} [path] MoveComponent path
          * @property {number|null} [speed] MoveComponent speed
          * @property {number|null} [degree] MoveComponent degree
          */
@@ -32320,7 +32768,7 @@ $root.world = (function() {
 
         /**
          * MoveComponent path.
-         * @member {Array.<number>} path
+         * @member {Array.<world.IPosition>} path
          * @memberof world.MoveComponent
          * @instance
          */
@@ -32368,12 +32816,9 @@ $root.world = (function() {
                 writer = $Writer.create();
             if (message.startMs != null && Object.hasOwnProperty.call(message, "startMs"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.startMs);
-            if (message.path != null && message.path.length) {
-                writer.uint32(/* id 3, wireType 2 =*/26).fork();
+            if (message.path != null && message.path.length)
                 for (var i = 0; i < message.path.length; ++i)
-                    writer.uint32(message.path[i]);
-                writer.ldelim();
-            }
+                    $root.world.Position.encode(message.path[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
             if (message.speed != null && Object.hasOwnProperty.call(message, "speed"))
                 writer.uint32(/* id 4, wireType 5 =*/37).float(message.speed);
             if (message.degree != null && Object.hasOwnProperty.call(message, "degree"))
@@ -32419,12 +32864,7 @@ $root.world = (function() {
                 case 3: {
                         if (!(message.path && message.path.length))
                             message.path = [];
-                        if ((tag & 7) === 2) {
-                            var end2 = reader.uint32() + reader.pos;
-                            while (reader.pos < end2)
-                                message.path.push(reader.uint32());
-                        } else
-                            message.path.push(reader.uint32());
+                        message.path.push($root.world.Position.decode(reader, reader.uint32()));
                         break;
                     }
                 case 4: {
@@ -32476,9 +32916,11 @@ $root.world = (function() {
             if (message.path != null && message.hasOwnProperty("path")) {
                 if (!Array.isArray(message.path))
                     return "path: array expected";
-                for (var i = 0; i < message.path.length; ++i)
-                    if (!$util.isInteger(message.path[i]))
-                        return "path: integer[] expected";
+                for (var i = 0; i < message.path.length; ++i) {
+                    var error = $root.world.Position.verify(message.path[i]);
+                    if (error)
+                        return "path." + error;
+                }
             }
             if (message.speed != null && message.hasOwnProperty("speed"))
                 if (typeof message.speed !== "number")
@@ -32507,8 +32949,11 @@ $root.world = (function() {
                 if (!Array.isArray(object.path))
                     throw TypeError(".world.MoveComponent.path: array expected");
                 message.path = [];
-                for (var i = 0; i < object.path.length; ++i)
-                    message.path[i] = object.path[i] >>> 0;
+                for (var i = 0; i < object.path.length; ++i) {
+                    if (typeof object.path[i] !== "object")
+                        throw TypeError(".world.MoveComponent.path: object expected");
+                    message.path[i] = $root.world.Position.fromObject(object.path[i]);
+                }
             }
             if (object.speed != null)
                 message.speed = Number(object.speed);
@@ -32542,7 +32987,7 @@ $root.world = (function() {
             if (message.path && message.path.length) {
                 object.path = [];
                 for (var j = 0; j < message.path.length; ++j)
-                    object.path[j] = message.path[j];
+                    object.path[j] = $root.world.Position.toObject(message.path[j], options);
             }
             if (message.speed != null && message.hasOwnProperty("speed"))
                 object.speed = options.json && !isFinite(message.speed) ? String(message.speed) : message.speed;
@@ -34589,8 +35034,8 @@ $root.world = (function() {
          * @interface Is2c_load
          * @property {number|null} [err] s2c_load err
          * @property {number|null} [mapId] s2c_load mapId
-         * @property {number|null} [myCityEid] s2c_load myCityEid
-         * @property {world.IPosition|null} [myCityPos] s2c_load myCityPos
+         * @property {number|null} [homeEid] s2c_load homeEid
+         * @property {world.IPosition|null} [homePos] s2c_load homePos
          */
 
         /**
@@ -34625,20 +35070,20 @@ $root.world = (function() {
         s2c_load.prototype.mapId = 0;
 
         /**
-         * s2c_load myCityEid.
-         * @member {number} myCityEid
+         * s2c_load homeEid.
+         * @member {number} homeEid
          * @memberof world.s2c_load
          * @instance
          */
-        s2c_load.prototype.myCityEid = 0;
+        s2c_load.prototype.homeEid = 0;
 
         /**
-         * s2c_load myCityPos.
-         * @member {world.IPosition|null|undefined} myCityPos
+         * s2c_load homePos.
+         * @member {world.IPosition|null|undefined} homePos
          * @memberof world.s2c_load
          * @instance
          */
-        s2c_load.prototype.myCityPos = null;
+        s2c_load.prototype.homePos = null;
 
         /**
          * Creates a new s2c_load instance using the specified properties.
@@ -34668,10 +35113,10 @@ $root.world = (function() {
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
             if (message.mapId != null && Object.hasOwnProperty.call(message, "mapId"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.mapId);
-            if (message.myCityEid != null && Object.hasOwnProperty.call(message, "myCityEid"))
-                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.myCityEid);
-            if (message.myCityPos != null && Object.hasOwnProperty.call(message, "myCityPos"))
-                $root.world.Position.encode(message.myCityPos, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            if (message.homeEid != null && Object.hasOwnProperty.call(message, "homeEid"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.homeEid);
+            if (message.homePos != null && Object.hasOwnProperty.call(message, "homePos"))
+                $root.world.Position.encode(message.homePos, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
             return writer;
         };
 
@@ -34715,11 +35160,11 @@ $root.world = (function() {
                         break;
                     }
                 case 3: {
-                        message.myCityEid = reader.uint32();
+                        message.homeEid = reader.uint32();
                         break;
                     }
                 case 4: {
-                        message.myCityPos = $root.world.Position.decode(reader, reader.uint32());
+                        message.homePos = $root.world.Position.decode(reader, reader.uint32());
                         break;
                     }
                 default:
@@ -34763,13 +35208,13 @@ $root.world = (function() {
             if (message.mapId != null && message.hasOwnProperty("mapId"))
                 if (!$util.isInteger(message.mapId))
                     return "mapId: integer expected";
-            if (message.myCityEid != null && message.hasOwnProperty("myCityEid"))
-                if (!$util.isInteger(message.myCityEid))
-                    return "myCityEid: integer expected";
-            if (message.myCityPos != null && message.hasOwnProperty("myCityPos")) {
-                var error = $root.world.Position.verify(message.myCityPos);
+            if (message.homeEid != null && message.hasOwnProperty("homeEid"))
+                if (!$util.isInteger(message.homeEid))
+                    return "homeEid: integer expected";
+            if (message.homePos != null && message.hasOwnProperty("homePos")) {
+                var error = $root.world.Position.verify(message.homePos);
                 if (error)
-                    return "myCityPos." + error;
+                    return "homePos." + error;
             }
             return null;
         };
@@ -34790,12 +35235,12 @@ $root.world = (function() {
                 message.err = object.err >>> 0;
             if (object.mapId != null)
                 message.mapId = object.mapId >>> 0;
-            if (object.myCityEid != null)
-                message.myCityEid = object.myCityEid >>> 0;
-            if (object.myCityPos != null) {
-                if (typeof object.myCityPos !== "object")
-                    throw TypeError(".world.s2c_load.myCityPos: object expected");
-                message.myCityPos = $root.world.Position.fromObject(object.myCityPos);
+            if (object.homeEid != null)
+                message.homeEid = object.homeEid >>> 0;
+            if (object.homePos != null) {
+                if (typeof object.homePos !== "object")
+                    throw TypeError(".world.s2c_load.homePos: object expected");
+                message.homePos = $root.world.Position.fromObject(object.homePos);
             }
             return message;
         };
@@ -34816,17 +35261,17 @@ $root.world = (function() {
             if (options.defaults) {
                 object.err = 0;
                 object.mapId = 0;
-                object.myCityEid = 0;
-                object.myCityPos = null;
+                object.homeEid = 0;
+                object.homePos = null;
             }
             if (message.err != null && message.hasOwnProperty("err"))
                 object.err = message.err;
             if (message.mapId != null && message.hasOwnProperty("mapId"))
                 object.mapId = message.mapId;
-            if (message.myCityEid != null && message.hasOwnProperty("myCityEid"))
-                object.myCityEid = message.myCityEid;
-            if (message.myCityPos != null && message.hasOwnProperty("myCityPos"))
-                object.myCityPos = $root.world.Position.toObject(message.myCityPos, options);
+            if (message.homeEid != null && message.hasOwnProperty("homeEid"))
+                object.homeEid = message.homeEid;
+            if (message.homePos != null && message.hasOwnProperty("homePos"))
+                object.homePos = $root.world.Position.toObject(message.homePos, options);
             return object;
         };
 
@@ -39107,7 +39552,7 @@ $root.world = (function() {
          * @memberof world
          * @interface IMoveAction
          * @property {number|null} [eid] MoveAction eid
-         * @property {Array.<number>|null} [path] MoveAction path
+         * @property {Array.<world.IPosition>|null} [path] MoveAction path
          * @property {number|null} [speed] MoveAction speed
          * @property {number|null} [startMs] MoveAction startMs
          * @property {world.IPosition|null} [curPos] MoveAction curPos
@@ -39140,7 +39585,7 @@ $root.world = (function() {
 
         /**
          * MoveAction path.
-         * @member {Array.<number>} path
+         * @member {Array.<world.IPosition>} path
          * @memberof world.MoveAction
          * @instance
          */
@@ -39204,12 +39649,9 @@ $root.world = (function() {
                 writer = $Writer.create();
             if (message.eid != null && Object.hasOwnProperty.call(message, "eid"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.eid);
-            if (message.path != null && message.path.length) {
-                writer.uint32(/* id 2, wireType 2 =*/18).fork();
+            if (message.path != null && message.path.length)
                 for (var i = 0; i < message.path.length; ++i)
-                    writer.uint32(message.path[i]);
-                writer.ldelim();
-            }
+                    $root.world.Position.encode(message.path[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
             if (message.speed != null && Object.hasOwnProperty.call(message, "speed"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.speed);
             if (message.startMs != null && Object.hasOwnProperty.call(message, "startMs"))
@@ -39259,12 +39701,7 @@ $root.world = (function() {
                 case 2: {
                         if (!(message.path && message.path.length))
                             message.path = [];
-                        if ((tag & 7) === 2) {
-                            var end2 = reader.uint32() + reader.pos;
-                            while (reader.pos < end2)
-                                message.path.push(reader.uint32());
-                        } else
-                            message.path.push(reader.uint32());
+                        message.path.push($root.world.Position.decode(reader, reader.uint32()));
                         break;
                     }
                 case 3: {
@@ -39324,9 +39761,11 @@ $root.world = (function() {
             if (message.path != null && message.hasOwnProperty("path")) {
                 if (!Array.isArray(message.path))
                     return "path: array expected";
-                for (var i = 0; i < message.path.length; ++i)
-                    if (!$util.isInteger(message.path[i]))
-                        return "path: integer[] expected";
+                for (var i = 0; i < message.path.length; ++i) {
+                    var error = $root.world.Position.verify(message.path[i]);
+                    if (error)
+                        return "path." + error;
+                }
             }
             if (message.speed != null && message.hasOwnProperty("speed"))
                 if (!$util.isInteger(message.speed))
@@ -39363,8 +39802,11 @@ $root.world = (function() {
                 if (!Array.isArray(object.path))
                     throw TypeError(".world.MoveAction.path: array expected");
                 message.path = [];
-                for (var i = 0; i < object.path.length; ++i)
-                    message.path[i] = object.path[i] >>> 0;
+                for (var i = 0; i < object.path.length; ++i) {
+                    if (typeof object.path[i] !== "object")
+                        throw TypeError(".world.MoveAction.path: object expected");
+                    message.path[i] = $root.world.Position.fromObject(object.path[i]);
+                }
             }
             if (object.speed != null)
                 message.speed = object.speed >>> 0;
@@ -39407,7 +39849,7 @@ $root.world = (function() {
             if (message.path && message.path.length) {
                 object.path = [];
                 for (var j = 0; j < message.path.length; ++j)
-                    object.path[j] = message.path[j];
+                    object.path[j] = $root.world.Position.toObject(message.path[j], options);
             }
             if (message.speed != null && message.hasOwnProperty("speed"))
                 object.speed = message.speed;

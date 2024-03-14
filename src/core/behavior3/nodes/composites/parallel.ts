@@ -1,25 +1,25 @@
-import { b3 } from "../../behavior";
+import { Node, Process, Status, TreeEnv } from "../../behavior";
 
-export class Parallel extends b3.Process {
-    public override run(node: b3.Node, env: b3.TreeEnv) {
+export class Parallel extends Process {
+    public override run(node: Node, env: TreeEnv) {
         const last = node.resume(env);
         let i = 0;
 
         if (typeof last === "number") {
-            if (env.lastRet.status === b3.Status.RUNNING) {
-                return b3.Status.RUNNING;
+            if (env.lastRet.status === Status.RUNNING) {
+                return Status.RUNNING;
             }
             i = last + 1;
         }
 
         for (; i < node.children.length; i++) {
             const status = node.children[i].run(env);
-            if (status === b3.Status.RUNNING) {
+            if (status === Status.RUNNING) {
                 return node.yield(env, i);
             }
         }
 
-        return b3.Status.SUCCESS;
+        return Status.SUCCESS;
     }
 
     public override get descriptor() {

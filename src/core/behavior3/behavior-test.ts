@@ -1,5 +1,5 @@
 import { Callback } from "../dispatcher";
-import { b3 } from "./behavior";
+import * as b3 from "./behavior";
 import { builtinNodes } from "./nodes/builtin-nodes";
 
 interface Role {

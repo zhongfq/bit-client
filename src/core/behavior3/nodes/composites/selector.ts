@@ -1,12 +1,12 @@
-import { b3 } from "../../behavior";
+import { Node, Process, Status, TreeEnv } from "../../behavior";
 
-export class Selector extends b3.Process {
-    public override run(node: b3.Node, env: b3.TreeEnv) {
+export class Selector extends Process {
+    public override run(node: Node, env: TreeEnv) {
         const last = node.resume(env);
         let i = 0;
 
         if (typeof last === "number") {
-            if (env.lastRet.status === b3.Status.FAILURE) {
+            if (env.lastRet.status === Status.FAILURE) {
                 i = last + 1;
             } else {
                 return env.lastRet.status;
@@ -15,14 +15,14 @@ export class Selector extends b3.Process {
 
         for (; i < node.children.length; i++) {
             const status = node.children[i].run(env);
-            if (status === b3.Status.SUCCESS) {
-                return b3.Status.SUCCESS;
-            } else if (status === b3.Status.RUNNING) {
+            if (status === Status.SUCCESS) {
+                return Status.SUCCESS;
+            } else if (status === Status.RUNNING) {
                 return node.yield(env, i);
             }
         }
 
-        return b3.Status.FAILURE;
+        return Status.FAILURE;
     }
 
     public override get descriptor() {

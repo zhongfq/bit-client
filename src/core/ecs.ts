@@ -1,6 +1,6 @@
 import { Constructor } from "./dispatcher";
 
-export namespace ecs {
+export module ecs {
     export interface Callback {
         (...any: any[]): void;
     }

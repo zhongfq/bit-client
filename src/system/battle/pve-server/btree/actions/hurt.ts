@@ -1,4 +1,4 @@
-import { b3 } from "../../../../../core/behavior3/behavior";
+import * as b3 from "../../../../../core/behavior3/behavior";
 import { ElementComponent } from "../../ecs/components/element-component";
 import { SkillTreeEnv } from "../../ecs/components/skill-component";
 

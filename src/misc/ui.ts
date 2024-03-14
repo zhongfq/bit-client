@@ -47,7 +47,7 @@ export enum ui {
     GM,
 }
 
-export namespace ui {
+export module ui {
     export const register = () => {
         app.ui.register({
             id: ui.APP,

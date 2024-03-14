@@ -1,4 +1,4 @@
-import { b3 } from "../../../../../core/behavior3/behavior";
+import * as b3 from "../../../../../core/behavior3/behavior";
 import { builtinNodes } from "../../../../../core/behavior3/nodes/builtin-nodes";
 import { ecs } from "../../../../../core/ecs";
 import { AdjustStance } from "../../btree/actions/adjust-stance";

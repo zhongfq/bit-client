@@ -65,3 +65,13 @@ message c2s_train_upgrade {
 message s2c_train_upgrade {
     uint32 err = 1; // OK, INVALID_ID
 }
+
+// 通知士兵挂件变化
+message notify_pendants {
+    repeated PendantInfo pendants = 1;
+}
+
+// 通知士兵变化
+message notify_slodiers {
+    repeated SoldierInfo soldiers = 1;
+}

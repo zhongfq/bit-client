@@ -2,6 +2,8 @@ import { app } from "../../../app";
 import { ecs } from "../../../core/ecs";
 import { Mediator } from "../../../core/ui-mediator";
 import { MathUtil } from "../../../core/utils/math-util";
+import proto from "../../../def/proto";
+import { errcode } from "../../../def/protocol";
 import { Event } from "../../../misc/event";
 import { res } from "../../../misc/res";
 import { PvpUI } from "../../../ui-runtime/scene/PvpUI";
@@ -16,6 +18,9 @@ import { TilemapSystem } from "./ecs/systems/tilemap-system";
 @Laya.regClass()
 export class PvpContext extends Mediator implements ITMContext {
     public declare owner: PvpUI;
+
+    /** 我的主城 eid */
+    public homeEid: number = 0;
 
     private _ecs!: ecs.World;
     private _camera!: Laya.Camera;
@@ -147,6 +152,7 @@ export class PvpContext extends Mediator implements ITMContext {
                 currXZPos.x = Math.floor(currXZPos.x + 0.5);
                 currXZPos.y = selectedTile.transform.position.y;
                 currXZPos.z = Math.floor(currXZPos.z + 0.5);
+                console.log("select tile:", currXZPos.x, currXZPos.z);
                 selectedTile.active = true;
                 selectedTile.transform.position = currXZPos;
             }
@@ -158,7 +164,15 @@ export class PvpContext extends Mediator implements ITMContext {
     }
 
     private async _startGame() {
-        const data = app.service.pvp.requestLoad();
-        console.log(data);
+        const data = await app.service.pvp.requestLoad();
+        if (data.err !== errcode.OK) {
+            console.log(`load pvp world error: ${data.err}`);
+            return;
+        }
+        this.homeEid = data.homeEid;
+        const camera = this._ecs.getSingletonComponent(CameraComponent)!;
+        const homePos = data.homePos as proto.world.Position;
+        camera.focus.set(homePos.x, 0, homePos.y);
+        app.service.pvp.requestChangeViewport(camera.focus);
     }
 }

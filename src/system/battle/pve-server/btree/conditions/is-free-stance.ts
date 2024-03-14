@@ -1,4 +1,4 @@
-import { b3 } from "../../../../../core/behavior3/behavior";
+import * as b3 from "../../../../../core/behavior3/behavior";
 import { AiTreeEnv } from "../../ecs/components/ai-component";
 import { ElementComponent } from "../../ecs/components/element-component";
 import { LAST_ADJUST_DIR } from "../actions/adjust-stance";

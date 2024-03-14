@@ -1,4 +1,4 @@
-import { b3 } from "../../../core/behavior3/behavior";
+import * as b3 from "../../../core/behavior3/behavior";
 import { PveServer } from "./pve-server";
 
 export class ExportNodes extends PveServer {

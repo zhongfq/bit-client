@@ -1,11 +1,11 @@
-import { b3 } from "../../behavior";
+import { Node, Process, Status, TreeEnv } from "../../behavior";
 
-export class Clear extends b3.Process {
-    public override check(node: b3.Node) {}
+export class Clear extends Process {
+    public override check(node: Node) {}
 
-    public override run(node: b3.Node, env: b3.TreeEnv) {
+    public override run(node: Node, env: TreeEnv) {
         env.lastRet.results.push(undefined);
-        return b3.Status.SUCCESS;
+        return Status.SUCCESS;
     }
 
     public override get descriptor() {

@@ -1,4 +1,4 @@
-import { b3 } from "../../../../../core/behavior3/behavior";
+import * as b3 from "../../../../../core/behavior3/behavior";
 import { AiTreeEnv } from "../../ecs/components/ai-component";
 import { SoldierComponent } from "../../ecs/components/element-component";
 import { AiSystem } from "../../ecs/systems/ai-system";
