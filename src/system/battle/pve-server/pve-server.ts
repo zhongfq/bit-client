@@ -201,7 +201,7 @@ export class PveServer extends b3.Context {
             const entity = this._ecs.createEntity();
 
             const element = entity.addComponent(ElementComponent);
-            element.tid = idx >= 4 ? 40004 : 40002;
+            element.tid = idx >= 4 ? 40704 : 40702;
             element.hp = 200;
             element.maxHp = 200;
             element.aid = 1;

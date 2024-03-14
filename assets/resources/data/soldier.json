@@ -130,7 +130,7 @@
                     1
                 ]
             ],
-            "battle_entity": 40701,
+            "battle_entity": 40001,
             "icon": "soldier1",
             "id": 40701,
             "max_lv": 50,
@@ -165,7 +165,7 @@
                     1
                 ]
             ],
-            "battle_entity": 40702,
+            "battle_entity": 40002,
             "icon": "soldier2",
             "id": 40702,
             "max_lv": 50,
@@ -200,7 +200,7 @@
                     1
                 ]
             ],
-            "battle_entity": 40703,
+            "battle_entity": 40003,
             "icon": "soldier3",
             "id": 40703,
             "max_lv": 50,
@@ -235,7 +235,7 @@
                     1
                 ]
             ],
-            "battle_entity": 40704,
+            "battle_entity": 40004,
             "icon": "soldier4",
             "id": 40704,
             "max_lv": 50,
@@ -270,7 +270,7 @@
                     1
                 ]
             ],
-            "battle_entity": 40705,
+            "battle_entity": 40005,
             "icon": "soldier5",
             "id": 40705,
             "max_lv": 50,
@@ -305,7 +305,7 @@
                     1
                 ]
             ],
-            "battle_entity": 40706,
+            "battle_entity": 40006,
             "icon": "soldier6",
             "id": 40706,
             "max_lv": 50,
@@ -340,7 +340,7 @@
                     1
                 ]
             ],
-            "battle_entity": 40707,
+            "battle_entity": 40007,
             "icon": "soldier7",
             "id": 40707,
             "max_lv": 50,
@@ -375,7 +375,7 @@
                     1
                 ]
             ],
-            "battle_entity": 40708,
+            "battle_entity": 40008,
             "icon": "soldier8",
             "id": 40708,
             "max_lv": 50,

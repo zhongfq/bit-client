@@ -91,6 +91,7 @@ declare global {
             normalize(): void;
             clone(): Vector2;
             cloneTo(value: IVector2Like): IVector2Like;
+            cloneFrom(value: IVector2Like): void;
 
             get length(): number;
         }
@@ -101,6 +102,7 @@ declare global {
                 transform: Matrix3x3,
                 result: Vector2
             ): void;
+            export function distance(p1: IVector2Like, p2: IVector2Like): number;
         }
 
         interface Vector3 {
@@ -120,6 +122,11 @@ Laya.Vector2.prototype.normalize = function () {
     Laya.Vector2.normalize(this, this);
 };
 
+Laya.Vector2.prototype.cloneFrom = function (value) {
+    this.x = value.x;
+    this.y = value.y;
+};
+
 Object.defineProperty(Laya.Vector2.prototype, "length", {
     get() {
         const { x, y } = this as Laya.Vector2;
@@ -137,6 +144,10 @@ Laya.Vector2.transformCoordinate = function (
     const transformElem = transform.elements;
     result.x = x * transformElem[0] + y * transformElem[3] + transformElem[6];
     result.y = x * transformElem[1] + y * transformElem[4] + transformElem[7];
+};
+
+Laya.Vector2.distance = function (p1, p2) {
+    return Math.sqrt((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2);
 };
 
 Laya.Vector3.prototype.cloneFrom = function (value: IVector3Like) {

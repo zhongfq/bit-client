@@ -51,6 +51,11 @@ export const BattleConf = {
     RECOVER_INTERVAL_MS: 100,
     RECOVER_WIDTH_RANGE: 100,
     SAME_ALLIANCE_LIMIT: 2,
+    SCENE: {
+        PVE: 3,
+        PVP_LARGE: 1,
+        PVP_SMALL: 2,
+    },
     SIDE: {
         LEFT: -1,
         RIGHT: 1,

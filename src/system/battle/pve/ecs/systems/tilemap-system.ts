@@ -5,7 +5,7 @@ import { TransformComponent } from "../components/movement-component";
 import { TilemapComponent } from "../components/tilemap-component";
 
 export class TilemapSystem extends ecs.System {
-    private static readonly TICK = 200;
+    private static readonly TICK = 100;
 
     private _lastTick = 0;
 
