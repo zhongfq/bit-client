@@ -56,6 +56,7 @@ export class PvpContext extends Mediator implements ITMContext {
         );
 
         this._initMapClickArea();
+        this._startGame();
 
         Laya.loader.load(res.BATTLE_HP_NUM);
         Laya.loader.load(res.BATTLE_HP_NUM_X);
@@ -154,5 +155,10 @@ export class PvpContext extends Mediator implements ITMContext {
         clickArea.on(Laya.Event.MOUSE_OUT, (e: Laya.Event) => {
             isDown = false;
         });
+    }
+
+    private async _startGame() {
+        const data = app.service.pvp.requestLoad();
+        console.log(data);
     }
 }

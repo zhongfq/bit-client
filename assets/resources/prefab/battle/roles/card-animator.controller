@@ -1,0 +1,74 @@
+{
+  "_$type": "Animator",
+  "enabled": true,
+  "controller": "null",
+  "cullingMode": 0,
+  "controllerLayers": [
+    {
+      "_$type": "AnimatorControllerLayer",
+      "playOnWake": true,
+      "name": "Base Layer",
+      "defaultWeight": 1,
+      "blendingMode": 0,
+      "states": [
+        {
+          "_$type": "AnimatorState",
+          "name": "idle",
+          "speed": 1,
+          "clipStart": 0,
+          "clipEnd": 1,
+          "x": 247.49149999999997,
+          "y": 97.29404,
+          "clip": {
+            "_$uuid": "c6522bcb-d925-4b51-86b5-119ba44b406b"
+          },
+          "id": "1",
+          "soloTransitions": [],
+          "_isLooping": 1
+        },
+        {
+          "_$type": "AnimatorState",
+          "name": "run",
+          "speed": 1,
+          "clipStart": 0,
+          "clipEnd": 1,
+          "x": 242,
+          "y": 177,
+          "clip": {
+            "_$uuid": "6cc7f5b3-b648-42fe-a359-b93abf4bb25e"
+          },
+          "id": "2",
+          "soloTransitions": [],
+          "_isLooping": 1
+        },
+        {
+          "id": "-1",
+          "name": "进入",
+          "speed": 1,
+          "clipEnd": 1,
+          "x": 50,
+          "y": 120,
+          "soloTransitions": [
+            {
+              "id": "1",
+              "exitByTime": true,
+              "transduration": 0.15,
+              "exitTime": 0.85
+            }
+          ]
+        },
+        {
+          "id": "-2",
+          "name": "任何状态",
+          "speed": 1,
+          "clipEnd": 1,
+          "x": 577,
+          "y": 444,
+          "soloTransitions": []
+        }
+      ]
+    }
+  ],
+  "layerW": 150,
+  "animatorParams": []
+}

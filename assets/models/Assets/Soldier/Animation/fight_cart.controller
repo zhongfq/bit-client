@@ -13,59 +13,31 @@
       "states": [
         {
           "_$type": "AnimatorState",
-          "name": "fight_infantry_attack_shield",
+          "name": "cart_move",
           "speed": 1,
           "clipStart": 0,
           "clipEnd": 1,
-          "x": 290,
-          "y": 80,
+          "x": 250,
+          "y": 370,
           "clip": {
             "_$type": "AnimationClip",
-            "_$uuid": "d01f801f-194b-40ce-b8e8-548f3d0c7b7b"
+            "_$uuid": "eb769cf4-628f-4f1e-8ea2-12f16a04040c"
           },
           "id": "0"
         },
         {
           "_$type": "AnimatorState",
-          "name": "fight_infantry_die",
+          "name": "cart_idle",
           "speed": 1,
           "clipStart": 0,
           "clipEnd": 1,
-          "x": 300,
-          "y": 130,
+          "x": 348.4401,
+          "y": 146.0167,
           "clip": {
             "_$type": "AnimationClip",
-            "_$uuid": "918ba272-787b-4275-8340-b80df73aba19"
+            "_$uuid": "eb769cf4-628f-4f1e-8ea2-12f16a04040c"
           },
           "id": "1"
-        },
-        {
-          "_$type": "AnimatorState",
-          "name": "fight_infantry_move",
-          "speed": 1,
-          "clipStart": 0,
-          "clipEnd": 1,
-          "x": 330,
-          "y": 220,
-          "clip": {
-            "_$type": "AnimationClip",
-            "_$uuid": "82586f2a-51e1-4d34-8e9b-83c69ce3afdc"
-          },
-          "id": "2"
-        },
-        {
-          "_$type": "AnimatorState",
-          "name": "fight_infantry_idle_shield",
-          "speed": 1,
-          "clipStart": 0,
-          "clipEnd": 1,
-          "x": 151,
-          "y": 328.5,
-          "clip": {
-            "_$type": "AnimationClip",
-            "_$uuid": "750961a3-29e0-41ed-b42a-5190fe3aadb9"
-          },
-          "id": "3"
         },
         {
           "id": "-1",

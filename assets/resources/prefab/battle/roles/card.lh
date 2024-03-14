@@ -1,0 +1,389 @@
+{
+  "_$ver": 1,
+  "_$id": "0uvm25g9",
+  "_$type": "Sprite3D",
+  "name": "hero01",
+  "_$child": [
+    {
+      "_$id": "80o1yihb",
+      "_$type": "Sprite3D",
+      "name": "anim",
+      "transform": {
+        "localRotation": {
+          "_$type": "Quaternion",
+          "w": -1
+        },
+        "localScale": {
+          "_$type": "Vector3",
+          "x": 0.4,
+          "y": 0.4,
+          "z": 0.4
+        }
+      },
+      "_$comp": [
+        {
+          "_$type": "Animator",
+          "controller": {
+            "_$uuid": "80b4310d-94d8-4f94-85e8-cde38c3e71b7",
+            "_$type": "AnimationController"
+          },
+          "controllerLayers": [
+            {
+              "_$type": "AnimatorControllerLayer",
+              "name": "Base Layer",
+              "states": [
+                {
+                  "_$type": "AnimatorState",
+                  "name": "run",
+                  "_isLooping": 1,
+                  "clipStart": 0,
+                  "clip": {
+                    "_$uuid": "30966398-4ea0-469b-9541-7f92aefc4d63",
+                    "_$type": "AnimationClip"
+                  },
+                  "soloTransitions": []
+                },
+                {
+                  "_$type": "AnimatorState",
+                  "name": "idle",
+                  "_isLooping": 1,
+                  "clipStart": 0,
+                  "clip": {
+                    "_$uuid": "5b60a641-0722-4f32-b361-f999a19e7307",
+                    "_$type": "AnimationClip"
+                  },
+                  "soloTransitions": []
+                }
+              ],
+              "defaultStateName": "idle"
+            }
+          ]
+        }
+      ],
+      "_$child": [
+        {
+          "_$id": "nq9mzxdd",
+          "_$type": "Sprite3D",
+          "name": "Cart",
+          "transform": {
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": 0.7071067811865476,
+              "w": -0.7071067811865476
+            }
+          },
+          "_$comp": [
+            {
+              "_$type": "MeshFilter",
+              "sharedMesh": {
+                "_$uuid": "61cc59bf-afd6-4bcc-b522-6ddac6d433fe",
+                "_$type": "Mesh"
+              }
+            },
+            {
+              "_$type": "SkinnedMeshRenderer",
+              "receiveShadow": true,
+              "castShadow": true,
+              "sharedMaterials": [
+                {
+                  "_$uuid": "8f1698b6-5fa9-4326-a510-624a2ca4b5ad",
+                  "_$type": "Material"
+                }
+              ],
+              "_bones": [
+                {
+                  "_$ref": "ndwc5r3x"
+                },
+                {
+                  "_$ref": "qsiaf7yo"
+                },
+                {
+                  "_$ref": "cyzdh9bh"
+                },
+                {
+                  "_$ref": "6wffoule"
+                },
+                {
+                  "_$ref": "q8l8nzqj"
+                },
+                {
+                  "_$ref": "bumr8ko9"
+                },
+                {
+                  "_$ref": "e85b8dir"
+                },
+                {
+                  "_$ref": "9o189ynr"
+                }
+              ],
+              "rootBone": {
+                "_$ref": "cyzdh9bh"
+              },
+              "localBounds": {
+                "_$type": "Bounds",
+                "min": {
+                  "_$type": "Vector3"
+                },
+                "max": {
+                  "_$type": "Vector3"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "_$id": "m0oe87c4",
+          "_$type": "Sprite3D",
+          "name": "Dummy_Cart",
+          "transform": {
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": 0.7071067811865476,
+              "w": -0.7071067811865476
+            }
+          },
+          "_$child": [
+            {
+              "_$id": "cyzdh9bh",
+              "_$type": "Sprite3D",
+              "name": "Bone_Cart_Core",
+              "transform": {
+                "localPosition": {
+                  "_$type": "Vector3",
+                  "x": 0.002515411,
+                  "y": -1.310316e-10,
+                  "z": 0.002997653
+                },
+                "localRotation": {
+                  "_$type": "Quaternion",
+                  "x": 0.49953462985479796,
+                  "y": -0.5004650299104036,
+                  "z": 0.5004728299108697,
+                  "w": 0.49952662985431984
+                }
+              },
+              "_$child": [
+                {
+                  "_$id": "bumr8ko9",
+                  "_$type": "Sprite3D",
+                  "name": "Bone_Cart_Flag1",
+                  "transform": {
+                    "localPosition": {
+                      "_$type": "Vector3",
+                      "x": 3.04761,
+                      "y": -0.889603,
+                      "z": 0.9808453
+                    },
+                    "localRotation": {
+                      "_$type": "Quaternion",
+                      "x": -0.282101989378093,
+                      "y": 0.6704527747556299,
+                      "z": 0.6479651756023492,
+                      "w": 0.22594839149242868
+                    }
+                  },
+                  "_$child": [
+                    {
+                      "_$id": "e85b8dir",
+                      "_$type": "Sprite3D",
+                      "name": "Bone_Cart_Flag2",
+                      "transform": {
+                        "localPosition": {
+                          "_$type": "Vector3",
+                          "x": 0.5581737,
+                          "y": 1.525879e-7,
+                          "z": 3.814697e-8
+                        },
+                        "localRotation": {
+                          "_$type": "Quaternion",
+                          "x": -0.0047365280551973175,
+                          "y": 0.043426920506077334,
+                          "z": -0.10841430126341035,
+                          "w": -0.9931455115736605
+                        },
+                        "localScale": {
+                          "_$type": "Vector3",
+                          "x": 1,
+                          "y": 1,
+                          "z": 0.9999999
+                        }
+                      },
+                      "_$child": [
+                        {
+                          "_$id": "9o189ynr",
+                          "_$type": "Sprite3D",
+                          "name": "Bone_Cart_Flag3",
+                          "transform": {
+                            "localPosition": {
+                              "_$type": "Vector3",
+                              "x": 0.6468632,
+                              "y": 6.866455e-7,
+                              "z": 3.433227e-7
+                            },
+                            "localRotation": {
+                              "_$type": "Quaternion",
+                              "x": 0.002349321832295984,
+                              "y": -0.043447946898511274,
+                              "z": 0.03148992775212264,
+                              "w": -0.9985565287190299
+                            },
+                            "localScale": {
+                              "_$type": "Vector3",
+                              "x": 1,
+                              "y": 1,
+                              "z": 0.9999999
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "_$id": "6wffoule",
+                  "_$type": "Sprite3D",
+                  "name": "Bone_Cart_Tire1",
+                  "transform": {
+                    "localPosition": {
+                      "_$type": "Vector3",
+                      "x": 0.4203086,
+                      "y": -0.6947299,
+                      "z": 0.7415439
+                    },
+                    "localRotation": {
+                      "_$type": "Quaternion",
+                      "x": 0.00000555965878558956,
+                      "y": 0.000005567106785302324,
+                      "z": 0.7066332727484085,
+                      "w": -0.7075799727118985
+                    },
+                    "localScale": {
+                      "_$type": "Vector3",
+                      "x": 0.9999999,
+                      "y": 0.9999999,
+                      "z": 1
+                    }
+                  }
+                },
+                {
+                  "_$id": "ndwc5r3x",
+                  "_$type": "Sprite3D",
+                  "name": "Bone_Cart_Tire2",
+                  "transform": {
+                    "localPosition": {
+                      "_$type": "Vector3",
+                      "x": 0.4229192,
+                      "y": 0.6964729,
+                      "z": 0.7415219
+                    },
+                    "localRotation": {
+                      "_$type": "Quaternion",
+                      "x": -0.7053042896523107,
+                      "y": 0.7089046895994884,
+                      "z": -0.00000554920191858632,
+                      "w": -0.000005577529918170713
+                    },
+                    "localScale": {
+                      "_$type": "Vector3",
+                      "x": -0.9999999,
+                      "y": -0.9999999,
+                      "z": -1
+                    }
+                  }
+                },
+                {
+                  "_$id": "q8l8nzqj",
+                  "_$type": "Sprite3D",
+                  "name": "Bone_Cart_Tire3",
+                  "transform": {
+                    "localPosition": {
+                      "_$type": "Vector3",
+                      "x": 0.4203085,
+                      "y": -0.6947543,
+                      "z": -0.7986522
+                    },
+                    "localRotation": {
+                      "_$type": "Quaternion",
+                      "x": 0.00000555965878558956,
+                      "y": 0.000005567106785302324,
+                      "z": 0.7066332727484085,
+                      "w": -0.7075799727118985
+                    },
+                    "localScale": {
+                      "_$type": "Vector3",
+                      "x": 0.9999999,
+                      "y": 0.9999999,
+                      "z": 1
+                    }
+                  }
+                },
+                {
+                  "_$id": "qsiaf7yo",
+                  "_$type": "Sprite3D",
+                  "name": "Bone_Cart_Tire4",
+                  "transform": {
+                    "localPosition": {
+                      "_$type": "Vector3",
+                      "x": 0.4229192,
+                      "y": 0.6964484,
+                      "z": -0.7986742
+                    },
+                    "localRotation": {
+                      "_$type": "Quaternion",
+                      "x": -0.7053042896523107,
+                      "y": 0.7089046895994884,
+                      "z": -0.00000554920191858632,
+                      "w": -0.000005577529918170713
+                    },
+                    "localScale": {
+                      "_$type": "Vector3",
+                      "x": -0.9999999,
+                      "y": -0.9999999,
+                      "z": -1
+                    }
+                  }
+                },
+                {
+                  "_$id": "kn8ji6dh",
+                  "_$type": "Sprite3D",
+                  "name": "对象178",
+                  "transform": {
+                    "localPosition": {
+                      "_$type": "Vector3",
+                      "x": 0.2819638,
+                      "y": -2.205675,
+                      "z": 0.495683
+                    },
+                    "localRotation": {
+                      "_$type": "Quaternion",
+                      "x": 0.5000000249999944,
+                      "y": -0.5000000249999944,
+                      "z": 0.5000000249999944,
+                      "w": -0.4999999250000095
+                    }
+                  },
+                  "_$comp": [
+                    {
+                      "_$type": "MeshFilter"
+                    },
+                    {
+                      "_$type": "MeshRenderer",
+                      "receiveShadow": true,
+                      "castShadow": true,
+                      "sharedMaterials": [
+                        {
+                          "_$uuid": "0fa31d74-f8d1-467d-bbd6-995ae9074cf4",
+                          "_$type": "Material"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

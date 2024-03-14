@@ -1292,7 +1292,7 @@
       "_$type": "Animator",
       "controller": {
         "_$type": "AnimationController",
-        "_$uuid": "acd296ed-67bd-43ca-af7b-838b83e9dfb6"
+        "_$uuid": "d22a9cc6-d234-48c8-9cae-81a0381f22d4"
       },
       "enabled": true
     }
