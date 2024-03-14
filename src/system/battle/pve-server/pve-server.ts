@@ -1,6 +1,6 @@
 import { app } from "../../../app";
 import * as b3 from "../../../core/behavior3/behavior";
-import { ecs } from "../../../core/ecs";
+import * as ecs from "../../../core/ecs";
 import { Loader } from "../../../core/loader";
 import { MathUtil } from "../../../core/utils/math-util";
 import { BattleConf } from "../../../def/battle";

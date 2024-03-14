@@ -1,4 +1,4 @@
-import { ecs } from "../../../../../core/ecs";
+import * as ecs from "../../../../../core/ecs";
 import { PveServer } from "../../pve-server";
 import { ElementComponent } from "../components/element-component";
 

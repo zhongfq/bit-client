@@ -1,4 +1,4 @@
-import { ecs } from "../../../../../core/ecs";
+import * as ecs from "../../../../../core/ecs";
 import { PvpContext } from "../../pvp-context";
 import { CameraComponent } from "../components/camera-component";
 import { AnimationComponent } from "../components/render-component";

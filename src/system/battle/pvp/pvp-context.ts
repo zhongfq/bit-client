@@ -1,5 +1,5 @@
 import { app } from "../../../app";
-import { ecs } from "../../../core/ecs";
+import * as ecs from "../../../core/ecs";
 import { Mediator } from "../../../core/ui-mediator";
 import { MathUtil } from "../../../core/utils/math-util";
 import proto from "../../../def/proto";

@@ -1,4 +1,4 @@
-import { ecs } from "../../../../../core/ecs";
+import * as ecs from "../../../../../core/ecs";
 import { PvpContext } from "../../pvp-context";
 
 export class CommandSystem extends ecs.System {

@@ -1,4 +1,4 @@
-import { ecs } from "../../../../../core/ecs";
+import * as ecs from "../../../../../core/ecs";
 
 export class CameraComponent implements ecs.SingletonComponent {
     public focus: Laya.Vector3 = new Laya.Vector3();

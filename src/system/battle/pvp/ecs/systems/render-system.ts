@@ -1,5 +1,5 @@
 import { app } from "../../../../../app";
-import { ecs } from "../../../../../core/ecs";
+import * as ecs from "../../../../../core/ecs";
 import { HeadInfoUI } from "../../../../../ui-runtime/prefab/battle/HeadInfoUI";
 import { TMUtil } from "../../../tilemap/tm-util";
 import { PvpContext } from "../../pvp-context";

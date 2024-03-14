@@ -1,5 +1,5 @@
 import * as b3 from "../../../../../core/behavior3/behavior";
-import { ecs } from "../../../../../core/ecs";
+import * as ecs from "../../../../../core/ecs";
 import { SkillRow } from "../../../../../def/table";
 import { PveServer } from "../../pve-server";
 import { ElementComponent } from "./element-component";

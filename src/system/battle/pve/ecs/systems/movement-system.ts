@@ -1,4 +1,4 @@
-import { ecs } from "../../../../../core/ecs";
+import * as ecs from "../../../../../core/ecs";
 import { PveContext } from "../../pve-context";
 import {
     MovementComponent,

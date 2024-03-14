@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-shadow */
-import { ecs } from "../../../../../core/ecs";
+import * as ecs from "../../../../../core/ecs";
 import { Tilemap } from "../../../tilemap/tilemap";
 import { ITMContext } from "../../../tilemap/tm-def";
 

@@ -1,4 +1,4 @@
-import { ecs } from "../../../../../core/ecs";
+import * as ecs from "../../../../../core/ecs";
 import { IVector3Like } from "../../../../../core/laya";
 import { MovementComponent, TransformComponent } from "./movement-component";
 import { AnimationComponent } from "./render-component";

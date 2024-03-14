@@ -1,4 +1,4 @@
-import { ecs } from "../../../../../core/ecs";
+import * as ecs from "../../../../../core/ecs";
 import { PveDef } from "../../pve-defs";
 
 export class TransformComponent extends ecs.Component {

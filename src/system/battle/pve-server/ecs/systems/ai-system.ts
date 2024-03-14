@@ -1,6 +1,6 @@
 import * as b3 from "../../../../../core/behavior3/behavior";
 import { builtinNodes } from "../../../../../core/behavior3/nodes/builtin-nodes";
-import { ecs } from "../../../../../core/ecs";
+import * as ecs from "../../../../../core/ecs";
 import { AdjustStance } from "../../btree/actions/adjust-stance";
 import { BackTeam } from "../../btree/actions/back-team";
 import { ClearStance } from "../../btree/actions/clear-stance";

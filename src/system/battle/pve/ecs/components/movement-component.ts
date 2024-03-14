@@ -1,4 +1,4 @@
-import { ecs } from "../../../../../core/ecs";
+import * as ecs from "../../../../../core/ecs";
 
 export class TransformComponent extends ecs.Component {
     public static readonly POSITION = 1 << 0;

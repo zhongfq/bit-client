@@ -1,4 +1,4 @@
-import { ecs } from "../../../../../core/ecs";
+import * as ecs from "../../../../../core/ecs";
 import { MathUtil } from "../../../../../core/utils/math-util";
 import { PveContext } from "../../pve-context";
 import { JoystickComponent } from "../components/joystick-component";

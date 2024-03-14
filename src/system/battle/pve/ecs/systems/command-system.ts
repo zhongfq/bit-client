@@ -1,5 +1,5 @@
 import { app } from "../../../../../app";
-import { ecs } from "../../../../../core/ecs";
+import * as ecs from "../../../../../core/ecs";
 import { tween } from "../../../../../core/tween/tween";
 import { BattleConf } from "../../../../../def/battle";
 import { res } from "../../../../../misc/res";

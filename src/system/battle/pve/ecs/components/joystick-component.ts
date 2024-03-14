@@ -1,4 +1,4 @@
-import { ecs } from "../../../../../core/ecs";
+import * as ecs from "../../../../../core/ecs";
 
 export class JoystickComponent implements ecs.SingletonComponent {
     public initX: number = 0;

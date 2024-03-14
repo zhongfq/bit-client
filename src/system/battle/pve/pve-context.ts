@@ -1,5 +1,5 @@
 import { app } from "../../../app";
-import { ecs } from "../../../core/ecs";
+import * as ecs from "../../../core/ecs";
 import { Mediator } from "../../../core/ui-mediator";
 import { BattleConf } from "../../../def/battle";
 import { Event } from "../../../misc/event";
