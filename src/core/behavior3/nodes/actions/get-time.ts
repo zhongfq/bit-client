@@ -1,11 +1,11 @@
-import { b3 } from "../../behavior";
+import { Node, Process, Status, TreeEnv } from "../../behavior";
 
-export class GetTime extends b3.Process {
-    public override check(node: b3.Node) {}
+export class GetTime extends Process {
+    public override check(node: Node) {}
 
-    public override run(node: b3.Node, env: b3.TreeEnv) {
+    public override run(node: Node, env: TreeEnv) {
         env.lastRet.results.push(env.context.time);
-        return b3.Status.SUCCESS;
+        return Status.SUCCESS;
     }
 
     public override get descriptor() {

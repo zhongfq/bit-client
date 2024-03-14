@@ -1,14 +1,14 @@
-import { b3 } from "../../behavior";
+import { Node, Process, Status, TreeEnv } from "../../behavior";
 
 interface LogArgs {
     str: string;
 }
 
-export class Log extends b3.Process {
-    public override run(node: b3.Node, env: b3.TreeEnv) {
+export class Log extends Process {
+    public override run(node: Node, env: TreeEnv) {
         const args = node.args as LogArgs;
         console.log("behavior3 -> log:", args.str);
-        return b3.Status.SUCCESS;
+        return Status.SUCCESS;
     }
 
     public override get descriptor() {

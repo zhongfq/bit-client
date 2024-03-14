@@ -107,6 +107,8 @@ export const opcode = {
         s2c_pendant_upgrade: 0x2009,
         c2s_train_upgrade: 0x200A,
         s2c_train_upgrade: 0x200B,
+        notify_pendants: 0x2090,
+        notify_slodiers: 0x2091,
     },
     task: {
         c2s_load: 0x1B00,
@@ -741,6 +743,18 @@ export const registerProtocols = () => {
         typeURL: proto.soldier.s2c_train_upgrade.getTypeUrl(),
         encode: proto.soldier.s2c_train_upgrade.encode,
         decode: proto.soldier.s2c_train_upgrade.decode,
+    });
+    register({
+        op: opcode.soldier.notify_pendants,
+        typeURL: proto.soldier.notify_pendants.getTypeUrl(),
+        encode: proto.soldier.notify_pendants.encode,
+        decode: proto.soldier.notify_pendants.decode,
+    });
+    register({
+        op: opcode.soldier.notify_slodiers,
+        typeURL: proto.soldier.notify_slodiers.getTypeUrl(),
+        encode: proto.soldier.notify_slodiers.encode,
+        decode: proto.soldier.notify_slodiers.decode,
     });
     register({
         op: opcode.task.c2s_load,

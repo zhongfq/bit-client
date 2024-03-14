@@ -11162,6 +11162,200 @@ declare namespace proto {
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
+
+        /** Properties of a notify_pendants. */
+        interface Inotify_pendants {
+
+            /** notify_pendants pendants */
+            pendants?: (soldier.IPendantInfo[]|null);
+        }
+
+        /** Represents a notify_pendants. */
+        class notify_pendants implements Inotify_pendants {
+
+            /**
+             * Constructs a new notify_pendants.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: soldier.Inotify_pendants);
+
+            /** notify_pendants pendants. */
+            public pendants: soldier.IPendantInfo[];
+
+            /**
+             * Creates a new notify_pendants instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns notify_pendants instance
+             */
+            public static create(properties?: soldier.Inotify_pendants): soldier.notify_pendants;
+
+            /**
+             * Encodes the specified notify_pendants message. Does not implicitly {@link soldier.notify_pendants.verify|verify} messages.
+             * @param message notify_pendants message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: soldier.Inotify_pendants, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified notify_pendants message, length delimited. Does not implicitly {@link soldier.notify_pendants.verify|verify} messages.
+             * @param message notify_pendants message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: soldier.Inotify_pendants, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a notify_pendants message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns notify_pendants
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): soldier.notify_pendants;
+
+            /**
+             * Decodes a notify_pendants message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns notify_pendants
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): soldier.notify_pendants;
+
+            /**
+             * Verifies a notify_pendants message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a notify_pendants message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns notify_pendants
+             */
+            public static fromObject(object: { [k: string]: any }): soldier.notify_pendants;
+
+            /**
+             * Creates a plain object from a notify_pendants message. Also converts values to other types if specified.
+             * @param message notify_pendants
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: soldier.notify_pendants, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this notify_pendants to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for notify_pendants
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a notify_slodiers. */
+        interface Inotify_slodiers {
+
+            /** notify_slodiers soldiers */
+            soldiers?: (soldier.ISoldierInfo[]|null);
+        }
+
+        /** Represents a notify_slodiers. */
+        class notify_slodiers implements Inotify_slodiers {
+
+            /**
+             * Constructs a new notify_slodiers.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: soldier.Inotify_slodiers);
+
+            /** notify_slodiers soldiers. */
+            public soldiers: soldier.ISoldierInfo[];
+
+            /**
+             * Creates a new notify_slodiers instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns notify_slodiers instance
+             */
+            public static create(properties?: soldier.Inotify_slodiers): soldier.notify_slodiers;
+
+            /**
+             * Encodes the specified notify_slodiers message. Does not implicitly {@link soldier.notify_slodiers.verify|verify} messages.
+             * @param message notify_slodiers message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: soldier.Inotify_slodiers, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified notify_slodiers message, length delimited. Does not implicitly {@link soldier.notify_slodiers.verify|verify} messages.
+             * @param message notify_slodiers message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: soldier.Inotify_slodiers, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a notify_slodiers message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns notify_slodiers
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): soldier.notify_slodiers;
+
+            /**
+             * Decodes a notify_slodiers message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns notify_slodiers
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): soldier.notify_slodiers;
+
+            /**
+             * Verifies a notify_slodiers message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a notify_slodiers message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns notify_slodiers
+             */
+            public static fromObject(object: { [k: string]: any }): soldier.notify_slodiers;
+
+            /**
+             * Creates a plain object from a notify_slodiers message. Also converts values to other types if specified.
+             * @param message notify_slodiers
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: soldier.notify_slodiers, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this notify_slodiers to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for notify_slodiers
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
     }
 
     /** Namespace task. */
@@ -14161,7 +14355,7 @@ declare namespace proto {
             startMs?: (number|null);
 
             /** MoveComponent path */
-            path?: (number[]|null);
+            path?: (world.IPosition[]|null);
 
             /** MoveComponent speed */
             speed?: (number|null);
@@ -14183,7 +14377,7 @@ declare namespace proto {
             public startMs: number;
 
             /** MoveComponent path. */
-            public path: number[];
+            public path: world.IPosition[];
 
             /** MoveComponent speed. */
             public speed: number;
@@ -15083,11 +15277,11 @@ declare namespace proto {
             /** s2c_load mapId */
             mapId?: (number|null);
 
-            /** s2c_load myCityEid */
-            myCityEid?: (number|null);
+            /** s2c_load homeEid */
+            homeEid?: (number|null);
 
-            /** s2c_load myCityPos */
-            myCityPos?: (world.IPosition|null);
+            /** s2c_load homePos */
+            homePos?: (world.IPosition|null);
         }
 
         /** Represents a s2c_load. */
@@ -15105,11 +15299,11 @@ declare namespace proto {
             /** s2c_load mapId. */
             public mapId: number;
 
-            /** s2c_load myCityEid. */
-            public myCityEid: number;
+            /** s2c_load homeEid. */
+            public homeEid: number;
 
-            /** s2c_load myCityPos. */
-            public myCityPos?: (world.IPosition|null);
+            /** s2c_load homePos. */
+            public homePos?: (world.IPosition|null);
 
             /**
              * Creates a new s2c_load instance using the specified properties.
@@ -17166,7 +17360,7 @@ declare namespace proto {
             eid?: (number|null);
 
             /** MoveAction path */
-            path?: (number[]|null);
+            path?: (world.IPosition[]|null);
 
             /** MoveAction speed */
             speed?: (number|null);
@@ -17194,7 +17388,7 @@ declare namespace proto {
             public eid: number;
 
             /** MoveAction path. */
-            public path: number[];
+            public path: world.IPosition[];
 
             /** MoveAction speed. */
             public speed: number;

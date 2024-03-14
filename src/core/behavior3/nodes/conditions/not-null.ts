@@ -1,11 +1,11 @@
-import { b3 } from "../../behavior";
+import { Node, Process, Status, TreeEnv } from "../../behavior";
 
-export class NotNull extends b3.Process {
-    public override run(node: b3.Node, env: b3.TreeEnv, value: unknown) {
+export class NotNull extends Process {
+    public override run(node: Node, env: TreeEnv, value: unknown) {
         if (value === undefined || value === null) {
-            return b3.Status.FAILURE;
+            return Status.FAILURE;
         } else {
-            return b3.Status.SUCCESS;
+            return Status.SUCCESS;
         }
     }
 

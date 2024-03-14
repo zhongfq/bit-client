@@ -1,11 +1,11 @@
-import { b3 } from "../../behavior";
+import { Node, Process, Status, TreeEnv } from "../../behavior";
 
 interface CheckArgs {
     value: string;
 }
 
-export class Check extends b3.Process {
-    public override check(node: b3.Node): void {
+export class Check extends Process {
+    public override check(node: Node): void {
         const args = node.args as CheckArgs;
         if (typeof args.value !== "string" || args.value.length == 0) {
             this.error(node, `args.value is not a expr string`);
@@ -13,10 +13,10 @@ export class Check extends b3.Process {
         node.tree.context.compileExpr(args.value);
     }
 
-    public override run(node: b3.Node, env: b3.TreeEnv) {
+    public override run(node: Node, env: TreeEnv) {
         const args = node.args as CheckArgs;
         const value = env.eval(args.value);
-        return value ? b3.Status.SUCCESS : b3.Status.FAILURE;
+        return value ? Status.SUCCESS : Status.FAILURE;
     }
 
     public override get descriptor() {

@@ -92,11 +92,14 @@ declare global {
             clone(): Vector2;
             cloneTo(value: IVector2Like): IVector2Like;
             cloneFrom(value: IVector2Like): void;
+            set(x: number, y: number): void;
+            vadd<T extends IVector2Like>(b: T, out: T): T;
+            vsub<T extends IVector2Like>(b: T, out: T): T;
 
             get length(): number;
         }
 
-        namespace Vector2 {
+        module Vector2 {
             export function transformCoordinate(
                 coordinate: Vector2,
                 transform: Matrix3x3,
@@ -115,7 +118,7 @@ declare global {
             getChildByPath(path: string): Node | null;
         }
 
-        namespace Pool {
+        module Pool {
             export function obtain<T>(cls: Constructor<T>): T;
             export function free<T>(obj: T): void;
         }
@@ -129,6 +132,20 @@ Laya.Vector2.prototype.normalize = function () {
 Laya.Vector2.prototype.cloneFrom = function (value) {
     this.x = value.x;
     this.y = value.y;
+};
+
+Laya.Vector2.prototype.set = Laya.Vector2.prototype.setValue;
+
+Laya.Vector2.prototype.vadd = function <T extends IVector2Like>(b: T, out: T) {
+    out.x = this.x + b.x;
+    out.y = this.y + b.y;
+    return out;
+};
+
+Laya.Vector2.prototype.vsub = function <T extends IVector2Like>(b: T, out: T) {
+    out.x = this.x - b.x;
+    out.y = this.y - b.y;
+    return out;
 };
 
 Object.defineProperty(Laya.Vector2.prototype, "length", {

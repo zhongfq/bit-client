@@ -1,11 +1,11 @@
-import { b3 } from "../../behavior";
+import { Node, Process, Status, TreeEnv } from "../../behavior";
 
 interface LoopArgs {
     count: number;
 }
 
-export class Loop extends b3.Process {
-    public override run(node: b3.Node, env: b3.TreeEnv, count?: number) {
+export class Loop extends Process {
+    public override run(node: Node, env: TreeEnv, count?: number) {
         count = count ?? (node.args as LoopArgs).count;
 
         let last = node.resume(env);
@@ -15,8 +15,8 @@ export class Loop extends b3.Process {
         if (last instanceof Array) {
             i = last[0];
             j = last[1];
-            if (env.lastRet.status === b3.Status.RUNNING) {
-                return b3.Status.RUNNING;
+            if (env.lastRet.status === Status.RUNNING) {
+                return Status.RUNNING;
             } else {
                 j++;
                 if (j >= node.children.length) {
@@ -29,7 +29,7 @@ export class Loop extends b3.Process {
         for (; i < count; i++) {
             for (; j < node.children.length; j++) {
                 const status = node.children[j].run(env);
-                if (status === b3.Status.RUNNING) {
+                if (status === Status.RUNNING) {
                     if (last instanceof Array) {
                         last[0] = i;
                         last[1] = j;
@@ -40,7 +40,7 @@ export class Loop extends b3.Process {
                 }
             }
         }
-        return b3.Status.SUCCESS;
+        return Status.SUCCESS;
     }
 
     public override get descriptor() {

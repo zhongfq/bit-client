@@ -1,4 +1,4 @@
-import { b3 } from "../../../../../core/behavior3/behavior";
+import * as b3 from "../../../../../core/behavior3/behavior";
 import { ecs } from "../../../../../core/ecs";
 import { PveServer } from "../../pve-server";
 import { ElementComponent } from "./element-component";

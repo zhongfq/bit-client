@@ -1,23 +1,23 @@
-import { b3 } from "../../behavior";
+import { Node, Process, Status, TreeEnv } from "../../behavior";
 
-export class Once extends b3.Process {
-    public override check(node: b3.Node): void {}
+export class Once extends Process {
+    public override check(node: Node): void {}
 
-    public override run(node: b3.Node, env: b3.TreeEnv) {
-        const onceKey = b3.TreeEnv.makePrivateVar(node, "once");
+    public override run(node: Node, env: TreeEnv) {
+        const onceKey = TreeEnv.makePrivateVar(node, "once");
         if (env.getValue(onceKey) === true) {
-            return b3.Status.FAILURE;
+            return Status.FAILURE;
         }
 
         for (let i = 0; i < node.children.length; i++) {
             const status = node.children[i].run(env);
-            if (status === b3.Status.RUNNING) {
+            if (status === Status.RUNNING) {
                 this.error(node, "this child should not return running status");
             }
         }
 
         env.setValue(onceKey, true);
-        return b3.Status.FAILURE;
+        return Status.FAILURE;
     }
 
     public override get descriptor() {

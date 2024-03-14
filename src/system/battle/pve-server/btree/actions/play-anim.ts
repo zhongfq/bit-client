@@ -1,4 +1,4 @@
-import { b3 } from "../../../../../core/behavior3/behavior";
+import * as b3 from "../../../../../core/behavior3/behavior";
 import { SkillTreeEnv } from "../../ecs/components/skill-component";
 
 export class PlayAnim extends b3.Process {
