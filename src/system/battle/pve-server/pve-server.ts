@@ -42,11 +42,11 @@ export class PveServer extends b3.Context {
 
         this._sender = sender;
 
-        this._ecs = new ecs.World();
-        this._ecs.addSystem(new AiSystem(this));
-        this._ecs.addSystem(new MovementSystem(this));
-        this._ecs.addSystem(new SkillSystem(this));
-        this._ecs.addSystem(new CacheSystem(this));
+        this._ecs = new ecs.World(this);
+        this._ecs.addSystem(AiSystem);
+        this._ecs.addSystem(MovementSystem);
+        this._ecs.addSystem(SkillSystem);
+        this._ecs.addSystem(CacheSystem);
     }
 
     public get ecs() {

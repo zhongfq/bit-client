@@ -23,8 +23,10 @@ export class World {
     private _timers: Timer[] = [];
     private _delays: Map<string | number, Timer> = new Map();
     private _time: number = 0;
+    private _context: unknown;
 
-    public constructor() {
+    public constructor(context: unknown) {
+        this._context = context;
         this._systems = [];
         this._namedSystems = new Map();
         this._caches = new Map();
@@ -45,10 +47,10 @@ export class World {
         this._components.clear();
     }
 
-    public addSystem(sys: System) {
-        this._namedSystems.set(sys.constructor as Constructor<any>, sys);
+    public addSystem<T extends System>(cls: Constructor<T>) {
+        const sys = new cls(this, this._context);
+        this._namedSystems.set(cls, sys);
         this._systems.push(sys);
-        sys.__setECS(this);
         sys.onCreate();
     }
 
@@ -169,13 +171,10 @@ export class World {
         }
     }
 
-    public addSingletonComponent<T extends SingletonComponent>(
-        cls: Constructor<T>,
-        ...args: unknown[]
-    ) {
+    public addSingletonComponent<T extends SingletonComponent>(cls: Constructor<T>) {
         let component = this._singletons.get(cls);
         if (!component) {
-            component = new cls(this, ...args);
+            component = new cls(this, this._context);
             this._singletons.set(cls, component);
         }
         return component as T;
@@ -303,7 +302,6 @@ export class Entity {
 
     public etype: number = 0;
 
-    // eslint-disable-next-line @typescript-eslint/no-shadow
     public constructor(eid: number, public readonly ecs: World) {
         this._eid = eid;
     }
@@ -334,22 +332,11 @@ export class Entity {
 }
 
 export abstract class System {
-    private _ecs!: World;
-
-    public constructor() {}
+    public constructor(public readonly ecs: World, public readonly context: unknown) {}
 
     public onCreate() {}
 
     public onDestroy() {}
-
-    // eslint-disable-next-line @typescript-eslint/no-shadow
-    public __setECS(ecs: World) {
-        this._ecs = ecs;
-    }
-
-    public get ecs() {
-        return this._ecs;
-    }
 
     public filter(entity: Entity) {
         return true;

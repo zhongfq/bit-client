@@ -4,12 +4,10 @@ import { CameraComponent } from "../components/camera-component";
 import { TransformComponent } from "../components/movement-component";
 
 export class CameraSystem extends ecs.System {
+    public declare context: PveContext;
+
     private _ray: Laya.Ray = new Laya.Ray(new Laya.Vector3(), new Laya.Vector3());
     private _rayMat: Laya.Matrix4x4 = new Laya.Matrix4x4();
-
-    public constructor(public readonly context: PveContext) {
-        super();
-    }
 
     public update(dt: number): void {
         const camera = this.ecs.getSingletonComponent(CameraComponent)!;

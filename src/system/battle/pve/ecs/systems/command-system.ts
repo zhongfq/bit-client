@@ -29,9 +29,7 @@ const PREFAB_HEAD_INFO3 = "resources/prefab/battle/ui/head-info3.lh";
 const PREFAB_ROLE_SHADOW = "resources/prefab/battle/ui/role-shadow.lh";
 
 export class CommandSystem extends ecs.System implements ICommandSender {
-    public constructor(public readonly context: PveContext) {
-        super();
-    }
+    public declare context: PveContext;
 
     public override update(dt: number): void {}
 

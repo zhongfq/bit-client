@@ -1,7 +1,6 @@
 import { app } from "../../../app";
 import * as ecs from "../../../core/ecs";
 import { Mediator } from "../../../core/ui-mediator";
-import { MathUtil } from "../../../core/utils/math-util";
 import proto from "../../../def/proto";
 import { errcode } from "../../../def/protocol";
 import { Event } from "../../../misc/event";
@@ -12,6 +11,7 @@ import { TMElement, TMObjectElement, TMTileElemet } from "../tilemap/tm-element"
 import { CameraComponent } from "./ecs/components/camera-component";
 import { TilemapComponent } from "./ecs/components/tilemap-component";
 import { CameraSystem } from "./ecs/systems/camera-system";
+import { CommandSystem } from "./ecs/systems/command-system";
 import { RenderSystem } from "./ecs/systems/render-system";
 import { TilemapSystem } from "./ecs/systems/tilemap-system";
 
@@ -46,12 +46,13 @@ export class PvpContext extends Mediator implements ITMContext {
     public onDelElement(element: TMElement): void {}
 
     public override onAwake() {
-        this._ecs = new ecs.World();
+        this._ecs = new ecs.World(this);
         this._ecs.addSingletonComponent(CameraComponent);
-        this._ecs.addSingletonComponent(TilemapComponent, this);
-        this._ecs.addSystem(new TilemapSystem(this));
-        this._ecs.addSystem(new CameraSystem(this));
-        this._ecs.addSystem(new RenderSystem(this));
+        this._ecs.addSingletonComponent(TilemapComponent);
+        this._ecs.addSystem(CommandSystem);
+        this._ecs.addSystem(TilemapSystem);
+        this._ecs.addSystem(CameraSystem);
+        this._ecs.addSystem(RenderSystem);
 
         this.on(
             app.service.gm,

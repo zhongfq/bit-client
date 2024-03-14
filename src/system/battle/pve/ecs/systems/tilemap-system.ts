@@ -7,11 +7,8 @@ import { TilemapComponent } from "../components/tilemap-component";
 export class TilemapSystem extends ecs.System {
     private static readonly TICK = 100;
 
+    public declare context: PveContext;
     private _lastTick = 0;
-
-    public constructor(public readonly context: PveContext) {
-        super();
-    }
 
     public override onCreate() {
         const tilemap = this.ecs.getSingletonComponent(TilemapComponent)!;

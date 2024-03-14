@@ -1,11 +1,13 @@
-import * as b3 from "../../../../../core/behavior3/behavior";
 import { builtinNodes } from "../../../../../core/behavior3/nodes/builtin-nodes";
 import * as ecs from "../../../../../core/ecs";
 import { AdjustStance } from "../../btree/actions/adjust-stance";
+import { BackSpawnpoint } from "../../btree/actions/back-spawnpoint";
 import { BackTeam } from "../../btree/actions/back-team";
-import { ClearStance } from "../../btree/actions/clear-stance";
-import { FollowHero } from "../../btree/actions/follow-hero";
 import { CalcHeroDistance } from "../../btree/actions/calc-hero-distance";
+import { CalcSpawnDistance } from "../../btree/actions/calc-spawnpoint-distance";
+import { ClearStance } from "../../btree/actions/clear-stance";
+import { Collect } from "../../btree/actions/collect";
+import { FollowHero } from "../../btree/actions/follow-hero";
 import { GetPos } from "../../btree/actions/get-pos";
 import { GetSkillTarget } from "../../btree/actions/get-skill-target";
 import { Hurt } from "../../btree/actions/hurt";
@@ -25,41 +27,38 @@ import { PveServer } from "../../pve-server";
 import { AiComponent, AiTreeEnv } from "../components/ai-component";
 import { ElementComponent } from "../components/element-component";
 import { SkillComponent } from "../components/skill-component";
-import { CalcSpawnDistance } from "../../btree/actions/calc-spawnpoint-distance";
-import { BackSpawnpoint } from "../../btree/actions/back-spawnpoint";
-import { Collect } from "../../btree/actions/collect";
 
 export class AiSystem extends ecs.System {
+    public declare context: PveServer;
+
     public static readonly TICK = 0.1;
 
-    public constructor(public readonly context: PveServer) {
-        super();
-
-        context.registerProcess(...builtinNodes);
-        context.registerProcess(AdjustStance);
-        context.registerProcess(BackSpawnpoint);
-        context.registerProcess(BackTeam);
-        context.registerProcess(CalcHeroDistance);
-        context.registerProcess(CalcSpawnDistance);
-        context.registerProcess(ClearStance);
-        context.registerProcess(FindOneTarget);
-        context.registerProcess(FindTargets);
-        context.registerProcess(FollowHero);
-        context.registerProcess(GetPos);
-        context.registerProcess(GetSkillTarget);
-        context.registerProcess(Hurt);
-        context.registerProcess(IsFreeStance);
-        context.registerProcess(IsTroopFighting);
-        context.registerProcess(MoveStop);
-        context.registerProcess(MoveToAtkPos);
-        context.registerProcess(MoveToPos);
-        context.registerProcess(NormalAttack);
-        context.registerProcess(NormalAttack);
-        context.registerProcess(PlayAnim);
-        context.registerProcess(SetStance);
-        context.registerProcess(TowardToTarget);
-        context.registerProcess(Wait);
-        context.registerProcess(Collect);
+    public override onCreate() {
+        this.context.registerProcess(...builtinNodes);
+        this.context.registerProcess(AdjustStance);
+        this.context.registerProcess(BackSpawnpoint);
+        this.context.registerProcess(BackTeam);
+        this.context.registerProcess(CalcHeroDistance);
+        this.context.registerProcess(CalcSpawnDistance);
+        this.context.registerProcess(ClearStance);
+        this.context.registerProcess(FindOneTarget);
+        this.context.registerProcess(FindTargets);
+        this.context.registerProcess(FollowHero);
+        this.context.registerProcess(GetPos);
+        this.context.registerProcess(GetSkillTarget);
+        this.context.registerProcess(Hurt);
+        this.context.registerProcess(IsFreeStance);
+        this.context.registerProcess(IsTroopFighting);
+        this.context.registerProcess(MoveStop);
+        this.context.registerProcess(MoveToAtkPos);
+        this.context.registerProcess(MoveToPos);
+        this.context.registerProcess(NormalAttack);
+        this.context.registerProcess(NormalAttack);
+        this.context.registerProcess(PlayAnim);
+        this.context.registerProcess(SetStance);
+        this.context.registerProcess(TowardToTarget);
+        this.context.registerProcess(Wait);
+        this.context.registerProcess(Collect);
     }
 
     public override onAddComponent(component: ecs.Component): void {

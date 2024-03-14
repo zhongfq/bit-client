@@ -4,9 +4,7 @@ import { PveContext } from "../../pve-context";
 import { JoystickComponent } from "../components/joystick-component";
 
 export class JoystickSystem extends ecs.System {
-    public constructor(public readonly context: PveContext) {
-        super();
-    }
+    public declare context: PveContext;
 
     public override onCreate() {
         const joystick = this.ecs.getSingletonComponent(JoystickComponent)!;

@@ -9,9 +9,7 @@ export class CacheData {
 }
 
 export class CacheSystem extends ecs.System {
-    public constructor(public readonly context: PveServer) {
-        super();
-    }
+    public declare context: PveServer;
 
     public getCache(key: string): CacheData | undefined {
         return this._cacheMap.get(key);

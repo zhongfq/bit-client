@@ -16,9 +16,7 @@ import { TilemapComponent } from "../components/tilemap-component";
 const tmpInfoVector4 = new Laya.Vector4();
 
 export class RenderSystem extends ecs.System {
-    public constructor(public readonly context: PvpContext) {
-        super();
-    }
+    public declare context: PvpContext;
 
     public override onAddComponent(component: ecs.Component): void {
         if (component instanceof AnimationComponent) {

@@ -4,9 +4,7 @@ import { ElementComponent } from "../components/element-component";
 import { MovementComponent, TransformComponent } from "../components/movement-component";
 
 export class MovementSystem extends ecs.System {
-    public constructor(public readonly context: PveServer) {
-        super();
-    }
+    public declare context: PveServer;
 
     public override onRemoveComponent(component: ecs.Component): void {}
 

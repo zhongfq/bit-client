@@ -61,16 +61,16 @@ export class PveContext extends Mediator implements ITMContext {
     }
 
     public override onAwake() {
-        this._ecs = new ecs.World();
+        this._ecs = new ecs.World(this);
         this._ecs.addSingletonComponent(CameraComponent);
         this._ecs.addSingletonComponent(JoystickComponent);
-        this._ecs.addSingletonComponent(TilemapComponent, this);
-        this._ecs.addSystem(new JoystickSystem(this));
-        this._ecs.addSystem(new CommandSystem(this));
-        this._ecs.addSystem(new MovementSystem(this));
-        this._ecs.addSystem(new CameraSystem(this));
-        this._ecs.addSystem(new RenderSystem(this));
-        this._ecs.addSystem(new TilemapSystem(this));
+        this._ecs.addSingletonComponent(TilemapComponent);
+        this._ecs.addSystem(JoystickSystem);
+        this._ecs.addSystem(CommandSystem);
+        this._ecs.addSystem(MovementSystem);
+        this._ecs.addSystem(CameraSystem);
+        this._ecs.addSystem(RenderSystem);
+        this._ecs.addSystem(TilemapSystem);
         this._pveServer = new PveServer(this._ecs.getSystem(CommandSystem)!);
         this._sender = new CommandSender(this._pveServer);
 

@@ -1,15 +1,12 @@
 import * as ecs from "../../../../../core/ecs";
 import { PvpContext } from "../../pvp-context";
 import { CameraComponent } from "../components/camera-component";
-import { AnimationComponent } from "../components/render-component";
 
 export class CameraSystem extends ecs.System {
+    public declare context: PvpContext;
+
     private _ray: Laya.Ray = new Laya.Ray(new Laya.Vector3(), new Laya.Vector3());
     private _rayMat: Laya.Matrix4x4 = new Laya.Matrix4x4();
-
-    public constructor(public readonly context: PvpContext) {
-        super();
-    }
 
     public update(dt: number): void {
         const camera = this.ecs.getSingletonComponent(CameraComponent)!;

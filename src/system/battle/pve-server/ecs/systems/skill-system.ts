@@ -3,11 +3,9 @@ import { PveServer } from "../../pve-server";
 import { SkillComponent, SkillTreeEnv } from "../components/skill-component";
 
 export class SkillSystem extends ecs.System {
-    public static readonly TICK = 0.1;
+    public declare context: PveServer;
 
-    public constructor(public readonly context: PveServer) {
-        super();
-    }
+    public static readonly TICK = 0.1;
 
     public override onAddComponent(component: ecs.Component) {
         if (component instanceof SkillComponent) {

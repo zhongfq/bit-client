@@ -10,9 +10,7 @@ import {
 const tmpVector3 = new Laya.Vector3();
 
 export class MovementSystem extends ecs.System {
-    public constructor(public readonly context: PveContext) {
-        super();
-    }
+    public declare context: PveContext;
 
     public update(dt: number): void {
         this.ecs.getComponents(MovementComponent).forEach((movement) => {

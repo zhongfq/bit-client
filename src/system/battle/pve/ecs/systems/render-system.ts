@@ -18,9 +18,7 @@ import { CommandSystem } from "./command-system";
 const tmpInfoVector4 = new Laya.Vector4();
 
 export class RenderSystem extends ecs.System {
-    public constructor(public readonly context: PveContext) {
-        super();
-    }
+    public declare context: PveContext;
 
     public override onAddComponent(component: ecs.Component): void {
         if (component instanceof AnimationComponent) {
