@@ -1,7 +1,7 @@
 import { ecs } from "../../../../../core/ecs";
 import { PveContext } from "../../pve-context";
 import { CameraComponent } from "../components/camera-component";
-import { AnimationComponent } from "../components/render-component";
+import { TransformComponent } from "../components/movement-component";
 
 export class CameraSystem extends ecs.System {
     private _ray: Laya.Ray = new Laya.Ray(new Laya.Vector3(), new Laya.Vector3());
@@ -12,14 +12,13 @@ export class CameraSystem extends ecs.System {
     }
 
     public update(dt: number): void {
-        const component = this.ecs.getSingletonComponent(CameraComponent);
-        if (!component?.focus) {
-            return;
-        }
+        const camera = this.ecs.getSingletonComponent(CameraComponent)!;
 
-        const focusTarget = this.ecs.getComponent(component.focus, AnimationComponent)?.view;
-        if (!focusTarget) {
-            return;
+        if (this.context.focusRole) {
+            const transform = this.ecs.getComponent(this.context.focusRole, TransformComponent);
+            if (transform) {
+                camera.focus.cloneFrom(transform.position);
+            }
         }
 
         const cameraTransform = this.context.camera.transform;
@@ -35,15 +34,9 @@ export class CameraSystem extends ecs.System {
         const t = -ray.origin.y / ray.direction.y;
         ray.direction.scale(t, ray.direction);
         ray.origin.vadd(ray.direction, ray.origin);
-        focusTarget.transform.position.vsub(ray.origin, ray.origin);
+        camera.focus.vsub(ray.origin, ray.origin);
         ray.origin.y = 0;
         ray.origin.vadd(cameraTransform.position, ray.origin);
         cameraTransform.position = ray.origin;
-
-        // if (this._ratio < 1) {
-        //     this._ratio += (Laya.timer.delta / 1000) * (1 / 0.2);
-        //     this.target.transform.localRotationEulerY =
-        //         this._lastRotation + (this._rotation - this._lastRotation) * this._ratio;
-        // }
     }
 }

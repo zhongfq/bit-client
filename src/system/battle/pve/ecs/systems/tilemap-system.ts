@@ -24,10 +24,7 @@ export class TilemapSystem extends ecs.System {
         if (tilemap.isReady && curr - this._lastTick >= TilemapSystem.TICK) {
             this._lastTick = curr;
             const camera = this.ecs.getSingletonComponent(CameraComponent)!;
-            if (camera.focus) {
-                const transform = this.ecs.getComponent(camera.focus, TransformComponent)!;
-                tilemap.update(transform.position);
-            }
+            tilemap.update(camera.focus);
         }
     }
 }

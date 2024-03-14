@@ -38,7 +38,6 @@ export class CommandSystem extends ecs.System implements ICommandSender {
     public focus(eid: number) {
         const camera = this.ecs.getSingletonComponent(CameraComponent)!;
         this.context.focusRole = eid;
-        camera.focus = eid;
     }
 
     public createElement(data: ElementCreator) {
