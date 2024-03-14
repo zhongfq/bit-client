@@ -6,7 +6,7 @@
  */
 export class SoldierPendantUIBase extends Laya.Box {
     public btnUpLv!: Laya.Button;
-    public listSoldier!: Laya.List;
+    public listPendant!: Laya.List;
     public imgHeadIcon!: Laya.Image;
     public labelSkillName!: Laya.Label;
     public labelSkillDesc!: Laya.Label;

@@ -7,6 +7,12 @@
   "width": 721,
   "height": 876,
   "_mouseState": 2,
+  "_$comp": [
+    {
+      "_$type": "a1ed5dd5-9dae-4f5d-b86a-996f435cfca1",
+      "scriptPath": "../src/system/soldier/soldier-train-mediator.ts"
+    }
+  ],
   "_$child": [
     {
       "_$id": "k2gtgtv2",

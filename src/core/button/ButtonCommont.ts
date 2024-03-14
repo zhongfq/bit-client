@@ -19,8 +19,10 @@ export class ButtonCommont extends Laya.Script {
             Laya.Tween.to(this.owner, { scaleX: 0.8, scaleY: 0.8 }, 30);
             this.owner.once(Laya.Event.MOUSE_OUT, () => {
                 Laya.Tween.to(this.owner, { scaleX: this.curScaleX, scaleY: this.curScaleY }, 30);
+                this.owner.offAll(Laya.Event.MOUSE_UP);
             });
             this.owner.once(Laya.Event.MOUSE_UP, () => {
+                this.owner.offAll(Laya.Event.MOUSE_OUT);
                 Laya.Tween.to(this.owner, { scaleX: this.curScaleX, scaleY: this.curScaleY }, 30);
             });
         });

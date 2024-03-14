@@ -187,7 +187,7 @@
         {
           "_$override": "3ux87mow",
           "spaceY": 12,
-          "repeatY": 3
+          "repeatY": 5
         }
       ]
     },

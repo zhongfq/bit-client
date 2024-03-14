@@ -5,5 +5,12 @@
  * resources/prefab/soldier/soldier-soldier.lh
  */
 export class SoldierSoldierUIBase extends Laya.Box {
+    public btnUpLv!: Laya.Button;
+    public listSoldier!: Laya.List;
+    public imgHeadIcon!: Laya.Image;
+    public labelSkillName!: Laya.Label;
+    public labelSkillDesc!: Laya.Label;
+    public labelName!: Laya.Label;
+    public labelLv!: Laya.Label;
 }
 

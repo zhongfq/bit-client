@@ -7,9 +7,16 @@
   "width": 721,
   "height": 876,
   "_mouseState": 2,
+  "_$comp": [
+    {
+      "_$type": "38ab2920-ded6-41df-b1dc-96e8f3efc436",
+      "scriptPath": "../src/system/soldier/soldier-soldier-mediator.ts"
+    }
+  ],
   "_$child": [
     {
       "_$id": "04sv3hon",
+      "_$var": true,
       "_$type": "Button",
       "name": "btnUpLv",
       "x": 266,
@@ -25,17 +32,37 @@
     },
     {
       "_$id": "h7qjjv6q",
+      "_$var": true,
       "_$type": "List",
       "name": "listSoldier",
       "x": 14,
       "y": 511,
       "width": 693,
       "height": 261,
-      "repeatX": 1,
-      "repeatY": 1
+      "_mouseState": 2,
+      "itemTemplate": {
+        "_$ref": "fmixtsfp",
+        "_$tmpl": "itemRender"
+      },
+      "repeatX": 6,
+      "repeatY": 2,
+      "spaceX": 6,
+      "spaceY": 24,
+      "selectEnable": true,
+      "_$child": [
+        {
+          "_$id": "fmixtsfp",
+          "_$prefab": "296a5627-8151-43ef-8283-ced0d50d81a8",
+          "name": "icon",
+          "active": true,
+          "x": 0,
+          "y": 15
+        }
+      ]
     },
     {
       "_$id": "wdwikcep",
+      "_$var": true,
       "_$type": "Image",
       "name": "imgHeadIcon",
       "x": 37,
@@ -48,6 +75,7 @@
     },
     {
       "_$id": "5siokyca",
+      "_$var": true,
       "_$type": "Label",
       "name": "labelSkillName",
       "x": 141,
@@ -62,6 +90,7 @@
     },
     {
       "_$id": "ov3v9okj",
+      "_$var": true,
       "_$type": "Label",
       "name": "labelSkillDesc",
       "x": 141,
@@ -76,6 +105,7 @@
     },
     {
       "_$id": "jl7p3h70",
+      "_$var": true,
       "_$type": "Label",
       "name": "labelName",
       "x": 281,
@@ -91,6 +121,7 @@
     },
     {
       "_$id": "h5kplup7",
+      "_$var": true,
       "_$type": "Label",
       "name": "labelLv",
       "x": 60.00000000000004,

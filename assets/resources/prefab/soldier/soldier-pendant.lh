@@ -7,6 +7,12 @@
   "width": 721,
   "height": 876,
   "_mouseState": 2,
+  "_$comp": [
+    {
+      "_$type": "2fe2702c-07bc-49a0-821a-dcffb7ff94c7",
+      "scriptPath": "../src/system/soldier/soldier-pendant-mediator.ts"
+    }
+  ],
   "_$child": [
     {
       "_$id": "b8c48zlg",
@@ -28,13 +34,32 @@
       "_$id": "be0tjpwd",
       "_$var": true,
       "_$type": "List",
-      "name": "listSoldier",
+      "name": "listPendant",
       "x": 14,
       "y": 646,
       "width": 693,
       "height": 126,
-      "repeatX": 1,
-      "repeatY": 1
+      "_mouseState": 2,
+      "itemTemplate": {
+        "_$ref": "oilmjpr7",
+        "_$tmpl": "itemRender"
+      },
+      "repeatX": 6,
+      "repeatY": 1,
+      "spaceX": 10,
+      "scrollType": 1,
+      "selectEnable": true,
+      "selectedIndex": 0,
+      "_$child": [
+        {
+          "_$id": "oilmjpr7",
+          "_$prefab": "296a5627-8151-43ef-8283-ced0d50d81a8",
+          "name": "icon",
+          "active": true,
+          "x": 0,
+          "y": 0
+        }
+      ]
     },
     {
       "_$id": "gfitp5kp",
