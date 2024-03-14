@@ -82,7 +82,8 @@ export class CommandSystem extends ecs.System implements ICommandSender {
         if (
             data.etype === ETYPE.HERO ||
             data.etype === ETYPE.MONSTER ||
-            data.etype === ETYPE.SOLDIER
+            data.etype === ETYPE.SOLDIER ||
+            data.etype === ETYPE.TRUCK
         ) {
             const shadow = entity.addComponent(ShadowComponent);
             shadow.res = PREFAB_ROLE_SHADOW;

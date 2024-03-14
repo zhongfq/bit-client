@@ -224,5 +224,11 @@
         "id": 70003,
         "pve_ai": "hero",
         "res": "resources/prefab/battle/roles/bing-dao.lh"
+    },
+    "80001": {
+        "etype": 9,
+        "id": 80001,
+        "pve_ai": "truck",
+        "res": "resources/prefab/battle/roles/card.lh"
     }
 }

@@ -31,6 +31,7 @@ export class ElementComponent extends ecs.Component {
     private _skill?: SkillComponent;
     private _troop?: TroopComponent;
     private _soldier?: SoldierComponent;
+    private _truck?: TruckComponent;
 
     public get movement() {
         return (this._movement ||= this.getComponent(MovementComponent)!);
@@ -51,10 +52,13 @@ export class ElementComponent extends ecs.Component {
     public get soldier() {
         return (this._soldier ||= this.getComponent(SoldierComponent));
     }
+
+    public get truck() {
+        return (this._truck ||= this.getComponent(TruckComponent));
+    }
 }
 
-export class SoldierComponent extends ecs.Component {
-    public data!: SoldierRow;
+export class FollowerComponent extends ecs.Component {
     public hero!: ElementComponent;
     public index: number = 0;
     public offset!: IVector3Like;
@@ -66,9 +70,18 @@ export class SoldierComponent extends ecs.Component {
     }
 }
 
+export class SoldierComponent extends FollowerComponent {
+    public data!: SoldierRow;
+}
+
+export class TruckComponent extends FollowerComponent {
+    public data = undefined; // TODO：资源车不需要读配置表，暂时留空
+}
+
 export class TroopComponent extends ecs.Component {
     public formation!: Readonly<IVector3Like>[];
     public soldiers: SoldierComponent[] = [];
+    public trucks: TruckComponent[] = [];
 
     private _element?: ElementComponent;
 

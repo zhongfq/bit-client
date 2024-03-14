@@ -42,6 +42,7 @@ export const BattleConf = {
         MONSTER: 3,
         SOLDIER: 2,
         STONE: 8,
+        TRUCK: 9,
         WOOD: 6,
     },
     LARGE_SCENE_ID: 2,
