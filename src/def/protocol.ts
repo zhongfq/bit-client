@@ -149,8 +149,8 @@ export const opcode = {
         s2c_troop_move_by: 0x150D,
         c2s_troop_move_stop: 0x150E,
         s2c_troop_move_stop: 0x150F,
-        c2s_load_sand: 0x1510,
-        s2c_load_sand: 0x1511,
+        c2s_troop_retreat: 0x1510,
+        s2c_troop_retreat: 0x1511,
         notify_alliances: 0x1590,
         notify_roles: 0x1591,
         notify_entities: 0x1592,
@@ -947,16 +947,16 @@ export const registerProtocols = () => {
         decode: proto.world.s2c_troop_move_stop.decode,
     });
     register({
-        op: opcode.world.c2s_load_sand,
-        typeURL: proto.world.c2s_load_sand.getTypeUrl(),
-        encode: proto.world.c2s_load_sand.encode,
-        decode: proto.world.c2s_load_sand.decode,
+        op: opcode.world.c2s_troop_retreat,
+        typeURL: proto.world.c2s_troop_retreat.getTypeUrl(),
+        encode: proto.world.c2s_troop_retreat.encode,
+        decode: proto.world.c2s_troop_retreat.decode,
     });
     register({
-        op: opcode.world.s2c_load_sand,
-        typeURL: proto.world.s2c_load_sand.getTypeUrl(),
-        encode: proto.world.s2c_load_sand.encode,
-        decode: proto.world.s2c_load_sand.decode,
+        op: opcode.world.s2c_troop_retreat,
+        typeURL: proto.world.s2c_troop_retreat.getTypeUrl(),
+        encode: proto.world.s2c_troop_retreat.encode,
+        decode: proto.world.s2c_troop_retreat.decode,
     });
     register({
         op: opcode.world.notify_alliances,

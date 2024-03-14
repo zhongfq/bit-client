@@ -111,6 +111,10 @@ declare global {
             cloneFrom(value: IVector3Like): void;
         }
 
+        interface Node {
+            getChildByPath(path: string): Node | null;
+        }
+
         namespace Pool {
             export function obtain<T>(cls: Constructor<T>): T;
             export function free<T>(obj: T): void;
@@ -154,6 +158,22 @@ Laya.Vector3.prototype.cloneFrom = function (value: IVector3Like) {
     this.x = value.x;
     this.y = value.y;
     this.z = value.z;
+};
+
+Laya.Node.prototype.getChildByPath = function (path) {
+    const names = path.match(/[^/]+/g);
+    if (names) {
+        let child: Laya.Node | null = this as Laya.Node;
+        for (const n of names) {
+            child = child.getChildByName(n);
+            if (!child) {
+                break;
+            }
+        }
+        return child;
+    } else {
+        return null;
+    }
 };
 
 Laya.Pool.obtain = function <T>(cls: Constructor<T>): T {

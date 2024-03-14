@@ -163,6 +163,28 @@
               "_$id": "ly13d9uo",
               "_$type": "Sprite3D",
               "name": "monster"
+            },
+            {
+              "_$id": "o6rpiwoz",
+              "_$prefab": "bd1abb40-cf2e-4803-a13b-162282a3357e",
+              "name": "selected",
+              "active": true,
+              "layer": 0,
+              "transform": {
+                "localPosition": {
+                  "_$type": "Vector3",
+                  "x": 5,
+                  "y": 0.001,
+                  "z": 5
+                },
+                "localRotation": {
+                  "_$type": "Quaternion",
+                  "x": 0,
+                  "y": 0,
+                  "z": 0,
+                  "w": 1
+                }
+              }
             }
           ]
         },

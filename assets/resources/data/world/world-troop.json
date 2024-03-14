@@ -24,6 +24,9 @@
         "IDLE": {
             "state": "IDLE"
         },
+        "INSIDE": {
+            "state": "INSIDE"
+        },
         "MOVE": {
             "state": "MOVE"
         },
@@ -31,8 +34,8 @@
             "peace": 1,
             "state": "RETREAT"
         },
-        "STANDBY": {
-            "state": "STANDBY"
+        "SIEGE": {
+            "state": "SIEGE"
         },
         "WAITLIST": {
             "state": "WAITLIST"

@@ -92,6 +92,9 @@ export class PvpContext extends Mediator implements ITMContext {
         const p0 = new Laya.Vector3();
         const p1 = new Laya.Vector3();
 
+        const selectedTile = this.scene3D.getChildByPath("world-map/selected") as Laya.Sprite3D;
+        selectedTile.active = false;
+
         const camera = this._ecs.getSingletonComponent(CameraComponent)!;
         const mat = new Laya.Matrix4x4();
 
@@ -115,6 +118,9 @@ export class PvpContext extends Mediator implements ITMContext {
             }
             const target = e.target as Laya.Sprite;
             if (!clickEnabled) {
+                if (selectedTile.active) {
+                    selectedTile.active = false;
+                }
                 p1.set(target.mouseX, 0, target.mouseY);
                 Laya.Vector3.transformCoordinate(p1, mat, p1);
                 p0.vsub(p1, p0);
@@ -130,17 +136,24 @@ export class PvpContext extends Mediator implements ITMContext {
             }
         });
 
-        clickArea.on(Laya.Event.MOUSE_UP, () => {
+        clickArea.on(Laya.Event.MOUSE_UP, (e: Laya.Event) => {
             isClickDown = false;
             if (clickEnabled) {
-                // const ray = new Laya.Ray(new Laya.Vector3(), new Laya.Vector3());
-                // this.camera.viewportPointToRay(endVec2, ray);
-                // const t = -ray.origin.y / ray.direction.y;
-                // ray.direction.scale(t, ray.direction);
-                // const groundPos = new Laya.Vector3();
-                // ray.origin.vadd(ray.direction, groundPos);
-                // const x = Math.floor(groundPos.x + 0.5);
-                // const y = Math.floor(groundPos.z + 0.5);
+                const ray = new Laya.Ray(new Laya.Vector3(), new Laya.Vector3());
+                this.camera.viewportPointToRay(
+                    new Laya.Vector2(e.target.mouseX, e.target.mouseY),
+                    ray
+                );
+                const t = -ray.origin.y / ray.direction.y;
+                ray.direction.scale(t, ray.direction);
+                const groundPos = new Laya.Vector3();
+                ray.origin.vadd(ray.direction, groundPos);
+
+                groundPos.x = Math.floor(groundPos.x + 0.5);
+                groundPos.y = selectedTile.transform.position.y;
+                groundPos.z = Math.floor(groundPos.z + 0.5);
+                selectedTile.active = true;
+                selectedTile.transform.position = groundPos;
             }
         });
     }

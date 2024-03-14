@@ -14977,200 +14977,6 @@ declare namespace proto {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
-        /** Properties of a c2s_load_sand. */
-        interface Ic2s_load_sand {
-        }
-
-        /** Represents a c2s_load_sand. */
-        class c2s_load_sand implements Ic2s_load_sand {
-
-            /**
-             * Constructs a new c2s_load_sand.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: world.Ic2s_load_sand);
-
-            /**
-             * Creates a new c2s_load_sand instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns c2s_load_sand instance
-             */
-            public static create(properties?: world.Ic2s_load_sand): world.c2s_load_sand;
-
-            /**
-             * Encodes the specified c2s_load_sand message. Does not implicitly {@link world.c2s_load_sand.verify|verify} messages.
-             * @param message c2s_load_sand message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: world.Ic2s_load_sand, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified c2s_load_sand message, length delimited. Does not implicitly {@link world.c2s_load_sand.verify|verify} messages.
-             * @param message c2s_load_sand message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: world.Ic2s_load_sand, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a c2s_load_sand message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns c2s_load_sand
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.c2s_load_sand;
-
-            /**
-             * Decodes a c2s_load_sand message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns c2s_load_sand
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.c2s_load_sand;
-
-            /**
-             * Verifies a c2s_load_sand message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a c2s_load_sand message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns c2s_load_sand
-             */
-            public static fromObject(object: { [k: string]: any }): world.c2s_load_sand;
-
-            /**
-             * Creates a plain object from a c2s_load_sand message. Also converts values to other types if specified.
-             * @param message c2s_load_sand
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: world.c2s_load_sand, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this c2s_load_sand to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for c2s_load_sand
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a s2c_load_sand. */
-        interface Is2c_load_sand {
-
-            /** s2c_load_sand err */
-            err?: (number|null);
-
-            /** s2c_load_sand worldUid */
-            worldUid?: (number|null);
-        }
-
-        /** Represents a s2c_load_sand. */
-        class s2c_load_sand implements Is2c_load_sand {
-
-            /**
-             * Constructs a new s2c_load_sand.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: world.Is2c_load_sand);
-
-            /** s2c_load_sand err. */
-            public err: number;
-
-            /** s2c_load_sand worldUid. */
-            public worldUid: number;
-
-            /**
-             * Creates a new s2c_load_sand instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns s2c_load_sand instance
-             */
-            public static create(properties?: world.Is2c_load_sand): world.s2c_load_sand;
-
-            /**
-             * Encodes the specified s2c_load_sand message. Does not implicitly {@link world.s2c_load_sand.verify|verify} messages.
-             * @param message s2c_load_sand message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: world.Is2c_load_sand, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified s2c_load_sand message, length delimited. Does not implicitly {@link world.s2c_load_sand.verify|verify} messages.
-             * @param message s2c_load_sand message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: world.Is2c_load_sand, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a s2c_load_sand message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns s2c_load_sand
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.s2c_load_sand;
-
-            /**
-             * Decodes a s2c_load_sand message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns s2c_load_sand
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.s2c_load_sand;
-
-            /**
-             * Verifies a s2c_load_sand message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a s2c_load_sand message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns s2c_load_sand
-             */
-            public static fromObject(object: { [k: string]: any }): world.s2c_load_sand;
-
-            /**
-             * Creates a plain object from a s2c_load_sand message. Also converts values to other types if specified.
-             * @param message s2c_load_sand
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: world.s2c_load_sand, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this s2c_load_sand to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for s2c_load_sand
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
         /** Properties of a c2s_load. */
         interface Ic2s_load {
 
@@ -16765,6 +16571,200 @@ declare namespace proto {
 
             /**
              * Gets the default type url for s2c_troop_move_stop
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a c2s_troop_retreat. */
+        interface Ic2s_troop_retreat {
+
+            /** c2s_troop_retreat troopEid */
+            troopEid?: (number|null);
+        }
+
+        /** Represents a c2s_troop_retreat. */
+        class c2s_troop_retreat implements Ic2s_troop_retreat {
+
+            /**
+             * Constructs a new c2s_troop_retreat.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: world.Ic2s_troop_retreat);
+
+            /** c2s_troop_retreat troopEid. */
+            public troopEid: number;
+
+            /**
+             * Creates a new c2s_troop_retreat instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns c2s_troop_retreat instance
+             */
+            public static create(properties?: world.Ic2s_troop_retreat): world.c2s_troop_retreat;
+
+            /**
+             * Encodes the specified c2s_troop_retreat message. Does not implicitly {@link world.c2s_troop_retreat.verify|verify} messages.
+             * @param message c2s_troop_retreat message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: world.Ic2s_troop_retreat, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified c2s_troop_retreat message, length delimited. Does not implicitly {@link world.c2s_troop_retreat.verify|verify} messages.
+             * @param message c2s_troop_retreat message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: world.Ic2s_troop_retreat, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a c2s_troop_retreat message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns c2s_troop_retreat
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.c2s_troop_retreat;
+
+            /**
+             * Decodes a c2s_troop_retreat message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns c2s_troop_retreat
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.c2s_troop_retreat;
+
+            /**
+             * Verifies a c2s_troop_retreat message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a c2s_troop_retreat message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns c2s_troop_retreat
+             */
+            public static fromObject(object: { [k: string]: any }): world.c2s_troop_retreat;
+
+            /**
+             * Creates a plain object from a c2s_troop_retreat message. Also converts values to other types if specified.
+             * @param message c2s_troop_retreat
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: world.c2s_troop_retreat, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this c2s_troop_retreat to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for c2s_troop_retreat
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a s2c_troop_retreat. */
+        interface Is2c_troop_retreat {
+
+            /** s2c_troop_retreat err */
+            err?: (number|null);
+        }
+
+        /** Represents a s2c_troop_retreat. */
+        class s2c_troop_retreat implements Is2c_troop_retreat {
+
+            /**
+             * Constructs a new s2c_troop_retreat.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: world.Is2c_troop_retreat);
+
+            /** s2c_troop_retreat err. */
+            public err: number;
+
+            /**
+             * Creates a new s2c_troop_retreat instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns s2c_troop_retreat instance
+             */
+            public static create(properties?: world.Is2c_troop_retreat): world.s2c_troop_retreat;
+
+            /**
+             * Encodes the specified s2c_troop_retreat message. Does not implicitly {@link world.s2c_troop_retreat.verify|verify} messages.
+             * @param message s2c_troop_retreat message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: world.Is2c_troop_retreat, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified s2c_troop_retreat message, length delimited. Does not implicitly {@link world.s2c_troop_retreat.verify|verify} messages.
+             * @param message s2c_troop_retreat message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: world.Is2c_troop_retreat, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a s2c_troop_retreat message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns s2c_troop_retreat
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): world.s2c_troop_retreat;
+
+            /**
+             * Decodes a s2c_troop_retreat message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns s2c_troop_retreat
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): world.s2c_troop_retreat;
+
+            /**
+             * Verifies a s2c_troop_retreat message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a s2c_troop_retreat message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns s2c_troop_retreat
+             */
+            public static fromObject(object: { [k: string]: any }): world.s2c_troop_retreat;
+
+            /**
+             * Creates a plain object from a s2c_troop_retreat message. Also converts values to other types if specified.
+             * @param message s2c_troop_retreat
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: world.s2c_troop_retreat, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this s2c_troop_retreat to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for s2c_troop_retreat
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

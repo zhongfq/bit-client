@@ -34378,408 +34378,6 @@ $root.world = (function() {
         return Entity;
     })();
 
-    world.c2s_load_sand = (function() {
-
-        /**
-         * Properties of a c2s_load_sand.
-         * @memberof world
-         * @interface Ic2s_load_sand
-         */
-
-        /**
-         * Constructs a new c2s_load_sand.
-         * @memberof world
-         * @classdesc Represents a c2s_load_sand.
-         * @implements Ic2s_load_sand
-         * @constructor
-         * @param {world.Ic2s_load_sand=} [properties] Properties to set
-         */
-        function c2s_load_sand(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * Creates a new c2s_load_sand instance using the specified properties.
-         * @function create
-         * @memberof world.c2s_load_sand
-         * @static
-         * @param {world.Ic2s_load_sand=} [properties] Properties to set
-         * @returns {world.c2s_load_sand} c2s_load_sand instance
-         */
-        c2s_load_sand.create = function create(properties) {
-            return new c2s_load_sand(properties);
-        };
-
-        /**
-         * Encodes the specified c2s_load_sand message. Does not implicitly {@link world.c2s_load_sand.verify|verify} messages.
-         * @function encode
-         * @memberof world.c2s_load_sand
-         * @static
-         * @param {world.Ic2s_load_sand} message c2s_load_sand message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        c2s_load_sand.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            return writer;
-        };
-
-        /**
-         * Encodes the specified c2s_load_sand message, length delimited. Does not implicitly {@link world.c2s_load_sand.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof world.c2s_load_sand
-         * @static
-         * @param {world.Ic2s_load_sand} message c2s_load_sand message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        c2s_load_sand.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a c2s_load_sand message from the specified reader or buffer.
-         * @function decode
-         * @memberof world.c2s_load_sand
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {world.c2s_load_sand} c2s_load_sand
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        c2s_load_sand.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.c2s_load_sand();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes a c2s_load_sand message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof world.c2s_load_sand
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {world.c2s_load_sand} c2s_load_sand
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        c2s_load_sand.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a c2s_load_sand message.
-         * @function verify
-         * @memberof world.c2s_load_sand
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        c2s_load_sand.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            return null;
-        };
-
-        /**
-         * Creates a c2s_load_sand message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof world.c2s_load_sand
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {world.c2s_load_sand} c2s_load_sand
-         */
-        c2s_load_sand.fromObject = function fromObject(object) {
-            if (object instanceof $root.world.c2s_load_sand)
-                return object;
-            return new $root.world.c2s_load_sand();
-        };
-
-        /**
-         * Creates a plain object from a c2s_load_sand message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof world.c2s_load_sand
-         * @static
-         * @param {world.c2s_load_sand} message c2s_load_sand
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        c2s_load_sand.toObject = function toObject() {
-            return {};
-        };
-
-        /**
-         * Converts this c2s_load_sand to JSON.
-         * @function toJSON
-         * @memberof world.c2s_load_sand
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        c2s_load_sand.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        /**
-         * Gets the default type url for c2s_load_sand
-         * @function getTypeUrl
-         * @memberof world.c2s_load_sand
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        c2s_load_sand.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/world.c2s_load_sand";
-        };
-
-        return c2s_load_sand;
-    })();
-
-    world.s2c_load_sand = (function() {
-
-        /**
-         * Properties of a s2c_load_sand.
-         * @memberof world
-         * @interface Is2c_load_sand
-         * @property {number|null} [err] s2c_load_sand err
-         * @property {number|null} [worldUid] s2c_load_sand worldUid
-         */
-
-        /**
-         * Constructs a new s2c_load_sand.
-         * @memberof world
-         * @classdesc Represents a s2c_load_sand.
-         * @implements Is2c_load_sand
-         * @constructor
-         * @param {world.Is2c_load_sand=} [properties] Properties to set
-         */
-        function s2c_load_sand(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * s2c_load_sand err.
-         * @member {number} err
-         * @memberof world.s2c_load_sand
-         * @instance
-         */
-        s2c_load_sand.prototype.err = 0;
-
-        /**
-         * s2c_load_sand worldUid.
-         * @member {number} worldUid
-         * @memberof world.s2c_load_sand
-         * @instance
-         */
-        s2c_load_sand.prototype.worldUid = 0;
-
-        /**
-         * Creates a new s2c_load_sand instance using the specified properties.
-         * @function create
-         * @memberof world.s2c_load_sand
-         * @static
-         * @param {world.Is2c_load_sand=} [properties] Properties to set
-         * @returns {world.s2c_load_sand} s2c_load_sand instance
-         */
-        s2c_load_sand.create = function create(properties) {
-            return new s2c_load_sand(properties);
-        };
-
-        /**
-         * Encodes the specified s2c_load_sand message. Does not implicitly {@link world.s2c_load_sand.verify|verify} messages.
-         * @function encode
-         * @memberof world.s2c_load_sand
-         * @static
-         * @param {world.Is2c_load_sand} message s2c_load_sand message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        s2c_load_sand.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
-            if (message.worldUid != null && Object.hasOwnProperty.call(message, "worldUid"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.worldUid);
-            return writer;
-        };
-
-        /**
-         * Encodes the specified s2c_load_sand message, length delimited. Does not implicitly {@link world.s2c_load_sand.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof world.s2c_load_sand
-         * @static
-         * @param {world.Is2c_load_sand} message s2c_load_sand message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        s2c_load_sand.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a s2c_load_sand message from the specified reader or buffer.
-         * @function decode
-         * @memberof world.s2c_load_sand
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {world.s2c_load_sand} s2c_load_sand
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        s2c_load_sand.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.s2c_load_sand();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1: {
-                        message.err = reader.uint32();
-                        break;
-                    }
-                case 2: {
-                        message.worldUid = reader.uint32();
-                        break;
-                    }
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes a s2c_load_sand message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof world.s2c_load_sand
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {world.s2c_load_sand} s2c_load_sand
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        s2c_load_sand.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a s2c_load_sand message.
-         * @function verify
-         * @memberof world.s2c_load_sand
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        s2c_load_sand.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.err != null && message.hasOwnProperty("err"))
-                if (!$util.isInteger(message.err))
-                    return "err: integer expected";
-            if (message.worldUid != null && message.hasOwnProperty("worldUid"))
-                if (!$util.isInteger(message.worldUid))
-                    return "worldUid: integer expected";
-            return null;
-        };
-
-        /**
-         * Creates a s2c_load_sand message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof world.s2c_load_sand
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {world.s2c_load_sand} s2c_load_sand
-         */
-        s2c_load_sand.fromObject = function fromObject(object) {
-            if (object instanceof $root.world.s2c_load_sand)
-                return object;
-            var message = new $root.world.s2c_load_sand();
-            if (object.err != null)
-                message.err = object.err >>> 0;
-            if (object.worldUid != null)
-                message.worldUid = object.worldUid >>> 0;
-            return message;
-        };
-
-        /**
-         * Creates a plain object from a s2c_load_sand message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof world.s2c_load_sand
-         * @static
-         * @param {world.s2c_load_sand} message s2c_load_sand
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        s2c_load_sand.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.err = 0;
-                object.worldUid = 0;
-            }
-            if (message.err != null && message.hasOwnProperty("err"))
-                object.err = message.err;
-            if (message.worldUid != null && message.hasOwnProperty("worldUid"))
-                object.worldUid = message.worldUid;
-            return object;
-        };
-
-        /**
-         * Converts this s2c_load_sand to JSON.
-         * @function toJSON
-         * @memberof world.s2c_load_sand
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        s2c_load_sand.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        /**
-         * Gets the default type url for s2c_load_sand
-         * @function getTypeUrl
-         * @memberof world.s2c_load_sand
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        s2c_load_sand.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/world.s2c_load_sand";
-        };
-
-        return s2c_load_sand;
-    })();
-
     world.c2s_load = (function() {
 
         /**
@@ -38235,6 +37833,412 @@ $root.world = (function() {
         };
 
         return s2c_troop_move_stop;
+    })();
+
+    world.c2s_troop_retreat = (function() {
+
+        /**
+         * Properties of a c2s_troop_retreat.
+         * @memberof world
+         * @interface Ic2s_troop_retreat
+         * @property {number|null} [troopEid] c2s_troop_retreat troopEid
+         */
+
+        /**
+         * Constructs a new c2s_troop_retreat.
+         * @memberof world
+         * @classdesc Represents a c2s_troop_retreat.
+         * @implements Ic2s_troop_retreat
+         * @constructor
+         * @param {world.Ic2s_troop_retreat=} [properties] Properties to set
+         */
+        function c2s_troop_retreat(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * c2s_troop_retreat troopEid.
+         * @member {number} troopEid
+         * @memberof world.c2s_troop_retreat
+         * @instance
+         */
+        c2s_troop_retreat.prototype.troopEid = 0;
+
+        /**
+         * Creates a new c2s_troop_retreat instance using the specified properties.
+         * @function create
+         * @memberof world.c2s_troop_retreat
+         * @static
+         * @param {world.Ic2s_troop_retreat=} [properties] Properties to set
+         * @returns {world.c2s_troop_retreat} c2s_troop_retreat instance
+         */
+        c2s_troop_retreat.create = function create(properties) {
+            return new c2s_troop_retreat(properties);
+        };
+
+        /**
+         * Encodes the specified c2s_troop_retreat message. Does not implicitly {@link world.c2s_troop_retreat.verify|verify} messages.
+         * @function encode
+         * @memberof world.c2s_troop_retreat
+         * @static
+         * @param {world.Ic2s_troop_retreat} message c2s_troop_retreat message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_troop_retreat.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.troopEid != null && Object.hasOwnProperty.call(message, "troopEid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.troopEid);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified c2s_troop_retreat message, length delimited. Does not implicitly {@link world.c2s_troop_retreat.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof world.c2s_troop_retreat
+         * @static
+         * @param {world.Ic2s_troop_retreat} message c2s_troop_retreat message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_troop_retreat.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a c2s_troop_retreat message from the specified reader or buffer.
+         * @function decode
+         * @memberof world.c2s_troop_retreat
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {world.c2s_troop_retreat} c2s_troop_retreat
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_troop_retreat.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.c2s_troop_retreat();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.troopEid = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a c2s_troop_retreat message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof world.c2s_troop_retreat
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {world.c2s_troop_retreat} c2s_troop_retreat
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_troop_retreat.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a c2s_troop_retreat message.
+         * @function verify
+         * @memberof world.c2s_troop_retreat
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        c2s_troop_retreat.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.troopEid != null && message.hasOwnProperty("troopEid"))
+                if (!$util.isInteger(message.troopEid))
+                    return "troopEid: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a c2s_troop_retreat message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof world.c2s_troop_retreat
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {world.c2s_troop_retreat} c2s_troop_retreat
+         */
+        c2s_troop_retreat.fromObject = function fromObject(object) {
+            if (object instanceof $root.world.c2s_troop_retreat)
+                return object;
+            var message = new $root.world.c2s_troop_retreat();
+            if (object.troopEid != null)
+                message.troopEid = object.troopEid >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a c2s_troop_retreat message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof world.c2s_troop_retreat
+         * @static
+         * @param {world.c2s_troop_retreat} message c2s_troop_retreat
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        c2s_troop_retreat.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.troopEid = 0;
+            if (message.troopEid != null && message.hasOwnProperty("troopEid"))
+                object.troopEid = message.troopEid;
+            return object;
+        };
+
+        /**
+         * Converts this c2s_troop_retreat to JSON.
+         * @function toJSON
+         * @memberof world.c2s_troop_retreat
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        c2s_troop_retreat.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for c2s_troop_retreat
+         * @function getTypeUrl
+         * @memberof world.c2s_troop_retreat
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        c2s_troop_retreat.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/world.c2s_troop_retreat";
+        };
+
+        return c2s_troop_retreat;
+    })();
+
+    world.s2c_troop_retreat = (function() {
+
+        /**
+         * Properties of a s2c_troop_retreat.
+         * @memberof world
+         * @interface Is2c_troop_retreat
+         * @property {number|null} [err] s2c_troop_retreat err
+         */
+
+        /**
+         * Constructs a new s2c_troop_retreat.
+         * @memberof world
+         * @classdesc Represents a s2c_troop_retreat.
+         * @implements Is2c_troop_retreat
+         * @constructor
+         * @param {world.Is2c_troop_retreat=} [properties] Properties to set
+         */
+        function s2c_troop_retreat(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * s2c_troop_retreat err.
+         * @member {number} err
+         * @memberof world.s2c_troop_retreat
+         * @instance
+         */
+        s2c_troop_retreat.prototype.err = 0;
+
+        /**
+         * Creates a new s2c_troop_retreat instance using the specified properties.
+         * @function create
+         * @memberof world.s2c_troop_retreat
+         * @static
+         * @param {world.Is2c_troop_retreat=} [properties] Properties to set
+         * @returns {world.s2c_troop_retreat} s2c_troop_retreat instance
+         */
+        s2c_troop_retreat.create = function create(properties) {
+            return new s2c_troop_retreat(properties);
+        };
+
+        /**
+         * Encodes the specified s2c_troop_retreat message. Does not implicitly {@link world.s2c_troop_retreat.verify|verify} messages.
+         * @function encode
+         * @memberof world.s2c_troop_retreat
+         * @static
+         * @param {world.Is2c_troop_retreat} message s2c_troop_retreat message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_troop_retreat.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified s2c_troop_retreat message, length delimited. Does not implicitly {@link world.s2c_troop_retreat.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof world.s2c_troop_retreat
+         * @static
+         * @param {world.Is2c_troop_retreat} message s2c_troop_retreat message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_troop_retreat.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a s2c_troop_retreat message from the specified reader or buffer.
+         * @function decode
+         * @memberof world.s2c_troop_retreat
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {world.s2c_troop_retreat} s2c_troop_retreat
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_troop_retreat.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.world.s2c_troop_retreat();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.err = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a s2c_troop_retreat message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof world.s2c_troop_retreat
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {world.s2c_troop_retreat} s2c_troop_retreat
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_troop_retreat.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a s2c_troop_retreat message.
+         * @function verify
+         * @memberof world.s2c_troop_retreat
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        s2c_troop_retreat.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.err != null && message.hasOwnProperty("err"))
+                if (!$util.isInteger(message.err))
+                    return "err: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a s2c_troop_retreat message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof world.s2c_troop_retreat
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {world.s2c_troop_retreat} s2c_troop_retreat
+         */
+        s2c_troop_retreat.fromObject = function fromObject(object) {
+            if (object instanceof $root.world.s2c_troop_retreat)
+                return object;
+            var message = new $root.world.s2c_troop_retreat();
+            if (object.err != null)
+                message.err = object.err >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a s2c_troop_retreat message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof world.s2c_troop_retreat
+         * @static
+         * @param {world.s2c_troop_retreat} message s2c_troop_retreat
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        s2c_troop_retreat.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.err = 0;
+            if (message.err != null && message.hasOwnProperty("err"))
+                object.err = message.err;
+            return object;
+        };
+
+        /**
+         * Converts this s2c_troop_retreat to JSON.
+         * @function toJSON
+         * @memberof world.s2c_troop_retreat
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        s2c_troop_retreat.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for s2c_troop_retreat
+         * @function getTypeUrl
+         * @memberof world.s2c_troop_retreat
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        s2c_troop_retreat.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/world.s2c_troop_retreat";
+        };
+
+        return s2c_troop_retreat;
     })();
 
     world.notify_alliances = (function() {

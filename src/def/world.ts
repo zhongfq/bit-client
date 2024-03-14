@@ -100,6 +100,7 @@ export const WorldConf = {
         INSIDE: 1,
         MOVE: 3,
         RETREAT: 6,
+        SIEGE: 7,
         WAITLIST: 4,
     },
     VISUAL_FPS: 60,
