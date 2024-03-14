@@ -57,6 +57,8 @@ export class UserService extends Service<NetworkService> {
             vo.initByCmd(item as proto.money.MoneyItem);
             this.money.set(item.id!, vo);
         }
+
+        this.event(UserService.MONEY_UPDATE);
     }
 
     private _onProfileNotify(data: proto.profile.notify_profile) {

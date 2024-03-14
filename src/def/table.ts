@@ -32,6 +32,7 @@ import {
     GeneratedTaskMainRow,
     GeneratedWorldEntityModelsRow,
     GeneratedSoldierPendantRow,
+    GeneratedRoleTrainRow,
 } from "./table.generated";
 //-----------------------------------------------------------------------------通用接口----------|
 //通用奖励接口
@@ -180,9 +181,11 @@ export type EmojiTable = {
 //-----------------------------------------------------------------------------
 export interface RoleLevelRow extends GeneratedRoleLevelRow {}
 export interface RoleConfRow extends GeneratedRoleConfRow {}
+export interface RoleTrainRow extends GeneratedRoleTrainRow {}
 export type RoleTable = {
     level: RoleLevelRow[];
     conf: RoleConfRow[];
+    train: { [k: number]: RoleTrainRow };
 };
 //-----------------------------------------------------------------------------
 // 宝箱

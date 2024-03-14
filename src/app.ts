@@ -17,6 +17,7 @@ import { MailService } from "./system/mail/mail-service";
 import { NetworkService } from "./system/network/network-service";
 import { ToastService } from "./system/network/toast-service";
 import { ShopService } from "./system/shop/shop-service";
+import { SoldierService } from "./system/soldier/soldier-service";
 import { TableService } from "./system/table/table-service";
 import { TaskService } from "./system/task/task-service";
 import { UserService } from "./system/user/user-service";
@@ -53,6 +54,7 @@ class ServiceManager {
     public readonly chat: ChatService;
     public readonly chest: ChestService;
     public readonly pvp: PvpService;
+    public readonly soldier: SoldierService;
 
     private _services: Service<NetworkService>[] = [];
 
@@ -70,6 +72,7 @@ class ServiceManager {
         this.chat = this.newService(ChatService);
         this.chest = this.newService(ChestService);
         this.pvp = this.newService(PvpService);
+        this.soldier = this.newService(SoldierService);
         // ignore log
         this.network.ignoreLog(opcode.user.c2s_ping);
         this.network.ignoreLog(opcode.user.s2c_ping);

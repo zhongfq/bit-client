@@ -3,6 +3,7 @@ import { Mediator } from "../../core/ui-mediator";
 import { MoneyVo } from "../../misc/vo/money/money-vo";
 import { HomeMonyeBoxUI } from "../../ui-runtime/prefab/home/HomeMonyeBoxUI";
 import { HomeMonyeItemUI } from "../../ui-runtime/prefab/home/HomeMonyeItemUI";
+import { UserService } from "../user/user-service";
 
 const { regClass, property } = Laya;
 
@@ -20,9 +21,9 @@ export class HomeMonyeMediator extends Mediator {
     public initEvent() {
         this.owner.listMonye.renderHandler = new Laya.Handler(this, this._updateItem);
 
-        // this.on(app.service.task, TaskService.TASK_UPDATE, () => {
-        //     this.updateInfo();
-        // });
+        this.on(app.service.task, UserService.MONEY_UPDATE, () => {
+            this.updateInfo();
+        });
     }
 
     private _updateItem(cell: HomeMonyeItemUI, index: number) {
@@ -31,7 +32,6 @@ export class HomeMonyeMediator extends Mediator {
     }
 
     public updateInfo() {
-        // const listData = [];
         let moneyId = 0;
         for (const [_, money] of app.service.user.money) {
             moneyId > money.id ? this._monyeInfo.push(money) : this._monyeInfo.unshift(money);
