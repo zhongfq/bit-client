@@ -1,5 +1,6 @@
 import { app } from "../../../../../app";
 import { ecs } from "../../../../../core/ecs";
+import { BattleConf } from "../../../../../def/battle";
 import { HeadInfoUI } from "../../../../../ui-runtime/prefab/battle/HeadInfoUI";
 import { TMUtil } from "../../../tilemap/tm-util";
 import { PveContext } from "../../pve-context";
@@ -12,7 +13,7 @@ import {
 } from "../components/render-component";
 import { TilemapComponent } from "../components/tilemap-component";
 import { ElementComponent } from "../components/troop-component";
-import { TilemapSystem } from "./tilemap-system";
+import { CommandSystem } from "./command-system";
 
 const tmpInfoVector4 = new Laya.Vector4();
 
@@ -105,7 +106,7 @@ export class RenderSystem extends ecs.System {
 
     private _updateHeadInfoPos(info: HeadInfoComponent) {
         const animation = info.getComponent(AnimationComponent)!;
-        if (!animation.view || !info.view) {
+        if (!animation || !animation.view || !info.view) {
             return;
         }
 
@@ -128,10 +129,12 @@ export class RenderSystem extends ecs.System {
     }
 
     private async _loadHeadInfo(info: HeadInfoComponent) {
-        const prefab: Laya.Prefab = await Laya.loader.load(info.res, Laya.Loader.HIERARCHY);
-        info.view = prefab.create() as HeadInfoUI;
-        info.view.update(info.data);
-        this.context.owner.troops.addChild(info.view);
+        if (info.res) {
+            const prefab: Laya.Prefab = await Laya.loader.load(info.res, Laya.Loader.HIERARCHY);
+            info.view = prefab.create() as HeadInfoUI;
+            info.view.update(info.data);
+            this.context.owner.troops.addChild(info.view);
+        }
     }
 
     private async _loadShadow(shadow: ShadowComponent) {
@@ -142,14 +145,10 @@ export class RenderSystem extends ecs.System {
     }
 
     private async _loadBoard(board: BoardComponent) {
-        const transform = board.getComponent(TransformComponent);
-        if (!transform) {
-            return;
-        }
-        const element = board.getComponent(ElementComponent);
-        if (!element) {
-            return;
-        }
+        const transform = board.getComponent(TransformComponent)!;
+        const element = board.getComponent(ElementComponent)!;
+        const headInfo = board.getComponent(HeadInfoComponent)!;
+
         const table = app.service.table;
         const buildingRow = table.battleBuilding[element.tableId];
         const textureCfg = TMUtil.DYNAMIC_TEXTURE_CFG.get(buildingRow.texture_key);
@@ -159,5 +158,13 @@ export class RenderSystem extends ecs.System {
 
         const tilemap = this.ecs.getSingletonComponent(TilemapComponent)!;
         tilemap.addDynamicElement(board.eid, x, y);
+
+        const etype = element.entity.etype;
+        const ETYPE = BattleConf.ENTITY_TYPE;
+
+        if (etype == ETYPE.WOOD || etype == ETYPE.FOOD || etype == ETYPE.STONE) {
+            const commandSystem = this.ecs.getSystem(CommandSystem);
+            commandSystem?.updateCollectionHp(board.eid, element.tableId, headInfo.data.hp, false);
+        }
     }
 }

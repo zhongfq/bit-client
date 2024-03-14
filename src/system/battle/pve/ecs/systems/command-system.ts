@@ -62,14 +62,14 @@ export class CommandSystem extends ecs.System implements ICommandSender {
             animation.res = entityRow.res;
         }
 
+        const info = entity.addComponent(HeadInfoComponent);
+        info.data.hp = data.hp;
+        info.data.maxHp = data.maxHp;
+        info.data.offset = entityRow.info_offset ?? 0;
+        if (data.aid === 2) {
+            info.data.style = HeadInfoStyle.ENEMY;
+        }
         if (entityRow.info_style) {
-            const info = entity.addComponent(HeadInfoComponent);
-            info.data.hp = data.hp;
-            info.data.maxHp = data.maxHp;
-            info.data.offset = entityRow.info_offset ?? 0;
-            if (data.aid === 2) {
-                info.data.style = HeadInfoStyle.ENEMY;
-            }
             if (entityRow.info_style === 1) {
                 info.res = PREFAB_HEAD_INFO1;
             } else if (entityRow.info_style === 2) {
@@ -251,36 +251,48 @@ export class CommandSystem extends ecs.System implements ICommandSender {
             const ETYPE = BattleConf.ENTITY_TYPE;
 
             if (etype == ETYPE.WOOD || etype == ETYPE.FOOD || etype == ETYPE.STONE) {
-                const tilemap = this.ecs.getSingletonComponent(TilemapComponent)!;
-                const dynamicElement = tilemap.getDynamicElementByEid(eid);
-                const buildingRow = app.service.table.battleBuilding[element.tableId];
-                const stateArr = buildingRow.hp_state as Array<number>;
-                const textureArr = buildingRow.hp_texture as Array<string>;
+                this.updateCollectionHp(element.eid, element.tableId, data.hp, true);
+            }
+        }
+    }
 
-                let textureName = undefined;
-                if (data.hp > 0) {
-                    for (let i = 0; i < stateArr.length - 1; i++) {
-                        const hp = stateArr[i];
-                        const nextHp = stateArr[i + 1];
-                        if (hp >= data.hp && data.hp > nextHp) {
-                            textureName = textureArr[i];
-                            break;
-                        }
-                    }
-                } else {
-                    if (buildingRow.die_hide) {
-                        textureName = undefined;
-                    } else {
-                        textureName = textureArr.at(-1);
-                    }
-                }
-                if (textureName) {
-                    dynamicElement?.draw();
-                    dynamicElement?.setTexture(textureName);
-                } else {
-                    dynamicElement?.erase();
+    public updateCollectionHp(eid: number, tid: number, hp: number, shake: boolean) {
+        const tilemap = this.ecs.getSingletonComponent(TilemapComponent)!;
+        const dynamicElement = tilemap.getDynamicElementByEid(eid);
+        if (!dynamicElement) {
+            return;
+        }
+
+        const buildingRow = app.service.table.battleBuilding[tid];
+        const stateArr = buildingRow?.hp_state as Array<number>;
+        const textureArr = buildingRow?.hp_texture as Array<string>;
+        if (!stateArr || !textureArr) {
+            return;
+        }
+
+        let textureName = undefined;
+        if (hp > 0) {
+            for (let i = 0; i < stateArr.length - 1; i++) {
+                const curHp = stateArr[i];
+                const nextHp = stateArr[i + 1];
+                if (curHp >= hp && hp > nextHp) {
+                    textureName = textureArr[i];
+                    break;
                 }
             }
+        } else {
+            if (buildingRow.die_hide) {
+                textureName = undefined;
+            } else {
+                textureName = textureArr.at(-1);
+            }
+        }
+        if (textureName) {
+            dynamicElement?.draw();
+            dynamicElement?.setTexture(textureName);
+            if (shake) dynamicElement?.shake();
+        } else {
+            dynamicElement?.erase();
         }
     }
 
