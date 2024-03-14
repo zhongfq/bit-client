@@ -1,4 +1,5 @@
 import { Constructor } from "../../../core/dispatcher";
+import { tween } from "../../../core/tween/tween";
 import { StringUtil } from "../../../core/utils/string-util";
 import { Tilemap } from "./tilemap";
 import { TMAtlasName, TMLayerName, TMTextureCfg, TMTextureName } from "./tm-def";
@@ -216,6 +217,8 @@ export abstract class TMBoardElement extends TMElement {
     private _width: number = 0;
     private _height: number = 0;
     private _resName: string = "";
+    private _drawing: boolean = false;
+    private _originPos: Laya.Vector3 = new Laya.Vector3();
 
     public get startX(): number {
         return this._startX;
@@ -238,16 +241,17 @@ export abstract class TMBoardElement extends TMElement {
     }
 
     public override async draw() {
-        if (this._board) {
+        if (this._board || this._drawing) {
             return;
         }
-        const prefab = await Laya.loader.load(this.getPrefabPath(), Laya.Loader.HIERARCHY);
+        this._drawing = true;
 
+        const prefab = await Laya.loader.load(this.getPrefabPath(), Laya.Loader.HIERARCHY);
         this._board = prefab.create() as Laya.Sprite3D;
 
         const sprite = this._board.getChildAt(0) as Laya.Sprite3D;
-        const resName = this._tilemap.getTextureResName(this.getTextureName(), this.gid);
-        const textureCfg = this.getTextureCfg().get(resName);
+        const defaultRes = this._tilemap.getTextureResName(this.getTextureName(), this.gid);
+        const textureCfg = this.getTextureCfg().get(defaultRes);
 
         this._startX = Math.floor(this.x - (textureCfg?.tileX ?? 0));
         this._startY = Math.floor(this.y - (textureCfg?.tileY ?? 0));
@@ -263,6 +267,7 @@ export abstract class TMBoardElement extends TMElement {
         spritePos.y = textureCfg?.offsetY ?? 0;
         spritePos.z = textureCfg?.offsetZ ?? 0;
         sprite.transform.localPosition = spritePos;
+        this._originPos.set(spritePos.x, spritePos.y, spritePos.z);
 
         sprite.transform.localScaleX = textureCfg?.scale ?? 1;
         sprite.transform.localScaleY = textureCfg?.scale ?? 1;
@@ -271,17 +276,24 @@ export abstract class TMBoardElement extends TMElement {
         sprite.transform.localRotationEulerX = cameraTrans.localRotationEulerX;
         sprite.transform.localRotationEulerY = cameraTrans.localRotationEulerY;
 
-        this.setTexture(resName);
+        this.setTexture(this._resName || defaultRes, true);
 
         this._width = textureCfg?.tileW ?? 1;
         this._height = textureCfg?.tileH ?? 1;
 
-        this._board.name = this.startX + "_" + this.startY + " | " + resName;
+        this._board.name = this.startX + "_" + this.startY + " | " + defaultRes;
         this._tilemap.getRoot().getChildByName(this.layerName).addChild(this._board);
+
+        this._drawing = false;
     }
 
-    public async setTexture(resName: string) {
-        if (!this._board || this._resName == resName) {
+    public async setTexture(resName: string, force: boolean = false) {
+        if (this._resName == resName && !force) {
+            return;
+        }
+        this._resName = resName;
+
+        if (!this._board) {
             return;
         }
         const sprite = this._board.getChildAt(0) as Laya.Sprite3D;
@@ -293,8 +305,49 @@ export abstract class TMBoardElement extends TMElement {
         mat.albedoTexture = texture;
         mat.renderMode = Laya.MaterialRenderMode.RENDERMODE_TRANSPARENT;
         renderer.material = mat;
+    }
 
-        this._resName = resName;
+    public shake() {
+        if (!this._board) {
+            return;
+        }
+        const sprite = this._board.getChildAt(0) as Laya.Sprite3D;
+        const spritePos = sprite.transform.localPosition;
+        spritePos.x = this._originPos.x;
+        spritePos.y = this._originPos.y;
+        spritePos.z = this._originPos.z;
+        sprite.transform.localPosition = spritePos;
+
+        tween(sprite.transform)
+            .to(0.05, {
+                localPositionX: this._originPos.x + 0.03,
+                localPositionZ: this._originPos.z - 0.03,
+            })
+            .to(0.05, {
+                localPositionX: this._originPos.x - 0.03,
+                localPositionZ: this._originPos.z + 0.03,
+            })
+            .to(0.05, {
+                localPositionX: this._originPos.x + 0.02,
+                localPositionZ: this._originPos.z - 0.02,
+            })
+            .to(0.05, {
+                localPositionX: this._originPos.x - 0.02,
+                localPositionZ: this._originPos.z + 0.02,
+            })
+            .to(0.05, {
+                localPositionX: this._originPos.x + 0.01,
+                localPositionZ: this._originPos.z - 0.01,
+            })
+            .to(0.05, {
+                localPositionX: this._originPos.x - 0.01,
+                localPositionZ: this._originPos.z + 0.01,
+            })
+            .to(0.05, {
+                localPositionX: this._originPos.x,
+                localPositionZ: this._originPos.z,
+            })
+            .start();
     }
 
     public showBlock() {
@@ -326,6 +379,8 @@ export abstract class TMBoardElement extends TMElement {
         this._width = 0;
         this._height = 0;
         this._resName = "";
+        this._drawing = false;
+        this._originPos.toDefault();
     }
 
     protected abstract getPrefabPath(): string;
