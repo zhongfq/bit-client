@@ -492,7 +492,9 @@ export class TMBuildingElement extends TMDebugElement {
             const buildingRow = app.service.table.battleBuilding[this.id];
             textureCfg = TMUtil.OBJECT_TEXTURE_CFG.get(buildingRow.texture_key);
         } else if (mode == TMMode.PVP) {
-            // TODO：需要在 world_building 表新增 texture_key 字段
+            // TODO：先临时读 battle_building 表，后面需要改读 world_building 表
+            const buildingRow = app.service.table.battleBuilding[this.id];
+            textureCfg = TMUtil.OBJECT_TEXTURE_CFG.get(buildingRow.texture_key);
         }
 
         if (!textureCfg) {
