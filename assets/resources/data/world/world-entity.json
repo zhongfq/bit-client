@@ -6,39 +6,39 @@
         },
         "102": {
             "id": 102,
-            "res": "resources/prefab/battle/roles/mc02.lh"
+            "res": "resources/prefab/battle/roles/hero02.lh"
         },
         "105": {
             "id": 105,
-            "res": "resources/prefab/battle/roles/mc03.lh"
+            "res": "resources/prefab/battle/roles/hero03.lh"
         },
         "106": {
             "id": 106,
-            "res": "resources/prefab/battle/roles/hero01.lh"
+            "res": "resources/prefab/battle/roles/hero04.lh"
         },
         "209": {
             "id": 209,
-            "res": "resources/prefab/battle/roles/hero01.lh"
+            "res": "resources/prefab/battle/roles/hero05.lh"
         },
         "212": {
             "id": 212,
-            "res": "resources/prefab/battle/roles/mc01.lh"
+            "res": "resources/prefab/battle/roles/hero06.lh"
         },
         "401": {
             "id": 401,
-            "res": "resources/prefab/battle/roles/mc01.lh"
+            "res": "resources/prefab/battle/roles/hero07.lh"
         },
         "404": {
             "id": 404,
-            "res": "resources/prefab/battle/roles/mc01.lh"
+            "res": "resources/prefab/battle/roles/hero08.lh"
         },
         "40001": {
             "id": 40001,
-            "res": "prefab/war/role/xibing1"
+            "res": "resources/prefab/battle/roles/bing-dao.lh"
         },
         "40002": {
             "id": 40002,
-            "res": "prefab/war/role/xibing2"
+            "res": "resources/prefab/battle/roles/bing-dao.lh"
         },
         "40003": {
             "id": 40003,
@@ -46,7 +46,7 @@
         },
         "40004": {
             "id": 40004,
-            "res": "prefab/battle/role/xb-gongbing"
+            "res": "resources/prefab/battle/roles/bing-gong.lh"
         },
         "40005": {
             "id": 40005,

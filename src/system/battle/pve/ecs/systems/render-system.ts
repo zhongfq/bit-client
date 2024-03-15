@@ -13,7 +13,7 @@ import {
     ShadowComponent,
 } from "../components/render-component";
 import { TilemapComponent } from "../components/tilemap-component";
-import { ElementComponent } from "../components/troop-component";
+import { ElementComponent } from "../components/element-component";
 import { CommandSystem } from "./command-system";
 
 const tmpInfoVector4 = new Laya.Vector4();

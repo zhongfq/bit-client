@@ -1,6 +1,7 @@
 import { app } from "../../../../../app";
 import * as ecs from "../../../../../core/ecs";
 import { BattleConf } from "../../../../../def/battle";
+import { WorldConf } from "../../../../../def/world";
 import { HeadInfoUI } from "../../../../../ui-runtime/prefab/battle/HeadInfoUI";
 import { TMPropKey } from "../../../tilemap/tm-def";
 import { TMUtil } from "../../../tilemap/tm-util";
@@ -12,6 +13,7 @@ import {
     ElementComponent,
     HeadInfoComponent,
     ShadowComponent,
+    TroopComponent,
 } from "../components/render-component";
 import { TilemapComponent } from "../components/tilemap-component";
 
@@ -29,6 +31,8 @@ export class RenderSystem extends ecs.System {
             this._loadShadow(component);
         } else if (component instanceof BoardComponent) {
             this._loadBoard(component);
+        } else if (component instanceof TroopComponent) {
+            this._loadTroop(component);
         }
     }
 
@@ -46,12 +50,24 @@ export class RenderSystem extends ecs.System {
         } else if (component instanceof BoardComponent) {
             const tilemap = this.ecs.getSingletonComponent(TilemapComponent)!;
             tilemap.delObjectElementByEid(component.eid);
+        } else if (component instanceof TroopComponent) {
+            component.hero?.destroy();
+            component.hero = null;
+            component.soldiers.forEach((soldier) => {
+                soldier.destroy();
+            });
+            component.soldiers.length = 0;
+            component.view?.destroy();
+            component.view = null;
         }
     }
 
     public update(dt: number): void {
+        this.ecs.getComponents(ElementComponent).forEach((element) => {
+            this._updatePosition(element);
+        });
         this.ecs.getComponents(AnimationComponent).forEach((anim) => {
-            this._updatePosition(anim);
+            // 可能不需要每帧执行
             this._updateAnim(anim);
         });
         this.ecs.getComponents(HeadInfoComponent).forEach((info) => {
@@ -59,30 +75,42 @@ export class RenderSystem extends ecs.System {
         });
     }
 
-    private _updatePosition(anim: AnimationComponent) {
-        if (!anim.view) {
-            return;
-        }
-
-        const transform = anim.getComponent(TransformComponent)!;
-        const targetTransform = anim.view.transform;
+    private _updatePosition(element: ElementComponent) {
+        const transform = element.getComponent(TransformComponent)!;
 
         if (transform.flag & TransformComponent.POSITION) {
+            const { shadow, animation, troop } = element;
+
             // 更新阴影位置
-            const shadow = anim.getComponent(ShadowComponent);
             if (shadow?.view) {
                 const position = shadow.view.transform.position;
                 position.cloneFrom(transform.position);
                 shadow.view.transform.position = position;
             }
 
-            targetTransform.position = transform.position;
-            transform.flag &= ~TransformComponent.POSITION;
+            if (animation?.view) {
+                // 更新动画位置
+                animation.view.transform.position = transform.position;
+                transform.flag &= ~TransformComponent.POSITION;
+            } else if (troop?.view) {
+                // 更新部队位置
+                troop.view.transform.position = transform.position;
+                transform.flag &= ~TransformComponent.POSITION;
+            }
         }
 
         if (transform.flag & TransformComponent.ROTATION) {
-            targetTransform.localRotationEulerY = transform.rotation;
-            transform.flag &= ~TransformComponent.ROTATION;
+            const { animation, troop } = element;
+
+            if (animation?.view) {
+                // 更新动画角度
+                animation.view.transform.localRotationEulerY = transform.rotation;
+                transform.flag &= ~TransformComponent.ROTATION;
+            } else if (troop?.view) {
+                // 更新部队角度
+                troop.view.transform.localRotationEulerY = transform.rotation;
+                transform.flag &= ~TransformComponent.ROTATION;
+            }
         }
     }
 
@@ -145,28 +173,78 @@ export class RenderSystem extends ecs.System {
         const element = board.getComponent(ElementComponent)!;
 
         const etype = element.entity.etype;
-        const ETYPE = BattleConf.ENTITY_TYPE;
+        const ETYPE = WorldConf.ENTITY_TYPE;
         const table = app.service.table;
+        let offsetX = 0;
+        let offsetZ = 0;
 
         const props = new Map<string, unknown>();
-        if (
-            etype == ETYPE.BUILDING ||
-            etype == ETYPE.WOOD ||
-            etype == ETYPE.FOOD ||
-            etype == ETYPE.STONE
-        ) {
-            const buildingRow = table.battleBuilding[element.tableId];
-            props.set(TMPropKey.TextureKey, buildingRow.texture_key);
-        } else {
-            // TODO：其他实体类型的属性待定义
+        if (etype === ETYPE.CITY) {
+            props.set(TMPropKey.TextureKey, board.textureKey!);
+            const cfg = TMUtil.OBJECT_TEXTURE_CFG.get(board.textureKey!)!;
+            offsetX = -cfg.tileW / 2;
+            offsetZ = -cfg.tileH / 2;
         }
+        // if (
+        //     etype == ETYPE.BUILDING ||
+        //     etype == ETYPE.WOOD ||
+        //     etype == ETYPE.FOOD ||
+        //     etype == ETYPE.STONE
+        // ) {
+        //     const buildingRow = table.battleBuilding[element.tableId];
+        //     props.set(TMPropKey.TextureKey, buildingRow.texture_key);
+        // } else if (etype === ETYPE.) {
+        //     // TODO：其他实体类型的属性待定义
+        // }
         if (props.size == 0) {
+            console.error("");
             return;
         }
-        const gridX = Math.floor(transform.position.x);
-        const gridY = Math.floor(transform.position.z);
 
+        const gridX = Math.floor(transform.position.x + offsetX);
+        const gridY = Math.floor(transform.position.z + offsetZ);
         const tilemap = this.ecs.getSingletonComponent(TilemapComponent)!;
         tilemap.addObjectElement(board.eid, gridX, gridY, props);
+    }
+
+    private async _loadTroop(troop: TroopComponent) {
+        const table = app.service.table;
+        const heroRow = table.hero[troop.heroId];
+        const heroEntityRow = table.worldEntity.models[heroRow.world_entity];
+        const soldier1EntityRow = table.worldEntity.models[40002];
+        const soldier2EntityRow = table.worldEntity.models[40004];
+        const heroPrefable = await Laya.loader.load(heroEntityRow.res);
+        const soldier1Prefable = await Laya.loader.load(soldier1EntityRow.res);
+        const soldier2Prefable = await Laya.loader.load(soldier2EntityRow.res);
+        if (!troop.alive) {
+            console.warn(`troop '${troop.eid}' is removed`);
+            return;
+        }
+        const group = new Laya.Sprite3D();
+        troop.view = new Laya.Sprite3D();
+        troop.view.addChild(group);
+        troop.hero = heroPrefable.create() as Laya.Sprite3D;
+        troop.hero.transform.localRotationEulerY = 90;
+        group.addChild(troop.hero);
+        // group.transform.localScaleX = 0.5;
+        // group.transform.localScaleY = 0.5;
+        // group.transform.localScaleZ = 0.5;
+        troop.formation.forEach((p, idx) => {
+            if (idx >= 12) {
+                return;
+            }
+            let soldier: Laya.Sprite3D | null;
+            if (idx < 4) {
+                soldier = soldier1Prefable.create() as Laya.Sprite3D;
+            } else {
+                soldier = soldier2Prefable.create() as Laya.Sprite3D;
+            }
+            const position = soldier.transform.localPosition;
+            position.cloneFrom(p);
+            soldier.transform.localPosition = position;
+            soldier.transform.localRotationEulerY = 90;
+            group.addChild(soldier);
+        });
+        this.context.owner.roles.addChild(troop.view);
     }
 }

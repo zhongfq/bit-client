@@ -12,6 +12,7 @@ import { CameraComponent } from "./ecs/components/camera-component";
 import { TilemapComponent } from "./ecs/components/tilemap-component";
 import { CameraSystem } from "./ecs/systems/camera-system";
 import { CommandSystem } from "./ecs/systems/command-system";
+import { MovementSystem } from "./ecs/systems/movement-system";
 import { RenderSystem } from "./ecs/systems/render-system";
 import { TilemapSystem } from "./ecs/systems/tilemap-system";
 
@@ -55,6 +56,7 @@ export class PvpContext extends Mediator implements ITMContext {
         this._ecs.addSingletonComponent(TilemapComponent);
         this._ecs.addSystem(CommandSystem);
         this._ecs.addSystem(TilemapSystem);
+        this._ecs.addSystem(MovementSystem);
         this._ecs.addSystem(CameraSystem);
         this._ecs.addSystem(RenderSystem);
 

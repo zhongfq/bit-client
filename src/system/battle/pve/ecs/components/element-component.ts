@@ -1,5 +1,4 @@
 import * as ecs from "../../../../../core/ecs";
-import { IVector3Like } from "../../../../../core/laya";
 import { MovementComponent, TransformComponent } from "./movement-component";
 import { AnimationComponent } from "./render-component";
 
@@ -38,28 +37,3 @@ export class ElementComponent extends ecs.Component {
     public entityId: number = 0;
     public tableId: number = 0;
 }
-
-// type SoliderAttack = {
-//     time: number;
-//     target: number | null;
-//     position: Laya.Vector3;
-// };
-
-// export class SoldierComponent extends ecs.Component {
-//     public leader!: number;
-//     public offset!: IVector3Like;
-//     public index: number = 0;
-
-//     // 攻击的小兵对象
-//     public attack: SoliderAttack = { target: null, time: 0, position: new Laya.Vector3() };
-// }
-
-// export class HeroComponent extends ecs.Component {
-//     public formation!: Readonly<IVector3Like>[];
-//     public soldiers: SoldierComponent[] = [];
-//     public hp: number = 0;
-//     public maxHp: number = 0;
-
-//     // 攻击的主角对象
-//     public attackTarget: number = 0;
-// }

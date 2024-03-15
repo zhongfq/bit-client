@@ -302,6 +302,7 @@ export interface GeneratedBattleBuffRow {
 export interface GeneratedBattleBuildingRow {
     id: number;
     battle_entity: number;
+    obstacle_size: number;
     max_hp: number;
     fresh_time: number;
     texture_key: string;
@@ -470,4 +471,17 @@ export interface GeneratedChestScoreRow {
     sort: number;
     reward_score: number;
     chest_id: number;
+}
+
+// file: design/texture_cfg.xlsx
+export interface GeneratedTextureCfgRow {
+    id: string;
+    tile_x?: number;
+    tile_y?: number;
+    tile_w: number;
+    tile_h: number;
+    offset_x: number;
+    offset_y: number;
+    offset_z: number;
+    scale: number;
 }

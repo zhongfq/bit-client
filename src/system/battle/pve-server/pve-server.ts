@@ -5,7 +5,7 @@ import { Loader } from "../../../core/loader";
 import { MathUtil } from "../../../core/utils/math-util";
 import { BattleConf } from "../../../def/battle";
 import { formation } from "../../../def/formation";
-import { ElementAnimation } from "../pve/ecs/components/troop-component";
+import { ElementAnimation } from "../pve/ecs/components/element-component";
 import { AiComponent } from "./ecs/components/ai-component";
 import {
     ElementComponent,

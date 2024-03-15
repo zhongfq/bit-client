@@ -1,4 +1,5 @@
 import * as ecs from "../../../../../core/ecs";
+import { IVector3Like } from "../../../../../core/laya";
 import {
     HeadInfoData,
     HeadInfoStyle,
@@ -37,6 +38,7 @@ export class AnimationComponent extends Renderable3D {
 export class ShadowComponent extends Renderable3D {}
 
 export class BoardComponent extends Renderable3D {
+    public textureKey?: string;
     // public element?: TMDynamicElement | null;
 }
 
@@ -62,9 +64,11 @@ export enum ElementAnimation {
 
 export class ElementComponent extends ecs.Component {
     // 缓存组件方便快速访问？
-    private _movement: MovementComponent | null = null;
-    private _transform: TransformComponent | null = null;
-    private _animation: AnimationComponent | null = null;
+    private _movement?: MovementComponent;
+    private _transform?: TransformComponent;
+    private _animation?: AnimationComponent;
+    private _troop?: TroopComponent;
+    private _shadow?: ShadowComponent;
 
     public get movement() {
         return (this._movement ||= this.getComponent(MovementComponent)!);
@@ -75,9 +79,26 @@ export class ElementComponent extends ecs.Component {
     }
 
     public get animation() {
-        return (this._animation ||= this.getComponent(AnimationComponent)!);
+        return (this._animation ||= this.getComponent(AnimationComponent));
+    }
+
+    public get troop() {
+        return (this._troop ||= this.getComponent(TroopComponent));
+    }
+
+    public get shadow() {
+        return (this._shadow ||= this.getComponent(ShadowComponent));
     }
 
     public entityId: number = 0;
     public tableId: number = 0;
+}
+
+export class TroopComponent extends ecs.Component {
+    public view?: Laya.Sprite3D | null;
+    public hero?: Laya.Sprite3D | null;
+    public soldiers: Laya.Sprite3D[] = [];
+
+    public formation!: Readonly<IVector3Like>[];
+    public heroId: number = 0;
 }

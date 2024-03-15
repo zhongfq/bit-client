@@ -15,7 +15,6 @@ export class World {
     private _eid: number = 0;
     private _systems: System[];
     private _namedSystems: Map<Constructor<any>, System>;
-    private _caches: Map<System, Entity[]>;
     private _entities: Map<number, Entity>;
     private _components: Map<Constructor<any>, Map<number, Component>>;
     private _singletons: Map<Constructor<any>, SingletonComponent>;
@@ -29,7 +28,6 @@ export class World {
         this._context = context;
         this._systems = [];
         this._namedSystems = new Map();
-        this._caches = new Map();
         this._entities = new Map();
         this._components = new Map();
         this._singletons = new Map();
@@ -42,7 +40,6 @@ export class World {
         this._systems.forEach((sys) => sys.onDestroy());
         this._systems.length = 0;
         this._namedSystems.clear();
-        this._caches.clear();
         this._entities.clear();
         this._components.clear();
     }
@@ -121,27 +118,12 @@ export class World {
         this._delays.delete(key);
     }
 
-    public select(sys: System) {
-        let entities = this._caches.get(sys);
-        if (!entities) {
-            entities = [];
-            this._caches.set(sys, entities);
-            for (const entity of this._entities.values()) {
-                if (sys.filter(entity)) {
-                    entities.push(entity);
-                }
-            }
-        }
-        return entities;
-    }
-
     public createEntity(eid: number | null = null) {
         eid = eid ?? --this._eid;
         let entity = this._entities.get(eid);
         if (!entity) {
             entity = new Entity(eid, this);
             this._entities.set(eid, entity);
-            this._caches.clear();
             this._systems.forEach((sys) => sys.onAddEntity?.(entity!));
         }
         return entity;
@@ -167,7 +149,6 @@ export class World {
             });
             this._systems.forEach((sys) => sys.onRemoveEntity?.(entity));
             this._entities.delete(eid);
-            this._caches.clear();
         }
     }
 
@@ -263,6 +244,10 @@ export abstract class Component {
     }
 
     public reset?(): void;
+
+    public get alive() {
+        return !!this.entity.ecs.getEntity(this.eid);
+    }
 
     public get entity() {
         return this._entity;

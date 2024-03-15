@@ -21,7 +21,7 @@ import {
     ShadowComponent,
 } from "../components/render-component";
 import { TilemapComponent } from "../components/tilemap-component";
-import { ElementAnimation, ElementComponent } from "../components/troop-component";
+import { ElementAnimation, ElementComponent } from "../components/element-component";
 
 const PREFAB_HEAD_INFO1 = "resources/prefab/battle/ui/head-info1.lh";
 const PREFAB_HEAD_INFO2 = "resources/prefab/battle/ui/head-info2.lh";

@@ -1,0 +1,13 @@
+{
+    "map_Grassland_hill_01": {
+        "id": "map_Grassland_hill_01",
+        "offset_x": 1.44996,
+        "offset_y": 1.44996,
+        "offset_z": 1.51993,
+        "scale": 4.5,
+        "tile_h": 4,
+        "tile_w": 4,
+        "tile_x": 1,
+        "tile_y": 2
+    }
+}

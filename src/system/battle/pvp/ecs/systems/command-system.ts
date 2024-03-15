@@ -1,13 +1,14 @@
 import { app } from "../../../../../app";
 import { Callback } from "../../../../../core/dispatcher";
 import * as ecs from "../../../../../core/ecs";
+import { formation } from "../../../../../def/formation";
 import proto from "../../../../../def/proto";
 import { opcode } from "../../../../../def/protocol";
 import { WorldConf } from "../../../../../def/world";
 import { PvpContext } from "../../pvp-context";
-import { TransformComponent } from "../components/movement-component";
+import { MovementComponent, TransformComponent } from "../components/movement-component";
 import { OwnerComponent } from "../components/owner-component";
-import { BoardComponent, ElementComponent } from "../components/render-component";
+import { BoardComponent, ElementComponent, TroopComponent } from "../components/render-component";
 
 export class CommandSystem extends ecs.System {
     public declare context: PvpContext;
@@ -25,7 +26,18 @@ export class CommandSystem extends ecs.System {
 
     public override update(dt: number) {}
 
-    private _notifyActions(notify: proto.world.notify_actions) {}
+    private _notifyActions(notify: proto.world.notify_actions) {
+        const ACTION = WorldConf.ENTITY_ACTION;
+        for (const cmd of notify.actions) {
+            if (cmd.action === ACTION.ADD_ENTITY) {
+                this._addEntity(cmd.addEntity!.entity as proto.world.Entity);
+            } else if (cmd.action === ACTION.DEL_ENTITY) {
+                this._delEntity(cmd.delEntity!.eid as number);
+            } else if (cmd.action === ACTION.MOVE) {
+                this._moveAction(cmd.move as proto.world.MoveAction);
+            }
+        }
+    }
 
     private _notifyEntities(notify: proto.world.notify_entities) {
         for (const eid of notify.leaveList) {
@@ -68,11 +80,63 @@ export class CommandSystem extends ecs.System {
             owner.allianceName = data.allianceName;
         }
 
+        if (cmd.troop) {
+            const data = cmd.troop as proto.world.TroopComponent;
+            const troop = entity.addComponent(TroopComponent);
+            troop.formation = formation;
+            troop.heroId = data.heroId;
+
+            entity.addComponent(MovementComponent);
+        }
+
+        if (cmd.move) {
+            this._moveAction(
+                proto.world.MoveAction.create({
+                    eid: entity.eid,
+                    path: cmd.move.path,
+                    speed: cmd.move.speed,
+                    curPos: cmd.pos,
+                    startMs: cmd.move.startMs,
+                })
+            );
+        }
+
         if (entity.etype === ETYPE.CITY) {
             const board = entity.addComponent(BoardComponent);
-            // board.element = new TMDynamicElement();
+            board.textureKey = "map_biulding_castle01";
+        } else if (entity.etype === ETYPE.TROOP) {
+            //
         }
     }
 
-    private _delEntity(eid: number) {}
+    private _delEntity(eid: number) {
+        this.ecs.removeEntity(eid);
+    }
+
+    private _moveAction(cmd: proto.world.MoveAction) {
+        const element = this._findElement(cmd.eid);
+        if (element) {
+            const transform = element.transform;
+            const movement = element.movement;
+            transform.position.x = cmd.curPos?.x ?? 0;
+            transform.position.z = cmd.curPos?.y ?? 0;
+            movement.speed = cmd.speed;
+            movement.startTime = cmd.startMs / 1000;
+            movement.next.cursor = 0;
+            movement.current.cursor = 0;
+            cmd.path.forEach((p) => {
+                const pos = Laya.Pool.obtain(Laya.Vector3);
+                pos.set(p.x ?? 0, 0, p.y ?? 0);
+                movement.paths.push(pos);
+            });
+        }
+    }
+
+    private _findElement(eid: number) {
+        const element = this.ecs.getComponent(eid, ElementComponent);
+        if (!element) {
+            console.warn(`not found entity: ${eid}`);
+        }
+        return element;
+    }
 }
