@@ -15,9 +15,9 @@
         },
         "localScale": {
           "_$type": "Vector3",
-          "x": 0.4,
-          "y": 0.4,
-          "z": 0.4
+          "x": 0.2,
+          "y": 0.2,
+          "z": 0.2
         }
       },
       "_$comp": [
@@ -38,7 +38,7 @@
                   "_isLooping": 1,
                   "clipStart": 0,
                   "clip": {
-                    "_$uuid": "30966398-4ea0-469b-9541-7f92aefc4d63",
+                    "_$uuid": "6cc7f5b3-b648-42fe-a359-b93abf4bb25e",
                     "_$type": "AnimationClip"
                   },
                   "soloTransitions": []
@@ -49,7 +49,7 @@
                   "_isLooping": 1,
                   "clipStart": 0,
                   "clip": {
-                    "_$uuid": "5b60a641-0722-4f32-b361-f999a19e7307",
+                    "_$uuid": "c6522bcb-d925-4b51-86b5-119ba44b406b",
                     "_$type": "AnimationClip"
                   },
                   "soloTransitions": []
