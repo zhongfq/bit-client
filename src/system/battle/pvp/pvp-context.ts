@@ -7,7 +7,7 @@ import { Event } from "../../../misc/event";
 import { res } from "../../../misc/res";
 import { PvpUI } from "../../../ui-runtime/scene/PvpUI";
 import { ITMContext } from "../tilemap/tm-def";
-import { TMElement, TMObjectElement, TMTileElemet } from "../tilemap/tm-element";
+import { TMElement, TMObjElement, TMTileElemet } from "../tilemap/tm-element";
 import { CameraComponent } from "./ecs/components/camera-component";
 import { TilemapComponent } from "./ecs/components/tilemap-component";
 import { CameraSystem } from "./ecs/systems/camera-system";
@@ -84,7 +84,7 @@ export class PvpContext extends Mediator implements ITMContext {
             }
         });
         allMap.forEach((element) => {
-            if (element instanceof TMObjectElement) {
+            if (element instanceof TMObjElement) {
                 element.erase();
                 element.draw();
             }

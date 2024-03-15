@@ -9,11 +9,11 @@ import { PveServer } from "../pve-server/pve-server";
 import { ITMContext, TMLayerName } from "../tilemap/tm-def";
 import {
     TMBuildingElement,
-    TMDynamicElement,
+    TMObjectElement,
     TMElement,
     TMEventElement,
     TMMonsterElement,
-    TMObjectElement,
+    TMObjElement,
     TMTileElemet,
 } from "../tilemap/tm-element";
 import { CameraComponent } from "./ecs/components/camera-component";
@@ -39,7 +39,7 @@ export class PveContext extends Mediator implements ITMContext {
     private _ecs!: ecs.World;
     private _camera!: Laya.Camera;
 
-    private _selectedDynamicElement?: number;
+    private _selectedObjectElement?: number;
 
     public get scene() {
         return this.owner.scene;
@@ -149,9 +149,9 @@ export class PveContext extends Mediator implements ITMContext {
     public onMapClickHandler() {
         const tilemap = this._ecs.getSingletonComponent(TilemapComponent)!;
 
-        if (this._selectedDynamicElement) {
+        if (this._selectedObjectElement) {
             tilemap.ecs;
-            const element = tilemap.getDynamicElementByUid(this._selectedDynamicElement);
+            const element = tilemap.getObjectElementByUid(this._selectedObjectElement);
             if (element) {
                 element.hideBlock();
             }
@@ -175,10 +175,10 @@ export class PveContext extends Mediator implements ITMContext {
         const x = Math.floor(groundPos.x + 0.5);
         const y = Math.floor(groundPos.z + 0.5);
 
-        const element = tilemap.getElementByPos(x, y, TMLayerName.Dynamic) as TMDynamicElement;
+        const element = tilemap.getElementByPos(x, y, TMLayerName.Object) as TMObjectElement;
         if (element) {
             element.showBlock();
-            this._selectedDynamicElement = element.uid;
+            this._selectedObjectElement = element.uid;
         }
     }
 
@@ -192,7 +192,7 @@ export class PveContext extends Mediator implements ITMContext {
             }
         });
         allMap.forEach((element) => {
-            if (element instanceof TMObjectElement) {
+            if (element instanceof TMObjElement) {
                 element.erase();
                 element.draw();
             }

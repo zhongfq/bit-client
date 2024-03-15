@@ -54,7 +54,7 @@ export enum TMLayerName {
     Road = "road",
     River = "river",
     Static = "static",
-    Dynamic = "dynamic",
+    Object = "object",
     Block = "block",
     Building = "building",
     Monster = "monster",
@@ -94,7 +94,7 @@ export enum TMAtlasName {
 
 export enum TMTextureName {
     Static = "static",
-    Dynamic = "dynamic",
+    Object = "object",
 }
 
 export interface TMTextureCfg {

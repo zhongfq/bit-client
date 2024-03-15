@@ -164,6 +164,7 @@
         "use": 1
     },
     "20501": {
+        "auto_use": 1,
         "bag_id": 1,
         "desc": "这是改名卡",
         "discard": 1,
@@ -173,8 +174,7 @@
         "name": "改名卡",
         "quality": 1,
         "stack": 1,
-        "sub_type": 5,
-        "use": 1
+        "sub_type": 5
     },
     "20601": {
         "bag_id": 1,
@@ -219,6 +219,7 @@
         "args": {
             "money_id": 101
         },
+        "auto_use": 1,
         "bag_id": 1,
         "desc": "这是金币",
         "icon": "icon8",
@@ -226,13 +227,13 @@
         "main_type": 3,
         "name": "金币",
         "quality": 1,
-        "sub_type": 3,
-        "use": 1
+        "sub_type": 3
     },
     "30401": {
         "args": {
             "money_id": 102
         },
+        "auto_use": 1,
         "bag_id": 1,
         "desc": "这是钻石",
         "icon": "icon9",
@@ -240,13 +241,13 @@
         "main_type": 3,
         "name": "钻石",
         "quality": 1,
-        "sub_type": 4,
-        "use": 1
+        "sub_type": 4
     },
     "30501": {
         "args": {
             "money_id": 103
         },
+        "auto_use": 1,
         "bag_id": 1,
         "desc": "这是金币",
         "icon": "icon8",
@@ -254,13 +255,13 @@
         "main_type": 3,
         "name": "金币",
         "quality": 1,
-        "sub_type": 3,
-        "use": 1
+        "sub_type": 3
     },
     "30601": {
         "args": {
             "money_id": 201
         },
+        "auto_use": 1,
         "bag_id": 1,
         "desc": "这是钻石",
         "icon": "icon9",
@@ -268,13 +269,13 @@
         "main_type": 3,
         "name": "钻石",
         "quality": 1,
-        "sub_type": 4,
-        "use": 1
+        "sub_type": 4
     },
     "30701": {
         "args": {
             "money_id": 202
         },
+        "auto_use": 1,
         "bag_id": 1,
         "desc": "这是钻石",
         "icon": "icon9",
@@ -282,10 +283,10 @@
         "main_type": 3,
         "name": "钻石",
         "quality": 1,
-        "sub_type": 4,
-        "use": 1
+        "sub_type": 4
     },
     "40701": {
+        "auto_use": 1,
         "bag_id": 3,
         "composite": 1,
         "desc": "这是士兵1",
@@ -299,6 +300,7 @@
         "sub_type": 7
     },
     "40702": {
+        "auto_use": 1,
         "bag_id": 3,
         "composite": 1,
         "desc": "这是士兵1",
@@ -312,6 +314,7 @@
         "sub_type": 7
     },
     "40703": {
+        "auto_use": 1,
         "bag_id": 3,
         "composite": 1,
         "desc": "这是士兵1",
@@ -325,6 +328,7 @@
         "sub_type": 7
     },
     "40704": {
+        "auto_use": 1,
         "bag_id": 3,
         "composite": 1,
         "desc": "这是士兵1",
@@ -338,6 +342,7 @@
         "sub_type": 7
     },
     "40705": {
+        "auto_use": 1,
         "bag_id": 3,
         "composite": 1,
         "desc": "这是士兵1",
@@ -351,6 +356,7 @@
         "sub_type": 7
     },
     "40706": {
+        "auto_use": 1,
         "bag_id": 3,
         "composite": 1,
         "desc": "这是士兵1",
@@ -364,6 +370,7 @@
         "sub_type": 7
     },
     "40707": {
+        "auto_use": 1,
         "bag_id": 3,
         "composite": 1,
         "desc": "这是士兵1",
@@ -377,6 +384,7 @@
         "sub_type": 7
     },
     "40708": {
+        "auto_use": 1,
         "bag_id": 3,
         "composite": 1,
         "desc": "这是士兵1",
@@ -390,6 +398,7 @@
         "sub_type": 7
     },
     "40801": {
+        "auto_use": 1,
         "bag_id": 4,
         "composite": 1,
         "desc": "这是士兵1",
@@ -403,6 +412,7 @@
         "sub_type": 8
     },
     "40802": {
+        "auto_use": 1,
         "bag_id": 4,
         "composite": 1,
         "desc": "这是士兵1",
@@ -416,6 +426,7 @@
         "sub_type": 8
     },
     "40803": {
+        "auto_use": 1,
         "bag_id": 4,
         "composite": 1,
         "desc": "这是士兵1",
@@ -429,6 +440,7 @@
         "sub_type": 8
     },
     "40804": {
+        "auto_use": 1,
         "bag_id": 4,
         "composite": 1,
         "desc": "这是士兵1",
@@ -442,6 +454,7 @@
         "sub_type": 8
     },
     "40805": {
+        "auto_use": 1,
         "bag_id": 4,
         "composite": 1,
         "desc": "这是士兵1",
@@ -455,6 +468,7 @@
         "sub_type": 8
     },
     "40806": {
+        "auto_use": 1,
         "bag_id": 4,
         "composite": 1,
         "desc": "这是士兵1",
@@ -468,6 +482,7 @@
         "sub_type": 8
     },
     "40807": {
+        "auto_use": 1,
         "bag_id": 4,
         "composite": 1,
         "desc": "这是士兵1",
@@ -481,6 +496,7 @@
         "sub_type": 8
     },
     "40808": {
+        "auto_use": 1,
         "bag_id": 4,
         "composite": 1,
         "desc": "这是士兵1",

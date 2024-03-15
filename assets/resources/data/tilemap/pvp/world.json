@@ -18,7 +18,7 @@
             "fileName": "tmx-pvp/world-map3.tmx",
             "height": 3200,
             "width": 6400,
-            "x": 0,
+            "x": 6400,
             "y": 3200
         },
         {
@@ -29,40 +29,42 @@
             "y": 1600
         },
         {
-            "fileName": "tmx-pvp/world-map5.tmx",
+            "fileName": "tmx-pvp/world-map6.tmx",
             "height": 3200,
             "width": 6400,
             "x": 3200,
             "y": 4800
         },
         {
-            "fileName": "tmx-pvp/world-map6.tmx",
-            "height": 3200,
-            "width": 6400,
-            "x": 6400,
-            "y": 6400
-        },
-        {
             "fileName": "tmx-pvp/world-map7.tmx",
             "height": 3200,
             "width": 6400,
-            "x": 3200,
-            "y": 8000
+            "x": -6400,
+            "y": 3200
         },
         {
             "fileName": "tmx-pvp/world-map8.tmx",
             "height": 3200,
             "width": 6400,
-            "x": 6400,
-            "y": 9600
+            "x": -3200,
+            "y": 4800
         },
         {
             "fileName": "tmx-pvp/world-map9.tmx",
             "height": 3200,
             "width": 6400,
-            "x": 9600,
-            "y": 8000
+            "x": 0,
+            "y": 6400
+        },
+       
+        {
+            "fileName": "tmx-pvp/world-map5.tmx",
+            "height": 3200,
+            "width": 6400,
+            "x": 0,
+            "y": 3200
         }
+        
     ],
     "onlyShowAdjacentMaps": false,
     "type": "world"

@@ -361,7 +361,7 @@
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":50,
          "id":21,
-         "name":"dynamic",
+         "name":"marker",
          "opacity":1,
          "type":"tilelayer",
          "visible":true,
@@ -2313,7 +2313,7 @@
         }, 
         {
          "firstgid":54,
-         "source":"..\/texture\/dynamic.tsx"
+         "source":"..\/texture\/object.tsx"
         }, 
         {
          "firstgid":59,

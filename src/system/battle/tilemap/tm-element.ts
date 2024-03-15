@@ -407,21 +407,21 @@ export class TMStaticElement extends TMBoardElement {
     }
 }
 
-export class TMDynamicElement extends TMBoardElement {
+export class TMObjectElement extends TMBoardElement {
     protected override getPrefabPath(): string {
-        return "resources/prefab/world-map/dynamic/dynamic-obj.lh";
+        return "resources/prefab/world-map/object/object-obj.lh";
     }
 
     protected override getTexturePath(): string {
-        return "resources/texture/world-map/dynamic/{0}.png";
+        return "resources/texture/world-map/object/{0}.png";
     }
 
     protected override getTextureName(): TMTextureName {
-        return TMTextureName.Dynamic;
+        return TMTextureName.Object;
     }
 
     protected override getTextureCfg(): Map<string, TMTextureCfg> {
-        return TMUtil.DYNAMIC_TEXTURE_CFG;
+        return TMUtil.OBJECT_TEXTURE_CFG;
     }
 }
 
@@ -459,7 +459,7 @@ export class TMBlockElement extends TMElement {
     }
 }
 
-export abstract class TMObjectElement extends TMElement {
+export abstract class TMObjElement extends TMElement {
     public get id(): number {
         return this.props.get("id");
     }
@@ -473,7 +473,7 @@ export abstract class TMObjectElement extends TMElement {
     }
 }
 
-export class TMBuildingElement extends TMObjectElement {
+export class TMBuildingElement extends TMObjElement {
     private _debugObjs: Laya.Sprite3D[] = [];
 
     public override async draw() {
@@ -483,23 +483,23 @@ export class TMBuildingElement extends TMObjectElement {
         if (!TMUtil.DEBUG_MODE) {
             return;
         }
-        const dynamicElement = this._tilemap.buildingToDynamicElemnt(this.uid);
-        if (!dynamicElement) {
+        const objectElement = this._tilemap.buildingToObjectElement(this.uid);
+        if (!objectElement) {
             return;
         }
         const prefab = await Laya.loader.load(
             "resources/prefab/world-map/test/debug-obj.lh",
             Laya.Loader.HIERARCHY
         );
-        for (let i = 0; i < dynamicElement.width; i++) {
-            for (let j = 0; j < dynamicElement.height; j++) {
+        for (let i = 0; i < objectElement.width; i++) {
+            for (let j = 0; j < objectElement.height; j++) {
                 const debugObj = prefab.create() as Laya.Sprite3D;
                 this._debugObjs.push(debugObj);
 
                 const pos = debugObj.transform.position;
-                pos.x = dynamicElement.startX + i;
+                pos.x = objectElement.startX + i;
                 pos.y = 0;
-                pos.z = dynamicElement.startY + j;
+                pos.z = objectElement.startY + j;
                 debugObj.transform.position = pos;
 
                 const sprite = debugObj.getChildAt(0) as Laya.Sprite3D;
@@ -523,7 +523,7 @@ export class TMBuildingElement extends TMObjectElement {
     }
 }
 
-export class TMMonsterElement extends TMObjectElement {
+export class TMMonsterElement extends TMObjElement {
     private _debugObj?: Laya.Sprite3D;
 
     public override async draw() {
@@ -563,7 +563,7 @@ export class TMMonsterElement extends TMObjectElement {
     }
 }
 
-export class TMEventElement extends TMObjectElement {
+export class TMEventElement extends TMObjElement {
     private _debugObj?: Laya.Sprite3D;
 
     public override async draw() {

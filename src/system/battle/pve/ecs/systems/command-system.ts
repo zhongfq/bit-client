@@ -257,8 +257,8 @@ export class CommandSystem extends ecs.System implements ICommandSender {
 
     public updateCollectionHp(eid: number, tid: number, hp: number, shake: boolean) {
         const tilemap = this.ecs.getSingletonComponent(TilemapComponent)!;
-        const dynamicElement = tilemap.getDynamicElementByEid(eid);
-        if (!dynamicElement) {
+        const objectElement = tilemap.getObjectElementByEid(eid);
+        if (!objectElement) {
             return;
         }
 
@@ -287,11 +287,11 @@ export class CommandSystem extends ecs.System implements ICommandSender {
             }
         }
         if (textureName) {
-            dynamicElement?.draw();
-            dynamicElement?.setTexture(textureName);
-            if (shake) dynamicElement?.shake();
+            objectElement?.draw();
+            objectElement?.setTexture(textureName);
+            if (shake) objectElement?.shake();
         } else {
-            dynamicElement?.erase();
+            objectElement?.erase();
         }
     }
 

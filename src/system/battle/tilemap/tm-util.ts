@@ -3,7 +3,7 @@ import { TMLayerName, TMTextureCfg } from "./tm-def";
 import {
     TMBlockElement,
     TMBuildingElement,
-    TMDynamicElement,
+    TMObjectElement,
     TMElement,
     TMEventElement,
     TMGroundElement,
@@ -113,7 +113,7 @@ export class TMUtil {
         ],
     ]);
 
-    public static readonly DYNAMIC_TEXTURE_CFG: Map<string, TMTextureCfg> = new Map([
+    public static readonly OBJECT_TEXTURE_CFG: Map<string, TMTextureCfg> = new Map([
         [
             "map_biulding_castle01",
             {
@@ -152,8 +152,8 @@ export class TMUtil {
                 return TMRiverElement;
             case TMLayerName.Static:
                 return TMStaticElement;
-            case TMLayerName.Dynamic:
-                return TMDynamicElement;
+            case TMLayerName.Object:
+                return TMObjectElement;
             case TMLayerName.Block:
                 return TMBlockElement;
             case TMLayerName.Building:

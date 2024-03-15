@@ -10,7 +10,7 @@ import {
     TMWorld,
     TMWorldMap,
 } from "./tm-def";
-import { TMBoardElement, TMBuildingElement, TMDynamicElement, TMElement } from "./tm-element";
+import { TMBoardElement, TMBuildingElement, TMObjectElement, TMElement } from "./tm-element";
 import { TMUtil } from "./tm-util";
 
 export class Tilemap {
@@ -36,13 +36,13 @@ export class Tilemap {
      * @param y Y坐标
      * @returns 动态元素的唯一ID
      */
-    public addDynamicElement(eid: number, x: number, y: number): number {
+    public addObjectElement(eid: number, x: number, y: number): number {
         const uids: number[] = [];
         this._tryAdd(
             x,
             y,
             (layerName: string) => {
-                return layerName == TMLayerName.Dynamic;
+                return layerName == TMLayerName.Object;
             },
             eid,
             uids
@@ -54,11 +54,11 @@ export class Tilemap {
      * 跟据唯一ID删除动态元素
      * @param uid 唯一ID
      */
-    public delDynamicElementByUid(uid: number): void {
+    public delObjectElementByUid(uid: number): void {
         const element = this._allMap.get(uid);
         if (element) {
             this._tryDel(element.x, element.y, (layerName: string) => {
-                return layerName == TMLayerName.Dynamic;
+                return layerName == TMLayerName.Object;
             });
         }
     }
@@ -67,11 +67,11 @@ export class Tilemap {
      * 根据实体ID删除动态元素
      * @param eid 实体ID
      */
-    public delDynamicElementByEid(eid: number): void {
+    public delObjectElementByEid(eid: number): void {
         for (const element of this._allMap.values()) {
-            if (element.eid == eid && element.layerName == TMLayerName.Dynamic) {
+            if (element.eid == eid && element.layerName == TMLayerName.Object) {
                 this._tryDel(element.x, element.y, (layerName: string) => {
-                    return layerName == TMLayerName.Dynamic;
+                    return layerName == TMLayerName.Object;
                 });
                 return;
             }
@@ -83,10 +83,10 @@ export class Tilemap {
      * @param uid 唯一ID
      * @returns 动态元素对象
      */
-    public getDynamicElementByUid(uid: number): TMDynamicElement | undefined {
+    public getObjectElementByUid(uid: number): TMObjectElement | undefined {
         const element = this._allMap.get(uid);
-        if (element?.layerName == TMLayerName.Dynamic) {
-            return element as TMDynamicElement;
+        if (element?.layerName == TMLayerName.Object) {
+            return element as TMObjectElement;
         }
         return undefined;
     }
@@ -96,10 +96,10 @@ export class Tilemap {
      * @param eid 实体ID
      * @returns 动态元素对象
      */
-    public getDynamicElementByEid(eid: number): TMDynamicElement | undefined {
+    public getObjectElementByEid(eid: number): TMObjectElement | undefined {
         for (const element of this._allMap.values()) {
-            if (element.eid == eid && element.layerName == TMLayerName.Dynamic) {
-                return element as TMDynamicElement;
+            if (element.eid == eid && element.layerName == TMLayerName.Object) {
+                return element as TMObjectElement;
             }
         }
         return undefined;
@@ -158,7 +158,7 @@ export class Tilemap {
     public getElementByPos(x: number, y: number, layerName: TMLayerName): TMElement | undefined {
         const uidMap = this._posMap.get(layerName);
         if (uidMap) {
-            if (layerName == TMLayerName.Static || layerName == TMLayerName.Dynamic) {
+            if (layerName == TMLayerName.Static || layerName == TMLayerName.Object) {
                 for (const uid of uidMap.values()) {
                     const element = this._allMap.get(uid) as TMBoardElement;
                     if (
@@ -235,9 +235,9 @@ export class Tilemap {
      * 获取动态元素所在区域内的建筑对象列表
      * @param uid 动态元素唯一id
      */
-    public dynamicToBuildingElements(uid: number): TMBuildingElement[] {
+    public objectToBuildingElements(uid: number): TMBuildingElement[] {
         const element = this._allMap.get(uid);
-        if (element instanceof TMDynamicElement) {
+        if (element instanceof TMObjectElement) {
             return this.getElementsByRect(
                 element.startX,
                 element.startY,
@@ -253,14 +253,14 @@ export class Tilemap {
      * 获取建筑对象所在位置的动态元素
      * @param uid 建筑对象唯一id
      */
-    public buildingToDynamicElemnt(uid: number): TMDynamicElement | undefined {
+    public buildingToObjectElement(uid: number): TMObjectElement | undefined {
         const element = this._allMap.get(uid);
         if (element instanceof TMBuildingElement) {
             return this.getElementByPos(
                 element.x,
                 element.y,
-                TMLayerName.Dynamic
-            ) as TMDynamicElement;
+                TMLayerName.Object
+            ) as TMObjectElement;
         }
         return undefined;
     }
@@ -444,14 +444,14 @@ export class Tilemap {
         for (let i = 0; i < this._addArr.length; i++) {
             const [x, y] = this._addArr[i];
             this._tryAdd(x, y, (layerName: string) => {
-                return layerName != TMLayerName.Dynamic;
+                return layerName != TMLayerName.Object;
             });
         }
 
         for (let i = 0; i < this._delArr.length; i++) {
             const [x, y] = this._delArr[i];
             this._tryDel(x, y, (layerName: string) => {
-                return layerName != TMLayerName.Dynamic;
+                return layerName != TMLayerName.Object;
             });
         }
     }

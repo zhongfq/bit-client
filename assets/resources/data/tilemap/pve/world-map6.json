@@ -80,7 +80,7 @@
         }, 
         {
          "firstgid":54,
-         "source":"..\/texture\/dynamic.tsx"
+         "source":"..\/texture\/object.tsx"
         }],
  "tilewidth":128,
  "type":"map",

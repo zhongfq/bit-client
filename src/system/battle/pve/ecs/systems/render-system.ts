@@ -45,7 +45,7 @@ export class RenderSystem extends ecs.System {
             component.view = null;
         } else if (component instanceof BoardComponent) {
             const tilemap = this.ecs.getSingletonComponent(TilemapComponent)!;
-            tilemap.delDynamicElementByEid(component.eid);
+            tilemap.delObjectElementByEid(component.eid);
         }
     }
 
@@ -149,13 +149,13 @@ export class RenderSystem extends ecs.System {
 
         const table = app.service.table;
         const buildingRow = table.battleBuilding[element.tableId];
-        const textureCfg = TMUtil.DYNAMIC_TEXTURE_CFG.get(buildingRow.texture_key);
+        const textureCfg = TMUtil.OBJECT_TEXTURE_CFG.get(buildingRow.texture_key);
 
         const x = Math.floor(transform.position.x + (textureCfg?.tileX ?? 0));
         const y = Math.floor(transform.position.z + (textureCfg?.tileY ?? 0));
 
         const tilemap = this.ecs.getSingletonComponent(TilemapComponent)!;
-        tilemap.addDynamicElement(board.eid, x, y);
+        tilemap.addObjectElement(board.eid, x, y);
 
         const etype = element.entity.etype;
         const ETYPE = BattleConf.ENTITY_TYPE;

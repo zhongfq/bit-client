@@ -152,7 +152,7 @@
             {
               "_$id": "utfqvaky",
               "_$type": "Sprite3D",
-              "name": "dynamic"
+              "name": "object"
             },
             {
               "_$id": "mb1yyfs0",

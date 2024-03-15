@@ -308,32 +308,32 @@
              "width":1
             },
          "margin":0,
-         "name":"dynamic",
+         "name":"object",
          "spacing":0,
          "tilecount":4,
          "tileheight":512,
          "tiles":[
                 {
                  "id":0,
-                 "image":"..\/texture\/dynamic\/map_biulding_castle01.png",
+                 "image":"..\/texture\/object\/map_biulding_castle01.png",
                  "imageheight":512,
                  "imagewidth":512
                 }, 
                 {
                  "id":1,
-                 "image":"..\/texture\/dynamic\/map_gather_wood1-1.png",
+                 "image":"..\/texture\/object\/map_gather_wood1-1.png",
                  "imageheight":288,
                  "imagewidth":256
                 }, 
                 {
                  "id":3,
-                 "image":"..\/texture\/dynamic\/map_gather_wood1-2.png",
+                 "image":"..\/texture\/object\/map_gather_wood1-2.png",
                  "imageheight":288,
                  "imagewidth":256
                 }, 
                 {
                  "id":4,
-                 "image":"..\/texture\/dynamic\/map_gather_wood1-3.png",
+                 "image":"..\/texture\/object\/map_gather_wood1-3.png",
                  "imageheight":288,
                  "imagewidth":256
                 }],

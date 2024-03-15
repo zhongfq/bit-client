@@ -9,6 +9,7 @@ export interface GeneratedItemRow {
     sub_type: number;
     bag_id: number;
     use?: number;
+    auto_use?: number;
     stack?: number;
     discard?: number;
     composite?: number;

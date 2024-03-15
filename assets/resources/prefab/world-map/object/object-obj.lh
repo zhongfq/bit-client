@@ -2,7 +2,7 @@
   "_$ver": 1,
   "_$id": "zftgmsz0",
   "_$type": "Sprite3D",
-  "name": "dynamic-obj",
+  "name": "object-obj",
   "_$child": [
     {
       "_$id": "h25r3f48",
