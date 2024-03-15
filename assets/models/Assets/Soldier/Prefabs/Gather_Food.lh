@@ -2,7 +2,7 @@
   "_$ver": 1,
   "_$id": "#0",
   "_$type": "Sprite3D",
-  "name": "Gather_Wood",
+  "name": "Gather_Food",
   "transform": {
     "localPosition": {
       "_$type": "Vector3",
@@ -15,31 +15,26 @@
   },
   "_$child": [
     {
-      "_$id": "1oyxjyw4",
+      "_$id": "8j6a2atk",
       "_$type": "Sprite3D",
-      "name": "Gather_Wood_1",
+      "name": "Gather_Food_1",
       "transform": {
         "localPosition": {
           "_$type": "Vector3",
-          "x": 0.6
+          "x": 0.35,
+          "z": 0.5
         },
         "localRotation": {
           "_$type": "Quaternion",
           "x": -0.7071067811865475,
           "w": 0.7071067811865476
-        },
-        "localScale": {
-          "_$type": "Vector3",
-          "x": 0.75,
-          "y": 1,
-          "z": 0.75
         }
       },
       "_$comp": [
         {
           "_$type": "MeshFilter",
           "sharedMesh": {
-            "_$uuid": "d0783655-9cee-453b-a35b-aebef1dca836",
+            "_$uuid": "ba29cc1f-43ee-4dec-b7d7-eef4c3d0432b",
             "_$type": "Mesh"
           }
         },
@@ -57,31 +52,26 @@
       ]
     },
     {
-      "_$id": "ivv3d2hb",
+      "_$id": "hrlkrz1z",
       "_$type": "Sprite3D",
-      "name": "Gather_Wood_2",
+      "name": "Gather_Food_2",
       "transform": {
         "localPosition": {
           "_$type": "Vector3",
-          "x": 0.2
+          "x": -0.35,
+          "z": 0.5
         },
         "localRotation": {
           "_$type": "Quaternion",
           "x": -0.7071067811865475,
           "w": 0.7071067811865476
-        },
-        "localScale": {
-          "_$type": "Vector3",
-          "x": 0.75,
-          "y": 1,
-          "z": 0.75
         }
       },
       "_$comp": [
         {
           "_$type": "MeshFilter",
           "sharedMesh": {
-            "_$uuid": "d0783655-9cee-453b-a35b-aebef1dca836",
+            "_$uuid": "ba29cc1f-43ee-4dec-b7d7-eef4c3d0432b",
             "_$type": "Mesh"
           }
         },
@@ -99,31 +89,26 @@
       ]
     },
     {
-      "_$id": "lueg3j33",
+      "_$id": "yrcpgnty",
       "_$type": "Sprite3D",
-      "name": "Gather_Wood_3",
+      "name": "Gather_Food_3",
       "transform": {
         "localPosition": {
           "_$type": "Vector3",
-          "x": -0.2
+          "x": 0.35,
+          "z": -0.5
         },
         "localRotation": {
           "_$type": "Quaternion",
           "x": -0.7071067811865475,
           "w": 0.7071067811865476
-        },
-        "localScale": {
-          "_$type": "Vector3",
-          "x": 0.75,
-          "y": 1,
-          "z": 0.75
         }
       },
       "_$comp": [
         {
           "_$type": "MeshFilter",
           "sharedMesh": {
-            "_$uuid": "d0783655-9cee-453b-a35b-aebef1dca836",
+            "_$uuid": "ba29cc1f-43ee-4dec-b7d7-eef4c3d0432b",
             "_$type": "Mesh"
           }
         },
@@ -141,31 +126,26 @@
       ]
     },
     {
-      "_$id": "bzugli5c",
+      "_$id": "n8bj7wjl",
       "_$type": "Sprite3D",
-      "name": "Gather_Wood_4",
+      "name": "Gather_Food_4",
       "transform": {
         "localPosition": {
           "_$type": "Vector3",
-          "x": -0.6
+          "x": -0.3499999940395355,
+          "z": -0.5
         },
         "localRotation": {
           "_$type": "Quaternion",
           "x": -0.7071067811865475,
           "w": 0.7071067811865476
-        },
-        "localScale": {
-          "_$type": "Vector3",
-          "x": 0.75,
-          "y": 1,
-          "z": 0.75
         }
       },
       "_$comp": [
         {
           "_$type": "MeshFilter",
           "sharedMesh": {
-            "_$uuid": "d0783655-9cee-453b-a35b-aebef1dca836",
+            "_$uuid": "ba29cc1f-43ee-4dec-b7d7-eef4c3d0432b",
             "_$type": "Mesh"
           }
         },
