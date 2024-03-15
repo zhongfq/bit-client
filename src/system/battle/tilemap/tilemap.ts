@@ -30,11 +30,11 @@ export class Tilemap {
     }
 
     /**
-     * 添加动态元素
+     * 添加对象元素
      * @param eid 实体ID
      * @param x X坐标
      * @param y Y坐标
-     * @returns 动态元素的唯一ID
+     * @returns 对象元素的唯一ID
      */
     public addObjectElement(eid: number, x: number, y: number): number {
         const uids: number[] = [];
@@ -51,7 +51,7 @@ export class Tilemap {
     }
 
     /**
-     * 跟据唯一ID删除动态元素
+     * 跟据唯一ID删除对象元素
      * @param uid 唯一ID
      */
     public delObjectElementByUid(uid: number): void {
@@ -64,7 +64,7 @@ export class Tilemap {
     }
 
     /**
-     * 根据实体ID删除动态元素
+     * 根据实体ID删除对象元素
      * @param eid 实体ID
      */
     public delObjectElementByEid(eid: number): void {
@@ -79,9 +79,9 @@ export class Tilemap {
     }
 
     /**
-     * 根据唯一ID获取动态元素
+     * 根据唯一ID获取对象元素
      * @param uid 唯一ID
-     * @returns 动态元素对象
+     * @returns 对象元素
      */
     public getObjectElementByUid(uid: number): TMObjectElement | undefined {
         const element = this._allMap.get(uid);
@@ -92,9 +92,9 @@ export class Tilemap {
     }
 
     /**
-     * 根据实体ID获取动态元素
+     * 根据实体ID获取对象元素
      * @param eid 实体ID
-     * @returns 动态元素对象
+     * @returns 对象元素
      */
     public getObjectElementByEid(eid: number): TMObjectElement | undefined {
         for (const element of this._allMap.values()) {
@@ -231,39 +231,39 @@ export class Tilemap {
         return elements;
     }
 
-    /**
-     * 获取动态元素所在区域内的建筑对象列表
-     * @param uid 动态元素唯一id
-     */
-    public objectToBuildingElements(uid: number): TMBuildingElement[] {
-        const element = this._allMap.get(uid);
-        if (element instanceof TMObjectElement) {
-            return this.getElementsByRect(
-                element.startX,
-                element.startY,
-                element.width,
-                element.height,
-                TMLayerName.Building
-            ) as TMBuildingElement[];
-        }
-        return [];
-    }
+    // /**
+    //  * 获取对象元素所在区域内的建筑对象列表
+    //  * @param uid 对象元素唯一id
+    //  */
+    // public objectToBuildingElements(uid: number): TMBuildingElement[] {
+    //     const element = this._allMap.get(uid);
+    //     if (element instanceof TMObjectElement) {
+    //         return this.getElementsByRect(
+    //             element.startX,
+    //             element.startY,
+    //             element.width,
+    //             element.height,
+    //             TMLayerName.Building
+    //         ) as TMBuildingElement[];
+    //     }
+    //     return [];
+    // }
 
-    /**
-     * 获取建筑对象所在位置的动态元素
-     * @param uid 建筑对象唯一id
-     */
-    public buildingToObjectElement(uid: number): TMObjectElement | undefined {
-        const element = this._allMap.get(uid);
-        if (element instanceof TMBuildingElement) {
-            return this.getElementByPos(
-                element.x,
-                element.y,
-                TMLayerName.Object
-            ) as TMObjectElement;
-        }
-        return undefined;
-    }
+    // /**
+    //  * 获取建筑对象所在位置的对象元素
+    //  * @param uid 建筑对象唯一id
+    //  */
+    // public buildingToObjectElement(uid: number): TMObjectElement | undefined {
+    //     const element = this._allMap.get(uid);
+    //     if (element instanceof TMBuildingElement) {
+    //         return this.getElementByPos(
+    //             element.x,
+    //             element.y,
+    //             TMLayerName.Object
+    //         ) as TMObjectElement;
+    //     }
+    //     return undefined;
+    // }
 
     /**
      * 指定位置是否阻挡块
@@ -533,7 +533,7 @@ export class Tilemap {
             if (!gid || gid == 0) {
                 return undefined;
             }
-            props.set("gid", gid);
+            props.set("__gid", gid);
         } else if (layer.objects) {
             let targetObj;
             let objX, objY;
@@ -557,8 +557,8 @@ export class Tilemap {
             targetObj.properties?.forEach((prop) => {
                 props.set(prop.name, prop.value);
             });
-            props.set("realX", realX);
-            props.set("realY", realY);
+            props.set("__realX", realX);
+            props.set("__realY", realY);
         } else {
             console.warn("该层没有数据", layer.name);
             return undefined;

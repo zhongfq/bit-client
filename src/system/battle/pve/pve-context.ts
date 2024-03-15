@@ -6,14 +6,14 @@ import { Event } from "../../../misc/event";
 import { res } from "../../../misc/res";
 import { PveUI } from "../../../ui-runtime/scene/PveUI";
 import { PveServer } from "../pve-server/pve-server";
-import { ITMContext, TMLayerName } from "../tilemap/tm-def";
+import { ITMContext, TMLayerName, TMMode } from "../tilemap/tm-def";
 import {
     TMBuildingElement,
     TMObjectElement,
     TMElement,
     TMEventElement,
     TMMonsterElement,
-    TMObjElement,
+    TMDebugElement,
     TMTileElemet,
 } from "../tilemap/tm-element";
 import { CameraComponent } from "./ecs/components/camera-component";
@@ -59,6 +59,10 @@ export class PveContext extends Mediator implements ITMContext {
 
     public get mapDir() {
         return "resources/data/tilemap/pve";
+    }
+
+    public get mode() {
+        return TMMode.PVE;
     }
 
     public override onAwake() {
@@ -192,7 +196,7 @@ export class PveContext extends Mediator implements ITMContext {
             }
         });
         allMap.forEach((element) => {
-            if (element instanceof TMObjElement) {
+            if (element instanceof TMDebugElement) {
                 element.erase();
                 element.draw();
             }

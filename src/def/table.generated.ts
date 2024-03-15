@@ -302,7 +302,6 @@ export interface GeneratedBattleBuffRow {
 export interface GeneratedBattleBuildingRow {
     id: number;
     battle_entity: number;
-    obstacle_size: number;
     max_hp: number;
     fresh_time: number;
     texture_key: string;

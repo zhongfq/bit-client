@@ -6,8 +6,8 @@ import { errcode } from "../../../def/protocol";
 import { Event } from "../../../misc/event";
 import { res } from "../../../misc/res";
 import { PvpUI } from "../../../ui-runtime/scene/PvpUI";
-import { ITMContext } from "../tilemap/tm-def";
-import { TMElement, TMObjElement, TMTileElemet } from "../tilemap/tm-element";
+import { ITMContext, TMMode } from "../tilemap/tm-def";
+import { TMElement, TMDebugElement, TMTileElemet } from "../tilemap/tm-element";
 import { CameraComponent } from "./ecs/components/camera-component";
 import { TilemapComponent } from "./ecs/components/tilemap-component";
 import { CameraSystem } from "./ecs/systems/camera-system";
@@ -39,6 +39,10 @@ export class PvpContext extends Mediator implements ITMContext {
 
     public get mapDir() {
         return "resources/data/tilemap/pvp";
+    }
+
+    public get mode() {
+        return TMMode.PVP;
     }
 
     public onAddElement(element: TMElement): void {}
@@ -84,7 +88,7 @@ export class PvpContext extends Mediator implements ITMContext {
             }
         });
         allMap.forEach((element) => {
-            if (element instanceof TMObjElement) {
+            if (element instanceof TMDebugElement) {
                 element.erase();
                 element.draw();
             }

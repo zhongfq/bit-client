@@ -108,10 +108,16 @@ export interface TMTextureCfg {
     scale: number;
 }
 
+export enum TMMode {
+    PVE = 1,
+    PVP = 2,
+}
+
 export interface ITMContext {
     get scene3D(): Laya.Scene3D;
     get camera(): Laya.Camera;
     get mapDir(): string;
+    get mode(): TMMode;
 
     onAddElement(element: TMElement): void;
     onDelElement(element: TMElement): void;

@@ -1,8 +1,9 @@
+import { app } from "../../../app";
 import { Constructor } from "../../../core/dispatcher";
 import { tween } from "../../../core/tween/tween";
 import { StringUtil } from "../../../core/utils/string-util";
 import { Tilemap } from "./tilemap";
-import { TMAtlasName, TMLayerName, TMTextureCfg, TMTextureName } from "./tm-def";
+import { TMAtlasName, TMLayerName, TMMode, TMTextureCfg, TMTextureName } from "./tm-def";
 import { TMUtil } from "./tm-util";
 
 export abstract class TMElement {
@@ -74,7 +75,7 @@ export abstract class TMTileElemet extends TMElement {
     private _tile?: Laya.Sprite3D;
 
     public get gid(): number {
-        return this.props.get("gid");
+        return this.props.get("__gid");
     }
 
     public override async draw() {
@@ -237,7 +238,7 @@ export abstract class TMBoardElement extends TMElement {
     }
 
     public get gid(): number {
-        return this.props.get("gid");
+        return this.props.get("__gid");
     }
 
     public override async draw() {
@@ -459,21 +460,21 @@ export class TMBlockElement extends TMElement {
     }
 }
 
-export abstract class TMObjElement extends TMElement {
+export abstract class TMDebugElement extends TMElement {
     public get id(): number {
         return this.props.get("id");
     }
 
     public get realX(): number {
-        return this.props.get("realX");
+        return this.props.get("__realX");
     }
 
     public get realY(): number {
-        return this.props.get("realY");
+        return this.props.get("__realY");
     }
 }
 
-export class TMBuildingElement extends TMObjElement {
+export class TMBuildingElement extends TMDebugElement {
     private _debugObjs: Laya.Sprite3D[] = [];
 
     public override async draw() {
@@ -483,23 +484,33 @@ export class TMBuildingElement extends TMObjElement {
         if (!TMUtil.DEBUG_MODE) {
             return;
         }
-        const objectElement = this._tilemap.buildingToObjectElement(this.uid);
-        if (!objectElement) {
+
+        let textureCfg = undefined;
+        const mode = this._tilemap.context.mode;
+
+        if (mode == TMMode.PVE) {
+            const buildingRow = app.service.table.battleBuilding[this.id];
+            textureCfg = TMUtil.OBJECT_TEXTURE_CFG.get(buildingRow.texture_key);
+        } else if (mode == TMMode.PVP) {
+            // TODO：需要在 world_building 表新增 texture_key 字段
+        }
+
+        if (!textureCfg) {
             return;
         }
         const prefab = await Laya.loader.load(
             "resources/prefab/world-map/test/debug-obj.lh",
             Laya.Loader.HIERARCHY
         );
-        for (let i = 0; i < objectElement.width; i++) {
-            for (let j = 0; j < objectElement.height; j++) {
+        for (let i = 0; i < textureCfg.tileW; i++) {
+            for (let j = 0; j < textureCfg.tileH; j++) {
                 const debugObj = prefab.create() as Laya.Sprite3D;
                 this._debugObjs.push(debugObj);
 
                 const pos = debugObj.transform.position;
-                pos.x = objectElement.startX + i;
-                pos.y = 0;
-                pos.z = objectElement.startY + j;
+                pos.x = this.x + i;
+                pos.y = 0.01;
+                pos.z = this.y + j;
                 debugObj.transform.position = pos;
 
                 const sprite = debugObj.getChildAt(0) as Laya.Sprite3D;
@@ -523,7 +534,7 @@ export class TMBuildingElement extends TMObjElement {
     }
 }
 
-export class TMMonsterElement extends TMObjElement {
+export class TMMonsterElement extends TMDebugElement {
     private _debugObj?: Laya.Sprite3D;
 
     public override async draw() {
@@ -542,7 +553,7 @@ export class TMMonsterElement extends TMObjElement {
 
         const pos = this._debugObj.transform.position;
         pos.x = this.x;
-        pos.y = 0;
+        pos.y = 0.01;
         pos.z = this.y;
         this._debugObj.transform.position = pos;
 
@@ -563,7 +574,7 @@ export class TMMonsterElement extends TMObjElement {
     }
 }
 
-export class TMEventElement extends TMObjElement {
+export class TMEventElement extends TMDebugElement {
     private _debugObj?: Laya.Sprite3D;
 
     public override async draw() {
@@ -582,7 +593,7 @@ export class TMEventElement extends TMObjElement {
 
         const pos = this._debugObj.transform.position;
         pos.x = this.x;
-        pos.y = 0;
+        pos.y = 0.01;
         pos.z = this.y;
         this._debugObj.transform.position = pos;
 
