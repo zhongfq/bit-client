@@ -110,7 +110,7 @@ export class PveContext extends Mediator implements ITMContext {
             const table = app.service.table;
             const buildingRow = table.battleBuilding[element.id];
             const entityRow = table.battleEntity[buildingRow.battle_entity];
-            const position = new Laya.Vector3(element.x, 0, element.y);
+            const position = new Laya.Vector3(element.gridX, 0, element.gridY);
             switch (entityRow.etype) {
                 case BattleConf.ENTITY_TYPE.BUILDING:
                     this.sender.addBuilding(element.id, position);
@@ -134,7 +134,7 @@ export class PveContext extends Mediator implements ITMContext {
             const table = app.service.table;
             const buildingRow = table.battleBuilding[element.id];
             const entityRow = table.battleEntity[buildingRow.battle_entity];
-            const position = new Laya.Vector3(element.x, 0, element.y);
+            const position = new Laya.Vector3(element.gridX, 0, element.gridY);
             switch (entityRow.etype) {
                 case BattleConf.ENTITY_TYPE.BUILDING:
                     this.sender.removeBuilding(element.id, position);

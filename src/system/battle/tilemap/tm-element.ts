@@ -3,7 +3,7 @@ import { Constructor } from "../../../core/dispatcher";
 import { tween } from "../../../core/tween/tween";
 import { StringUtil } from "../../../core/utils/string-util";
 import { Tilemap } from "./tilemap";
-import { TMAtlasName, TMLayerName, TMMode, TMTextureCfg, TMTextureName } from "./tm-def";
+import { TMAtlasName, TMLayerName, TMMode, TMPropKey, TMTextureCfg, TMTextureName } from "./tm-def";
 import { TMUtil } from "./tm-util";
 
 export abstract class TMElement {
@@ -11,9 +11,9 @@ export abstract class TMElement {
     protected _tilemap!: Tilemap;
 
     private _uid!: number;
-    private _x!: number;
-    private _y!: number;
-    private _props!: Map<string, any>;
+    private _gridX!: number;
+    private _gridY!: number;
+    private _props!: Map<string, unknown>;
     private _layerName!: string;
     private _eid?: number;
 
@@ -21,15 +21,15 @@ export abstract class TMElement {
         return this._uid;
     }
 
-    public get x(): number {
-        return this._x;
+    public get gridX(): number {
+        return this._gridX;
     }
 
-    public get y(): number {
-        return this._y;
+    public get gridY(): number {
+        return this._gridY;
     }
 
-    public get props(): Map<string, any> {
+    public get props(): Map<string, unknown> {
         return this._props;
     }
 
@@ -47,16 +47,16 @@ export abstract class TMElement {
 
     public init(
         tilemap: Tilemap,
-        x: number,
-        y: number,
-        props: Map<string, any>,
+        gridX: number,
+        gridY: number,
+        props: Map<string, unknown>,
         layerName: string,
         eid?: number
     ): void {
         this._uid = --TMElement.UID;
         this._tilemap = tilemap;
-        this._x = x;
-        this._y = y;
+        this._gridX = gridX;
+        this._gridY = gridY;
         this._props = props;
         this._layerName = layerName;
         this._eid = eid;
@@ -75,7 +75,7 @@ export abstract class TMTileElemet extends TMElement {
     private _tile?: Laya.Sprite3D;
 
     public get gid(): number {
-        return this.props.get("__gid");
+        return this.props.get(TMPropKey.Gid) as number;
     }
 
     public override async draw() {
@@ -94,9 +94,9 @@ export abstract class TMTileElemet extends TMElement {
         this._tile = prefab.create() as Laya.Sprite3D;
 
         const pos = this._tile.transform.position;
-        pos.x = this.x;
+        pos.x = this.gridX;
         pos.y = this.getOffsetY();
-        pos.z = this.y;
+        pos.z = this.gridY;
         this._tile.transform.position = pos;
 
         const mat = new Laya.BlinnPhongMaterial(); // 使用 UnlitMaterial 时 tilingOffset 会失效
@@ -117,7 +117,7 @@ export abstract class TMTileElemet extends TMElement {
             this._tile.transform.localScaleZ = 0.98;
         }
 
-        this._tile.name = this.x + "_" + this.y;
+        this._tile.name = this.gridX + "_" + this.gridY;
         this._tilemap.getRoot().getChildByName(this.layerName).addChild(this._tile);
     }
 
@@ -211,7 +211,95 @@ export class TMRiverElement extends TMTileElemet {
     }
 }
 
-export abstract class TMBoardElement extends TMElement {
+export class TMStaticElement extends TMElement {
+    private _root?: Laya.Sprite3D;
+    private _startX: number = 0;
+    private _startY: number = 0;
+    private _width: number = 0;
+    private _height: number = 0;
+
+    public get startX(): number {
+        return this._startX;
+    }
+
+    public get startY(): number {
+        return this._startY;
+    }
+
+    public get width(): number {
+        return this._width;
+    }
+
+    public get height(): number {
+        return this._height;
+    }
+
+    public get gid(): number {
+        return this.props.get(TMPropKey.Gid) as number;
+    }
+
+    public override async draw() {
+        if (this._root) {
+            return;
+        }
+        const prefab = await Laya.loader.load(
+            "resources/prefab/world-map/static/static-obj.lh",
+            Laya.Loader.HIERARCHY
+        );
+        this._root = prefab.create() as Laya.Sprite3D;
+
+        const sprite = this._root.getChildAt(0) as Laya.Sprite3D;
+        const resName = this._tilemap.getTextureResName(TMTextureName.Static, this.gid);
+        const textureCfg = TMUtil.STATIC_TEXTURE_CFG.get(resName);
+
+        this._startX = Math.floor(this.gridX - (textureCfg?.tileX ?? 0));
+        this._startY = Math.floor(this.gridY - (textureCfg?.tileY ?? 0));
+
+        const objPos = this._root.transform.position;
+        objPos.x = this._startX;
+        objPos.y = 0;
+        objPos.z = this._startY;
+        this._root.transform.position = objPos;
+
+        const spritePos = sprite.transform.localPosition;
+        spritePos.x = textureCfg?.offsetX ?? 0;
+        spritePos.y = textureCfg?.offsetY ?? 0;
+        spritePos.z = textureCfg?.offsetZ ?? 0;
+        sprite.transform.localPosition = spritePos;
+
+        sprite.transform.localScaleX = textureCfg?.scale ?? 1;
+        sprite.transform.localScaleY = textureCfg?.scale ?? 1;
+
+        const cameraTrans = this._tilemap.context.camera.transform;
+        sprite.transform.localRotationEulerX = cameraTrans.localRotationEulerX;
+        sprite.transform.localRotationEulerY = cameraTrans.localRotationEulerY;
+
+        const renderer = sprite.getComponent(Laya.MeshRenderer);
+        const mat = new Laya.UnlitMaterial();
+        const path = StringUtil.format("resources/texture/world-map/static/{0}.png", resName);
+        const texture = (await Laya.loader.load(path, Laya.Loader.TEXTURE2D)) as Laya.Texture2D;
+        mat.albedoTexture = texture;
+        mat.renderMode = Laya.MaterialRenderMode.RENDERMODE_TRANSPARENT;
+        renderer.material = mat;
+
+        this._width = textureCfg?.tileW ?? 1;
+        this._height = textureCfg?.tileH ?? 1;
+
+        this._root.name = this.startX + "_" + this.startY + " | " + resName;
+        this._tilemap.getRoot().getChildByName(this.layerName).addChild(this._root);
+    }
+
+    public override erase() {
+        this._root?.removeSelf();
+        this._root = undefined;
+        this._startX = 0;
+        this._startY = 0;
+        this._width = 0;
+        this._height = 0;
+    }
+}
+
+export class TMObjectElement extends TMElement {
     private _board?: Laya.Sprite3D;
     private _startX: number = 0;
     private _startY: number = 0;
@@ -237,30 +325,26 @@ export abstract class TMBoardElement extends TMElement {
         return this._height;
     }
 
-    public get gid(): number {
-        return this.props.get("__gid");
-    }
-
     public override async draw() {
         if (this._board || this._drawing) {
             return;
         }
         this._drawing = true;
 
-        const prefab = await Laya.loader.load(this.getPrefabPath(), Laya.Loader.HIERARCHY);
+        const prefab = await Laya.loader.load(
+            "resources/prefab/world-map/object/object-obj.lh",
+            Laya.Loader.HIERARCHY
+        );
         this._board = prefab.create() as Laya.Sprite3D;
 
         const sprite = this._board.getChildAt(0) as Laya.Sprite3D;
-        const defaultRes = this._tilemap.getTextureResName(this.getTextureName(), this.gid);
-        const textureCfg = this.getTextureCfg().get(defaultRes);
-
-        this._startX = Math.floor(this.x - (textureCfg?.tileX ?? 0));
-        this._startY = Math.floor(this.y - (textureCfg?.tileY ?? 0));
+        const defaultRes = this.props.get(TMPropKey.TextureKey) as string;
+        const textureCfg = TMUtil.OBJECT_TEXTURE_CFG.get(defaultRes);
 
         const objPos = this._board.transform.position;
-        objPos.x = this._startX;
+        objPos.x = this.gridX;
         objPos.y = 0;
-        objPos.z = this._startY;
+        objPos.z = this.gridY;
         this._board.transform.position = objPos;
 
         const spritePos = sprite.transform.localPosition;
@@ -278,6 +362,9 @@ export abstract class TMBoardElement extends TMElement {
         sprite.transform.localRotationEulerY = cameraTrans.localRotationEulerY;
 
         this.setTexture(this._resName || defaultRes, true);
+
+        this._startX = this.gridX;
+        this._startY = this.gridY;
 
         this._width = textureCfg?.tileW ?? 1;
         this._height = textureCfg?.tileH ?? 1;
@@ -301,7 +388,7 @@ export abstract class TMBoardElement extends TMElement {
         const renderer = sprite.getComponent(Laya.MeshRenderer);
 
         const mat = new Laya.UnlitMaterial();
-        const path = StringUtil.format(this.getTexturePath(), resName);
+        const path = StringUtil.format("resources/texture/world-map/object/{0}.png", resName);
         const texture = (await Laya.loader.load(path, Laya.Loader.TEXTURE2D)) as Laya.Texture2D;
         mat.albedoTexture = texture;
         mat.renderMode = Laya.MaterialRenderMode.RENDERMODE_TRANSPARENT;
@@ -383,47 +470,6 @@ export abstract class TMBoardElement extends TMElement {
         this._drawing = false;
         this._originPos.toDefault();
     }
-
-    protected abstract getPrefabPath(): string;
-    protected abstract getTexturePath(): string;
-    protected abstract getTextureName(): TMTextureName;
-    protected abstract getTextureCfg(): Map<string, TMTextureCfg>;
-}
-
-export class TMStaticElement extends TMBoardElement {
-    protected override getPrefabPath(): string {
-        return "resources/prefab/world-map/static/static-obj.lh";
-    }
-
-    protected override getTexturePath(): string {
-        return "resources/texture/world-map/static/{0}.png";
-    }
-
-    protected override getTextureName(): TMTextureName {
-        return TMTextureName.Static;
-    }
-
-    protected override getTextureCfg(): Map<string, TMTextureCfg> {
-        return TMUtil.STATIC_TEXTURE_CFG;
-    }
-}
-
-export class TMObjectElement extends TMBoardElement {
-    protected override getPrefabPath(): string {
-        return "resources/prefab/world-map/object/object-obj.lh";
-    }
-
-    protected override getTexturePath(): string {
-        return "resources/texture/world-map/object/{0}.png";
-    }
-
-    protected override getTextureName(): TMTextureName {
-        return TMTextureName.Object;
-    }
-
-    protected override getTextureCfg(): Map<string, TMTextureCfg> {
-        return TMUtil.OBJECT_TEXTURE_CFG;
-    }
 }
 
 export class TMBlockElement extends TMElement {
@@ -433,7 +479,7 @@ export class TMBlockElement extends TMElement {
         if (this._blockTile) {
             return;
         }
-        const key = TMUtil.XY_TO_KEY(this.x, this.y);
+        const key = TMUtil.XY_TO_KEY(this.gridX, this.gridY);
         if (!this._tilemap.showBlocks.get(key)) {
             return;
         }
@@ -445,12 +491,12 @@ export class TMBlockElement extends TMElement {
         this._blockTile = prefab.create() as Laya.Sprite3D;
 
         const pos = this._blockTile.transform.position;
-        pos.x = this.x;
+        pos.x = this.gridX;
         pos.y = 0.01;
-        pos.z = this.y;
+        pos.z = this.gridY;
         this._blockTile.transform.position = pos;
 
-        this._blockTile.name = this.x + "_" + this.y;
+        this._blockTile.name = this.gridX + "_" + this.gridY;
         this._tilemap.getRoot().getChildByName(this.layerName).addChild(this._blockTile);
     }
 
@@ -462,15 +508,15 @@ export class TMBlockElement extends TMElement {
 
 export abstract class TMDebugElement extends TMElement {
     public get id(): number {
-        return this.props.get("id");
+        return this.props.get(TMPropKey.ID) as number;
     }
 
     public get realX(): number {
-        return this.props.get("__realX");
+        return this.props.get(TMPropKey.RealX) as number;
     }
 
     public get realY(): number {
-        return this.props.get("__realY");
+        return this.props.get(TMPropKey.RealY) as number;
     }
 }
 
@@ -510,9 +556,9 @@ export class TMBuildingElement extends TMDebugElement {
                 this._debugObjs.push(debugObj);
 
                 const pos = debugObj.transform.position;
-                pos.x = this.x + i;
+                pos.x = this.gridX + i;
                 pos.y = 0.01;
-                pos.z = this.y + j;
+                pos.z = this.gridY + j;
                 debugObj.transform.position = pos;
 
                 const sprite = debugObj.getChildAt(0) as Laya.Sprite3D;
@@ -522,7 +568,7 @@ export class TMBuildingElement extends TMDebugElement {
                 mat.renderMode = Laya.MaterialRenderMode.RENDERMODE_TRANSPARENT;
                 renderer.material = mat;
 
-                debugObj.name = this.x + "_" + this.y + " (" + i + "," + j + ")";
+                debugObj.name = this.gridX + "_" + this.gridY + " (" + i + "," + j + ")";
                 this._tilemap.getRoot().getChildByName(this.layerName).addChild(debugObj);
             }
         }
@@ -554,9 +600,9 @@ export class TMMonsterElement extends TMDebugElement {
         this._debugObj = prefab.create() as Laya.Sprite3D;
 
         const pos = this._debugObj.transform.position;
-        pos.x = this.x;
+        pos.x = this.gridX;
         pos.y = 0.01;
-        pos.z = this.y;
+        pos.z = this.gridY;
         this._debugObj.transform.position = pos;
 
         const sprite = this._debugObj.getChildAt(0) as Laya.Sprite3D;
@@ -566,7 +612,7 @@ export class TMMonsterElement extends TMDebugElement {
         mat.renderMode = Laya.MaterialRenderMode.RENDERMODE_TRANSPARENT;
         renderer.material = mat;
 
-        this._debugObj.name = this.x + "_" + this.y;
+        this._debugObj.name = this.gridX + "_" + this.gridY;
         this._tilemap.getRoot().getChildByName(this.layerName).addChild(this._debugObj);
     }
 
@@ -594,9 +640,9 @@ export class TMEventElement extends TMDebugElement {
         this._debugObj = prefab.create() as Laya.Sprite3D;
 
         const pos = this._debugObj.transform.position;
-        pos.x = this.x;
+        pos.x = this.gridX;
         pos.y = 0.01;
-        pos.z = this.y;
+        pos.z = this.gridY;
         this._debugObj.transform.position = pos;
 
         const sprite = this._debugObj.getChildAt(0) as Laya.Sprite3D;
@@ -606,7 +652,7 @@ export class TMEventElement extends TMDebugElement {
         mat.renderMode = Laya.MaterialRenderMode.RENDERMODE_TRANSPARENT;
         renderer.material = mat;
 
-        this._debugObj.name = this.x + "_" + this.y;
+        this._debugObj.name = this.gridX + "_" + this.gridY;
         this._tilemap.getRoot().getChildByName(this.layerName).addChild(this._debugObj);
     }
 

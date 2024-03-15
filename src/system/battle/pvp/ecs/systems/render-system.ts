@@ -1,6 +1,8 @@
 import { app } from "../../../../../app";
 import * as ecs from "../../../../../core/ecs";
+import { BattleConf } from "../../../../../def/battle";
 import { HeadInfoUI } from "../../../../../ui-runtime/prefab/battle/HeadInfoUI";
+import { TMPropKey } from "../../../tilemap/tm-def";
 import { TMUtil } from "../../../tilemap/tm-util";
 import { PvpContext } from "../../pvp-context";
 import { TransformComponent } from "../components/movement-component";
@@ -142,14 +144,29 @@ export class RenderSystem extends ecs.System {
         const transform = board.getComponent(TransformComponent)!;
         const element = board.getComponent(ElementComponent)!;
 
+        const etype = element.entity.etype;
+        const ETYPE = BattleConf.ENTITY_TYPE;
         const table = app.service.table;
-        const buildingRow = table.battleBuilding[element.tableId];
-        const textureCfg = TMUtil.OBJECT_TEXTURE_CFG.get(buildingRow.texture_key);
 
-        const x = Math.floor(transform.position.x + (textureCfg?.tileX ?? 0));
-        const y = Math.floor(transform.position.z + (textureCfg?.tileY ?? 0));
+        const props = new Map<string, unknown>();
+        if (
+            etype == ETYPE.BUILDING ||
+            etype == ETYPE.WOOD ||
+            etype == ETYPE.FOOD ||
+            etype == ETYPE.STONE
+        ) {
+            const buildingRow = table.battleBuilding[element.tableId];
+            props.set(TMPropKey.TextureKey, buildingRow.texture_key);
+        } else {
+            // TODO：其他实体类型的属性待定义
+        }
+        if (props.size == 0) {
+            return;
+        }
+        const gridX = Math.floor(transform.position.x);
+        const gridY = Math.floor(transform.position.z);
 
         const tilemap = this.ecs.getSingletonComponent(TilemapComponent)!;
-        tilemap.addObjectElement(board.eid, x, y);
+        tilemap.addObjectElement(board.eid, gridX, gridY, props);
     }
 }

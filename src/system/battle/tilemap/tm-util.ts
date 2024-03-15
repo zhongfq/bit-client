@@ -117,8 +117,6 @@ export class TMUtil {
         [
             "map_biulding_castle01",
             {
-                tileX: 3,
-                tileY: 5,
                 tileW: 5,
                 tileH: 5,
                 offsetX: 3.14974,
@@ -130,8 +128,6 @@ export class TMUtil {
         [
             "map_gather_wood1-1",
             {
-                tileX: 0,
-                tileY: 1,
                 tileW: 1,
                 tileH: 1,
                 offsetX: -0.06037,

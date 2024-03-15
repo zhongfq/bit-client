@@ -50,15 +50,18 @@ export enum TMLayerType {
 }
 
 export enum TMLayerName {
+    // 编辑器里的层
     Ground = "ground",
     Road = "road",
     River = "river",
-    Static = "static",
-    Object = "object",
     Block = "block",
+    Static = "static",
+    Marker = "marker",
     Building = "building",
     Monster = "monster",
     Event = "event",
+    // 自定义对象层
+    Object = "object",
 }
 
 export interface TMTileSet {
@@ -98,14 +101,24 @@ export enum TMTextureName {
 }
 
 export interface TMTextureCfg {
-    tileX: number;
-    tileY: number;
+    tileX?: number;
+    tileY?: number;
     tileW: number;
     tileH: number;
     offsetX: number;
     offsetY: number;
     offsetZ: number;
     scale: number;
+}
+
+export enum TMPropKey {
+    // 外部变量
+    ID = "id",
+    // 内部变量
+    Gid = "__gid",
+    RealX = "__realX",
+    RealY = "__realY",
+    TextureKey = "__texture_key",
 }
 
 export enum TMMode {
