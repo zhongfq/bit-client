@@ -58,6 +58,7 @@ export enum TMLayerName {
     Block = "block",
     Building = "building",
     Monster = "monster",
+    Event = "event",
 }
 
 export interface TMTileSet {

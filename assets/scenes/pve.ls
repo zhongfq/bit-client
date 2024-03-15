@@ -163,6 +163,11 @@
               "_$id": "ly13d9uo",
               "_$type": "Sprite3D",
               "name": "monster"
+            },
+            {
+              "_$id": "lruiomhu",
+              "_$type": "Sprite3D",
+              "name": "event"
             }
           ]
         },

@@ -2265,9 +2265,39 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "color":"#fff700",
+         "draworder":"topdown",
+         "id":37,
+         "name":"event",
+         "objects":[
+                {
+                 "height":0,
+                 "id":245,
+                 "name":"event",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"id",
+                         "type":"int",
+                         "value":10001
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":945,
+                 "y":2691
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":37,
- "nextobjectid":244,
+ "nextlayerid":38,
+ "nextobjectid":246,
  "orientation":"isometric",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",

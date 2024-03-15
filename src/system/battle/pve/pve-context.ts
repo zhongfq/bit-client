@@ -11,6 +11,7 @@ import {
     TMBuildingElement,
     TMDynamicElement,
     TMElement,
+    TMEventElement,
     TMMonsterElement,
     TMObjectElement,
     TMTileElemet,
@@ -116,6 +117,8 @@ export class PveContext extends Mediator implements ITMContext {
                     this.sender.addCollection(element.id, position);
                     break;
             }
+        } else if (element instanceof TMEventElement) {
+            // TODO: 事件元素的处理
         }
     }
 
@@ -138,6 +141,8 @@ export class PveContext extends Mediator implements ITMContext {
                     this.sender.removeCollection(element.id, position);
                     break;
             }
+        } else if (element instanceof TMEventElement) {
+            // TODO: 事件元素的处理
         }
     }
 

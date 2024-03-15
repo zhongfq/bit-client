@@ -5,6 +5,7 @@ import {
     TMBuildingElement,
     TMDynamicElement,
     TMElement,
+    TMEventElement,
     TMGroundElement,
     TMMonsterElement,
     TMRiverElement,
@@ -159,6 +160,8 @@ export class TMUtil {
                 return TMBuildingElement;
             case TMLayerName.Monster:
                 return TMMonsterElement;
+            case TMLayerName.Event:
+                return TMEventElement;
         }
         return null;
     }

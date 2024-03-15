@@ -502,6 +502,13 @@ export class TMBuildingElement extends TMObjectElement {
                 pos.z = dynamicElement.startY + j;
                 debugObj.transform.position = pos;
 
+                const sprite = debugObj.getChildAt(0) as Laya.Sprite3D;
+                const renderer = sprite.getComponent(Laya.MeshRenderer);
+                const mat = new Laya.UnlitMaterial();
+                mat.albedoColor = Laya.Color.BLUE; // new Laya.Color(85, 170, 255, 255);
+                mat.renderMode = Laya.MaterialRenderMode.RENDERMODE_TRANSPARENT;
+                renderer.material = mat;
+
                 debugObj.name = this.x + "_" + this.y + " (" + i + "," + j + ")";
                 this._tilemap.getRoot().getChildByName(this.layerName).addChild(debugObj);
             }
@@ -538,6 +545,53 @@ export class TMMonsterElement extends TMObjectElement {
         pos.y = 0;
         pos.z = this.y;
         this._debugObj.transform.position = pos;
+
+        const sprite = this._debugObj.getChildAt(0) as Laya.Sprite3D;
+        const renderer = sprite.getComponent(Laya.MeshRenderer);
+        const mat = new Laya.UnlitMaterial();
+        mat.albedoColor = Laya.Color.MAGENTA; // new Laya.Color(255, 85, 255, 255);
+        mat.renderMode = Laya.MaterialRenderMode.RENDERMODE_TRANSPARENT;
+        renderer.material = mat;
+
+        this._debugObj.name = this.x + "_" + this.y;
+        this._tilemap.getRoot().getChildByName(this.layerName).addChild(this._debugObj);
+    }
+
+    public override erase() {
+        this._debugObj?.removeSelf();
+        this._debugObj = undefined;
+    }
+}
+
+export class TMEventElement extends TMObjectElement {
+    private _debugObj?: Laya.Sprite3D;
+
+    public override async draw() {
+        if (this._debugObj) {
+            return;
+        }
+        if (!TMUtil.DEBUG_MODE) {
+            return;
+        }
+        const prefab = await Laya.loader.load(
+            "resources/prefab/world-map/test/debug-obj.lh",
+            Laya.Loader.HIERARCHY
+        );
+
+        this._debugObj = prefab.create() as Laya.Sprite3D;
+
+        const pos = this._debugObj.transform.position;
+        pos.x = this.x;
+        pos.y = 0;
+        pos.z = this.y;
+        this._debugObj.transform.position = pos;
+
+        const sprite = this._debugObj.getChildAt(0) as Laya.Sprite3D;
+        const renderer = sprite.getComponent(Laya.MeshRenderer);
+        const mat = new Laya.UnlitMaterial();
+        mat.albedoColor = Laya.Color.YELLOW; // new Laya.Color(255, 247, 0, 255);
+        mat.renderMode = Laya.MaterialRenderMode.RENDERMODE_TRANSPARENT;
+        renderer.material = mat;
 
         this._debugObj.name = this.x + "_" + this.y;
         this._tilemap.getRoot().getChildByName(this.layerName).addChild(this._debugObj);
