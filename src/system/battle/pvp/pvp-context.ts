@@ -157,9 +157,15 @@ export class PvpContext extends Mediator implements ITMContext {
                 currXZPos.x = Math.floor(currXZPos.x + 0.5);
                 currXZPos.y = selectedTile.transform.position.y;
                 currXZPos.z = Math.floor(currXZPos.z + 0.5);
-                console.log("select tile:", currXZPos.x, currXZPos.z);
                 selectedTile.active = true;
                 selectedTile.transform.position = currXZPos;
+                console.log("select tile:", currXZPos.x, currXZPos.z);
+                const troop = app.service.troop.list[0];
+                if (!troop || !troop.eid) {
+                    console.log("no troop");
+                    return;
+                }
+                app.service.pvp.requestTroopMoveTo(troop.eid, { x: currXZPos.x, y: currXZPos.z });
             }
         });
 

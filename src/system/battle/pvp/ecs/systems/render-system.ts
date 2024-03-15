@@ -139,14 +139,9 @@ export class RenderSystem extends ecs.System {
     }
 
     private async _loadBoard(board: BoardComponent) {
-        const transform = board.getComponent(TransformComponent);
-        if (!transform) {
-            return;
-        }
-        const element = board.getComponent(ElementComponent);
-        if (!element) {
-            return;
-        }
+        const transform = board.getComponent(TransformComponent)!;
+        const element = board.getComponent(ElementComponent)!;
+
         const table = app.service.table;
         const buildingRow = table.battleBuilding[element.tableId];
         const textureCfg = TMUtil.OBJECT_TEXTURE_CFG.get(buildingRow.texture_key);

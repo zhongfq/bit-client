@@ -20,6 +20,7 @@ import { ShopService } from "./system/shop/shop-service";
 import { SoldierService } from "./system/soldier/soldier-service";
 import { TableService } from "./system/table/table-service";
 import { TaskService } from "./system/task/task-service";
+import { TroopService } from "./system/troop/troop-service";
 import { UserService } from "./system/user/user-service";
 
 const { regClass, property } = Laya;
@@ -55,6 +56,7 @@ class ServiceManager {
     public readonly chest: ChestService;
     public readonly pvp: PvpService;
     public readonly soldier: SoldierService;
+    public readonly troop: TroopService;
 
     private _services: Service<NetworkService>[] = [];
 
@@ -73,6 +75,7 @@ class ServiceManager {
         this.chest = this.newService(ChestService);
         this.pvp = this.newService(PvpService);
         this.soldier = this.newService(SoldierService);
+        this.troop = this.newService(TroopService);
         // ignore log
         this.network.ignoreLog(opcode.user.c2s_ping);
         this.network.ignoreLog(opcode.user.s2c_ping);

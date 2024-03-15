@@ -151,6 +151,7 @@ export class RenderSystem extends ecs.System {
         const buildingRow = table.battleBuilding[element.tableId];
         const textureCfg = TMUtil.OBJECT_TEXTURE_CFG.get(buildingRow.texture_key);
 
+        // 通过 building 的位置 + 纹理配置信息推算 dynamic 的 gid 的位置
         const x = Math.floor(transform.position.x + (textureCfg?.tileX ?? 0));
         const y = Math.floor(transform.position.z + (textureCfg?.tileY ?? 0));
 

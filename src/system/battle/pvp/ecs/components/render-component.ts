@@ -1,8 +1,8 @@
 import * as ecs from "../../../../../core/ecs";
 import {
     HeadInfoData,
-    HeadInfoUI,
     HeadInfoStyle,
+    HeadInfoUI,
 } from "../../../../../ui-runtime/prefab/battle/HeadInfoUI";
 import { MovementComponent, TransformComponent } from "./movement-component";
 
@@ -36,7 +36,9 @@ export class AnimationComponent extends Renderable3D {
 
 export class ShadowComponent extends Renderable3D {}
 
-export class BoardComponent extends Renderable3D {}
+export class BoardComponent extends Renderable3D {
+    // public element?: TMDynamicElement | null;
+}
 
 export class HeadInfoComponent extends Renderable2D {
     public declare view: HeadInfoUI | null;

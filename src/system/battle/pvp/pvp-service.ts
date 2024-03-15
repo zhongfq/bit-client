@@ -1,4 +1,4 @@
-import { IVector3Like } from "../../../core/laya";
+import { IVector2Like, IVector3Like } from "../../../core/laya";
 import { Service } from "../../../core/service";
 import proto from "../../../def/proto";
 import { NetworkService } from "../../network/network-service";
@@ -21,6 +21,16 @@ export class PvpService extends Service<NetworkService> {
                 pos: { x: viewport.x, y: viewport.z },
             }),
             proto.world.s2c_change_viewport
+        );
+    }
+
+    public async requestTroopMoveTo(troopEid: number, dest: IVector2Like) {
+        return await this._network.call(
+            proto.world.c2s_troop_move_to.create({
+                troopEid: troopEid,
+                dstPos: dest,
+            }),
+            proto.world.s2c_troop_move_to
         );
     }
 }

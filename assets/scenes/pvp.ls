@@ -165,6 +165,11 @@
               "name": "monster"
             },
             {
+              "_$id": "b8rdr1bx",
+              "_$type": "Sprite3D",
+              "name": "event"
+            },
+            {
               "_$id": "o6rpiwoz",
               "_$prefab": "bd1abb40-cf2e-4803-a13b-162282a3357e",
               "name": "selected",

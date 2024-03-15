@@ -14,7 +14,7 @@ import { ChatService } from "../chat/chat-service";
 import { TableUtil } from "../table/table-util";
 
 @regClass()
-export class MainMediator extends Mediator {
+export class HomeMediator extends Mediator {
     public declare owner: HomeUI;
     public iframeElement: any;
     public divElement: any;
@@ -24,6 +24,9 @@ export class MainMediator extends Mediator {
         this.initBtn();
         this._initServiceEvent();
         this._initChat();
+
+        // 加载数据
+        app.service.troop.requestLoad();
     }
 
     private _initServiceEvent() {
