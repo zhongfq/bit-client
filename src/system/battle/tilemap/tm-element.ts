@@ -441,7 +441,7 @@ export class TMObjectElement extends TMElement {
     public showBlock() {
         for (let $x = this.startX; $x < this.startX + this.width; $x++) {
             for (let $y = this.startY; $y < this.startY + this.height; $y++) {
-                this._tilemap.showBlocks.set(TMUtil.XY_TO_KEY($x, $y), true);
+                this._tilemap.showBlocks.set(TMUtil.xyToKey($x, $y), true);
                 const element = this._tilemap.getElementByPos($x, $y, TMLayerName.Block);
                 element?.draw();
             }
@@ -451,7 +451,7 @@ export class TMObjectElement extends TMElement {
     public hideBlock() {
         for (let $x = this.startX; $x < this.startX + this.width; $x++) {
             for (let $y = this.startY; $y < this.startY + this.height; $y++) {
-                this._tilemap.showBlocks.delete(TMUtil.XY_TO_KEY($x, $y));
+                this._tilemap.showBlocks.delete(TMUtil.xyToKey($x, $y));
                 const element = this._tilemap.getElementByPos($x, $y, TMLayerName.Block);
                 element?.erase();
             }
@@ -479,7 +479,7 @@ export class TMBlockElement extends TMElement {
         if (this._blockTile) {
             return;
         }
-        const key = TMUtil.XY_TO_KEY(this.gridX, this.gridY);
+        const key = TMUtil.xyToKey(this.gridX, this.gridY);
         if (!this._tilemap.showBlocks.get(key)) {
             return;
         }

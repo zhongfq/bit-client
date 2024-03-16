@@ -25,16 +25,11 @@ export class TMUtil {
     public static readonly TILE_WIDTH = 128; // 瓦片宽度（单位：像素）
     public static readonly TILE_HEIGHT = 64; // 瓦片高度（单位：像素）
 
-    public static readonly XY_TO_KEY = (x: number, y: number) => {
+    public static readonly xyToKey = (x: number, y: number) => {
         return Math.floor(x) + "_" + Math.floor(y);
     };
 
-    public static readonly KEY_TO_XY = (key: string) => {
-        const arr = key.split("_");
-        return [Math.floor(Number(arr[0])), Math.floor(Number(arr[1]))];
-    };
-
-    public static readonly IN_RECT = (
+    public static readonly inRect = (
         x: number,
         y: number,
         rectX: number,

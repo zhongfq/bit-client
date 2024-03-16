@@ -43,7 +43,7 @@ export class Tilemap {
         gridY: number,
         props: Map<string, unknown>
     ): number | undefined {
-        return this._tryAddObj(gridX, gridY, eid, props);
+        return this._tryAddObj(gridX, gridY, props, eid);
     }
 
     /**
@@ -129,7 +129,7 @@ export class Tilemap {
                     const element = this._allMap.get(uid) as TMStaticElement | TMObjectElement;
                     if (
                         element &&
-                        TMUtil.IN_RECT(
+                        TMUtil.inRect(
                             gridX,
                             gridY,
                             element.startX,
@@ -142,7 +142,7 @@ export class Tilemap {
                     }
                 }
             } else {
-                const uid = uidMap.get(TMUtil.XY_TO_KEY(gridX, gridY)) ?? 0;
+                const uid = uidMap.get(TMUtil.xyToKey(gridX, gridY)) ?? 0;
                 const element = this._allMap.get(uid);
                 return element;
             }
@@ -204,7 +204,7 @@ export class Tilemap {
      */
     public isBlock(gridX: number, gridY: number): boolean {
         const uidMap = this._posMap.get(TMLayerName.Block);
-        const uid = uidMap?.get(TMUtil.XY_TO_KEY(gridX, gridY));
+        const uid = uidMap?.get(TMUtil.xyToKey(gridX, gridY));
         return Boolean(uid);
     }
 
@@ -396,7 +396,7 @@ export class Tilemap {
         for (let i = 0; i < this._world!.maps.length; i++) {
             const info = this._world!.maps[i];
 
-            const inRect = TMUtil.IN_RECT(gridX, gridY, info.x, info.y, info.width, info.height);
+            const inRect = TMUtil.inRect(gridX, gridY, info.x, info.y, info.width, info.height);
             if (!inRect) {
                 continue;
             }
@@ -420,29 +420,7 @@ export class Tilemap {
                 if (!props) {
                     continue;
                 }
-                const cls = TMUtil.layerToCls(layerName);
-                if (!cls) {
-                    continue;
-                }
-                let uidMap = this._posMap.get(layerName);
-                if (!uidMap) {
-                    uidMap = new Map();
-                    this._posMap.set(layerName, uidMap);
-                }
-                const key = TMUtil.XY_TO_KEY(gridX, gridY);
-                const uid = uidMap.get(key) ?? 0;
-
-                let element = this._allMap.get(uid);
-                if (!element) {
-                    element = TMElement.create(cls.name, cls);
-                    element.init(this, gridX, gridY, props, layerName);
-
-                    uidMap.set(key, element.uid);
-                    this._allMap.set(element.uid, element);
-
-                    element.draw();
-                    this.context.onAddElement(element);
-                }
+                this._tryAddObj(gridX, gridY, props);
             }
         }
     }
@@ -450,8 +428,8 @@ export class Tilemap {
     private _tryAddObj(
         gridX: number,
         gridY: number,
-        eid: number,
-        props: Map<string, unknown>
+        props: Map<string, unknown>,
+        eid?: number
     ): number | undefined {
         const layerName = TMLayerName.Object;
         const cls = TMUtil.layerToCls(layerName);
@@ -463,7 +441,7 @@ export class Tilemap {
             uidMap = new Map();
             this._posMap.set(layerName, uidMap);
         }
-        const key = TMUtil.XY_TO_KEY(gridX, gridY);
+        const key = TMUtil.xyToKey(gridX, gridY);
         const uid = uidMap.get(key) ?? 0;
 
         let element = this._allMap.get(uid);
@@ -484,7 +462,7 @@ export class Tilemap {
             if (filterFunc && !filterFunc(layerName)) {
                 return;
             }
-            const key = TMUtil.XY_TO_KEY(gridX, gridY);
+            const key = TMUtil.xyToKey(gridX, gridY);
             const uid = uidMap.get(key) ?? 0;
             const element = this._allMap.get(uid);
 
