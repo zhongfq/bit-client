@@ -39,7 +39,7 @@ export class ShadowComponent extends Renderable3D {}
 
 export class BoardComponent extends Renderable3D {
     public textureKey?: string;
-    // public element?: TMDynamicElement | null;
+    public props: Map<string, unknown> = new Map();
 }
 
 export class HeadInfoComponent extends Renderable2D {

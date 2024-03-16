@@ -2,6 +2,7 @@ import { app } from "../../../../../app";
 import * as ecs from "../../../../../core/ecs";
 import { WorldConf } from "../../../../../def/world";
 import { HeadInfoUI } from "../../../../../ui-runtime/prefab/battle/HeadInfoUI";
+import { Tilemap } from "../../../tilemap/tilemap";
 import { TMPropKey } from "../../../tilemap/tm-def";
 import { PvpContext } from "../../pvp-context";
 import { MovementComponent, TransformComponent } from "../components/movement-component";
@@ -48,6 +49,7 @@ export class RenderSystem extends ecs.System {
             component.view = null;
         } else if (component instanceof BoardComponent) {
             const tilemap = this.ecs.getSingletonComponent(TilemapComponent)!;
+            component.props.set(TMPropKey.OWNER, Tilemap);
             tilemap.delObjectElementByEid(component.eid);
         } else if (component instanceof TroopComponent) {
             component.hero?.destroy();
@@ -178,9 +180,9 @@ export class RenderSystem extends ecs.System {
         let offsetX = 0;
         let offsetZ = 0;
 
-        const props = new Map<string, unknown>();
         if (etype === ETYPE.CITY) {
-            props.set(TMPropKey.TextureKey, board.textureKey!);
+            board.props.set(TMPropKey.TextureKey, board.textureKey!);
+            board.props.set(TMPropKey.OWNER, RenderSystem);
             const cfg = app.service.table.textureCfg[board.textureKey!]!;
             offsetX = -cfg.tile_w / 2;
             offsetZ = -cfg.tile_h / 2;
@@ -196,15 +198,11 @@ export class RenderSystem extends ecs.System {
         // } else if (etype === ETYPE.) {
         //     // TODO：其他实体类型的属性待定义
         // }
-        if (props.size == 0) {
-            console.error("");
-            return;
-        }
 
         const gridX = Math.floor(transform.position.x + offsetX);
         const gridY = Math.floor(transform.position.z + offsetZ);
         const tilemap = this.ecs.getSingletonComponent(TilemapComponent)!;
-        tilemap.addObjectElement(board.eid, gridX, gridY, props);
+        tilemap.addObjectElement(board.eid, gridX, gridY, board.props);
     }
 
     private _collectTroopAnimator(troop: TroopComponent, view: Laya.Sprite3D) {
