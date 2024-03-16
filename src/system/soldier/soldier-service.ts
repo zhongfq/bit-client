@@ -87,9 +87,23 @@ export class SoldierService extends Service<NetworkService> {
         }
     }
 
-    private _notifySlodiers(data: proto.soldier.notify_slodiers) {}
+    private _notifySlodiers(data: proto.soldier.notify_slodiers) {
+        for (const soldierCmd of data.soldiers) {
+            const vo = new SoldierVo();
+            vo.initByCmd(soldierCmd as proto.soldier.SoldierInfo);
+            this.soldierBag.onAdd(vo);
+        }
+        this.event(SoldierService.SOLDIER_SOLDIER_UPDATE);
+    }
 
-    private _notifyPendants(data: proto.soldier.notify_pendants) {}
+    private _notifyPendants(data: proto.soldier.notify_pendants) {
+        for (const pendantCmd of data.pendants) {
+            const vo = new SoldierPendantVo();
+            vo.initByCmd(pendantCmd as proto.soldier.PendantInfo);
+            this.soldierPendantBag.onAdd(vo);
+        }
+        this.event(SoldierService.SOLDIER_PENDANT_UPDATE);
+    }
 
     /**
      * 加载士兵
