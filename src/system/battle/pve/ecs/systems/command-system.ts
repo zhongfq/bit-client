@@ -138,8 +138,8 @@ export class CommandSystem extends ecs.System implements ICommandSender {
             movement.velocity.x = 0;
             movement.velocity.y = 0;
             movement.velocity.z = 0;
-            movement.track = null;
-            movement.target = null;
+            movement.track = undefined;
+            movement.target = undefined;
             transform.position.cloneFrom(position);
             transform.flag |= TransformComponent.POSITION;
             this.playAnim(eid, ElementAnimation.IDLE);

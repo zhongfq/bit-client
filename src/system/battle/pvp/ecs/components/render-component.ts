@@ -101,4 +101,6 @@ export class TroopComponent extends ecs.Component {
 
     public formation!: Readonly<IVector3Like>[];
     public heroId: number = 0;
+
+    public animators: Laya.Animator[] = [];
 }

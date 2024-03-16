@@ -34,6 +34,7 @@ export class Mediator extends Laya.Script {
     }
 
     public override onDestroy() {
+        console.debug(`[DEBUG] destroy ${this.constructor.name}`);
         for (const listener of this._listeners) {
             const { type, target, callback, thisArg } = listener;
             target.off(toEventType(type), thisArg, callback);

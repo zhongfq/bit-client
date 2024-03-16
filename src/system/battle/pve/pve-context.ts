@@ -65,6 +65,12 @@ export class PveContext extends Mediator implements ITMContext {
         return TMMode.PVE;
     }
 
+    public override onDestroy() {
+        this._ecs.destroy();
+        this._pveServer.destroy();
+        super.onDestroy();
+    }
+
     public override onAwake() {
         this._ecs = new ecs.World(this);
         this._ecs.addSingletonComponent(CameraComponent);

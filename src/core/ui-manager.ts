@@ -19,9 +19,7 @@ export interface UIDescriptor {
     id: number;
     url: string;
     blockInput?: boolean;
-    autoClose?: boolean;
     capture?: boolean;
-    autoDestroy?: boolean;
 }
 
 export interface UIAlertArgs {
@@ -111,12 +109,11 @@ export class UIManager {
     private _doCloseScene(scene: Laya.Scene) {
         scene.offAllCaller(this);
 
-        scene.close();
-
-        const descriptor = this._checkDescriptor(scene.url);
-        if (descriptor?.autoClose) {
-            scene.destroy();
+        if (!scene.destroyed) {
+            scene.autoDestroyAtClosed = true;
+            scene.close();
         }
+
         //TODO 切换场景会导致资源消失
         // Laya.Scene.gc();
     }

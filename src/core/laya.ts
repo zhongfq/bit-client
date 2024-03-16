@@ -198,7 +198,12 @@ Laya.Pool.obtain = function <T>(cls: Constructor<T>): T {
 };
 
 Laya.Pool.free = function <T>(obj: T): void {
-    if (obj) {
+    if (obj instanceof Array) {
+        for (const v of obj) {
+            Laya.Pool.free(v);
+        }
+        obj.length = 0;
+    } else if (obj) {
         Laya.Pool.recoverByClass(obj);
     }
 };

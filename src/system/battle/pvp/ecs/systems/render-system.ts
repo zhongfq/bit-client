@@ -57,6 +57,7 @@ export class RenderSystem extends ecs.System {
                 soldier.destroy();
             });
             component.soldiers.length = 0;
+            component.animators.length = 0;
             component.view?.destroy();
             component.view = null;
         }
@@ -207,6 +208,15 @@ export class RenderSystem extends ecs.System {
         tilemap.addObjectElement(board.eid, gridX, gridY, props);
     }
 
+    private _collectTroopAnimator(troop: TroopComponent, view: Laya.Sprite3D) {
+        const animator = view.getChildByName("anim")?.getComponent(Laya.Animator);
+        if (!animator) {
+            console.error(`no animator in '${view.url}'`);
+        } else {
+            troop.animators.push(animator);
+        }
+    }
+
     private async _loadTroop(troop: TroopComponent) {
         const table = app.service.table;
         const heroRow = table.hero[troop.heroId];
@@ -225,10 +235,12 @@ export class RenderSystem extends ecs.System {
         troop.view.addChild(group);
         troop.hero = heroPrefable.create() as Laya.Sprite3D;
         troop.hero.transform.localRotationEulerY = 90;
+        this._collectTroopAnimator(troop, troop.hero);
         group.addChild(troop.hero);
-        // group.transform.localScaleX = 0.5;
-        // group.transform.localScaleY = 0.5;
-        // group.transform.localScaleZ = 0.5;
+        group.transform.localPositionX = 0.5;
+        group.transform.localScaleX = 0.5;
+        group.transform.localScaleY = 0.5;
+        group.transform.localScaleZ = 0.5;
         troop.formation.forEach((p, idx) => {
             if (idx >= 12) {
                 return;
@@ -243,6 +255,7 @@ export class RenderSystem extends ecs.System {
             position.cloneFrom(p);
             soldier.transform.localPosition = position;
             soldier.transform.localRotationEulerY = 90;
+            this._collectTroopAnimator(troop, soldier);
             group.addChild(soldier);
         });
         this.context.owner.roles.addChild(troop.view);

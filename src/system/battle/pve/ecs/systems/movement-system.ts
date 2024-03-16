@@ -39,9 +39,11 @@ export class MovementSystem extends ecs.System {
         const velocity = movement.velocity;
         const target = movement.target;
 
-        position.x += velocity.x * dt;
-        position.z += velocity.z * dt;
-        transform.flag |= TransformComponent.POSITION;
+        if (velocity.x !== 0 || velocity.z !== 0) {
+            position.x += velocity.x * dt;
+            position.z += velocity.z * dt;
+            transform.flag |= TransformComponent.POSITION;
+        }
 
         if (target) {
             const offsetX = target.x - position.x;
@@ -55,7 +57,7 @@ export class MovementSystem extends ecs.System {
                 velocity.z = 0;
             }
             if (velocity.x === 0 && velocity.z === 0) {
-                movement.target = null;
+                movement.target = undefined;
                 movement.type == MovementType.NONE;
             }
         }

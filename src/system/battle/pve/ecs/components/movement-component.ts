@@ -57,11 +57,11 @@ class RotationInterpolation {
 export class MovementComponent extends ecs.Component {
     public type: MovementType = MovementType.NONE;
 
-    public target: Laya.Vector3 | null = null;
+    public target?: Laya.Vector3;
     public velocity: Laya.Vector3 = new Laya.Vector3();
 
     // 轨迹方式移动
-    public track: Track | null = null;
+    public track?: Track;
     public trackType: TrackType = TrackType.NONE;
 
     // 改变角度

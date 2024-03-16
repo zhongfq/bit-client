@@ -15,10 +15,15 @@ class Location extends Laya.Vector3 {
 }
 
 export class MovementComponent extends ecs.Component {
+    public static readonly UPDATE = 1 << 0;
+
+    public flag: number = 0;
     public startTime: number = 0; // 开始时间(秒)
     public speed: number = 0; // 每秒多少格
+    public ratio: number = 1;
+    public index: number = 0;
     public paths: Laya.Vector3[] = [];
 
-    public current: Location = new Location();
-    public next: Location = new Location();
+    public target?: Laya.Vector3;
+    public velocity: Laya.Vector3 = new Laya.Vector3();
 }

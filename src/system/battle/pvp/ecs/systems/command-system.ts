@@ -8,7 +8,12 @@ import { WorldConf } from "../../../../../def/world";
 import { PvpContext } from "../../pvp-context";
 import { MovementComponent, TransformComponent } from "../components/movement-component";
 import { OwnerComponent } from "../components/owner-component";
-import { BoardComponent, ElementComponent, TroopComponent } from "../components/render-component";
+import {
+    BoardComponent,
+    ElementAnimation,
+    ElementComponent,
+    TroopComponent,
+} from "../components/render-component";
 
 export class CommandSystem extends ecs.System {
     public declare context: PvpContext;
@@ -53,6 +58,11 @@ export class CommandSystem extends ecs.System {
     private _notifyAlliances(notify: proto.world.notify_alliances) {}
 
     private _addEntity(cmd: proto.world.Entity) {
+        if (this.ecs.getEntity(cmd.eid)) {
+            console.error(`duplicate add entity: eid=${cmd.eid} etype=${cmd.etype}`);
+            return;
+        }
+
         const ETYPE = WorldConf.ENTITY_TYPE;
 
         const entity = this.ecs.createEntity(cmd.eid);
@@ -68,6 +78,10 @@ export class CommandSystem extends ecs.System {
             transform.position.x = data.x;
             transform.position.z = data.y;
             transform.flag |= TransformComponent.POSITION;
+
+            if (entity.etype === ETYPE.TROOP) {
+                this._adjustOffset(transform.position);
+            }
         }
 
         if (cmd.owner) {
@@ -85,7 +99,6 @@ export class CommandSystem extends ecs.System {
             const troop = entity.addComponent(TroopComponent);
             troop.formation = formation;
             troop.heroId = data.heroId;
-
             entity.addComponent(MovementComponent);
         }
 
@@ -115,21 +128,32 @@ export class CommandSystem extends ecs.System {
 
     private _moveAction(cmd: proto.world.MoveAction) {
         const element = this._findElement(cmd.eid);
-        if (element) {
+        if (element && cmd.path.length > 1) {
             const transform = element.transform;
             const movement = element.movement;
             transform.position.x = cmd.curPos?.x ?? 0;
             transform.position.z = cmd.curPos?.y ?? 0;
+            this._adjustOffset(transform.position);
+            transform.flag |= TransformComponent.POSITION;
             movement.speed = cmd.speed;
             movement.startTime = cmd.startMs / 1000;
-            movement.next.cursor = 0;
-            movement.current.cursor = 0;
+            Laya.Pool.free(movement.paths);
             cmd.path.forEach((p) => {
                 const pos = Laya.Pool.obtain(Laya.Vector3);
-                pos.set(p.x ?? 0, 0, p.y ?? 0);
+                this._adjustOffset(pos.set(p.x ?? 0, 0, p.y ?? 0));
                 movement.paths.push(pos);
             });
+            movement.index = 0;
+            movement.flag |= MovementComponent.UPDATE;
+
+            this.playAnim(cmd.eid, ElementAnimation.RUN);
         }
+    }
+
+    private _adjustOffset(pos: Laya.Vector3): Laya.Vector3 {
+        pos.x -= 0.5;
+        pos.z -= 0.5;
+        return pos;
     }
 
     private _findElement(eid: number) {
@@ -138,5 +162,31 @@ export class CommandSystem extends ecs.System {
             console.warn(`not found entity: ${eid}`);
         }
         return element;
+    }
+
+    public playAnim(eid: number, name: ElementAnimation) {
+        const element = this._findElement(eid);
+        if (!element) {
+            return;
+        }
+
+        const troop = element.getComponent(TroopComponent);
+        if (troop) {
+            for (const animator of troop.animators) {
+                switch (name) {
+                    case ElementAnimation.ATTACK: {
+                        console.log("TODO: play attack");
+                        break;
+                    }
+                    case ElementAnimation.IDLE:
+                        animator.play("idle");
+                        break;
+                    case ElementAnimation.RUN: {
+                        animator.play("run");
+                        break;
+                    }
+                }
+            }
+        }
     }
 }

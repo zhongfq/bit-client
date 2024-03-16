@@ -63,12 +63,10 @@ export module ui {
         });
         app.ui.register({
             id: ui.LOGIN_SCENE,
-            autoClose: true,
             url: "scenes/login.ls",
         });
         app.ui.register({
             id: ui.LOADING_SCENE,
-            autoClose: true,
             url: "scenes/loading.ls",
         });
         app.ui.register({
@@ -104,75 +102,73 @@ export module ui {
         });
         app.ui.register({
             id: ui.HOME_SCENE,
-            autoClose: true,
             url: "scenes/home.ls",
             blockInput: true,
         });
         app.ui.register({
             id: ui.BAG_BOX_USE,
-            autoClose: false,
             url: "resources/prefab/bag/item-box-use.lh",
             blockInput: true,
         });
         app.ui.register({
             id: ui.TASK,
-            autoClose: false,
+
             url: "resources/prefab/task/task.lh",
             blockInput: true,
         });
 
         app.ui.register({
             id: ui.MAIL,
-            autoClose: false,
+
             url: "resources/prefab/mail/mail.lh",
             blockInput: true,
         });
 
         app.ui.register({
             id: ui.MAIL_INFO,
-            autoClose: false,
+
             url: "resources/prefab/mail/mail-info.lh",
             blockInput: true,
         });
 
         app.ui.register({
             id: ui.SHOP,
-            autoClose: false,
+
             url: "resources/prefab/shop/shop.lh",
             blockInput: true,
         });
 
         app.ui.register({
             id: ui.SHOP_BUY,
-            autoClose: false,
+
             url: "resources/prefab/shop/shop-buy.lh",
             blockInput: true,
         });
 
         app.ui.register({
             id: ui.ALLIANCE,
-            autoClose: false,
+
             url: "resources/prefab/alliance/alliance.lh",
             blockInput: true,
         });
 
         app.ui.register({
             id: ui.CHAT,
-            autoClose: false,
+
             url: "resources/prefab/chat/chat.lh",
             blockInput: true,
         });
 
         app.ui.register({
             id: ui.CHEST_HERO,
-            autoClose: false,
+
             url: "resources/prefab/chest/chest-hero.lh",
             blockInput: true,
         });
 
         app.ui.register({
             id: ui.REWARD,
-            autoClose: false,
+
             url: "resources/prefab/common/dialog/reward.lh",
             blockInput: true,
         });

@@ -267,11 +267,13 @@ export class Tree {
             console.log(`---------------- debug ai: ${this.name} --------------------`);
         }
         if (stack.length > 0) {
-            while (stack.length > 0) {
-                const node = stack[env.stack.length - 1];
+            let node = stack.at(-1);
+            while (node) {
                 const status = node.run(env);
                 if (status === Status.RUNNING) {
                     break;
+                } else {
+                    node = stack.at(-1);
                 }
             }
         } else {

@@ -1,46 +1,67 @@
 import * as ecs from "../../../../../core/ecs";
+import { MathUtil } from "../../../../../core/utils/math-util";
 import { PvpContext } from "../../pvp-context";
 import { MovementComponent, TransformComponent } from "../components/movement-component";
+import { ElementAnimation } from "../components/render-component";
+import { CommandSystem } from "./command-system";
 
 export class MovementSystem extends ecs.System {
     public declare context: PvpContext;
 
-    public override onAddComponent(component: ecs.Component) {
-        if (component instanceof MovementComponent) {
-            const movement = component;
-            movement.current.cursor = 0;
-            movement.next.cursor = 0;
-        }
+    private _setup(movement: MovementComponent) {
+        const index = movement.index;
+        const velocity = movement.velocity;
+        const p0 = movement.paths[index];
+        const p1 = movement.paths[index + 1];
+        movement.target = p1;
+        const rad = Math.atan2(p1.z - p0.z, p1.x - p0.x);
+        velocity.x = Math.cos(rad) * movement.speed;
+        velocity.z = Math.sin(rad) * movement.speed;
+
+        const transform = movement.getComponent(TransformComponent)!;
+        transform.rotation = MathUtil.toDegree(Math.atan2(-velocity.z, velocity.x));
+        transform.flag |= TransformComponent.ROTATION;
     }
 
     public override update(dt: number) {
         this.ecs.getComponents(MovementComponent).forEach((movement) => {
-            if (movement.speed <= 0) {
-                return;
-            }
-            const current = movement.current;
-            const next = movement.next;
-            const transform = movement.entity.getComponent(TransformComponent)!;
+            const transform = movement.getComponent(TransformComponent)!;
             const position = transform.position;
-            next.cursor += movement.speed * dt;
-            if (next.cursor >= 1) {
-                const paths = movement.paths;
-                ++current.cursor;
-                if (current.cursor < paths.length - 1) {
-                    next.cursor = 0;
-                    current.cloneFrom(paths[current.cursor]);
-                    next.cloneFrom(paths[current.cursor + 1]);
-                } else {
-                    movement.speed = 0;
-                    movement.paths.forEach((p) => {
-                        Laya.Pool.free(p);
-                    });
-                    movement.paths.length = 0;
-                }
-            } else {
-                position.x = current.x + (next.x - current.x) * next.cursor;
-                position.z = current.z + (next.z - current.z) * next.cursor;
+            const velocity = movement.velocity;
+            const target = movement.target;
+
+            if (movement.flag & MovementComponent.UPDATE) {
+                movement.flag &= ~MovementComponent.UPDATE;
+                this._setup(movement);
+            }
+
+            if (velocity.x !== 0 || velocity.z !== 0) {
+                position.x += velocity.x * dt;
+                position.z += velocity.z * dt;
                 transform.flag |= TransformComponent.POSITION;
+            }
+
+            if (target) {
+                const offsetX = target.x - position.x;
+                const offsetZ = target.z - position.z;
+                if (offsetX === 0 || offsetX * velocity.x < 0) {
+                    position.x = target.x;
+                    velocity.x = 0;
+                }
+                if (offsetZ === 0 || offsetZ * velocity.z < 0) {
+                    position.z = target.z;
+                    velocity.z = 0;
+                }
+                if (velocity.x === 0 && velocity.z === 0) {
+                    movement.target = undefined;
+                    if (++movement.index < movement.paths.length - 1) {
+                        this._setup(movement);
+                    } else {
+                        this.ecs
+                            .getSystem(CommandSystem)
+                            ?.playAnim(movement.eid, ElementAnimation.IDLE);
+                    }
+                }
             }
         });
     }

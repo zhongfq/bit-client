@@ -8,6 +8,7 @@ import { res } from "../../../misc/res";
 import { PvpUI } from "../../../ui-runtime/scene/PvpUI";
 import { ITMContext, TMMode } from "../tilemap/tm-def";
 import { TMElement, TMDebugElement, TMTileElemet } from "../tilemap/tm-element";
+import { TMUtil } from "../tilemap/tm-util";
 import { CameraComponent } from "./ecs/components/camera-component";
 import { TilemapComponent } from "./ecs/components/tilemap-component";
 import { CameraSystem } from "./ecs/systems/camera-system";
@@ -46,6 +47,11 @@ export class PvpContext extends Mediator implements ITMContext {
         return TMMode.PVP;
     }
 
+    public override onDestroy() {
+        this._ecs.destroy();
+        super.onDestroy();
+    }
+
     public onAddElement(element: TMElement): void {}
 
     public onDelElement(element: TMElement): void {}
@@ -72,6 +78,9 @@ export class PvpContext extends Mediator implements ITMContext {
 
         Laya.loader.load(res.BATTLE_HP_NUM);
         Laya.loader.load(res.BATTLE_HP_NUM_X);
+
+        //TODO: tm
+        TMUtil.DEBUG_MODE = true;
     }
 
     public override onUpdate() {

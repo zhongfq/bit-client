@@ -25,13 +25,13 @@ import { ElementCreator, UpdateHp } from "./pve-defs";
 const _tmpVelocity = new Laya.Vector3();
 const SOLDIER_COUNT = 12;
 
+const tmpT3d: Laya.Transform3D = new Laya.Transform3D();
+
 export class PveServer extends b3.Context {
     private _ecs: ecs.World;
 
     private _loader: Loader = new Loader();
     private _sender: ICommandSender;
-
-    private _transform3D: Laya.Transform3D = new Laya.Transform3D();
 
     private _aiTrees: Map<string, b3.Tree> = new Map();
     private _stanceMap: Map<number, ElementComponent> = new Map();
@@ -47,6 +47,10 @@ export class PveServer extends b3.Context {
         this._ecs.addSystem(MovementSystem);
         this._ecs.addSystem(SkillSystem);
         this._ecs.addSystem(CacheSystem);
+    }
+
+    public destroy() {
+        this._ecs.destroy();
     }
 
     public get ecs() {
@@ -131,11 +135,10 @@ export class PveServer extends b3.Context {
         follower: FollowerComponent,
         out: Laya.Vector3
     ) {
-        const t3d = this._transform3D;
-        t3d.localPosition = hero.transform.position;
-        t3d.localRotationEulerY = -hero.transform.rotation;
+        tmpT3d.localPosition = hero.transform.position;
+        tmpT3d.localRotationEulerY = -hero.transform.rotation;
         out.cloneFrom(follower.offset);
-        t3d.localToGlobal(out, out);
+        tmpT3d.localToGlobal(out, out);
     }
 
     //-------------------------------------------------------------------------
