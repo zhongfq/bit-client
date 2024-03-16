@@ -250,10 +250,10 @@ export class TMStaticElement extends TMElement {
 
         const sprite = this._root.getChildAt(0) as Laya.Sprite3D;
         const resName = this._tilemap.getTextureResName(TMTextureName.Static, this.gid);
-        const textureCfg = TMUtil.STATIC_TEXTURE_CFG.get(resName);
+        const textureCfg = app.service.table.textureCfg[resName];
 
-        this._startX = Math.floor(this.gridX - (textureCfg?.tileX ?? 0));
-        this._startY = Math.floor(this.gridY - (textureCfg?.tileY ?? 0));
+        this._startX = Math.floor(this.gridX - (textureCfg?.tile_x ?? 0));
+        this._startY = Math.floor(this.gridY - (textureCfg?.tile_y ?? 0));
 
         const objPos = this._root.transform.position;
         objPos.x = this._startX;
@@ -262,9 +262,9 @@ export class TMStaticElement extends TMElement {
         this._root.transform.position = objPos;
 
         const spritePos = sprite.transform.localPosition;
-        spritePos.x = textureCfg?.offsetX ?? 0;
-        spritePos.y = textureCfg?.offsetY ?? 0;
-        spritePos.z = textureCfg?.offsetZ ?? 0;
+        spritePos.x = textureCfg?.offset_x ?? 0;
+        spritePos.y = textureCfg?.offset_y ?? 0;
+        spritePos.z = textureCfg?.offset_z ?? 0;
         sprite.transform.localPosition = spritePos;
 
         sprite.transform.localScaleX = textureCfg?.scale ?? 1;
@@ -282,8 +282,8 @@ export class TMStaticElement extends TMElement {
         mat.renderMode = Laya.MaterialRenderMode.RENDERMODE_TRANSPARENT;
         renderer.material = mat;
 
-        this._width = textureCfg?.tileW ?? 1;
-        this._height = textureCfg?.tileH ?? 1;
+        this._width = textureCfg?.tile_w ?? 1;
+        this._height = textureCfg?.tile_h ?? 1;
 
         this._root.name = this.startX + "_" + this.startY + " | " + resName;
         this._tilemap.getRoot().getChildByName(this.layerName).addChild(this._root);
@@ -339,7 +339,7 @@ export class TMObjectElement extends TMElement {
 
         const sprite = this._board.getChildAt(0) as Laya.Sprite3D;
         const defaultRes = this.props.get(TMPropKey.TextureKey) as string;
-        const textureCfg = TMUtil.OBJECT_TEXTURE_CFG.get(defaultRes);
+        const textureCfg = app.service.table.textureCfg[defaultRes];
 
         const objPos = this._board.transform.position;
         objPos.x = this.gridX;
@@ -348,9 +348,9 @@ export class TMObjectElement extends TMElement {
         this._board.transform.position = objPos;
 
         const spritePos = sprite.transform.localPosition;
-        spritePos.x = textureCfg?.offsetX ?? 0;
-        spritePos.y = textureCfg?.offsetY ?? 0;
-        spritePos.z = textureCfg?.offsetZ ?? 0;
+        spritePos.x = textureCfg?.offset_x ?? 0;
+        spritePos.y = textureCfg?.offset_y ?? 0;
+        spritePos.z = textureCfg?.offset_z ?? 0;
         sprite.transform.localPosition = spritePos;
         this._originPos.set(spritePos.x, spritePos.y, spritePos.z);
 
@@ -366,8 +366,8 @@ export class TMObjectElement extends TMElement {
         this._startX = this.gridX;
         this._startY = this.gridY;
 
-        this._width = textureCfg?.tileW ?? 1;
-        this._height = textureCfg?.tileH ?? 1;
+        this._width = textureCfg?.tile_w ?? 1;
+        this._height = textureCfg?.tile_h ?? 1;
 
         this._board.name = this.startX + "_" + this.startY + " | " + defaultRes;
         this._tilemap.getRoot().getChildByName(this.layerName).addChild(this._board);
@@ -536,11 +536,11 @@ export class TMBuildingElement extends TMDebugElement {
 
         if (mode == TMMode.PVE) {
             const buildingRow = app.service.table.battleBuilding[this.id];
-            textureCfg = TMUtil.OBJECT_TEXTURE_CFG.get(buildingRow.texture_key);
+            textureCfg = app.service.table.textureCfg[buildingRow.texture_key];
         } else if (mode == TMMode.PVP) {
             // TODO：先临时读 battle_building 表，后面需要改读 world_building 表
             const buildingRow = app.service.table.battleBuilding[this.id];
-            textureCfg = TMUtil.OBJECT_TEXTURE_CFG.get(buildingRow.texture_key);
+            textureCfg = app.service.table.textureCfg[buildingRow.texture_key];
         }
 
         if (!textureCfg) {
@@ -550,8 +550,8 @@ export class TMBuildingElement extends TMDebugElement {
             "resources/prefab/world-map/test/debug-obj.lh",
             Laya.Loader.HIERARCHY
         );
-        for (let i = 0; i < textureCfg.tileW; i++) {
-            for (let j = 0; j < textureCfg.tileH; j++) {
+        for (let i = 0; i < textureCfg.tile_w; i++) {
+            for (let j = 0; j < textureCfg.tile_h; j++) {
                 const debugObj = prefab.create() as Laya.Sprite3D;
                 this._debugObjs.push(debugObj);
 

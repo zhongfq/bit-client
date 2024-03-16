@@ -19,6 +19,7 @@ import {
     SkillTable,
     SoldierTable,
     TaskTable,
+    TextureCfgTable,
     WorldEntityTable,
 } from "../../def/table";
 import { res } from "../../misc/res";
@@ -43,6 +44,7 @@ export class TableService extends Service<NetworkService> {
     public skill!: SkillTable;
     public soldier!: SoldierTable;
     public task!: TaskTable;
+    public textureCfg!: TextureCfgTable;
     public worldEntity!: WorldEntityTable;
 
     public constructor(network: NetworkService) {
@@ -67,6 +69,7 @@ export class TableService extends Service<NetworkService> {
         this.skill = await app.loader.loadJson(res.TABLE_SKILL_TABLE);
         this.soldier = await app.loader.loadJson(res.TABLE_SOLDIER_TABLE);
         this.task = await app.loader.loadJson(res.TABLE_TASK_TABLE);
+        this.textureCfg = await app.loader.loadJson(res.TABLE_TEXTURE_CFG_TABLE);
         this.worldEntity = await app.loader.loadJson(res.TABLE_ENTITY_TABLE);
     }
 

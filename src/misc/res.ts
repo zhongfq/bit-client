@@ -18,6 +18,7 @@ export module res {
     export const TABLE_SKILL_TABLE = "resources/data/skill.json";
     export const TABLE_SOLDIER_TABLE = "resources/data/soldier.json";
     export const TABLE_TASK_TABLE = "resources/data/task.json";
+    export const TABLE_TEXTURE_CFG_TABLE = "resources/data/texture-cfg.json";
 
     export const BATTLE_HP_NUM = "resources/prefab/battle/ui/hp-num.lh";
     export const BATTLE_HP_NUM_X = "resources/prefab/battle/ui/hp-num-x.lh";

@@ -30,6 +30,7 @@ import {
     GeneratedTaskBranchRow,
     GeneratedTaskDailyRow,
     GeneratedTaskMainRow,
+    GeneratedTextureCfgRow,
     GeneratedWorldEntityModelsRow,
     GeneratedSoldierPendantRow,
     GeneratedRoleTrainRow,
@@ -89,7 +90,14 @@ export interface BattleBuildingRow extends GeneratedBattleBuildingRow {}
 export type BattleBuildingTable = {
     [k: string]: BattleBuildingRow;
 };
+//-----------------------------------------------------------------------------
+// 纹理配置
+//-----------------------------------------------------------------------------
+export interface TextureCfgRow extends GeneratedTextureCfgRow {}
 
+export type TextureCfgTable = {
+    [k: string]: TextureCfgRow;
+};
 //-----------------------------------------------------------------------------
 // 武将
 //-----------------------------------------------------------------------------

@@ -182,9 +182,9 @@ export class RenderSystem extends ecs.System {
         const props = new Map<string, unknown>();
         if (etype === ETYPE.CITY) {
             props.set(TMPropKey.TextureKey, board.textureKey!);
-            const cfg = TMUtil.OBJECT_TEXTURE_CFG.get(board.textureKey!)!;
-            offsetX = -cfg.tileW / 2;
-            offsetZ = -cfg.tileH / 2;
+            const cfg = app.service.table.textureCfg[board.textureKey!]!;
+            offsetX = -cfg.tile_w / 2;
+            offsetZ = -cfg.tile_h / 2;
         }
         // if (
         //     etype == ETYPE.BUILDING ||

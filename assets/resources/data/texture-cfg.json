@@ -1,13 +1,75 @@
 {
+    "map_Grassland_Tree_01": {
+        "id": "map_Grassland_Tree_01",
+        "offset_x": 0.51987,
+        "offset_y": 1.22977,
+        "offset_z": 0.48983,
+        "scale": 3,
+        "tile_h": 2,
+        "tile_w": 2,
+        "tile_x": 0,
+        "tile_y": 1
+    },
+    "map_Grassland_Tree_02": {
+        "id": "map_Grassland_Tree_02",
+        "offset_x": 1.43997,
+        "offset_y": 1.34993,
+        "offset_z": 1.39997,
+        "scale": 3,
+        "tile_h": 3,
+        "tile_w": 3,
+        "tile_x": 1,
+        "tile_y": 2
+    },
+    "map_Grassland_Tree_03": {
+        "id": "map_Grassland_Tree_03",
+        "offset_x": 1.55997,
+        "offset_y": 1.24993,
+        "offset_z": 1.41997,
+        "scale": 3,
+        "tile_h": 3,
+        "tile_w": 3,
+        "tile_x": 1,
+        "tile_y": 2
+    },
     "map_Grassland_hill_01": {
         "id": "map_Grassland_hill_01",
         "offset_x": 1.44996,
-        "offset_y": 1.44996,
+        "offset_y": 1.49997,
         "offset_z": 1.51993,
         "scale": 4.5,
         "tile_h": 4,
         "tile_w": 4,
         "tile_x": 1,
+        "tile_y": 3
+    },
+    "map_Grassland_hill_02": {
+        "id": "map_Grassland_hill_02",
+        "offset_x": 1.21997,
+        "offset_y": 1.49997,
+        "offset_z": 1.32993,
+        "scale": 3,
+        "tile_h": 3,
+        "tile_w": 3,
+        "tile_x": 1,
         "tile_y": 2
+    },
+    "map_biulding_castle01": {
+        "id": "map_biulding_castle01",
+        "offset_x": 3.14974,
+        "offset_y": 2.09952,
+        "offset_z": 2.18969,
+        "scale": 6,
+        "tile_h": 5,
+        "tile_w": 5
+    },
+    "map_gather_wood1-1": {
+        "id": "map_gather_wood1-1",
+        "offset_x": -0.06037,
+        "offset_y": 1.0398,
+        "offset_z": -0.12026,
+        "scale": 3,
+        "tile_h": 1,
+        "tile_w": 1
     }
 }
