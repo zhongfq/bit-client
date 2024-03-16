@@ -2,111 +2,147 @@
     "1": {
         "anim": "attack",
         "cd": 1.5,
+        "desc": "近战普攻",
         "id": 1,
         "lanuch_btree": "attack",
+        "name": "近战普攻",
         "type": 0
     },
     "2": {
         "anim": "attack",
         "cd": 1.5,
+        "desc": "远程普攻",
         "id": 2,
         "lanuch_btree": "attack2_sample",
+        "name": "远程普攻",
         "type": 0
     },
     "10101": {
         "anim": "skill2",
         "cd": 1.5,
+        "desc": "赵云大招",
         "id": 10101,
         "lanuch_btree": "zhaoyun_skill_1",
+        "name": "赵云大招",
         "type": 1
     },
     "10102": {
+        "desc": "赵云天赋1",
         "id": 10102,
         "lanuch_btree": "zhaoyun_talent_1",
+        "name": "赵云天赋1",
         "type": 2
     },
     "10103": {
+        "desc": "赵云天赋2",
         "id": 10103,
         "lanuch_btree": "zhaoyun_talent_2",
+        "name": "赵云天赋2",
         "type": 2
     },
     "10104": {
+        "desc": "赵云天赋3",
         "id": 10104,
         "lanuch_btree": "zhaoyun_talent_3",
+        "name": "赵云天赋3",
         "type": 2
     },
     "10105": {
+        "desc": "赵云天赋4",
         "id": 10105,
         "lanuch_btree": "zhaoyun_talent_4",
+        "name": "赵云天赋4",
         "type": 2
     },
     "10201": {
         "anim": "skill2",
         "cd": 1.5,
+        "desc": "关羽大招",
         "id": 10201,
         "lanuch_btree": "guanyu_skill_1",
+        "name": "关羽大招",
         "type": 1
     },
     "10501": {
         "anim": "skill2",
         "cd": 1.5,
+        "desc": "孙策大招",
         "id": 10501,
         "lanuch_btree": "sunce_skill_1",
+        "name": "孙策大招",
         "type": 1
     },
     "10502": {
+        "desc": "孙策天赋1",
         "id": 10502,
         "lanuch_btree": "sunce_talent_1",
+        "name": "孙策天赋1",
         "type": 2
     },
     "10503": {
+        "desc": "孙策天赋2",
         "id": 10503,
         "lanuch_btree": "sunce_talent_2",
+        "name": "孙策天赋2",
         "type": 2
     },
     "10504": {
+        "desc": "孙策天赋3",
         "id": 10504,
         "lanuch_btree": "sunce_talent_3",
+        "name": "孙策天赋3",
         "type": 2
     },
     "10505": {
+        "desc": "孙策天赋4",
         "id": 10505,
         "lanuch_btree": "sunce_talent_4",
+        "name": "孙策天赋4",
         "type": 2
     },
     "10601": {
         "anim": "skill2",
         "cd": 1.5,
+        "desc": "吕布大招",
         "id": 10601,
         "lanuch_btree": "lvbu_skill_1",
+        "name": "吕布大招",
         "type": 1
     },
     "20901": {
         "anim": "skill2",
         "cd": 1.5,
+        "desc": "周泰大招",
         "id": 20901,
         "lanuch_btree": "zhoutai_skill_1",
+        "name": "周泰大招",
         "type": 1
     },
     "21201": {
         "anim": "skill2",
         "cd": 1.5,
+        "desc": "魏延大招",
         "id": 21201,
         "lanuch_btree": "weiyan_skill_1",
+        "name": "魏延大招",
         "type": 1
     },
     "40101": {
         "anim": "skill2",
         "cd": 1.5,
+        "desc": "周瑜大招",
         "id": 40101,
         "lanuch_btree": "zhouyu_skill_1",
+        "name": "周瑜大招",
         "type": 1
     },
     "40401": {
         "anim": "skill2",
         "cd": 1.5,
+        "desc": "诸葛亮大招",
         "id": 40401,
         "lanuch_btree": "zhugeliang_skill_1",
+        "name": "诸葛亮大招",
         "type": 1
     }
 }

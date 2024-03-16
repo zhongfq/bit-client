@@ -1,0 +1,82 @@
+{
+  "_$ver": 1,
+  "_$id": "f0idl2fy",
+  "_$runtime": "res://9d87d8cb-3338-4946-b9b5-e364a8b059ea",
+  "_$type": "Box",
+  "name": "Box",
+  "width": 108,
+  "height": 148,
+  "_$child": [
+    {
+      "_$id": "ndjpjlw5",
+      "_$prefab": "296a5627-8151-43ef-8283-ced0d50d81a8",
+      "_$var": true,
+      "name": "icon",
+      "active": true,
+      "x": 0,
+      "y": 0,
+      "visible": true
+    },
+    {
+      "_$id": "oilbulog",
+      "_$type": "Image",
+      "name": "Image",
+      "x": 5,
+      "y": 111,
+      "width": 98,
+      "height": 32,
+      "_mouseState": 2,
+      "skin": "res://0128a93d-b244-40e4-bc90-48a93a3d87a2",
+      "color": "#ffffff",
+      "_$child": [
+        {
+          "_$id": "9y52x4gg",
+          "_$prefab": "7fd1a163-f140-41df-806c-a9338fbb3412",
+          "_$var": true,
+          "name": "imgBar",
+          "active": true,
+          "x": 0,
+          "y": 0,
+          "visible": true,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "bottom": 0,
+          "skin": "res://ae3de75e-ee9f-478d-9f8b-ede75a4fc296",
+          "width": 98,
+          "_$child": [
+            {
+              "_$id": "tj25i4f2",
+              "_$var": true,
+              "_$type": "Label",
+              "name": "labelNum",
+              "width": 98,
+              "height": 32,
+              "centerX": 0,
+              "centerY": 0,
+              "text": "Label",
+              "fontSize": 20,
+              "color": "#FFFFFF",
+              "align": "center",
+              "valign": "middle",
+              "padding": "0,0,0,0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "1giahefx",
+      "_$var": true,
+      "_$type": "Image",
+      "name": "selectBox",
+      "y": 1,
+      "width": 108,
+      "height": 107,
+      "visible": false,
+      "centerX": 0,
+      "skin": "res://2746a5c1-1212-413c-bb35-0a4cd4ef7e11",
+      "color": "#ffffff"
+    }
+  ]
+}

@@ -189,7 +189,9 @@ export type EmojiTable = {
 //-----------------------------------------------------------------------------
 export interface RoleLevelRow extends GeneratedRoleLevelRow {}
 export interface RoleConfRow extends GeneratedRoleConfRow {}
-export interface RoleTrainRow extends GeneratedRoleTrainRow {}
+export interface RoleTrainRow extends GeneratedRoleTrainRow {
+    consume: Reward[];
+}
 export type RoleTable = {
     level: RoleLevelRow[];
     conf: RoleConfRow[];

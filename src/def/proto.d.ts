@@ -10677,6 +10677,9 @@ declare namespace proto {
 
             /** s2c_soldier_upgrade err */
             err?: (number|null);
+
+            /** s2c_soldier_upgrade soldier */
+            soldier?: (soldier.ISoldierInfo|null);
         }
 
         /** Represents a s2c_soldier_upgrade. */
@@ -10690,6 +10693,9 @@ declare namespace proto {
 
             /** s2c_soldier_upgrade err. */
             public err: number;
+
+            /** s2c_soldier_upgrade soldier. */
+            public soldier?: (soldier.ISoldierInfo|null);
 
             /**
              * Creates a new s2c_soldier_upgrade instance using the specified properties.

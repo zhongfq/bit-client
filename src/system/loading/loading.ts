@@ -1,5 +1,7 @@
 import { app } from "../../app";
 import { ChatConf } from "../../def/chat";
+import { ItemConf } from "../../def/item";
+import { bag } from "../../def/proto";
 import { TaskConf } from "../../def/task";
 import { ui } from "../../misc/ui";
 import { LoadingUI } from "../../ui-runtime/scene/LoadingUI";
@@ -31,7 +33,9 @@ export class LoadingMediator extends Laya.Script {
         await app.service.user.loadProfile();
         await app.service.table.load();
         this.progress = 20;
-        await app.service.bag.load({ bagId: 1 }).then();
+        await app.service.bag.load({ bagId: ItemConf.BAG_TYPE.ITEM });
+        await app.service.bag.load({ bagId: ItemConf.BAG_TYPE.SOLDIER });
+        await app.service.bag.load({ bagId: ItemConf.BAG_TYPE.SOLDIER_PENDANT });
         this.progress = 40;
 
         await app.service.task.load({ taskType: TaskConf.TASK_TYPE.MAIN });
@@ -43,9 +47,9 @@ export class LoadingMediator extends Laya.Script {
         await app.service.mail.load();
         await app.service.chat.load({ channel: ChatConf.CHAT_CHANNEL.WORLD });
         await app.service.chest.load();
-        // await app.service.soldier.loadPendant();
-        // await app.service.soldier.loadSoldier();
-        // await app.service.soldier.loadTrain();
+        await app.service.soldier.loadPendant();
+        await app.service.soldier.loadSoldier();
+        await app.service.soldier.loadTrain();
         await Laya.loader.load("resources/texture/emoji/emoji.atlas");
         this.progress = 100;
     }
@@ -60,6 +64,9 @@ export class LoadingMediator extends Laya.Script {
         this.owner.imgBar.value = this.virtualProgress * 0.01;
         if (this.owner.imgBar.value < 1 && Math.round(this.owner.imgBar.value * 100) == 100) {
             this.owner.imgBar.value = 1;
+            this.isOpen = true;
+            app.ui.replace(ui.HOME_SCENE);
+        } else if (this.owner.imgBar.value >= 1) {
             this.isOpen = true;
             app.ui.replace(ui.HOME_SCENE);
         }

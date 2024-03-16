@@ -88,6 +88,7 @@
     },
     {
       "_$id": "nh9n32v6",
+      "_$var": true,
       "_$type": "Image",
       "name": "selectBox",
       "y": 1,

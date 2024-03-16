@@ -47,6 +47,7 @@ message c2s_soldier_upgrade {
 }
 message s2c_soldier_upgrade {
     uint32 err = 1; // OK, INVALID_ID
+    SoldierInfo soldier = 2;
 }
 
 // 升级士兵挂件
@@ -66,12 +67,12 @@ message s2c_train_upgrade {
     uint32 err = 1; // OK, INVALID_ID
 }
 
-// 通知士兵挂件变化
+// 通知士兵挂件变化:只有在增删时广播
 message notify_pendants {
     repeated PendantInfo pendants = 1;
 }
 
-// 通知士兵变化
+// 通知士兵变化:只有在增删时广播
 message notify_slodiers {
     repeated SoldierInfo soldiers = 1;
 }
