@@ -155,6 +155,8 @@ export interface GeneratedMoneyRow {
 // file: design/skill.xlsx
 export interface GeneratedSkillRow {
     id: number;
+    name: string;
+    desc: string;
     type: number;
     lanuch_btree: string;
     anim?: string;

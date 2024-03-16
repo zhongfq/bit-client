@@ -41,22 +41,24 @@
       "height": 261,
       "_mouseState": 2,
       "itemTemplate": {
-        "_$ref": "fmixtsfp",
+        "_$ref": "76vdkrch",
         "_$tmpl": "itemRender"
       },
       "repeatX": 6,
       "repeatY": 2,
       "spaceX": 6,
       "spaceY": 24,
+      "scrollType": 2,
       "selectEnable": true,
+      "selectedIndex": 0,
       "_$child": [
         {
-          "_$id": "fmixtsfp",
-          "_$prefab": "296a5627-8151-43ef-8283-ced0d50d81a8",
-          "name": "icon",
+          "_$id": "76vdkrch",
+          "_$prefab": "318e7576-4d76-475c-9f35-609a31eeaa3b",
+          "name": "soldier-icon",
           "active": true,
           "x": 0,
-          "y": 15
+          "y": 0
         }
       ]
     },

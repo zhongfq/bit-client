@@ -2,6 +2,7 @@ import { app } from "../../../app";
 import { ItemTable, RoleTrainRow } from "../../../def/table";
 import { soldier } from "../../../def/proto";
 import { VO } from "../vo-base/vo";
+import { TableUtil } from "../../../system/table/table-util";
 
 /**
  * Item
@@ -35,7 +36,14 @@ export class TrainVo extends VO<RoleTrainRow, soldier.TrainInfo> {
     }
 
     public get name(): string {
-        return "";
+        return app.service.table.attr[this.refId].name;
+    }
+
+    public get level(): number {
+        if (this._cmd) {
+            return Number(this._cmd.lv);
+        }
+        return 0;
     }
 
     protected onGetNumber(): number {

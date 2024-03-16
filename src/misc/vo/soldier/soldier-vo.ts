@@ -1,14 +1,27 @@
 import { app } from "../../../app";
 import { ItemTable, SoldierRow } from "../../../def/table";
 import { soldier } from "../../../def/proto";
-import { VO } from "../vo-base/vo";
+import { GoodsVo } from "../goods/goods-vo";
 
 /**
  * Item
  * 道具
  */
-export class SoldierVo extends VO<SoldierRow, soldier.SoldierInfo> {
-    public refTable!: ItemTable;
+export class SoldierVo extends GoodsVo<SoldierRow, soldier.SoldierInfo> {
+    public override refTable!: SoldierRow;
+
+    public override get iconUrl(): string {
+        // throw new Error("Method not implemented.");
+        return this._ref ? `resources/atlas/head/${"icon_main_role_1"}.png` : ""; //icon_main_role_1
+    }
+
+    public override get quality(): number {
+        return 1;
+    }
+
+    public override get qualitySkin(): string {
+        return `resources/atlas/imgFrame/img_icon_frame_${this.quality}.png`;
+    }
 
     //#region 重载
     public get refId(): number {
@@ -34,12 +47,16 @@ export class SoldierVo extends VO<SoldierRow, soldier.SoldierInfo> {
         return ""; //this.ref.desc;
     }
 
+    public get level(): number {
+        return this._cmd ? this._cmd.lv : 1;
+    }
+
     public get name(): string {
         return "";
     }
 
-    protected onGetNumber(): number {
-        return 1;
+    protected override onGetNumber(): number {
+        return app.service.bag.itemBag.get(this.id)?.goodsNumber || 0;
     }
     //#endregion
 }

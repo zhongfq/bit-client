@@ -11,7 +11,10 @@ import { SoldierPendantVo } from "../../misc/vo/soldier/soldier-pendant-vo";
 import { TrainVo } from "../../misc/vo/soldier/train-vo";
 
 export class SoldierService extends Service<NetworkService> {
-    public static readonly ITEM_UPDATE = "item-update";
+    public static readonly SOLDIER_PENDANT_UPDATE = "soldier_pendant-update";
+
+    public static readonly SOLDIER_TRAIN_UPDATE = "soldier_train-update";
+    public static readonly SOLDIER_SOLDIER_UPDATE = "soldier_soldier-update";
 
     public readonly soldierBag = VoUtil.createBag(SoldierBag); //创建士兵背包
     public readonly soldierPendantBag = VoUtil.createBag(SoldierPendantBag); //创建士兵挂件背包
@@ -25,6 +28,9 @@ export class SoldierService extends Service<NetworkService> {
         this.handle(opcode.soldier.s2c_pendant_upgrade, this._onPendantUpgrade);
         this.handle(opcode.soldier.s2c_soldier_upgrade, this._onSoldierUpgrade);
         this.handle(opcode.soldier.s2c_train_upgrade, this._onTrainUpgrade);
+
+        this.handle(opcode.soldier.notify_slodiers, this._notifySlodiers);
+        this.handle(opcode.soldier.notify_pendants, this._notifyPendants);
     }
 
     private _onLoadSoldier(data: proto.soldier.s2c_load_soldier) {
@@ -50,6 +56,8 @@ export class SoldierService extends Service<NetworkService> {
             const vo = new SoldierPendantVo();
             vo.initByCmd(cmd);
             this.soldierPendantBag.onUpdate(vo);
+
+            this.event(SoldierService.SOLDIER_PENDANT_UPDATE);
         }
     }
 
@@ -58,11 +66,10 @@ export class SoldierService extends Service<NetworkService> {
         req: proto.soldier.c2s_soldier_upgrade
     ) {
         if (data.err === errcode.OK) {
-            const cmd = (this.soldierBag.get(req.id) as SoldierVo).cmd as proto.soldier.SoldierInfo;
-            cmd.lv += 1;
             const vo = new SoldierVo();
-            vo.initByCmd(cmd);
+            vo.initByCmd(data.soldier as proto.soldier.SoldierInfo);
             this.soldierBag.onUpdate(vo);
+            this.event(SoldierService.SOLDIER_SOLDIER_UPDATE);
         }
     }
 
@@ -76,8 +83,13 @@ export class SoldierService extends Service<NetworkService> {
             const vo = new TrainVo();
             vo.initByCmd(cmd);
             this.trainBag.onUpdate(vo);
+            this.event(SoldierService.SOLDIER_TRAIN_UPDATE);
         }
     }
+
+    private _notifySlodiers(data: proto.soldier.notify_slodiers) {}
+
+    private _notifyPendants(data: proto.soldier.notify_pendants) {}
 
     /**
      * 加载士兵

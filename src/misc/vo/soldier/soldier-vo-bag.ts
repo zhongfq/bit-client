@@ -3,8 +3,9 @@ import { app } from "../../../app";
 import { Constructor } from "../../../core/dispatcher";
 import { VoBag } from "../vo-base/vo-bag";
 import { SoldierVo } from "./soldier-vo";
+import { GoodsVoBag } from "../goods/goods-vo-bag";
 
-export class SoldierBag extends VoBag<SoldierVo> {
+export class SoldierBag extends GoodsVoBag<SoldierVo> {
     public Hash(t: SoldierVo): string | number {
         return t.cmd?.id || 0;
     }

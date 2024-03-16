@@ -36,12 +36,12 @@
       "_$type": "List",
       "name": "listPendant",
       "x": 14,
-      "y": 646,
+      "y": 619,
       "width": 693,
-      "height": 126,
+      "height": 153,
       "_mouseState": 2,
       "itemTemplate": {
-        "_$ref": "oilmjpr7",
+        "_$ref": "n2ba3o9x",
         "_$tmpl": "itemRender"
       },
       "repeatX": 6,
@@ -52,9 +52,9 @@
       "selectedIndex": 0,
       "_$child": [
         {
-          "_$id": "oilmjpr7",
-          "_$prefab": "296a5627-8151-43ef-8283-ced0d50d81a8",
-          "name": "icon",
+          "_$id": "n2ba3o9x",
+          "_$prefab": "318e7576-4d76-475c-9f35-609a31eeaa3b",
+          "name": "soldier-icon",
           "active": true,
           "x": 0,
           "y": 0

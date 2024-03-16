@@ -1,11 +1,11 @@
 import proto from "../../../def/proto";
 import { app } from "../../../app";
 import { Constructor } from "../../../core/dispatcher";
-import { TableUtil } from "../../../system/table/table-util";
 import { VoBag } from "../vo-base/vo-bag";
 import { SoldierPendantVo } from "./soldier-pendant-vo";
+import { GoodsVoBag } from "../goods/goods-vo-bag";
 
-export class SoldierPendantBag extends VoBag<SoldierPendantVo> {
+export class SoldierPendantBag extends GoodsVoBag<SoldierPendantVo> {
     public Hash(t: SoldierPendantVo): string | number {
         return t.cmd?.id || 0;
     }

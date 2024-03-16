@@ -6,8 +6,6 @@ import { NetworkService } from "../network/network-service";
 import { ItemVo } from "../../misc/vo/goods/item-vo";
 import { VoUtil } from "../../misc/vo-util";
 import { ItemBag } from "../../misc/vo/goods/item-vo-bag";
-import { VO } from "../../misc/vo/vo-base/vo";
-import { GoodsVo } from "../../misc/vo/goods/goods-vo";
 
 export class BagService extends Service<NetworkService> {
     public static readonly ITEM_UPDATE = "item-update";
@@ -25,7 +23,15 @@ export class BagService extends Service<NetworkService> {
 
     private _onLoad(data: proto.bag.s2c_load) {
         if (data.err === errcode.OK) {
-            this.itemBag.init(data);
+            if (this.itemBag.getOne()) {
+                for (const item of data.items as proto.bag.Item[]) {
+                    const vo = new ItemVo();
+                    vo.initByCmd(item);
+                    this.itemBag.onAdd(vo); //新增道具
+                }
+            } else {
+                this.itemBag.init(data);
+            }
         }
     }
 

@@ -1,7 +1,12 @@
 import { app } from "../../app";
 import { Mediator } from "../../core/ui-mediator";
+import { ItemConf } from "../../def/item";
+import { SoldierVo } from "../../misc/vo/soldier/soldier-vo";
+import { IconUI } from "../../ui-runtime/prefab/icon/IconUI";
+import { SoldierIconUI } from "../../ui-runtime/prefab/icon/SoldierIconUI";
 import { SoldierSoldierUI } from "../../ui-runtime/prefab/soldier/SoldierSoldierUI";
 import { TableUtil } from "../table/table-util";
+import { SoldierService } from "./soldier-service";
 
 const { regClass, property } = Laya;
 
@@ -11,36 +16,57 @@ export class SoldierSoldierMediator extends Mediator {
 
     public override onAwake(): void {
         this.initUIEvent();
-        this.initInfo();
+        // this.initInfo();
         this.updateList();
     }
 
     //初始化UI
     private initInfo() {
-        this.owner.labelName.text = "我是士兵";
-        this.owner.labelLv.text = "Lv." + 1;
-        this.owner.labelSkillName.text = "技能";
-        this.owner.labelSkillDesc.text = "技能描述";
+        const vo = this.owner.listSoldier.selectedItem.soldierVo as SoldierVo;
+        this.owner.labelName.text = vo.name;
+
+        this.owner.labelLv.text = "Lv." + vo.level;
+        const skillRow = app.service.table.skill[vo.ref.skill2];
+        this.owner.labelSkillName.text = skillRow.name;
+        this.owner.labelSkillDesc.text = skillRow.desc;
         // this.owner.imgHeadIcon.skin = ""
     }
 
     //初始化UI事件监听
     private initUIEvent() {
+        this.on(app.service.soldier, SoldierService.SOLDIER_SOLDIER_UPDATE, () => {
+            this.updateList();
+        });
         this.owner.btnUpLv.on(Laya.Event.CLICK, () => {
             //升级
-            app.service.soldier.requestSoldiertUpgrade({ id: 1 });
+            app.service.soldier.requestSoldiertUpgrade({
+                id: this.owner.listSoldier.selectedItem.soldierVo.id,
+            });
         });
+
+        this.owner.listSoldier.renderHandler = new Laya.Handler(this, this.updateItem);
+    }
+
+    public updateItem(cell: SoldierIconUI, index: number) {
+        cell.updateGoods(cell.dataSource.soldierVo, ItemConf.ITEM_SUB_TYPE.SOLDIER);
     }
 
     private updateList() {
         const pendantList = [];
 
         for (const soldierRow of TableUtil.getRows(app.service.table.soldier.soldier, {})) {
+            let vo = new SoldierVo();
+            const soldierVo = app.service.soldier.soldierBag.get(soldierRow.id);
+            if (soldierVo) {
+                vo = soldierVo;
+            } else {
+                vo.initByTableRow(soldierRow);
+            }
             pendantList.push({
-                row: soldierRow,
-                cmd: app.service.soldier.soldierBag.get(soldierRow.id),
+                soldierVo: vo,
             });
         }
         this.owner.listSoldier.array = pendantList;
+        this.initInfo();
     }
 }

@@ -24529,6 +24529,7 @@ $root.soldier = (function() {
          * @memberof soldier
          * @interface Is2c_soldier_upgrade
          * @property {number|null} [err] s2c_soldier_upgrade err
+         * @property {soldier.ISoldierInfo|null} [soldier] s2c_soldier_upgrade soldier
          */
 
         /**
@@ -24553,6 +24554,14 @@ $root.soldier = (function() {
          * @instance
          */
         s2c_soldier_upgrade.prototype.err = 0;
+
+        /**
+         * s2c_soldier_upgrade soldier.
+         * @member {soldier.ISoldierInfo|null|undefined} soldier
+         * @memberof soldier.s2c_soldier_upgrade
+         * @instance
+         */
+        s2c_soldier_upgrade.prototype.soldier = null;
 
         /**
          * Creates a new s2c_soldier_upgrade instance using the specified properties.
@@ -24580,6 +24589,8 @@ $root.soldier = (function() {
                 writer = $Writer.create();
             if (message.err != null && Object.hasOwnProperty.call(message, "err"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
+            if (message.soldier != null && Object.hasOwnProperty.call(message, "soldier"))
+                $root.soldier.SoldierInfo.encode(message.soldier, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
             return writer;
         };
 
@@ -24616,6 +24627,10 @@ $root.soldier = (function() {
                 switch (tag >>> 3) {
                 case 1: {
                         message.err = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.soldier = $root.soldier.SoldierInfo.decode(reader, reader.uint32());
                         break;
                     }
                 default:
@@ -24656,6 +24671,11 @@ $root.soldier = (function() {
             if (message.err != null && message.hasOwnProperty("err"))
                 if (!$util.isInteger(message.err))
                     return "err: integer expected";
+            if (message.soldier != null && message.hasOwnProperty("soldier")) {
+                var error = $root.soldier.SoldierInfo.verify(message.soldier);
+                if (error)
+                    return "soldier." + error;
+            }
             return null;
         };
 
@@ -24673,6 +24693,11 @@ $root.soldier = (function() {
             var message = new $root.soldier.s2c_soldier_upgrade();
             if (object.err != null)
                 message.err = object.err >>> 0;
+            if (object.soldier != null) {
+                if (typeof object.soldier !== "object")
+                    throw TypeError(".soldier.s2c_soldier_upgrade.soldier: object expected");
+                message.soldier = $root.soldier.SoldierInfo.fromObject(object.soldier);
+            }
             return message;
         };
 
@@ -24689,10 +24714,14 @@ $root.soldier = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults)
+            if (options.defaults) {
                 object.err = 0;
+                object.soldier = null;
+            }
             if (message.err != null && message.hasOwnProperty("err"))
                 object.err = message.err;
+            if (message.soldier != null && message.hasOwnProperty("soldier"))
+                object.soldier = $root.soldier.SoldierInfo.toObject(message.soldier, options);
             return object;
         };
 
