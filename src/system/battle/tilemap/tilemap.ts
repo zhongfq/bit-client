@@ -43,7 +43,7 @@ export class Tilemap {
         gridY: number,
         props: Map<string, unknown>
     ): number | undefined {
-        return this._tryAddObj(gridX, gridY, props, eid);
+        return this._tryAdd(gridX, gridY, props, TMLayerName.Object, eid);
     }
 
     /**
@@ -242,9 +242,6 @@ export class Tilemap {
     private _lastRect: Laya.Rectangle = Laya.Rectangle.create();
     private _curRect: Laya.Rectangle = Laya.Rectangle.create();
 
-    private _addArr: number[][] = [];
-    private _delArr: number[][] = [];
-
     private _allMap: Map<number, TMElement> = new Map();
     private _posMap: Map<TMLayerName, Map<string, number>> = new Map();
 
@@ -299,8 +296,6 @@ export class Tilemap {
         this._textureMap.clear();
         this._lastRect.reset();
         this._curRect.reset();
-        this._addArr = [];
-        this._delArr = [];
         this._allMap.clear();
         this._posMap.clear();
     }
@@ -345,50 +340,47 @@ export class Tilemap {
             return;
         }
 
-        this._addArr = [];
-        this._delArr = [];
+        const addArr = [];
+        const delArr = [];
 
         if (!this._lastRect.isEmpty()) {
             for (let x = curX; x < curX + this._curRect.width; x++) {
                 for (let y = curY; y < curY + this._curRect.height; y++) {
                     if (!this._lastRect.contains(x, y)) {
-                        this._addArr.push([x, y]);
+                        addArr.push([x, y]);
                     }
                 }
             }
-            const [lastX, lastY] = [this._lastRect.x, this._lastRect.y];
+            const lastX = this._lastRect.x;
+            const lastY = this._lastRect.y;
             for (let x = lastX; x < lastX + this._lastRect.width; x++) {
                 for (let y = lastY; y < lastY + this._lastRect.height; y++) {
                     if (!this._curRect.contains(x, y)) {
-                        this._delArr.push([x, y]);
+                        delArr.push([x, y]);
                     }
                 }
             }
         } else {
             for (let x = curX; x < curX + this._curRect.width; x++) {
                 for (let y = curY; y < curY + this._curRect.height; y++) {
-                    this._addArr.push([x, y]);
+                    addArr.push([x, y]);
                 }
             }
         }
         this._lastRect.copyFrom(this._curRect);
 
-        for (let i = 0; i < this._addArr.length; i++) {
-            const [x, y] = this._addArr[i];
-            this._tryAdd(x, y, (layerName: string) => {
-                return layerName != TMLayerName.Marker;
-            });
+        for (let i = 0; i < addArr.length; i++) {
+            const [x, y] = addArr[i];
+            this._searchInMap(x, y, (layerName) => layerName != TMLayerName.Marker);
         }
 
-        for (let i = 0; i < this._delArr.length; i++) {
-            const [x, y] = this._delArr[i];
-            this._tryDel(x, y, (layerName: string) => {
-                return layerName != TMLayerName.Marker;
-            });
+        for (let i = 0; i < delArr.length; i++) {
+            const [x, y] = delArr[i];
+            this._tryDel(x, y, (layerName) => layerName != TMLayerName.Marker);
         }
     }
 
-    private async _tryAdd(
+    private async _searchInMap(
         gridX: number,
         gridY: number,
         filterFunc?: (layerName: string) => boolean
@@ -420,18 +412,18 @@ export class Tilemap {
                 if (!props) {
                     continue;
                 }
-                this._tryAddObj(gridX, gridY, props);
+                this._tryAdd(gridX, gridY, props, layerName);
             }
         }
     }
 
-    private _tryAddObj(
+    private _tryAdd(
         gridX: number,
         gridY: number,
         props: Map<string, unknown>,
+        layerName: TMLayerName,
         eid?: number
     ): number | undefined {
-        const layerName = TMLayerName.Object;
         const cls = TMUtil.layerToCls(layerName);
         if (!cls) {
             return undefined;
