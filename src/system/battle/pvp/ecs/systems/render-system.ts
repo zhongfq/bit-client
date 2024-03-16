@@ -1,15 +1,14 @@
 import { app } from "../../../../../app";
 import * as ecs from "../../../../../core/ecs";
-import { BattleConf } from "../../../../../def/battle";
 import { WorldConf } from "../../../../../def/world";
 import { HeadInfoUI } from "../../../../../ui-runtime/prefab/battle/HeadInfoUI";
 import { TMPropKey } from "../../../tilemap/tm-def";
-import { TMUtil } from "../../../tilemap/tm-util";
 import { PvpContext } from "../../pvp-context";
-import { TransformComponent } from "../components/movement-component";
+import { MovementComponent, TransformComponent } from "../components/movement-component";
 import {
     AnimationComponent,
     BoardComponent,
+    ElementAnimation,
     ElementComponent,
     HeadInfoComponent,
     ShadowComponent,
@@ -237,7 +236,7 @@ export class RenderSystem extends ecs.System {
         troop.hero.transform.localRotationEulerY = 90;
         this._collectTroopAnimator(troop, troop.hero);
         group.addChild(troop.hero);
-        group.transform.localPositionX = 0.5;
+        group.transform.localPositionX = 0.3;
         group.transform.localScaleX = 0.5;
         group.transform.localScaleY = 0.5;
         group.transform.localScaleZ = 0.5;
@@ -259,5 +258,10 @@ export class RenderSystem extends ecs.System {
             group.addChild(soldier);
         });
         this.context.owner.roles.addChild(troop.view);
+
+        const movement = troop.getComponent(MovementComponent)!;
+        if (movement.velocity.x !== 0 || movement.velocity.z !== 0) {
+            this.context.playAnim(movement.eid, ElementAnimation.RUN);
+        }
     }
 }

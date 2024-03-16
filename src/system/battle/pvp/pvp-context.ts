@@ -10,6 +10,7 @@ import { ITMContext, TMMode } from "../tilemap/tm-def";
 import { TMElement, TMDebugElement, TMTileElemet } from "../tilemap/tm-element";
 import { TMUtil } from "../tilemap/tm-util";
 import { CameraComponent } from "./ecs/components/camera-component";
+import { ElementAnimation } from "./ecs/components/render-component";
 import { TilemapComponent } from "./ecs/components/tilemap-component";
 import { CameraSystem } from "./ecs/systems/camera-system";
 import { CommandSystem } from "./ecs/systems/command-system";
@@ -196,5 +197,9 @@ export class PvpContext extends Mediator implements ITMContext {
         const homePos = data.homePos as proto.world.Position;
         camera.focus.set(homePos.x, 0, homePos.y);
         app.service.pvp.requestChangeViewport(camera.focus);
+    }
+
+    public playAnim(eid: number, name: ElementAnimation) {
+        this._ecs.getSystem(CommandSystem)?.playAnim(eid, name);
     }
 }

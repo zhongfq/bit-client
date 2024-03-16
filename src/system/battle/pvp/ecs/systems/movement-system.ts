@@ -3,7 +3,6 @@ import { MathUtil } from "../../../../../core/utils/math-util";
 import { PvpContext } from "../../pvp-context";
 import { MovementComponent, TransformComponent } from "../components/movement-component";
 import { ElementAnimation } from "../components/render-component";
-import { CommandSystem } from "./command-system";
 
 export class MovementSystem extends ecs.System {
     public declare context: PvpContext;
@@ -57,9 +56,7 @@ export class MovementSystem extends ecs.System {
                     if (++movement.index < movement.paths.length - 1) {
                         this._setup(movement);
                     } else {
-                        this.ecs
-                            .getSystem(CommandSystem)
-                            ?.playAnim(movement.eid, ElementAnimation.IDLE);
+                        this.context.playAnim(movement.eid, ElementAnimation.IDLE);
                     }
                 }
             }
