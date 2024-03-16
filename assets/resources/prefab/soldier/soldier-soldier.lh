@@ -135,6 +135,38 @@
       "color": "#FFFFFF",
       "valign": "top",
       "padding": "0,0,0,0"
+    },
+    {
+      "_$id": "38sngzzy",
+      "_$var": true,
+      "_$type": "List",
+      "name": "listAttr",
+      "x": 135,
+      "y": 334,
+      "width": 574,
+      "height": 61,
+      "_mouseState": 2,
+      "itemTemplate": {
+        "_$ref": "xi5glyn9",
+        "_$tmpl": "itemRender"
+      },
+      "repeatX": 4,
+      "repeatY": 3,
+      "spaceX": 27,
+      "_$child": [
+        {
+          "_$id": "xi5glyn9",
+          "_$type": "Label",
+          "name": "labelAttr",
+          "width": 120,
+          "height": 28,
+          "text": "Label",
+          "fontSize": 20,
+          "color": "#FFFFFF",
+          "valign": "top",
+          "padding": "0,0,0,0"
+        }
+      ]
     }
   ]
 }

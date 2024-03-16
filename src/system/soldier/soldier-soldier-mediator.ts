@@ -1,6 +1,8 @@
 import { app } from "../../app";
 import { Mediator } from "../../core/ui-mediator";
+import { StringUtil } from "../../core/utils/string-util";
 import { ItemConf } from "../../def/item";
+import proto from "../../def/proto";
 import { SoldierVo } from "../../misc/vo/soldier/soldier-vo";
 import { IconUI } from "../../ui-runtime/prefab/icon/IconUI";
 import { SoldierIconUI } from "../../ui-runtime/prefab/icon/SoldierIconUI";
@@ -30,6 +32,12 @@ export class SoldierSoldierMediator extends Mediator {
         this.owner.labelSkillName.text = skillRow.name;
         this.owner.labelSkillDesc.text = skillRow.desc;
         // this.owner.imgHeadIcon.skin = ""
+        const attrList = [];
+        const attrs = (vo.cmd as proto.soldier.SoldierInfo).attrs;
+        for (const attr in attrs) {
+            attrList.push({ id: attr, val: attrs[attr] });
+        }
+        this.owner.listAttr.array = attrList;
     }
 
     //初始化UI事件监听
@@ -45,6 +53,16 @@ export class SoldierSoldierMediator extends Mediator {
         });
 
         this.owner.listSoldier.renderHandler = new Laya.Handler(this, this.updateItem);
+
+        this.owner.listAttr.renderHandler = new Laya.Handler(
+            this,
+            (cell: Laya.Label, index: number) => {
+                cell.text = StringUtil.getAttrStr(
+                    this.owner.listAttr.array[index].id,
+                    this.owner.listAttr.array[index].val
+                );
+            }
+        );
     }
 
     public updateItem(cell: SoldierIconUI, index: number) {

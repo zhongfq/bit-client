@@ -12,5 +12,6 @@ export class SoldierSoldierUIBase extends Laya.Box {
     public labelSkillDesc!: Laya.Label;
     public labelName!: Laya.Label;
     public labelLv!: Laya.Label;
+    public listAttr!: Laya.List;
 }
 

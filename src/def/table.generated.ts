@@ -128,6 +128,7 @@ export interface GeneratedAttrRow {
     id: number;
     name: string;
     define?: string;
+    show_type: number;
 }
 
 // file: design/define.xlsx

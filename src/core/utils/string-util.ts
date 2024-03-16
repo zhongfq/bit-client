@@ -1,3 +1,6 @@
+import { app } from "../../app";
+import { AttrConf } from "../../def/attr";
+
 interface UBBData {
     text?: string;
     image?: string;
@@ -256,6 +259,16 @@ export class StringUtil {
                 }
             }
             return str;
+        }
+        return "";
+    }
+
+    public static getAttrStr(attrId: number, val: number): string {
+        const row = app.service.table.attr[attrId];
+        if (row.show_type == AttrConf.SHOW_TYPE.INTEGER) {
+            return `${row.name}:${val}`;
+        } else {
+            return `${row.name}:${val / 100}%`;
         }
         return "";
     }

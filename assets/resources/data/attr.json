@@ -2,149 +2,179 @@
     "101": {
         "define": "hp",
         "id": 101,
-        "name": "生命"
+        "name": "生命",
+        "show_type": 1
     },
     "102": {
         "define": "atk",
         "id": 102,
-        "name": "攻击"
+        "name": "攻击",
+        "show_type": 1
     },
     "103": {
         "define": "defence",
         "id": 103,
-        "name": "防御"
+        "name": "防御",
+        "show_type": 1
     },
     "104": {
         "define": "move_speed",
         "id": 104,
-        "name": "速度"
+        "name": "速度",
+        "show_type": 1
     },
     "105": {
         "define": "atk_speed",
         "id": 105,
-        "name": "攻速"
+        "name": "攻速",
+        "show_type": 1
     },
     "106": {
         "define": "critical_up",
         "id": 106,
-        "name": "暴击"
+        "name": "暴击",
+        "show_type": 2
     },
     "107": {
         "define": "critical_damage",
         "id": 107,
-        "name": "暴击伤害"
+        "name": "暴击伤害",
+        "show_type": 1
     },
     "108": {
         "define": "pursuit_up",
         "id": 108,
-        "name": "追击"
+        "name": "追击",
+        "show_type": 1
     },
     "109": {
         "define": "pursuit_damage",
         "id": 109,
-        "name": "追击伤害"
+        "name": "追击伤害",
+        "show_type": 1
     },
     "110": {
         "define": "counterattack_up",
         "id": 110,
-        "name": "反击"
+        "name": "反击",
+        "show_type": 1
     },
     "111": {
         "define": "counterattack_damage",
         "id": 111,
-        "name": "反击伤害"
+        "name": "反击伤害",
+        "show_type": 1
     },
     "112": {
         "define": "dodge_up",
         "id": 112,
-        "name": "闪避"
+        "name": "闪避",
+        "show_type": 1
     },
     "113": {
         "define": "critical_down",
         "id": 113,
-        "name": "抵抗暴击"
+        "name": "抵抗暴击",
+        "show_type": 1
     },
     "114": {
         "define": "pursuit_down",
         "id": 114,
-        "name": "抵抗追击"
+        "name": "抵抗追击",
+        "show_type": 1
     },
     "115": {
         "define": "counterattack_down",
         "id": 115,
-        "name": "抵抗反击"
+        "name": "抵抗反击",
+        "show_type": 1
     },
     "116": {
         "define": "dodge_down",
         "id": 116,
-        "name": "抵抗闪避"
+        "name": "抵抗闪避",
+        "show_type": 1
     },
     "117": {
         "define": "finalattack_up",
         "id": 117,
-        "name": "最终增伤"
+        "name": "最终增伤",
+        "show_type": 1
     },
     "118": {
         "define": "finalattack_down",
         "id": 118,
-        "name": "最终减伤"
+        "name": "最终减伤",
+        "show_type": 1
     },
     "119": {
         "define": "generalattack_up",
         "id": 119,
-        "name": "强化普攻伤害"
+        "name": "强化普攻伤害",
+        "show_type": 1
     },
     "120": {
         "define": "generalattack_down",
         "id": 120,
-        "name": "弱化普攻伤害"
+        "name": "弱化普攻伤害",
+        "show_type": 1
     },
     "121": {
         "define": "skillattack_up",
         "id": 121,
-        "name": "强化战法伤害"
+        "name": "强化战法伤害",
+        "show_type": 1
     },
     "122": {
         "define": "skillattack_down",
         "id": 122,
-        "name": "弱化战法伤害"
+        "name": "弱化战法伤害",
+        "show_type": 1
     },
     "123": {
         "define": "treatment_up",
         "id": 123,
-        "name": "强化治疗"
+        "name": "强化治疗",
+        "show_type": 1
     },
     "124": {
         "define": "treatment_down",
         "id": 124,
-        "name": "弱化治疗"
+        "name": "弱化治疗",
+        "show_type": 1
     },
     "125": {
         "define": "pvpattack_up",
         "id": 125,
-        "name": "PVP增伤"
+        "name": "PVP增伤",
+        "show_type": 1
     },
     "126": {
         "define": "pvpattack_down",
         "id": 126,
-        "name": "PVP减伤"
+        "name": "PVP减伤",
+        "show_type": 1
     },
     "127": {
         "define": "pveattack_up",
         "id": 127,
-        "name": "PVE增伤"
+        "name": "PVE增伤",
+        "show_type": 1
     },
     "128": {
         "define": "pveattack_down",
         "id": 128,
-        "name": "PVE减伤"
+        "name": "PVE减伤",
+        "show_type": 1
     },
     "129": {
         "id": 129,
-        "name": "主动、追击技能CD"
+        "name": "主动、追击技能CD",
+        "show_type": 1
     },
     "130": {
         "id": 130,
-        "name": "攻击范围"
+        "name": "攻击范围",
+        "show_type": 1
     }
 }

@@ -43,4 +43,8 @@ export const AttrConf = {
         SPEED: 18,
         SUNDER_ARMOR: 13,
     },
+    SHOW_TYPE: {
+        INTEGER: 1,
+        PERCENTAGE: 2,
+    },
 }
