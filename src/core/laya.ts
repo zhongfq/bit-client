@@ -108,6 +108,10 @@ declare global {
             export function distance(p1: IVector2Like, p2: IVector2Like): number;
         }
 
+        interface Sprite3D {
+            clone(): Sprite3D;
+        }
+
         interface Vector3 {
             clone(): Vector3;
             cloneTo(value: IVector3Like): IVector3Like;
