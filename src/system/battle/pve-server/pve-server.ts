@@ -151,8 +151,8 @@ export class PveServer extends b3.Context {
 
         const element = entity.addComponent(ElementComponent);
         element.tid = 101;
-        element.hp = 200;
-        element.maxHp = 200;
+        element.hp = 400;
+        element.maxHp = 400;
         element.aid = 1;
 
         const transform = entity.addComponent(TransformComponent);
@@ -198,7 +198,7 @@ export class PveServer extends b3.Context {
         });
         this._sender.focus(element.eid);
 
-        this._loadSoliders(element);
+        // this._loadSoliders(element);
         this._loadTrucks(element);
     }
 
@@ -441,10 +441,12 @@ export class PveServer extends b3.Context {
         }
 
         const ai = element.getComponent(AiComponent)!;
-        if (ai.tree && ai.env) {
-            ai.tree.interrupt(ai.env);
+        if (ai.active) {
+            if (ai.tree && ai.env) {
+                ai.tree.interrupt(ai.env);
+            }
+            ai.active = false;
         }
-        ai.active = false;
 
         const rad = MathUtil.toRadian(degree);
         const movement = element.movement;
@@ -471,7 +473,7 @@ export class PveServer extends b3.Context {
             return;
         }
         const ai = element.getComponent(AiComponent)!;
-        // ai.active = true;
+        ai.active = true;
         this.moveStop(element);
     }
 

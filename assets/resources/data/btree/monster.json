@@ -74,7 +74,9 @@
               {
                 "id": 11,
                 "name": "Sequence",
+                "desc": "通用普通攻击",
                 "args": {},
+                "path": "normal_attack.json",
                 "children": [
                   {
                     "id": 12,
@@ -86,17 +88,50 @@
                   },
                   {
                     "id": 13,
+                    "name": "AlwaysSuccess",
+                    "desc": "设置交战时间",
+                    "args": {},
+                    "children": [
+                      {
+                        "id": 14,
+                        "name": "Sequence",
+                        "args": {},
+                        "children": [
+                          {
+                            "id": 15,
+                            "name": "IsNull",
+                            "args": {},
+                            "input": [
+                              "fight_time"
+                            ],
+                            "children": []
+                          },
+                          {
+                            "id": 16,
+                            "name": "GetTime",
+                            "desc": "设置交战时间",
+                            "args": {},
+                            "output": [
+                              "fight_time"
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": 17,
                     "name": "SetStance",
                     "args": {}
                   },
                   {
-                    "id": 14,
+                    "id": 18,
                     "name": "MoveStop",
                     "desc": "停止移动",
                     "args": {}
                   },
                   {
-                    "id": 15,
+                    "id": 19,
                     "name": "TowardToTarget",
                     "args": {},
                     "input": [
@@ -104,7 +139,7 @@
                     ]
                   },
                   {
-                    "id": 16,
+                    "id": 20,
                     "name": "NormalAttack",
                     "args": {},
                     "input": [
@@ -114,7 +149,7 @@
                 ]
               },
               {
-                "id": 17,
+                "id": 21,
                 "name": "AdjustStance",
                 "args": {},
                 "input": [
@@ -126,18 +161,18 @@
         ]
       },
       {
-        "id": 18,
+        "id": 22,
         "name": "Sequence",
         "desc": "找目标",
         "args": {},
         "children": [
           {
-            "id": 19,
+            "id": 23,
             "name": "ClearStance",
             "args": {}
           },
           {
-            "id": 20,
+            "id": 24,
             "name": "FindOneTarget",
             "args": {
               "radius": 3,
@@ -149,7 +184,7 @@
             ]
           },
           {
-            "id": 21,
+            "id": 25,
             "name": "GetPos",
             "args": {},
             "input": [
@@ -160,7 +195,7 @@
             ]
           },
           {
-            "id": 22,
+            "id": 26,
             "name": "MoveToPos",
             "args": {
               "rate": 1.5

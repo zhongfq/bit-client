@@ -26,7 +26,8 @@
         "args": {},
         "output": [
           "enemy"
-        ]
+        ],
+        "children": []
       },
       {
         "id": 5,
@@ -34,7 +35,8 @@
         "args": {},
         "input": [
           "enemy"
-        ]
+        ],
+        "children": []
       },
       {
         "id": 6,

@@ -75,115 +75,170 @@
       },
       {
         "id": 11,
-        "name": "Sequence",
-        "desc": "普攻",
+        "name": "Selector",
+        "desc": "找敌人",
         "args": {},
         "children": [
           {
             "id": 12,
-            "name": "FindOneTarget",
-            "args": {
-              "attack": true,
-              "radius": null,
-              "skill": false,
-              "soldier": true,
-              "hero": true,
-              "wood": false,
-              "friend": false
-            },
-            "output": [
-              "enemy"
-            ],
-            "children": []
-          },
-          {
-            "id": 13,
-            "name": "Selector",
+            "name": "Sequence",
+            "desc": "普攻",
             "args": {},
             "children": [
               {
+                "id": 13,
+                "name": "FindOneTarget",
+                "args": {
+                  "attack": true,
+                  "radius": null,
+                  "skill": false,
+                  "soldier": true,
+                  "hero": true,
+                  "wood": false,
+                  "friend": false
+                },
+                "output": [
+                  "enemy"
+                ],
+                "children": []
+              },
+              {
                 "id": 14,
-                "name": "Sequence",
-                "desc": "通用普通攻击",
+                "name": "Selector",
                 "args": {},
-                "path": "normal_attack.json",
                 "children": [
                   {
                     "id": 15,
-                    "name": "IsFreeStance",
+                    "name": "Sequence",
+                    "desc": "通用普通攻击",
                     "args": {},
-                    "input": [
-                      ""
-                    ]
-                  },
-                  {
-                    "id": 16,
-                    "name": "AlwaysSuccess",
-                    "desc": "设置交战时间",
-                    "args": {},
+                    "path": "normal_attack.json",
                     "children": [
                       {
+                        "id": 16,
+                        "name": "IsFreeStance",
+                        "args": {},
+                        "input": [
+                          ""
+                        ]
+                      },
+                      {
                         "id": 17,
-                        "name": "Sequence",
+                        "name": "AlwaysSuccess",
+                        "desc": "设置交战时间",
                         "args": {},
                         "children": [
                           {
                             "id": 18,
-                            "name": "IsNull",
+                            "name": "Sequence",
                             "args": {},
-                            "input": [
-                              "fight_time"
-                            ],
-                            "children": []
-                          },
-                          {
-                            "id": 19,
-                            "name": "GetTime",
-                            "desc": "设置交战时间",
-                            "args": {},
-                            "output": [
-                              "fight_time"
+                            "children": [
+                              {
+                                "id": 19,
+                                "name": "IsNull",
+                                "args": {},
+                                "input": [
+                                  "fight_time"
+                                ],
+                                "children": []
+                              },
+                              {
+                                "id": 20,
+                                "name": "GetTime",
+                                "desc": "设置交战时间",
+                                "args": {},
+                                "output": [
+                                  "fight_time"
+                                ]
+                              }
                             ]
                           }
+                        ]
+                      },
+                      {
+                        "id": 21,
+                        "name": "SetStance",
+                        "args": {}
+                      },
+                      {
+                        "id": 22,
+                        "name": "MoveStop",
+                        "desc": "停止移动",
+                        "args": {}
+                      },
+                      {
+                        "id": 23,
+                        "name": "TowardToTarget",
+                        "args": {},
+                        "input": [
+                          "enemy"
+                        ]
+                      },
+                      {
+                        "id": 24,
+                        "name": "NormalAttack",
+                        "args": {},
+                        "input": [
+                          "enemy"
                         ]
                       }
                     ]
                   },
                   {
-                    "id": 20,
-                    "name": "SetStance",
-                    "args": {}
-                  },
-                  {
-                    "id": 21,
-                    "name": "MoveStop",
-                    "desc": "停止移动",
-                    "args": {}
-                  },
-                  {
-                    "id": 22,
-                    "name": "TowardToTarget",
-                    "args": {},
-                    "input": [
-                      "enemy"
-                    ]
-                  },
-                  {
-                    "id": 23,
-                    "name": "NormalAttack",
+                    "id": 25,
+                    "name": "AdjustStance",
                     "args": {},
                     "input": [
                       "enemy"
                     ]
                   }
                 ]
+              }
+            ]
+          },
+          {
+            "id": 26,
+            "name": "Sequence",
+            "desc": "找敌人",
+            "args": {},
+            "children": [
+              {
+                "id": 27,
+                "name": "ClearStance",
+                "args": {}
               },
               {
-                "id": 24,
-                "name": "AdjustStance",
+                "id": 28,
+                "name": "FindOneTarget",
+                "args": {
+                  "radius": 3,
+                  "hero": true,
+                  "soldier": true
+                },
+                "output": [
+                  "enemy"
+                ]
+              },
+              {
+                "id": 29,
+                "name": "GetPos",
                 "args": {},
                 "input": [
                   "enemy"
+                ],
+                "output": [
+                  "pos"
+                ]
+              },
+              {
+                "id": 30,
+                "name": "MoveToPos",
+                "args": {
+                  "rate": 1.5,
+                  "rushing": true
+                },
+                "input": [
+                  "pos"
                 ]
               }
             ]
@@ -191,135 +246,145 @@
         ]
       },
       {
-        "id": 25,
-        "name": "Sequence",
-        "desc": "找敌人",
-        "args": {},
-        "children": [
-          {
-            "id": 26,
-            "name": "ClearStance",
-            "args": {}
-          },
-          {
-            "id": 27,
-            "name": "FindOneTarget",
-            "args": {
-              "radius": 3,
-              "hero": true,
-              "soldier": true
-            },
-            "output": [
-              "enemy"
-            ]
-          },
-          {
-            "id": 28,
-            "name": "GetPos",
-            "args": {},
-            "input": [
-              "enemy"
-            ],
-            "output": [
-              "pos"
-            ]
-          },
-          {
-            "id": 29,
-            "name": "MoveToPos",
-            "args": {
-              "rate": 1.5,
-              "rushing": true
-            },
-            "input": [
-              "pos"
-            ]
-          }
-        ]
-      },
-      {
-        "id": 30,
-        "name": "Sequence",
+        "id": 31,
+        "name": "Selector",
         "desc": "采集",
         "args": {},
+        "path": "collect.json",
         "children": [
           {
-            "id": 31,
-            "name": "FindOneTarget",
-            "args": {
-              "attack": false,
-              "radius": 1,
-              "skill": false,
-              "soldier": false,
-              "hero": false,
-              "wood": true,
-              "friend": false,
-              "collection": true
-            },
-            "output": [
-              "collection"
-            ],
-            "children": []
-          },
-          {
             "id": 32,
-            "name": "Selector",
+            "name": "Sequence",
+            "desc": "采集",
             "args": {},
             "children": [
               {
                 "id": 33,
-                "name": "Sequence",
+                "name": "FindOneTarget",
+                "args": {
+                  "attack": false,
+                  "radius": 1,
+                  "skill": false,
+                  "soldier": false,
+                  "hero": false,
+                  "wood": true,
+                  "friend": false,
+                  "collection": true
+                },
+                "output": [
+                  "collection"
+                ],
+                "children": []
+              },
+              {
+                "id": 34,
+                "name": "Selector",
+                "args": {},
                 "children": [
                   {
-                    "id": 34,
-                    "name": "IsFreeStance",
-                    "args": {},
-                    "input": [
-                      ""
-                    ]
-                  },
-                  {
                     "id": 35,
-                    "name": "SetStance",
-                    "args": {}
+                    "name": "Sequence",
+                    "children": [
+                      {
+                        "id": 36,
+                        "name": "IsFreeStance",
+                        "args": {},
+                        "input": [
+                          ""
+                        ]
+                      },
+                      {
+                        "id": 37,
+                        "name": "SetStance",
+                        "args": {}
+                      },
+                      {
+                        "id": 38,
+                        "name": "MoveStop",
+                        "desc": "停止移动",
+                        "args": {}
+                      },
+                      {
+                        "id": 39,
+                        "name": "TowardToTarget",
+                        "args": {},
+                        "input": [
+                          "collection"
+                        ]
+                      },
+                      {
+                        "id": 40,
+                        "name": "Collect",
+                        "args": {},
+                        "input": [
+                          "collection"
+                        ]
+                      },
+                      {
+                        "id": 41,
+                        "name": "Wait",
+                        "args": {
+                          "time": 1
+                        }
+                      }
+                    ]
                   },
                   {
-                    "id": 36,
-                    "name": "MoveStop",
-                    "desc": "停止移动",
-                    "args": {}
-                  },
-                  {
-                    "id": 37,
-                    "name": "TowardToTarget",
+                    "id": 42,
+                    "name": "AdjustStance",
                     "args": {},
                     "input": [
                       "collection"
                     ]
-                  },
-                  {
-                    "id": 38,
-                    "name": "Collect",
-                    "args": {},
-                    "input": [
-                      "collection"
-                    ]
-                  },
-                  {
-                    "id": 39,
-                    "name": "Wait",
-                    "args": {
-                      "time": 1
-                    }
                   }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 43,
+            "name": "Sequence",
+            "desc": "找采集物",
+            "args": {},
+            "children": [
+              {
+                "id": 44,
+                "name": "ClearStance",
+                "args": {}
+              },
+              {
+                "id": 45,
+                "name": "FindOneTarget",
+                "args": {
+                  "radius": 3,
+                  "hero": false,
+                  "soldier": false,
+                  "collection": true
+                },
+                "output": [
+                  "collection"
                 ]
               },
               {
-                "id": 40,
-                "name": "AdjustStance",
+                "id": 46,
+                "name": "GetPos",
                 "args": {},
                 "input": [
                   "collection"
+                ],
+                "output": [
+                  "pos"
+                ]
+              },
+              {
+                "id": 47,
+                "name": "MoveToPos",
+                "args": {
+                  "rate": 1.5,
+                  "rushing": true
+                },
+                "input": [
+                  "pos"
                 ]
               }
             ]
@@ -327,55 +392,7 @@
         ]
       },
       {
-        "id": 41,
-        "name": "Sequence",
-        "desc": "找采集物",
-        "args": {},
-        "children": [
-          {
-            "id": 42,
-            "name": "ClearStance",
-            "args": {}
-          },
-          {
-            "id": 43,
-            "name": "FindOneTarget",
-            "args": {
-              "radius": 3,
-              "hero": false,
-              "soldier": false,
-              "collection": true
-            },
-            "output": [
-              "collection"
-            ]
-          },
-          {
-            "id": 44,
-            "name": "GetPos",
-            "args": {},
-            "input": [
-              "collection"
-            ],
-            "output": [
-              "pos"
-            ]
-          },
-          {
-            "id": 45,
-            "name": "MoveToPos",
-            "args": {
-              "rate": 1.5,
-              "rushing": true
-            },
-            "input": [
-              "pos"
-            ]
-          }
-        ]
-      },
-      {
-        "id": 46,
+        "id": 48,
         "name": "FollowHero",
         "desc": "士兵以阵型位置跟随主将",
         "args": {}

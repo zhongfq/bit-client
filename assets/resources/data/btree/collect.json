@@ -1,0 +1,149 @@
+{
+  "name": "collect",
+  "root": {
+    "id": 1,
+    "name": "Selector",
+    "desc": "采集",
+    "args": {},
+    "children": [
+      {
+        "id": 2,
+        "name": "Sequence",
+        "desc": "采集",
+        "args": {},
+        "children": [
+          {
+            "id": 3,
+            "name": "FindOneTarget",
+            "args": {
+              "attack": false,
+              "radius": 1,
+              "skill": false,
+              "soldier": false,
+              "hero": false,
+              "wood": true,
+              "friend": false,
+              "collection": true
+            },
+            "output": [
+              "collection"
+            ],
+            "children": []
+          },
+          {
+            "id": 4,
+            "name": "Selector",
+            "args": {},
+            "children": [
+              {
+                "id": 5,
+                "name": "Sequence",
+                "children": [
+                  {
+                    "id": 6,
+                    "name": "IsFreeStance",
+                    "args": {},
+                    "input": [
+                      ""
+                    ]
+                  },
+                  {
+                    "id": 7,
+                    "name": "SetStance",
+                    "args": {}
+                  },
+                  {
+                    "id": 8,
+                    "name": "MoveStop",
+                    "desc": "停止移动",
+                    "args": {}
+                  },
+                  {
+                    "id": 9,
+                    "name": "TowardToTarget",
+                    "args": {},
+                    "input": [
+                      "collection"
+                    ]
+                  },
+                  {
+                    "id": 10,
+                    "name": "Collect",
+                    "args": {},
+                    "input": [
+                      "collection"
+                    ]
+                  },
+                  {
+                    "id": 11,
+                    "name": "Wait",
+                    "args": {
+                      "time": 1
+                    }
+                  }
+                ]
+              },
+              {
+                "id": 12,
+                "name": "AdjustStance",
+                "args": {},
+                "input": [
+                  "collection"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "name": "Sequence",
+        "desc": "找采集物",
+        "args": {},
+        "children": [
+          {
+            "id": 14,
+            "name": "ClearStance",
+            "args": {}
+          },
+          {
+            "id": 15,
+            "name": "FindOneTarget",
+            "args": {
+              "radius": 3,
+              "hero": false,
+              "soldier": false,
+              "collection": true
+            },
+            "output": [
+              "collection"
+            ]
+          },
+          {
+            "id": 16,
+            "name": "GetPos",
+            "args": {},
+            "input": [
+              "collection"
+            ],
+            "output": [
+              "pos"
+            ]
+          },
+          {
+            "id": 17,
+            "name": "MoveToPos",
+            "args": {
+              "rate": 1.5,
+              "rushing": true
+            },
+            "input": [
+              "pos"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "desc": "采集"
+}
