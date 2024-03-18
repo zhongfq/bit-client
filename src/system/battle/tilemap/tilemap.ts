@@ -245,8 +245,6 @@ export class Tilemap {
     private _allMap: Map<number, TMElement> = new Map();
     private _posMap: Map<TMLayerName, Map<string, number>> = new Map();
 
-    private _transMat: Laya.Matrix3x3 | undefined;
-
     public showBlocks: Map<string, boolean> = new Map();
 
     public constructor(public readonly context: ITMContext) {}
@@ -262,13 +260,6 @@ export class Tilemap {
             `${this.context.mapDir}/world.json`,
             "json"
         )) as TMWorld;
-        this._world.maps.forEach((info) => {
-            [info.x, info.y] = this._transMapPos(info);
-            [info.width, info.height] = [
-                info.width / TMUtil.TILE_WIDTH,
-                info.height / TMUtil.TILE_HEIGHT,
-            ];
-        });
 
         const tilesetRef = (await Laya.loader.fetch(
             `${this.context.mapDir}/world-tileset-ref.json`,
@@ -298,33 +289,6 @@ export class Tilemap {
         this._curRect.reset();
         this._allMap.clear();
         this._posMap.clear();
-    }
-
-    private _transMapPos(info: TMMapInfo) {
-        const mat = this._getTransMat();
-        const pos = new Laya.Vector2(info.x + info.width / 2, info.y);
-        Laya.Vector2.transformCoordinate(pos, mat, pos);
-
-        return [Math.floor(pos.x), Math.floor(pos.y)];
-    }
-
-    private _getTransMat() {
-        if (this._transMat) {
-            return this._transMat;
-        }
-        const scale = Math.sqrt((TMUtil.TILE_HEIGHT * 2) ** 2 / 2);
-
-        const mat = new Laya.Matrix3x3();
-        mat.translate(new Laya.Vector2((TMUtil.MAP_HEIGHT * TMUtil.TILE_WIDTH) / 2, 0), mat);
-        mat.scale(new Laya.Vector2(1, 0.5), mat);
-        mat.rotate(Math.PI / 4, mat);
-        mat.scale(new Laya.Vector2(scale, scale), mat);
-
-        const invertMat = new Laya.Matrix3x3();
-        mat.invert(invertMat);
-
-        this._transMat = invertMat;
-        return invertMat;
     }
 
     public update(position: Laya.Vector3): void {
@@ -398,9 +362,8 @@ export class Tilemap {
             }
 
             if (!info.worldMap) {
-                const realFileName = info.fileName.split("/").at(-1)?.replace(".tmx", ".json");
                 info.worldMap = (await Laya.loader.fetch(
-                    `${this.context.mapDir}/` + realFileName,
+                    `${this.context.mapDir}/` + info.fileName,
                     "json"
                 )) as TMWorldMap;
             }

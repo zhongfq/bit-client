@@ -1,67 +1,67 @@
 {
     "maps": [
         {
-            "fileName": "tmx-pvp/world-map1.tmx",
-            "height": 3200,
-            "width": 6400,
+            "fileName": "world-map1.json",
+            "height": 50,
+            "width": 50,
             "x": 0,
             "y": 0
         },
         {
-            "fileName": "tmx-pvp/world-map2.tmx",
-            "height": 3200,
-            "width": 6400,
-            "x": 3200,
-            "y": 1600
+            "fileName": "world-map2.json",
+            "height": 50,
+            "width": 50,
+            "x": 50,
+            "y": 0
         },
         {
-            "fileName": "tmx-pvp/world-map3.tmx",
-            "height": 3200,
-            "width": 6400,
-            "x": 6400,
-            "y": 3200
+            "fileName": "world-map3.json",
+            "height": 50,
+            "width": 50,
+            "x": 100,
+            "y": 0
         },
         {
-            "fileName": "tmx-pvp/world-map4.tmx",
-            "height": 3200,
-            "width": 6400,
-            "x": -3200,
-            "y": 1600
-        },
-        {
-            "fileName": "tmx-pvp/world-map6.tmx",
-            "height": 3200,
-            "width": 6400,
-            "x": 3200,
-            "y": 4800
-        },
-        {
-            "fileName": "tmx-pvp/world-map7.tmx",
-            "height": 3200,
-            "width": 6400,
-            "x": -6400,
-            "y": 3200
-        },
-        {
-            "fileName": "tmx-pvp/world-map8.tmx",
-            "height": 3200,
-            "width": 6400,
-            "x": -3200,
-            "y": 4800
-        },
-        {
-            "fileName": "tmx-pvp/world-map9.tmx",
-            "height": 3200,
-            "width": 6400,
+            "fileName": "world-map4.json",
+            "height": 50,
+            "width": 50,
             "x": 0,
-            "y": 6400
+            "y": 50
         },
         {
-            "fileName": "tmx-pvp/world-map5.tmx",
-            "height": 3200,
-            "width": 6400,
+            "fileName": "world-map6.json",
+            "height": 50,
+            "width": 50,
+            "x": 100,
+            "y": 50
+        },
+        {
+            "fileName": "world-map7.json",
+            "height": 50,
+            "width": 50,
             "x": 0,
-            "y": 3200
+            "y": 100
+        },
+        {
+            "fileName": "world-map8.json",
+            "height": 50,
+            "width": 50,
+            "x": 50,
+            "y": 100
+        },
+        {
+            "fileName": "world-map9.json",
+            "height": 50,
+            "width": 50,
+            "x": 100,
+            "y": 100
+        },
+        {
+            "fileName": "world-map5.json",
+            "height": 50,
+            "width": 50,
+            "x": 50,
+            "y": 50
         }
     ],
     "onlyShowAdjacentMaps": false,
