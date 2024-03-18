@@ -198,7 +198,7 @@ export class PveServer extends b3.Context {
         });
         this._sender.focus(element.eid);
 
-        // this._loadSoliders(element);
+        this._loadSoliders(element);
         this._loadTrucks(element);
     }
 
