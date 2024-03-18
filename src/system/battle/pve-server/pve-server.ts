@@ -20,7 +20,7 @@ import { AiSystem } from "./ecs/systems/ai-system";
 import { CacheSystem } from "./ecs/systems/cache-system";
 import { MovementSystem } from "./ecs/systems/movement-system";
 import { SkillSystem } from "./ecs/systems/skill-system";
-import { ElementCreator, UpdateHp } from "./pve-defs";
+import { ElementCreator, UpdateTruck, UpdateHp } from "./pve-defs";
 
 const _tmpVelocity = new Laya.Vector3();
 const SOLDIER_COUNT = 12;
@@ -277,8 +277,16 @@ export class PveServer extends b3.Context {
             truck.index = idx;
             truck.offset = value;
             truck.hero = hero;
-            truck.data = undefined;
-            hero.troop!.trucks.push(truck);
+            truck.collectCnt = 0;
+
+            if (idx == SOLDIER_COUNT) {
+                truck.collectType = BattleConf.ENTITY_TYPE.WOOD;
+            } else if (idx == SOLDIER_COUNT + 1) {
+                truck.collectType = BattleConf.ENTITY_TYPE.FOOD;
+            } else {
+                truck.collectType = BattleConf.ENTITY_TYPE.STONE;
+            }
+            hero.troop!.trucks.set(truck.collectType, truck);
 
             const transform = entity.addComponent(TransformComponent);
             transform.position.x = value.x + hero.transform.position.x;
@@ -299,6 +307,7 @@ export class PveServer extends b3.Context {
                 maxHp: element.maxHp,
                 position: transform.position,
                 animation: true,
+                collectType: truck.collectType,
             });
         });
     }
@@ -365,7 +374,7 @@ export class PveServer extends b3.Context {
                 this.removeElement(enemy, false);
             });
             const cacheSys = this.ecs.getSystem(CacheSystem);
-            cacheSys?.setReliveTime(enemy, Laya.timer.currTimer + 10 * 1000); // TODO：复活时间读配置表
+            cacheSys?.setReliveTime(enemy, Laya.timer.currTimer + 60 * 1000); // TODO：复活时间读配置表
         }
     }
 
@@ -393,6 +402,16 @@ export class PveServer extends b3.Context {
             maxHp: target.maxHp,
             subHp: subHp,
         });
+
+        const truck = element.soldier?.hero?.troop?.trucks.get(target.data.etype);
+        if (truck) {
+            truck.collectCnt++;
+            this._sender.updateTruck(truck.eid, {
+                collecter: element.eid,
+                collection: target.eid,
+                collectCnt: truck.collectCnt,
+            });
+        }
 
         if (target.hp <= 0) {
             const cacheSys = this.ecs.getSystem(CacheSystem);
@@ -670,6 +689,7 @@ export interface ICommandSender {
     moveStop(eid: number, position: Laya.Vector3): void;
 
     updateHp(eid: number, info: UpdateHp): void;
+    updateTruck(eid: number, info: UpdateTruck): void;
 
     towardTo(eid: number, target: number): void;
 

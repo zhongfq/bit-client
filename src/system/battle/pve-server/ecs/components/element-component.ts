@@ -1,3 +1,4 @@
+import { Constructor } from "../../../../../core/dispatcher";
 import * as ecs from "../../../../../core/ecs";
 import { IVector3Like } from "../../../../../core/laya";
 import { BattleEntityRow, SoldierRow } from "../../../../../def/table";
@@ -75,13 +76,14 @@ export class SoldierComponent extends FollowerComponent {
 }
 
 export class TruckComponent extends FollowerComponent {
-    public data = undefined; // TODO：资源车不需要读配置表，暂时留空
+    public collectType!: number;
+    public collectCnt: number = 0;
 }
 
 export class TroopComponent extends ecs.Component {
     public formation!: Readonly<IVector3Like>[];
     public soldiers: SoldierComponent[] = [];
-    public trucks: TruckComponent[] = [];
+    public trucks: Map<number, TruckComponent> = new Map();
 
     private _element?: ElementComponent;
 

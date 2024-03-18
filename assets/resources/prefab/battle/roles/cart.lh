@@ -2,7 +2,7 @@
   "_$ver": 1,
   "_$id": "0uvm25g9",
   "_$type": "Sprite3D",
-  "name": "hero01",
+  "name": "cart",
   "_$child": [
     {
       "_$id": "80o1yihb",
@@ -342,80 +342,55 @@
                       "z": -1
                     }
                   }
+                },
+                {
+                  "_$id": "kn8ji6dh",
+                  "_$type": "Sprite3D",
+                  "name": "对象178",
+                  "transform": {
+                    "localPosition": {
+                      "_$type": "Vector3",
+                      "x": 0.2819638,
+                      "y": -2.205675,
+                      "z": 0.495683
+                    },
+                    "localRotation": {
+                      "_$type": "Quaternion",
+                      "x": 0.5000000249999944,
+                      "y": -0.5000000249999944,
+                      "z": 0.5000000249999944,
+                      "w": -0.4999999250000095
+                    }
+                  },
+                  "_$comp": [
+                    {
+                      "_$type": "MeshFilter"
+                    },
+                    {
+                      "_$type": "MeshRenderer",
+                      "receiveShadow": true,
+                      "castShadow": true,
+                      "sharedMaterials": [
+                        {
+                          "_$uuid": "0fa31d74-f8d1-467d-bbd6-995ae9074cf4",
+                          "_$type": "Material"
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             }
           ]
         },
         {
-          "_$id": "yeqi0511",
-          "_$prefab": "58564de4-e902-43c1-be11-6ebe6da569bb",
-          "name": "Gather_Wood",
-          "active": false,
-          "layer": 0,
+          "_$id": "xumydivc",
+          "_$type": "Sprite3D",
+          "name": "gather",
           "transform": {
             "localPosition": {
               "_$type": "Vector3",
-              "x": 0,
-              "y": 1,
-              "z": 0
-            },
-            "localRotation": {
-              "_$type": "Quaternion",
-              "x": 0,
-              "y": 0,
-              "z": 0,
-              "w": -1
-            }
-          }
-        },
-        {
-          "_$id": "e8b3ay8t",
-          "_$prefab": "72eb0ee4-cdb1-4176-b4c9-d46883baf460",
-          "name": "Gather_Food",
-          "active": false,
-          "layer": 0,
-          "transform": {
-            "localPosition": {
-              "_$type": "Vector3",
-              "x": 0,
-              "y": 1,
-              "z": 0
-            },
-            "localRotation": {
-              "_$type": "Quaternion",
-              "x": 0,
-              "y": 0,
-              "z": 0,
-              "w": -1
-            }
-          }
-        },
-        {
-          "_$id": "30lwftip",
-          "_$prefab": "9dc43063-fd33-4ad2-846f-fb7440585b94",
-          "name": "Gather_Stone",
-          "active": false,
-          "layer": 0,
-          "transform": {
-            "localPosition": {
-              "_$type": "Vector3",
-              "x": 0,
-              "y": 1,
-              "z": 0
-            },
-            "localRotation": {
-              "_$type": "Quaternion",
-              "x": 0,
-              "y": 0,
-              "z": 0,
-              "w": 1
-            },
-            "localScale": {
-              "_$type": "Vector3",
-              "x": 1,
-              "y": 1,
-              "z": 1
+              "y": 1
             }
           }
         }

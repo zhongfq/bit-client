@@ -1,3 +1,5 @@
+import { IVector3Like } from "../../../core/laya";
+
 export class PveDef {
     public static readonly MOVE_SPEED = 1.5;
     public static readonly MAX_FOLLOW_SPEED = PveDef.MOVE_SPEED * 2;
@@ -19,6 +21,7 @@ export interface ElementCreator {
     position: Laya.Vector3;
 
     animation?: boolean;
+    collectType?: number;
 }
 
 export interface UpdateHp {
@@ -26,4 +29,31 @@ export interface UpdateHp {
     maxHp: number;
     subHp?: number;
     isCrit?: boolean;
+}
+
+export interface UpdateTruck {
+    collecter: number;
+    collection: number;
+    collectCnt: number;
+}
+
+export class TruckFormation {
+    public static readonly WOOD: IVector3Like[] = [
+        { x: 0.6, y: 0, z: 0 },
+        { x: 0.2, y: 0, z: 0 },
+        { x: -0.2, y: 0, z: 0 },
+        { x: -0.6, y: 0, z: 0 },
+    ];
+    public static readonly FOOD: IVector3Like[] = [
+        { x: 0.35, y: 0, z: 0.5 },
+        { x: -0.35, y: 0, z: 0.5 },
+        { x: 0.35, y: 0, z: -0.5 },
+        { x: -0.35, y: 0, z: -0.5 },
+    ];
+    public static readonly STONE: IVector3Like[] = [
+        { x: 0.35, y: 0, z: 0.5 },
+        { x: -0.35, y: 0, z: 0.5 },
+        { x: 0.35, y: 0, z: -0.5 },
+        { x: -0.35, y: 0, z: -0.5 },
+    ];
 }

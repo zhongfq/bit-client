@@ -22,4 +22,8 @@ export module res {
 
     export const BATTLE_HP_NUM = "resources/prefab/battle/ui/hp-num.lh";
     export const BATTLE_HP_NUM_X = "resources/prefab/battle/ui/hp-num-x.lh";
+
+    export const BATTLE_GATHER_WOOD = "resources/prefab/battle/gather/gather-wood.lh";
+    export const BATTLE_GATHER_FOOD = "resources/prefab/battle/gather/gather-food.lh";
+    export const BATTLE_GATHER_STONE = "resources/prefab/battle/gather/gather-stone.lh";
 }
