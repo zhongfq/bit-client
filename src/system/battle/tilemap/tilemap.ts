@@ -296,8 +296,8 @@ export class Tilemap {
             return;
         }
 
-        const curX = Math.floor(position.x - TMUtil.VISION_WIDTH / 2);
-        const curY = Math.floor(position.z - TMUtil.VISION_HEIGHT / 2);
+        const curX = Math.floor(position.x - TMUtil.VISION_WIDTH * 0.6);
+        const curY = Math.floor(position.z - TMUtil.VISION_HEIGHT * 0.6);
         this._curRect.setTo(curX, curY, TMUtil.VISION_WIDTH, TMUtil.VISION_HEIGHT);
 
         if (this._curRect.equals(this._lastRect)) {

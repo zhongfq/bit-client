@@ -17,8 +17,9 @@
   "_$child": [
     {
       "_$id": "kaffipmj",
+      "_$var": true,
       "_$type": "Image",
-      "name": "Image",
+      "name": "bg",
       "y": -108,
       "width": 750,
       "height": 1550,

@@ -7,6 +7,7 @@ import { HomeChatBoxUI } from "../prefab/home/HomeChatBoxUI";
  * scenes/home.ls
  */
 export class HomeUIBase extends Laya.Scene {
+    public bg!: Laya.Image;
     public btnPve!: Laya.Button;
     public btnMail!: Laya.Button;
     public btnShop!: Laya.Button;
