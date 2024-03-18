@@ -49,7 +49,6 @@ export class RenderSystem extends ecs.System {
             component.view = null;
         } else if (component instanceof BoardComponent) {
             const tilemap = this.ecs.getSingletonComponent(TilemapComponent)!;
-            component.props.set(TMPropKey.OWNER, Tilemap);
             tilemap.delObjectElementByEid(component.eid);
         } else if (component instanceof TroopComponent) {
             component.hero?.destroy();
@@ -182,7 +181,6 @@ export class RenderSystem extends ecs.System {
 
         if (etype === ETYPE.CITY) {
             board.props.set(TMPropKey.TextureKey, board.textureKey!);
-            board.props.set(TMPropKey.OWNER, RenderSystem);
             const cfg = app.service.table.textureCfg[board.textureKey!]!;
             offsetX = -cfg.tile_w / 2;
             offsetZ = -cfg.tile_h / 2;

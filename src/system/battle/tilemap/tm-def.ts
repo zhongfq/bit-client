@@ -115,7 +115,6 @@ export enum TMPropKey {
     // 外部变量
     ID = "id",
     // 内部变量
-    OWNER = "__owner",
     Gid = "__gid",
     RealX = "__realX",
     RealY = "__realY",

@@ -371,12 +371,16 @@ export class Tilemap {
 
         for (let i = 0; i < addArr.length; i++) {
             const [x, y] = addArr[i];
-            this._searchInMap(x, y, (layerName) => layerName != TMLayerName.Marker);
+            this._searchInMap(x, y, (layerName) => {
+                return layerName != TMLayerName.Object && layerName != TMLayerName.Marker;
+            });
         }
 
         for (let i = 0; i < delArr.length; i++) {
             const [x, y] = delArr[i];
-            this._tryDel(x, y, (layerName) => layerName != TMLayerName.Marker);
+            this._tryDel(x, y, (layerName) => {
+                return layerName != TMLayerName.Object && layerName != TMLayerName.Marker;
+            });
         }
     }
 
@@ -459,19 +463,11 @@ export class Tilemap {
             const element = this._allMap.get(uid);
 
             if (element) {
-                if (element.props.get(TMPropKey.OWNER) === Tilemap) {
-                    this.context.onDelElement(element);
-                    element.recover();
-
-                    uidMap.delete(key);
-                    this._allMap.delete(uid);
-                } else {
-                    this.context.onDelElement(element);
-                }
-            } else {
-                uidMap.delete(key);
-                this._allMap.delete(uid);
+                this.context.onDelElement(element);
+                element.recover();
             }
+            uidMap.delete(key);
+            this._allMap.delete(uid);
         });
     }
 
@@ -489,7 +485,6 @@ export class Tilemap {
             }
             const props = new Map<string, unknown>();
             props.set(TMPropKey.Gid, gid);
-            props.set(TMPropKey.OWNER, Tilemap);
             return props;
         } else if (layer.objects) {
             const $gridX = gridX - info.x;
@@ -504,7 +499,6 @@ export class Tilemap {
             });
             props.set(TMPropKey.RealX, info.x + $targetObj.x - 0.5);
             props.set(TMPropKey.RealY, info.y + $targetObj.y - 0.5);
-            props.set(TMPropKey.OWNER, Tilemap);
             return props;
         } else {
             console.warn("该层没有数据", layer.name);
