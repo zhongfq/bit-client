@@ -4,7 +4,12 @@ import { tween } from "../../../../../core/tween/tween";
 import { BattleConf } from "../../../../../def/battle";
 import { res } from "../../../../../misc/res";
 import { HeadInfoStyle } from "../../../../../ui-runtime/prefab/battle/HeadInfoUI";
-import { ElementCreator, UpdateHp } from "../../../pve-server/pve-defs";
+import {
+    ElementCreator,
+    UpdateTruck,
+    UpdateHp,
+    TruckFormation,
+} from "../../../pve-server/pve-defs";
 import { ICommandSender } from "../../../pve-server/pve-server";
 import { PveContext } from "../../pve-context";
 import { CameraComponent } from "../components/camera-component";
@@ -21,7 +26,11 @@ import {
     ShadowComponent,
 } from "../components/render-component";
 import { TilemapComponent } from "../components/tilemap-component";
-import { ElementAnimation, ElementComponent } from "../components/element-component";
+import {
+    ElementAnimation,
+    ElementComponent,
+    TruckComponent,
+} from "../components/element-component";
 
 const PREFAB_HEAD_INFO1 = "resources/prefab/battle/ui/head-info1.lh";
 const PREFAB_HEAD_INFO2 = "resources/prefab/battle/ui/head-info2.lh";
@@ -97,6 +106,11 @@ export class CommandSystem extends ecs.System implements ICommandSender {
             data.etype == ETYPE.STONE
         ) {
             entity.addComponent(BoardComponent);
+        }
+
+        if (data.etype === ETYPE.TRUCK) {
+            const truck = entity.addComponent(TruckComponent);
+            truck.collectType = data.collectType || 0;
         }
     }
 
@@ -292,6 +306,94 @@ export class CommandSystem extends ecs.System implements ICommandSender {
             if (shake) objectElement?.shake();
         } else {
             objectElement?.erase();
+        }
+    }
+
+    public updateTruck(eid: number, data: UpdateTruck) {
+        const truck = this._findElement(eid);
+        if (!truck) {
+            return;
+        }
+        const truckComp = truck.getComponent(TruckComponent);
+        if (!truckComp) {
+            return;
+        }
+        const curCnt = truckComp.collectCnt;
+        const tarCnt = data.collectCnt;
+        if (curCnt < tarCnt) {
+            this.playCollectFlyAnim(data.collecter, data.collection);
+        }
+        const curObjCnt = truckComp.collectObjs.length;
+        const tarObjCnt = Math.floor(data.collectCnt / TruckComponent.COLLECT_CNT_PER_OBJ);
+        if (curObjCnt < tarObjCnt) {
+            this.addTruckCollectObj(eid, tarObjCnt - curObjCnt);
+        } else if (curObjCnt > tarObjCnt) {
+            this.delTruckCollectObj(eid, curObjCnt - tarObjCnt);
+        }
+    }
+
+    public playCollectFlyAnim(collecter: number, collection: number) {}
+
+    public async addTruckCollectObj(eid: number, count: number) {
+        const truck = this._findElement(eid);
+        if (!truck) {
+            return;
+        }
+        const truckComp = truck.getComponent(TruckComponent);
+        if (!truckComp) {
+            return;
+        }
+
+        let path, formation;
+        if (truckComp.collectType == BattleConf.ENTITY_TYPE.WOOD) {
+            [path, formation] = [res.BATTLE_GATHER_WOOD, TruckFormation.WOOD];
+        } else if (truckComp.collectType == BattleConf.ENTITY_TYPE.FOOD) {
+            [path, formation] = [res.BATTLE_GATHER_FOOD, TruckFormation.FOOD];
+        } else if (truckComp.collectType == BattleConf.ENTITY_TYPE.STONE) {
+            [path, formation] = [res.BATTLE_GATHER_STONE, TruckFormation.STONE];
+        }
+        if (!path || !formation) {
+            return;
+        }
+
+        let prefab = Laya.loader.getRes(path, Laya.Loader.HIERARCHY);
+        prefab ??= await Laya.loader.load(path, Laya.Loader.HIERARCHY);
+
+        while (count--) {
+            const obj = prefab.create() as Laya.Sprite3D;
+
+            const len = truckComp.collectObjs.length;
+            const tarPos = formation[len % formation.length];
+            const offsetY = Math.floor(len / formation.length) * 0.35;
+
+            const pos = obj.transform.localPosition;
+            pos.x = tarPos.x;
+            pos.y = tarPos.y + offsetY;
+            pos.z = tarPos.z;
+            obj.transform.localPosition = pos;
+
+            obj.name = len + "_" + pos.x + "_" + pos.y + "_" + pos.z;
+            truck.animation.view?.getChildByName("anim")?.getChildByName("gather")?.addChild(obj);
+
+            truckComp.collectObjs.push(obj);
+        }
+    }
+
+    public delTruckCollectObj(eid: number, count: number) {
+        const truck = this._findElement(eid);
+        if (!truck) {
+            return;
+        }
+        const truckComp = truck.getComponent(TruckComponent);
+        if (!truckComp) {
+            return;
+        }
+        while (count--) {
+            let obj = truckComp.collectObjs.pop();
+            if (obj) {
+                obj.removeSelf();
+                obj = undefined;
+            }
         }
     }
 

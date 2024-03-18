@@ -37,3 +37,11 @@ export class ElementComponent extends ecs.Component {
     public entityId: number = 0;
     public tableId: number = 0;
 }
+
+export class TruckComponent extends ecs.Component {
+    public static readonly COLLECT_CNT_PER_OBJ = 5;
+
+    public collectType!: number;
+    public collectCnt: number = 0;
+    public collectObjs: Laya.Sprite3D[] = [];
+}

@@ -229,6 +229,6 @@
         "etype": 9,
         "id": 80001,
         "pve_ai": "truck",
-        "res": "resources/prefab/battle/roles/card.lh"
+        "res": "resources/prefab/battle/roles/cart.lh"
     }
 }
