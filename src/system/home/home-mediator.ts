@@ -16,9 +16,9 @@ export class HomeMediator extends Mediator {
 
     private _currentBtn?: HomeNaviMenuBtnUI;
     private _currentBox?: Laya.Node;
-
     private _pve?: PveUI;
     private _pvp?: PvpUI;
+    private _loading: boolean = false;
 
     public override onAwake() {
         this._initBtn();
@@ -97,6 +97,9 @@ export class HomeMediator extends Mediator {
     private _initNaviMenu() {
         const naviMenu = this.owner.naviMenu;
         naviMenu.btnChest.on(Laya.Event.CLICK, () => {
+            if (this._loading) {
+                return;
+            }
             if (this._currentBtn === naviMenu.btnChest) {
                 this._closeBox();
                 this._activatePveOrPvp(true);
@@ -109,9 +112,15 @@ export class HomeMediator extends Mediator {
             }
         });
         naviMenu.btnFight.on(Laya.Event.CLICK, () => {
+            if (this._loading) {
+                return;
+            }
             this._loadPvp();
         });
         naviMenu.btnMain.on(Laya.Event.CLICK, () => {
+            if (this._loading) {
+                return;
+            }
             this._loadPve();
         });
         naviMenu.btnSoldier.on(Laya.Event.CLICK, () => {
@@ -123,33 +132,41 @@ export class HomeMediator extends Mediator {
     }
 
     private _loadPvp() {
-        app.ui.load(ui.PVP)?.then((scene) => {
-            this._closeBox();
-            this.owner.bg.visible = false;
-            this.owner.boxUI.visible = false;
-            this._pve?.destroy();
-            this._pve = undefined;
-            this._pvp = scene as PvpUI;
-            this._pvp.width = this.owner.width;
-            this._pvp.height = this.owner.height;
-            this.owner.battle.addChild(this._pvp);
-            this.owner.stage.addChildAt(this._pvp.scene3D, 0);
-        });
+        if (!this._pvp) {
+            this._loading = true;
+            app.ui.load(ui.PVP)?.then((scene) => {
+                this._loading = false;
+                this._closeBox();
+                this.owner.bg.visible = false;
+                this.owner.boxUI.visible = false;
+                this._pve?.destroy();
+                this._pve = undefined;
+                this._pvp = scene as PvpUI;
+                this._pvp.width = this.owner.width;
+                this._pvp.height = this.owner.height;
+                this.owner.battle.addChild(this._pvp);
+                this.owner.stage.addChildAt(this._pvp.scene3D, 0);
+            });
+        }
     }
 
     private _loadPve() {
-        app.ui.load(ui.PVE)?.then((scene) => {
-            this._closeBox();
-            this.owner.bg.visible = false;
-            this.owner.boxUI.visible = false;
-            this._pvp?.destroy();
-            this._pvp = undefined;
-            this._pve = scene as PveUI;
-            this._pve.width = this.owner.width;
-            this._pve.height = this.owner.height;
-            this.owner.battle.addChild(this._pve);
-            this.owner.stage.addChildAt(this._pve.scene3D, 0);
-        });
+        if (!this._pve) {
+            this._loading = true;
+            app.ui.load(ui.PVE)?.then((scene) => {
+                this._loading = false;
+                this._closeBox();
+                this.owner.bg.visible = false;
+                this.owner.boxUI.visible = false;
+                this._pvp?.destroy();
+                this._pvp = undefined;
+                this._pve = scene as PveUI;
+                this._pve.width = this.owner.width;
+                this._pve.height = this.owner.height;
+                this.owner.battle.addChild(this._pve);
+                this.owner.stage.addChildAt(this._pve.scene3D, 0);
+            });
+        }
     }
 
     private _closeBox() {
