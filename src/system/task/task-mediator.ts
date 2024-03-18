@@ -9,29 +9,69 @@ import { TaskService } from "./task-service";
 
 const { regClass, property } = Laya;
 
+interface TaskItemData {
+    taskVo: TaskVo;
+    isShowTips: boolean;
+}
+const itemNodeY = 28;
 @regClass()
 export class TaskMediator extends Mediator {
     public declare owner: TaskUI;
-    private tlTaskData: TaskVo[] = [];
+    private tlTaskData: TaskItemData[] = [];
 
     public override onAwake(): void {
         this.initUIEvent();
         this.initServiceEvent();
-        this.tlTaskData.push(app.service.task.mainTask);
-        this.tlTaskData = this.tlTaskData.concat(app.service.task.branchTaskBag.toArray());
+
+        this.tlTaskData.push({ taskVo: app.service.task.mainTask, isShowTips: true });
+        let index = 0;
+        for (const task of app.service.task.branchTaskBag.toArray()) {
+            this.tlTaskData.push({ taskVo: task, isShowTips: index == 0 });
+            index++;
+        }
+        // this.tlTaskData = this.tlTaskData.concat(app.service.task.branchTaskBag.toArray());
+        // this.updateList();
+    }
+
+    public override onStart(): void {
         this.updateList();
     }
 
     private initUIEvent() {
         this.owner.listTask.renderHandler = new Laya.Handler(this, this.onListRender);
         this.owner.listTask.mouseHandler = new Laya.Handler(this, this.onListClick);
+        this.owner.listTaskNew.setRenderHandler((item: TaskItemBox, data: TaskItemData) => {
+            if (data.isShowTips) {
+                item.boxInfo.y = itemNodeY;
+                item.height = 110 + itemNodeY;
+                item.labelTips.text = data.taskVo.tipsName;
+            } else {
+                item.height = 110;
+                item.labelTips.text = "";
+            }
+
+            item.labelName.text = data.taskVo.name;
+            item.labelDesc.text = data.taskVo.desc;
+            if (data.taskVo.cmd?.finish) {
+                item.btnUse.label = "领取";
+            } else {
+                item.btnUse.label = "前往";
+            }
+
+            // item.height = 127;
+            // const a = 1;
+        });
     }
 
     private initServiceEvent() {
         this.on(app.service.task, TaskService.TASK_UPDATE, () => {
             this.tlTaskData = [];
-            this.tlTaskData.push(app.service.task.mainTask);
-            this.tlTaskData = this.tlTaskData.concat(app.service.task.branchTaskBag.toArray());
+            this.tlTaskData.push({ taskVo: app.service.task.mainTask, isShowTips: true });
+            let index = 0;
+            for (const task of app.service.task.branchTaskBag.toArray()) {
+                this.tlTaskData.push({ taskVo: task, isShowTips: index == 0 });
+                index++;
+            }
             this.updateList();
         });
     }
@@ -39,9 +79,9 @@ export class TaskMediator extends Mediator {
     private onListClick(e: Laya.Event, index: number) {
         if (e.type == Laya.Event.CLICK) {
             if (e.target.name === "btnUse") {
-                const taskCmd = this.tlTaskData[index].cmd;
+                const taskCmd = this.tlTaskData[index].taskVo.cmd;
                 const ids: number[] = [];
-                if (this.tlTaskData[index].ref.type == TaskConf.TASK_TYPE.BRANCH) {
+                if (this.tlTaskData[index].taskVo.ref.type == TaskConf.TASK_TYPE.BRANCH) {
                     for (const task of app.service.task.branchTaskBag.toArray()) {
                         if (task.cmd && task.cmd?.num >= task.cmd?.max) {
                             ids.push(task.cmd.id);
@@ -62,6 +102,7 @@ export class TaskMediator extends Mediator {
     }
 
     private updateList() {
-        this.owner.listTask.array = this.tlTaskData;
+        // this.owner.listTask.array = this.tlTaskData;
+        this.owner.listTaskNew.setArrayData(this.tlTaskData);
     }
 }

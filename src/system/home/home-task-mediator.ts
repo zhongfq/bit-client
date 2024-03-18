@@ -15,9 +15,6 @@ export class HomeTaskMediator extends Mediator {
 
     public override onAwake(): void {
         this.initEvent();
-        this.owner.on(Laya.Event.CLICK, this, () => {
-            app.ui.show(ui.TASK);
-        });
         // this.owner.imgIcon.skin = "";
         this.updateInfo();
     }
@@ -25,6 +22,9 @@ export class HomeTaskMediator extends Mediator {
     public initEvent() {
         this.on(app.service.task, TaskService.TASK_UPDATE, () => {
             this.updateInfo();
+        });
+        this.owner.on(Laya.Event.CLICK, this, () => {
+            app.ui.show(ui.TASK);
         });
     }
 
@@ -41,8 +41,9 @@ export class HomeTaskMediator extends Mediator {
             //完成任务
             this.owner.mouseEnabled = false;
             this.owner.labelDesc.text = "完成";
-            Laya.timer.frameOnce(3000, this, () => {
+            Laya.timer.once(3000, this, () => {
                 if (taskInfo.cmd) {
+                    this.owner.mouseEnabled = true;
                     app.service.task.requestReceiveReward({ taskIds: [taskInfo.cmd.id] });
                 }
             });
