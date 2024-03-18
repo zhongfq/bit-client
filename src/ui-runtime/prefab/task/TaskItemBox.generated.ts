@@ -5,6 +5,8 @@
  * resources/prefab/task/task-item-box.lh
  */
 export class TaskItemBoxBase extends Laya.Box {
+    public labelTips!: Laya.Label;
+    public boxInfo!: Laya.Sprite;
     public btnUse!: Laya.Button;
     public labelDesc!: Laya.Label;
     public labelName!: Laya.Label;

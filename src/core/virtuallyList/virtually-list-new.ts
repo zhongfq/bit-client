@@ -1,6 +1,7 @@
 import { ChatCellUI } from "../../ui-runtime/prefab/chat/ChatCellUI";
 import { VirtuallyListNewUI } from "../../ui-runtime/prefab/common/VirtuallyListNewUI";
 import { VirtuallyListUI } from "../../ui-runtime/prefab/common/VirtuallyListUI";
+import { Callback } from "../dispatcher";
 
 const { regClass, property } = Laya;
 export enum ListCreateDataType {
@@ -65,6 +66,8 @@ export class VirtuallyListNew extends Laya.Script {
 
     @property({ type: Laya.ScrollType, tips: "滚动方向" })
     public scrollType: Laya.ScrollType = 1; //竖向cell数量
+
+    private _renderHandler!: Callback; //刷新节点回调
 
     public override onAwake(): void {
         const node = this._createNode();
@@ -285,7 +288,11 @@ export class VirtuallyListNew extends Laya.Script {
                         node = this._nodes[backIdx + 1];
                         node.visible = true;
                     }
-                    node.set_dataSource(val);
+                    if (this._renderHandler) {
+                        this._renderHandler(node, val);
+                    } else {
+                        node.set_dataSource(val);
+                    }
                     this._nodes.unshift(node);
                     this._node2Idx.set(node, fistIdx - 1);
                     if (this.alignH == AlignH.BOTTOM) {
@@ -308,7 +315,11 @@ export class VirtuallyListNew extends Laya.Script {
                         node = this._nodes[backIdx + 1];
                         node.visible = true;
                     }
-                    node.set_dataSource(val);
+                    if (this._renderHandler) {
+                        this._renderHandler(node, val);
+                    } else {
+                        node.set_dataSource(val);
+                    }
                     this._nodes.unshift(node);
                     this._node2Idx.set(node, fistIdx - 1);
                     if (this.alignV == AlignV.RIGHT) {
@@ -375,7 +386,11 @@ export class VirtuallyListNew extends Laya.Script {
                     ? (node.width + this.spaceX) * (i % this.cellNumX)
                     : -(node.width + this.spaceX) * ((i % this.cellNumX) + 1);
 
-            node.set_dataSource(this._data[index]);
+            if (this._renderHandler) {
+                this._renderHandler(node, this._data[index]);
+            } else {
+                node.set_dataSource(this._data[index]);
+            }
             node.visible = true;
 
             if (this.alignH == AlignH.TOP) {
@@ -525,8 +540,11 @@ export class VirtuallyListNew extends Laya.Script {
             if (!node) {
                 break;
             }
-
-            node.set_dataSource(this._data[i]);
+            if (this._renderHandler) {
+                this._renderHandler(node, this._data[i]);
+            } else {
+                node.set_dataSource(this._data[i]);
+            }
             node.visible = true;
 
             if (this.scrollType == Laya.ScrollType.Vertical) {
@@ -590,5 +608,9 @@ export class VirtuallyListNew extends Laya.Script {
 
             addNum++;
         }
+    }
+
+    public set renderHandler(func: Callback) {
+        this._renderHandler = func;
     }
 }

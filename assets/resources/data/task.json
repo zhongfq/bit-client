@@ -1,6 +1,6 @@
 {
     "1001": {
-        "desc": "等级达到10级",
+        "desc": "砍5棵树",
         "icon": "0",
         "id": 1001,
         "receive_type": 1,
@@ -19,7 +19,7 @@
         "type": 1
     },
     "1002": {
-        "desc": "等级达到20级",
+        "desc": "割10棵草",
         "icon": "0",
         "id": 1002,
         "receive_type": 1,
@@ -38,7 +38,7 @@
         "type": 1
     },
     "1003": {
-        "desc": "等级达到30级",
+        "desc": "解救1个小兵",
         "icon": "0",
         "id": 1003,
         "receive_type": 1,
@@ -57,7 +57,7 @@
         "type": 1
     },
     "1004": {
-        "desc": "等级达到40级",
+        "desc": "捡到1个宝箱",
         "icon": "0",
         "id": 1004,
         "receive_type": 1,
@@ -75,8 +75,122 @@
         "sort": 4,
         "type": 1
     },
+    "1005": {
+        "desc": "训练1次",
+        "icon": "0",
+        "id": 1005,
+        "receive_type": 1,
+        "reset_type": 0,
+        "reward": [
+            {
+                "count": 1,
+                "id": 10101
+            },
+            {
+                "count": 4,
+                "id": 10102
+            }
+        ],
+        "sort": 5,
+        "type": 1
+    },
+    "1006": {
+        "desc": "开启1次宝箱",
+        "icon": "0",
+        "id": 1006,
+        "receive_type": 1,
+        "reset_type": 0,
+        "reward": [
+            {
+                "count": 1,
+                "id": 10101
+            },
+            {
+                "count": 5,
+                "id": 10102
+            }
+        ],
+        "sort": 6,
+        "type": 1
+    },
+    "1007": {
+        "desc": "等级达到10级",
+        "icon": "0",
+        "id": 1007,
+        "receive_type": 1,
+        "reset_type": 0,
+        "reward": [
+            {
+                "count": 1,
+                "id": 10101
+            },
+            {
+                "count": 2,
+                "id": 10102
+            }
+        ],
+        "sort": 7,
+        "type": 1
+    },
+    "1008": {
+        "desc": "等级达到20级",
+        "icon": "0",
+        "id": 1008,
+        "receive_type": 1,
+        "reset_type": 0,
+        "reward": [
+            {
+                "count": 1,
+                "id": 10101
+            },
+            {
+                "count": 3,
+                "id": 10102
+            }
+        ],
+        "sort": 8,
+        "type": 1
+    },
+    "1009": {
+        "desc": "等级达到30级",
+        "icon": "0",
+        "id": 1009,
+        "receive_type": 1,
+        "reset_type": 0,
+        "reward": [
+            {
+                "count": 1,
+                "id": 10101
+            },
+            {
+                "count": 4,
+                "id": 10102
+            }
+        ],
+        "sort": 9,
+        "type": 1
+    },
+    "1010": {
+        "desc": "等级达到40级",
+        "icon": "0",
+        "id": 1010,
+        "receive_type": 1,
+        "reset_type": 0,
+        "reward": [
+            {
+                "count": 1,
+                "id": 10101
+            },
+            {
+                "count": 5,
+                "id": 10102
+            }
+        ],
+        "sort": 10,
+        "type": 1
+    },
     "2001": {
-        "desc": "拥有10个小兵",
+        "desc": "砍50棵树",
         "icon": "0",
         "id": 2001,
         "receive_type": 0,
@@ -95,7 +209,7 @@
         "type": 2
     },
     "2002": {
-        "desc": "拥有20个小兵",
+        "desc": "割100棵草",
         "icon": "0",
         "id": 2002,
         "receive_type": 0,
@@ -114,7 +228,7 @@
         "type": 2
     },
     "2003": {
-        "desc": "拥有30个小兵",
+        "desc": "解救5个小兵",
         "icon": "0",
         "id": 2003,
         "receive_type": 0,
@@ -133,7 +247,7 @@
         "type": 2
     },
     "2004": {
-        "desc": "拥有40个小兵",
+        "desc": "捡到5个宝箱",
         "icon": "0",
         "id": 2004,
         "receive_type": 0,
@@ -149,6 +263,120 @@
             }
         ],
         "sort": 4,
+        "type": 2
+    },
+    "2005": {
+        "desc": "训练20次",
+        "icon": "0",
+        "id": 2005,
+        "receive_type": 0,
+        "reset_type": 0,
+        "reward": [
+            {
+                "count": 1,
+                "id": 10101
+            },
+            {
+                "count": 2,
+                "id": 10102
+            }
+        ],
+        "sort": 5,
+        "type": 2
+    },
+    "2006": {
+        "desc": "开启20次宝箱",
+        "icon": "0",
+        "id": 2006,
+        "receive_type": 0,
+        "reset_type": 0,
+        "reward": [
+            {
+                "count": 1,
+                "id": 10101
+            },
+            {
+                "count": 3,
+                "id": 10102
+            }
+        ],
+        "sort": 6,
+        "type": 2
+    },
+    "2007": {
+        "desc": "拥有10个小兵",
+        "icon": "0",
+        "id": 2007,
+        "receive_type": 0,
+        "reset_type": 0,
+        "reward": [
+            {
+                "count": 1,
+                "id": 10101
+            },
+            {
+                "count": 4,
+                "id": 10102
+            }
+        ],
+        "sort": 7,
+        "type": 2
+    },
+    "2008": {
+        "desc": "拥有20个小兵",
+        "icon": "0",
+        "id": 2008,
+        "receive_type": 0,
+        "reset_type": 0,
+        "reward": [
+            {
+                "count": 1,
+                "id": 10101
+            },
+            {
+                "count": 5,
+                "id": 10102
+            }
+        ],
+        "sort": 8,
+        "type": 2
+    },
+    "2009": {
+        "desc": "拥有30个小兵",
+        "icon": "0",
+        "id": 2009,
+        "receive_type": 0,
+        "reset_type": 0,
+        "reward": [
+            {
+                "count": 1,
+                "id": 10101
+            },
+            {
+                "count": 2,
+                "id": 10102
+            }
+        ],
+        "sort": 9,
+        "type": 2
+    },
+    "2010": {
+        "desc": "拥有40个小兵",
+        "icon": "0",
+        "id": 2010,
+        "receive_type": 0,
+        "reset_type": 0,
+        "reward": [
+            {
+                "count": 1,
+                "id": 10101
+            },
+            {
+                "count": 3,
+                "id": 10102
+            }
+        ],
+        "sort": 10,
         "type": 2
     },
     "3001": {

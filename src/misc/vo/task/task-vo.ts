@@ -4,6 +4,7 @@ import { task } from "../../../def/proto";
 import { TableUtil } from "../../../system/table/table-util";
 import { VO } from "../vo-base/vo";
 import { TaskMainRow, TaskBranchRow, TaskDailyRow } from "../../../def/table";
+import { TaskConf } from "../../../def/task";
 
 /**
  * Item
@@ -44,7 +45,7 @@ export class TaskVo extends VO<TaskMainRow | TaskBranchRow | TaskDailyRow, task.
     }
 
     public get name(): string {
-        return "";
+        return this.ref.desc;
     }
 
     protected onGetNumber(): number {
@@ -52,6 +53,14 @@ export class TaskVo extends VO<TaskMainRow | TaskBranchRow | TaskDailyRow, task.
             return this._cmd.num ? this._cmd.num : 0;
         }
         return 0;
+    }
+
+    public get tipsName(): string {
+        if (this._ref.type == TaskConf.TASK_TYPE.MAIN) {
+            return "主线";
+        } else {
+            return "支线";
+        }
     }
     //#endregion
 }

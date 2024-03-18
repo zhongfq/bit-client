@@ -97,7 +97,6 @@ export abstract class TMTileElemet extends TMElement {
         if (cacheUid !== this.uid) {
             return;
         }
-
         this._tile = prefab.create() as Laya.Sprite3D;
 
         const pos = this._tile.transform.position;
@@ -263,7 +262,6 @@ export class TMStaticElement extends TMElement {
         if (cacheUid !== this.uid) {
             return;
         }
-
         this._root = prefab.create() as Laya.Sprite3D;
 
         const sprite = this._root.getChildAt(0) as Laya.Sprite3D;
@@ -346,10 +344,15 @@ export class TMObjectElement extends TMElement {
         }
         this._drawing = true;
 
+        const cacheUid = this.uid;
         const prefab = await Laya.loader.load(
             "resources/prefab/world-map/object/object-obj.lh",
             Laya.Loader.HIERARCHY
         );
+        // 如果uid和缓存的不一致，说明对象复用了
+        if (cacheUid !== this.uid) {
+            return;
+        }
         this._board = prefab.create() as Laya.Sprite3D;
 
         const sprite = this._board.getChildAt(0) as Laya.Sprite3D;
@@ -396,15 +399,18 @@ export class TMObjectElement extends TMElement {
         }
         this._resName = resName;
 
-        if (!this._board) {
+        const cacheUid = this.uid;
+        const path = StringUtil.format("resources/texture/world-map/object/{0}.png", resName);
+        const texture = (await Laya.loader.load(path, Laya.Loader.TEXTURE2D)) as Laya.Texture2D;
+
+        // 如果uid和缓存的不一致，说明对象复用了
+        if (!this._board || cacheUid !== this.uid) {
             return;
         }
         const sprite = this._board.getChildAt(0) as Laya.Sprite3D;
         const renderer = sprite.getComponent(Laya.MeshRenderer);
 
         const mat = new Laya.UnlitMaterial();
-        const path = StringUtil.format("resources/texture/world-map/object/{0}.png", resName);
-        const texture = (await Laya.loader.load(path, Laya.Loader.TEXTURE2D)) as Laya.Texture2D;
         mat.albedoTexture = texture;
         mat.renderMode = Laya.MaterialRenderMode.RENDERMODE_TRANSPARENT;
         renderer.material = mat;
@@ -503,10 +509,10 @@ export class TMBlockElement extends TMElement {
             "resources/prefab/world-map/block/block-tile.lh",
             Laya.Loader.HIERARCHY
         );
+        // 如果uid和缓存的不一致，说明对象复用了
         if (cacheUid !== this.uid) {
             return;
         }
-
         this._blockTile = prefab.create() as Laya.Sprite3D;
 
         const pos = this._blockTile.transform.position;
@@ -570,6 +576,7 @@ export class TMBuildingElement extends TMDebugElement {
             "resources/prefab/world-map/test/debug-obj.lh",
             Laya.Loader.HIERARCHY
         );
+        // 如果uid和缓存的不一致，说明对象复用了
         if (cacheUid !== this.uid) {
             return;
         }
@@ -620,6 +627,7 @@ export class TMMonsterElement extends TMDebugElement {
             "resources/prefab/world-map/test/debug-obj.lh",
             Laya.Loader.HIERARCHY
         );
+        // 如果uid和缓存的不一致，说明对象复用了
         if (cacheUid !== this.uid) {
             return;
         }

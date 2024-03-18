@@ -1,4 +1,5 @@
 const { regClass } = Laya;
+import { Callback } from "../../../core/dispatcher";
 import { VirtuallyListNew } from "../../../core/virtuallyList/virtually-list-new";
 import { VirtuallyListNewUIBase } from "./VirtuallyListNewUI.generated";
 
@@ -25,5 +26,9 @@ export class VirtuallyListNewUI extends VirtuallyListNewUIBase {
 
     public scrollDown() {
         this.getComponent(VirtuallyListNew).scrollDown();
+    }
+
+    public setRenderHandler(func: Callback) {
+        this.getComponent(VirtuallyListNew).renderHandler = func;
     }
 }

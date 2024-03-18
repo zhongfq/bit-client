@@ -1,6 +1,7 @@
 {
     "chest": {
         "10101": {
+            "desc": "绿色士兵概率20%",
             "icon": "icon_chest_1",
             "id": 10101,
             "open_max_num": 10,
@@ -13,14 +14,20 @@
                 },
                 {
                     "count": 1,
-                    "id": 10201,
-                    "prob": 20
+                    "id": 40701,
+                    "prob": 10
+                },
+                {
+                    "count": 1,
+                    "id": 40702,
+                    "prob": 10
                 }
             ],
             "reward_score": 5,
             "sort": 1
         },
         "10102": {
+            "desc": "绿色士兵概率15%，蓝色士兵概率5%",
             "icon": "icon_chest_2",
             "id": 10102,
             "open_max_num": 10,
@@ -28,39 +35,56 @@
             "reward": [
                 {
                     "count": 100,
-                    "id": 30701,
+                    "id": 30601,
                     "prob": 80
                 },
                 {
                     "count": 1,
-                    "id": 10202,
-                    "prob": 20
+                    "id": 40703,
+                    "prob": 15
+                },
+                {
+                    "count": 1,
+                    "id": 40704,
+                    "prob": 5
                 }
             ],
             "reward_score": 10,
             "sort": 2
         },
         "10103": {
+            "desc": "绿色概率17%，蓝色概率6%，紫色概率2%",
             "icon": "icon_chest_3",
             "id": 10103,
             "open_max_num": 10,
             "open_score": 15,
             "reward": [
                 {
-                    "count": 15,
-                    "id": 30301,
-                    "prob": 60
+                    "count": 100,
+                    "id": 30601,
+                    "prob": 80
                 },
                 {
-                    "count": 100,
-                    "id": 20602,
-                    "prob": 40
+                    "count": 1,
+                    "id": 40705,
+                    "prob": 17
+                },
+                {
+                    "count": 1,
+                    "id": 40706,
+                    "prob": 6
+                },
+                {
+                    "count": 1,
+                    "id": 40707,
+                    "prob": 2
                 }
             ],
             "reward_score": 30,
             "sort": 3
         },
         "10104": {
+            "desc": "必出紫色以上士兵，橙色士兵概率20%",
             "icon": "icon_chest_4",
             "id": 10104,
             "open_max_num": 3,
@@ -72,29 +96,30 @@
                     "prob": 80.2
                 },
                 {
-                    "count": 100,
-                    "id": 20603,
-                    "prob": 19.8
+                    "count": 1,
+                    "id": 40707,
+                    "prob": 20
                 }
             ],
             "reward_score": 50,
             "sort": 4
         },
         "10105": {
+            "desc": "必出一个橙色士兵",
             "icon": "icon_chest_5",
             "id": 10105,
             "open_max_num": 1,
             "open_score": 0,
             "reward": [
                 {
-                    "count": 15,
-                    "id": 30301,
+                    "count": 1,
+                    "id": 40801,
                     "prob": 80.2
                 },
                 {
-                    "count": 100,
-                    "id": 20603,
-                    "prob": 19.8
+                    "count": 1,
+                    "id": 40802,
+                    "prob": 20
                 }
             ],
             "reward_score": 80,
