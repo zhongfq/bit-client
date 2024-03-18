@@ -1,6 +1,7 @@
 import { appBase as AppBase } from "./app.generated";
 import { Constructor } from "./core/dispatcher";
 import { Loader } from "./core/loader";
+import { Pool } from "./core/pool";
 import { Service } from "./core/service";
 import { TweenSystem } from "./core/tween/tween-system";
 import { UIManager } from "./core/ui-manager";
@@ -35,6 +36,17 @@ export class Main extends AppBase {
             Laya.stage.alignH = Laya.Stage.ALIGN_CENTER;
         }
         console.log(new ExportNodes().stringify());
+
+        const v = Pool.obtain(Laya.Vector3);
+        Pool.free(v);
+
+        const arr = [Pool.obtain(Laya.Vector2), Pool.obtain(Laya.Vector3)];
+        Pool.free(arr);
+
+        const v4 = Pool.obtain("uservalue", () => {
+            return new Laya.Vector4();
+        });
+        Pool.free("uservalue", v4);
 
         ui.register();
         app.init();

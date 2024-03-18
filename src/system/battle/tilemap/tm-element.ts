@@ -1,5 +1,6 @@
 import { app } from "../../../app";
 import { Constructor } from "../../../core/dispatcher";
+import { Pool } from "../../../core/pool";
 import { tween } from "../../../core/tween/tween";
 import { StringUtil } from "../../../core/utils/string-util";
 import { Tilemap } from "./tilemap";
@@ -41,8 +42,8 @@ export abstract class TMElement {
         return this._eid ?? 0;
     }
 
-    public static create<T>(sign: string, cls: Constructor<T>): T {
-        return Laya.Pool.getItemByClass(sign, cls);
+    public static create<T>(cls: Constructor<T>): T {
+        return Pool.obtain(cls);
     }
 
     public init(
@@ -64,7 +65,7 @@ export abstract class TMElement {
 
     public recover(): void {
         this.erase();
-        Laya.Pool.recoverByClass(this);
+        Pool.free(this);
     }
 
     public abstract draw(): void;

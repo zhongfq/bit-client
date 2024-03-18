@@ -405,7 +405,7 @@ export class Tilemap {
 
         let element = this._allMap.get(uid);
         if (!element) {
-            element = TMElement.create(cls.name, cls);
+            element = TMElement.create(cls);
             element.init(this, gridX, gridY, props, layerName, eid);
 
             uidMap.set(key, element.uid);
