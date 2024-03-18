@@ -5,6 +5,7 @@ import { SoldierPendantVo } from "../../misc/vo/soldier/soldier-pendant-vo";
 import { SoldierIconUI } from "../../ui-runtime/prefab/icon/SoldierIconUI";
 import { SoldierPendantUI } from "../../ui-runtime/prefab/soldier/SoldierPendantUI";
 import { SoldierUI } from "../../ui-runtime/prefab/soldier/SoldierUI";
+import { BagService } from "../bag/bag-service";
 import { TableUtil } from "../table/table-util";
 import { SoldierService } from "./soldier-service";
 
@@ -44,6 +45,9 @@ export class SoldierPendantMediator extends Mediator {
         });
 
         this.owner.listPendant.renderHandler = new Laya.Handler(this, this.updateItem);
+        this.on(app.service.bag, BagService.ITEM_UPDATE, () => {
+            this.updateList();
+        });
     }
 
     public updateItem(cell: SoldierIconUI, index: number) {

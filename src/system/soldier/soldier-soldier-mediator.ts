@@ -7,6 +7,7 @@ import { SoldierVo } from "../../misc/vo/soldier/soldier-vo";
 import { IconUI } from "../../ui-runtime/prefab/icon/IconUI";
 import { SoldierIconUI } from "../../ui-runtime/prefab/icon/SoldierIconUI";
 import { SoldierSoldierUI } from "../../ui-runtime/prefab/soldier/SoldierSoldierUI";
+import { BagService } from "../bag/bag-service";
 import { TableUtil } from "../table/table-util";
 import { SoldierService } from "./soldier-service";
 
@@ -31,7 +32,6 @@ export class SoldierSoldierMediator extends Mediator {
         const skillRow = app.service.table.skill[vo.ref.skill2];
         this.owner.labelSkillName.text = skillRow.name;
         this.owner.labelSkillDesc.text = skillRow.desc;
-        // this.owner.imgHeadIcon.skin = ""
         const attrList = [];
         const attrs = (vo.cmd as proto.soldier.SoldierInfo).attrs;
         for (const attr in attrs) {
@@ -63,6 +63,10 @@ export class SoldierSoldierMediator extends Mediator {
                 );
             }
         );
+
+        this.on(app.service.bag, BagService.ITEM_UPDATE, () => {
+            this.updateList();
+        });
     }
 
     public updateItem(cell: SoldierIconUI, index: number) {
