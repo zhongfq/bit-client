@@ -78,6 +78,7 @@ export class SoldierComponent extends FollowerComponent {
 export class TruckComponent extends FollowerComponent {
     public collectType!: number;
     public collectCnt: number = 0;
+    public lastTipsTime: number = 0;
 }
 
 export class TroopComponent extends ecs.Component {

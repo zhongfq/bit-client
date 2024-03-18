@@ -20,7 +20,7 @@ import { AiSystem } from "./ecs/systems/ai-system";
 import { CacheSystem } from "./ecs/systems/cache-system";
 import { MovementSystem } from "./ecs/systems/movement-system";
 import { SkillSystem } from "./ecs/systems/skill-system";
-import { ElementCreator, UpdateTruck, UpdateHp } from "./pve-defs";
+import { ElementCreator, UpdateTruck, UpdateHp, PveDef } from "./pve-defs";
 
 const _tmpVelocity = new Laya.Vector3();
 const SOLDIER_COUNT = 12;
@@ -394,7 +394,7 @@ export class PveServer extends b3.Context {
         }
         this._sender.playAnim(element.eid, ElementAnimation.CHOP);
 
-        const subHp = 10;
+        const subHp = PveDef.COLLECT_PER_HP;
         target.hp = Math.max(0, target.hp - subHp);
 
         this._sender.updateHp(target.eid, {
@@ -403,14 +403,38 @@ export class PveServer extends b3.Context {
             subHp: subHp,
         });
 
-        const truck = element.soldier?.hero?.troop?.trucks.get(target.data.etype);
+        let trucks;
+        if (element.data.etype == BattleConf.ENTITY_TYPE.HERO) {
+            trucks = element.troop?.trucks;
+        } else if (element.data.etype == BattleConf.ENTITY_TYPE.SOLDIER) {
+            trucks = element.soldier?.hero?.troop?.trucks;
+        }
+        const truck = trucks?.get(target.data.etype);
         if (truck) {
-            truck.collectCnt++;
-            this._sender.updateTruck(truck.eid, {
-                collecter: element.eid,
-                collection: target.eid,
-                collectCnt: truck.collectCnt,
-            });
+            if (truck.collectCnt >= PveDef.COLLECT_MAX_CNT) {
+                const lastTime = truck.lastTipsTime;
+                if (!lastTime || Laya.timer.currTimer - lastTime > 10 * 1000) {
+                    switch (truck.collectType) {
+                        case BattleConf.ENTITY_TYPE.WOOD:
+                            app.ui.toast("木头资源车已满，无法继续获得木头");
+                            break;
+                        case BattleConf.ENTITY_TYPE.FOOD:
+                            app.ui.toast("粮食资源车已满，无法继续获得粮食");
+                            break;
+                        case BattleConf.ENTITY_TYPE.STONE:
+                            app.ui.toast("石材资源车已满，无法继续获得石材");
+                            break;
+                    }
+                    truck.lastTipsTime = Laya.timer.currTimer;
+                }
+            } else {
+                truck.collectCnt++;
+                this._sender.updateTruck(truck.eid, {
+                    collecter: element.eid,
+                    collection: target.eid,
+                    collectCnt: truck.collectCnt,
+                });
+            }
         }
 
         if (target.hp <= 0) {
