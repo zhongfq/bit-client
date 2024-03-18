@@ -56,7 +56,6 @@
             "x": 0,
             "y": 6400
         },
-       
         {
             "fileName": "tmx-pvp/world-map5.tmx",
             "height": 3200,
@@ -64,7 +63,6 @@
             "x": 0,
             "y": 3200
         }
-        
     ],
     "onlyShowAdjacentMaps": false,
     "type": "world"

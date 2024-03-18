@@ -29,7 +29,7 @@ export interface TMLayer {
     width: number;
     height: number;
     data?: number[];
-    objects?: TMObj[];
+    objects?: { [k: string]: TMObj };
 }
 
 export interface TMObj {

@@ -492,23 +492,9 @@ export class Tilemap {
             props.set(TMPropKey.OWNER, Tilemap);
             return props;
         } else if (layer.objects) {
-            let $targetObj;
-            let $gridX, $gridY;
-            let $realX, $realY;
-
-            // TODO：导出时，生成对象索引
-            for (const obj of layer.objects) {
-                $gridX = Math.floor(info.x + obj.x / 64);
-                $gridY = Math.floor(info.y + obj.y / 64);
-
-                $realX = Math.max(Math.floor((info.x + obj.x / 64 - 0.5) * 100) / 100, 0);
-                $realY = Math.max(Math.floor((info.y + obj.y / 64 - 0.5) * 100) / 100, 0);
-
-                if ($gridX == gridX && $gridY == gridY) {
-                    $targetObj = obj;
-                    break;
-                }
-            }
+            const $gridX = gridX - info.x;
+            const $gridY = gridY - info.y;
+            const $targetObj = layer.objects[TMUtil.xyToKey($gridX, $gridY)];
             if (!$targetObj) {
                 return undefined;
             }
@@ -516,8 +502,8 @@ export class Tilemap {
             $targetObj.properties?.forEach((prop) => {
                 props.set(prop.name, prop.value);
             });
-            props.set(TMPropKey.RealX, $realX);
-            props.set(TMPropKey.RealY, $realY);
+            props.set(TMPropKey.RealX, info.x + $targetObj.x - 0.5);
+            props.set(TMPropKey.RealY, info.y + $targetObj.y - 0.5);
             props.set(TMPropKey.OWNER, Tilemap);
             return props;
         } else {
