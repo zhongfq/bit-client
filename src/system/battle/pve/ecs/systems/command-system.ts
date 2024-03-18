@@ -9,6 +9,7 @@ import {
     UpdateTruck,
     UpdateHp,
     TruckFormation,
+    PveDef,
 } from "../../../pve-server/pve-defs";
 import { ICommandSender } from "../../../pve-server/pve-server";
 import { PveContext } from "../../pve-context";
@@ -320,11 +321,12 @@ export class CommandSystem extends ecs.System implements ICommandSender {
         }
         const curCnt = truckComp.collectCnt;
         const tarCnt = data.collectCnt;
+
         if (curCnt < tarCnt) {
             this.playCollectFlyAnim(data.collecter, data.collection);
         }
         const curObjCnt = truckComp.collectObjs.length;
-        const tarObjCnt = Math.floor(data.collectCnt / TruckComponent.COLLECT_CNT_PER_OBJ);
+        const tarObjCnt = Math.floor(data.collectCnt / PveDef.COLLECT_CNT_PER_OBJ);
         if (curObjCnt < tarObjCnt) {
             this.addTruckCollectObj(eid, tarObjCnt - curObjCnt);
         } else if (curObjCnt > tarObjCnt) {
