@@ -346,21 +346,20 @@ export class CommandSystem extends ecs.System implements ICommandSender {
 
         let path, formation;
         if (truckComp.collectType == BattleConf.ENTITY_TYPE.WOOD) {
-            [path, formation] = [res.BATTLE_GATHER_WOOD, TruckFormation.WOOD];
+            [path, formation] = ["anim/gather-wood", TruckFormation.WOOD];
         } else if (truckComp.collectType == BattleConf.ENTITY_TYPE.FOOD) {
-            [path, formation] = [res.BATTLE_GATHER_FOOD, TruckFormation.FOOD];
+            [path, formation] = ["anim/gather-food", TruckFormation.FOOD];
         } else if (truckComp.collectType == BattleConf.ENTITY_TYPE.STONE) {
-            [path, formation] = [res.BATTLE_GATHER_STONE, TruckFormation.STONE];
+            [path, formation] = ["anim/gather-stone", TruckFormation.STONE];
         }
         if (!path || !formation) {
             return;
         }
 
-        let prefab = Laya.loader.getRes(path, Laya.Loader.HIERARCHY);
-        prefab ??= await Laya.loader.load(path, Laya.Loader.HIERARCHY);
-
         while (count--) {
-            const obj = prefab.create() as Laya.Sprite3D;
+            const view = truck.animation.view;
+            const obj = (view?.getChildByPath(path) as Laya.Sprite3D).clone()!;
+            obj.active = true;
 
             const len = truckComp.collectObjs.length;
             const tarPos = formation[len % formation.length];

@@ -393,6 +393,78 @@
               "y": 1
             }
           }
+        },
+        {
+          "_$id": "u95vkn0f",
+          "_$prefab": "1a805297-8228-4a86-a9df-15e22e561f90",
+          "name": "gather-wood",
+          "active": false,
+          "layer": 0,
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": 0.6000000238418579,
+              "y": 1,
+              "z": 0
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": -0.7071067811865475,
+              "y": 0,
+              "z": 0,
+              "w": 0.7071067811865476
+            },
+            "localScale": {
+              "_$type": "Vector3",
+              "x": 0.75,
+              "y": 1,
+              "z": 0.75
+            }
+          }
+        },
+        {
+          "_$id": "81fi5xvk",
+          "_$prefab": "3d995265-1795-46a4-9543-e9684bf3fc4a",
+          "name": "gather-food",
+          "active": false,
+          "layer": 0,
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": -0.35,
+              "y": 0,
+              "z": 0.5
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": -0.7071067811865475,
+              "y": 0,
+              "z": 0,
+              "w": 0.7071067811865476
+            }
+          }
+        },
+        {
+          "_$id": "o9apuecr",
+          "_$prefab": "cd24499a-31f0-486d-9e2f-8905dce325f9",
+          "name": "gather-stone",
+          "active": false,
+          "layer": 0,
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": 0.35,
+              "y": 0,
+              "z": 0.5
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": -0.7071067811865475,
+              "y": 0,
+              "z": 0,
+              "w": 0.7071067811865476
+            }
+          }
         }
       ]
     }

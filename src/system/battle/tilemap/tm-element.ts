@@ -86,10 +86,17 @@ export abstract class TMTileElemet extends TMElement {
         if (idx == 0 && this.ignoreFirstFrame()) {
             return;
         }
+        const cacheUid = this.uid;
+
         const [atlasPath, texturePath, prefabPath] = this.getResPaths();
         const atlas = await Laya.loader.load(atlasPath, Laya.Loader.ATLAS);
         const texture = await Laya.loader.load(texturePath, Laya.Loader.TEXTURE2D);
         const prefab = await Laya.loader.load(prefabPath, Laya.Loader.HIERARCHY);
+
+        // 如果uid和缓存的不一致，说明对象复用了
+        if (cacheUid !== this.uid) {
+            return;
+        }
 
         this._tile = prefab.create() as Laya.Sprite3D;
 
@@ -242,14 +249,24 @@ export class TMStaticElement extends TMElement {
         if (this._root) {
             return;
         }
+        const cacheUid = this.uid;
+
         const prefab = await Laya.loader.load(
             "resources/prefab/world-map/static/static-obj.lh",
             Laya.Loader.HIERARCHY
         );
+        const resName = this._tilemap.getTextureResName(TMTextureName.Static, this.gid);
+        const path = StringUtil.format("resources/texture/world-map/static/{0}.png", resName);
+        const texture = (await Laya.loader.load(path, Laya.Loader.TEXTURE2D)) as Laya.Texture2D;
+
+        // 如果uid和缓存的不一致，说明对象复用了
+        if (cacheUid !== this.uid) {
+            return;
+        }
+
         this._root = prefab.create() as Laya.Sprite3D;
 
         const sprite = this._root.getChildAt(0) as Laya.Sprite3D;
-        const resName = this._tilemap.getTextureResName(TMTextureName.Static, this.gid);
         const textureCfg = app.service.table.textureCfg[resName];
 
         this._startX = Math.floor(this.gridX - (textureCfg?.tile_x ?? 0));
@@ -276,8 +293,6 @@ export class TMStaticElement extends TMElement {
 
         const renderer = sprite.getComponent(Laya.MeshRenderer);
         const mat = new Laya.UnlitMaterial();
-        const path = StringUtil.format("resources/texture/world-map/static/{0}.png", resName);
-        const texture = (await Laya.loader.load(path, Laya.Loader.TEXTURE2D)) as Laya.Texture2D;
         mat.albedoTexture = texture;
         mat.renderMode = Laya.MaterialRenderMode.RENDERMODE_TRANSPARENT;
         renderer.material = mat;
@@ -483,10 +498,14 @@ export class TMBlockElement extends TMElement {
         if (!this._tilemap.showBlocks.get(key)) {
             return;
         }
+        const cacheUid = this.uid;
         const prefab = await Laya.loader.load(
             "resources/prefab/world-map/block/block-tile.lh",
             Laya.Loader.HIERARCHY
         );
+        if (cacheUid !== this.uid) {
+            return;
+        }
 
         this._blockTile = prefab.create() as Laya.Sprite3D;
 
@@ -546,10 +565,14 @@ export class TMBuildingElement extends TMDebugElement {
         if (!textureCfg) {
             return;
         }
+        const cacheUid = this.uid;
         const prefab = await Laya.loader.load(
             "resources/prefab/world-map/test/debug-obj.lh",
             Laya.Loader.HIERARCHY
         );
+        if (cacheUid !== this.uid) {
+            return;
+        }
         for (let i = 0; i < textureCfg.tile_w; i++) {
             for (let j = 0; j < textureCfg.tile_h; j++) {
                 const debugObj = prefab.create() as Laya.Sprite3D;
@@ -592,11 +615,14 @@ export class TMMonsterElement extends TMDebugElement {
         if (!TMUtil.DEBUG_MODE) {
             return;
         }
+        const cacheUid = this.uid;
         const prefab = await Laya.loader.load(
             "resources/prefab/world-map/test/debug-obj.lh",
             Laya.Loader.HIERARCHY
         );
-
+        if (cacheUid !== this.uid) {
+            return;
+        }
         this._debugObj = prefab.create() as Laya.Sprite3D;
 
         const pos = this._debugObj.transform.position;
@@ -632,11 +658,14 @@ export class TMEventElement extends TMDebugElement {
         if (!TMUtil.DEBUG_MODE) {
             return;
         }
+        const cacheUid = this.uid;
         const prefab = await Laya.loader.load(
             "resources/prefab/world-map/test/debug-obj.lh",
             Laya.Loader.HIERARCHY
         );
-
+        if (cacheUid !== this.uid) {
+            return;
+        }
         this._debugObj = prefab.create() as Laya.Sprite3D;
 
         const pos = this._debugObj.transform.position;

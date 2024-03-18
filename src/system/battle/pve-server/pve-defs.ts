@@ -21,7 +21,8 @@ export interface ElementCreator {
     position: Laya.Vector3;
 
     animation?: boolean;
-    collectType?: number;
+
+    collectType?: number; // 资源车上采集物的实体类型
 }
 
 export interface UpdateHp {
