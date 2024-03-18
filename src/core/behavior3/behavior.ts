@@ -286,12 +286,30 @@ export class Tree {
     }
 }
 
-type TokenType = number | string;
-type ScalarType = number | string | boolean;
-type ObjectType = { [k: string]: ScalarType | undefined | null };
+type ObjectType = { [k: string]: unknown };
+
+const enum TokenType {
+    NUMBER,
+    STRING,
+    DOT,
+    GT,
+    GE,
+    EQ,
+    LT,
+    LE,
+    ADD,
+    SUB,
+    MUL,
+    DIV,
+}
+
+type Token = {
+    type: TokenType;
+    value?: string | number;
+};
 
 class ExpressionEvaluator {
-    private _postfix: TokenType[];
+    private _postfix: Token[];
     private _args: Map<string, unknown> | null = null;
 
     public constructor(expression: string) {
@@ -304,43 +322,44 @@ class ExpressionEvaluator {
     }
 
     public evaluate(args: Map<string, unknown>): unknown {
-        const stack: TokenType[] = [];
+        const stack: (string | number)[] = [];
 
         this._args = args;
         for (const token of this._postfix) {
-            if (typeof token === "number") {
-                stack.push(token);
-            } else if (/^\w+$/.test(token)) {
-                stack.push(token);
+            const type = token.type;
+            if (type === TokenType.NUMBER) {
+                stack.push(token.value as number);
+            } else if (type === TokenType.STRING) {
+                stack.push(token.value as string);
             } else {
                 const b = stack.pop()!;
                 const a = stack.pop()!;
-                switch (token) {
-                    case ".": {
+                switch (type) {
+                    case TokenType.DOT: {
                         const obj = this._toObject(a);
                         stack.push(this._toNumber(obj[b]));
                         break;
                     }
-                    case ">":
+                    case TokenType.GT:
                         return this._toNumber(a) > this._toNumber(b);
-                    case ">=":
+                    case TokenType.GE:
                         return this._toNumber(a) >= this._toNumber(b);
-                    case "==":
+                    case TokenType.EQ:
                         return this._toNumber(a) === this._toNumber(b);
-                    case "<":
+                    case TokenType.LT:
                         return this._toNumber(a) < this._toNumber(b);
-                    case "<=":
+                    case TokenType.LE:
                         return this._toNumber(a) <= this._toNumber(b);
-                    case "+":
+                    case TokenType.ADD:
                         stack.push(this._toNumber(a) + this._toNumber(b));
                         break;
-                    case "-":
+                    case TokenType.SUB:
                         stack.push(this._toNumber(a) - this._toNumber(b));
                         break;
-                    case "*":
+                    case TokenType.MUL:
                         stack.push(this._toNumber(a) * this._toNumber(b));
                         break;
-                    case "/":
+                    case TokenType.DIV:
                         stack.push(this._toNumber(a) / this._toNumber(b));
                         break;
                 }
@@ -352,7 +371,7 @@ class ExpressionEvaluator {
         return stack.pop();
     }
 
-    private _toObject(token: ScalarType) {
+    private _toObject(token: unknown) {
         if (typeof token === "string") {
             const obj = this._args?.get(token);
             if (typeof obj === "object") {
@@ -365,7 +384,7 @@ class ExpressionEvaluator {
         }
     }
 
-    private _toNumber(token: ScalarType | unknown) {
+    private _toNumber(token: unknown) {
         if (typeof token === "number") {
             return token;
         } else if (typeof token === "string") {
@@ -403,20 +422,50 @@ class ExpressionEvaluator {
         }
     }
 
+    private _toToken(operator: string): Token {
+        switch (operator) {
+            case "<":
+                return { type: TokenType.LT };
+            case "<=":
+                return { type: TokenType.LE };
+            case "==":
+                return { type: TokenType.EQ };
+            case ">":
+                return { type: TokenType.GT };
+            case ">=":
+                return { type: TokenType.GE };
+            case "+":
+                return { type: TokenType.ADD };
+            case "-":
+                return { type: TokenType.SUB };
+            case "*":
+                return { type: TokenType.MUL };
+            case "/":
+                return { type: TokenType.DIV };
+            case ".":
+                return { type: TokenType.DOT };
+            default:
+                throw new Error(`unsupport operator: ${operator}`);
+        }
+    }
+
     private _convertToPostfix(infix: string[]) {
-        const outputQueue: (string | number)[] = [];
+        const outputQueue: Token[] = [];
         const operatorStack: string[] = [];
 
         infix.forEach((token) => {
             if (/^\d+$/.test(token)) {
-                outputQueue.push(parseFloat(token));
+                outputQueue.push({
+                    type: TokenType.NUMBER,
+                    value: parseFloat(token),
+                });
             } else if (/^\w+$/.test(token)) {
-                outputQueue.push(token);
+                outputQueue.push({ type: TokenType.STRING, value: token });
             } else if (token === "(") {
                 operatorStack.push(token);
             } else if (token === ")") {
                 while (operatorStack.length && operatorStack[operatorStack.length - 1] !== "(") {
-                    outputQueue.push(operatorStack.pop()!);
+                    outputQueue.push(this._toToken(operatorStack.pop()!));
                 }
                 operatorStack.pop();
             } else {
@@ -425,14 +474,14 @@ class ExpressionEvaluator {
                     this._precedence(token) <=
                         this._precedence(operatorStack[operatorStack.length - 1])
                 ) {
-                    outputQueue.push(operatorStack.pop()!);
+                    outputQueue.push(this._toToken(operatorStack.pop()!));
                 }
                 operatorStack.push(token);
             }
         });
 
         while (operatorStack.length) {
-            outputQueue.push(operatorStack.pop()!);
+            outputQueue.push(this._toToken(operatorStack.pop()!));
         }
 
         return outputQueue;
