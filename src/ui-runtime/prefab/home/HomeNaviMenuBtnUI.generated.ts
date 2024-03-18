@@ -2,9 +2,9 @@
 
 
 /**
- * resources/prefab/home/down-btn-item.lh
+ * resources/prefab/home/navi-menu-btn.lh
  */
-export class HomeDownBtnItemUIBase extends Laya.Box {
+export class HomeNaviMenuBtnUIBase extends Laya.Box {
     public imgIcon!: Laya.Image;
     public imgText!: Laya.Image;
     public selectBox!: Laya.Image;

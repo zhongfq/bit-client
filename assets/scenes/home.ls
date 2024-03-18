@@ -16,6 +16,18 @@
   ],
   "_$child": [
     {
+      "_$id": "5z09ehoj",
+      "_$var": true,
+      "_$type": "Box",
+      "name": "battle",
+      "width": 750,
+      "height": 1334,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "bottom": 0
+    },
+    {
       "_$id": "kaffipmj",
       "_$var": true,
       "_$type": "Image",
@@ -253,7 +265,8 @@
     {
       "_$id": "wmyfoz1d",
       "_$prefab": "a2698c95-41ec-440d-a998-408eeeab733b",
-      "name": "down-btn-box",
+      "_$var": true,
+      "name": "naviMenu",
       "active": true,
       "x": 0,
       "y": 1190,

@@ -11,12 +11,6 @@
   "left": 0,
   "right": 0,
   "bottom": 0,
-  "_$comp": [
-    {
-      "_$type": "0a3369c7-c077-49a5-9fa6-ef91c9db26dc",
-      "scriptPath": "../src/system/home/home-down-btn-new-mediator.ts"
-    }
-  ],
   "_$child": [
     {
       "_$id": "t510az5e",

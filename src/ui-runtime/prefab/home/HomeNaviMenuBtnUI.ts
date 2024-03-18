@@ -1,8 +1,9 @@
+import { HomeNaviMenuBtnUIBase } from "./HomeNaviMenuBtnUI.generated";
+
 const { regClass } = Laya;
-import { HomeDownBtnItemUIBase } from "./HomeDownBtnItemUI.generated";
 
 @regClass()
-export class HomeDownBtnItemUI extends HomeDownBtnItemUIBase {
+export class HomeNaviMenuBtnUI extends HomeNaviMenuBtnUIBase {
     private _selected: boolean = false;
 
     public get selected() {

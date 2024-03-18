@@ -7,11 +7,7 @@ import { PvpUI } from "../../../ui-runtime/scene/PvpUI";
 export class PvpMediator extends Mediator {
     public declare owner: PvpUI;
 
-    public override onAwake() {
-        this.owner.btnBack.on(Laya.Event.CLICK, () => {
-            app.ui.replace(ui.HOME_SCENE);
-        });
-    }
+    public override onAwake() {}
 
     public override onKeyDown(evt: Laya.Event): void {
         if (evt.ctrlKey && evt.keyCode == Laya.Keyboard.B) {

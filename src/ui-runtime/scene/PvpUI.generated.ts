@@ -9,6 +9,5 @@ export class PvpUIBase extends Laya.Scene {
     public troops!: Laya.Box;
     public labels!: Laya.Box;
     public mapClickArea!: Laya.Box;
-    public btnBack!: Laya.Button;
 }
 

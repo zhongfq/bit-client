@@ -133,6 +133,16 @@ export class UIManager {
         }
     }
 
+    public load(id: number, args?: any) {
+        const descriptor = this._checkDescriptor(id);
+        if (descriptor) {
+            console.log("open scene:", descriptor.url);
+            return Laya.Scene.load(descriptor.url).catch((e) => {
+                console.error(e);
+            });
+        }
+    }
+
     public replace(id: number, args?: any) {
         const descriptor = this._checkDescriptor(id);
         if (descriptor) {

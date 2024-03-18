@@ -1,8 +1,8 @@
 import { app } from "../../app";
 import { Mediator } from "../../core/ui-mediator";
 import { ui } from "../../misc/ui";
-import { HomeDownBtnBoxNewUI } from "../../ui-runtime/prefab/home/HomeDownBtnBoxNewUI";
-import { HomeDownBtnItemUI } from "../../ui-runtime/prefab/home/HomeDownBtnItemUI";
+import { HomeNaviMenuUI } from "../../ui-runtime/prefab/home/HomeNaviMenuUI";
+import { HomeNaviMenuBtnUI } from "../../ui-runtime/prefab/home/HomeNaviMenuBtnUI";
 import { HomeUI } from "../../ui-runtime/scene/HomeUI";
 
 const { regClass, property } = Laya;
@@ -10,9 +10,9 @@ const { regClass, property } = Laya;
 @regClass()
 export class HomeDownBtnMediator extends Mediator {
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
-    public declare owner: HomeDownBtnBoxNewUI;
+    public declare owner: HomeNaviMenuUI;
 
-    private _currentBtn: HomeDownBtnItemUI | null = null;
+    private _currentBtn: HomeNaviMenuBtnUI | null = null;
     private _currentBox: Laya.Node | null = null;
 
     public override onAwake(): void {
@@ -41,7 +41,7 @@ export class HomeDownBtnMediator extends Mediator {
         this.owner.btnUnion.on(Laya.Event.CLICK, () => {});
     }
 
-    private _btnSelected(btn: HomeDownBtnItemUI): boolean {
+    private _btnSelected(btn: HomeNaviMenuBtnUI): boolean {
         this._currentBox?.destroy(true);
         if (this._currentBtn == btn) {
             this._currentBtn.selected = !this._currentBtn.selected;

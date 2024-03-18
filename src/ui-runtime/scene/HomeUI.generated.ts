@@ -2,11 +2,13 @@
 
 import { HomeTaskBoxUI } from "../prefab/home/HomeTaskBoxUI";
 import { HomeChatBoxUI } from "../prefab/home/HomeChatBoxUI";
+import { HomeNaviMenuUI } from "../prefab/home/HomeNaviMenuUI";
 
 /**
  * scenes/home.ls
  */
 export class HomeUIBase extends Laya.Scene {
+    public battle!: Laya.Box;
     public bg!: Laya.Image;
     public btnPve!: Laya.Button;
     public btnMail!: Laya.Button;
@@ -17,5 +19,6 @@ export class HomeUIBase extends Laya.Scene {
     public task_box!: HomeTaskBoxUI;
     public chat_box!: HomeChatBoxUI;
     public boxUI!: Laya.Box;
+    public naviMenu!: HomeNaviMenuUI;
 }
 
