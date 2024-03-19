@@ -42,6 +42,7 @@ export class SoldierSoldierMediator extends Mediator {
             }
         }
         this.owner.listAttr.array = attrList;
+        this.owner.btnUpLv.visible = vo.cmd ? true : false;
     }
 
     //初始化UI事件监听
