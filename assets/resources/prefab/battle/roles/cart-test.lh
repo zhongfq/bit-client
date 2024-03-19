@@ -363,9 +363,9 @@
           },
           "_$child": [
             {
-              "_$id": "8n6gzoyy",
-              "_$prefab": "1a805297-8228-4a86-a9df-15e22e561f90",
-              "name": "gather-wood-1",
+              "_$id": "a89wnew7",
+              "_$prefab": "14473cdb-e54e-4e60-9d9f-ba5d8df6ad90",
+              "name": "gather-wood",
               "active": true,
               "layer": 0,
               "transform": {
@@ -377,76 +377,10 @@
                 },
                 "localRotation": {
                   "_$type": "Quaternion",
-                  "x": -0.7071067811865475,
+                  "x": 0,
                   "y": 0,
                   "z": 0,
-                  "w": 0.7071067811865476
-                }
-              }
-            },
-            {
-              "_$id": "06zv6w0b",
-              "_$prefab": "1a805297-8228-4a86-a9df-15e22e561f90",
-              "name": "gather-wood-2",
-              "active": true,
-              "layer": 0,
-              "transform": {
-                "localPosition": {
-                  "_$type": "Vector3",
-                  "x": 0.2,
-                  "y": 0,
-                  "z": 0
-                },
-                "localRotation": {
-                  "_$type": "Quaternion",
-                  "x": -0.7071067811865475,
-                  "y": 0,
-                  "z": 0,
-                  "w": 0.7071067811865476
-                }
-              }
-            },
-            {
-              "_$id": "lfksfs08",
-              "_$prefab": "1a805297-8228-4a86-a9df-15e22e561f90",
-              "name": "gather-wood-3",
-              "active": true,
-              "layer": 0,
-              "transform": {
-                "localPosition": {
-                  "_$type": "Vector3",
-                  "x": -0.2,
-                  "y": 0,
-                  "z": 0
-                },
-                "localRotation": {
-                  "_$type": "Quaternion",
-                  "x": -0.7071067811865475,
-                  "y": 0,
-                  "z": 0,
-                  "w": 0.7071067811865476
-                }
-              }
-            },
-            {
-              "_$id": "g6vh7ysz",
-              "_$prefab": "1a805297-8228-4a86-a9df-15e22e561f90",
-              "name": "gather-wood-4",
-              "active": true,
-              "layer": 0,
-              "transform": {
-                "localPosition": {
-                  "_$type": "Vector3",
-                  "x": -0.6,
-                  "y": 0,
-                  "z": 0
-                },
-                "localRotation": {
-                  "_$type": "Quaternion",
-                  "x": -0.7071067811865475,
-                  "y": 0,
-                  "z": 0,
-                  "w": 0.7071067811865476
+                  "w": 1
                 }
               }
             }
@@ -468,9 +402,9 @@
           },
           "_$child": [
             {
-              "_$id": "ronid1lh",
-              "_$prefab": "3d995265-1795-46a4-9543-e9684bf3fc4a",
-              "name": "gather-food-1",
+              "_$id": "c1uocbcy",
+              "_$prefab": "32ff7eb3-e699-4a11-807a-f54c1d25ed00",
+              "name": "gather-food",
               "active": true,
               "layer": 0,
               "transform": {
@@ -482,76 +416,10 @@
                 },
                 "localRotation": {
                   "_$type": "Quaternion",
-                  "x": -0.7071067811865475,
+                  "x": 0,
                   "y": 0,
                   "z": 0,
-                  "w": 0.7071067811865476
-                }
-              }
-            },
-            {
-              "_$id": "yii9f9jf",
-              "_$prefab": "3d995265-1795-46a4-9543-e9684bf3fc4a",
-              "name": "gather-food-2",
-              "active": true,
-              "layer": 0,
-              "transform": {
-                "localPosition": {
-                  "_$type": "Vector3",
-                  "x": -0.35,
-                  "y": 0,
-                  "z": 0.5
-                },
-                "localRotation": {
-                  "_$type": "Quaternion",
-                  "x": -0.7071067811865475,
-                  "y": 0,
-                  "z": 0,
-                  "w": 0.7071067811865476
-                }
-              }
-            },
-            {
-              "_$id": "mmbr1yvw",
-              "_$prefab": "3d995265-1795-46a4-9543-e9684bf3fc4a",
-              "name": "gather-food-3",
-              "active": true,
-              "layer": 0,
-              "transform": {
-                "localPosition": {
-                  "_$type": "Vector3",
-                  "x": 0.35,
-                  "y": 0,
-                  "z": -0.5
-                },
-                "localRotation": {
-                  "_$type": "Quaternion",
-                  "x": -0.7071067811865475,
-                  "y": 0,
-                  "z": 0,
-                  "w": 0.7071067811865476
-                }
-              }
-            },
-            {
-              "_$id": "bn7b0l0f",
-              "_$prefab": "3d995265-1795-46a4-9543-e9684bf3fc4a",
-              "name": "gather-food-4",
-              "active": true,
-              "layer": 0,
-              "transform": {
-                "localPosition": {
-                  "_$type": "Vector3",
-                  "x": -0.35,
-                  "y": 0,
-                  "z": -0.5
-                },
-                "localRotation": {
-                  "_$type": "Quaternion",
-                  "x": -0.7071067811865475,
-                  "y": 0,
-                  "z": 0,
-                  "w": 0.7071067811865476
+                  "w": 1
                 }
               }
             }
@@ -569,9 +437,9 @@
           },
           "_$child": [
             {
-              "_$id": "y31bypk6",
-              "_$prefab": "cd24499a-31f0-486d-9e2f-8905dce325f9",
-              "name": "gather-stone-1",
+              "_$id": "cx02ekz5",
+              "_$prefab": "35ab3baf-9d73-41c2-a770-733d9ecc4c86",
+              "name": "gather-stone",
               "active": true,
               "layer": 0,
               "transform": {
@@ -583,76 +451,10 @@
                 },
                 "localRotation": {
                   "_$type": "Quaternion",
-                  "x": -0.7071067811865475,
+                  "x": 0,
                   "y": 0,
                   "z": 0,
-                  "w": 0.7071067811865476
-                }
-              }
-            },
-            {
-              "_$id": "ondviex1",
-              "_$prefab": "cd24499a-31f0-486d-9e2f-8905dce325f9",
-              "name": "gather-stone-2",
-              "active": true,
-              "layer": 0,
-              "transform": {
-                "localPosition": {
-                  "_$type": "Vector3",
-                  "x": -0.35,
-                  "y": 0,
-                  "z": 0.5
-                },
-                "localRotation": {
-                  "_$type": "Quaternion",
-                  "x": -0.7071067811865475,
-                  "y": 0,
-                  "z": 0,
-                  "w": 0.7071067811865476
-                }
-              }
-            },
-            {
-              "_$id": "bu2rlbxu",
-              "_$prefab": "cd24499a-31f0-486d-9e2f-8905dce325f9",
-              "name": "gather-stone-3",
-              "active": true,
-              "layer": 0,
-              "transform": {
-                "localPosition": {
-                  "_$type": "Vector3",
-                  "x": 0.35,
-                  "y": 0,
-                  "z": -0.5
-                },
-                "localRotation": {
-                  "_$type": "Quaternion",
-                  "x": -0.7071067811865475,
-                  "y": 0,
-                  "z": 0,
-                  "w": 0.7071067811865476
-                }
-              }
-            },
-            {
-              "_$id": "i8ae4m2k",
-              "_$prefab": "cd24499a-31f0-486d-9e2f-8905dce325f9",
-              "name": "gather-stone-4",
-              "active": true,
-              "layer": 0,
-              "transform": {
-                "localPosition": {
-                  "_$type": "Vector3",
-                  "x": -0.35,
-                  "y": 0,
-                  "z": -0.5
-                },
-                "localRotation": {
-                  "_$type": "Quaternion",
-                  "x": -0.7071067811865475,
-                  "y": 0,
-                  "z": 0,
-                  "w": 0.7071067811865476
+                  "w": 1
                 }
               }
             }
