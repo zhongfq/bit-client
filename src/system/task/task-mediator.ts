@@ -38,8 +38,6 @@ export class TaskMediator extends Mediator {
     }
 
     private initUIEvent() {
-        this.owner.listTask.renderHandler = new Laya.Handler(this, this.onListRender);
-        this.owner.listTask.mouseHandler = new Laya.Handler(this, this.onListClick);
         this.owner.listTaskNew.setRenderHandler((item: TaskItemBox, data: TaskItemData) => {
             if (data.isShowTips) {
                 item.boxInfo.y = itemNodeY;
@@ -50,14 +48,29 @@ export class TaskMediator extends Mediator {
                 item.labelTips.text = "";
             }
 
-            item.labelName.text = data.taskVo.name;
+            // item.labelName.text = data.taskVo.name;
             item.labelDesc.text = data.taskVo.desc;
             if (data.taskVo.cmd?.finish) {
                 item.btnUse.label = "领取";
             } else {
                 item.btnUse.label = "前往";
             }
-
+            item.btnUse.on(Laya.Event.CLICK, () => {
+                const taskCmd = data.taskVo.cmd;
+                const ids: number[] = [];
+                if (data.taskVo.ref.type == TaskConf.TASK_TYPE.BRANCH) {
+                    for (const task of app.service.task.branchTaskBag.toArray()) {
+                        if (task.cmd && task.cmd?.num >= task.cmd?.max) {
+                            ids.push(task.cmd.id);
+                        }
+                    }
+                } else {
+                    if (taskCmd) {
+                        ids.push(taskCmd.id);
+                    }
+                }
+                app.service.task.requestReceiveReward({ taskIds: ids });
+            });
             // item.height = 127;
             // const a = 1;
         });
@@ -74,27 +87,6 @@ export class TaskMediator extends Mediator {
             }
             this.updateList();
         });
-    }
-
-    private onListClick(e: Laya.Event, index: number) {
-        if (e.type == Laya.Event.CLICK) {
-            if (e.target.name === "btnUse") {
-                const taskCmd = this.tlTaskData[index].taskVo.cmd;
-                const ids: number[] = [];
-                if (this.tlTaskData[index].taskVo.ref.type == TaskConf.TASK_TYPE.BRANCH) {
-                    for (const task of app.service.task.branchTaskBag.toArray()) {
-                        if (task.cmd && task.cmd?.num >= task.cmd?.max) {
-                            ids.push(task.cmd.id);
-                        }
-                    }
-                } else {
-                    if (taskCmd) {
-                        ids.push(taskCmd.id);
-                    }
-                }
-                app.service.task.requestReceiveReward({ taskIds: ids });
-            }
-        }
     }
 
     private onListRender(item: TaskItemBox, index: number) {
