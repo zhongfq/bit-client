@@ -1,5 +1,7 @@
 export type Constructor<T = unknown> = new (...args: any[]) => T;
 
+type ObjectType = { [k: string]: unknown };
+
 export const enum Status {
     FAILURE = "failure", // 失败
     SUCCESS = "success", // 成功
@@ -106,9 +108,9 @@ export class Node {
 
         if (this.data.debug || env.debug) {
             let varStr = "";
-            for (const k of env.vars.keys()) {
+            for (const k in env.vars) {
                 if (!(TreeEnv.isTempVar(k) || TreeEnv.isPrivateVar(k))) {
-                    varStr += `${k}:${env.vars.get(k)}, `;
+                    varStr += `${k}:${env.vars[k]}, `;
                 }
             }
             const indent = env.debug ? " ".repeat(env.stack.length) : "";
@@ -167,7 +169,7 @@ export class TreeEnv {
         results: [],
     };
 
-    private _values: Map<string, unknown> = new Map();
+    private _values: ObjectType = {};
     private _stack: Node[] = [];
 
     public debug: boolean = false;
@@ -189,20 +191,20 @@ export class TreeEnv {
     }
 
     public getValue(k: string) {
-        return this._values.get(k);
+        return this._values[k];
     }
 
     public setValue(k: string, v: unknown) {
         if (v === undefined) {
-            this._values.delete(k);
+            delete this._values[k];
         } else {
-            this._values.set(k, v);
+            this._values[k] = v;
         }
     }
 
     public clear() {
         this._stack.length = 0;
-        this._values.clear();
+        this._values = {};
         this.lastRet.results.length = 0;
     }
 
@@ -253,9 +255,9 @@ export class Tree {
         const vars = env.vars;
         if (stack.length > 0) {
             stack.length = 0;
-            for (const key of vars.keys()) {
+            for (const key in vars) {
                 if (TreeEnv.isTempVar(key)) {
-                    vars.delete(key);
+                    delete vars[key];
                 }
             }
         }
@@ -287,8 +289,6 @@ export class Tree {
     }
 }
 
-type ObjectType = { [k: string]: unknown };
-
 const enum TokenType {
     NUMBER,
     STRING,
@@ -311,7 +311,7 @@ type Token = {
 
 class ExpressionEvaluator {
     private _postfix: Token[];
-    private _args: Map<string, unknown> | null = null;
+    private _args: ObjectType | null = null;
 
     public constructor(expression: string) {
         expression = expression.replace(/\s/g, "");
@@ -322,7 +322,7 @@ class ExpressionEvaluator {
         this._postfix = this._convertToPostfix(tokens);
     }
 
-    public evaluate(args: Map<string, unknown>): unknown {
+    public evaluate(args: ObjectType): unknown {
         const stack: (string | number)[] = [];
 
         this._args = args;
@@ -374,7 +374,7 @@ class ExpressionEvaluator {
 
     private _toObject(token: unknown) {
         if (typeof token === "string") {
-            const obj = this._args?.get(token);
+            const obj = this._args?.[token];
             if (typeof obj === "object") {
                 return obj as ObjectType;
             } else {
@@ -389,7 +389,7 @@ class ExpressionEvaluator {
         if (typeof token === "number") {
             return token;
         } else if (typeof token === "string") {
-            const value = this._args?.get(token);
+            const value = this._args?.[token];
             if (typeof value === "number") {
                 return value;
             } else if (value === undefined) {
