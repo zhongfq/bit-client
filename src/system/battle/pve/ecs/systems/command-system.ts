@@ -32,6 +32,7 @@ import {
     ElementComponent,
     TruckComponent,
 } from "../components/element-component";
+import { Pool } from "../../../../../core/pool";
 
 const PREFAB_HEAD_INFO1 = "resources/prefab/battle/ui/head-info1.lh";
 const PREFAB_HEAD_INFO2 = "resources/prefab/battle/ui/head-info2.lh";
@@ -399,8 +400,8 @@ export class CommandSystem extends ecs.System implements ICommandSender {
     }
 
     public drawDebug(x: number, z: number, radius: number, color: number) {
-        const outPos = Laya.Pool.obtain(Laya.Vector4);
-        const inPos = Laya.Pool.obtain(Laya.Vector3);
+        const outPos = Pool.obtain(Laya.Vector4);
+        const inPos = Pool.obtain(Laya.Vector3);
         inPos.x = x;
         inPos.z = z;
         this.context.camera.worldToViewportPoint(inPos, outPos);

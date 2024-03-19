@@ -1,6 +1,7 @@
 import { app } from "../../../../../app";
 import { Callback } from "../../../../../core/dispatcher";
 import * as ecs from "../../../../../core/ecs";
+import { Pool } from "../../../../../core/pool";
 import { formation } from "../../../../../def/formation";
 import proto from "../../../../../def/proto";
 import { opcode } from "../../../../../def/protocol";
@@ -137,9 +138,9 @@ export class CommandSystem extends ecs.System {
             transform.flag |= TransformComponent.POSITION;
             movement.speed = cmd.speed;
             movement.startTime = cmd.startMs / 1000;
-            Laya.Pool.free(movement.paths);
+            Pool.free(movement.paths);
             cmd.path.forEach((p) => {
-                const pos = Laya.Pool.obtain(Laya.Vector3);
+                const pos = Pool.obtain(Laya.Vector3);
                 this._adjustOffset(pos.set(p.x ?? 0, 0, p.y ?? 0));
                 movement.paths.push(pos);
             });

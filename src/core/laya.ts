@@ -121,11 +121,6 @@ declare global {
         interface Node {
             getChildByPath(path: string): Node | null;
         }
-
-        module Pool {
-            export function obtain<T>(cls: Constructor<T>): T;
-            export function free<T>(obj: T): void;
-        }
     }
 }
 
@@ -194,20 +189,5 @@ Laya.Node.prototype.getChildByPath = function (path) {
         return child;
     } else {
         return null;
-    }
-};
-
-Laya.Pool.obtain = function <T>(cls: Constructor<T>): T {
-    return Laya.Pool.createByClass(cls);
-};
-
-Laya.Pool.free = function <T>(obj: T): void {
-    if (obj instanceof Array) {
-        for (const v of obj) {
-            Laya.Pool.free(v);
-        }
-        obj.length = 0;
-    } else if (obj) {
-        Laya.Pool.recoverByClass(obj);
     }
 };
