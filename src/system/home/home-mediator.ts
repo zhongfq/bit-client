@@ -124,6 +124,16 @@ export class HomeMediator extends Mediator {
             this._loadPve();
         });
         naviMenu.btnSoldier.on(Laya.Event.CLICK, () => {
+            if (this._currentBtn === naviMenu.btnSoldier) {
+                this._closeBox();
+                this._activatePveOrPvp(true);
+            } else {
+                this._closeBox();
+                this._activatePveOrPvp(false);
+                this._currentBtn = naviMenu.btnSoldier;
+                this._currentBtn.selected = true;
+                this._loadAddNode("resources/prefab/soldier/soldier.lh");
+            }
             // if (this._naviBtnSelected(this.owner.naviMenu.btnSoldier)) {
             //     this._loadAddNode("resources/prefab/soldier/soldier.lh");
             // }
