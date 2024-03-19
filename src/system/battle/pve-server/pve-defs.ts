@@ -6,9 +6,9 @@ export class PveDef {
     public static readonly MAX_ADJUST_SPEED = PveDef.MOVE_SPEED * 2;
     public static readonly MAX_BACK_SPEED = PveDef.MOVE_SPEED * 3;
 
-    public static readonly COLLECT_PER_HP = 10;
-    public static readonly COLLECT_MAX_CNT = 300;
-    public static readonly COLLECT_CNT_PER_OBJ = 5;
+    public static readonly COLLECT_PER_HP = 10; // 每采集一次，采集物扣多少血
+    public static readonly COLLECT_MAX_CNT = 200; // 每个资源车最大承载资源数量
+    public static readonly COLLECT_CNT_PER_OBJ = 2; // 每个资源对象相当于多少资源数量
 }
 
 export interface ElementCreator {
@@ -43,22 +43,22 @@ export interface UpdateTruck {
 }
 
 export class TruckFormation {
-    public static readonly WOOD: IVector3Like[] = [
-        { x: 0.6, y: 0, z: 0 },
-        { x: 0.2, y: 0, z: 0 },
-        { x: -0.2, y: 0, z: 0 },
-        { x: -0.6, y: 0, z: 0 },
+    public static readonly WOOD: Laya.Vector3[] = [
+        new Laya.Vector3(0.6, 0, 0),
+        new Laya.Vector3(0.2, 0, 0),
+        new Laya.Vector3(-0.2, 0, 0),
+        new Laya.Vector3(-0.6, 0, 0),
     ];
-    public static readonly FOOD: IVector3Like[] = [
-        { x: 0.35, y: 0, z: 0.5 },
-        { x: -0.35, y: 0, z: 0.5 },
-        { x: 0.35, y: 0, z: -0.5 },
-        { x: -0.35, y: 0, z: -0.5 },
+    public static readonly FOOD: Laya.Vector3[] = [
+        new Laya.Vector3(0.35, 0, 0.5),
+        new Laya.Vector3(-0.35, 0, 0.5),
+        new Laya.Vector3(0.35, 0, -0.5),
+        new Laya.Vector3(-0.35, 0, -0.5),
     ];
-    public static readonly STONE: IVector3Like[] = [
-        { x: 0.35, y: 0, z: 0.5 },
-        { x: -0.35, y: 0, z: 0.5 },
-        { x: 0.35, y: 0, z: -0.5 },
-        { x: -0.35, y: 0, z: -0.5 },
+    public static readonly STONE: Laya.Vector3[] = [
+        new Laya.Vector3(0.35, 0, 0.5),
+        new Laya.Vector3(-0.35, 0, 0.5),
+        new Laya.Vector3(0.35, 0, -0.5),
+        new Laya.Vector3(-0.35, 0, -0.5),
     ];
 }
