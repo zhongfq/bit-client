@@ -1,4 +1,5 @@
-import { Callback, Constructor, ConstructorType } from "./dispatcher";
+import { Callback, ConstructorType } from "./dispatcher";
+import { Bezier3D } from "./utils/besier-3d";
 
 type EaseFunc = (t: number, b: number, c: number, d: number, ...any: any[]) => number;
 
@@ -8,17 +9,11 @@ export class Tween {
     }
 
     /**
-     * Laya.timer.once(1000, this, () => {
-            Tween.toBezier(this, 8, [
-                new Laya.Point(50, 1000),
-                new Laya.Point(100, 500),
-                new Laya.Point(350, 500),
-                new Laya.Point(500, 1000),
-            ],12);
-        });
+     * 2D贝塞尔曲线动画
      * @param target 执行动作的目标
      * @param speed 速度
      * @param points 用于计算贝塞尔曲线的坐标，2次贝塞尔3个point 3次4个point，目前最大支持3次
+     * @param backFunc 回调函数
      * @param inSertCount 运动轨迹的坐标数量 >=5,值越大 轨迹越明显
      */
     public static toBezier(
@@ -36,22 +31,22 @@ export class Tween {
         const bezierPoints = Laya.Bezier.I.getBezierPoints(
             _points,
             inSertCount,
-            _points.length > 2 * 3 ? 3 : 2
+            points.length > 3 ? 3 : 2
         );
         function to(num: number) {
-            const distance = new Laya.Point(bezierPoints[num - 2], bezierPoints[num - 2]).distance(
-                bezierPoints[num],
-                bezierPoints[num + 1]
+            const distance = new Laya.Point(bezierPoints[num], bezierPoints[num + 1]).distance(
+                bezierPoints[num + 2],
+                bezierPoints[num + 3]
             );
             return Laya.Tween.to(
                 target,
-                { x: bezierPoints[num], y: bezierPoints[num + 1] },
+                { x: bezierPoints[num + 2], y: bezierPoints[num + 3] },
                 distance / speed,
                 null,
                 Laya.Handler.create(
                     null,
                     () => {
-                        if (num + 2 >= bezierPoints.length) {
+                        if (num + 4 >= bezierPoints.length) {
                             if (backFunc) {
                                 return backFunc();
                             }
@@ -65,7 +60,65 @@ export class Tween {
                 )
             );
         }
-        to(2);
+        to(0);
+    }
+
+    /**
+     * 3D贝塞尔曲线动画
+     * @param target 执行动作的目标
+     * @param speed 速度
+     * @param points 用于计算贝塞尔曲线的坐标，2次贝塞尔3个point 3次4个point，目前最大支持3次
+     * @param backFunc 回调函数
+     * @param inSertCount 运动轨迹的坐标数量 >=5,值越大 轨迹越明显
+     */
+    public static toBezier3D(
+        target: any,
+        speed: number,
+        points: Laya.Vector3[],
+        backFunc?: Callback,
+        inSertCount: number = 5
+    ) {
+        const _points = [];
+        for (const point of points) {
+            _points.push(point.x);
+            _points.push(point.y);
+            _points.push(point.z);
+        }
+        const bezierPoints = Bezier3D.I.getBezierPoints(
+            _points,
+            inSertCount,
+            points.length > 3 ? 3 : 2
+        );
+        function to(idx: number) {
+            const fromPos = new Laya.Vector3(
+                bezierPoints[idx],
+                bezierPoints[idx + 1],
+                bezierPoints[idx + 2]
+            );
+            const toPos = new Laya.Vector3(
+                bezierPoints[idx + 3],
+                bezierPoints[idx + 4],
+                bezierPoints[idx + 5]
+            );
+            const distance = Laya.Vector3.distance(fromPos, toPos);
+            return Laya.Tween.to(
+                target,
+                { localPositionX: toPos.x, localPositionY: toPos.y, localPositionZ: toPos.z },
+                distance / speed,
+                null,
+                Laya.Handler.create(null, () => {
+                    if (idx + 6 >= bezierPoints.length) {
+                        if (backFunc) {
+                            return backFunc();
+                        }
+                        return;
+                    } else {
+                        to(idx + 3);
+                    }
+                })
+            );
+        }
+        to(0);
     }
 }
 

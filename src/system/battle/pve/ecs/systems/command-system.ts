@@ -33,6 +33,7 @@ import {
     TruckComponent,
 } from "../components/element-component";
 import { Pool } from "../../../../../core/pool";
+import { IVector3Like, Tween } from "../../../../../core/laya";
 
 const PREFAB_HEAD_INFO1 = "resources/prefab/battle/ui/head-info1.lh";
 const PREFAB_HEAD_INFO2 = "resources/prefab/battle/ui/head-info2.lh";
@@ -320,24 +321,16 @@ export class CommandSystem extends ecs.System implements ICommandSender {
         if (!truckComp) {
             return;
         }
-        const curCnt = truckComp.collectCnt;
-        const tarCnt = data.collectCnt;
-
-        if (curCnt < tarCnt) {
-            this.playCollectFlyAnim(data.collecter, data.collection);
-        }
         const curObjCnt = truckComp.collectObjs.length;
         const tarObjCnt = Math.floor(data.collectCnt / PveDef.COLLECT_CNT_PER_OBJ);
         if (curObjCnt < tarObjCnt) {
-            this.addTruckCollectObj(eid, tarObjCnt - curObjCnt);
+            this.addTruckCollectObj(eid, tarObjCnt - curObjCnt, data);
         } else if (curObjCnt > tarObjCnt) {
             this.delTruckCollectObj(eid, curObjCnt - tarObjCnt);
         }
     }
 
-    public playCollectFlyAnim(collecter: number, collection: number) {}
-
-    public async addTruckCollectObj(eid: number, count: number) {
+    public async addTruckCollectObj(eid: number, count: number, data: UpdateTruck) {
         const truck = this._findElement(eid);
         if (!truck) {
             return;
@@ -347,7 +340,8 @@ export class CommandSystem extends ecs.System implements ICommandSender {
             return;
         }
 
-        let path, formation;
+        let path!: string;
+        let formation!: Laya.Vector3[];
         if (truckComp.collectType == BattleConf.ENTITY_TYPE.WOOD) {
             [path, formation] = ["anim/gather-wood", TruckFormation.WOOD];
         } else if (truckComp.collectType == BattleConf.ENTITY_TYPE.FOOD) {
@@ -364,18 +358,29 @@ export class CommandSystem extends ecs.System implements ICommandSender {
             const obj = (view?.getChildByPath(path) as Laya.Sprite3D).clone()!;
             obj.active = true;
 
+            const fromPos = new Laya.Vector3();
+            const parent = truck.animation.view?.getChildByPath("anim/gather") as Laya.Sprite3D;
+            const collection = this._findElement(data.collection);
+            parent.transform.globalToLocal(collection!.transform.position, fromPos);
+            fromPos.y = 5; // TODO：不同采集物配置不同高度
+
             const len = truckComp.collectObjs.length;
-            const tarPos = formation[len % formation.length];
+            const toPos = formation[len % formation.length].clone();
             const offsetY = Math.floor(len / formation.length) * 0.35;
+            toPos.y += offsetY; // 计算采集物每一层的偏移高度
 
-            const pos = obj.transform.localPosition;
-            pos.x = tarPos.x;
-            pos.y = tarPos.y + offsetY;
-            pos.z = tarPos.z;
-            obj.transform.localPosition = pos;
+            const midPos = new Laya.Vector3();
+            Laya.Vector3.lerp(fromPos, toPos, 0.5, midPos);
+            midPos.y += 5; // 中间点的高度提一提，模拟抛物线效果
 
-            obj.name = len + "_" + pos.x + "_" + pos.y + "_" + pos.z;
-            truck.animation.view?.getChildByName("anim")?.getChildByName("gather")?.addChild(obj);
+            obj.transform.localPosition = fromPos;
+            const points: Laya.Vector3[] = [fromPos, midPos, toPos];
+            Tween.toBezier3D(obj.transform, 0.05, points, () => {
+                obj.transform.localPosition = toPos;
+            });
+
+            obj.name = len + "_" + toPos.x + "_" + toPos.y + "_" + toPos.z;
+            parent?.addChild(obj);
 
             truckComp.collectObjs.push(obj);
         }
