@@ -4,7 +4,6 @@ import { StringUtil } from "../../core/utils/string-util";
 import { ItemConf } from "../../def/item";
 import proto from "../../def/proto";
 import { SoldierVo } from "../../misc/vo/soldier/soldier-vo";
-import { IconUI } from "../../ui-runtime/prefab/icon/IconUI";
 import { SoldierIconUI } from "../../ui-runtime/prefab/icon/SoldierIconUI";
 import { SoldierSoldierUI } from "../../ui-runtime/prefab/soldier/SoldierSoldierUI";
 import { BagService } from "../bag/bag-service";
@@ -28,14 +27,19 @@ export class SoldierSoldierMediator extends Mediator {
         const vo = this.owner.listSoldier.selectedItem.soldierVo as SoldierVo;
         this.owner.labelName.text = vo.name;
 
-        this.owner.labelLv.text = "Lv." + vo.level;
+        this.owner.labelLv.text = "Lv." + (vo.cmd ? vo.level : "1");
         const skillRow = app.service.table.skill[vo.ref.skill2];
         this.owner.labelSkillName.text = skillRow.name;
         this.owner.labelSkillDesc.text = skillRow.desc;
         const attrList = [];
-        const attrs = (vo.cmd as proto.soldier.SoldierInfo).attrs;
-        for (const attr in attrs) {
-            attrList.push({ id: attr, val: attrs[attr] });
+        if (vo.cmd) {
+            for (const attr in vo.cmd.attrs) {
+                attrList.push({ id: attr, val: vo.cmd.attrs[attr] });
+            }
+        } else {
+            for (const attr of vo.ref.attr) {
+                attrList.push({ id: attr[0], val: attr[1] });
+            }
         }
         this.owner.listAttr.array = attrList;
     }
