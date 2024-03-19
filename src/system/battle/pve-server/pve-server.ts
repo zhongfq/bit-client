@@ -15,7 +15,7 @@ import {
     TruckComponent,
 } from "./ecs/components/element-component";
 import { MovementComponent, TransformComponent } from "./ecs/components/movement-component";
-import { Skill, SkillComponent } from "./ecs/components/skill-component";
+import { Skill, LauncherComponent } from "./ecs/components/skill-component";
 import { AiSystem } from "./ecs/systems/ai-system";
 import { CacheSystem } from "./ecs/systems/cache-system";
 import { MovementSystem } from "./ecs/systems/movement-system";
@@ -144,6 +144,12 @@ export class PveServer extends b3.Context {
     //-------------------------------------------------------------------------
     //------------------------------ICommandReceiver---------------------------
     //-------------------------------------------------------------------------
+    private _initSkill(owner: ElementComponent, launcher: LauncherComponent, skillId?: number) {
+        if (skillId) {
+            launcher.skills.push(new Skill(app.service.table.skill[skillId], owner));
+        }
+    }
+
     public start() {
         // 创建主角
         const entity = this._ecs.createEntity();
@@ -166,24 +172,15 @@ export class PveServer extends b3.Context {
         const heroRow = table.hero[element.tid];
         element.data = table.battleEntity[heroRow.battle_entity];
 
-        const entityRow = table.battleEntity[heroRow.battle_entity];
         const ai = entity.addComponent(AiComponent);
-        ai.res = `resources/data/btree/${entityRow.pve_ai}.json`;
+        ai.res = `resources/data/btree/${element.data.pve_ai}.json`;
         ai.active = false;
 
-        const skill = entity.addComponent(SkillComponent);
-        if (heroRow.skill1) {
-            skill.skills.push(new Skill(table.skill[heroRow.skill1], element));
-        }
-        if (heroRow.skill2) {
-            skill.skills.push(new Skill(table.skill[heroRow.skill2], element));
-        }
-        if (heroRow.skill3) {
-            skill.skills.push(new Skill(table.skill[heroRow.skill3], element));
-        }
-        if (heroRow.skill4) {
-            skill.skills.push(new Skill(table.skill[heroRow.skill4], element));
-        }
+        const launcher = entity.addComponent(LauncherComponent);
+        this._initSkill(element, launcher, heroRow.skill0);
+        this._initSkill(element, launcher, heroRow.skill1);
+        this._initSkill(element, launcher, heroRow.skill2);
+        this._initSkill(element, launcher, heroRow.skill3);
 
         this._sender.createElement({
             eid: element.eid,
@@ -228,21 +225,16 @@ export class PveServer extends b3.Context {
             soldier.data = soldierRow;
             hero.troop!.soldiers.push(soldier);
 
-            const skill = entity.addComponent(SkillComponent);
-            if (soldierRow.skill1) {
-                skill.skills.push(new Skill(table.skill[soldierRow.skill1], element));
-            }
-            if (soldierRow.skill2) {
-                skill.skills.push(new Skill(table.skill[soldierRow.skill2], element));
-            }
+            const launcher = entity.addComponent(LauncherComponent);
+            this._initSkill(element, launcher, soldierRow.skill0);
+            this._initSkill(element, launcher, soldierRow.skill1);
 
             const transform = entity.addComponent(TransformComponent);
             transform.position.x = value.x + hero.transform.position.x;
             transform.position.z = value.z + hero.transform.position.z;
 
-            const entityRow = table.battleEntity[soldierRow.battle_entity];
             const ai = entity.addComponent(AiComponent);
-            ai.res = `resources/data/btree/${entityRow.pve_ai}.json`;
+            ai.res = `resources/data/btree/${element.data.pve_ai}.json`;
 
             entity.addComponent(MovementComponent);
 
@@ -549,25 +541,22 @@ export class PveServer extends b3.Context {
         this._elements.set(key, element);
 
         const table = app.service.table;
-        const heroRow = table.hero[element.tid];
+        const monsterRow = table.monster[element.tid];
 
-        element.data = table.battleEntity[heroRow.battle_entity];
+        element.data = table.battleEntity[monsterRow.battle_entity];
 
-        const skill = entity.addComponent(SkillComponent);
-        if (heroRow.skill1) {
-            skill.skills.push(new Skill(table.skill[heroRow.skill1], element));
-        }
-        if (heroRow.skill2) {
-            skill.skills.push(new Skill(table.skill[heroRow.skill2], element));
-        }
+        const launcher = entity.addComponent(LauncherComponent);
+        this._initSkill(element, launcher, monsterRow.skill0);
+        this._initSkill(element, launcher, monsterRow.skill1);
+        this._initSkill(element, launcher, monsterRow.skill2);
+        this._initSkill(element, launcher, monsterRow.skill3);
 
         const transform = entity.addComponent(TransformComponent);
         transform.position.x = position.x;
         transform.position.z = position.z;
 
-        const entityRow = table.battleEntity[heroRow.battle_entity];
         const ai = entity.addComponent(AiComponent);
-        ai.res = `resources/data/btree/${entityRow.pve_ai}.json`;
+        ai.res = `resources/data/btree/${element.data.pve_ai}.json`;
 
         entity.addComponent(MovementComponent);
 

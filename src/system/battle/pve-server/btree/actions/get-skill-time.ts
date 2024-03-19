@@ -15,7 +15,7 @@ export class GetSkillTime extends b3.Process {
 
     public override run(node: b3.Node, env: AiTreeEnv) {
         const args = node.args as GetSkillTimeArgs;
-        const skill = env.owner.skill?.skills[args.skill];
+        const skill = env.owner.launcher?.skills[args.skill];
         if (skill) {
             return b3.Status.SUCCESS;
         } else {
@@ -30,6 +30,7 @@ export class GetSkillTime extends b3.Process {
             desc: "获取技能上次释放的时间",
             args: [{ name: "skill", type: "int", desc: "技能id" }],
             output: ["上次释放时间"],
+            doc: `+ 技能不存在则返回 FAILURE`,
         } as b3.ProcessDescriptor;
     }
 }

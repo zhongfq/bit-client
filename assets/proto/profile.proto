@@ -24,6 +24,7 @@ message c2s_load {
 message s2c_load {
     int32 err = 1;
     ProfileInfo profile = 2;
+    bool new = 3; // 新角色
 }
 
 message notify_profile {

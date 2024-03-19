@@ -2,8 +2,8 @@ export module res {
     // 表格数据
     export const TABLE_ALLIANCE_TABLE = "resources/data/alliance.json";
     export const TABLE_ATTR_TABLE = "resources/data/attr.json";
-    export const TABLE_BATTLE_ENTITY_TABLE = "resources/data/battle/battle-entity.json";
     export const TABLE_BATTLE_BUILDING_TABLE = "resources/data/battle/battle-building.json";
+    export const TABLE_BATTLE_ENTITY_TABLE = "resources/data/battle/battle-entity.json";
     export const TABLE_BUFF_TABLE = "resources/data/battle/battle-buff.json";
     export const TABLE_CHEST_TABLE = "resources/data/chest.json";
     export const TABLE_EMOJI_TABLE = "resources/data/emoji.json";
@@ -13,6 +13,7 @@ export module res {
     export const TABLE_ITEM_TABLE = "resources/data/item.json";
     export const TABLE_MAIL_TABLE = "resources/data/mail.json";
     export const TABLE_MONEY_TABLE = "resources/data/money.json";
+    export const TABLE_MONSTER_TABLE = "resources/data/monster.json";
     export const TABLE_ROLE_TABLE = "resources/data/role.json";
     export const TABLE_SHOP_TABLE = "resources/data/activity/shop.json";
     export const TABLE_SKILL_TABLE = "resources/data/skill.json";

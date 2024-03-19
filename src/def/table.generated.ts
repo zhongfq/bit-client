@@ -40,6 +40,20 @@ export interface GeneratedRoleTrainRow {
     consume: any;
 }
 
+// file: design/monster.xlsx
+export interface GeneratedMonsterRow {
+    id: number;
+    name: string;
+    type: number;
+    battle_entity: number;
+    enable?: number;
+    job: number;
+    skill0?: number;
+    skill1?: number;
+    skill2?: number;
+    skill3?: number;
+}
+
 // file: design/hero.xlsx
 export interface GeneratedHeroRow {
     id: number;
@@ -49,22 +63,18 @@ export interface GeneratedHeroRow {
     world_entity: number;
     enable?: number;
     job: number;
-    attack_radius: number;
-    skill_radius: number;
+    skill0?: number;
     skill1?: number;
     skill2?: number;
     skill3?: number;
-    skill4?: number;
 }
 
 // file: design/soldier.xlsx
 export interface GeneratedSoldierRow {
     id: number;
     battle_entity: number;
+    skill0: number;
     skill1?: number;
-    attack_radius: number;
-    skill_radius: number;
-    skill2: number;
     position: number;
     quality: number;
     icon: string;
@@ -159,9 +169,10 @@ export interface GeneratedSkillRow {
     name: string;
     desc: string;
     type: number;
-    lanuch_btree: string;
     anim?: string;
     cd?: number;
+    radius: number;
+    lanuch_btree: string;
 }
 
 // file: design/mail.xlsx
@@ -193,7 +204,6 @@ export interface GeneratedTaskBranchRow {
     id: number;
     sort: number;
     type: number;
-    name: string;
     desc: string;
     reward: any;
     guide_id?: number;
@@ -270,8 +280,6 @@ export interface GeneratedBattleEntityRow {
     etype: number;
     res: string;
     pve_ai: string;
-    attack_radius?: number;
-    skill_radius?: number;
     info_style?: number;
     info_offset?: number;
 }

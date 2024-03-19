@@ -25,8 +25,7 @@ export class FindOneTarget extends FindTargets {
                 { name: "soldier", type: "boolean?", desc: "找士兵" },
                 { name: "collection", type: "boolean?", desc: "找采集物" },
                 { name: "friend", type: "boolean?", desc: "友方" },
-                { name: "attack", type: "boolean?", desc: "普攻范围" },
-                { name: "skill", type: "boolean?", desc: "技能范围" },
+                { name: "skillId", type: "int?", desc: "技能id" },
                 { name: "radius", type: "int?", desc: "半径" },
             ],
             output: ["目标单位"],
@@ -35,6 +34,7 @@ export class FindOneTarget extends FindTargets {
                 + 默认查找敌对单位
                 + 范围优先级，普攻>技能>半径
                 + 如果找到多个取最近那个
+                + 普攻 id 为 0，技能1 id 为 1，以次类推
                 + etype 在 battle/battle_entity 表中有定义, 默认查找所有可攻击类型
                 `,
         };

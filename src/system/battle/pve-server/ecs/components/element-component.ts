@@ -3,7 +3,7 @@ import * as ecs from "../../../../../core/ecs";
 import { IVector3Like } from "../../../../../core/laya";
 import { BattleEntityRow, SoldierRow } from "../../../../../def/table";
 import { MovementComponent, TransformComponent } from "./movement-component";
-import { SkillComponent } from "./skill-component";
+import { LauncherComponent } from "./skill-component";
 
 export class ElementComponent extends ecs.Component {
     public data!: BattleEntityRow;
@@ -29,7 +29,7 @@ export class ElementComponent extends ecs.Component {
     // 缓存组件方便快速访问？
     private _movement?: MovementComponent;
     private _transform?: TransformComponent;
-    private _skill?: SkillComponent;
+    private _launcher?: LauncherComponent;
     private _troop?: TroopComponent;
     private _soldier?: SoldierComponent;
     private _truck?: TruckComponent;
@@ -42,8 +42,8 @@ export class ElementComponent extends ecs.Component {
         return (this._transform ||= this.getComponent(TransformComponent)!);
     }
 
-    public get skill() {
-        return (this._skill ||= this.getComponent(SkillComponent));
+    public get launcher() {
+        return (this._launcher ||= this.getComponent(LauncherComponent));
     }
 
     public get troop() {

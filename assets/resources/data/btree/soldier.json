@@ -95,7 +95,8 @@
                   "soldier": true,
                   "hero": true,
                   "wood": false,
-                  "friend": false
+                  "friend": false,
+                  "skillId": 0
                 },
                 "output": [
                   "enemy"

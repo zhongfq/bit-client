@@ -7,8 +7,7 @@ interface FindTargetsArgs {
     hero?: boolean;
     soldier?: boolean;
     collection?: boolean;
-    attack?: boolean;
-    skill?: boolean;
+    skillId?: number;
 }
 
 export class FindTargets extends b3.Process {
@@ -20,10 +19,11 @@ export class FindTargets extends b3.Process {
         const findSoldier = args.soldier;
         const findCollection = args.collection;
         let radius = args.radius ?? 0;
-        if (args.attack) {
-            radius = env.owner.data.attack_radius ?? radius;
-        } else if (args.skill) {
-            radius = env.owner.data.skill_radius ?? radius;
+        if (typeof args.skillId === "number") {
+            const skill = env.owner.launcher?.skills[args.skillId];
+            if (skill) {
+                radius = skill.data.radius;
+            }
         }
         const ETYPE = BattleConf.ENTITY_TYPE;
         const position = env.owner.transform.position;
@@ -67,8 +67,7 @@ export class FindTargets extends b3.Process {
                 { name: "soldier", type: "boolean?", desc: "找士兵" },
                 { name: "collection", type: "boolean?", desc: "找采集物" },
                 { name: "friend", type: "boolean?", desc: "友方" },
-                { name: "attack", type: "boolean?", desc: "普攻范围" },
-                { name: "skill", type: "boolean?", desc: "技能范围" },
+                { name: "skillId", type: "int?", desc: "技能id" },
                 { name: "radius", type: "int?", desc: "半径" },
                 { name: "limit", type: "int?", desc: "数量限制" },
             ],
@@ -78,6 +77,7 @@ export class FindTargets extends b3.Process {
                 + 默认查找敌对单位
                 + 范围优先级，普攻>技能>半径
                 + 如果找到多个取最近那个
+                + 普攻 id 为 0，技能1 id 为 1，以次类推
                 + etype 在 battle/battle_entity 表中有定义, 默认查找所有可攻击类型
                 `,
         };

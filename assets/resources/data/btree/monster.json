@@ -60,7 +60,8 @@
             "args": {
               "hero": true,
               "soldier": true,
-              "attack": true
+              "attack": true,
+              "skillId": 0
             },
             "output": [
               "enemy"

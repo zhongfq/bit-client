@@ -8,8 +8,8 @@
             "name": "士兵1",
             "position": 1,
             "quality": 1,
-            "skill1": 1,
-            "skill2": 1,
+            "skill1": 10002,
+            "skill2": 10002,
             "skill_id": 1,
             "up_star_num": 5
         },
@@ -21,8 +21,8 @@
             "name": "士兵2",
             "position": 2,
             "quality": 2,
-            "skill1": 1,
-            "skill2": 1,
+            "skill1": 10002,
+            "skill2": 10002,
             "skill_id": 1,
             "up_star_num": 5
         },
@@ -34,8 +34,8 @@
             "name": "士兵3",
             "position": 3,
             "quality": 3,
-            "skill1": 1,
-            "skill2": 1,
+            "skill1": 10002,
+            "skill2": 10002,
             "skill_id": 1,
             "up_star_num": 5
         },
@@ -47,8 +47,8 @@
             "name": "士兵4",
             "position": 1,
             "quality": 4,
-            "skill1": 1,
-            "skill2": 1,
+            "skill1": 10002,
+            "skill2": 10002,
             "skill_id": 1,
             "up_star_num": 5
         },
@@ -60,8 +60,8 @@
             "name": "士兵5",
             "position": 2,
             "quality": 1,
-            "skill1": 1,
-            "skill2": 2,
+            "skill1": 10002,
+            "skill2": 10002,
             "skill_id": 2,
             "up_star_num": 5
         },
@@ -73,8 +73,8 @@
             "name": "士兵6",
             "position": 3,
             "quality": 2,
-            "skill1": 1,
-            "skill2": 2,
+            "skill1": 10002,
+            "skill2": 10002,
             "skill_id": 2,
             "up_star_num": 5
         },
@@ -86,8 +86,8 @@
             "name": "士兵7",
             "position": 1,
             "quality": 3,
-            "skill1": 1,
-            "skill2": 2,
+            "skill1": 10002,
+            "skill2": 10002,
             "skill_id": 2,
             "up_star_num": 5
         },
@@ -99,50 +99,14 @@
             "name": "士兵8",
             "position": 2,
             "quality": 4,
-            "skill1": 1,
-            "skill2": 2,
+            "skill1": 10002,
+            "skill2": 10002,
             "skill_id": 2,
             "up_star_num": 5
         }
     },
     "soldier": {
-        "40701": {
-            "attack_radius": 1,
-            "attr": [
-                [
-                    101,
-                    100,
-                    1
-                ],
-                [
-                    102,
-                    10,
-                    1
-                ],
-                [
-                    103,
-                    50,
-                    1
-                ],
-                [
-                    104,
-                    5,
-                    1
-                ]
-            ],
-            "battle_entity": 40001,
-            "icon": "soldier1",
-            "id": 40701,
-            "max_lv": 50,
-            "position": 1,
-            "quality": 1,
-            "skill1": 1,
-            "skill2": 1,
-            "skill_radius": 1,
-            "up_lv_num": 5
-        },
         "40702": {
-            "attack_radius": 5,
             "attr": [
                 [
                     101,
@@ -171,48 +135,11 @@
             "max_lv": 50,
             "position": 2,
             "quality": 2,
-            "skill1": 1,
-            "skill2": 1,
-            "skill_radius": 5,
-            "up_lv_num": 5
-        },
-        "40703": {
-            "attack_radius": 4.5,
-            "attr": [
-                [
-                    101,
-                    100,
-                    1
-                ],
-                [
-                    102,
-                    10,
-                    1
-                ],
-                [
-                    103,
-                    50,
-                    1
-                ],
-                [
-                    104,
-                    5,
-                    1
-                ]
-            ],
-            "battle_entity": 40003,
-            "icon": "soldier3",
-            "id": 40703,
-            "max_lv": 50,
-            "position": 3,
-            "quality": 3,
-            "skill1": 1,
-            "skill2": 1,
-            "skill_radius": 4.5,
+            "skill0": 10002,
+            "skill1": 10002,
             "up_lv_num": 5
         },
         "40704": {
-            "attack_radius": 5,
             "attr": [
                 [
                     101,
@@ -241,149 +168,8 @@
             "max_lv": 50,
             "position": 1,
             "quality": 4,
-            "skill1": 1,
-            "skill2": 1,
-            "skill_radius": 5,
-            "up_lv_num": 5
-        },
-        "40705": {
-            "attack_radius": 1.2,
-            "attr": [
-                [
-                    101,
-                    100,
-                    1
-                ],
-                [
-                    102,
-                    10,
-                    1
-                ],
-                [
-                    103,
-                    50,
-                    1
-                ],
-                [
-                    104,
-                    5,
-                    1
-                ]
-            ],
-            "battle_entity": 40005,
-            "icon": "soldier5",
-            "id": 40705,
-            "max_lv": 50,
-            "position": 2,
-            "quality": 1,
-            "skill1": 1,
-            "skill2": 2,
-            "skill_radius": 1.2,
-            "up_lv_num": 5
-        },
-        "40706": {
-            "attack_radius": 1,
-            "attr": [
-                [
-                    101,
-                    100,
-                    1
-                ],
-                [
-                    102,
-                    10,
-                    1
-                ],
-                [
-                    103,
-                    50,
-                    1
-                ],
-                [
-                    104,
-                    5,
-                    1
-                ]
-            ],
-            "battle_entity": 40006,
-            "icon": "soldier6",
-            "id": 40706,
-            "max_lv": 50,
-            "position": 3,
-            "quality": 2,
-            "skill1": 1,
-            "skill2": 2,
-            "skill_radius": 1,
-            "up_lv_num": 5
-        },
-        "40707": {
-            "attack_radius": 1.1,
-            "attr": [
-                [
-                    101,
-                    100,
-                    1
-                ],
-                [
-                    102,
-                    10,
-                    1
-                ],
-                [
-                    103,
-                    50,
-                    1
-                ],
-                [
-                    104,
-                    5,
-                    1
-                ]
-            ],
-            "battle_entity": 40007,
-            "icon": "soldier7",
-            "id": 40707,
-            "max_lv": 50,
-            "position": 1,
-            "quality": 3,
-            "skill1": 1,
-            "skill2": 2,
-            "skill_radius": 1.1,
-            "up_lv_num": 5
-        },
-        "40708": {
-            "attack_radius": 4.5,
-            "attr": [
-                [
-                    101,
-                    100,
-                    1
-                ],
-                [
-                    102,
-                    10,
-                    1
-                ],
-                [
-                    103,
-                    50,
-                    1
-                ],
-                [
-                    104,
-                    5,
-                    1
-                ]
-            ],
-            "battle_entity": 40008,
-            "icon": "soldier8",
-            "id": 40708,
-            "max_lv": 50,
-            "position": 2,
-            "quality": 4,
-            "skill1": 1,
-            "skill2": 2,
-            "skill_radius": 4.5,
+            "skill0": 10003,
+            "skill1": 10003,
             "up_lv_num": 5
         }
     }

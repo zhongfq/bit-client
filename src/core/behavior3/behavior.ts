@@ -279,6 +279,7 @@ export class Tree {
         } else {
             this.root.run(env);
         }
+        return env.lastRet.status;
     }
 
     public isRunning(env: TreeEnv) {

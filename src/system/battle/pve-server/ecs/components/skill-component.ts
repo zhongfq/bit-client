@@ -30,6 +30,6 @@ export class Skill {
     }
 }
 
-export class SkillComponent extends ecs.Component {
+export class LauncherComponent extends ecs.Component {
     public skills: Skill[] = [];
 }

@@ -28,7 +28,7 @@ import { IsTroopFighting } from "../../btree/conditions/is-troop-fighting";
 import { PveServer } from "../../pve-server";
 import { AiComponent, AiTreeEnv } from "../components/ai-component";
 import { ElementComponent } from "../components/element-component";
-import { SkillComponent } from "../components/skill-component";
+import { LauncherComponent } from "../components/skill-component";
 
 export class AiSystem extends ecs.System {
     public declare context: PveServer;
@@ -83,9 +83,9 @@ export class AiSystem extends ecs.System {
     public override update(dt: number): void {
         const time = this.context.time;
         this.ecs.getComponents(AiComponent).forEach((ai) => {
-            const skillComp = ai.getComponent(SkillComponent);
-            if (skillComp) {
-                for (const v of skillComp.skills) {
+            const launcher = ai.getComponent(LauncherComponent);
+            if (launcher) {
+                for (const v of launcher.skills) {
                     if (v.running) {
                         return;
                     }

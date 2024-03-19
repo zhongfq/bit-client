@@ -9,10 +9,12 @@ export class NormalAttack extends b3.Process {
         } else if (!(target instanceof ElementComponent)) {
             this.error(node, "target is not an ElementComponent");
         }
-        const skill = env.owner.skill?.skills[0];
+        const skill = env.owner.launcher?.skills[0];
         if (skill && skill.env && skill.tree) {
             skill.env.setValue("__skill_target__", target);
             skill.running = true;
+
+            skill.tree.run(skill.env);
         }
         return b3.Status.SUCCESS;
     }

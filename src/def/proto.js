@@ -20696,6 +20696,7 @@ $root.profile = (function() {
          * @interface Is2c_load
          * @property {number|null} [err] s2c_load err
          * @property {profile.IProfileInfo|null} [profile] s2c_load profile
+         * @property {boolean|null} ["new"] s2c_load new
          */
 
         /**
@@ -20730,6 +20731,14 @@ $root.profile = (function() {
         s2c_load.prototype.profile = null;
 
         /**
+         * s2c_load new.
+         * @member {boolean} new
+         * @memberof profile.s2c_load
+         * @instance
+         */
+        s2c_load.prototype["new"] = false;
+
+        /**
          * Creates a new s2c_load instance using the specified properties.
          * @function create
          * @memberof profile.s2c_load
@@ -20757,6 +20766,8 @@ $root.profile = (function() {
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.err);
             if (message.profile != null && Object.hasOwnProperty.call(message, "profile"))
                 $root.profile.ProfileInfo.encode(message.profile, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            if (message["new"] != null && Object.hasOwnProperty.call(message, "new"))
+                writer.uint32(/* id 3, wireType 0 =*/24).bool(message["new"]);
             return writer;
         };
 
@@ -20797,6 +20808,10 @@ $root.profile = (function() {
                     }
                 case 2: {
                         message.profile = $root.profile.ProfileInfo.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 3: {
+                        message["new"] = reader.bool();
                         break;
                     }
                 default:
@@ -20842,6 +20857,9 @@ $root.profile = (function() {
                 if (error)
                     return "profile." + error;
             }
+            if (message["new"] != null && message.hasOwnProperty("new"))
+                if (typeof message["new"] !== "boolean")
+                    return "new: boolean expected";
             return null;
         };
 
@@ -20864,6 +20882,8 @@ $root.profile = (function() {
                     throw TypeError(".profile.s2c_load.profile: object expected");
                 message.profile = $root.profile.ProfileInfo.fromObject(object.profile);
             }
+            if (object["new"] != null)
+                message["new"] = Boolean(object["new"]);
             return message;
         };
 
@@ -20883,11 +20903,14 @@ $root.profile = (function() {
             if (options.defaults) {
                 object.err = 0;
                 object.profile = null;
+                object["new"] = false;
             }
             if (message.err != null && message.hasOwnProperty("err"))
                 object.err = message.err;
             if (message.profile != null && message.hasOwnProperty("profile"))
                 object.profile = $root.profile.ProfileInfo.toObject(message.profile, options);
+            if (message["new"] != null && message.hasOwnProperty("new"))
+                object["new"] = message["new"];
             return object;
         };
 

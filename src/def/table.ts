@@ -34,6 +34,7 @@ import {
     GeneratedWorldEntityModelsRow,
     GeneratedSoldierPendantRow,
     GeneratedRoleTrainRow,
+    GeneratedMonsterRow,
 } from "./table.generated";
 //-----------------------------------------------------------------------------通用接口----------|
 //通用奖励接口
@@ -207,4 +208,9 @@ export type ChestTable = {
     chest: { [k: number]: ChestRow };
     hero: ChestHeroRow[];
     score: ChestScoreRow[];
+};
+
+export interface MonsterRow extends GeneratedMonsterRow {}
+export type MonsterTable = {
+    [k: number]: MonsterRow;
 };

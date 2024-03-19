@@ -45,7 +45,8 @@
                   "soldier": true,
                   "hero": true,
                   "wood": false,
-                  "friend": false
+                  "friend": false,
+                  "skillId": 1
                 },
                 "output": [
                   "enemy"
@@ -97,7 +98,8 @@
                   "soldier": true,
                   "hero": true,
                   "wood": false,
-                  "friend": false
+                  "friend": false,
+                  "skillId": 2
                 },
                 "output": [
                   "enemy"
@@ -140,7 +142,8 @@
                   "soldier": true,
                   "hero": true,
                   "wood": false,
-                  "friend": false
+                  "friend": false,
+                  "skillId": 0
                 },
                 "output": [
                   "enemy"

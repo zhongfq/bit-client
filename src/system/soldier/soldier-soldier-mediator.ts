@@ -28,7 +28,7 @@ export class SoldierSoldierMediator extends Mediator {
         this.owner.labelName.text = vo.name;
 
         this.owner.labelLv.text = "Lv." + (vo.cmd ? vo.level : "1");
-        const skillRow = app.service.table.skill[vo.ref.skill2];
+        const skillRow = app.service.table.skill[vo.ref.skill0];
         this.owner.labelSkillName.text = skillRow.name;
         this.owner.labelSkillDesc.text = skillRow.desc;
         const attrList = [];

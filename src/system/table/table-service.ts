@@ -14,6 +14,7 @@ import {
     ItemTable,
     MailTable,
     MoneyTable,
+    MonsterTable,
     RoleTable,
     ShopTable,
     SkillTable,
@@ -44,6 +45,7 @@ export class TableService extends Service<NetworkService> {
     public skill!: SkillTable;
     public soldier!: SoldierTable;
     public task!: TaskTable;
+    public monster!: MonsterTable;
     public textureCfg!: TextureCfgTable;
     public worldEntity!: WorldEntityTable;
 
@@ -55,8 +57,8 @@ export class TableService extends Service<NetworkService> {
         // TODO: 处理加载错误
         this.alliance = await app.loader.loadJson(res.TABLE_ALLIANCE_TABLE);
         this.attr = await app.loader.loadJson(res.TABLE_ATTR_TABLE);
-        this.battleEntity = await app.loader.loadJson(res.TABLE_BATTLE_ENTITY_TABLE);
         this.battleBuilding = await app.loader.loadJson(res.TABLE_BATTLE_BUILDING_TABLE);
+        this.battleEntity = await app.loader.loadJson(res.TABLE_BATTLE_ENTITY_TABLE);
         this.chest = await app.loader.loadJson(res.TABLE_CHEST_TABLE);
         this.emoji = await app.loader.loadJson(res.TABLE_EMOJI_TABLE);
         this.equip = await app.loader.loadJson(res.TABLE_EQUIP_TABLE);
@@ -64,6 +66,7 @@ export class TableService extends Service<NetworkService> {
         this.item = await app.loader.loadJson(res.TABLE_ITEM_TABLE);
         this.mail = await app.loader.loadJson(res.TABLE_MAIL_TABLE);
         this.money = await app.loader.loadJson(res.TABLE_MONEY_TABLE);
+        this.monster = await app.loader.loadJson(res.TABLE_MONSTER_TABLE);
         this.role = await app.loader.loadJson(res.TABLE_ROLE_TABLE);
         this.shop = await app.loader.loadJson(res.TABLE_SHOP_TABLE);
         this.skill = await app.loader.loadJson(res.TABLE_SKILL_TABLE);

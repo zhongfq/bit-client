@@ -8963,6 +8963,9 @@ declare namespace proto {
 
             /** s2c_load profile */
             profile?: (profile.IProfileInfo|null);
+
+            /** s2c_load new */
+            "new"?: (boolean|null);
         }
 
         /** Represents a s2c_load. */
@@ -8979,6 +8982,9 @@ declare namespace proto {
 
             /** s2c_load profile. */
             public profile?: (profile.IProfileInfo|null);
+
+            /** s2c_load new. */
+            public new: boolean;
 
             /**
              * Creates a new s2c_load instance using the specified properties.
