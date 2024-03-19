@@ -1,6 +1,6 @@
 export type Constructor<T = unknown> = new (...args: any[]) => T;
 
-type ObjectType = { [k: string]: unknown };
+export type ObjectType = { [k: string]: unknown };
 
 export const enum Status {
     FAILURE = "failure", // 失败
@@ -133,21 +133,28 @@ export class Node {
     }
 }
 
+type Evaluator = (envars: any) => unknown;
+
 export class Context {
     protected _processResolvers: Map<string, Process> = new Map();
-    protected _exps: Map<string, ExpressionEvaluator> = new Map();
+    protected _evaluators: Map<string, Evaluator> = new Map();
 
     public time: number = 0;
 
     public constructor() {}
 
-    public compileExpr(code: string) {
-        let expr = this._exps.get(code);
-        if (!expr) {
-            expr = new ExpressionEvaluator(code);
-            this._exps.set(code, expr);
+    public compileCode(code: string) {
+        let evaluator = this._evaluators.get(code);
+        if (!evaluator) {
+            const expr = new ExpressionEvaluator(code);
+            evaluator = (envars: any) => expr.evaluate(envars);
+            this._evaluators.set(code, evaluator);
         }
-        return expr;
+        return evaluator;
+    }
+
+    public registerCode(code: string, evaluator: Evaluator) {
+        this._evaluators.set(code, evaluator);
     }
 
     public registerProcess<T extends Process>(...args: Constructor<T>[]) {
@@ -187,7 +194,7 @@ export class TreeEnv {
     }
 
     public eval(code: string) {
-        return this.context.compileExpr(code).evaluate(this._values);
+        return this.context.compileCode(code)(this._values);
     }
 
     public getValue(k: string) {

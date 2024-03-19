@@ -1,5 +1,6 @@
 import { builtinNodes } from "../../../../../core/behavior3/nodes/builtin-nodes";
 import * as ecs from "../../../../../core/ecs";
+import { btreeCode } from "../../../../../def/btree-code";
 import { AdjustStance } from "../../btree/actions/adjust-stance";
 import { BackSpawnpoint } from "../../btree/actions/back-spawnpoint";
 import { BackTeam } from "../../btree/actions/back-team";
@@ -63,6 +64,8 @@ export class AiSystem extends ecs.System {
         this.context.registerProcess(SetStance);
         this.context.registerProcess(TowardToTarget);
         this.context.registerProcess(Wait);
+
+        btreeCode.forEach((value) => this.context.registerCode(value.code, value.evaluator));
     }
 
     public override onAddComponent(component: ecs.Component): void {

@@ -10,7 +10,7 @@ export class Check extends Process {
         if (typeof args.value !== "string" || args.value.length == 0) {
             this.error(node, `args.value is not a expr string`);
         }
-        node.tree.context.compileExpr(args.value);
+        node.tree.context.compileCode(args.value);
     }
 
     public override run(node: Node, env: TreeEnv) {
@@ -24,7 +24,7 @@ export class Check extends Process {
             name: "Check",
             type: "Condition",
             desc: "检查True或False",
-            args: [{ name: "value", type: "code?", desc: "值" }],
+            args: [{ name: "value", type: "code", desc: "值" }],
             doc: `
                 + 做简单数值公式判定，返回成功或失败`,
         };
