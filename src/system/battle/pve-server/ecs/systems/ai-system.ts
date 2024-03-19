@@ -10,7 +10,9 @@ import { Collect } from "../../btree/actions/collect";
 import { FollowHero } from "../../btree/actions/follow-hero";
 import { GetPos } from "../../btree/actions/get-pos";
 import { GetSkillTarget } from "../../btree/actions/get-skill-target";
+import { GetSkillTime } from "../../btree/actions/get-skill-time";
 import { Hurt } from "../../btree/actions/hurt";
+import { LaunchSkill } from "../../btree/actions/launch-skill";
 import { MoveStop } from "../../btree/actions/move-stop";
 import { MoveToAtkPos } from "../../btree/actions/move-to-atk-pos";
 import { MoveToPos } from "../../btree/actions/move-to-pos";
@@ -41,14 +43,17 @@ export class AiSystem extends ecs.System {
         this.context.registerProcess(CalcHeroDistance);
         this.context.registerProcess(CalcSpawnDistance);
         this.context.registerProcess(ClearStance);
+        this.context.registerProcess(Collect);
         this.context.registerProcess(FindOneTarget);
         this.context.registerProcess(FindTargets);
         this.context.registerProcess(FollowHero);
         this.context.registerProcess(GetPos);
         this.context.registerProcess(GetSkillTarget);
+        this.context.registerProcess(GetSkillTime);
         this.context.registerProcess(Hurt);
         this.context.registerProcess(IsFreeStance);
         this.context.registerProcess(IsTroopFighting);
+        this.context.registerProcess(LaunchSkill);
         this.context.registerProcess(MoveStop);
         this.context.registerProcess(MoveToAtkPos);
         this.context.registerProcess(MoveToPos);
@@ -58,7 +63,6 @@ export class AiSystem extends ecs.System {
         this.context.registerProcess(SetStance);
         this.context.registerProcess(TowardToTarget);
         this.context.registerProcess(Wait);
-        this.context.registerProcess(Collect);
     }
 
     public override onAddComponent(component: ecs.Component): void {

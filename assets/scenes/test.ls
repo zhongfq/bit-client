@@ -33,41 +33,19 @@
       "lightmaps": [],
       "_$child": [
         {
-          "_$id": "acg6pbsw",
-          "_$prefab": "d91dfbc1-c248-44bb-b27d-f9398fe8ee5c",
-          "name": "role-shadow",
-          "active": true,
-          "layer": 0,
-          "transform": {
-            "localPosition": {
-              "_$type": "Vector3",
-              "x": 0,
-              "y": 0,
-              "z": 0
-            },
-            "localRotation": {
-              "_$type": "Quaternion",
-              "x": 0,
-              "y": 0,
-              "z": 0,
-              "w": 1
-            }
-          }
-        },
-        {
           "_$id": "grafja8m",
           "_$type": "Camera",
           "name": "Camera",
           "transform": {
             "localPosition": {
               "_$type": "Vector3",
-              "y": 20,
-              "z": 20
+              "y": 20.46993,
+              "z": 19.88984
             },
             "localRotation": {
               "_$type": "Quaternion",
-              "x": -0.42673448279993353,
-              "w": 0.9043769574626905
+              "x": -0.3949923988789122,
+              "w": 0.9186843880397023
             }
           },
           "orthographicVerticalSize": 10,
@@ -88,17 +66,52 @@
             "height": 1
           },
           "depthTextureFormat": 35
+        },
+        {
+          "_$id": "kwnj3xjq",
+          "_$prefab": "e865d833-74d1-43c4-9ef1-3b6e3ab1cf5c",
+          "name": "vfx_firerain",
+          "active": true,
+          "layer": 0,
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": 0,
+              "y": 0,
+              "z": 0,
+              "w": 1
+            }
+          }
+        },
+        {
+          "_$id": "qdnj8o7a",
+          "_$prefab": "35010b48-ef9d-4687-ae43-6cf4455ccf03",
+          "name": "vfx_icerain",
+          "active": true,
+          "layer": 0,
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": 0,
+              "y": 0,
+              "z": 0,
+              "w": 1
+            }
+          }
         }
       ]
-    },
-    {
-      "_$id": "v9ufc3zf",
-      "_$prefab": "6669a2c4-94a0-4dc2-a23f-3b83a3823fc1",
-      "name": "testNode",
-      "active": true,
-      "x": 50,
-      "y": 1000,
-      "visible": true
     }
   ]
 }

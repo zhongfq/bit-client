@@ -9,17 +9,129 @@
       {
         "id": 2,
         "name": "Selector",
-        "desc": "找敌人并攻击",
+        "desc": "释放技能",
         "args": {},
         "children": [
           {
             "id": 3,
             "name": "Sequence",
-            "desc": "普攻",
+            "desc": "火球术",
             "args": {},
             "children": [
               {
                 "id": 4,
+                "name": "GetSkillTime",
+                "args": {
+                  "skill": 1
+                },
+                "output": [
+                  "launchTime"
+                ]
+              },
+              {
+                "id": 5,
+                "name": "Check",
+                "args": {
+                  "value": "launchTime > 5"
+                }
+              },
+              {
+                "id": 6,
+                "name": "FindTargets",
+                "args": {
+                  "attack": true,
+                  "radius": null,
+                  "skill": false,
+                  "soldier": true,
+                  "hero": true,
+                  "wood": false,
+                  "friend": false
+                },
+                "output": [
+                  "enemy"
+                ],
+                "children": []
+              },
+              {
+                "id": 7,
+                "name": "LaunchSkill",
+                "args": {
+                  "skill": 1
+                },
+                "input": [
+                  "enemy"
+                ]
+              }
+            ]
+          },
+          {
+            "id": 8,
+            "name": "Sequence",
+            "desc": "冰箭",
+            "args": {},
+            "children": [
+              {
+                "id": 9,
+                "name": "GetSkillTime",
+                "args": {
+                  "skill": 2
+                },
+                "output": [
+                  "launchTime"
+                ]
+              },
+              {
+                "id": 10,
+                "name": "Check",
+                "args": {
+                  "value": "launchTime > 9"
+                }
+              },
+              {
+                "id": 11,
+                "name": "FindTargets",
+                "args": {
+                  "attack": true,
+                  "radius": null,
+                  "skill": false,
+                  "soldier": true,
+                  "hero": true,
+                  "wood": false,
+                  "friend": false
+                },
+                "output": [
+                  "enemy"
+                ],
+                "children": []
+              },
+              {
+                "id": 12,
+                "name": "LaunchSkill",
+                "args": {
+                  "skill": 2
+                },
+                "input": [
+                  "enemy"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "name": "Selector",
+        "desc": "找敌人并攻击",
+        "args": {},
+        "children": [
+          {
+            "id": 14,
+            "name": "Sequence",
+            "desc": "普攻",
+            "args": {},
+            "children": [
+              {
+                "id": 15,
                 "name": "FindOneTarget",
                 "args": {
                   "attack": true,
@@ -36,17 +148,17 @@
                 "children": []
               },
               {
-                "id": 5,
+                "id": 16,
                 "name": "Selector",
                 "args": {},
                 "children": [
                   {
-                    "id": 6,
+                    "id": 17,
                     "name": "Sequence",
                     "args": {},
                     "children": [
                       {
-                        "id": 7,
+                        "id": 18,
                         "name": "IsFreeStance",
                         "args": {},
                         "input": [
@@ -54,18 +166,18 @@
                         ]
                       },
                       {
-                        "id": 8,
+                        "id": 19,
                         "name": "SetStance",
                         "args": {}
                       },
                       {
-                        "id": 9,
+                        "id": 20,
                         "name": "MoveStop",
                         "desc": "停止移动",
                         "args": {}
                       },
                       {
-                        "id": 10,
+                        "id": 21,
                         "name": "TowardToTarget",
                         "args": {},
                         "input": [
@@ -73,7 +185,7 @@
                         ]
                       },
                       {
-                        "id": 11,
+                        "id": 22,
                         "name": "NormalAttack",
                         "args": {},
                         "input": [
@@ -83,7 +195,7 @@
                     ]
                   },
                   {
-                    "id": 12,
+                    "id": 23,
                     "name": "AdjustStance",
                     "args": {},
                     "input": [
@@ -95,18 +207,18 @@
             ]
           },
           {
-            "id": 13,
+            "id": 24,
             "name": "Sequence",
             "desc": "找目标",
             "args": {},
             "children": [
               {
-                "id": 14,
+                "id": 25,
                 "name": "ClearStance",
                 "args": {}
               },
               {
-                "id": 15,
+                "id": 26,
                 "name": "FindOneTarget",
                 "args": {
                   "radius": 3,
@@ -118,7 +230,7 @@
                 ]
               },
               {
-                "id": 16,
+                "id": 27,
                 "name": "GetPos",
                 "args": {},
                 "input": [
@@ -129,7 +241,7 @@
                 ]
               },
               {
-                "id": 17,
+                "id": 28,
                 "name": "MoveToPos",
                 "args": {
                   "rate": 1.5
@@ -143,20 +255,20 @@
         ]
       },
       {
-        "id": 18,
+        "id": 29,
         "name": "Selector",
         "desc": "采集",
         "args": {},
         "path": "collect.json",
         "children": [
           {
-            "id": 19,
+            "id": 30,
             "name": "Sequence",
             "desc": "采集",
             "args": {},
             "children": [
               {
-                "id": 20,
+                "id": 31,
                 "name": "FindOneTarget",
                 "args": {
                   "attack": false,
@@ -174,16 +286,16 @@
                 "children": []
               },
               {
-                "id": 21,
+                "id": 32,
                 "name": "Selector",
                 "args": {},
                 "children": [
                   {
-                    "id": 22,
+                    "id": 33,
                     "name": "Sequence",
                     "children": [
                       {
-                        "id": 23,
+                        "id": 34,
                         "name": "IsFreeStance",
                         "args": {},
                         "input": [
@@ -191,18 +303,18 @@
                         ]
                       },
                       {
-                        "id": 24,
+                        "id": 35,
                         "name": "SetStance",
                         "args": {}
                       },
                       {
-                        "id": 25,
+                        "id": 36,
                         "name": "MoveStop",
                         "desc": "停止移动",
                         "args": {}
                       },
                       {
-                        "id": 26,
+                        "id": 37,
                         "name": "TowardToTarget",
                         "args": {},
                         "input": [
@@ -210,7 +322,7 @@
                         ]
                       },
                       {
-                        "id": 27,
+                        "id": 38,
                         "name": "Collect",
                         "args": {},
                         "input": [
@@ -218,7 +330,7 @@
                         ]
                       },
                       {
-                        "id": 28,
+                        "id": 39,
                         "name": "Wait",
                         "args": {
                           "time": 1
@@ -227,7 +339,7 @@
                     ]
                   },
                   {
-                    "id": 29,
+                    "id": 40,
                     "name": "AdjustStance",
                     "args": {},
                     "input": [
@@ -239,18 +351,18 @@
             ]
           },
           {
-            "id": 30,
+            "id": 41,
             "name": "Sequence",
             "desc": "找采集物",
             "args": {},
             "children": [
               {
-                "id": 31,
+                "id": 42,
                 "name": "ClearStance",
                 "args": {}
               },
               {
-                "id": 32,
+                "id": 43,
                 "name": "FindOneTarget",
                 "args": {
                   "radius": 3,
@@ -263,7 +375,7 @@
                 ]
               },
               {
-                "id": 33,
+                "id": 44,
                 "name": "GetPos",
                 "args": {},
                 "input": [
@@ -274,7 +386,7 @@
                 ]
               },
               {
-                "id": 34,
+                "id": 45,
                 "name": "MoveToPos",
                 "args": {
                   "rate": 1.5,

@@ -1,7 +1,6 @@
 import * as b3 from "../../../../../core/behavior3/behavior";
 import { BattleConf } from "../../../../../def/battle";
 import { AiTreeEnv } from "../../ecs/components/ai-component";
-import { ElementComponent } from "../../ecs/components/element-component";
 
 interface FindTargetsArgs {
     radius?: number;
