@@ -68,8 +68,8 @@
           "transform": {
             "localRotation": {
               "_$type": "Quaternion",
-              "x": 0.7071067811865476,
-              "w": -0.7071067811865476
+              "x": -0.7071067811865475,
+              "w": 0.7071067811865476
             }
           },
           "_$comp": [
@@ -395,58 +395,52 @@
           }
         },
         {
-          "_$id": "u95vkn0f",
-          "_$prefab": "1a805297-8228-4a86-a9df-15e22e561f90",
+          "_$id": "41gfaf57",
+          "_$prefab": "14473cdb-e54e-4e60-9d9f-ba5d8df6ad90",
           "name": "gather-wood",
           "active": false,
           "layer": 0,
           "transform": {
             "localPosition": {
               "_$type": "Vector3",
-              "x": 0.6000000238418579,
+              "x": 0.6,
               "y": 1,
               "z": 0
             },
             "localRotation": {
               "_$type": "Quaternion",
-              "x": -0.7071067811865475,
+              "x": 0,
               "y": 0,
               "z": 0,
-              "w": 0.7071067811865476
-            },
-            "localScale": {
-              "_$type": "Vector3",
-              "x": 0.75,
-              "y": 1,
-              "z": 0.75
+              "w": 1
             }
           }
         },
         {
-          "_$id": "81fi5xvk",
-          "_$prefab": "3d995265-1795-46a4-9543-e9684bf3fc4a",
+          "_$id": "htpppdqa",
+          "_$prefab": "32ff7eb3-e699-4a11-807a-f54c1d25ed00",
           "name": "gather-food",
           "active": false,
           "layer": 0,
           "transform": {
             "localPosition": {
               "_$type": "Vector3",
-              "x": -0.35,
-              "y": 0,
+              "x": 0.35,
+              "y": 1,
               "z": 0.5
             },
             "localRotation": {
               "_$type": "Quaternion",
-              "x": -0.7071067811865475,
+              "x": 0,
               "y": 0,
               "z": 0,
-              "w": 0.7071067811865476
+              "w": 1
             }
           }
         },
         {
-          "_$id": "o9apuecr",
-          "_$prefab": "cd24499a-31f0-486d-9e2f-8905dce325f9",
+          "_$id": "m6uvhm8p",
+          "_$prefab": "35ab3baf-9d73-41c2-a770-733d9ecc4c86",
           "name": "gather-stone",
           "active": false,
           "layer": 0,
@@ -454,15 +448,15 @@
             "localPosition": {
               "_$type": "Vector3",
               "x": 0.35,
-              "y": 0,
+              "y": 1,
               "z": 0.5
             },
             "localRotation": {
               "_$type": "Quaternion",
-              "x": -0.7071067811865475,
+              "x": 0,
               "y": 0,
               "z": 0,
-              "w": 0.7071067811865476
+              "w": 1
             }
           }
         }
