@@ -30,9 +30,9 @@ export class ShopService extends Service<NetworkService> {
     public getShopItemBuyNum(shopItem: ShopItem): { num: number; tips: string } {
         let num = 0;
         let tips = "";
-        const cost = shopItem.refData.cost as Reward[];
-        const costBagNum = VoUtil.getNumber(cost[0].id);
-        const maxBuyNum = Math.floor(costBagNum / cost[0].count);
+        const cost = shopItem.refData.cost;
+        const costBagNum = cost ? VoUtil.getNumber(cost[0].id) : 0;
+        const maxBuyNum = cost ? Math.floor(costBagNum / cost[0].count) : 1;
         const limitNum = this.getShopItemLimit(shopItem.refData);
         if (!maxBuyNum) {
             tips = `道具不足····后续增加获取道具弹窗`;
