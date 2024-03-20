@@ -1,9 +1,10 @@
 {
   "_$ver": 1,
-  "_$id": "xlbg1tbz",
+  "_$id": "wmyfoz1d",
+  "_$var": true,
   "_$runtime": "res://69fdfddd-a7ad-451c-a53e-cc274fec5781",
   "_$type": "Box",
-  "name": "Box",
+  "name": "naviMenu",
   "y": 1190,
   "width": 750,
   "height": 144,
@@ -31,7 +32,7 @@
       "width": 750,
       "height": 144,
       "_mouseState": 2,
-      "space": 4,
+      "space": 31,
       "_$child": [
         {
           "_$id": "03kp3tw8",
@@ -40,16 +41,44 @@
           "name": "btnFight",
           "active": true,
           "x": 0,
-          "y": -4,
+          "y": 0,
+          "visible": true,
+          "_$child": [
+            {
+              "_$override": "sod02qbd",
+              "skin": "res://c88771c6-c27f-4cc1-8364-eb815e5eee6c"
+            },
+            {
+              "_$override": "l5lr7h9h",
+              "skin": "res://d175b211-ba02-4c80-8dd5-8ee7afb82509"
+            }
+          ]
+        },
+        {
+          "_$id": "96dovwxo",
+          "_$prefab": "49acf14b-826d-4141-9ddb-15b99edb95ba",
+          "_$var": true,
+          "name": "btnRole",
+          "active": true,
+          "x": 131,
+          "y": 0,
           "visible": true,
           "_$child": [
             {
               "_$override": "0jaivhzj",
-              "skin": "res://ccb56c8f-883c-44bf-8d1e-30a292e66672"
+              "skin": "res://f10a525a-218d-49bf-929a-95eed3509c46"
             },
             {
               "_$override": "sod02qbd",
-              "skin": "res://cb83aec1-0b8c-4821-9373-15da065128ab"
+              "skin": "res://931595db-c986-412e-8a46-82a3d19e24e1"
+            },
+            {
+              "_$override": "l5lr7h9h",
+              "skin": "res://0b4842e4-4a10-495b-96c8-9ae82293da7e"
+            },
+            {
+              "_$override": "pck248mi",
+              "skin": "res://03d777e3-f539-4da9-9dbf-93401cfb5d04"
             }
           ]
         },
@@ -59,9 +88,27 @@
           "_$var": true,
           "name": "btnSoldier",
           "active": true,
-          "x": 152,
-          "y": -4,
-          "visible": true
+          "x": 262,
+          "y": 0,
+          "visible": true,
+          "_$child": [
+            {
+              "_$override": "0jaivhzj",
+              "skin": "res://a5cb4e53-a543-4aae-9c1d-173ba88fe4ae"
+            },
+            {
+              "_$override": "sod02qbd",
+              "skin": "res://7e2810c4-8d4b-42e7-a343-c9313598b678"
+            },
+            {
+              "_$override": "l5lr7h9h",
+              "skin": "res://e4bf9da2-ab7e-4c81-bd60-91b2d553d90b"
+            },
+            {
+              "_$override": "pck248mi",
+              "skin": "res://f933e5da-4c53-4a13-97d6-ec1dc2e102bf"
+            }
+          ]
         },
         {
           "_$id": "rla0mlw5",
@@ -69,17 +116,25 @@
           "_$var": true,
           "name": "btnMain",
           "active": true,
-          "x": 304,
-          "y": -4,
+          "x": 393,
+          "y": 0,
           "visible": true,
           "_$child": [
             {
               "_$override": "0jaivhzj",
-              "skin": "res://885dd826-21a8-4392-b7d7-5da935c84b57"
+              "skin": "res://2b8bff12-5c7b-4653-93dc-90ef6046af06"
             },
             {
               "_$override": "sod02qbd",
-              "skin": "res://1dc83d66-d42f-40d4-adc8-6227521ae956"
+              "skin": "res://e8a08d79-1c10-4beb-a60e-2292bbf50e89"
+            },
+            {
+              "_$override": "l5lr7h9h",
+              "skin": "res://a5e99338-d1d4-4c3f-aa23-ccf462a2e7c1"
+            },
+            {
+              "_$override": "pck248mi",
+              "skin": "res://fabe6f72-e08d-41d4-9120-98e9e21249ad"
             }
           ]
         },
@@ -89,8 +144,8 @@
           "_$var": true,
           "name": "btnChest",
           "active": true,
-          "x": 456,
-          "y": -4,
+          "x": 524,
+          "y": 0,
           "visible": true,
           "_$child": [
             {
@@ -99,7 +154,15 @@
             },
             {
               "_$override": "sod02qbd",
-              "skin": "res://a85e9852-5f67-4c4b-8332-aaf5e8b505a2"
+              "skin": "res://00cf4520-5bb7-404c-98bc-73bd941e2634"
+            },
+            {
+              "_$override": "l5lr7h9h",
+              "skin": "res://63592774-2e26-473b-b71d-b07ef93efec1"
+            },
+            {
+              "_$override": "pck248mi",
+              "skin": "res://8d17bef1-596a-4a29-b64e-999c3b98c814"
             }
           ]
         },
@@ -109,8 +172,8 @@
           "_$var": true,
           "name": "btnUnion",
           "active": true,
-          "x": 608,
-          "y": -4,
+          "x": 655,
+          "y": 0,
           "visible": true,
           "_$child": [
             {
@@ -119,7 +182,15 @@
             },
             {
               "_$override": "sod02qbd",
-              "skin": "res://013b35d4-ae95-4cf0-8c0e-6101a7da90a8"
+              "skin": "res://f5d09024-0ab5-4004-a470-d8a60d7a7776"
+            },
+            {
+              "_$override": "l5lr7h9h",
+              "skin": "res://8755d076-35ef-469d-952c-bb94db9a2dc7"
+            },
+            {
+              "_$override": "pck248mi",
+              "skin": "res://a8a3b27c-819f-4069-aca1-0d473297d547"
             }
           ]
         }

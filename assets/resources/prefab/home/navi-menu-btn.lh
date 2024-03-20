@@ -6,7 +6,7 @@
   "name": "down-btn-item",
   "x": 339,
   "y": 611,
-  "width": 148,
+  "width": 100,
   "height": 148,
   "_mouseState": 2,
   "_$child": [
@@ -15,13 +15,13 @@
       "_$var": true,
       "_$type": "Image",
       "name": "imgIcon",
-      "x": 28,
+      "x": 4,
       "y": 28,
       "width": 92,
       "height": 92,
       "centerX": 0,
       "centerY": 0,
-      "skin": "res://f10a525a-218d-49bf-929a-95eed3509c46",
+      "skin": "res://ccb56c8f-883c-44bf-8d1e-30a292e66672",
       "color": "#ffffff",
       "_$child": [
         {
@@ -29,13 +29,13 @@
           "_$var": true,
           "_$type": "Image",
           "name": "imgText",
-          "x": 14,
-          "y": 56,
-          "width": 64,
-          "height": 36,
+          "x": 10,
+          "y": 48,
+          "width": 72,
+          "height": 44,
           "bottom": 0,
           "centerX": 0,
-          "skin": "res://675bcf34-2b99-4659-ad76-1bd9fb613450",
+          "skin": "res://c88771c6-c27f-4cc1-8364-eb815e5eee6c",
           "useSourceSize": true,
           "color": "#ffffff"
         }
@@ -46,15 +46,33 @@
       "_$var": true,
       "_$type": "Image",
       "name": "selectBox",
-      "width": 148,
-      "height": 148,
+      "x": 4,
+      "y": 28,
+      "width": 92,
+      "height": 92,
       "visible": false,
       "_mouseState": 2,
       "centerX": 0,
       "centerY": 0,
-      "skin": "res://eab88349-e227-487a-9054-15d2bcd79d83",
+      "skin": "res://d175b211-ba02-4c80-8dd5-8ee7afb82509",
       "useSourceSize": true,
-      "color": "#ffffff"
+      "color": "#ffffff",
+      "_$child": [
+        {
+          "_$id": "pck248mi",
+          "_$type": "Image",
+          "name": "imgSelectText",
+          "x": 10,
+          "y": 48,
+          "width": 72,
+          "height": 44,
+          "bottom": 0,
+          "centerX": 0,
+          "skin": "res://563fe75d-0afa-4373-82c2-c39074a8820b",
+          "useSourceSize": true,
+          "color": "#ffffff"
+        }
+      ]
     }
   ]
 }

@@ -100,10 +100,7 @@ export class HomeMediator extends Mediator {
             if (this._loading) {
                 return;
             }
-            if (this._currentBtn === naviMenu.btnChest) {
-                this._closeBox();
-                this._activatePveOrPvp(true);
-            } else {
+            if (this._currentBtn != naviMenu.btnChest) {
                 this._closeBox();
                 this._activatePveOrPvp(false);
                 this._currentBtn = naviMenu.btnChest;
@@ -115,30 +112,39 @@ export class HomeMediator extends Mediator {
             if (this._loading) {
                 return;
             }
-            this._loadPvp();
+            if (this._currentBtn != naviMenu.btnFight) {
+                this._activatePveOrPvp(true);
+                this._closeBox();
+                this._currentBtn = naviMenu.btnFight;
+                this._currentBtn.selected = true;
+                this._loadPvp();
+            }
         });
         naviMenu.btnMain.on(Laya.Event.CLICK, () => {
             if (this._loading) {
                 return;
             }
-            this._loadPve();
+            if (this._currentBtn != naviMenu.btnMain) {
+                this._activatePveOrPvp(true);
+                this._closeBox();
+                this._currentBtn = naviMenu.btnMain;
+                this._currentBtn.selected = true;
+                this._loadPve();
+            }
         });
         naviMenu.btnSoldier.on(Laya.Event.CLICK, () => {
-            if (this._currentBtn === naviMenu.btnSoldier) {
-                this._closeBox();
-                this._activatePveOrPvp(true);
-            } else {
+            if (this._currentBtn != naviMenu.btnSoldier) {
                 this._closeBox();
                 this._activatePveOrPvp(false);
                 this._currentBtn = naviMenu.btnSoldier;
                 this._currentBtn.selected = true;
                 this._loadAddNode("resources/prefab/soldier/soldier.lh");
             }
-            // if (this._naviBtnSelected(this.owner.naviMenu.btnSoldier)) {
-            //     this._loadAddNode("resources/prefab/soldier/soldier.lh");
-            // }
         });
         naviMenu.btnUnion.on(Laya.Event.CLICK, () => {});
+
+        this._currentBtn = naviMenu.btnMain;
+        this._currentBtn.selected = true;
     }
 
     private _loadPvp() {
@@ -146,7 +152,7 @@ export class HomeMediator extends Mediator {
             this._loading = true;
             app.ui.load(ui.PVP)?.then((scene) => {
                 this._loading = false;
-                this._closeBox();
+                // this._closeBox();
                 this.owner.bg.visible = false;
                 this.owner.boxUI.visible = false;
                 this._pve?.destroy();
@@ -165,7 +171,7 @@ export class HomeMediator extends Mediator {
             this._loading = true;
             app.ui.load(ui.PVE)?.then((scene) => {
                 this._loading = false;
-                this._closeBox();
+                // this._closeBox();
                 this.owner.bg.visible = false;
                 this.owner.boxUI.visible = false;
                 this._pvp?.destroy();

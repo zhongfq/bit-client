@@ -7,8 +7,10 @@ import { HomeNaviMenuBtnUI } from "./HomeNaviMenuBtnUI";
  */
 export class HomeNaviMenuUIBase extends Laya.Box {
     public btnFight!: HomeNaviMenuBtnUI;
+    public btnRole!: HomeNaviMenuBtnUI;
     public btnSoldier!: HomeNaviMenuBtnUI;
     public btnMain!: HomeNaviMenuBtnUI;
     public btnChest!: HomeNaviMenuBtnUI;
     public btnUnion!: HomeNaviMenuBtnUI;
 }
+

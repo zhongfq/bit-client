@@ -38,5 +38,25 @@
         "name": "远程弓兵",
         "radius": 2,
         "type": 0
+    },
+    "20001": {
+        "battle_entity": 50000,
+        "cd": 5,
+        "desc": "火球术",
+        "id": 20001,
+        "lanuch_btree": "skill_firerain",
+        "name": "火球术",
+        "radius": 3,
+        "type": 0
+    },
+    "20002": {
+        "battle_entity": 50001,
+        "cd": 9,
+        "desc": "雪箭",
+        "id": 20002,
+        "lanuch_btree": "skill_icerain",
+        "name": "雪箭",
+        "radius": 3,
+        "type": 0
     }
 }
