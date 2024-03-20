@@ -37,6 +37,7 @@ export class PveContext extends Mediator implements ITMContext {
 
     private _pveServer!: PveServer;
 
+    private _eidCount: number = 0;
     private _ecs!: ecs.World;
     private _camera!: Laya.Camera;
 
@@ -108,6 +109,10 @@ export class PveContext extends Mediator implements ITMContext {
         super.onUpdate();
         this._pveServer.update(Laya.timer.delta / 1000);
         this._ecs.update(Laya.timer.delta / 1000);
+    }
+
+    public obtainEid() {
+        return --this._eidCount;
     }
 
     public onAddElement(element: TMElement) {

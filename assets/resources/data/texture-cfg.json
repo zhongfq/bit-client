@@ -63,24 +63,6 @@
         "tile_h": 5,
         "tile_w": 5
     },
-    "map_gather_food1-1": {
-        "id": "map_gather_food1-1",
-        "offset_x": 0.01557,
-        "offset_y": 0.50949,
-        "offset_z": 0.00561,
-        "scale": 1.5,
-        "tile_h": 1,
-        "tile_w": 1
-    },
-    "map_gather_iron1-1": {
-        "id": "map_gather_iron1-1",
-        "offset_x": 0.68998,
-        "offset_y": 0.50949,
-        "offset_z": 0.70999,
-        "scale": 3,
-        "tile_h": 2,
-        "tile_w": 2
-    },
     "map_gather_wood1-1": {
         "id": "map_gather_wood1-1",
         "offset_x": -0.06037,

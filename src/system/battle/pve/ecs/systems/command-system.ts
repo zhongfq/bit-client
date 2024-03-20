@@ -17,6 +17,7 @@ import {
 import {
     AnimationComponent,
     BoardComponent,
+    BulletComponent,
     HeadInfoComponent,
     ShadowComponent,
 } from "../components/render-component";
@@ -67,20 +68,27 @@ export class CommandSystem extends ecs.System implements ICommandSender {
             animation.res = entityRow.res;
         }
 
-        const info = entity.addComponent(HeadInfoComponent);
-        info.data.hp = data.hp;
-        info.data.maxHp = data.maxHp;
-        info.data.offset = entityRow.info_offset ?? 0;
-        if (data.aid === 2) {
-            info.data.style = HeadInfoStyle.ENEMY;
+        if (data.bullet) {
+            const bullet = entity.addComponent(BulletComponent);
+            bullet.res = entityRow.res;
         }
-        if (entityRow.info_style) {
-            if (entityRow.info_style === 1) {
-                info.res = PREFAB_HEAD_INFO1;
-            } else if (entityRow.info_style === 2) {
-                info.res = PREFAB_HEAD_INFO2;
-            } else if (entityRow.info_style === 3) {
-                info.res = PREFAB_HEAD_INFO3;
+
+        if (data.hp && data.maxHp) {
+            const info = entity.addComponent(HeadInfoComponent);
+            info.data.hp = data.hp;
+            info.data.maxHp = data.maxHp;
+            info.data.offset = entityRow.info_offset ?? 0;
+            if (data.aid === 2) {
+                info.data.style = HeadInfoStyle.ENEMY;
+            }
+            if (entityRow.info_style) {
+                if (entityRow.info_style === 1) {
+                    info.res = PREFAB_HEAD_INFO1;
+                } else if (entityRow.info_style === 2) {
+                    info.res = PREFAB_HEAD_INFO2;
+                } else if (entityRow.info_style === 3) {
+                    info.res = PREFAB_HEAD_INFO3;
+                }
             }
         }
 
@@ -322,7 +330,7 @@ export class CommandSystem extends ecs.System implements ICommandSender {
 
         if (diffCnt > 0) {
             while (diffCnt--) {
-                const entity = this.ecs.createEntity();
+                const entity = this.ecs.createEntity(this.context.obtainEid());
                 const component = entity.addComponent(TruckCollectComponent);
                 component.truck = eid;
                 component.data = data;

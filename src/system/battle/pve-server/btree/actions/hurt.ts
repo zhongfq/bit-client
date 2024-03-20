@@ -10,12 +10,12 @@ export class Hurt extends b3.Process {
     public override check(node: b3.Node) {}
 
     public override run(node: b3.Node, env: SkillTreeEnv, target: unknown) {
-        if (target instanceof ElementComponent || target instanceof Array) {
+        if (target instanceof ElementComponent) {
             const args = node.args as HurtArgs;
             const ratio = args.add ?? 1;
             env.context.hurt(env.skill, target, ratio);
         } else {
-            this.warn(node, `enemy not found`);
+            this.warn(node, `invalid target: ${target}`);
         }
         return b3.Status.SUCCESS;
     }

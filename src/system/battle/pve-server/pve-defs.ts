@@ -20,11 +20,13 @@ export interface ElementCreator {
 
     entityId: number; // id in battle_entity.xlsx
     tableId: number; // 配置表id
-    maxHp: number;
-    hp: number;
+    maxHp?: number;
+    hp?: number;
     position: Laya.Vector3;
 
+    // TODO: 根据实体类型移除此代码？
     animation?: boolean;
+    bullet?: boolean;
 
     collectType?: number; // 资源车上采集物的实体类型
 }

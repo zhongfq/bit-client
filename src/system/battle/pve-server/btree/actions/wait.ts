@@ -37,8 +37,8 @@ export class Wait extends b3.Process {
             type: "Action",
             desc: "等待",
             args: [
-                { name: "time", type: "int", desc: "时间/秒" },
-                { name: "random", type: "int?", desc: "随机范围" },
+                { name: "time", type: "float", desc: "时间/秒" },
+                { name: "random", type: "float?", desc: "随机范围" },
             ],
         };
     }

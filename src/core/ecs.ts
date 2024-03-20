@@ -12,7 +12,6 @@ type Timer = {
 };
 
 export class World {
-    private _eid: number = 0;
     private _systems: System[];
     private _namedSystems: Map<Constructor<any>, System>;
     private _entities: Map<number, Entity>;
@@ -118,8 +117,7 @@ export class World {
         this._delays.delete(key);
     }
 
-    public createEntity(eid: number | null = null) {
-        eid = eid ?? --this._eid;
+    public createEntity(eid: number) {
         let entity = this._entities.get(eid);
         if (!entity) {
             entity = new Entity(eid, this);
@@ -141,9 +139,6 @@ export class World {
         const entity = this.getEntity(eid);
         if (entity) {
             const components = entity.getComponents();
-            components.forEach((value) => {
-                this._systems.forEach((sys) => sys.onRemoveComponent?.(value));
-            });
             components.forEach((value) => {
                 this.__removeComponent(entity.eid, value.constructor as Constructor<any>);
             });

@@ -20,7 +20,7 @@ export class Skill {
     public lastUpdate: number = 0;
     public lastLaunch: number = 0;
     public data: SkillRow;
-    public res: string;
+    public btree: string;
     public tree: b3.Tree | null = null;
     public env: SkillTreeEnv | null = null;
     public owner: ElementComponent;
@@ -28,7 +28,7 @@ export class Skill {
 
     public constructor(data: SkillRow, owner: ElementComponent) {
         this.data = data;
-        this.res = `resources/data/btree/${data.lanuch_btree}.json`;
+        this.btree = `resources/data/btree/${data.lanuch_btree}.json`;
         this.owner = owner;
     }
 }

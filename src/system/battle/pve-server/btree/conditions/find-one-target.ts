@@ -1,6 +1,6 @@
 import * as b3 from "../../../../../core/behavior3/behavior";
 import { AiTreeEnv } from "../../ecs/components/ai-component";
-import { SkillOption, SkillRangeOption } from "../btree-dev";
+import { SkillOption, SkillRangeOption } from "../btree-def";
 import { FindTargets } from "./find-targets";
 
 export class FindOneTarget extends FindTargets {
