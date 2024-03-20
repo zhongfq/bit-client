@@ -3,6 +3,7 @@
 import { HomeTaskBoxUI } from "../prefab/home/HomeTaskBoxUI";
 import { HomeChatBoxUI } from "../prefab/home/HomeChatBoxUI";
 import { HomeNaviMenuUI } from "../prefab/home/HomeNaviMenuUI";
+import { HomeRightMenuUI } from "../prefab/home/HomeRightMenuUI";
 
 /**
  * scenes/home.ls
@@ -10,15 +11,12 @@ import { HomeNaviMenuUI } from "../prefab/home/HomeNaviMenuUI";
 export class HomeUIBase extends Laya.Scene {
     public battle!: Laya.Box;
     public bg!: Laya.Image;
-    public btnPve!: Laya.Button;
-    public btnMail!: Laya.Button;
-    public btnShop!: Laya.Button;
     public btnNotice!: Laya.Button;
-    public btnBag!: Laya.Button;
     public btnEdge!: Laya.Button;
     public task_box!: HomeTaskBoxUI;
     public chat_box!: HomeChatBoxUI;
     public boxUI!: Laya.Box;
     public naviMenu!: HomeNaviMenuUI;
+    public rightMenu!: HomeRightMenuUI;
 }
 
