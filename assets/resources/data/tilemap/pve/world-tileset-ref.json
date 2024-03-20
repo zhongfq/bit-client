@@ -745,7 +745,7 @@
             "margin": 0,
             "name": "object",
             "spacing": 0,
-            "tilecount": 5,
+            "tilecount": 10,
             "tileheight": 512,
             "tiles": [
                 {
@@ -777,13 +777,43 @@
                     "image": "../texture/object/map_gather_food1-1.png",
                     "imageheight": 128,
                     "imagewidth": 128
+                },
+                {
+                    "id": 12,
+                    "image": "../texture/object/map_gather_food1-2.png",
+                    "imageheight": 128,
+                    "imagewidth": 128
+                },
+                {
+                    "id": 13,
+                    "image": "../texture/object/map_gather_food1-3.png",
+                    "imageheight": 128,
+                    "imagewidth": 128
+                },
+                {
+                    "id": 14,
+                    "image": "../texture/object/map_gather_iron1-1.png",
+                    "imageheight": 192,
+                    "imagewidth": 256
+                },
+                {
+                    "id": 15,
+                    "image": "../texture/object/map_gather_iron1-2.png",
+                    "imageheight": 192,
+                    "imagewidth": 256
+                },
+                {
+                    "id": 16,
+                    "image": "../texture/object/map_gather_iron1-3.png",
+                    "imageheight": 192,
+                    "imagewidth": 256
                 }
             ],
             "tilewidth": 512
         },
         {
             "columns": 4,
-            "firstgid": 66,
+            "firstgid": 71,
             "grid": {
                 "height": 64,
                 "orientation": "isometric",
@@ -1240,7 +1270,7 @@
         },
         {
             "columns": 4,
-            "firstgid": 98,
+            "firstgid": 103,
             "grid": {
                 "height": 64,
                 "orientation": "isometric",
@@ -1694,10 +1724,6 @@
                     ]
                 }
             ]
-        },
-        {
-            "firstgid": 130,
-            "source": "../texture/object.tsx"
         }
     ],
     "tilewidth": 128,
