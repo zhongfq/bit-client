@@ -13,6 +13,7 @@ export enum ui {
     LOGIN_SCENE,
     LOADING_SCENE,
     HOME_SCENE,
+    CREATOR_ROLE_SCENE,
 
     PVE,
     PVP,
@@ -64,6 +65,10 @@ export module ui {
         app.ui.register({
             id: ui.LOGIN_SCENE,
             url: "scenes/login.ls",
+        });
+        app.ui.register({
+            id: ui.CREATOR_ROLE_SCENE,
+            url: "scenes/creator-role.ls",
         });
         app.ui.register({
             id: ui.LOADING_SCENE,
