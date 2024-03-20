@@ -745,7 +745,7 @@
             "margin": 0,
             "name": "object",
             "spacing": 0,
-            "tilecount": 4,
+            "tilecount": 5,
             "tileheight": 512,
             "tiles": [
                 {
@@ -771,13 +771,19 @@
                     "image": "../texture/object/map_gather_wood1-3.png",
                     "imageheight": 288,
                     "imagewidth": 256
+                },
+                {
+                    "id": 11,
+                    "image": "../texture/object/map_gather_food1-1.png",
+                    "imageheight": 128,
+                    "imagewidth": 128
                 }
             ],
             "tilewidth": 512
         },
         {
             "columns": 4,
-            "firstgid": 59,
+            "firstgid": 66,
             "grid": {
                 "height": 64,
                 "orientation": "isometric",
@@ -1234,7 +1240,7 @@
         },
         {
             "columns": 4,
-            "firstgid": 91,
+            "firstgid": 98,
             "grid": {
                 "height": 64,
                 "orientation": "isometric",
@@ -1688,6 +1694,10 @@
                     ]
                 }
             ]
+        },
+        {
+            "firstgid": 130,
+            "source": "../texture/object.tsx"
         }
     ],
     "tilewidth": 128,

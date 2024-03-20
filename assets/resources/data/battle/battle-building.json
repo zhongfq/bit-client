@@ -26,7 +26,7 @@
     },
     "20002": {
         "battle_entity": 70002,
-        "die_hide": 1,
+        "die_hide": 0,
         "fresh_time": 60,
         "hp_state": [
             100,
@@ -34,17 +34,17 @@
             0
         ],
         "hp_texture": [
-            "map_gather_wood1-1",
-            "map_gather_wood1-2",
-            "map_gather_wood1-3"
+            "map_gather_food1-1",
+            "map_gather_food1-2",
+            "map_gather_food1-3"
         ],
         "id": 20002,
         "max_hp": 50,
-        "texture_key": "map_gather_wood1-1"
+        "texture_key": "map_gather_food1-1"
     },
     "20003": {
         "battle_entity": 70003,
-        "die_hide": 1,
+        "die_hide": 0,
         "fresh_time": 60,
         "hp_state": [
             100,
@@ -52,12 +52,12 @@
             0
         ],
         "hp_texture": [
-            "map_gather_wood1-1",
-            "map_gather_wood1-2",
-            "map_gather_wood1-3"
+            "map_gather_iron1-1",
+            "map_gather_iron1-2",
+            "map_gather_iron1-3"
         ],
         "id": 20003,
         "max_hp": 200,
-        "texture_key": "map_gather_wood1-1"
+        "texture_key": "map_gather_iron1-1"
     }
 }
