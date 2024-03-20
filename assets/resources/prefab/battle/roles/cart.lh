@@ -9,10 +9,6 @@
       "_$type": "Sprite3D",
       "name": "anim",
       "transform": {
-        "localRotation": {
-          "_$type": "Quaternion",
-          "w": -1
-        },
         "localScale": {
           "_$type": "Vector3",
           "x": 0.2,
@@ -459,6 +455,25 @@
               "w": 1
             }
           }
+        }
+      ]
+    },
+    {
+      "_$id": "f4uyibom",
+      "_$type": "Sprite3D",
+      "name": "point",
+      "transform": {
+        "localScale": {
+          "_$type": "Vector3",
+          "x": 0.2,
+          "y": 0.2,
+          "z": 0.2
+        }
+      },
+      "_$comp": [
+        {
+          "_$type": "ab0f1db8-f26d-4f78-acf9-ab4e1f6284eb",
+          "scriptPath": "../src/misc/rotate-revert.ts"
         }
       ]
     }

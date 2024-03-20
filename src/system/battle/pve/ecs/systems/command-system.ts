@@ -340,8 +340,12 @@ export class CommandSystem extends ecs.System implements ICommandSender {
             return;
         }
         const view = truck.animation.view;
-        const parent = view?.getChildByPath("anim/gather") as Laya.Sprite3D;
-        if (!parent) {
+        const pointParent = view?.getChildByName("point") as Laya.Sprite3D;
+        if (!pointParent) {
+            return;
+        }
+        const gatherParent = view?.getChildByPath("anim/gather") as Laya.Sprite3D;
+        if (!gatherParent) {
             return;
         }
 
@@ -358,41 +362,37 @@ export class CommandSystem extends ecs.System implements ICommandSender {
             return;
         }
 
-        const collection = this._findElement(data.collection);
-        const fromPos = collection!.transform.position.clone();
-        fromPos.y = 1; // TODO：不同采集物配置不同高度
-
         while (count--) {
             const obj = (view?.getChildByPath(path) as Laya.Sprite3D).clone()!;
             obj.active = true;
+            pointParent.addChild(obj);
 
-            const len = truckComp.collectObjs.length;
-            const localToPos = formation[len % formation.length].clone();
-            const offsetY = Math.floor(len / formation.length) * 0.35;
-            localToPos.y += offsetY; // 计算采集物每一层的偏移高度
+            const fromPos = new Laya.Vector3();
+            const collection = this._findElement(data.collection);
+            pointParent.transform.globalToLocal(collection!.transform.position, fromPos);
+            fromPos.y = 5; // TODO：不同采集物配置不同高度
 
-            const toPos = new Laya.Vector3();
-            parent.transform.localToGlobal(localToPos, toPos);
-
+            const toPos = new Laya.Vector3(0, 0.2, 0);
             const midPos = new Laya.Vector3();
             Laya.Vector3.lerp(fromPos, toPos, 0.5, midPos);
-            midPos.y += 5; // 中间点的高度提一提，模拟抛物线效果
+            midPos.y += 8; // 中间点的高度提一提，模拟抛物线效果
 
-            obj.transform.position = fromPos;
-            obj.transform.rotationEuler = parent.transform.rotationEuler;
-            obj.transform.setWorldLossyScale(parent.transform.getWorldLossyScale());
-            this.context.scene3D.addChild(obj);
+            obj.transform.localPosition = fromPos;
+            obj.transform.localRotationEulerY = Math.random() * 360;
 
+            const idx = truckComp.collectObjs.length;
             const points: Laya.Vector3[] = [fromPos, midPos, toPos];
-            Tween.toBezier3D(obj.transform, 0.01, points, () => {
-                obj.transform.localPosition = localToPos;
+            Tween.toBezier3D(obj.transform, 0.03, points, () => {
+                const finalPos = formation[idx % formation.length].clone();
+                const offsetY = Math.floor(idx / formation.length) * 0.35;
+                finalPos.y += offsetY; // 计算采集物每一层的偏移高度
+                obj.transform.localPosition = finalPos;
                 obj.transform.localRotationEuler = Laya.Vector3.ZERO;
-                obj.transform.localScale = Laya.Vector3.ONE;
+                obj.name = idx + "_" + finalPos.x + "_" + finalPos.y + "_" + finalPos.z;
                 obj.removeSelf();
-                parent?.addChild(obj);
+                gatherParent.addChild(obj);
             });
 
-            obj.name = len + "_" + toPos.x + "_" + toPos.y + "_" + toPos.z;
             truckComp.collectObjs.push(obj);
         }
     }
