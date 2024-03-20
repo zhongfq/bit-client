@@ -204,6 +204,7 @@ export interface GeneratedTaskBranchRow {
     id: number;
     sort: number;
     type: number;
+    name: string;
     desc: string;
     reward: any;
     guide_id?: number;

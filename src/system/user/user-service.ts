@@ -8,7 +8,7 @@ import { MoneyVo } from "../../misc/vo/money/money-vo";
 export class UserService extends Service<NetworkService> {
     public static readonly PROFILE_UPDATE = "profile-update";
     public static readonly MONEY_UPDATE = "money-update";
-    public uid: number = 0;
+    public uid: string | undefined | null = null;
     public rid: number = 0;
     public money: Map<number, MoneyVo> = new Map<number, MoneyVo>();
     public profileInfo!: proto.profile.ProfileInfo;
@@ -28,9 +28,16 @@ export class UserService extends Service<NetworkService> {
                 console.log("response error for request 'c2s_login'");
                 return;
             }
-            const role = data.role as proto.user.RoleInfo;
-            this.rid = role.rid as number;
-            this._goMainScen();
+            this.uid = data.info?.uid;
+            if (data.role.rid) {
+                app.ui.replace(ui.LOADING_SCENE);
+            } else {
+                app.ui.replace(ui.CREATOR_ROLE_SCENE);
+            }
+            // const role = data.role as proto.user.RoleInfo;
+            // this.rid = role.rid as number;
+            // this._goMainScen();
+            // role;
         }
     }
 
@@ -67,15 +74,29 @@ export class UserService extends Service<NetworkService> {
         this.event(UserService.PROFILE_UPDATE);
     }
 
-    private async _goMainScen() {
-        app.ui.replace(ui.LOADING_SCENE);
-    }
-
     public async loadMonye() {
         return await this._network.call(proto.money.c2s_load.create(), proto.money.s2c_load);
     }
 
     public async loadProfile() {
         return await this._network.call(proto.profile.c2s_load.create(), proto.profile.s2c_load);
+    }
+
+    public requestCreateRole(data: proto.user.Ic2s_create_role) {
+        return this._network.call(
+            proto.user.c2s_create_role.create(data),
+            proto.user.s2c_create_role
+        );
+    }
+
+    public requestRandomName(data: proto.user.Ic2s_random_name) {
+        return this._network.call(
+            proto.user.c2s_random_name.create(data),
+            proto.user.s2c_random_name
+        );
+    }
+
+    public requestRename(data: proto.user.Ic2s_rename) {
+        return this._network.call(proto.user.c2s_rename.create(data), proto.user.s2c_rename);
     }
 }

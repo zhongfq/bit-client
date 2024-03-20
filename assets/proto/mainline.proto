@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package mainline;
+
+message MainLineData {
+    float x = 1;
+    float y = 2;
+}
+
+message c2s_load {
+}
+message s2c_load {
+    uint32 err = 1;
+    MainLineData data = 2;
+}
+
+message c2s_save {
+    MainLineData data = 1;
+}
+message s2c_save {
+    uint32 err = 1;
+}
+
+message c2s_event {
+    uint32 event_id = 1;
+    uint32 amount = 2;
+}
+message s2c_event {
+    uint32 err = 1;
+}

@@ -19,7 +19,17 @@ message s2c_login {
     RoleInfo role = 3;
 }
 
+message c2s_create_role {
+    string uid = 1;
+    string name = 2; // 昵称
+    uint32 gender = 3; // 性别
+}
+message s2c_create_role {
+    uint32 err = 1; // OK, HAS_CRAP, NAME_REPEATED, GENDER_ERROR
+}
+
 message c2s_random_name {
+    uint32 gender = 1;
 }
 message s2c_random_name {
     uint32 err = 1;

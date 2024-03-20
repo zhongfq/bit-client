@@ -76,6 +76,14 @@ export const opcode = {
         s2c_receive_all: 0x1909,
         notify_new_mails: 0x1990,
     },
+    mainline: {
+        c2s_load: 0x2100,
+        s2c_load: 0x2101,
+        c2s_save: 0x2102,
+        s2c_save: 0x2103,
+        c2s_event: 0x2104,
+        s2c_event: 0x2105,
+    },
     money: {
         c2s_load: 0x1800,
         s2c_load: 0x1801,
@@ -84,8 +92,6 @@ export const opcode = {
     profile: {
         c2s_load: 0x1A00,
         s2c_load: 0x1A01,
-        c2s_create_role: 0x1A02,
-        s2c_create_role: 0x1A03,
         notify_profile: 0x1A90,
     },
     shop: {
@@ -133,6 +139,8 @@ export const opcode = {
         s2c_gm: 0x1009,
         c2s_rename: 0x100A,
         s2c_rename: 0x100B,
+        c2s_create_role: 0x100C,
+        s2c_create_role: 0x100D,
     },
     world: {
         c2s_load: 0x1500,
@@ -604,6 +612,42 @@ export const registerProtocols = () => {
         decode: proto.mail.notify_new_mails.decode,
     });
     register({
+        op: opcode.mainline.c2s_load,
+        typeURL: proto.mainline.c2s_load.getTypeUrl(),
+        encode: proto.mainline.c2s_load.encode,
+        decode: proto.mainline.c2s_load.decode,
+    });
+    register({
+        op: opcode.mainline.s2c_load,
+        typeURL: proto.mainline.s2c_load.getTypeUrl(),
+        encode: proto.mainline.s2c_load.encode,
+        decode: proto.mainline.s2c_load.decode,
+    });
+    register({
+        op: opcode.mainline.c2s_save,
+        typeURL: proto.mainline.c2s_save.getTypeUrl(),
+        encode: proto.mainline.c2s_save.encode,
+        decode: proto.mainline.c2s_save.decode,
+    });
+    register({
+        op: opcode.mainline.s2c_save,
+        typeURL: proto.mainline.s2c_save.getTypeUrl(),
+        encode: proto.mainline.s2c_save.encode,
+        decode: proto.mainline.s2c_save.decode,
+    });
+    register({
+        op: opcode.mainline.c2s_event,
+        typeURL: proto.mainline.c2s_event.getTypeUrl(),
+        encode: proto.mainline.c2s_event.encode,
+        decode: proto.mainline.c2s_event.decode,
+    });
+    register({
+        op: opcode.mainline.s2c_event,
+        typeURL: proto.mainline.s2c_event.getTypeUrl(),
+        encode: proto.mainline.s2c_event.encode,
+        decode: proto.mainline.s2c_event.decode,
+    });
+    register({
         op: opcode.money.c2s_load,
         typeURL: proto.money.c2s_load.getTypeUrl(),
         encode: proto.money.c2s_load.encode,
@@ -632,18 +676,6 @@ export const registerProtocols = () => {
         typeURL: proto.profile.s2c_load.getTypeUrl(),
         encode: proto.profile.s2c_load.encode,
         decode: proto.profile.s2c_load.decode,
-    });
-    register({
-        op: opcode.profile.c2s_create_role,
-        typeURL: proto.profile.c2s_create_role.getTypeUrl(),
-        encode: proto.profile.c2s_create_role.encode,
-        decode: proto.profile.c2s_create_role.decode,
-    });
-    register({
-        op: opcode.profile.s2c_create_role,
-        typeURL: proto.profile.s2c_create_role.getTypeUrl(),
-        encode: proto.profile.s2c_create_role.encode,
-        decode: proto.profile.s2c_create_role.decode,
     });
     register({
         op: opcode.profile.notify_profile,
@@ -866,6 +898,18 @@ export const registerProtocols = () => {
         typeURL: proto.user.s2c_rename.getTypeUrl(),
         encode: proto.user.s2c_rename.encode,
         decode: proto.user.s2c_rename.decode,
+    });
+    register({
+        op: opcode.user.c2s_create_role,
+        typeURL: proto.user.c2s_create_role.getTypeUrl(),
+        encode: proto.user.c2s_create_role.encode,
+        decode: proto.user.c2s_create_role.decode,
+    });
+    register({
+        op: opcode.user.s2c_create_role,
+        typeURL: proto.user.s2c_create_role.getTypeUrl(),
+        encode: proto.user.s2c_create_role.encode,
+        decode: proto.user.s2c_create_role.decode,
     });
     register({
         op: opcode.world.c2s_load,
