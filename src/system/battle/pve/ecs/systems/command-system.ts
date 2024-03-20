@@ -40,10 +40,52 @@ const PREFAB_HEAD_INFO2 = "resources/prefab/battle/ui/head-info2.lh";
 const PREFAB_HEAD_INFO3 = "resources/prefab/battle/ui/head-info3.lh";
 const PREFAB_ROLE_SHADOW = "resources/prefab/battle/ui/role-shadow.lh";
 
+interface FlyingCollect {
+    idx: number;
+    obj: Laya.Sprite3D;
+    parent: Laya.Sprite3D;
+    targetPos: Laya.Vector3;
+    finalPos: Laya.Vector3;
+    speed: number;
+}
+
 export class CommandSystem extends ecs.System implements ICommandSender {
     public declare context: PveContext;
 
-    public override update(dt: number): void {}
+    private _flyingCollects: Map<FlyingCollect, boolean> = new Map();
+
+    public override onDestroy(): void {
+        this._flyingCollects.clear();
+    }
+
+    public override update(dt: number): void {
+        for (const data of this._flyingCollects.keys()) {
+            if (!data.obj.transform || !data.parent.transform) {
+                this._flyingCollects.delete(data);
+                continue;
+            }
+            const curPos = data.obj.transform.localPosition;
+            const totalDis = Laya.Vector3.distance(curPos, data.targetPos);
+            const gapDis = data.speed * dt;
+
+            if (gapDis < totalDis) {
+                const nextPos = new Laya.Vector3();
+                Laya.Vector3.lerp(curPos, data.targetPos, gapDis / totalDis, nextPos);
+                data.obj.transform.localPosition = nextPos;
+                data.speed += 0.2;
+            } else {
+                const finalPos = data.finalPos;
+                data.obj.transform.localPosition = finalPos;
+                data.obj.transform.localRotationEuler = Laya.Vector3.ZERO;
+                data.obj.transform.localScale = Laya.Vector3.ONE;
+                data.obj.name = data.idx + "_" + finalPos.x + "_" + finalPos.y + "_" + finalPos.z;
+                data.obj.removeSelf();
+                data.parent.addChild(data.obj);
+
+                this._flyingCollects.delete(data);
+            }
+        }
+    }
 
     public focus(eid: number) {
         const camera = this.ecs.getSingletonComponent(CameraComponent)!;
@@ -365,35 +407,57 @@ export class CommandSystem extends ecs.System implements ICommandSender {
         while (count--) {
             const obj = (view?.getChildByPath(path) as Laya.Sprite3D).clone()!;
             obj.active = true;
-            pointParent.addChild(obj);
-
-            const fromPos = new Laya.Vector3();
-            const collection = this._findElement(data.collection);
-            pointParent.transform.globalToLocal(collection!.transform.position, fromPos);
-            fromPos.y = 5; // TODO：不同采集物配置不同高度
-
-            const toPos = new Laya.Vector3(0, 0.2, 0);
-            const midPos = new Laya.Vector3();
-            Laya.Vector3.lerp(fromPos, toPos, 0.5, midPos);
-            midPos.y += 8; // 中间点的高度提一提，模拟抛物线效果
-
-            obj.transform.localPosition = fromPos;
             obj.transform.localRotationEulerY = Math.random() * 360;
+            obj.transform.localScale = new Laya.Vector3(0.25, 0.25, 0.25);
+            this.context.scene3D.addChild(obj);
+
+            const collection = this._findElement(data.collection);
+            const startPos = collection!.transform.position.clone();
+            startPos.y = 1; // TODO：不同采集物配置不同高度
+            obj.transform.position = startPos;
 
             const idx = truckComp.collectObjs.length;
-            const points: Laya.Vector3[] = [fromPos, midPos, toPos];
-            Tween.toBezier3D(obj.transform, 0.03, points, () => {
-                const finalPos = formation[idx % formation.length].clone();
-                const offsetY = Math.floor(idx / formation.length) * 0.35;
-                finalPos.y += offsetY; // 计算采集物每一层的偏移高度
-                obj.transform.localPosition = finalPos;
-                obj.transform.localRotationEuler = Laya.Vector3.ZERO;
-                obj.name = idx + "_" + finalPos.x + "_" + finalPos.y + "_" + finalPos.z;
-                obj.removeSelf();
-                gatherParent.addChild(obj);
-            });
-
             truckComp.collectObjs.push(obj);
+
+            const radius = Math.random() + 0.5;
+            const rad = Math.random() * Math.PI * 2;
+            Laya.Tween.to(
+                obj.transform,
+                {
+                    localPositionX: startPos.x + radius * Math.sin(rad),
+                    localPositionZ: startPos.z + radius * Math.cos(rad),
+                    localRotationEulerY: obj.transform.localRotationEulerY + 90,
+                },
+                500,
+                Laya.Ease.cubicOut,
+                Laya.Handler.create(null, () => {
+                    if (!obj.transform || !pointParent.transform) {
+                        return;
+                    }
+                    const localPos = new Laya.Vector3();
+                    pointParent.transform.globalToLocal(obj.transform.position, localPos);
+                    obj.transform.localPosition = localPos;
+                    obj.removeSelf();
+                    pointParent.addChild(obj);
+
+                    const targetPos = new Laya.Vector3(0, 0.2, 0);
+                    const finalPos = formation[idx % formation.length].clone();
+                    const offsetY = Math.floor(idx / formation.length) * 0.35;
+                    finalPos.y += offsetY; // 计算采集物每一层的偏移高度
+
+                    this._flyingCollects.set(
+                        {
+                            idx: idx,
+                            obj: obj,
+                            parent: gatherParent,
+                            targetPos: targetPos,
+                            finalPos: finalPos,
+                            speed: 1,
+                        },
+                        true
+                    );
+                })
+            );
         }
     }
 
