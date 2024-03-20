@@ -2,20 +2,23 @@ import * as b3 from "../../../../../core/behavior3/behavior";
 import * as ecs from "../../../../../core/ecs";
 import { SkillRow } from "../../../../../def/table";
 import { PveServer } from "../../pve-server";
+import { AiTreeEnv } from "./ai-component";
 import { ElementComponent } from "./element-component";
 
-export class SkillTreeEnv extends b3.TreeEnv {
+export class SkillTreeEnv extends AiTreeEnv {
     public declare context: PveServer;
     public skill: Skill;
 
-    public constructor(context: PveServer, skill: Skill) {
-        super(context);
+    public constructor(context: PveServer, owner: ElementComponent, skill: Skill) {
+        super(context, owner);
+        this.owner = owner;
         this.skill = skill;
     }
 }
 
 export class Skill {
     public lastUpdate: number = 0;
+    public lastLaunch: number = 0;
     public data: SkillRow;
     public res: string;
     public tree: b3.Tree | null = null;

@@ -1,6 +1,6 @@
 {
   "name": "bit-client",
-  "outputPath": "E:\\SVN\\client\\distal-trunk",
+  "outputPath": "E:\\SVN\\client\\trunk",
   "minifyJS": true,
   "sourcemap": true,
   "startupScene": "res://9b931ecf-fde9-44dd-acf3-15f8dc807965",
@@ -13,7 +13,6 @@
   ],
   "copyBinFiles": false,
   "excludeFilesRule": [],
-  "enableVersion": true,
   "subpackages": [
     {
       "path": "resources/prefab",

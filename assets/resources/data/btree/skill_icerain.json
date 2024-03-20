@@ -1,0 +1,43 @@
+{
+  "name": "skill_icerain",
+  "root": {
+    "id": 1,
+    "name": "Sequence",
+    "desc": "冰雪箭",
+    "args": {},
+    "children": [
+      {
+        "id": 2,
+        "name": "FindTargets",
+        "args": {
+          "hero": true,
+          "soldier": true,
+          "skillId": -1
+        },
+        "output": [
+          "targets"
+        ],
+        "children": []
+      },
+      {
+        "id": 3,
+        "name": "LaunchSkill",
+        "args": {
+          "skill": -1
+        },
+        "input": [
+          "targets"
+        ],
+        "children": []
+      },
+      {
+        "id": 4,
+        "name": "Wait",
+        "args": {
+          "time": 3
+        }
+      }
+    ]
+  },
+  "desc": "冰雪箭"
+}

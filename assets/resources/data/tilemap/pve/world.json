@@ -1,69 +1,69 @@
 {
-    "maps": [
-        {
-            "fileName": "world-map1.json",
-            "height": 50,
-            "width": 50,
-            "x": 0,
-            "y": 0
-        },
-        {
-            "fileName": "world-map2.json",
-            "height": 50,
-            "width": 50,
-            "x": 50,
-            "y": 0
-        },
-        {
-            "fileName": "world-map3.json",
-            "height": 50,
-            "width": 50,
-            "x": 50,
-            "y": 50
-        },
-        {
-            "fileName": "world-map4.json",
-            "height": 50,
-            "width": 50,
-            "x": 0,
-            "y": 50
-        },
-        {
-            "fileName": "world-map5.json",
-            "height": 50,
-            "width": 50,
-            "x": 100,
-            "y": 50
-        },
-        {
-            "fileName": "world-map6.json",
-            "height": 50,
-            "width": 50,
-            "x": 150,
-            "y": 50
-        },
-        {
-            "fileName": "world-map7.json",
-            "height": 50,
-            "width": 50,
-            "x": 150,
-            "y": 100
-        },
-        {
-            "fileName": "world-map8.json",
-            "height": 50,
-            "width": 50,
-            "x": 200,
-            "y": 100
-        },
-        {
-            "fileName": "world-map9.json",
-            "height": 50,
-            "width": 50,
-            "x": 200,
-            "y": 50
-        }
-    ],
-    "onlyShowAdjacentMaps": false,
-    "type": "world"
+  "maps": [
+    {
+      "fileName": "world-map1.json",
+      "height": 50,
+      "width": 50,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "fileName": "world-map2.json",
+      "height": 50,
+      "width": 50,
+      "x": 50,
+      "y": 0
+    },
+    {
+      "fileName": "world-map3.json",
+      "height": 50,
+      "width": 50,
+      "x": 50,
+      "y": 50
+    },
+    {
+      "fileName": "world-map4.json",
+      "height": 50,
+      "width": 50,
+      "x": 0,
+      "y": 50
+    },
+    {
+      "fileName": "world-map5.json",
+      "height": 50,
+      "width": 50,
+      "x": 100,
+      "y": 50
+    },
+    {
+      "fileName": "world-map6.json",
+      "height": 50,
+      "width": 50,
+      "x": 150,
+      "y": 50
+    },
+    {
+      "fileName": "world-map7.json",
+      "height": 50,
+      "width": 50,
+      "x": 150,
+      "y": 100
+    },
+    {
+      "fileName": "world-map8.json",
+      "height": 50,
+      "width": 50,
+      "x": 200,
+      "y": 100
+    },
+    {
+      "fileName": "world-map9.json",
+      "height": 50,
+      "width": 50,
+      "x": 200,
+      "y": 50
+    }
+  ],
+  "onlyShowAdjacentMaps": false,
+  "type": "world"
 }

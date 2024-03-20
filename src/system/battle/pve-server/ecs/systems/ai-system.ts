@@ -21,6 +21,7 @@ import { NormalAttack } from "../../btree/actions/normal-attack";
 import { PlayAnim } from "../../btree/actions/play-anim";
 import { SetStance } from "../../btree/actions/set-stance";
 import { TowardToTarget } from "../../btree/actions/toward-to-target";
+import { TryLaunchSkill } from "../../btree/actions/try-launch-skill";
 import { Wait } from "../../btree/actions/wait";
 import { FindOneTarget } from "../../btree/conditions/find-one-target";
 import { FindTargets } from "../../btree/conditions/find-targets";
@@ -63,6 +64,7 @@ export class AiSystem extends ecs.System {
         this.context.registerProcess(PlayAnim);
         this.context.registerProcess(SetStance);
         this.context.registerProcess(TowardToTarget);
+        this.context.registerProcess(TryLaunchSkill);
         this.context.registerProcess(Wait);
 
         btreeCode.forEach((value) => this.context.registerCode(value.code, value.evaluator));

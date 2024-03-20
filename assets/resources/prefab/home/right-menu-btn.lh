@@ -1,0 +1,58 @@
+{
+  "_$ver": 1,
+  "_$id": "m3d8u5lu",
+  "_$type": "Box",
+  "name": "right-menu-btn-item",
+  "x": 339,
+  "y": 611,
+  "width": 128,
+  "height": 150,
+  "_mouseState": 2,
+  "_$child": [
+    {
+      "_$id": "0jaivhzj",
+      "_$var": true,
+      "_$type": "Image",
+      "name": "imgIcon",
+      "width": 128,
+      "height": 128,
+      "top": 0,
+      "centerX": 0,
+      "skin": "res://71dcb1ce-b5ff-42d3-9486-d84657dc6da2",
+      "useSourceSize": true,
+      "color": "#ffffff"
+    },
+    {
+      "_$id": "sod02qbd",
+      "_$type": "Image",
+      "name": "imgTextBg",
+      "x": 4,
+      "y": 106,
+      "width": 120,
+      "height": 44,
+      "bottom": 0,
+      "centerX": 0,
+      "skin": "res://dd8b1c26-fe6b-4fce-908b-7de8ab05f36f",
+      "useSourceSize": true,
+      "color": "#ffffff",
+      "_$child": [
+        {
+          "_$id": "c6xnzpha",
+          "_$type": "Label",
+          "name": "Label",
+          "width": 120,
+          "height": 44,
+          "centerX": 0,
+          "centerY": 0,
+          "text": "排行",
+          "fontSize": 25,
+          "color": "rgba(0, 0, 0, 1)",
+          "bold": true,
+          "align": "center",
+          "valign": "middle",
+          "padding": "0,0,0,0"
+        }
+      ]
+    }
+  ]
+}

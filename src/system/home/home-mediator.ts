@@ -1,14 +1,10 @@
 import { app } from "../../app";
 import { Mediator } from "../../core/ui-mediator";
 import { ui } from "../../misc/ui";
-import { ChatMsgVo } from "../../misc/vo/chat/chat-msg-vo";
-import { ChatRoleVo } from "../../misc/vo/chat/chat-role-vo";
 import { HomeNaviMenuBtnUI } from "../../ui-runtime/prefab/home/HomeNaviMenuBtnUI";
 import { HomeUI } from "../../ui-runtime/scene/HomeUI";
 import { PveUI } from "../../ui-runtime/scene/PveUI";
 import { PvpUI } from "../../ui-runtime/scene/PvpUI";
-import { ChatService } from "../chat/chat-service";
-import { TableUtil } from "../table/table-util";
 
 @Laya.regClass()
 export class HomeMediator extends Mediator {
@@ -23,7 +19,6 @@ export class HomeMediator extends Mediator {
     public override onAwake() {
         this._initBtn();
         this._initServiceEvent();
-        this._initChat();
         this._initNaviMenu();
 
         // 加载数据
@@ -41,29 +36,7 @@ export class HomeMediator extends Mediator {
         super.onDestroy();
     }
 
-    private _initServiceEvent() {
-        this.on(app.service.chat, ChatService.CHAT_UPDATE, (data: ChatMsgVo) => {
-            this._initChat();
-        });
-    }
-
-    private _initChat() {
-        const msg = app.service.chat.chatMsgVoBag.getOne();
-        if (msg) {
-            const role = app.service.chat.chatRoleVoBag.get(msg.id) as ChatRoleVo;
-            const reg = /{(\d+)}/gm;
-            const str = msg.cmd?.text || "";
-            const ubbStr = str.replace(reg, function (match, name) {
-                const emojiRow = TableUtil.getRow(app.service.table.emoji, { id: Number(name) });
-                if (emojiRow) {
-                    return `<img src='resources/texture/emoji/emoji/${emojiRow.icon}.png' width=30 height = 30/>`;
-                } else {
-                    return match;
-                }
-            });
-            // this.owner.labelMsg.text = `${role.cmd?.name}:${ubbStr}`;
-        }
-    }
+    private _initServiceEvent() {}
 
     public override onKeyDown(evt: Laya.Event): void {
         if (evt.ctrlKey && evt.keyCode == Laya.Keyboard.B) {
@@ -72,23 +45,9 @@ export class HomeMediator extends Mediator {
     }
 
     private _initBtn() {
-        this.owner.btnPve.on(Laya.Event.CLICK, () => {
-            app.ui.replace(ui.PVE);
+        this.owner.btnEdge.on(Laya.Event.CLICK, () => {
+            this.owner.rightMenu.visible = true;
         });
-        this.owner.btnBag.on(Laya.Event.CLICK, () => {
-            app.ui.show(ui.BAG);
-        });
-        this.owner.btnMail.on(Laya.Event.CLICK, () => {
-            app.ui.show(ui.MAIL);
-        });
-        this.owner.btnShop.on(Laya.Event.CLICK, () => {
-            app.service.shop.load({ shopId: 1 });
-            app.ui.show(ui.SHOP);
-        });
-        // this.owner.chat_box.on(Laya.Event.CLICK, () => {
-        //     app.ui.show(ui.CHAT);
-        // });
-        // this.owner.List.array = ["1111", "1111", "1111", "1111", "1111"];
     }
 
     //-------------------------------------------------------------------------
@@ -100,10 +59,7 @@ export class HomeMediator extends Mediator {
             if (this._loading) {
                 return;
             }
-            if (this._currentBtn === naviMenu.btnChest) {
-                this._closeBox();
-                this._activatePveOrPvp(true);
-            } else {
+            if (this._currentBtn != naviMenu.btnChest) {
                 this._closeBox();
                 this._activatePveOrPvp(false);
                 this._currentBtn = naviMenu.btnChest;
@@ -115,30 +71,39 @@ export class HomeMediator extends Mediator {
             if (this._loading) {
                 return;
             }
-            this._loadPvp();
+            if (this._currentBtn != naviMenu.btnFight) {
+                this._activatePveOrPvp(true);
+                this._closeBox();
+                this._currentBtn = naviMenu.btnFight;
+                this._currentBtn.selected = true;
+                this._loadPvp();
+            }
         });
         naviMenu.btnMain.on(Laya.Event.CLICK, () => {
             if (this._loading) {
                 return;
             }
-            this._loadPve();
+            if (this._currentBtn != naviMenu.btnMain) {
+                this._activatePveOrPvp(true);
+                this._closeBox();
+                this._currentBtn = naviMenu.btnMain;
+                this._currentBtn.selected = true;
+                this._loadPve();
+            }
         });
         naviMenu.btnSoldier.on(Laya.Event.CLICK, () => {
-            if (this._currentBtn === naviMenu.btnSoldier) {
-                this._closeBox();
-                this._activatePveOrPvp(true);
-            } else {
+            if (this._currentBtn != naviMenu.btnSoldier) {
                 this._closeBox();
                 this._activatePveOrPvp(false);
                 this._currentBtn = naviMenu.btnSoldier;
                 this._currentBtn.selected = true;
                 this._loadAddNode("resources/prefab/soldier/soldier.lh");
             }
-            // if (this._naviBtnSelected(this.owner.naviMenu.btnSoldier)) {
-            //     this._loadAddNode("resources/prefab/soldier/soldier.lh");
-            // }
         });
         naviMenu.btnUnion.on(Laya.Event.CLICK, () => {});
+
+        this._currentBtn = naviMenu.btnMain;
+        this._currentBtn.selected = true;
     }
 
     private _loadPvp() {
@@ -146,7 +111,7 @@ export class HomeMediator extends Mediator {
             this._loading = true;
             app.ui.load(ui.PVP)?.then((scene) => {
                 this._loading = false;
-                this._closeBox();
+                // this._closeBox();
                 this.owner.bg.visible = false;
                 this.owner.boxUI.visible = false;
                 this._pve?.destroy();
@@ -165,7 +130,7 @@ export class HomeMediator extends Mediator {
             this._loading = true;
             app.ui.load(ui.PVE)?.then((scene) => {
                 this._loading = false;
-                this._closeBox();
+                // this._closeBox();
                 this.owner.bg.visible = false;
                 this.owner.boxUI.visible = false;
                 this._pvp?.destroy();
