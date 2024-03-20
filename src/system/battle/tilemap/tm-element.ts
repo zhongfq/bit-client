@@ -107,6 +107,9 @@ export abstract class TMTileElemet extends TMElement {
         this._tile.transform.position = pos;
 
         const mat = new Laya.BlinnPhongMaterial(); // 使用 UnlitMaterial 时 tilingOffset 会失效
+        if (!atlas.frames[idx]) {
+            console.log("error");
+        }
         const path = atlas.frames[idx].url;
         const tex = Laya.loader.getRes(path) as Laya.Texture;
         mat.albedoTexture = texture;

@@ -1,6 +1,8 @@
 import * as b3 from "../../../../../core/behavior3/behavior";
 import { BattleConf } from "../../../../../def/battle";
 import { AiTreeEnv } from "../../ecs/components/ai-component";
+import { SkillTreeEnv } from "../../ecs/components/skill-component";
+import { SkillOption, SkillRangeOption } from "../btree-dev";
 
 interface FindTargetsArgs {
     radius?: number;
@@ -20,7 +22,16 @@ export class FindTargets extends b3.Process {
         const findCollection = args.collection;
         let radius = args.radius ?? 0;
         if (typeof args.skillId === "number") {
-            const skill = env.owner.launcher?.skills[args.skillId];
+            let skill;
+            if (args.skillId === -1) {
+                if (env instanceof SkillTreeEnv) {
+                    skill = env.skill;
+                } else {
+                    this.error(node, `current env is not SkillTreeEnv`);
+                }
+            } else if (args.skillId >= 0) {
+                skill = env.owner.launcher?.skills[args.skillId];
+            }
             if (skill) {
                 radius = skill.data.radius;
             }
@@ -67,7 +78,7 @@ export class FindTargets extends b3.Process {
                 { name: "soldier", type: "boolean?", desc: "找士兵" },
                 { name: "collection", type: "boolean?", desc: "找采集物" },
                 { name: "friend", type: "boolean?", desc: "友方" },
-                { name: "skillId", type: "int?", desc: "技能id" },
+                { name: "skillId", type: "enum?", desc: "筛选范围", options: SkillRangeOption },
                 { name: "radius", type: "int?", desc: "半径" },
                 { name: "limit", type: "int?", desc: "数量限制" },
             ],
@@ -80,6 +91,6 @@ export class FindTargets extends b3.Process {
                 + 普攻 id 为 0，技能1 id 为 1，以次类推
                 + etype 在 battle/battle_entity 表中有定义, 默认查找所有可攻击类型
                 `,
-        };
+        } as b3.ProcessDescriptor;
     }
 }

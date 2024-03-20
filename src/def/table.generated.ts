@@ -168,9 +168,10 @@ export interface GeneratedSkillRow {
     id: number;
     name: string;
     desc: string;
+    battle_entity?: number;
     type: number;
     anim?: string;
-    cd?: number;
+    cd: number;
     radius: number;
     lanuch_btree: string;
 }
@@ -204,6 +205,7 @@ export interface GeneratedTaskBranchRow {
     id: number;
     sort: number;
     type: number;
+    name: string;
     desc: string;
     reward: any;
     guide_id?: number;
@@ -279,7 +281,7 @@ export interface GeneratedBattleEntityRow {
     id: number;
     etype: number;
     res: string;
-    pve_ai: string;
+    pve_ai?: string;
     info_style?: number;
     info_offset?: number;
 }

@@ -1,5 +1,6 @@
 import * as b3 from "../../../../../core/behavior3/behavior";
 import { AiTreeEnv } from "../../ecs/components/ai-component";
+import { SkillOption, SkillRangeOption } from "../btree-dev";
 import { FindTargets } from "./find-targets";
 
 export class FindOneTarget extends FindTargets {
@@ -25,7 +26,7 @@ export class FindOneTarget extends FindTargets {
                 { name: "soldier", type: "boolean?", desc: "找士兵" },
                 { name: "collection", type: "boolean?", desc: "找采集物" },
                 { name: "friend", type: "boolean?", desc: "友方" },
-                { name: "skillId", type: "int?", desc: "技能id" },
+                { name: "skillId", type: "enum?", desc: "筛选范围", options: SkillRangeOption },
                 { name: "radius", type: "int?", desc: "半径" },
             ],
             output: ["目标单位"],
@@ -37,6 +38,6 @@ export class FindOneTarget extends FindTargets {
                 + 普攻 id 为 0，技能1 id 为 1，以次类推
                 + etype 在 battle/battle_entity 表中有定义, 默认查找所有可攻击类型
                 `,
-        };
+        } as b3.ProcessDescriptor;
     }
 }

@@ -12,7 +12,12 @@ export interface ProcessDescriptor {
     name: string;
     type: string;
     desc: string;
-    args?: { name: string; type: string; desc: string }[];
+    args?: {
+        name: string;
+        type: string;
+        desc: string;
+        options?: { name: string; value: unknown }[];
+    }[];
     output?: string[];
     input?: string[];
     doc?: string;

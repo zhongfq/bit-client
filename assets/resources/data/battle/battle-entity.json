@@ -103,77 +103,15 @@
         "pve_ai": "hero",
         "res": "prefab/battle/role/jx-gongchengche"
     },
+    "50000": {
+        "etype": 4,
+        "id": 50000,
+        "res": "resources/prefab/battle/vfx/vfx_firerain.lh"
+    },
     "50001": {
         "etype": 4,
         "id": 50001,
-        "pve_ai": "hero",
-        "res": "prefab/battle/bullet/jiantou"
-    },
-    "50002": {
-        "etype": 4,
-        "id": 50002,
-        "pve_ai": "hero",
-        "res": "prefab/battle/bullet/fengniu"
-    },
-    "50003": {
-        "etype": 4,
-        "id": 50003,
-        "pve_ai": "hero",
-        "res": "prefab/battle/bullet/houjianpao"
-    },
-    "50004": {
-        "etype": 4,
-        "id": 50004,
-        "pve_ai": "hero",
-        "res": "prefab/battle/bullet/longjuanfeng"
-    },
-    "50005": {
-        "etype": 4,
-        "id": 50005,
-        "pve_ai": "hero",
-        "res": "prefab/battle/bullet/bailong"
-    },
-    "50006": {
-        "etype": 4,
-        "id": 50006,
-        "pve_ai": "hero",
-        "res": "prefab/battle/bullet/bishan"
-    },
-    "50007": {
-        "etype": 4,
-        "id": 50007,
-        "pve_ai": "hero",
-        "res": "prefab/battle/bullet/yunshi"
-    },
-    "50008": {
-        "etype": 4,
-        "id": 50008,
-        "pve_ai": "hero",
-        "res": "prefab/battle/bullet/lvbu-skill"
-    },
-    "50009": {
-        "etype": 4,
-        "id": 50009,
-        "pve_ai": "hero",
-        "res": "prefab/battle/bullet/zhouyu-attack"
-    },
-    "50010": {
-        "etype": 4,
-        "id": 50010,
-        "pve_ai": "hero",
-        "res": "prefab/battle/bullet/zhugeliang-attack"
-    },
-    "50011": {
-        "etype": 4,
-        "id": 50011,
-        "pve_ai": "hero",
-        "res": "prefab/battle/bullet/xiaoqiao-attack"
-    },
-    "50012": {
-        "etype": 4,
-        "id": 50012,
-        "pve_ai": "hero",
-        "res": "prefab/battle/bullet/guanyu-skill"
+        "res": "resources/prefab/battle/vfx/vfx_icerain.lh"
     },
     "60001": {
         "etype": 5,

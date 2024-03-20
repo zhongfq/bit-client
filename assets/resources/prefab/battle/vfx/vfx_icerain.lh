@@ -1,0 +1,3671 @@
+{
+  "_$ver": 1,
+  "_$id": "myxs9vgm",
+  "_$type": "Sprite3D",
+  "name": "vfx_icerain",
+  "_$child": [
+    {
+      "_$id": "terzpf50",
+      "_$type": "Sprite3D",
+      "name": "groundice",
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "y": 0.020000457763671875
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0.7071067811865475,
+          "w": 0.7071067811865476
+        }
+      },
+      "_$comp": [
+        {
+          "_$type": "ShurikenParticleRenderer",
+          "sharedMaterials": [
+            {
+              "_$uuid": "96304be1-595e-44f3-985e-e3b8fe3261f8",
+              "_$type": "Material"
+            }
+          ],
+          "renderMode": 2,
+          "_particleSystem": {
+            "_isPlaying": true,
+            "duration": 3,
+            "startDelay": 0.26,
+            "startLifetimeType": 2,
+            "startLifetimeConstant": 2,
+            "startLifetimeConstantMin": 1,
+            "startLifetimeConstantMax": 2,
+            "startSpeedConstant": 0,
+            "startSizeType": 2,
+            "startSizeConstant": 0.5,
+            "startSizeConstantMin": 5,
+            "startSizeConstantMax": 10,
+            "startSizeConstantSeparate": {
+              "_$type": "Vector3",
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
+            "startSizeConstantMinSeparate": {
+              "_$type": "Vector3"
+            },
+            "startSizeConstantMaxSeparate": {
+              "_$type": "Vector3",
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
+            "startRotationType": 2,
+            "startRotationConstantMin": 100,
+            "startRotationConstantMax": -100,
+            "startRotationConstantSeparate": {
+              "_$type": "Vector3"
+            },
+            "startRotationConstantMinSeparate": {
+              "_$type": "Vector3"
+            },
+            "startRotationConstantMaxSeparate": {
+              "_$type": "Vector3"
+            },
+            "startColorConstant": {
+              "_$type": "Vector4",
+              "x": 0.6666666666666667,
+              "y": 0.9612925114213362,
+              "z": 1,
+              "w": 1
+            },
+            "startColorConstantMin": {
+              "_$type": "Vector4"
+            },
+            "startColorConstantMax": {
+              "_$type": "Vector4",
+              "x": 1,
+              "y": 1,
+              "z": 1,
+              "w": 1
+            },
+            "maxParticles": 10000,
+            "autoRandomSeed": false,
+            "randomSeed": {
+              "_$type": "Uint32Array",
+              "value": [
+                240
+              ]
+            },
+            "emission": {
+              "emissionRate": 4
+            },
+            "shape": {
+              "_$type": "CircleShape",
+              "radius": 3
+            },
+            "colorOverLifetime": {
+              "_$type": "ColorOverLifetime",
+              "enable": true,
+              "_color": {
+                "_$type": "GradientColor",
+                "_type": 1,
+                "_constant": {
+                  "_$type": "Vector4",
+                  "x": 1,
+                  "y": 1,
+                  "z": 1,
+                  "w": 1
+                },
+                "_constantMin": {
+                  "_$type": "Vector4",
+                  "x": 1,
+                  "y": 1,
+                  "z": 1,
+                  "w": 1
+                },
+                "_constantMax": {
+                  "_$type": "Vector4",
+                  "x": 1,
+                  "y": 1,
+                  "z": 1,
+                  "w": 1
+                },
+                "_gradient": {
+                  "_$type": "Gradient",
+                  "_alphaElements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0.0030120480805635452,
+                      0,
+                      0.4367469847202301,
+                      0.4000000059604645,
+                      1,
+                      0
+                    ]
+                  },
+                  "_colorAlphaKeysCount": 3,
+                  "_rgbElements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0,
+                      1,
+                      1,
+                      1,
+                      0.5451807379722595,
+                      0.8255813717842102,
+                      0.9904423952102661,
+                      1
+                    ]
+                  },
+                  "_colorRGBKeysCount": 2
+                },
+                "_gradientMin": {
+                  "_$type": "Gradient",
+                  "_alphaElements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0,
+                      1,
+                      1,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "_colorAlphaKeysCount": 2,
+                  "_rgbElements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "_colorRGBKeysCount": 2
+                },
+                "_gradientMax": {
+                  "_$type": "Gradient",
+                  "_alphaElements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0,
+                      1,
+                      1,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "_colorAlphaKeysCount": 2,
+                  "_rgbElements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "_colorRGBKeysCount": 2
+                }
+              }
+            },
+            "sizeOverLifetime": {
+              "_$type": "SizeOverLifetime",
+              "enable": true,
+              "_size": {
+                "_$type": "GradientSize",
+                "_constantMin": 1,
+                "_constantMax": 1,
+                "_constantMinSeparate": {
+                  "_$type": "Vector3",
+                  "x": 1,
+                  "y": 1,
+                  "z": 1
+                },
+                "_constantMaxSeparate": {
+                  "_$type": "Vector3",
+                  "x": 1,
+                  "y": 1,
+                  "z": 1
+                },
+                "_gradient": {
+                  "_$type": "GradientDataNumber",
+                  "_elements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0,
+                      0.8178571462631226,
+                      1,
+                      1
+                    ]
+                  },
+                  "_currentLength": 4
+                },
+                "_gradientX": {
+                  "_$type": "GradientDataNumber",
+                  "_elements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "_currentLength": 4
+                },
+                "_gradientY": {
+                  "_$type": "GradientDataNumber",
+                  "_elements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "_currentLength": 4
+                },
+                "_gradientZ": {
+                  "_$type": "GradientDataNumber",
+                  "_elements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "_currentLength": 4
+                },
+                "_gradientMin": {
+                  "_$type": "GradientDataNumber",
+                  "_elements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0,
+                      0.43214285373687744,
+                      1,
+                      1
+                    ]
+                  },
+                  "_currentLength": 4
+                },
+                "_gradientMax": {
+                  "_$type": "GradientDataNumber",
+                  "_elements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0,
+                      0.9107142686843872,
+                      1,
+                      1
+                    ]
+                  },
+                  "_currentLength": 4
+                },
+                "_gradientXMin": {
+                  "_$type": "GradientDataNumber",
+                  "_elements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "_currentLength": 4
+                },
+                "_gradientYMin": {
+                  "_$type": "GradientDataNumber",
+                  "_elements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "_currentLength": 4
+                },
+                "_gradientZMin": {
+                  "_$type": "GradientDataNumber",
+                  "_elements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "_currentLength": 4
+                },
+                "_gradientXMax": {
+                  "_$type": "GradientDataNumber",
+                  "_elements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "_currentLength": 4
+                },
+                "_gradientYMax": {
+                  "_$type": "GradientDataNumber",
+                  "_elements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "_currentLength": 4
+                },
+                "_gradientZMax": {
+                  "_$type": "GradientDataNumber",
+                  "_elements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "_currentLength": 4
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "_$id": "q360g9r7",
+      "_$type": "Sprite3D",
+      "name": "snow",
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "y": 10
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0.7071067811865475,
+          "w": 0.7071067811865476
+        }
+      },
+      "_$comp": [
+        {
+          "_$type": "ShurikenParticleRenderer",
+          "sharedMaterials": [
+            {
+              "_$uuid": "4d19941a-72e3-48ec-9edb-0e885985d8cc",
+              "_$type": "Material"
+            }
+          ],
+          "_particleSystem": {
+            "_isPlaying": true,
+            "duration": 3,
+            "startDelay": 0.26,
+            "startLifetimeType": 2,
+            "startLifetimeConstant": 2,
+            "startLifetimeConstantMin": 1,
+            "startLifetimeConstantMax": 2,
+            "startSpeedType": 2,
+            "startSpeedConstant": 0,
+            "startSpeedConstantMin": -0.1,
+            "startSpeedConstantMax": 0.3,
+            "startSizeType": 2,
+            "startSizeConstant": 0.5,
+            "startSizeConstantMin": 0.1,
+            "startSizeConstantMax": 0.2,
+            "startSizeConstantSeparate": {
+              "_$type": "Vector3",
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
+            "startSizeConstantMinSeparate": {
+              "_$type": "Vector3"
+            },
+            "startSizeConstantMaxSeparate": {
+              "_$type": "Vector3",
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
+            "startRotationType": 2,
+            "startRotationConstantMin": 100,
+            "startRotationConstantMax": -100,
+            "startRotationConstantSeparate": {
+              "_$type": "Vector3"
+            },
+            "startRotationConstantMinSeparate": {
+              "_$type": "Vector3"
+            },
+            "startRotationConstantMaxSeparate": {
+              "_$type": "Vector3"
+            },
+            "startColorConstant": {
+              "_$type": "Vector4",
+              "x": 0.6666666666666667,
+              "y": 0.9612925114213362,
+              "z": 1,
+              "w": 1
+            },
+            "startColorConstantMin": {
+              "_$type": "Vector4"
+            },
+            "startColorConstantMax": {
+              "_$type": "Vector4",
+              "x": 1,
+              "y": 1,
+              "z": 1,
+              "w": 1
+            },
+            "maxParticles": 10000,
+            "autoRandomSeed": false,
+            "randomSeed": {
+              "_$type": "Uint32Array",
+              "value": [
+                240
+              ]
+            },
+            "emission": {
+              "emissionRate": 30,
+              "emissionRateOverDistance": 5,
+              "_bursts": [
+                {
+                  "_$type": "Burst"
+                }
+              ]
+            },
+            "shape": {
+              "_$type": "ConeShape",
+              "angleDEG": 0,
+              "radius": 4,
+              "length": 10,
+              "emitType": 2
+            },
+            "velocityOverLifetime": {
+              "_$type": "VelocityOverLifetime",
+              "enable": true,
+              "_velocity": {
+                "_$type": "GradientVelocity",
+                "_type": 1,
+                "_constant": {
+                  "_$type": "Vector3"
+                },
+                "_constantMin": {
+                  "_$type": "Vector3"
+                },
+                "_constantMax": {
+                  "_$type": "Vector3"
+                },
+                "_gradientX": {
+                  "_$type": "GradientDataNumber",
+                  "_elements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0.7000000476837158,
+                      0.10357142984867096,
+                      1,
+                      0
+                    ]
+                  },
+                  "_currentLength": 4
+                },
+                "_gradientY": {
+                  "_$type": "GradientDataNumber",
+                  "_elements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0.607692301273346,
+                      0.13571429252624512,
+                      1,
+                      0
+                    ]
+                  },
+                  "_currentLength": 4
+                },
+                "_gradientZ": {
+                  "_$type": "GradientDataNumber",
+                  "_elements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0.5903846025466919,
+                      0.13214285671710968,
+                      1,
+                      1.9956911123664156e-11
+                    ]
+                  },
+                  "_currentLength": 4
+                },
+                "_gradientXMin": {
+                  "_$type": "GradientDataNumber",
+                  "_elements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "_currentLength": 4
+                },
+                "_gradientYMin": {
+                  "_$type": "GradientDataNumber",
+                  "_elements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "_currentLength": 4
+                },
+                "_gradientZMin": {
+                  "_$type": "GradientDataNumber",
+                  "_elements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "_currentLength": 4
+                },
+                "_gradientXMax": {
+                  "_$type": "GradientDataNumber",
+                  "_elements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "_currentLength": 4
+                },
+                "_gradientYMax": {
+                  "_$type": "GradientDataNumber",
+                  "_elements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "_currentLength": 4
+                },
+                "_gradientZMax": {
+                  "_$type": "GradientDataNumber",
+                  "_elements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "_currentLength": 4
+                }
+              },
+              "space": 0
+            },
+            "colorOverLifetime": {
+              "_$type": "ColorOverLifetime",
+              "enable": true,
+              "_color": {
+                "_$type": "GradientColor",
+                "_type": 3,
+                "_constant": {
+                  "_$type": "Vector4",
+                  "x": 1,
+                  "y": 1,
+                  "z": 1,
+                  "w": 1
+                },
+                "_constantMin": {
+                  "_$type": "Vector4",
+                  "x": 0.8953488372093024,
+                  "y": 0.9942847819211194,
+                  "z": 1,
+                  "w": 0.11764705882352941
+                },
+                "_constantMax": {
+                  "_$type": "Vector4",
+                  "x": 0.6061684994892134,
+                  "y": 0.9735495479517912,
+                  "z": 0.996124031007752,
+                  "w": 0.058823529411764705
+                },
+                "_gradient": {
+                  "_$type": "Gradient",
+                  "_alphaElements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0.0030120480805635452,
+                      0,
+                      0.22289156913757324,
+                      0.5,
+                      1,
+                      0
+                    ]
+                  },
+                  "_colorAlphaKeysCount": 3,
+                  "_rgbElements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0,
+                      1,
+                      1,
+                      1,
+                      0.5451807379722595,
+                      0.8255813717842102,
+                      0.9904423952102661,
+                      1
+                    ]
+                  },
+                  "_colorRGBKeysCount": 2
+                },
+                "_gradientMin": {
+                  "_$type": "Gradient",
+                  "_alphaElements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0.0030120480805635452,
+                      0,
+                      0.3885542154312134,
+                      0.5,
+                      1,
+                      0
+                    ]
+                  },
+                  "_colorAlphaKeysCount": 3,
+                  "_rgbElements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0.713178277015686,
+                      0.9833959341049194,
+                      1
+                    ]
+                  },
+                  "_colorRGBKeysCount": 2
+                },
+                "_gradientMax": {
+                  "_$type": "Gradient",
+                  "_alphaElements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0.0030120480805635452,
+                      0,
+                      0.3765060305595398,
+                      0.25,
+                      1,
+                      0
+                    ]
+                  },
+                  "_colorAlphaKeysCount": 3,
+                  "_rgbElements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "_colorRGBKeysCount": 2
+                }
+              }
+            },
+            "rotationOverLifetime": {
+              "_$type": "RotationOverLifetime",
+              "enable": true,
+              "_angularVelocity": {
+                "_$type": "GradientAngularVelocity",
+                "_type": 2,
+                "_constant": 0.7853981633974483,
+                "_constantMin": -1,
+                "_constantMax": 1,
+                "_constantSeparate": {
+                  "_$type": "Vector3",
+                  "z": 0.7853981633974483
+                },
+                "_constantMinSeparate": {
+                  "_$type": "Vector3",
+                  "z": 0.7853981633974483
+                },
+                "_constantMaxSeparate": {
+                  "_$type": "Vector3",
+                  "z": 0.7853981633974483
+                },
+                "_gradient": {
+                  "_$type": "GradientDataNumber",
+                  "_elements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "_currentLength": 4
+                },
+                "_gradientX": {
+                  "_$type": "GradientDataNumber",
+                  "_elements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "_currentLength": 4
+                },
+                "_gradientY": {
+                  "_$type": "GradientDataNumber",
+                  "_elements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "_currentLength": 4
+                },
+                "_gradientZ": {
+                  "_$type": "GradientDataNumber",
+                  "_elements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "_currentLength": 4
+                },
+                "_gradientMin": {
+                  "_$type": "GradientDataNumber",
+                  "_elements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "_currentLength": 4
+                },
+                "_gradientMax": {
+                  "_$type": "GradientDataNumber",
+                  "_elements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "_currentLength": 4
+                },
+                "_gradientXMin": {
+                  "_$type": "GradientDataNumber",
+                  "_elements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "_currentLength": 4
+                },
+                "_gradientYMin": {
+                  "_$type": "GradientDataNumber",
+                  "_elements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "_currentLength": 4
+                },
+                "_gradientZMin": {
+                  "_$type": "GradientDataNumber",
+                  "_elements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "_currentLength": 4
+                },
+                "_gradientXMax": {
+                  "_$type": "GradientDataNumber",
+                  "_elements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "_currentLength": 4
+                },
+                "_gradientYMax": {
+                  "_$type": "GradientDataNumber",
+                  "_elements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "_currentLength": 4
+                },
+                "_gradientZMax": {
+                  "_$type": "GradientDataNumber",
+                  "_elements": {
+                    "_$type": "Float32Array",
+                    "value": [
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "_currentLength": 4
+                }
+              }
+            },
+            "textureSheetAnimation": {
+              "_$type": "TextureSheetAnimation",
+              "enable": true,
+              "tiles": {
+                "_$type": "Vector2",
+                "x": 2,
+                "y": 2
+              },
+              "_frame": {
+                "_$type": "FrameOverTime"
+              },
+              "_startFrame": {
+                "_$type": "StartFrame",
+                "_type": 1,
+                "_constantMax": 4
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "_$id": "21u80tl2",
+      "_$type": "Sprite3D",
+      "name": "Plane",
+      "active": false,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "y": 0.004999999888241291
+        },
+        "localScale": {
+          "_$type": "Vector3",
+          "x": 10,
+          "y": 1,
+          "z": 10
+        }
+      },
+      "_$comp": [
+        {
+          "_$type": "MeshFilter",
+          "sharedMesh": {
+            "_$uuid": "4a4afb22-ef83-40a2-a6a8-212a2d20c52f",
+            "_$type": "Mesh"
+          }
+        },
+        {
+          "_$type": "MeshRenderer",
+          "sharedMaterials": [
+            {
+              "_$uuid": "6465b450-dedd-4511-9848-05029d2d1fad",
+              "_$type": "Material"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "56ugkwia",
+      "_$prefab": "086bbea5-f0d6-42bf-8605-d0259a65b171",
+      "name": "icesrrowfly(1)",
+      "active": true,
+      "layer": 0,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": -5.59016,
+          "y": 18.8,
+          "z": -2.63003
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0.5299155298754943,
+          "y": 0.31347591593739144,
+          "z": -0.21949819938655477,
+          "w": 0.7567978077333786
+        }
+      }
+    },
+    {
+      "_$id": "te02wxaq",
+      "_$prefab": "086bbea5-f0d6-42bf-8605-d0259a65b171",
+      "name": "icesrrowfly(2)",
+      "active": true,
+      "layer": 0,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": -0.86032,
+          "y": 18.8,
+          "z": -3.30005
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0.5299155298754943,
+          "y": 0.31347591593739144,
+          "z": -0.21949819938655477,
+          "w": 0.7567978077333786
+        }
+      },
+      "_$comp": [
+        {
+          "_$override": "ShurikenParticleRenderer",
+          "_particleSystem": {
+            "startLifetimeConstant": 0.3,
+            "startDelay": 0.05
+          }
+        }
+      ],
+      "_$child": [
+        {
+          "_$override": "8q5k04xn",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.25
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "dvg70fen",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.25
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "l58yorsd",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.25
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "zoq5fc8o",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.25
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "mq8m0mus",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.25
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "4lhq5vpm",
+      "_$prefab": "086bbea5-f0d6-42bf-8605-d0259a65b171",
+      "name": "icesrrowfly(3)",
+      "active": true,
+      "layer": 0,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": -6.44022,
+          "y": 18.8,
+          "z": -1.3601
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0.5299155298754943,
+          "y": 0.31347591593739144,
+          "z": -0.21949819938655477,
+          "w": 0.7567978077333786
+        }
+      },
+      "_$comp": [
+        {
+          "_$override": "ShurikenParticleRenderer",
+          "_particleSystem": {
+            "startDelay": 0.1
+          }
+        }
+      ],
+      "_$child": [
+        {
+          "_$override": "8q5k04xn",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.3
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "dvg70fen",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.3
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "l58yorsd",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.3
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "zoq5fc8o",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.3
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "mq8m0mus",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.3
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "tw50apyx",
+      "_$prefab": "086bbea5-f0d6-42bf-8605-d0259a65b171",
+      "name": "icesrrowfly(4)",
+      "active": true,
+      "layer": 0,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": -5.92018,
+          "y": 18.8,
+          "z": -4.95008
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0.5299155298754943,
+          "y": 0.31347591593739144,
+          "z": -0.21949819938655477,
+          "w": 0.7567978077333786
+        }
+      },
+      "_$comp": [
+        {
+          "_$override": "ShurikenParticleRenderer",
+          "_particleSystem": {
+            "startDelay": 0.15
+          }
+        }
+      ],
+      "_$child": [
+        {
+          "_$override": "8q5k04xn",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.35
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "dvg70fen",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.35
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "l58yorsd",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.35
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "zoq5fc8o",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.35
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "mq8m0mus",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.35
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "wuv8b1sh",
+      "_$prefab": "086bbea5-f0d6-42bf-8605-d0259a65b171",
+      "name": "icesrrowfly(5)",
+      "active": true,
+      "layer": 0,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": -7.11024,
+          "y": 18.8,
+          "z": -3.94003
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0.5299155298754943,
+          "y": 0.31347591593739144,
+          "z": -0.21949819938655477,
+          "w": 0.7567978077333786
+        }
+      },
+      "_$comp": [
+        {
+          "_$override": "ShurikenParticleRenderer",
+          "_particleSystem": {
+            "startDelay": 0.2
+          }
+        }
+      ],
+      "_$child": [
+        {
+          "_$override": "8q5k04xn",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.4
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "dvg70fen",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.4
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "l58yorsd",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.4
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "zoq5fc8o",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.4
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "mq8m0mus",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.4
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "wcvabwgl",
+      "_$prefab": "086bbea5-f0d6-42bf-8605-d0259a65b171",
+      "name": "icesrrowfly(6)",
+      "active": true,
+      "layer": 0,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": -3.7402,
+          "y": 18.8,
+          "z": -3.93006
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0.5299155298754943,
+          "y": 0.31347591593739144,
+          "z": -0.21949819938655477,
+          "w": 0.7567978077333786
+        }
+      },
+      "_$comp": [
+        {
+          "_$override": "ShurikenParticleRenderer",
+          "_particleSystem": {
+            "startDelay": 0.25
+          }
+        }
+      ],
+      "_$child": [
+        {
+          "_$override": "8q5k04xn",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.45
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "dvg70fen",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.45
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "l58yorsd",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.45
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "zoq5fc8o",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.45
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "mq8m0mus",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.45
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "qcsxw2wa",
+      "_$prefab": "086bbea5-f0d6-42bf-8605-d0259a65b171",
+      "name": "icesrrowfly(7)",
+      "active": true,
+      "layer": 0,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": -3.60023,
+          "y": 18.8,
+          "z": -5.50008
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0.5299155298754943,
+          "y": 0.31347591593739144,
+          "z": -0.21949819938655477,
+          "w": 0.7567978077333786
+        }
+      },
+      "_$comp": [
+        {
+          "_$override": "ShurikenParticleRenderer",
+          "_particleSystem": {
+            "startDelay": 0.3
+          }
+        }
+      ],
+      "_$child": [
+        {
+          "_$override": "8q5k04xn",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.5
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "dvg70fen",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.5
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "l58yorsd",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.5
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "zoq5fc8o",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.5
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "mq8m0mus",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.5
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "qnvuqx8z",
+      "_$prefab": "086bbea5-f0d6-42bf-8605-d0259a65b171",
+      "name": "icesrrowfly(8)",
+      "active": true,
+      "layer": 0,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": -5.03023,
+          "y": 18.8,
+          "z": -8.65025
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0.5299155298754943,
+          "y": 0.31347591593739144,
+          "z": -0.21949819938655477,
+          "w": 0.7567978077333786
+        }
+      },
+      "_$comp": [
+        {
+          "_$override": "ShurikenParticleRenderer",
+          "_particleSystem": {
+            "startDelay": 0.35
+          }
+        }
+      ],
+      "_$child": [
+        {
+          "_$override": "8q5k04xn",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.55
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "dvg70fen",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.55
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "l58yorsd",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.55
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "zoq5fc8o",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.55
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "mq8m0mus",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.55
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "lg9bj1f2",
+      "_$prefab": "086bbea5-f0d6-42bf-8605-d0259a65b171",
+      "name": "icesrrowfly(9)",
+      "active": true,
+      "layer": 0,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": -5.88019,
+          "y": 18.8,
+          "z": -7.00004
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0.5299155298754943,
+          "y": 0.31347591593739144,
+          "z": -0.21949819938655477,
+          "w": 0.7567978077333786
+        }
+      },
+      "_$comp": [
+        {
+          "_$override": "ShurikenParticleRenderer",
+          "_particleSystem": {
+            "startDelay": 0.4
+          }
+        }
+      ],
+      "_$child": [
+        {
+          "_$override": "8q5k04xn",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.6
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "dvg70fen",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.6
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "l58yorsd",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.6
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "zoq5fc8o",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.6
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "mq8m0mus",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.6
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "bdmdtxs7",
+      "_$prefab": "086bbea5-f0d6-42bf-8605-d0259a65b171",
+      "name": "icesrrowfly(10)",
+      "active": true,
+      "layer": 0,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": -3.70027,
+          "y": 18.8,
+          "z": -5.11004
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0.5299155298754943,
+          "y": 0.31347591593739144,
+          "z": -0.21949819938655477,
+          "w": 0.7567978077333786
+        }
+      },
+      "_$comp": [
+        {
+          "_$override": "ShurikenParticleRenderer",
+          "_particleSystem": {
+            "startDelay": 0.45
+          }
+        }
+      ],
+      "_$child": [
+        {
+          "_$override": "8q5k04xn",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.65
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "dvg70fen",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.65
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "l58yorsd",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.65
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "zoq5fc8o",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.65
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "mq8m0mus",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.65
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "m7g67fx9",
+      "_$prefab": "086bbea5-f0d6-42bf-8605-d0259a65b171",
+      "name": "icesrrowfly(11)",
+      "active": true,
+      "layer": 0,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": -7.95018,
+          "y": 18.8,
+          "z": -5.41008
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0.5299155298754943,
+          "y": 0.31347591593739144,
+          "z": -0.21949819938655477,
+          "w": 0.7567978077333786
+        }
+      },
+      "_$comp": [
+        {
+          "_$override": "ShurikenParticleRenderer",
+          "_particleSystem": {
+            "startDelay": 0.5
+          }
+        }
+      ],
+      "_$child": [
+        {
+          "_$override": "8q5k04xn",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.7
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "dvg70fen",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.7
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "l58yorsd",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.7
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "zoq5fc8o",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.7
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "mq8m0mus",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.7
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "51wpmddl",
+      "_$prefab": "086bbea5-f0d6-42bf-8605-d0259a65b171",
+      "name": "icesrrowfly(12)",
+      "active": true,
+      "layer": 0,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": -5.67018,
+          "y": 18.8,
+          "z": -3.92016
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0.5299155298754943,
+          "y": 0.31347591593739144,
+          "z": -0.21949819938655477,
+          "w": 0.7567978077333786
+        }
+      },
+      "_$comp": [
+        {
+          "_$override": "ShurikenParticleRenderer",
+          "_particleSystem": {
+            "startDelay": 0.55
+          }
+        }
+      ],
+      "_$child": [
+        {
+          "_$override": "8q5k04xn",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.75
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "dvg70fen",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.75
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "l58yorsd",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.75
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "zoq5fc8o",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.75
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "mq8m0mus",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.75
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "42th0zd5",
+      "_$prefab": "086bbea5-f0d6-42bf-8605-d0259a65b171",
+      "name": "icesrrowfly(13)",
+      "active": true,
+      "layer": 0,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": -6.67018,
+          "y": 18.8,
+          "z": -3.55016
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0.5299155298754943,
+          "y": 0.31347591593739144,
+          "z": -0.21949819938655477,
+          "w": 0.7567978077333786
+        }
+      },
+      "_$comp": [
+        {
+          "_$override": "ShurikenParticleRenderer",
+          "_particleSystem": {
+            "startDelay": 0.6
+          }
+        }
+      ],
+      "_$child": [
+        {
+          "_$override": "8q5k04xn",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.8
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "dvg70fen",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.8
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "l58yorsd",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.8
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "zoq5fc8o",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.8
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "mq8m0mus",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.8
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "cox38fgd",
+      "_$prefab": "086bbea5-f0d6-42bf-8605-d0259a65b171",
+      "name": "icesrrowfly(14)",
+      "active": true,
+      "layer": 0,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": -2.26028,
+          "y": 18.8,
+          "z": -2.79016
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0.5299155298754943,
+          "y": 0.31347591593739144,
+          "z": -0.21949819938655477,
+          "w": 0.7567978077333786
+        }
+      },
+      "_$comp": [
+        {
+          "_$override": "ShurikenParticleRenderer",
+          "_particleSystem": {
+            "startDelay": 0.65
+          }
+        }
+      ],
+      "_$child": [
+        {
+          "_$override": "8q5k04xn",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.85
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "dvg70fen",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.85
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "l58yorsd",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.85
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "zoq5fc8o",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.85
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "mq8m0mus",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.85
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "97jg5qnc",
+      "_$prefab": "086bbea5-f0d6-42bf-8605-d0259a65b171",
+      "name": "icesrrowfly(15)",
+      "active": true,
+      "layer": 0,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": -7.71028,
+          "y": 18.8,
+          "z": -7.66014
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0.5299155298754943,
+          "y": 0.31347591593739144,
+          "z": -0.21949819938655477,
+          "w": 0.7567978077333786
+        }
+      },
+      "_$comp": [
+        {
+          "_$override": "ShurikenParticleRenderer",
+          "_particleSystem": {
+            "startDelay": 0.7
+          }
+        }
+      ],
+      "_$child": [
+        {
+          "_$override": "8q5k04xn",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "dvg70fen",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "l58yorsd",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "zoq5fc8o",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "mq8m0mus",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.9
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "8s3zfbkz",
+      "_$prefab": "086bbea5-f0d6-42bf-8605-d0259a65b171",
+      "name": "icesrrowfly(16)",
+      "active": true,
+      "layer": 0,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": -5.86018,
+          "y": 18.8,
+          "z": -3.3301
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0.5299155298754943,
+          "y": 0.31347591593739144,
+          "z": -0.21949819938655477,
+          "w": 0.7567978077333786
+        }
+      },
+      "_$comp": [
+        {
+          "_$override": "ShurikenParticleRenderer",
+          "_particleSystem": {
+            "startDelay": 0.75
+          }
+        }
+      ],
+      "_$child": [
+        {
+          "_$override": "8q5k04xn",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.95
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "dvg70fen",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.95
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "l58yorsd",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.95
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "zoq5fc8o",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.95
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "mq8m0mus",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 0.95
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "xi6wtcui",
+      "_$prefab": "086bbea5-f0d6-42bf-8605-d0259a65b171",
+      "name": "icesrrowfly(17)",
+      "active": true,
+      "layer": 0,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": -2.86026,
+          "y": 18.8,
+          "z": -8.70011
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0.5299155298754943,
+          "y": 0.31347591593739144,
+          "z": -0.21949819938655477,
+          "w": 0.7567978077333786
+        }
+      },
+      "_$comp": [
+        {
+          "_$override": "ShurikenParticleRenderer",
+          "_particleSystem": {
+            "startDelay": 0.8
+          }
+        }
+      ],
+      "_$child": [
+        {
+          "_$override": "8q5k04xn",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "dvg70fen",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "l58yorsd",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "zoq5fc8o",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "mq8m0mus",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "5sxcjf4a",
+      "_$prefab": "086bbea5-f0d6-42bf-8605-d0259a65b171",
+      "name": "icesrrowfly(18)",
+      "active": true,
+      "layer": 0,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": -2.5202,
+          "y": 18.8,
+          "z": -1.4402
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0.5299155298754943,
+          "y": 0.31347591593739144,
+          "z": -0.21949819938655477,
+          "w": 0.7567978077333786
+        }
+      },
+      "_$comp": [
+        {
+          "_$override": "ShurikenParticleRenderer",
+          "_particleSystem": {
+            "startDelay": 0.85
+          }
+        }
+      ],
+      "_$child": [
+        {
+          "_$override": "8q5k04xn",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.05
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "dvg70fen",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.05
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "l58yorsd",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.05
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "zoq5fc8o",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.05
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "mq8m0mus",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.05
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "ejum3dns",
+      "_$prefab": "086bbea5-f0d6-42bf-8605-d0259a65b171",
+      "name": "icesrrowfly(19)",
+      "active": true,
+      "layer": 0,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": -5.83018,
+          "y": 18.8,
+          "z": -0.87017
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0.5299155298754943,
+          "y": 0.31347591593739144,
+          "z": -0.21949819938655477,
+          "w": 0.7567978077333786
+        }
+      },
+      "_$comp": [
+        {
+          "_$override": "ShurikenParticleRenderer",
+          "_particleSystem": {
+            "startDelay": 0.9
+          }
+        }
+      ],
+      "_$child": [
+        {
+          "_$override": "8q5k04xn",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.1
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "dvg70fen",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.1
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "l58yorsd",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.1
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "zoq5fc8o",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.1
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "mq8m0mus",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "oa714x6e",
+      "_$prefab": "086bbea5-f0d6-42bf-8605-d0259a65b171",
+      "name": "icesrrowfly(20)",
+      "active": true,
+      "layer": 0,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": -2.72025,
+          "y": 18.8,
+          "z": -2.8402
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0.5299155298754943,
+          "y": 0.31347591593739144,
+          "z": -0.21949819938655477,
+          "w": 0.7567978077333786
+        }
+      },
+      "_$comp": [
+        {
+          "_$override": "ShurikenParticleRenderer",
+          "_particleSystem": {
+            "startDelay": 0.95
+          }
+        }
+      ],
+      "_$child": [
+        {
+          "_$override": "8q5k04xn",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.15
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "dvg70fen",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.15
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "l58yorsd",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.15
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "zoq5fc8o",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.15
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "mq8m0mus",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.15
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "7ck913t5",
+      "_$prefab": "086bbea5-f0d6-42bf-8605-d0259a65b171",
+      "name": "icesrrowfly(21)",
+      "active": true,
+      "layer": 0,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": -3.98023,
+          "y": 18.8,
+          "z": -3.85023
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0.5299155298754943,
+          "y": 0.31347591593739144,
+          "z": -0.21949819938655477,
+          "w": 0.7567978077333786
+        }
+      },
+      "_$comp": [
+        {
+          "_$override": "ShurikenParticleRenderer",
+          "_particleSystem": {
+            "startDelay": 1
+          }
+        }
+      ],
+      "_$child": [
+        {
+          "_$override": "8q5k04xn",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.2
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "dvg70fen",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.2
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "l58yorsd",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.2
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "zoq5fc8o",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.2
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "mq8m0mus",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.2
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "ktytctpj",
+      "_$prefab": "086bbea5-f0d6-42bf-8605-d0259a65b171",
+      "name": "icesrrowfly(22)",
+      "active": true,
+      "layer": 0,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": -8.51087,
+          "y": 18.8,
+          "z": -3.21014
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0.5299155298754943,
+          "y": 0.31347591593739144,
+          "z": -0.21949819938655477,
+          "w": 0.7567978077333786
+        }
+      },
+      "_$comp": [
+        {
+          "_$override": "ShurikenParticleRenderer",
+          "_particleSystem": {
+            "startDelay": 1.05
+          }
+        }
+      ],
+      "_$child": [
+        {
+          "_$override": "8q5k04xn",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.25
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "dvg70fen",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.25
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "l58yorsd",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.25
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "zoq5fc8o",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.25
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "mq8m0mus",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.25
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "8fdqq5yj",
+      "_$prefab": "086bbea5-f0d6-42bf-8605-d0259a65b171",
+      "name": "icesrrowfly(23)",
+      "active": true,
+      "layer": 0,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": -2.06037,
+          "y": 18.8,
+          "z": -3.02022
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0.5299155298754943,
+          "y": 0.31347591593739144,
+          "z": -0.21949819938655477,
+          "w": 0.7567978077333786
+        }
+      },
+      "_$comp": [
+        {
+          "_$override": "ShurikenParticleRenderer",
+          "_particleSystem": {
+            "startDelay": 1.1
+          }
+        }
+      ],
+      "_$child": [
+        {
+          "_$override": "8q5k04xn",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.3
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "dvg70fen",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.3
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "l58yorsd",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.3
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "zoq5fc8o",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.3
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "mq8m0mus",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.3
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "rqmhueno",
+      "_$prefab": "086bbea5-f0d6-42bf-8605-d0259a65b171",
+      "name": "icesrrowfly(24)",
+      "active": true,
+      "layer": 0,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": -5.69023,
+          "y": 18.8,
+          "z": -7.25013
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0.5299155298754943,
+          "y": 0.31347591593739144,
+          "z": -0.21949819938655477,
+          "w": 0.7567978077333786
+        }
+      },
+      "_$comp": [
+        {
+          "_$override": "ShurikenParticleRenderer",
+          "_particleSystem": {
+            "startDelay": 1.15
+          }
+        }
+      ],
+      "_$child": [
+        {
+          "_$override": "8q5k04xn",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.35
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "dvg70fen",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.35
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "l58yorsd",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.35
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "zoq5fc8o",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.35
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "mq8m0mus",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.35
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "5qiu5tl6",
+      "_$prefab": "086bbea5-f0d6-42bf-8605-d0259a65b171",
+      "name": "icesrrowfly(25)",
+      "active": true,
+      "layer": 0,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": -1.89022,
+          "y": 18.8,
+          "z": -7.52012
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0.5299155298754943,
+          "y": 0.31347591593739144,
+          "z": -0.21949819938655477,
+          "w": 0.7567978077333786
+        }
+      },
+      "_$comp": [
+        {
+          "_$override": "ShurikenParticleRenderer",
+          "_particleSystem": {
+            "startDelay": 1.2
+          }
+        }
+      ],
+      "_$child": [
+        {
+          "_$override": "8q5k04xn",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.4
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "dvg70fen",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.4
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "l58yorsd",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.4
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "zoq5fc8o",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.4
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "mq8m0mus",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.4
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "up3mgn09",
+      "_$prefab": "086bbea5-f0d6-42bf-8605-d0259a65b171",
+      "name": "icesrrowfly(26)",
+      "active": true,
+      "layer": 0,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": -6.77018,
+          "y": 18.8,
+          "z": -8.49027
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0.5299155298754943,
+          "y": 0.31347591593739144,
+          "z": -0.21949819938655477,
+          "w": 0.7567978077333786
+        }
+      },
+      "_$comp": [
+        {
+          "_$override": "ShurikenParticleRenderer",
+          "_particleSystem": {
+            "startDelay": 1.25
+          }
+        }
+      ],
+      "_$child": [
+        {
+          "_$override": "8q5k04xn",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.45
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "dvg70fen",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.45
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "l58yorsd",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.45
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "zoq5fc8o",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.45
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "mq8m0mus",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.45
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "yokqx232",
+      "_$prefab": "086bbea5-f0d6-42bf-8605-d0259a65b171",
+      "name": "icesrrowfly(27)",
+      "active": true,
+      "layer": 0,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": -6.63033,
+          "y": 18.8,
+          "z": -2.5402
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0.5299155298754943,
+          "y": 0.31347591593739144,
+          "z": -0.21949819938655477,
+          "w": 0.7567978077333786
+        }
+      },
+      "_$comp": [
+        {
+          "_$override": "ShurikenParticleRenderer",
+          "_particleSystem": {
+            "startDelay": 1.3
+          }
+        }
+      ],
+      "_$child": [
+        {
+          "_$override": "8q5k04xn",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.5
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "dvg70fen",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.5
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "l58yorsd",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.5
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "zoq5fc8o",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.5
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "mq8m0mus",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.5
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "y0ufcxmg",
+      "_$prefab": "086bbea5-f0d6-42bf-8605-d0259a65b171",
+      "name": "icesrrowfly(28)",
+      "active": true,
+      "layer": 0,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": -0.90029,
+          "y": 18.8,
+          "z": -5.41008
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0.5299155298754943,
+          "y": 0.31347591593739144,
+          "z": -0.21949819938655477,
+          "w": 0.7567978077333786
+        }
+      },
+      "_$comp": [
+        {
+          "_$override": "ShurikenParticleRenderer",
+          "_particleSystem": {
+            "startDelay": 1.35
+          }
+        }
+      ],
+      "_$child": [
+        {
+          "_$override": "8q5k04xn",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.55
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "dvg70fen",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.55
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "l58yorsd",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.55
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "zoq5fc8o",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.55
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "mq8m0mus",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.55
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "1nhxvfus",
+      "_$prefab": "086bbea5-f0d6-42bf-8605-d0259a65b171",
+      "name": "icesrrowfly(29)",
+      "active": true,
+      "layer": 0,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": -3.9002,
+          "y": 18.8,
+          "z": -7.12008
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0.5299155298754943,
+          "y": 0.31347591593739144,
+          "z": -0.21949819938655477,
+          "w": 0.7567978077333786
+        }
+      },
+      "_$comp": [
+        {
+          "_$override": "ShurikenParticleRenderer",
+          "_particleSystem": {
+            "startDelay": 1.4
+          }
+        }
+      ],
+      "_$child": [
+        {
+          "_$override": "8q5k04xn",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.6
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "dvg70fen",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.6
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "l58yorsd",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.6
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "zoq5fc8o",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.6
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "mq8m0mus",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.6
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "nv6z45sf",
+      "_$prefab": "086bbea5-f0d6-42bf-8605-d0259a65b171",
+      "name": "icesrrowfly(30)",
+      "active": true,
+      "layer": 0,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": -5.24018,
+          "y": 18.8,
+          "z": -4.61009
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0.5299155298754943,
+          "y": 0.31347591593739144,
+          "z": -0.21949819938655477,
+          "w": 0.7567978077333786
+        }
+      },
+      "_$comp": [
+        {
+          "_$override": "ShurikenParticleRenderer",
+          "_particleSystem": {
+            "startDelay": 1.45
+          }
+        }
+      ],
+      "_$child": [
+        {
+          "_$override": "8q5k04xn",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.65
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "dvg70fen",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.65
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "l58yorsd",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.65
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "zoq5fc8o",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.65
+              }
+            }
+          ]
+        },
+        {
+          "_$override": "mq8m0mus",
+          "_$comp": [
+            {
+              "_$override": "ShurikenParticleRenderer",
+              "_particleSystem": {
+                "startDelay": 1.65
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
