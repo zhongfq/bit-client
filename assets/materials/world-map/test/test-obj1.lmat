@@ -3,10 +3,10 @@
   "props": {
     "textures": [
       {
-        "path": "res://e86e1cc9-032e-4034-a38b-bef9d336212c",
+        "path": "res://0b02e73d-c72d-41a9-bfc5-761612763c3c",
         "constructParams": [
-          384,
-          384,
+          256,
+          192,
           1,
           false,
           false,
@@ -48,7 +48,6 @@
       0
     ],
     "defines": [
-      "Gamma_u_AlbedoTexture",
       "ALBEDOTEXTURE"
     ]
   }
