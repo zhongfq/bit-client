@@ -37,6 +37,8 @@ export class PveServer extends b3.Context {
     private _stanceMap: Map<number, ElementComponent> = new Map();
     private _elements: Map<string, ElementComponent> = new Map();
 
+    private _eidCount: number = 1;
+
     public constructor(sender: ICommandSender) {
         super();
 
@@ -152,7 +154,7 @@ export class PveServer extends b3.Context {
 
     public start() {
         // 创建主角
-        const entity = this._ecs.createEntity();
+        const entity = this._ecs.createEntity(this._eidCount++);
         entity.etype = BattleConf.ENTITY_TYPE.HERO;
 
         const element = entity.addComponent(ElementComponent);
@@ -205,7 +207,7 @@ export class PveServer extends b3.Context {
             if (idx >= SOLDIER_COUNT) {
                 return;
             }
-            const entity = this._ecs.createEntity();
+            const entity = this._ecs.createEntity(this._eidCount++);
             entity.etype = BattleConf.ENTITY_TYPE.SOLDIER;
 
             const element = entity.addComponent(ElementComponent);
@@ -258,7 +260,7 @@ export class PveServer extends b3.Context {
             if (idx < SOLDIER_COUNT) {
                 return;
             }
-            const entity = this._ecs.createEntity();
+            const entity = this._ecs.createEntity(this._eidCount++);
             entity.etype = BattleConf.ENTITY_TYPE.TRUCK;
 
             const element = entity.addComponent(ElementComponent);
@@ -522,7 +524,7 @@ export class PveServer extends b3.Context {
             return;
         }
 
-        const entity = this._ecs.createEntity();
+        const entity = this._ecs.createEntity(this._eidCount++);
         entity.etype = BattleConf.ENTITY_TYPE.HERO;
 
         const element = entity.addComponent(ElementComponent);
@@ -595,7 +597,7 @@ export class PveServer extends b3.Context {
         const buildingRow = table.battleBuilding[tid];
         const entityRow = table.battleEntity[buildingRow.battle_entity];
 
-        const entity = this._ecs.createEntity();
+        const entity = this._ecs.createEntity(this._eidCount++);
         entity.etype = entityRow.etype;
 
         const element = entity.addComponent(ElementComponent);
@@ -650,7 +652,7 @@ export class PveServer extends b3.Context {
         const buildingRow = table.battleBuilding[tid];
         const entityRow = table.battleEntity[buildingRow.battle_entity];
 
-        const entity = this._ecs.createEntity();
+        const entity = this._ecs.createEntity(this._eidCount++);
         entity.etype = entityRow.etype;
 
         const element = entity.addComponent(ElementComponent);

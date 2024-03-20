@@ -41,5 +41,6 @@ export class ElementComponent extends ecs.Component {
 export class TruckComponent extends ecs.Component {
     public collectType!: number;
     public collectCnt: number = 0;
+    public collectObjCnt: number = 0;
     public collectObjs: Laya.Sprite3D[] = [];
 }

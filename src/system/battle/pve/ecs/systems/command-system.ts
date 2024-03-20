@@ -4,13 +4,7 @@ import { tween } from "../../../../../core/tween/tween";
 import { BattleConf } from "../../../../../def/battle";
 import { res } from "../../../../../misc/res";
 import { HeadInfoStyle } from "../../../../../ui-runtime/prefab/battle/HeadInfoUI";
-import {
-    ElementCreator,
-    UpdateTruck,
-    UpdateHp,
-    TruckFormation,
-    PveDef,
-} from "../../../pve-server/pve-defs";
+import { ElementCreator, UpdateTruck, UpdateHp, PveDef } from "../../../pve-server/pve-defs";
 import { ICommandSender } from "../../../pve-server/pve-server";
 import { PveContext } from "../../pve-context";
 import { CameraComponent } from "../components/camera-component";
@@ -33,58 +27,18 @@ import {
     TruckComponent,
 } from "../components/element-component";
 import { Pool } from "../../../../../core/pool";
-import { IVector3Like, Tween } from "../../../../../core/laya";
+import { TruckCollectComponent } from "../components/truck-collect-component";
+import { TruckCollectSystem } from "./truck-collect-system";
 
 const PREFAB_HEAD_INFO1 = "resources/prefab/battle/ui/head-info1.lh";
 const PREFAB_HEAD_INFO2 = "resources/prefab/battle/ui/head-info2.lh";
 const PREFAB_HEAD_INFO3 = "resources/prefab/battle/ui/head-info3.lh";
 const PREFAB_ROLE_SHADOW = "resources/prefab/battle/ui/role-shadow.lh";
 
-interface FlyingCollect {
-    idx: number;
-    obj: Laya.Sprite3D;
-    parent: Laya.Sprite3D;
-    targetPos: Laya.Vector3;
-    finalPos: Laya.Vector3;
-    speed: number;
-}
-
 export class CommandSystem extends ecs.System implements ICommandSender {
     public declare context: PveContext;
 
-    private _flyingCollects: Map<string, FlyingCollect> = new Map();
-
-    public override onDestroy(): void {
-        this._flyingCollects.clear();
-    }
-
-    public override update(dt: number): void {
-        for (const [key, data] of this._flyingCollects.entries()) {
-            if (!data.obj.transform || !data.parent.transform) {
-                this._flyingCollects.delete(key);
-                continue;
-            }
-            const curPos = data.obj.transform.localPosition;
-            const totalDis = Laya.Vector3.distance(curPos, data.targetPos);
-            const gapDis = data.speed * dt;
-
-            if (gapDis < totalDis) {
-                const nextPos = new Laya.Vector3();
-                Laya.Vector3.lerp(curPos, data.targetPos, gapDis / totalDis, nextPos);
-                data.obj.transform.localPosition = nextPos;
-                data.speed += 0.2;
-            } else {
-                const finalPos = data.finalPos;
-                data.obj.transform.localPosition = finalPos;
-                data.obj.transform.localRotationEuler = Laya.Vector3.ZERO;
-                data.obj.transform.localScale = Laya.Vector3.ONE;
-                data.obj.removeSelf();
-                data.parent.addChild(data.obj);
-
-                this._flyingCollects.delete(key);
-            }
-        }
-    }
+    public override update(dt: number): void {}
 
     public focus(eid: number) {
         const camera = this.ecs.getSingletonComponent(CameraComponent)!;
@@ -362,119 +316,25 @@ export class CommandSystem extends ecs.System implements ICommandSender {
         if (!truckComp) {
             return;
         }
-        const curObjCnt = truckComp.collectObjs.length;
+        const curObjCnt = truckComp.collectObjCnt;
         const tarObjCnt = Math.floor(data.collectCnt / PveDef.COLLECT_CNT_PER_OBJ);
-        if (curObjCnt < tarObjCnt) {
-            this.addTruckCollectObj(eid, tarObjCnt - curObjCnt, data);
-        } else if (curObjCnt > tarObjCnt) {
-            this.delTruckCollectObj(eid, curObjCnt - tarObjCnt);
-        }
-    }
+        let diffCnt = tarObjCnt - curObjCnt;
 
-    public async addTruckCollectObj(eid: number, count: number, data: UpdateTruck) {
-        const truck = this._findElement(eid);
-        if (!truck) {
-            return;
-        }
-        const truckComp = truck.getComponent(TruckComponent);
-        if (!truckComp) {
-            return;
-        }
-        const view = truck.animation.view;
-        const pointParent = view?.getChildByName("point") as Laya.Sprite3D;
-        if (!pointParent) {
-            return;
-        }
-        const gatherParent = view?.getChildByPath("anim/gather") as Laya.Sprite3D;
-        if (!gatherParent) {
-            return;
-        }
-
-        let path!: string;
-        let formation!: Laya.Vector3[];
-        if (truckComp.collectType == BattleConf.ENTITY_TYPE.WOOD) {
-            [path, formation] = ["anim/gather-wood", TruckFormation.WOOD];
-        } else if (truckComp.collectType == BattleConf.ENTITY_TYPE.FOOD) {
-            [path, formation] = ["anim/gather-food", TruckFormation.FOOD];
-        } else if (truckComp.collectType == BattleConf.ENTITY_TYPE.STONE) {
-            [path, formation] = ["anim/gather-stone", TruckFormation.STONE];
-        }
-        if (!path || !formation) {
-            return;
-        }
-
-        while (count--) {
-            const obj = (view?.getChildByPath(path) as Laya.Sprite3D).clone()!;
-            obj.active = true;
-            obj.transform.localRotationEulerY = Math.random() * 360;
-            obj.transform.localScale = new Laya.Vector3(0.25, 0.25, 0.25);
-            this.context.scene3D.addChild(obj);
-
-            const idx = truckComp.collectObjs.length;
-            truckComp.collectObjs.push(obj);
-
-            const collection = this._findElement(data.collection);
-            const startPos = collection!.transform.position.clone();
-            startPos.y = 1; // TODO：不同采集物配置不同高度
-            obj.transform.position = startPos;
-
-            const targetPos = new Laya.Vector3(0, 0.2, 0);
-            const finalPos = formation[idx % formation.length].clone();
-            const offsetY = Math.floor(idx / formation.length) * 0.35;
-            finalPos.y += offsetY; // 计算采集物每一层的偏移高度
-
-            obj.name = idx + "_" + finalPos.x + "_" + finalPos.y + "_" + finalPos.z;
-
-            const radius = Math.random() + 0.5;
-            const rad = Math.random() * Math.PI * 2;
-            Laya.Tween.to(
-                obj.transform,
-                {
-                    localPositionX: startPos.x + radius * Math.sin(rad),
-                    localPositionZ: startPos.z + radius * Math.cos(rad),
-                    localRotationEulerY: obj.transform.localRotationEulerY + 90,
-                },
-                500,
-                Laya.Ease.cubicOut,
-                Laya.Handler.create(null, () => {
-                    if (!obj.transform || !pointParent.transform) {
-                        return;
-                    }
-                    const localPos = new Laya.Vector3();
-                    pointParent.transform.globalToLocal(obj.transform.position, localPos);
-                    obj.transform.localPosition = localPos;
-                    obj.removeSelf();
-                    pointParent.addChild(obj);
-
-                    this._flyingCollects.set(obj.name, {
-                        idx: idx,
-                        obj: obj,
-                        parent: gatherParent,
-                        targetPos: targetPos,
-                        finalPos: finalPos,
-                        speed: 1,
-                    });
-                })
-            );
-        }
-    }
-
-    public delTruckCollectObj(eid: number, count: number) {
-        const truck = this._findElement(eid);
-        if (!truck) {
-            return;
-        }
-        const truckComp = truck.getComponent(TruckComponent);
-        if (!truckComp) {
-            return;
-        }
-        while (count--) {
-            let obj = truckComp.collectObjs.pop();
-            if (obj) {
-                obj.removeSelf();
-                obj = undefined;
+        if (diffCnt > 0) {
+            while (diffCnt--) {
+                const entity = this.ecs.createEntity();
+                const component = entity.addComponent(TruckCollectComponent);
+                component.truck = eid;
+                component.data = data;
+            }
+        } else if (diffCnt < 0) {
+            diffCnt = -diffCnt;
+            while (diffCnt--) {
+                const system = this.ecs.getSystem(TruckCollectSystem);
+                system?.delCollectObj(eid);
             }
         }
+        truckComp.collectObjCnt = tarObjCnt;
     }
 
     public drawDebug(x: number, z: number, radius: number, color: number) {

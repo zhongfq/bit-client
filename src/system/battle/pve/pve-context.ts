@@ -25,6 +25,7 @@ import { JoystickSystem } from "./ecs/systems/joystick-system";
 import { MovementSystem } from "./ecs/systems/movement-system";
 import { RenderSystem } from "./ecs/systems/render-system";
 import { TilemapSystem } from "./ecs/systems/tilemap-system";
+import { TruckCollectSystem } from "./ecs/systems/truck-collect-system";
 
 @Laya.regClass()
 export class PveContext extends Mediator implements ITMContext {
@@ -82,6 +83,7 @@ export class PveContext extends Mediator implements ITMContext {
         this._ecs.addSystem(CameraSystem);
         this._ecs.addSystem(RenderSystem);
         this._ecs.addSystem(TilemapSystem);
+        this._ecs.addSystem(TruckCollectSystem);
         this._pveServer = new PveServer(this._ecs.getSystem(CommandSystem)!);
         this._sender = new CommandSender(this._pveServer);
 
