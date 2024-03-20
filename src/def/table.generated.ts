@@ -468,7 +468,7 @@ export interface GeneratedChestRow {
     open_score: number;
     reward_score: number;
     reward: any;
-    desc?: string;
+    desc: string;
 }
 
 // file: design/chest.xlsx

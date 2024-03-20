@@ -105,6 +105,7 @@ export class ChestMediator extends Mediator {
         cell2.hightlight();
         this._updateBtnOpen();
         this.owner.spineShest.play("chest2_down", false);
+        this.owner.labelBoxDesc.text = this.listData[this.selectedIndex].row?.desc || "";
     }
 
     private _playRewardChestTween(chestId: number) {
@@ -143,8 +144,6 @@ export class ChestMediator extends Mediator {
         const scoreMax = chesRow ? chesRow.reward_score : 0;
         this.owner.boxReward.gray = score < scoreMax;
         this.owner.labelScore.text = `${score}/${scoreMax}`;
-        console.log(app.service.table.chest.hero[app.service.chest.heroId]);
-
         this.owner.spineHero.source = `animations/spine/${
             app.service.table.chest.hero[app.service.chest.heroId].spine_source
         }.skel`;
@@ -182,7 +181,6 @@ export class ChestMediator extends Mediator {
             item.labelNum.text = this.listData[index].cmdNum
                 ? `x${this.listData[index].cmdNum}`
                 : "x0";
-            console.log(this.listData[index].row.icon);
 
             item.imgIcon.skin = `resources/atlas/chest/${this.listData[index].row.icon}_n.png`;
             item.imgHigh.skin = `resources/atlas/chest/${this.listData[index].row.icon}_s.png`;
