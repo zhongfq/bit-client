@@ -265,6 +265,12 @@ export class Tilemap {
             `${this.context.mapDir}/world-tileset-ref.json`,
             "json"
         )) as TMWorldMap;
+
+        if (!this._root || this._root.destroyed) {
+            console.warn("Tilemap根节点已经被销毁");
+            return;
+        }
+
         tilesetRef.tilesets.forEach((tileset) => {
             if (tileset.tiles?.length > 0) {
                 const map = new Map<number, TMTile>();

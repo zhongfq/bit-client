@@ -95,7 +95,7 @@ export abstract class TMTileElemet extends TMElement {
         const prefab = await Laya.loader.load(prefabPath, Laya.Loader.HIERARCHY);
 
         // 如果uid和缓存的不一致，说明对象复用了
-        if (cacheUid !== this.uid) {
+        if (cacheUid !== this.uid || this._tilemap.getRoot()?.destroyed !== false) {
             return;
         }
         this._tile = prefab.create() as Laya.Sprite3D;
@@ -260,7 +260,7 @@ export class TMStaticElement extends TMElement {
         const texture = (await Laya.loader.load(path, Laya.Loader.TEXTURE2D)) as Laya.Texture2D;
 
         // 如果uid和缓存的不一致，说明对象复用了
-        if (cacheUid !== this.uid) {
+        if (cacheUid !== this.uid || this._tilemap.getRoot()?.destroyed !== false) {
             return;
         }
         this._root = prefab.create() as Laya.Sprite3D;
@@ -351,7 +351,7 @@ export class TMObjectElement extends TMElement {
             Laya.Loader.HIERARCHY
         );
         // 如果uid和缓存的不一致，说明对象复用了
-        if (cacheUid !== this.uid) {
+        if (cacheUid !== this.uid || this._tilemap.getRoot()?.destroyed !== false) {
             return;
         }
         this._board = prefab.create() as Laya.Sprite3D;
@@ -405,7 +405,7 @@ export class TMObjectElement extends TMElement {
         const texture = (await Laya.loader.load(path, Laya.Loader.TEXTURE2D)) as Laya.Texture2D;
 
         // 如果uid和缓存的不一致，说明对象复用了
-        if (!this._board || cacheUid !== this.uid) {
+        if (!this._board || cacheUid !== this.uid || this._tilemap.getRoot()?.destroyed !== false) {
             return;
         }
         const sprite = this._board.getChildAt(0) as Laya.Sprite3D;
@@ -511,7 +511,7 @@ export class TMBlockElement extends TMElement {
             Laya.Loader.HIERARCHY
         );
         // 如果uid和缓存的不一致，说明对象复用了
-        if (cacheUid !== this.uid) {
+        if (cacheUid !== this.uid || this._tilemap.getRoot()?.destroyed !== false) {
             return;
         }
         this._blockTile = prefab.create() as Laya.Sprite3D;
@@ -578,7 +578,7 @@ export class TMBuildingElement extends TMDebugElement {
             Laya.Loader.HIERARCHY
         );
         // 如果uid和缓存的不一致，说明对象复用了
-        if (cacheUid !== this.uid) {
+        if (cacheUid !== this.uid || this._tilemap.getRoot()?.destroyed !== false) {
             return;
         }
         for (let i = 0; i < textureCfg.tile_w; i++) {
@@ -629,7 +629,7 @@ export class TMMonsterElement extends TMDebugElement {
             Laya.Loader.HIERARCHY
         );
         // 如果uid和缓存的不一致，说明对象复用了
-        if (cacheUid !== this.uid) {
+        if (cacheUid !== this.uid || this._tilemap.getRoot()?.destroyed !== false) {
             return;
         }
         this._debugObj = prefab.create() as Laya.Sprite3D;
@@ -672,7 +672,7 @@ export class TMEventElement extends TMDebugElement {
             "resources/prefab/world-map/test/debug-obj.lh",
             Laya.Loader.HIERARCHY
         );
-        if (cacheUid !== this.uid) {
+        if (cacheUid !== this.uid || this._tilemap.getRoot()?.destroyed !== false) {
             return;
         }
         this._debugObj = prefab.create() as Laya.Sprite3D;
