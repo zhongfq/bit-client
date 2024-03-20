@@ -52,16 +52,16 @@ interface FlyingCollect {
 export class CommandSystem extends ecs.System implements ICommandSender {
     public declare context: PveContext;
 
-    private _flyingCollects: Map<FlyingCollect, boolean> = new Map();
+    private _flyingCollects: Map<string, FlyingCollect> = new Map();
 
     public override onDestroy(): void {
         this._flyingCollects.clear();
     }
 
     public override update(dt: number): void {
-        for (const data of this._flyingCollects.keys()) {
+        for (const [key, data] of this._flyingCollects.entries()) {
             if (!data.obj.transform || !data.parent.transform) {
-                this._flyingCollects.delete(data);
+                this._flyingCollects.delete(key);
                 continue;
             }
             const curPos = data.obj.transform.localPosition;
@@ -78,11 +78,10 @@ export class CommandSystem extends ecs.System implements ICommandSender {
                 data.obj.transform.localPosition = finalPos;
                 data.obj.transform.localRotationEuler = Laya.Vector3.ZERO;
                 data.obj.transform.localScale = Laya.Vector3.ONE;
-                data.obj.name = data.idx + "_" + finalPos.x + "_" + finalPos.y + "_" + finalPos.z;
                 data.obj.removeSelf();
                 data.parent.addChild(data.obj);
 
-                this._flyingCollects.delete(data);
+                this._flyingCollects.delete(key);
             }
         }
     }
@@ -411,13 +410,20 @@ export class CommandSystem extends ecs.System implements ICommandSender {
             obj.transform.localScale = new Laya.Vector3(0.25, 0.25, 0.25);
             this.context.scene3D.addChild(obj);
 
+            const idx = truckComp.collectObjs.length;
+            truckComp.collectObjs.push(obj);
+
             const collection = this._findElement(data.collection);
             const startPos = collection!.transform.position.clone();
             startPos.y = 1; // TODO：不同采集物配置不同高度
             obj.transform.position = startPos;
 
-            const idx = truckComp.collectObjs.length;
-            truckComp.collectObjs.push(obj);
+            const targetPos = new Laya.Vector3(0, 0.2, 0);
+            const finalPos = formation[idx % formation.length].clone();
+            const offsetY = Math.floor(idx / formation.length) * 0.35;
+            finalPos.y += offsetY; // 计算采集物每一层的偏移高度
+
+            obj.name = idx + "_" + finalPos.x + "_" + finalPos.y + "_" + finalPos.z;
 
             const radius = Math.random() + 0.5;
             const rad = Math.random() * Math.PI * 2;
@@ -440,22 +446,14 @@ export class CommandSystem extends ecs.System implements ICommandSender {
                     obj.removeSelf();
                     pointParent.addChild(obj);
 
-                    const targetPos = new Laya.Vector3(0, 0.2, 0);
-                    const finalPos = formation[idx % formation.length].clone();
-                    const offsetY = Math.floor(idx / formation.length) * 0.35;
-                    finalPos.y += offsetY; // 计算采集物每一层的偏移高度
-
-                    this._flyingCollects.set(
-                        {
-                            idx: idx,
-                            obj: obj,
-                            parent: gatherParent,
-                            targetPos: targetPos,
-                            finalPos: finalPos,
-                            speed: 1,
-                        },
-                        true
-                    );
+                    this._flyingCollects.set(obj.name, {
+                        idx: idx,
+                        obj: obj,
+                        parent: gatherParent,
+                        targetPos: targetPos,
+                        finalPos: finalPos,
+                        speed: 1,
+                    });
                 })
             );
         }
