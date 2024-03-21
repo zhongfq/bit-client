@@ -9,6 +9,11 @@
       "_$type": "Sprite3D",
       "name": "anim",
       "transform": {
+        "localRotation": {
+          "_$type": "Quaternion",
+          "y": 0.7071067811865475,
+          "w": 0.7071067811865476
+        },
         "localScale": {
           "_$type": "Vector3",
           "x": 0.2,

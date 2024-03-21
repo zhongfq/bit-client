@@ -342,7 +342,7 @@ export class PveServer extends b3.Context {
         this._sender.moveStop(element.eid, element.transform.position);
     }
 
-    public launchBullet(skill: Skill) {
+    public launchBullet(skill: Skill, targets: ElementComponent[]) {
         const entity = this._ecs.createEntity(this._obtainEid());
         entity.etype = BattleConf.ENTITY_TYPE.BULLET;
 
@@ -370,8 +370,8 @@ export class PveServer extends b3.Context {
             aid: element.aid,
             entityId: element.data.id,
             tableId: element.tid,
-            position: transform.position,
-            bullet: true,
+            position: targets[0].transform.position,
+            animation: true,
         });
     }
 

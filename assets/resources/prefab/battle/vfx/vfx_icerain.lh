@@ -718,8 +718,7 @@
                   },
                   "_currentLength": 4
                 }
-              },
-              "space": 0
+              }
             },
             "colorOverLifetime": {
               "_$type": "ColorOverLifetime",

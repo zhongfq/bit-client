@@ -48,5 +48,3 @@ export class HeadInfoComponent extends Renderable2D {
         offset: 0,
     };
 }
-
-export class BulletComponent extends Renderable3D {}

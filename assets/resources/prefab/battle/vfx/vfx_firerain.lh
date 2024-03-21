@@ -513,8 +513,7 @@
                       },
                       "_currentLength": 6
                     }
-                  },
-                  "space": 0
+                  }
                 },
                 "colorOverLifetime": {
                   "_$type": "ColorOverLifetime",
@@ -1171,8 +1170,7 @@
                       },
                       "_currentLength": 4
                     }
-                  },
-                  "space": 0
+                  }
                 },
                 "colorOverLifetime": {
                   "_$type": "ColorOverLifetime",
@@ -1368,6 +1366,7 @@
             "_$type": "Mesh"
           },
           "_particleSystem": {
+            "_isPlaying": true,
             "duration": 2.33,
             "looping": false,
             "startDelay": 0.83,
@@ -1824,6 +1823,7 @@
               ],
               "renderMode": 1,
               "_particleSystem": {
+                "_isPlaying": true,
                 "duration": 2.33,
                 "looping": false,
                 "startDelay": 0.83,
@@ -2148,6 +2148,7 @@
               ],
               "stretchedBillboardLengthScale": 1,
               "_particleSystem": {
+                "_isPlaying": true,
                 "duration": 2.33,
                 "looping": false,
                 "startDelay": 0.83,
@@ -2420,6 +2421,7 @@
               ],
               "stretchedBillboardLengthScale": 1,
               "_particleSystem": {
+                "_isPlaying": true,
                 "duration": 2.33,
                 "looping": false,
                 "startDelay": 0.83,
@@ -2651,8 +2653,7 @@
                       },
                       "_currentLength": 6
                     }
-                  },
-                  "space": 0
+                  }
                 },
                 "colorOverLifetime": {
                   "_$type": "ColorOverLifetime",
@@ -3059,6 +3060,7 @@
               "renderMode": 2,
               "stretchedBillboardLengthScale": 1,
               "_particleSystem": {
+                "_isPlaying": true,
                 "duration": 2.33,
                 "looping": false,
                 "startDelay": 0.83,
@@ -3304,6 +3306,7 @@
               ],
               "stretchedBillboardLengthScale": 1,
               "_particleSystem": {
+                "_isPlaying": true,
                 "duration": 2.33,
                 "looping": false,
                 "startDelay": 0.83,
@@ -3557,8 +3560,7 @@
                       },
                       "_currentLength": 4
                     }
-                  },
-                  "space": 0
+                  }
                 },
                 "colorOverLifetime": {
                   "_$type": "ColorOverLifetime",
@@ -3742,6 +3744,7 @@
               "renderMode": 2,
               "stretchedBillboardLengthScale": 1,
               "_particleSystem": {
+                "_isPlaying": true,
                 "duration": 2.33,
                 "looping": false,
                 "startDelay": 0.83,
@@ -4920,8 +4923,7 @@
                       },
                       "_currentLength": 6
                     }
-                  },
-                  "space": 0
+                  }
                 },
                 "colorOverLifetime": {
                   "_$type": "ColorOverLifetime",
@@ -5578,8 +5580,7 @@
                       },
                       "_currentLength": 4
                     }
-                  },
-                  "space": 0
+                  }
                 },
                 "colorOverLifetime": {
                   "_$type": "ColorOverLifetime",
@@ -7063,8 +7064,7 @@
                       },
                       "_currentLength": 6
                     }
-                  },
-                  "space": 0
+                  }
                 },
                 "colorOverLifetime": {
                   "_$type": "ColorOverLifetime",
@@ -7971,8 +7971,7 @@
                       },
                       "_currentLength": 4
                     }
-                  },
-                  "space": 0
+                  }
                 },
                 "colorOverLifetime": {
                   "_$type": "ColorOverLifetime",
@@ -9334,8 +9333,7 @@
                       },
                       "_currentLength": 6
                     }
-                  },
-                  "space": 0
+                  }
                 },
                 "colorOverLifetime": {
                   "_$type": "ColorOverLifetime",
@@ -9992,8 +9990,7 @@
                       },
                       "_currentLength": 4
                     }
-                  },
-                  "space": 0
+                  }
                 },
                 "colorOverLifetime": {
                   "_$type": "ColorOverLifetime",
@@ -11472,8 +11469,7 @@
                       },
                       "_currentLength": 6
                     }
-                  },
-                  "space": 0
+                  }
                 },
                 "colorOverLifetime": {
                   "_$type": "ColorOverLifetime",
@@ -12378,8 +12374,7 @@
                       },
                       "_currentLength": 4
                     }
-                  },
-                  "space": 0
+                  }
                 },
                 "colorOverLifetime": {
                   "_$type": "ColorOverLifetime",
@@ -13741,8 +13736,7 @@
                       },
                       "_currentLength": 6
                     }
-                  },
-                  "space": 0
+                  }
                 },
                 "colorOverLifetime": {
                   "_$type": "ColorOverLifetime",
@@ -14399,8 +14393,7 @@
                       },
                       "_currentLength": 4
                     }
-                  },
-                  "space": 0
+                  }
                 },
                 "colorOverLifetime": {
                   "_$type": "ColorOverLifetime",
@@ -15884,8 +15877,7 @@
                       },
                       "_currentLength": 6
                     }
-                  },
-                  "space": 0
+                  }
                 },
                 "colorOverLifetime": {
                   "_$type": "ColorOverLifetime",
@@ -16792,8 +16784,7 @@
                       },
                       "_currentLength": 4
                     }
-                  },
-                  "space": 0
+                  }
                 },
                 "colorOverLifetime": {
                   "_$type": "ColorOverLifetime",
@@ -18157,8 +18148,7 @@
                       },
                       "_currentLength": 6
                     }
-                  },
-                  "space": 0
+                  }
                 },
                 "colorOverLifetime": {
                   "_$type": "ColorOverLifetime",
@@ -18815,8 +18805,7 @@
                       },
                       "_currentLength": 4
                     }
-                  },
-                  "space": 0
+                  }
                 },
                 "colorOverLifetime": {
                   "_$type": "ColorOverLifetime",
@@ -20296,8 +20285,7 @@
                       },
                       "_currentLength": 6
                     }
-                  },
-                  "space": 0
+                  }
                 },
                 "colorOverLifetime": {
                   "_$type": "ColorOverLifetime",
@@ -21202,8 +21190,7 @@
                       },
                       "_currentLength": 4
                     }
-                  },
-                  "space": 0
+                  }
                 },
                 "colorOverLifetime": {
                   "_$type": "ColorOverLifetime",
@@ -22565,8 +22552,7 @@
                       },
                       "_currentLength": 6
                     }
-                  },
-                  "space": 0
+                  }
                 },
                 "colorOverLifetime": {
                   "_$type": "ColorOverLifetime",
@@ -23223,8 +23209,7 @@
                       },
                       "_currentLength": 4
                     }
-                  },
-                  "space": 0
+                  }
                 },
                 "colorOverLifetime": {
                   "_$type": "ColorOverLifetime",
@@ -24704,8 +24689,7 @@
                       },
                       "_currentLength": 6
                     }
-                  },
-                  "space": 0
+                  }
                 },
                 "colorOverLifetime": {
                   "_$type": "ColorOverLifetime",
@@ -25610,8 +25594,7 @@
                       },
                       "_currentLength": 4
                     }
-                  },
-                  "space": 0
+                  }
                 },
                 "colorOverLifetime": {
                   "_$type": "ColorOverLifetime",

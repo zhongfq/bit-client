@@ -11,7 +11,8 @@
       "transform": {
         "localRotation": {
           "_$type": "Quaternion",
-          "w": -1
+          "y": 0.7071067811865475,
+          "w": 0.7071067811865476
         },
         "localScale": {
           "_$type": "Vector3",
@@ -32,6 +33,39 @@
               "_$type": "AnimatorControllerLayer",
               "name": "Base Layer",
               "states": [
+                {
+                  "_$type": "AnimatorState",
+                  "name": "chop",
+                  "_isLooping": 2,
+                  "clipStart": 0,
+                  "clip": {
+                    "_$uuid": "04145be7-5fb3-46a3-88c5-ab23e978319d",
+                    "_$type": "AnimationClip"
+                  },
+                  "soloTransitions": []
+                },
+                {
+                  "_$type": "AnimatorState",
+                  "name": "attack2",
+                  "_isLooping": 2,
+                  "clipStart": 0,
+                  "clip": {
+                    "_$uuid": "04145be7-5fb3-46a3-88c5-ab23e978319d",
+                    "_$type": "AnimationClip"
+                  },
+                  "soloTransitions": []
+                },
+                {
+                  "_$type": "AnimatorState",
+                  "name": "rush",
+                  "_isLooping": 1,
+                  "clipStart": 0,
+                  "clip": {
+                    "_$uuid": "30966398-4ea0-469b-9541-7f92aefc4d63",
+                    "_$type": "AnimationClip"
+                  },
+                  "soloTransitions": []
+                },
                 {
                   "_$type": "AnimatorState",
                   "name": "die",
@@ -67,8 +101,8 @@
                 },
                 {
                   "_$type": "AnimatorState",
-                  "name": "attack",
-                  "_isLooping": 1,
+                  "name": "attack1",
+                  "_isLooping": 2,
                   "clipStart": 0,
                   "clip": {
                     "_$uuid": "04145be7-5fb3-46a3-88c5-ab23e978319d",
@@ -325,10 +359,10 @@
                                     },
                                     "localRotation": {
                                       "_$type": "Quaternion",
-                                      "x": -1.8128160638928794e-14,
-                                      "y": 3.4048371200038175e-7,
-                                      "z": -0.12275880432664607,
-                                      "w": -0.9924365349785228
+                                      "x": -1.812816063892879e-14,
+                                      "y": 3.404837120003817e-7,
+                                      "z": -0.12275880432664604,
+                                      "w": -0.9924365349785226
                                     }
                                   },
                                   "_$child": [
@@ -688,10 +722,10 @@
                                             },
                                             "localRotation": {
                                               "_$type": "Quaternion",
-                                              "x": 0.11030380095963077,
-                                              "y": -0.08783658076416845,
-                                              "z": -0.008499339073943303,
-                                              "w": -0.9899725086126505
+                                              "x": 0.11030380095963074,
+                                              "y": -0.08783658076416843,
+                                              "z": -0.008499339073943301,
+                                              "w": -0.9899725086126503
                                             }
                                           },
                                           "_$child": [
@@ -1147,10 +1181,10 @@
                             },
                             "localRotation": {
                               "_$type": "Quaternion",
-                              "x": 5.936501806700587e-9,
-                              "y": -1.5070939509272658e-9,
-                              "z": 0.3905842872821207,
-                              "w": -0.9205671700252609
+                              "x": 5.936501806700589e-9,
+                              "y": -1.5070939509272662e-9,
+                              "z": 0.3905842872821208,
+                              "w": -0.9205671700252611
                             }
                           },
                           "_$child": [

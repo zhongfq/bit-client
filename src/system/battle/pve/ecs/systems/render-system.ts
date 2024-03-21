@@ -9,7 +9,6 @@ import { TransformComponent } from "../components/movement-component";
 import {
     AnimationComponent,
     BoardComponent,
-    BulletComponent,
     HeadInfoComponent,
     ShadowComponent,
 } from "../components/render-component";
@@ -31,8 +30,6 @@ export class RenderSystem extends ecs.System {
             this._loadShadow(component);
         } else if (component instanceof BoardComponent) {
             this._loadBoard(component);
-        } else if (component instanceof BulletComponent) {
-            this._loadBullet(component);
         }
     }
 
@@ -50,13 +47,6 @@ export class RenderSystem extends ecs.System {
         } else if (component instanceof BoardComponent) {
             const tilemap = this.ecs.getSingletonComponent(TilemapComponent)!;
             tilemap.delObjectElementByEid(component.eid);
-        } else if (component instanceof BulletComponent) {
-            if (!component.view) {
-                console.log("erro");
-            }
-            component.view?.destroy();
-            component.view = null;
-            console.log("remove bullet:", component.res);
         }
     }
 
@@ -131,8 +121,7 @@ export class RenderSystem extends ecs.System {
         if (anim.res) {
             const prefab: Laya.Prefab = await Laya.loader.load(anim.res, Laya.Loader.HIERARCHY);
             anim.view = prefab.create() as Laya.Sprite3D;
-            anim.animator = anim.view.getChildByName("anim").getComponent(Laya.Animator);
-            (anim.animator.owner as Laya.Sprite3D).transform.localRotationEulerY = 90;
+            anim.animator = anim.view.getChildByName("anim")?.getComponent(Laya.Animator);
             this.context.owner.roles.addChild(anim.view);
         }
     }
@@ -187,12 +176,5 @@ export class RenderSystem extends ecs.System {
             const commandSystem = this.ecs.getSystem(CommandSystem);
             commandSystem?.updateCollectionHp(board.eid, element.tableId, headInfo.data.hp, false);
         }
-    }
-
-    private async _loadBullet(bullet: BulletComponent) {
-        const prefab: Laya.Prefab = await Laya.loader.load(bullet.res, Laya.Loader.HIERARCHY);
-        bullet.view = prefab.create() as Laya.Sprite3D;
-        this.context.owner.roles.addChild(bullet.view);
-        console.log("add bullet:", bullet.res);
     }
 }

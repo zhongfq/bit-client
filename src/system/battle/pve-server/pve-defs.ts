@@ -26,7 +26,6 @@ export interface ElementCreator {
 
     // TODO: 根据实体类型移除此代码？
     animation?: boolean;
-    bullet?: boolean;
 
     collectType?: number; // 资源车上采集物的实体类型
 }

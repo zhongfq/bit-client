@@ -1,13 +1,19 @@
 import { app } from "../../../../../app";
 import * as ecs from "../../../../../core/ecs";
+import { Pool } from "../../../../../core/pool";
 import { tween } from "../../../../../core/tween/tween";
 import { BattleConf } from "../../../../../def/battle";
 import { res } from "../../../../../misc/res";
 import { HeadInfoStyle } from "../../../../../ui-runtime/prefab/battle/HeadInfoUI";
-import { ElementCreator, UpdateTruck, UpdateHp, PveDef } from "../../../pve-server/pve-defs";
+import { ElementCreator, PveDef, UpdateHp, UpdateTruck } from "../../../pve-server/pve-defs";
 import { ICommandSender } from "../../../pve-server/pve-server";
 import { PveContext } from "../../pve-context";
 import { CameraComponent } from "../components/camera-component";
+import {
+    ElementAnimation,
+    ElementComponent,
+    TruckComponent,
+} from "../components/element-component";
 import {
     InterpolationRate,
     MovementComponent,
@@ -17,17 +23,10 @@ import {
 import {
     AnimationComponent,
     BoardComponent,
-    BulletComponent,
     HeadInfoComponent,
     ShadowComponent,
 } from "../components/render-component";
 import { TilemapComponent } from "../components/tilemap-component";
-import {
-    ElementAnimation,
-    ElementComponent,
-    TruckComponent,
-} from "../components/element-component";
-import { Pool } from "../../../../../core/pool";
 import { TruckCollectComponent } from "../components/truck-collect-component";
 import { TruckCollectSystem } from "./truck-collect-system";
 
@@ -66,11 +65,6 @@ export class CommandSystem extends ecs.System implements ICommandSender {
         if (data.animation) {
             const animation = entity.addComponent(AnimationComponent);
             animation.res = entityRow.res;
-        }
-
-        if (data.bullet) {
-            const bullet = entity.addComponent(BulletComponent);
-            bullet.res = entityRow.res;
         }
 
         if (data.hp !== undefined && data.maxHp !== undefined) {

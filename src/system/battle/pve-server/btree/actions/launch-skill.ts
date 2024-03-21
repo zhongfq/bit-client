@@ -1,5 +1,6 @@
 import * as b3 from "../../../../../core/behavior3/behavior";
 import { AiTreeEnv } from "../../ecs/components/ai-component";
+import { ElementComponent } from "../../ecs/components/element-component";
 import { SkillTreeEnv } from "../../ecs/components/skill-component";
 import { SkillOption } from "../btree-def";
 
@@ -10,7 +11,7 @@ interface LaunchSkillArgs {
 export class LaunchSkill extends b3.Process {
     public override check(node: b3.Node) {}
 
-    public override run(node: b3.Node, env: AiTreeEnv) {
+    public override run(node: b3.Node, env: AiTreeEnv, targets: ElementComponent[]) {
         const args = node.args as LaunchSkillArgs;
         let skill;
         if (args.skill === -1) {
@@ -23,7 +24,7 @@ export class LaunchSkill extends b3.Process {
             skill = env.owner.launcher?.skills[args.skill];
         }
         if (skill) {
-            // env.context.launchBullet(skill);
+            env.context.launchBullet(skill, targets);
             return b3.Status.SUCCESS;
         } else {
             return b3.Status.FAILURE;

@@ -28,6 +28,7 @@
     "image": "bin/splash.png",
     "fit": "center"
   },
+  "stat": true,
   "vConsole": true,
   "alertGlobalError": true
 }
