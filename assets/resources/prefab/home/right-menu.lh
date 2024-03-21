@@ -6,6 +6,7 @@
   "name": "Box",
   "width": 750,
   "height": 1334,
+  "_mouseState": 2,
   "right": 0,
   "top": 0,
   "bottom": 0,
@@ -31,6 +32,7 @@
       "x": 582,
       "width": 168,
       "height": 1334,
+      "_mouseState": 2,
       "right": 0,
       "top": 0,
       "bottom": 0,
@@ -39,15 +41,16 @@
       "color": "#ffffff",
       "_$child": [
         {
-          "_$id": "kdn4i3t7",
+          "_$id": "e6ph8tl4",
           "_$type": "VBox",
           "name": "VBox",
-          "x": 16,
-          "y": 657,
+          "x": 17,
+          "y": 363,
           "width": 153,
-          "height": 670,
+          "height": 609,
+          "_mouseState": 2,
+          "centerY": 0,
           "space": 0,
-          "align": "center",
           "_$child": [
             {
               "_$id": "h26klbll",

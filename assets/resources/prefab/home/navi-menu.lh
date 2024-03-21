@@ -41,9 +41,13 @@
           "name": "btnFight",
           "active": true,
           "x": 0,
-          "y": 0,
+          "y": 26,
           "visible": true,
           "_$child": [
+            {
+              "_$override": "0jaivhzj",
+              "skin": "res://80374979-dedf-4876-ac73-501e16cd85c7"
+            },
             {
               "_$override": "sod02qbd",
               "skin": "res://c88771c6-c27f-4cc1-8364-eb815e5eee6c"
@@ -61,12 +65,12 @@
           "name": "btnRole",
           "active": true,
           "x": 131,
-          "y": 0,
+          "y": 26,
           "visible": true,
           "_$child": [
             {
               "_$override": "0jaivhzj",
-              "skin": "res://f10a525a-218d-49bf-929a-95eed3509c46"
+              "skin": "res://c0f52177-cdf7-4a53-a3df-de4757553a42"
             },
             {
               "_$override": "sod02qbd",
@@ -89,12 +93,12 @@
           "name": "btnSoldier",
           "active": true,
           "x": 262,
-          "y": 0,
+          "y": 26,
           "visible": true,
           "_$child": [
             {
               "_$override": "0jaivhzj",
-              "skin": "res://a5cb4e53-a543-4aae-9c1d-173ba88fe4ae"
+              "skin": "res://02c9f944-f52d-436b-817a-595621d98941"
             },
             {
               "_$override": "sod02qbd",
@@ -117,12 +121,12 @@
           "name": "btnMain",
           "active": true,
           "x": 393,
-          "y": 0,
+          "y": 26,
           "visible": true,
           "_$child": [
             {
               "_$override": "0jaivhzj",
-              "skin": "res://2b8bff12-5c7b-4653-93dc-90ef6046af06"
+              "skin": "res://f7afb3a3-f850-4a47-ab33-a0dbd9b25aff"
             },
             {
               "_$override": "sod02qbd",
@@ -145,12 +149,12 @@
           "name": "btnChest",
           "active": true,
           "x": 524,
-          "y": 0,
+          "y": 26,
           "visible": true,
           "_$child": [
             {
               "_$override": "0jaivhzj",
-              "skin": "res://3e517507-6980-4da6-b548-4118b962c4a1"
+              "skin": "res://d47ffd96-f749-419e-a0ea-28ef89cb1878"
             },
             {
               "_$override": "sod02qbd",
@@ -173,12 +177,12 @@
           "name": "btnUnion",
           "active": true,
           "x": 655,
-          "y": 0,
+          "y": 26,
           "visible": true,
           "_$child": [
             {
               "_$override": "0jaivhzj",
-              "skin": "res://142987d5-4d6a-4f02-ac6c-c27cfc65be17"
+              "skin": "res://7f5cc096-fb9f-413f-9551-bad929245312"
             },
             {
               "_$override": "sod02qbd",

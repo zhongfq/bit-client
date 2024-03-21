@@ -7,7 +7,7 @@
   "x": 339,
   "y": 611,
   "width": 100,
-  "height": 148,
+  "height": 120,
   "_mouseState": 2,
   "_$child": [
     {
@@ -16,7 +16,7 @@
       "_$type": "Image",
       "name": "imgIcon",
       "x": 4,
-      "y": 28,
+      "y": 14,
       "width": 92,
       "height": 92,
       "centerX": 0,
@@ -42,35 +42,50 @@
       ]
     },
     {
-      "_$id": "l5lr7h9h",
+      "_$id": "ltf06bfy",
       "_$var": true,
       "_$type": "Image",
       "name": "selectBox",
-      "x": 4,
-      "y": 28,
-      "width": 92,
-      "height": 92,
-      "visible": false,
-      "_mouseState": 2,
+      "x": 50,
+      "width": 0,
+      "height": 120,
+      "alpha": 0,
       "centerX": 0,
       "centerY": 0,
-      "skin": "res://d175b211-ba02-4c80-8dd5-8ee7afb82509",
-      "useSourceSize": true,
+      "skin": "res://a3c14bf0-0aef-41f3-84c2-a89f1999f8cc",
       "color": "#ffffff",
       "_$child": [
         {
-          "_$id": "pck248mi",
+          "_$id": "l5lr7h9h",
+          "_$var": true,
           "_$type": "Image",
-          "name": "imgSelectText",
-          "x": 10,
-          "y": 48,
-          "width": 72,
-          "height": 44,
-          "bottom": 0,
+          "name": "imgSelectBox",
+          "x": -46,
+          "y": 14,
+          "width": 92,
+          "height": 92,
+          "_mouseState": 2,
           "centerX": 0,
-          "skin": "res://563fe75d-0afa-4373-82c2-c39074a8820b",
+          "centerY": 0,
+          "skin": "res://d175b211-ba02-4c80-8dd5-8ee7afb82509",
           "useSourceSize": true,
-          "color": "#ffffff"
+          "color": "#ffffff",
+          "_$child": [
+            {
+              "_$id": "pck248mi",
+              "_$type": "Image",
+              "name": "imgSelectText",
+              "x": 10,
+              "y": 48,
+              "width": 72,
+              "height": 44,
+              "bottom": 0,
+              "centerX": 0,
+              "skin": "res://563fe75d-0afa-4373-82c2-c39074a8820b",
+              "useSourceSize": true,
+              "color": "#ffffff"
+            }
+          ]
         }
       ]
     }

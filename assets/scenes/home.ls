@@ -95,7 +95,24 @@
       "active": true,
       "x": 4,
       "y": 1007,
-      "visible": true
+      "visible": true,
+      "_$child": [
+        {
+          "_$override": "jm4ntjx0",
+          "bold": true,
+          "fontSize": 26,
+          "text": "任务描述少于1",
+          "overflow": "visible",
+          "height": 51
+        },
+        {
+          "_$override": "rnhhkr78",
+          "y": 72,
+          "align": "left",
+          "valign": "bottom",
+          "fontSize": 24
+        }
+      ]
     },
     {
       "_$id": "e4j1h8ry",
@@ -110,7 +127,8 @@
       "_$child": [
         {
           "_$override": "ahevrzex",
-          "visible": true
+          "visible": true,
+          "bold": true
         }
       ]
     },

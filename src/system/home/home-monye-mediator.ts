@@ -32,10 +32,15 @@ export class HomeMonyeMediator extends Mediator {
     }
 
     public updateInfo() {
-        let moneyId = 0;
+        let moneySort = 0;
+        this._monyeInfo = [];
         for (const [_, money] of app.service.user.money) {
-            moneyId > money.id ? this._monyeInfo.push(money) : this._monyeInfo.unshift(money);
-            moneyId = money.id;
+            if (money.id > 200) {
+                moneySort < Number(money.ref.sort)
+                    ? this._monyeInfo.push(money)
+                    : this._monyeInfo.unshift(money);
+                moneySort = Number(money.ref.sort);
+            }
         }
         this.owner.listMonye.array = this._monyeInfo;
     }
