@@ -25,6 +25,7 @@
   },
   "spineVersion": "4.1",
   "splash": {
+    "image": "bin/splash.png",
     "fit": "center"
   },
   "vConsole": true,
