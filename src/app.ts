@@ -1,7 +1,6 @@
 import { appBase as AppBase } from "./app.generated";
 import { Constructor } from "./core/dispatcher";
 import { Loader } from "./core/loader";
-import { Pool } from "./core/pool";
 import { Service } from "./core/service";
 import { TweenSystem } from "./core/tween/tween-system";
 import { UIManager } from "./core/ui-manager";
@@ -24,9 +23,7 @@ import { TaskService } from "./system/task/task-service";
 import { TroopService } from "./system/troop/troop-service";
 import { UserService } from "./system/user/user-service";
 
-const { regClass, property } = Laya;
-
-@regClass()
+@Laya.regClass()
 export class Main extends AppBase {
     public override onAwake(): void {
         // new BehaviorTest().start();
@@ -131,30 +128,6 @@ class App {
         this._service = new ServiceManager();
 
         app.ui.open(ui.LOGIN_SCENE);
-
-        const t: unknown = "";
-
-        console.log("tcheck", t ? "true" : "false");
-
-        const offset = new Laya.Vector3(-0.6, 0, 0);
-        const transform = new Laya.Transform3D();
-        transform.localRotationEulerY = 90;
-        const out = new Laya.Vector3();
-        transform.localToGlobal(offset, out);
-        console.log(out);
-    }
-
-    public async test() {
-        const t = this.trace();
-        const t1 = this.trace();
-        console.log(t);
-        console.log(t1);
-        console.log(t == t1, t === t1);
-        console.log("test");
-    }
-
-    public async trace() {
-        return 0;
     }
 }
 

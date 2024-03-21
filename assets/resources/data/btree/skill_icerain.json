@@ -25,10 +25,18 @@
         "name": "PlayAnim",
         "args": {
           "name": "attack"
-        }
+        },
+        "debug": false
       },
       {
         "id": 4,
+        "name": "Wait",
+        "args": {
+          "time": 0.5
+        }
+      },
+      {
+        "id": 5,
         "name": "LaunchSkill",
         "args": {
           "skill": -1
@@ -39,11 +47,12 @@
         "children": []
       },
       {
-        "id": 5,
+        "id": 6,
         "name": "Wait",
         "args": {
           "time": 1
-        }
+        },
+        "children": []
       }
     ]
   },
