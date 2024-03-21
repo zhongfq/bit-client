@@ -1,3 +1,4 @@
+import { app } from "../../../../../app";
 import * as ecs from "../../../../../core/ecs";
 import { BattleConf } from "../../../../../def/battle";
 import { TruckFormation } from "../../../pve-server/pve-defs";
@@ -14,25 +15,27 @@ export class TruckCollectSystem extends ecs.System {
             if (!data) {
                 return;
             }
-            if (data.obj.destroyed || data.parent.destroyed) {
+            if (data.obj.destroyed || data.pointParent.destroyed || data.gatherParent.destroyed) {
                 this.ecs.removeEntity(component.eid);
                 return;
             }
-            const objPos = data.obj.transform.localPosition;
-            const totalDis = Laya.Vector3.distance(objPos, data.targetPos);
+            const objPos = data.obj.transform.position;
+            const targetPos = data.pointParent.transform.position;
+            targetPos.y = (1 + data.finalPos.y) * 0.2;
+
+            const totalDis = Laya.Vector3.distance(objPos, targetPos);
             const gapDis = data.speed * dt;
 
             if (gapDis < totalDis) {
-                Laya.Vector3.lerp(objPos, data.targetPos, gapDis / totalDis, objPos);
-                data.obj.transform.localPosition = objPos;
+                Laya.Vector3.lerp(objPos, targetPos, gapDis / totalDis, objPos);
+                data.obj.transform.position = objPos;
                 data.speed += 0.2;
             } else {
-                const finalPos = data.finalPos;
-                data.obj.transform.localPosition = finalPos;
+                data.obj.transform.localPosition = data.finalPos;
                 data.obj.transform.localRotationEuler = Laya.Vector3.ZERO;
                 data.obj.transform.localScale = Laya.Vector3.ONE;
                 data.obj.removeSelf();
-                data.parent.addChild(data.obj);
+                data.gatherParent.addChild(data.obj);
 
                 this.ecs.removeEntity(component.eid);
             }
@@ -92,17 +95,15 @@ export class TruckCollectSystem extends ecs.System {
         const idx = truckComp.collectObjs.length;
         truckComp.collectObjs.push(obj);
 
-        const collection = this.ecs.getComponent(component.data.collection, ElementComponent);
+        const collection = this.ecs.getComponent(component.data.collection, ElementComponent)!;
+        const buildingRow = app.service.table.battleBuilding[collection.tableId];
         const startPos = collection!.transform.position.clone();
-        startPos.y = 1; // TODO：不同采集物配置不同高度
+        startPos.y = buildingRow.height;
         obj.transform.position = startPos;
 
-        const targetPos = new Laya.Vector3(0, 0.2, 0);
         const finalPos = formation[idx % formation.length].clone();
         const offsetY = Math.floor(idx / formation.length) * 0.35;
-        finalPos.y += offsetY; // 计算采集物每一层的偏移高度
-
-        obj.name = idx + "_" + finalPos.x + "_" + finalPos.y + "_" + finalPos.z;
+        finalPos.y += offsetY;
 
         const radius = Math.random() + 0.5;
         const rad = Math.random() * Math.PI * 2;
@@ -119,22 +120,18 @@ export class TruckCollectSystem extends ecs.System {
                 if (obj.destroyed || pointParent.destroyed) {
                     return;
                 }
-                const localPos = new Laya.Vector3();
-                pointParent.transform.globalToLocal(obj.transform.position, localPos);
-                obj.transform.localPosition = localPos;
-                obj.removeSelf();
-                pointParent.addChild(obj);
-
                 component.flyingCollect = {
                     idx: idx,
                     obj: obj,
-                    parent: gatherParent,
-                    targetPos: targetPos,
+                    pointParent: pointParent,
+                    gatherParent: gatherParent,
                     finalPos: finalPos,
                     speed: 1,
                 };
             })
         );
+
+        obj.name = idx + "_" + finalPos.x + "_" + finalPos.y + "_" + finalPos.z;
     }
 
     public delCollectObj(eid: number) {

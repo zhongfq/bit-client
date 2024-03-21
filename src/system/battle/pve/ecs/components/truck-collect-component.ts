@@ -4,8 +4,8 @@ import { UpdateTruck } from "../../../pve-server/pve-defs";
 interface FlyingCollect {
     idx: number;
     obj: Laya.Sprite3D;
-    parent: Laya.Sprite3D;
-    targetPos: Laya.Vector3;
+    pointParent: Laya.Sprite3D;
+    gatherParent: Laya.Sprite3D;
     finalPos: Laya.Vector3;
     speed: number;
 }

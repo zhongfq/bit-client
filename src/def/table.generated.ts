@@ -318,6 +318,7 @@ export interface GeneratedBattleBuildingRow {
     battle_entity: number;
     max_hp: number;
     fresh_time: number;
+    height: number;
     texture_key: string;
     hp_state?: any;
     hp_texture?: any;
@@ -468,7 +469,7 @@ export interface GeneratedChestRow {
     open_score: number;
     reward_score: number;
     reward: any;
-    desc?: string;
+    desc: string;
 }
 
 // file: design/chest.xlsx

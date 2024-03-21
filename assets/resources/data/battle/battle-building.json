@@ -2,6 +2,7 @@
     "10001": {
         "battle_entity": 60001,
         "fresh_time": 0,
+        "height": 4,
         "id": 10001,
         "max_hp": 5000,
         "texture_key": "map_biulding_castle01"
@@ -10,6 +11,7 @@
         "battle_entity": 70001,
         "die_hide": 0,
         "fresh_time": 60,
+        "height": 1.8,
         "hp_state": [
             100,
             50,
@@ -28,6 +30,7 @@
         "battle_entity": 70002,
         "die_hide": 0,
         "fresh_time": 60,
+        "height": 0.6,
         "hp_state": [
             100,
             50,
@@ -46,6 +49,7 @@
         "battle_entity": 70003,
         "die_hide": 0,
         "fresh_time": 60,
+        "height": 1,
         "hp_state": [
             100,
             50,
