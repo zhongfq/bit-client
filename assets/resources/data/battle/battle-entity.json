@@ -106,11 +106,13 @@
     "50000": {
         "etype": 4,
         "id": 50000,
+        "pve_ai": "skill_firerain_bullet",
         "res": "resources/prefab/battle/vfx/vfx_firerain.lh"
     },
     "50001": {
         "etype": 4,
         "id": 50001,
+        "pve_ai": "skill_icerain_bullet",
         "res": "resources/prefab/battle/vfx/vfx_icerain.lh"
     },
     "60001": {

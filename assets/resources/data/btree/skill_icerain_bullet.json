@@ -1,0 +1,55 @@
+{
+  "name": "skill_icerain_bullet",
+  "root": {
+    "id": 1,
+    "name": "Sequence",
+    "args": {},
+    "children": [
+      {
+        "id": 2,
+        "name": "Wait",
+        "args": {
+          "time": 1
+        }
+      },
+      {
+        "id": 3,
+        "name": "GetSkillTarget",
+        "args": {},
+        "output": [
+          "targets"
+        ],
+        "children": []
+      },
+      {
+        "id": 4,
+        "name": "ForEach",
+        "args": {},
+        "input": [
+          "targets"
+        ],
+        "output": [
+          "enemy"
+        ],
+        "children": [
+          {
+            "id": 5,
+            "name": "Hurt",
+            "args": {},
+            "input": [
+              "enemy"
+            ]
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "name": "Wait",
+        "args": {
+          "time": 2
+        }
+      }
+    ]
+  },
+  "desc": "雪箭子弹"
+}

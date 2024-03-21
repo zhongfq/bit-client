@@ -104,7 +104,7 @@ export class AiSystem extends ecs.System {
     }
 
     private async _loadAi(ai: AiComponent) {
-        const tree = await this.context.loadAiTree(ai.res);
+        const tree = await this.context.loadAiTree(ai.btree);
         if (tree) {
             ai.tree = tree;
             ai.env = new AiTreeEnv(this.context, ai.getComponent(ElementComponent)!);

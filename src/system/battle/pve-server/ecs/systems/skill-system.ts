@@ -30,7 +30,7 @@ export class SkillSystem extends ecs.System {
 
     private async _loadSkill(launcher: LauncherComponent) {
         for (const v of launcher.skills) {
-            const tree = await this.context.loadAiTree(v.res);
+            const tree = await this.context.loadAiTree(v.btree);
             if (tree && launcher.alive) {
                 const owner = launcher.getComponent(ElementComponent)!;
                 v.tree = tree;

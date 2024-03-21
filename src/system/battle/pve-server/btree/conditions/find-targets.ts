@@ -2,7 +2,7 @@ import * as b3 from "../../../../../core/behavior3/behavior";
 import { BattleConf } from "../../../../../def/battle";
 import { AiTreeEnv } from "../../ecs/components/ai-component";
 import { SkillTreeEnv } from "../../ecs/components/skill-component";
-import { SkillOption, SkillRangeOption } from "../btree-dev";
+import { SkillOption, SkillRangeOption } from "../btree-def";
 
 interface FindTargetsArgs {
     radius?: number;

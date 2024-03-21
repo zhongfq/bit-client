@@ -1,13 +1,6 @@
 import { Node, Process, Status, TreeEnv } from "../../behavior";
 
 export class Foreach extends Process {
-    public override check(node: Node): void {
-        const varName = node.data.output?.[0];
-        if (!varName) {
-            this.error(node, `args.time is not a number`);
-        }
-    }
-
     public override run(node: Node, env: TreeEnv, arr: unknown[]) {
         let last = node.resume(env);
         let i: number = 0;

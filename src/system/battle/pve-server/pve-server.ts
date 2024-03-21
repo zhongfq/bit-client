@@ -7,6 +7,7 @@ import { BattleConf } from "../../../def/battle";
 import { formation } from "../../../def/formation";
 import { ElementAnimation } from "../pve/ecs/components/element-component";
 import { AiComponent } from "./ecs/components/ai-component";
+import { BulletComponent } from "./ecs/components/bullet-compoment";
 import {
     ElementComponent,
     FollowerComponent,
@@ -15,12 +16,13 @@ import {
     TruckComponent,
 } from "./ecs/components/element-component";
 import { MovementComponent, TransformComponent } from "./ecs/components/movement-component";
-import { Skill, LauncherComponent } from "./ecs/components/skill-component";
+import { LauncherComponent, Skill } from "./ecs/components/skill-component";
 import { AiSystem } from "./ecs/systems/ai-system";
+import { BulletSystem } from "./ecs/systems/bullet-system";
 import { CacheSystem } from "./ecs/systems/cache-system";
 import { MovementSystem } from "./ecs/systems/movement-system";
 import { SkillSystem } from "./ecs/systems/skill-system";
-import { ElementCreator, UpdateTruck, UpdateHp, PveDef } from "./pve-defs";
+import { ElementCreator, PveDef, UpdateHp, UpdateTruck } from "./pve-defs";
 
 const _tmpVelocity = new Laya.Vector3();
 const SOLDIER_COUNT = 12;
@@ -29,6 +31,7 @@ const tmpT3d: Laya.Transform3D = new Laya.Transform3D();
 
 export class PveServer extends b3.Context {
     private _ecs: ecs.World;
+    private _eidCount: number = 0;
 
     private _loader: Loader = new Loader();
     private _sender: ICommandSender;
@@ -46,6 +49,7 @@ export class PveServer extends b3.Context {
         this._ecs.addSystem(AiSystem);
         this._ecs.addSystem(MovementSystem);
         this._ecs.addSystem(SkillSystem);
+        this._ecs.addSystem(BulletSystem);
         this._ecs.addSystem(CacheSystem);
     }
 
@@ -55,6 +59,10 @@ export class PveServer extends b3.Context {
 
     public get ecs() {
         return this._ecs;
+    }
+
+    private _obtainEid() {
+        return ++this._eidCount;
     }
 
     public isFreeStance(element: ElementComponent, position: Laya.Vector3) {
@@ -152,7 +160,7 @@ export class PveServer extends b3.Context {
 
     public start() {
         // 创建主角
-        const entity = this._ecs.createEntity();
+        const entity = this._ecs.createEntity(this._obtainEid());
         entity.etype = BattleConf.ENTITY_TYPE.HERO;
 
         const element = entity.addComponent(ElementComponent);
@@ -173,7 +181,7 @@ export class PveServer extends b3.Context {
         element.data = table.battleEntity[heroRow.battle_entity];
 
         const ai = entity.addComponent(AiComponent);
-        ai.res = `resources/data/btree/${element.data.pve_ai}.json`;
+        ai.btree = `resources/data/btree/${element.data.pve_ai}.json`;
         ai.active = false;
 
         const launcher = entity.addComponent(LauncherComponent);
@@ -205,7 +213,7 @@ export class PveServer extends b3.Context {
             if (idx >= SOLDIER_COUNT) {
                 return;
             }
-            const entity = this._ecs.createEntity();
+            const entity = this._ecs.createEntity(this._obtainEid());
             entity.etype = BattleConf.ENTITY_TYPE.SOLDIER;
 
             const element = entity.addComponent(ElementComponent);
@@ -234,7 +242,7 @@ export class PveServer extends b3.Context {
             transform.position.z = value.z + hero.transform.position.z;
 
             const ai = entity.addComponent(AiComponent);
-            ai.res = `resources/data/btree/${element.data.pve_ai}.json`;
+            ai.btree = `resources/data/btree/${element.data.pve_ai}.json`;
 
             entity.addComponent(MovementComponent);
 
@@ -258,7 +266,7 @@ export class PveServer extends b3.Context {
             if (idx < SOLDIER_COUNT) {
                 return;
             }
-            const entity = this._ecs.createEntity();
+            const entity = this._ecs.createEntity(this._obtainEid());
             entity.etype = BattleConf.ENTITY_TYPE.TRUCK;
 
             const element = entity.addComponent(ElementComponent);
@@ -285,7 +293,7 @@ export class PveServer extends b3.Context {
             transform.position.z = value.z + hero.transform.position.z;
 
             const ai = entity.addComponent(AiComponent);
-            ai.res = `resources/data/btree/${element.data.pve_ai}.json`;
+            ai.btree = `resources/data/btree/${element.data.pve_ai}.json`;
 
             entity.addComponent(MovementComponent);
 
@@ -334,6 +342,39 @@ export class PveServer extends b3.Context {
         this._sender.moveStop(element.eid, element.transform.position);
     }
 
+    public launchBullet(skill: Skill) {
+        const entity = this._ecs.createEntity(this._obtainEid());
+        entity.etype = BattleConf.ENTITY_TYPE.BULLET;
+
+        if (!skill.data.battle_entity) {
+            throw new Error(`bullet skill no battle entity: ${skill.data.id}`);
+        }
+
+        const element = entity.addComponent(ElementComponent);
+        element.data = app.service.table.battleEntity[skill.data.battle_entity];
+        element.tid = skill.data.id;
+
+        const transform = entity.addComponent(TransformComponent);
+        transform.position.cloneFrom(skill.owner.transform.position);
+
+        entity.addComponent(MovementComponent);
+
+        const bullet = entity.addComponent(BulletComponent);
+        bullet.skill = skill;
+        if (element.data.pve_ai) {
+            bullet.btree = `resources/data/btree/${element.data.pve_ai}.json`;
+        }
+        this._sender.createElement({
+            eid: element.eid,
+            etype: element.entity.etype,
+            aid: element.aid,
+            entityId: element.data.id,
+            tableId: element.tid,
+            position: transform.position,
+            bullet: true,
+        });
+    }
+
     public towardTo(element: ElementComponent, target: ElementComponent) {
         this._sender.towardTo(element.eid, target.eid);
     }
@@ -342,7 +383,7 @@ export class PveServer extends b3.Context {
         this._sender.playAnim(element.eid, anim);
     }
 
-    private _calcHurt(skill: Skill, enemy: ElementComponent, ratio: number) {
+    public hurt(skill: Skill, enemy: ElementComponent, ratio: number = 1) {
         if (enemy.hp <= 0) {
             return;
         }
@@ -367,16 +408,6 @@ export class PveServer extends b3.Context {
             });
             const cacheSys = this.ecs.getSystem(CacheSystem);
             cacheSys?.setReliveTime(enemy, Laya.timer.currTimer + 60 * 1000); // TODO：复活时间读配置表
-        }
-    }
-
-    public hurt(skill: Skill, enemy: ElementComponent | ElementComponent[], ratio: number = 1) {
-        if (enemy instanceof Array) {
-            for (const v of enemy) {
-                this._calcHurt(skill, v, ratio);
-            }
-        } else {
-            this._calcHurt(skill, enemy, ratio);
         }
     }
 
@@ -522,7 +553,7 @@ export class PveServer extends b3.Context {
             return;
         }
 
-        const entity = this._ecs.createEntity();
+        const entity = this._ecs.createEntity(this._obtainEid());
         entity.etype = BattleConf.ENTITY_TYPE.HERO;
 
         const element = entity.addComponent(ElementComponent);
@@ -556,7 +587,7 @@ export class PveServer extends b3.Context {
         transform.position.z = position.z;
 
         const ai = entity.addComponent(AiComponent);
-        ai.res = `resources/data/btree/${element.data.pve_ai}.json`;
+        ai.btree = `resources/data/btree/${element.data.pve_ai}.json`;
 
         entity.addComponent(MovementComponent);
 
@@ -595,7 +626,7 @@ export class PveServer extends b3.Context {
         const buildingRow = table.battleBuilding[tid];
         const entityRow = table.battleEntity[buildingRow.battle_entity];
 
-        const entity = this._ecs.createEntity();
+        const entity = this._ecs.createEntity(this._obtainEid());
         entity.etype = entityRow.etype;
 
         const element = entity.addComponent(ElementComponent);
@@ -650,7 +681,7 @@ export class PveServer extends b3.Context {
         const buildingRow = table.battleBuilding[tid];
         const entityRow = table.battleEntity[buildingRow.battle_entity];
 
-        const entity = this._ecs.createEntity();
+        const entity = this._ecs.createEntity(this._obtainEid());
         entity.etype = entityRow.etype;
 
         const element = entity.addComponent(ElementComponent);

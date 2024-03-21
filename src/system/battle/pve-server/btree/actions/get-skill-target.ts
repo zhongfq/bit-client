@@ -1,6 +1,5 @@
 import * as b3 from "../../../../../core/behavior3/behavior";
 import { AiTreeEnv } from "../../ecs/components/ai-component";
-import { ElementComponent } from "../../ecs/components/element-component";
 
 export class GetSkillTarget extends b3.Process {
     public override run(node: b3.Node, env: AiTreeEnv) {

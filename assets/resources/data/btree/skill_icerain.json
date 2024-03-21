@@ -17,10 +17,18 @@
         "output": [
           "targets"
         ],
+        "debug": false,
         "children": []
       },
       {
         "id": 3,
+        "name": "PlayAnim",
+        "args": {
+          "name": "attack"
+        }
+      },
+      {
+        "id": 4,
         "name": "LaunchSkill",
         "args": {
           "skill": -1
@@ -31,10 +39,10 @@
         "children": []
       },
       {
-        "id": 4,
+        "id": 5,
         "name": "Wait",
         "args": {
-          "time": 3
+          "time": 1
         }
       }
     ]
