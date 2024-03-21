@@ -14,32 +14,21 @@ export class HomeNaviMenuBtnUI extends HomeNaviMenuBtnUIBase {
     public set selected(value: boolean) {
         this._selected = value;
         if (value) {
-            // this.setSelectVisible(value);
             Laya.Tween.to(
                 this.selectBox,
                 { width: 320, alpha: 1 },
                 150,
                 null,
-                new Laya.Handler(null, () => {
-                    // this.setSelectVisible(value);
-                })
+                new Laya.Handler(null, () => {})
             );
         } else {
-            // this.setSelectVisible(value);
             Laya.Tween.to(
                 this.selectBox,
                 { width: 0, alpha: 0 },
                 150,
                 null,
-                new Laya.Handler(null, () => {
-                    // this.setSelectVisible(value);
-                })
+                new Laya.Handler(null, () => {})
             );
         }
-    }
-
-    private setSelectVisible(value: boolean) {
-        // this.selectBox.visible = value;
-        this.imgIcon.visible = !value;
     }
 }

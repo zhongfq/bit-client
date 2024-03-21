@@ -20,13 +20,13 @@
         "recover_sec": 10
     },
     "201": {
-        "icon": "icon_gather_food",
+        "icon": "icon_gather_wood",
         "id": 201,
         "name": "wood",
         "sort": 4
     },
     "202": {
-        "icon": "icon_gather_wood",
+        "icon": "icon_gather_food",
         "id": 202,
         "name": "food",
         "sort": 3
