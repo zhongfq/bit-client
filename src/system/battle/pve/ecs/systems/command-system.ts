@@ -73,7 +73,7 @@ export class CommandSystem extends ecs.System implements ICommandSender {
             bullet.res = entityRow.res;
         }
 
-        if (data.hp && data.maxHp) {
+        if (data.hp !== undefined && data.maxHp !== undefined) {
             const info = entity.addComponent(HeadInfoComponent);
             info.data.hp = data.hp;
             info.data.maxHp = data.maxHp;
