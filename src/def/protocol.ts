@@ -53,12 +53,6 @@ export const opcode = {
         ioerror: 0x00F3,
         msg_error: 0x00F4,
     },
-    dungeon: {
-        c2s_load: 0x1100,
-        s2c_load: 0x1101,
-        c2s_challenge: 0x1102,
-        s2c_challenge: 0x1103,
-    },
     hero: {
         c2s_load: 0x1300,
         s2c_load: 0x1301,
@@ -508,30 +502,6 @@ export const registerProtocols = () => {
         typeURL: proto.chest.notify_chest_hero.getTypeUrl(),
         encode: proto.chest.notify_chest_hero.encode,
         decode: proto.chest.notify_chest_hero.decode,
-    });
-    register({
-        op: opcode.dungeon.c2s_load,
-        typeURL: proto.dungeon.c2s_load.getTypeUrl(),
-        encode: proto.dungeon.c2s_load.encode,
-        decode: proto.dungeon.c2s_load.decode,
-    });
-    register({
-        op: opcode.dungeon.s2c_load,
-        typeURL: proto.dungeon.s2c_load.getTypeUrl(),
-        encode: proto.dungeon.s2c_load.encode,
-        decode: proto.dungeon.s2c_load.decode,
-    });
-    register({
-        op: opcode.dungeon.c2s_challenge,
-        typeURL: proto.dungeon.c2s_challenge.getTypeUrl(),
-        encode: proto.dungeon.c2s_challenge.encode,
-        decode: proto.dungeon.c2s_challenge.decode,
-    });
-    register({
-        op: opcode.dungeon.s2c_challenge,
-        typeURL: proto.dungeon.s2c_challenge.getTypeUrl(),
-        encode: proto.dungeon.s2c_challenge.encode,
-        decode: proto.dungeon.s2c_challenge.decode,
     });
     register({
         op: opcode.hero.c2s_load,

@@ -95,7 +95,13 @@
       "active": true,
       "x": 4,
       "y": 1007,
-      "visible": true
+      "visible": true,
+      "_$child": [
+        {
+          "_$override": "jm4ntjx0",
+          "bold": true
+        }
+      ]
     },
     {
       "_$id": "e4j1h8ry",

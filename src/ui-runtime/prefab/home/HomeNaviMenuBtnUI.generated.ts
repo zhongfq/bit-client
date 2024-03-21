@@ -8,5 +8,6 @@ export class HomeNaviMenuBtnUIBase extends Laya.Box {
     public imgIcon!: Laya.Image;
     public imgText!: Laya.Image;
     public selectBox!: Laya.Image;
+    public imgSelectBox!: Laya.Image;
 }
 

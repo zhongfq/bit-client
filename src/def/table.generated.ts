@@ -161,6 +161,7 @@ export interface GeneratedMoneyRow {
     recover_max?: number;
     recover_sec?: number;
     recover_inc?: number;
+    sort?: number;
 }
 
 // file: design/skill.xlsx

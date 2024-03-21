@@ -41,7 +41,7 @@
           "name": "btnFight",
           "active": true,
           "x": 0,
-          "y": 0,
+          "y": 26,
           "visible": true,
           "_$child": [
             {
@@ -61,7 +61,7 @@
           "name": "btnRole",
           "active": true,
           "x": 131,
-          "y": 0,
+          "y": 26,
           "visible": true,
           "_$child": [
             {
@@ -89,7 +89,7 @@
           "name": "btnSoldier",
           "active": true,
           "x": 262,
-          "y": 0,
+          "y": 26,
           "visible": true,
           "_$child": [
             {
@@ -117,7 +117,7 @@
           "name": "btnMain",
           "active": true,
           "x": 393,
-          "y": 0,
+          "y": 26,
           "visible": true,
           "_$child": [
             {
@@ -145,7 +145,7 @@
           "name": "btnChest",
           "active": true,
           "x": 524,
-          "y": 0,
+          "y": 26,
           "visible": true,
           "_$child": [
             {
@@ -173,7 +173,7 @@
           "name": "btnUnion",
           "active": true,
           "x": 655,
-          "y": 0,
+          "y": 26,
           "visible": true,
           "_$child": [
             {
