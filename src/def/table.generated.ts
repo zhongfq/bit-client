@@ -171,7 +171,6 @@ export interface GeneratedSkillRow {
     desc: string;
     battle_entity?: number;
     type: number;
-    anim?: string;
     cd: number;
     radius: number;
     lanuch_btree: string;

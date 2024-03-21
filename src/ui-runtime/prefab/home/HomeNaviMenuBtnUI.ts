@@ -14,21 +14,9 @@ export class HomeNaviMenuBtnUI extends HomeNaviMenuBtnUIBase {
     public set selected(value: boolean) {
         this._selected = value;
         if (value) {
-            Laya.Tween.to(
-                this.selectBox,
-                { width: 320, alpha: 1 },
-                150,
-                null,
-                new Laya.Handler(null, () => {})
-            );
+            Laya.Tween.to(this.selectBox, { width: 320, alpha: 1 }, 150);
         } else {
-            Laya.Tween.to(
-                this.selectBox,
-                { width: 0, alpha: 0 },
-                150,
-                null,
-                new Laya.Handler(null, () => {})
-            );
+            Laya.Tween.to(this.selectBox, { width: 0, alpha: 0 }, 150);
         }
     }
 }
