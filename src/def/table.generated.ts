@@ -1,101 +1,158 @@
 // AUTO GENERATED, DON'T NOT MODIFY!
 
-// file: design/item.xlsx
-export interface GeneratedItemRow {
+// file: design/activity/shop.xlsx
+export interface GeneratedShopConfigRow {
+    id: number;
+    type: number;
+    open_id?: number;
+    refresh_hour?: number;
+}
+
+// file: design/activity/shop.xlsx
+export interface GeneratedShop1Row {
+    id: number;
+    items: any;
+    cost?: any;
+    limit_day?: number;
+    limit_week?: number;
+    sort_id?: number;
+    open_id?: number;
+}
+
+// file: design/activity/shop.xlsx
+export interface GeneratedShop2Row {
+    id: number;
+    items: any;
+    cost?: any;
+    limit_day?: number;
+    limit_week?: number;
+    sort_id?: number;
+    open_id?: number;
+}
+
+// file: design/alliance.xlsx
+export interface GeneratedAllianceRow {
     id: number;
     name: string;
-    desc: string;
-    main_type: number;
-    sub_type: number;
-    bag_id: number;
-    use?: number;
-    auto_use?: number;
-    stack?: number;
-    discard?: number;
-    composite?: number;
-    expired?: number;
-    quality: number;
-    args?: any;
-    icon: string;
 }
 
-// file: design/role.xlsx
-export interface GeneratedRoleLevelRow {
-    lv: number;
-    upgrade_exp: number;
-    train_max_lv: number;
+// file: design/attr.xlsx
+export interface GeneratedAttrRow {
+    id: number;
+    name: string;
+    define?: string;
+    show_type: number;
 }
 
-// file: design/role.xlsx
-export interface GeneratedRoleConfRow {
+// file: design/bag.xlsx
+export interface GeneratedBagRow {
+    id: number;
+    type: number;
+    max_grid: number;
+}
+
+// file: design/battle/battle_buff.xlsx
+export interface GeneratedBattleBuffRow {
+    id: number;
+    type: string;
+    res: string;
+    ban_actions?: any;
+}
+
+// file: design/battle/battle_building.xlsx
+export interface GeneratedBattleBuildingRow {
+    id: number;
+    battle_entity: number;
+    max_hp: number;
+    fresh_time: number;
+    height: number;
+    texture_key: string;
+    hp_state?: any;
+    hp_texture?: any;
+    die_hide?: number;
+}
+
+// file: design/battle/battle_demo.xlsx
+export interface GeneratedBattleDemoRow {
     key: string;
-    value?: string;
+    hero_id: number;
+    soldiers1: any;
+    soldiers2: any;
+    soldiers3: any;
+    soldiers4: any;
 }
 
-// file: design/role.xlsx
-export interface GeneratedRoleTrainRow {
+// file: design/battle/battle_entity.xlsx
+export interface GeneratedBattleEntityRow {
     id: number;
-    initial: number;
-    grow: number;
-    consume: any;
+    etype: number;
+    res: string;
+    pve_ai?: string;
+    info_style?: number;
+    info_offset?: number;
 }
 
-// file: design/monster.xlsx
-export interface GeneratedMonsterRow {
+// file: design/battle/battle_event.xlsx
+export interface GeneratedBattleEventRow {
     id: number;
-    name: string;
     type: number;
+    hide: number;
+    reward: any;
+    cost?: any;
     battle_entity: number;
-    enable?: number;
-    job: number;
-    skill0?: number;
-    skill1?: number;
-    skill2?: number;
-    skill3?: number;
+    radius?: number;
 }
 
-// file: design/hero.xlsx
-export interface GeneratedHeroRow {
+// file: design/battle/battle_scene.xlsx
+export interface GeneratedBattleSceneRow {
     id: number;
-    name: string;
-    type: number;
-    battle_entity: number;
-    world_entity: number;
-    enable?: number;
-    job: number;
-    skill0?: number;
-    skill1?: number;
-    skill2?: number;
-    skill3?: number;
+    battle_type: number;
+    max_slot: number;
+    max_wait_list: number;
 }
 
-// file: design/soldier.xlsx
-export interface GeneratedSoldierRow {
+// file: design/chest.xlsx
+export interface GeneratedChestRow {
     id: number;
-    battle_entity: number;
-    skill0: number;
-    skill1?: number;
-    position: number;
-    quality: number;
+    sort: number;
     icon: string;
-    up_lv_num: number;
-    max_lv: number;
-    attr: any;
+    open_max_num: number;
+    open_score: number;
+    reward_score: number;
+    reward: any;
+    desc: string;
 }
 
-// file: design/soldier.xlsx
-export interface GeneratedSoldierPendantRow {
+// file: design/chest.xlsx
+export interface GeneratedChestHeroRow {
+    hero_id: number;
+    sort: number;
+    spine_source: string;
+}
+
+// file: design/chest.xlsx
+export interface GeneratedChestScoreRow {
     id: number;
-    name: string;
-    battle_entity: number;
-    skill1: number;
-    skill2: number;
-    position: number;
-    quality: number;
-    skill_id: number;
+    sort: number;
+    reward_score: number;
+    chest_id: number;
+}
+
+// file: design/define.xlsx
+export interface GeneratedDefineRow {
+    idx: number;
+}
+
+// file: design/dungeon.xlsx
+export interface GeneratedDungeonRow {
+    id: number;
+    reward?: any;
+}
+
+// file: design/emoji.xlsx
+export interface GeneratedEmojiRow {
+    id: number;
     icon: string;
-    up_star_num: number;
-    max_star: number;
 }
 
 // file: design/equip.xlsx
@@ -133,24 +190,48 @@ export interface GeneratedEquipConfRow {
     value?: string;
 }
 
-// file: design/attr.xlsx
-export interface GeneratedAttrRow {
+// file: design/hero.xlsx
+export interface GeneratedHeroRow {
     id: number;
     name: string;
-    define?: string;
-    show_type: number;
+    type: number;
+    battle_entity: number;
+    world_entity: number;
+    enable?: number;
+    job: number;
+    skill0?: number;
+    skill1?: number;
+    skill2?: number;
+    skill3?: number;
 }
 
-// file: design/define.xlsx
-export interface GeneratedDefineRow {
-    idx: number;
+// file: design/item.xlsx
+export interface GeneratedItemRow {
+    id: number;
+    name: string;
+    desc: string;
+    main_type: number;
+    sub_type: number;
+    bag_id: number;
+    use?: number;
+    auto_use?: number;
+    stack?: number;
+    discard?: number;
+    composite?: number;
+    expired?: number;
+    quality: number;
+    args?: any;
+    icon: string;
 }
 
-// file: design/bag.xlsx
-export interface GeneratedBagRow {
+// file: design/mail.xlsx
+export interface GeneratedMailRow {
     id: number;
     type: number;
-    max_grid: number;
+    title: string;
+    content: string;
+    reward?: any;
+    expired_sec?: number;
 }
 
 // file: design/money.xlsx
@@ -164,6 +245,49 @@ export interface GeneratedMoneyRow {
     sort?: number;
 }
 
+// file: design/monster.xlsx
+export interface GeneratedMonsterRow {
+    id: number;
+    name: string;
+    type: number;
+    battle_entity: number;
+    enable?: number;
+    job: number;
+    skill0?: number;
+    skill1?: number;
+    skill2?: number;
+    skill3?: number;
+}
+
+// file: design/random_name.xlsx
+export interface GeneratedRandomNameRow {
+    id: number;
+    firstname?: string;
+    malename?: string;
+    femalename?: string;
+}
+
+// file: design/role.xlsx
+export interface GeneratedRoleLevelRow {
+    lv: number;
+    upgrade_exp: number;
+    train_max_lv: number;
+}
+
+// file: design/role.xlsx
+export interface GeneratedRoleConfRow {
+    key: string;
+    value?: string;
+}
+
+// file: design/role.xlsx
+export interface GeneratedRoleTrainRow {
+    id: number;
+    initial: number;
+    grow: number;
+    consume: any;
+}
+
 // file: design/skill.xlsx
 export interface GeneratedSkillRow {
     id: number;
@@ -171,20 +295,38 @@ export interface GeneratedSkillRow {
     desc: string;
     battle_entity?: number;
     type: number;
-    anim?: string;
     cd: number;
     radius: number;
     lanuch_btree: string;
 }
 
-// file: design/mail.xlsx
-export interface GeneratedMailRow {
+// file: design/soldier.xlsx
+export interface GeneratedSoldierRow {
     id: number;
-    type: number;
-    title: string;
-    content: string;
-    reward?: any;
-    expired_sec?: number;
+    battle_entity: number;
+    skill0: number;
+    skill1?: number;
+    position: number;
+    quality: number;
+    icon: string;
+    up_lv_num: number;
+    max_lv: number;
+    attr: any;
+}
+
+// file: design/soldier.xlsx
+export interface GeneratedSoldierPendantRow {
+    id: number;
+    name: string;
+    battle_entity: number;
+    skill1: number;
+    skill2: number;
+    position: number;
+    quality: number;
+    skill_id: number;
+    icon: string;
+    up_star_num: number;
+    max_star: number;
 }
 
 // file: design/task.xlsx
@@ -269,95 +411,17 @@ export interface GeneratedTaskPassesRow {
     icon: string;
 }
 
-// file: design/random_name.xlsx
-export interface GeneratedRandomNameRow {
-    id: number;
-    firstname?: string;
-    malename?: string;
-    femalename?: string;
-}
-
-// file: design/battle/battle_entity.xlsx
-export interface GeneratedBattleEntityRow {
-    id: number;
-    etype: number;
-    res: string;
-    pve_ai?: string;
-    info_style?: number;
-    info_offset?: number;
-}
-
-// file: design/battle/battle_scene.xlsx
-export interface GeneratedBattleSceneRow {
-    id: number;
-    battle_type: number;
-    max_slot: number;
-    max_wait_list: number;
-}
-
-// file: design/battle/battle_demo.xlsx
-export interface GeneratedBattleDemoRow {
-    key: string;
-    hero_id: number;
-    soldiers1: any;
-    soldiers2: any;
-    soldiers3: any;
-    soldiers4: any;
-}
-
-// file: design/battle/battle_buff.xlsx
-export interface GeneratedBattleBuffRow {
-    id: number;
-    type: string;
-    res: string;
-    ban_actions?: any;
-}
-
-// file: design/battle/battle_building.xlsx
-export interface GeneratedBattleBuildingRow {
-    id: number;
-    battle_entity: number;
-    max_hp: number;
-    fresh_time: number;
-    height: number;
-    texture_key: string;
-    hp_state?: any;
-    hp_texture?: any;
-    die_hide?: number;
-}
-
-// file: design/world/world_map.xlsx
-export interface GeneratedWorldMapMapsRow {
-    id: number;
-    battle_type: number;
-    battle_mode: number;
-    expired_sec: number;
-}
-
-// file: design/world/world_map.xlsx
-export interface GeneratedWorldMapStatesRow {
-    id: number;
-    aid?: number;
-    next_state?: number;
-    pass_cond?: any;
-}
-
-// file: design/world/world_entity.xlsx
-export interface GeneratedWorldEntityTypeConfRow {
-    etype: number;
-    define: string;
-    dispel_fog_size?: number;
-    view_limit?: number;
-    sight_radius?: number;
-    sight_shared?: number;
-    build_limit?: number;
-    can_defend?: number;
-}
-
-// file: design/world/world_entity.xlsx
-export interface GeneratedWorldEntityModelsRow {
-    id: number;
-    res: string;
+// file: design/texture_cfg.xlsx
+export interface GeneratedTextureCfgRow {
+    id: string;
+    tile_x?: number;
+    tile_y?: number;
+    tile_w: number;
+    tile_h: number;
+    offset_x: number;
+    offset_y: number;
+    offset_z: number;
+    scale: number;
 }
 
 // file: design/world/world_building.xlsx
@@ -378,6 +442,40 @@ export interface GeneratedWorldBuildingMineRow {
     height: number;
     name: string;
     building_desc?: string;
+}
+
+// file: design/world/world_entity.xlsx
+export interface GeneratedWorldEntityTypeConfRow {
+    etype: number;
+    define: string;
+    dispel_fog_size?: number;
+    view_limit?: number;
+    sight_radius?: number;
+    sight_shared?: number;
+    build_limit?: number;
+    can_defend?: number;
+}
+
+// file: design/world/world_entity.xlsx
+export interface GeneratedWorldEntityModelsRow {
+    id: number;
+    res: string;
+}
+
+// file: design/world/world_map.xlsx
+export interface GeneratedWorldMapMapsRow {
+    id: number;
+    battle_type: number;
+    battle_mode: number;
+    expired_sec: number;
+}
+
+// file: design/world/world_map.xlsx
+export interface GeneratedWorldMapStatesRow {
+    id: number;
+    aid?: number;
+    next_state?: number;
+    pass_cond?: any;
 }
 
 // file: design/world/world_season.xlsx
@@ -411,92 +509,4 @@ export interface GeneratedWorldTroopState2cmdRow {
     MOVE_TO?: number;
     STOP?: number;
     RETREAT?: number;
-}
-
-// file: design/alliance.xlsx
-export interface GeneratedAllianceRow {
-    id: number;
-    name: string;
-}
-
-// file: design/dungeon.xlsx
-export interface GeneratedDungeonRow {
-    id: number;
-    reward?: any;
-}
-
-// file: design/activity/shop.xlsx
-export interface GeneratedShopConfigRow {
-    id: number;
-    type: number;
-    open_id?: number;
-    refresh_hour?: number;
-}
-
-// file: design/activity/shop.xlsx
-export interface GeneratedShop1Row {
-    id: number;
-    items: any;
-    cost?: any;
-    limit_day?: number;
-    limit_week?: number;
-    sort_id?: number;
-    open_id?: number;
-}
-
-// file: design/activity/shop.xlsx
-export interface GeneratedShop2Row {
-    id: number;
-    items: any;
-    cost?: any;
-    limit_day?: number;
-    limit_week?: number;
-    sort_id?: number;
-    open_id?: number;
-}
-
-// file: design/emoji.xlsx
-export interface GeneratedEmojiRow {
-    id: number;
-    icon: string;
-}
-
-// file: design/chest.xlsx
-export interface GeneratedChestRow {
-    id: number;
-    sort: number;
-    icon: string;
-    open_max_num: number;
-    open_score: number;
-    reward_score: number;
-    reward: any;
-    desc: string;
-}
-
-// file: design/chest.xlsx
-export interface GeneratedChestHeroRow {
-    hero_id: number;
-    sort: number;
-    spine_source: string;
-}
-
-// file: design/chest.xlsx
-export interface GeneratedChestScoreRow {
-    id: number;
-    sort: number;
-    reward_score: number;
-    chest_id: number;
-}
-
-// file: design/texture_cfg.xlsx
-export interface GeneratedTextureCfgRow {
-    id: string;
-    tile_x?: number;
-    tile_y?: number;
-    tile_w: number;
-    tile_h: number;
-    offset_x: number;
-    offset_y: number;
-    offset_z: number;
-    scale: number;
 }

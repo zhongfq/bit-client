@@ -118,28 +118,30 @@ export class RenderSystem extends ecs.System {
     }
 
     private async _loadAnimation(anim: AnimationComponent) {
-        if (anim.res) {
-            const prefab: Laya.Prefab = await Laya.loader.load(anim.res, Laya.Loader.HIERARCHY);
-            anim.view = prefab.create() as Laya.Sprite3D;
-            anim.animator = anim.view.getChildByName("anim")?.getComponent(Laya.Animator);
-            this.context.owner.roles.addChild(anim.view);
-        }
+        const prefab: Laya.Prefab = await app.loader.loadPrefab(anim.res, () => anim.alive);
+        anim.view = prefab.create() as Laya.Sprite3D;
+        anim.animator = anim.view.getChildByName("anim")?.getComponent(Laya.Animator);
+        this.context.owner.roles.addChild(anim.view);
     }
 
     private async _loadHeadInfo(info: HeadInfoComponent) {
         if (info.res) {
             const prefab: Laya.Prefab = await Laya.loader.load(info.res, Laya.Loader.HIERARCHY);
-            info.view = prefab.create() as HeadInfoUI;
-            info.view.update(info.data);
-            this.context.owner.troops.addChild(info.view);
+            if (info.alive) {
+                info.view = prefab.create() as HeadInfoUI;
+                info.view.update(info.data);
+                this.context.owner.troops.addChild(info.view);
+            }
         }
     }
 
     private async _loadShadow(shadow: ShadowComponent) {
         const prefab: Laya.Prefab = await Laya.loader.load(shadow.res, Laya.Loader.HIERARCHY);
-        shadow.view = prefab.create() as Laya.Sprite3D;
-        shadow.view.transform.localPositionY = 0.01;
-        this.context.owner.shadows.addChild(shadow.view);
+        if (shadow.alive) {
+            shadow.view = prefab.create() as Laya.Sprite3D;
+            shadow.view.transform.localPositionY = 0.01;
+            this.context.owner.shadows.addChild(shadow.view);
+        }
     }
 
     private async _loadBoard(board: BoardComponent) {

@@ -1,6 +1,7 @@
 import * as b3 from "../../../../../core/behavior3/behavior";
 import { AiTreeEnv } from "../../ecs/components/ai-component";
 import { SkillTreeEnv } from "../../ecs/components/skill-component";
+import { AnimNameOptions } from "../btree-def";
 
 interface PlayAnimArgs {
     name: string;
@@ -21,7 +22,7 @@ export class PlayAnim extends b3.Process {
             name: "PlayAnim",
             type: "Action",
             desc: "播放动画",
-            args: [{ name: "name", type: "string", desc: "动画名" }],
-        };
+            args: [{ name: "name", type: "enum", desc: "动画名", options: AnimNameOptions }],
+        } as b3.ProcessDescriptor;
     }
 }

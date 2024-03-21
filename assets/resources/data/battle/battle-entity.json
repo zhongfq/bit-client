@@ -63,6 +63,31 @@
         "pve_ai": "pve_hero",
         "res": "resources/prefab/battle/roles/hero08.lh"
     },
+    "30001": {
+        "etype": 10,
+        "id": 30001,
+        "res": "map_chest_1"
+    },
+    "30002": {
+        "etype": 10,
+        "id": 30002,
+        "res": "map_chest_2"
+    },
+    "30003": {
+        "etype": 10,
+        "id": 30003,
+        "res": "map_chest_3"
+    },
+    "30004": {
+        "etype": 10,
+        "id": 30004,
+        "res": "map_chest_4"
+    },
+    "30005": {
+        "etype": 10,
+        "id": 30005,
+        "res": "map_chest_5"
+    },
     "40001": {
         "etype": 3,
         "id": 40001,

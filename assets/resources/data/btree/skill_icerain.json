@@ -17,7 +17,6 @@
         "output": [
           "targets"
         ],
-        "debug": false,
         "children": []
       },
       {
@@ -25,8 +24,7 @@
         "name": "PlayAnim",
         "args": {
           "name": "attack"
-        },
-        "debug": false
+        }
       },
       {
         "id": 4,
@@ -44,14 +42,6 @@
         "input": [
           "targets"
         ],
-        "children": []
-      },
-      {
-        "id": 6,
-        "name": "Wait",
-        "args": {
-          "time": 1
-        },
         "children": []
       }
     ]

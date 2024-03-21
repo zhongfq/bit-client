@@ -745,7 +745,7 @@
       "margin": 0,
       "name": "object",
       "spacing": 0,
-      "tilecount": 10,
+      "tilecount": 15,
       "tileheight": 512,
       "tiles": [
         {
@@ -807,13 +807,43 @@
           "image": "../texture/object/map_gather_iron1-3.png",
           "imageheight": 192,
           "imagewidth": 256
+        },
+        {
+          "id": 17,
+          "image": "../texture/object/map_chest_1.png",
+          "imageheight": 100,
+          "imagewidth": 120
+        },
+        {
+          "id": 18,
+          "image": "../texture/object/map_chest_2.png",
+          "imageheight": 100,
+          "imagewidth": 120
+        },
+        {
+          "id": 19,
+          "image": "../texture/object/map_chest_3.png",
+          "imageheight": 100,
+          "imagewidth": 120
+        },
+        {
+          "id": 20,
+          "image": "../texture/object/map_chest_4.png",
+          "imageheight": 100,
+          "imagewidth": 120
+        },
+        {
+          "id": 21,
+          "image": "../texture/object/map_chest_5.png",
+          "imageheight": 100,
+          "imagewidth": 120
         }
       ],
       "tilewidth": 512
     },
     {
       "columns": 4,
-      "firstgid": 71,
+      "firstgid": 76,
       "grid": {
         "height": 64,
         "orientation": "isometric",
@@ -1270,7 +1300,7 @@
     },
     {
       "columns": 4,
-      "firstgid": 103,
+      "firstgid": 108,
       "grid": {
         "height": 64,
         "orientation": "isometric",
