@@ -121,6 +121,8 @@ export const opcode = {
     troop: {
         c2s_load: 0x1400,
         s2c_load: 0x1401,
+        c2s_edit_troop: 0x1402,
+        s2c_edit_troop: 0x1403,
     },
     user: {
         c2s_login: 0x1000,
@@ -808,6 +810,18 @@ export const registerProtocols = () => {
         typeURL: proto.troop.s2c_load.getTypeUrl(),
         encode: proto.troop.s2c_load.encode,
         decode: proto.troop.s2c_load.decode,
+    });
+    register({
+        op: opcode.troop.c2s_edit_troop,
+        typeURL: proto.troop.c2s_edit_troop.getTypeUrl(),
+        encode: proto.troop.c2s_edit_troop.encode,
+        decode: proto.troop.c2s_edit_troop.decode,
+    });
+    register({
+        op: opcode.troop.s2c_edit_troop,
+        typeURL: proto.troop.s2c_edit_troop.getTypeUrl(),
+        encode: proto.troop.s2c_edit_troop.encode,
+        decode: proto.troop.s2c_edit_troop.decode,
     });
     register({
         op: opcode.user.c2s_login,

@@ -1,11 +1,23 @@
 syntax = "proto3";
 
 package troop;
+message Pendant {
+    uint32 station = 1;//站位
+    uint32 id = 2;
+
+}
+
+message Soldier {
+    uint32 station = 1;//站位
+    repeated Pendant pendants = 2;//挂件列表
+
+}
 
 message Troop {
     uint32 idx = 1; // 队伍编号
     uint32 eid = 2;
     uint32 hero_uid = 3; // 英雄uid
+    repeated Soldier soldiers = 4;//士兵列表
 }
 
 message c2s_load {
@@ -13,4 +25,13 @@ message c2s_load {
 message s2c_load {
     uint32 err = 1; // OK
     repeated Troop troop_list = 2;
+}
+
+//编辑部队
+message c2s_edit_troop {
+    Troop troop = 1;
+}
+
+message s2c_edit_troop {
+    uint32 err = 1; // OK
 }

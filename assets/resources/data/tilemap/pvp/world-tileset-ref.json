@@ -839,7 +839,7 @@
           "imagewidth": 120
         },
         {
-          "id": 26,
+          "id": 27,
           "image": "../texture/object/map_soldieri_cage.png",
           "imageheight": 150,
           "imagewidth": 140
@@ -849,7 +849,7 @@
     },
     {
       "columns": 4,
-      "firstgid": 81,
+      "firstgid": 82,
       "grid": {
         "height": 64,
         "orientation": "isometric",
@@ -1306,7 +1306,7 @@
     },
     {
       "columns": 4,
-      "firstgid": 113,
+      "firstgid": 114,
       "grid": {
         "height": 64,
         "orientation": "isometric",

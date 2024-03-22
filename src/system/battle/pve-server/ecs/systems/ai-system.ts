@@ -17,7 +17,6 @@ import { MoveForward } from "../../btree/actions/move-forward";
 import { MoveStop } from "../../btree/actions/move-stop";
 import { MoveToAtkPos } from "../../btree/actions/move-to-atk-pos";
 import { MoveToPos } from "../../btree/actions/move-to-pos";
-import { NormalAttack } from "../../btree/actions/normal-attack";
 import { PlayAnim } from "../../btree/actions/play-anim";
 import { SetStance } from "../../btree/actions/set-stance";
 import { TowardToTarget } from "../../btree/actions/toward-to-target";
@@ -61,8 +60,6 @@ export class AiSystem extends ecs.System {
         this.context.registerProcess(MoveStop);
         this.context.registerProcess(MoveToAtkPos);
         this.context.registerProcess(MoveToPos);
-        this.context.registerProcess(NormalAttack);
-        this.context.registerProcess(NormalAttack);
         this.context.registerProcess(PlayAnim);
         this.context.registerProcess(SetStance);
         this.context.registerProcess(TowardToTarget);

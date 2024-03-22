@@ -177,8 +177,10 @@
                       },
                       {
                         "id": 24,
-                        "name": "NormalAttack",
-                        "args": {},
+                        "name": "TryLaunchSkill",
+                        "args": {
+                          "skill": 0
+                        },
                         "input": [
                           "enemy"
                         ]

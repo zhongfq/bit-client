@@ -12062,6 +12062,212 @@ declare namespace proto {
     /** Namespace troop. */
     namespace troop {
 
+        /** Properties of a Pendant. */
+        interface IPendant {
+
+            /** Pendant station */
+            station?: (number|null);
+
+            /** Pendant id */
+            id?: (number|null);
+        }
+
+        /** Represents a Pendant. */
+        class Pendant implements IPendant {
+
+            /**
+             * Constructs a new Pendant.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: troop.IPendant);
+
+            /** Pendant station. */
+            public station: number;
+
+            /** Pendant id. */
+            public id: number;
+
+            /**
+             * Creates a new Pendant instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Pendant instance
+             */
+            public static create(properties?: troop.IPendant): troop.Pendant;
+
+            /**
+             * Encodes the specified Pendant message. Does not implicitly {@link troop.Pendant.verify|verify} messages.
+             * @param message Pendant message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: troop.IPendant, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Pendant message, length delimited. Does not implicitly {@link troop.Pendant.verify|verify} messages.
+             * @param message Pendant message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: troop.IPendant, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Pendant message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Pendant
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): troop.Pendant;
+
+            /**
+             * Decodes a Pendant message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Pendant
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): troop.Pendant;
+
+            /**
+             * Verifies a Pendant message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Pendant message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Pendant
+             */
+            public static fromObject(object: { [k: string]: any }): troop.Pendant;
+
+            /**
+             * Creates a plain object from a Pendant message. Also converts values to other types if specified.
+             * @param message Pendant
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: troop.Pendant, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Pendant to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Pendant
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a Soldier. */
+        interface ISoldier {
+
+            /** Soldier station */
+            station?: (number|null);
+
+            /** Soldier pendants */
+            pendants?: (troop.IPendant[]|null);
+        }
+
+        /** Represents a Soldier. */
+        class Soldier implements ISoldier {
+
+            /**
+             * Constructs a new Soldier.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: troop.ISoldier);
+
+            /** Soldier station. */
+            public station: number;
+
+            /** Soldier pendants. */
+            public pendants: troop.IPendant[];
+
+            /**
+             * Creates a new Soldier instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Soldier instance
+             */
+            public static create(properties?: troop.ISoldier): troop.Soldier;
+
+            /**
+             * Encodes the specified Soldier message. Does not implicitly {@link troop.Soldier.verify|verify} messages.
+             * @param message Soldier message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: troop.ISoldier, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Soldier message, length delimited. Does not implicitly {@link troop.Soldier.verify|verify} messages.
+             * @param message Soldier message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: troop.ISoldier, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Soldier message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Soldier
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): troop.Soldier;
+
+            /**
+             * Decodes a Soldier message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Soldier
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): troop.Soldier;
+
+            /**
+             * Verifies a Soldier message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Soldier message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Soldier
+             */
+            public static fromObject(object: { [k: string]: any }): troop.Soldier;
+
+            /**
+             * Creates a plain object from a Soldier message. Also converts values to other types if specified.
+             * @param message Soldier
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: troop.Soldier, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Soldier to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Soldier
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** Properties of a Troop. */
         interface ITroop {
 
@@ -12073,6 +12279,9 @@ declare namespace proto {
 
             /** Troop heroUid */
             heroUid?: (number|null);
+
+            /** Troop soldiers */
+            soldiers?: (troop.ISoldier[]|null);
         }
 
         /** Represents a Troop. */
@@ -12092,6 +12301,9 @@ declare namespace proto {
 
             /** Troop heroUid. */
             public heroUid: number;
+
+            /** Troop soldiers. */
+            public soldiers: troop.ISoldier[];
 
             /**
              * Creates a new Troop instance using the specified properties.
@@ -12359,6 +12571,200 @@ declare namespace proto {
 
             /**
              * Gets the default type url for s2c_load
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a c2s_edit_troop. */
+        interface Ic2s_edit_troop {
+
+            /** c2s_edit_troop troop */
+            troop?: (troop.ITroop|null);
+        }
+
+        /** Represents a c2s_edit_troop. */
+        class c2s_edit_troop implements Ic2s_edit_troop {
+
+            /**
+             * Constructs a new c2s_edit_troop.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: troop.Ic2s_edit_troop);
+
+            /** c2s_edit_troop troop. */
+            public troop?: (troop.ITroop|null);
+
+            /**
+             * Creates a new c2s_edit_troop instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns c2s_edit_troop instance
+             */
+            public static create(properties?: troop.Ic2s_edit_troop): troop.c2s_edit_troop;
+
+            /**
+             * Encodes the specified c2s_edit_troop message. Does not implicitly {@link troop.c2s_edit_troop.verify|verify} messages.
+             * @param message c2s_edit_troop message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: troop.Ic2s_edit_troop, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified c2s_edit_troop message, length delimited. Does not implicitly {@link troop.c2s_edit_troop.verify|verify} messages.
+             * @param message c2s_edit_troop message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: troop.Ic2s_edit_troop, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a c2s_edit_troop message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns c2s_edit_troop
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): troop.c2s_edit_troop;
+
+            /**
+             * Decodes a c2s_edit_troop message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns c2s_edit_troop
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): troop.c2s_edit_troop;
+
+            /**
+             * Verifies a c2s_edit_troop message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a c2s_edit_troop message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns c2s_edit_troop
+             */
+            public static fromObject(object: { [k: string]: any }): troop.c2s_edit_troop;
+
+            /**
+             * Creates a plain object from a c2s_edit_troop message. Also converts values to other types if specified.
+             * @param message c2s_edit_troop
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: troop.c2s_edit_troop, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this c2s_edit_troop to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for c2s_edit_troop
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a s2c_edit_troop. */
+        interface Is2c_edit_troop {
+
+            /** s2c_edit_troop err */
+            err?: (number|null);
+        }
+
+        /** Represents a s2c_edit_troop. */
+        class s2c_edit_troop implements Is2c_edit_troop {
+
+            /**
+             * Constructs a new s2c_edit_troop.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: troop.Is2c_edit_troop);
+
+            /** s2c_edit_troop err. */
+            public err: number;
+
+            /**
+             * Creates a new s2c_edit_troop instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns s2c_edit_troop instance
+             */
+            public static create(properties?: troop.Is2c_edit_troop): troop.s2c_edit_troop;
+
+            /**
+             * Encodes the specified s2c_edit_troop message. Does not implicitly {@link troop.s2c_edit_troop.verify|verify} messages.
+             * @param message s2c_edit_troop message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: troop.Is2c_edit_troop, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified s2c_edit_troop message, length delimited. Does not implicitly {@link troop.s2c_edit_troop.verify|verify} messages.
+             * @param message s2c_edit_troop message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: troop.Is2c_edit_troop, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a s2c_edit_troop message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns s2c_edit_troop
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): troop.s2c_edit_troop;
+
+            /**
+             * Decodes a s2c_edit_troop message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns s2c_edit_troop
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): troop.s2c_edit_troop;
+
+            /**
+             * Verifies a s2c_edit_troop message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a s2c_edit_troop message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns s2c_edit_troop
+             */
+            public static fromObject(object: { [k: string]: any }): troop.s2c_edit_troop;
+
+            /**
+             * Creates a plain object from a s2c_edit_troop message. Also converts values to other types if specified.
+             * @param message s2c_edit_troop
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: troop.s2c_edit_troop, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this s2c_edit_troop to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for s2c_edit_troop
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

@@ -16,12 +16,19 @@ export class CreateBullet extends b3.Process {
         }
     }
 
-    public override run(node: b3.Node, env: AiTreeEnv, targets: ElementComponent[]) {
+    public override run(
+        node: b3.Node,
+        env: AiTreeEnv,
+        targets: ElementComponent[] | ElementComponent
+    ) {
         if (!(env instanceof SkillTreeEnv)) {
             throw new Error(`env is not SkillTreeEnv: ${env}`);
         }
         const args = node.args as CreateBulletArgs;
         const skill = env.skill;
+        if (!(targets instanceof Array)) {
+            targets = [targets];
+        }
         env.context.launchBullet(skill, args.entity_id, targets);
         return b3.Status.SUCCESS;
     }

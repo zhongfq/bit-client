@@ -1,9 +1,19 @@
 import * as b3 from "../../../../../core/behavior3/behavior";
 import { AiTreeEnv } from "../../ecs/components/ai-component";
 
+interface GetSkillTargetArgs {
+    multi?: boolean;
+}
+
 export class GetSkillTarget extends b3.Process {
     public override run(node: b3.Node, env: AiTreeEnv) {
-        env.lastRet.results.push(env.getValue("__skill_target__"));
+        const targets = env.getValue("__skill_targets__") as unknown[];
+        const args = node.args as GetSkillTargetArgs;
+        if (args.multi) {
+            env.lastRet.results.push(targets);
+        } else {
+            env.lastRet.results.push(targets[0]);
+        }
         return b3.Status.SUCCESS;
     }
 

@@ -32,7 +32,7 @@ export class BulletSystem extends ecs.System {
         if (tree && bullet.alive && bullet.skill.env) {
             bullet.tree = tree;
             bullet.env = new BulletTreeEnv(this.context, bullet.skill.owner, bullet);
-            bullet.env.setValue("__skill_target__", bullet.skill.env.getValue("targets"));
+            bullet.env.setValue("__skill_targets__", bullet.skill.env.getValue("targets"));
         }
     }
 }

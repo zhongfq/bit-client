@@ -1,5 +1,6 @@
 import * as b3 from "../../../../../core/behavior3/behavior";
 import { AiTreeEnv } from "../../ecs/components/ai-component";
+import { ElementComponent } from "../../ecs/components/element-component";
 import { SkillOption } from "../btree-def";
 
 interface TryLaunchSkillArgs {
@@ -9,7 +10,11 @@ interface TryLaunchSkillArgs {
 export class TryLaunchSkill extends b3.Process {
     public override check(node: b3.Node) {}
 
-    public override run(node: b3.Node, env: AiTreeEnv) {
+    public override run(
+        node: b3.Node,
+        env: AiTreeEnv,
+        targets: ElementComponent[] | ElementComponent
+    ) {
         const args = node.args as TryLaunchSkillArgs;
         const skill = env.owner.launcher?.skills[args.skill];
         if (!skill) {
@@ -26,7 +31,11 @@ export class TryLaunchSkill extends b3.Process {
             return b3.Status.FAILURE;
         }
 
-        // TODO：目标查找可以考虑使用主行为树的变量
+        if (!(targets instanceof Array)) {
+            targets = [targets];
+        }
+
+        skill.env.setValue("__skill_targets__", targets);
         const status = skill.tree.run(skill.env);
         skill.running = true;
         if (status === b3.Status.FAILURE) {
@@ -43,8 +52,10 @@ export class TryLaunchSkill extends b3.Process {
             type: "Action",
             desc: "尝试启动技能",
             args: [{ name: "skill", type: "enum", desc: "技能id", options: SkillOption }],
+            input: ["目标"],
             doc: `
                 + 检查技能 CD
+                + 目标可以是单个或多个
                 + 根据技能范围筛选敌人
                 + 如果没有技能、技能运行中、没有敌人、CD时间未到返回 FAILURE`,
         } as b3.ProcessDescriptor;

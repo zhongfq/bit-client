@@ -27598,6 +27598,481 @@ $root.troop = (function() {
      */
     var troop = {};
 
+    troop.Pendant = (function() {
+
+        /**
+         * Properties of a Pendant.
+         * @memberof troop
+         * @interface IPendant
+         * @property {number|null} [station] Pendant station
+         * @property {number|null} [id] Pendant id
+         */
+
+        /**
+         * Constructs a new Pendant.
+         * @memberof troop
+         * @classdesc Represents a Pendant.
+         * @implements IPendant
+         * @constructor
+         * @param {troop.IPendant=} [properties] Properties to set
+         */
+        function Pendant(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Pendant station.
+         * @member {number} station
+         * @memberof troop.Pendant
+         * @instance
+         */
+        Pendant.prototype.station = 0;
+
+        /**
+         * Pendant id.
+         * @member {number} id
+         * @memberof troop.Pendant
+         * @instance
+         */
+        Pendant.prototype.id = 0;
+
+        /**
+         * Creates a new Pendant instance using the specified properties.
+         * @function create
+         * @memberof troop.Pendant
+         * @static
+         * @param {troop.IPendant=} [properties] Properties to set
+         * @returns {troop.Pendant} Pendant instance
+         */
+        Pendant.create = function create(properties) {
+            return new Pendant(properties);
+        };
+
+        /**
+         * Encodes the specified Pendant message. Does not implicitly {@link troop.Pendant.verify|verify} messages.
+         * @function encode
+         * @memberof troop.Pendant
+         * @static
+         * @param {troop.IPendant} message Pendant message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Pendant.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.station != null && Object.hasOwnProperty.call(message, "station"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.station);
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.id);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified Pendant message, length delimited. Does not implicitly {@link troop.Pendant.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof troop.Pendant
+         * @static
+         * @param {troop.IPendant} message Pendant message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Pendant.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a Pendant message from the specified reader or buffer.
+         * @function decode
+         * @memberof troop.Pendant
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {troop.Pendant} Pendant
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Pendant.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.troop.Pendant();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.station = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.id = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a Pendant message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof troop.Pendant
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {troop.Pendant} Pendant
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Pendant.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a Pendant message.
+         * @function verify
+         * @memberof troop.Pendant
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        Pendant.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.station != null && message.hasOwnProperty("station"))
+                if (!$util.isInteger(message.station))
+                    return "station: integer expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isInteger(message.id))
+                    return "id: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a Pendant message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof troop.Pendant
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {troop.Pendant} Pendant
+         */
+        Pendant.fromObject = function fromObject(object) {
+            if (object instanceof $root.troop.Pendant)
+                return object;
+            var message = new $root.troop.Pendant();
+            if (object.station != null)
+                message.station = object.station >>> 0;
+            if (object.id != null)
+                message.id = object.id >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a Pendant message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof troop.Pendant
+         * @static
+         * @param {troop.Pendant} message Pendant
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        Pendant.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.station = 0;
+                object.id = 0;
+            }
+            if (message.station != null && message.hasOwnProperty("station"))
+                object.station = message.station;
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            return object;
+        };
+
+        /**
+         * Converts this Pendant to JSON.
+         * @function toJSON
+         * @memberof troop.Pendant
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        Pendant.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for Pendant
+         * @function getTypeUrl
+         * @memberof troop.Pendant
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        Pendant.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/troop.Pendant";
+        };
+
+        return Pendant;
+    })();
+
+    troop.Soldier = (function() {
+
+        /**
+         * Properties of a Soldier.
+         * @memberof troop
+         * @interface ISoldier
+         * @property {number|null} [station] Soldier station
+         * @property {Array.<troop.IPendant>|null} [pendants] Soldier pendants
+         */
+
+        /**
+         * Constructs a new Soldier.
+         * @memberof troop
+         * @classdesc Represents a Soldier.
+         * @implements ISoldier
+         * @constructor
+         * @param {troop.ISoldier=} [properties] Properties to set
+         */
+        function Soldier(properties) {
+            this.pendants = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Soldier station.
+         * @member {number} station
+         * @memberof troop.Soldier
+         * @instance
+         */
+        Soldier.prototype.station = 0;
+
+        /**
+         * Soldier pendants.
+         * @member {Array.<troop.IPendant>} pendants
+         * @memberof troop.Soldier
+         * @instance
+         */
+        Soldier.prototype.pendants = $util.emptyArray;
+
+        /**
+         * Creates a new Soldier instance using the specified properties.
+         * @function create
+         * @memberof troop.Soldier
+         * @static
+         * @param {troop.ISoldier=} [properties] Properties to set
+         * @returns {troop.Soldier} Soldier instance
+         */
+        Soldier.create = function create(properties) {
+            return new Soldier(properties);
+        };
+
+        /**
+         * Encodes the specified Soldier message. Does not implicitly {@link troop.Soldier.verify|verify} messages.
+         * @function encode
+         * @memberof troop.Soldier
+         * @static
+         * @param {troop.ISoldier} message Soldier message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Soldier.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.station != null && Object.hasOwnProperty.call(message, "station"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.station);
+            if (message.pendants != null && message.pendants.length)
+                for (var i = 0; i < message.pendants.length; ++i)
+                    $root.troop.Pendant.encode(message.pendants[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified Soldier message, length delimited. Does not implicitly {@link troop.Soldier.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof troop.Soldier
+         * @static
+         * @param {troop.ISoldier} message Soldier message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Soldier.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a Soldier message from the specified reader or buffer.
+         * @function decode
+         * @memberof troop.Soldier
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {troop.Soldier} Soldier
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Soldier.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.troop.Soldier();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.station = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        if (!(message.pendants && message.pendants.length))
+                            message.pendants = [];
+                        message.pendants.push($root.troop.Pendant.decode(reader, reader.uint32()));
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a Soldier message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof troop.Soldier
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {troop.Soldier} Soldier
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Soldier.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a Soldier message.
+         * @function verify
+         * @memberof troop.Soldier
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        Soldier.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.station != null && message.hasOwnProperty("station"))
+                if (!$util.isInteger(message.station))
+                    return "station: integer expected";
+            if (message.pendants != null && message.hasOwnProperty("pendants")) {
+                if (!Array.isArray(message.pendants))
+                    return "pendants: array expected";
+                for (var i = 0; i < message.pendants.length; ++i) {
+                    var error = $root.troop.Pendant.verify(message.pendants[i]);
+                    if (error)
+                        return "pendants." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a Soldier message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof troop.Soldier
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {troop.Soldier} Soldier
+         */
+        Soldier.fromObject = function fromObject(object) {
+            if (object instanceof $root.troop.Soldier)
+                return object;
+            var message = new $root.troop.Soldier();
+            if (object.station != null)
+                message.station = object.station >>> 0;
+            if (object.pendants) {
+                if (!Array.isArray(object.pendants))
+                    throw TypeError(".troop.Soldier.pendants: array expected");
+                message.pendants = [];
+                for (var i = 0; i < object.pendants.length; ++i) {
+                    if (typeof object.pendants[i] !== "object")
+                        throw TypeError(".troop.Soldier.pendants: object expected");
+                    message.pendants[i] = $root.troop.Pendant.fromObject(object.pendants[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a Soldier message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof troop.Soldier
+         * @static
+         * @param {troop.Soldier} message Soldier
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        Soldier.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.pendants = [];
+            if (options.defaults)
+                object.station = 0;
+            if (message.station != null && message.hasOwnProperty("station"))
+                object.station = message.station;
+            if (message.pendants && message.pendants.length) {
+                object.pendants = [];
+                for (var j = 0; j < message.pendants.length; ++j)
+                    object.pendants[j] = $root.troop.Pendant.toObject(message.pendants[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this Soldier to JSON.
+         * @function toJSON
+         * @memberof troop.Soldier
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        Soldier.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for Soldier
+         * @function getTypeUrl
+         * @memberof troop.Soldier
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        Soldier.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/troop.Soldier";
+        };
+
+        return Soldier;
+    })();
+
     troop.Troop = (function() {
 
         /**
@@ -27607,6 +28082,7 @@ $root.troop = (function() {
          * @property {number|null} [idx] Troop idx
          * @property {number|null} [eid] Troop eid
          * @property {number|null} [heroUid] Troop heroUid
+         * @property {Array.<troop.ISoldier>|null} [soldiers] Troop soldiers
          */
 
         /**
@@ -27618,6 +28094,7 @@ $root.troop = (function() {
          * @param {troop.ITroop=} [properties] Properties to set
          */
         function Troop(properties) {
+            this.soldiers = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -27649,6 +28126,14 @@ $root.troop = (function() {
         Troop.prototype.heroUid = 0;
 
         /**
+         * Troop soldiers.
+         * @member {Array.<troop.ISoldier>} soldiers
+         * @memberof troop.Troop
+         * @instance
+         */
+        Troop.prototype.soldiers = $util.emptyArray;
+
+        /**
          * Creates a new Troop instance using the specified properties.
          * @function create
          * @memberof troop.Troop
@@ -27678,6 +28163,9 @@ $root.troop = (function() {
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.eid);
             if (message.heroUid != null && Object.hasOwnProperty.call(message, "heroUid"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.heroUid);
+            if (message.soldiers != null && message.soldiers.length)
+                for (var i = 0; i < message.soldiers.length; ++i)
+                    $root.troop.Soldier.encode(message.soldiers[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
             return writer;
         };
 
@@ -27724,6 +28212,12 @@ $root.troop = (function() {
                         message.heroUid = reader.uint32();
                         break;
                     }
+                case 4: {
+                        if (!(message.soldiers && message.soldiers.length))
+                            message.soldiers = [];
+                        message.soldiers.push($root.troop.Soldier.decode(reader, reader.uint32()));
+                        break;
+                    }
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -27768,6 +28262,15 @@ $root.troop = (function() {
             if (message.heroUid != null && message.hasOwnProperty("heroUid"))
                 if (!$util.isInteger(message.heroUid))
                     return "heroUid: integer expected";
+            if (message.soldiers != null && message.hasOwnProperty("soldiers")) {
+                if (!Array.isArray(message.soldiers))
+                    return "soldiers: array expected";
+                for (var i = 0; i < message.soldiers.length; ++i) {
+                    var error = $root.troop.Soldier.verify(message.soldiers[i]);
+                    if (error)
+                        return "soldiers." + error;
+                }
+            }
             return null;
         };
 
@@ -27789,6 +28292,16 @@ $root.troop = (function() {
                 message.eid = object.eid >>> 0;
             if (object.heroUid != null)
                 message.heroUid = object.heroUid >>> 0;
+            if (object.soldiers) {
+                if (!Array.isArray(object.soldiers))
+                    throw TypeError(".troop.Troop.soldiers: array expected");
+                message.soldiers = [];
+                for (var i = 0; i < object.soldiers.length; ++i) {
+                    if (typeof object.soldiers[i] !== "object")
+                        throw TypeError(".troop.Troop.soldiers: object expected");
+                    message.soldiers[i] = $root.troop.Soldier.fromObject(object.soldiers[i]);
+                }
+            }
             return message;
         };
 
@@ -27805,6 +28318,8 @@ $root.troop = (function() {
             if (!options)
                 options = {};
             var object = {};
+            if (options.arrays || options.defaults)
+                object.soldiers = [];
             if (options.defaults) {
                 object.idx = 0;
                 object.eid = 0;
@@ -27816,6 +28331,11 @@ $root.troop = (function() {
                 object.eid = message.eid;
             if (message.heroUid != null && message.hasOwnProperty("heroUid"))
                 object.heroUid = message.heroUid;
+            if (message.soldiers && message.soldiers.length) {
+                object.soldiers = [];
+                for (var j = 0; j < message.soldiers.length; ++j)
+                    object.soldiers[j] = $root.troop.Soldier.toObject(message.soldiers[j], options);
+            }
             return object;
         };
 
@@ -28269,6 +28789,417 @@ $root.troop = (function() {
         };
 
         return s2c_load;
+    })();
+
+    troop.c2s_edit_troop = (function() {
+
+        /**
+         * Properties of a c2s_edit_troop.
+         * @memberof troop
+         * @interface Ic2s_edit_troop
+         * @property {troop.ITroop|null} [troop] c2s_edit_troop troop
+         */
+
+        /**
+         * Constructs a new c2s_edit_troop.
+         * @memberof troop
+         * @classdesc Represents a c2s_edit_troop.
+         * @implements Ic2s_edit_troop
+         * @constructor
+         * @param {troop.Ic2s_edit_troop=} [properties] Properties to set
+         */
+        function c2s_edit_troop(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * c2s_edit_troop troop.
+         * @member {troop.ITroop|null|undefined} troop
+         * @memberof troop.c2s_edit_troop
+         * @instance
+         */
+        c2s_edit_troop.prototype.troop = null;
+
+        /**
+         * Creates a new c2s_edit_troop instance using the specified properties.
+         * @function create
+         * @memberof troop.c2s_edit_troop
+         * @static
+         * @param {troop.Ic2s_edit_troop=} [properties] Properties to set
+         * @returns {troop.c2s_edit_troop} c2s_edit_troop instance
+         */
+        c2s_edit_troop.create = function create(properties) {
+            return new c2s_edit_troop(properties);
+        };
+
+        /**
+         * Encodes the specified c2s_edit_troop message. Does not implicitly {@link troop.c2s_edit_troop.verify|verify} messages.
+         * @function encode
+         * @memberof troop.c2s_edit_troop
+         * @static
+         * @param {troop.Ic2s_edit_troop} message c2s_edit_troop message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_edit_troop.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.troop != null && Object.hasOwnProperty.call(message, "troop"))
+                $root.troop.Troop.encode(message.troop, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified c2s_edit_troop message, length delimited. Does not implicitly {@link troop.c2s_edit_troop.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof troop.c2s_edit_troop
+         * @static
+         * @param {troop.Ic2s_edit_troop} message c2s_edit_troop message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        c2s_edit_troop.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a c2s_edit_troop message from the specified reader or buffer.
+         * @function decode
+         * @memberof troop.c2s_edit_troop
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {troop.c2s_edit_troop} c2s_edit_troop
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_edit_troop.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.troop.c2s_edit_troop();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.troop = $root.troop.Troop.decode(reader, reader.uint32());
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a c2s_edit_troop message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof troop.c2s_edit_troop
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {troop.c2s_edit_troop} c2s_edit_troop
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        c2s_edit_troop.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a c2s_edit_troop message.
+         * @function verify
+         * @memberof troop.c2s_edit_troop
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        c2s_edit_troop.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.troop != null && message.hasOwnProperty("troop")) {
+                var error = $root.troop.Troop.verify(message.troop);
+                if (error)
+                    return "troop." + error;
+            }
+            return null;
+        };
+
+        /**
+         * Creates a c2s_edit_troop message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof troop.c2s_edit_troop
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {troop.c2s_edit_troop} c2s_edit_troop
+         */
+        c2s_edit_troop.fromObject = function fromObject(object) {
+            if (object instanceof $root.troop.c2s_edit_troop)
+                return object;
+            var message = new $root.troop.c2s_edit_troop();
+            if (object.troop != null) {
+                if (typeof object.troop !== "object")
+                    throw TypeError(".troop.c2s_edit_troop.troop: object expected");
+                message.troop = $root.troop.Troop.fromObject(object.troop);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a c2s_edit_troop message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof troop.c2s_edit_troop
+         * @static
+         * @param {troop.c2s_edit_troop} message c2s_edit_troop
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        c2s_edit_troop.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.troop = null;
+            if (message.troop != null && message.hasOwnProperty("troop"))
+                object.troop = $root.troop.Troop.toObject(message.troop, options);
+            return object;
+        };
+
+        /**
+         * Converts this c2s_edit_troop to JSON.
+         * @function toJSON
+         * @memberof troop.c2s_edit_troop
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        c2s_edit_troop.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for c2s_edit_troop
+         * @function getTypeUrl
+         * @memberof troop.c2s_edit_troop
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        c2s_edit_troop.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/troop.c2s_edit_troop";
+        };
+
+        return c2s_edit_troop;
+    })();
+
+    troop.s2c_edit_troop = (function() {
+
+        /**
+         * Properties of a s2c_edit_troop.
+         * @memberof troop
+         * @interface Is2c_edit_troop
+         * @property {number|null} [err] s2c_edit_troop err
+         */
+
+        /**
+         * Constructs a new s2c_edit_troop.
+         * @memberof troop
+         * @classdesc Represents a s2c_edit_troop.
+         * @implements Is2c_edit_troop
+         * @constructor
+         * @param {troop.Is2c_edit_troop=} [properties] Properties to set
+         */
+        function s2c_edit_troop(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * s2c_edit_troop err.
+         * @member {number} err
+         * @memberof troop.s2c_edit_troop
+         * @instance
+         */
+        s2c_edit_troop.prototype.err = 0;
+
+        /**
+         * Creates a new s2c_edit_troop instance using the specified properties.
+         * @function create
+         * @memberof troop.s2c_edit_troop
+         * @static
+         * @param {troop.Is2c_edit_troop=} [properties] Properties to set
+         * @returns {troop.s2c_edit_troop} s2c_edit_troop instance
+         */
+        s2c_edit_troop.create = function create(properties) {
+            return new s2c_edit_troop(properties);
+        };
+
+        /**
+         * Encodes the specified s2c_edit_troop message. Does not implicitly {@link troop.s2c_edit_troop.verify|verify} messages.
+         * @function encode
+         * @memberof troop.s2c_edit_troop
+         * @static
+         * @param {troop.Is2c_edit_troop} message s2c_edit_troop message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_edit_troop.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.err);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified s2c_edit_troop message, length delimited. Does not implicitly {@link troop.s2c_edit_troop.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof troop.s2c_edit_troop
+         * @static
+         * @param {troop.Is2c_edit_troop} message s2c_edit_troop message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        s2c_edit_troop.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a s2c_edit_troop message from the specified reader or buffer.
+         * @function decode
+         * @memberof troop.s2c_edit_troop
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {troop.s2c_edit_troop} s2c_edit_troop
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_edit_troop.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.troop.s2c_edit_troop();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.err = reader.uint32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a s2c_edit_troop message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof troop.s2c_edit_troop
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {troop.s2c_edit_troop} s2c_edit_troop
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        s2c_edit_troop.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a s2c_edit_troop message.
+         * @function verify
+         * @memberof troop.s2c_edit_troop
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        s2c_edit_troop.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.err != null && message.hasOwnProperty("err"))
+                if (!$util.isInteger(message.err))
+                    return "err: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a s2c_edit_troop message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof troop.s2c_edit_troop
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {troop.s2c_edit_troop} s2c_edit_troop
+         */
+        s2c_edit_troop.fromObject = function fromObject(object) {
+            if (object instanceof $root.troop.s2c_edit_troop)
+                return object;
+            var message = new $root.troop.s2c_edit_troop();
+            if (object.err != null)
+                message.err = object.err >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a s2c_edit_troop message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof troop.s2c_edit_troop
+         * @static
+         * @param {troop.s2c_edit_troop} message s2c_edit_troop
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        s2c_edit_troop.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.err = 0;
+            if (message.err != null && message.hasOwnProperty("err"))
+                object.err = message.err;
+            return object;
+        };
+
+        /**
+         * Converts this s2c_edit_troop to JSON.
+         * @function toJSON
+         * @memberof troop.s2c_edit_troop
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        s2c_edit_troop.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for s2c_edit_troop
+         * @function getTypeUrl
+         * @memberof troop.s2c_edit_troop
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        s2c_edit_troop.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/troop.s2c_edit_troop";
+        };
+
+        return s2c_edit_troop;
     })();
 
     return troop;
