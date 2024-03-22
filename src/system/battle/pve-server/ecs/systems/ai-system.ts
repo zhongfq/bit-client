@@ -13,7 +13,6 @@ import { GetPos } from "../../btree/actions/get-pos";
 import { GetSkillTarget } from "../../btree/actions/get-skill-target";
 import { GetSkillTime } from "../../btree/actions/get-skill-time";
 import { Hurt } from "../../btree/actions/hurt";
-import { LaunchSkill } from "../../btree/actions/launch-skill";
 import { MoveForward } from "../../btree/actions/move-forward";
 import { MoveStop } from "../../btree/actions/move-stop";
 import { MoveToAtkPos } from "../../btree/actions/move-to-atk-pos";
@@ -22,7 +21,7 @@ import { NormalAttack } from "../../btree/actions/normal-attack";
 import { PlayAnim } from "../../btree/actions/play-anim";
 import { SetStance } from "../../btree/actions/set-stance";
 import { TowardToTarget } from "../../btree/actions/toward-to-target";
-import { TryLaunchSkill } from "../../btree/actions/try-launch-skill";
+import { TryLaunchSkill } from "../../btree/conditions/try-launch-skill";
 import { Wait } from "../../btree/actions/wait";
 import { FindOneTarget } from "../../btree/conditions/find-one-target";
 import { FindTargets } from "../../btree/conditions/find-targets";
@@ -32,6 +31,7 @@ import { PveServer } from "../../pve-server";
 import { AiComponent, AiTreeEnv } from "../components/ai-component";
 import { ElementComponent } from "../components/element-component";
 import { LauncherComponent } from "../components/skill-component";
+import { CreateBullet } from "../../btree/actions/create-bullet";
 
 export class AiSystem extends ecs.System {
     public declare context: PveServer;
@@ -47,6 +47,7 @@ export class AiSystem extends ecs.System {
         this.context.registerProcess(CalcSpawnDistance);
         this.context.registerProcess(ClearStance);
         this.context.registerProcess(Collect);
+        this.context.registerProcess(CreateBullet);
         this.context.registerProcess(FindOneTarget);
         this.context.registerProcess(FindTargets);
         this.context.registerProcess(FollowHero);
@@ -56,7 +57,7 @@ export class AiSystem extends ecs.System {
         this.context.registerProcess(Hurt);
         this.context.registerProcess(IsFreeStance);
         this.context.registerProcess(IsTroopFighting);
-        this.context.registerProcess(LaunchSkill);
+        this.context.registerProcess(MoveForward);
         this.context.registerProcess(MoveStop);
         this.context.registerProcess(MoveToAtkPos);
         this.context.registerProcess(MoveToPos);
@@ -67,7 +68,6 @@ export class AiSystem extends ecs.System {
         this.context.registerProcess(TowardToTarget);
         this.context.registerProcess(TryLaunchSkill);
         this.context.registerProcess(Wait);
-        this.context.registerProcess(MoveForward);
 
         btreeCode.forEach((value) => this.context.registerCode(value.code, value.evaluator));
     }

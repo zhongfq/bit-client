@@ -35,14 +35,14 @@
       },
       {
         "id": 5,
-        "name": "LaunchSkill",
+        "name": "CreateBullet",
         "args": {
-          "skill": -1
+          "entity_id": 50001
         },
         "input": [
-          "targets"
-        ],
-        "children": []
+          "targets",
+          ""
+        ]
       }
     ]
   },

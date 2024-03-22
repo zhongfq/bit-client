@@ -293,7 +293,6 @@ export interface GeneratedSkillRow {
     id: number;
     name: string;
     desc: string;
-    battle_entity?: number;
     type: number;
     cd: number;
     radius: number;

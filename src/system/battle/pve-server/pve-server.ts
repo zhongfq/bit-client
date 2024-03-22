@@ -342,16 +342,12 @@ export class PveServer extends b3.Context {
         this._sender.moveStop(element.eid, element.transform.position);
     }
 
-    public launchBullet(skill: Skill, targets: ElementComponent[]) {
+    public launchBullet(skill: Skill, bulletEntity: number, targets: ElementComponent[]) {
         const entity = this._ecs.createEntity(this._obtainEid());
         entity.etype = BattleConf.ENTITY_TYPE.BULLET;
 
-        if (!skill.data.battle_entity) {
-            throw new Error(`bullet skill no battle entity: ${skill.data.id}`);
-        }
-
         const element = entity.addComponent(ElementComponent);
-        element.data = app.service.table.battleEntity[skill.data.battle_entity];
+        element.data = app.service.table.battleEntity[bulletEntity];
         element.tid = skill.data.id;
 
         const transform = entity.addComponent(TransformComponent);

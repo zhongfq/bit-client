@@ -2,7 +2,7 @@ import * as b3 from "../../../../../core/behavior3/behavior";
 import { AiTreeEnv } from "../../ecs/components/ai-component";
 import { SkillOption } from "../btree-def";
 
-interface LaunchSkillArgs {
+interface TryLaunchSkillArgs {
     skill: number;
 }
 
@@ -10,7 +10,7 @@ export class TryLaunchSkill extends b3.Process {
     public override check(node: b3.Node) {}
 
     public override run(node: b3.Node, env: AiTreeEnv) {
-        const args = node.args as LaunchSkillArgs;
+        const args = node.args as TryLaunchSkillArgs;
         const skill = env.owner.launcher?.skills[args.skill];
         if (!skill) {
             console.warn(`skill not found: ${args.skill}`);

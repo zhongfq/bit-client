@@ -1,13 +1,28 @@
+import { app } from "../../../../../app";
 import * as b3 from "../../../../../core/behavior3/behavior";
 import { AiTreeEnv } from "../../ecs/components/ai-component";
 import { ElementComponent } from "../../ecs/components/element-component";
+import { SkillTreeEnv } from "../../ecs/components/skill-component";
+
+interface CreateBulletArgs {
+    entity_id: number;
+}
 
 export class CreateBullet extends b3.Process {
-    public override run(
-        node: b3.Node,
-        env: AiTreeEnv,
-        target?: ElementComponent[] | ElementComponent
-    ) {
+    public override check(node: b3.Node): void {
+        const args = node.args as CreateBulletArgs;
+        if (!app.service.table.battleEntity[args.entity_id]) {
+            throw new Error(`no bullet entity: ${args.entity_id}`);
+        }
+    }
+
+    public override run(node: b3.Node, env: AiTreeEnv, targets: ElementComponent[]) {
+        if (!(env instanceof SkillTreeEnv)) {
+            throw new Error(`env is not SkillTreeEnv: ${env}`);
+        }
+        const args = node.args as CreateBulletArgs;
+        const skill = env.skill;
+        env.context.launchBullet(skill, args.entity_id, targets);
         return b3.Status.SUCCESS;
     }
 
