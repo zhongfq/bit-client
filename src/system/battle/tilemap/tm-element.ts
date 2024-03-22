@@ -83,6 +83,9 @@ export abstract class TMTileElemet extends TMElement {
         if (this._tile) {
             return;
         }
+        if (TMUtil.TILE_BATCH) {
+            return;
+        }
         const idx = this._tilemap.getAtlasFrameIdx(this.getAtlasName(), this.gid);
         if (idx == 0 && this.ignoreFirstFrame()) {
             return;
@@ -136,19 +139,19 @@ export abstract class TMTileElemet extends TMElement {
         this._tile = undefined;
     }
 
-    protected abstract getAtlasName(): TMAtlasName;
-    protected abstract getResPaths(): string[];
-    protected abstract getOffsetY(): number;
-    protected abstract getRenderMode(): Laya.MaterialRenderMode;
-    protected abstract ignoreFirstFrame(): boolean;
+    public abstract getAtlasName(): TMAtlasName;
+    public abstract getResPaths(): string[];
+    public abstract getOffsetY(): number;
+    public abstract getRenderMode(): Laya.MaterialRenderMode;
+    public abstract ignoreFirstFrame(): boolean;
 }
 
 export class TMGroundElement extends TMTileElemet {
-    protected override getAtlasName(): TMAtlasName {
+    public override getAtlasName(): TMAtlasName {
         return TMAtlasName.Ground;
     }
 
-    protected override getResPaths(): string[] {
+    public override getResPaths(): string[] {
         return [
             "resources/texture/world-map/ground/ground.atlas",
             "resources/texture/world-map/ground/ground.png",
@@ -156,25 +159,25 @@ export class TMGroundElement extends TMTileElemet {
         ];
     }
 
-    protected override getOffsetY(): number {
+    public override getOffsetY(): number {
         return -0.01;
     }
 
-    protected override getRenderMode(): Laya.MaterialRenderMode {
+    public override getRenderMode(): Laya.MaterialRenderMode {
         return Laya.MaterialRenderMode.RENDERMODE_OPAQUE;
     }
 
-    protected override ignoreFirstFrame(): boolean {
+    public override ignoreFirstFrame(): boolean {
         return false;
     }
 }
 
 export class TMRoadElement extends TMTileElemet {
-    protected override getAtlasName(): TMAtlasName {
+    public override getAtlasName(): TMAtlasName {
         return TMAtlasName.Road;
     }
 
-    protected override getResPaths(): string[] {
+    public override getResPaths(): string[] {
         return [
             "resources/texture/world-map/road/road.atlas",
             "resources/texture/world-map/road/road.png",
@@ -182,25 +185,25 @@ export class TMRoadElement extends TMTileElemet {
         ];
     }
 
-    protected override getOffsetY(): number {
+    public override getOffsetY(): number {
         return 0;
     }
 
-    protected override getRenderMode(): Laya.MaterialRenderMode {
+    public override getRenderMode(): Laya.MaterialRenderMode {
         return Laya.MaterialRenderMode.RENDERMODE_TRANSPARENT;
     }
 
-    protected override ignoreFirstFrame(): boolean {
+    public override ignoreFirstFrame(): boolean {
         return true;
     }
 }
 
 export class TMRiverElement extends TMTileElemet {
-    protected override getAtlasName(): TMAtlasName {
+    public override getAtlasName(): TMAtlasName {
         return TMAtlasName.River;
     }
 
-    protected override getResPaths(): string[] {
+    public override getResPaths(): string[] {
         return [
             "resources/texture/world-map/river/river.atlas",
             "resources/texture/world-map/river/river.png",
@@ -208,15 +211,15 @@ export class TMRiverElement extends TMTileElemet {
         ];
     }
 
-    protected override getOffsetY(): number {
+    public override getOffsetY(): number {
         return 0;
     }
 
-    protected override getRenderMode(): Laya.MaterialRenderMode {
+    public override getRenderMode(): Laya.MaterialRenderMode {
         return Laya.MaterialRenderMode.RENDERMODE_TRANSPARENT;
     }
 
-    protected override ignoreFirstFrame(): boolean {
+    public override ignoreFirstFrame(): boolean {
         return true;
     }
 }

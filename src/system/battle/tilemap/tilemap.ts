@@ -1,3 +1,4 @@
+import { IVector2Like } from "../../../core/laya";
 import {
     ITMContext,
     TMAtlasName,
@@ -11,7 +12,7 @@ import {
     TMWorld,
     TMWorldMap,
 } from "./tm-def";
-import { TMObjectElement, TMElement, TMStaticElement } from "./tm-element";
+import { TMObjectElement, TMElement, TMStaticElement, TMTileElemet } from "./tm-element";
 import { TMUtil } from "./tm-util";
 
 export class Tilemap {
@@ -352,6 +353,14 @@ export class Tilemap {
                 return layerName != TMLayerName.Object && layerName != TMLayerName.Marker;
             });
         }
+
+        if (TMUtil.TILE_BATCH) {
+            Laya.timer.once(3000, this, () => {
+                this._drawTilePlane(this._curRect, TMLayerName.Ground);
+                this._drawTilePlane(this._curRect, TMLayerName.Road);
+                this._drawTilePlane(this._curRect, TMLayerName.River);
+            });
+        }
     }
 
     private async _searchInMap(
@@ -473,5 +482,87 @@ export class Tilemap {
             console.warn("该层没有数据", layer.name);
             return undefined;
         }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private _tilePlanes: Map<TMLayerName, Laya.MeshSprite3D> = new Map();
+
+    private async _drawTilePlane(rect: Laya.Rectangle, layerName: TMLayerName) {
+        let plane = this._tilePlanes.get(layerName);
+        if (plane) {
+            plane.destroy();
+            this._tilePlanes.delete(layerName);
+        }
+        const firstElement = this.getElementByPos(rect.x, rect.y, layerName) as TMTileElemet;
+        const atlasName = firstElement.getAtlasName();
+        const offsetY = firstElement.getOffsetY();
+        const renderMode = firstElement.getRenderMode();
+        const ignoreFirstFrame = firstElement.ignoreFirstFrame();
+
+        const [atlasPath, texturePath, prefabPath] = firstElement.getResPaths();
+        const atlas = await Laya.loader.load(atlasPath, Laya.Loader.ATLAS);
+        const texture = await Laya.loader.load(texturePath, Laya.Loader.TEXTURE2D);
+
+        const uvMap = this._getUVMap(rect, layerName, atlas);
+        if (uvMap.size == 0) {
+            return;
+        }
+        plane = new Laya.MeshSprite3D(TMUtil.createPlane(rect, uvMap), layerName + "-batch");
+        const pos = plane.transform.localPosition;
+        pos.x = rect.x;
+        pos.y = offsetY;
+        pos.z = rect.y;
+        plane.transform.localPosition = pos;
+
+        const renderer = plane.getComponent(Laya.MeshRenderer);
+        const mat = new Laya.BlinnPhongMaterial();
+        mat.albedoTexture = texture;
+        mat.renderMode = renderMode;
+        renderer.material = mat;
+
+        this._root.getChildByName(layerName).addChild(plane);
+        this._tilePlanes.set(layerName as TMLayerName, plane);
+    }
+
+    private _getUVMap(
+        rect: Laya.Rectangle,
+        layerName: TMLayerName,
+        atlas: Laya.AtlasResource
+    ): Map<string, IVector2Like[]> {
+        const uvMap: Map<string, IVector2Like[]> = new Map();
+
+        for (let x = rect.x; x < rect.x + rect.width; x++) {
+            for (let y = rect.y; y < rect.y + rect.height; y++) {
+                const key = TMUtil.xyToKey(x, y);
+                const uvs = this._findUVs(x, y, layerName, atlas);
+                uvMap.set(key, uvs);
+            }
+        }
+        return uvMap;
+    }
+
+    private _findUVs(
+        gridX: number,
+        gridY: number,
+        layerName: TMLayerName,
+        atlas: Laya.AtlasResource
+    ): IVector2Like[] {
+        const element = this.getElementByPos(gridX, gridY, layerName) as TMTileElemet;
+        const idx = this.getAtlasFrameIdx(element.getAtlasName(), element.gid);
+        const path = atlas.frames[idx].url;
+        const tex = Laya.loader.getRes(path) as Laya.Texture;
+
+        const uvs: IVector2Like[] = [];
+        for (let i = 0; i < tex.uv.length - 1; i += 2) {
+            uvs.push({ x: tex.uv[i], y: tex.uv[i + 1] });
+        }
+
+        // 最后两个uv需要对调一下，才符合laya的需求
+        const uv2 = { x: uvs[2].x, y: uvs[2].y };
+        const uv3 = { x: uvs[3].x, y: uvs[3].y };
+        [uvs[2], uvs[3]] = [uv3, uv2];
+
+        return uvs;
     }
 }

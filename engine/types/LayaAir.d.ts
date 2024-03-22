@@ -52,7 +52,9 @@ declare class Laya {
      * 在引擎初始化前执行自定义逻辑。此时Stage尚未创建，因为可以修改stageConfig实现动态舞台配置。
      * @param callback
      */
-    static addBeforeInitCallback(callback: (stageConfig: Laya.IStageConfig) => void | Promise<void>): void;
+    static addBeforeInitCallback(
+        callback: (stageConfig: Laya.IStageConfig) => void | Promise<void>
+    ): void;
     /**
      * 在引擎初始化后执行自定义逻辑
      * @param callback
@@ -85,8 +87,8 @@ declare module Laya {
      */
     class Config {
         /**
-        * 画布设置是否抗锯齿，只对2D(WebGL)有效,3D抗锯齿在camera或RT上面控制。
-        */
+         * 画布设置是否抗锯齿，只对2D(WebGL)有效,3D抗锯齿在camera或RT上面控制。
+         */
         static isAntialias: boolean;
         /**
          * 是否使用webgl2
@@ -102,8 +104,8 @@ declare module Laya {
          */
         static animationInterval: number;
         /**
-           * 当使用webGL渲染2d的时候，每次创建vb是否直接分配足够64k个顶点的缓存。这样可以提高效率。
-           */
+         * 当使用webGL渲染2d的时候，每次创建vb是否直接分配足够64k个顶点的缓存。这样可以提高效率。
+         */
         static webGL2D_MeshAllocMaxMem: boolean;
         static defaultFontSize: number;
         static defaultFont: string;
@@ -183,18 +185,18 @@ declare module Laya {
          */
         static maxLightCount: number;
         /**
-        * X、Y、Z轴的光照集群数量,Z值会影响Cluster接受区域光(点光、聚光)影响的数量,Math.floor(2048 / lightClusterCount.z - 1) * 4 为每个Cluster的最大平均接受区域光数量,如果每个Cluster所接受光源影响的平均数量大于该值，则较远的Cluster会忽略其中多余的光照影响。
-        */
+         * X、Y、Z轴的光照集群数量,Z值会影响Cluster接受区域光(点光、聚光)影响的数量,Math.floor(2048 / lightClusterCount.z - 1) * 4 为每个Cluster的最大平均接受区域光数量,如果每个Cluster所接受光源影响的平均数量大于该值，则较远的Cluster会忽略其中多余的光照影响。
+         */
         static lightClusterCount: Vector3;
         /**
          * 最大形变数量
          */
         static maxMorphTargetCount: number;
         /**
-        * 设置分辨率大小（并不是实际渲染分辨率）
-        * @param width
-        * @param height
-        */
+         * 设置分辨率大小（并不是实际渲染分辨率）
+         * @param width
+         * @param height
+         */
         static setResolution(width: number, height: number): void;
         /**BVHRenderConfig */
         /**是否使用BVH裁剪 */
@@ -206,18 +208,17 @@ declare module Laya {
         /**最小cellbuild数，如果小于这个数，不会BVH构建 */
         static BVH_Min_Build_nums: number;
     }
-    type FEnumDescriptor = {
-        name: string;
-        value: any;
-        extend?: FEnumDescriptor;
-        [index: string]: any;
-    }[] | any[] | Object | string;
-    type FPropertyType = string | Function | Object | [
-        FPropertyType
-    ] | [
-        "Record",
-        FPropertyType
-    ];
+    type FEnumDescriptor =
+        | {
+              name: string;
+              value: any;
+              extend?: FEnumDescriptor;
+              [index: string]: any;
+          }[]
+        | any[]
+        | Object
+        | string;
+    type FPropertyType = string | Function | Object | [FPropertyType] | ["Record", FPropertyType];
     interface FPropertyDescriptor {
         /** 属性名称。一般不需要设定。 */
         name: string;
@@ -301,10 +302,7 @@ declare module Laya {
         /** 数字的最大值 */
         max: number;
         /** 数值范围，等同于一次性设置min和max。 */
-        range: [
-            number,
-            number
-        ];
+        range: [number, number];
         /** 拖动方式改变数值时，每次数值改变的幅度。 */
         step: number;
         /** 小数点后的位数 */
@@ -347,7 +345,7 @@ declare module Laya {
         /** 显示位置。语法：before xxx/after xxx/first/last。 */
         position: string;
         /** 表示属性是私有属性。私有属性不会显示在Inspector里，但会序列化保存。 */
-        "private": boolean;
+        private: boolean;
         /** 增加缩进，单位是层级，不是像素。 */
         addIndent: number;
         /** 表示属性是否允许多选情况下编辑。默认true。 */
@@ -550,7 +548,13 @@ declare module Laya {
          * @param	playStart 播放的起始时间位置。
          * @param	playEnd 播放的结束时间位置。（0为动画一次循环的最长结束时间位置）。
          */
-        play(index?: number, playbackRate?: number, overallDuration?: number, playStart?: number, playEnd?: number): void;
+        play(
+            index?: number,
+            playbackRate?: number,
+            overallDuration?: number,
+            playStart?: number,
+            playEnd?: number
+        ): void;
         /**
          * 播放动画。
          * @param	index 动画索引。
@@ -559,7 +563,14 @@ declare module Laya {
          * @param	playStartFrame 播放的原始起始帧率位置。
          * @param	playEndFrame 播放的原始结束帧率位置。（0为动画一次循环的最长结束时间位置）。
          */
-        playByFrame(index?: number, playbackRate?: number, overallDuration?: number, playStartFrame?: number, playEndFrame?: number, fpsIn3DBuilder?: number): void;
+        playByFrame(
+            index?: number,
+            playbackRate?: number,
+            overallDuration?: number,
+            playStartFrame?: number,
+            playEndFrame?: number,
+            fpsIn3DBuilder?: number
+        ): void;
         /**
          * 停止播放当前动画
          * 如果不是立即停止就等待动画播放完成后再停止
@@ -645,9 +656,20 @@ declare module Laya {
         /**获取附加数据 */
         getPublicExtData(): ArrayBuffer;
         /**获取动画信息数据 */
-        getAnimationDataWithCache(key: any, cacheDatas: any, aniIndex: number, frameIndex: number): Float32Array;
+        getAnimationDataWithCache(
+            key: any,
+            cacheDatas: any,
+            aniIndex: number,
+            frameIndex: number
+        ): Float32Array;
         /**设置动画信息数据 */
-        setAnimationDataWithCache(key: any, cacheDatas: any[], aniIndex: number, frameIndex: number, data: any): void;
+        setAnimationDataWithCache(
+            key: any,
+            cacheDatas: any[],
+            aniIndex: number,
+            frameIndex: number,
+            data: any
+        ): void;
         /**
          * 计算当前时间应该对应关键帧的哪一帧
          * @param	nodeframes	当前骨骼的关键帧数据
@@ -667,11 +689,21 @@ declare module Laya {
          * @param	frameIndex
          * @param	playCurTime
          */
-        getOriginalData(aniIndex: number, originalData: Float32Array, nodesFrameIndices: any[], frameIndex: number, playCurTime: number): void;
+        getOriginalData(
+            aniIndex: number,
+            originalData: Float32Array,
+            nodesFrameIndices: any[],
+            frameIndex: number,
+            playCurTime: number
+        ): void;
         /**获取nodes信息 */
         getNodesCurrentFrameIndex(aniIndex: number, playCurTime: number): Uint32Array;
         /**获取原始数据 */
-        getOriginalDataUnfixedRate(aniIndex: number, originalData: Float32Array, playCurTime: number): void;
+        getOriginalDataUnfixedRate(
+            aniIndex: number,
+            originalData: Float32Array,
+            playCurTime: number
+        ): void;
     }
     /**
      * @private
@@ -778,7 +810,12 @@ declare module Laya {
          * @param	graphics
          * @param	noUseSave   不使用共享的矩阵对象 _tempResultMatrix，只有实时计算的时候才设置为true
          */
-        draw(graphics: GraphicsAni, boneMatrixArray: any[], noUseSave?: boolean, alpha?: number): void;
+        draw(
+            graphics: GraphicsAni,
+            boneMatrixArray: any[],
+            noUseSave?: boolean,
+            alpha?: number
+        ): void;
         /**
          * 显示蒙皮动画
          * @param	boneMatrixArray 当前帧的骨骼矩阵
@@ -909,9 +946,9 @@ declare module Laya {
          */
         constructor(aniMode?: number);
         /**
-        * @private
-        * 得到帧索引
-        */
+         * @private
+         * 得到帧索引
+         */
         get index(): number;
         /**
          * @private
@@ -1057,7 +1094,15 @@ declare module Laya {
          * @param	freshSkin	是否刷新皮肤数据
          * @param	playAudio	是否播放音频
          */
-        play(nameOrIndex: any, loop: boolean, force?: boolean, start?: number, end?: number, freshSkin?: boolean, playAudio?: boolean): void;
+        play(
+            nameOrIndex: any,
+            loop: boolean,
+            force?: boolean,
+            start?: number,
+            end?: number,
+            freshSkin?: boolean,
+            playAudio?: boolean
+        ): void;
         /**
          * 停止动画
          */
@@ -1414,7 +1459,7 @@ declare module Laya {
         /**
          * 不等于
          */
-        NotEqual = 3
+        NotEqual = 3,
     }
     /**
      * 2D动画类型
@@ -1485,16 +1530,44 @@ declare module Laya {
             Circ_EaseIn: (t: number, b: number, c: number, d: number) => number;
             Circ_EaseOut: (t: number, b: number, c: number, d: number) => number;
             Circ_EaseInOut: (t: number, b: number, c: number, d: number) => number;
-            Elastic_EaseIn: (t: number, b: number, c: number, d: number, a: number, p: number) => number;
-            Elastic_EaseOut: (t: number, b: number, c: number, d: number, a: number, p: number) => number;
-            Elastic_EaseInOut: (t: number, b: number, c: number, d: number, a: number, p: number) => number;
+            Elastic_EaseIn: (
+                t: number,
+                b: number,
+                c: number,
+                d: number,
+                a: number,
+                p: number
+            ) => number;
+            Elastic_EaseOut: (
+                t: number,
+                b: number,
+                c: number,
+                d: number,
+                a: number,
+                p: number
+            ) => number;
+            Elastic_EaseInOut: (
+                t: number,
+                b: number,
+                c: number,
+                d: number,
+                a: number,
+                p: number
+            ) => number;
             Back_EaseIn: (t: number, b: number, c: number, d: number, s?: number) => number;
             Back_EaseOut: (t: number, b: number, c: number, d: number, s?: number) => number;
             Back_EaseInOut: (t: number, b: number, c: number, d: number, s?: number) => number;
             Bounce_EaseIn: (t: number, b: number, c: number, d: number) => number;
             Bounce_EaseOut: (t: number, b: number, c: number, d: number) => number;
             Bounce_EaseInOut: (t: number, b: number, c: number, d: number) => number;
-            hermiteInterpolate: (outTangent: number, inTangent: number, startValue: number, endValue: number, t: number, dur: number) => number;
+            hermiteInterpolate: (
+                outTangent: number,
+                inTangent: number,
+                startValue: number,
+                endValue: number,
+                t: number,
+                dur: number
+            ) => number;
         };
         /**
          * 是否循环
@@ -1522,7 +1595,17 @@ declare module Laya {
          * @param time 时间
          * @returns
          */
-        hermiteCurveSplineWeight(frameValue: number, frametime: number, frameOutWeight: number, frameOutTangent: number, nextframeValue: number, nextframetime: number, nextframeInweight: number, nextframeIntangent: number, time: number): number;
+        hermiteCurveSplineWeight(
+            frameValue: number,
+            frametime: number,
+            frameOutWeight: number,
+            frameOutTangent: number,
+            nextframeValue: number,
+            nextframetime: number,
+            nextframeInweight: number,
+            nextframeIntangent: number,
+            time: number
+        ): number;
         /**
          * 添加动画事件。
          * @param event 动画事件
@@ -1533,8 +1616,7 @@ declare module Laya {
      * <code>AnimationClip2DParse01</code>
      * AnimationClip资源解析
      */
-    class AnimationClip2DParse01 {
-    }
+    class AnimationClip2DParse01 {}
     /**
      * <code>Animator2D<code/>2D动画组件
      */
@@ -1600,7 +1682,12 @@ declare module Laya {
          * @param	layerIndex 层索引。
          * @param	normalizedTime 归一化的播放起始时间。
          */
-        crossFade(name: string, transitionDuration: number, layerIndex?: number, normalizedTime?: number): boolean;
+        crossFade(
+            name: string,
+            transitionDuration: number,
+            layerIndex?: number,
+            normalizedTime?: number
+        ): boolean;
         /**
          * 默认状态机
          * @param layerIndex
@@ -1695,9 +1782,9 @@ declare module Laya {
          */
         private _removeClip;
         /**
-        * 获取当前的播放状态。
-        * @return 动画播放状态。
-        */
+         * 获取当前的播放状态。
+         * @return 动画播放状态。
+         */
         getCurrentPlayState(): AnimatorPlayState2D;
         /**
          * 状态机名称
@@ -1718,9 +1805,9 @@ declare module Laya {
          */
         removeState(state: AnimatorState2D): void;
         /**
-             * 克隆。
-             * @return	 克隆副本。
-             */
+         * 克隆。
+         * @return	 克隆副本。
+         */
         clone(): AnimatorControllerLayer2D;
         /**
          * 克隆。
@@ -1760,7 +1847,7 @@ declare module Laya {
     enum AniParmType {
         Float = 0,
         Bool = 1,
-        Trigger = 2
+        Trigger = 2,
     }
     /**
      * 动画状态条件类型
@@ -1768,7 +1855,7 @@ declare module Laya {
     enum AniStateConditionType {
         Number = 0,
         Bool = 1,
-        Trigger = 2
+        Trigger = 2,
     }
     interface TypeAnimatorState {
         x: number;
@@ -1811,7 +1898,7 @@ declare module Laya {
     }
     enum AniStateConditionNumberCompressType {
         Less = 0,
-        Greater = 1
+        Greater = 1,
     }
     class AnimatorControllerParse {
         static parse(data: TypeAnimatorControllerData): {
@@ -2043,11 +2130,15 @@ declare module Laya {
          */
         removeCondition(condition: AnimatorStateCondition): void;
         /**
-        * 是否启用过渡
-        * @param normalizeTime
-        * @param paramsMap
-        */
-        check(normalizeTime: number, paramsMap: Record<string, Animation2DParm>, isReplay: boolean): boolean;
+         * 是否启用过渡
+         * @param normalizeTime
+         * @param paramsMap
+         */
+        check(
+            normalizeTime: number,
+            paramsMap: Record<string, Animation2DParm>,
+            isReplay: boolean
+        ): boolean;
     }
     /**
      * 动画更新模式
@@ -2058,7 +2149,7 @@ declare module Laya {
         /**低频率更新 */
         LowFrame = 1,
         /**不更新 */
-        UnScaleTime = 2
+        UnScaleTime = 2,
     }
     /**
      * <code>Component</code> 类用于创建组件的基类。
@@ -2158,8 +2249,7 @@ declare module Laya {
          */
         onDestroy(): void;
     }
-    interface IComponentExtra {
-    }
+    interface IComponentExtra {}
     class ComponentDriver {
         private _onUpdates;
         private _onLateUpdates;
@@ -2205,8 +2295,8 @@ declare module Laya {
         _indexInList: number;
         _keyFrames: Keyframe2D[];
         /**
-        * 帧个数。
-        */
+         * 帧个数。
+         */
         get keyFramesCount(): number;
         _setOwnerPathCount(value: number): void;
         _setOwnerPathByIndex(index: number, value: string): void;
@@ -2216,13 +2306,13 @@ declare module Laya {
         _joinOwnerPath(sep: string): string;
         _joinProperty(sep: string): string;
         /**
-        * 通过索引获取帧。
-        * @param index 索引。
-        */
+         * 通过索引获取帧。
+         * @param index 索引。
+         */
         getKeyframeByIndex(index: number): Keyframe2D;
         /**
-        * 精灵路径个数。
-        */
+         * 精灵路径个数。
+         */
         get ownerPathCount(): number;
         /**
          * 属性路径个数。
@@ -2242,8 +2332,8 @@ declare module Laya {
     class KeyframeNodeList2D {
         private _nodes;
         /**
-        *	节点个数。
-        */
+         *	节点个数。
+         */
         get count(): number;
         set count(value: number);
         /**
@@ -2268,15 +2358,27 @@ declare module Laya {
         /**
          * 3D物理触发器事件与2D物理碰撞事件，开始碰撞时执行
          */
-        onTriggerEnter?(other: PhysicsColliderComponent | ColliderBase, self?: ColliderBase, contact?: any): void;
+        onTriggerEnter?(
+            other: PhysicsColliderComponent | ColliderBase,
+            self?: ColliderBase,
+            contact?: any
+        ): void;
         /**
          * 3D物理触发器事件与2D物理碰撞事件，持续碰撞时执行
          */
-        onTriggerStay?(other: PhysicsColliderComponent | ColliderBase, self?: ColliderBase, contact?: any): void;
+        onTriggerStay?(
+            other: PhysicsColliderComponent | ColliderBase,
+            self?: ColliderBase,
+            contact?: any
+        ): void;
         /**
          * 3D物理触发器事件与2D物理碰撞事件，结束碰撞时执行
          */
-        onTriggerExit?(other: PhysicsColliderComponent | ColliderBase, self?: ColliderBase, contact?: any): void;
+        onTriggerExit?(
+            other: PhysicsColliderComponent | ColliderBase,
+            self?: ColliderBase,
+            contact?: any
+        ): void;
         /**
          * 3D物理碰撞器事件（不适用2D），开始碰撞时执行
          */
@@ -2709,7 +2811,12 @@ declare module Laya {
          * @param	layerIndex 层索引。
          * @param	normalizedTime 归一化的播放起始时间。
          */
-        crossFade(name: string, transitionDuration: number, layerIndex?: number, normalizedTime?: number): void;
+        crossFade(
+            name: string,
+            transitionDuration: number,
+            layerIndex?: number,
+            normalizedTime?: number
+        ): void;
         /**
          * set params value
          * @param name
@@ -2871,8 +2978,8 @@ declare module Laya {
          */
         static EVENT_OnStateUpdate: string;
         /**
-        * 动画事件 循环完成时调用
-        */
+         * 动画事件 循环完成时调用
+         */
         static EVENT_OnStateLoop: string;
         /**
          * 动画事件 离开时调用
@@ -2979,13 +3086,13 @@ declare module Laya {
         set transduration(value: number);
         get transduration(): number;
         /**
-        * 目标State播放时间偏移（归一化时间）
-        */
+         * 目标State播放时间偏移（归一化时间）
+         */
         set transstartoffset(value: number);
         get transstartoffset(): number;
         /**
-        * 触发时间（归一化时间）
-        */
+         * 触发时间（归一化时间）
+         */
         set exitTime(value: number);
         get exitTime(): number;
         /**
@@ -3003,9 +3110,12 @@ declare module Laya {
          * @param normalizeTime
          * @param paramsMap
          */
-        check(normalizeTime: number, paramsMap: {
-            [key: number]: number | boolean;
-        }): boolean;
+        check(
+            normalizeTime: number,
+            paramsMap: {
+                [key: number]: number | boolean;
+            }
+        ): boolean;
     }
     /**
      * 用来描述动画层遮罩
@@ -3033,9 +3143,9 @@ declare module Laya {
          */
         getAllTranfromPath(): Record<string, boolean>;
         /**
-       * 克隆。
-       * @return	 克隆副本。
-       */
+         * 克隆。
+         * @return	 克隆副本。
+         */
         clone(): any;
         /**
          * 克隆。
@@ -3053,7 +3163,7 @@ declare module Laya {
         Vector2 = 5,
         Vector3 = 6,
         Vector4 = 7,
-        Color = 8
+        Color = 8,
     }
     class HLOD extends Component {
         constructor();
@@ -3268,9 +3378,9 @@ declare module Laya {
         constructor();
         shadowCullPass(): boolean;
         /**
-        * get LODInfo 数组
-        * @returns
-        */
+         * get LODInfo 数组
+         * @returns
+         */
         get lods(): LODInfo[];
         /**
          * 设置 LODInfo 数组
@@ -3612,9 +3722,9 @@ declare module Laya {
          */
         protected _onDestroy(): void;
         /**
-        * 合批队列传入
-        * @param renderNodes
-        */
+         * 合批队列传入
+         * @param renderNodes
+         */
         addList(renderNodes: BaseRender[]): void;
         /**
          * 根据_batchList合批
@@ -3627,8 +3737,7 @@ declare module Laya {
     /**
      * <code>VolumeManager</code> 类用于管理体积组件
      */
-    interface IVolumeManager {
-    }
+    interface IVolumeManager {}
     /**
      * 反射探针模式
      */
@@ -3636,7 +3745,7 @@ declare module Laya {
         /**烘培模式 */
         off = 0,
         /**实时简单采样模式 还未支持*/
-        simple = 1
+        simple = 1,
     }
     /**
      * <code>ReflectionProbe</code> 类用于实现反射探针组件
@@ -3721,9 +3830,9 @@ declare module Laya {
         get ambientSH(): Float32Array;
         set ambientSH(value: Float32Array);
         /**
-        * 环境光模式。
-        * 如果值为AmbientMode.SolidColor一般使用ambientColor作为环境光源，如果值为如果值为AmbientMode.SphericalHarmonics一般使用ambientSphericalHarmonics作为环境光源。
-        */
+         * 环境光模式。
+         * 如果值为AmbientMode.SolidColor一般使用ambientColor作为环境光源，如果值为如果值为AmbientMode.SphericalHarmonics一般使用ambientSphericalHarmonics作为环境光源。
+         */
         get ambientMode(): AmbientMode;
         set ambientMode(value: AmbientMode);
         /**
@@ -3738,9 +3847,9 @@ declare module Laya {
         set iblTexRGBD(value: boolean);
         applyReflectionShaderData(shaderData: ShaderData): void;
         /**
-        * @inheritDoc
-        * @override
-        */
+         * @inheritDoc
+         * @override
+         */
         protected _onEnable(): void;
         /**
          * @inheritDoc
@@ -3772,8 +3881,8 @@ declare module Laya {
         get reflectionTexture(): TextureCube;
         set reflectionTexture(value: TextureCube);
         /**
-        * @deprecated
-        */
+         * @deprecated
+         */
         get customReflection(): TextureCube;
         set customReflection(value: TextureCube);
         /**
@@ -3788,10 +3897,10 @@ declare module Laya {
         get reflectionDecodingFormat(): TextureDecodeFormat;
         set reflectionDecodingFormat(value: TextureDecodeFormat);
         /**
-        * @deprecated
-        * 球谐环境光,修改后必须重新赋值。
-        * use scene.ambientSH
-        */
+         * @deprecated
+         * 球谐环境光,修改后必须重新赋值。
+         * use scene.ambientSH
+         */
         get ambientSphericalHarmonics(): SphericalHarmonicsL2;
         /**
          * @deprecated
@@ -3799,9 +3908,9 @@ declare module Laya {
          */
         set ambientSphericalHarmonics(value: SphericalHarmonicsL2);
         /**
-       * @deprecated
-       * 设置 天空， 地平线， 地面 环境光颜色
-       */
+         * @deprecated
+         * 设置 天空， 地平线， 地面 环境光颜色
+         */
         setGradientAmbient(skyColor: Vector3, equatorColor: Vector3, groundColor: Vector3): void;
     }
     /**
@@ -3829,7 +3938,7 @@ declare module Laya {
         /**相交 */
         intersect = 1,
         /**不相交*/
-        Disjoint = 2
+        Disjoint = 2,
     }
     /**
      * 物体于Volume的相交属性
@@ -3959,9 +4068,9 @@ declare module Laya {
          */
         constructor();
         /**
-        * @inheritDoc
-        * @override
-        */
+         * @inheritDoc
+         * @override
+         */
         protected _onEnable(): void;
         /**
          * light probe texture
@@ -4065,8 +4174,8 @@ declare module Laya {
         get fieldOfView(): number;
         set fieldOfView(value: number);
         /**
-       * 最大本地距离
-       */
+         * 最大本地距离
+         */
         get maxlocalYDistance(): number;
         /**
          * 近裁面。
@@ -4156,7 +4265,7 @@ declare module Laya {
         /**不清除。*/
         Nothing = 3,
         /**只清理颜色 */
-        ColorOnly = 4
+        ColorOnly = 4,
     }
     /**
      * 相机事件标记
@@ -4171,7 +4280,7 @@ declare module Laya {
         /**在后期处理之前。*/
         BeforeImageEffect = 6,
         /**所有渲染之后。*/
-        AfterEveryThing = 8
+        AfterEveryThing = 8,
     }
     /**
      * <code>Camera</code> 类用于创建摄像机。
@@ -4187,7 +4296,13 @@ declare module Laya {
          * @param shader 着色器
          * @param replacementTag 替换标记。
          */
-        static drawRenderTextureByScene(camera: Camera, scene: Scene3D, renderTexture: RenderTexture, shader?: Shader3D, replaceFlag?: string): RenderTexture;
+        static drawRenderTextureByScene(
+            camera: Camera,
+            scene: Scene3D,
+            renderTexture: RenderTexture,
+            shader?: Shader3D,
+            replaceFlag?: string
+        ): RenderTexture;
         /**
          * get PixelTexture
          * @param texture
@@ -4202,8 +4317,21 @@ declare module Laya {
          * @param format
          * @returns bake front left right up down
          */
-        static drawTextureCubePixelByScene(camera: Camera, scene: Scene3D, renderCubeSize: number, format: TextureFormat, cullingMask: number): ArrayBufferView[];
-        static drawTextureCubeByScene(camera: Camera, position: Vector3, scene: Scene3D, renderCubeSize: number, format: TextureFormat, cullingMask?: number): TextureCube;
+        static drawTextureCubePixelByScene(
+            camera: Camera,
+            scene: Scene3D,
+            renderCubeSize: number,
+            format: TextureFormat,
+            cullingMask: number
+        ): ArrayBufferView[];
+        static drawTextureCubeByScene(
+            camera: Camera,
+            position: Vector3,
+            scene: Scene3D,
+            renderCubeSize: number,
+            format: TextureFormat,
+            cullingMask?: number
+        ): TextureCube;
         /**深度贴图模式 */
         protected _depthTextureFormat: RenderTargetFormat;
         /** 深度贴图*/
@@ -4406,8 +4534,8 @@ declare module Laya {
         removeCommandBuffers(event: CameraEventFlags): void;
     }
     /**
-         * <code>FloatKeyFrame</code> 类用于创建浮点关键帧实例。
-         */
+     * <code>FloatKeyFrame</code> 类用于创建浮点关键帧实例。
+     */
     class FloatKeyframe extends Keyframe {
         /**内切线 */
         inTangent: number;
@@ -4568,7 +4696,12 @@ declare module Laya {
          * @param  开始查找索引。
          * @return 结果索引。
          */
-        evaluateColorRGB(lerpFactor: number, out: Color, startSearchIndex?: number, reverseSearch?: boolean): number;
+        evaluateColorRGB(
+            lerpFactor: number,
+            out: Color,
+            startSearchIndex?: number,
+            reverseSearch?: boolean
+        ): number;
         /**
          * 通过插值获取透明值。
          * @param  lerpFactor 插值因子。
@@ -4576,7 +4709,12 @@ declare module Laya {
          * @param  开始查找索引。
          * @return 结果索引 。
          */
-        evaluateColorAlpha(lerpFactor: number, outColor: Color, startSearchIndex?: number, reverseSearch?: boolean): number;
+        evaluateColorAlpha(
+            lerpFactor: number,
+            outColor: Color,
+            startSearchIndex?: number,
+            reverseSearch?: boolean
+        ): number;
         /**
          * 克隆。
          * @param	destObject 克隆源。
@@ -4589,9 +4727,9 @@ declare module Laya {
         clone(): any;
     }
     /**
-         * ...
-         * @author ...
-         */
+     * ...
+     * @author ...
+     */
     class GradientMode {
         /**
          * 找到与请求的评估时间相邻的两个键,并线性插值在他们之间,以获得一种混合的颜色。
@@ -4609,7 +4747,7 @@ declare module Laya {
         None = 0,
         In = 1,
         Out = 2,
-        Both = 3
+        Both = 3,
     }
     /**
      * <code>KeyFrame</code> 类用于创建关键帧实例。
@@ -4635,7 +4773,7 @@ declare module Laya {
     }
     enum AreaShape {
         rectangle = 0,
-        ellipse = 1
+        ellipse = 1,
     }
     /**
      * <code>LightSprite</code> 类用于创建灯光的父类。
@@ -4646,8 +4784,8 @@ declare module Laya {
          */
         constructor();
         /**
-          * 灯光烘培类型。
-          */
+         * 灯光烘培类型。
+         */
         get lightmapBakedType(): LightMode;
         set lightmapBakedType(value: LightMode);
         /**
@@ -4729,12 +4867,12 @@ declare module Laya {
         Directional = 0,
         Spot = 1,
         Point = 2,
-        Area = 3
+        Area = 3,
     }
     enum LightMode {
         mix = 0,
         realTime = 1,
-        bakeOnly = 2
+        bakeOnly = 2,
     }
     /**
      * <code>LightSprite</code> 类用于创建灯光的父类。
@@ -4897,7 +5035,7 @@ declare module Laya {
         /** 二级级联。 */
         TwoCascades = 1,
         /** 四级级联。 */
-        FourCascades = 2
+        FourCascades = 2,
     }
     /**
      * 阴影模式。
@@ -4910,12 +5048,12 @@ declare module Laya {
         /**低强度软阴影，对性能要求一般。*/
         SoftLow = 2,
         /**高强度软阴影,对性能要求较高。*/
-        SoftHigh = 3
+        SoftHigh = 3,
     }
     enum ShadowMapFormat {
         bit16 = 0,
         bit24_8 = 1,
-        bit32 = 2
+        bit32 = 2,
     }
     /**
      * @deprecated
@@ -4923,8 +5061,8 @@ declare module Laya {
      */
     class SpotLight extends LightSprite {
         /**
-          * 聚光灯的锥形角度。
-          */
+         * 聚光灯的锥形角度。
+         */
         get spotAngle(): number;
         set spotAngle(value: number);
         /**
@@ -4942,8 +5080,8 @@ declare module Laya {
      */
     class SpotLightCom extends Light {
         /**
-          * 聚光灯的锥形角度。
-          */
+         * 聚光灯的锥形角度。
+         */
         get spotAngle(): number;
         set spotAngle(value: number);
         /**
@@ -5188,10 +5326,10 @@ declare module Laya {
          */
         constructor();
         /**
-        * 克隆。
-        * @return	 克隆副本。
-        * @override
-        */
+         * 克隆。
+         * @return	 克隆副本。
+         * @override
+         */
         clone(): any;
     }
     /**
@@ -5205,7 +5343,7 @@ declare module Laya {
         /**透明混合_游戏中经常使用的透明。*/
         Fade = 2,
         /**透明混合_物理上看似合理的透明。*/
-        Transparent = 3
+        Transparent = 3,
     }
     /**
      * PBR材质的父类,该类为抽象类。
@@ -5263,8 +5401,8 @@ declare module Laya {
         get smoothness(): number;
         set smoothness(value: number);
         /**
-          * 是否支持顶点色。
-          */
+         * 是否支持顶点色。
+         */
         get enableVertexColor(): boolean;
         set enableVertexColor(value: boolean);
         /**
@@ -5300,13 +5438,13 @@ declare module Laya {
         get detailNormalTexture(): BaseTexture;
         set detailNormalTexture(value: BaseTexture);
         /**
-        * 细节图纹理平铺和偏移。
-        */
+         * 细节图纹理平铺和偏移。
+         */
         get detailTilingOffset(): Vector4;
         set detailTilingOffset(value: Vector4);
         /**
-        * 细节法线贴图缩放系数。
-        */
+         * 细节法线贴图缩放系数。
+         */
         get detailNormalScale(): number;
         set detailNormalScale(value: number);
         /**
@@ -5378,7 +5516,7 @@ declare module Laya {
         /**高质量。*/
         High = 0,
         /**低质量。*/
-        Low = 1
+        Low = 1,
     }
     /**
      * 金属度PBR材质光滑度数据源。
@@ -5387,7 +5525,7 @@ declare module Laya {
         /**金属度贴图的Alpha通道。*/
         MetallicGlossTextureAlpha = 0,
         /**反射率贴图的Alpha通道。*/
-        AlbedoTextureAlpha = 1
+        AlbedoTextureAlpha = 1,
     }
     /**
      * <code>PBRStandardMaterial</code> 类用于实现PBR材质。
@@ -5604,7 +5742,7 @@ declare module Laya {
         /**
          * @deprecated
          * 渲染状态_阿尔法测试。
-        */
+         */
         static RENDERMODE_CUTOUT: number;
         /**
          * @deprecated
@@ -5926,7 +6064,10 @@ declare module Laya {
          * @param	gradientFrameMax 最大时间帧。
          * @return 时间帧。
          */
-        static createByRandomTwoOverTime(gradientFrameMin: GradientDataInt, gradientFrameMax: GradientDataInt): FrameOverTime;
+        static createByRandomTwoOverTime(
+            gradientFrameMin: GradientDataInt,
+            gradientFrameMax: GradientDataInt
+        ): FrameOverTime;
         private _type;
         private _constant;
         private _overTime;
@@ -6006,28 +6147,41 @@ declare module Laya {
          * @param	gradientZ Z轴渐变角速度。
          * @return  渐变角速度。
          */
-        static createByGradientSeparate(gradientX: GradientDataNumber, gradientY: GradientDataNumber, gradientZ: GradientDataNumber): GradientAngularVelocity;
+        static createByGradientSeparate(
+            gradientX: GradientDataNumber,
+            gradientY: GradientDataNumber,
+            gradientZ: GradientDataNumber
+        ): GradientAngularVelocity;
         /**
          * 通过随机双固定角速度创建一个 <code>GradientAngularVelocity</code> 实例。
          * @param	constantMin 最小固定角速度。
          * @param	constantMax 最大固定角速度。
          * @return 渐变角速度。
          */
-        static createByRandomTwoConstant(constantMin: number, constantMax: number): GradientAngularVelocity;
+        static createByRandomTwoConstant(
+            constantMin: number,
+            constantMax: number
+        ): GradientAngularVelocity;
         /**
          * 通过随机分轴双固定角速度创建一个 <code>GradientAngularVelocity</code> 实例。
          * @param	separateConstantMin  最小分轴固定角速度。
          * @param	separateConstantMax  最大分轴固定角速度。
          * @return  渐变角速度。
          */
-        static createByRandomTwoConstantSeparate(separateConstantMin: Vector3, separateConstantMax: Vector3): GradientAngularVelocity;
+        static createByRandomTwoConstantSeparate(
+            separateConstantMin: Vector3,
+            separateConstantMax: Vector3
+        ): GradientAngularVelocity;
         /**
          * 通过随机双渐变角速度创建一个 <code>GradientAngularVelocity</code> 实例。
          * @param	gradientMin 最小渐变角速度。
          * @param	gradientMax 最大渐变角速度。
          * @return  渐变角速度。
          */
-        static createByRandomTwoGradient(gradientMin: GradientDataNumber, gradientMax: GradientDataNumber): GradientAngularVelocity;
+        static createByRandomTwoGradient(
+            gradientMin: GradientDataNumber,
+            gradientMax: GradientDataNumber
+        ): GradientAngularVelocity;
         /**
          * 通过分轴随机双渐变角速度创建一个 <code>GradientAngularVelocity</code> 实例。
          * @param	gradientXMin  最小X轴渐变角速度。
@@ -6038,7 +6192,16 @@ declare module Laya {
          * @param	gradientZMax  最大Z轴渐变角速度。
          * @return  渐变角速度。
          */
-        static createByRandomTwoGradientSeparate(gradientXMin: GradientDataNumber, gradientXMax: GradientDataNumber, gradientYMin: GradientDataNumber, gradientYMax: GradientDataNumber, gradientZMin: GradientDataNumber, gradientZMax: GradientDataNumber, gradientWMin: GradientDataNumber, gradientWMax: GradientDataNumber): GradientAngularVelocity;
+        static createByRandomTwoGradientSeparate(
+            gradientXMin: GradientDataNumber,
+            gradientXMax: GradientDataNumber,
+            gradientYMin: GradientDataNumber,
+            gradientYMax: GradientDataNumber,
+            gradientZMin: GradientDataNumber,
+            gradientZMax: GradientDataNumber,
+            gradientWMin: GradientDataNumber,
+            gradientWMax: GradientDataNumber
+        ): GradientAngularVelocity;
         private _type;
         private _separateAxes;
         private _constant;
@@ -6194,7 +6357,10 @@ declare module Laya {
          * @param minGradient 最小渐变颜色。
          * @param maxGradient 最大渐变颜色。
          */
-        static createByRandomTwoGradient(minGradient: Gradient, maxGradient: Gradient): GradientColor;
+        static createByRandomTwoGradient(
+            minGradient: Gradient,
+            maxGradient: Gradient
+        ): GradientColor;
         private _type;
         private _constant;
         private _constantMin;
@@ -6362,7 +6528,11 @@ declare module Laya {
          * @param	gradientZ 渐变尺寸Z。
          * @return  渐变尺寸。
          */
-        static createByGradientSeparate(gradientX: GradientDataNumber, gradientY: GradientDataNumber, gradientZ: GradientDataNumber): GradientSize;
+        static createByGradientSeparate(
+            gradientX: GradientDataNumber,
+            gradientY: GradientDataNumber,
+            gradientZ: GradientDataNumber
+        ): GradientSize;
         /**
          * 通过随机双固定尺寸创建一个 <code>GradientSize</code> 实例。
          * @param	constantMin 最小固定尺寸。
@@ -6376,14 +6546,20 @@ declare module Laya {
          * @param	constantMaxSeparate 分轴最大固定尺寸。
          * @return   渐变尺寸。
          */
-        static createByRandomTwoConstantSeparate(constantMinSeparate: Vector3, constantMaxSeparate: Vector3): GradientSize;
+        static createByRandomTwoConstantSeparate(
+            constantMinSeparate: Vector3,
+            constantMaxSeparate: Vector3
+        ): GradientSize;
         /**
          * 通过随机双渐变尺寸创建一个 <code>GradientSize</code> 实例。
          * @param	gradientMin 最小渐变尺寸。
          * @param	gradientMax 最大渐变尺寸。
          * @return 渐变尺寸。
          */
-        static createByRandomTwoGradient(gradientMin: GradientDataNumber, gradientMax: GradientDataNumber): GradientSize;
+        static createByRandomTwoGradient(
+            gradientMin: GradientDataNumber,
+            gradientMax: GradientDataNumber
+        ): GradientSize;
         /**
          * 通过分轴随机双渐变尺寸创建一个 <code>GradientSize</code> 实例。
          * @param	gradientXMin X轴最小渐变尺寸。
@@ -6394,7 +6570,14 @@ declare module Laya {
          * @param	gradientZMax Z轴最大渐变尺寸。
          * @return  渐变尺寸。
          */
-        static createByRandomTwoGradientSeparate(gradientXMin: GradientDataNumber, gradientXMax: GradientDataNumber, gradientYMin: GradientDataNumber, gradientYMax: GradientDataNumber, gradientZMin: GradientDataNumber, gradientZMax: GradientDataNumber): GradientSize;
+        static createByRandomTwoGradientSeparate(
+            gradientXMin: GradientDataNumber,
+            gradientXMax: GradientDataNumber,
+            gradientYMin: GradientDataNumber,
+            gradientYMax: GradientDataNumber,
+            gradientZMin: GradientDataNumber,
+            gradientZMax: GradientDataNumber
+        ): GradientSize;
         private _type;
         private _separateAxes;
         private _gradient;
@@ -6521,14 +6704,21 @@ declare module Laya {
          * @param	gradientZ 渐变速度Z。
          * @return  渐变速度。
          */
-        static createByGradient(gradientX: GradientDataNumber, gradientY: GradientDataNumber, gradientZ: GradientDataNumber): GradientVelocity;
+        static createByGradient(
+            gradientX: GradientDataNumber,
+            gradientY: GradientDataNumber,
+            gradientZ: GradientDataNumber
+        ): GradientVelocity;
         /**
          * 通过随机双固定速度创建一个 <code>GradientVelocity</code> 实例。
          * @param	constantMin 最小固定角速度。
          * @param	constantMax 最大固定角速度。
          * @return 渐变速度。
          */
-        static createByRandomTwoConstant(constantMin: Vector3, constantMax: Vector3): GradientVelocity;
+        static createByRandomTwoConstant(
+            constantMin: Vector3,
+            constantMax: Vector3
+        ): GradientVelocity;
         /**
          * 通过随机双渐变速度创建一个 <code>GradientVelocity</code> 实例。
          * @param	gradientXMin X轴最小渐变速度。
@@ -6539,7 +6729,14 @@ declare module Laya {
          * @param	gradientZMax Z轴最大渐变速度。
          * @return  渐变速度。
          */
-        static createByRandomTwoGradient(gradientXMin: GradientDataNumber, gradientXMax: GradientDataNumber, gradientYMin: GradientDataNumber, gradientYMax: GradientDataNumber, gradientZMin: GradientDataNumber, gradientZMax: GradientDataNumber): GradientVelocity;
+        static createByRandomTwoGradient(
+            gradientXMin: GradientDataNumber,
+            gradientXMax: GradientDataNumber,
+            gradientYMin: GradientDataNumber,
+            gradientYMax: GradientDataNumber,
+            gradientZMin: GradientDataNumber,
+            gradientZMax: GradientDataNumber
+        ): GradientVelocity;
         private _type;
         private _constant;
         private _gradientX;
@@ -6650,7 +6847,7 @@ declare module Laya {
         /**半球体 */
         Hemisphere = 3,
         /**球体 */
-        Sphere = 4
+        Sphere = 4,
     }
     /**
      * <code>BaseShape</code> 类用于粒子形状。
@@ -6671,7 +6868,12 @@ declare module Laya {
          * @param	position 粒子位置。
          * @param	direction 粒子方向。
          */
-        generatePositionAndDirection(position: Vector3, direction: Vector3, rand?: Rand, randomSeeds?: Uint32Array): void;
+        generatePositionAndDirection(
+            position: Vector3,
+            direction: Vector3,
+            rand?: Rand,
+            randomSeeds?: Uint32Array
+        ): void;
         /**
          * 克隆。
          * @param	destObject 克隆源。
@@ -6703,7 +6905,12 @@ declare module Laya {
          * @param	direction 粒子方向。
          * @override
          */
-        generatePositionAndDirection(position: Vector3, direction: Vector3, rand?: Rand, randomSeeds?: Uint32Array): void;
+        generatePositionAndDirection(
+            position: Vector3,
+            direction: Vector3,
+            rand?: Rand,
+            randomSeeds?: Uint32Array
+        ): void;
         /**
          * @param destObject
          * @override
@@ -6741,7 +6948,12 @@ declare module Laya {
          * @param	direction 粒子方向。
          * @override
          */
-        generatePositionAndDirection(position: Vector3, direction: Vector3, rand?: Rand, randomSeeds?: Uint32Array): void;
+        generatePositionAndDirection(
+            position: Vector3,
+            direction: Vector3,
+            rand?: Rand,
+            randomSeeds?: Uint32Array
+        ): void;
         /**
          * @param destObject
          * @override
@@ -6781,7 +6993,12 @@ declare module Laya {
          * @param	direction 粒子方向。
          * @override
          */
-        generatePositionAndDirection(position: Vector3, direction: Vector3, rand?: Rand, randomSeeds?: Uint32Array): void;
+        generatePositionAndDirection(
+            position: Vector3,
+            direction: Vector3,
+            rand?: Rand,
+            randomSeeds?: Uint32Array
+        ): void;
         /**
          * @override
          */
@@ -6811,7 +7028,12 @@ declare module Laya {
          * @param	direction 粒子方向。
          * @override
          */
-        generatePositionAndDirection(position: Vector3, direction: Vector3, rand?: Rand, randomSeeds?: Uint32Array): void;
+        generatePositionAndDirection(
+            position: Vector3,
+            direction: Vector3,
+            rand?: Rand,
+            randomSeeds?: Uint32Array
+        ): void;
         /**
          * @override
          */
@@ -6841,7 +7063,12 @@ declare module Laya {
          * @param	direction 粒子方向。
          * @override
          */
-        generatePositionAndDirection(position: Vector3, direction: Vector3, rand?: Rand, randomSeeds?: Uint32Array): void;
+        generatePositionAndDirection(
+            position: Vector3,
+            direction: Vector3,
+            rand?: Rand,
+            randomSeeds?: Uint32Array
+        ): void;
         /**
          * @override
          */
@@ -7078,10 +7305,10 @@ declare module Laya {
          */
         constructor();
         /**
-        * 克隆。
-        * @return	 克隆副本。
-        * @override
-        */
+         * 克隆。
+         * @return	 克隆副本。
+         * @override
+         */
         clone(): any;
         /**
          * @deprecated
@@ -7367,7 +7594,11 @@ declare module Laya {
          */
         get textureSheetAnimation(): TextureSheetAnimation;
         set textureSheetAnimation(value: TextureSheetAnimation);
-        constructor(render: ShurikenParticleRenderer, meshTopology?: MeshTopology, drawType?: DrawType);
+        constructor(
+            render: ShurikenParticleRenderer,
+            meshTopology?: MeshTopology,
+            drawType?: DrawType
+        );
         /**
          * 设置 自定义 包围盒
          */
@@ -7518,7 +7749,12 @@ declare module Laya {
          * @param	startColor	   初始点颜色
          * @param	endColor	   结束点颜色
          */
-        addLine(startPosition: Vector3, endPosition: Vector3, startColor: Color, endColor: Color): void;
+        addLine(
+            startPosition: Vector3,
+            endPosition: Vector3,
+            startColor: Color,
+            endColor: Color
+        ): void;
         /**
          * 添加多条线段。
          * @param	lines  线段数据
@@ -7537,7 +7773,13 @@ declare module Laya {
          * @param	startColor	   初始点颜色
          * @param	endColor	   结束点颜色
          */
-        setLine(index: number, startPosition: Vector3, endPosition: Vector3, startColor: Color, endColor: Color): void;
+        setLine(
+            index: number,
+            startPosition: Vector3,
+            endPosition: Vector3,
+            startColor: Color,
+            endColor: Color
+        ): void;
         /**
          * 获取线段数据
          * @param out 线段数据。
@@ -7588,7 +7830,12 @@ declare module Laya {
          * @param	startColor	   初始点颜色
          * @param	endColor	   结束点颜色
          */
-        addLine(startPosition: Vector3, endPosition: Vector3, startColor: Color, endColor: Color): void;
+        addLine(
+            startPosition: Vector3,
+            endPosition: Vector3,
+            startColor: Color,
+            endColor: Color
+        ): void;
         /**
          * 添加多条线段。
          * @param	lines  线段数据
@@ -7607,7 +7854,13 @@ declare module Laya {
          * @param	startColor	   初始点颜色
          * @param	endColor	   结束点颜色
          */
-        setLine(index: number, startPosition: Vector3, endPosition: Vector3, startColor: Color, endColor: Color): void;
+        setLine(
+            index: number,
+            startPosition: Vector3,
+            endPosition: Vector3,
+            startColor: Color,
+            endColor: Color
+        ): void;
         /**
          * 获取线段数据
          * @param out 线段数据。
@@ -7650,12 +7903,12 @@ declare module Laya {
         RenderBitFlag_Batch = 1,
         RenderBitFlag_Editor = 2,
         RenderBitFlag_InstanceBatch = 3,
-        RenderBitFlag_VertexMergeBatch = 4
+        RenderBitFlag_VertexMergeBatch = 4,
     }
     enum IrradianceMode {
         LightMap = 0,
         VolumetricGI = 1,
-        Common = 2
+        Common = 2,
     }
     /**
      * <code>Render</code> 类用于渲染器的父类，抽象类不允许实例。
@@ -7782,16 +8035,24 @@ declare module Laya {
      */
     class BlitFrameBufferCMD {
         /**
-       * 渲染命令集
-       * @param source
-       * @param dest
-       * @param viewport
-       * @param offsetScale
-       * @param shader
-       * @param shaderData
-       * @param subShader
-       */
-        static create(source: BaseTexture, dest: RenderTexture, viewport: Viewport, offsetScale?: Vector4, shader?: Shader3D, shaderData?: ShaderData, subShader?: number): BlitFrameBufferCMD;
+         * 渲染命令集
+         * @param source
+         * @param dest
+         * @param viewport
+         * @param offsetScale
+         * @param shader
+         * @param shaderData
+         * @param subShader
+         */
+        static create(
+            source: BaseTexture,
+            dest: RenderTexture,
+            viewport: Viewport,
+            offsetScale?: Vector4,
+            shader?: Shader3D,
+            shaderData?: ShaderData,
+            subShader?: number
+        ): BlitFrameBufferCMD;
         constructor();
         set shaderData(value: ShaderData);
         setshader(shader: Shader3D, subShader: number, shaderData: ShaderData): void;
@@ -7808,16 +8069,25 @@ declare module Laya {
     }
     class BlitScreenQuadCMD extends Command {
         /**
-        * 创建命令流
-        * @param source 原始贴图 如果设置为null  将会使用默认的Camera流程中的原RenderTexture
-        * @param dest 目标贴图 如果设置为null，将会使用默认的camera渲染目标
-        * @param offsetScale 偏移缩放
-        * @param shader 渲染shader
-        * @param shaderData 渲染数据
-        * @param subShader subshader的节点
-        * @param screenType
-        */
-        static create(source: BaseTexture, dest: RenderTexture, offsetScale?: Vector4, shader?: Shader3D, shaderData?: ShaderData, subShader?: number, screenType?: number, commandbuffer?: CommandBuffer): BlitScreenQuadCMD;
+         * 创建命令流
+         * @param source 原始贴图 如果设置为null  将会使用默认的Camera流程中的原RenderTexture
+         * @param dest 目标贴图 如果设置为null，将会使用默认的camera渲染目标
+         * @param offsetScale 偏移缩放
+         * @param shader 渲染shader
+         * @param shaderData 渲染数据
+         * @param subShader subshader的节点
+         * @param screenType
+         */
+        static create(
+            source: BaseTexture,
+            dest: RenderTexture,
+            offsetScale?: Vector4,
+            shader?: Shader3D,
+            shaderData?: ShaderData,
+            subShader?: number,
+            screenType?: number,
+            commandbuffer?: CommandBuffer
+        ): BlitScreenQuadCMD;
         constructor();
         set shaderData(value: ShaderData);
         setshader(shader: Shader3D, subShader: number, shaderData: ShaderData): void;
@@ -7987,7 +8257,14 @@ declare module Laya {
          * @param	shaderData 着色器数据,如果为null只接收sourceTexture。
          * @param	subShader subShader索引,默认值为0。
          */
-        blitScreenQuad(source: BaseTexture, dest: RenderTexture, offsetScale?: Vector4, shader?: Shader3D, shaderData?: ShaderData, subShader?: number): void;
+        blitScreenQuad(
+            source: BaseTexture,
+            dest: RenderTexture,
+            offsetScale?: Vector4,
+            shader?: Shader3D,
+            shaderData?: ShaderData,
+            subShader?: number
+        ): void;
         /**
          * 添加一条通过全屏四边形将源纹理渲染到目标渲染纹理指令。
          * @param source 源纹理 如果为null,前渲染结果为原纹理
@@ -7996,7 +8273,13 @@ declare module Laya {
          * @param material 材质
          * @param subShader shader索引
          */
-        blitScreenQuadByMaterial(source: BaseTexture, dest: RenderTexture, offsetScale?: Vector4, material?: Material, subShader?: number): void;
+        blitScreenQuadByMaterial(
+            source: BaseTexture,
+            dest: RenderTexture,
+            offsetScale?: Vector4,
+            material?: Material,
+            subShader?: number
+        ): void;
         /**
          * 添加一条通过全屏三角形将源纹理渲染到目标渲染纹理指令。
          * @param	source 源纹理。
@@ -8006,7 +8289,14 @@ declare module Laya {
          * @param	shaderData 着色器数据,如果为null只接收sourceTexture。
          * @param	subShader subShader索引,默认值为0。
          */
-        blitScreenTriangle(source: BaseTexture, dest: RenderTexture, offsetScale?: Vector4, shader?: Shader3D, shaderData?: ShaderData, subShader?: number): void;
+        blitScreenTriangle(
+            source: BaseTexture,
+            dest: RenderTexture,
+            offsetScale?: Vector4,
+            shader?: Shader3D,
+            shaderData?: ShaderData,
+            subShader?: number
+        ): void;
         /**
          * 设置指令渲染目标
          * @param renderTexture RT渲染目标
@@ -8019,7 +8309,12 @@ declare module Laya {
          * @param backgroundColor
          * @param depth
          */
-        clearRenderTarget(clearColor: boolean, clearDepth: boolean, backgroundColor: Color, depth?: number): void;
+        clearRenderTarget(
+            clearColor: boolean,
+            clearDepth: boolean,
+            backgroundColor: Color,
+            depth?: number
+        ): void;
         /**
          * 渲染一个Mesh
          * @param mesh 原始网格信息
@@ -8028,7 +8323,13 @@ declare module Laya {
          * @param submeshIndex 子网格索引 如果索引为
          * @param subShaderIndex 子shader索引 一般为0
          */
-        drawMesh(mesh: Mesh, matrix: Matrix4x4, material: Material, submeshIndex: number, subShaderIndex: number): void;
+        drawMesh(
+            mesh: Mesh,
+            matrix: Matrix4x4,
+            material: Material,
+            submeshIndex: number,
+            subShaderIndex: number
+        ): void;
         /**
          * 渲染一个Render
          * @param render 渲染器
@@ -8046,7 +8347,15 @@ declare module Laya {
          * @param instanceProperty Instance自定义属性
          * @param drawnums 渲染个数
          */
-        drawMeshInstance(mesh: Mesh, subMeshIndex: number, matrixs: Matrix4x4[], material: Material, subShaderIndex: number, instanceProperty: MaterialInstancePropertyBlock, drawnums: number): any;
+        drawMeshInstance(
+            mesh: Mesh,
+            subMeshIndex: number,
+            matrixs: Matrix4x4[],
+            material: Material,
+            subShaderIndex: number,
+            instanceProperty: MaterialInstancePropertyBlock,
+            drawnums: number
+        ): any;
         /**
          * add 自定义的渲染命令
          * @param command
@@ -8098,7 +8407,7 @@ declare module Laya {
         CUSTOME0 = 12,
         CUSTOME1 = 13,
         CUSTOME2 = 14,
-        CUSTOME3 = 15
+        CUSTOME3 = 15,
     }
     /**
      * <code>Mesh</code> 类用于创建CustomInstance属性块。
@@ -8125,33 +8434,51 @@ declare module Laya {
          * @param arrays 数据
          * @param attributeLocation  属性Shader位置（需要与shader中的声明Attribute一一对应）
          */
-        setVectorArray(attributeName: string, arrays: Vector4[] | Float32Array, attributeLocation: InstanceLocation): void;
+        setVectorArray(
+            attributeName: string,
+            arrays: Vector4[] | Float32Array,
+            attributeLocation: InstanceLocation
+        ): void;
         /**
          * 设置Vector3材质数组属性
          * @param attributeName 属性名称（要对应到Shader中）
          * @param arrays 数据
          * @param attributeLocation 属性shader位置（需要与shader中的声明Attribute一一对应）
          */
-        setVector3Array(attributeName: string, arrays: Vector3[] | Float32Array, attributeLocation: InstanceLocation): void;
+        setVector3Array(
+            attributeName: string,
+            arrays: Vector3[] | Float32Array,
+            attributeLocation: InstanceLocation
+        ): void;
         /**
          * 设置Vector2材质数组属性
          * @param attributeName 属性名称（要对应到Shader中）
          * @param arrays 数据
          * @param attributeLocation 属性shader位置（需要与shader中的声明Attribute一一对应）
          */
-        setVector2Array(attributeName: string, arrays: Vector2[] | Float32Array, attributeLocation: InstanceLocation): void;
+        setVector2Array(
+            attributeName: string,
+            arrays: Vector2[] | Float32Array,
+            attributeLocation: InstanceLocation
+        ): void;
         /**
          * 设置Number材质数组属性
          * @param attributeName 属性名称（要对应到Shader中）
          * @param arrays 数据
          * @param attributeLocation 属性shader位置（需要与shader中的声明Attribute一一对应）
          */
-        setNumberArray(attributeName: string, arrays: Float32Array, attributeLocation: InstanceLocation): void;
+        setNumberArray(
+            attributeName: string,
+            arrays: Float32Array,
+            attributeLocation: InstanceLocation
+        ): void;
         /**
          * 获得属性数据
          * @param attributeLocation  属性shader位置
          */
-        getPropertyArray(attributeLocation: InstanceLocation): Vector4[] | Vector3[] | Vector2[] | Float32Array;
+        getPropertyArray(
+            attributeLocation: InstanceLocation
+        ): Vector4[] | Vector3[] | Vector2[] | Float32Array;
         clear(): void;
     }
     class InstanceRenderElement extends RenderElement {
@@ -8283,7 +8610,7 @@ declare module Laya {
     }
     enum ToneMappingType {
         None = 0,
-        ACES = 1
+        ACES = 1,
     }
     /**
      * <code>ColorGradEffect</code> 类用于创建调色Effect
@@ -8495,9 +8822,9 @@ declare module Laya {
         set maxRadius(value: number);
         get maxRadius(): number;
         /**
-        * @override
-        * @param context
-        */
+         * @override
+         * @param context
+         */
         render(context: PostProcessRenderContext): void;
     }
     class LensFlareCMD extends Command {
@@ -8643,10 +8970,10 @@ declare module Laya {
          */
         render(context: PostProcessRenderContext): void;
         /**
-       * 释放Effect
-       * @inheritDoc
-       * @override
-       */
+         * 释放Effect
+         * @inheritDoc
+         * @override
+         */
         release(postprocess: PostProcess): void;
     }
     class LensFlareElementGeomtry extends GeometryElement {
@@ -8677,7 +9004,7 @@ declare module Laya {
         /**中 */
         MEDIUM = 1,
         /**低 */
-        LOWEST = 2
+        LOWEST = 2,
     }
     /**
      * <code>BloomEffect</code> 类用于创建环境光遮罩效果。
@@ -8723,8 +9050,8 @@ declare module Laya {
         render(context: PostProcessRenderContext): void;
     }
     /**
-         * <code>PostProcessEffect</code> 类用于创建后期处理渲染效果。
-         */
+     * <code>PostProcessEffect</code> 类用于创建后期处理渲染效果。
+     */
     class PostProcessEffect {
         /**
          * 创建一个 <code>PostProcessEffect</code> 实例。
@@ -8777,7 +9104,16 @@ declare module Laya {
         /**
          * 从回收的RT中选择一个RT 用来节省内存
          */
-        createRTByContextReleaseTexture(width: number, height: number, colorFormat: RenderTargetFormat, depthFormat: RenderTargetFormat, mipmap?: boolean, multiSamples?: number, depthTexture?: boolean, sRGB?: boolean): RenderTexture;
+        createRTByContextReleaseTexture(
+            width: number,
+            height: number,
+            colorFormat: RenderTargetFormat,
+            depthFormat: RenderTargetFormat,
+            mipmap?: boolean,
+            multiSamples?: number,
+            depthTexture?: boolean,
+            sRGB?: boolean
+        ): RenderTexture;
     }
     /**
      * <code>RenderContext3D</code> 类用于实现渲染状态。
@@ -8858,7 +9194,11 @@ declare module Laya {
          * @param subshaderIndex
          * @returns
          */
-        _convertSubShader(customShader: Shader3D, replacementTag: string, subshaderIndex?: number): void;
+        _convertSubShader(
+            customShader: Shader3D,
+            replacementTag: string,
+            subshaderIndex?: number
+        ): void;
         /**
          * pre update data
          * @param context
@@ -8962,7 +9302,7 @@ declare module Laya {
         /** 球谐光照, 通过天空盒生成的球谐数据。 */
         SphericalHarmonics = 1,
         /** 分别设置天空, 地平线, 地面的环境光颜色 */
-        TripleColor = 2
+        TripleColor = 2,
     }
     /**
      * BVH系统
@@ -9004,12 +9344,15 @@ declare module Laya {
          */
         motionOne(cell: IBoundsCell): void;
         /**
-        * 通过CameraCull查找逻辑对象
-        * @override
-        * @param frustum 视锥
-        * @param out 输出逻辑对象组
-        */
-        getItemByCameraCullInfo(cameraCullInfo: ICameraCullInfo, out: SingletonList<IBoundsCell>): void;
+         * 通过CameraCull查找逻辑对象
+         * @override
+         * @param frustum 视锥
+         * @param out 输出逻辑对象组
+         */
+        getItemByCameraCullInfo(
+            cameraCullInfo: ICameraCullInfo,
+            out: SingletonList<IBoundsCell>
+        ): void;
         /**
          * 通过视锥查找逻辑对象
          * @override
@@ -9054,7 +9397,7 @@ declare module Laya {
          * 包围盒是否和阴影相机相交
          * @param box
          * @param cullInfo
-        */
+         */
         static sciIntersectsBox(box: Bounds, cullInfo: IShadowCullInfo): boolean;
         protected _children1: BVHSpatialBox<T>;
         /**此BVH设置 */
@@ -9180,7 +9523,10 @@ declare module Laya {
          * @param frustum 视锥
          * @param out 输出逻辑对象组
          */
-        getItemByCameraCullInfo(cameraCullInfo: ICameraCullInfo, out: SingletonList<IBoundsCell>): void;
+        getItemByCameraCullInfo(
+            cameraCullInfo: ICameraCullInfo,
+            out: SingletonList<IBoundsCell>
+        ): void;
         /**
          * 通过视锥查找逻辑对象
          * @override
@@ -9236,8 +9582,7 @@ declare module Laya {
     /**
      * BVHConfig
      */
-    class BVHSpatialConfig {
-    }
+    class BVHSpatialConfig {}
     /**
      * 类实现BVH架构的裁剪Pass
      */
@@ -9252,7 +9597,10 @@ declare module Laya {
          * @param cameraCullInfo
          * @param renderManager
          */
-        cullByCameraCullInfo(cameraCullInfo: ICameraCullInfo, renderManager: BVHSceneRenderManager): void;
+        cullByCameraCullInfo(
+            cameraCullInfo: ICameraCullInfo,
+            renderManager: BVHSceneRenderManager
+        ): void;
         /**
          * 基于阴影视锥裁剪
          * @param cullInfo
@@ -9264,7 +9612,10 @@ declare module Laya {
          * @param cameraCullInfo
          * @param renderManager
          */
-        cullingSpotShadow(cameraCullInfo: ICameraCullInfo, renderManager: ISceneRenderManager): void;
+        cullingSpotShadow(
+            cameraCullInfo: ICameraCullInfo,
+            renderManager: ISceneRenderManager
+        ): void;
     }
     class BVHRenderSpatial extends BVHSpatial {
         /**
@@ -9291,13 +9642,16 @@ declare module Laya {
          * @param frustum 视锥
          * @param out 输出逻辑对象组
          */
-        getItemByCameraCullInfo(cameraCullInfo: ICameraCullInfo, out: SingletonList<BaseRender>): void;
+        getItemByCameraCullInfo(
+            cameraCullInfo: ICameraCullInfo,
+            out: SingletonList<BaseRender>
+        ): void;
         /**
-        * 通过阴影裁剪信息查找逻辑对象
-        * @override
-        * @param sci
-        * @param out
-        */
+         * 通过阴影裁剪信息查找逻辑对象
+         * @override
+         * @param sci
+         * @param out
+         */
         getItemBySCI(sci: IShadowCullInfo, out: SingletonList<BaseRender>): void;
     }
     class BVHSceneRenderManager extends SceneRenderManager {
@@ -9307,8 +9661,8 @@ declare module Laya {
          */
         constructor(bvhConfig?: BVHSpatialConfig);
         /**
-        * get RenderList
-        */
+         * get RenderList
+         */
         get list(): SingletonList<BaseRender>;
         set list(value: SingletonList<BaseRender>);
         get bvhSpatial(): BVHRenderSpatial;
@@ -9345,8 +9699,7 @@ declare module Laya {
     /**
      * Interface Overall management of a type of component
      */
-    interface IElementComponentManager {
-    }
+    interface IElementComponentManager {}
     /**
      * 光照贴图。
      */
@@ -9360,7 +9713,7 @@ declare module Laya {
     enum FogMode {
         Linear = 0,
         EXP = 1,
-        EXP2 = 2
+        EXP2 = 2,
     }
     /**
      * 用于实现3D场景。
@@ -9747,7 +10100,13 @@ declare module Laya {
          * @param	rotation  世界旋转,worldPositionStays为false时生效。
          * @return  克隆实例。
          */
-        static instantiate(original: Sprite3D, parent?: Node, worldPositionStays?: boolean, position?: Vector3, rotation?: Quaternion): Sprite3D;
+        static instantiate(
+            original: Sprite3D,
+            parent?: Node,
+            worldPositionStays?: boolean,
+            position?: Vector3,
+            rotation?: Quaternion
+        ): Sprite3D;
         /**
          * 加载网格模板。
          * @param url 模板地址。
@@ -9779,8 +10138,8 @@ declare module Laya {
          */
         constructor(name?: string, isStatic?: boolean);
         /**
-        * @private
-        */
+         * @private
+         */
         protected _onActive(): void;
         /**
          * @private
@@ -9812,7 +10171,7 @@ declare module Laya {
         /** 使拖尾面向摄像机。*/
         View = 0,
         /** 使拖尾的与组件的方向对齐*/
-        TransformZ = 1
+        TransformZ = 1,
     }
     /**
      * <code>TrailFilter</code> 类用于创建拖尾过滤器。
@@ -9963,9 +10322,9 @@ declare module Laya {
          */
         static RENDERMODE_ALPHABLENDED: number;
         /**
-        * @deprecated
-        * 渲染状态_加色法混合。
-        */
+         * @deprecated
+         * 渲染状态_加色法混合。
+         */
         static RENDERMODE_ADDTIVE: number;
         /**
          * @deprecated
@@ -10270,10 +10629,10 @@ declare module Laya {
         localToGlobal(value: Vector3, out: Vector3): void;
         /**
          *转化成局部坐标
-            * @param pos
-            * @param out
-            *
-            */
+         * @param pos
+         * @param out
+         *
+         */
         globalToLocal(pos: Vector3, out: Vector3): void;
         /**
          *转化成局部向量
@@ -10352,9 +10711,9 @@ declare module Laya {
          */
         constructor();
         /**
-        * 分析碰撞点
-        * @param hit
-        */
+         * 分析碰撞点
+         * @param hit
+         */
         private _parseHit;
         /**
          * 获得ui渲染图
@@ -10487,7 +10846,7 @@ declare module Laya {
         DepthNormals = 2,
         /**是否应渲染运动矢量  TODO*/
         DepthAndDepthNormals = 3,
-        MotionVectors = 4
+        MotionVectors = 4,
     }
     /**
      * <code>ShadowCasterPass</code> 类用于实现阴影渲染管线
@@ -10501,7 +10860,11 @@ declare module Laya {
          * @param camera
          * @param depthType
          */
-        update(camera: Camera, depthType: DepthTextureMode, depthTextureFormat: RenderTargetFormat): void;
+        update(
+            camera: Camera,
+            depthType: DepthTextureMode,
+            depthTextureFormat: RenderTargetFormat
+        ): void;
         /**
          * 渲染深度帧缓存
          * @param context
@@ -10552,7 +10915,12 @@ declare module Laya {
          * @param	bufferUsage IndexBuffer3D用途类型。
          * @param	canRead 是否可读。
          */
-        constructor(indexType: IndexFormat, indexCount: number, bufferUsage?: BufferUsage, canRead?: boolean);
+        constructor(
+            indexType: IndexFormat,
+            indexCount: number,
+            bufferUsage?: BufferUsage,
+            canRead?: boolean
+        );
         /**
          * 设置数据。
          * @param	data 索引数据。
@@ -10560,7 +10928,12 @@ declare module Laya {
          * @param	dataStartIndex 索引数据的偏移。
          * @param	dataCount 索引数据的数量。
          */
-        setData(data: any, bufferOffset?: number, dataStartIndex?: number, dataCount?: number): void;
+        setData(
+            data: any,
+            bufferOffset?: number,
+            dataStartIndex?: number,
+            dataCount?: number
+        ): void;
         /**
          * 获取索引数据。
          * @return	索引数据。
@@ -10573,8 +10946,8 @@ declare module Laya {
         destroy(): void;
     }
     /**
-         * <code>IVertex</code> 接口用于实现创建顶点声明。
-         */
+     * <code>IVertex</code> 接口用于实现创建顶点声明。
+     */
     interface IVertex {
         /**顶点声明 */
         vertexDeclaration: VertexDeclaration;
@@ -10608,7 +10981,18 @@ declare module Laya {
          * @param coefficient7 系数7
          * @param coefficient8 系数8
          */
-        setCoefficients(i: number, coefficient0: number, coefficient1: number, coefficient2: number, coefficient3: number, coefficient4: number, coefficient5: number, coefficient6: number, coefficient7: number, coefficient8: number): void;
+        setCoefficients(
+            i: number,
+            coefficient0: number,
+            coefficient1: number,
+            coefficient2: number,
+            coefficient3: number,
+            coefficient4: number,
+            coefficient5: number,
+            coefficient6: number,
+            coefficient7: number,
+            coefficient8: number
+        ): void;
         /**
          * 克隆
          * @param dest
@@ -10647,7 +11031,12 @@ declare module Laya {
          * @param	dataStartIndex 顶点数据的偏移,以字节为单位。
          * @param	dataCount 顶点数据的长度,以字节为单位。
          */
-        setData(buffer: ArrayBuffer, bufferOffset?: number, dataStartIndex?: number, dataCount?: number): void;
+        setData(
+            buffer: ArrayBuffer,
+            bufferOffset?: number,
+            dataStartIndex?: number,
+            dataCount?: number
+        ): void;
         /**
          * 获取顶点数据。
          * @return	顶点数据。
@@ -10741,7 +11130,7 @@ declare module Laya {
         nearTopLeft = 5,
         nearTopRight = 6,
         nearBottomRight = 7,
-        unknown = 8
+        unknown = 8,
     }
     /**
      * <code>BoundFrustum</code> 类用于创建锥截体。
@@ -10757,7 +11146,15 @@ declare module Laya {
          * @param  tp 顶平面。
          * @param  bp 底平面。
          */
-        static getPlanesFromMatrix(m: Matrix4x4, np: Plane, fp: Plane, lp: Plane, rp: Plane, tp: Plane, bp: Plane): void;
+        static getPlanesFromMatrix(
+            m: Matrix4x4,
+            np: Plane,
+            fp: Plane,
+            lp: Plane,
+            rp: Plane,
+            tp: Plane,
+            bp: Plane
+        ): void;
         /**
          * 创建一个 <code>BoundFrustum</code> 实例。
          * @param	matrix 锥截体的描述4x4矩阵。
@@ -11055,7 +11452,12 @@ declare module Laya {
          * @param	count 顶点子队列的顶点数。
          * @param	result 生成的包围球。
          */
-        static createFromSubPoints(points: Vector3[], start: number, count: number, out: BoundSphere): void;
+        static createFromSubPoints(
+            points: Vector3[],
+            start: number,
+            count: number,
+            out: BoundSphere
+        ): void;
         /**
          * 从顶点队列生成包围球。
          * @param	points 顶点的队列。
@@ -11087,8 +11489,8 @@ declare module Laya {
         clone(): any;
     }
     /**
-         * <code>Collision</code> 类用于检测碰撞。
-         */
+     * <code>Collision</code> 类用于检测碰撞。
+     */
     class CollisionUtils {
         /**
          * 创建一个 <code>Collision</code> 实例。
@@ -11133,7 +11535,13 @@ declare module Laya {
          * @param	out 点和三角面的距离
          * @return  是否相交
          */
-        static intersectsRayAndTriangleRD(ray: Ray, vertex1: Vector3, vertex2: Vector3, vertex3: Vector3, out: number): boolean;
+        static intersectsRayAndTriangleRD(
+            ray: Ray,
+            vertex1: Vector3,
+            vertex2: Vector3,
+            vertex3: Vector3,
+            out: number
+        ): boolean;
         /**
          * 空间中射线和三角面是否相交,输出相交点
          * @param	ray 射线
@@ -11143,7 +11551,13 @@ declare module Laya {
          * @param	out 相交点
          * @return  是否相交
          */
-        static intersectsRayAndTriangleRP(ray: Ray, vertex1: Vector3, vertex2: Vector3, vertex3: Vector3, out: Vector3): boolean;
+        static intersectsRayAndTriangleRP(
+            ray: Ray,
+            vertex1: Vector3,
+            vertex2: Vector3,
+            vertex3: Vector3,
+            out: Vector3
+        ): boolean;
         /**
          * 空间中射线和点是否相交
          * @param	sphere1 包围球1
@@ -11165,7 +11579,12 @@ declare module Laya {
          * @param	vertex3 三角面顶点3
          * @return  返回空间位置关系
          */
-        static intersectsPlaneAndTriangle(plane: Plane, vertex1: Vector3, vertex2: Vector3, vertex3: Vector3): number;
+        static intersectsPlaneAndTriangle(
+            plane: Plane,
+            vertex1: Vector3,
+            vertex2: Vector3,
+            vertex3: Vector3
+        ): number;
         /**
          * 射线和平面是否相交,并返回相交距离。
          * @param	ray   射线。
@@ -11217,7 +11636,12 @@ declare module Laya {
          * @param	vertex3 三角面顶点3
          * @return  返回是否相交
          */
-        static intersectsSphereAndTriangle(sphere: BoundSphere, vertex1: Vector3, vertex2: Vector3, vertex3: Vector3): boolean;
+        static intersectsSphereAndTriangle(
+            sphere: BoundSphere,
+            vertex1: Vector3,
+            vertex2: Vector3,
+            vertex3: Vector3
+        ): boolean;
         /**
          * 空间中点和平面是否相交
          * @param	plane  平面
@@ -11311,7 +11735,12 @@ declare module Laya {
          * @param	vertex3 三角面顶点3
          * @return  返回空间位置关系
          */
-        static sphereContainsTriangle(sphere: BoundSphere, vertex1: Vector3, vertex2: Vector3, vertex3: Vector3): number;
+        static sphereContainsTriangle(
+            sphere: BoundSphere,
+            vertex1: Vector3,
+            vertex2: Vector3,
+            vertex3: Vector3
+        ): number;
         /**
          * 空间中包围球是否包含另一包围盒
          * @param	sphere 包围球
@@ -11334,7 +11763,13 @@ declare module Laya {
          * @param	vertex3 三角面顶点3
          * @param	out 最近点
          */
-        static closestPointPointTriangle(point: Vector3, vertex1: Vector3, vertex2: Vector3, vertex3: Vector3, out: Vector3): void;
+        static closestPointPointTriangle(
+            point: Vector3,
+            vertex1: Vector3,
+            vertex2: Vector3,
+            vertex3: Vector3,
+            out: Vector3
+        ): void;
         /**
          * 空间中平面与一点的最近点
          * @param	plane 平面
@@ -11362,7 +11797,11 @@ declare module Laya {
          * @param	sphere2 包围球2
          * @param	out 最近点
          */
-        static closestPointSphereSphere(sphere1: BoundSphere, sphere2: BoundSphere, out: Vector3): void;
+        static closestPointSphereSphere(
+            sphere1: BoundSphere,
+            sphere2: BoundSphere,
+            out: Vector3
+        ): void;
     }
     /**
      * <code>ContainmentType</code> 类用于定义空间物体位置关系。
@@ -11430,8 +11869,8 @@ declare module Laya {
         clone(): Plane;
     }
     /**
-         * <code>Rand</code> 类用于通过32位无符号整型随机种子创建随机数。
-         */
+     * <code>Rand</code> 类用于通过32位无符号整型随机种子创建随机数。
+     */
     class Rand {
         /**
          * 通过无符号32位整形，获取32位浮点随机数。
@@ -11479,8 +11918,8 @@ declare module Laya {
         getSignedFloat(): number;
     }
     /**
-         * <code>Rand</code> 类用于通过128位整型种子创建随机数,算法来自:https://github.com/AndreasMadsen/xorshift。
-         */
+     * <code>Rand</code> 类用于通过128位整型种子创建随机数,算法来自:https://github.com/AndreasMadsen/xorshift。
+     */
     class RandX {
         /**基于时间种子的随机数。*/
         static defaultRand: RandX;
@@ -11501,8 +11940,8 @@ declare module Laya {
         random(): number;
     }
     /**
-         * <code>Ray</code> 类用于创建射线。
-         */
+     * <code>Ray</code> 类用于创建射线。
+     */
     class Ray {
         /**原点*/
         origin: Vector3;
@@ -11568,7 +12007,13 @@ declare module Laya {
          * @param	world 世界矩阵,可设置为null。
          * @param   out 输出向量。
          */
-        unprojectFromWVP(source: Vector3, projection: Matrix4x4, view: Matrix4x4, world: Matrix4x4, out: Vector3): void;
+        unprojectFromWVP(
+            source: Vector3,
+            projection: Matrix4x4,
+            view: Matrix4x4,
+            world: Matrix4x4,
+            out: Vector3
+        ): void;
         set(x: number, y: number, width: number, height: number): void;
         /**
          * 克隆
@@ -11607,8 +12052,8 @@ declare module Laya {
         get gravity(): Vector3;
         set gravity(value: Vector3);
         /**
-        * 碰撞偏移。
-        */
+         * 碰撞偏移。
+         */
         get skinWidth(): number;
         set skinWidth(value: number);
         /**
@@ -11819,8 +12264,8 @@ declare module Laya {
         protected _onEnable(): void;
         protected _onDisable(): void;
         /**
-        * create joint
-        */
+         * create joint
+         */
         protected _initJoint(): void;
     }
     /**
@@ -11904,8 +12349,8 @@ declare module Laya {
     }
     class HingeConstraint extends ConstraintComponent {
         /**
-        * 创建一个<code>HingeConstraint</code>铰链实例
-        */
+         * 创建一个<code>HingeConstraint</code>铰链实例
+         */
         constructor();
         /**
          * create joint
@@ -11920,8 +12365,8 @@ declare module Laya {
          */
         protected _onDisable(): void;
         /**
-        * set Hinge Rotation Axis,value by local rigibody0
-        */
+         * set Hinge Rotation Axis,value by local rigibody0
+         */
         set Axis(value: Vector3);
         get Axis(): Vector3;
         /**
@@ -12082,11 +12527,11 @@ declare module Laya {
         /** Multiplies the friction/bounce of the two colliding materials. */
         Multiply = 2,
         /** Uses the larger friction/bounce of the two colliding materials. */
-        Maximum = 3
+        Maximum = 3,
     }
     enum PhysicsForceMode {
         Force = 0,
-        Impulse = 1
+        Impulse = 1,
     }
     /**
      * <code>PhysicsColliderComponent</code> 类用于创建物理组件的父类。
@@ -12636,8 +13081,17 @@ declare module Laya {
         createSkinRenderElement(): IRenderElement;
         createInstanceRenderElement(): IRenderElement;
         createBaseRenderQueue(isTransparent: boolean): IRenderQueue;
-        createVertexBuffer3D(byteLength: number, bufferUsage: BufferUsage, canRead: boolean): VertexBuffer3D;
-        createIndexBuffer3D(indexType: IndexFormat, indexCount: number, bufferUsage: BufferUsage, canRead: boolean): IndexBuffer3D;
+        createVertexBuffer3D(
+            byteLength: number,
+            bufferUsage: BufferUsage,
+            canRead: boolean
+        ): VertexBuffer3D;
+        createIndexBuffer3D(
+            indexType: IndexFormat,
+            indexCount: number,
+            bufferUsage: BufferUsage,
+            canRead: boolean
+        ): IndexBuffer3D;
         createSceneRenderManager(): ISceneRenderManager;
         createCullPass(): ICullPass;
         createSortPass(): ISortPass;
@@ -12800,9 +13254,15 @@ declare module Laya {
         private _tempRenderList;
         get cullList(): SingletonList<BaseRender>;
         constructor();
-        cullByCameraCullInfo(cameraCullInfo: ICameraCullInfo, renderManager: ISceneRenderManager): void;
+        cullByCameraCullInfo(
+            cameraCullInfo: ICameraCullInfo,
+            renderManager: ISceneRenderManager
+        ): void;
         cullByShadowCullInfo(cullInfo: IShadowCullInfo, renderManager: ISceneRenderManager): void;
-        cullingSpotShadow(cameraCullInfo: ICameraCullInfo, renderManager: ISceneRenderManager): void;
+        cullingSpotShadow(
+            cameraCullInfo: ICameraCullInfo,
+            renderManager: ISceneRenderManager
+        ): void;
     }
     class NativeGLRenderEngine3DOBJFactory implements IRenderEngine3DOBJFactory {
         createTransform(owner: Sprite3D): Transform3D;
@@ -12811,8 +13271,17 @@ declare module Laya {
         createSkinRenderElement(): IRenderElement;
         createInstanceRenderElement(): IRenderElement;
         createBaseRenderQueue(isTransparent: boolean): IRenderQueue;
-        createVertexBuffer3D(byteLength: number, bufferUsage: BufferUsage, canRead?: boolean): NativeVertexBuffer3D;
-        createIndexBuffer3D(indexType: IndexFormat, indexCount: number, bufferUsage?: BufferUsage, canRead?: boolean): IndexBuffer3D;
+        createVertexBuffer3D(
+            byteLength: number,
+            bufferUsage: BufferUsage,
+            canRead?: boolean
+        ): NativeVertexBuffer3D;
+        createIndexBuffer3D(
+            indexType: IndexFormat,
+            indexCount: number,
+            bufferUsage?: BufferUsage,
+            canRead?: boolean
+        ): IndexBuffer3D;
         createSceneRenderManager(): ISceneRenderManager;
         createCullPass(): ICullPass;
         createSortPass(): ISortPass;
@@ -12820,7 +13289,10 @@ declare module Laya {
         createCameraCullInfo(): ICameraCullInfo;
         createBaseRenderNode(): NativeBaseRenderNode;
         createRenderContext3D(): NativeRenderContext3DOBJ;
-        createRenderGeometry(mode: MeshTopology, drayType: DrawType): NativeRenderGeometryElementOBJ;
+        createRenderGeometry(
+            mode: MeshTopology,
+            drayType: DrawType
+        ): NativeRenderGeometryElementOBJ;
     }
     class NativeIndexBuffer3D extends IndexBuffer3D {
         _conchIndexBuffer3D: any;
@@ -12830,7 +13302,12 @@ declare module Laya {
          * @param	bufferUsage VertexBuffer3D用途类型。
          * @param	canRead 是否可读。
          */
-        constructor(indexType: IndexFormat, indexCount: number, bufferUsage?: BufferUsage, canRead?: boolean);
+        constructor(
+            indexType: IndexFormat,
+            indexCount: number,
+            bufferUsage?: BufferUsage,
+            canRead?: boolean
+        );
     }
     class NativeInstanceRenderElementOBJ extends NativeRenderElementOBJ {
         private _updateData;
@@ -12893,7 +13370,7 @@ declare module Laya {
     enum RenderElementType {
         Base = 0,
         Skin = 1,
-        Instance = 2
+        Instance = 2,
     }
     class NativeRenderElementOBJ implements IRenderElement {
         private geometry;
@@ -13247,9 +13724,15 @@ declare module Laya {
          * @returns
          */
         static cullDistanceVolume(context: RenderContext3D, render: BaseRender): boolean;
-        cullByCameraCullInfo(cameraCullInfo: ICameraCullInfo, renderManager: ISceneRenderManager): void;
+        cullByCameraCullInfo(
+            cameraCullInfo: ICameraCullInfo,
+            renderManager: ISceneRenderManager
+        ): void;
         cullByShadowCullInfo(cullInfo: IShadowCullInfo, renderManager: ISceneRenderManager): void;
-        cullingSpotShadow(cameraCullInfo: ICameraCullInfo, renderManager: ISceneRenderManager): void;
+        cullingSpotShadow(
+            cameraCullInfo: ICameraCullInfo,
+            renderManager: ISceneRenderManager
+        ): void;
     }
     class InstanceRenderElementOBJ extends RenderElementOBJ {
         private _updateData;
@@ -13286,7 +13769,12 @@ declare module Laya {
          * @param left
          * @param right
          */
-        sort(elements: SingletonList<RenderElement>, isTransparent: boolean, left: number, right: number): void;
+        sort(
+            elements: SingletonList<RenderElement>,
+            isTransparent: boolean,
+            left: number,
+            right: number
+        ): void;
     }
     class RenderContext3DOBJ implements IRenderContext3D {
         destTarget: IRenderTarget;
@@ -13326,8 +13814,7 @@ declare module Laya {
         drawGeometry(shaderIns: ShaderInstance): void;
         _destroy(): void;
     }
-    class FastSinglelist<T> extends SingletonList<T> {
-    }
+    class FastSinglelist<T> extends SingletonList<T> {}
     class RenderGeometryElementOBJ implements IRenderGeometryElement {
         /**
          * index format
@@ -13372,8 +13859,17 @@ declare module Laya {
         createSkinRenderElement(): IRenderElement;
         createInstanceRenderElement(): InstanceRenderElementOBJ;
         createBaseRenderQueue(isTransparent: boolean): IRenderQueue;
-        createVertexBuffer3D(byteLength: number, bufferUsage: BufferUsage, canRead?: boolean): VertexBuffer3D;
-        createIndexBuffer3D(indexType: IndexFormat, indexCount: number, bufferUsage?: BufferUsage, canRead?: boolean): IndexBuffer3D;
+        createVertexBuffer3D(
+            byteLength: number,
+            bufferUsage: BufferUsage,
+            canRead?: boolean
+        ): VertexBuffer3D;
+        createIndexBuffer3D(
+            indexType: IndexFormat,
+            indexCount: number,
+            bufferUsage?: BufferUsage,
+            canRead?: boolean
+        ): IndexBuffer3D;
         createSceneRenderManager(): ISceneRenderManager;
         createCullPass(): ICullPass;
         createSortPass(): ISortPass;
@@ -13390,12 +13886,40 @@ declare module Laya {
         static pool: {
             [key: number]: WGPUBlendState;
         };
-        static getBlendState(blend: BlendType, operationRGB?: BlendEquationSeparate, srcBlendRGB?: BlendFactor, dstBlendRGB?: BlendFactor, operationAlpha?: BlendEquationSeparate, srcBlendAlpha?: BlendFactor, dstBlendAlpha?: BlendFactor): WGPUBlendState;
+        static getBlendState(
+            blend: BlendType,
+            operationRGB?: BlendEquationSeparate,
+            srcBlendRGB?: BlendFactor,
+            dstBlendRGB?: BlendFactor,
+            operationAlpha?: BlendEquationSeparate,
+            srcBlendAlpha?: BlendFactor,
+            dstBlendAlpha?: BlendFactor
+        ): WGPUBlendState;
         mapId: number;
         state: GPUBlendState;
-        constructor(blend: BlendType, operationRGB: BlendEquationSeparate, srcBlendRGB: BlendFactor, dstBlendRGB: BlendFactor, operationAlpha: BlendEquationSeparate, srcBlendAlpha: BlendFactor, dstBlendAlpha: BlendFactor);
-        getComponent(operation: BlendEquationSeparate, src: BlendFactor, dst: BlendFactor): GPUBlendComponent;
-        static getmapID(blend: BlendType, operationRGB: BlendEquationSeparate, srcBlendRGB: BlendFactor, dstBlendRGB: BlendFactor, operationAlpha: BlendEquationSeparate, srcBlendAlpha: BlendFactor, dstBlendAlpha: BlendFactor): number;
+        constructor(
+            blend: BlendType,
+            operationRGB: BlendEquationSeparate,
+            srcBlendRGB: BlendFactor,
+            dstBlendRGB: BlendFactor,
+            operationAlpha: BlendEquationSeparate,
+            srcBlendAlpha: BlendFactor,
+            dstBlendAlpha: BlendFactor
+        );
+        getComponent(
+            operation: BlendEquationSeparate,
+            src: BlendFactor,
+            dst: BlendFactor
+        ): GPUBlendComponent;
+        static getmapID(
+            blend: BlendType,
+            operationRGB: BlendEquationSeparate,
+            srcBlendRGB: BlendFactor,
+            dstBlendRGB: BlendFactor,
+            operationAlpha: BlendEquationSeparate,
+            srcBlendAlpha: BlendFactor,
+            dstBlendAlpha: BlendFactor
+        ): number;
     }
     /**
      * WebGPU DepthStencil
@@ -13404,11 +13928,29 @@ declare module Laya {
         static pool: {
             [key: number]: WGPUDepthStencilState;
         };
-        static getmapID(format: RenderTargetFormat, depthWriteEnabled: boolean, depthCompare: CompareFunction, stencilParam?: any, depthBiasParam?: any): number;
-        static getDepthStencilState(format: RenderTargetFormat, depthWriteEnabled: boolean, depthCompare: CompareFunction, stencilParam?: any, depthBiasParam?: any): WGPUDepthStencilState;
+        static getmapID(
+            format: RenderTargetFormat,
+            depthWriteEnabled: boolean,
+            depthCompare: CompareFunction,
+            stencilParam?: any,
+            depthBiasParam?: any
+        ): number;
+        static getDepthStencilState(
+            format: RenderTargetFormat,
+            depthWriteEnabled: boolean,
+            depthCompare: CompareFunction,
+            stencilParam?: any,
+            depthBiasParam?: any
+        ): WGPUDepthStencilState;
         state: GPUDepthStencilState;
         mapId: number;
-        constructor(format: RenderTargetFormat, depthWriteEnabled: boolean, depthCompare: CompareFunction, stencilParam?: any, depthBiasParam?: any);
+        constructor(
+            format: RenderTargetFormat,
+            depthWriteEnabled: boolean,
+            depthCompare: CompareFunction,
+            stencilParam?: any,
+            depthBiasParam?: any
+        );
     }
     /**
      * WebGPU GPUPrimitiveState
@@ -13417,11 +13959,26 @@ declare module Laya {
         static pool: {
             [key: number]: WGPUPrimitiveState;
         };
-        static getmapID(mode: MeshTopology, indexformat: IndexFormat, cullMode: CullMode, unclippedDepth?: boolean): number;
-        static getPrimitiveState(mode: MeshTopology, indexformat: IndexFormat, cullMode: CullMode, unclippedDepth?: boolean): WGPUPrimitiveState;
+        static getmapID(
+            mode: MeshTopology,
+            indexformat: IndexFormat,
+            cullMode: CullMode,
+            unclippedDepth?: boolean
+        ): number;
+        static getPrimitiveState(
+            mode: MeshTopology,
+            indexformat: IndexFormat,
+            cullMode: CullMode,
+            unclippedDepth?: boolean
+        ): WGPUPrimitiveState;
         state: GPUPrimitiveState;
         mapId: number;
-        constructor(mode: MeshTopology, indexformat: IndexFormat, cullMode: CullMode, unclippedDepth?: boolean);
+        constructor(
+            mode: MeshTopology,
+            indexformat: IndexFormat,
+            cullMode: CullMode,
+            unclippedDepth?: boolean
+        );
     }
     /**
      * WebGPU GPUVertexState.buffers
@@ -13439,8 +13996,21 @@ declare module Laya {
     class WGPURenderPipeline {
         static offscreenFormat: GPUTextureFormat;
         pipeline: GPURenderPipeline;
-        constructor(engine: WebGPUEngine, gpuPipelineLayout: GPUPipelineLayout, vertexModule: GPUShaderModule, fragModule: GPUShaderModule, vertexBufferLayouts: WGPUVertexBufferLayouts, targets: WebGPUInternalRT, blendState: WGPUBlendState, depthStencilState: WGPUDepthStencilState, primitiveState: WGPUPrimitiveState);
-        getFragmentFormatByRT(rt: WebGPUInternalRT, blendState: WGPUBlendState): Array<GPUColorTargetState>;
+        constructor(
+            engine: WebGPUEngine,
+            gpuPipelineLayout: GPUPipelineLayout,
+            vertexModule: GPUShaderModule,
+            fragModule: GPUShaderModule,
+            vertexBufferLayouts: WGPUVertexBufferLayouts,
+            targets: WebGPUInternalRT,
+            blendState: WGPUBlendState,
+            depthStencilState: WGPUDepthStencilState,
+            primitiveState: WGPUPrimitiveState
+        );
+        getFragmentFormatByRT(
+            rt: WebGPUInternalRT,
+            blendState: WGPUBlendState
+        ): Array<GPUColorTargetState>;
     }
     class WGPURenderContext3D implements IRenderContext3D {
         device: GPUDevice;
@@ -13494,8 +14064,17 @@ declare module Laya {
         createSkinRenderElement(): SkinRenderElementOBJ;
         createInstanceRenderElement(): InstanceRenderElementOBJ;
         createBaseRenderQueue(isTransparent: boolean): IRenderQueue;
-        createVertexBuffer3D(byteLength: number, bufferUsage: BufferUsage, canRead?: boolean): VertexBuffer3D;
-        createIndexBuffer3D(indexType: IndexFormat, indexCount: number, bufferUsage?: BufferUsage, canRead?: boolean): IndexBuffer3D;
+        createVertexBuffer3D(
+            byteLength: number,
+            bufferUsage: BufferUsage,
+            canRead?: boolean
+        ): VertexBuffer3D;
+        createIndexBuffer3D(
+            indexType: IndexFormat,
+            indexCount: number,
+            bufferUsage?: BufferUsage,
+            canRead?: boolean
+        ): IndexBuffer3D;
         createSceneRenderManager(): SceneRenderManagerOBJ;
         createCullPass(): CullPassBase;
         createSortPass(): QuickSort;
@@ -13536,12 +14115,22 @@ declare module Laya {
          * @param destTexture
          * @returns
          */
-        getGPURenderPipeline(blendState: WGPUBlendState, depthStencilState: WGPUDepthStencilState, primitiveState: WGPUPrimitiveState, vertexBufferLayouts: WGPUVertexBufferLayouts, destTexture: WebGPUInternalRT): WGPURenderPipeline;
+        getGPURenderPipeline(
+            blendState: WGPUBlendState,
+            depthStencilState: WGPUDepthStencilState,
+            primitiveState: WGPUPrimitiveState,
+            vertexBufferLayouts: WGPUVertexBufferLayouts,
+            destTexture: WebGPUInternalRT
+        ): WGPURenderPipeline;
         /**
          * update Uniform Data
          * @param WGPURenderCommand
          */
-        uploadUniforms(shaderUniform: CommandEncoder, shaderDatas: WGPUShaderData, renderEncoder: WebGPURenderCommandEncoder): void;
+        uploadUniforms(
+            shaderUniform: CommandEncoder,
+            shaderDatas: WGPUShaderData,
+            renderEncoder: WebGPURenderCommandEncoder
+        ): void;
         private testCreateSceneCommandEncoder;
         private testCreateCameraCommandEncoder;
         private testCreateSpriteCommandEncoder;
@@ -13760,24 +14349,24 @@ declare module Laya {
          */
         setTangents(tangents: Vector4[]): void;
         /**
-        * 获取骨骼权重。
-        * @param boneWeights 骨骼权重。
-        */
+         * 获取骨骼权重。
+         * @param boneWeights 骨骼权重。
+         */
         getBoneWeights(boneWeights: Vector4[]): void;
         /**
-        * 拷贝并填充骨骼权重数据至数组。
-        * @param boneWeights 骨骼权重。
-        */
+         * 拷贝并填充骨骼权重数据至数组。
+         * @param boneWeights 骨骼权重。
+         */
         setBoneWeights(boneWeights: Vector4[]): void;
         /**
-        * 获取骨骼索引。
-        * @param boneIndices 骨骼索引。
-        */
+         * 获取骨骼索引。
+         * @param boneIndices 骨骼索引。
+         */
         getBoneIndices(boneIndices: Vector4[]): void;
         /**
-        * 拷贝并填充骨骼索引数据至数组。
-        * @param boneWeights 骨骼索引。
-        */
+         * 拷贝并填充骨骼索引数据至数组。
+         * @param boneWeights 骨骼索引。
+         */
         setBoneIndices(boneIndices: Vector4[]): void;
         /**
          * 将Mesh标记为不可读,可减少内存，标记后不可再调用相关读取方法。
@@ -13788,14 +14377,14 @@ declare module Laya {
          */
         getVertexDeclaration(): VertexDeclaration;
         /**
-        * 拷贝并获取顶点数据的副本。
-        * @return 顶点数据。
-        */
+         * 拷贝并获取顶点数据的副本。
+         * @return 顶点数据。
+         */
         getVertices(): ArrayBuffer;
         /**
-        * 设置顶点数据。
-        * @param vertices 顶点数据。
-        */
+         * 设置顶点数据。
+         * @param vertices 顶点数据。
+         */
         setVertices(vertices: ArrayBuffer): void;
         /**
          * 拷贝并获取网格索引的副本。
@@ -13875,6 +14464,13 @@ declare module Laya {
      * <code>PrimitiveMesh</code> 类用于创建简单网格。
      */
     class PrimitiveMesh {
+        static _createMesh(
+            vertexDeclaration: VertexDeclaration,
+            vertices: Float32Array,
+            indices: Uint16Array
+        ): Mesh {
+            throw new Error("Method not implemented.");
+        }
         static __init__(): void;
         /**
          * 创建Box网格。
@@ -13891,7 +14487,12 @@ declare module Laya {
          * @param stacks 水平层数,一般设为垂直层数的一半
          * @param slices 垂直层数
          */
-        static createCapsule(radius?: number, height?: number, stacks?: number, slices?: number): Mesh;
+        static createCapsule(
+            radius?: number,
+            height?: number,
+            stacks?: number,
+            slices?: number
+        ): Mesh;
         /**
          * 创建一个圆锥体模型
          * @param radius 半径
@@ -14086,7 +14687,7 @@ declare module Laya {
         /**聚光 */
         SpotLight = 1,
         /**点光 */
-        PointLight = 2
+        PointLight = 2,
     }
     /**
      * <code>TextMesh</code> 类用于创建文本网格。
@@ -14193,7 +14794,14 @@ declare module Laya {
          * @param	world 世界偏移矩阵。
          * @return  out  输出射线。
          */
-        static calculateCursorRay(point: Vector2, viewPort: Viewport, projectionMatrix: Matrix4x4, viewMatrix: Matrix4x4, world: Matrix4x4, out: Ray): void;
+        static calculateCursorRay(
+            point: Vector2,
+            viewPort: Viewport,
+            projectionMatrix: Matrix4x4,
+            viewMatrix: Matrix4x4,
+            world: Matrix4x4,
+            out: Ray
+        ): void;
         /**
          * 计算射线和三角形碰撞并返回碰撞距离。
          * @param	ray 射线。
@@ -14202,7 +14810,12 @@ declare module Laya {
          * @param	vertex3 顶点3。
          * @return   射线距离三角形的距离，返回Number.NaN则不相交。
          */
-        static rayIntersectsTriangle(ray: Ray, vertex1: Vector3, vertex2: Vector3, vertex3: Vector3): number;
+        static rayIntersectsTriangle(
+            ray: Ray,
+            vertex1: Vector3,
+            vertex2: Vector3,
+            vertex3: Vector3
+        ): number;
         /**
          * 检测射线和平面的交点
          * @param ray
@@ -14268,7 +14881,12 @@ declare module Laya {
         /**
          * 将顶点进行billboard转换
          */
-        static billboardTrans(v0: Vector3, cameraDir: Vector3, cameraUp: Vector3, out: Vector3): void;
+        static billboardTrans(
+            v0: Vector3,
+            cameraDir: Vector3,
+            cameraUp: Vector3,
+            out: Vector3
+        ): void;
         /**
          * 判断P点是否在ABC组成的三角形中
          * https://mathworld.wolfram.com/BarycentricCoordinates.html
@@ -14285,7 +14903,13 @@ declare module Laya {
          * @param	rotation 旋转四元数。
          * @param	out 输出三维向量。
          */
-        static transformVector3ArrayByQuat(sourceArray: Float32Array, sourceOffset: number, rotation: Quaternion, outArray: Float32Array, outOffset: number): void;
+        static transformVector3ArrayByQuat(
+            sourceArray: Float32Array,
+            sourceOffset: number,
+            rotation: Quaternion,
+            outArray: Float32Array,
+            outOffset: number
+        ): void;
         /**
          *通过数组数据计算矩阵乘法。
          * @param leftArray left矩阵数组。
@@ -14295,7 +14919,14 @@ declare module Laya {
          * @param outArray 输出矩阵数组。
          * @param outOffset 输出矩阵数组的偏移。
          */
-        static mulMatrixByArray(leftArray: Float32Array, leftOffset: number, rightArray: Float32Array, rightOffset: number, outArray: Float32Array, outOffset: number): void;
+        static mulMatrixByArray(
+            leftArray: Float32Array,
+            leftOffset: number,
+            rightArray: Float32Array,
+            rightOffset: number,
+            outArray: Float32Array,
+            outOffset: number
+        ): void;
         /**
          *通过数组数据计算矩阵乘法,rightArray和outArray不能为同一数组引用。
          * @param leftArray left矩阵数组。
@@ -14305,7 +14936,14 @@ declare module Laya {
          * @param outArray 结果矩阵数组。
          * @param outOffset 结果矩阵数组的偏移。
          */
-        static mulMatrixByArrayFast(leftArray: Float32Array, leftOffset: number, rightArray: Float32Array, rightOffset: number, outArray: Float32Array, outOffset: number): void;
+        static mulMatrixByArrayFast(
+            leftArray: Float32Array,
+            leftOffset: number,
+            rightArray: Float32Array,
+            rightOffset: number,
+            outArray: Float32Array,
+            outOffset: number
+        ): void;
         /**
          *通过数组数据计算矩阵乘法,rightArray和outArray不能为同一数组引用。
          * @param leftArray left矩阵数组。
@@ -14314,7 +14952,13 @@ declare module Laya {
          * @param outArray 结果矩阵数组。
          * @param outOffset 结果矩阵数组的偏移。
          */
-        static mulMatrixByArrayAndMatrixFast(leftArray: Float32Array, leftOffset: number, rightMatrix: Matrix4x4, outArray: Float32Array, outOffset: number): void;
+        static mulMatrixByArrayAndMatrixFast(
+            leftArray: Float32Array,
+            leftOffset: number,
+            rightMatrix: Matrix4x4,
+            outArray: Float32Array,
+            outOffset: number
+        ): void;
         /**
          *通过数平移、旋转、缩放值计算到结果矩阵数组。
          * @param tX left矩阵数组。
@@ -14330,7 +14974,20 @@ declare module Laya {
          * @param outArray 结果矩阵数组。
          * @param outOffset 结果矩阵数组的偏移。
          */
-        static createAffineTransformationArray(tX: number, tY: number, tZ: number, rX: number, rY: number, rZ: number, rW: number, sX: number, sY: number, sZ: number, outArray: Float32Array, outOffset: number): void;
+        static createAffineTransformationArray(
+            tX: number,
+            tY: number,
+            tZ: number,
+            rX: number,
+            rY: number,
+            rZ: number,
+            rW: number,
+            sX: number,
+            sY: number,
+            sZ: number,
+            outArray: Float32Array,
+            outOffset: number
+        ): void;
         /**
          * 通过矩阵转换一个三维向量数组到另外一个三维向量数组。
          * @param	source 源三维向量所在数组。
@@ -14339,7 +14996,13 @@ declare module Laya {
          * @param	result 输出三维向量所在数组。
          * @param	resultOffset 输出三维向量数组偏移。
          */
-        static transformVector3ArrayToVector3ArrayCoordinate(source: Float32Array, sourceOffset: number, transform: Matrix4x4, result: Float32Array, resultOffset: number): void;
+        static transformVector3ArrayToVector3ArrayCoordinate(
+            source: Float32Array,
+            sourceOffset: number,
+            transform: Matrix4x4,
+            result: Float32Array,
+            resultOffset: number
+        ): void;
         /**
          * 通过矩阵转换一个三维向量数组到另外一个归一化的三维向量数组。
          * @param source 源三维向量所在数组。
@@ -14348,7 +15011,13 @@ declare module Laya {
          * @param result 输出三维向量所在数组。
          * @param resultOffset 输出三维向量数组偏移。
          */
-        static transformVector3ArrayToVector3ArrayNormal(source: Float32Array, sourceOffset: number, transform: Matrix4x4, result: Float32Array, resultOffset: number): void;
+        static transformVector3ArrayToVector3ArrayNormal(
+            source: Float32Array,
+            sourceOffset: number,
+            transform: Matrix4x4,
+            result: Float32Array,
+            resultOffset: number
+        ): void;
         /**
          * 获取URL版本字符。
          * @param	url
@@ -14534,7 +15203,11 @@ declare module Laya {
          * @param cameraInfo WebXRCameraInfo webXRCamera设置
          * @returns Promise<WebXRSessionManager>
          */
-        static enterXRAsync(sessionMode: string, referenceSpaceType: string, cameraInfo: WebXRCameraInfo): Promise<WebXRSessionManager>;
+        static enterXRAsync(
+            sessionMode: string,
+            referenceSpaceType: string,
+            cameraInfo: WebXRCameraInfo
+        ): Promise<WebXRSessionManager>;
         /**
          * config WebXRCameraManager
          * @param camera Camera
@@ -14548,7 +15221,10 @@ declare module Laya {
          * @param cameraManager WebXRCameraManager
          * @returns
          */
-        static setWebXRInput(sessionManager: WebXRSessionManager, cameraManager: WebXRCameraManager): WebXRInputManager;
+        static setWebXRInput(
+            sessionManager: WebXRSessionManager,
+            cameraManager: WebXRCameraManager
+        ): WebXRInputManager;
     }
     /**
      * 类用来描述gamepad Axis
@@ -14588,8 +15264,8 @@ declare module Laya {
          */
         handness: string;
         /**
-        * The index of the gamepad
-        */
+         * The index of the gamepad
+         */
         index: number;
         /**
          * front touch state
@@ -14833,17 +15509,17 @@ declare module Laya {
         /**web XRSystem */
         private _xrNavigator;
         /**
-        * The current reference space used in this session.
-        * @returns XRReferenceSpace;
-        */
+         * The current reference space used in this session.
+         * @returns XRReferenceSpace;
+         */
         get referenceSpace(): any;
         /**
          * set 参考空间
          */
         set referenceSpace(newReferenceSpace: any);
         /**
-        * The mode for the managed XR session
-        */
+         * The mode for the managed XR session
+         */
         get sessionMode(): any;
         /**
          * Stops the xrSession and restores the render loop
@@ -14889,24 +15565,24 @@ declare module Laya {
          */
         private _updateByXrFrame;
         /**
-        * Sets the reference space on the xr session
-        * @param referenceSpaceType space to set
-        * @returns a promise that will resolve once the reference space has been set
-        */
+         * Sets the reference space on the xr session
+         * @param referenceSpaceType space to set
+         * @returns a promise that will resolve once the reference space has been set
+         */
         setReferenceSpaceTypeAsync(referenceSpaceType?: string): Promise<any>;
         /**
-        * Updates the render state of the session
-        * @param state state to set
-        * @returns a promise that resolves once the render state has been updated
-        */
+         * Updates the render state of the session
+         * @param state state to set
+         * @returns a promise that resolves once the render state has been updated
+         */
         updateRenderStateAsync(state: any): any;
         /**
          * The current frame rate as reported by the device
          */
         get currentFrameRate(): number | undefined;
         /**
-        * A list of supported frame rates (only available in-session!
-        */
+         * A list of supported frame rates (only available in-session!
+         */
         get supportedFrameRates(): Float32Array | undefined;
         /**
          * Set the framerate of the session.
@@ -15035,11 +15711,11 @@ declare module Laya {
         static getMedia(options: any, onSuccess: Handler, onError: Handler): void;
     }
     /**
-         * 加速度x/y/z的单位均为m/s²。
-         * 在硬件（陀螺仪）不支持的情况下，alpha、beta和gamma值为null。
-         *
-         * @author Survivor
-         */
+     * 加速度x/y/z的单位均为m/s²。
+     * 在硬件（陀螺仪）不支持的情况下，alpha、beta和gamma值为null。
+     *
+     * @author Survivor
+     */
     class AccelerationInfo {
         /**
          * x轴上的加速度值。
@@ -15134,9 +15810,9 @@ declare module Laya {
         private onDeviceOrientationChange;
     }
     /**
-         * 保存旋转信息的类。请勿修改本类的属性。
-         * @author Survivor
-         */
+     * 保存旋转信息的类。请勿修改本类的属性。
+     * @author Survivor
+     */
     class RotationInfo {
         /**
          * <p>
@@ -15305,12 +15981,12 @@ declare module Laya {
         /**@private */
         private _copyLabels;
         /**@private
-        *  @override
-        */
+         *  @override
+         */
         protected _frameLoop(): void;
         /**@private
          * @override
-        */
+         */
         protected _displayToIndex(value: number): void;
         /**
          * 当前动画的帧图像数组。本类中，每个帧图像是一个Graphics对象，而动画播放就是定时切换Graphics对象的过程。
@@ -15640,7 +16316,14 @@ declare module Laya {
          */
         percent: boolean;
         /**@private */
-        static create(x: number, y: number, radius: number, fillColor: any, lineColor: any, lineWidth: number): DrawCircleCmd;
+        static create(
+            x: number,
+            y: number,
+            radius: number,
+            fillColor: any,
+            lineColor: any,
+            lineWidth: number
+        ): DrawCircleCmd;
         /**
          * 回收到对象池
          */
@@ -15649,10 +16332,7 @@ declare module Laya {
         run(context: Context, gx: number, gy: number): void;
         /**@private */
         get cmdID(): string;
-        getBoundPoints(sp?: {
-            width: number;
-            height?: number;
-        }): number[];
+        getBoundPoints(sp?: { width: number; height?: number }): number[];
     }
     /**
      * 绘制曲线
@@ -15680,7 +16360,13 @@ declare module Laya {
          */
         lineWidth: number;
         /**@private */
-        static create(x: number, y: number, points: any[], lineColor: any, lineWidth: number): DrawCurvesCmd;
+        static create(
+            x: number,
+            y: number,
+            points: any[],
+            lineColor: any,
+            lineWidth: number
+        ): DrawCurvesCmd;
         /**
          * 回收到对象池
          */
@@ -15689,10 +16375,7 @@ declare module Laya {
         run(context: Context, gx: number, gy: number): void;
         /**@private */
         get cmdID(): string;
-        getBoundPoints(sp?: {
-            width: number;
-            height?: number;
-        }): number[];
+        getBoundPoints(sp?: { width: number; height?: number }): number[];
     }
     class DrawEllipseCmd {
         static ID: string;
@@ -15729,7 +16412,16 @@ declare module Laya {
          */
         percent: boolean;
         /**@private */
-        static create(x: number, y: number, width: number, height: number, fillColor: any, lineColor: any, lineWidth: number, percent?: boolean): DrawEllipseCmd;
+        static create(
+            x: number,
+            y: number,
+            width: number,
+            height: number,
+            fillColor: any,
+            lineColor: any,
+            lineWidth: number,
+            percent?: boolean
+        ): DrawEllipseCmd;
         /**
          * 回收到对象池
          */
@@ -15738,10 +16430,7 @@ declare module Laya {
         run(context: Context, gx: number, gy: number): void;
         /**@private */
         get cmdID(): string;
-        getBoundPoints(sp?: {
-            width: number;
-            height?: number;
-        }): number[];
+        getBoundPoints(sp?: { width: number; height?: number }): number[];
     }
     /**
      * 绘制图片
@@ -15771,7 +16460,14 @@ declare module Laya {
         /** （可选）绘图颜色 */
         color: number;
         /**@private */
-        static create(texture: Texture, x: number, y: number, width: number, height: number, color: string): DrawImageCmd;
+        static create(
+            texture: Texture,
+            x: number,
+            y: number,
+            width: number,
+            height: number,
+            color: string
+        ): DrawImageCmd;
         /**
          * 回收到对象池
          */
@@ -15815,7 +16511,14 @@ declare module Laya {
          */
         percent: boolean;
         /**@private */
-        static create(fromX: number, fromY: number, toX: number, toY: number, lineColor: string, lineWidth: number): DrawLineCmd;
+        static create(
+            fromX: number,
+            fromY: number,
+            toX: number,
+            toY: number,
+            lineColor: string,
+            lineWidth: number
+        ): DrawLineCmd;
         /**
          * 回收到对象池
          */
@@ -15824,10 +16527,7 @@ declare module Laya {
         run(context: Context, gx: number, gy: number): void;
         /**@private */
         get cmdID(): string;
-        getBoundPoints(sp?: {
-            width: number;
-            height?: number;
-        }): number[];
+        getBoundPoints(sp?: { width: number; height?: number }): number[];
     }
     /**
      * 绘制连续曲线
@@ -15855,7 +16555,13 @@ declare module Laya {
          */
         lineWidth: number;
         /**@private */
-        static create(x: number, y: number, points: any[], lineColor: any, lineWidth: number): DrawLinesCmd;
+        static create(
+            x: number,
+            y: number,
+            points: any[],
+            lineColor: any,
+            lineWidth: number
+        ): DrawLinesCmd;
         /**
          * 回收到对象池
          */
@@ -15918,10 +16624,7 @@ declare module Laya {
         run(context: Context, gx: number, gy: number): void;
         /**@private */
         get cmdID(): string;
-        getBoundPoints(sp?: {
-            width: number;
-            height?: number;
-        }): number[];
+        getBoundPoints(sp?: { width: number; height?: number }): number[];
     }
     /**
      * 绘制扇形
@@ -15955,7 +16658,16 @@ declare module Laya {
         private _startAngle;
         private _endAngle;
         /**@private */
-        static create(x: number, y: number, radius: number, startAngle: number, endAngle: number, fillColor: any, lineColor: any, lineWidth: number): DrawPieCmd;
+        static create(
+            x: number,
+            y: number,
+            radius: number,
+            startAngle: number,
+            endAngle: number,
+            fillColor: any,
+            lineColor: any,
+            lineWidth: number
+        ): DrawPieCmd;
         /**
          * 回收到对象池
          */
@@ -15974,10 +16686,7 @@ declare module Laya {
          */
         get endAngle(): number;
         set endAngle(value: number);
-        getBoundPoints(sp?: {
-            width: number;
-            height?: number;
-        }): number[];
+        getBoundPoints(sp?: { width: number; height?: number }): number[];
     }
     /**
      * 绘制多边形
@@ -16009,7 +16718,14 @@ declare module Laya {
          */
         lineWidth: number;
         /**@private */
-        static create(x: number, y: number, points: any[], fillColor: any, lineColor: any, lineWidth: number): DrawPolyCmd;
+        static create(
+            x: number,
+            y: number,
+            points: any[],
+            fillColor: any,
+            lineColor: any,
+            lineWidth: number
+        ): DrawPolyCmd;
         /**
          * 回收到对象池
          */
@@ -16057,7 +16773,16 @@ declare module Laya {
          */
         percent: boolean;
         /**@private */
-        static create(x: number, y: number, width: number, height: number, fillColor: any, lineColor: any, lineWidth: number, percent?: boolean): DrawRectCmd;
+        static create(
+            x: number,
+            y: number,
+            width: number,
+            height: number,
+            fillColor: any,
+            lineColor: any,
+            lineWidth: number,
+            percent?: boolean
+        ): DrawRectCmd;
         /**
          * 回收到对象池
          */
@@ -16066,10 +16791,7 @@ declare module Laya {
         run(context: Context, gx: number, gy: number): void;
         /**@private */
         get cmdID(): string;
-        getBoundPoints(sp?: {
-            width: number;
-            height?: number;
-        }): number[];
+        getBoundPoints(sp?: { width: number; height?: number }): number[];
     }
     class DrawRoundRectCmd {
         static ID: string;
@@ -16122,7 +16844,20 @@ declare module Laya {
          */
         percent: boolean;
         /**@private */
-        static create(x: number, y: number, width: number, height: number, lt: number, rt: number, lb: number, rb: number, fillColor: any, lineColor: any, lineWidth: number, percent?: boolean): DrawRoundRectCmd;
+        static create(
+            x: number,
+            y: number,
+            width: number,
+            height: number,
+            lt: number,
+            rt: number,
+            lb: number,
+            rb: number,
+            fillColor: any,
+            lineColor: any,
+            lineWidth: number,
+            percent?: boolean
+        ): DrawRoundRectCmd;
         /**
          * 回收到对象池
          */
@@ -16131,10 +16866,7 @@ declare module Laya {
         run(context: Context, gx: number, gy: number): void;
         /**@private */
         get cmdID(): string;
-        getBoundPoints(sp?: {
-            width: number;
-            height?: number;
-        }): number[];
+        getBoundPoints(sp?: { width: number; height?: number }): number[];
     }
     /**
      * 绘制单个贴图
@@ -16179,7 +16911,18 @@ declare module Laya {
         blendMode: string | null;
         uv: number[] | null;
         /**@private */
-        static create(texture: Texture, x: number, y: number, width: number, height: number, matrix: Matrix | null, alpha: number, color: string | null, blendMode: string | null, uv?: number[]): DrawTextureCmd;
+        static create(
+            texture: Texture,
+            x: number,
+            y: number,
+            width: number,
+            height: number,
+            matrix: Matrix | null,
+            alpha: number,
+            color: string | null,
+            blendMode: string | null,
+            uv?: number[]
+        ): DrawTextureCmd;
         /**
          * 回收到对象池
          */
@@ -16261,7 +17004,18 @@ declare module Laya {
          */
         color: number | null;
         /**@private */
-        static create(texture: Texture, x: number, y: number, vertices: Float32Array, uvs: Float32Array, indices: Uint16Array, matrix: Matrix | null, alpha: number, color: string | number, blendMode: string | null): DrawTrianglesCmd;
+        static create(
+            texture: Texture,
+            x: number,
+            y: number,
+            vertices: Float32Array,
+            uvs: Float32Array,
+            indices: Uint16Array,
+            matrix: Matrix | null,
+            alpha: number,
+            color: string | number,
+            blendMode: string | null
+        ): DrawTrianglesCmd;
         /**
          * 回收到对象池
          */
@@ -16270,10 +17024,7 @@ declare module Laya {
         run(context: Context, gx: number, gy: number): void;
         /**@private */
         get cmdID(): string;
-        getBoundPoints(sp?: {
-            width: number;
-            height?: number;
-        }): number[];
+        getBoundPoints(sp?: { width: number; height?: number }): number[];
     }
     /**
      * 绘制文字
@@ -16304,7 +17055,16 @@ declare module Laya {
         get stroke(): number;
         set align(value: number);
         get align(): number;
-        static create(text: string | WordText | null, x: number, y: number, font: string, color: string | null, align: string, stroke: number, strokeColor: string | null): FillTextCmd;
+        static create(
+            text: string | WordText | null,
+            x: number,
+            y: number,
+            font: string,
+            color: string | null,
+            align: string,
+            stroke: number,
+            strokeColor: string | null
+        ): FillTextCmd;
         /**
          * 回收到对象池
          */
@@ -16364,7 +17124,16 @@ declare module Laya {
         /** （可选）绘图颜色 */
         color: number;
         /**@private */
-        static create(texture: Texture, x: number, y: number, width: number, height: number, type: string, offset: Point, color: string): FillTextureCmd;
+        static create(
+            texture: Texture,
+            x: number,
+            y: number,
+            width: number,
+            height: number,
+            type: string,
+            offset: Point,
+            color: string
+        ): FillTextureCmd;
         /**
          * 回收到对象池
          */
@@ -16373,10 +17142,7 @@ declare module Laya {
         run(context: Context, gx: number, gy: number): void;
         /**@private */
         get cmdID(): string;
-        getBoundPoints(sp?: {
-            width: number;
-            height?: number;
-        }): number[];
+        getBoundPoints(sp?: { width: number; height?: number }): number[];
     }
     /**
      * 恢复命令，和save配套使用
@@ -16660,7 +17426,7 @@ declare module Laya {
         set effectData(uiData: any);
         /**
          * @override
-        */
+         */
         protected _displayNodeToFrame(node: any, frame: number, targetDic?: any): void;
     }
     /**
@@ -16682,7 +17448,7 @@ declare module Laya {
         constructor();
         /**@inheritDoc
          * @override
-        */
+         */
         clear(): AnimationBase;
         /**
          * @inheritDoc
@@ -16763,12 +17529,18 @@ declare module Laya {
         private _createGraphicData;
         /**@private */
         protected _createFrameGraphic(frame: number): any;
-        protected _updateNodeGraphic(node: any, frame: number, parentTransfrom: Matrix, g: Graphics, alpha?: number): void;
+        protected _updateNodeGraphic(
+            node: any,
+            frame: number,
+            parentTransfrom: Matrix,
+            g: Graphics,
+            alpha?: number
+        ): void;
         protected _updateNodeGraphic2(node: any, frame: number, g: Graphics): void;
         /**
          * @private
          * @override
-        */
+         */
         protected _calculateKeyFrames(node: any): void;
         /**@private */
         protected getNodeDataByID(nodeID: number): any;
@@ -16801,7 +17573,11 @@ declare module Laya {
          * @param propertyKey
          * @param uniformtype
          */
-        static add2DGlobalUniformData(propertyID: number, propertyKey: string, uniformtype: ShaderDataType): void;
+        static add2DGlobalUniformData(
+            propertyID: number,
+            propertyKey: string,
+            uniformtype: ShaderDataType
+        ): void;
         /**
          * get global shaderData
          */
@@ -16866,7 +17642,14 @@ declare module Laya {
          * @param height	（可选）高度。
          * @param color	 	 （可选）颜色
          */
-        drawImage(texture: Texture, x?: number, y?: number, width?: number, height?: number, color?: string): DrawImageCmd | null;
+        drawImage(
+            texture: Texture,
+            x?: number,
+            y?: number,
+            width?: number,
+            height?: number,
+            color?: string
+        ): DrawImageCmd | null;
         /**
          * 绘制纹理，相比drawImage功能更强大，性能会差一些
          * @param texture		纹理。
@@ -16879,7 +17662,18 @@ declare module Laya {
          * @param color		（可选）颜色滤镜。
          * @param blendMode （可选）混合模式。
          */
-        drawTexture(texture: Texture | null, x?: number, y?: number, width?: number, height?: number, matrix?: Matrix | null, alpha?: number, color?: string | null, blendMode?: string | null, uv?: number[]): DrawTextureCmd | null;
+        drawTexture(
+            texture: Texture | null,
+            x?: number,
+            y?: number,
+            width?: number,
+            height?: number,
+            matrix?: Matrix | null,
+            alpha?: number,
+            color?: string | null,
+            blendMode?: string | null,
+            uv?: number[]
+        ): DrawTextureCmd | null;
         /**
          * 批量绘制同样纹理。
          * @param texture 纹理。
@@ -16900,7 +17694,18 @@ declare module Laya {
          * @param color		颜色变换
          * @param blendMode	blend模式
          */
-        drawTriangles(texture: Texture, x: number, y: number, vertices: Float32Array, uvs: Float32Array, indices: Uint16Array, matrix?: Matrix | null, alpha?: number, color?: string | number, blendMode?: string | null): DrawTrianglesCmd;
+        drawTriangles(
+            texture: Texture,
+            x: number,
+            y: number,
+            vertices: Float32Array,
+            uvs: Float32Array,
+            indices: Uint16Array,
+            matrix?: Matrix | null,
+            alpha?: number,
+            color?: string | number,
+            blendMode?: string | null
+        ): DrawTrianglesCmd;
         /**
          * 用 texture 填充。
          * @param texture		纹理。
@@ -16913,7 +17718,16 @@ declare module Laya {
          * @param color	 	 （可选）颜色
          *
          */
-        fillTexture(texture: Texture, x: number, y: number, width?: number, height?: number, type?: string, offset?: Point | null, color?: string): FillTextureCmd | null;
+        fillTexture(
+            texture: Texture,
+            x: number,
+            y: number,
+            width?: number,
+            height?: number,
+            type?: string,
+            offset?: Point | null,
+            color?: string
+        ): FillTextureCmd | null;
         /**
          * 设置剪裁区域，超出剪裁区域的坐标不显示。
          * @param x X 轴偏移量。
@@ -16931,7 +17745,14 @@ declare module Laya {
          * @param color 定义文本颜色，比如"#ff0000"。
          * @param textAlign 文本对齐方式，可选值："left"，"center"，"right"。
          */
-        fillText(text: string | WordText, x: number, y: number, font: string, color: string, textAlign: string): FillTextCmd;
+        fillText(
+            text: string | WordText,
+            x: number,
+            y: number,
+            font: string,
+            color: string,
+            textAlign: string
+        ): FillTextCmd;
         /**
          * 在画布上绘制“被填充且镶边的”文本。
          * @param text			在画布上输出的文本。
@@ -16943,7 +17764,16 @@ declare module Laya {
          * @param lineWidth		镶边线条宽度。
          * @param borderColor	定义镶边文本颜色。
          */
-        fillBorderText(text: string | WordText, x: number, y: number, font: string, fillColor: string, textAlign: string, lineWidth: number, borderColor: string): FillTextCmd;
+        fillBorderText(
+            text: string | WordText,
+            x: number,
+            y: number,
+            font: string,
+            fillColor: string,
+            textAlign: string,
+            lineWidth: number,
+            borderColor: string
+        ): FillTextCmd;
         /**
          * 在画布上绘制文本（没有填色）。文本的默认颜色是黑色。
          * @param text		在画布上输出的文本。
@@ -16954,7 +17784,15 @@ declare module Laya {
          * @param lineWidth	线条宽度。
          * @param textAlign	文本对齐方式，可选值："left"，"center"，"right"。
          */
-        strokeText(text: string | WordText, x: number, y: number, font: string, color: string, lineWidth: number, textAlign: string): FillTextCmd;
+        strokeText(
+            text: string | WordText,
+            x: number,
+            y: number,
+            font: string,
+            color: string,
+            lineWidth: number,
+            textAlign: string
+        ): FillTextCmd;
         /**
          * 设置透明度。
          * @param value 透明度。
@@ -17011,7 +17849,14 @@ declare module Laya {
          * @param height	（可选）显示图片的高度，设置为0表示使用图片默认高度。
          * @param complete	（可选）加载完成回调。
          */
-        loadImage(url: string, x?: number, y?: number, width?: number, height?: number, complete?: Function | null): void;
+        loadImage(
+            url: string,
+            x?: number,
+            y?: number,
+            width?: number,
+            height?: number,
+            complete?: Function | null
+        ): void;
         /**
          * 绘制一条线。
          * @param fromX		X轴开始位置。
@@ -17021,7 +17866,14 @@ declare module Laya {
          * @param lineColor	颜色。
          * @param lineWidth	（可选）线条宽度。
          */
-        drawLine(fromX: number, fromY: number, toX: number, toY: number, lineColor: string, lineWidth?: number): DrawLineCmd;
+        drawLine(
+            fromX: number,
+            fromY: number,
+            toX: number,
+            toY: number,
+            lineColor: string,
+            lineWidth?: number
+        ): DrawLineCmd;
         /**
          * 绘制一系列线段。
          * @param x			开始绘制的X轴位置。
@@ -17030,7 +17882,13 @@ declare module Laya {
          * @param lineColor	线段颜色，或者填充绘图的渐变对象。
          * @param lineWidth	（可选）线段宽度。
          */
-        drawLines(x: number, y: number, points: any[], lineColor: any, lineWidth?: number): DrawLinesCmd | null;
+        drawLines(
+            x: number,
+            y: number,
+            points: any[],
+            lineColor: any,
+            lineWidth?: number
+        ): DrawLinesCmd | null;
         /**
          * 绘制一系列曲线。
          * @param x			开始绘制的 X 轴位置。
@@ -17039,7 +17897,13 @@ declare module Laya {
          * @param lineColor	线段颜色，或者填充绘图的渐变对象。
          * @param lineWidth	（可选）线段宽度。
          */
-        drawCurves(x: number, y: number, points: any[], lineColor: any, lineWidth?: number): DrawCurvesCmd;
+        drawCurves(
+            x: number,
+            y: number,
+            points: any[],
+            lineColor: any,
+            lineWidth?: number
+        ): DrawCurvesCmd;
         /**
          * 绘制矩形。
          * @param x			开始绘制的 X 轴位置。
@@ -17051,7 +17915,16 @@ declare module Laya {
          * @param lineWidth	（可选）边框宽度。
          * @param percent 位置和大小是否是百分比值。
          */
-        drawRect(x: number, y: number, width: number, height: number, fillColor: any, lineColor?: any, lineWidth?: number, percent?: boolean): DrawRectCmd;
+        drawRect(
+            x: number,
+            y: number,
+            width: number,
+            height: number,
+            fillColor: any,
+            lineColor?: any,
+            lineWidth?: number,
+            percent?: boolean
+        ): DrawRectCmd;
         /**
          * 绘制圆角矩形
          * @param x             开始绘制的 X 轴位置。
@@ -17068,7 +17941,20 @@ declare module Laya {
          * @param percent       （可选）位置和大小是否是百分比值。
          * @returns
          */
-        drawRoundRect(x: number, y: number, width: number, height: number, lt: number, rt: number, lb: number, rb: number, fillColor: any, lineColor?: any, lineWidth?: number, percent?: boolean): any;
+        drawRoundRect(
+            x: number,
+            y: number,
+            width: number,
+            height: number,
+            lt: number,
+            rt: number,
+            lb: number,
+            rb: number,
+            fillColor: any,
+            lineColor?: any,
+            lineWidth?: number,
+            percent?: boolean
+        ): any;
         /**
          * 绘制圆形。
          * @param x			圆点X 轴位置。
@@ -17078,7 +17964,14 @@ declare module Laya {
          * @param lineColor	（可选）边框颜色，或者填充绘图的渐变对象。
          * @param lineWidth	（可选）边框宽度。
          */
-        drawCircle(x: number, y: number, radius: number, fillColor: any, lineColor?: any, lineWidth?: number): DrawCircleCmd;
+        drawCircle(
+            x: number,
+            y: number,
+            radius: number,
+            fillColor: any,
+            lineColor?: any,
+            lineWidth?: number
+        ): DrawCircleCmd;
         /**
          * 绘制椭圆形
          * @param x         圆点X 轴位置。
@@ -17090,7 +17983,16 @@ declare module Laya {
          * @param lineWidth （可选）边框宽度。
          * @param percent   （可选）位置和大小是否是百分比值。
          */
-        drawEllipse(x: number, y: number, width: number, height: number, fillColor: any, lineColor: any, lineWidth: number, percent?: boolean): DrawEllipseCmd;
+        drawEllipse(
+            x: number,
+            y: number,
+            width: number,
+            height: number,
+            fillColor: any,
+            lineColor: any,
+            lineWidth: number,
+            percent?: boolean
+        ): DrawEllipseCmd;
         /**
          * 绘制扇形。
          * @param x				开始绘制的 X 轴位置。
@@ -17102,7 +18004,16 @@ declare module Laya {
          * @param lineColor		（可选）边框颜色，或者填充绘图的渐变对象。
          * @param lineWidth		（可选）边框宽度。
          */
-        drawPie(x: number, y: number, radius: number, startAngle: number, endAngle: number, fillColor: any, lineColor?: any, lineWidth?: number): DrawPieCmd;
+        drawPie(
+            x: number,
+            y: number,
+            radius: number,
+            startAngle: number,
+            endAngle: number,
+            fillColor: any,
+            lineColor?: any,
+            lineWidth?: number
+        ): DrawPieCmd;
         /**
          * 绘制多边形。
          * @param x			开始绘制的 X 轴位置。
@@ -17112,7 +18023,14 @@ declare module Laya {
          * @param lineColor	（可选）边框颜色，或者填充绘图的渐变对象。
          * @param lineWidth	（可选）边框宽度。
          */
-        drawPoly(x: number, y: number, points: any[], fillColor: any, lineColor?: any, lineWidth?: number): DrawPolyCmd;
+        drawPoly(
+            x: number,
+            y: number,
+            points: any[],
+            fillColor: any,
+            lineColor?: any,
+            lineWidth?: number
+        ): DrawPolyCmd;
         /**
          * 绘制路径。
          * @param x		开始绘制的 X 轴位置。
@@ -17133,7 +18051,15 @@ declare module Laya {
          * @param	sizeGrid
          * @param	color
          */
-        draw9Grid(texture: Texture, x: number, y: number, width: number, height: number, sizeGrid: any[], color?: string): void;
+        draw9Grid(
+            texture: Texture,
+            x: number,
+            y: number,
+            width: number,
+            height: number,
+            sizeGrid: any[],
+            color?: string
+        ): void;
     }
     /**
      * @private
@@ -17302,7 +18228,7 @@ declare module Laya {
         miniGameTxt(value: string): void;
         /**@inheritDoc
          * @override
-        */
+         */
         set text(value: string);
         /**
          * @override
@@ -17310,11 +18236,11 @@ declare module Laya {
         get text(): string;
         /**@inheritDoc
          * @override
-        */
+         */
         set_color(value: string): void;
         /**@inheritDoc
          * @override
-        */
+         */
         set bgColor(value: string);
         get bgColor(): string;
         /**限制输入的字符。*/
@@ -17555,7 +18481,14 @@ declare module Laya {
          * @param	coverBefore	（可选）是否覆盖之前的延迟执行，默认为true。
          * @param	jumpFrame 时钟是否跳帧。基于时间的循环回调，单位时间间隔内，如能执行多次回调，出于性能考虑，引擎默认只执行一次，设置jumpFrame=true后，则回调会连续执行多次
          */
-        timerLoop(delay: number, caller: any, method: Function, args?: any[], coverBefore?: boolean, jumpFrame?: boolean): void;
+        timerLoop(
+            delay: number,
+            caller: any,
+            method: Function,
+            args?: any[],
+            coverBefore?: boolean,
+            jumpFrame?: boolean
+        ): void;
         /**
          * 定时执行某函数一次。功能同Laya.timer.timerOnce()。
          * @param	delay		延迟时间(单位毫秒)。
@@ -17564,7 +18497,13 @@ declare module Laya {
          * @param	args		（可选）回调参数。
          * @param	coverBefore	（可选）是否覆盖之前的延迟执行，默认为true。
          */
-        timerOnce(delay: number, caller: any, method: Function, args?: any[], coverBefore?: boolean): void;
+        timerOnce(
+            delay: number,
+            caller: any,
+            method: Function,
+            args?: any[],
+            coverBefore?: boolean
+        ): void;
         /**
          * 定时重复执行某函数(基于帧率)。功能同Laya.timer.frameLoop()。
          * @param	delay		间隔几帧(单位为帧)。
@@ -17573,7 +18512,13 @@ declare module Laya {
          * @param	args		（可选）回调参数。
          * @param	coverBefore	（可选）是否覆盖之前的延迟执行，默认为true。
          */
-        frameLoop(delay: number, caller: any, method: Function, args?: any[], coverBefore?: boolean): void;
+        frameLoop(
+            delay: number,
+            caller: any,
+            method: Function,
+            args?: any[],
+            coverBefore?: boolean
+        ): void;
         /**
          * 定时执行一次某函数(基于帧率)。功能同Laya.timer.frameOnce()。
          * @param	delay		延迟几帧(单位为帧)。
@@ -17582,7 +18527,13 @@ declare module Laya {
          * @param	args		（可选）回调参数
          * @param	coverBefore	（可选）是否覆盖之前的延迟执行，默认为true
          */
-        frameOnce(delay: number, caller: any, method: Function, args?: any[], coverBefore?: boolean): void;
+        frameOnce(
+            delay: number,
+            caller: any,
+            method: Function,
+            args?: any[],
+            coverBefore?: boolean
+        ): void;
         /**
          * 清理定时器。功能同Laya.timer.clearTimer()。
          * @param	caller 执行域(this)。
@@ -17646,9 +18597,9 @@ declare module Laya {
          */
         protected _onInActiveInScene(): void;
         /**
-        * 组件被激活后执行，此时所有节点和组件均已创建完毕，次方法只执行一次
-        * 此方法为虚方法，使用时重写覆盖即可
-        */
+         * 组件被激活后执行，此时所有节点和组件均已创建完毕，次方法只执行一次
+         * 此方法为虚方法，使用时重写覆盖即可
+         */
         onAwake(): void;
         /**
          * 组件被启用后执行，比如节点被添加到舞台后
@@ -17712,8 +18663,7 @@ declare module Laya {
          */
         onAfterDeserialize(): void;
     }
-    interface INodeExtra {
-    }
+    interface INodeExtra {}
     /**
      * 场景类，负责场景创建，加载，销毁等功能
      * 场景被从节点移除后，并不会被自动垃圾机制回收，如果想回收，请调用destroy接口，可以通过unDestroyedScenes属性查看还未被销毁的场景列表
@@ -17758,8 +18708,8 @@ declare module Laya {
          */
         createView(view: any): void;
         /**
-        * 根据IDE内的节点id，获得节点实例
-        */
+         * 根据IDE内的节点id，获得节点实例
+         */
         getNodeByID(id: number): any;
         /**
          * 打开场景。【注意】被关闭的场景，如果没有设置autoDestroyAtRemoved=true，则资源可能不能被回收，需要自己手动回收
@@ -17839,7 +18789,7 @@ declare module Laya {
         /**
          * @private
          * @override
-        */
+         */
         protected _sizeChanged(): void;
         /**
          * 重新排版
@@ -17867,7 +18817,13 @@ declare module Laya {
          * @param	complete	打开完成回调，返回场景实例（可选）
          * @param	progress	加载进度回调（可选）
          */
-        static open(url: string, closeOther?: boolean, param?: any, complete?: Handler, progress?: Handler): Promise<Scene>;
+        static open(
+            url: string,
+            closeOther?: boolean,
+            param?: any,
+            complete?: Handler,
+            progress?: Handler
+        ): Promise<Scene>;
         /**@private */
         private static _onSceneLoaded;
         /**
@@ -18209,7 +19165,12 @@ declare module Laya {
          * @param	y 绘制的 Y 轴偏移量。
          * @return  HTMLCanvas 对象。
          */
-        drawToCanvas(canvasWidth: number, canvasHeight: number, offsetX: number, offsetY: number): HTMLCanvas;
+        drawToCanvas(
+            canvasWidth: number,
+            canvasHeight: number,
+            offsetX: number,
+            offsetY: number
+        ): HTMLCanvas;
         /**
          * 绘制到一个Texture对象
          * @param canvasWidth
@@ -18217,7 +19178,13 @@ declare module Laya {
          * @param offsetX
          * @param offsetY
          */
-        drawToTexture(canvasWidth: number, canvasHeight: number, offsetX: number, offsetY: number, rt?: RenderTexture2D | null): Texture | RenderTexture2D;
+        drawToTexture(
+            canvasWidth: number,
+            canvasHeight: number,
+            offsetX: number,
+            offsetY: number,
+            rt?: RenderTexture2D | null
+        ): Texture | RenderTexture2D;
         /**
          * 把当前对象渲染到指定的贴图上。贴图由外部指定，避免每次都创建。
          * @param offx
@@ -18229,13 +19196,28 @@ declare module Laya {
          * @private
          * 绘制到画布。
          */
-        static drawToCanvas(sprite: Sprite, _renderType: number, canvasWidth: number, canvasHeight: number, offsetX: number, offsetY: number): HTMLCanvas;
+        static drawToCanvas(
+            sprite: Sprite,
+            _renderType: number,
+            canvasWidth: number,
+            canvasHeight: number,
+            offsetX: number,
+            offsetY: number
+        ): HTMLCanvas;
         static drawtocanvCtx: Context;
         /**
          * @private
          *
          */
-        static drawToTexture(sprite: Sprite, _renderType: number, canvasWidth: number, canvasHeight: number, offsetX: number, offsetY: number, rt?: RenderTexture2D | null): Texture | RenderTexture2D;
+        static drawToTexture(
+            sprite: Sprite,
+            _renderType: number,
+            canvasWidth: number,
+            canvasHeight: number,
+            offsetX: number,
+            offsetY: number,
+            rt?: RenderTexture2D | null
+        ): Texture | RenderTexture2D;
         /**
          * <p>自定义更新、呈现显示对象。一般用来扩展渲染模式，请合理使用，可能会导致在加速器上无法渲染。</p>
          * <p><b>注意</b>不要在此函数内增加或删除树节点，否则会对树节点遍历造成影响。</p>
@@ -18280,7 +19262,7 @@ declare module Laya {
         protected _onDisplay(v?: boolean): void;
         /**@private
          * @override
-        */
+         */
         protected _setParent(value: Node): void;
         /**
          * <p>加载并显示一个图片。相当于加载图片后，设置texture属性</p>
@@ -18300,7 +19282,7 @@ declare module Laya {
         repaint(type?: number): void;
         /**@private
          * @override
-        */
+         */
         protected _childChanged(child?: Node): void;
         /**cacheAs时，设置所有父对象缓存失效。 */
         parentRepaint(type?: number): void;
@@ -18333,7 +19315,14 @@ declare module Laya {
          * @param data				（可选）拖动事件携带的数据，可选。
          * @param ratio				（可选）惯性阻尼系数，影响惯性力度和时长。
          */
-        startDrag(area?: Rectangle, hasInertia?: boolean, elasticDistance?: number, elasticBackTime?: number, data?: any, ratio?: number): void;
+        startDrag(
+            area?: Rectangle,
+            hasInertia?: boolean,
+            elasticDistance?: number,
+            elasticBackTime?: number,
+            data?: any,
+            ratio?: number
+        ): void;
         /**停止拖动此对象。*/
         stopDrag(): void;
         /**
@@ -18598,7 +19587,11 @@ declare module Laya {
          * @param _screenMode
          * @returns
          */
-        setScreenSizeForScene(screenWidth: number, screenHeight: number, _screenMode: string): {
+        setScreenSizeForScene(
+            screenWidth: number,
+            screenHeight: number,
+            _screenMode: string
+        ): {
             stageWidth: number;
             stageHeight: number;
             canvasWidth: number;
@@ -18890,7 +19883,7 @@ declare module Laya {
         /**
          * @inheritDoc
          * @override
-        */
+         */
         destroy(destroyChild?: boolean): void;
         /**
          * @inheritDoc
@@ -19053,9 +20046,9 @@ declare module Laya {
         set templateVars(value: Record<string, any> | boolean);
         setVar(name: string, value: any): Text;
         /**
-        * <p>设置横向滚动量。</p>
-        * <p>即使设置超出滚动范围的值，也会被自动限制在可能的最大值处。</p>
-        */
+         * <p>设置横向滚动量。</p>
+         * <p>即使设置超出滚动范围的值，也会被自动限制在可能的最大值处。</p>
+         */
         set scrollX(value: number);
         /**
          * 获取横向滚动量。
@@ -19097,11 +20090,11 @@ declare module Laya {
          */
         protected doLayout(): void;
         /**
-        * @private
-        * 渲染文字。
-        * @param	begin 开始渲染的行索引。
-        * @param	visibleLineCount 渲染的行数。
-        */
+         * @private
+         * 渲染文字。
+         * @param	begin 开始渲染的行索引。
+         * @param	visibleLineCount 渲染的行数。
+         */
         protected renderText(): void;
         protected drawBg(): void;
     }
@@ -19817,7 +20810,13 @@ declare module Laya {
      */
     class BlurFilterGLRender {
         private static blurinfo;
-        render(rt: RenderTexture2D, ctx: Context, width: number, height: number, filter: BlurFilter): void;
+        render(
+            rt: RenderTexture2D,
+            ctx: Context,
+            width: number,
+            height: number,
+            filter: BlurFilter
+        ): void;
         setShaderInfo(shader: Value2D, filter: BlurFilter, w: number, h: number): void;
     }
     /**
@@ -19858,7 +20857,7 @@ declare module Laya {
         /**
          * @private
          * @override
-        */
+         */
         get type(): number;
         /**
          * 调整颜色，包括亮度，对比度，饱和度和色调
@@ -19868,7 +20867,12 @@ declare module Laya {
          * @param hue 色调,范围:-180~180
          * @return this
          */
-        adjustColor(brightness: number, contrast: number, saturation: number, hue: number): ColorFilter;
+        adjustColor(
+            brightness: number,
+            contrast: number,
+            saturation: number,
+            hue: number
+        ): ColorFilter;
         /**
          * 调整亮度
          * @param brightness 亮度,范围:-100~100
@@ -19936,7 +20940,13 @@ declare module Laya {
         constructor();
         /**@private 滤镜类型。*/
         get type(): number;
-        static _filter: (this: RenderSprite, sprite: Sprite, context: Context, x: number, y: number) => void;
+        static _filter: (
+            this: RenderSprite,
+            sprite: Sprite,
+            context: Context,
+            x: number,
+            y: number
+        ) => void;
     }
     /**
      *  发光滤镜(也可以当成阴影滤使用）
@@ -19987,7 +20997,13 @@ declare module Laya {
      */
     class GlowFilterGLRender {
         private setShaderInfo;
-        render(rt: RenderTexture2D, ctx: Context, width: number, height: number, filter: GlowFilter): void;
+        render(
+            rt: RenderTexture2D,
+            ctx: Context,
+            width: number,
+            height: number,
+            filter: GlowFilter
+        ): void;
     }
     /**
      * 滤镜接口。
@@ -20011,7 +21027,13 @@ declare module Laya {
         constructor();
         /**@private 滤镜类型。*/
         get type(): number;
-        static _filter: (this: RenderSprite, sprite: Sprite, context: any, x: number, y: number) => void;
+        static _filter: (
+            this: RenderSprite,
+            sprite: Sprite,
+            context: any,
+            x: number,
+            y: number
+        ) => void;
     }
     class KHR_materials_anisotropy implements glTFExtension {
         readonly name: string;
@@ -20084,7 +21106,7 @@ declare module Laya {
         Input = 3,
         Select = 4,
         Object = 5,
-        LinkEnd = 6
+        LinkEnd = 6,
     }
     class HtmlElement {
         type: HtmlElementType;
@@ -20156,7 +21178,12 @@ declare module Laya {
         protected _elements: Array<HtmlElement>;
         protected _options: HtmlParseOptions;
         constructor();
-        parse(aSource: string, style: TextStyle, out: Array<HtmlElement>, options?: HtmlParseOptions): void;
+        parse(
+            aSource: string,
+            style: TextStyle,
+            out: Array<HtmlElement>,
+            options?: HtmlParseOptions
+        ): void;
         protected pushStyle(): void;
         protected popStyle(): void;
         protected isNewLine(): boolean;
@@ -20224,7 +21251,7 @@ declare module Laya {
         Void = 2,
         CDATA = 3,
         Comment = 4,
-        Instruction = 5
+        Instruction = 5,
     }
     class XMLIterator {
         static tagName: string;
@@ -20346,7 +21373,13 @@ declare module Laya {
          * @param view 组件所在的视图实例，用来注册var全局变量，如果值为空则不注册。
          * @return 一个 Component 对象。
          */
-        static createComp(uiView: any, comp?: Sprite, view?: Sprite, dataMap?: any[], initTool?: InitTool): any;
+        static createComp(
+            uiView: any,
+            comp?: Sprite,
+            view?: Sprite,
+            dataMap?: any[],
+            initTool?: InitTool
+        ): any;
         /**
          * @private
          * 设置组件的属性值。
@@ -20397,7 +21430,13 @@ declare module Laya {
          * @param	root 根节点，用来设置var定义。
          * @return	生成的节点。
          */
-        static createByJson(json: any, node?: any, root?: Node, customHandler?: Handler, instanceHandler?: Handler): any;
+        static createByJson(
+            json: any,
+            node?: any,
+            root?: Node,
+            customHandler?: Handler,
+            instanceHandler?: Handler
+        ): any;
         /**
          * @private
          */
@@ -20469,9 +21508,9 @@ declare module Laya {
          */
         static parseLegacy(data: any): Material;
         /**
-            * @deprecated
-            * 兼容Blend数据
-            */
+         * @deprecated
+         * 兼容Blend数据
+         */
         private static _getRenderStateParams;
     }
     class NullLoader implements IResourceLoader {
@@ -20507,9 +21546,12 @@ declare module Laya {
         static getCGBlock(source: string): {
             [key: string]: string;
         };
-        static bindCG(shaderObj: IShaderObjStructor, cgmap: {
-            [key: string]: string;
-        }): void;
+        static bindCG(
+            shaderObj: IShaderObjStructor,
+            cgmap: {
+                [key: string]: string;
+            }
+        ): void;
         /**
          * trans string to ShaderDataType
          * @param value
@@ -20809,7 +21851,15 @@ declare module Laya {
          * @param	enableLinear 	是否开启线性取样（为false时，可以解决地图黑线的问题，但画质会锐化）
          * @param	limitRange		把地图限制在显示区域
          */
-        createMap(mapName: string, viewRect: Rectangle, completeHandler: Handler, viewRectPadding?: Rectangle, gridSize?: Point, enableLinear?: boolean, limitRange?: boolean): void;
+        createMap(
+            mapName: string,
+            viewRect: Rectangle,
+            completeHandler: Handler,
+            viewRectPadding?: Rectangle,
+            gridSize?: Point,
+            enableLinear?: boolean,
+            limitRange?: boolean
+        ): void;
         /**
          * json文件读取成功后，解析里面的纹理数据，进行加载
          * @param	e JSON数据
@@ -21285,16 +22335,24 @@ declare module Laya {
         static scan(PointSet: any[]): any[];
     }
     /**
-         * @private
-         * <code>MathUtil</code> 是一个数据处理工具类。
-         */
+     * @private
+     * <code>MathUtil</code> 是一个数据处理工具类。
+     */
     class MathUtil {
         static subtractVector3(l: Float32Array, r: Float32Array, o: Float32Array): void;
         static lerp(left: number, right: number, amount: number): number;
         static scaleVector3(f: Float32Array, b: number, e: Float32Array): void;
         static lerpVector3(l: Float32Array, r: Float32Array, t: number, o: Float32Array): void;
         static lerpVector4(l: Float32Array, r: Float32Array, t: number, o: Float32Array): void;
-        static slerpQuaternionArray(a: Float32Array, Offset1: number, b: Float32Array, Offset2: number, t: number, out: Float32Array, Offset3: number): Float32Array;
+        static slerpQuaternionArray(
+            a: Float32Array,
+            Offset1: number,
+            b: Float32Array,
+            Offset2: number,
+            t: number,
+            out: Float32Array,
+            Offset3: number
+        ): Float32Array;
         /**
          * 获取指定的两个点组成的线段的角度值。
          * @param	x0 点一的 X 轴坐标值。
@@ -21339,7 +22397,11 @@ declare module Laya {
          * @param	forceNum 如果值为true，则将排序的元素转为数字进行比较。
          * @return 排序函数。
          */
-        static sortByKey(key: string, bigFirst?: boolean, forceNum?: boolean): (a: any, b: any) => number;
+        static sortByKey(
+            key: string,
+            bigFirst?: boolean,
+            forceNum?: boolean
+        ): (a: any, b: any) => number;
     }
     /**
      * <code>MathUtils3D</code> 类用于创建数学工具。
@@ -21401,7 +22463,15 @@ declare module Laya {
          * @param tx	（可选）沿 x 轴平移每个点的距离。
          * @param ty	（可选）沿 y 轴平移每个点的距离。
          */
-        constructor(a?: number, b?: number, c?: number, d?: number, tx?: number, ty?: number, nums?: number);
+        constructor(
+            a?: number,
+            b?: number,
+            c?: number,
+            d?: number,
+            tx?: number,
+            ty?: number,
+            nums?: number
+        );
         /**
          * 将本矩阵设置为单位矩阵。
          * @return 返回当前矩形。
@@ -21702,7 +22772,12 @@ declare module Laya {
          * @param	roll
          * @param	result
          */
-        static createRotationYawPitchRoll(yaw: number, pitch: number, roll: number, result: Matrix4x4): void;
+        static createRotationYawPitchRoll(
+            yaw: number,
+            pitch: number,
+            roll: number,
+            result: Matrix4x4
+        ): void;
         /**
          * 通过旋转轴axis和旋转角度angle计算旋转矩阵。
          * @param	axis 旋转轴,假定已经归一化。
@@ -21748,7 +22823,12 @@ declare module Laya {
          * @param	scale 缩放
          * @param	out 输出矩阵
          */
-        static createAffineTransformation(trans: Vector3, rot: Quaternion, scale: Vector3, out: Matrix4x4): void;
+        static createAffineTransformation(
+            trans: Vector3,
+            rot: Quaternion,
+            scale: Vector3,
+            out: Matrix4x4
+        ): void;
         /**
          * 计算观察矩阵
          * @param	eye 视点位置
@@ -21765,7 +22845,13 @@ declare module Laya {
          * @param	far 远裁面。
          * @param	out 输出矩阵。
          */
-        static createPerspective(fov: number, aspect: number, znear: number, zfar: number, out: Matrix4x4): void;
+        static createPerspective(
+            fov: number,
+            aspect: number,
+            znear: number,
+            zfar: number,
+            out: Matrix4x4
+        ): void;
         /**
          * 创建透视投影矩阵。
          * @param	left 视椎左边界。
@@ -21776,7 +22862,15 @@ declare module Laya {
          * @param	zfar 视椎远边界。
          * @param	out 输出矩阵。
          */
-        static createPerspectiveOffCenter(left: number, right: number, bottom: number, top: number, znear: number, zfar: number, out: Matrix4x4): void;
+        static createPerspectiveOffCenter(
+            left: number,
+            right: number,
+            bottom: number,
+            top: number,
+            znear: number,
+            zfar: number,
+            out: Matrix4x4
+        ): void;
         /**
          * 计算正交投影矩阵。
          * @param	left 视椎左边界。
@@ -21787,18 +22881,44 @@ declare module Laya {
          * @param	far 视椎远边界。
          * @param	out 输出矩阵。
          */
-        static createOrthoOffCenter(left: number, right: number, bottom: number, top: number, znear: number, zfar: number, out: Matrix4x4): void;
+        static createOrthoOffCenter(
+            left: number,
+            right: number,
+            bottom: number,
+            top: number,
+            znear: number,
+            zfar: number,
+            out: Matrix4x4
+        ): void;
         /**矩阵元素数组*/
         elements: Float32Array;
         /**
          * 创建一个 <code>Matrix4x4</code> 实例。
          * @param	4x4矩阵的各元素
          */
-        constructor(m11?: number, m12?: number, m13?: number, m14?: number, m21?: number, m22?: number, m23?: number, m24?: number, m31?: number, m32?: number, m33?: number, m34?: number, m41?: number, m42?: number, m43?: number, m44?: number, elements?: Float32Array);
+        constructor(
+            m11?: number,
+            m12?: number,
+            m13?: number,
+            m14?: number,
+            m21?: number,
+            m22?: number,
+            m23?: number,
+            m24?: number,
+            m31?: number,
+            m32?: number,
+            m33?: number,
+            m34?: number,
+            m41?: number,
+            m42?: number,
+            m43?: number,
+            m44?: number,
+            elements?: Float32Array
+        );
         /**
-      * 四元数生成矩阵
-      * @param rotation
-      */
+         * 四元数生成矩阵
+         * @param rotation
+         */
         setRotation(rotation: Quaternion): void;
         /**
          * 位置
@@ -21825,7 +22945,11 @@ declare module Laya {
          * @param	scale 缩放向量。
          * @return 是否分解成功。
          */
-        decomposeTransRotMatScale(translation: Vector3, rotationMatrix: Matrix4x4, scale: Vector3): boolean;
+        decomposeTransRotMatScale(
+            translation: Vector3,
+            rotationMatrix: Matrix4x4,
+            scale: Vector3
+        ): boolean;
         /**
          * 分解旋转矩阵的旋转为YawPitchRoll欧拉角。
          * @param	out float yaw
@@ -21855,7 +22979,13 @@ declare module Laya {
          * @param	cameraForward  相机前向量
          * @param	mat            变换矩阵
          */
-        static billboard(objectPosition: Vector3, cameraPosition: Vector3, cameraUp: Vector3, cameraForward: Vector3, mat: Matrix4x4): void;
+        static billboard(
+            objectPosition: Vector3,
+            cameraPosition: Vector3,
+            cameraUp: Vector3,
+            cameraForward: Vector3,
+            mat: Matrix4x4
+        ): void;
         /**
          * 归一化
          */
@@ -21974,7 +23104,12 @@ declare module Laya {
          * @param	roll roll值
          * @param	out 输出四元数
          */
-        static createFromYawPitchRoll(yaw: number, pitch: number, roll: number, out: Quaternion): void;
+        static createFromYawPitchRoll(
+            yaw: number,
+            pitch: number,
+            roll: number,
+            out: Quaternion
+        ): void;
         /**
          * 计算两个四元数相乘
          * @param	left left四元数
@@ -21983,11 +23118,11 @@ declare module Laya {
          */
         static multiply(left: Quaternion, right: Quaternion, out: Quaternion): void;
         /**
-       * Calculate a quaternion rotates around an arbitrary axis.
-       * @param axis - The axis
-       * @param rad - The rotation angle in radians
-       * @param out - The quaternion after rotate
-       */
+         * Calculate a quaternion rotates around an arbitrary axis.
+         * @param axis - The axis
+         * @param rad - The rotation angle in radians
+         * @param out - The quaternion after rotate
+         */
         static rotationAxisAngle(axis: Vector3, rad: number, out: Quaternion): void;
         private static arcTanAngle;
         private static angleTo;
@@ -22501,7 +23636,11 @@ declare module Laya {
          * @param	transform  变换矩阵。
          * @param	result 输出三维向量。
          */
-        static transformCoordinate(coordinate: Vector3, transform: Matrix4x4, result: Vector3): void;
+        static transformCoordinate(
+            coordinate: Vector3,
+            transform: Matrix4x4,
+            result: Vector3
+        ): void;
         /**
          * 求一个指定范围的向量
          * @param	value clamp向量
@@ -23141,7 +24280,13 @@ declare module Laya {
          * @param startTime		声音播放起始时间。
          * @return SoundChannel对象，通过此对象可以对声音进行控制，以及获取声音信息。
          */
-        static playSound(url: string, loops?: number, complete?: Handler, soundClass?: new () => any, startTime?: number): SoundChannel;
+        static playSound(
+            url: string,
+            loops?: number,
+            complete?: Handler,
+            soundClass?: new () => any,
+            startTime?: number
+        ): SoundChannel;
         /**
          * 释放声音资源。
          * @param url	声音播放地址。
@@ -23155,7 +24300,12 @@ declare module Laya {
          * @param startTime	声音播放起始时间。
          * @return SoundChannel对象，通过此对象可以对声音进行控制，以及获取声音信息。
          */
-        static playMusic(url: string, loops?: number, complete?: Handler, startTime?: number): SoundChannel;
+        static playMusic(
+            url: string,
+            loops?: number,
+            complete?: Handler,
+            startTime?: number
+        ): SoundChannel;
         /**
          * 停止声音播放。此方法能够停止任意声音的播放（包括背景音乐和音效），只需传入对应的声音播放地址。
          * @param url  声音文件地址。
@@ -23401,8 +24551,8 @@ declare module Laya {
          */
         get seeking(): boolean;
         /**
-        * @override
-        */
+         * @override
+         */
         _setX(value: number): void;
         /**
          * @override
@@ -23446,9 +24596,9 @@ declare module Laya {
         get source(): string;
         get gammaCorrection(): number;
         /**
-        * 设置播放源路径
-        * @param url 播放源路径
-        */
+         * 设置播放源路径
+         * @param url 播放源路径
+         */
         set source(url: string);
         private appendSource;
         /**
@@ -23729,15 +24879,15 @@ declare module Laya {
      * @private
      */
     class AtlasInfoManager {
-        static _fileLoadDic: Record<string, {
-            url: string;
-            baseUrl?: string;
-        }>;
-        static enable(infoFile: string, callback?: Handler | null): void;
-        static addAtlases(data: Record<string, [
+        static _fileLoadDic: Record<
             string,
-            string[]
-        ]>): void;
+            {
+                url: string;
+                baseUrl?: string;
+            }
+        >;
+        static enable(infoFile: string, callback?: Handler | null): void;
+        static addAtlases(data: Record<string, [string, string[]]>): void;
         static addAtlas(atlasUrl: string, prefix: string, frames: Array<string>): void;
         static getFileLoadPath(file: string): {
             url: string;
@@ -23762,11 +24912,42 @@ declare module Laya {
         update(index: number, value: number): void;
     }
     class Downloader {
-        common(owner: any, url: string, originalUrl: string, contentType: string, onProgress: (progress: number) => void, onComplete: (data: any, error?: string) => void): void;
-        image(owner: any, url: string, originalUrl: string, onProgress: (progress: number) => void, onComplete: (data: any, error?: string) => void): void;
-        imageWithBlob(owner: any, blob: ArrayBuffer, originalUrl: string, onProgress: (progress: number) => void, onComplete: (data: any, error?: string) => void): void;
-        imageWithWorker(owner: any, url: string, originalUrl: string, onProgress: (progress: number) => void, onComplete: (data: any, error?: string) => void): void;
-        audio(owner: any, url: string, originalUrl: string, onProgress: (progress: number) => void, onComplete: (data: any, error?: string) => void): void;
+        common(
+            owner: any,
+            url: string,
+            originalUrl: string,
+            contentType: string,
+            onProgress: (progress: number) => void,
+            onComplete: (data: any, error?: string) => void
+        ): void;
+        image(
+            owner: any,
+            url: string,
+            originalUrl: string,
+            onProgress: (progress: number) => void,
+            onComplete: (data: any, error?: string) => void
+        ): void;
+        imageWithBlob(
+            owner: any,
+            blob: ArrayBuffer,
+            originalUrl: string,
+            onProgress: (progress: number) => void,
+            onComplete: (data: any, error?: string) => void
+        ): void;
+        imageWithWorker(
+            owner: any,
+            url: string,
+            originalUrl: string,
+            onProgress: (progress: number) => void,
+            onComplete: (data: any, error?: string) => void
+        ): void;
+        audio(
+            owner: any,
+            url: string,
+            originalUrl: string,
+            onProgress: (progress: number) => void,
+            onComplete: (data: any, error?: string) => void
+        ): void;
         httpRequestPool: Array<HttpRequest>;
         protected getRequestInst(): HttpRequest;
         protected returnRequestInst(inst: HttpRequest): void;
@@ -23806,7 +24987,13 @@ declare module Laya {
          * @param	responseType	(default = "text")Web 服务器的响应类型，可设置为 "text"、"json"、"xml"、"arraybuffer"。
          * @param	headers			(default = null) HTTP 请求的头部信息。参数形如key-value数组：key是头部的名称，不应该包括空白、冒号或换行；value是头部的值，不应该包括换行。比如["Content-Type", "application/json"]。
          */
-        send(url: string, data?: any, method?: "get" | "post" | "head", responseType?: "text" | "json" | "xml" | "arraybuffer", headers?: string[]): void;
+        send(
+            url: string,
+            data?: any,
+            method?: "get" | "post" | "head",
+            responseType?: "text" | "json" | "xml" | "arraybuffer",
+            headers?: string[]
+        ): void;
         /**
          * @private
          * 请求进度的侦听处理函数。
@@ -23889,12 +25076,12 @@ declare module Laya {
         url: string;
     }
     interface ContentTypeMap {
-        "text": string;
-        "json": any;
-        "xml": XML;
-        "arraybuffer": ArrayBuffer;
-        "image": HTMLImageElement | ImageBitmap;
-        "sound": HTMLAudioElement;
+        text: string;
+        json: any;
+        xml: XML;
+        arraybuffer: ArrayBuffer;
+        image: HTMLImageElement | ImageBitmap;
+        sound: HTMLAudioElement;
     }
     type TypeMapEntry = {
         typeId: number;
@@ -23996,7 +25183,11 @@ declare module Laya {
          * @param onProgress 进度回调函数。
          * @return 根据url类型不同分为2种情况：1. url为String或ILoadURL类型，也就是单个资源地址，如果加载成功，则回调参数值为加载完成的资源，否则为null；2. url为数组类型，则返回一个数组，数组每个元素为加载完成的资源或null。
          */
-        load(url: string | ILoadURL | (string | Readonly<ILoadURL>)[], type?: string, onProgress?: ProgressCallback): Promise<any>;
+        load(
+            url: string | ILoadURL | (string | Readonly<ILoadURL>)[],
+            type?: string,
+            onProgress?: ProgressCallback
+        ): Promise<any>;
         /**
          * <p>加载资源。</p>
          * @param url 要加载的资源地址或资源地址数组。
@@ -24004,7 +25195,11 @@ declare module Laya {
          * @param onProgress 进度回调函数。
          * @return 根据url类型不同分为2种情况：1. url为String或ILoadURL类型，也就是单个资源地址，如果加载成功，则回调参数值为加载完成的资源，否则为null；2. url为数组类型，则返回一个数组，数组每个元素为加载完成的资源或null。
          */
-        load(url: string | ILoadURL | (string | Readonly<ILoadURL>)[], options?: Readonly<ILoadOptions>, onProgress?: ProgressCallback): Promise<any>;
+        load(
+            url: string | ILoadURL | (string | Readonly<ILoadURL>)[],
+            options?: Readonly<ILoadOptions>,
+            onProgress?: ProgressCallback
+        ): Promise<any>;
         /**
          * <p>这是兼容2.0引擎的加载接口</p>
          * <p>加载资源。</p>
@@ -24019,14 +25214,29 @@ declare module Laya {
          * @param useWorkerLoader(default = false)是否使用worker加载（只针对IMAGE类型和ATLAS类型，并且浏览器支持的情况下生效）
          * @return Promise对象
          */
-        load(url: string | ILoadURL | (string | Readonly<ILoadURL>)[], complete?: Handler, progress?: Handler, type?: string, priority?: number, cache?: boolean, group?: string, ignoreCache?: boolean, useWorkerLoader?: boolean): Promise<any>;
+        load(
+            url: string | ILoadURL | (string | Readonly<ILoadURL>)[],
+            complete?: Handler,
+            progress?: Handler,
+            type?: string,
+            priority?: number,
+            cache?: boolean,
+            group?: string,
+            ignoreCache?: boolean,
+            useWorkerLoader?: boolean
+        ): Promise<any>;
         private _load1;
         private _load2;
         /**
          * 从指定URL下载。这是较为底层的下载资源的方法，它和load方法不同，不对返回的数据进行解析，也不会缓存下载的内容。
          * 成功则返回下载的数据，失败返回null。
          */
-        fetch<K extends keyof ContentTypeMap>(url: string, contentType: K, onProgress?: ProgressCallback, options?: Readonly<ILoadOptions>): Promise<ContentTypeMap[K]>;
+        fetch<K extends keyof ContentTypeMap>(
+            url: string,
+            contentType: K,
+            onProgress?: ProgressCallback,
+            options?: Readonly<ILoadOptions>
+        ): Promise<ContentTypeMap[K]>;
         private queueToDownload;
         private download;
         private completeItem;
@@ -24262,7 +25472,13 @@ declare module Laya {
          * @param isSecure  是否使用WebSocket安全协议wss，默认（false）使用普通协议ws
          * @see laya.utils.Byte
          */
-        constructor(host?: string | null, port?: number, byteClass?: new () => any, protocols?: any[] | null, isSecure?: boolean);
+        constructor(
+            host?: string | null,
+            port?: number,
+            byteClass?: new () => any,
+            protocols?: any[] | null,
+            isSecure?: boolean
+        );
         /**
          * <p>连接到指定的主机和端口。</p>
          * <p>连接成功派发 Event.OPEN 事件；连接失败派发 Event.ERROR 事件；连接被关闭派发 Event.CLOSE 事件；接收到数据派发 Event.MESSAGE 事件； 除了 Event.MESSAGE 事件参数为数据内容，其他事件参数都是原生的 HTML DOM Event 对象。</p>
@@ -24366,10 +25582,10 @@ declare module Laya {
         static normalize(url: string): string;
         static getResURLByUUID(url: string): string;
         /**
-        * 组合相对路径并格式化
-        * @param base
-        * @param path
-        */
+         * 组合相对路径并格式化
+         * @param base
+         * @param path
+         */
         static join(base: string, path: string): string;
         /**
          * 获取指定 URL 的文件夹路径（不包括文件名）。
@@ -24428,8 +25644,8 @@ declare module Laya {
         /**矩形高度*/
         private _height;
         /**
-        * 创建一个新的 <code>BoxCollider</code> 实例。
-        */
+         * 创建一个新的 <code>BoxCollider</code> 实例。
+         */
         constructor();
         /**@override */
         protected _setShapeData(shape: any): void;
@@ -24455,8 +25671,8 @@ declare module Laya {
         private _loop;
         constructor();
         /**
-        * @override
-        */
+         * @override
+         */
         protected _setShapeData(shape: any): void;
         /**
          * @deprecated
@@ -24480,8 +25696,8 @@ declare module Laya {
         private _radius;
         constructor();
         /**
-        * @override
-        */
+         * @override
+         */
         protected _setShapeData(shape: any): void;
         /**圆形半径，必须为正数*/
         get radius(): number;
@@ -24555,7 +25771,7 @@ declare module Laya {
         CircleShape = 1,
         PolygonShape = 2,
         ChainShape = 3,
-        EdgeShape = 4
+        EdgeShape = 4,
     }
     class FixtureBox2DDef {
         density: number;
@@ -24605,8 +25821,8 @@ declare module Laya {
         constructor();
         onAdded(): void;
         /**
-        * @override
-        */
+         * @override
+         */
         protected _setShapeData(shape: any): void;
         /**
          * @deprecated
@@ -24658,10 +25874,10 @@ declare module Laya {
          */
         removeBody(body: any): void;
         /**
-        * create Box2D Joint
-        * @param def
-        * @returns
-        */
+         * create Box2D Joint
+         * @param def
+         * @returns
+         */
         createJoint(def: any, cls?: any): any;
         /**
          * Remove Box2D Joint
@@ -24708,7 +25924,12 @@ declare module Laya {
          * @param dampingRatio
          * @param isdamping
          */
-        set_Joint_frequencyAndDampingRatio(Joint: any, frequency: number, dampingRatio: number, isdamping: boolean): void;
+        set_Joint_frequencyAndDampingRatio(
+            Joint: any,
+            frequency: number,
+            dampingRatio: number,
+            isdamping: boolean
+        ): void;
         /**
          * @param defStruct
          * @returns
@@ -24776,7 +25997,11 @@ declare module Laya {
          * @param frequency
          * @param dampingRatio
          */
-        set_MouseJoint_frequencyAndDampingRatio(Joint: any, frequency: number, dampingRatio: number): void;
+        set_MouseJoint_frequencyAndDampingRatio(
+            Joint: any,
+            frequency: number,
+            dampingRatio: number
+        ): void;
         /**
          * @param defStruct
          * @returns
@@ -24829,7 +26054,14 @@ declare module Laya {
          * @param pos
          *
          */
-        set_collider_SetAsBox(shape: any, width: number, height: number, pos: IV2, scaleX: number, scaleY: number): void;
+        set_collider_SetAsBox(
+            shape: any,
+            width: number,
+            height: number,
+            pos: IV2,
+            scaleX: number,
+            scaleY: number
+        ): void;
         /**
          * @returns
          */
@@ -24841,7 +26073,15 @@ declare module Laya {
          * @param arr
          * @param loop
          */
-        set_ChainShape_data(shape: any, x: number, y: number, arr: number[], loop: boolean, scaleX: number, scaleY: number): void;
+        set_ChainShape_data(
+            shape: any,
+            x: number,
+            y: number,
+            arr: number[],
+            loop: boolean,
+            scaleX: number,
+            scaleY: number
+        ): void;
         /**
          * @returns
          */
@@ -24867,18 +26107,32 @@ declare module Laya {
          * @param y
          * @param arr
          */
-        set_EdgeShape_data(shape: any, x: number, y: number, arr: number[], scaleX: number, scaleY: number): void;
+        set_EdgeShape_data(
+            shape: any,
+            x: number,
+            y: number,
+            arr: number[],
+            scaleX: number,
+            scaleY: number
+        ): void;
         /**
          * @returns
          */
         create_PolygonShape(): any;
         /**
-        * @param shape
-        * @param x
-        * @param y
-        * @param arr
-        */
-        set_PolygonShape_data(shape: any, x: number, y: number, arr: number[], scaleX: number, scaleY: number): void;
+         * @param shape
+         * @param x
+         * @param y
+         * @param arr
+         */
+        set_PolygonShape_data(
+            shape: any,
+            x: number,
+            y: number,
+            arr: number[],
+            scaleX: number,
+            scaleY: number
+        ): void;
         /**
          * create fixture descript
          * @param fixtureDef
@@ -24901,10 +26155,10 @@ declare module Laya {
          */
         set_fixtureDef_maskBits(def: any, maskbits: number): void;
         /**
-        * create fixture by body and def
-        * @param body
-        * @param def
-        */
+         * create fixture by body and def
+         * @param body
+         * @param def
+         */
         createfixture(body: any, fixtureDef: any): any;
         /**
          * @param fixture
@@ -24977,9 +26231,9 @@ declare module Laya {
          */
         rigidbody_ApplyLinearImpulseToCenter(body: any, impulse: IV2): void;
         /**
-        * 对刚体施加扭矩，使其旋转
-        * @param	torque	施加的扭矩
-        */
+         * 对刚体施加扭矩，使其旋转
+         * @param	torque	施加的扭矩
+         */
         rigidbody_applyTorque(body: any, torque: number): void;
         /**
          * 设置速度，比如{x:10,y:10}
@@ -25069,12 +26323,11 @@ declare module Laya {
          */
         set_rigidBody_bullet(body: any, value: boolean): void;
         /**
-        * @param body
-        */
+         * @param body
+         */
         retSet_rigidBody_MassData(body: any): void;
     }
-    interface IPhysiscs2DFactory {
-    }
+    interface IPhysiscs2DFactory {}
     /**
      * 距离关节：两个物体上面各自有一点，两点之间的距离固定不变
      */
@@ -25617,17 +26870,17 @@ declare module Laya {
          */
         set drawAABB(enable: boolean);
         /**
-        * 是否绘制Pair
-        */
+         * 是否绘制Pair
+         */
         set drawPair(enable: boolean);
         /**
-        * 是否绘制CenterOfMass
-        */
+         * 是否绘制CenterOfMass
+         */
         set drawCenterOfMass(enable: boolean);
         enable(): Promise<void>;
         /**
-        * 销毁当前物理世界
-        */
+         * 销毁当前物理世界
+         */
         destroyWorld(): void;
         /**
          * 开启物理世界
@@ -25647,9 +26900,9 @@ declare module Laya {
         get allowSleeping(): boolean;
         set allowSleeping(value: boolean);
         /**
-        * 物理世界重力环境，默认值为{x:0,y:10}
-        * 如果修改y方向重力方向向上，可以直接设置gravity.y=-10;
-        */
+         * 物理世界重力环境，默认值为{x:0,y:10}
+         * 如果修改y方向重力方向向上，可以直接设置gravity.y=-10;
+         */
         get gravity(): any;
         set gravity(value: Vector2);
         /**获得刚体总数量*/
@@ -25690,7 +26943,7 @@ declare module Laya {
         constructor(factory: IPhysiscs2DFactory);
         /**@private
          * @override
-        */
+         */
         render(ctx: Context, x: number, y: number): void;
         /**@private */
         private _renderToGraphic;
@@ -25888,13 +27141,13 @@ declare module Laya {
          * 获得相对body的世界坐标
          * @param x (单位： 像素)
          * @param y (单位： 像素)
-        */
+         */
         GetWorldPoint(x: number, y: number): Point;
         /**
          * 获得相对body的本地坐标
          * @param x (单位： 像素)
          * @param y (单位： 像素)
-        */
+         */
         GetLocalPoint(x: number, y: number): Point;
     }
     class RigidBody2DInfo {
@@ -26028,8 +27281,20 @@ declare module Laya {
         addJoint(joint: btJoint): void;
         removeJoint(joint: btJoint): void;
         update(elapsedTime: number): void;
-        rayCast(ray: Ray, outHitResult: HitResult, distance?: number, collisonGroup?: number, collisionMask?: number): boolean;
-        rayCastAll(ray: Ray, out: HitResult[], distance?: number, collisonGroup?: number, collisionMask?: number): boolean;
+        rayCast(
+            ray: Ray,
+            outHitResult: HitResult,
+            distance?: number,
+            collisonGroup?: number,
+            collisionMask?: number
+        ): boolean;
+        rayCastAll(
+            ray: Ray,
+            out: HitResult[],
+            distance?: number,
+            collisonGroup?: number,
+            collisionMask?: number
+        ): boolean;
         destroy(): void;
     }
     class btCharacterCollider extends btCollider implements ICharacterController {
@@ -26071,7 +27336,7 @@ declare module Laya {
     enum btColliderType {
         RigidbodyCollider = 0,
         CharactorCollider = 1,
-        StaticCollider = 2
+        StaticCollider = 2,
     }
     class btCollider implements ICollider {
         static _colliderID: number;
@@ -26122,8 +27387,8 @@ declare module Laya {
         sleep(): void;
         protected getColliderType(): btColliderType;
         /**
-        * 是否重载重力。
-        */
+         * 是否重载重力。
+         */
         private _setoverrideGravity;
         /**
          * 是否处于睡眠状态。
@@ -26159,9 +27424,9 @@ declare module Laya {
          */
         private _applyForce;
         /**
-       * 应用扭转力。
-       * @param	torque 扭转力。
-       */
+         * 应用扭转力。
+         * @param	torque 扭转力。
+         */
         private _applyTorque;
         /**
          * 应用冲量。
@@ -26212,10 +27477,38 @@ declare module Laya {
         setConnectLocalPos(pos: Vector3): void;
         setAxis(axis: Vector3, secendary: Vector3): void;
         setMotion(axis: D6Axis, motionType: D6MotionType): void;
-        setDistanceLimit(limit: number, bounceness: number, bounceThreshold: number, spring: number, damp: number): void;
-        setLinearLimit(linearAxis: D6MotionType, upper: number, lower: number, bounceness: number, bounceThreshold: number, spring: number, damping: number): void;
-        setTwistLimit(upper: number, lower: number, bounceness: number, bounceThreshold: number, spring: number, damping: number): void;
-        setSwingLimit(yAngle: number, zAngle: number, bounceness: number, bounceThreshold: number, spring: number, damping: number): void;
+        setDistanceLimit(
+            limit: number,
+            bounceness: number,
+            bounceThreshold: number,
+            spring: number,
+            damp: number
+        ): void;
+        setLinearLimit(
+            linearAxis: D6MotionType,
+            upper: number,
+            lower: number,
+            bounceness: number,
+            bounceThreshold: number,
+            spring: number,
+            damping: number
+        ): void;
+        setTwistLimit(
+            upper: number,
+            lower: number,
+            bounceness: number,
+            bounceThreshold: number,
+            spring: number,
+            damping: number
+        ): void;
+        setSwingLimit(
+            yAngle: number,
+            zAngle: number,
+            bounceness: number,
+            bounceThreshold: number,
+            spring: number,
+            damping: number
+        ): void;
         setDrive(index: D6Drive, stiffness: number, damping: number, forceLimit: number): void;
         setDriveTransform(position: Vector3, rotate: Quaternion): void;
         setDriveVelocity(position: Vector3, angular: Vector3): void;
@@ -26245,7 +27538,12 @@ declare module Laya {
         getAngle(): number;
         getVelocity(): Readonly<Vector3>;
         setHardLimit(lowerLimit: number, upperLimit: number, contactDist: number): void;
-        setSoftLimit(lowerLimit: number, upperLimit: number, stiffness: number, damping: number): void;
+        setSoftLimit(
+            lowerLimit: number,
+            upperLimit: number,
+            stiffness: number,
+            damping: number
+        ): void;
         setDriveVelocity(velocity: number): void;
         setDriveForceLimit(limit: number): void;
         setDriveGearRatio(ratio: number): void;
@@ -26414,7 +27712,7 @@ declare module Laya {
         private _convex;
         /**
          * 网格
-        */
+         */
         get mesh(): Mesh;
         set mesh(value: Mesh);
         static __init__(): void;
@@ -26733,9 +28031,9 @@ declare module Laya {
     }
     interface IPhysicsManager {
         /**
-        * Set gravity.
-        * @param gravity - Physics gravity
-        */
+         * Set gravity.
+         * @param gravity - Physics gravity
+         */
         setGravity(gravity: Vector3): void;
         /**
          * Add ICollider into the manager.
@@ -26760,7 +28058,13 @@ declare module Laya {
          * @param collisonGroup
          * @param collisionMask
          */
-        rayCast?(ray: Ray, outHitResult: HitResult, distance?: number, collisonGroup?: number, collisionMask?: number): boolean;
+        rayCast?(
+            ray: Ray,
+            outHitResult: HitResult,
+            distance?: number,
+            collisonGroup?: number,
+            collisionMask?: number
+        ): boolean;
         /**
          * ray cast all collision
          * @param ray
@@ -26769,7 +28073,13 @@ declare module Laya {
          * @param collisonGroup
          * @param collisionMask
          */
-        rayCastAll?(ray: Ray, out: HitResult[], distance?: number, collisonGroup?: number, collisionMask?: number): boolean;
+        rayCastAll?(
+            ray: Ray,
+            out: HitResult[],
+            distance?: number,
+            collisonGroup?: number,
+            collisionMask?: number
+        ): boolean;
         /**
          * debugger
          * @param value
@@ -26782,7 +28092,12 @@ declare module Laya {
          * @param result
          * @param collisionmask
          */
-        sphereQuery?(pos: Vector3, radius: number, result: ICollider[], collisionmask: number): void;
+        sphereQuery?(
+            pos: Vector3,
+            radius: number,
+            result: ICollider[],
+            collisionmask: number
+        ): void;
         /**
          * destroy
          */
@@ -26826,20 +28141,19 @@ declare module Laya {
          */
         setTrigger(value: boolean): void;
     }
-    interface ICustomJoint extends IJoint {
-    }
+    interface ICustomJoint extends IJoint {}
     enum D6MotionType {
         eX = 0,
         eY = 1,
         eZ = 2,
         eTWIST = 3,
         eSWING1 = 4,
-        eSWING2 = 5
+        eSWING2 = 5,
     }
     enum D6Axis {
         eLOCKED = 0,
         eLIMITED = 1,
-        eFREE = 2
+        eFREE = 2,
     }
     enum D6Drive {
         eX = 0,
@@ -26847,15 +28161,43 @@ declare module Laya {
         eZ = 2,
         eSWING = 3,
         eTWIST = 4,
-        eSLERP = 5
+        eSLERP = 5,
     }
     interface ID6Joint extends IJoint {
         setAxis(axis: Vector3, secendary: Vector3): void;
         setMotion(axis: D6Axis, motionType: D6MotionType): void;
-        setDistanceLimit(limit: number, bounceness: number, bounceThreshold: number, spring: number, damp: number): void;
-        setLinearLimit(linearAxis: D6MotionType, upper: number, lower: number, bounceness: number, bounceThreshold: number, spring: number, damping: number): void;
-        setTwistLimit(upper: number, lower: number, bounceness: number, bounceThreshold: number, spring: number, damping: number): void;
-        setSwingLimit(yAngle: number, zAngle: number, bounceness: number, bounceThreshold: number, spring: number, damping: number): void;
+        setDistanceLimit(
+            limit: number,
+            bounceness: number,
+            bounceThreshold: number,
+            spring: number,
+            damp: number
+        ): void;
+        setLinearLimit(
+            linearAxis: D6MotionType,
+            upper: number,
+            lower: number,
+            bounceness: number,
+            bounceThreshold: number,
+            spring: number,
+            damping: number
+        ): void;
+        setTwistLimit(
+            upper: number,
+            lower: number,
+            bounceness: number,
+            bounceThreshold: number,
+            spring: number,
+            damping: number
+        ): void;
+        setSwingLimit(
+            yAngle: number,
+            zAngle: number,
+            bounceness: number,
+            bounceThreshold: number,
+            spring: number,
+            damping: number
+        ): void;
         setDrive(index: D6Drive, stiffness: number, damping: number, forceLimit: number): void;
         setDriveTransform(position: Vector3, rotate: Quaternion): void;
         setDriveVelocity(position: Vector3, angular: Vector3): void;
@@ -26863,8 +28205,7 @@ declare module Laya {
         getSwingYAngle(): number;
         getSwingZAngle(): number;
     }
-    interface IFixedJoint extends IJoint {
-    }
+    interface IFixedJoint extends IJoint {}
     interface IHingeJoint extends IJoint {
         /**
          * The anchor rotation.
@@ -27015,9 +28356,9 @@ declare module Laya {
     }
     interface IBoxColliderShape extends IColliderShape {
         /**
-          * Set size of Box Shape.
-          * @param size - The size
-          */
+         * Set size of Box Shape.
+         * @param size - The size
+         */
         setSize(size: Vector3): void;
     }
     interface ICapsuleColliderShape extends IColliderShape {
@@ -27048,13 +28389,12 @@ declare module Laya {
          */
         destroy(): void;
     }
-    interface ICompoundColliderShape {
-    }
+    interface ICompoundColliderShape {}
     interface IConeColliderShape extends IColliderShape {
         /**
-        * Set radius of capsule.
-        * @param radius - The radius
-        */
+         * Set radius of capsule.
+         * @param radius - The radius
+         */
         setRadius(radius: number): void;
         /**
          * Set height of capsule.
@@ -27069,9 +28409,9 @@ declare module Laya {
     }
     interface ICylinderColliderShape extends IColliderShape {
         /**
-        * Set radius of capsule.
-        * @param radius - The radius
-        */
+         * Set radius of capsule.
+         * @param radius - The radius
+         */
         setRadius(radius: number): void;
         /**
          * Set height of capsule.
@@ -27092,7 +28432,13 @@ declare module Laya {
          * @param heightData
          * @param _scale
          */
-        setHeightFieldData(numRows: number, numCols: number, heightData: Float32Array, flag: Uint8Array, scale: Vector3): void;
+        setHeightFieldData(
+            numRows: number,
+            numCols: number,
+            heightData: Float32Array,
+            flag: Uint8Array,
+            scale: Vector3
+        ): void;
         /**
          * NBRows
          */
@@ -27125,8 +28471,7 @@ declare module Laya {
          */
         setLimitVertex(limit: number): void;
     }
-    interface IPlaneColliderShape extends IColliderShape {
-    }
+    interface IPlaneColliderShape extends IColliderShape {}
     interface ISphereColliderShape extends IColliderShape {
         /**
          * Set radius of sphere.
@@ -27151,7 +28496,7 @@ declare module Laya {
         Character_Skin = 13,
         Character_minDistance = 14,
         Character_EventFilter = 15,
-        Character_SimulateGravity = 16
+        Character_SimulateGravity = 16,
     }
     enum EColliderCapable {
         Collider_CollisionGroup = 0,
@@ -27192,11 +28537,11 @@ declare module Laya {
         RigidBody_ApplyForceWithOffset = 35,
         RigidBody_ApplyTorque = 36,
         RigidBody_ApplyImpulse = 37,
-        RigidBody_ApplyTorqueImpulse = 38
+        RigidBody_ApplyTorqueImpulse = 38,
     }
     enum EJointCapable {
         Joint_Anchor = 0,
-        Joint_ConnectAnchor = 1
+        Joint_ConnectAnchor = 1,
     }
     enum EPhysicsCapable {
         Physics_Gravity = 0,
@@ -27216,16 +28561,16 @@ declare module Laya {
         Physics_FixedJoint = 14,
         Physics_SpringJoint = 15,
         Physics_HingeJoint = 16,
-        Physics_D6Joint = 17
+        Physics_D6Joint = 17,
     }
     enum ControllerNonWalkableMode {
         ePREVENT_CLIMBING = 0,
-        ePREVENT_CLIMBING_AND_FORCE_SLIDING = 1
+        ePREVENT_CLIMBING_AND_FORCE_SLIDING = 1,
     }
     enum ECharacterCollisionFlag {
         eCOLLISION_SIDES = 1,
         eCOLLISION_UP = 2,
-        eCOLLISION_DOWN = 4
+        eCOLLISION_DOWN = 4,
     }
     class pxCharactorCollider extends pxCollider implements ICharacterController {
         static tempV3: Vector3;
@@ -27268,8 +28613,7 @@ declare module Laya {
         setRadius(value: number): void;
         setminDistance(value: number): void;
         setNonWalkableMode(value: ControllerNonWalkableMode): void;
-        setEventFilter(events: [
-        ]): void;
+        setEventFilter(events: []): void;
         release(): void;
     }
     /**
@@ -27278,7 +28622,7 @@ declare module Laya {
     enum pxColliderType {
         RigidbodyCollider = 0,
         CharactorCollider = 1,
-        StaticCollider = 2
+        StaticCollider = 2,
     }
     /**
      *physX actor flag
@@ -27287,7 +28631,7 @@ declare module Laya {
         eVISUALIZATION = 1,
         eDISABLE_GRAVITY = 2,
         eSEND_SLEEP_NOTIFIES = 4,
-        eDISABLE_SIMULATION = 8
+        eDISABLE_SIMULATION = 8,
     }
     class pxCollider implements ICollider {
         /**temp tranform object */
@@ -27322,8 +28666,7 @@ declare module Laya {
         destroy(): void;
         setCollisionGroup(value: number): void;
         setCanCollideWith(value: number): void;
-        setEventFilter(events: [
-        ]): void;
+        setEventFilter(events: []): void;
         setOwner(node: Sprite3D): void;
         protected _initCollider(): void;
         transformChanged(flag: number): void;
@@ -27348,7 +28691,7 @@ declare module Laya {
         /** Continuous collision detection is on for colliding with static and dynamic geometry. */
         ContinuousDynamic = 2,
         /** Speculative continuous collision detection is on for static and dynamic geometries */
-        ContinuousSpeculative = 3
+        ContinuousSpeculative = 3,
     }
     /**
      * Use these flags to constrain motion of dynamic collider.
@@ -27367,7 +28710,7 @@ declare module Laya {
         /** Freeze rotation along the Y-axis. */
         FreezeRotationY = 16,
         /** Freeze rotation along the Z-axis. */
-        FreezeRotationZ = 32
+        FreezeRotationZ = 32,
     }
     class pxDynamicCollider extends pxCollider implements IDynamicCollider {
         static getStaticColliderCapable(value: EColliderCapable): boolean;
@@ -27414,7 +28757,7 @@ declare module Laya {
         protected _initColliderShapeByCollider(): void;
     }
     enum PxD6JointDriveFlag {
-        eACCELERATION = 1
+        eACCELERATION = 1,
     }
     class pxD6Joint extends pxJoint implements ID6Joint {
         /**
@@ -27447,7 +28790,13 @@ declare module Laya {
          * @param spring
          * @param damp
          */
-        setDistanceLimit(limit: number, bounceness: number, bounceThreshold: number, spring: number, damp: number): void;
+        setDistanceLimit(
+            limit: number,
+            bounceness: number,
+            bounceThreshold: number,
+            spring: number,
+            damp: number
+        ): void;
         /**
          *
          * @param linearAxis
@@ -27458,7 +28807,15 @@ declare module Laya {
          * @param spring
          * @param damping
          */
-        setLinearLimit(linearAxis: D6MotionType, upper: number, lower: number, bounceness: number, bounceThreshold: number, spring: number, damping: number): void;
+        setLinearLimit(
+            linearAxis: D6MotionType,
+            upper: number,
+            lower: number,
+            bounceness: number,
+            bounceThreshold: number,
+            spring: number,
+            damping: number
+        ): void;
         /**
          *
          * @param upper
@@ -27468,7 +28825,14 @@ declare module Laya {
          * @param spring
          * @param damping
          */
-        setTwistLimit(upper: number, lower: number, bounceness: number, bounceThreshold: number, spring: number, damping: number): void;
+        setTwistLimit(
+            upper: number,
+            lower: number,
+            bounceness: number,
+            bounceThreshold: number,
+            spring: number,
+            damping: number
+        ): void;
         /**
          *
          * @param yAngle
@@ -27478,7 +28842,14 @@ declare module Laya {
          * @param spring
          * @param damping
          */
-        setSwingLimit(yAngle: number, zAngle: number, bounceness: number, bounceThreshold: number, spring: number, damping: number): void;
+        setSwingLimit(
+            yAngle: number,
+            zAngle: number,
+            bounceness: number,
+            bounceThreshold: number,
+            spring: number,
+            damping: number
+        ): void;
         /**
          *
          * @param index
@@ -27573,7 +28944,7 @@ declare module Laya {
         eENABLE_EXTENDED_LIMITS = 512,
         eGPU_COMPATIBLE = 1024,
         eALWAYS_UPDATE = 2048,
-        eDISABLE_CONSTRAINT = 4096
+        eDISABLE_CONSTRAINT = 4096,
     }
     class pxJoint implements IJoint {
         /**@interanl */
@@ -27589,7 +28960,7 @@ declare module Laya {
     enum PxRevoluteJointFlag {
         eLIMIT_ENABLED = 1,
         eDRIVE_ENABLED = 2,
-        eDRIVE_FREESPIN = 4
+        eDRIVE_FREESPIN = 4,
     }
     class pxRevoluteJoint extends pxJoint implements IHingeJoint {
         /**
@@ -27597,8 +28968,7 @@ declare module Laya {
          */
         protected _createJoint(): void;
     }
-    class pxSphereJoint extends pxJoint {
-    }
+    class pxSphereJoint extends pxJoint {}
     /**
      * 实现PhysX碰撞数据内容
      */
@@ -27692,7 +29062,7 @@ declare module Laya {
         eCONTACT_EVENT_POSE = 16384,
         eNEXT_FREE = 32768,
         eCONTACT_DEFAULT = 1025,
-        eTRIGGER_DEFAULT = 1044
+        eTRIGGER_DEFAULT = 1044,
     }
     class pxPhysicsManager implements IPhysicsManager {
         _dynamicUpdateList: PhysicsUpdateList;
@@ -27715,9 +29085,26 @@ declare module Laya {
         private _updatePhysicsTransformToRender;
         private functiontest;
         update(elapsedTime: number): void;
-        rayCast(ray: Ray, outHitResult: HitResult, distance?: number, collisonGroup?: number, collisionMask?: number): boolean;
-        rayCastAll?(ray: Ray, out: HitResult[], distance?: number, collisonGroup?: number, collisionMask?: number): boolean;
-        sphereQuery?(pos: Vector3, radius: number, result: ICollider[], collisionmask: number): void;
+        rayCast(
+            ray: Ray,
+            outHitResult: HitResult,
+            distance?: number,
+            collisonGroup?: number,
+            collisionMask?: number
+        ): boolean;
+        rayCastAll?(
+            ray: Ray,
+            out: HitResult[],
+            distance?: number,
+            collisonGroup?: number,
+            collisionMask?: number
+        ): boolean;
+        sphereQuery?(
+            pos: Vector3,
+            radius: number,
+            result: ICollider[],
+            collisionmask: number
+        ): void;
         destroy(): void;
     }
     class pxPhysicsMaterial {
@@ -27762,7 +29149,7 @@ declare module Laya {
         /** The shape will partake in scene queries (ray casts, overlap tests, sweeps, ...). */
         SCENE_QUERY_SHAPE = 2,
         /** The shape is a trigger which can send reports whenever other shapes enter/leave its volume. */
-        TRIGGER_SHAPE = 4
+        TRIGGER_SHAPE = 4,
     }
     interface pxFilterData {
         word0?: number;
@@ -27823,7 +29210,13 @@ declare module Laya {
          * @param flag
          * @param scale
          */
-        setHeightFieldData(numRows: number, numCols: number, heightData: Float32Array, flag: Uint8Array, scale: Vector3): void;
+        setHeightFieldData(
+            numRows: number,
+            numCols: number,
+            heightData: Float32Array,
+            flag: Uint8Array,
+            scale: Vector3
+        ): void;
         /**
          * get rows number
          * @returns
@@ -27851,14 +29244,14 @@ declare module Laya {
         ePLANE_SHIFTING = 32,
         eFAST_INERTIA_COMPUTATION = 64,
         eGPU_COMPATIBLE = 128,
-        eSHIFT_VERTICES = 256
+        eSHIFT_VERTICES = 256,
     }
     enum PxConvexMeshGeometryFlag {
-        eTIGHT_BOUNDS = 1
+        eTIGHT_BOUNDS = 1,
     }
     enum PxMeshGeometryFlag {
         eTIGHT_BOUNDS = 1,
-        eDOUBLE_SIDED = 2
+        eDOUBLE_SIDED = 2,
     }
     class pxMeshColliderShape extends pxColliderShape implements IMeshColliderShape {
         private _limitvertex;
@@ -27890,7 +29283,11 @@ declare module Laya {
     class BlendState {
         static _blend_All_pool: any;
         static _blend_seperate_pool: any;
-        static create(blendType: number, colorBlendhash: BlendComponent, alphaBlendComponent: BlendComponent): void;
+        static create(
+            blendType: number,
+            colorBlendhash: BlendComponent,
+            alphaBlendComponent: BlendComponent
+        ): void;
         /** Whether to enable blend. */
         blendType: BlendType;
         colorBlendComponent: BlendComponent;
@@ -27899,8 +29296,16 @@ declare module Laya {
     }
     class BlendComponent {
         static _pool: any;
-        static getHash(blendOperationGLData: number, sourceBlendFactor: number, destinationFactor: number): number;
-        static getBlendComponent(blendOperationGLData: number, sourceBlendFactor: number, destinationFactor: number): any;
+        static getHash(
+            blendOperationGLData: number,
+            sourceBlendFactor: number,
+            destinationFactor: number
+        ): number;
+        static getBlendComponent(
+            blendOperationGLData: number,
+            sourceBlendFactor: number,
+            destinationFactor: number
+        ): any;
         _blendOperation: BlendEquationSeparate;
         _blendOperationGLData: number;
         _sourceBlendFactor: BlendFactor;
@@ -27908,7 +29313,12 @@ declare module Laya {
         _destinationFactor: BlendFactor;
         _destinationFactorGLData: number;
         _hashIndex: number;
-        constructor(blendOperationGLData: BlendEquationSeparate, sourceBlendFactor: BlendFactor, destinationFactor: BlendFactor, hashindex: number);
+        constructor(
+            blendOperationGLData: BlendEquationSeparate,
+            sourceBlendFactor: BlendFactor,
+            destinationFactor: BlendFactor,
+            hashindex: number
+        );
     }
     class Buffer {
         _glBuffer: IRenderBuffer;
@@ -27950,7 +29360,11 @@ declare module Laya {
          * @param propertyID
          * @param propertyKey
          */
-        addShaderBlockUniform(propertyID: number, blockname: string, blockProperty: UniformProperty[]): void;
+        addShaderBlockUniform(
+            propertyID: number,
+            blockname: string,
+            blockProperty: UniformProperty[]
+        ): void;
     }
     /**
      * dds 未存储 color space 需要手动指定
@@ -27966,11 +29380,21 @@ declare module Laya {
         compressed: boolean;
         dataOffset: number;
         source: ArrayBuffer;
-        constructor(width: number, height: number, mipmapCount: number, isCube: boolean, bpp: number, blockBytes: number, dataOffset: number, format: TextureFormat, compressed: boolean, sourceData: ArrayBuffer);
+        constructor(
+            width: number,
+            height: number,
+            mipmapCount: number,
+            isCube: boolean,
+            bpp: number,
+            blockBytes: number,
+            dataOffset: number,
+            format: TextureFormat,
+            compressed: boolean,
+            sourceData: ArrayBuffer
+        );
         static getDDSTextureInfo(source: ArrayBuffer): DDSTextureInfo;
     }
-    class DepthState {
-    }
+    class DepthState {}
     /**
      * https://floyd.lbl.gov/radiance/framer.html
      */
@@ -27983,21 +29407,40 @@ declare module Laya {
         height: number;
         format: TextureFormat;
         static HDRTEXTURE: string;
-        static _parseHDRTexture(data: ArrayBuffer, propertyParams?: any, constructParams?: any[]): Texture2D;
+        static _parseHDRTexture(
+            data: ArrayBuffer,
+            propertyParams?: any,
+            constructParams?: any[]
+        ): Texture2D;
         /**
          *
          * @param source
          */
         static getHDRInfo(source: ArrayBuffer): HDRTextureInfo;
         private static getLineString;
-        constructor(source: ArrayBuffer, byteOffset: number, decreaseX: boolean, decreaseY: boolean, width: number, height: number, format: TextureFormat);
+        constructor(
+            source: ArrayBuffer,
+            byteOffset: number,
+            decreaseX: boolean,
+            decreaseY: boolean,
+            width: number,
+            height: number,
+            format: TextureFormat
+        );
         get_32_bit_rle_rgbe(): ArrayBufferView;
         /**
          * https://www.radiance-online.org/archived/radsite/radiance/refer/Notes/picture_format.html
          */
         readScanLine(): ArrayBufferView;
         readcolors(scanlineArray: Uint8Array, getc: () => number, wrong: () => void): void;
-        olddreadcolors(scanlineArray: Uint8Array, getc: () => number, r: number, g: number, b: number, e: number): void;
+        olddreadcolors(
+            scanlineArray: Uint8Array,
+            getc: () => number,
+            r: number,
+            g: number,
+            b: number,
+            e: number
+        ): void;
         color_color(col: Vector4, clr: Vector4): void;
     }
     class IndexBuffer extends Buffer {
@@ -28020,13 +29463,29 @@ declare module Laya {
         mipmapCount: number;
         bytesOfKeyValueData: number;
         headerOffset: number;
-        static getLayaFormat(glFormat: number, glInternalFormat: number, glType: number, glTypeSize: number): {
+        static getLayaFormat(
+            glFormat: number,
+            glInternalFormat: number,
+            glType: number,
+            glTypeSize: number
+        ): {
             format: TextureFormat;
             sRGB: boolean;
         };
         static getKTXTextureInfo(source: ArrayBuffer): KTXTextureInfo;
         static createKTX1Info(source: ArrayBuffer): KTXTextureInfo;
-        constructor(source: ArrayBuffer, compress: boolean, sRGB: boolean, dimension: TextureDimension, width: number, height: number, format: TextureFormat, mipmapCount: number, bytesOfKeyValueData: number, headerOffset: number);
+        constructor(
+            source: ArrayBuffer,
+            compress: boolean,
+            sRGB: boolean,
+            dimension: TextureDimension,
+            width: number,
+            height: number,
+            format: TextureFormat,
+            mipmapCount: number,
+            bytesOfKeyValueData: number,
+            headerOffset: number
+        );
     }
     /**
      * 共享内存分配,并且绑定Native共享Buffer
@@ -28058,7 +29517,7 @@ declare module Laya {
         TextureData = 1,
         VertexData = 2,
         IndexData = 3,
-        BaseRenderData = 4
+        BaseRenderData = 4,
     }
     class NativeMemory {
         static NativeSourceID: number;
@@ -28205,14 +29664,28 @@ declare module Laya {
     class NativeGLRenderDrawContext extends NativeGLObject implements IRenderDrawContext {
         _nativeObj: any;
         constructor(engine: NativeWebGLEngine);
-        drawElements2DTemp(mode: MeshTopology, count: number, type: IndexFormat, offset: number): void;
+        drawElements2DTemp(
+            mode: MeshTopology,
+            count: number,
+            type: IndexFormat,
+            offset: number
+        ): void;
     }
     class NativeGLRenderEngineFactory implements IRenderEngineFactory {
         createShaderData(): ShaderData;
-        createShaderInstance(shaderProcessInfo: ShaderProcessInfo, shaderPass: ShaderCompileDefineBase): ShaderInstance;
+        createShaderInstance(
+            shaderProcessInfo: ShaderProcessInfo,
+            shaderPass: ShaderCompileDefineBase
+        ): ShaderInstance;
         createRenderStateComand(): NativeRenderStateCommand;
         createRenderState(): RenderState;
-        createUniformBufferObject(glPointer: number, name: string, bufferUsage: BufferUsage, byteLength: number, isSingle: boolean): UniformBufferObject;
+        createUniformBufferObject(
+            glPointer: number,
+            name: string,
+            bufferUsage: BufferUsage,
+            byteLength: number,
+            isSingle: boolean
+        ): UniformBufferObject;
         createGlobalUniformMap(blockName: string): NativeCommandUniformMap;
         createEngine(config: any, canvas: any): Promise<void>;
     }
@@ -28220,35 +29693,168 @@ declare module Laya {
         needBitmap: boolean;
         protected _native: any;
         constructor(engine: NativeWebGLEngine, native: any);
-        createTextureInternal(dimension: TextureDimension, width: number, height: number, format: TextureFormat, generateMipmap: boolean, sRGB: boolean): InternalTexture;
-        setTextureImageData(texture: InternalTexture, source: HTMLImageElement | HTMLCanvasElement | ImageBitmap, premultiplyAlpha: boolean, invertY: boolean): void;
-        setTexturePixelsData(texture: InternalTexture, source: ArrayBufferView, premultiplyAlpha: boolean, invertY: boolean): void;
+        createTextureInternal(
+            dimension: TextureDimension,
+            width: number,
+            height: number,
+            format: TextureFormat,
+            generateMipmap: boolean,
+            sRGB: boolean
+        ): InternalTexture;
+        setTextureImageData(
+            texture: InternalTexture,
+            source: HTMLImageElement | HTMLCanvasElement | ImageBitmap,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
+        setTexturePixelsData(
+            texture: InternalTexture,
+            source: ArrayBufferView,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
         initVideoTextureData(texture: InternalTexture): void;
-        setTextureSubPixelsData(texture: InternalTexture, source: ArrayBufferView, mipmapLevel: number, generateMipmap: boolean, xOffset: number, yOffset: number, width: number, height: number, premultiplyAlpha: boolean, invertY: boolean): void;
-        setTextureSubImageData(texture: InternalTexture, source: HTMLImageElement | HTMLCanvasElement | ImageBitmap, x: number, y: number, premultiplyAlpha: boolean, invertY: boolean): void;
-        setTexture3DImageData(texture: InternalTexture, source: HTMLImageElement[] | HTMLCanvasElement[] | ImageBitmap[], depth: number, premultiplyAlpha: boolean, invertY: boolean): void;
-        setTexture3DPixlesData(texture: InternalTexture, source: ArrayBufferView, depth: number, premultiplyAlpha: boolean, invertY: boolean): void;
-        setTexture3DSubPixelsData(texture: InternalTexture, source: ArrayBufferView, mipmapLevel: number, generateMipmap: boolean, xOffset: number, yOffset: number, zOffset: number, width: number, height: number, depth: number, premultiplyAlpha: boolean, invertY: boolean): void;
+        setTextureSubPixelsData(
+            texture: InternalTexture,
+            source: ArrayBufferView,
+            mipmapLevel: number,
+            generateMipmap: boolean,
+            xOffset: number,
+            yOffset: number,
+            width: number,
+            height: number,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
+        setTextureSubImageData(
+            texture: InternalTexture,
+            source: HTMLImageElement | HTMLCanvasElement | ImageBitmap,
+            x: number,
+            y: number,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
+        setTexture3DImageData(
+            texture: InternalTexture,
+            source: HTMLImageElement[] | HTMLCanvasElement[] | ImageBitmap[],
+            depth: number,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
+        setTexture3DPixlesData(
+            texture: InternalTexture,
+            source: ArrayBufferView,
+            depth: number,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
+        setTexture3DSubPixelsData(
+            texture: InternalTexture,
+            source: ArrayBufferView,
+            mipmapLevel: number,
+            generateMipmap: boolean,
+            xOffset: number,
+            yOffset: number,
+            zOffset: number,
+            width: number,
+            height: number,
+            depth: number,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
         setTextureHDRData(texture: InternalTexture, hdrInfo: HDRTextureInfo): void;
         setTextureDDSData(texture: InternalTexture, ddsInfo: DDSTextureInfo): void;
         setTextureKTXData(texture: InternalTexture, ktxInfo: KTXTextureInfo): void;
-        setCubeImageData(texture: InternalTexture, sources: (HTMLImageElement | HTMLCanvasElement | ImageBitmap)[], premultiplyAlpha: boolean, invertY: boolean): void;
-        setCubePixelsData(texture: InternalTexture, source: ArrayBufferView[], premultiplyAlpha: boolean, invertY: boolean): void;
-        setCubeSubPixelData(texture: InternalTexture, source: ArrayBufferView[], mipmapLevel: number, generateMipmap: boolean, xOffset: number, yOffset: number, width: number, height: number, premultiplyAlpha: boolean, invertY: boolean): void;
+        setCubeImageData(
+            texture: InternalTexture,
+            sources: (HTMLImageElement | HTMLCanvasElement | ImageBitmap)[],
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
+        setCubePixelsData(
+            texture: InternalTexture,
+            source: ArrayBufferView[],
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
+        setCubeSubPixelData(
+            texture: InternalTexture,
+            source: ArrayBufferView[],
+            mipmapLevel: number,
+            generateMipmap: boolean,
+            xOffset: number,
+            yOffset: number,
+            width: number,
+            height: number,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
         setCubeDDSData(texture: InternalTexture, ddsInfo: DDSTextureInfo): void;
         setCubeKTXData(texture: InternalTexture, ktxInfo: KTXTextureInfo): void;
-        setTextureCompareMode(texture: InternalTexture, compareMode: TextureCompareMode): TextureCompareMode;
+        setTextureCompareMode(
+            texture: InternalTexture,
+            compareMode: TextureCompareMode
+        ): TextureCompareMode;
         bindRenderTarget(renderTarget: InternalRenderTarget, faceIndex?: number): void;
         bindoutScreenTarget(): void;
         unbindRenderTarget(renderTarget: InternalRenderTarget): void;
-        createRenderTextureInternal(dimension: TextureDimension, width: number, height: number, format: RenderTargetFormat, generateMipmap: boolean, sRGB: boolean): InternalTexture;
-        createRenderTargetInternal(width: number, height: number, colorFormat: RenderTargetFormat, depthStencilFormat: RenderTargetFormat, generateMipmap: boolean, sRGB: boolean, multiSamples: number): InternalRenderTarget;
-        createRenderTargetCubeInternal(size: number, colorFormat: RenderTargetFormat, depthStencilFormat: RenderTargetFormat, generateMipmap: boolean, sRGB: boolean, multiSamples: number): InternalRenderTarget;
-        createRenderTextureCubeInternal(dimension: TextureDimension, size: number, format: RenderTargetFormat, generateMipmap: boolean, sRGB: boolean): InternalTexture;
-        setupRendertargetTextureAttachment(renderTarget: InternalRenderTarget, texture: InternalTexture): void;
-        readRenderTargetPixelData(renderTarget: InternalRenderTarget, xOffset: number, yOffset: number, width: number, height: number, out: ArrayBufferView): ArrayBufferView;
-        updateVideoTexture(texture: InternalTexture, video: HTMLVideoElement, premultiplyAlpha: boolean, invertY: boolean): void;
-        getRenderTextureData(internalTex: InternalRenderTarget, x: number, y: number, width: number, height: number): ArrayBufferView;
+        createRenderTextureInternal(
+            dimension: TextureDimension,
+            width: number,
+            height: number,
+            format: RenderTargetFormat,
+            generateMipmap: boolean,
+            sRGB: boolean
+        ): InternalTexture;
+        createRenderTargetInternal(
+            width: number,
+            height: number,
+            colorFormat: RenderTargetFormat,
+            depthStencilFormat: RenderTargetFormat,
+            generateMipmap: boolean,
+            sRGB: boolean,
+            multiSamples: number
+        ): InternalRenderTarget;
+        createRenderTargetCubeInternal(
+            size: number,
+            colorFormat: RenderTargetFormat,
+            depthStencilFormat: RenderTargetFormat,
+            generateMipmap: boolean,
+            sRGB: boolean,
+            multiSamples: number
+        ): InternalRenderTarget;
+        createRenderTextureCubeInternal(
+            dimension: TextureDimension,
+            size: number,
+            format: RenderTargetFormat,
+            generateMipmap: boolean,
+            sRGB: boolean
+        ): InternalTexture;
+        setupRendertargetTextureAttachment(
+            renderTarget: InternalRenderTarget,
+            texture: InternalTexture
+        ): void;
+        readRenderTargetPixelData(
+            renderTarget: InternalRenderTarget,
+            xOffset: number,
+            yOffset: number,
+            width: number,
+            height: number,
+            out: ArrayBufferView
+        ): ArrayBufferView;
+        updateVideoTexture(
+            texture: InternalTexture,
+            video: HTMLVideoElement,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
+        getRenderTextureData(
+            internalTex: InternalRenderTarget,
+            x: number,
+            y: number,
+            width: number,
+            height: number
+        ): ArrayBufferView;
     }
     class NativeGLVertexState extends NativeGLObject implements IRenderVertexState {
         _vertexDeclaration: VertexDeclaration[];
@@ -28319,7 +29925,7 @@ declare module Laya {
         Number32Array = 5,
         Texture = 6,
         ShaderDefine = 7,
-        UBO = 8
+        UBO = 8,
     }
     class NativeShaderData extends ShaderData implements INativeUploadNode {
         private inUploadList;
@@ -28423,7 +30029,13 @@ declare module Laya {
     }
     class NativeUniformBufferObject extends UniformBufferObject {
         _conchUniformBufferObject: any;
-        constructor(glPointer: number, name: string, bufferUsage: BufferUsage, byteLength: number, isSingle: boolean);
+        constructor(
+            glPointer: number,
+            name: string,
+            bufferUsage: BufferUsage,
+            byteLength: number,
+            isSingle: boolean
+        );
     }
     /**
      * @private 封装Webgl
@@ -28457,17 +30069,31 @@ declare module Laya {
         viewport(x: number, y: number, width: number, height: number): void;
         scissor(x: number, y: number, width: number, height: number): void;
         scissorTest(value: boolean): void;
-        clearRenderTexture(clearFlag: RenderClearFlag, clearcolor?: Color, clearDepth?: number): void;
-        copySubFrameBuffertoTex(texture: BaseTexture, level: number, xoffset: number, yoffset: number, x: number, y: number, width: number, height: number): void;
+        clearRenderTexture(
+            clearFlag: RenderClearFlag,
+            clearcolor?: Color,
+            clearDepth?: number
+        ): void;
+        copySubFrameBuffertoTex(
+            texture: BaseTexture,
+            level: number,
+            xoffset: number,
+            yoffset: number,
+            x: number,
+            y: number,
+            width: number,
+            height: number
+        ): void;
         colorMask(r: boolean, g: boolean, b: boolean, a: boolean): void;
         getParams(params: RenderParams): number;
         createBuffer(targetType: BufferTargetType, bufferUsageType: BufferUsage): IRenderBuffer;
-        createShaderInstance(vs: string, ps: string, attributeMap: {
-            [name: string]: [
-                number,
-                ShaderDataType
-            ];
-        }): IRenderShaderInstance;
+        createShaderInstance(
+            vs: string,
+            ps: string,
+            attributeMap: {
+                [name: string]: [number, ShaderDataType];
+            }
+        ): IRenderShaderInstance;
         createVertexState(): IRenderVertexState;
         getTextureContext(): ITextureContext;
         getDrawContext(): IRenderDrawContext;
@@ -28475,8 +30101,18 @@ declare module Laya {
         getCreateRenderOBJContext(): IRenderEngineFactory;
         propertyNameToID(name: string): number;
         propertyIDToName(id: number): string;
-        uploadUniforms(shader: IRenderShaderInstance, commandEncoder: CommandEncoder, shaderData: any, uploadUnTexture: boolean): number;
-        uploadCustomUniforms(shader: IRenderShaderInstance, custom: any[], index: number, data: any): number;
+        uploadUniforms(
+            shader: IRenderShaderInstance,
+            commandEncoder: CommandEncoder,
+            shaderData: any,
+            uploadUnTexture: boolean
+        ): number;
+        uploadCustomUniforms(
+            shader: IRenderShaderInstance,
+            custom: any[],
+            index: number,
+            data: any
+        ): number;
         unbindVertexState(): void;
     }
     /**
@@ -28486,41 +30122,147 @@ declare module Laya {
         protected _gl: WebGL2RenderingContext;
         constructor(engine: WebGLEngine);
         protected getTarget(dimension: TextureDimension): number;
-        glTextureParam(format: TextureFormat, useSRGB: boolean): {
+        glTextureParam(
+            format: TextureFormat,
+            useSRGB: boolean
+        ): {
             internalFormat: number;
             format: number;
             type: number;
         };
-        glRenderBufferParam(format: RenderTargetFormat, useSRGB: boolean): {
+        glRenderBufferParam(
+            format: RenderTargetFormat,
+            useSRGB: boolean
+        ): {
             internalFormat: number;
             attachment: number;
         };
-        glRenderTextureParam(format: RenderTargetFormat, useSRGB: boolean): {
+        glRenderTextureParam(
+            format: RenderTargetFormat,
+            useSRGB: boolean
+        ): {
             internalFormat: number;
             format: number;
             type: number;
         };
         getGLtexMemory(tex: WebGLInternalTex, depth?: number): number;
         supportSRGB(format: TextureFormat | RenderTargetFormat, mipmap: boolean): boolean;
-        setTextureImageData(texture: WebGLInternalTex, source: HTMLImageElement | HTMLCanvasElement | ImageBitmap, premultiplyAlpha: boolean, invertY: boolean): void;
-        setTextureSubImageData(texture: WebGLInternalTex, source: HTMLImageElement | HTMLCanvasElement | ImageBitmap, x: number, y: number, premultiplyAlpha: boolean, invertY: boolean): void;
-        setTexturePixelsData(texture: WebGLInternalTex, source: ArrayBufferView, premultiplyAlpha: boolean, invertY: boolean): void;
-        createTexture3DInternal(dimension: TextureDimension, width: number, height: number, depth: number, format: TextureFormat, generateMipmap: boolean, sRGB: boolean, premultipliedAlpha: boolean): InternalTexture;
-        setTexture3DImageData(texture: WebGLInternalTex, sources: HTMLImageElement[] | HTMLCanvasElement[] | ImageBitmap[], depth: number, premultiplyAlpha: boolean, invertY: boolean): void;
-        setTexture3DPixelsData(texture: WebGLInternalTex, source: ArrayBufferView, depth: number, premultiplyAlpha: boolean, invertY: boolean): void;
-        setTexture3DSubPixelsData(texture: WebGLInternalTex, source: ArrayBufferView, mipmapLevel: number, generateMipmap: boolean, xOffset: number, yOffset: number, zOffset: number, width: number, height: number, depth: number, premultiplyAlpha: boolean, invertY: boolean): void;
+        setTextureImageData(
+            texture: WebGLInternalTex,
+            source: HTMLImageElement | HTMLCanvasElement | ImageBitmap,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
+        setTextureSubImageData(
+            texture: WebGLInternalTex,
+            source: HTMLImageElement | HTMLCanvasElement | ImageBitmap,
+            x: number,
+            y: number,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
+        setTexturePixelsData(
+            texture: WebGLInternalTex,
+            source: ArrayBufferView,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
+        createTexture3DInternal(
+            dimension: TextureDimension,
+            width: number,
+            height: number,
+            depth: number,
+            format: TextureFormat,
+            generateMipmap: boolean,
+            sRGB: boolean,
+            premultipliedAlpha: boolean
+        ): InternalTexture;
+        setTexture3DImageData(
+            texture: WebGLInternalTex,
+            sources: HTMLImageElement[] | HTMLCanvasElement[] | ImageBitmap[],
+            depth: number,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
+        setTexture3DPixelsData(
+            texture: WebGLInternalTex,
+            source: ArrayBufferView,
+            depth: number,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
+        setTexture3DSubPixelsData(
+            texture: WebGLInternalTex,
+            source: ArrayBufferView,
+            mipmapLevel: number,
+            generateMipmap: boolean,
+            xOffset: number,
+            yOffset: number,
+            zOffset: number,
+            width: number,
+            height: number,
+            depth: number,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
         setTextureHDRData(texture: WebGLInternalTex, hdrInfo: HDRTextureInfo): void;
         setTextureKTXData(texture: WebGLInternalTex, ktxInfo: KTXTextureInfo): void;
-        setCubeImageData(texture: WebGLInternalTex, sources: (HTMLImageElement | HTMLCanvasElement | ImageBitmap)[], premultiplyAlpha: boolean, invertY: boolean): void;
-        setCubePixelsData(texture: WebGLInternalTex, source: ArrayBufferView[], premultiplyAlpha: boolean, invertY: boolean): void;
+        setCubeImageData(
+            texture: WebGLInternalTex,
+            sources: (HTMLImageElement | HTMLCanvasElement | ImageBitmap)[],
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
+        setCubePixelsData(
+            texture: WebGLInternalTex,
+            source: ArrayBufferView[],
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
         setCubeKTXData(texture: WebGLInternalTex, ktxInfo: KTXTextureInfo): void;
         getCubeKTXRGBMData(texture: WebGLInternalTex, ktxInfo: KTXTextureInfo): void;
-        setTextureCompareMode(texture: WebGLInternalTex, compareMode: TextureCompareMode): TextureCompareMode;
-        createRenderbuffer(width: number, height: number, internalFormat: number, samples: number): WebGLRenderbuffer;
-        createRenderTextureInternal(dimension: TextureDimension, width: number, height: number, format: RenderTargetFormat, generateMipmap: boolean, sRGB: boolean): WebGLInternalTex;
-        createRenderTargetInternal(width: number, height: number, colorFormat: RenderTargetFormat, depthStencilFormat: RenderTargetFormat, generateMipmap: boolean, sRGB: boolean, multiSamples: number): WebGLInternalRT;
-        createRenderTargetCubeInternal(size: number, colorFormat: RenderTargetFormat, depthStencilFormat: RenderTargetFormat, generateMipmap: boolean, sRGB: boolean, multiSamples: number): WebGLInternalRT;
-        createRenderTextureCubeInternal(dimension: TextureDimension, size: number, format: RenderTargetFormat, generateMipmap: boolean, sRGB: boolean): WebGLInternalTex;
+        setTextureCompareMode(
+            texture: WebGLInternalTex,
+            compareMode: TextureCompareMode
+        ): TextureCompareMode;
+        createRenderbuffer(
+            width: number,
+            height: number,
+            internalFormat: number,
+            samples: number
+        ): WebGLRenderbuffer;
+        createRenderTextureInternal(
+            dimension: TextureDimension,
+            width: number,
+            height: number,
+            format: RenderTargetFormat,
+            generateMipmap: boolean,
+            sRGB: boolean
+        ): WebGLInternalTex;
+        createRenderTargetInternal(
+            width: number,
+            height: number,
+            colorFormat: RenderTargetFormat,
+            depthStencilFormat: RenderTargetFormat,
+            generateMipmap: boolean,
+            sRGB: boolean,
+            multiSamples: number
+        ): WebGLInternalRT;
+        createRenderTargetCubeInternal(
+            size: number,
+            colorFormat: RenderTargetFormat,
+            depthStencilFormat: RenderTargetFormat,
+            generateMipmap: boolean,
+            sRGB: boolean,
+            multiSamples: number
+        ): WebGLInternalRT;
+        createRenderTextureCubeInternal(
+            dimension: TextureDimension,
+            size: number,
+            format: RenderTargetFormat,
+            generateMipmap: boolean,
+            sRGB: boolean
+        ): WebGLInternalTex;
         bindRenderTarget(renderTarget: WebGLInternalRT, faceIndex?: number): void;
         unbindRenderTarget(renderTarget: WebGLInternalRT): void;
     }
@@ -28531,7 +30273,11 @@ declare module Laya {
         _glTargetType: BufferTargetType;
         _glBufferUsageType: BufferUsage;
         _byteLength: number;
-        constructor(engine: WebGLEngine, targetType: BufferTargetType, bufferUsageType: BufferUsage);
+        constructor(
+            engine: WebGLEngine,
+            targetType: BufferTargetType,
+            bufferUsageType: BufferUsage
+        );
         private _getGLUsage;
         private _getGLTarget;
         private _memorychange;
@@ -28573,7 +30319,7 @@ declare module Laya {
         WEBGL_compressed_texture_etc1 = 16,
         WEBGL_compressed_texture_etc = 17,
         WEBGL_compressed_texture_astc = 18,
-        OES_standard_derivatives = 19
+        OES_standard_derivatives = 19,
     }
     /**
      * WebGL mode.
@@ -28584,7 +30330,7 @@ declare module Laya {
         /** WebGL2.0. */
         WebGL2 = 1,
         /** WebGL1.0, */
-        WebGL1 = 2
+        WebGL1 = 2,
     }
     /**
      * WebglObject 基类
@@ -28679,12 +30425,14 @@ declare module Laya {
     class GLShaderInstance extends GLObject implements IRenderShaderInstance {
         _engine: WebGLEngine;
         _gl: WebGLRenderingContext | WebGL2RenderingContext;
-        constructor(engine: WebGLEngine, vs: string, ps: string, attributeMap: {
-            [name: string]: [
-                number,
-                ShaderDataType
-            ];
-        });
+        constructor(
+            engine: WebGLEngine,
+            vs: string,
+            ps: string,
+            attributeMap: {
+                [name: string]: [number, ShaderDataType];
+            }
+        );
         private _create;
         private _legalUBObyteLength;
         getUniformMap(): ShaderVariable[];
@@ -28708,17 +30456,26 @@ declare module Laya {
             format: number;
             type: number;
         };
-        glTextureParam(format: TextureFormat, useSRGB: boolean): {
+        glTextureParam(
+            format: TextureFormat,
+            useSRGB: boolean
+        ): {
             internalFormat: number;
             format: number;
             type: number;
         };
-        glRenderTextureParam(format: RenderTargetFormat, useSRGB: boolean): {
+        glRenderTextureParam(
+            format: RenderTargetFormat,
+            useSRGB: boolean
+        ): {
             internalFormat: number;
             format: number;
             type: number;
         };
-        glRenderBufferParam(format: RenderTargetFormat, useSRGB: boolean): {
+        glRenderBufferParam(
+            format: RenderTargetFormat,
+            useSRGB: boolean
+        ): {
             internalFormat: number;
             attachment: number;
         };
@@ -28736,7 +30493,15 @@ declare module Laya {
          * @returns
          */
         getGLtexMemory(tex: WebGLInternalTex, depth?: number): number;
-        getGLRTTexMemory(width: number, height: number, colorFormat: RenderTargetFormat, depthStencilFormat: RenderTargetFormat, generateMipmap: boolean, multiSamples: number, cube: boolean): number;
+        getGLRTTexMemory(
+            width: number,
+            height: number,
+            colorFormat: RenderTargetFormat,
+            depthStencilFormat: RenderTargetFormat,
+            generateMipmap: boolean,
+            multiSamples: number,
+            cube: boolean
+        ): number;
         /**
          * 根据 format 判断是否支持 SRGBload
          * @param format
@@ -28750,33 +30515,147 @@ declare module Laya {
          * @returns
          */
         isSRGBFormat(format: TextureFormat | RenderTargetFormat): boolean;
-        createTextureInternal(dimension: TextureDimension, width: number, height: number, format: TextureFormat, generateMipmap: boolean, sRGB: boolean, premultipliedAlpha: boolean): InternalTexture;
-        setTextureImageData(texture: WebGLInternalTex, source: HTMLImageElement | HTMLCanvasElement | ImageBitmap, premultiplyAlpha: boolean, invertY: boolean): void;
-        setTextureSubImageData(texture: WebGLInternalTex, source: HTMLImageElement | HTMLCanvasElement | ImageBitmap, x: number, y: number, premultiplyAlpha: boolean, invertY: boolean): void;
+        createTextureInternal(
+            dimension: TextureDimension,
+            width: number,
+            height: number,
+            format: TextureFormat,
+            generateMipmap: boolean,
+            sRGB: boolean,
+            premultipliedAlpha: boolean
+        ): InternalTexture;
+        setTextureImageData(
+            texture: WebGLInternalTex,
+            source: HTMLImageElement | HTMLCanvasElement | ImageBitmap,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
+        setTextureSubImageData(
+            texture: WebGLInternalTex,
+            source: HTMLImageElement | HTMLCanvasElement | ImageBitmap,
+            x: number,
+            y: number,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
         initVideoTextureData(texture: WebGLInternalTex): void;
-        setTexturePixelsData(texture: WebGLInternalTex, source: ArrayBufferView, premultiplyAlpha: boolean, invertY: boolean): void;
-        setTextureSubPixelsData(texture: WebGLInternalTex, source: ArrayBufferView, mipmapLevel: number, generateMipmap: boolean, xOffset: number, yOffset: number, width: number, height: number, premultiplyAlpha: boolean, invertY: boolean): void;
+        setTexturePixelsData(
+            texture: WebGLInternalTex,
+            source: ArrayBufferView,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
+        setTextureSubPixelsData(
+            texture: WebGLInternalTex,
+            source: ArrayBufferView,
+            mipmapLevel: number,
+            generateMipmap: boolean,
+            xOffset: number,
+            yOffset: number,
+            width: number,
+            height: number,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
         setTextureDDSData(texture: WebGLInternalTex, ddsInfo: DDSTextureInfo): void;
         setTextureKTXData(texture: WebGLInternalTex, ktxInfo: KTXTextureInfo): void;
         setTextureHDRData(texture: WebGLInternalTex, hdrInfo: HDRTextureInfo): void;
-        setCubeImageData(texture: WebGLInternalTex, sources: (HTMLImageElement | HTMLCanvasElement | ImageBitmap)[], premultiplyAlpha: boolean, invertY: boolean): void;
-        setCubePixelsData(texture: WebGLInternalTex, source: ArrayBufferView[], premultiplyAlpha: boolean, invertY: boolean): void;
-        setCubeSubPixelData(texture: WebGLInternalTex, source: ArrayBufferView[], mipmapLevel: number, generateMipmap: boolean, xOffset: number, yOffset: number, width: number, height: number, premultiplyAlpha: boolean, invertY: boolean): void;
+        setCubeImageData(
+            texture: WebGLInternalTex,
+            sources: (HTMLImageElement | HTMLCanvasElement | ImageBitmap)[],
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
+        setCubePixelsData(
+            texture: WebGLInternalTex,
+            source: ArrayBufferView[],
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
+        setCubeSubPixelData(
+            texture: WebGLInternalTex,
+            source: ArrayBufferView[],
+            mipmapLevel: number,
+            generateMipmap: boolean,
+            xOffset: number,
+            yOffset: number,
+            width: number,
+            height: number,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
         setCubeDDSData(texture: WebGLInternalTex, ddsInfo: DDSTextureInfo): void;
         setCubeKTXData(texture: WebGLInternalTex, ktxInfo: KTXTextureInfo): void;
-        setTextureCompareMode(texture: WebGLInternalTex, compareMode: TextureCompareMode): TextureCompareMode;
+        setTextureCompareMode(
+            texture: WebGLInternalTex,
+            compareMode: TextureCompareMode
+        ): TextureCompareMode;
         bindRenderTarget(renderTarget: WebGLInternalRT, faceIndex?: number): void;
         bindoutScreenTarget(): void;
         unbindRenderTarget(renderTarget: WebGLInternalRT): void;
-        createRenderTextureInternal(dimension: TextureDimension, width: number, height: number, format: RenderTargetFormat, generateMipmap: boolean, sRGB: boolean): WebGLInternalTex;
-        createRenderTextureCubeInternal(dimension: TextureDimension, size: number, format: RenderTargetFormat, generateMipmap: boolean, sRGB: boolean): WebGLInternalTex;
-        createRenderTargetInternal(width: number, height: number, colorFormat: RenderTargetFormat, depthStencilFormat: RenderTargetFormat, generateMipmap: boolean, sRGB: boolean, multiSamples: number): WebGLInternalRT;
-        createRenderTargetCubeInternal(size: number, colorFormat: RenderTargetFormat, depthStencilFormat: RenderTargetFormat, generateMipmap: boolean, sRGB: boolean, multiSamples: number): WebGLInternalRT;
-        createRenderbuffer(width: number, height: number, internalFormat: number, samples: number): WebGLRenderbuffer;
-        setupRendertargetTextureAttachment(renderTarget: WebGLInternalRT, texture: WebGLInternalTex): void;
-        readRenderTargetPixelData(renderTarget: WebGLInternalRT, xOffset: number, yOffset: number, width: number, height: number, out: ArrayBufferView): ArrayBufferView;
-        updateVideoTexture(texture: WebGLInternalTex, video: HTMLVideoElement, premultiplyAlpha: boolean, invertY: boolean): void;
-        getRenderTextureData(internalTex: WebGLInternalRT, x: number, y: number, width: number, height: number): ArrayBufferView;
+        createRenderTextureInternal(
+            dimension: TextureDimension,
+            width: number,
+            height: number,
+            format: RenderTargetFormat,
+            generateMipmap: boolean,
+            sRGB: boolean
+        ): WebGLInternalTex;
+        createRenderTextureCubeInternal(
+            dimension: TextureDimension,
+            size: number,
+            format: RenderTargetFormat,
+            generateMipmap: boolean,
+            sRGB: boolean
+        ): WebGLInternalTex;
+        createRenderTargetInternal(
+            width: number,
+            height: number,
+            colorFormat: RenderTargetFormat,
+            depthStencilFormat: RenderTargetFormat,
+            generateMipmap: boolean,
+            sRGB: boolean,
+            multiSamples: number
+        ): WebGLInternalRT;
+        createRenderTargetCubeInternal(
+            size: number,
+            colorFormat: RenderTargetFormat,
+            depthStencilFormat: RenderTargetFormat,
+            generateMipmap: boolean,
+            sRGB: boolean,
+            multiSamples: number
+        ): WebGLInternalRT;
+        createRenderbuffer(
+            width: number,
+            height: number,
+            internalFormat: number,
+            samples: number
+        ): WebGLRenderbuffer;
+        setupRendertargetTextureAttachment(
+            renderTarget: WebGLInternalRT,
+            texture: WebGLInternalTex
+        ): void;
+        readRenderTargetPixelData(
+            renderTarget: WebGLInternalRT,
+            xOffset: number,
+            yOffset: number,
+            width: number,
+            height: number,
+            out: ArrayBufferView
+        ): ArrayBufferView;
+        updateVideoTexture(
+            texture: WebGLInternalTex,
+            video: HTMLVideoElement,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
+        getRenderTextureData(
+            internalTex: WebGLInternalRT,
+            x: number,
+            y: number,
+            width: number,
+            height: number
+        ): ArrayBufferView;
     }
     class GLVertexState extends GLObject implements IRenderVertexState {
         private _angleInstancedArrays;
@@ -28851,17 +30730,31 @@ declare module Laya {
         viewport(x: number, y: number, width: number, height: number): void;
         scissor(x: number, y: number, width: number, height: number): void;
         scissorTest(value: boolean): void;
-        clearRenderTexture(clearFlag: RenderClearFlag, clearcolor?: Color, clearDepth?: number): void;
-        copySubFrameBuffertoTex(texture: BaseTexture, level: number, xoffset: number, yoffset: number, x: number, y: number, width: number, height: number): void;
+        clearRenderTexture(
+            clearFlag: RenderClearFlag,
+            clearcolor?: Color,
+            clearDepth?: number
+        ): void;
+        copySubFrameBuffertoTex(
+            texture: BaseTexture,
+            level: number,
+            xoffset: number,
+            yoffset: number,
+            x: number,
+            y: number,
+            width: number,
+            height: number
+        ): void;
         colorMask(r: boolean, g: boolean, b: boolean, a: boolean): void;
         getParams(params: RenderParams): number;
         createBuffer(targetType: BufferTargetType, bufferUsageType: BufferUsage): IRenderBuffer;
-        createShaderInstance(vs: string, ps: string, attributeMap: {
-            [name: string]: [
-                number,
-                ShaderDataType
-            ];
-        }): IRenderShaderInstance;
+        createShaderInstance(
+            vs: string,
+            ps: string,
+            attributeMap: {
+                [name: string]: [number, ShaderDataType];
+            }
+        ): IRenderShaderInstance;
         createVertexState(): IRenderVertexState;
         getUBOPointer(name: string): number;
         getTextureContext(): ITextureContext;
@@ -28869,10 +30762,10 @@ declare module Laya {
         get2DRenderContext(): IRender2DContext;
         getCreateRenderOBJContext(): IRenderEngineFactory;
         /**
-       * 通过Shader属性名称获得唯一ID。
-       * @param name Shader属性名称。
-       * @return 唯一ID。
-       */
+         * 通过Shader属性名称获得唯一ID。
+         * @param name Shader属性名称。
+         * @return 唯一ID。
+         */
         propertyNameToID(name: string): number;
         propertyIDToName(id: number): string;
         createRenderStateComand(): RenderStateCommand;
@@ -28896,15 +30789,31 @@ declare module Laya {
         _gpuMemory: number;
         get gpuMemory(): number;
         set gpuMemory(value: number);
-        constructor(engine: WebGLEngine, colorFormat: RenderTargetFormat, depthStencilFormat: RenderTargetFormat, isCube: boolean, generateMipmap: boolean, samples: number);
+        constructor(
+            engine: WebGLEngine,
+            colorFormat: RenderTargetFormat,
+            depthStencilFormat: RenderTargetFormat,
+            isCube: boolean,
+            generateMipmap: boolean,
+            samples: number
+        );
         dispose(): void;
     }
     class WebGLRenderEngineFactory implements IRenderEngineFactory {
         createShaderData(): ShaderData;
-        createShaderInstance(shaderProcessInfo: ShaderProcessInfo, shaderPass: ShaderCompileDefineBase): ShaderInstance;
+        createShaderInstance(
+            shaderProcessInfo: ShaderProcessInfo,
+            shaderPass: ShaderCompileDefineBase
+        ): ShaderInstance;
         createRenderStateComand(): RenderStateCommand;
         createRenderState(): RenderState;
-        createUniformBufferObject(glPointer: number, name: string, bufferUsage: BufferUsage, byteLength: number, isSingle: boolean): UniformBufferObject;
+        createUniformBufferObject(
+            glPointer: number,
+            name: string,
+            bufferUsage: BufferUsage,
+            byteLength: number,
+            isSingle: boolean
+        ): UniformBufferObject;
         createGlobalUniformMap(blockName: string): CommandUniformMap;
         createEngine(config: any, canvas: any): Promise<void>;
         /**@private test function*/
@@ -28922,7 +30831,7 @@ declare module Laya {
         UNIFORM = 64,
         STORAGE = 128,
         INDIRECT = 256,
-        QUERY_RESOLVE = 512
+        QUERY_RESOLVE = 512,
     }
     class WebGPUBuffer extends WebGPUObject implements IRenderBuffer {
         _gpuBuffer: GPUBuffer;
@@ -28930,7 +30839,12 @@ declare module Laya {
         _size: number;
         private _isCreate;
         private _mappedAtCreation;
-        constructor(engine: WebGPUEngine, usage: GPUBufferUsageFlags, byteSize?: number, mappedAtCreation?: boolean);
+        constructor(
+            engine: WebGPUEngine,
+            usage: GPUBufferUsageFlags,
+            byteSize?: number,
+            mappedAtCreation?: boolean
+        );
         bindBuffer(): boolean;
         unbindBuffer(): void;
         bindBufferBase(glPointer: number): void;
@@ -28944,8 +30858,18 @@ declare module Laya {
         private _alignedLength;
         private _memorychange;
         setData(srcData: ArrayBuffer | ArrayBufferView, offset: number): void;
-        setDataEx(srcData: ArrayBuffer | ArrayBufferView, offset: number, bytelength: number, dstOffset?: number): void;
-        setSubDataEx(srcData: ArrayBuffer | ArrayBufferView, offset: number, bytelength: number, dstOffset?: number): void;
+        setDataEx(
+            srcData: ArrayBuffer | ArrayBufferView,
+            offset: number,
+            bytelength: number,
+            dstOffset?: number
+        ): void;
+        setSubDataEx(
+            srcData: ArrayBuffer | ArrayBufferView,
+            offset: number,
+            bytelength: number,
+            dstOffset?: number
+        ): void;
         readDataFromBuffer(): void;
         destroy(): void;
         release(): void;
@@ -29054,7 +30978,16 @@ declare module Laya {
         scissorTest(value: boolean): void;
         clearRenderTexture(clearFlag: number, clearcolor: Color, clearDepth: number): void;
         colorMask(r: boolean, g: boolean, b: boolean, a: boolean): void;
-        copySubFrameBuffertoTex(texture: BaseTexture, level: number, xoffset: number, yoffset: number, x: number, y: number, width: number, height: number): void;
+        copySubFrameBuffertoTex(
+            texture: BaseTexture,
+            level: number,
+            xoffset: number,
+            yoffset: number,
+            x: number,
+            y: number,
+            width: number,
+            height: number
+        ): void;
         bindTexture(texture: BaseTexture): void;
         propertyNameToID(name: string): number;
         propertyIDToName(id: number): string;
@@ -29064,15 +30997,26 @@ declare module Laya {
         getDrawContext(): IRenderDrawContext;
         get2DRenderContext(): IRender2DContext;
         getCreateRenderOBJContext(): IRenderEngineFactory;
-        uploadUniforms(shader: IRenderShaderInstance, commandEncoder: CommandEncoder, shaderData: WGPUShaderData, uploadUnTexture: boolean): number;
-        uploadCustomUniforms(shader: IRenderShaderInstance, custom: any[], index: number, data: any): number;
+        uploadUniforms(
+            shader: IRenderShaderInstance,
+            commandEncoder: CommandEncoder,
+            shaderData: WGPUShaderData,
+            uploadUnTexture: boolean
+        ): number;
+        uploadCustomUniforms(
+            shader: IRenderShaderInstance,
+            custom: any[],
+            index: number,
+            data: any
+        ): number;
         createRenderStateComand(): RenderStateCommand;
-        createShaderInstance(vs: string, ps: string, attributeMap: {
-            [name: string]: [
-                number,
-                ShaderDataType
-            ];
-        }): IRenderShaderInstance;
+        createShaderInstance(
+            vs: string,
+            ps: string,
+            attributeMap: {
+                [name: string]: [number, ShaderDataType];
+            }
+        ): IRenderShaderInstance;
         createBuffer(targetType: BufferTargetType, bufferUsageType: BufferUsage): WebGPUBuffer;
         createVertexState(): IRenderVertexState;
         getUBOPointer(name: string): number;
@@ -29086,7 +31030,10 @@ declare module Laya {
          * resize canvans
          */
         resizeCavansRT(): void;
-        setRenderPassDescriptor(rt: WebGPUInternalRT, renderPassDec: WebGPURenderPassDescriptor): void;
+        setRenderPassDescriptor(
+            rt: WebGPUInternalRT,
+            renderPassDec: WebGPURenderPassDescriptor
+        ): void;
         createUniformBuffer(bufferSize: number): WebGPUBuffer;
         /**
          *
@@ -29116,7 +31063,14 @@ declare module Laya {
         loadClear: boolean;
         clearDes: WGPRenderPassDesCache;
         isOffscreenRT: boolean;
-        constructor(engine: WebGPUEngine, colorFormat: RenderTargetFormat, depthStencilFormat: RenderTargetFormat, isCube: boolean, generateMipmap: boolean, samples: number);
+        constructor(
+            engine: WebGPUEngine,
+            colorFormat: RenderTargetFormat,
+            depthStencilFormat: RenderTargetFormat,
+            isCube: boolean,
+            generateMipmap: boolean,
+            samples: number
+        );
         dispose(): void;
     }
     class WebGPUInternalTex extends WebGPUObject implements InternalTexture {
@@ -29140,7 +31094,13 @@ declare module Laya {
         gammaCorrection: number;
         _cacheBindGroup: GPUBindGroup;
         _cacheSampler: GPUSampler;
-        constructor(engine: WebGPUEngine, width: number, height: number, dimension: TextureDimension, mipmap: boolean);
+        constructor(
+            engine: WebGPUEngine,
+            width: number,
+            height: number,
+            dimension: TextureDimension,
+            mipmap: boolean
+        );
         get textureView(): GPUTextureView;
         releaseTexture(texture: InternalTexture | GPUTexture): void;
         private _filterMode;
@@ -29230,15 +31190,47 @@ declare module Laya {
          * @param offset
          * @param byteSize
          */
-        setIndexBuffer(buffer: WebGPUBuffer, indexformat: GPUIndexFormat, offset: number, byteSize: number): void;
-        setVertexBuffer(slot: GPUIndex32, buffer: GPUBuffer, offset?: GPUSize64, size?: GPUSize64): void;
+        setIndexBuffer(
+            buffer: WebGPUBuffer,
+            indexformat: GPUIndexFormat,
+            offset: number,
+            byteSize: number
+        ): void;
+        setVertexBuffer(
+            slot: GPUIndex32,
+            buffer: GPUBuffer,
+            offset?: GPUSize64,
+            size?: GPUSize64
+        ): void;
         drawIndirect(indirectBuffer: GPUBuffer, indirectOffset: GPUSize64): void;
         drawIndexedIndirect(indirectBuffer: GPUBuffer, indirectOffset: GPUSize64): void;
-        setBindGroup(index: GPUIndex32, bindGroup: GPUBindGroup, dynamicOffsets?: Iterable<GPUBufferDynamicOffset>): void;
-        setBindGroupByDataOffaset(index: GPUIndex32, bindGroup: GPUBindGroup, dynamicOffsetsData: Uint32Array, dynamicOffsetsDataStart: GPUSize64, dynamicOffsetsDataLength: GPUSize32): void;
+        setBindGroup(
+            index: GPUIndex32,
+            bindGroup: GPUBindGroup,
+            dynamicOffsets?: Iterable<GPUBufferDynamicOffset>
+        ): void;
+        setBindGroupByDataOffaset(
+            index: GPUIndex32,
+            bindGroup: GPUBindGroup,
+            dynamicOffsetsData: Uint32Array,
+            dynamicOffsetsDataStart: GPUSize64,
+            dynamicOffsetsDataLength: GPUSize32
+        ): void;
         end(): void;
-        setViewport(x: number, y: number, width: number, height: number, minDepth: number, maxDepth: number): void;
-        setScissorRect(x: GPUIntegerCoordinate, y: GPUIntegerCoordinate, width: GPUIntegerCoordinate, height: GPUIntegerCoordinate): void;
+        setViewport(
+            x: number,
+            y: number,
+            width: number,
+            height: number,
+            minDepth: number,
+            maxDepth: number
+        ): void;
+        setScissorRect(
+            x: GPUIntegerCoordinate,
+            y: GPUIntegerCoordinate,
+            width: GPUIntegerCoordinate,
+            height: GPUIntegerCoordinate
+        ): void;
         setBlendConstant(color: GPUColor): void;
         setStencilReference(reference: GPUStencilValue): void;
         executeBundles(bundles: Iterable<GPURenderBundle>): void;
@@ -29247,8 +31239,16 @@ declare module Laya {
     class WebGPURenderPassDescriptor {
         des: GPURenderPassDescriptor;
         constructor();
-        setColorAttachments(textures: WebGPUInternalTex[], clear: boolean, clearColor?: Color): void;
-        setDepthAttachments(depthTex: WebGPUInternalTex, clear: boolean, clearDepthValue?: number): void;
+        setColorAttachments(
+            textures: WebGPUInternalTex[],
+            clear: boolean,
+            clearColor?: Color
+        ): void;
+        setDepthAttachments(
+            depthTex: WebGPUInternalTex,
+            clear: boolean,
+            clearDepthValue?: number
+        ): void;
     }
     interface WebGPUSamplerParams {
         comparedMode: TextureCompareMode;
@@ -29284,9 +31284,12 @@ declare module Laya {
         getVertexModule(): GPUShaderModule;
         getFragmentModule(): GPUShaderModule;
         getUniformMap(): WGPUShaderVariable[];
-        applyBindGroupLayoutByUniformMap(uniformMap: {
-            [name: string]: ShaderDataType;
-        }, command: CommandEncoder): void;
+        applyBindGroupLayoutByUniformMap(
+            uniformMap: {
+                [name: string]: ShaderDataType;
+            },
+            command: CommandEncoder
+        ): void;
         applyBindGroupLayout(map: CommandUniformMap, command: CommandEncoder): void;
         getWGPUPipelineLayout(): GPUPipelineLayout;
         bind(): boolean;
@@ -29297,7 +31300,7 @@ declare module Laya {
         VD2d_array = "2d-array",
         VDcube = "cube",
         VDcube_array = "cube-array",
-        VD3d = "3d"
+        VD3d = "3d",
     }
     enum GPUTextureFormat {
         r8unorm = "r8unorm",
@@ -29389,76 +31392,236 @@ declare module Laya {
         astc_12x10_unorm = "astc-12x10-unorm",
         astc_12x10_unorm_srgb = "astc-12x10-unorm-srgb",
         astc_12x12_unorm = "astc-12x12-unorm",
-        astc_12x12_unorm_srgb = "astc-12x12-unorm-srgb"
+        astc_12x12_unorm_srgb = "astc-12x12-unorm-srgb",
     }
     enum GPUTextureUsage {
         COPY_SRC = 1,
         COPY_DST = 2,
         TEXTURE_BINDING = 4,
         STORAGE_BINDING = 8,
-        RENDER_ATTACHMENT = 16
+        RENDER_ATTACHMENT = 16,
     }
     class WebGPUTextureContext extends WebGPUObject implements ITextureContext {
         needBitmap: boolean;
         curBindWGPURT: WebGPUInternalRT;
         constructor(engine: WebGPUEngine);
-        setTexture3DImageData(texture: InternalTexture, source: HTMLImageElement[] | HTMLCanvasElement[] | ImageBitmap[], depth: number, premultiplyAlpha: boolean, invertY: boolean): void;
-        setTexture3DPixlesData(texture: InternalTexture, source: ArrayBufferView, depth: number, premultiplyAlpha: boolean, invertY: boolean): void;
-        setTexture3DSubPixelsData(texture: InternalTexture, source: ArrayBufferView, mipmapLevel: number, generateMipmap: boolean, xOffset: number, yOffset: number, zOffset: number, width: number, height: number, depth: number, premultiplyAlpha: boolean, invertY: boolean): void;
+        setTexture3DImageData(
+            texture: InternalTexture,
+            source: HTMLImageElement[] | HTMLCanvasElement[] | ImageBitmap[],
+            depth: number,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
+        setTexture3DPixlesData(
+            texture: InternalTexture,
+            source: ArrayBufferView,
+            depth: number,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
+        setTexture3DSubPixelsData(
+            texture: InternalTexture,
+            source: ArrayBufferView,
+            mipmapLevel: number,
+            generateMipmap: boolean,
+            xOffset: number,
+            yOffset: number,
+            zOffset: number,
+            width: number,
+            height: number,
+            depth: number,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
         getGPUTextureFormat(format: TextureFormat, useSRGB: boolean): GPUTextureFormat;
         private isCompressTexture;
-        getGPURenderTargetFormat(format: RenderTargetFormat, useSRGB: boolean): GPUTextureFormat.rgba8unorm | GPUTextureFormat.rgba8unorm_srgb | GPUTextureFormat.rgba16float | GPUTextureFormat.rgba32float | GPUTextureFormat.stencil8 | GPUTextureFormat.depth16unorm | GPUTextureFormat.depth24plus | GPUTextureFormat.depth24plus_stencil8 | GPUTextureFormat.depth32float;
+        getGPURenderTargetFormat(
+            format: RenderTargetFormat,
+            useSRGB: boolean
+        ):
+            | GPUTextureFormat.rgba8unorm
+            | GPUTextureFormat.rgba8unorm_srgb
+            | GPUTextureFormat.rgba16float
+            | GPUTextureFormat.rgba32float
+            | GPUTextureFormat.stencil8
+            | GPUTextureFormat.depth16unorm
+            | GPUTextureFormat.depth24plus
+            | GPUTextureFormat.depth24plus_stencil8
+            | GPUTextureFormat.depth32float;
         getTextureViewDimension(demension: TextureDimension): GPUTextureViewDimension;
         /**
-        * caculate texture memory
-        * @param tex
-        * @returns
-        */
+         * caculate texture memory
+         * @param tex
+         * @returns
+         */
         getGLtexMemory(tex: WebGPUInternalTex, depth?: number): number;
         private _generateMipmaps;
-        createTextureInternal(dimension: TextureDimension, width: number, height: number, format: TextureFormat, generateMipmap: boolean, sRGB: boolean): WebGPUInternalTex;
+        createTextureInternal(
+            dimension: TextureDimension,
+            width: number,
+            height: number,
+            format: TextureFormat,
+            generateMipmap: boolean,
+            sRGB: boolean
+        ): WebGPUInternalTex;
         private getGPUTextureDescriptor;
-        createRenderTextureInternal(dimension: TextureDimension, width: number, height: number, format: RenderTargetFormat, generateMipmap: boolean, sRGB: boolean): WebGPUInternalTex;
-        createRenderTargetInternal(width: number, height: number, format: RenderTargetFormat, depthStencilFormat: RenderTargetFormat, generateMipmap: boolean, sRGB: boolean, multiSamples: number): WebGPUInternalRT;
-        setTextureImageData(texture: WebGPUInternalTex, source: HTMLCanvasElement | HTMLImageElement | ImageBitmap, premultiplyAlpha: boolean, invertY: boolean): void;
-        setTextureSubImageData(texture: InternalTexture, source: HTMLCanvasElement | HTMLImageElement | ImageBitmap, x: number, y: number, premultiplyAlpha: boolean, invertY: boolean): void;
-        setTexturePixelsData(texture: WebGPUInternalTex, source: ArrayBufferView, premultiplyAlpha: boolean, invertY: boolean): void;
-        setTextureSubPixelsData(texture: WebGPUInternalTex, source: ArrayBufferView, mipmapLevel: number, generateMipmap: boolean, xOffset: number, yOffset: number, width: number, height: number, premultiplyAlpha: boolean, invertY: boolean): void;
+        createRenderTextureInternal(
+            dimension: TextureDimension,
+            width: number,
+            height: number,
+            format: RenderTargetFormat,
+            generateMipmap: boolean,
+            sRGB: boolean
+        ): WebGPUInternalTex;
+        createRenderTargetInternal(
+            width: number,
+            height: number,
+            format: RenderTargetFormat,
+            depthStencilFormat: RenderTargetFormat,
+            generateMipmap: boolean,
+            sRGB: boolean,
+            multiSamples: number
+        ): WebGPUInternalRT;
+        setTextureImageData(
+            texture: WebGPUInternalTex,
+            source: HTMLCanvasElement | HTMLImageElement | ImageBitmap,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
+        setTextureSubImageData(
+            texture: InternalTexture,
+            source: HTMLCanvasElement | HTMLImageElement | ImageBitmap,
+            x: number,
+            y: number,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
+        setTexturePixelsData(
+            texture: WebGPUInternalTex,
+            source: ArrayBufferView,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
+        setTextureSubPixelsData(
+            texture: WebGPUInternalTex,
+            source: ArrayBufferView,
+            mipmapLevel: number,
+            generateMipmap: boolean,
+            xOffset: number,
+            yOffset: number,
+            width: number,
+            height: number,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
         initVideoTextureData(texture: WebGPUInternalTex): void;
         setTextureDDSData(texture: WebGPUInternalTex, ddsInfo: DDSTextureInfo): void;
         setTextureKTXData(texture: WebGPUInternalTex, ktxInfo: KTXTextureInfo): void;
         setTextureHDRData(texture: WebGPUInternalTex, hdrInfo: HDRTextureInfo): void;
-        setCubeImageData(texture: WebGPUInternalTex, sources: (HTMLCanvasElement | HTMLImageElement | ImageBitmap)[], premultiplyAlpha: boolean, invertY: boolean): void;
-        setCubePixelsData(texture: WebGPUInternalTex, source: ArrayBufferView[], premultiplyAlpha: boolean, invertY: boolean): void;
-        setCubeSubPixelData(texture: WebGPUInternalTex, source: ArrayBufferView[], mipmapLevel: number, generateMipmap: boolean, xOffset: number, yOffset: number, width: number, height: number, premultiplyAlpha: boolean, invertY: boolean): void;
+        setCubeImageData(
+            texture: WebGPUInternalTex,
+            sources: (HTMLCanvasElement | HTMLImageElement | ImageBitmap)[],
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
+        setCubePixelsData(
+            texture: WebGPUInternalTex,
+            source: ArrayBufferView[],
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
+        setCubeSubPixelData(
+            texture: WebGPUInternalTex,
+            source: ArrayBufferView[],
+            mipmapLevel: number,
+            generateMipmap: boolean,
+            xOffset: number,
+            yOffset: number,
+            width: number,
+            height: number,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
         setCubeDDSData(texture: WebGPUInternalTex, ddsInfo: DDSTextureInfo): void;
         setCubeKTXData(texture: WebGPUInternalTex, ktxInfo: KTXTextureInfo): void;
-        setTextureCompareMode(texture: WebGPUInternalTex, compareMode: TextureCompareMode): TextureCompareMode;
-        createRenderTargetCubeInternal(size: number, colorFormat: RenderTargetFormat, depthStencilFormat: RenderTargetFormat, generateMipmap: boolean, sRGB: boolean, multiSamples: number): InternalRenderTarget;
-        setupRendertargetTextureAttachment(renderTarget: InternalRenderTarget, texture: InternalTexture): void;
+        setTextureCompareMode(
+            texture: WebGPUInternalTex,
+            compareMode: TextureCompareMode
+        ): TextureCompareMode;
+        createRenderTargetCubeInternal(
+            size: number,
+            colorFormat: RenderTargetFormat,
+            depthStencilFormat: RenderTargetFormat,
+            generateMipmap: boolean,
+            sRGB: boolean,
+            multiSamples: number
+        ): InternalRenderTarget;
+        setupRendertargetTextureAttachment(
+            renderTarget: InternalRenderTarget,
+            texture: InternalTexture
+        ): void;
         bindRenderTarget(renderTarget: InternalRenderTarget, faceIndex?: number): void;
         bindoutScreenTarget(): void;
         unbindRenderTarget(renderTarget: InternalRenderTarget): void;
-        readRenderTargetPixelData(renderTarget: InternalRenderTarget, xOffset: number, yOffset: number, width: number, height: number, out: ArrayBufferView): ArrayBufferView;
-        updateVideoTexture(texture: InternalTexture, video: HTMLVideoElement, premultiplyAlpha: boolean, invertY: boolean): void;
-        getRenderTextureData(internalTex: InternalRenderTarget, x: number, y: number, width: number, height: number): ArrayBufferView;
+        readRenderTargetPixelData(
+            renderTarget: InternalRenderTarget,
+            xOffset: number,
+            yOffset: number,
+            width: number,
+            height: number,
+            out: ArrayBufferView
+        ): ArrayBufferView;
+        updateVideoTexture(
+            texture: InternalTexture,
+            video: HTMLVideoElement,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
+        getRenderTextureData(
+            internalTex: InternalRenderTarget,
+            x: number,
+            y: number,
+            width: number,
+            height: number
+        ): ArrayBufferView;
     }
-    class WGPUBindGroup {
-    }
+    class WGPUBindGroup {}
     class WGPUBindGroupHelper {
         static device: GPUDevice;
         /**create BindGroup by ShaderVariable */
-        static getBindGroupbyUniformMap(shaderVariable: WGPUShaderVariable, shaderData: WGPUShaderData): GPUBindGroup;
+        static getBindGroupbyUniformMap(
+            shaderVariable: WGPUShaderVariable,
+            shaderData: WGPUShaderData
+        ): GPUBindGroup;
         /**Buffer BindGroup */
-        static getBufferBindGroup(shaderVariable: WGPUShaderVariable, databuffer: GPUBuffer, size: number, offset?: number): GPUBindGroup;
+        static getBufferBindGroup(
+            shaderVariable: WGPUShaderVariable,
+            databuffer: GPUBuffer,
+            size: number,
+            offset?: number
+        ): GPUBindGroup;
         /**Texture BindGroup */
-        static getTextureBindGroup(shaderVariable: WGPUShaderVariable, internalTexture: WebGPUInternalTex): GPUBindGroup;
+        static getTextureBindGroup(
+            shaderVariable: WGPUShaderVariable,
+            internalTexture: WebGPUInternalTex
+        ): GPUBindGroup;
         /**Buffer BindGroup Entry */
-        static createBufferBindGroupEntry(bindIndex: number, databuffer: GPUBuffer, size: number, offset?: number): GPUBindGroupEntry;
+        static createBufferBindGroupEntry(
+            bindIndex: number,
+            databuffer: GPUBuffer,
+            size: number,
+            offset?: number
+        ): GPUBindGroupEntry;
         /**Sampler BindGroup Entry */
-        static createSamplerBindGroupEntry(bindIndex: number, sampler: GPUSampler): GPUBindGroupEntry;
+        static createSamplerBindGroupEntry(
+            bindIndex: number,
+            sampler: GPUSampler
+        ): GPUBindGroupEntry;
         /**TextureView BindGroup Entry */
-        static createTextureBindGroupEntry(bindIndex: number, texture: GPUTextureView): GPUBindGroupEntry;
+        static createTextureBindGroupEntry(
+            bindIndex: number,
+            texture: GPUTextureView
+        ): GPUBindGroupEntry;
         /**todo */
         static createExternalTextureBindGroupEntry(): void;
     }
@@ -29472,31 +31635,63 @@ declare module Laya {
          * @returns
          */
         static getBindGroupLayoutByMap(map: CommandUniformMap, out: WGPUShaderVariable[]): void;
-        static getBindGroupLayoutByUniformMap(uniformMap: {
-            [name: string]: ShaderDataType;
-        }, out: WGPUShaderVariable[]): void;
-        static getTextureBindGroupLayout(visibility: GPUShaderStageFlags, dimension?: GPUTextureViewDimension, mulsampler?: boolean, GPUTtextureType?: GPUTextureSampleType, samplerType?: GPUSamplerBindingType): GPUBindGroupLayout;
-        static getBufferBindGroupLayout(visibility: GPUShaderStageFlags, bufferBindType?: GPUBufferBindingType): GPUBindGroupLayout;
+        static getBindGroupLayoutByUniformMap(
+            uniformMap: {
+                [name: string]: ShaderDataType;
+            },
+            out: WGPUShaderVariable[]
+        ): void;
+        static getTextureBindGroupLayout(
+            visibility: GPUShaderStageFlags,
+            dimension?: GPUTextureViewDimension,
+            mulsampler?: boolean,
+            GPUTtextureType?: GPUTextureSampleType,
+            samplerType?: GPUSamplerBindingType
+        ): GPUBindGroupLayout;
+        static getBufferBindGroupLayout(
+            visibility: GPUShaderStageFlags,
+            bufferBindType?: GPUBufferBindingType
+        ): GPUBindGroupLayout;
         /**
          * BufferEntry
          * @returns
          */
-        static createBufferLayoutEntry(binding: number, visibility: GPUShaderStageFlags, bufferBindType: GPUBufferBindingType, dynamicOffset?: boolean): GPUBindGroupLayoutEntry;
+        static createBufferLayoutEntry(
+            binding: number,
+            visibility: GPUShaderStageFlags,
+            bufferBindType: GPUBufferBindingType,
+            dynamicOffset?: boolean
+        ): GPUBindGroupLayoutEntry;
         /**
          * TextureEntry
          * @returns
          */
-        static createTextureLayoutEntry(binding: number, visibility: GPUShaderStageFlags, dimension?: GPUTextureViewDimension, mulsampler?: boolean, GPUTtextureType?: GPUTextureSampleType): GPUBindGroupLayoutEntry;
+        static createTextureLayoutEntry(
+            binding: number,
+            visibility: GPUShaderStageFlags,
+            dimension?: GPUTextureViewDimension,
+            mulsampler?: boolean,
+            GPUTtextureType?: GPUTextureSampleType
+        ): GPUBindGroupLayoutEntry;
         /**
          * SamplerEntry
          * @returns
          */
-        static createSamplerLayoutEntry(binding: number, visibility: GPUShaderStageFlags, samplerType?: GPUSamplerBindingType): GPUBindGroupLayoutEntry;
+        static createSamplerLayoutEntry(
+            binding: number,
+            visibility: GPUShaderStageFlags,
+            samplerType?: GPUSamplerBindingType
+        ): GPUBindGroupLayoutEntry;
         /**
          * StrorageEntry
          * @returns
          */
-        static createStorageTextureEntry(binding: number, visibility: GPUShaderStageFlags, textureFormat: GPUTextureFormat, dimension?: GPUTextureViewDimension): GPUBindGroupLayoutEntry;
+        static createStorageTextureEntry(
+            binding: number,
+            visibility: GPUShaderStageFlags,
+            textureFormat: GPUTextureFormat,
+            dimension?: GPUTextureViewDimension
+        ): GPUBindGroupLayoutEntry;
         /**
          * ExternalTextureEntry
          * @returns
@@ -29505,10 +31700,19 @@ declare module Laya {
     }
     class WGPURenderEngineFactory implements IRenderEngineFactory {
         createShaderData(): WGPUShaderData;
-        createShaderInstance(shaderProcessInfo: ShaderProcessInfo, shaderPass: ShaderCompileDefineBase): WGPURenderPipelineInstance;
+        createShaderInstance(
+            shaderProcessInfo: ShaderProcessInfo,
+            shaderPass: ShaderCompileDefineBase
+        ): WGPURenderPipelineInstance;
         createRenderStateComand(): RenderStateCommand;
         createRenderState(): RenderState;
-        createUniformBufferObject(glPointer: number, name: string, bufferUsage: BufferUsage, byteLength: number, isSingle: boolean): UniformBufferObject;
+        createUniformBufferObject(
+            glPointer: number,
+            name: string,
+            bufferUsage: BufferUsage,
+            byteLength: number,
+            isSingle: boolean
+        ): UniformBufferObject;
         createGlobalUniformMap(blockName: string): CommandUniformMap;
         createEngine(config: any, canvas: any): Promise<any>;
     }
@@ -29521,7 +31725,7 @@ declare module Laya {
         SUBTRACT = 1,
         REVERSE_SUBTRACT = 2,
         MIN = 3,
-        MAX = 4
+        MAX = 4,
     }
     enum BlendFactor {
         /** (0, 0, 0, 0)*/
@@ -29549,7 +31753,7 @@ declare module Laya {
         /** (Rc, Gc, Bc, Ac)*/
         BlendColor = 11,
         /** (1 - Rc, 1 - Gc, 1 - Bc, 1 - Ac)*/
-        OneMinusBlendColor = 12
+        OneMinusBlendColor = 12,
     }
     enum BlendType {
         /**混合枚举_禁用。*/
@@ -29557,7 +31761,7 @@ declare module Laya {
         /**混合枚举_启用_RGB和Alpha统一混合。*/
         BLEND_ENABLE_ALL = 1,
         /**混合枚举_启用_RGB和Alpha单独混合。*/
-        BLEND_ENABLE_SEPERATE = 2
+        BLEND_ENABLE_SEPERATE = 2,
     }
     enum BufferTargetType {
         ARRAY_BUFFER = 0,
@@ -29567,7 +31771,7 @@ declare module Laya {
         COPY_WRITE_BUFFER = 4,
         TRANSFORM_FEEDBACK_BUFFER = 5,
         PIXEL_PACK_BUFFER = 6,
-        PIXEL_UNPACK_BUFFER = 7
+        PIXEL_UNPACK_BUFFER = 7,
     }
     /**
      * Buffer usage.
@@ -29578,7 +31782,7 @@ declare module Laya {
         /** The buffer contents are intended to be respecified repeatedly, and used many times */
         Dynamic = 1,
         /** The buffer contents are intended to be specified once, and used at most a few times */
-        Stream = 2
+        Stream = 2,
     }
     enum CompareFunction {
         /** never pass. */
@@ -29598,7 +31802,7 @@ declare module Laya {
         /** always pass. */
         Always = 7,
         /** off */
-        Off = 8
+        Off = 8,
     }
     enum CullMode {
         /** Disable culling. */
@@ -29606,13 +31810,13 @@ declare module Laya {
         /** cut the front-face of the polygons. */
         Front = 1,
         /** cut the back-face of the polygons. */
-        Back = 2
+        Back = 2,
     }
     enum DrawType {
         DrawArray = 0,
         DrawArrayInstance = 1,
         DrawElement = 2,
-        DrawElementInstance = 3
+        DrawElementInstance = 3,
     }
     /**
      * 纹理的过滤模式。
@@ -29623,12 +31827,12 @@ declare module Laya {
         /**双线性过滤。*/
         Bilinear = 1,
         /**三线性过滤。*/
-        Trilinear = 2
+        Trilinear = 2,
     }
     enum HDREncodeFormat {
         NONE = 0,
         RGBM = 1,
-        RGBD = 2
+        RGBD = 2,
     }
     enum IndexFormat {
         /** 8 位无符号整型索引格式。*/
@@ -29636,7 +31840,7 @@ declare module Laya {
         /** 16 位无符号整型索引格式。*/
         UInt16 = 1,
         /** 32 位无符号整型索引格式。*/
-        UInt32 = 2
+        UInt32 = 2,
     }
     enum RenderCapable {
         Element_Index_Uint32 = 0,
@@ -29661,23 +31865,23 @@ declare module Laya {
         UnifromBufferObject = 19,
         Texture3D = 20,
         Texture_FloatLinearFiltering = 21,
-        Texture_HalfFloatLinearFiltering = 22
+        Texture_HalfFloatLinearFiltering = 22,
     }
     enum RenderClearFlag {
         Nothing = 0,
         Color = 1,
         Depth = 2,
-        Stencil = 4
+        Stencil = 4,
     }
     enum RenderDrawMode {
         TRIANGLES = 0,
         POINTS = 1,
-        LINES = 2
+        LINES = 2,
     }
     enum RenderIndexMode {
         UNSIGNED_BYTE = 0,
         UNSIGNED_SHORT = 1,
-        UNSIGNED_INT = 2
+        UNSIGNED_INT = 2,
     }
     enum RenderParams {
         Max_Active_Texture_Count = 0,
@@ -29689,7 +31893,7 @@ declare module Laya {
         FLOAT = 6,
         UNSIGNED_BYTE = 7,
         BYTE = 8,
-        UNSIGNED_SHORT = 9
+        UNSIGNED_SHORT = 9,
     }
     /**
      * Mesh topology.
@@ -29708,7 +31912,7 @@ declare module Laya {
         /** Draws a triangle strip */
         TriangleStrip = 5,
         /** Draws a triangle fan */
-        TriangleFan = 6
+        TriangleFan = 6,
     }
     enum RenderStateType {
         DepthTest = 0,
@@ -29724,7 +31928,7 @@ declare module Laya {
         BlendFunc = 10,
         BlendFuncSeperate = 11,
         CullFace = 12,
-        FrontFace = 13
+        FrontFace = 13,
     }
     /**
      * 渲染统计数据
@@ -29737,7 +31941,7 @@ declare module Laya {
         GPUMemory = 4,
         TextureMemeory = 5,
         RenderTextureMemory = 6,
-        BufferMemory = 7
+        BufferMemory = 7,
     }
     enum RenderTargetFormat {
         None = -1,
@@ -29752,7 +31956,7 @@ declare module Laya {
         STENCIL_8 = 36,
         DEPTHSTENCIL_24_8 = 37,
         DEPTH_32 = 38,
-        DEPTHSTENCIL_24_Plus = 39
+        DEPTHSTENCIL_24_Plus = 39,
     }
     enum StencilOperation {
         /** Keeps the current value. */
@@ -29770,7 +31974,7 @@ declare module Laya {
         /** Increments the current stencil buffer value. Wraps stencil buffer value to zero when incrementing the maximum representable unsigned value. */
         IncrementWrap = 6,
         /** Decrements the current stencil buffer value. Wraps stencil buffer value to the maximum representable unsigned value when decrementing a stencil buffer value of 0. */
-        DecrementWrap = 7
+        DecrementWrap = 7,
     }
     enum TextureCompareMode {
         None = 0,
@@ -29781,7 +31985,7 @@ declare module Laya {
         EQUAL = 5,
         NOTEQUAL = 6,
         ALWAYS = 7,
-        NEVER = 8
+        NEVER = 8,
     }
     /**
      * 纹理解码格式。
@@ -29790,7 +31994,7 @@ declare module Laya {
         /** 常规解码方式,直接采样纹理颜色。*/
         Normal = 0,
         /** 按照RGBM方式解码并计算最终RGB颜色。 */
-        RGBM = 1
+        RGBM = 1,
     }
     enum TextureDimension {
         Tex2D = 0,
@@ -29799,7 +32003,7 @@ declare module Laya {
         Texture2DArray = 3,
         CubeArray = 4,
         Unkonw = 5,
-        None = 6
+        None = 6,
     }
     /**
      * 纹理格式
@@ -29867,7 +32071,7 @@ declare module Laya {
         /**ktx图片 */
         KTXTEXTURE = -1,
         /**pvr图片 */
-        PVRTEXTURE = -2
+        PVRTEXTURE = -2,
     }
     /**
      * 纹理寻址模式。
@@ -29878,7 +32082,7 @@ declare module Laya {
         /** 超过UV边界后采用最后一个像素。*/
         Clamp = 1,
         /** 镜像采样 */
-        Mirrored = 2
+        Mirrored = 2,
     }
     interface InternalRenderTarget {
         _isCube: boolean;
@@ -29942,8 +32146,7 @@ declare module Laya {
         bindBufferRange(glPointer: number, offset: number, byteCount: number): void;
         destroy(): void;
     }
-    interface IRenderDrawContext {
-    }
+    interface IRenderDrawContext {}
     interface IRenderEngine {
         _context: any;
         initRenderEngine(canvas: any): void;
@@ -29951,9 +32154,22 @@ declare module Laya {
         viewport(x: number, y: number, width: number, height: number): void;
         scissor(x: number, y: number, width: number, height: number): void;
         colorMask(r: boolean, g: boolean, b: boolean, a: boolean): void;
-        copySubFrameBuffertoTex(texture: BaseTexture, level: number, xoffset: number, yoffset: number, x: number, y: number, width: number, height: number): void;
+        copySubFrameBuffertoTex(
+            texture: BaseTexture,
+            level: number,
+            xoffset: number,
+            yoffset: number,
+            x: number,
+            y: number,
+            width: number,
+            height: number
+        ): void;
         bindTexture(texture: BaseTexture): void;
-        clearRenderTexture(clearFlag: RenderClearFlag | number, clearcolor: Color, clearDepth: number): void;
+        clearRenderTexture(
+            clearFlag: RenderClearFlag | number,
+            clearcolor: Color,
+            clearDepth: number
+        ): void;
         scissorTest(value: boolean): void;
         propertyNameToID(name: string): number;
         propertyIDToName(id: number): string;
@@ -29964,23 +32180,33 @@ declare module Laya {
         get2DRenderContext(): IRender2DContext;
         getCreateRenderOBJContext(): IRenderEngineFactory;
         createRenderStateComand(): RenderStateCommand;
-        createShaderInstance(vs: string, ps: string, attributeMap: {
-            [name: string]: [
-                number,
-                ShaderDataType
-            ];
-        }): IRenderShaderInstance;
+        createShaderInstance(
+            vs: string,
+            ps: string,
+            attributeMap: {
+                [name: string]: [number, ShaderDataType];
+            }
+        ): IRenderShaderInstance;
         createBuffer(targetType: BufferTargetType, bufferUsageType: BufferUsage): IRenderBuffer;
         createVertexState(): IRenderVertexState;
         getUBOPointer(name: string): number;
         unbindVertexState(): void;
     }
     interface IRenderEngineFactory {
-        createShaderInstance(shaderProcessInfo: ShaderProcessInfo, shaderPass: ShaderCompileDefineBase): any;
+        createShaderInstance(
+            shaderProcessInfo: ShaderProcessInfo,
+            shaderPass: ShaderCompileDefineBase
+        ): any;
         createShaderData(ownerResource: Resource): ShaderData;
         createRenderStateComand(): RenderStateCommand;
         createRenderState(): RenderState;
-        createUniformBufferObject(glPointer: number, name: string, bufferUsage: BufferUsage, byteLength: number, isSingle: boolean): UniformBufferObject;
+        createUniformBufferObject(
+            glPointer: number,
+            name: string,
+            bufferUsage: BufferUsage,
+            byteLength: number,
+            isSingle: boolean
+        ): UniformBufferObject;
         createGlobalUniformMap(blockName: string): CommandUniformMap;
         createEngine(config: Config, canvas: any): Promise<void>;
     }
@@ -30017,43 +32243,179 @@ declare module Laya {
          * @param sRGB
          * @returns
          */
-        createTextureInternal(dimension: TextureDimension, width: number, height: number, format: TextureFormat, generateMipmap: boolean, sRGB: boolean, premultipliedAlpha: boolean): InternalTexture;
-        setTextureImageData(texture: InternalTexture, source: HTMLImageElement | HTMLCanvasElement | ImageBitmap, premultiplyAlpha: boolean, invertY: boolean): void;
-        setTextureSubImageData(texture: InternalTexture, source: HTMLImageElement | HTMLCanvasElement | ImageBitmap, x: number, y: number, premultiplyAlpha: boolean, invertY: boolean): void;
-        setTexturePixelsData(texture: InternalTexture, source: ArrayBufferView, premultiplyAlpha: boolean, invertY: boolean): void;
+        createTextureInternal(
+            dimension: TextureDimension,
+            width: number,
+            height: number,
+            format: TextureFormat,
+            generateMipmap: boolean,
+            sRGB: boolean,
+            premultipliedAlpha: boolean
+        ): InternalTexture;
+        setTextureImageData(
+            texture: InternalTexture,
+            source: HTMLImageElement | HTMLCanvasElement | ImageBitmap,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
+        setTextureSubImageData(
+            texture: InternalTexture,
+            source: HTMLImageElement | HTMLCanvasElement | ImageBitmap,
+            x: number,
+            y: number,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
+        setTexturePixelsData(
+            texture: InternalTexture,
+            source: ArrayBufferView,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
         initVideoTextureData(texture: InternalTexture): void;
-        setTextureSubPixelsData(texture: InternalTexture, source: ArrayBufferView, mipmapLevel: number, generateMipmap: boolean, xOffset: number, yOffset: number, width: number, height: number, premultiplyAlpha: boolean, invertY: boolean): void;
+        setTextureSubPixelsData(
+            texture: InternalTexture,
+            source: ArrayBufferView,
+            mipmapLevel: number,
+            generateMipmap: boolean,
+            xOffset: number,
+            yOffset: number,
+            width: number,
+            height: number,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
         setTextureDDSData(texture: InternalTexture, ddsInfo: DDSTextureInfo): void;
         setTextureKTXData(texture: InternalTexture, ktxInfo: KTXTextureInfo): void;
         setTextureHDRData(texture: InternalTexture, hdrInfo: HDRTextureInfo): void;
-        setCubeImageData(texture: InternalTexture, sources: (HTMLImageElement | HTMLCanvasElement | ImageBitmap)[], premultiplyAlpha: boolean, invertY: boolean): void;
-        setCubePixelsData(texture: InternalTexture, source: ArrayBufferView[], premultiplyAlpha: boolean, invertY: boolean): void;
-        setCubeSubPixelData(texture: InternalTexture, source: ArrayBufferView[], mipmapLevel: number, generateMipmap: boolean, xOffset: number, yOffset: number, width: number, height: number, premultiplyAlpha: boolean, invertY: boolean): void;
+        setCubeImageData(
+            texture: InternalTexture,
+            sources: (HTMLImageElement | HTMLCanvasElement | ImageBitmap)[],
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
+        setCubePixelsData(
+            texture: InternalTexture,
+            source: ArrayBufferView[],
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
+        setCubeSubPixelData(
+            texture: InternalTexture,
+            source: ArrayBufferView[],
+            mipmapLevel: number,
+            generateMipmap: boolean,
+            xOffset: number,
+            yOffset: number,
+            width: number,
+            height: number,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
         setCubeDDSData(texture: InternalTexture, ddsInfo: DDSTextureInfo): void;
         setCubeKTXData(texture: InternalTexture, ktxInfo: KTXTextureInfo): void;
-        setTextureCompareMode(texture: InternalTexture, compareMode: TextureCompareMode): TextureCompareMode;
-        createRenderTextureInternal(dimension: TextureDimension, width: number, height: number, format: RenderTargetFormat, generateMipmap: boolean, sRGB: boolean): InternalTexture;
-        createRenderTargetInternal(width: number, height: number, format: RenderTargetFormat, depthStencilFormat: RenderTargetFormat, generateMipmap: boolean, sRGB: boolean, multiSamples: number): InternalRenderTarget;
-        createRenderTargetCubeInternal(size: number, colorFormat: RenderTargetFormat, depthStencilFormat: RenderTargetFormat, generateMipmap: boolean, sRGB: boolean, multiSamples: number): InternalRenderTarget;
-        setupRendertargetTextureAttachment(renderTarget: InternalRenderTarget, texture: InternalTexture): void;
+        setTextureCompareMode(
+            texture: InternalTexture,
+            compareMode: TextureCompareMode
+        ): TextureCompareMode;
+        createRenderTextureInternal(
+            dimension: TextureDimension,
+            width: number,
+            height: number,
+            format: RenderTargetFormat,
+            generateMipmap: boolean,
+            sRGB: boolean
+        ): InternalTexture;
+        createRenderTargetInternal(
+            width: number,
+            height: number,
+            format: RenderTargetFormat,
+            depthStencilFormat: RenderTargetFormat,
+            generateMipmap: boolean,
+            sRGB: boolean,
+            multiSamples: number
+        ): InternalRenderTarget;
+        createRenderTargetCubeInternal(
+            size: number,
+            colorFormat: RenderTargetFormat,
+            depthStencilFormat: RenderTargetFormat,
+            generateMipmap: boolean,
+            sRGB: boolean,
+            multiSamples: number
+        ): InternalRenderTarget;
+        setupRendertargetTextureAttachment(
+            renderTarget: InternalRenderTarget,
+            texture: InternalTexture
+        ): void;
         bindRenderTarget(renderTarget: InternalRenderTarget, faceIndex?: number): void;
         bindoutScreenTarget(): void;
         unbindRenderTarget(renderTarget: InternalRenderTarget): void;
-        readRenderTargetPixelData(renderTarget: InternalRenderTarget, xOffset: number, yOffset: number, width: number, height: number, out: ArrayBufferView): ArrayBufferView;
-        updateVideoTexture(texture: InternalTexture, video: HTMLVideoElement, premultiplyAlpha: boolean, invertY: boolean): void;
-        getRenderTextureData(internalTex: InternalRenderTarget, x: number, y: number, width: number, height: number): ArrayBufferView;
+        readRenderTargetPixelData(
+            renderTarget: InternalRenderTarget,
+            xOffset: number,
+            yOffset: number,
+            width: number,
+            height: number,
+            out: ArrayBufferView
+        ): ArrayBufferView;
+        updateVideoTexture(
+            texture: InternalTexture,
+            video: HTMLVideoElement,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
+        getRenderTextureData(
+            internalTex: InternalRenderTarget,
+            x: number,
+            y: number,
+            width: number,
+            height: number
+        ): ArrayBufferView;
     }
     interface ITexture3DContext extends ITextureContext {
-        createTexture3DInternal(dimension: TextureDimension, width: number, height: number, depth: number, format: TextureFormat, generateMipmap: boolean, sRGB: boolean, premultipliedAlpha: boolean): InternalTexture;
-        setTexture3DImageData(texture: InternalTexture, source: HTMLImageElement[] | HTMLCanvasElement[] | ImageBitmap[], depth: number, premultiplyAlpha: boolean, invertY: boolean): void;
-        setTexture3DPixelsData(texture: InternalTexture, source: ArrayBufferView, depth: number, premultiplyAlpha: boolean, invertY: boolean): void;
-        setTexture3DSubPixelsData(texture: InternalTexture, source: ArrayBufferView, mipmapLevel: number, generateMipmap: boolean, xOffset: number, yOffset: number, zOffset: number, width: number, height: number, depth: number, premultiplyAlpha: boolean, invertY: boolean): void;
+        createTexture3DInternal(
+            dimension: TextureDimension,
+            width: number,
+            height: number,
+            depth: number,
+            format: TextureFormat,
+            generateMipmap: boolean,
+            sRGB: boolean,
+            premultipliedAlpha: boolean
+        ): InternalTexture;
+        setTexture3DImageData(
+            texture: InternalTexture,
+            source: HTMLImageElement[] | HTMLCanvasElement[] | ImageBitmap[],
+            depth: number,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
+        setTexture3DPixelsData(
+            texture: InternalTexture,
+            source: ArrayBufferView,
+            depth: number,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
+        setTexture3DSubPixelsData(
+            texture: InternalTexture,
+            source: ArrayBufferView,
+            mipmapLevel: number,
+            generateMipmap: boolean,
+            xOffset: number,
+            yOffset: number,
+            zOffset: number,
+            width: number,
+            height: number,
+            depth: number,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
     }
     /**
      * 基本渲染单元
      */
-    interface IBaseRenderNode {
-    }
+    interface IBaseRenderNode {}
     interface ICameraCullInfo {
         /**位置 */
         position: Vector3;
@@ -30071,9 +32433,15 @@ declare module Laya {
      */
     interface ICullPass {
         cullList: SingletonList<BaseRender>;
-        cullByCameraCullInfo(cameraCullInfo: ICameraCullInfo, renderManager: ISceneRenderManager): void;
+        cullByCameraCullInfo(
+            cameraCullInfo: ICameraCullInfo,
+            renderManager: ISceneRenderManager
+        ): void;
         cullByShadowCullInfo(cullInfo: IShadowCullInfo, renderManager: ISceneRenderManager): void;
-        cullingSpotShadow(cameraCullInfo: ICameraCullInfo, renderManager: ISceneRenderManager): void;
+        cullingSpotShadow(
+            cameraCullInfo: ICameraCullInfo,
+            renderManager: ISceneRenderManager
+        ): void;
     }
     type PipelineMode = "Forward" | "ShadowCaster" | "DepthNormal" | string;
     interface IRenderContext3D {
@@ -30108,8 +32476,7 @@ declare module Laya {
         _clearShaderInstance(): void;
         _destroy(): void;
     }
-    interface IRenderGeometryElement {
-    }
+    interface IRenderGeometryElement {}
     /**
      * 渲染通道
      */
@@ -30186,7 +32553,12 @@ declare module Laya {
          * @param left
          * @param right
          */
-        sort(elements: SingletonList<RenderElement>, isTransparent: boolean, left: number, right: number): void;
+        sort(
+            elements: SingletonList<RenderElement>,
+            isTransparent: boolean,
+            left: number,
+            right: number
+        ): void;
     }
     /**
      * <code>DefineDatas</code> 类用于创建宏定义数据集合。
@@ -30487,11 +32859,21 @@ declare module Laya {
          * @param   passIndex  通道索引。
          * @param	defineNames 宏定义名字集合。
          */
-        static compileShaderByDefineNames(shaderName: string, subShaderIndex: number, passIndex: number, defineNames: string[], nodeCommonMap: string[]): void;
+        static compileShaderByDefineNames(
+            shaderName: string,
+            subShaderIndex: number,
+            passIndex: number,
+            defineNames: string[],
+            nodeCommonMap: string[]
+        ): void;
         /**
          * 添加预编译shader文件，主要是处理宏定义
          */
-        static add(name: string, enableInstancing?: boolean, supportReflectionProbe?: boolean): Shader3D;
+        static add(
+            name: string,
+            enableInstancing?: boolean,
+            supportReflectionProbe?: boolean
+        ): Shader3D;
         /**
          * 获取ShaderCompile3D。
          * @param	name
@@ -30531,10 +32913,30 @@ declare module Laya {
         Texture2D = 8,
         TextureCube = 9,
         Buffer = 10,
-        Matrix3x3 = 11
+        Matrix3x3 = 11,
     }
-    type ShaderDataItem = number | boolean | Vector2 | Vector3 | Vector4 | Color | Matrix4x4 | BaseTexture | Float32Array | Matrix3x3;
-    function ShaderDataDefaultValue(type: ShaderDataType): false | Readonly<Vector2> | 0 | Readonly<Matrix3x3> | Readonly<Vector3> | Readonly<Matrix4x4> | Readonly<Vector4> | Color;
+    type ShaderDataItem =
+        | number
+        | boolean
+        | Vector2
+        | Vector3
+        | Vector4
+        | Color
+        | Matrix4x4
+        | BaseTexture
+        | Float32Array
+        | Matrix3x3;
+    function ShaderDataDefaultValue(
+        type: ShaderDataType
+    ):
+        | false
+        | Readonly<Vector2>
+        | 0
+        | Readonly<Matrix3x3>
+        | Readonly<Vector3>
+        | Readonly<Matrix4x4>
+        | Readonly<Vector4>
+        | Color;
     /**
      * 着色器数据类。
      */
@@ -30707,8 +33109,25 @@ declare module Laya {
          */
         setUniformBuffer(index: number, value: UniformBufferObject): void;
         getUniformBuffer(index: number): UniformBufferObject;
-        setShaderData(uniformIndex: number, type: ShaderDataType, value: ShaderDataItem | Quaternion): void;
-        getShaderData(uniformIndex: number, type: ShaderDataType): number | boolean | Vector2 | Float32Array | Vector3 | Matrix3x3 | Matrix4x4 | Vector4 | Color | BaseTexture;
+        setShaderData(
+            uniformIndex: number,
+            type: ShaderDataType,
+            value: ShaderDataItem | Quaternion
+        ): void;
+        getShaderData(
+            uniformIndex: number,
+            type: ShaderDataType
+        ):
+            | number
+            | boolean
+            | Vector2
+            | Float32Array
+            | Vector3
+            | Matrix3x3
+            | Matrix4x4
+            | Vector4
+            | Color
+            | BaseTexture;
         /**
          * get shader data
          * @deprecated
@@ -30753,18 +33172,24 @@ declare module Laya {
          * get complete
          */
         get complete(): boolean;
-        protected _webGLShaderLanguageProcess3D(defineString: string[], attributeMap: {
-            [name: string]: [
-                number,
-                ShaderDataType
-            ];
-        }, uniformMap: UniformMapType, VS: ShaderNode, FS: ShaderNode): void;
-        protected _webGLShaderLanguageProcess2D(defineString: string[], attributeMap: {
-            [name: string]: [
-                number,
-                ShaderDataType
-            ];
-        }, uniformMap: UniformMapType, VS: ShaderNode, FS: ShaderNode): void;
+        protected _webGLShaderLanguageProcess3D(
+            defineString: string[],
+            attributeMap: {
+                [name: string]: [number, ShaderDataType];
+            },
+            uniformMap: UniformMapType,
+            VS: ShaderNode,
+            FS: ShaderNode
+        ): void;
+        protected _webGLShaderLanguageProcess2D(
+            defineString: string[],
+            attributeMap: {
+                [name: string]: [number, ShaderDataType];
+            },
+            uniformMap: UniformMapType,
+            VS: ShaderNode,
+            FS: ShaderNode
+        ): void;
         private hasSpritePtrID;
         /**
          * @inheritDoc
@@ -30782,7 +33207,11 @@ declare module Laya {
          * @param shaderDatas
          * @param uploadUnTexture
          */
-        uploadUniforms(shaderUniform: CommandEncoder, shaderDatas: ShaderData, uploadUnTexture: boolean): void;
+        uploadUniforms(
+            shaderUniform: CommandEncoder,
+            shaderDatas: ShaderData,
+            uploadUnTexture: boolean
+        ): void;
         /**
          * set blend depth stencil RenderState
          * @param shaderDatas
@@ -30856,7 +33285,12 @@ declare module Laya {
          * @param passIndex 通道索引
          * @param defineNames 宏定义集合
          */
-        setValue(shader: Shader3D, subShaderIndex: number, passIndex: number, defineNames: string[]): void;
+        setValue(
+            shader: Shader3D,
+            subShaderIndex: number,
+            passIndex: number,
+            defineNames: string[]
+        ): void;
         /**
          * 是否相等。
          * @param other 其它着色器变种
@@ -30914,15 +33348,14 @@ declare module Laya {
         compile(): void;
     }
     type UniformMapType = {
-        [blockName: string]: {
-            [uniformName: string]: ShaderDataType;
-        } | ShaderDataType;
+        [blockName: string]:
+            | {
+                  [uniformName: string]: ShaderDataType;
+              }
+            | ShaderDataType;
     };
     type AttributeMapType = {
-        [name: string]: [
-            number,
-            ShaderDataType
-        ];
+        [name: string]: [number, ShaderDataType];
     };
     /**
      * <code>SubShader</code> 类用于创建SubShader。
@@ -30936,30 +33369,32 @@ declare module Laya {
          * @param uniformInfo
          * @param defaultUniformData
          */
-        static regIncludeBindUnifrom(includeName: string, uniformMap: {
-            [name: string]: ShaderDataType;
-        }, defaultValue: {
-            [key: string]: any;
-        }): void;
+        static regIncludeBindUnifrom(
+            includeName: string,
+            uniformMap: {
+                [name: string]: ShaderDataType;
+            },
+            defaultValue: {
+                [key: string]: any;
+            }
+        ): void;
         static readonly DefaultAttributeMap: {
-            [name: string]: [
-                number,
-                ShaderDataType
-            ];
+            [name: string]: [number, ShaderDataType];
         };
         /**
          * 创建一个 <code>SubShader</code> 实例。
          * @param	attributeMap  顶点属性表。
          * @param	uniformMap  uniform属性表。
          */
-        constructor(attributeMap?: {
-            [name: string]: [
-                number,
-                ShaderDataType
-            ];
-        }, uniformMap?: UniformMapType, uniformDefaultValue?: {
-            [name: string]: ShaderDataItem;
-        });
+        constructor(
+            attributeMap?: {
+                [name: string]: [number, ShaderDataType];
+            },
+            uniformMap?: UniformMapType,
+            uniformDefaultValue?: {
+                [name: string]: ShaderDataItem;
+            }
+        );
         /**
          * 添加标记。
          * @param key 标记键。
@@ -31058,8 +33493,7 @@ declare module Laya {
          */
         static setStencilMask(value: boolean): void;
     }
-    class StencilState {
-    }
+    class StencilState {}
     class SubUniformBufferData extends UnifromBufferData {
         /**@interanl */
         _isInPool: boolean;
@@ -31074,8 +33508,7 @@ declare module Laya {
     /**
      * 管理
      */
-    class UniformBufferBase {
-    }
+    class UniformBufferBase {}
     /**
      *描述UniformBuffer参数类型
      */
@@ -31086,7 +33519,7 @@ declare module Laya {
         Vector4 = 3,
         Matrix4x4 = 4,
         Vector4Array = 5,
-        MatrixArray = 6
+        MatrixArray = 6,
     }
     /**
      * 实例化UniformBuffer数据
@@ -31106,7 +33539,11 @@ declare module Laya {
          * @interanl
          * layout UniformBuffer pitch std140
          */
-        protected _addUniformParams(uniformID: number, value: UniformBufferParamsType, offset: number): number;
+        protected _addUniformParams(
+            uniformID: number,
+            value: UniformBufferParamsType,
+            offset: number
+        ): number;
         /**
          * @interanl
          * set upload range
@@ -31234,7 +33671,12 @@ declare module Laya {
          * @param bytelength byte length
          * @returns
          */
-        static create(name: string, bufferUsage: number, bytelength: number, isSingle?: boolean): UniformBufferObject;
+        static create(
+            name: string,
+            bufferUsage: number,
+            bytelength: number,
+            isSingle?: boolean
+        ): UniformBufferObject;
         /**
          * get Uniform Buffer by name
          * @param name Uniform block name(must pitch Shader)
@@ -31250,7 +33692,13 @@ declare module Laya {
         /**
          * @interanl
          */
-        constructor(glPointer: number, name: string, bufferUsage: BufferUsage, byteLength: number, isSingle: boolean);
+        constructor(
+            glPointer: number,
+            name: string,
+            bufferUsage: BufferUsage,
+            byteLength: number,
+            isSingle: boolean
+        );
         /**
          * 重置buffer长度
          * @param bytelength
@@ -31441,8 +33889,8 @@ declare module Laya {
         static setBlendMode(blendMode: string): void;
     }
     /**
-    * <code>VertexElement</code> 类用于创建顶点结构分配。
-    */
+     * <code>VertexElement</code> 类用于创建顶点结构分配。
+     */
     class VertexElement {
         /**
          * 顶点偏移
@@ -31568,7 +34016,12 @@ declare module Laya {
          * @param subAssetExt
          * @returns
          */
-        getSubAssetURL(url: string, uuid: string, subAssetName: string, subAssetExt: string): string;
+        getSubAssetURL(
+            url: string,
+            uuid: string,
+            subAssetName: string,
+            subAssetExt: string
+        ): string;
     }
     /**
      * 大图合集资源
@@ -31726,11 +34179,26 @@ declare module Laya {
         clearRect(x: number, y: number, width: number, height: number): void;
         /**@private */
         /**@private */
-        drawTexture2(x: number, y: number, pivotX: number, pivotY: number, m: Matrix, args2: any[]): void;
+        drawTexture2(
+            x: number,
+            y: number,
+            pivotX: number,
+            pivotY: number,
+            m: Matrix,
+            args2: any[]
+        ): void;
         transformByMatrix(matrix: Matrix, tx: number, ty: number): void;
         saveTransform(matrix: Matrix): void;
         restoreTransform(matrix: Matrix): void;
-        drawRect(x: number, y: number, width: number, height: number, fillColor: any, lineColor: any, lineWidth: number): void;
+        drawRect(
+            x: number,
+            y: number,
+            width: number,
+            height: number,
+            fillColor: any,
+            lineColor: any,
+            lineWidth: number
+        ): void;
         alpha(value: number): void;
         drawCurves(x: number, y: number, points: any[], lineColor: any, lineWidth: number): void;
         private _fillAndStroke;
@@ -31818,21 +34286,85 @@ declare module Laya {
         save(): void;
         restore(): void;
         set font(str: string);
-        fillText(txt: string | WordText, x: number, y: number, fontStr: string, color: string, align: string, lineWidth?: number, borderColor?: string): void;
-        drawText(text: string | WordText, x: number, y: number, font: string, color: string, textAlign: string): void;
-        strokeWord(text: string | WordText, x: number, y: number, font: string, color: string, lineWidth: number, textAlign: string): void;
-        fillBorderText(txt: string | WordText, x: number, y: number, font: string, color: string, borderColor: string, lineWidth: number, textAlign: string): void;
-        filltext11(data: string | WordText, x: number, y: number, fontStr: string, color: string, strokeColor: string, lineWidth: number, textAlign: string): void;
+        fillText(
+            txt: string | WordText,
+            x: number,
+            y: number,
+            fontStr: string,
+            color: string,
+            align: string,
+            lineWidth?: number,
+            borderColor?: string
+        ): void;
+        drawText(
+            text: string | WordText,
+            x: number,
+            y: number,
+            font: string,
+            color: string,
+            textAlign: string
+        ): void;
+        strokeWord(
+            text: string | WordText,
+            x: number,
+            y: number,
+            font: string,
+            color: string,
+            lineWidth: number,
+            textAlign: string
+        ): void;
+        fillBorderText(
+            txt: string | WordText,
+            x: number,
+            y: number,
+            font: string,
+            color: string,
+            borderColor: string,
+            lineWidth: number,
+            textAlign: string
+        ): void;
+        filltext11(
+            data: string | WordText,
+            x: number,
+            y: number,
+            fontStr: string,
+            color: string,
+            strokeColor: string,
+            lineWidth: number,
+            textAlign: string
+        ): void;
         private _fillRect;
         fillRect(x: number, y: number, width: number, height: number, fillStyle: any): void;
-        fillTexture(texture: Texture, x: number, y: number, width: number, height: number, type: string, offset: Point, color: number): void;
+        fillTexture(
+            texture: Texture,
+            x: number,
+            y: number,
+            width: number,
+            height: number,
+            type: string,
+            offset: Point,
+            color: number
+        ): void;
         /**
          * 反正只支持一种filter，就不要叫setFilter了，直接叫setColorFilter
          * @param	value
          */
         setColorFilter(filter: ColorFilter): void;
-        drawTexture(tex: Texture, x: number, y: number, width: number, height: number, color?: number): void;
-        drawTextures(tex: Texture, pos: ArrayLike<number>, tx: number, ty: number, colors: number[]): void;
+        drawTexture(
+            tex: Texture,
+            x: number,
+            y: number,
+            width: number,
+            height: number,
+            color?: number
+        ): void;
+        drawTextures(
+            tex: Texture,
+            pos: ArrayLike<number>,
+            tx: number,
+            ty: number,
+            colors: number[]
+        ): void;
         submitDebugger(): void;
         private isSameClipInfo;
         drawCallOptimize(enable: boolean): boolean;
@@ -31856,7 +34388,15 @@ declare module Laya {
          * @param	h
          * @param   italicDeg 倾斜角度，单位是度。0度无，目前是下面不动。以后要做成可调的
          */
-        transformQuad(x: number, y: number, w: number, h: number, italicDeg: number, m: Matrix, out: any[]): void;
+        transformQuad(
+            x: number,
+            y: number,
+            w: number,
+            h: number,
+            italicDeg: number,
+            m: Matrix,
+            out: any[]
+        ): void;
         pushRT(): void;
         popRT(): void;
         useRT(rt: RenderTexture2D): void;
@@ -31883,7 +34423,20 @@ declare module Laya {
          * @param	ty
          * @param	alpha
          */
-        drawTextureWithTransform(tex: Texture, x: number, y: number, width: number, height: number, transform: Matrix | null, tx: number, ty: number, alpha: number, blendMode: string | null, uv?: number[], color?: number): void;
+        drawTextureWithTransform(
+            tex: Texture,
+            x: number,
+            y: number,
+            width: number,
+            height: number,
+            transform: Matrix | null,
+            tx: number,
+            ty: number,
+            alpha: number,
+            blendMode: string | null,
+            uv?: number[],
+            color?: number
+        ): void;
         /**
          * * 把ctx中的submits提交。结果渲染到target上
          * @param	ctx
@@ -31891,8 +34444,30 @@ declare module Laya {
          */
         private _flushToTarget;
         drawCanvas(canvas: HTMLCanvas, x: number, y: number, width: number, height: number): void;
-        drawTarget(rt: RenderTexture2D, x: number, y: number, width: number, height: number, m: Matrix, shaderValue: Value2D, uv?: ArrayLike<number> | null, blend?: number, color?: number): boolean;
-        drawTriangles(tex: Texture, x: number, y: number, vertices: Float32Array, uvs: Float32Array, indices: Uint16Array, matrix: Matrix, alpha: number, blendMode: string, colorNum?: number): void;
+        drawTarget(
+            rt: RenderTexture2D,
+            x: number,
+            y: number,
+            width: number,
+            height: number,
+            m: Matrix,
+            shaderValue: Value2D,
+            uv?: ArrayLike<number> | null,
+            blend?: number,
+            color?: number
+        ): boolean;
+        drawTriangles(
+            tex: Texture,
+            x: number,
+            y: number,
+            vertices: Float32Array,
+            uvs: Float32Array,
+            indices: Uint16Array,
+            matrix: Matrix,
+            alpha: number,
+            blendMode: string,
+            colorNum?: number
+        ): void;
         transform(a: number, b: number, c: number, d: number, tx: number, ty: number): void;
         setTransformByMatrix(value: Matrix): void;
         rotate(angle: number): void;
@@ -31930,14 +34505,30 @@ declare module Laya {
          */
         lineTo(x: number, y: number): void;
         arcTo(x1: number, y1: number, x2: number, y2: number, r: number): void;
-        arc(cx: number, cy: number, rx: number, ry: number, startAngle: number, endAngle: number, counterclockwise?: boolean, b?: boolean, minNum?: number): void;
+        arc(
+            cx: number,
+            cy: number,
+            rx: number,
+            ry: number,
+            startAngle: number,
+            endAngle: number,
+            counterclockwise?: boolean,
+            b?: boolean,
+            minNum?: number
+        ): void;
         quadraticCurveTo(cpx: number, cpy: number, x: number, y: number): void;
         /**
          * 把颜色跟当前设置的alpha混合
          * @return
          */
         mixRGBandAlpha(color: number): number;
-        strokeRect(x: number, y: number, width: number, height: number, parameterLineWidth: number): void;
+        strokeRect(
+            x: number,
+            y: number,
+            width: number,
+            height: number,
+            parameterLineWidth: number
+        ): void;
         clip(): void;
         /*******************************************end矢量绘制***************************************************/
         drawParticle(x: number, y: number, pt: any): void;
@@ -31971,7 +34562,17 @@ declare module Laya {
         private _fillTexture_v;
         private static tmpUV;
         private static tmpUVRect;
-        drawTextureWithSizeGrid(tex: Texture, tx: number, ty: number, width: number, height: number, sizeGrid: any[], gx: number, gy: number, color: number): void;
+        drawTextureWithSizeGrid(
+            tex: Texture,
+            tx: number,
+            ty: number,
+            width: number,
+            height: number,
+            sizeGrid: any[],
+            gx: number,
+            gy: number,
+            color: number
+        ): void;
         addRenderObject3D(scene3D: ISubmit): void;
     }
     class Prefab extends Resource {
@@ -32086,7 +34687,7 @@ declare module Laya {
         /**渲染状态_透明混合。*/
         RENDERMODE_ALPHABLENDED = 4,
         /**渲染状态_自定义 */
-        RENDERMODE_CUSTOME = 5
+        RENDERMODE_CUSTOME = 5,
     }
     /**
      * <code>Material</code> 类用于创建材质。
@@ -32543,7 +35144,11 @@ declare module Laya {
          * @param type 值类型
          * @param value 值
          */
-        setShaderDataByIndex(uniformIndex: number, type: ShaderDataType, value: ShaderDataItem): void;
+        setShaderDataByIndex(
+            uniformIndex: number,
+            type: ShaderDataType,
+            value: ShaderDataItem
+        ): void;
         /**
          * 设置ShaderData的属性值
          * @param name 属性名称
@@ -32652,7 +35257,13 @@ declare module Laya {
          * @param depthStencilFormat 深度格式。
          * 创建一个 <code>RenderTexture</code> 实例。
          */
-        constructor(width: number, height: number, format?: number, depthStencilFormat?: number, create?: boolean);
+        constructor(
+            width: number,
+            height: number,
+            format?: number,
+            depthStencilFormat?: number,
+            create?: boolean
+        );
         get isCube(): boolean;
         get samples(): number;
         get generateMipmap(): boolean;
@@ -32698,7 +35309,11 @@ declare module Laya {
         /**收集资源链接 */
         collectResourceLinks: (data: any, basePath: string) => (string | ILoadURL)[];
         /**解析 */
-        parse: (data: any, options?: Record<string, any>, errors?: Array<any>) => Array<Node> | Node;
+        parse: (
+            data: any,
+            options?: Record<string, any>,
+            errors?: Array<any>
+        ) => Array<Node> | Node;
     }
     /**
      * 预制体导入
@@ -32742,7 +35357,16 @@ declare module Laya {
          * @param sRGB
          * @returns
          */
-        static createFromPool(width: number, height: number, colorFormat: RenderTargetFormat, depthFormat: RenderTargetFormat, mipmap?: boolean, multiSamples?: number, depthTexture?: boolean, sRGB?: boolean): RenderTexture;
+        static createFromPool(
+            width: number,
+            height: number,
+            colorFormat: RenderTargetFormat,
+            depthFormat: RenderTargetFormat,
+            mipmap?: boolean,
+            multiSamples?: number,
+            depthTexture?: boolean,
+            sRGB?: boolean
+        ): RenderTexture;
         static recoverToPool(rt: RenderTexture): void;
         static clearPool(): void;
         /**
@@ -32777,11 +35401,26 @@ declare module Laya {
          * @param generateDepthTexture
          * @param sRGB
          */
-        constructor(width: number, height: number, colorFormat: RenderTargetFormat, depthFormat: RenderTargetFormat, generateMipmap?: boolean, multiSamples?: number, generateDepthTexture?: boolean, sRGB?: boolean);
+        constructor(
+            width: number,
+            height: number,
+            colorFormat: RenderTargetFormat,
+            depthFormat: RenderTargetFormat,
+            generateMipmap?: boolean,
+            multiSamples?: number,
+            generateDepthTexture?: boolean,
+            sRGB?: boolean
+        );
         _createRenderTarget(): void;
         _start(): void;
         _end(): void;
-        getData(xOffset: number, yOffset: number, width: number, height: number, out: Uint8Array | Float32Array): Uint8Array | Float32Array;
+        getData(
+            xOffset: number,
+            yOffset: number,
+            width: number,
+            height: number,
+            out: Uint8Array | Float32Array
+        ): Uint8Array | Float32Array;
         protected _disposeResource(): void;
     }
     /**
@@ -32855,7 +35494,12 @@ declare module Laya {
          * @param depthStencilFormat 深度格式。
          * 创建一个 <code>RenderTexture</code> 实例。
          */
-        constructor(width: number, height: number, format?: RenderTargetFormat, depthStencilFormat?: RenderTargetFormat);
+        constructor(
+            width: number,
+            height: number,
+            format?: RenderTargetFormat,
+            depthStencilFormat?: RenderTargetFormat
+        );
         /**是否是RTCube */
         get isCube(): boolean;
         /**采样 */
@@ -32918,7 +35562,13 @@ declare module Laya {
          * @param generateMipmap 是否生成mipmap
          * @param multiSamples
          */
-        constructor(size: number, colorFormat: RenderTargetFormat, depthFormat: RenderTargetFormat, generateMipmap: boolean, multiSamples: number);
+        constructor(
+            size: number,
+            colorFormat: RenderTargetFormat,
+            depthFormat: RenderTargetFormat,
+            generateMipmap: boolean,
+            multiSamples: number
+        );
         _start(): void;
     }
     /**
@@ -33026,7 +35676,7 @@ declare module Laya {
         /**Json */
         JSON = 2,
         /**XML */
-        XML = 3
+        XML = 3,
     }
     /**
      * 文字资源
@@ -33092,7 +35742,17 @@ declare module Laya {
          * @param	sourceHeight 原始高度，包括被裁剪的透明区域（可选）。
          * @return  <code>Texture</code> 对象。
          */
-        static create(source: Texture | BaseTexture, x: number, y: number, width: number, height: number, offsetX?: number, offsetY?: number, sourceWidth?: number, sourceHeight?: number): Texture;
+        static create(
+            source: Texture | BaseTexture,
+            x: number,
+            y: number,
+            width: number,
+            height: number,
+            offsetX?: number,
+            offsetY?: number,
+            sourceWidth?: number,
+            sourceHeight?: number
+        ): Texture;
         /**
          * 截取Texture的一部分区域，生成新的Texture，如果两个区域没有相交，则返回null。
          * @param	texture	目标Texture。
@@ -33102,7 +35762,13 @@ declare module Laya {
          * @param	height	截取的高度。
          * @return 返回一个新的Texture。
          */
-        static createFromTexture(texture: Texture, x: number, y: number, width: number, height: number): Texture;
+        static createFromTexture(
+            texture: Texture,
+            x: number,
+            y: number,
+            width: number,
+            height: number
+        ): Texture;
         /**
          * uv
          */
@@ -33129,13 +35795,23 @@ declare module Laya {
          * @param bitmap 位图资源。
          * @param uv UV 数据信息。
          */
-        constructor(source?: Texture | BaseTexture, uv?: ArrayLike<number>, sourceWidth?: number, sourceHeight?: number);
+        constructor(
+            source?: Texture | BaseTexture,
+            uv?: ArrayLike<number>,
+            sourceWidth?: number,
+            sourceHeight?: number
+        );
         /**
          * 设置此对象的位图资源、UV数据信息。
          * @param	bitmap 位图资源
          * @param	uv UV数据信息
          */
-        setTo(bitmap?: BaseTexture, uv?: ArrayLike<number>, sourceWidth?: number, sourceHeight?: number): void;
+        setTo(
+            bitmap?: BaseTexture,
+            uv?: ArrayLike<number>,
+            sourceWidth?: number,
+            sourceHeight?: number
+        ): void;
         /**
          * 加载指定地址的图片。
          * @param	url 图片地址。
@@ -33229,14 +35905,26 @@ declare module Laya {
          * @param sRGB
          * @returns
          */
-        constructor(width: number, height: number, format: TextureFormat, mipmap: boolean, canRead: boolean, sRGB?: boolean, premultiplyAlpha?: boolean);
+        constructor(
+            width: number,
+            height: number,
+            format: TextureFormat,
+            mipmap: boolean,
+            canRead: boolean,
+            sRGB?: boolean,
+            premultiplyAlpha?: boolean
+        );
         /**
          * 设置Image数据
          * @param source Image原始数据
          * @param premultiplyAlpha 是否预乘 alpha
          * @param invertY 是否反转图像 Y 轴
          */
-        setImageData(source: HTMLImageElement | HTMLCanvasElement | ImageBitmap, premultiplyAlpha: boolean, invertY: boolean): void;
+        setImageData(
+            source: HTMLImageElement | HTMLCanvasElement | ImageBitmap,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
         /**
          * 设置像素数据
          * @param source 像素数据
@@ -33256,7 +35944,17 @@ declare module Laya {
          * @param premultiplyAlpha 预乘
          * @param invertY 翻转Y
          */
-        setSubPixelsData(xOffset: number, yOffset: number, width: number, height: number, pixels: ArrayBufferView, mipmapLevel: number, generateMipmap: boolean, premultiplyAlpha: boolean, invertY: boolean): void;
+        setSubPixelsData(
+            xOffset: number,
+            yOffset: number,
+            width: number,
+            height: number,
+            pixels: ArrayBufferView,
+            mipmapLevel: number,
+            generateMipmap: boolean,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
         /**
          * 设置dds数据
          * @param ddsInfo
@@ -33288,14 +35986,26 @@ declare module Laya {
      */
     class Texture2DArray extends BaseTexture {
         depth: number;
-        constructor(width: number, height: number, depth: number, format: TextureFormat, mipmap: boolean, canRead: boolean, sRGB?: boolean);
+        constructor(
+            width: number,
+            height: number,
+            depth: number,
+            format: TextureFormat,
+            mipmap: boolean,
+            canRead: boolean,
+            sRGB?: boolean
+        );
         /**
          * 设置Image数据
          * @param sources Image 数组
          * @param premultiplyAlpha 是否预乘 alpha
          * @param invertY 是否反转图像 Y 轴
          */
-        setImageData(sources: HTMLImageElement[] | HTMLCanvasElement[] | ImageBitmap[], premultiplyAlpha: boolean, invertY: boolean): void;
+        setImageData(
+            sources: HTMLImageElement[] | HTMLCanvasElement[] | ImageBitmap[],
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
         /**
          * 设置像素数据
          * @param source 像素数据
@@ -33317,18 +36027,37 @@ declare module Laya {
          * @param premultiplyAlpha 是否预乘 alpha
          * @param invertY 是否反转 Y 轴
          */
-        setSubPixelsData(xOffset: number, yOffset: number, zOffset: number, width: number, height: number, depth: number, pixels: ArrayBufferView, mipmapLevel: number, generateMipmap: boolean, premultiplyAlpha: boolean, invertY: boolean): void;
+        setSubPixelsData(
+            xOffset: number,
+            yOffset: number,
+            zOffset: number,
+            width: number,
+            height: number,
+            depth: number,
+            pixels: ArrayBufferView,
+            mipmapLevel: number,
+            generateMipmap: boolean,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
     }
     /**
      * 3D 纹理
      */
     class Texture3D extends BaseTexture {
         depth: number;
-        constructor(width: number, height: number, depth: number, format: TextureFormat, mipmap?: boolean, sRGB?: boolean);
+        constructor(
+            width: number,
+            height: number,
+            depth: number,
+            format: TextureFormat,
+            mipmap?: boolean,
+            sRGB?: boolean
+        );
         /**
-        * 设置像素数据
-        * @param source 像素数据
-        */
+         * 设置像素数据
+         * @param source 像素数据
+         */
         setPixelsData(source: ArrayBufferView): void;
         /**
          * 更新像素数据
@@ -33342,7 +36071,17 @@ declare module Laya {
          * @param mipmapLevel mipmap 等级
          * @param generateMipmap 是否生成 mipmap
          */
-        setSubPixelsData(xOffset: number, yOffset: number, zOffset: number, width: number, height: number, depth: number, pixels: ArrayBufferView, mipmapLevel: number, generateMipmap: boolean): void;
+        setSubPixelsData(
+            xOffset: number,
+            yOffset: number,
+            zOffset: number,
+            width: number,
+            height: number,
+            depth: number,
+            pixels: ArrayBufferView,
+            mipmapLevel: number,
+            generateMipmap: boolean
+        ): void;
     }
     enum TextureCubeFace {
         /**+x */
@@ -33356,7 +36095,7 @@ declare module Laya {
         /**+z */
         PositiveZ = 4,
         /**-z */
-        NegativeZ = 5
+        NegativeZ = 5,
     }
     /**
      * <code>TextureCube</code> 类用于生成立方体纹理。
@@ -33382,10 +36121,30 @@ declare module Laya {
          */
         static get whiteTexture(): TextureCube;
         static get errorTexture(): TextureCube;
-        constructor(size: number, format: TextureFormat, mipmap?: boolean, sRGB?: boolean, premultiplyAlpha?: boolean);
-        setImageData(source: (HTMLImageElement | HTMLCanvasElement | ImageBitmap)[], premultiplyAlpha: boolean, invertY: boolean): void;
+        constructor(
+            size: number,
+            format: TextureFormat,
+            mipmap?: boolean,
+            sRGB?: boolean,
+            premultiplyAlpha?: boolean
+        );
+        setImageData(
+            source: (HTMLImageElement | HTMLCanvasElement | ImageBitmap)[],
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
         setPixelsData(source: ArrayBufferView[], premultiplyAlpha: boolean, invertY: boolean): void;
-        updateSubPixelsData(source: ArrayBufferView[], xOffset: number, yOffset: number, width: number, height: number, mipmapLevel: number, generateMipmap: boolean, premultiplyAlpha: boolean, invertY: boolean): void;
+        updateSubPixelsData(
+            source: ArrayBufferView[],
+            xOffset: number,
+            yOffset: number,
+            width: number,
+            height: number,
+            mipmapLevel: number,
+            generateMipmap: boolean,
+            premultiplyAlpha: boolean,
+            invertY: boolean
+        ): void;
         setDDSData(ddsInfo: DDSTextureInfo): void;
         setKTXData(ktxInfo: KTXTextureInfo): void;
         get defaultTexture(): BaseTexture;
@@ -33421,9 +36180,9 @@ declare module Laya {
         set items(value: ExternalSkinItem[]);
         get items(): ExternalSkinItem[];
         /**
-        * 得到动画模板的引用
-        * @return templet
-        */
+         * 得到动画模板的引用
+         * @return templet
+         */
         get templet(): SpineTemplet;
         set templet(value: SpineTemplet);
         protected init(templet: SpineTemplet): void;
@@ -33520,7 +36279,15 @@ declare module Laya {
          * @param	freshSkin	是否刷新皮肤数据
          * @param	playAudio	是否播放音频
          */
-        play(nameOrIndex: any, loop: boolean, force?: boolean, start?: number, end?: number, freshSkin?: boolean, playAudio?: boolean): void;
+        play(
+            nameOrIndex: any,
+            loop: boolean,
+            force?: boolean,
+            start?: number,
+            end?: number,
+            freshSkin?: boolean,
+            playAudio?: boolean
+        ): void;
         private _update;
         private _flushExtSkin;
         /**
@@ -33618,7 +36385,12 @@ declare module Laya {
         private temp3;
         private temp4;
         constructor(templet: SpineTemplet, twoColorTint?: boolean);
-        draw(skeleton: spine.Skeleton, graphics: Graphics, slotRangeStart?: number, slotRangeEnd?: number): void;
+        draw(
+            skeleton: spine.Skeleton,
+            graphics: Graphics,
+            slotRangeStart?: number,
+            slotRangeEnd?: number
+        ): void;
     }
     /**
      * Spine动画模板基类
@@ -33633,7 +36405,12 @@ declare module Laya {
         get ns(): typeof spine;
         get basePath(): string;
         getTexture(name: string): SpineTexture;
-        _parse(desc: string | ArrayBuffer, atlasText: string, createURL: string, progress?: IBatchProgress): Promise<void>;
+        _parse(
+            desc: string | ArrayBuffer,
+            atlasText: string,
+            createURL: string,
+            progress?: IBatchProgress
+        ): Promise<void>;
         private getRuntimeVersion;
         private parseAtlas3;
         private parseAtlas4;
@@ -33697,7 +36474,7 @@ declare module Laya {
         private _drawGridCmd;
         /**@inheritDoc
          * @override
-        */
+         */
         destroy(): void;
         get sizeGrid(): number[];
         set sizeGrid(value: number[]);
@@ -33958,7 +36735,7 @@ declare module Laya {
         protected createText(): void;
         /**@inheritDoc
          * @override
-        */
+         */
         protected initialize(): void;
         /**
          * 对象的 <code>Event.MOUSE_OVER、Event.MOUSE_OUT、Event.MOUSE_DOWN、Event.MOUSE_UP、Event.CLICK</code> 事件侦听处理函数。
@@ -34101,7 +36878,7 @@ declare module Laya {
         /**
          * 兼容老IDE
          * @private
-        */
+         */
         set text(value: Text);
         /**
          * <p>当前实例的位图 <code>AutoImage</code> 实例的有效缩放网格数据。</p>
@@ -34903,12 +37680,12 @@ declare module Laya {
         /**
          * @inheritDoc
          * @override
-        */
+         */
         destroy(destroyChild?: boolean): void;
         /**
          * @inheritDoc
          * @override
-        */
+         */
         protected createChildren(): void;
         private _createList;
         private _setListEvent;
@@ -34923,12 +37700,12 @@ declare module Laya {
         /**
          * @inheritDoc
          * @override
-        */
+         */
         protected measureWidth(): number;
         /**
          * @inheritDoc
          * @override
-        */
+         */
         protected measureHeight(): number;
         /**
          * @private
@@ -34979,8 +37756,8 @@ declare module Laya {
         set selectedIndex(value: number);
         private changeSelected;
         /**
-        * 默认的下拉提示文本。
-        */
+         * 默认的下拉提示文本。
+         */
         get defaultLabel(): string;
         set defaultLabel(value: string);
         /**
@@ -35057,7 +37834,7 @@ declare module Laya {
         /**
          * @inheritDoc
          * @override
-        */
+         */
         set_dataSource(value: any): void;
         /**
          * 获取或设置对 <code>ComboBox</code> 组件所包含的 <code>Button</code> 组件的文本标签颜色。
@@ -35291,7 +38068,7 @@ declare module Laya {
         /**
          * @inheritDoc
          * @override
-        */
+         */
         open(closeOther?: boolean, param?: any): void;
         /**
          * 关闭对话框。
@@ -35636,7 +38413,7 @@ declare module Laya {
      *         console.log("滚动条的位置： value=" + value);
      *     }
      * }
-    */
+     */
     class HScrollBar extends ScrollBar {
         /**
          * @override
@@ -35732,7 +38509,7 @@ declare module Laya {
      * }
      *
      * @see laya.ui.Slider
-    */
+     */
     class HSlider extends Slider {
         /**
          * 创建一个 <code>HSlider</code> 类实例。
@@ -36028,7 +38805,7 @@ declare module Laya {
         /**
          * @override
          * @inheritDoc
-        */
+         */
         protected createChildren(): void;
         protected _onPostLayout(): void;
         /**
@@ -36213,18 +38990,18 @@ declare module Laya {
         /**
          * @inheritDoc
          * @override
-        */
+         */
         addChild<T extends Node>(child: T): T;
         private onResize;
         /**
          * @inheritDoc
          * @override
-        */
+         */
         addChildAt(child: Node, index: number): Node;
         /**
          *  @inheritDoc
          * @override
-        */
+         */
         removeChildAt(index: number): Node;
         /** 刷新。*/
         refresh(): void;
@@ -36516,12 +39293,12 @@ declare module Laya {
         /**
          * @inheritDoc
          * @override
-        */
+         */
         _setWidth(value: number): void;
         /**
          * @inheritDoc
          * @override
-        */
+         */
         _setHeight(value: number): void;
         /**
          * 水平方向显示的单元格数量。
@@ -36586,7 +39363,7 @@ declare module Laya {
         /**
          * @inheritDoc
          * @override
-        */
+         */
         protected _sizeChanged(): void;
         /**
          * @private
@@ -36654,7 +39431,7 @@ declare module Laya {
         /**
          * @inheritDoc
          * @override
-        */
+         */
         set_dataSource(value: any): void;
         /**
          * 单元格集合。
@@ -37031,12 +39808,12 @@ declare module Laya {
         /**
          * @inheritDoc
          * @override
-        */
+         */
         destroy(destroyChild?: boolean): void;
         /**
          * @inheritDoc
          * @override
-        */
+         */
         protected createChildren(): void;
         /**
          * @copy laya.ui.Image#skin
@@ -37048,12 +39825,12 @@ declare module Laya {
         /**
          * @inheritDoc
          * @override
-        */
+         */
         protected measureWidth(): number;
         /**
          * @inheritDoc
          * @override
-        */
+         */
         protected measureHeight(): number;
         /**
          * 当前的进度量。
@@ -37084,12 +39861,12 @@ declare module Laya {
         /**
          * @inheritDoc
          * @override
-        */
+         */
         set_width(value: number): void;
         /**
          * @inheritDoc
          * @override
-        */
+         */
         set_dataSource(value: any): void;
     }
     /**
@@ -37209,7 +39986,7 @@ declare module Laya {
     class RadioGroup extends UIGroup {
         /**@inheritDoc
          * @override
-        */
+         */
         protected createItem(skin: string, label: string): Sprite;
     }
     /**
@@ -37319,7 +40096,7 @@ declare module Laya {
         /**
          * @inheritDoc
          * @override
-        */
+         */
         destroy(destroyChild?: boolean): void;
         /**
          * @override
@@ -37363,7 +40140,7 @@ declare module Laya {
         /**
          * @inheritDoc
          * @override
-        */
+         */
         protected _sizeChanged(): void;
         /**@private */
         private resetPositions;
@@ -37372,12 +40149,12 @@ declare module Laya {
         /**
          * @inheritDoc
          * @override
-        */
+         */
         protected measureWidth(): number;
         /**
          * @inheritDoc
          * @override
-        */
+         */
         protected measureHeight(): number;
         /**
          * 设置滚动条信息。
@@ -37557,12 +40334,12 @@ declare module Laya {
         /**
          * @inheritDoc
          * @override
-        */
+         */
         protected createChildren(): void;
         /**
          * @inheritDoc
          * @override
-        */
+         */
         protected initialize(): void;
         /**
          * @private
@@ -37610,12 +40387,12 @@ declare module Laya {
         /**
          * @inheritDoc
          * @override
-        */
+         */
         protected measureHeight(): number;
         /**
          * @inheritDoc
          * @override
-        */
+         */
         protected _sizeChanged(): void;
         /**
          * <p>当前实例的背景图（ <code>Image</code> ）和滑块按钮（ <code>Button</code> ）实例的有效缩放网格数据。</p>
@@ -37694,9 +40471,9 @@ declare module Laya {
         show(x?: number, y?: number, views?: Array<StatUIParams>): void;
         showToggle(x?: number, y?: number, views?: Array<StatToggleUIParams>): void;
         /**
-        * @override
-        * 隐藏性能统计信息。
-        */
+         * @override
+         * 隐藏性能统计信息。
+         */
         hide(): void;
         update(): void;
         private createUI;
@@ -37753,7 +40530,7 @@ declare module Laya {
         None = 0,
         Horizontal = 1,
         Vertical = 2,
-        Both = 3
+        Both = 3,
     }
     /**
      * 当 <code>Group</code> 实例的 <code>selectedIndex</code> 属性发生变化时调度。
@@ -38095,17 +40872,17 @@ declare module Laya {
         /**
          * @inheritDoc
          * @override
-        */
+         */
         protected preinitialize(): void;
         /**
          * @inheritDoc
          * @override
-        */
+         */
         protected createChildren(): void;
         /**
          * @inheritDoc
          * @override
-        */
+         */
         protected initialize(): void;
         /**
          * @copy laya.ui.Image#skin
@@ -38465,7 +41242,7 @@ declare module Laya {
         /**
          * @inheritDoc
          * @override
-        */
+         */
         destroy(destroyChild?: boolean): void;
         /**
          * @override
@@ -38867,7 +41644,7 @@ declare module Laya {
         /**
          * @inheritDoc
          * @override
-        */
+         */
         destroy(destroyChild?: boolean): void;
         /**
          * 添加一个项对象，返回此项对象的索引id。
@@ -39001,7 +41778,7 @@ declare module Laya {
         /**
          * @inheritDoc
          * @override
-        */
+         */
         protected commitMeasure(): void;
         /**
          * 项对象们的存放数组。
@@ -39053,8 +41830,8 @@ declare module Laya {
         static getBindFun(value: string): Function;
     }
     /**
-         * <code>VBox</code> 是一个垂直布局容器类。
-         */
+     * <code>VBox</code> 是一个垂直布局容器类。
+     */
     class VBox extends LayoutBox {
         /**
          * 无对齐。
@@ -39081,7 +41858,7 @@ declare module Laya {
         /**
          * @inheritDoc
          * @override
-        */
+         */
         protected changeItems(): void;
     }
     /**
@@ -39168,7 +41945,7 @@ declare module Laya {
         /**
          * @inheritDoc
          * @override
-        */
+         */
         set_dataSource(value: any): void;
     }
     /**
@@ -39245,8 +42022,7 @@ declare module Laya {
      *     }
      * }
      */
-    class VScrollBar extends ScrollBar {
-    }
+    class VScrollBar extends ScrollBar {}
     /**
      * 使用 <code>VSlider</code> 控件，用户可以通过在滑块轨道的终点之间移动滑块来选择值。
      * <p> <code>VSlider</code> 控件采用垂直方向。滑块轨道从下往上扩展，而标签位于轨道的左右两侧。</p>
@@ -39334,8 +42110,7 @@ declare module Laya {
      * }
      * @see laya.ui.Slider
      */
-    class VSlider extends Slider {
-    }
+    class VSlider extends Slider {}
     class Base64Tool {
         static chars: string;
         static reg: RegExp;
@@ -39903,7 +42678,10 @@ declare module Laya {
          * @param getCacheListFunction 获取cache列表函数fun():Array
          *
          */
-        static unRegCacheByFunction(disposeFunction: Function, getCacheListFunction: Function): void;
+        static unRegCacheByFunction(
+            disposeFunction: Function,
+            getCacheListFunction: Function
+        ): void;
         /**
          * 强制清理所有管理器
          *
@@ -40067,7 +42845,15 @@ declare module Laya {
          * @param	data 事件携带数据。
          * @param	ratio 惯性阻尼系数
          */
-        start(target: Sprite, area: Rectangle, hasInertia: boolean, elasticDistance: number, elasticBackTime: number, data: any, ratio?: number): void;
+        start(
+            target: Sprite,
+            area: Rectangle,
+            hasInertia: boolean,
+            elasticDistance: number,
+            elasticBackTime: number,
+            data: any,
+            ratio?: number
+        ): void;
         /**
          * 清除计时器。
          */
@@ -40107,8 +42893,8 @@ declare module Laya {
         private clear;
     }
     /**
-    * <code>Ease</code> 类定义了缓动函数，以便实现 <code>Tween</code> 动画的缓动效果。
-    */
+     * <code>Ease</code> 类定义了缓动函数，以便实现 <code>Tween</code> 动画的缓动效果。
+     */
     class Ease {
         /**
          * 定义无加速持续运动。
@@ -40217,7 +43003,14 @@ declare module Laya {
          * @param	p 指定正弦波的周期。
          * @return 指定时间的插补属性的值。
          */
-        static elasticIn(t: number, b: number, c: number, d: number, a?: number, p?: number): number;
+        static elasticIn(
+            t: number,
+            b: number,
+            c: number,
+            d: number,
+            a?: number,
+            p?: number
+        ): number;
         /**
          * 开始运动时速率为零，先对运动进行加速，再减速直到速率为零。
          * 其中的运动由按照指数方式衰减的正弦波来定义。
@@ -40229,7 +43022,14 @@ declare module Laya {
          * @param	p 指定正弦波的周期。
          * @return 指定时间的插补属性的值。
          */
-        static elasticInOut(t: number, b: number, c: number, d: number, a?: number, p?: number): number;
+        static elasticInOut(
+            t: number,
+            b: number,
+            c: number,
+            d: number,
+            a?: number,
+            p?: number
+        ): number;
         /**
          * 以较快速度开始运动，然后在执行时减慢运动速度，直至速率为零。
          * 其中的运动由按照指数方式衰减的正弦波来定义。
@@ -40241,7 +43041,14 @@ declare module Laya {
          * @param	p 指定正弦波的周期。
          * @return 指定时间的插补属性的值。
          */
-        static elasticOut(t: number, b: number, c: number, d: number, a?: number, p?: number): number;
+        static elasticOut(
+            t: number,
+            b: number,
+            c: number,
+            d: number,
+            a?: number,
+            p?: number
+        ): number;
         /**
          * 以零速率开始运动，然后在执行时加快运动速度。
          * @param	t 指定当前时间，介于 0 和持续时间之间（包括二者）。
@@ -40536,7 +43343,12 @@ declare module Laya {
          * @param	args 函数参数。
          * @param	once 是否只执行一次。
          */
-        constructor(caller?: Object | null, method?: Function | null, args?: any[] | null, once?: boolean);
+        constructor(
+            caller?: Object | null,
+            method?: Function | null,
+            args?: any[] | null,
+            once?: boolean
+        );
         /**
          * 设置此对象的指定属性值。
          * @param	caller 执行域(this)。
@@ -40571,7 +43383,12 @@ declare module Laya {
          * @param	once 是否只执行一次，如果为true，回调后执行recover()进行回收，默认为true。
          * @return  返回创建的handler实例。
          */
-        static create(caller: any, method: Function | null, args?: any[] | null, once?: boolean): Handler;
+        static create(
+            caller: any,
+            method: Function | null,
+            args?: any[] | null,
+            once?: boolean
+        ): Handler;
     }
     /**
      * 鼠标点击区域，可以设置绘制一系列矢量图作为点击区域和非点击区域（目前只支持圆形，矩形，多边形）
@@ -40611,10 +43428,10 @@ declare module Laya {
         contains(x: number, y: number, sp?: Sprite): boolean;
     }
     /**
-    * 图片二进制处理类
-    * @ author:xs
-    * @ data: 2021-11-03 10:54
-    */
+     * 图片二进制处理类
+     * @ author:xs
+     * @ data: 2021-11-03 10:54
+     */
     class ImgUtils {
         /**存储数据池*/
         static data: any;
@@ -40890,7 +43707,13 @@ declare module Laya {
          * @param	y1	点二的 Y 轴坐标点。
          * @return 两个点在舞台坐标系组成的矩形对象 <code>Rectangle</code>。
          */
-        static getGlobalRecByPoints(sprite: Sprite, x0: number, y0: number, x1: number, y1: number): Rectangle;
+        static getGlobalRecByPoints(
+            sprite: Sprite,
+            x0: number,
+            y0: number,
+            x1: number,
+            y1: number
+        ): Rectangle;
         /**
          * 计算传入的显示对象 <code>Sprite</code> 的全局坐标系的坐标和缩放值，返回 <code>Rectangle</code> 对象存放计算出的坐标X值、Y值、ScaleX值、ScaleY值。
          * @param	sprite <code>Sprite</code> 对象。
@@ -40898,12 +43721,12 @@ declare module Laya {
          */
         static getGlobalPosAndScale(sprite: Sprite): Rectangle;
         /**
-        * 获取指定区域内相对于窗口左上角的transform。
-        * @param	coordinateSpace	坐标空间，不能是Stage引用
-        * @param	x				相对于coordinateSpace的x坐标
-        * @param	y				相对于coordinateSpace的y坐标
-        * @return
-        */
+         * 获取指定区域内相对于窗口左上角的transform。
+         * @param	coordinateSpace	坐标空间，不能是Stage引用
+         * @param	x				相对于coordinateSpace的x坐标
+         * @param	y				相对于coordinateSpace的y坐标
+         * @return
+         */
         static getTransformRelativeToWindow(coordinateSpace: Sprite, x: number, y: number): any;
         /**
          * 使DOM元素使用舞台内的某块区域内。
@@ -40914,7 +43737,14 @@ declare module Laya {
          * @param	width			宽度
          * @param	height			高度
          */
-        static fitDOMElementInArea(dom: any, coordinateSpace: Sprite, x: number, y: number, width: number, height: number): void;
+        static fitDOMElementInArea(
+            dom: any,
+            coordinateSpace: Sprite,
+            x: number,
+            y: number,
+            width: number,
+            height: number
+        ): void;
         /**
          * @private
          * 对传入的数组列表，根据子项的属性 Z 值进行重新排序。返回是否已重新排序的 Boolean 值。
@@ -41078,7 +43908,13 @@ declare module Laya {
          * @param	ease		缓动类型
          * @param	offset		相对于上一个对象，偏移多长时间（单位：毫秒）。
          */
-        static to(target: any, props: any, duration: number, ease?: Function, offset?: number): TimeLine;
+        static to(
+            target: any,
+            props: any,
+            duration: number,
+            ease?: Function,
+            offset?: number
+        ): TimeLine;
         /**
          * 从 props 属性，缓动到当前状态。
          * @param	target		target 目标对象(即将更改属性值的对象)
@@ -41087,7 +43923,13 @@ declare module Laya {
          * @param	ease		缓动类型
          * @param	offset		相对于上一个对象，偏移多长时间（单位：毫秒）
          */
-        static from(target: any, props: any, duration: number, ease?: Function, offset?: number): TimeLine;
+        static from(
+            target: any,
+            props: any,
+            duration: number,
+            ease?: Function,
+            offset?: number
+        ): TimeLine;
         /**
          * 控制一个对象，从当前点移动到目标点。
          * @param	target		要控制的对象。
@@ -41227,7 +44069,13 @@ declare module Laya {
          * @param	args	回调参数。
          * @param	coverBefore	是否覆盖之前的延迟执行，默认为 true 。
          */
-        once(delay: number, caller: any, method: Function, args?: any[], coverBefore?: boolean): void;
+        once(
+            delay: number,
+            caller: any,
+            method: Function,
+            args?: any[],
+            coverBefore?: boolean
+        ): void;
         /**
          * 定时重复执行。
          * @param	delay	间隔时间(单位毫秒)。
@@ -41237,7 +44085,14 @@ declare module Laya {
          * @param	coverBefore	是否覆盖之前的延迟执行，默认为 true 。
          * @param	jumpFrame 时钟是否跳帧。基于时间的循环回调，单位时间间隔内，如能执行多次回调，出于性能考虑，引擎默认只执行一次，设置jumpFrame=true后，则回调会连续执行多次
          */
-        loop(delay: number, caller: any, method: Function, args?: any[], coverBefore?: boolean, jumpFrame?: boolean): void;
+        loop(
+            delay: number,
+            caller: any,
+            method: Function,
+            args?: any[],
+            coverBefore?: boolean,
+            jumpFrame?: boolean
+        ): void;
         /**
          * 定时执行一次(基于帧率)。
          * @param	delay	延迟几帧(单位为帧)。
@@ -41246,7 +44101,13 @@ declare module Laya {
          * @param	args	回调参数。
          * @param	coverBefore	是否覆盖之前的延迟执行，默认为 true 。
          */
-        frameOnce(delay: number, caller: any, method: Function, args?: any[], coverBefore?: boolean): void;
+        frameOnce(
+            delay: number,
+            caller: any,
+            method: Function,
+            args?: any[],
+            coverBefore?: boolean
+        ): void;
         /**
          * 定时重复执行(基于帧率)。
          * @param	delay	间隔几帧(单位为帧)。
@@ -41255,7 +44116,13 @@ declare module Laya {
          * @param	args	回调参数。
          * @param	coverBefore	是否覆盖之前的延迟执行，默认为 true 。
          */
-        frameLoop(delay: number, caller: any, method: Function, args?: any[], coverBefore?: boolean): void;
+        frameLoop(
+            delay: number,
+            caller: any,
+            method: Function,
+            args?: any[],
+            coverBefore?: boolean
+        ): void;
         /** 返回统计信息。*/
         toString(): string;
         /**
@@ -41352,7 +44219,16 @@ declare module Laya {
          * @param	autoRecover 是否自动回收，默认为true，缓动结束之后自动回收到对象池。
          * @return	返回Tween对象。
          */
-        static to(target: any, props: any, duration: number, ease?: Function | null, complete?: Handler | null, delay?: number, coverBefore?: boolean, autoRecover?: boolean): Tween;
+        static to(
+            target: any,
+            props: any,
+            duration: number,
+            ease?: Function | null,
+            complete?: Handler | null,
+            delay?: number,
+            coverBefore?: boolean,
+            autoRecover?: boolean
+        ): Tween;
         /**
          * 从props属性，缓动到当前状态。
          * @param	target 目标对象(即将更改属性值的对象)。
@@ -41365,7 +44241,16 @@ declare module Laya {
          * @param	autoRecover 是否自动回收，默认为true，缓动结束之后自动回收到对象池。
          * @return	返回Tween对象。
          */
-        static from(target: any, props: any, duration: number, ease?: Function, complete?: Handler, delay?: number, coverBefore?: boolean, autoRecover?: boolean): Tween;
+        static from(
+            target: any,
+            props: any,
+            duration: number,
+            ease?: Function,
+            complete?: Handler,
+            delay?: number,
+            coverBefore?: boolean,
+            autoRecover?: boolean
+        ): Tween;
         /**
          * 缓动对象的props属性到目标值。
          * @param	target 目标对象(即将更改属性值的对象)。
@@ -41377,7 +44262,15 @@ declare module Laya {
          * @param	coverBefore 是否覆盖之前的缓动。
          * @return	返回Tween对象。
          */
-        to(target: any, props: any, duration: number, ease?: Function, complete?: Handler, delay?: number, coverBefore?: boolean): Tween;
+        to(
+            target: any,
+            props: any,
+            duration: number,
+            ease?: Function,
+            complete?: Handler,
+            delay?: number,
+            coverBefore?: boolean
+        ): Tween;
         /**
          * 从props属性，缓动到当前状态。
          * @param	target 目标对象(即将更改属性值的对象)。
@@ -41389,7 +44282,15 @@ declare module Laya {
          * @param	coverBefore 是否覆盖之前的缓动。
          * @return	返回Tween对象。
          */
-        from(target: any, props: any, duration: number, ease?: Function | null, complete?: Handler | null, delay?: number, coverBefore?: boolean): Tween;
+        from(
+            target: any,
+            props: any,
+            duration: number,
+            ease?: Function | null,
+            complete?: Handler | null,
+            delay?: number,
+            coverBefore?: boolean
+        ): Tween;
         private firstStart;
         private _initProps;
         private _beginLoop;
@@ -41789,19 +44690,13 @@ declare module Laya {
          * primitive Mesh Descript
          */
         static readonly primitiveAttribute: {
-            [name: string]: [
-                number,
-                ShaderDataType
-            ];
+            [name: string]: [number, ShaderDataType];
         };
         /**
          * TextureSV Mesh Descript
          */
         static readonly textureAttribute: {
-            [name: string]: [
-                number,
-                ShaderDataType
-            ];
+            [name: string]: [number, ShaderDataType];
         };
         /**
          * init 2D internal Shader
@@ -41872,7 +44767,7 @@ declare module Laya {
     enum RenderSpriteData {
         Zero = 0,
         Texture2D = 1,
-        Primitive = 2
+        Primitive = 2,
     }
     class Value2D {
         static globalShaderData: ShaderData;
@@ -41939,9 +44834,23 @@ declare module Laya {
          * @param	outVertex
          * @return
          */
-        static createLine2(p: any[], indices: any[], lineWidth: number, indexBase: number, outVertex: any[], loop: boolean): any[];
+        static createLine2(
+            p: any[],
+            indices: any[],
+            lineWidth: number,
+            indexBase: number,
+            outVertex: any[],
+            loop: boolean
+        ): any[];
         private static _setMiddleVertexs;
-        static getNormal(x1: number, y1: number, x2: number, y2: number, w: number, out?: Vector2): Vector2;
+        static getNormal(
+            x1: number,
+            y1: number,
+            x2: number,
+            y2: number,
+            w: number,
+            out?: Vector2
+        ): Vector2;
         /**
          * 相邻的两段线，边界会相交，这些交点可以作为三角形的顶点。有两种可选，一种是采用左左,右右交点，一种是采用 左右，左右交点。当两段线夹角很小的时候，如果采用
          * 左左，右右会产生很长很长的交点，这时候就要采用左右左右交点，相当于把尖角截断。
@@ -41970,17 +44879,40 @@ declare module Laya {
          * [98,176,  163,178, 95,66, 175,177, 198,178, 252,56, 209,178,  248,175,  248,266,  209,266, 227,277, 203,280, 188,271,  150,271, 140,283, 122,283, 131,268, 99,268]
          *
          */
-        static createLineTriangle(path: any[], color: number, width: number, loop: boolean, outvb: Float32Array, vbstride: number, outib: Uint16Array): void;
+        static createLineTriangle(
+            path: any[],
+            color: number,
+            width: number,
+            loop: boolean,
+            outvb: Float32Array,
+            vbstride: number,
+            outib: Uint16Array
+        ): void;
     }
     class Earcut {
         static earcut(data: any, holeIndices: any, dim: any): any;
         static linkedList(data: any, start: any, end: any, dim: any, clockwise: any): any;
         static filterPoints(start: any, end: any): any;
-        static earcutLinked(ear: any, triangles: any, dim: any, minX: any, minY: any, invSize: any, pass?: any): any;
+        static earcutLinked(
+            ear: any,
+            triangles: any,
+            dim: any,
+            minX: any,
+            minY: any,
+            invSize: any,
+            pass?: any
+        ): any;
         static isEar(ear: any): any;
         static isEarHashed(ear: any, minX: any, minY: any, invSize: any): boolean;
         static cureLocalIntersections(start: any, triangles: any, dim: any): any;
-        static splitEarcut(start: any, triangles: any, dim: any, minX: any, minY: any, invSize: any): void;
+        static splitEarcut(
+            start: any,
+            triangles: any,
+            dim: any,
+            minX: any,
+            minY: any,
+            invSize: any
+        ): void;
         static eliminateHoles(data: any, holeIndices: any, outerNode: any, dim: any): any;
         static compareX(a: any, b: any): any;
         static eliminateHole(hole: any, outerNode: any): void;
@@ -41989,7 +44921,16 @@ declare module Laya {
         static sortLinked(list: any): any;
         static zOrder(x: any, y: any, minX: any, minY: any, invSize: any): any;
         static getLeftmost(start: any): any;
-        static pointInTriangle(ax: any, ay: any, bx: any, by: any, cx: any, cy: any, px: any, py: any): boolean;
+        static pointInTriangle(
+            ax: any,
+            ay: any,
+            bx: any,
+            by: any,
+            cx: any,
+            cy: any,
+            px: any,
+            py: any
+        ): boolean;
         static isValidDiagonal(a: any, b: any): boolean;
         static area(p: any, q: any, r: any): any;
         static equals(p1: any, p2: any): boolean;
@@ -42115,9 +45056,9 @@ declare module Laya {
         static create(args: any[], fun: Function, thisobj: any): SubmitCMD;
     }
     /**
-         * ...
-         * @author xie
-         */
+     * ...
+     * @author xie
+     */
     class SubmitKey {
         blendShader: number;
         submitType: number;
@@ -42141,7 +45082,12 @@ declare module Laya {
         blend(): void;
         getRenderType(): number;
         releaseRender(): void;
-        static create(context: Context, mesh: Mesh2D, sv: Value2D, rt: RenderTexture2D): SubmitTarget;
+        static create(
+            context: Context,
+            mesh: Mesh2D,
+            sv: Value2D,
+            rt: RenderTexture2D
+        ): SubmitTarget;
     }
     class SubmitTexture extends SubmitBase {
         private static _poolSize;
@@ -42161,10 +45107,10 @@ declare module Laya {
      * https://github.com/louy/Javascript-Arabic-Reshaper/blob/master/src/index.js
      */
     /**
-         * Javascript Arabic Reshaper by Louy Alakkad
-         * https://github.com/louy/Javascript-Arabic-Reshaper
-         * Based on (http://git.io/vsnAd)
-         */
+     * Javascript Arabic Reshaper by Louy Alakkad
+     * https://github.com/louy/Javascript-Arabic-Reshaper
+     * Based on (http://git.io/vsnAd)
+     */
     class ArabicReshaper {
         private static charsMap;
         private static combCharsMap;
@@ -42180,7 +45126,7 @@ declare module Laya {
          * 例如
          * graphics.fillText(convertArabic('سلام'),....)
          *
-        */
+         */
         convertArabic(normal: any): string;
         convertArabicBack(apfb: any): string;
     }
@@ -42211,7 +45157,13 @@ declare module Laya {
         private scaleFontSize;
         private showDbgInfo;
         private supportImageData;
-        constructor(maxw: number, maxh: number, scalefont?: boolean, useImageData?: boolean, showdbg?: boolean);
+        constructor(
+            maxw: number,
+            maxh: number,
+            scalefont?: boolean,
+            useImageData?: boolean,
+            showdbg?: boolean
+        );
         /**
          * @override
          */
@@ -42242,8 +45194,31 @@ declare module Laya {
          * @return
          * @override
          */
-        getCharBmp(char: string, font: string, lineWidth: number, colStr: string, strokeColStr: string, cri: CharRenderInfo, margin_left: number, margin_top: number, margin_right: number, margin_bottom: number, rect?: any[] | null): ImageData | null;
-        getCharCanvas(char: string, font: string, lineWidth: number, colStr: string, strokeColStr: string, cri: CharRenderInfo, margin_left: number, margin_top: number, margin_right: number, margin_bottom: number): ImageData;
+        getCharBmp(
+            char: string,
+            font: string,
+            lineWidth: number,
+            colStr: string,
+            strokeColStr: string,
+            cri: CharRenderInfo,
+            margin_left: number,
+            margin_top: number,
+            margin_right: number,
+            margin_bottom: number,
+            rect?: any[] | null
+        ): ImageData | null;
+        getCharCanvas(
+            char: string,
+            font: string,
+            lineWidth: number,
+            colStr: string,
+            strokeColStr: string,
+            cri: CharRenderInfo,
+            margin_left: number,
+            margin_top: number,
+            margin_right: number,
+            margin_bottom: number
+        ): ImageData;
     }
     /**
      * TODO如果占用内存较大,这个结构有很多成员可以临时计算
@@ -42280,7 +45255,14 @@ declare module Laya {
         constructor();
         clear(): void;
         destroy(): void;
-        add(ctx: Context, tex: Texture, imgid: number, pos: any[], uv: ArrayLike<number>, color: number): void;
+        add(
+            ctx: Context,
+            tex: Texture,
+            imgid: number,
+            pos: any[],
+            uv: ArrayLike<number>,
+            color: number
+        ): void;
         getPos(): any[];
         enable(value: boolean, ctx: Context): void;
         submit(ctx: Context): void;
@@ -42298,7 +45280,19 @@ declare module Laya {
          * @param	size  返回宽高
          * @return
          */
-        getCharBmp(char: string, font: string, lineWidth: number, colStr: string, strokeColStr: string, size: CharRenderInfo, margin_left: number, margin_top: number, margin_right: number, margin_bottom: number, rect?: any[] | null): ImageData | null;
+        getCharBmp(
+            char: string,
+            font: string,
+            lineWidth: number,
+            colStr: string,
+            strokeColStr: string,
+            size: CharRenderInfo,
+            margin_left: number,
+            margin_top: number,
+            margin_right: number,
+            margin_bottom: number,
+            rect?: any[] | null
+        ): ImageData | null;
     }
     /**
      *  文字贴图的大图集。
@@ -42388,15 +45382,40 @@ declare module Laya {
          * @param	start	开始位置
          */
         getNextChar(str: string): string | null;
-        filltext(ctx: Context, data: string | WordText, x: number, y: number, fontStr: string, color: string, strokeColor: string, lineWidth: number, textAlign: string): void;
-        _fast_filltext(ctx: Context, data: string | WordText | null, x: number, y: number, font: FontInfo, color: string, strokeColor: string | null, lineWidth: number, textAlign: number): void;
+        filltext(
+            ctx: Context,
+            data: string | WordText,
+            x: number,
+            y: number,
+            fontStr: string,
+            color: string,
+            strokeColor: string,
+            lineWidth: number,
+            textAlign: string
+        ): void;
+        _fast_filltext(
+            ctx: Context,
+            data: string | WordText | null,
+            x: number,
+            y: number,
+            font: FontInfo,
+            color: string,
+            strokeColor: string | null,
+            lineWidth: number,
+            textAlign: number
+        ): void;
         /**
          * 画出重新按照贴图顺序分组的文字。
          * @param	samePagesData
          * @param  startx 保存的数据是相对位置，所以需要加上这个偏移。用相对位置更灵活一些。
          * @param y {int} 因为这个只能画在一行上所以没有必要保存y。所以这里再把y传进来
          */
-        protected _drawResortedWords(ctx: Context, startx: number, starty: number, samePagesData: any[]): void;
+        protected _drawResortedWords(
+            ctx: Context,
+            startx: number,
+            starty: number,
+            samePagesData: any[]
+        ): void;
         /**
          * 检查 txts数组中有没有被释放的资源
          * @param	txts {{ri:CharRenderInfo,...}[][]}
@@ -42404,7 +45423,14 @@ declare module Laya {
          * @return
          */
         hasFreedText(txts: any[]): boolean;
-        getCharRenderInfo(str: string, font: FontInfo, color: string, strokeColor: string | null, lineWidth: number, isoTexture?: boolean): CharRenderInfo;
+        getCharRenderInfo(
+            str: string,
+            font: FontInfo,
+            color: string,
+            strokeColor: string | null,
+            lineWidth: number,
+            isoTexture?: boolean
+        ): CharRenderInfo;
         /**
          * 添加数据到大图集
          * @param	w
@@ -42441,7 +45467,17 @@ declare module Laya {
         getFontSizeInfo(font: string): number;
         printDbgInfo(): void;
         showAtlas(n: number, bgcolor: string, x: number, y: number, w: number, h: number): Sprite;
-        filltext_native(ctx: Context, data: string | WordText, x: number, y: number, fontStr: string, color: string, strokeColor: string, lineWidth: number, textAlign: string): void;
+        filltext_native(
+            ctx: Context,
+            data: string | WordText,
+            x: number,
+            y: number,
+            fontStr: string,
+            color: string,
+            strokeColor: string,
+            lineWidth: number,
+            textAlign: string
+        ): void;
     }
     class TextTexture extends Resource {
         private static pool;
@@ -42726,7 +45762,12 @@ declare module Laya {
          * @param color 顶点颜色
          * @param useTex 是否使用贴图。false的话是给fillRect用的
          */
-        addQuad(pos: ArrayLike<number>, uv: ArrayLike<number>, color: number, useTex: boolean): void;
+        addQuad(
+            pos: ArrayLike<number>,
+            uv: ArrayLike<number>,
+            color: number,
+            useTex: boolean
+        ): void;
     }
     /**
      * 与MeshQuadTexture基本相同。不过index不是固定的
@@ -42750,7 +45791,13 @@ declare module Laya {
          * @param matrix
          * @param rgba
          */
-        addData(vertices: Float32Array, uvs: Float32Array, idx: Uint16Array, matrix: Matrix, rgba: number): void;
+        addData(
+            vertices: Float32Array,
+            uvs: Float32Array,
+            idx: Uint16Array,
+            matrix: Matrix,
+            rgba: number
+        ): void;
         /**
          * 把本对象放到回收池中，以便getMesh能用。
          * @override
@@ -42833,17 +45880,17 @@ declare module Laya {
          * @private
          */
         private static _compileToTree;
-        static getRenderState(obj: Record<string, string | boolean | number | string[]>, renderState: RenderState): void;
+        static getRenderState(
+            obj: Record<string, string | boolean | number | string[]>,
+            renderState: RenderState
+        ): void;
     }
     class ShaderProcessInfo {
         defineString: string[];
         vs: ShaderNode;
         ps: ShaderNode;
         attributeMap: {
-            [name: string]: [
-                number,
-                ShaderDataType
-            ];
+            [name: string]: [number, ShaderDataType];
         };
         uniformMap: UniformMapType;
         is2D: boolean;
