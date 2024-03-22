@@ -40,6 +40,15 @@
           "y": 0
         }
       ]
+    },
+    {
+      "_$id": "wb0n1f0f",
+      "_$prefab": "148a6d54-97ac-4354-a774-12a01dad2732",
+      "name": "money-item",
+      "active": true,
+      "x": 567,
+      "y": -371,
+      "visible": true
     }
   ]
 }

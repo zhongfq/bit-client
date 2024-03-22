@@ -35,7 +35,7 @@ export class HomeMonyeMediator extends Mediator {
         let moneySort = 0;
         this._monyeInfo = [];
         for (const [_, money] of app.service.user.money) {
-            if (money.id > 200) {
+            if (money.id >= 30601) {
                 moneySort < Number(money.ref.sort)
                     ? this._monyeInfo.push(money)
                     : this._monyeInfo.unshift(money);

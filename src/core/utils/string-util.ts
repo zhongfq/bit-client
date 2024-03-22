@@ -230,15 +230,15 @@ export class StringUtil {
         });
     }
 
-    public static getUBB(data: UBBData): string {
+    private static getUBB(data: UBBData): string {
         let str = "";
         if (data.image) {
             str += `<img src='${data.image}'`;
             if (data.width) {
-                str += ` widht=${data.width}`;
+                str += ` width=${data.width}`;
             }
             if (data.height) {
-                str += ` height=${data.height}`;
+                str += ` height=${data.height} `;
             }
             str += `/>`;
             return str;

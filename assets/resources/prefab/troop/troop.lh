@@ -1,0 +1,327 @@
+{
+  "_$ver": 1,
+  "_$id": "x6nzvkov",
+  "_$type": "Dialog",
+  "name": "Dialog",
+  "width": 550,
+  "height": 1000,
+  "_$child": [
+    {
+      "_$id": "z7pc995k",
+      "_$type": "VBox",
+      "name": "VBox",
+      "x": 86,
+      "y": 38,
+      "width": 122,
+      "height": 442,
+      "_mouseState": 2,
+      "bgColor": "rgba(29, 107, 0, 1)",
+      "space": 14,
+      "align": "center",
+      "_$child": [
+        {
+          "_$id": "zqcbs9pl",
+          "_$type": "Sprite",
+          "name": "Sprite",
+          "x": 11,
+          "width": 100,
+          "height": 100,
+          "_gcmds": [
+            {
+              "_$type": "DrawRectCmd",
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1,
+              "percent": true,
+              "lineWidth": 1,
+              "lineColor": "#000000",
+              "fillColor": "#FFFFFF"
+            }
+          ]
+        },
+        {
+          "_$id": "qg7di47p",
+          "_$type": "Sprite",
+          "name": "Sprite(1)",
+          "x": 11,
+          "y": 114,
+          "width": 100,
+          "height": 100,
+          "_gcmds": [
+            {
+              "_$type": "DrawRectCmd",
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1,
+              "percent": true,
+              "lineWidth": 1,
+              "lineColor": "#000000",
+              "fillColor": "#FFFFFF"
+            }
+          ]
+        },
+        {
+          "_$id": "tvpyn3hs",
+          "_$type": "Sprite",
+          "name": "Sprite(2)",
+          "x": 11,
+          "y": 228,
+          "width": 100,
+          "height": 100,
+          "_gcmds": [
+            {
+              "_$type": "DrawRectCmd",
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1,
+              "percent": true,
+              "lineWidth": 1,
+              "lineColor": "#000000",
+              "fillColor": "#FFFFFF"
+            }
+          ]
+        },
+        {
+          "_$id": "u3ssoa7c",
+          "_$type": "Sprite",
+          "name": "Sprite(3)",
+          "x": 11,
+          "y": 342,
+          "width": 100,
+          "height": 100,
+          "_gcmds": [
+            {
+              "_$type": "DrawRectCmd",
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1,
+              "percent": true,
+              "lineWidth": 1,
+              "lineColor": "#000000",
+              "fillColor": "#FFFFFF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "fjzzhoit",
+      "_$type": "VBox",
+      "name": "VBox(1)",
+      "x": 235,
+      "y": 38,
+      "width": 114,
+      "height": 444,
+      "_mouseState": 2,
+      "bgColor": "rgba(29, 107, 0, 1)",
+      "space": 14,
+      "align": "center",
+      "_$child": [
+        {
+          "_$id": "msb1xnfz",
+          "_$type": "Sprite",
+          "name": "Sprite",
+          "x": 7,
+          "width": 100,
+          "height": 100,
+          "_gcmds": [
+            {
+              "_$type": "DrawRectCmd",
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1,
+              "percent": true,
+              "lineWidth": 1,
+              "lineColor": "#000000",
+              "fillColor": "#FFFFFF"
+            }
+          ]
+        },
+        {
+          "_$id": "xno28lck",
+          "_$type": "Sprite",
+          "name": "Sprite(1)",
+          "x": 7,
+          "y": 114,
+          "width": 100,
+          "height": 100,
+          "_gcmds": [
+            {
+              "_$type": "DrawRectCmd",
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1,
+              "percent": true,
+              "lineWidth": 1,
+              "lineColor": "#000000",
+              "fillColor": "#FFFFFF"
+            }
+          ]
+        },
+        {
+          "_$id": "q7ipurde",
+          "_$type": "Sprite",
+          "name": "Sprite(2)",
+          "x": 7,
+          "y": 228,
+          "width": 100,
+          "height": 100,
+          "_gcmds": [
+            {
+              "_$type": "DrawRectCmd",
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1,
+              "percent": true,
+              "lineWidth": 1,
+              "lineColor": "#000000",
+              "fillColor": "#FFFFFF"
+            }
+          ]
+        },
+        {
+          "_$id": "54xokx4v",
+          "_$type": "Sprite",
+          "name": "Sprite(3)",
+          "x": 7,
+          "y": 342,
+          "width": 100,
+          "height": 100,
+          "_gcmds": [
+            {
+              "_$type": "DrawRectCmd",
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1,
+              "percent": true,
+              "lineWidth": 1,
+              "lineColor": "#000000",
+              "fillColor": "#FFFFFF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "tpwjm7u0",
+      "_$type": "VBox",
+      "name": "VBox(2)",
+      "x": 376,
+      "y": 38,
+      "width": 116,
+      "height": 443,
+      "_mouseState": 2,
+      "bgColor": "rgba(29, 107, 0, 1)",
+      "space": 14,
+      "align": "center",
+      "_$child": [
+        {
+          "_$id": "vttf0w2g",
+          "_$type": "Sprite",
+          "name": "Sprite",
+          "x": 8,
+          "width": 100,
+          "height": 100,
+          "_gcmds": [
+            {
+              "_$type": "DrawRectCmd",
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1,
+              "percent": true,
+              "lineWidth": 1,
+              "lineColor": "#000000",
+              "fillColor": "#FFFFFF"
+            }
+          ]
+        },
+        {
+          "_$id": "8trwqbye",
+          "_$type": "Sprite",
+          "name": "Sprite(1)",
+          "x": 8,
+          "y": 114,
+          "width": 100,
+          "height": 100,
+          "_gcmds": [
+            {
+              "_$type": "DrawRectCmd",
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1,
+              "percent": true,
+              "lineWidth": 1,
+              "lineColor": "#000000",
+              "fillColor": "#FFFFFF"
+            }
+          ]
+        },
+        {
+          "_$id": "bhu3hp91",
+          "_$type": "Sprite",
+          "name": "Sprite(2)",
+          "x": 8,
+          "y": 228,
+          "width": 100,
+          "height": 100,
+          "_gcmds": [
+            {
+              "_$type": "DrawRectCmd",
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1,
+              "percent": true,
+              "lineWidth": 1,
+              "lineColor": "#000000",
+              "fillColor": "#FFFFFF"
+            }
+          ]
+        },
+        {
+          "_$id": "jq9k8kuf",
+          "_$type": "Sprite",
+          "name": "Sprite(3)",
+          "x": 8,
+          "y": 342,
+          "width": 100,
+          "height": 100,
+          "_gcmds": [
+            {
+              "_$type": "DrawRectCmd",
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1,
+              "percent": true,
+              "lineWidth": 1,
+              "lineColor": "#000000",
+              "fillColor": "#FFFFFF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_$id": "mx4gjary",
+      "_$type": "List",
+      "name": "List",
+      "x": 28,
+      "y": 484,
+      "width": 508,
+      "height": 251,
+      "repeatX": 1,
+      "repeatY": 1
+    }
+  ]
+}

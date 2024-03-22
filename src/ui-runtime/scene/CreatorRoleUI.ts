@@ -13,11 +13,16 @@ export class CreatorRoleUI extends CreatorRoleUIBase {
 
     public override onAwake(): void {
         this._initUIEvent();
+        this.reqRandomName();
     }
 
     private _initUIEvent() {
         this.tab.selectHandler = new Laya.Handler(this, this._onSelect);
         this.btnCreatorRole.on(Laya.Event.CLICK, () => {
+            if (this.textInputName.text.length == 0) {
+                app.ui.toast("名字不能为空");
+                return;
+            }
             //请求创角
             app.service.user
                 .requestCreateRole({
@@ -36,17 +41,7 @@ export class CreatorRoleUI extends CreatorRoleUIBase {
         });
         this.btnRandomName.on(Laya.Event.CLICK, () => {
             //随机名字
-            app.service.user
-                .requestRandomName({
-                    gender:
-                        this.tab.selectedIndex == 0
-                            ? CommonConf.GENDER.MALE
-                            : CommonConf.GENDER.FEMALE,
-                })
-                .then((val: proto.user.s2c_random_name) => {
-                    this.textInputName.text = val.name;
-                    this.isThisName = false;
-                });
+            this.reqRandomName();
         });
         this.textInputName.on(Laya.Event.BLUR, () => {
             if (!this.isThisName && this._curName != this.textInputName.text) {
@@ -70,5 +65,17 @@ export class CreatorRoleUI extends CreatorRoleUIBase {
                     this.isThisName = false;
                 });
         }
+    }
+
+    private reqRandomName() {
+        app.service.user
+            .requestRandomName({
+                gender:
+                    this.tab.selectedIndex == 0 ? CommonConf.GENDER.MALE : CommonConf.GENDER.FEMALE,
+            })
+            .then((val: proto.user.s2c_random_name) => {
+                this.textInputName.text = val.name;
+                this.isThisName = false;
+            });
     }
 }

@@ -52,4 +52,13 @@ export class ItemBag extends GoodsVoBag<ItemVo> {
             return t.refId == refId;
         };
     }
+
+    public getItemNumber(id: number): number {
+        const vo = this.bag.get(id);
+        if (vo) {
+            return vo.goodsNumber;
+        } else {
+            return 0;
+        }
+    }
 }
