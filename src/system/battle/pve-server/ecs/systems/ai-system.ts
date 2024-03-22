@@ -14,6 +14,7 @@ import { GetSkillTarget } from "../../btree/actions/get-skill-target";
 import { GetSkillTime } from "../../btree/actions/get-skill-time";
 import { Hurt } from "../../btree/actions/hurt";
 import { LaunchSkill } from "../../btree/actions/launch-skill";
+import { MoveForward } from "../../btree/actions/move-forward";
 import { MoveStop } from "../../btree/actions/move-stop";
 import { MoveToAtkPos } from "../../btree/actions/move-to-atk-pos";
 import { MoveToPos } from "../../btree/actions/move-to-pos";
@@ -66,6 +67,7 @@ export class AiSystem extends ecs.System {
         this.context.registerProcess(TowardToTarget);
         this.context.registerProcess(TryLaunchSkill);
         this.context.registerProcess(Wait);
+        this.context.registerProcess(MoveForward);
 
         btreeCode.forEach((value) => this.context.registerCode(value.code, value.evaluator));
     }
