@@ -1,25 +1,43 @@
+type ContextChecker = () => boolean;
+
 interface PromiseDescriptor {
     resolve: (value: unknown) => void;
-    contextChecker?: () => boolean;
+    contextChecker?: ContextChecker;
 }
 
 export class Loader {
     private _loadings: Map<string, PromiseDescriptor[]> = new Map();
 
-    public async loadJson<T>(path: string) {
-        const json = await Laya.loader.load(path, Laya.Loader.JSON);
-        if (json) {
-            return json.data as T;
-        } else {
-            return json;
-        }
+    /**
+     * 同 loadPrefab
+     * @param url
+     * @param checker
+     * @returns
+     */
+    public async loadJson<T>(url: string, checker?: ContextChecker): Promise<T> {
+        const json = (await this._load(url, Laya.Loader.JSON, checker)) as Laya.TextResource;
+        return json.data as T;
     }
 
-    public async loadPrefab(url: string, contextChecker?: () => boolean): Promise<Laya.Prefab> {
-        return this._load(url, Laya.Loader.HIERARCHY, contextChecker) as Promise<Laya.Prefab>;
+    public async loadAtlas(url: string, checker?: ContextChecker) {
+        return this._load(url, Laya.Loader.ATLAS, checker) as Promise<Laya.AtlasResource>;
     }
 
-    private _load(url: string, type: string, contextChecker?: () => boolean): Promise<unknown> {
+    public async loadTexture2D(url: string, checker?: ContextChecker) {
+        return this._load(url, Laya.Loader.TEXTURE2D, checker) as Promise<Laya.Texture2D>;
+    }
+
+    /**
+     * 加载预制体，并且有返回一定成功。
+     * @param url 加载的资源。
+     * @param checker 在加载成功的情况下并且通过检查才会返回。
+     * @returns
+     */
+    public async loadPrefab(url: string, checker?: ContextChecker) {
+        return this._load(url, Laya.Loader.HIERARCHY, checker) as Promise<Laya.Prefab>;
+    }
+
+    private _load(url: string, type: string, checker?: ContextChecker): Promise<unknown> {
         const res = Laya.loader.getRes(url);
         if (res) {
             return Promise.resolve(res);
@@ -30,7 +48,7 @@ export class Loader {
                 arr = [];
                 this._loadings.set(url, arr);
             }
-            arr.push({ resolve, contextChecker });
+            arr.push({ resolve, contextChecker: checker });
             if (arr.length == 1) {
                 Laya.loader.load(url, type).then((value) => {
                     if (!value) {

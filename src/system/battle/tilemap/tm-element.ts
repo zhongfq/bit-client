@@ -92,10 +92,16 @@ export abstract class TMTileElemet extends TMElement {
         }
         const cacheUid = this.uid;
 
+        // 如果uid和缓存的不一致，说明对象复用了
+        const checker = () => {
+            const root = this._tilemap.getRoot();
+            return cacheUid === this.uid && root && !root.destroyed;
+        };
+
         const [atlasPath, texturePath, prefabPath] = this.getResPaths();
-        const atlas = await Laya.loader.load(atlasPath, Laya.Loader.ATLAS);
+        const atlas = await app.loader.loadAtlas(atlasPath, checker);
         const texture = await Laya.loader.load(texturePath, Laya.Loader.TEXTURE2D);
-        const prefab = await Laya.loader.load(prefabPath, Laya.Loader.HIERARCHY);
+        const prefab = await app.loader.loadPrefab(prefabPath, checker);
 
         // 如果uid和缓存的不一致，说明对象复用了
         if (cacheUid !== this.uid || this._tilemap.getRoot()?.destroyed !== false) {

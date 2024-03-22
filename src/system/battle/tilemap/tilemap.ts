@@ -486,7 +486,7 @@ export class Tilemap {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private _tilePlanes: Map<TMLayerName, Laya.MeshSprite3D> = new Map();
+    private _tilePlanes: Map<TMLayerName, Laya.Sprite3D> = new Map();
 
     private async _drawTilePlane(rect: Laya.Rectangle, layerName: TMLayerName) {
         let plane = this._tilePlanes.get(layerName);
@@ -508,7 +508,13 @@ export class Tilemap {
         if (uvMap.size == 0) {
             return;
         }
-        plane = new Laya.MeshSprite3D(TMUtil.createPlane(rect, uvMap), layerName + "-batch");
+        plane = new Laya.Sprite3D();
+        plane.addComponent(Laya.MeshRenderer);
+
+        const mesh = plane.addComponent(Laya.MeshFilter);
+        mesh.sharedMesh = TMUtil.createPlane(rect, uvMap);
+        plane.name = layerName + "-batch";
+
         const pos = plane.transform.localPosition;
         pos.x = rect.x;
         pos.y = offsetY;

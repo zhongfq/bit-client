@@ -249,7 +249,6 @@ export class RenderSystem extends ecs.System {
             const position = soldier.transform.localPosition;
             position.cloneFrom(p);
             soldier.transform.localPosition = position;
-            soldier.transform.localRotationEulerY = 90;
             this._collectTroopAnimator(troop, soldier);
             group.addChild(soldier);
         });
