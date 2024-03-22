@@ -147,7 +147,7 @@ export class RenderSystem extends ecs.System {
 
     private async _loadAnimation(anim: AnimationComponent) {
         if (anim.res) {
-            const prefab: Laya.Prefab = await Laya.loader.load(anim.res, Laya.Loader.HIERARCHY);
+            const prefab = await app.loader.loadPrefab(anim.res, () => anim.alive);
             anim.view = prefab.create() as Laya.Sprite3D;
             anim.animator = anim.view.getChildByName("anim").getComponent(Laya.Animator);
             (anim.animator.owner as Laya.Sprite3D).transform.localRotationEulerY = 90;
@@ -156,14 +156,14 @@ export class RenderSystem extends ecs.System {
     }
 
     private async _loadHeadInfo(info: HeadInfoComponent) {
-        const prefab: Laya.Prefab = await Laya.loader.load(info.res, Laya.Loader.HIERARCHY);
+        const prefab = await app.loader.loadPrefab(info.res, () => info.alive);
         info.view = prefab.create() as HeadInfoUI;
         info.view.update(info.data);
         this.context.owner.troops.addChild(info.view);
     }
 
     private async _loadShadow(shadow: ShadowComponent) {
-        const prefab: Laya.Prefab = await Laya.loader.load(shadow.res, Laya.Loader.HIERARCHY);
+        const prefab = await app.loader.loadPrefab(shadow.res, () => shadow.alive);
         shadow.view = prefab.create() as Laya.Sprite3D;
         shadow.view.transform.localPositionY = 0.01;
         this.context.owner.shadows.addChild(shadow.view);
@@ -218,13 +218,10 @@ export class RenderSystem extends ecs.System {
         const heroEntityRow = table.worldEntity.models[heroRow.world_entity];
         const soldier1EntityRow = table.worldEntity.models[40002];
         const soldier2EntityRow = table.worldEntity.models[40004];
-        const heroPrefable = await Laya.loader.load(heroEntityRow.res);
-        const soldier1Prefable = await Laya.loader.load(soldier1EntityRow.res);
-        const soldier2Prefable = await Laya.loader.load(soldier2EntityRow.res);
-        if (!troop.alive) {
-            console.warn(`troop '${troop.eid}' is removed`);
-            return;
-        }
+        const checker = () => troop.alive;
+        const heroPrefable = await app.loader.loadPrefab(heroEntityRow.res, checker);
+        const soldier1Prefable = await app.loader.loadPrefab(soldier1EntityRow.res, checker);
+        const soldier2Prefable = await app.loader.loadPrefab(soldier2EntityRow.res, checker);
         const group = new Laya.Sprite3D();
         troop.view = new Laya.Sprite3D();
         troop.view.addChild(group);

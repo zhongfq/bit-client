@@ -96,8 +96,8 @@ export class PveContext extends Mediator implements ITMContext {
             this
         );
 
-        Laya.loader.load(res.BATTLE_HP_NUM);
-        Laya.loader.load(res.BATTLE_HP_NUM_X);
+        app.loader.loadPrefab(res.BATTLE_HP_NUM);
+        app.loader.loadPrefab(res.BATTLE_HP_NUM_X);
     }
 
     public override async onStart() {

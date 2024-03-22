@@ -1,3 +1,4 @@
+import { app } from "../../../app";
 import { IVector2Like } from "../../../core/laya";
 import {
     ITMContext,
@@ -500,9 +501,11 @@ export class Tilemap {
         const renderMode = firstElement.getRenderMode();
         const ignoreFirstFrame = firstElement.ignoreFirstFrame();
 
+        const checker = () => this._root && !this._root.destroyed;
+
         const [atlasPath, texturePath, prefabPath] = firstElement.getResPaths();
-        const atlas = await Laya.loader.load(atlasPath, Laya.Loader.ATLAS);
-        const texture = await Laya.loader.load(texturePath, Laya.Loader.TEXTURE2D);
+        const atlas = await app.loader.loadAtlas(atlasPath, checker);
+        const texture = await app.loader.loadTexture2D(texturePath, checker);
 
         const uvMap = this._getUVMap(rect, layerName, atlas);
         if (uvMap.size == 0) {
