@@ -7,6 +7,7 @@ import {
     BattleBuffTable,
     BattleBuildingTable,
     BattleEntityTable,
+    BattleEventTable,
     ChestTable,
     EmojiTable,
     EquipTable,
@@ -33,6 +34,7 @@ export class TableService extends Service<NetworkService> {
     public battleBuff!: BattleBuffTable;
     public battleEntity!: BattleEntityTable;
     public battleBuilding!: BattleBuildingTable;
+    public battleEvent!: BattleEventTable;
     public chest!: ChestTable;
     public emoji!: EmojiTable;
     public equip!: EquipTable;
@@ -59,6 +61,7 @@ export class TableService extends Service<NetworkService> {
         this.attr = await app.loader.loadJson(res.TABLE_ATTR_TABLE);
         this.battleBuilding = await app.loader.loadJson(res.TABLE_BATTLE_BUILDING_TABLE);
         this.battleEntity = await app.loader.loadJson(res.TABLE_BATTLE_ENTITY_TABLE);
+        this.battleEvent = await app.loader.loadJson(res.TABLE_BATTLE_EVENT_TABLE);
         this.chest = await app.loader.loadJson(res.TABLE_CHEST_TABLE);
         this.emoji = await app.loader.loadJson(res.TABLE_EMOJI_TABLE);
         this.equip = await app.loader.loadJson(res.TABLE_EQUIP_TABLE);

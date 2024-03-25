@@ -4,6 +4,7 @@ export module res {
     export const TABLE_ATTR_TABLE = "resources/data/attr.json";
     export const TABLE_BATTLE_BUILDING_TABLE = "resources/data/battle/battle-building.json";
     export const TABLE_BATTLE_ENTITY_TABLE = "resources/data/battle/battle-entity.json";
+    export const TABLE_BATTLE_EVENT_TABLE = "resources/data/battle/battle-event.json";
     export const TABLE_BUFF_TABLE = "resources/data/battle/battle-buff.json";
     export const TABLE_CHEST_TABLE = "resources/data/chest.json";
     export const TABLE_EMOJI_TABLE = "resources/data/emoji.json";

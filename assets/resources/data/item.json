@@ -217,7 +217,7 @@
     },
     "30301": {
         "args": {
-            "money_id": 101
+            "money_id": 30301
         },
         "auto_use": 1,
         "bag_id": 1,
@@ -231,7 +231,7 @@
     },
     "30401": {
         "args": {
-            "money_id": 102
+            "money_id": 30401
         },
         "auto_use": 1,
         "bag_id": 1,
@@ -245,7 +245,7 @@
     },
     "30501": {
         "args": {
-            "money_id": 103
+            "money_id": 30501
         },
         "auto_use": 1,
         "bag_id": 1,
@@ -259,7 +259,7 @@
     },
     "30601": {
         "args": {
-            "money_id": 201
+            "money_id": 30601
         },
         "auto_use": 1,
         "bag_id": 1,
@@ -273,7 +273,7 @@
     },
     "30701": {
         "args": {
-            "money_id": 202
+            "money_id": 30701
         },
         "auto_use": 1,
         "bag_id": 1,
@@ -287,7 +287,7 @@
     },
     "30801": {
         "args": {
-            "money_id": 203
+            "money_id": 30801
         },
         "auto_use": 1,
         "bag_id": 1,

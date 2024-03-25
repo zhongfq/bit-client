@@ -16,6 +16,7 @@ import {
     TroopComponent,
     TruckComponent,
 } from "./ecs/components/element-component";
+import { EventComponent } from "./ecs/components/event-component";
 import { MovementComponent, TransformComponent } from "./ecs/components/movement-component";
 import { LauncherComponent, Skill } from "./ecs/components/skill-component";
 import { AiSystem } from "./ecs/systems/ai-system";
@@ -32,6 +33,8 @@ const SOLDIER_COUNT = 12;
 const tmpT3d: Laya.Transform3D = new Laya.Transform3D();
 
 export class PveServer extends b3.Context {
+    public focusRole: number = 0;
+
     private _ecs: ecs.World;
     private _eidCount: number = 0;
 
@@ -165,6 +168,7 @@ export class PveServer extends b3.Context {
     public start() {
         // 创建主角
         const entity = this._ecs.createEntity(this._obtainEid());
+        this.focusRole = entity.eid;
         entity.etype = BattleConf.ENTITY_TYPE.HERO;
 
         const element = entity.addComponent(ElementComponent);
@@ -721,6 +725,54 @@ export class PveServer extends b3.Context {
     }
 
     public removeCollection(tid: number, position: Laya.Vector3) {
+        const key = this._toElementKey(tid, position);
+        const element = this._elements.get(key);
+        if (element) {
+            this.removeElement(element, true);
+        }
+    }
+
+    public addEvent(tid: number, position: Laya.Vector3) {
+        const key = this._toElementKey(tid, position);
+        if (this._elements.has(key)) {
+            return;
+        }
+
+        const cache = this.ecs.getSingletonComponent(CacheComponent)!;
+        const cacheEntry = cache.get(key);
+        if (cacheEntry && cacheEntry.reliveTime > this.time) {
+            cacheEntry.outVision = false;
+            return;
+        } else {
+            cache.delete(key);
+        }
+
+        const table = app.service.table;
+        const eventRow = table.battleEvent[tid];
+        const entityRow = table.battleEntity[eventRow.battle_entity];
+
+        const entity = this._ecs.createEntity(this._obtainEid());
+        entity.etype = entityRow.etype;
+
+        const element = entity.addComponent(ElementComponent);
+        element.tag = ElementComponent.COLLECTION;
+        element.tid = tid;
+        element.aid = 1;
+        element.key = key;
+        element.spawnpoint.cloneFrom(position);
+        element.data = entityRow;
+        this._elements.set(key, element);
+
+        const event = entity.addComponent(EventComponent);
+        event.dispatching = false;
+        event.data = eventRow;
+
+        const transform = entity.addComponent(TransformComponent);
+        transform.position.x = position.x;
+        transform.position.z = position.z;
+    }
+
+    public removeEvent(tid: number, position: Laya.Vector3) {
         const key = this._toElementKey(tid, position);
         const element = this._elements.get(key);
         if (element) {

@@ -100,7 +100,7 @@ export interface GeneratedBattleEventRow {
     reward: any;
     cost?: any;
     battle_entity: number;
-    radius?: number;
+    radius: number;
 }
 
 // file: design/battle/battle_scene.xlsx

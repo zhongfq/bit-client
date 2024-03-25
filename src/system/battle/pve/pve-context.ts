@@ -137,6 +137,8 @@ export class PveContext extends Mediator implements ITMContext {
         } else if (element instanceof TMEventElement) {
             // TODO: 事件元素的处理
             console.log("add event", element);
+            const position = new Laya.Vector3(element.gridX, 0, element.gridY);
+            this.sender.addEvent(element.id, position);
         }
     }
 
@@ -160,7 +162,8 @@ export class PveContext extends Mediator implements ITMContext {
                     break;
             }
         } else if (element instanceof TMEventElement) {
-            // TODO: 事件元素的处理
+            const position = new Laya.Vector3(element.gridX, 0, element.gridY);
+            this.sender.removeEvent(element.id, position);
         }
     }
 
@@ -239,6 +242,14 @@ class CommandSender {
 
     public addBuilding(tid: number, position: Laya.Vector3) {
         this.server.addBuilding(tid, position);
+    }
+
+    public addEvent(tid: number, position: Laya.Vector3) {
+        this.server.addEvent(tid, position);
+    }
+
+    public removeEvent(tid: number, position: Laya.Vector3) {
+        this.server.removeEvent(tid, position);
     }
 
     public removeBuilding(tid: number, position: Laya.Vector3) {
