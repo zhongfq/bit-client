@@ -58,7 +58,7 @@
                   "skillId": 0
                 },
                 "output": [
-                  "enemy"
+                  "target"
                 ],
                 "children": []
               },
@@ -96,7 +96,7 @@
                         "name": "TowardToTarget",
                         "args": {},
                         "input": [
-                          "enemy"
+                          "target"
                         ]
                       },
                       {
@@ -107,17 +107,29 @@
                           "skill": 0
                         },
                         "input": [
-                          "enemy"
+                          "target"
                         ]
                       }
                     ]
                   },
                   {
                     "id": 15,
-                    "name": "AdjustStance",
+                    "name": "Sequence",
                     "args": {},
-                    "input": [
-                      "enemy"
+                    "children": [
+                      {
+                        "id": 16,
+                        "name": "ClearStance",
+                        "args": {}
+                      },
+                      {
+                        "id": 17,
+                        "name": "AdjustStance",
+                        "args": {},
+                        "input": [
+                          "target"
+                        ]
+                      }
                     ]
                   }
                 ]
@@ -125,18 +137,18 @@
             ]
           },
           {
-            "id": 16,
+            "id": 18,
             "name": "Sequence",
             "desc": "找目标",
             "args": {},
             "children": [
               {
-                "id": 17,
+                "id": 19,
                 "name": "ClearStance",
                 "args": {}
               },
               {
-                "id": 18,
+                "id": 20,
                 "name": "FindOneTarget",
                 "args": {
                   "radius": 3,
@@ -144,22 +156,22 @@
                   "soldier": true
                 },
                 "output": [
-                  "enemy"
+                  "target"
                 ]
               },
               {
-                "id": 19,
+                "id": 21,
                 "name": "GetPos",
                 "args": {},
                 "input": [
-                  "enemy"
+                  "target"
                 ],
                 "output": [
                   "pos"
                 ]
               },
               {
-                "id": 20,
+                "id": 22,
                 "name": "MoveToPos",
                 "args": {
                   "rate": 1.5
@@ -173,20 +185,20 @@
         ]
       },
       {
-        "id": 21,
+        "id": 23,
         "name": "Selector",
         "desc": "采集",
         "args": {},
         "path": "collect.json",
         "children": [
           {
-            "id": 22,
+            "id": 24,
             "name": "Sequence",
             "desc": "采集",
             "args": {},
             "children": [
               {
-                "id": 23,
+                "id": 25,
                 "name": "FindOneTarget",
                 "args": {
                   "attack": false,
@@ -199,21 +211,21 @@
                   "collection": true
                 },
                 "output": [
-                  "collection"
+                  "target"
                 ],
                 "children": []
               },
               {
-                "id": 24,
+                "id": 26,
                 "name": "Selector",
                 "args": {},
                 "children": [
                   {
-                    "id": 25,
+                    "id": 27,
                     "name": "Sequence",
                     "children": [
                       {
-                        "id": 26,
+                        "id": 28,
                         "name": "IsFreeStance",
                         "args": {},
                         "input": [
@@ -221,34 +233,34 @@
                         ]
                       },
                       {
-                        "id": 27,
+                        "id": 29,
                         "name": "SetStance",
                         "args": {}
                       },
                       {
-                        "id": 28,
+                        "id": 30,
                         "name": "MoveStop",
                         "desc": "停止移动",
                         "args": {}
                       },
                       {
-                        "id": 29,
+                        "id": 31,
                         "name": "TowardToTarget",
                         "args": {},
                         "input": [
-                          "collection"
+                          "target"
                         ]
                       },
                       {
-                        "id": 30,
+                        "id": 32,
                         "name": "Collect",
                         "args": {},
                         "input": [
-                          "collection"
+                          "target"
                         ]
                       },
                       {
-                        "id": 31,
+                        "id": 33,
                         "name": "Wait",
                         "args": {
                           "time": 1
@@ -257,11 +269,23 @@
                     ]
                   },
                   {
-                    "id": 32,
-                    "name": "AdjustStance",
+                    "id": 34,
+                    "name": "Sequence",
                     "args": {},
-                    "input": [
-                      "collection"
+                    "children": [
+                      {
+                        "id": 35,
+                        "name": "ClearStance",
+                        "args": {}
+                      },
+                      {
+                        "id": 36,
+                        "name": "AdjustStance",
+                        "args": {},
+                        "input": [
+                          "target"
+                        ]
+                      }
                     ]
                   }
                 ]
@@ -269,18 +293,18 @@
             ]
           },
           {
-            "id": 33,
+            "id": 37,
             "name": "Sequence",
             "desc": "找采集物",
             "args": {},
             "children": [
               {
-                "id": 34,
+                "id": 38,
                 "name": "ClearStance",
                 "args": {}
               },
               {
-                "id": 35,
+                "id": 39,
                 "name": "FindOneTarget",
                 "args": {
                   "radius": 3,
@@ -289,22 +313,22 @@
                   "collection": true
                 },
                 "output": [
-                  "collection"
+                  "target"
                 ]
               },
               {
-                "id": 36,
+                "id": 40,
                 "name": "GetPos",
                 "args": {},
                 "input": [
-                  "collection"
+                  "target"
                 ],
                 "output": [
                   "pos"
                 ]
               },
               {
-                "id": 37,
+                "id": 41,
                 "name": "MoveToPos",
                 "args": {
                   "rate": 1.5,

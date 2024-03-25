@@ -26,7 +26,7 @@
               "collection": true
             },
             "output": [
-              "collection"
+              "target"
             ],
             "children": []
           },
@@ -63,7 +63,7 @@
                     "name": "TowardToTarget",
                     "args": {},
                     "input": [
-                      "collection"
+                      "target"
                     ]
                   },
                   {
@@ -71,7 +71,7 @@
                     "name": "Collect",
                     "args": {},
                     "input": [
-                      "collection"
+                      "target"
                     ]
                   },
                   {
@@ -85,10 +85,22 @@
               },
               {
                 "id": 12,
-                "name": "AdjustStance",
+                "name": "Sequence",
                 "args": {},
-                "input": [
-                  "collection"
+                "children": [
+                  {
+                    "id": 13,
+                    "name": "ClearStance",
+                    "args": {}
+                  },
+                  {
+                    "id": 14,
+                    "name": "AdjustStance",
+                    "args": {},
+                    "input": [
+                      "target"
+                    ]
+                  }
                 ]
               }
             ]
@@ -96,18 +108,18 @@
         ]
       },
       {
-        "id": 13,
+        "id": 15,
         "name": "Sequence",
         "desc": "找采集物",
         "args": {},
         "children": [
           {
-            "id": 14,
+            "id": 16,
             "name": "ClearStance",
             "args": {}
           },
           {
-            "id": 15,
+            "id": 17,
             "name": "FindOneTarget",
             "args": {
               "radius": 3,
@@ -116,22 +128,22 @@
               "collection": true
             },
             "output": [
-              "collection"
+              "target"
             ]
           },
           {
-            "id": 16,
+            "id": 18,
             "name": "GetPos",
             "args": {},
             "input": [
-              "collection"
+              "target"
             ],
             "output": [
               "pos"
             ]
           },
           {
-            "id": 17,
+            "id": 19,
             "name": "MoveToPos",
             "args": {
               "rate": 1.5,

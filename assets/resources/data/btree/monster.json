@@ -64,7 +64,7 @@
               "skillId": 0
             },
             "output": [
-              "enemy"
+              "target"
             ]
           },
           {
@@ -136,7 +136,7 @@
                     "name": "TowardToTarget",
                     "args": {},
                     "input": [
-                      "enemy"
+                      "target"
                     ]
                   },
                   {
@@ -146,17 +146,29 @@
                       "skill": 0
                     },
                     "input": [
-                      "enemy"
+                      "target"
                     ]
                   }
                 ]
               },
               {
                 "id": 21,
-                "name": "AdjustStance",
+                "name": "Sequence",
                 "args": {},
-                "input": [
-                  "enemy"
+                "children": [
+                  {
+                    "id": 22,
+                    "name": "ClearStance",
+                    "args": {}
+                  },
+                  {
+                    "id": 23,
+                    "name": "AdjustStance",
+                    "args": {},
+                    "input": [
+                      "target"
+                    ]
+                  }
                 ]
               }
             ]
@@ -164,18 +176,18 @@
         ]
       },
       {
-        "id": 22,
+        "id": 24,
         "name": "Sequence",
         "desc": "找目标",
         "args": {},
         "children": [
           {
-            "id": 23,
+            "id": 25,
             "name": "ClearStance",
             "args": {}
           },
           {
-            "id": 24,
+            "id": 26,
             "name": "FindOneTarget",
             "args": {
               "radius": 3,
@@ -183,22 +195,22 @@
               "soldier": true
             },
             "output": [
-              "enemy"
+              "target"
             ]
           },
           {
-            "id": 25,
+            "id": 27,
             "name": "GetPos",
             "args": {},
             "input": [
-              "enemy"
+              "target"
             ],
             "output": [
               "pos"
             ]
           },
           {
-            "id": 26,
+            "id": 28,
             "name": "MoveToPos",
             "args": {
               "rate": 1.5

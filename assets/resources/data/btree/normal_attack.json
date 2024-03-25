@@ -63,7 +63,7 @@
         "name": "TowardToTarget",
         "args": {},
         "input": [
-          "enemy"
+          "target"
         ]
       },
       {
@@ -73,7 +73,7 @@
           "skill": 0
         },
         "input": [
-          "enemy"
+          "target"
         ]
       }
     ]
