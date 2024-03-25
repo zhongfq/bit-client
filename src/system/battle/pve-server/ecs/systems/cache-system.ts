@@ -20,7 +20,7 @@ export class CacheSystem extends ecs.System {
         if (!data || data.reliveTime === undefined) {
             return undefined;
         }
-        return data.reliveTime <= Laya.timer.currTimer;
+        return data.reliveTime <= this.context.time;
     }
 
     public setReliveTime(element: ElementComponent, reliveTime: number | undefined) {

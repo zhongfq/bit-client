@@ -405,7 +405,7 @@ export class PveServer extends b3.Context {
                 this.removeElement(enemy, false);
             });
             const cacheSys = this.ecs.getSystem(CacheSystem)!;
-            cacheSys.setReliveTime(enemy, Laya.timer.currTimer + 60 * 1000); // TODO：复活时间读配置表
+            cacheSys.setReliveTime(enemy, this.time + 60); // TODO：复活时间读配置表
         }
     }
 
@@ -434,7 +434,7 @@ export class PveServer extends b3.Context {
         if (truck) {
             if (truck.collectCnt >= PveDef.COLLECT_MAX_CNT) {
                 const lastTime = truck.lastTipsTime;
-                if (!lastTime || Laya.timer.currTimer - lastTime > 10 * 1000) {
+                if (!lastTime || this.time - lastTime > 10) {
                     switch (truck.collectType) {
                         case BattleConf.ENTITY_TYPE.WOOD:
                             app.ui.toast("木头资源车已满，无法继续获得木头");
@@ -446,7 +446,7 @@ export class PveServer extends b3.Context {
                             app.ui.toast("石材资源车已满，无法继续获得石材");
                             break;
                     }
-                    truck.lastTipsTime = Laya.timer.currTimer;
+                    truck.lastTipsTime = this.time;
                 }
             } else {
                 truck.collectCnt++;
@@ -462,7 +462,7 @@ export class PveServer extends b3.Context {
             const cacheSys = this.ecs.getSystem(CacheSystem)!;
             const table = app.service.table;
             const buildingRow = table.battleBuilding[target.tid];
-            cacheSys.setReliveTime(target, Laya.timer.currTimer + buildingRow.fresh_time * 1000);
+            cacheSys.setReliveTime(target, this.time + buildingRow.fresh_time);
         }
     }
 
