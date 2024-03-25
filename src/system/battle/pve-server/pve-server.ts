@@ -487,8 +487,11 @@ export class PveServer extends b3.Context {
                     subHp: 0,
                 });
             }
-        } else if (etype == ETYPE.MONSTER) {
+        } else if (etype == ETYPE.HERO) {
+            // TODO: MONSTER_HERO?
             this.addMonster(entry.data.tid, entry.data.spawnpoint);
+        } else {
+            console.warn(`unsupport relive:`, entry.data.key, entry.data.etype);
         }
     }
 
