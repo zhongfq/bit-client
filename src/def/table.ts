@@ -1,3 +1,4 @@
+import { GeneratedBattleEventRow } from "./table.generated";
 // import { BuffType } from "../system/war/ecs/components/buff";
 // import { ElementType, SkillType } from "../system/war/ecs/components/element";
 // import { TrackType } from "../system/war/ecs/components/movement";
@@ -91,6 +92,13 @@ export interface BattleBuildingRow extends GeneratedBattleBuildingRow {}
 export type BattleBuildingTable = {
     [k: string]: BattleBuildingRow;
 };
+
+export interface BattleEventRow extends GeneratedBattleEventRow {}
+
+export type BattleEventTable = {
+    [k: string]: BattleEventRow;
+};
+
 //-----------------------------------------------------------------------------
 // 纹理配置
 //-----------------------------------------------------------------------------

@@ -136,6 +136,7 @@ export class PveContext extends Mediator implements ITMContext {
             }
         } else if (element instanceof TMEventElement) {
             // TODO: 事件元素的处理
+            console.log("add event", element);
         }
     }
 

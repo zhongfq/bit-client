@@ -1,39 +1,39 @@
 {
-    "30301": {
+    "101": {
         "icon": "icon_main_gold",
-        "id": 30301,
+        "id": 101,
         "name": "coin",
         "sort": 1
     },
-    "30401": {
+    "102": {
         "icon": "icon_main_diamond",
-        "id": 30401,
+        "id": 102,
         "name": "diamond",
         "sort": 2
     },
-    "30501": {
+    "103": {
         "icon": "iconSmall4",
-        "id": 30501,
+        "id": 103,
         "name": "energy",
         "recover_inc": 10,
         "recover_max": 120,
         "recover_sec": 10
     },
-    "30601": {
+    "201": {
         "icon": "icon_gather_wood",
-        "id": 30601,
+        "id": 201,
         "name": "wood",
         "sort": 4
     },
-    "30701": {
+    "202": {
         "icon": "icon_gather_food",
-        "id": 30701,
+        "id": 202,
         "name": "food",
         "sort": 3
     },
-    "30801": {
+    "203": {
         "icon": "icon_gather_iron",
-        "id": 30801,
+        "id": 203,
         "name": "stone",
         "sort": 5
     }

@@ -1,10 +1,9 @@
 export const MoneyConf = {
     MONEY_ID: {
-        COIN: 30301,
-        DIAMOND: 30401,
-        ENERGY: 30501,
-        FOOD: 30701,
-        STONE: 30801,
-        WOOD: 30601,
+        COIN: 101,
+        DIAMOND: 102,
+        ENERGY: 103,
+        FOOD: 202,
+        WOOD: 201,
     },
 }

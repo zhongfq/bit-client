@@ -20,6 +20,7 @@ import { LauncherComponent, Skill } from "./ecs/components/skill-component";
 import { AiSystem } from "./ecs/systems/ai-system";
 import { BulletSystem } from "./ecs/systems/bullet-system";
 import { CacheSystem } from "./ecs/systems/cache-system";
+import { EventSystem } from "./ecs/systems/event-system";
 import { MovementSystem } from "./ecs/systems/movement-system";
 import { SkillSystem } from "./ecs/systems/skill-system";
 import { ElementCreator, PveDef, UpdateHp, UpdateTruck } from "./pve-defs";
@@ -48,6 +49,7 @@ export class PveServer extends b3.Context {
         this._ecs = new ecs.World(this);
         this._ecs.addSystem(AiSystem);
         this._ecs.addSystem(MovementSystem);
+        this._ecs.addSystem(EventSystem);
         this._ecs.addSystem(SkillSystem);
         this._ecs.addSystem(BulletSystem);
         this._ecs.addSystem(CacheSystem);
@@ -318,8 +320,8 @@ export class PveServer extends b3.Context {
         this._sender.removeElement(element.eid);
 
         if (outVision && element.hp < element.maxHp) {
-            const cacheSys = this.ecs.getSystem(CacheSystem);
-            cacheSys?.setOutVision(element, true);
+            const cacheSys = this.ecs.getSystem(CacheSystem)!;
+            cacheSys.setOutVision(element, true);
         }
     }
 
@@ -402,8 +404,8 @@ export class PveServer extends b3.Context {
             this.ecs.delay(2, enemy.eid, () => {
                 this.removeElement(enemy, false);
             });
-            const cacheSys = this.ecs.getSystem(CacheSystem);
-            cacheSys?.setReliveTime(enemy, Laya.timer.currTimer + 60 * 1000); // TODO：复活时间读配置表
+            const cacheSys = this.ecs.getSystem(CacheSystem)!;
+            cacheSys.setReliveTime(enemy, Laya.timer.currTimer + 60 * 1000); // TODO：复活时间读配置表
         }
     }
 
@@ -457,16 +459,16 @@ export class PveServer extends b3.Context {
         }
 
         if (target.hp <= 0) {
-            const cacheSys = this.ecs.getSystem(CacheSystem);
+            const cacheSys = this.ecs.getSystem(CacheSystem)!;
             const table = app.service.table;
             const buildingRow = table.battleBuilding[target.tid];
-            cacheSys?.setReliveTime(target, Laya.timer.currTimer + buildingRow.fresh_time * 1000);
+            cacheSys.setReliveTime(target, Laya.timer.currTimer + buildingRow.fresh_time * 1000);
         }
     }
 
     public relive(e: ElementComponent) {
-        const cacheSys = this.ecs.getSystem(CacheSystem);
-        if (cacheSys?.isOutVision(e.key) === true) {
+        const cacheSys = this.ecs.getSystem(CacheSystem)!;
+        if (cacheSys.isOutVision(e.key) === true) {
             return;
         }
         const etype = e.data.etype;
@@ -544,8 +546,8 @@ export class PveServer extends b3.Context {
         if (this._elements.has(key)) {
             return;
         }
-        const cacheSys = this.ecs.getSystem(CacheSystem);
-        if (cacheSys?.canRelive(key) === false) {
+        const cacheSys = this.ecs.getSystem(CacheSystem)!;
+        if (cacheSys.canRelive(key) === false) {
             return;
         }
 
@@ -553,7 +555,7 @@ export class PveServer extends b3.Context {
         entity.etype = BattleConf.ENTITY_TYPE.HERO;
 
         const element = entity.addComponent(ElementComponent);
-        const cacheData = cacheSys?.getCache(key);
+        const cacheData = cacheSys.getCache(key);
 
         element.tid = tid;
         element.hp = cacheData?.element.hp ?? 200;
@@ -563,7 +565,7 @@ export class PveServer extends b3.Context {
         element.spawnpoint.cloneFrom(position);
 
         if (cacheData) {
-            cacheSys?.setOutVision(cacheData.element, undefined);
+            cacheSys.setOutVision(cacheData.element, undefined);
         }
         this._elements.set(key, element);
 
@@ -613,8 +615,8 @@ export class PveServer extends b3.Context {
         if (this._elements.has(key)) {
             return;
         }
-        const cacheSys = this.ecs.getSystem(CacheSystem);
-        if (cacheSys?.canRelive(key) === false) {
+        const cacheSys = this.ecs.getSystem(CacheSystem)!;
+        if (cacheSys.canRelive(key) === false) {
             return;
         }
 
@@ -626,7 +628,7 @@ export class PveServer extends b3.Context {
         entity.etype = entityRow.etype;
 
         const element = entity.addComponent(ElementComponent);
-        const cacheData = cacheSys?.getCache(key);
+        const cacheData = cacheSys.getCache(key);
 
         element.tid = tid;
         element.hp = cacheData?.element.hp ?? buildingRow.max_hp;
@@ -637,7 +639,7 @@ export class PveServer extends b3.Context {
         element.data = entityRow;
 
         if (cacheData) {
-            cacheSys?.setOutVision(cacheData.element, undefined);
+            cacheSys.setOutVision(cacheData.element, undefined);
         }
         this._elements.set(key, element);
 
@@ -670,8 +672,8 @@ export class PveServer extends b3.Context {
         if (this._elements.has(key)) {
             return;
         }
-        const cacheSys = this.ecs.getSystem(CacheSystem);
-        const cacheData = cacheSys?.getCache(key);
+        const cacheSys = this.ecs.getSystem(CacheSystem)!;
+        const cacheData = cacheSys.getCache(key);
 
         const table = app.service.table;
         const buildingRow = table.battleBuilding[tid];
@@ -690,7 +692,7 @@ export class PveServer extends b3.Context {
         element.data = entityRow;
 
         if (cacheData) {
-            cacheSys?.setOutVision(cacheData.element, undefined);
+            cacheSys.setOutVision(cacheData.element, undefined);
         }
         this._elements.set(key, element);
 
