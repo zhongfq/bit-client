@@ -9,6 +9,5 @@ export class ToastUI extends ToastUIBase {
     public override open(closeOther?: boolean | undefined, param?: any): void {
         this.args = param;
         super.open(closeOther, param);
-        console.log("xxxdfa open");
     }
 }
