@@ -252,6 +252,10 @@ export abstract class Component {
         return this.entity.eid;
     }
 
+    public get etype() {
+        return this.entity.etype;
+    }
+
     public addComponent<T extends Component>(cls: Constructor<T>): T {
         return this.entity.addComponent(cls);
     }

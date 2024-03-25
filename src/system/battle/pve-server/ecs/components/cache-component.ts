@@ -2,32 +2,21 @@ import * as ecs from "../../../../../core/ecs";
 import { ElementComponent } from "./element-component";
 
 export interface IElementLike {
+    etype: number;
+    tid: number;
     key: string;
     hp: number;
     maxHp: number;
+    spawnpoint: Laya.Vector3;
 }
 
 export class CacheEntry {
-    public key: string;
-    public hp: number;
-    public maxHp: number;
-
-    /**
-     * 表示此对象是否处在视野之外
-     */
-    public outVision: boolean = true;
-
-    /**
-     * + 小于0，代表此对象不可复活。
-     * + 等于0，表示此前记录的对象未创建。
-     * + 大于0，表示些对象记录了复活时间。
-     */
+    public data: IElementLike;
+    public outVision: boolean = false;
     public reliveTime: number = 0;
 
     public constructor(data: IElementLike) {
-        this.key = data.key;
-        this.hp = data.hp;
-        this.maxHp = data.maxHp;
+        this.data = data;
     }
 }
 
@@ -37,14 +26,13 @@ export class CacheComponent extends Map<string, CacheEntry> implements ecs.Singl
         super();
     }
 
-    public create(element: ElementComponent) {
-        let cacheEntry = this.get(element.key);
+    public create(data: IElementLike) {
+        let cacheEntry = this.get(data.key);
         if (!cacheEntry) {
-            cacheEntry = new CacheEntry(element);
-            this.set(cacheEntry.key, cacheEntry);
+            cacheEntry = new CacheEntry(data);
+            this.set(data.key, cacheEntry);
         } else {
-            cacheEntry.hp = element.hp;
-            cacheEntry.maxHp = element.maxHp;
+            cacheEntry.data = data;
         }
         return cacheEntry;
     }

@@ -221,9 +221,9 @@ export class CommandSystem extends ecs.System implements ICommandSender {
 
     public updateHp(eid: number, data: UpdateHp): void {
         const element = this._findElement(eid);
-        if (element && data.subHp) {
+        if (element) {
             const info = element.getComponent(HeadInfoComponent);
-            if (info && info.view) {
+            if (info && info.view && data.subHp) {
                 info.data.hp = data.hp;
                 info.data.maxHp = data.maxHp;
                 info.view.update(info.data);

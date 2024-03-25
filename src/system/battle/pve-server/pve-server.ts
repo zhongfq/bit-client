@@ -8,6 +8,7 @@ import { formation } from "../../../def/formation";
 import { ElementAnimation } from "../pve/ecs/components/element-component";
 import { AiComponent } from "./ecs/components/ai-component";
 import { BulletComponent } from "./ecs/components/bullet-compoment";
+import { CacheComponent, CacheEntry } from "./ecs/components/cache-component";
 import {
     ElementComponent,
     FollowerComponent,
@@ -47,6 +48,7 @@ export class PveServer extends b3.Context {
         this._sender = sender;
 
         this._ecs = new ecs.World(this);
+        this._ecs.addSingletonComponent(CacheComponent);
         this._ecs.addSystem(AiSystem);
         this._ecs.addSystem(MovementSystem);
         this._ecs.addSystem(EventSystem);
@@ -205,7 +207,7 @@ export class PveServer extends b3.Context {
         });
         this._sender.focus(element.eid);
 
-        this._loadSoliders(element);
+        // this._loadSoliders(element);
         this._loadTrucks(element);
     }
 
@@ -320,8 +322,9 @@ export class PveServer extends b3.Context {
         this._sender.removeElement(element.eid);
 
         if (outVision && element.hp < element.maxHp) {
-            const cacheSys = this.ecs.getSystem(CacheSystem)!;
-            cacheSys.setOutVision(element, true);
+            const cache = this.ecs.getSingletonComponent(CacheComponent)!;
+            const cacheEntry = cache.create(element);
+            cacheEntry.outVision = true;
         }
     }
 
@@ -404,8 +407,10 @@ export class PveServer extends b3.Context {
             this.ecs.delay(2, enemy.eid, () => {
                 this.removeElement(enemy, false);
             });
-            const cacheSys = this.ecs.getSystem(CacheSystem)!;
-            cacheSys.setReliveTime(enemy, this.time + 60); // TODO：复活时间读配置表
+            const cache = this.ecs.getSingletonComponent(CacheComponent)!;
+            const cacheEntry = cache.create(enemy);
+            // TODO：复活时间读配置表
+            cacheEntry.reliveTime = this.time + 60;
         }
     }
 
@@ -459,26 +464,23 @@ export class PveServer extends b3.Context {
         }
 
         if (target.hp <= 0) {
-            const cacheSys = this.ecs.getSystem(CacheSystem)!;
             const table = app.service.table;
             const buildingRow = table.battleBuilding[target.tid];
-            cacheSys.setReliveTime(target, this.time + buildingRow.fresh_time);
+            const cache = this.ecs.getSingletonComponent(CacheComponent)!;
+            const cacheEntry = cache.create(target);
+            cacheEntry.reliveTime = this.time + buildingRow.fresh_time;
         }
     }
 
-    public relive(e: ElementComponent) {
-        const cacheSys = this.ecs.getSystem(CacheSystem)!;
-        if (cacheSys.isOutVision(e.key) === true) {
-            return;
-        }
-        const etype = e.data.etype;
+    public relive(entry: CacheEntry) {
+        const etype = entry.data.etype;
         const ETYPE = BattleConf.ENTITY_TYPE;
 
         if (etype == ETYPE.WOOD || etype == ETYPE.FOOD || etype == ETYPE.STONE) {
-            const element = this._elements.get(e.key);
+            const element = this._elements.get(entry.data.key);
             if (element) {
-                element.hp = e.hp;
-                element.maxHp = e.maxHp;
+                element.hp = entry.data.hp;
+                element.maxHp = entry.data.maxHp;
                 this._sender.updateHp(element.eid, {
                     hp: element.hp,
                     maxHp: element.maxHp,
@@ -486,7 +488,7 @@ export class PveServer extends b3.Context {
                 });
             }
         } else if (etype == ETYPE.MONSTER) {
-            this.addMonster(e.tid, e.spawnpoint);
+            this.addMonster(entry.data.tid, entry.data.spawnpoint);
         }
     }
 
@@ -546,27 +548,26 @@ export class PveServer extends b3.Context {
         if (this._elements.has(key)) {
             return;
         }
-        const cacheSys = this.ecs.getSystem(CacheSystem)!;
-        if (cacheSys.canRelive(key) === false) {
+
+        const cache = this.ecs.getSingletonComponent(CacheComponent)!;
+        const cacheEntry = cache.get(key);
+        if (cacheEntry && cacheEntry.reliveTime > this.time) {
+            cacheEntry.outVision = false;
             return;
+        } else {
+            cache.delete(key);
         }
 
         const entity = this._ecs.createEntity(this._obtainEid());
         entity.etype = BattleConf.ENTITY_TYPE.HERO;
 
         const element = entity.addComponent(ElementComponent);
-        const cacheData = cacheSys.getCache(key);
-
         element.tid = tid;
-        element.hp = cacheData?.element.hp ?? 200;
-        element.maxHp = cacheData?.element.maxHp ?? 200;
+        element.hp = cacheEntry?.data.hp ?? 200;
+        element.maxHp = cacheEntry?.data.maxHp ?? 200;
         element.aid = 2;
         element.key = key;
         element.spawnpoint.cloneFrom(position);
-
-        if (cacheData) {
-            cacheSys.setOutVision(cacheData.element, undefined);
-        }
         this._elements.set(key, element);
 
         const table = app.service.table;
@@ -615,9 +616,14 @@ export class PveServer extends b3.Context {
         if (this._elements.has(key)) {
             return;
         }
-        const cacheSys = this.ecs.getSystem(CacheSystem)!;
-        if (cacheSys.canRelive(key) === false) {
+
+        const cache = this.ecs.getSingletonComponent(CacheComponent)!;
+        const cacheEntry = cache.get(key);
+        if (cacheEntry && cacheEntry.reliveTime > this.time) {
+            cacheEntry.outVision = false;
             return;
+        } else {
+            cache.delete(key);
         }
 
         const table = app.service.table;
@@ -628,19 +634,13 @@ export class PveServer extends b3.Context {
         entity.etype = entityRow.etype;
 
         const element = entity.addComponent(ElementComponent);
-        const cacheData = cacheSys.getCache(key);
-
         element.tid = tid;
-        element.hp = cacheData?.element.hp ?? buildingRow.max_hp;
-        element.maxHp = cacheData?.element.maxHp ?? buildingRow.max_hp;
+        element.hp = cacheEntry?.data.hp ?? buildingRow.max_hp;
+        element.maxHp = cacheEntry?.data.maxHp ?? buildingRow.max_hp;
         element.aid = 1; // TODO: 区分敌我方城建
         element.key = key;
         element.spawnpoint.cloneFrom(position);
         element.data = entityRow;
-
-        if (cacheData) {
-            cacheSys.setOutVision(cacheData.element, undefined);
-        }
         this._elements.set(key, element);
 
         const transform = entity.addComponent(TransformComponent);
@@ -672,8 +672,12 @@ export class PveServer extends b3.Context {
         if (this._elements.has(key)) {
             return;
         }
-        const cacheSys = this.ecs.getSystem(CacheSystem)!;
-        const cacheData = cacheSys.getCache(key);
+
+        const cache = this.ecs.getSingletonComponent(CacheComponent)!;
+        const cacheEntry = cache.get(key);
+        if (cacheEntry) {
+            cacheEntry.outVision = false;
+        }
 
         const table = app.service.table;
         const buildingRow = table.battleBuilding[tid];
@@ -684,16 +688,12 @@ export class PveServer extends b3.Context {
 
         const element = entity.addComponent(ElementComponent);
         element.tid = tid;
-        element.hp = cacheData?.element.hp ?? buildingRow.max_hp;
-        element.maxHp = cacheData?.element.maxHp ?? buildingRow.max_hp;
+        element.hp = cacheEntry?.data.hp ?? buildingRow.max_hp;
+        element.maxHp = cacheEntry?.data.maxHp ?? buildingRow.max_hp;
         element.aid = 2;
         element.key = key;
         element.spawnpoint.cloneFrom(position);
         element.data = entityRow;
-
-        if (cacheData) {
-            cacheSys.setOutVision(cacheData.element, undefined);
-        }
         this._elements.set(key, element);
 
         const transform = entity.addComponent(TransformComponent);

@@ -203,14 +203,20 @@ export class TreeEnv {
     }
 
     public getValue(k: string) {
-        return this._values[k];
+        if (k) {
+            return this._values[k];
+        } else {
+            return undefined;
+        }
     }
 
     public setValue(k: string, v: unknown) {
-        if (v === undefined) {
-            delete this._values[k];
-        } else {
-            this._values[k] = v;
+        if (k) {
+            if (v === undefined) {
+                delete this._values[k];
+            } else {
+                this._values[k] = v;
+            }
         }
     }
 
