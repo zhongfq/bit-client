@@ -5,7 +5,7 @@ import { TransformComponent } from "../components/movement-component";
 import { TilemapComponent } from "../components/tilemap-component";
 
 export class TilemapSystem extends ecs.System {
-    private static readonly TICK = 100;
+    private static readonly TICK = 0.1;
 
     public declare context: PvpContext;
 
@@ -18,9 +18,9 @@ export class TilemapSystem extends ecs.System {
 
     public override update(dt: number) {
         const tilemap = this.ecs.getSingletonComponent(TilemapComponent)!;
-        const curr = Laya.timer.currTimer;
-        if (tilemap.isReady && curr - this._lastTick >= TilemapSystem.TICK) {
-            this._lastTick = curr;
+        const time = this.ecs.time;
+        if (tilemap.isReady && time - this._lastTick >= TilemapSystem.TICK) {
+            this._lastTick = time;
             const camera = this.ecs.getSingletonComponent(CameraComponent)!;
             tilemap.update(camera.focus);
         }

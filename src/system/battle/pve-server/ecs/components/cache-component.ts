@@ -13,6 +13,9 @@ export interface IElementLike {
 export class CacheEntry {
     public data: IElementLike;
     public outVision: boolean = false;
+    /**
+     * 如果对象不需要复活，则可以把复活时间设置为无限大。
+     */
     public reliveTime: number = 0;
 
     public constructor(data: IElementLike) {
