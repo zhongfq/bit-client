@@ -1,6 +1,7 @@
 import * as b3 from "../../../../../core/behavior3/behavior";
 import { BattleConf } from "../../../../../def/battle";
 import { AiTreeEnv } from "../../ecs/components/ai-component";
+import { ElementComponent } from "../../ecs/components/element-component";
 import { SkillTreeEnv } from "../../ecs/components/skill-component";
 import { SkillOption, SkillRangeOption } from "../btree-def";
 
@@ -36,18 +37,13 @@ export class FindTargets extends b3.Process {
                 radius = skill.data.radius;
             }
         }
-        const ETYPE = BattleConf.ENTITY_TYPE;
         const position = env.owner.transform.position;
+        let tag = 0;
+        tag |= findHero ? ElementComponent.HERO : 0;
+        tag |= findSoldier ? ElementComponent.SOLDIER : 0;
+        tag |= findCollection ? ElementComponent.COLLECTION : 0;
         const arr = env.context.find((element) => {
-            const etype = element.entity.etype;
-            if (
-                ((findHero && etype === ETYPE.HERO) ||
-                    (findSoldier && etype === ETYPE.SOLDIER) ||
-                    (findCollection &&
-                        (etype === ETYPE.WOOD || etype == ETYPE.FOOD || etype == ETYPE.STONE))) &&
-                element.aid !== env.owner.aid &&
-                element.hp > 0
-            ) {
+            if (element.tag & tag && element.aid !== env.owner.aid && element.hp > 0) {
                 const distance = Laya.Vector3.distance(element.transform.position, position);
                 if (distance < radius) {
                     element.tmpDistance = distance;

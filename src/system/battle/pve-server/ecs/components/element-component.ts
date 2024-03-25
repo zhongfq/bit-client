@@ -6,6 +6,17 @@ import { MovementComponent, TransformComponent } from "./movement-component";
 import { LauncherComponent } from "./skill-component";
 
 export class ElementComponent extends ecs.Component {
+    public static readonly HERO = 1 << 0;
+    public static readonly SOLDIER = 1 << 1;
+    public static readonly TRUCK = 1 << 2;
+    public static readonly WOOD = 1 << 3;
+    public static readonly FOOD = 1 << 4;
+    public static readonly STONE = 1 << 5;
+    public static readonly COLLECTION =
+        ElementComponent.WOOD | ElementComponent.FOOD | ElementComponent.STONE;
+
+    public tag: number = 0;
+
     public data!: BattleEntityRow;
 
     public maxHp: number = 0;
@@ -59,6 +70,7 @@ export class ElementComponent extends ecs.Component {
     }
 }
 
+// 优化尝试，跟随前面一个位置，减少大范围的晃动？
 export class FollowerComponent extends ecs.Component {
     public hero!: ElementComponent;
     public index: number = 0;

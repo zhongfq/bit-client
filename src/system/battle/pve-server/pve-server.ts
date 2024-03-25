@@ -168,6 +168,7 @@ export class PveServer extends b3.Context {
         entity.etype = BattleConf.ENTITY_TYPE.HERO;
 
         const element = entity.addComponent(ElementComponent);
+        element.tag = ElementComponent.HERO;
         element.tid = 101;
         element.hp = 400;
         element.maxHp = 400;
@@ -221,6 +222,7 @@ export class PveServer extends b3.Context {
             entity.etype = BattleConf.ENTITY_TYPE.SOLDIER;
 
             const element = entity.addComponent(ElementComponent);
+            element.tag = ElementComponent.SOLDIER;
             element.tid = idx >= 4 ? 40704 : 40702;
             element.hp = 200;
             element.maxHp = 200;
@@ -274,6 +276,7 @@ export class PveServer extends b3.Context {
             entity.etype = BattleConf.ENTITY_TYPE.TRUCK;
 
             const element = entity.addComponent(ElementComponent);
+            element.tag = ElementComponent.TRUCK;
             element.aid = 1;
             element.data = app.service.table.battleEntity[80001];
 
@@ -562,9 +565,10 @@ export class PveServer extends b3.Context {
         }
 
         const entity = this._ecs.createEntity(this._obtainEid());
-        entity.etype = BattleConf.ENTITY_TYPE.HERO;
+        entity.etype = BattleConf.ENTITY_TYPE.MONSTER;
 
         const element = entity.addComponent(ElementComponent);
+        element.tag = ElementComponent.HERO;
         element.tid = tid;
         element.hp = cacheEntry?.data.hp ?? 200;
         element.maxHp = cacheEntry?.data.maxHp ?? 200;
@@ -690,6 +694,7 @@ export class PveServer extends b3.Context {
         entity.etype = entityRow.etype;
 
         const element = entity.addComponent(ElementComponent);
+        element.tag = ElementComponent.COLLECTION;
         element.tid = tid;
         element.hp = cacheEntry?.data.hp ?? buildingRow.max_hp;
         element.maxHp = cacheEntry?.data.maxHp ?? buildingRow.max_hp;
