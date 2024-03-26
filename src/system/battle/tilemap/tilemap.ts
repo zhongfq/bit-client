@@ -258,15 +258,11 @@ export class Tilemap {
     public async onCreate() {
         this._root = this.context.scene3D.getChildByName("world-map") as Laya.Sprite3D;
 
-        this._world = (await Laya.loader.fetch(
-            `${this.context.mapDir}/world.json`,
-            "json"
-        )) as TMWorld;
+        this._world = await app.loader.loadJson(`${this.context.mapDir}/world.json`);
 
-        const tilesetRef = (await Laya.loader.fetch(
-            `${this.context.mapDir}/world-tileset-ref.json`,
-            "json"
-        )) as TMWorldMap;
+        const tilesetRef = await app.loader.loadJson<TMWorldMap>(
+            `${this.context.mapDir}/world-tileset-ref.json`
+        );
 
         if (!this._root || this._root.destroyed) {
             console.warn("Tilemap根节点已经被销毁");
@@ -378,9 +374,8 @@ export class Tilemap {
             }
 
             if (!info.worldMap) {
-                info.worldMap = (await Laya.loader.fetch(
-                    `${this.context.mapDir}/` + info.fileName,
-                    "json"
+                info.worldMap = (await app.loader.loadJson(
+                    `${this.context.mapDir}/` + info.fileName
                 )) as TMWorldMap;
             }
 

@@ -116,7 +116,7 @@ export abstract class TMTileElemet extends TMElement {
             console.log("error");
         }
         const path = atlas.frames[idx].url;
-        const tex = Laya.loader.getRes(path) as Laya.Texture;
+        const tex = await app.loader.loadTexture(path);
         mat.albedoTexture = texture;
         mat.tilingOffset.x = tex.uvrect[2]; // 瓦片宽度
         mat.tilingOffset.y = tex.uvrect[3]; // 瓦片高度

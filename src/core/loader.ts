@@ -22,6 +22,10 @@ export class Loader {
         return this.load<Laya.Texture2D>(url, Laya.Loader.TEXTURE2D, checker);
     }
 
+    public async loadTexture(url: string, checker?: ContextChecker) {
+        return this.load<Laya.Texture>(url, undefined!, checker);
+    }
+
     public async loadPrefab(url: string, checker?: ContextChecker) {
         return this.load<Laya.Prefab>(url, Laya.Loader.HIERARCHY, checker);
     }
