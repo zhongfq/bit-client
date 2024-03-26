@@ -79,9 +79,6 @@ export class PvpContext extends Mediator implements ITMContext {
 
         app.loader.loadPrefab(res.BATTLE_HP_NUM);
         app.loader.loadPrefab(res.BATTLE_HP_NUM_X);
-
-        //TODO: tm
-        TMUtil.DEBUG_MODE = true;
     }
 
     public override onUpdate() {

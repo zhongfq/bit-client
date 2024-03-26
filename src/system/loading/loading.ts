@@ -1,7 +1,6 @@
 import { app } from "../../app";
 import { ChatConf } from "../../def/chat";
 import { ItemConf } from "../../def/item";
-import { bag } from "../../def/proto";
 import { TaskConf } from "../../def/task";
 import { ui } from "../../misc/ui";
 import { LoadingUI } from "../../ui-runtime/scene/LoadingUI";
