@@ -96,7 +96,7 @@ export class TruckCollectSystem extends ecs.System {
         truckComp.collectObjs.push(obj);
 
         const collection = this.ecs.getComponent(component.data.collection, ElementComponent)!;
-        const buildingRow = app.service.table.battleBuilding[collection.tableId];
+        const buildingRow = app.service.table.battleBuilding[collection.tid];
         const startPos = collection!.transform.position.clone();
         startPos.y = buildingRow.height;
         obj.transform.position = startPos;

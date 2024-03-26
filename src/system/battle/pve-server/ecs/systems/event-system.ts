@@ -1,5 +1,6 @@
 import * as ecs from "../../../../../core/ecs";
 import { PveServer } from "../../pve-server";
+import { ElementComponent } from "../components/element-component";
 import { EventComponent } from "../components/event-component";
 import { TransformComponent } from "../components/movement-component";
 
@@ -27,11 +28,11 @@ export class EventSystem extends ecs.System {
                 if (dis < event.data.radius) {
                     if (!event.dispatching) {
                         event.dispatching = true;
-                        console.log("dispatch event:", event);
+                        this.context.dispatch(event.getComponent(ElementComponent)!, "enter");
                     }
                 } else if (event.dispatching) {
                     event.dispatching = false;
-                    console.log("dispatch no:", event);
+                    this.context.dispatch(event.getComponent(ElementComponent)!, "leave");
                 }
             });
         }

@@ -34,8 +34,10 @@ export class ElementComponent extends ecs.Component {
         return (this._animation ||= this.getComponent(AnimationComponent)!);
     }
 
-    public entityId: number = 0;
-    public tableId: number = 0;
+    /** entity 表格中实体 id */
+    public teid: number = 0;
+    /** hero, soldier, monster, event, building 表格中的数据 id */
+    public tid: number = 0;
 }
 
 export class TruckComponent extends ecs.Component {

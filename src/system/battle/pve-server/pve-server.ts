@@ -16,7 +16,7 @@ import {
     TroopComponent,
     TruckComponent,
 } from "./ecs/components/element-component";
-import { EventComponent } from "./ecs/components/event-component";
+import { EventTrigger, EventComponent } from "./ecs/components/event-component";
 import { MovementComponent, TransformComponent } from "./ecs/components/movement-component";
 import { LauncherComponent, Skill } from "./ecs/components/skill-component";
 import { AiSystem } from "./ecs/systems/ai-system";
@@ -203,8 +203,8 @@ export class PveServer extends b3.Context {
             eid: element.eid,
             etype: element.entity.etype,
             aid: element.aid,
-            entityId: element.data.id,
-            tableId: element.tid,
+            teid: element.data.id,
+            tid: element.tid,
             hp: element.hp,
             maxHp: element.maxHp,
             position: transform.position,
@@ -212,7 +212,7 @@ export class PveServer extends b3.Context {
         });
         this._sender.focus(element.eid);
 
-        this._loadSoliders(element);
+        // this._loadSoliders(element);
         this._loadTrucks(element);
     }
 
@@ -260,8 +260,8 @@ export class PveServer extends b3.Context {
                 eid: element.eid,
                 etype: element.entity.etype,
                 aid: element.aid,
-                entityId: element.data.id,
-                tableId: element.tid,
+                teid: element.data.id,
+                tid: element.tid,
                 hp: element.hp,
                 maxHp: element.maxHp,
                 position: transform.position,
@@ -312,8 +312,8 @@ export class PveServer extends b3.Context {
                 eid: element.eid,
                 etype: element.entity.etype,
                 aid: element.aid,
-                entityId: element.data.id,
-                tableId: element.tid,
+                teid: element.data.id,
+                tid: element.tid,
                 hp: element.hp,
                 maxHp: element.maxHp,
                 position: transform.position,
@@ -354,6 +354,10 @@ export class PveServer extends b3.Context {
         this._sender.moveStop(element.eid, element.transform.position);
     }
 
+    public dispatch(element: ElementComponent, trigger: EventTrigger) {
+        this._sender.dispatch(element.eid, trigger);
+    }
+
     public launchBullet(skill: Skill, bulletEntity: number, targets: ElementComponent[]) {
         const entity = this._ecs.createEntity(this._obtainEid());
         entity.etype = BattleConf.ENTITY_TYPE.BULLET;
@@ -376,8 +380,8 @@ export class PveServer extends b3.Context {
             eid: element.eid,
             etype: element.entity.etype,
             aid: element.aid,
-            entityId: element.data.id,
-            tableId: element.tid,
+            teid: element.data.id,
+            tid: element.tid,
             position: targets[0].transform.position,
             animation: true,
         });
@@ -605,8 +609,8 @@ export class PveServer extends b3.Context {
             eid: element.eid,
             etype: element.entity.etype,
             aid: element.aid,
-            entityId: element.data.id,
-            tableId: element.tid,
+            teid: element.data.id,
+            tid: element.tid,
             hp: element.hp,
             maxHp: element.maxHp,
             position: transform.position,
@@ -662,8 +666,8 @@ export class PveServer extends b3.Context {
             eid: element.eid,
             etype: element.entity.etype,
             aid: element.aid,
-            entityId: element.data.id,
-            tableId: element.tid,
+            teid: element.data.id,
+            tid: element.tid,
             hp: element.hp,
             maxHp: element.maxHp,
             position: transform.position,
@@ -723,8 +727,8 @@ export class PveServer extends b3.Context {
             eid: element.eid,
             etype: element.entity.etype,
             aid: element.aid,
-            entityId: element.data.id,
-            tableId: element.tid,
+            teid: element.data.id,
+            tid: element.tid,
             hp: element.hp,
             maxHp: element.maxHp,
             position: transform.position,
@@ -758,13 +762,14 @@ export class PveServer extends b3.Context {
         const eventRow = table.battleEvent[tid];
 
         const entity = this._ecs.createEntity(this._obtainEid());
-        // entity.etype = entityRow.etype;
+        const entityRow = table.battleEntity[eventRow.battle_entity];
+        entity.etype = entityRow.etype;
 
         const element = entity.addComponent(ElementComponent);
-        // element.tag = ElementComponent.COLLECTION;
         element.tid = tid;
         element.aid = 1;
         element.key = key;
+        element.data = entityRow;
         element.spawnpoint.cloneFrom(position);
         this._elements.set(key, element);
 
@@ -775,6 +780,15 @@ export class PveServer extends b3.Context {
         const transform = entity.addComponent(TransformComponent);
         transform.position.x = position.x;
         transform.position.z = position.z;
+
+        this._sender.createElement({
+            eid: element.eid,
+            etype: element.entity.etype,
+            aid: element.aid,
+            teid: element.data.id,
+            tid: element.tid,
+            position: transform.position,
+        });
     }
 
     public removeEvent(tid: number, position: Laya.Vector3) {
@@ -782,6 +796,19 @@ export class PveServer extends b3.Context {
         const element = this._elements.get(key);
         if (element) {
             this.removeElement(element, true);
+        }
+    }
+
+    public rescueSoldier(eid: number) {
+        const hero = this.ecs.getComponent(this.focusRole, ElementComponent);
+        const event = this.ecs.getComponent(eid, ElementComponent);
+        if (hero && event) {
+            const cache = this.ecs.getSingletonComponent(CacheComponent)!;
+            const cacheEntry = cache.create(event);
+            // 不复活
+            cacheEntry.reliveTime = Number.MAX_SAFE_INTEGER;
+            this.removeElement(event, false);
+            this._loadSoliders(hero);
         }
     }
 }
@@ -794,6 +821,8 @@ export interface ICommandSender {
     rushStart(eid: number): void;
     moveStart(eid: number, velocity: Laya.Vector3): void;
     moveStop(eid: number, position: Laya.Vector3): void;
+
+    dispatch(eid: number, trigger: EventTrigger): void;
 
     updateHp(eid: number, info: UpdateHp): void;
     updateTruck(eid: number, info: UpdateTruck): void;

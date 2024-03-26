@@ -264,6 +264,10 @@ class CommandSender {
         this.server.removeCollection(tid, position);
     }
 
+    public rescueSoldier(eid: number) {
+        this.server.rescueSoldier(eid);
+    }
+
     public click(x: number, z: number) {
         this.server.click(x, z);
     }

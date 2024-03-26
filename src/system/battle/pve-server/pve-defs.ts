@@ -18,8 +18,8 @@ export interface ElementCreator {
     // 同盟id
     aid: number;
 
-    entityId: number; // id in battle_entity.xlsx
-    tableId: number; // 配置表id
+    teid: number; // id in battle_entity.xlsx
+    tid: number; // 配置表id
     maxHp?: number;
     hp?: number;
     position: Laya.Vector3;

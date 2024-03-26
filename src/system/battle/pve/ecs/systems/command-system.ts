@@ -5,6 +5,7 @@ import { tween } from "../../../../../core/tween/tween";
 import { BattleConf } from "../../../../../def/battle";
 import { res } from "../../../../../misc/res";
 import { HeadInfoStyle } from "../../../../../ui-runtime/prefab/battle/HeadInfoUI";
+import { EventTrigger } from "../../../pve-server/ecs/components/event-component";
 import { ElementCreator, PveDef, UpdateHp, UpdateTruck } from "../../../pve-server/pve-defs";
 import { ICommandSender } from "../../../pve-server/pve-server";
 import { PveContext } from "../../pve-context";
@@ -49,14 +50,14 @@ export class CommandSystem extends ecs.System implements ICommandSender {
         const table = app.service.table;
         const ETYPE = BattleConf.ENTITY_TYPE;
 
-        const entityRow = table.battleEntity[data.entityId];
+        const entityRow = table.battleEntity[data.teid];
 
         const entity = this.ecs.createEntity(data.eid);
         entity.etype = data.etype;
 
         const element = entity.addComponent(ElementComponent);
-        element.entityId = data.entityId;
-        element.tableId = data.tableId;
+        element.teid = data.teid;
+        element.tid = data.tid;
 
         const transform = entity.addComponent(TransformComponent);
         transform.position.cloneFrom(data.position);
@@ -158,6 +159,20 @@ export class CommandSystem extends ecs.System implements ICommandSender {
             transform.position.cloneFrom(position);
             transform.flag |= TransformComponent.POSITION;
             this.playAnim(eid, ElementAnimation.IDLE);
+        }
+    }
+
+    public dispatch(eid: number, trigger: EventTrigger) {
+        const element = this._findElement(eid);
+        if (element) {
+            const event = app.service.table.battleEvent[element.tid];
+            // 救援士兵
+            if (event.type === 2) {
+                if (trigger === "enter") {
+                    // TODO: 暂停游戏逻辑更新，显示交互UI
+                    this.context.sender.rescueSoldier(eid);
+                }
+            }
         }
     }
 
@@ -265,7 +280,7 @@ export class CommandSystem extends ecs.System implements ICommandSender {
             const ETYPE = BattleConf.ENTITY_TYPE;
 
             if (etype == ETYPE.WOOD || etype == ETYPE.FOOD || etype == ETYPE.STONE) {
-                this.updateCollectionHp(element.eid, element.tableId, data.hp, true);
+                this.updateCollectionHp(element.eid, element.tid, data.hp, true);
             }
         }
     }

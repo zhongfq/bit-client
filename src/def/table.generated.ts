@@ -100,6 +100,7 @@ export interface GeneratedBattleEventRow {
     reward: any;
     cost?: any;
     texture_key: string;
+    battle_entity: number;
     radius: number;
 }
 

@@ -1075,9 +1075,9 @@
       "transform": {
         "localPosition": {
           "_$type": "Vector3",
-          "x": 0.68998,
-          "y": 0.50949,
-          "z": 0.70999
+          "x": 0.01557,
+          "y": 0.81945,
+          "z": 0.00561
         },
         "localRotation": {
           "_$type": "Quaternion",
@@ -1088,9 +1088,9 @@
         },
         "localScale": {
           "_$type": "Vector3",
-          "x": 3,
-          "y": 3,
-          "z": 3
+          "x": 2,
+          "y": 2,
+          "z": 2
         }
       },
       "_$comp": [

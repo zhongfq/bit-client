@@ -156,10 +156,10 @@ export class RenderSystem extends ecs.System {
             etype === ETYPE.FOOD ||
             etype === ETYPE.STONE
         ) {
-            const buildingRow = table.battleBuilding[element.tableId];
+            const buildingRow = table.battleBuilding[element.tid];
             props.set(TMPropKey.TextureKey, buildingRow.texture_key);
         } else if (etype === ETYPE.EVENT) {
-            const eventRow = table.battleEvent[element.tableId];
+            const eventRow = table.battleEvent[element.tid];
             props.set(TMPropKey.TextureKey, eventRow.texture_key);
         } else {
             // TODO：其他实体类型的属性待定义
@@ -176,7 +176,7 @@ export class RenderSystem extends ecs.System {
 
         if (etype == ETYPE.WOOD || etype == ETYPE.FOOD || etype == ETYPE.STONE) {
             const commandSystem = this.ecs.getSystem(CommandSystem);
-            commandSystem?.updateCollectionHp(board.eid, element.tableId, headInfo.data.hp, false);
+            commandSystem?.updateCollectionHp(board.eid, element.tid, headInfo.data.hp, false);
         }
     }
 }
