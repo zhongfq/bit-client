@@ -4,20 +4,14 @@ package troop;
 message Pendant {
     uint32 station = 1;//站位
     uint32 id = 2;
-
-}
-
-message Soldier {
-    uint32 station = 1;//站位
-    repeated Pendant pendants = 2;//挂件列表
-
 }
 
 message Troop {
     uint32 idx = 1; // 队伍编号
     uint32 eid = 2;
     uint32 hero_uid = 3; // 英雄uid
-    repeated Soldier soldiers = 4;//士兵列表
+    repeated Pendant pendants = 4;//挂件列表
+    repeated uint32 soldier_ids = 5;//士兵id列表
 }
 
 message c2s_load {

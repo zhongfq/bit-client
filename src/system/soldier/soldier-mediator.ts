@@ -1,4 +1,6 @@
+import { app } from "../../app";
 import { Mediator } from "../../core/ui-mediator";
+import { ui } from "../../misc/ui";
 import { SoldierUI } from "../../ui-runtime/prefab/soldier/SoldierUI";
 
 const { regClass, property } = Laya;
@@ -19,6 +21,9 @@ export class SoldierMediator extends Mediator {
     private initUIEvent() {
         this.owner.tab.selectHandler = new Laya.Handler(this, (index: number) => {
             this.owner.viewStack.selectedIndex = index;
+        });
+        this.owner.btnTroop.on(Laya.Event.CLICK, this, () => {
+            app.ui.show(ui.TROOP);
         });
     }
 }

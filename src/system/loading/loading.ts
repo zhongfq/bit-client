@@ -49,6 +49,7 @@ export class LoadingMediator extends Laya.Script {
         await app.service.soldier.loadPendant();
         await app.service.soldier.loadSoldier();
         await app.service.soldier.loadTrain();
+        await app.service.troop.load();
         await Laya.loader.load("resources/texture/emoji/emoji.atlas");
         this.progress = 100;
     }

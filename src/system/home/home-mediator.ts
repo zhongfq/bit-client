@@ -21,9 +21,6 @@ export class HomeMediator extends Mediator {
         this._initServiceEvent();
         this._initNaviMenu();
 
-        // 加载数据
-        app.service.troop.requestLoad();
-
         // 默认显示主线任务
         this._loadPve();
     }

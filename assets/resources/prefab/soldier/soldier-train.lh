@@ -44,11 +44,18 @@
     {
       "_$id": "wb0n1f0f",
       "_$prefab": "148a6d54-97ac-4354-a774-12a01dad2732",
-      "name": "money-item",
+      "_$var": true,
+      "name": "moneyItem",
       "active": true,
       "x": 567,
       "y": -371,
-      "visible": true
+      "visible": true,
+      "_$child": [
+        {
+          "_$override": "uy1zfhbv",
+          "skin": "res://f6690169-ea3e-4f15-934b-152a9d8768e4"
+        }
+      ]
     }
   ]
 }

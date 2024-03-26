@@ -7,5 +7,6 @@
 export class SoldierUIBase extends Laya.Box {
     public tab!: Laya.Tab;
     public viewStack!: Laya.ViewStack;
+    public btnTroop!: Laya.Button;
 }
 
