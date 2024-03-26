@@ -7,7 +7,8 @@ import { RoleConfRow } from "../../def/table";
 import { NetworkService } from "../network/network-service";
 
 export class TroopService extends Service<NetworkService> {
-    public readonly mapTroop: Map<number, proto.troop.ITroop> = new Map();
+    public list: proto.troop.ITroop[] = [];
+    public mapTroop: Map<number, proto.troop.ITroop> = new Map();
 
     public constructor(network: NetworkService) {
         super(network);
@@ -18,7 +19,9 @@ export class TroopService extends Service<NetworkService> {
 
     private _onLoad(data: proto.troop.s2c_load) {
         if (data.err === errcode.OK) {
+            this.list.length = 0;
             data.troopList.forEach((v) => {
+                this.list.push(v);
                 if (v.idx) {
                     this.mapTroop.set(v.idx, v);
                 }
