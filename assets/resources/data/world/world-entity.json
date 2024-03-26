@@ -1,104 +1,56 @@
 {
     "models": {
-        "101": {
-            "id": 101,
+        "10000": {
+            "id": 10000,
             "res": "resources/prefab/battle/roles/hero01.lh"
         },
-        "102": {
-            "id": 102,
-            "res": "resources/prefab/battle/roles/hero02.lh"
+        "20000": {
+            "id": 20000,
+            "res": "resources/prefab/battle/roles/bing-dao.lh"
         },
-        "105": {
-            "id": 105,
-            "res": "resources/prefab/battle/roles/hero03.lh"
+        "20001": {
+            "id": 20001,
+            "res": "resources/prefab/battle/roles/bing-gong.lh"
         },
-        "106": {
-            "id": 106,
-            "res": "resources/prefab/battle/roles/hero04.lh"
+        "29000": {
+            "id": 29000,
+            "res": "resources/prefab/battle/roles/cart.lh"
         },
-        "209": {
-            "id": 209,
-            "res": "resources/prefab/battle/roles/hero05.lh"
+        "30000": {
+            "id": 30000,
+            "res": "resources/prefab/battle/roles/bing-dao.lh"
         },
-        "212": {
-            "id": 212,
-            "res": "resources/prefab/battle/roles/hero06.lh"
-        },
-        "401": {
-            "id": 401,
-            "res": "resources/prefab/battle/roles/hero07.lh"
-        },
-        "404": {
-            "id": 404,
-            "res": "resources/prefab/battle/roles/hero08.lh"
+        "40000": {
+            "id": 40000,
+            "res": "resources/prefab/battle/vfx/vfx_firerain.lh"
         },
         "40001": {
             "id": 40001,
-            "res": "resources/prefab/battle/roles/bing-dao.lh"
-        },
-        "40002": {
-            "id": 40002,
-            "res": "resources/prefab/battle/roles/bing-dao.lh"
-        },
-        "40003": {
-            "id": 40003,
-            "res": "prefab/battle/role/xb-qiangbing"
-        },
-        "40004": {
-            "id": 40004,
-            "res": "resources/prefab/battle/roles/bing-gong.lh"
-        },
-        "40005": {
-            "id": 40005,
-            "res": "prefab/battle/role/jx-gongchengche"
+            "res": "resources/prefab/battle/vfx/vfx_icerain.lh"
         },
         "50001": {
             "id": 50001,
-            "res": "prefab/battle/bullet/jiantou"
+            "res": "<unknown>"
         },
-        "50002": {
-            "id": 50002,
-            "res": "prefab/battle/bullet/fengniu"
+        "60001": {
+            "id": 60001,
+            "res": "<unknown>"
         },
-        "50003": {
-            "id": 50003,
-            "res": "prefab/battle/bullet/houjianpao"
+        "60002": {
+            "id": 60002,
+            "res": "<unknown>"
         },
-        "50004": {
-            "id": 50004,
-            "res": "prefab/battle/bullet/longjuanfeng"
+        "60003": {
+            "id": 60003,
+            "res": "<unknown>"
         },
-        "50005": {
-            "id": 50005,
-            "res": "prefab/battle/bullet/bailong"
+        "70000": {
+            "id": 70000,
+            "res": "<unknown>"
         },
-        "50006": {
-            "id": 50006,
-            "res": "prefab/battle/bullet/bishan"
-        },
-        "50007": {
-            "id": 50007,
-            "res": "prefab/battle/bullet/yunshi"
-        },
-        "50008": {
-            "id": 50008,
-            "res": "prefab/battle/bullet/lvbu-skill"
-        },
-        "50009": {
-            "id": 50009,
-            "res": "prefab/battle/bullet/zhouyu-attack"
-        },
-        "50010": {
-            "id": 50010,
-            "res": "prefab/battle/bullet/zhugeliang-attack"
-        },
-        "50011": {
-            "id": 50011,
-            "res": "prefab/battle/bullet/xiaoqiao-attack"
-        },
-        "50012": {
-            "id": 50012,
-            "res": "prefab/battle/bullet/guanyu-skill"
+        "70001": {
+            "id": 70001,
+            "res": "<unknown>"
         }
     },
     "type_conf": [

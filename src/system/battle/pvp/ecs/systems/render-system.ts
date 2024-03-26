@@ -226,7 +226,6 @@ export class RenderSystem extends ecs.System {
         troop.view = new Laya.Sprite3D();
         troop.view.addChild(group);
         troop.hero = heroPrefable.create() as Laya.Sprite3D;
-        troop.hero.transform.localRotationEulerY = 90;
         this._collectTroopAnimator(troop, troop.hero);
         group.addChild(troop.hero);
         group.transform.localPositionX = 0.3;
