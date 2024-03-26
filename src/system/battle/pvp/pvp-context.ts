@@ -175,6 +175,8 @@ export class PvpContext extends Mediator implements ITMContext {
                     return;
                 }
                 app.service.pvp.requestTroopMoveTo(troop.eid, { x: currXZPos.x, y: currXZPos.z });
+            } else {
+                app.service.pvp.requestChangeViewport(camera.focus);
             }
         });
 
