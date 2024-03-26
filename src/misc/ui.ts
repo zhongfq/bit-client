@@ -43,6 +43,10 @@ export enum ui {
 
     CHEST_HERO,
 
+    TROOP,
+
+    TROOP_PENDANT,
+
     REWARD,
 
     GM,
@@ -168,6 +172,19 @@ export module ui {
             id: ui.CHEST_HERO,
 
             url: "resources/prefab/chest/chest-hero.lh",
+            blockInput: true,
+        });
+
+        app.ui.register({
+            id: ui.TROOP,
+
+            url: "resources/prefab/troop/troop.lh",
+            blockInput: true,
+        });
+
+        app.ui.register({
+            id: ui.TROOP_PENDANT,
+            url: "resources/prefab/troop/troop-pendant.lh",
             blockInput: true,
         });
 

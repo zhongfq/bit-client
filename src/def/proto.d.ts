@@ -12165,109 +12165,6 @@ declare namespace proto {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
-        /** Properties of a Soldier. */
-        interface ISoldier {
-
-            /** Soldier station */
-            station?: (number|null);
-
-            /** Soldier pendants */
-            pendants?: (troop.IPendant[]|null);
-        }
-
-        /** Represents a Soldier. */
-        class Soldier implements ISoldier {
-
-            /**
-             * Constructs a new Soldier.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: troop.ISoldier);
-
-            /** Soldier station. */
-            public station: number;
-
-            /** Soldier pendants. */
-            public pendants: troop.IPendant[];
-
-            /**
-             * Creates a new Soldier instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Soldier instance
-             */
-            public static create(properties?: troop.ISoldier): troop.Soldier;
-
-            /**
-             * Encodes the specified Soldier message. Does not implicitly {@link troop.Soldier.verify|verify} messages.
-             * @param message Soldier message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: troop.ISoldier, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Soldier message, length delimited. Does not implicitly {@link troop.Soldier.verify|verify} messages.
-             * @param message Soldier message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: troop.ISoldier, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Soldier message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Soldier
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): troop.Soldier;
-
-            /**
-             * Decodes a Soldier message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Soldier
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): troop.Soldier;
-
-            /**
-             * Verifies a Soldier message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Soldier message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Soldier
-             */
-            public static fromObject(object: { [k: string]: any }): troop.Soldier;
-
-            /**
-             * Creates a plain object from a Soldier message. Also converts values to other types if specified.
-             * @param message Soldier
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: troop.Soldier, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Soldier to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Soldier
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
         /** Properties of a Troop. */
         interface ITroop {
 
@@ -12280,8 +12177,11 @@ declare namespace proto {
             /** Troop heroUid */
             heroUid?: (number|null);
 
-            /** Troop soldiers */
-            soldiers?: (troop.ISoldier[]|null);
+            /** Troop pendants */
+            pendants?: (troop.IPendant[]|null);
+
+            /** Troop soldierIds */
+            soldierIds?: (number[]|null);
         }
 
         /** Represents a Troop. */
@@ -12302,8 +12202,11 @@ declare namespace proto {
             /** Troop heroUid. */
             public heroUid: number;
 
-            /** Troop soldiers. */
-            public soldiers: troop.ISoldier[];
+            /** Troop pendants. */
+            public pendants: troop.IPendant[];
+
+            /** Troop soldierIds. */
+            public soldierIds: number[];
 
             /**
              * Creates a new Troop instance using the specified properties.

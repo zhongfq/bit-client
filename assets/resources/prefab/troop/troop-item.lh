@@ -1,0 +1,133 @@
+{
+  "_$ver": 1,
+  "_$id": "eawkvp6o",
+  "_$runtime": "res://1072b75d-a67c-4a49-8987-9b7c7d424999",
+  "_$type": "Sprite",
+  "name": "bg",
+  "x": -3.197442310920451e-14,
+  "y": -5.329070518200751e-15,
+  "width": 122,
+  "height": 442,
+  "_mouseState": 2,
+  "_gcmds": [
+    {
+      "_$type": "DrawRectCmd",
+      "x": 0,
+      "y": 0,
+      "width": 1,
+      "height": 1,
+      "percent": true,
+      "lineWidth": 1,
+      "lineColor": "#000000",
+      "fillColor": "rgba(61, 81, 19, 1)"
+    }
+  ],
+  "_$child": [
+    {
+      "_$id": "u2m16tel",
+      "_$var": true,
+      "_$type": "Sprite",
+      "name": "selectBox",
+      "width": 122,
+      "height": 442,
+      "visible": false,
+      "_gcmds": [
+        {
+          "_$type": "DrawRectCmd",
+          "x": 0,
+          "y": 0,
+          "width": 1,
+          "height": 1,
+          "percent": true,
+          "lineWidth": 1,
+          "lineColor": "#000000",
+          "fillColor": "rgba(173, 255, 0, 1)"
+        }
+      ]
+    },
+    {
+      "_$id": "z7pc995k",
+      "_$var": true,
+      "_$type": "VBox",
+      "name": "VBox",
+      "width": 122,
+      "height": 442,
+      "_mouseState": 2,
+      "space": 14,
+      "align": "center",
+      "_$child": [
+        {
+          "_$id": "busc5emb",
+          "_$type": "Button",
+          "name": "btn1",
+          "x": 11,
+          "width": 100,
+          "height": 100,
+          "_mouseState": 2,
+          "stateNum": 1,
+          "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
+          "label": "Title",
+          "labelSize": 20,
+          "labelBold": true,
+          "labelColors": "#ffffff,#32cc6b,#ff0000",
+          "labelAlign": "center",
+          "labelVAlign": "middle"
+        },
+        {
+          "_$id": "b52frnp6",
+          "_$type": "Button",
+          "name": "btn2",
+          "x": 11,
+          "y": 114,
+          "width": 100,
+          "height": 100,
+          "_mouseState": 2,
+          "stateNum": 1,
+          "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
+          "label": "Title",
+          "labelSize": 20,
+          "labelBold": true,
+          "labelColors": "#ffffff,#32cc6b,#ff0000",
+          "labelAlign": "center",
+          "labelVAlign": "middle"
+        },
+        {
+          "_$id": "h8hfzwqy",
+          "_$type": "Button",
+          "name": "btn3",
+          "x": 11,
+          "y": 228,
+          "width": 100,
+          "height": 100,
+          "_mouseState": 2,
+          "stateNum": 1,
+          "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
+          "label": "Title",
+          "labelSize": 20,
+          "labelBold": true,
+          "labelColors": "#ffffff,#32cc6b,#ff0000",
+          "labelAlign": "center",
+          "labelVAlign": "middle"
+        },
+        {
+          "_$id": "b0kjeb8y",
+          "_$type": "Button",
+          "name": "btn4",
+          "x": 11,
+          "y": 342,
+          "width": 100,
+          "height": 100,
+          "_mouseState": 2,
+          "stateNum": 1,
+          "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
+          "label": "Title",
+          "labelSize": 20,
+          "labelBold": true,
+          "labelColors": "#ffffff,#32cc6b,#ff0000",
+          "labelAlign": "center",
+          "labelVAlign": "middle"
+        }
+      ]
+    }
+  ]
+}

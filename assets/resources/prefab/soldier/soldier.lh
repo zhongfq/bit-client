@@ -101,6 +101,23 @@
           "visible": false
         }
       ]
+    },
+    {
+      "_$id": "6d4s72r7",
+      "_$var": true,
+      "_$type": "Button",
+      "name": "btnTroop",
+      "x": 602,
+      "y": 579,
+      "width": 120,
+      "height": 40,
+      "_mouseState": 2,
+      "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
+      "label": "布阵",
+      "labelSize": 20,
+      "labelColors": "#ffffff,#ffffff,#ffffff",
+      "labelAlign": "center",
+      "labelVAlign": "middle"
     }
   ]
 }

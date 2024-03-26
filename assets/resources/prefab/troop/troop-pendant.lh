@@ -1,0 +1,63 @@
+{
+  "_$ver": 1,
+  "_$id": "x6nzvkov",
+  "_$type": "Dialog",
+  "name": "Dialog",
+  "width": 550,
+  "height": 911,
+  "_mouseState": 2,
+  "isModal": true,
+  "_$child": [
+    {
+      "_$id": "j7jfy4fl",
+      "_$type": "Box",
+      "name": "Box",
+      "width": 550,
+      "height": 911,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "bottom": 0,
+      "bgColor": "rgba(146, 146, 146, 1)"
+    },
+    {
+      "_$id": "sgjz9qp0",
+      "_$prefab": "f69ab375-29f7-4d36-afcb-5bbf8ef54210",
+      "name": "bg",
+      "active": true,
+      "x": 204,
+      "y": 8,
+      "visible": true
+    },
+    {
+      "_$id": "mx4gjary",
+      "_$var": true,
+      "_$type": "List",
+      "name": "listPendant",
+      "x": 28,
+      "y": 460,
+      "width": 508,
+      "height": 309,
+      "_mouseState": 2,
+      "itemTemplate": {
+        "_$ref": "tszxhwas",
+        "_$tmpl": "itemRender"
+      },
+      "repeatX": 4,
+      "repeatY": 2,
+      "spaceX": 22,
+      "spaceY": 10,
+      "scrollType": 2,
+      "_$child": [
+        {
+          "_$id": "tszxhwas",
+          "_$prefab": "318e7576-4d76-475c-9f35-609a31eeaa3b",
+          "name": "soldier-icon",
+          "active": true,
+          "x": 0,
+          "y": 0
+        }
+      ]
+    }
+  ]
+}

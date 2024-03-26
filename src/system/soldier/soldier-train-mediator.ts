@@ -48,5 +48,8 @@ export class SoldierTrainMediator extends Mediator {
             listData.push({ vo: vo });
         }
         this.owner.listAttr.array = listData;
+        this.owner.moneyItem.labelNum.text = app.service.bag.itemBag
+            .getItemNumber(30301)
+            .toString();
     }
 }

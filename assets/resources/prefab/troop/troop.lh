@@ -1,312 +1,64 @@
 {
   "_$ver": 1,
   "_$id": "x6nzvkov",
+  "_$runtime": "res://be11b588-7180-47f5-879b-9fdca0bc2df9",
   "_$type": "Dialog",
   "name": "Dialog",
   "width": 550,
-  "height": 1000,
+  "height": 911,
+  "_mouseState": 2,
+  "isModal": true,
+  "_$comp": [
+    {
+      "_$type": "c9a0cbfb-052d-42da-bc33-a8d56d544421",
+      "scriptPath": "../src/system/troop/troop-mediator.ts"
+    }
+  ],
   "_$child": [
     {
-      "_$id": "z7pc995k",
-      "_$type": "VBox",
-      "name": "VBox",
-      "x": 86,
-      "y": 38,
-      "width": 122,
-      "height": 442,
-      "_mouseState": 2,
-      "bgColor": "rgba(29, 107, 0, 1)",
-      "space": 14,
-      "align": "center",
-      "_$child": [
-        {
-          "_$id": "zqcbs9pl",
-          "_$type": "Sprite",
-          "name": "Sprite",
-          "x": 11,
-          "width": 100,
-          "height": 100,
-          "_gcmds": [
-            {
-              "_$type": "DrawRectCmd",
-              "x": 0,
-              "y": 0,
-              "width": 1,
-              "height": 1,
-              "percent": true,
-              "lineWidth": 1,
-              "lineColor": "#000000",
-              "fillColor": "#FFFFFF"
-            }
-          ]
-        },
-        {
-          "_$id": "qg7di47p",
-          "_$type": "Sprite",
-          "name": "Sprite(1)",
-          "x": 11,
-          "y": 114,
-          "width": 100,
-          "height": 100,
-          "_gcmds": [
-            {
-              "_$type": "DrawRectCmd",
-              "x": 0,
-              "y": 0,
-              "width": 1,
-              "height": 1,
-              "percent": true,
-              "lineWidth": 1,
-              "lineColor": "#000000",
-              "fillColor": "#FFFFFF"
-            }
-          ]
-        },
-        {
-          "_$id": "tvpyn3hs",
-          "_$type": "Sprite",
-          "name": "Sprite(2)",
-          "x": 11,
-          "y": 228,
-          "width": 100,
-          "height": 100,
-          "_gcmds": [
-            {
-              "_$type": "DrawRectCmd",
-              "x": 0,
-              "y": 0,
-              "width": 1,
-              "height": 1,
-              "percent": true,
-              "lineWidth": 1,
-              "lineColor": "#000000",
-              "fillColor": "#FFFFFF"
-            }
-          ]
-        },
-        {
-          "_$id": "u3ssoa7c",
-          "_$type": "Sprite",
-          "name": "Sprite(3)",
-          "x": 11,
-          "y": 342,
-          "width": 100,
-          "height": 100,
-          "_gcmds": [
-            {
-              "_$type": "DrawRectCmd",
-              "x": 0,
-              "y": 0,
-              "width": 1,
-              "height": 1,
-              "percent": true,
-              "lineWidth": 1,
-              "lineColor": "#000000",
-              "fillColor": "#FFFFFF"
-            }
-          ]
-        }
-      ]
+      "_$id": "j7jfy4fl",
+      "_$type": "Box",
+      "name": "Box",
+      "width": 550,
+      "height": 911,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "bottom": 0,
+      "bgColor": "rgba(146, 146, 146, 1)"
     },
     {
-      "_$id": "fjzzhoit",
-      "_$type": "VBox",
-      "name": "VBox(1)",
-      "x": 235,
-      "y": 38,
-      "width": 114,
-      "height": 444,
+      "_$id": "ro96xfoe",
+      "_$prefab": "2b33b19f-f835-4ee5-a6cc-c2e6fcb1ae25",
+      "_$var": true,
+      "name": "listTroop",
+      "active": true,
+      "x": 23,
+      "y": 10,
+      "visible": true,
+      "itemTemplate": {
+        "_$ref": "sgjz9qp0",
+        "_$tmpl": "itemRender"
+      },
+      "width": 413,
+      "height": 447,
+      "repeatX": 3,
+      "spaceX": 23,
       "_mouseState": 2,
-      "bgColor": "rgba(29, 107, 0, 1)",
-      "space": 14,
-      "align": "center",
+      "selectEnable": false,
       "_$child": [
         {
-          "_$id": "msb1xnfz",
-          "_$type": "Sprite",
-          "name": "Sprite",
-          "x": 7,
-          "width": 100,
-          "height": 100,
-          "_gcmds": [
+          "_$id": "sgjz9qp0",
+          "_$prefab": "f69ab375-29f7-4d36-afcb-5bbf8ef54210",
+          "_$index": 1,
+          "name": "bg",
+          "active": true,
+          "x": 0,
+          "y": 0,
+          "_$child": [
             {
-              "_$type": "DrawRectCmd",
-              "x": 0,
-              "y": 0,
-              "width": 1,
-              "height": 1,
-              "percent": true,
-              "lineWidth": 1,
-              "lineColor": "#000000",
-              "fillColor": "#FFFFFF"
-            }
-          ]
-        },
-        {
-          "_$id": "xno28lck",
-          "_$type": "Sprite",
-          "name": "Sprite(1)",
-          "x": 7,
-          "y": 114,
-          "width": 100,
-          "height": 100,
-          "_gcmds": [
-            {
-              "_$type": "DrawRectCmd",
-              "x": 0,
-              "y": 0,
-              "width": 1,
-              "height": 1,
-              "percent": true,
-              "lineWidth": 1,
-              "lineColor": "#000000",
-              "fillColor": "#FFFFFF"
-            }
-          ]
-        },
-        {
-          "_$id": "q7ipurde",
-          "_$type": "Sprite",
-          "name": "Sprite(2)",
-          "x": 7,
-          "y": 228,
-          "width": 100,
-          "height": 100,
-          "_gcmds": [
-            {
-              "_$type": "DrawRectCmd",
-              "x": 0,
-              "y": 0,
-              "width": 1,
-              "height": 1,
-              "percent": true,
-              "lineWidth": 1,
-              "lineColor": "#000000",
-              "fillColor": "#FFFFFF"
-            }
-          ]
-        },
-        {
-          "_$id": "54xokx4v",
-          "_$type": "Sprite",
-          "name": "Sprite(3)",
-          "x": 7,
-          "y": 342,
-          "width": 100,
-          "height": 100,
-          "_gcmds": [
-            {
-              "_$type": "DrawRectCmd",
-              "x": 0,
-              "y": 0,
-              "width": 1,
-              "height": 1,
-              "percent": true,
-              "lineWidth": 1,
-              "lineColor": "#000000",
-              "fillColor": "#FFFFFF"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "_$id": "tpwjm7u0",
-      "_$type": "VBox",
-      "name": "VBox(2)",
-      "x": 376,
-      "y": 38,
-      "width": 116,
-      "height": 443,
-      "_mouseState": 2,
-      "bgColor": "rgba(29, 107, 0, 1)",
-      "space": 14,
-      "align": "center",
-      "_$child": [
-        {
-          "_$id": "vttf0w2g",
-          "_$type": "Sprite",
-          "name": "Sprite",
-          "x": 8,
-          "width": 100,
-          "height": 100,
-          "_gcmds": [
-            {
-              "_$type": "DrawRectCmd",
-              "x": 0,
-              "y": 0,
-              "width": 1,
-              "height": 1,
-              "percent": true,
-              "lineWidth": 1,
-              "lineColor": "#000000",
-              "fillColor": "#FFFFFF"
-            }
-          ]
-        },
-        {
-          "_$id": "8trwqbye",
-          "_$type": "Sprite",
-          "name": "Sprite(1)",
-          "x": 8,
-          "y": 114,
-          "width": 100,
-          "height": 100,
-          "_gcmds": [
-            {
-              "_$type": "DrawRectCmd",
-              "x": 0,
-              "y": 0,
-              "width": 1,
-              "height": 1,
-              "percent": true,
-              "lineWidth": 1,
-              "lineColor": "#000000",
-              "fillColor": "#FFFFFF"
-            }
-          ]
-        },
-        {
-          "_$id": "bhu3hp91",
-          "_$type": "Sprite",
-          "name": "Sprite(2)",
-          "x": 8,
-          "y": 228,
-          "width": 100,
-          "height": 100,
-          "_gcmds": [
-            {
-              "_$type": "DrawRectCmd",
-              "x": 0,
-              "y": 0,
-              "width": 1,
-              "height": 1,
-              "percent": true,
-              "lineWidth": 1,
-              "lineColor": "#000000",
-              "fillColor": "#FFFFFF"
-            }
-          ]
-        },
-        {
-          "_$id": "jq9k8kuf",
-          "_$type": "Sprite",
-          "name": "Sprite(3)",
-          "x": 8,
-          "y": 342,
-          "width": 100,
-          "height": 100,
-          "_gcmds": [
-            {
-              "_$type": "DrawRectCmd",
-              "x": 0,
-              "y": 0,
-              "width": 1,
-              "height": 1,
-              "percent": true,
-              "lineWidth": 1,
-              "lineColor": "#000000",
-              "fillColor": "#FFFFFF"
+              "_$override": "z7pc995k",
+              "visible": true
             }
           ]
         }
@@ -314,14 +66,31 @@
     },
     {
       "_$id": "mx4gjary",
+      "_$var": true,
       "_$type": "List",
-      "name": "List",
+      "name": "listSoldier",
       "x": 28,
-      "y": 484,
+      "y": 469,
       "width": 508,
-      "height": 251,
-      "repeatX": 1,
-      "repeatY": 1
+      "height": 301,
+      "_mouseState": 2,
+      "itemTemplate": {
+        "_$ref": "tszxhwas",
+        "_$tmpl": "itemRender"
+      },
+      "repeatX": 4,
+      "repeatY": 3,
+      "spaceX": 21,
+      "_$child": [
+        {
+          "_$id": "tszxhwas",
+          "_$prefab": "318e7576-4d76-475c-9f35-609a31eeaa3b",
+          "name": "soldier-icon",
+          "active": true,
+          "x": 0,
+          "y": 0
+        }
+      ]
     }
   ]
 }
