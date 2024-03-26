@@ -37,6 +37,7 @@ export const BattleConf = {
     ENTITY_TYPE: {
         BUILDING: 5,
         BULLET: 4,
+        EVENT: 10,
         FOOD: 7,
         HERO: 1,
         MONSTER: 3,

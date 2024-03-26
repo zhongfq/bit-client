@@ -151,15 +151,19 @@ export class RenderSystem extends ecs.System {
 
         const props = new Map<string, unknown>();
         if (
-            etype == ETYPE.BUILDING ||
-            etype == ETYPE.WOOD ||
-            etype == ETYPE.FOOD ||
-            etype == ETYPE.STONE
+            etype === ETYPE.BUILDING ||
+            etype === ETYPE.WOOD ||
+            etype === ETYPE.FOOD ||
+            etype === ETYPE.STONE
         ) {
             const buildingRow = table.battleBuilding[element.tableId];
             props.set(TMPropKey.TextureKey, buildingRow.texture_key);
+        } else if (etype === ETYPE.EVENT) {
+            const eventRow = table.battleEvent[element.tableId];
+            props.set(TMPropKey.TextureKey, eventRow.texture_key);
         } else {
             // TODO：其他实体类型的属性待定义
+            console.log("TODO: load borad ", etype);
         }
         if (props.size == 0) {
             return;

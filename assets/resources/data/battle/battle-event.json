@@ -1,6 +1,5 @@
 {
     "10001": {
-        "battle_entity": 30001,
         "hide": 1,
         "id": 10001,
         "radius": 1.5,
@@ -8,10 +7,10 @@
             10101,
             1
         ],
+        "texture_key": "map_chest_1",
         "type": 1
     },
     "10002": {
-        "battle_entity": 30002,
         "hide": 1,
         "id": 10002,
         "radius": 1.5,
@@ -19,10 +18,10 @@
             10102,
             1
         ],
+        "texture_key": "map_chest_2",
         "type": 1
     },
     "10003": {
-        "battle_entity": 30003,
         "hide": 1,
         "id": 10003,
         "radius": 1.5,
@@ -30,10 +29,10 @@
             10103,
             1
         ],
+        "texture_key": "map_chest_3",
         "type": 1
     },
     "10004": {
-        "battle_entity": 30004,
         "hide": 1,
         "id": 10004,
         "radius": 1.5,
@@ -41,10 +40,10 @@
             10104,
             1
         ],
+        "texture_key": "map_chest_4",
         "type": 1
     },
     "10005": {
-        "battle_entity": 30005,
         "hide": 1,
         "id": 10005,
         "radius": 1.5,
@@ -52,10 +51,10 @@
             10105,
             1
         ],
+        "texture_key": "map_chest_5",
         "type": 1
     },
     "11001": {
-        "battle_entity": 40002,
         "cost": [
             30601,
             5
@@ -67,10 +66,10 @@
             40701,
             1
         ],
+        "texture_key": "map_soldieri_cage",
         "type": 2
     },
     "11002": {
-        "battle_entity": 40002,
         "cost": [
             30601,
             5
@@ -82,10 +81,10 @@
             40702,
             1
         ],
+        "texture_key": "map_soldieri_cage",
         "type": 2
     },
     "11003": {
-        "battle_entity": 40004,
         "cost": [
             30601,
             5
@@ -97,10 +96,10 @@
             40703,
             1
         ],
+        "texture_key": "map_soldieri_cage",
         "type": 2
     },
     "11004": {
-        "battle_entity": 40004,
         "cost": [
             30601,
             5
@@ -112,10 +111,10 @@
             40704,
             1
         ],
+        "texture_key": "map_soldieri_cage",
         "type": 2
     },
     "11005": {
-        "battle_entity": 40002,
         "cost": [
             30601,
             5
@@ -127,10 +126,10 @@
             40705,
             1
         ],
+        "texture_key": "map_soldieri_cage",
         "type": 2
     },
     "11006": {
-        "battle_entity": 40002,
         "cost": [
             30601,
             5
@@ -142,10 +141,10 @@
             40706,
             1
         ],
+        "texture_key": "map_soldieri_cage",
         "type": 2
     },
     "11007": {
-        "battle_entity": 40004,
         "cost": [
             30601,
             5
@@ -157,10 +156,10 @@
             40707,
             1
         ],
+        "texture_key": "map_soldieri_cage",
         "type": 2
     },
     "11008": {
-        "battle_entity": 40004,
         "cost": [
             30601,
             5
@@ -172,10 +171,10 @@
             40708,
             1
         ],
+        "texture_key": "map_soldieri_cage",
         "type": 2
     },
     "11009": {
-        "battle_entity": 40002,
         "cost": [
             30601,
             5
@@ -187,10 +186,10 @@
             40801,
             1
         ],
+        "texture_key": "map_soldieri_cage",
         "type": 2
     },
     "11010": {
-        "battle_entity": 40002,
         "cost": [
             30601,
             5
@@ -202,10 +201,10 @@
             40802,
             1
         ],
+        "texture_key": "map_soldieri_cage",
         "type": 2
     },
     "11011": {
-        "battle_entity": 40004,
         "cost": [
             30601,
             5
@@ -217,10 +216,10 @@
             40803,
             1
         ],
+        "texture_key": "map_soldieri_cage",
         "type": 2
     },
     "11012": {
-        "battle_entity": 40005,
         "cost": [
             30601,
             5
@@ -232,6 +231,7 @@
             40804,
             1
         ],
+        "texture_key": "map_soldieri_cage",
         "type": 2
     }
 }

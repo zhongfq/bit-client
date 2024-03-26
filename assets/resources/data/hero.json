@@ -1,6 +1,6 @@
 {
     "101": {
-        "battle_entity": 101,
+        "battle_entity": 10000,
         "enable": 1,
         "id": 101,
         "job": 1,
@@ -9,26 +9,26 @@
         "skill1": 20001,
         "skill2": 20002,
         "type": 1,
-        "world_entity": 101
+        "world_entity": 10000
     },
     "103": {
-        "battle_entity": 101,
+        "battle_entity": 10000,
         "enable": 1,
         "id": 103,
         "job": 1,
         "name": "肉盾(徐晃)",
         "skill0": 10000,
         "type": 1,
-        "world_entity": 101
+        "world_entity": 10000
     },
     "105": {
-        "battle_entity": 101,
+        "battle_entity": 10000,
         "enable": 1,
         "id": 105,
         "job": 1,
         "name": "肉盾(徐晃)",
         "skill0": 10000,
         "type": 1,
-        "world_entity": 101
+        "world_entity": 10000
     }
 }

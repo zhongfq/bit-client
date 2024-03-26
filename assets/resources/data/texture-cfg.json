@@ -89,5 +89,14 @@
         "scale": 3,
         "tile_h": 1,
         "tile_w": 1
+    },
+    "map_soldieri_cage": {
+        "id": "map_soldieri_cage",
+        "offset_x": 0.01557,
+        "offset_y": 0.81945,
+        "offset_z": 0.00561,
+        "scale": 2,
+        "tile_h": 1,
+        "tile_w": 1
     }
 }

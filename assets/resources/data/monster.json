@@ -1,6 +1,6 @@
 {
     "40002": {
-        "battle_entity": 40001,
+        "battle_entity": 30000,
         "id": 40002,
         "job": 1,
         "name": "小怪",

@@ -1,173 +1,72 @@
 {
-    "101": {
+    "10000": {
         "etype": 1,
-        "id": 101,
+        "id": 10000,
         "info_offset": 170,
         "info_style": 1,
         "pve_ai": "pve_hero",
         "res": "resources/prefab/battle/roles/hero01.lh"
     },
-    "102": {
-        "etype": 1,
-        "id": 102,
-        "info_offset": 170,
-        "info_style": 1,
-        "pve_ai": "pve_hero",
-        "res": "resources/prefab/battle/roles/hero02.lh"
-    },
-    "105": {
-        "etype": 1,
-        "id": 105,
-        "info_offset": 170,
-        "info_style": 1,
-        "pve_ai": "pve_hero",
-        "res": "resources/prefab/battle/roles/hero03.lh"
-    },
-    "106": {
-        "etype": 1,
-        "id": 106,
-        "info_offset": 170,
-        "info_style": 1,
-        "pve_ai": "pve_hero",
-        "res": "resources/prefab/battle/roles/hero04.lh"
-    },
-    "209": {
-        "etype": 1,
-        "id": 209,
-        "info_offset": 170,
-        "info_style": 1,
-        "pve_ai": "pve_hero",
-        "res": "resources/prefab/battle/roles/hero05.lh"
-    },
-    "212": {
-        "etype": 1,
-        "id": 212,
-        "info_offset": 170,
-        "info_style": 1,
-        "pve_ai": "pve_hero",
-        "res": "resources/prefab/battle/roles/hero06.lh"
-    },
-    "401": {
-        "etype": 1,
-        "id": 401,
-        "info_offset": 170,
-        "info_style": 1,
-        "pve_ai": "pve_hero",
-        "res": "resources/prefab/battle/roles/hero07.lh"
-    },
-    "404": {
-        "etype": 1,
-        "id": 404,
-        "info_offset": 170,
-        "info_style": 1,
-        "pve_ai": "pve_hero",
-        "res": "resources/prefab/battle/roles/hero08.lh"
-    },
-    "30001": {
-        "etype": 10,
-        "id": 30001,
-        "res": "map_chest_1"
-    },
-    "30002": {
-        "etype": 10,
-        "id": 30002,
-        "res": "map_chest_2"
-    },
-    "30003": {
-        "etype": 10,
-        "id": 30003,
-        "res": "map_chest_3"
-    },
-    "30004": {
-        "etype": 10,
-        "id": 30004,
-        "res": "map_chest_4"
-    },
-    "30005": {
-        "etype": 10,
-        "id": 30005,
-        "res": "map_chest_5"
-    },
-    "40001": {
-        "etype": 3,
-        "id": 40001,
-        "info_offset": 55,
-        "info_style": 3,
-        "pve_ai": "monster",
-        "res": "resources/prefab/battle/roles/bing-dao.lh"
-    },
-    "40002": {
+    "20000": {
         "etype": 2,
-        "id": 40002,
+        "id": 20000,
         "info_offset": 55,
         "info_style": 3,
         "pve_ai": "soldier",
         "res": "resources/prefab/battle/roles/bing-dao.lh"
     },
-    "40003": {
+    "20001": {
         "etype": 2,
-        "id": 40003,
-        "info_offset": 55,
-        "info_style": 3,
-        "pve_ai": "hero",
-        "res": "prefab/battle/role/xb-qiangbing"
-    },
-    "40004": {
-        "etype": 2,
-        "id": 40004,
+        "id": 20001,
         "info_offset": 55,
         "info_style": 3,
         "pve_ai": "soldier",
         "res": "resources/prefab/battle/roles/bing-gong.lh"
     },
-    "40005": {
-        "etype": 2,
-        "id": 40005,
+    "29000": {
+        "etype": 9,
+        "id": 29000,
+        "pve_ai": "truck",
+        "res": "resources/prefab/battle/roles/cart.lh"
+    },
+    "30000": {
+        "etype": 3,
+        "id": 30000,
         "info_offset": 55,
         "info_style": 3,
-        "pve_ai": "hero",
-        "res": "prefab/battle/role/jx-gongchengche"
+        "pve_ai": "monster",
+        "res": "resources/prefab/battle/roles/bing-dao.lh"
     },
-    "50000": {
+    "40000": {
         "etype": 4,
-        "id": 50000,
+        "id": 40000,
         "pve_ai": "skill_firerain_bullet",
         "res": "resources/prefab/battle/vfx/vfx_firerain.lh"
     },
-    "50001": {
+    "40001": {
         "etype": 4,
-        "id": 50001,
+        "id": 40001,
         "pve_ai": "skill_icerain_bullet",
         "res": "resources/prefab/battle/vfx/vfx_icerain.lh"
     },
-    "60001": {
+    "50001": {
         "etype": 5,
-        "id": 60001,
-        "pve_ai": "hero",
-        "res": "resources/prefab/battle/roles/bing-dao.lh"
+        "id": 50001,
+        "res": "<unknown>"
     },
-    "70001": {
+    "60001": {
         "etype": 6,
-        "id": 70001,
-        "pve_ai": "hero",
-        "res": "resources/prefab/battle/roles/bing-dao.lh"
+        "id": 60001,
+        "res": "<unknown>"
     },
-    "70002": {
+    "60002": {
         "etype": 7,
-        "id": 70002,
-        "pve_ai": "hero",
-        "res": "resources/prefab/battle/roles/bing-dao.lh"
+        "id": 60002,
+        "res": "<unknown>"
     },
-    "70003": {
+    "60003": {
         "etype": 8,
-        "id": 70003,
-        "pve_ai": "hero",
-        "res": "resources/prefab/battle/roles/bing-dao.lh"
-    },
-    "80001": {
-        "etype": 9,
-        "id": 80001,
-        "pve_ai": "truck",
-        "res": "resources/prefab/battle/roles/cart.lh"
+        "id": 60003,
+        "res": "<unknown>"
     }
 }

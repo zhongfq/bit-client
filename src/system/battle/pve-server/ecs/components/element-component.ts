@@ -12,8 +12,6 @@ export class ElementComponent extends ecs.Component {
     public static readonly WOOD = 1 << 3;
     public static readonly FOOD = 1 << 4;
     public static readonly STONE = 1 << 5;
-    public static readonly COLLECTION =
-        ElementComponent.WOOD | ElementComponent.FOOD | ElementComponent.STONE;
 
     public tag: number = 0;
 

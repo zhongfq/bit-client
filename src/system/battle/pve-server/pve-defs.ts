@@ -2,9 +2,9 @@ import { IVector3Like } from "../../../core/laya";
 
 export class PveDef {
     public static readonly MOVE_SPEED = 1.5;
-    public static readonly MAX_FOLLOW_SPEED = PveDef.MOVE_SPEED * 2;
-    public static readonly MAX_ADJUST_SPEED = PveDef.MOVE_SPEED * 2;
-    public static readonly MAX_BACK_SPEED = PveDef.MOVE_SPEED * 3;
+    public static readonly MAX_FOLLOW_SPEED = PveDef.MOVE_SPEED * 1.5;
+    public static readonly MAX_ADJUST_SPEED = PveDef.MOVE_SPEED * 1.5;
+    public static readonly MAX_BACK_SPEED = PveDef.MOVE_SPEED * 2;
 
     public static readonly COLLECT_PER_HP = 10; // 每采集一次，采集物扣多少血
     public static readonly COLLECT_MAX_CNT = 100; // 每个资源车最大承载资源数量

@@ -37,7 +37,7 @@
         "id": 5,
         "name": "CreateBullet",
         "args": {
-          "entity_id": 50001
+          "entity_id": 40001
         },
         "input": [
           "targets",

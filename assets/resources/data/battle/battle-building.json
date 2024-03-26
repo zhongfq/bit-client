@@ -1,6 +1,6 @@
 {
     "10001": {
-        "battle_entity": 60001,
+        "battle_entity": 50001,
         "fresh_time": 0,
         "height": 4,
         "id": 10001,
@@ -8,7 +8,7 @@
         "texture_key": "map_biulding_castle01"
     },
     "20001": {
-        "battle_entity": 70001,
+        "battle_entity": 60001,
         "die_hide": 0,
         "fresh_time": 60,
         "height": 1.8,
@@ -27,7 +27,7 @@
         "texture_key": "map_gather_wood1-1"
     },
     "20002": {
-        "battle_entity": 70002,
+        "battle_entity": 60002,
         "die_hide": 0,
         "fresh_time": 60,
         "height": 0.6,
@@ -46,7 +46,7 @@
         "texture_key": "map_gather_food1-1"
     },
     "20003": {
-        "battle_entity": 70003,
+        "battle_entity": 60003,
         "die_hide": 0,
         "fresh_time": 60,
         "height": 1,

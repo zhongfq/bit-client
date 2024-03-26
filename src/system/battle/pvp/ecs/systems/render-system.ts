@@ -216,8 +216,8 @@ export class RenderSystem extends ecs.System {
         const table = app.service.table;
         const heroRow = table.hero[troop.heroId];
         const heroEntityRow = table.worldEntity.models[heroRow.world_entity];
-        const soldier1EntityRow = table.worldEntity.models[40002];
-        const soldier2EntityRow = table.worldEntity.models[40004];
+        const soldier1EntityRow = table.worldEntity.models[20000];
+        const soldier2EntityRow = table.worldEntity.models[20001];
         const checker = () => troop.alive;
         const heroPrefable = await app.loader.loadPrefab(heroEntityRow.res, checker);
         const soldier1Prefable = await app.loader.loadPrefab(soldier1EntityRow.res, checker);

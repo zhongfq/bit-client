@@ -100,10 +100,11 @@ export class CommandSystem extends ecs.System implements ICommandSender {
         }
 
         if (
-            data.etype == ETYPE.BUILDING ||
-            data.etype == ETYPE.WOOD ||
-            data.etype == ETYPE.FOOD ||
-            data.etype == ETYPE.STONE
+            data.etype === ETYPE.BUILDING ||
+            data.etype === ETYPE.WOOD ||
+            data.etype === ETYPE.FOOD ||
+            data.etype === ETYPE.STONE ||
+            data.etype === ETYPE.EVENT
         ) {
             entity.addComponent(BoardComponent);
         }

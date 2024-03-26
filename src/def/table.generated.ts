@@ -99,7 +99,7 @@ export interface GeneratedBattleEventRow {
     hide: number;
     reward: any;
     cost?: any;
-    battle_entity: number;
+    texture_key: string;
     radius: number;
 }
 

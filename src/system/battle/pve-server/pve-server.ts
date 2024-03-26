@@ -282,7 +282,7 @@ export class PveServer extends b3.Context {
             const element = entity.addComponent(ElementComponent);
             element.tag = ElementComponent.TRUCK;
             element.aid = 1;
-            element.data = app.service.table.battleEntity[80001];
+            element.data = app.service.table.battleEntity[29000];
 
             const truck = entity.addComponent(TruckComponent);
             truck.index = idx;
@@ -698,7 +698,14 @@ export class PveServer extends b3.Context {
         entity.etype = entityRow.etype;
 
         const element = entity.addComponent(ElementComponent);
-        element.tag = ElementComponent.COLLECTION;
+        const ETYPE = BattleConf.ENTITY_TYPE;
+        if (entity.etype === ETYPE.WOOD) {
+            element.tag = ElementComponent.WOOD;
+        } else if (entity.etype === ETYPE.STONE) {
+            element.tag = ElementComponent.STONE;
+        } else {
+            element.tag = ElementComponent.FOOD;
+        }
         element.tid = tid;
         element.hp = cacheEntry?.data.hp ?? buildingRow.max_hp;
         element.maxHp = cacheEntry?.data.maxHp ?? buildingRow.max_hp;
@@ -749,18 +756,16 @@ export class PveServer extends b3.Context {
 
         const table = app.service.table;
         const eventRow = table.battleEvent[tid];
-        const entityRow = table.battleEntity[eventRow.battle_entity];
 
         const entity = this._ecs.createEntity(this._obtainEid());
-        entity.etype = entityRow.etype;
+        // entity.etype = entityRow.etype;
 
         const element = entity.addComponent(ElementComponent);
-        element.tag = ElementComponent.COLLECTION;
+        // element.tag = ElementComponent.COLLECTION;
         element.tid = tid;
         element.aid = 1;
         element.key = key;
         element.spawnpoint.cloneFrom(position);
-        element.data = entityRow;
         this._elements.set(key, element);
 
         const event = entity.addComponent(EventComponent);
