@@ -267,13 +267,14 @@
           "_$var": true,
           "_$type": "Box",
           "name": "joystickArea",
-          "y": 934,
+          "y": 704,
           "width": 750,
-          "height": 400,
+          "height": 630,
           "_mouseState": 2,
           "left": 0,
           "right": 0,
-          "bottom": 0
+          "bottom": 0,
+          "centerX": 0
         },
         {
           "_$id": "ms0qcu1u",

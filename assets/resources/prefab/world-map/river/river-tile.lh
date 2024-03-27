@@ -9,6 +9,10 @@
       "_$type": "Sprite3D",
       "name": "Plane",
       "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "y": 0.03
+        },
         "localRotation": {
           "_$type": "Quaternion",
           "x": -0.7071067811865475,
