@@ -118,6 +118,7 @@ export class PvpContext extends Mediator implements ITMContext {
         const currXZPos = new Laya.Vector3();
 
         const selectedTile = this.scene3D.getChildByPath("world-map/selected") as Laya.Sprite3D;
+        const debugFocus = this.scene3D.getChildByPath("world-map/debugFocus") as Laya.Sprite3D;
         selectedTile.active = false;
 
         const camera = this._ecs.getSingletonComponent(CameraComponent)!;
@@ -176,6 +177,11 @@ export class PvpContext extends Mediator implements ITMContext {
                 }
                 app.service.pvp.requestTroopMoveTo(troop.eid, { x: currXZPos.x, y: currXZPos.z });
             } else {
+                const position = debugFocus.transform.position;
+                position.cloneFrom(camera.focus);
+                position.x = Math.floor(position.x);
+                position.z = Math.floor(position.z);
+                debugFocus.transform.position = position;
                 app.service.pvp.requestChangeViewport(camera.focus);
             }
         });
