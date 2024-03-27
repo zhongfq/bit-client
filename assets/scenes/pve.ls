@@ -281,7 +281,7 @@
           "_$type": "Box",
           "name": "joystick",
           "x": 375,
-          "y": 1112,
+          "y": 1033,
           "width": 256,
           "height": 222,
           "_$child": [
