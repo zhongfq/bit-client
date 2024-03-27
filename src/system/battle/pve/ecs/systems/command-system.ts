@@ -249,10 +249,11 @@ export class CommandSystem extends ecs.System implements ICommandSender {
                 }
 
                 let prefab: Laya.Prefab | undefined;
+                const checker = () => !this.context.owner.destroyed;
                 if (data.isCrit) {
-                    prefab = await app.loader.loadPrefab(res.BATTLE_HP_NUM_X);
+                    prefab = await app.loader.loadPrefab(res.BATTLE_HP_NUM_X, checker);
                 } else {
-                    prefab = await app.loader.loadPrefab(res.BATTLE_HP_NUM);
+                    prefab = await app.loader.loadPrefab(res.BATTLE_HP_NUM, checker);
                 }
                 if (prefab) {
                     const pos = new Laya.Vector4();

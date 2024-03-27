@@ -96,8 +96,8 @@ export class PveContext extends Mediator implements ITMContext {
             this
         );
 
-        app.loader.loadPrefab(res.BATTLE_HP_NUM);
-        app.loader.loadPrefab(res.BATTLE_HP_NUM_X);
+        app.loader.loadPrefab(res.BATTLE_HP_NUM, () => true);
+        app.loader.loadPrefab(res.BATTLE_HP_NUM_X, () => true);
     }
 
     public override async onStart() {

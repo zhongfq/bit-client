@@ -8,6 +8,8 @@ export interface Callback {
     (...any: any[]): void;
 }
 
+export type ContextChecker = () => boolean;
+
 // eslint-disable-next-line
 export type AnyFunction = Function;
 

@@ -36,6 +36,7 @@ export class PveServer extends b3.Context {
     public focusRole: number = 0;
 
     private _ecs: ecs.World;
+    private _destroyed: boolean = false;
     private _eidCount: number = 0;
 
     private _loader: Loader = new Loader();
@@ -61,7 +62,12 @@ export class PveServer extends b3.Context {
     }
 
     public destroy() {
+        this._destroyed = true;
         this._ecs.destroy();
+    }
+
+    public get destroyed() {
+        return this._destroyed;
     }
 
     public get ecs() {
@@ -111,7 +117,8 @@ export class PveServer extends b3.Context {
     public async loadAiTree(res: string) {
         let tree = this._aiTrees.get(res);
         if (!tree) {
-            const data = (await this._loader.loadJson(res)) as b3.TreeData;
+            const checker = () => !this.destroyed;
+            const data = (await this._loader.loadJson(res, checker)) as b3.TreeData;
             // 重新获取，有可能同时加载，前面一个已经完成了
             tree = this._aiTrees.get(res);
             if (!tree && data) {

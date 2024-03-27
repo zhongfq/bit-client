@@ -151,7 +151,8 @@ export class HomeMediator extends Mediator {
     }
 
     private _loadAddNode(url: string) {
-        app.loader.loadPrefab(url, undefined).then((prefab: Laya.Prefab) => {
+        const checker = () => !this.owner.destroyed;
+        app.loader.loadPrefab(url, checker).then((prefab: Laya.Prefab) => {
             this._currentBox = prefab.create();
             this.owner.boxUI.addChild(this._currentBox);
         });

@@ -1,5 +1,5 @@
 import { appBase as AppBase } from "./app.generated";
-import { Constructor } from "./core/dispatcher";
+import { Constructor, ContextChecker } from "./core/dispatcher";
 import { Loader } from "./core/loader";
 import { Service } from "./core/service";
 import { TweenSystem } from "./core/tween/tween-system";
@@ -25,7 +25,7 @@ import { UserService } from "./system/user/user-service";
 
 @Laya.regClass()
 export class Main extends AppBase {
-    public override onAwake(): void {
+    public override async onAwake() {
         // new BehaviorTest().start();
 
         if (Laya.Browser.onPC) {
@@ -128,6 +128,16 @@ class App {
         this._service = new ServiceManager();
 
         app.ui.open(ui.LOGIN_SCENE);
+    }
+
+    public async sleep(frame: number, checker: ContextChecker) {
+        return new Promise<void>((resolve) => {
+            Laya.timer.frameOnce(frame, null, () => {
+                if (!checker || checker()) {
+                    resolve();
+                }
+            });
+        });
     }
 }
 
