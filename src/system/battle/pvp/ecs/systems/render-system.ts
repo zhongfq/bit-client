@@ -251,7 +251,7 @@ export class RenderSystem extends ecs.System {
         this.context.owner.roles.addChild(troop.view);
 
         const movement = troop.getComponent(MovementComponent)!;
-        if (movement.velocity.x !== 0 || movement.velocity.z !== 0) {
+        if (movement.speed > 0) {
             this.context.playAnim(movement.eid, ElementAnimation.RUN);
         }
     }

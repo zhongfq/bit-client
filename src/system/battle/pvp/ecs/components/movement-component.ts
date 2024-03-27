@@ -23,7 +23,5 @@ export class MovementComponent extends ecs.Component {
     public ratio: number = 1;
     public index: number = 0;
     public paths: Laya.Vector3[] = [];
-
-    public target?: Laya.Vector3;
-    public velocity: Laya.Vector3 = new Laya.Vector3();
+    public target: Laya.Vector3 = new Laya.Vector3();
 }

@@ -3,7 +3,7 @@
     "icon_fight_Head001.png": {
       "frame": {
         "idx": 0,
-        "x": 0,
+        "x": 162,
         "y": 158,
         "w": 63,
         "h": 83
@@ -20,7 +20,7 @@
     "icon_fight_Head002.png": {
       "frame": {
         "idx": 0,
-        "x": 65,
+        "x": 227,
         "y": 158,
         "w": 65,
         "h": 76
@@ -37,8 +37,8 @@
     "icon_world_armygarrison.png": {
       "frame": {
         "idx": 0,
-        "x": 188,
-        "y": 100,
+        "x": 136,
+        "y": 162,
         "w": 20,
         "h": 20
       },
@@ -54,8 +54,8 @@
     "icon_world_armymove.png": {
       "frame": {
         "idx": 0,
-        "x": 188,
-        "y": 79,
+        "x": 112,
+        "y": 162,
         "w": 22,
         "h": 19
       },
@@ -71,8 +71,8 @@
     "sb_world_Blood1.png": {
       "frame": {
         "idx": 0,
-        "x": 65,
-        "y": 236,
+        "x": 0,
+        "y": 162,
         "w": 110,
         "h": 4
       },
@@ -88,8 +88,8 @@
     "sb_world_Blood1Bg.png": {
       "frame": {
         "idx": 0,
-        "x": 132,
-        "y": 158,
+        "x": 227,
+        "y": 236,
         "w": 112,
         "h": 6
       },
@@ -102,10 +102,27 @@
         "y": 0
       }
     },
-    "ui_world_RoleInfoBg1.png": {
+    "ui_fight_attackrange1.png": {
       "frame": {
         "idx": 0,
         "x": 0,
+        "y": 0,
+        "w": 160,
+        "h": 160
+      },
+      "sourceSize": {
+        "w": 160,
+        "h": 160
+      },
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    "ui_world_RoleInfoBg1.png": {
+      "frame": {
+        "idx": 0,
+        "x": 162,
         "y": 79,
         "w": 186,
         "h": 77
@@ -122,7 +139,7 @@
     "ui_world_RoleInfoBg2.png": {
       "frame": {
         "idx": 0,
-        "x": 0,
+        "x": 162,
         "y": 0,
         "w": 187,
         "h": 77
