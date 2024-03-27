@@ -22,6 +22,11 @@ export module res {
     export const TABLE_TASK_TABLE = "resources/data/task.json";
     export const TABLE_TEXTURE_CFG_TABLE = "resources/data/texture-cfg.json";
 
-    export const BATTLE_HP_NUM = "resources/prefab/battle/ui/hp-num.lh";
-    export const BATTLE_HP_NUM_X = "resources/prefab/battle/ui/hp-num-x.lh";
+    export const BATTLE_HP_NUM = "resources/prefab/battle/pve-ui/hp-num.lh";
+    export const BATTLE_HP_NUM_X = "resources/prefab/battle/pve-ui/hp-num-x.lh";
+    export const BATTLE_HEAD_INFO1 = "resources/prefab/battle/pve-ui/head-info1.lh";
+    export const BATTLE_HEAD_INFO2 = "resources/prefab/battle/pve-ui/head-info2.lh";
+    export const BATTLE_HEAD_INFO3 = "resources/prefab/battle/pve-ui/head-info3.lh";
+    export const BATTLE_ROLE_SHADOW = "resources/prefab/battle/pve-ui/role-shadow.lh";
+    export const BATTLE_PVE_TROOP = "resources/texture/battle/pve-troop.atlas";
 }

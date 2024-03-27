@@ -348,6 +348,7 @@ export class PveServer extends b3.Context {
 
     public moveStart(element: ElementComponent, velocity: Laya.Vector3, target?: Laya.Vector3) {
         element.movement.target = target;
+        element.movement.speed = velocity.length();
         element.movement.velocity.cloneFrom(velocity);
         element.transform.rotation = MathUtil.toDegree(Math.atan2(velocity.z, velocity.x));
         this._sender.moveStart(element.eid, velocity);

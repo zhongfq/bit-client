@@ -31,11 +31,6 @@ import { TilemapComponent } from "../components/tilemap-component";
 import { TruckCollectComponent } from "../components/truck-collect-component";
 import { TruckCollectSystem } from "./truck-collect-system";
 
-const PREFAB_HEAD_INFO1 = "resources/prefab/battle/ui/head-info1.lh";
-const PREFAB_HEAD_INFO2 = "resources/prefab/battle/ui/head-info2.lh";
-const PREFAB_HEAD_INFO3 = "resources/prefab/battle/ui/head-info3.lh";
-const PREFAB_ROLE_SHADOW = "resources/prefab/battle/ui/role-shadow.lh";
-
 export class CommandSystem extends ecs.System implements ICommandSender {
     public declare context: PveContext;
 
@@ -78,11 +73,11 @@ export class CommandSystem extends ecs.System implements ICommandSender {
             }
             if (entityRow.info_style) {
                 if (entityRow.info_style === 1) {
-                    info.res = PREFAB_HEAD_INFO1;
+                    info.res = res.BATTLE_HEAD_INFO1;
                 } else if (entityRow.info_style === 2) {
-                    info.res = PREFAB_HEAD_INFO2;
+                    info.res = res.BATTLE_HEAD_INFO2;
                 } else if (entityRow.info_style === 3) {
-                    info.res = PREFAB_HEAD_INFO3;
+                    info.res = res.BATTLE_HEAD_INFO3;
                 }
             }
         }
@@ -94,7 +89,7 @@ export class CommandSystem extends ecs.System implements ICommandSender {
             data.etype === ETYPE.TRUCK
         ) {
             const shadow = entity.addComponent(ShadowComponent);
-            shadow.res = PREFAB_ROLE_SHADOW;
+            shadow.res = res.BATTLE_ROLE_SHADOW;
 
             const movement = entity.addComponent(MovementComponent);
             movement.rotationInterpolation.rate = InterpolationRate.ROTATION;
