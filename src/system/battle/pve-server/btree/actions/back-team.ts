@@ -31,19 +31,17 @@ export class BackTeam extends b3.Process {
         } else {
             const rad = Math.atan2(p1.z - p0.z, p1.x - p0.x);
             const speed = distance / AiSystem.TICK;
-            if (movement.speed < leader.movement.speed) {
-                movement.speed = leader.movement.speed;
-            }
-            if (movement.speed < speed) {
-                movement.speed += 0.2;
+            let currSpeed = Math.max(movement.velocity.length(), PveDef.MOVE_SPEED);
+            if (currSpeed < speed) {
+                currSpeed += 0.2;
             } else {
-                movement.speed = speed;
+                currSpeed = speed;
             }
-            if (movement.speed > PveDef.MAX_BACK_SPEED) {
-                movement.speed = PveDef.MAX_BACK_SPEED;
+            if (currSpeed > PveDef.MAX_BACK_SPEED) {
+                currSpeed = PveDef.MAX_BACK_SPEED;
             }
-            tmpVelocity.x = movement.speed * Math.cos(rad);
-            tmpVelocity.z = movement.speed * Math.sin(rad);
+            tmpVelocity.x = currSpeed * Math.cos(rad);
+            tmpVelocity.z = currSpeed * Math.sin(rad);
             env.context.moveStart(env.owner, tmpVelocity);
             return node.yield(env);
         }

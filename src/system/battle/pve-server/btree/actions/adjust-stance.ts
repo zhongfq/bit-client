@@ -7,6 +7,7 @@ import { PveDef } from "../../pve-defs";
 const tmpVelocity = new Laya.Vector3();
 const tmpDir = new Laya.Vector3();
 
+/** 调整位置可能在好几个节点执行，所以使用与节点ID无关的变量 */
 export const LAST_ADJUST_DIR = b3.TreeEnv.makePrivateVar("lastAdjustDir");
 
 // 可以通过预定位置的方式进行优化

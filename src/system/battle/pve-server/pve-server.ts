@@ -347,18 +347,22 @@ export class PveServer extends b3.Context {
     }
 
     public moveStart(element: ElementComponent, velocity: Laya.Vector3, target?: Laya.Vector3) {
-        element.movement.target = target;
-        element.movement.speed = velocity.length();
-        element.movement.velocity.cloneFrom(velocity);
+        const movement = element.movement;
+        movement.speed = velocity.length();
+        if (target) {
+            movement.target.cloneFrom(target);
+            movement.velocity.set(0, 0, 0);
+        } else {
+            movement.velocity.cloneFrom(velocity);
+        }
         element.transform.rotation = MathUtil.toDegree(Math.atan2(velocity.z, velocity.x));
         this._sender.moveStart(element.eid, velocity);
     }
 
     public moveStop(element: ElementComponent) {
         const movement = element.movement;
-        movement.velocity.x = 0;
-        movement.velocity.y = 0;
-        movement.velocity.z = 0;
+        movement.velocity.set(0, 0, 0);
+        movement.speed = 0;
         this._sender.moveStop(element.eid, element.transform.position);
     }
 
@@ -538,8 +542,8 @@ export class PveServer extends b3.Context {
 
         const rad = MathUtil.toRadian(degree);
         const movement = element.movement;
-        _tmpVelocity.x = movement.speed * Math.cos(rad);
-        _tmpVelocity.z = movement.speed * Math.sin(rad);
+        _tmpVelocity.x = PveDef.MOVE_SPEED * Math.cos(rad);
+        _tmpVelocity.z = PveDef.MOVE_SPEED * Math.sin(rad);
         this.moveStart(element, _tmpVelocity);
     }
 

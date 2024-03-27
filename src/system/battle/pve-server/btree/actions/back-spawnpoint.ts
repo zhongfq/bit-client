@@ -1,5 +1,6 @@
 import * as b3 from "../../../../../core/behavior3/behavior";
 import { AiTreeEnv } from "../../ecs/components/ai-component";
+import { PveDef } from "../../pve-defs";
 
 export class BackSpawnpoint extends b3.Process {
     public override check(node: b3.Node) {}
@@ -7,7 +8,6 @@ export class BackSpawnpoint extends b3.Process {
     public override run(node: b3.Node, env: AiTreeEnv) {
         let velocity = node.resume(env) as Laya.Vector3 | undefined;
 
-        const movement = env.owner.movement;
         const transform = env.owner.transform;
 
         const p1 = env.owner.spawnpoint;
@@ -19,8 +19,8 @@ export class BackSpawnpoint extends b3.Process {
         } else if (!velocity) {
             const rad = Math.atan2(p1.z - p0.z, p1.x - p0.x);
             velocity = new Laya.Vector3();
-            velocity.x = movement.speed * Math.cos(rad);
-            velocity.z = movement.speed * Math.sin(rad);
+            velocity.x = PveDef.MOVE_SPEED * Math.cos(rad);
+            velocity.z = PveDef.MOVE_SPEED * Math.sin(rad);
             env.context.moveStart(env.owner, velocity, p1);
         }
         return node.yield(env, velocity);

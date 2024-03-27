@@ -27,9 +27,7 @@ export class FollowHero extends b3.Process {
         const distance = Laya.Vector3.distance(p1, p0);
         if (distance <= 0.05) {
             if (movement.velocity.x !== 0 || movement.velocity.z !== 0) {
-                movement.velocity.x = 0;
-                movement.velocity.y = 0;
-                movement.velocity.z = 0;
+                movement.velocity.set(0, 0, 0);
 
                 if (leader.movement.velocity.x === 0 && leader.movement.velocity.z === 0) {
                     env.context.moveStop(env.owner);
@@ -39,20 +37,18 @@ export class FollowHero extends b3.Process {
             }
         } else {
             const rad = Math.atan2(p1.z - p0.z, p1.x - p0.x);
-            const velocity = distance / AiSystem.TICK;
-            if (movement.speed < leader.movement.speed) {
-                movement.speed = leader.movement.speed;
-            }
-            if (movement.speed < velocity) {
-                movement.speed += 0.1;
+            const speed = distance / AiSystem.TICK;
+            let currSpeed = Math.max(movement.velocity.length(), PveDef.MOVE_SPEED);
+            if (currSpeed < speed) {
+                currSpeed += 0.1;
             } else {
-                movement.speed = velocity;
+                currSpeed = speed;
             }
-            if (movement.speed > PveDef.MAX_FOLLOW_SPEED) {
-                movement.speed = PveDef.MAX_FOLLOW_SPEED;
+            if (currSpeed > PveDef.MAX_FOLLOW_SPEED) {
+                currSpeed = PveDef.MAX_FOLLOW_SPEED;
             }
-            tmpVelocity.x = movement.speed * Math.cos(rad);
-            tmpVelocity.z = movement.speed * Math.sin(rad);
+            tmpVelocity.x = currSpeed * Math.cos(rad);
+            tmpVelocity.z = currSpeed * Math.sin(rad);
             env.context.moveStart(env.owner, tmpVelocity);
         }
 
