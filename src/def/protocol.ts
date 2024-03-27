@@ -159,7 +159,6 @@ export const opcode = {
         s2c_troop_retreat: 0x1511,
         notify_alliances: 0x1590,
         notify_roles: 0x1591,
-        notify_entities: 0x1592,
         notify_actions: 0x1593,
     },
 };
@@ -1014,12 +1013,6 @@ export const registerProtocols = () => {
         typeURL: proto.world.notify_roles.getTypeUrl(),
         encode: proto.world.notify_roles.encode,
         decode: proto.world.notify_roles.decode,
-    });
-    register({
-        op: opcode.world.notify_entities,
-        typeURL: proto.world.notify_entities.getTypeUrl(),
-        encode: proto.world.notify_entities.encode,
-        decode: proto.world.notify_entities.decode,
     });
     register({
         op: opcode.world.notify_actions,

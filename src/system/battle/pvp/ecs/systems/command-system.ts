@@ -21,7 +21,6 @@ export class CommandSystem extends ecs.System {
 
     public override onCreate() {
         this.handle(opcode.world.notify_actions, this._notifyActions);
-        this.handle(opcode.world.notify_entities, this._notifyEntities);
         this.handle(opcode.world.notify_roles, this._notifyRoles);
         this.handle(opcode.world.notify_alliances, this._notifyAlliances);
     }
@@ -42,15 +41,6 @@ export class CommandSystem extends ecs.System {
             } else if (cmd.action === ACTION.MOVE) {
                 this._moveAction(cmd.move as proto.world.MoveAction);
             }
-        }
-    }
-
-    private _notifyEntities(notify: proto.world.notify_entities) {
-        for (const eid of notify.leaveList) {
-            this._delEntity(eid);
-        }
-        for (const entity of notify.enterList) {
-            this._addEntity(entity as proto.world.Entity);
         }
     }
 

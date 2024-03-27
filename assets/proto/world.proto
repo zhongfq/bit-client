@@ -186,7 +186,7 @@ message s2c_troop_retreat {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // 服务主动推送
-// 同一帧内，发送的顺序为: notify_alliances -> notify_roles -> notify_entities
+// 同一帧内，发送的顺序为: notify_alliances -> notify_roles -> notify_actions
 
 message notify_alliances {
     repeated Alliance alliances = 1;
@@ -236,12 +236,6 @@ message EntityAction {
     StartBattleAction start_battle = 21;
     LeaveBattleAction leave_battle = 22;
     StopBattleAction stop_battle = 23;
-}
-
-// 单位同步(最基层)
-message notify_entities {
-    repeated Entity enter_list = 3; // 进入视野
-    repeated uint32 leave_list = 4; // 离开视野
 }
 
 // 同步单位行动
