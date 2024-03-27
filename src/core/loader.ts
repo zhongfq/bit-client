@@ -4,7 +4,7 @@ type ExecutorResolve = (value: unknown) => void;
 
 interface PromiseDescriptor {
     resolve: ExecutorResolve;
-    contextChecker?: ContextChecker;
+    checker: ContextChecker;
 }
 
 export class Loader {
@@ -60,7 +60,7 @@ export class Loader {
                 arr = [];
                 this._loadings.set(url, arr);
             }
-            arr.push({ resolve: resolve as ExecutorResolve, contextChecker: checker });
+            arr.push({ resolve: resolve as ExecutorResolve, checker: checker! });
             if (arr.length == 1) {
                 Laya.loader.load(url, type as string).then((value) => {
                     if (!value) {
@@ -68,7 +68,7 @@ export class Loader {
                         console.error(`load error: ${url}`);
                     } else {
                         for (const descriptor of arr!) {
-                            if (!descriptor.contextChecker || descriptor.contextChecker()) {
+                            if (descriptor.checker()) {
                                 descriptor.resolve(value);
                             } else {
                                 console.warn(`context check failure: ${url}`);
