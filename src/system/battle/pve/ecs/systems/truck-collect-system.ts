@@ -76,11 +76,14 @@ export class TruckCollectSystem extends ecs.System {
         let path!: string;
         let formation!: Laya.Vector3[];
         if (truckComp.collectType == BattleConf.ENTITY_TYPE.WOOD) {
-            [path, formation] = ["anim/gather-wood", TruckFormation.WOOD];
+            path = "anim/gather-wood";
+            formation = TruckFormation.WOOD;
         } else if (truckComp.collectType == BattleConf.ENTITY_TYPE.FOOD) {
-            [path, formation] = ["anim/gather-food", TruckFormation.FOOD];
+            path = "anim/gather-food";
+            formation = TruckFormation.FOOD;
         } else if (truckComp.collectType == BattleConf.ENTITY_TYPE.STONE) {
-            [path, formation] = ["anim/gather-stone", TruckFormation.STONE];
+            path = "anim/gather-stone";
+            formation = TruckFormation.STONE;
         }
         if (!path || !formation) {
             return;

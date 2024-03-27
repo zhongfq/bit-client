@@ -235,7 +235,7 @@ export class CommandSystem extends ecs.System implements ICommandSender {
         }
     }
 
-    public updateHp(eid: number, data: UpdateHp): void {
+    public async updateHp(eid: number, data: UpdateHp) {
         const element = this._findElement(eid);
         if (element) {
             const info = element.getComponent(HeadInfoComponent);
@@ -250,9 +250,9 @@ export class CommandSystem extends ecs.System implements ICommandSender {
 
                 let prefab: Laya.Prefab | undefined;
                 if (data.isCrit) {
-                    prefab = Laya.loader.getRes(res.BATTLE_HP_NUM_X);
+                    prefab = await app.loader.loadPrefab(res.BATTLE_HP_NUM_X);
                 } else {
-                    prefab = Laya.loader.getRes(res.BATTLE_HP_NUM);
+                    prefab = await app.loader.loadPrefab(res.BATTLE_HP_NUM);
                 }
                 if (prefab) {
                     const pos = new Laya.Vector4();
