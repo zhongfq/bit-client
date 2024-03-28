@@ -20,7 +20,7 @@
           "x": 510,
           "y": 62,
           "clip": {
-            "_$uuid": "0a546ba8-338e-4539-9cc3-05ad0b7df2fa"
+            "_$uuid": "311b6acb-1a25-4902-803a-fef23f69b920"
           },
           "id": "0",
           "soloTransitions": [],
@@ -35,7 +35,7 @@
           "x": 247.49149999999997,
           "y": 97.29404,
           "clip": {
-            "_$uuid": "2c155a9b-5eb4-4646-89ab-f7369f8c1a60"
+            "_$uuid": "8d2b0b3d-0bd9-4d70-b381-ae9fbca8b9fc"
           },
           "id": "1",
           "soloTransitions": [],
@@ -50,7 +50,7 @@
           "x": 246,
           "y": 165,
           "clip": {
-            "_$uuid": "82586f2a-51e1-4d34-8e9b-83c69ce3afdc"
+            "_$uuid": "f4aa4ac7-b8ac-41c6-83a9-28bb5af964b0"
           },
           "id": "2",
           "soloTransitions": [],
@@ -82,15 +82,15 @@
           "soloTransitions": []
         },
         {
-          "x": 201,
-          "y": 379,
+          "x": 200,
+          "y": 380,
           "_isLooping": 2,
           "id": "3",
           "name": "die",
           "speed": 1,
           "clipEnd": 1,
           "clip": {
-            "_$uuid": "918ba272-787b-4275-8340-b80df73aba19"
+            "_$uuid": "53f8dcd7-b671-4d8c-8d9a-0f97f508902a"
           }
         },
         {
@@ -104,7 +104,7 @@
           "_$type": "AnimatorState",
           "clipStart": 0,
           "clip": {
-            "_$uuid": "82586f2a-51e1-4d34-8e9b-83c69ce3afdc"
+            "_$uuid": "f4aa4ac7-b8ac-41c6-83a9-28bb5af964b0"
           }
         },
         {
@@ -118,7 +118,7 @@
           "_$type": "AnimatorState",
           "clipStart": 0,
           "clip": {
-            "_$uuid": "0a546ba8-338e-4539-9cc3-05ad0b7df2fa"
+            "_$uuid": "311b6acb-1a25-4902-803a-fef23f69b920"
           }
         },
         {
@@ -132,7 +132,7 @@
           "_$type": "AnimatorState",
           "clipStart": 0,
           "clip": {
-            "_$uuid": "0a546ba8-338e-4539-9cc3-05ad0b7df2fa"
+            "_$uuid": "311b6acb-1a25-4902-803a-fef23f69b920"
           }
         }
       ]

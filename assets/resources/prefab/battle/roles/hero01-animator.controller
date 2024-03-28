@@ -20,7 +20,7 @@
           "x": 570,
           "y": 77,
           "clip": {
-            "_$uuid": "04145be7-5fb3-46a3-88c5-ab23e978319d"
+            "_$uuid": "35f1ac99-846d-4a32-96c5-497953d01f74"
           },
           "id": "0",
           "soloTransitions": [],
@@ -33,9 +33,9 @@
           "clipStart": 0,
           "clipEnd": 1,
           "x": 247.49149999999997,
-          "y": 97.29404,
+          "y": 96.29404,
           "clip": {
-            "_$uuid": "5b60a641-0722-4f32-b361-f999a19e7307"
+            "_$uuid": "91a0165c-0559-4900-8a53-2573da650c6c"
           },
           "id": "1",
           "soloTransitions": [],
@@ -50,7 +50,7 @@
           "x": 242,
           "y": 177,
           "clip": {
-            "_$uuid": "30966398-4ea0-469b-9541-7f92aefc4d63"
+            "_$uuid": "deb34351-61a8-4c70-8a40-463163036e26"
           },
           "id": "2",
           "soloTransitions": [],
@@ -90,7 +90,7 @@
           "speed": 1,
           "clipEnd": 1,
           "clip": {
-            "_$uuid": "4e571d5e-71b0-4ada-8049-19336f966337"
+            "_$uuid": "60c8df13-6828-430a-86e6-b24c79db31c4"
           }
         },
         {
@@ -104,7 +104,7 @@
           "_$type": "AnimatorState",
           "clipStart": 0,
           "clip": {
-            "_$uuid": "30966398-4ea0-469b-9541-7f92aefc4d63"
+            "_$uuid": "deb34351-61a8-4c70-8a40-463163036e26"
           }
         },
         {
@@ -118,7 +118,7 @@
           "_$type": "AnimatorState",
           "clipStart": 0,
           "clip": {
-            "_$uuid": "04145be7-5fb3-46a3-88c5-ab23e978319d"
+            "_$uuid": "35f1ac99-846d-4a32-96c5-497953d01f74"
           }
         },
         {
@@ -132,7 +132,7 @@
           "_$type": "AnimatorState",
           "clipStart": 0,
           "clip": {
-            "_$uuid": "04145be7-5fb3-46a3-88c5-ab23e978319d"
+            "_$uuid": "35f1ac99-846d-4a32-96c5-497953d01f74"
           }
         }
       ]

@@ -13,57 +13,57 @@
       "states": [
         {
           "_$type": "AnimatorState",
-          "name": "fight_infantry_attack_archer",
+          "name": "fight_hero_attack",
           "speed": 1,
           "clipStart": 0,
           "clipEnd": 1,
-          "x": 280,
-          "y": 70,
+          "x": 416,
+          "y": 253,
           "clip": {
             "_$type": "AnimationClip",
-            "_$uuid": "0a546ba8-338e-4539-9cc3-05ad0b7df2fa"
+            "_$uuid": "35f1ac99-846d-4a32-96c5-497953d01f74"
           },
           "id": "0"
         },
         {
           "_$type": "AnimatorState",
-          "name": "fight_infantry_die",
+          "name": "fight_hero_die",
           "speed": 1,
           "clipStart": 0,
           "clipEnd": 1,
-          "x": 320,
-          "y": 110,
+          "x": 426,
+          "y": 263,
           "clip": {
             "_$type": "AnimationClip",
-            "_$uuid": "918ba272-787b-4275-8340-b80df73aba19"
+            "_$uuid": "60c8df13-6828-430a-86e6-b24c79db31c4"
           },
           "id": "1"
         },
         {
           "_$type": "AnimatorState",
-          "name": "fight_infantry_idle_archer",
+          "name": "fight_hero_idle",
           "speed": 1,
           "clipStart": 0,
           "clipEnd": 1,
-          "x": 330,
-          "y": 160,
+          "x": 436,
+          "y": 273,
           "clip": {
             "_$type": "AnimationClip",
-            "_$uuid": "2c155a9b-5eb4-4646-89ab-f7369f8c1a60"
+            "_$uuid": "91a0165c-0559-4900-8a53-2573da650c6c"
           },
           "id": "2"
         },
         {
           "_$type": "AnimatorState",
-          "name": "fight_infantry_move",
+          "name": "fight_hero_move",
           "speed": 1,
           "clipStart": 0,
           "clipEnd": 1,
-          "x": 340,
-          "y": 200,
+          "x": 446,
+          "y": 283,
           "clip": {
             "_$type": "AnimationClip",
-            "_$uuid": "82586f2a-51e1-4d34-8e9b-83c69ce3afdc"
+            "_$uuid": "deb34351-61a8-4c70-8a40-463163036e26"
           },
           "id": "3"
         },

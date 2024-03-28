@@ -260,7 +260,7 @@
           },
           "_$id": "#46",
           "_$type": "Sprite3D",
-          "_$prefab": "9dc43063-fd33-4ad2-846f-fb7440585b94"
+          "_$prefab": "d1e099cc-c702-426e-ad26-9d0772760c5e"
         },
         {
           "name": "Gather_Wheat",
@@ -290,7 +290,7 @@
           },
           "_$id": "#53",
           "_$type": "Sprite3D",
-          "_$prefab": "72eb0ee4-cdb1-4176-b4c9-d46883baf460"
+          "_$prefab": "1756fc57-7f8e-4c03-9170-5562f9fb0474"
         },
         {
           "name": "Gather_Wood",
@@ -320,7 +320,67 @@
           },
           "_$id": "#58",
           "_$type": "Sprite3D",
-          "_$prefab": "58564de4-e902-43c1-be11-6ebe6da569bb"
+          "_$prefab": "422530bc-4933-4a62-97e7-4f1218bf6c19"
+        },
+        {
+          "name": "Hero_Fight_001",
+          "active": true,
+          "isStatic": false,
+          "layer": 0,
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": 1.431865,
+              "y": -2.384186E-07,
+              "z": -0.314115
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": 0,
+              "y": 0,
+              "z": 0,
+              "w": -1
+            },
+            "localScale": {
+              "_$type": "Vector3",
+              "x": 1,
+              "y": 1,
+              "z": 1
+            }
+          },
+          "_$id": "#62",
+          "_$type": "Sprite3D",
+          "_$prefab": "c9050913-3e98-4355-b33e-4063e04a81df"
+        },
+        {
+          "name": "Bing_Gong001",
+          "active": true,
+          "isStatic": false,
+          "layer": 0,
+          "transform": {
+            "localPosition": {
+              "_$type": "Vector3",
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "localRotation": {
+              "_$type": "Quaternion",
+              "x": 0,
+              "y": 0,
+              "z": 0,
+              "w": -1
+            },
+            "localScale": {
+              "_$type": "Vector3",
+              "x": 1,
+              "y": 1,
+              "z": 1
+            }
+          },
+          "_$id": "#113",
+          "_$type": "Sprite3D",
+          "_$prefab": "915aabd7-01e4-439c-a8d8-5bcc9474ecb2"
         }
       ]
     }
