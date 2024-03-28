@@ -29,6 +29,7 @@
     "fit": "center",
     "duration": 0.5
   },
+  "stat": true,
   "vConsole": true,
   "alertGlobalError": true
 }

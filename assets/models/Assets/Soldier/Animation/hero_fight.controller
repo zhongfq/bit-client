@@ -17,8 +17,8 @@
           "speed": 1,
           "clipStart": 0,
           "clipEnd": 1,
-          "x": 430,
-          "y": 70,
+          "x": 360.9331,
+          "y": 137.468,
           "clip": {
             "_$type": "AnimationClip",
             "_$uuid": "35f1ac99-846d-4a32-96c5-497953d01f74"
@@ -31,8 +31,8 @@
           "speed": 1,
           "clipStart": 0,
           "clipEnd": 1,
-          "x": 300,
-          "y": 180,
+          "x": 370.9331,
+          "y": 147.468,
           "clip": {
             "_$type": "AnimationClip",
             "_$uuid": "60c8df13-6828-430a-86e6-b24c79db31c4"
@@ -45,8 +45,8 @@
           "speed": 1,
           "clipStart": 0,
           "clipEnd": 1,
-          "x": 510,
-          "y": 210,
+          "x": 380.9331,
+          "y": 157.468,
           "clip": {
             "_$type": "AnimationClip",
             "_$uuid": "91a0165c-0559-4900-8a53-2573da650c6c"
@@ -59,8 +59,8 @@
           "speed": 1,
           "clipStart": 0,
           "clipEnd": 1,
-          "x": 446,
-          "y": 283,
+          "x": 390.9331,
+          "y": 167.468,
           "clip": {
             "_$type": "AnimationClip",
             "_$uuid": "deb34351-61a8-4c70-8a40-463163036e26"

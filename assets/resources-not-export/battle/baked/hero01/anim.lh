@@ -1,6 +1,6 @@
 {
   "_$ver": 1,
-  "_$id": "b30tg1if",
+  "_$id": "vkuxijoe",
   "_$type": "Sprite3D",
   "name": "anim",
   "_$comp": [
@@ -21,7 +21,7 @@
   ],
   "_$child": [
     {
-      "_$id": "c7ult5td",
+      "_$id": "m0a1kkzt",
       "_$type": "Sprite3D",
       "name": "BoneHorseCore",
       "transform": {
@@ -47,7 +47,7 @@
       },
       "_$child": [
         {
-          "_$id": "1w5wnz5i",
+          "_$id": "2li4x2xm",
           "_$type": "Sprite3D",
           "name": "BoneHorse Pelvis",
           "transform": {
@@ -61,22 +61,22 @@
           },
           "_$child": [
             {
-              "_$id": "duraov8c",
+              "_$id": "mlz8zzae",
               "_$type": "Sprite3D",
               "name": "BoneHorse Spine",
               "transform": {
                 "localPosition": {
                   "_$type": "Vector3",
-                  "x": 0.0737641006708145,
+                  "x": 0.07376361638307571,
                   "y": 0.2629614174365997,
                   "z": -0.0023816092871129513
                 },
                 "localRotation": {
                   "_$type": "Quaternion",
-                  "x": 0.003012196584927125,
-                  "y": -0.0033396417776011163,
-                  "z": -0.7268446734657378,
-                  "w": -0.6867871534318446
+                  "x": 0.003012196119283654,
+                  "y": -0.0033396403806361355,
+                  "z": -0.7268446734701484,
+                  "w": -0.686787153436012
                 },
                 "localScale": {
                   "_$type": "Vector3",
@@ -87,15 +87,15 @@
               },
               "_$child": [
                 {
-                  "_$id": "l2z8cd9q",
+                  "_$id": "tna7l8vv",
                   "_$type": "Sprite3D",
                   "name": "BoneHero001 Core",
                   "transform": {
                     "localPosition": {
                       "_$type": "Vector3",
-                      "x": 0.1943853348493576,
-                      "y": -0.21941664814949036,
-                      "z": -0.0000014903780538588762
+                      "x": 0.1943860948085785,
+                      "y": -0.21942287683486938,
+                      "z": -0.0000014900994074196205
                     },
                     "localRotation": {
                       "_$type": "Quaternion",
@@ -113,7 +113,7 @@
                   },
                   "_$child": [
                     {
-                      "_$id": "oe5ergh1",
+                      "_$id": "ebsq09tk",
                       "_$type": "Sprite3D",
                       "name": "BoneHero001 Pelvis",
                       "transform": {
@@ -133,22 +133,22 @@
                       },
                       "_$child": [
                         {
-                          "_$id": "fwg5lux4",
+                          "_$id": "7u855yzr",
                           "_$type": "Sprite3D",
                           "name": "BoneHero001 Spine",
                           "transform": {
                             "localPosition": {
                               "_$type": "Vector3",
-                              "x": 0.1217101067304611,
-                              "y": -0.020311884582042694,
+                              "x": 0.12171000987291336,
+                              "y": -0.020311890169978142,
                               "z": 2.243511261212916e-7
                             },
                             "localRotation": {
                               "_$type": "Quaternion",
-                              "x": 0.000002120899160065831,
-                              "y": 6.734105271962376e-7,
-                              "z": 0.026168431475486354,
-                              "w": -0.99965754795788
+                              "x": 0.00000212089913407159,
+                              "y": 6.734105254662301e-7,
+                              "z": 0.02616843892092883,
+                              "w": -0.9996575477629778
                             },
                             "localScale": {
                               "_$type": "Vector3",
@@ -159,19 +159,19 @@
                           },
                           "_$child": [
                             {
-                              "_$id": "vkay6gwj",
+                              "_$id": "5cypi0hy",
                               "_$type": "Sprite3D",
                               "name": "BoneHero001 Neck",
                               "transform": {
                                 "localPosition": {
                                   "_$type": "Vector3",
-                                  "x": 0.40098127722740173,
-                                  "y": -0.0009380689589306712,
-                                  "z": 3.567810269444749e-9
+                                  "x": 0.40098249912261963,
+                                  "y": -0.0009386591846123338,
+                                  "z": 5.593969287787104e-9
                                 },
                                 "localRotation": {
                                   "_$type": "Quaternion",
-                                  "x": -1.8128160375198807e-14,
+                                  "x": -6.14506079270832e-14,
                                   "y": 3.404837267797094e-7,
                                   "z": -0.12275876986392564,
                                   "w": -0.9924365392413662
@@ -185,22 +185,22 @@
                               },
                               "_$child": [
                                 {
-                                  "_$id": "vhb2x4b3",
+                                  "_$id": "0snn72v2",
                                   "_$type": "Sprite3D",
                                   "name": "BoneHero001 L Clavicle",
                                   "transform": {
                                     "localPosition": {
                                       "_$type": "Vector3",
                                       "x": 0.012226967141032219,
-                                      "y": -0.002104813465848565,
+                                      "y": -0.002104861894622445,
                                       "z": 0.10186573117971419
                                     },
                                     "localRotation": {
                                       "_$type": "Quaternion",
-                                      "x": 0.5130765037635435,
-                                      "y": -0.11575505666257666,
-                                      "z": 0.8473562526704517,
-                                      "w": 0.07307974550524979
+                                      "x": 0.5130765044851234,
+                                      "y": -0.1157550493749165,
+                                      "z": 0.8473562538627893,
+                                      "w": 0.07307973815742497
                                     },
                                     "localScale": {
                                       "_$type": "Vector3",
@@ -211,46 +211,45 @@
                                   },
                                   "_$child": [
                                     {
-                                      "_$id": "hpbuudtj",
+                                      "_$id": "9i2jkvj6",
                                       "_$type": "Sprite3D",
                                       "name": "BoneHero001 L UpperArm",
                                       "transform": {
                                         "localPosition": {
                                           "_$type": "Vector3",
-                                          "x": 0.25785237550735474,
-                                          "y": -1.5139579589984462e-9,
+                                          "x": 0.25785231590270996,
+                                          "y": 9.083747976035285e-9,
                                           "z": -1.9378661875180112e-7
                                         },
                                         "localRotation": {
                                           "_$type": "Quaternion",
-                                          "x": -0.07666339777415837,
-                                          "y": -0.1990426396409941,
-                                          "z": 0.21322028494405187,
-                                          "w": -0.9534368679335008
+                                          "x": -0.07666341260393907,
+                                          "y": -0.19904265435662388,
+                                          "z": 0.2132202698444652,
+                                          "w": -0.9534368670457638
                                         },
                                         "localScale": {
                                           "_$type": "Vector3",
-                                          "x": 0.9999998211860657,
+                                          "x": 0.9999998807907104,
                                           "y": 1,
-                                          "z": 0.9999997615814208
+                                          "z": 0.9999998807907104
                                         }
                                       },
                                       "_$child": [
                                         {
-                                          "_$id": "intw8pqj",
+                                          "_$id": "ggu2lhum",
                                           "_$type": "Sprite3D",
                                           "name": "BoneHero001 L Forearm",
                                           "transform": {
                                             "localPosition": {
                                               "_$type": "Vector3",
-                                              "x": 0.17457199096679688,
-                                              "y": -1.211166367198757e-8,
-                                              "z": 1.9378661875180112e-7
+                                              "x": 0.1745721846818924,
+                                              "y": 1.211166367198757e-8
                                             },
                                             "localRotation": {
                                               "_$type": "Quaternion",
-                                              "x": 1.679474019715722e-8,
-                                              "y": -6.44888124511207e-8,
+                                              "x": 1.6794779274344282e-8,
+                                              "y": -6.448888783619512e-8,
                                               "z": 0.20736277827900537,
                                               "w": -0.9782641147381457
                                             },
@@ -263,15 +262,15 @@
                                           },
                                           "_$child": [
                                             {
-                                              "_$id": "4ln4wy38",
+                                              "_$id": "4ch3hczx",
                                               "_$type": "Sprite3D",
                                               "name": "BoneHero001 L Hand",
                                               "transform": {
                                                 "localPosition": {
                                                   "_$type": "Vector3",
-                                                  "x": 0.1745723783969879,
-                                                  "y": 9.689330937590056e-8,
-                                                  "z": -1.9378661875180112e-7
+                                                  "x": 0.17457228899002075,
+                                                  "y": 4.844665468795028e-8,
+                                                  "z": -9.689330937590056e-8
                                                 },
                                                 "localRotation": {
                                                   "_$type": "Quaternion",
@@ -289,7 +288,7 @@
                                               },
                                               "_$child": [
                                                 {
-                                                  "_$id": "yypx193o",
+                                                  "_$id": "sxgsbxkz",
                                                   "_$type": "Sprite3D",
                                                   "name": "Hero_Shield_01",
                                                   "transform": {
@@ -301,10 +300,10 @@
                                                     },
                                                     "localRotation": {
                                                       "_$type": "Quaternion",
-                                                      "x": -0.41928348127978055,
-                                                      "y": 0.5997550683407016,
-                                                      "z": -0.2993725636535054,
-                                                      "w": -0.6122673341417755
+                                                      "x": -0.4192835180968431,
+                                                      "y": 0.5997550258862372,
+                                                      "z": -0.29937261292132644,
+                                                      "w": -0.612267326426285
                                                     },
                                                     "localScale": {
                                                       "_$type": "Vector3",
@@ -343,70 +342,71 @@
                                   ]
                                 },
                                 {
-                                  "_$id": "4o76h4f7",
+                                  "_$id": "xvcx8azp",
                                   "_$type": "Sprite3D",
                                   "name": "BoneHero001 R Clavicle",
                                   "transform": {
                                     "localPosition": {
                                       "_$type": "Vector3",
                                       "x": 0.012226967141032219,
-                                      "y": -0.002104232087731361,
+                                      "y": -0.002104280516505241,
                                       "z": -0.10186573117971419
                                     },
                                     "localRotation": {
                                       "_$type": "Quaternion",
-                                      "x": -0.5130763179775388,
-                                      "y": 0.11575261042394638,
-                                      "z": 0.8473565786356444,
-                                      "w": 0.0730811449934159
+                                      "x": -0.5130763184200282,
+                                      "y": 0.11575260307319346,
+                                      "z": 0.8473565793664251,
+                                      "w": 0.07308114505644284
                                     },
                                     "localScale": {
                                       "_$type": "Vector3",
                                       "x": 1.0000001192092896,
-                                      "y": 1,
+                                      "y": 1.0000001192092896,
                                       "z": 1.0000001192092896
                                     }
                                   },
                                   "_$child": [
                                     {
-                                      "_$id": "c6mijd4s",
+                                      "_$id": "6mfa25wd",
                                       "_$type": "Sprite3D",
                                       "name": "BoneHero001 R UpperArm",
                                       "transform": {
                                         "localPosition": {
                                           "_$type": "Vector3",
                                           "x": 0.2578522861003876,
-                                          "y": 1.0597705824011426e-8,
-                                          "z": 1.9378661875180112e-7
+                                          "y": 9.083747976035284e-9,
+                                          "z": 3.875732375036022e-7
                                         },
                                         "localRotation": {
                                           "_$type": "Quaternion",
-                                          "x": 0.09994322152435044,
-                                          "y": 0.3315842567556119,
-                                          "z": 0.06455336377855218,
-                                          "w": -0.9358932077796254
+                                          "x": 0.09994324370066344,
+                                          "y": 0.3315842561745423,
+                                          "z": 0.06455335621475944,
+                                          "w": -0.9358932061390208
                                         },
                                         "localScale": {
                                           "_$type": "Vector3",
-                                          "x": 1,
+                                          "x": 1.0000001192092896,
                                           "y": 1,
-                                          "z": 1.0000001192092896
+                                          "z": 1.000000238418579
                                         }
                                       },
                                       "_$child": [
                                         {
-                                          "_$id": "d95jnylo",
+                                          "_$id": "4oxnpx1n",
                                           "_$type": "Sprite3D",
                                           "name": "BoneHero001 R Forearm",
                                           "transform": {
                                             "localPosition": {
                                               "_$type": "Vector3",
-                                              "x": 0.1745721846818924
+                                              "x": 0.1745721846818924,
+                                              "y": -1.211166367198757e-8
                                             },
                                             "localRotation": {
                                               "_$type": "Quaternion",
-                                              "x": -7.851664442984218e-9,
-                                              "y": 1.5763765876526475e-8,
+                                              "x": -3.9667836871610267e-10,
+                                              "y": 1.4886743839674329e-8,
                                               "z": 0.09983359576421472,
                                               "w": -0.9950041473063251
                                             },
@@ -419,15 +419,14 @@
                                           },
                                           "_$child": [
                                             {
-                                              "_$id": "pmtf2s1t",
+                                              "_$id": "p46r1amb",
                                               "_$type": "Sprite3D",
                                               "name": "BoneHero001 R Hand",
                                               "transform": {
                                                 "localPosition": {
                                                   "_$type": "Vector3",
                                                   "x": 0.17457228899002075,
-                                                  "y": 1.211166367198757e-8,
-                                                  "z": -9.689330937590056e-8
+                                                  "y": 3.6334991904141134e-8
                                                 },
                                                 "localRotation": {
                                                   "_$type": "Quaternion",
@@ -439,7 +438,7 @@
                                               },
                                               "_$child": [
                                                 {
-                                                  "_$id": "zxyo354e",
+                                                  "_$id": "cyp3b54g",
                                                   "_$type": "Sprite3D",
                                                   "name": "Hero_Weapon_01",
                                                   "transform": {
@@ -451,10 +450,10 @@
                                                     },
                                                     "localRotation": {
                                                       "_$type": "Quaternion",
-                                                      "x": -0.7191173551131174,
-                                                      "y": -0.003623357567219712,
-                                                      "z": -0.6924362295154537,
-                                                      "w": 0.05821656902872868
+                                                      "x": -0.7191173450232496,
+                                                      "y": -0.0036232842268503623,
+                                                      "z": -0.6924362433527713,
+                                                      "w": 0.05821653364488153
                                                     },
                                                     "localScale": {
                                                       "_$type": "Vector3",
@@ -507,7 +506,7 @@
       ]
     },
     {
-      "_$id": "xgyfgwqk",
+      "_$id": "ltqdxtfw",
       "_$type": "Sprite3D",
       "name": "Hero_Body",
       "_$comp": [
@@ -530,50 +529,50 @@
           ],
           "_bones": [
             {
-              "_$ref": "fwg5lux4"
+              "_$ref": "7u855yzr"
             },
             {
-              "_$ref": "vhb2x4b3"
+              "_$ref": "0snn72v2"
             },
             {
-              "_$ref": "c6mijd4s"
+              "_$ref": "6mfa25wd"
             },
             {
-              "_$ref": "4o76h4f7"
+              "_$ref": "xvcx8azp"
             },
             {
-              "_$ref": "v7ud0ne5"
+              "_$ref": "zgfu96tn"
             },
             {
-              "_$ref": "oe5ergh1"
+              "_$ref": "ebsq09tk"
             },
             {
-              "_$ref": "pmtf2s1t"
+              "_$ref": "p46r1amb"
             },
             {
-              "_$ref": "d95jnylo"
+              "_$ref": "4oxnpx1n"
             },
             {
-              "_$ref": "6i6vy3rj"
+              "_$ref": "vqzami6i"
             },
             {
-              "_$ref": "hpbuudtj"
+              "_$ref": "9i2jkvj6"
             },
             {
-              "_$ref": "4ln4wy38"
+              "_$ref": "4ch3hczx"
             },
             {
-              "_$ref": "intw8pqj"
+              "_$ref": "ggu2lhum"
             },
             {
-              "_$ref": "vkay6gwj"
+              "_$ref": "5cypi0hy"
             },
             {
-              "_$ref": "prqo1v7d"
+              "_$ref": "v76ln0fr"
             }
           ],
           "rootBone": {
-            "_$ref": "xgyfgwqk"
+            "_$ref": "ltqdxtfw"
           },
           "localBounds": {
             "_$type": "Bounds",
@@ -593,7 +592,7 @@
       ]
     },
     {
-      "_$id": "ar5ffe6h",
+      "_$id": "xdnhlhe5",
       "_$type": "Sprite3D",
       "name": "Hero_Horse",
       "_$comp": [
@@ -616,74 +615,74 @@
           ],
           "_bones": [
             {
-              "_$ref": "duraov8c"
+              "_$ref": "mlz8zzae"
             },
             {
-              "_$ref": "1w5wnz5i"
+              "_$ref": "2li4x2xm"
             },
             {
-              "_$ref": "wyzmzctx"
+              "_$ref": "jymx6t71"
             },
             {
-              "_$ref": "x96bu3mj"
+              "_$ref": "ive6zhi3"
             },
             {
-              "_$ref": "m1agtt1w"
+              "_$ref": "qwphettz"
             },
             {
-              "_$ref": "avvhf1ew"
+              "_$ref": "1q0zjgdt"
             },
             {
-              "_$ref": "avecjd6v"
+              "_$ref": "dd5l8r0n"
             },
             {
-              "_$ref": "zexjvbv6"
+              "_$ref": "v4xwd88c"
             },
             {
-              "_$ref": "4zzn7a57"
+              "_$ref": "o515c1is"
             },
             {
-              "_$ref": "6wq2bpoy"
+              "_$ref": "xibq7sef"
             },
             {
-              "_$ref": "afiqxfmx"
+              "_$ref": "hs3lpfcg"
             },
             {
-              "_$ref": "s5nmjmns"
+              "_$ref": "ecjfa97c"
             },
             {
-              "_$ref": "3d89ltpg"
+              "_$ref": "vps2k97r"
             },
             {
-              "_$ref": "0btvgbvg"
+              "_$ref": "xfbegvym"
             },
             {
-              "_$ref": "e7qo9j67"
+              "_$ref": "0pcx6zxj"
             },
             {
-              "_$ref": "rayvgsm7"
+              "_$ref": "xs0vrfsx"
             },
             {
-              "_$ref": "336q6q30"
+              "_$ref": "y1fnx560"
             },
             {
-              "_$ref": "v4e0vp49"
+              "_$ref": "t4zvh6oq"
             },
             {
-              "_$ref": "4fr9mzv8"
+              "_$ref": "lvnayuts"
             },
             {
-              "_$ref": "ypy7ktj1"
+              "_$ref": "pguma5cy"
             },
             {
-              "_$ref": "vgqbop8w"
+              "_$ref": "j3l0em6u"
             },
             {
-              "_$ref": "whu2w1an"
+              "_$ref": "r7l77ux3"
             }
           ],
           "rootBone": {
-            "_$ref": "ar5ffe6h"
+            "_$ref": "xdnhlhe5"
           },
           "localBounds": {
             "_$type": "Bounds",

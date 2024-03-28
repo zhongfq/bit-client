@@ -17,8 +17,8 @@
           "speed": 1,
           "clipStart": 0,
           "clipEnd": 1,
-          "x": 280,
-          "y": 70,
+          "x": 332.6323,
+          "y": 204.9214,
           "clip": {
             "_$type": "AnimationClip",
             "_$uuid": "311b6acb-1a25-4902-803a-fef23f69b920"
@@ -27,17 +27,31 @@
         },
         {
           "_$type": "AnimatorState",
+          "name": "fight_infantry_attack_shield",
+          "speed": 1,
+          "clipStart": 0,
+          "clipEnd": 1,
+          "x": 342.6323,
+          "y": 214.9214,
+          "clip": {
+            "_$type": "AnimationClip",
+            "_$uuid": "d26e580b-72a6-493e-b0a1-3c9c0cfe7f48"
+          },
+          "id": "1"
+        },
+        {
+          "_$type": "AnimatorState",
           "name": "fight_infantry_die",
           "speed": 1,
           "clipStart": 0,
           "clipEnd": 1,
-          "x": 320,
-          "y": 110,
+          "x": 352.6323,
+          "y": 224.9214,
           "clip": {
             "_$type": "AnimationClip",
             "_$uuid": "53f8dcd7-b671-4d8c-8d9a-0f97f508902a"
           },
-          "id": "1"
+          "id": "2"
         },
         {
           "_$type": "AnimatorState",
@@ -45,13 +59,27 @@
           "speed": 1,
           "clipStart": 0,
           "clipEnd": 1,
-          "x": 330,
-          "y": 160,
+          "x": 362.6323,
+          "y": 234.9214,
           "clip": {
             "_$type": "AnimationClip",
             "_$uuid": "8d2b0b3d-0bd9-4d70-b381-ae9fbca8b9fc"
           },
-          "id": "2"
+          "id": "3"
+        },
+        {
+          "_$type": "AnimatorState",
+          "name": "fight_infantry_idle_shield",
+          "speed": 1,
+          "clipStart": 0,
+          "clipEnd": 1,
+          "x": 372.6323,
+          "y": 244.9214,
+          "clip": {
+            "_$type": "AnimationClip",
+            "_$uuid": "1000f98e-3709-4cf4-95fd-62c5ec5a8e06"
+          },
+          "id": "4"
         },
         {
           "_$type": "AnimatorState",
@@ -59,13 +87,13 @@
           "speed": 1,
           "clipStart": 0,
           "clipEnd": 1,
-          "x": 340,
-          "y": 200,
+          "x": 382.6323,
+          "y": 254.9214,
           "clip": {
             "_$type": "AnimationClip",
             "_$uuid": "f4aa4ac7-b8ac-41c6-83a9-28bb5af964b0"
           },
-          "id": "3"
+          "id": "5"
         },
         {
           "id": "-1",

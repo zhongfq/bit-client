@@ -105,7 +105,7 @@
           ]
         },
         {
-          "_$id": "97neatsr",
+          "_$id": "hs2xbtd4",
           "_$prefab": "b868bac6-2a13-470d-b35b-e359b1b41c9a",
           "name": "bing-dao",
           "active": false,
@@ -115,7 +115,7 @@
               "_$type": "Vector3",
               "x": 0,
               "y": 0,
-              "z": 0
+              "z": 0.028479504314975035
             },
             "localRotation": {
               "_$type": "Quaternion",
@@ -123,13 +123,19 @@
               "y": 0,
               "z": 0,
               "w": 1
+            },
+            "localScale": {
+              "_$type": "Vector3",
+              "x": 1,
+              "y": 1,
+              "z": 1
             }
           }
         },
         {
-          "_$id": "n6aq4k65",
-          "_$prefab": "eb559588-bea9-4774-a732-497be1db0621",
-          "name": "bing-gong",
+          "_$id": "byak06ri",
+          "_$prefab": "6dfd410b-62f0-4907-8974-a9e617108ff2",
+          "name": "hero01",
           "active": false,
           "layer": 0,
           "transform": {
@@ -149,17 +155,17 @@
           }
         },
         {
-          "_$id": "byak06ri",
-          "_$prefab": "6dfd410b-62f0-4907-8974-a9e617108ff2",
-          "name": "hero01",
+          "_$id": "qjqcytor",
+          "_$prefab": "eb559588-bea9-4774-a732-497be1db0621",
+          "name": "bing-gong",
           "active": true,
           "layer": 0,
           "transform": {
             "localPosition": {
               "_$type": "Vector3",
-              "x": 0,
-              "y": 0,
-              "z": 0
+              "x": 0.09862899201813224,
+              "y": 0.02366771007308699,
+              "z": 0.6682666706618869
             },
             "localRotation": {
               "_$type": "Quaternion",
@@ -182,12 +188,13 @@
           },
           "_$child": [
             {
-              "_$id": "xct5kehm",
+              "_$id": "25s4jcty",
               "_$type": "Sprite3D",
               "name": "hero01",
+              "active": false,
               "_$child": [
                 {
-                  "_$id": "c2kuwre7",
+                  "_$id": "crb4nokb",
                   "_$prefab": "57553287-eff5-40c3-9a19-b4c27a2f7cd2",
                   "name": "anim",
                   "active": true,
@@ -211,6 +218,77 @@
                       "x": 0.4,
                       "y": 0.4,
                       "z": 0.4
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "_$id": "o6wdeho7",
+              "_$type": "Sprite3D",
+              "name": "bing-dao",
+              "active": false,
+              "_$child": [
+                {
+                  "_$id": "rvvkalhq",
+                  "_$prefab": "b1231031-e4c5-4d6e-86c4-9ffba76eb3c5",
+                  "name": "anim",
+                  "active": true,
+                  "layer": 0,
+                  "transform": {
+                    "localPosition": {
+                      "_$type": "Vector3",
+                      "x": 0,
+                      "y": 0,
+                      "z": 0
+                    },
+                    "localRotation": {
+                      "_$type": "Quaternion",
+                      "x": 0,
+                      "y": 0.7071067811865475,
+                      "z": 0,
+                      "w": 0.7071067811865476
+                    },
+                    "localScale": {
+                      "_$type": "Vector3",
+                      "x": 0.4000000059604645,
+                      "y": 0.4000000059604645,
+                      "z": 0.4000000059604645
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "_$id": "kj0ohbke",
+              "_$type": "Sprite3D",
+              "name": "bing-gong",
+              "_$child": [
+                {
+                  "_$id": "cc3qf87a",
+                  "_$prefab": "859e30bc-80a6-4274-8924-147367df02f8",
+                  "name": "anim",
+                  "active": true,
+                  "layer": 0,
+                  "transform": {
+                    "localPosition": {
+                      "_$type": "Vector3",
+                      "x": 0,
+                      "y": 0,
+                      "z": 0
+                    },
+                    "localRotation": {
+                      "_$type": "Quaternion",
+                      "x": 0,
+                      "y": 0.7071067811865475,
+                      "z": 0,
+                      "w": 0.7071067811865476
+                    },
+                    "localScale": {
+                      "_$type": "Vector3",
+                      "x": 0.4000000059604645,
+                      "y": 0.4000000059604645,
+                      "z": 0.4000000059604645
                     }
                   }
                 }

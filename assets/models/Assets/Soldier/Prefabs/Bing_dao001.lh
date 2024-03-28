@@ -1,6 +1,6 @@
 {
   "_$ver": 1,
-  "name": "Bing_dao002",
+  "name": "Bing_dao001",
   "active": true,
   "isStatic": false,
   "layer": 0,
@@ -29,7 +29,7 @@
   "_$type": "Sprite3D",
   "_$child": [
     {
-      "name": "body_level1",
+      "name": "Body_Sword shield_01",
       "active": true,
       "isStatic": false,
       "layer": 0,
@@ -42,10 +42,10 @@
         },
         "localRotation": {
           "_$type": "Quaternion",
-          "x": 0,
+          "x": 0.7071068,
           "y": 0,
           "z": 0,
-          "w": -1
+          "w": -0.7071068
         },
         "localScale": {
           "_$type": "Vector3",
@@ -56,251 +56,140 @@
       },
       "_$id": "#1",
       "_$type": "Sprite3D",
-      "_$child": [
+      "_$type": "Sprite3D",
+      "_$comp": [
         {
-          "name": "Body_Sword shield_01",
-          "active": true,
-          "isStatic": false,
-          "layer": 0,
-          "transform": {
-            "localPosition": {
-              "_$type": "Vector3",
-              "x": 0,
-              "y": 0,
-              "z": 0
-            },
-            "localRotation": {
-              "_$type": "Quaternion",
-              "x": 0.7071068,
-              "y": 0,
-              "z": 0,
-              "w": -0.7071068
-            },
-            "localScale": {
-              "_$type": "Vector3",
-              "x": 1,
-              "y": 1,
-              "z": 1
-            }
-          },
-          "_$id": "#2",
-          "_$type": "Sprite3D",
-          "_$type": "Sprite3D",
-          "_$comp": [
-            {
-              "_$type": "MeshFilter",
-              "sharedMesh": {
-                "_$uuid": "415cf7e0-c293-44bf-933e-2917fd720a2d",
-                "_$type": "mesh"
-              }
-            },
-            {
-              "_$type": "SkinnedMeshRenderer",
-              "sharedMaterials": [
-                {
-                  "_$type": "Material",
-                  "_$uuid": "8f1698b6-5fa9-4326-a510-624a2ca4b5ad"
-                }
-              ],
-              "enabled": true,
-              "receiveShadow": true,
-              "castShadow": true,
-              "boundBox": {
-                "_$type": "Bounds",
-                "min": {
-                  "_$type": "Vector3",
-                  "x": -0.3840739,
-                  "y": -0.5098023,
-                  "z": -0.8210031
-                },
-                "max": {
-                  "_$type": "Vector3",
-                  "x": 0.7114547,
-                  "y": 0.5789859,
-                  "z": 0.6018687
-                }
-              },
-              "_bones": [
-                {
-                  "_$ref": [
-                    "#23"
-                  ]
-                },
-                {
-                  "_$ref": [
-                    "#5"
-                  ]
-                },
-                {
-                  "_$ref": [
-                    "#6"
-                  ]
-                },
-                {
-                  "_$ref": [
-                    "#21"
-                  ]
-                },
-                {
-                  "_$ref": [
-                    "#22"
-                  ]
-                },
-                {
-                  "_$ref": [
-                    "#24"
-                  ]
-                },
-                {
-                  "_$ref": [
-                    "#9"
-                  ]
-                },
-                {
-                  "_$ref": [
-                    "#7"
-                  ]
-                },
-                {
-                  "_$ref": [
-                    "#8"
-                  ]
-                },
-                {
-                  "_$ref": [
-                    "#10"
-                  ]
-                },
-                {
-                  "_$ref": [
-                    "#17"
-                  ]
-                },
-                {
-                  "_$ref": [
-                    "#20"
-                  ]
-                },
-                {
-                  "_$ref": [
-                    "#19"
-                  ]
-                },
-                {
-                  "_$ref": [
-                    "#18"
-                  ]
-                },
-                {
-                  "_$ref": [
-                    "#13"
-                  ]
-                },
-                {
-                  "_$ref": [
-                    "#15"
-                  ]
-                },
-                {
-                  "_$ref": [
-                    "#16"
-                  ]
-                },
-                {
-                  "_$ref": [
-                    "#14"
-                  ]
-                }
-              ],
-              "rootBone": {
-                "_$ref": [
-                  "#5"
-                ]
-              }
-            }
-          ]
+          "_$type": "MeshFilter",
+          "sharedMesh": {
+            "_$uuid": "415cf7e0-c293-44bf-933e-2917fd720a2d",
+            "_$type": "mesh"
+          }
         },
         {
-          "name": "Head_Sword shield_01",
-          "active": true,
-          "isStatic": false,
-          "layer": 0,
-          "transform": {
-            "localPosition": {
+          "_$type": "SkinnedMeshRenderer",
+          "sharedMaterials": [
+            {
+              "_$type": "Material",
+              "_$uuid": "8f1698b6-5fa9-4326-a510-624a2ca4b5ad"
+            }
+          ],
+          "enabled": true,
+          "receiveShadow": true,
+          "castShadow": true,
+          "boundBox": {
+            "_$type": "Bounds",
+            "min": {
               "_$type": "Vector3",
-              "x": -0.01694161,
-              "y": 1.081394,
-              "z": 0.1284582
+              "x": -0.3840739,
+              "y": -0.5098025,
+              "z": -0.8210033
             },
-            "localRotation": {
-              "_$type": "Quaternion",
-              "x": 0.6231954,
-              "y": 0.01098956,
-              "z": -0.01360676,
-              "w": -0.7818707
-            },
-            "localScale": {
+            "max": {
               "_$type": "Vector3",
-              "x": 0.8299999,
-              "y": 0.8300002,
-              "z": 0.83
+              "x": 0.7114552,
+              "y": 0.578986,
+              "z": 0.6018687
             }
           },
-          "_$id": "#3",
-          "_$type": "Sprite3D",
-          "_$type": "Sprite3D",
-          "_$comp": [
+          "_bones": [
             {
-              "_$type": "MeshFilter",
-              "sharedMesh": {
-                "_$uuid": "e8e175cd-5bce-4c71-92bc-8ddc5a44f396",
-                "_$type": "mesh"
-              }
+              "_$ref": [
+                "#24"
+              ]
             },
             {
-              "_$type": "SkinnedMeshRenderer",
-              "sharedMaterials": [
-                {
-                  "_$type": "Material",
-                  "_$uuid": "8f1698b6-5fa9-4326-a510-624a2ca4b5ad"
-                }
-              ],
-              "enabled": true,
-              "receiveShadow": true,
-              "castShadow": true,
-              "boundBox": {
-                "_$type": "Bounds",
-                "min": {
-                  "_$type": "Vector3",
-                  "x": -0.03372788,
-                  "y": -0.3427708,
-                  "z": -0.3067149
-                },
-                "max": {
-                  "_$type": "Vector3",
-                  "x": 0.5662764,
-                  "y": 0.2904959,
-                  "z": 0.3068905
-                }
-              },
-              "_bones": [
-                {
-                  "_$ref": [
-                    "#12"
-                  ]
-                }
-              ],
-              "rootBone": {
-                "_$ref": [
-                  "#12"
-                ]
-              }
+              "_$ref": [
+                "#3"
+              ]
+            },
+            {
+              "_$ref": [
+                "#4"
+              ]
+            },
+            {
+              "_$ref": [
+                "#22"
+              ]
+            },
+            {
+              "_$ref": [
+                "#23"
+              ]
+            },
+            {
+              "_$ref": [
+                "#25"
+              ]
+            },
+            {
+              "_$ref": [
+                "#7"
+              ]
+            },
+            {
+              "_$ref": [
+                "#5"
+              ]
+            },
+            {
+              "_$ref": [
+                "#6"
+              ]
+            },
+            {
+              "_$ref": [
+                "#8"
+              ]
+            },
+            {
+              "_$ref": [
+                "#16"
+              ]
+            },
+            {
+              "_$ref": [
+                "#19"
+              ]
+            },
+            {
+              "_$ref": [
+                "#18"
+              ]
+            },
+            {
+              "_$ref": [
+                "#17"
+              ]
+            },
+            {
+              "_$ref": [
+                "#11"
+              ]
+            },
+            {
+              "_$ref": [
+                "#13"
+              ]
+            },
+            {
+              "_$ref": [
+                "#14"
+              ]
+            },
+            {
+              "_$ref": [
+                "#12"
+              ]
             }
-          ]
+          ],
+          "rootBone": {
+            "_$ref": [
+              "#3"
+            ]
+          }
         }
-      ],
-      "_$type": "Sprite3D",
-      "_$comp": []
+      ]
     },
     {
       "name": "BoneInfantry001",
@@ -328,7 +217,7 @@
           "z": 1
         }
       },
-      "_$id": "#4",
+      "_$id": "#2",
       "_$type": "Sprite3D",
       "_$child": [
         {
@@ -357,7 +246,7 @@
               "z": 1
             }
           },
-          "_$id": "#5",
+          "_$id": "#3",
           "_$type": "Sprite3D",
           "_$child": [
             {
@@ -370,12 +259,12 @@
                   "_$type": "Vector3",
                   "x": 0.1292895,
                   "y": -0.00174849,
-                  "z": 0.000119679
+                  "z": 0.0001196778
                 },
                 "localRotation": {
                   "_$type": "Quaternion",
                   "x": 0.2031027,
-                  "y": -0.004270199,
+                  "y": -0.004270193,
                   "z": 0.04593077,
                   "w": -0.9780703
                 },
@@ -386,7 +275,7 @@
                   "z": 1
                 }
               },
-              "_$id": "#6",
+              "_$id": "#4",
               "_$type": "Sprite3D",
               "_$child": [
                 {
@@ -415,7 +304,7 @@
                       "z": 0.9999998
                     }
                   },
-                  "_$id": "#7",
+                  "_$id": "#5",
                   "_$type": "Sprite3D",
                   "_$child": [
                     {
@@ -444,7 +333,7 @@
                           "z": 1
                         }
                       },
-                      "_$id": "#8",
+                      "_$id": "#6",
                       "_$type": "Sprite3D",
                       "_$child": [
                         {
@@ -473,7 +362,7 @@
                               "z": 0.9999999
                             }
                           },
-                          "_$id": "#9",
+                          "_$id": "#7",
                           "_$type": "Sprite3D",
                           "_$child": [
                             {
@@ -502,7 +391,7 @@
                                   "z": 1
                                 }
                               },
-                              "_$id": "#10",
+                              "_$id": "#8",
                               "_$type": "Sprite3D",
                               "_$type": "Sprite3D",
                               "_$comp": []
@@ -528,13 +417,13 @@
                     "localPosition": {
                       "_$type": "Vector3",
                       "x": 0.3773309,
-                      "y": -8.134365E-05,
-                      "z": -7.152557E-09
+                      "y": -8.134841E-05,
+                      "z": -4.768371E-09
                     },
                     "localRotation": {
                       "_$type": "Quaternion",
-                      "x": -8.699522E-09,
-                      "y": 1.485182E-08,
+                      "x": -9.165175E-09,
+                      "y": 1.484917E-08,
                       "z": -0.005699425,
                       "w": -0.9999838
                     },
@@ -545,7 +434,7 @@
                       "z": 1
                     }
                   },
-                  "_$id": "#11",
+                  "_$id": "#9",
                   "_$type": "Sprite3D",
                   "_$child": [
                     {
@@ -557,7 +446,7 @@
                         "localPosition": {
                           "_$type": "Vector3",
                           "x": 0.1099043,
-                          "y": -0.00196661,
+                          "y": -0.001966615,
                           "z": 0
                         },
                         "localRotation": {
@@ -574,7 +463,7 @@
                           "z": 0.9999999
                         }
                       },
-                      "_$id": "#12",
+                      "_$id": "#10",
                       "_$type": "Sprite3D",
                       "_$type": "Sprite3D",
                       "_$comp": []
@@ -588,7 +477,7 @@
                         "localPosition": {
                           "_$type": "Vector3",
                           "x": 0.02187721,
-                          "y": -0.0001856947,
+                          "y": -0.0001856899,
                           "z": 0.08724853
                         },
                         "localRotation": {
@@ -605,7 +494,7 @@
                           "z": 0.9999999
                         }
                       },
-                      "_$id": "#13",
+                      "_$id": "#11",
                       "_$type": "Sprite3D",
                       "_$child": [
                         {
@@ -631,10 +520,10 @@
                               "_$type": "Vector3",
                               "x": 1,
                               "y": 1,
-                              "z": 1
+                              "z": 0.9999999
                             }
                           },
-                          "_$id": "#14",
+                          "_$id": "#12",
                           "_$type": "Sprite3D",
                           "_$child": [
                             {
@@ -663,7 +552,7 @@
                                   "z": 0.9999999
                                 }
                               },
-                              "_$id": "#15",
+                              "_$id": "#13",
                               "_$type": "Sprite3D",
                               "_$child": [
                                 {
@@ -692,8 +581,61 @@
                                       "z": 0.9999999
                                     }
                                   },
-                                  "_$id": "#16",
+                                  "_$id": "#14",
                                   "_$type": "Sprite3D",
+                                  "_$child": [
+                                    {
+                                      "name": "Weapon_SwordShield_Shield01",
+                                      "active": true,
+                                      "isStatic": false,
+                                      "layer": 0,
+                                      "transform": {
+                                        "localPosition": {
+                                          "_$type": "Vector3",
+                                          "x": 1.144409E-07,
+                                          "y": 0,
+                                          "z": 3.33786E-08
+                                        },
+                                        "localRotation": {
+                                          "_$type": "Quaternion",
+                                          "x": -7.450603E-09,
+                                          "y": -1.005828E-07,
+                                          "z": 2.086162E-07,
+                                          "w": -1
+                                        },
+                                        "localScale": {
+                                          "_$type": "Vector3",
+                                          "x": 1,
+                                          "y": 0.9999999,
+                                          "z": 1
+                                        }
+                                      },
+                                      "_$id": "#15",
+                                      "_$type": "Sprite3D",
+                                      "_$type": "Sprite3D",
+                                      "_$comp": [
+                                        {
+                                          "_$type": "MeshFilter",
+                                          "sharedMesh": {
+                                            "_$uuid": "7ba566d3-6518-472c-b1c7-2c08831fb7b6",
+                                            "_$type": "mesh"
+                                          }
+                                        },
+                                        {
+                                          "_$type": "MeshRenderer",
+                                          "enabled": true,
+                                          "sharedMaterials": [
+                                            {
+                                              "_$type": "Material",
+                                              "_$uuid": "8f1698b6-5fa9-4326-a510-624a2ca4b5ad"
+                                            }
+                                          ],
+                                          "receiveShadow": true,
+                                          "castShadow": true
+                                        }
+                                      ]
+                                    }
+                                  ],
                                   "_$type": "Sprite3D",
                                   "_$comp": []
                                 }
@@ -718,15 +660,15 @@
                         "localPosition": {
                           "_$type": "Vector3",
                           "x": 0.02187714,
-                          "y": -0.0001852226,
-                          "z": -0.08724851
+                          "y": -0.0001852179,
+                          "z": -0.08724853
                         },
                         "localRotation": {
                           "_$type": "Quaternion",
                           "x": -0.7072823,
-                          "y": 0.008340658,
+                          "y": 0.008340987,
                           "z": 0.7068819,
-                          "w": 0.0002797843
+                          "w": 0.0002801139
                         },
                         "localScale": {
                           "_$type": "Vector3",
@@ -735,7 +677,7 @@
                           "z": 0.9999999
                         }
                       },
-                      "_$id": "#17",
+                      "_$id": "#16",
                       "_$type": "Sprite3D",
                       "_$child": [
                         {
@@ -747,7 +689,7 @@
                             "localPosition": {
                               "_$type": "Vector3",
                               "x": 0.2762494,
-                              "y": 4.768371E-09,
+                              "y": 2.384186E-08,
                               "z": -7.629394E-08
                             },
                             "localRotation": {
@@ -764,7 +706,7 @@
                               "z": 1
                             }
                           },
-                          "_$id": "#18",
+                          "_$id": "#17",
                           "_$type": "Sprite3D",
                           "_$child": [
                             {
@@ -775,7 +717,7 @@
                               "transform": {
                                 "localPosition": {
                                   "_$type": "Vector3",
-                                  "x": 0.1805581,
+                                  "x": 0.1805582,
                                   "y": 0,
                                   "z": 0
                                 },
@@ -793,7 +735,7 @@
                                   "z": 1
                                 }
                               },
-                              "_$id": "#19",
+                              "_$id": "#18",
                               "_$type": "Sprite3D",
                               "_$child": [
                                 {
@@ -822,8 +764,112 @@
                                       "z": 0.9999999
                                     }
                                   },
-                                  "_$id": "#20",
+                                  "_$id": "#19",
                                   "_$type": "Sprite3D",
+                                  "_$child": [
+                                    {
+                                      "name": "Weapon_axe",
+                                      "active": true,
+                                      "isStatic": false,
+                                      "layer": 0,
+                                      "transform": {
+                                        "localPosition": {
+                                          "_$type": "Vector3",
+                                          "x": -3.814697E-08,
+                                          "y": 0,
+                                          "z": -1.144409E-07
+                                        },
+                                        "localRotation": {
+                                          "_$type": "Quaternion",
+                                          "x": -3.166497E-07,
+                                          "y": -4.051243E-08,
+                                          "z": 2.83122E-07,
+                                          "w": -1
+                                        },
+                                        "localScale": {
+                                          "_$type": "Vector3",
+                                          "x": 1,
+                                          "y": 1,
+                                          "z": 1
+                                        }
+                                      },
+                                      "_$id": "#20",
+                                      "_$type": "Sprite3D",
+                                      "_$type": "Sprite3D",
+                                      "_$comp": [
+                                        {
+                                          "_$type": "MeshFilter",
+                                          "sharedMesh": {
+                                            "_$uuid": "195fb631-0de8-4ba1-938a-82be825486ed",
+                                            "_$type": "mesh"
+                                          }
+                                        },
+                                        {
+                                          "_$type": "MeshRenderer",
+                                          "enabled": true,
+                                          "sharedMaterials": [
+                                            {
+                                              "_$type": "Material",
+                                              "_$uuid": "8f1698b6-5fa9-4326-a510-624a2ca4b5ad"
+                                            }
+                                          ],
+                                          "receiveShadow": true,
+                                          "castShadow": true
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "name": "Weapon_SwordShield_Sword01",
+                                      "active": true,
+                                      "isStatic": false,
+                                      "layer": 0,
+                                      "transform": {
+                                        "localPosition": {
+                                          "_$type": "Vector3",
+                                          "x": 1.907349E-08,
+                                          "y": 7.629394E-08,
+                                          "z": -1.525879E-07
+                                        },
+                                        "localRotation": {
+                                          "_$type": "Quaternion",
+                                          "x": 9.31323E-08,
+                                          "y": 2.28174E-07,
+                                          "z": 2.384186E-07,
+                                          "w": -1
+                                        },
+                                        "localScale": {
+                                          "_$type": "Vector3",
+                                          "x": 1,
+                                          "y": 1,
+                                          "z": 1
+                                        }
+                                      },
+                                      "_$id": "#21",
+                                      "_$type": "Sprite3D",
+                                      "_$type": "Sprite3D",
+                                      "_$comp": [
+                                        {
+                                          "_$type": "MeshFilter",
+                                          "sharedMesh": {
+                                            "_$uuid": "be197a6e-1774-4e5a-ad03-3b26d3416d14",
+                                            "_$type": "mesh"
+                                          }
+                                        },
+                                        {
+                                          "_$type": "MeshRenderer",
+                                          "enabled": true,
+                                          "sharedMaterials": [
+                                            {
+                                              "_$type": "Material",
+                                              "_$uuid": "8f1698b6-5fa9-4326-a510-624a2ca4b5ad"
+                                            }
+                                          ],
+                                          "receiveShadow": true,
+                                          "castShadow": true
+                                        }
+                                      ]
+                                    }
+                                  ],
                                   "_$type": "Sprite3D",
                                   "_$comp": []
                                 }
@@ -869,7 +915,7 @@
                       "z": 0.9999999
                     }
                   },
-                  "_$id": "#21",
+                  "_$id": "#22",
                   "_$type": "Sprite3D",
                   "_$child": [
                     {
@@ -898,7 +944,7 @@
                           "z": 0.9999999
                         }
                       },
-                      "_$id": "#22",
+                      "_$id": "#23",
                       "_$type": "Sprite3D",
                       "_$child": [
                         {
@@ -927,7 +973,7 @@
                               "z": 1
                             }
                           },
-                          "_$id": "#23",
+                          "_$id": "#24",
                           "_$type": "Sprite3D",
                           "_$child": [
                             {
@@ -956,7 +1002,7 @@
                                   "z": 0.9999999
                                 }
                               },
-                              "_$id": "#24",
+                              "_$id": "#25",
                               "_$type": "Sprite3D",
                               "_$type": "Sprite3D",
                               "_$comp": []
@@ -986,304 +1032,82 @@
       "_$comp": []
     },
     {
-      "name": "weapon_chop",
+      "name": "Head_Sword shield_01",
       "active": true,
       "isStatic": false,
       "layer": 0,
       "transform": {
         "localPosition": {
           "_$type": "Vector3",
-          "x": 0,
-          "y": 0,
-          "z": 0
+          "x": -0.01694161,
+          "y": 1.081394,
+          "z": 0.1284582
         },
         "localRotation": {
           "_$type": "Quaternion",
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": -1
+          "x": 0.6231954,
+          "y": 0.01098956,
+          "z": -0.01360676,
+          "w": -0.7818707
         },
         "localScale": {
           "_$type": "Vector3",
-          "x": 1,
-          "y": 1,
-          "z": 1
+          "x": 0.8299999,
+          "y": 0.8300002,
+          "z": 0.8300001
         }
       },
-      "_$id": "#25",
+      "_$id": "#26",
       "_$type": "Sprite3D",
-      "_$child": [
+      "_$type": "Sprite3D",
+      "_$comp": [
         {
-          "name": "Weapon_axe",
-          "active": true,
-          "isStatic": false,
-          "layer": 0,
-          "transform": {
-            "localPosition": {
-              "_$type": "Vector3",
-              "x": -0.5317721,
-              "y": 0.6901071,
-              "z": -0.1621835
-            },
-            "localRotation": {
-              "_$type": "Quaternion",
-              "x": 0.696767,
-              "y": 0.0114622,
-              "z": 0.01681209,
-              "w": -0.7170088
-            },
-            "localScale": {
-              "_$type": "Vector3",
-              "x": 1,
-              "y": 1,
-              "z": 1
-            }
-          },
-          "_$id": "#26",
-          "_$type": "Sprite3D",
-          "_$type": "Sprite3D",
-          "_$comp": [
-            {
-              "_$type": "MeshFilter",
-              "sharedMesh": {
-                "_$uuid": "195fb631-0de8-4ba1-938a-82be825486ed",
-                "_$type": "mesh"
-              }
-            },
-            {
-              "_$type": "SkinnedMeshRenderer",
-              "sharedMaterials": [
-                {
-                  "_$type": "Material",
-                  "_$uuid": "8f1698b6-5fa9-4326-a510-624a2ca4b5ad"
-                }
-              ],
-              "enabled": true,
-              "receiveShadow": true,
-              "castShadow": true,
-              "boundBox": {
-                "_$type": "Bounds",
-                "min": {
-                  "_$type": "Vector3",
-                  "x": -0.03124553,
-                  "y": -0.1187551,
-                  "z": -0.2402054
-                },
-                "max": {
-                  "_$type": "Vector3",
-                  "x": 0.4118367,
-                  "y": 0.1085552,
-                  "z": 0.7029748
-                }
-              },
-              "_bones": [
-                {
-                  "_$ref": [
-                    "#20"
-                  ]
-                }
-              ],
-              "rootBone": {
-                "_$ref": [
-                  "#20"
-                ]
-              }
-            }
-          ]
-        }
-      ],
-      "_$type": "Sprite3D",
-      "_$comp": []
-    },
-    {
-      "name": "weapon_attack",
-      "active": true,
-      "isStatic": false,
-      "layer": 0,
-      "transform": {
-        "localPosition": {
-          "_$type": "Vector3",
-          "x": 0,
-          "y": 0,
-          "z": 0
-        },
-        "localRotation": {
-          "_$type": "Quaternion",
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": -1
-        },
-        "localScale": {
-          "_$type": "Vector3",
-          "x": 1,
-          "y": 1,
-          "z": 1
-        }
-      },
-      "_$id": "#27",
-      "_$type": "Sprite3D",
-      "_$child": [
-        {
-          "name": "Weapon_SwordShield_Shield01",
-          "active": true,
-          "isStatic": false,
-          "layer": 0,
-          "transform": {
-            "localPosition": {
-              "_$type": "Vector3",
-              "x": 0.1556546,
-              "y": 0.5710801,
-              "z": 0.6169682
-            },
-            "localRotation": {
-              "_$type": "Quaternion",
-              "x": 0.7514971,
-              "y": -0.08044625,
-              "z": 0.04387084,
-              "w": -0.653342
-            },
-            "localScale": {
-              "_$type": "Vector3",
-              "x": 1,
-              "y": 1,
-              "z": 1
-            }
-          },
-          "_$id": "#28",
-          "_$type": "Sprite3D",
-          "_$type": "Sprite3D",
-          "_$comp": [
-            {
-              "_$type": "MeshFilter",
-              "sharedMesh": {
-                "_$uuid": "7ba566d3-6518-472c-b1c7-2c08831fb7b6",
-                "_$type": "mesh"
-              }
-            },
-            {
-              "_$type": "SkinnedMeshRenderer",
-              "sharedMaterials": [
-                {
-                  "_$type": "Material",
-                  "_$uuid": "8f1698b6-5fa9-4326-a510-624a2ca4b5ad"
-                }
-              ],
-              "enabled": true,
-              "receiveShadow": true,
-              "castShadow": true,
-              "boundBox": {
-                "_$type": "Bounds",
-                "min": {
-                  "_$type": "Vector3",
-                  "x": -0.2736287,
-                  "y": -0.3439187,
-                  "z": -0.328847
-                },
-                "max": {
-                  "_$type": "Vector3",
-                  "x": 0.5208176,
-                  "y": 0.1905464,
-                  "z": 0.3724581
-                }
-              },
-              "_bones": [
-                {
-                  "_$ref": [
-                    "#16"
-                  ]
-                }
-              ],
-              "rootBone": {
-                "_$ref": [
-                  "#16"
-                ]
-              }
-            }
-          ]
+          "_$type": "MeshFilter",
+          "sharedMesh": {
+            "_$uuid": "e8e175cd-5bce-4c71-92bc-8ddc5a44f396",
+            "_$type": "mesh"
+          }
         },
         {
-          "name": "Weapon_SwordShield_Sword01",
-          "active": true,
-          "isStatic": false,
-          "layer": 0,
-          "transform": {
-            "localPosition": {
+          "_$type": "SkinnedMeshRenderer",
+          "sharedMaterials": [
+            {
+              "_$type": "Material",
+              "_$uuid": "8f1698b6-5fa9-4326-a510-624a2ca4b5ad"
+            }
+          ],
+          "enabled": true,
+          "receiveShadow": true,
+          "castShadow": true,
+          "boundBox": {
+            "_$type": "Bounds",
+            "min": {
               "_$type": "Vector3",
-              "x": -0.5317721,
-              "y": 0.690107,
-              "z": -0.1621835
+              "x": -0.03372788,
+              "y": -0.3427708,
+              "z": -0.3067149
             },
-            "localRotation": {
-              "_$type": "Quaternion",
-              "x": -0.2393394,
-              "y": 0.5728648,
-              "z": -0.2732739,
-              "w": -0.7347544
-            },
-            "localScale": {
+            "max": {
               "_$type": "Vector3",
-              "x": 1,
-              "y": 1,
-              "z": 1
+              "x": 0.5662764,
+              "y": 0.2904959,
+              "z": 0.3068905
             }
           },
-          "_$id": "#29",
-          "_$type": "Sprite3D",
-          "_$type": "Sprite3D",
-          "_$comp": [
+          "_bones": [
             {
-              "_$type": "MeshFilter",
-              "sharedMesh": {
-                "_$uuid": "be197a6e-1774-4e5a-ad03-3b26d3416d14",
-                "_$type": "mesh"
-              }
-            },
-            {
-              "_$type": "SkinnedMeshRenderer",
-              "sharedMaterials": [
-                {
-                  "_$type": "Material",
-                  "_$uuid": "8f1698b6-5fa9-4326-a510-624a2ca4b5ad"
-                }
-              ],
-              "enabled": true,
-              "receiveShadow": true,
-              "castShadow": true,
-              "boundBox": {
-                "_$type": "Bounds",
-                "min": {
-                  "_$type": "Vector3",
-                  "x": -0.05512808,
-                  "y": -0.07832655,
-                  "z": -0.2339889
-                },
-                "max": {
-                  "_$type": "Vector3",
-                  "x": 0.2278683,
-                  "y": 0.1056285,
-                  "z": 1.011161
-                }
-              },
-              "_bones": [
-                {
-                  "_$ref": [
-                    "#20"
-                  ]
-                }
-              ],
-              "rootBone": {
-                "_$ref": [
-                  "#20"
-                ]
-              }
+              "_$ref": [
+                "#10"
+              ]
             }
-          ]
+          ],
+          "rootBone": {
+            "_$ref": [
+              "#10"
+            ]
+          }
         }
-      ],
-      "_$type": "Sprite3D",
-      "_$comp": []
+      ]
     }
   ],
   "_$type": "Sprite3D",
@@ -1292,7 +1116,7 @@
       "_$type": "Animator",
       "controller": {
         "_$type": "AnimationController",
-        "_$uuid": "acd296ed-67bd-43ca-af7b-838b83e9dfb6"
+        "_$uuid": "57b3bac5-7a4a-4afe-aa26-b5853fc21238"
       },
       "enabled": true
     }

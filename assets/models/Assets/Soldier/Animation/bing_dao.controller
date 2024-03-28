@@ -1,0 +1,136 @@
+{
+  "_$type": "Animator",
+  "enabled": true,
+  "controller": "null",
+  "cullingMode": 0,
+  "controllerLayers": [
+    {
+      "_$type": "AnimatorControllerLayer",
+      "playOnWake": true,
+      "name": "Base Layer",
+      "defaultWeight": 1,
+      "blendingMode": 0,
+      "states": [
+        {
+          "_$type": "AnimatorState",
+          "name": "fight_swordsman_attack1",
+          "speed": 1,
+          "clipStart": 0,
+          "clipEnd": 1,
+          "x": 445.4318,
+          "y": 264.3398,
+          "clip": {
+            "_$type": "AnimationClip",
+            "_$uuid": "aa6069b0-28e0-4361-90a4-c7eb55f2461c"
+          },
+          "id": "0"
+        },
+        {
+          "_$type": "AnimatorState",
+          "name": "fight_swordsman_attack2",
+          "speed": 1,
+          "clipStart": 0,
+          "clipEnd": 1,
+          "x": 455.4318,
+          "y": 274.3398,
+          "clip": {
+            "_$type": "AnimationClip",
+            "_$uuid": "44590238-a916-4f09-91c2-44dace8b4144"
+          },
+          "id": "1"
+        },
+        {
+          "_$type": "AnimatorState",
+          "name": "fight_swordsman_die",
+          "speed": 1,
+          "clipStart": 0,
+          "clipEnd": 1,
+          "x": 465.4318,
+          "y": 284.3398,
+          "clip": {
+            "_$type": "AnimationClip",
+            "_$uuid": "d73a87f5-e3c1-4675-8636-0577693be44c"
+          },
+          "id": "2"
+        },
+        {
+          "_$type": "AnimatorState",
+          "name": "fight_swordsman_idle",
+          "speed": 1,
+          "clipStart": 0,
+          "clipEnd": 1,
+          "x": 475.4318,
+          "y": 294.3398,
+          "clip": {
+            "_$type": "AnimationClip",
+            "_$uuid": "4e112ac4-a074-44b0-826a-3642cb06e8a1"
+          },
+          "id": "3"
+        },
+        {
+          "_$type": "AnimatorState",
+          "name": "fight_swordsman_logging",
+          "speed": 1,
+          "clipStart": 0,
+          "clipEnd": 1,
+          "x": 485.4318,
+          "y": 304.3398,
+          "clip": {
+            "_$type": "AnimationClip",
+            "_$uuid": "8b90da0f-5ea7-4f16-8735-3119a31260a7"
+          },
+          "id": "4"
+        },
+        {
+          "_$type": "AnimatorState",
+          "name": "fight_swordsman_move",
+          "speed": 1,
+          "clipStart": 0,
+          "clipEnd": 1,
+          "x": 495.4318,
+          "y": 314.3398,
+          "clip": {
+            "_$type": "AnimationClip",
+            "_$uuid": "dc42b22a-a85f-495d-8337-b1ac61f83f0f"
+          },
+          "id": "5"
+        },
+        {
+          "_$type": "AnimatorState",
+          "name": "fight_swordsman_run",
+          "speed": 1,
+          "clipStart": 0,
+          "clipEnd": 1,
+          "x": 505.4318,
+          "y": 324.3398,
+          "clip": {
+            "_$type": "AnimationClip",
+            "_$uuid": "c08969f3-d68a-4051-9f9b-b5fc66b73bd0"
+          },
+          "id": "6"
+        },
+        {
+          "id": "-1",
+          "name": "进入",
+          "speed": 1,
+          "clipEnd": 1,
+          "x": 50,
+          "y": 120,
+          "soloTransitions": [
+            {
+              "id": "0"
+            }
+          ]
+        },
+        {
+          "id": "-2",
+          "name": "任何状态",
+          "speed": 1,
+          "clipEnd": 1,
+          "x": 50,
+          "y": 20
+        }
+      ]
+    }
+  ]
+}
