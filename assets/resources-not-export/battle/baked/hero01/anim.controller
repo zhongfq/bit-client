@@ -1,0 +1,140 @@
+{
+  "_$type": "Animator",
+  "controller": {
+    "_$uuid": "8e6a7a46-80c1-49e0-b21a-ca4d097fadbf",
+    "_$type": "AnimationController"
+  },
+  "controllerLayers": [
+    {
+      "_$type": "AnimatorControllerLayer",
+      "name": "Base Layer",
+      "states": [
+        {
+          "id": "-1",
+          "name": "进入",
+          "speed": 1,
+          "clipEnd": 1,
+          "x": 50,
+          "y": 120,
+          "soloTransitions": [
+            {
+              "id": "1",
+              "exitByTime": true,
+              "transduration": 0,
+              "exitTime": 0.85
+            }
+          ]
+        },
+        {
+          "id": "-2",
+          "name": "任何状态",
+          "speed": 1,
+          "clipEnd": 1,
+          "x": 577,
+          "y": 444,
+          "soloTransitions": []
+        },
+        {
+          "x": 456,
+          "y": 259,
+          "_isLooping": 2,
+          "id": "6",
+          "name": "chop",
+          "speed": 1,
+          "clipEnd": 1,
+          "_$type": "AnimatorState",
+          "clipStart": 0,
+          "clip": {
+            "_$uuid": "7748906b-114a-4fbc-b94e-4c9cf5cff19a"
+          }
+        },
+        {
+          "x": 568,
+          "y": 126,
+          "_isLooping": 2,
+          "id": "5",
+          "name": "attack2",
+          "speed": 1,
+          "clipEnd": 1,
+          "_$type": "AnimatorState",
+          "clipStart": 0,
+          "clip": {
+            "_$uuid": "82ac06d5-fae4-406b-97de-8ec5e692b401"
+          }
+        },
+        {
+          "x": 245,
+          "y": 232,
+          "_isLooping": 1,
+          "id": "4",
+          "name": "rush",
+          "speed": 1,
+          "clipEnd": 1,
+          "_$type": "AnimatorState",
+          "clipStart": 0,
+          "clip": {
+            "_$uuid": "3c55eb24-eba2-4cf7-a8ac-009a687fe93d"
+          }
+        },
+        {
+          "x": 201,
+          "y": 379,
+          "_isLooping": 2,
+          "id": "3",
+          "name": "die",
+          "speed": 1,
+          "clipEnd": 1,
+          "clip": {
+            "_$uuid": "fd0fc9f0-933f-45a0-b268-5da7277d3fe1"
+          }
+        },
+        {
+          "_$type": "AnimatorState",
+          "name": "run",
+          "speed": 1,
+          "clipStart": 0,
+          "clipEnd": 1,
+          "x": 242,
+          "y": 177,
+          "clip": {
+            "_$uuid": "0449359c-90e8-420b-a596-2f025e9eb0de"
+          },
+          "id": "2",
+          "soloTransitions": [],
+          "_isLooping": 1
+        },
+        {
+          "_$type": "AnimatorState",
+          "name": "idle",
+          "speed": 1,
+          "clipStart": 0,
+          "clipEnd": 1,
+          "x": 247.49149999999997,
+          "y": 96.29404,
+          "clip": {
+            "_$uuid": "183d9e4f-ceac-4b7b-8ec9-78993cbff6b5"
+          },
+          "id": "1",
+          "soloTransitions": [],
+          "_isLooping": 1
+        },
+        {
+          "_$type": "AnimatorState",
+          "name": "attack1",
+          "speed": 1,
+          "clipStart": 0,
+          "clipEnd": 1,
+          "x": 570,
+          "y": 77,
+          "clip": {
+            "_$uuid": "4570e9f8-8586-4969-8219-a4c8110e8cb1"
+          },
+          "id": "0",
+          "soloTransitions": [],
+          "_isLooping": 2
+        }
+      ],
+      "defaultStateName": "idle"
+    }
+  ]
+}

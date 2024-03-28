@@ -13,31 +13,59 @@
       "states": [
         {
           "_$type": "AnimatorState",
-          "name": "cart_move",
+          "name": "fight_hero_attack",
           "speed": 1,
           "clipStart": 0,
           "clipEnd": 1,
-          "x": 250,
-          "y": 370,
+          "x": 430,
+          "y": 70,
           "clip": {
             "_$type": "AnimationClip",
-            "_$uuid": "6cc7f5b3-b648-42fe-a359-b93abf4bb25e"
+            "_$uuid": "35f1ac99-846d-4a32-96c5-497953d01f74"
           },
           "id": "0"
         },
         {
           "_$type": "AnimatorState",
-          "name": "cart_idle",
+          "name": "fight_hero_die",
           "speed": 1,
           "clipStart": 0,
           "clipEnd": 1,
-          "x": 350,
-          "y": 150,
+          "x": 300,
+          "y": 180,
           "clip": {
             "_$type": "AnimationClip",
-            "_$uuid": "c6522bcb-d925-4b51-86b5-119ba44b406b"
+            "_$uuid": "60c8df13-6828-430a-86e6-b24c79db31c4"
           },
           "id": "1"
+        },
+        {
+          "_$type": "AnimatorState",
+          "name": "fight_hero_idle",
+          "speed": 1,
+          "clipStart": 0,
+          "clipEnd": 1,
+          "x": 510,
+          "y": 210,
+          "clip": {
+            "_$type": "AnimationClip",
+            "_$uuid": "91a0165c-0559-4900-8a53-2573da650c6c"
+          },
+          "id": "2"
+        },
+        {
+          "_$type": "AnimatorState",
+          "name": "fight_hero_move",
+          "speed": 1,
+          "clipStart": 0,
+          "clipEnd": 1,
+          "x": 446,
+          "y": 283,
+          "clip": {
+            "_$type": "AnimationClip",
+            "_$uuid": "deb34351-61a8-4c70-8a40-463163036e26"
+          },
+          "id": "3"
         },
         {
           "id": "-1",

@@ -51,10 +51,6 @@ export class PvpContext extends Mediator implements ITMContext {
         return TMMode.PVP;
     }
 
-    public get contextChecker() {
-        return () => !this.owner.destroyed;
-    }
-
     public onAddElement(element: TMElement): void {}
 
     public onDelElement(element: TMElement): void {}
@@ -156,8 +152,8 @@ export class PvpContext extends Mediator implements ITMContext {
                 camera.focus.vadd(lastXZPos, camera.focus);
                 lastPos.cloneFrom(currPos);
             } else if (Laya.Vector2.distance(lastPos, currPos) > 5) {
-                //判断出问题
                 clickEnabled = false;
+                this._actionMenu?.removeSelf();
             }
         });
 
@@ -173,13 +169,8 @@ export class PvpContext extends Mediator implements ITMContext {
                 selectedTile.active = true;
                 selectedTile.transform.position = currXZPos;
                 console.log("select tile:", currXZPos.x, currXZPos.z);
-                const troop = app.service.troop.list[0];
-                if (!troop || !troop.eid) {
-                    console.log("no troop");
-                    return;
-                }
                 // TOOD：判断当前tile的情况，显示菜单显项
-                app.service.pvp.requestTroopMoveTo(troop.eid, { x: currXZPos.x, y: currXZPos.z });
+                this.showActionMenu(currXZPos);
             } else {
                 const position = debugFocus.transform.position;
                 position.cloneFrom(camera.focus);
@@ -212,11 +203,31 @@ export class PvpContext extends Mediator implements ITMContext {
         this._ecs.getSystem(CommandSystem)?.playAnim(eid, name);
     }
 
-    public async showActionMenu(tilePos: Laya.Vector3) {
+    public async showActionMenu(currXZPos: Laya.Vector3) {
+        const troop = app.service.troop.list[0];
+        if (!troop || !troop.eid) {
+            console.log("no troop");
+            return;
+        }
+
         if (!this._actionMenu) {
-            const checker = this.contextChecker;
+            const checker = () => !this.owner.destroyed;
             this._actionMenu = await app.loader.create(res.battle.PVP_ACTION_MENU, checker);
             this.autoDestroy(this._actionMenu);
         }
+        this._actionMenu.btnAttack.offAll();
+        this._actionMenu.btnMove.offAll();
+        this.owner.addChild(this._actionMenu);
+
+        const out = new Laya.Vector4();
+        this.camera.worldToViewportPoint(currXZPos, out);
+        this._actionMenu.pos(out.x + 50, out.y - 30);
+
+        this._actionMenu.btnAttack.onClick(() => {});
+
+        this._actionMenu.btnMove.onClick(() => {
+            this._actionMenu?.removeSelf();
+            app.service.pvp.requestTroopMoveTo(troop.eid!, { x: currXZPos.x, y: currXZPos.z });
+        });
     }
 }

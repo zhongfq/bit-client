@@ -1,0 +1,187 @@
+{
+  "_$ver": 1,
+  "name": "Gather_Wood",
+  "active": true,
+  "isStatic": false,
+  "layer": 0,
+  "transform": {
+    "localPosition": {
+      "_$type": "Vector3",
+      "x": -10.036,
+      "y": 0.975,
+      "z": -1.29
+    },
+    "localRotation": {
+      "_$type": "Quaternion",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": -1
+    },
+    "localScale": {
+      "_$type": "Vector3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    }
+  },
+  "_$id": "#0",
+  "_$type": "Sprite3D",
+  "_$child": [
+    {
+      "name": "Gather_Wood_1",
+      "active": true,
+      "isStatic": false,
+      "layer": 0,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": 0.5,
+          "y": 0,
+          "z": 0
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0.7071068,
+          "y": 1.053671E-08,
+          "z": 1.053671E-08,
+          "w": -0.7071068
+        },
+        "localScale": {
+          "_$type": "Vector3",
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      "_$id": "#1",
+      "_$type": "Sprite3D",
+      "_$type": "Sprite3D",
+      "_$comp": [
+        {
+          "_$type": "MeshFilter",
+          "sharedMesh": {
+            "_$uuid": "d0783655-9cee-453b-a35b-aebef1dca836",
+            "_$type": "mesh"
+          }
+        },
+        {
+          "_$type": "MeshRenderer",
+          "enabled": true,
+          "sharedMaterials": [
+            {
+              "_$type": "Material",
+              "_$uuid": "8f1698b6-5fa9-4326-a510-624a2ca4b5ad"
+            }
+          ],
+          "receiveShadow": true,
+          "castShadow": true
+        }
+      ]
+    },
+    {
+      "name": "Gather_Wood_2",
+      "active": true,
+      "isStatic": false,
+      "layer": 0,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0.6532815,
+          "y": -0.2705981,
+          "z": 0.2705981,
+          "w": -0.6532815
+        },
+        "localScale": {
+          "_$type": "Vector3",
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      "_$id": "#2",
+      "_$type": "Sprite3D",
+      "_$type": "Sprite3D",
+      "_$comp": [
+        {
+          "_$type": "MeshFilter",
+          "sharedMesh": {
+            "_$uuid": "d0783655-9cee-453b-a35b-aebef1dca836",
+            "_$type": "mesh"
+          }
+        },
+        {
+          "_$type": "MeshRenderer",
+          "enabled": true,
+          "sharedMaterials": [
+            {
+              "_$type": "Material",
+              "_$uuid": "8f1698b6-5fa9-4326-a510-624a2ca4b5ad"
+            }
+          ],
+          "receiveShadow": true,
+          "castShadow": true
+        }
+      ]
+    },
+    {
+      "name": "Gather_Wood_3",
+      "active": true,
+      "isStatic": false,
+      "layer": 0,
+      "transform": {
+        "localPosition": {
+          "_$type": "Vector3",
+          "x": -0.5,
+          "y": 0,
+          "z": 0
+        },
+        "localRotation": {
+          "_$type": "Quaternion",
+          "x": 0.664463,
+          "y": 0.2418448,
+          "z": -0.2418448,
+          "w": -0.664463
+        },
+        "localScale": {
+          "_$type": "Vector3",
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      "_$id": "#3",
+      "_$type": "Sprite3D",
+      "_$type": "Sprite3D",
+      "_$comp": [
+        {
+          "_$type": "MeshFilter",
+          "sharedMesh": {
+            "_$uuid": "d0783655-9cee-453b-a35b-aebef1dca836",
+            "_$type": "mesh"
+          }
+        },
+        {
+          "_$type": "MeshRenderer",
+          "enabled": true,
+          "sharedMaterials": [
+            {
+              "_$type": "Material",
+              "_$uuid": "8f1698b6-5fa9-4326-a510-624a2ca4b5ad"
+            }
+          ],
+          "receiveShadow": true,
+          "castShadow": true
+        }
+      ]
+    }
+  ],
+  "_$type": "Sprite3D",
+  "_$comp": []
+}

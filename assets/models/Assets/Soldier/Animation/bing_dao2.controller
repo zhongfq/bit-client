@@ -17,8 +17,8 @@
           "speed": 1,
           "clipStart": 0,
           "clipEnd": 1,
-          "x": 272.2841,
-          "y": 246.1351,
+          "x": 270,
+          "y": 100,
           "clip": {
             "_$type": "AnimationClip",
             "_$uuid": "aa6069b0-28e0-4361-90a4-c7eb55f2461c"
@@ -31,8 +31,8 @@
           "speed": 1,
           "clipStart": 0,
           "clipEnd": 1,
-          "x": 282.2841,
-          "y": 256.1351,
+          "x": 390,
+          "y": 170,
           "clip": {
             "_$type": "AnimationClip",
             "_$uuid": "44590238-a916-4f09-91c2-44dace8b4144"
@@ -45,8 +45,8 @@
           "speed": 1,
           "clipStart": 0,
           "clipEnd": 1,
-          "x": 292.2841,
-          "y": 266.1351,
+          "x": 170,
+          "y": 250,
           "clip": {
             "_$type": "AnimationClip",
             "_$uuid": "d73a87f5-e3c1-4675-8636-0577693be44c"
