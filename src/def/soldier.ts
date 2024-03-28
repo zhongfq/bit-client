@@ -5,6 +5,7 @@ export const SoldierConf = {
         S3: 3,
         S4: 4,
     },
+    PENDANT_STATION_COUNT: 4,
     SOLDIER_STATION: {
         BACK: 3,
         FRONT: 1,

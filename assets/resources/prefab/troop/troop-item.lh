@@ -1,28 +1,35 @@
 {
   "_$ver": 1,
-  "_$id": "eawkvp6o",
+  "_$id": "xvwip06p",
   "_$runtime": "res://1072b75d-a67c-4a49-8987-9b7c7d424999",
-  "_$type": "Sprite",
+  "_$type": "Box",
   "name": "bg",
   "x": -3.197442310920451e-14,
   "y": -5.329070518200751e-15,
   "width": 122,
   "height": 442,
   "_mouseState": 2,
-  "_gcmds": [
-    {
-      "_$type": "DrawRectCmd",
-      "x": 0,
-      "y": 0,
-      "width": 1,
-      "height": 1,
-      "percent": true,
-      "lineWidth": 1,
-      "lineColor": "#000000",
-      "fillColor": "rgba(61, 81, 19, 1)"
-    }
-  ],
   "_$child": [
+    {
+      "_$id": "2k2un6qr",
+      "_$type": "Sprite",
+      "name": "Sprite",
+      "width": 122,
+      "height": 442,
+      "_gcmds": [
+        {
+          "_$type": "DrawRectCmd",
+          "x": 0,
+          "y": 0,
+          "width": 1,
+          "height": 1,
+          "percent": true,
+          "lineWidth": 1,
+          "lineColor": "#000000",
+          "fillColor": "rgba(43, 80, 4, 1)"
+        }
+      ]
+    },
     {
       "_$id": "u2m16tel",
       "_$var": true,
@@ -58,6 +65,7 @@
       "_$child": [
         {
           "_$id": "busc5emb",
+          "_$var": true,
           "_$type": "Button",
           "name": "btn1",
           "x": 11,
@@ -75,6 +83,7 @@
         },
         {
           "_$id": "b52frnp6",
+          "_$var": true,
           "_$type": "Button",
           "name": "btn2",
           "x": 11,
@@ -93,6 +102,7 @@
         },
         {
           "_$id": "h8hfzwqy",
+          "_$var": true,
           "_$type": "Button",
           "name": "btn3",
           "x": 11,
@@ -111,6 +121,7 @@
         },
         {
           "_$id": "b0kjeb8y",
+          "_$var": true,
           "_$type": "Button",
           "name": "btn4",
           "x": 11,

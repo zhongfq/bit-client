@@ -46,4 +46,11 @@ export class SoldierBag extends GoodsVoBag<SoldierVo> {
             return t.refId == refId;
         };
     }
+
+    public setSoldierTroopId(soldierId: number, troopId: number) {
+        const soldierVo = this.get(soldierId);
+        if (soldierVo) {
+            soldierVo.troopId = troopId;
+        }
+    }
 }

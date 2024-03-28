@@ -322,7 +322,7 @@
         "icon": "icon13",
         "id": 40702,
         "main_type": 4,
-        "name": "士兵1",
+        "name": "士兵2",
         "quality": 3,
         "stack": 1,
         "sub_type": 7
@@ -336,7 +336,7 @@
         "icon": "icon13",
         "id": 40703,
         "main_type": 4,
-        "name": "士兵1",
+        "name": "士兵3",
         "quality": 3,
         "stack": 1,
         "sub_type": 7
@@ -350,7 +350,7 @@
         "icon": "icon13",
         "id": 40704,
         "main_type": 4,
-        "name": "士兵1",
+        "name": "士兵4",
         "quality": 3,
         "stack": 1,
         "sub_type": 7
@@ -364,7 +364,7 @@
         "icon": "icon13",
         "id": 40705,
         "main_type": 4,
-        "name": "士兵1",
+        "name": "士兵5",
         "quality": 3,
         "stack": 1,
         "sub_type": 7
@@ -378,7 +378,7 @@
         "icon": "icon13",
         "id": 40706,
         "main_type": 4,
-        "name": "士兵1",
+        "name": "士兵6",
         "quality": 3,
         "stack": 1,
         "sub_type": 7
@@ -392,7 +392,7 @@
         "icon": "icon13",
         "id": 40707,
         "main_type": 4,
-        "name": "士兵1",
+        "name": "士兵7",
         "quality": 3,
         "stack": 1,
         "sub_type": 7
@@ -406,7 +406,7 @@
         "icon": "icon13",
         "id": 40708,
         "main_type": 4,
-        "name": "士兵1",
+        "name": "士兵8",
         "quality": 3,
         "stack": 1,
         "sub_type": 7
@@ -420,7 +420,7 @@
         "icon": "icon13",
         "id": 40801,
         "main_type": 4,
-        "name": "士兵1",
+        "name": "特种1",
         "quality": 3,
         "stack": 1,
         "sub_type": 8
@@ -434,7 +434,7 @@
         "icon": "icon13",
         "id": 40802,
         "main_type": 4,
-        "name": "士兵1",
+        "name": "特种2",
         "quality": 3,
         "stack": 1,
         "sub_type": 8
@@ -448,7 +448,7 @@
         "icon": "icon13",
         "id": 40803,
         "main_type": 4,
-        "name": "士兵1",
+        "name": "特种3",
         "quality": 3,
         "stack": 1,
         "sub_type": 8
@@ -462,7 +462,7 @@
         "icon": "icon13",
         "id": 40804,
         "main_type": 4,
-        "name": "士兵1",
+        "name": "特种4",
         "quality": 3,
         "stack": 1,
         "sub_type": 8
@@ -476,7 +476,7 @@
         "icon": "icon13",
         "id": 40805,
         "main_type": 4,
-        "name": "士兵1",
+        "name": "特种5",
         "quality": 3,
         "stack": 1,
         "sub_type": 8
@@ -490,7 +490,7 @@
         "icon": "icon13",
         "id": 40806,
         "main_type": 4,
-        "name": "士兵1",
+        "name": "特种6",
         "quality": 3,
         "stack": 1,
         "sub_type": 8
@@ -504,7 +504,7 @@
         "icon": "icon13",
         "id": 40807,
         "main_type": 4,
-        "name": "士兵1",
+        "name": "特种7",
         "quality": 3,
         "stack": 1,
         "sub_type": 8
@@ -518,7 +518,7 @@
         "icon": "icon13",
         "id": 40808,
         "main_type": 4,
-        "name": "士兵1",
+        "name": "特种8",
         "quality": 3,
         "stack": 1,
         "sub_type": 8
