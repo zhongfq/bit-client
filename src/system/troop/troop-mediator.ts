@@ -1,112 +1,98 @@
 import { app } from "../../app";
 import { Mediator } from "../../core/ui-mediator";
-import { TaskItemBox } from "../../ui-runtime/prefab/task/TaskItemBox";
-import { TaskUI } from "../../ui-runtime/prefab/task/TaskUI";
-import { TaskVo } from "../../misc/vo/task/task-vo";
-import { TaskConf } from "../../def/task";
 import { TroopUI } from "../../ui-runtime/prefab/troop/TroopUI";
-import { util } from "protobufjs";
 import { SoldierVo } from "../../misc/vo/soldier/soldier-vo";
 import { SoldierConf } from "../../def/soldier";
 import { TroopItemUI } from "../../ui-runtime/prefab/troop/TroopItemUI";
-import proto from "../../def/proto";
 import { SoldierIconUI } from "../../ui-runtime/prefab/icon/SoldierIconUI";
 import { ItemConf } from "../../def/item";
+import { TroopVo } from "../../misc/vo/troop/troop-vo";
 
 const { regClass, property } = Laya;
 
 interface TroopCellData {
     soldierId: number;
-    pos: number;
 }
 
+interface SoldierCellData {
+    soldierVo: SoldierVo;
+}
 @regClass()
 export class TroopMediator extends Mediator {
     public declare owner: TroopUI;
 
-    private _curTroop!: proto.troop.ITroop;
-
     public override onAwake(): void {
-        this._curTroop = app.service.troop.mapTroop.get(0) || {};
+        app.service.troop.setEditingTroop(1); // = app.service.troop.troopBag.get(1) as TroopVo;
         this.initUIEvent();
         this.initServiceEvent();
     }
 
     public override onStart(): void {
-        this._updateTroopList();
+        this._updateTroopSoldierList();
     }
 
     private initUIEvent() {
-        this.owner.listTroop.selectHandler = new Laya.Handler(this, () => {
-            // this._updateSoldierList();
-        });
-        this.owner.listTroop.renderHandler = new Laya.Handler(this, this.updateTroopItem);
-
+        this.owner.listTroop.renderHandler = new Laya.Handler(this, this._updateTroopSoldierItem);
+        this.owner.listTroop.selectCheck = () => {
+            return false;
+        };
         this.owner.listSoldier.mouseHandler = new Laya.Handler(
             this,
             (e: Laya.Event, index: number) => {
                 if (e.type == Laya.Event.CLICK) {
-                    let troop = this.owner.listTroop.selectedItem as TroopCellData;
-                    const soldier = this.owner.listSoldier.getItem(index) as SoldierVo;
-                    if (troop.soldierId) {
-                        troop.soldierId = soldier.id;
-                    } else {
-                        troop = { soldierId: soldier.id, pos: soldier.ref.position };
-                    }
-                    if (!this._curTroop.soldierIds) {
-                        this._curTroop.soldierIds = [];
-                    }
-
-                    this._curTroop.soldierIds.push(soldier.id);
-                    this.owner.listTroop.array[index] = troop;
-                    this._updateTroopList();
+                    const editingTroopVo = app.service.troop.getEditingTroop();
+                    const cellData = this.owner.listSoldier.getItem(index) as SoldierCellData;
+                    editingTroopVo.updateSoldiers(cellData.soldierVo.pos, cellData.soldierVo.id);
+                    this._updateTroopSoldierList();
                 }
             }
         );
-        this.owner.listSoldier.renderHandler = new Laya.Handler(this, this.updateItem);
+        this.owner.listSoldier.renderHandler = new Laya.Handler(this, this._updateSoldierItem);
     }
 
     private initServiceEvent() {}
 
-    private updateTroopItem(item: TroopItemUI, index: number) {
-        if (!this.owner.listTroop.getItem(index).soldierId) {
-            item.VBox.visible = false;
+    //渲染上阵士兵ListCell
+    private _updateTroopSoldierItem(item: TroopItemUI, index: number) {
+        item.updateInfo(this.owner.listTroop.getItem(index) as TroopCellData);
+    }
+
+    //渲染士兵背包ListCell
+    private _updateSoldierItem(cell: SoldierIconUI, index: number) {
+        const editingTroop = app.service.troop.getEditingTroop() as TroopVo;
+        cell.updateGoods(cell.dataSource.soldierVo, ItemConf.ITEM_SUB_TYPE.SOLDIER);
+        if (editingTroop.soldierIds.indexOf(cell.dataSource.soldierVo.id) != -1) {
+            cell.gray = true;
         } else {
-            item.VBox.visible = true;
+            cell.gray = false;
         }
-        // item.updateInfo(item.dataSource);
     }
 
-    public updateItem(cell: SoldierIconUI, index: number) {
-        // cell.updateGoods(cell.dataSource.soldierVo, ItemConf.ITEM_SUB_TYPE.SOLDIER);
-    }
-
-    private _updateTroopList() {
+    //刷新上阵士兵列表
+    private _updateTroopSoldierList() {
+        const curTroop = app.service.troop.getEditingTroop();
         const listData = [];
         let index = -1;
         for (let i = 1; i < 4; i++) {
-            const soldierId = app.service.troop.getSoldierByTroopIdx(this._curTroop, i);
+            const soldierId = curTroop.getSoldierIdByPos(i);
             listData.push({ soldierId: soldierId });
             if (!soldierId && index == -1) {
                 index = this._getIndex(i);
             }
         }
         this.owner.listTroop.array = listData;
-
         this.owner.listTroop.selectedIndex = index;
         if (index == -1) {
             this.owner.listTroop.selectEnable = false;
-            this.owner.listTroop.mouseEnabled = true;
         } else {
             this.owner.listTroop.selectEnable = true;
-            this.owner.listTroop.mouseEnabled = false;
         }
         this.owner.listTroop.selectedIndex = index;
-
-        this._updateSoldierList();
+        this._updateSoldierBagList();
     }
 
-    private _updateSoldierList() {
+    //刷新士兵背包列表
+    private _updateSoldierBagList() {
         this.owner.listSoldier.selectedIndex = -1;
         const soldiers = app.service.soldier.soldierBag.filter((vo: SoldierVo) => {
             if (this.owner.listTroop.selectedIndex != -1) {
@@ -119,9 +105,9 @@ export class TroopMediator extends Mediator {
                 return true;
             }
         });
-        const listData = [];
+        const listData: SoldierCellData[] = [];
         for (const vo of soldiers) {
-            listData.push(vo);
+            listData.push({ soldierVo: vo });
         }
         this.owner.listSoldier.array = listData;
         this.owner.listSoldier.refresh();

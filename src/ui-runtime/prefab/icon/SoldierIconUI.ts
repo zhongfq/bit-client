@@ -13,6 +13,7 @@ export class SoldierIconUI extends SoldierIconUIBase {
     public updateGoods(vo?: GoodsVo, type?: number) {
         if (vo) {
             this.icon.updateGoods(vo);
+            this.icon.itemName = vo.name;
             // this.icon.selectBox.visible = this.selectEnable;
             this.icon.imgLock.visible = vo.cmd ? false : true;
             const voNum = app.service.bag.itemBag.get(vo.id)?.goodsNumber || 0;

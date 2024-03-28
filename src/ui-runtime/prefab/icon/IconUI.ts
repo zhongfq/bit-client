@@ -19,4 +19,8 @@ export class IconUI extends IconUIBase {
     public set itemNumber(num: string) {
         this.labelNumber.text = num;
     }
+
+    public set itemName(name: string) {
+        this.labelNumber.text = name;
+    }
 }

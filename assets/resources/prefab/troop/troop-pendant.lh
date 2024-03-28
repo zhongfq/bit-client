@@ -1,12 +1,19 @@
 {
   "_$ver": 1,
   "_$id": "x6nzvkov",
+  "_$runtime": "res://58df65a5-fd6d-4dba-9d7d-9c5efad5c1af",
   "_$type": "Dialog",
   "name": "Dialog",
   "width": 550,
   "height": 911,
   "_mouseState": 2,
   "isModal": true,
+  "_$comp": [
+    {
+      "_$type": "ad7d1bc2-890e-4f63-b2a8-c7f2a22e5d3a",
+      "scriptPath": "../src/system/troop/troop-pendant-mediator.ts"
+    }
+  ],
   "_$child": [
     {
       "_$id": "j7jfy4fl",
@@ -21,43 +28,131 @@
       "bgColor": "rgba(146, 146, 146, 1)"
     },
     {
-      "_$id": "sgjz9qp0",
-      "_$prefab": "f69ab375-29f7-4d36-afcb-5bbf8ef54210",
-      "name": "bg",
+      "_$id": "r9desqka",
+      "_$prefab": "2b33b19f-f835-4ee5-a6cc-c2e6fcb1ae25",
+      "_$var": true,
+      "name": "listTroopPendant",
       "active": true,
-      "x": 204,
-      "y": 8,
-      "visible": true
+      "x": 14,
+      "y": 148,
+      "visible": true,
+      "width": 510,
+      "height": 112,
+      "itemTemplate": {
+        "_$ref": "9ehecgb2",
+        "_$tmpl": "itemRender"
+      },
+      "scrollType": 1,
+      "repeatY": 1,
+      "spaceY": 0,
+      "repeatX": 4,
+      "spaceX": 21,
+      "selectedIndex": -1,
+      "selectEnable": true,
+      "_$child": [
+        {
+          "_$id": "9ehecgb2",
+          "_$var": true,
+          "_$index": 1,
+          "_$type": "Box",
+          "name": "box",
+          "width": 110,
+          "height": 110,
+          "_mouseState": 2,
+          "bgColor": "rgba(18, 93, 0, 1)",
+          "_$child": [
+            {
+              "_$id": "n4kdwhfn",
+              "_$var": true,
+              "_$type": "Sprite",
+              "name": "selectBox",
+              "width": 110,
+              "height": 110,
+              "visible": false,
+              "_gcmds": [
+                {
+                  "_$type": "DrawRectCmd",
+                  "x": 0,
+                  "y": 0,
+                  "width": 1,
+                  "height": 1,
+                  "percent": true,
+                  "lineWidth": 1,
+                  "lineColor": "#000000",
+                  "fillColor": "rgba(173, 255, 0, 1)"
+                }
+              ]
+            },
+            {
+              "_$id": "1udwpwwk",
+              "_$var": true,
+              "_$type": "Button",
+              "name": "btn",
+              "x": 10,
+              "y": 10,
+              "width": 90,
+              "height": 90,
+              "_mouseState": 2,
+              "centerX": 0,
+              "centerY": 0,
+              "stateNum": 1,
+              "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
+              "label": "Title",
+              "labelSize": 20,
+              "labelBold": true,
+              "labelColors": "#ffffff,#32cc6b,#ff0000",
+              "labelAlign": "center",
+              "labelVAlign": "middle"
+            }
+          ]
+        }
+      ]
     },
     {
-      "_$id": "mx4gjary",
+      "_$id": "7ras2qoc",
+      "_$prefab": "2b33b19f-f835-4ee5-a6cc-c2e6fcb1ae25",
       "_$var": true,
-      "_$type": "List",
       "name": "listPendant",
+      "active": true,
       "x": 28,
       "y": 460,
-      "width": 508,
-      "height": 309,
-      "_mouseState": 2,
+      "visible": true,
       "itemTemplate": {
         "_$ref": "tszxhwas",
         "_$tmpl": "itemRender"
       },
-      "repeatX": 4,
-      "repeatY": 2,
-      "spaceX": 22,
-      "spaceY": 10,
+      "width": 508,
+      "height": 309,
       "scrollType": 2,
+      "repeatX": 4,
+      "spaceX": 23,
+      "selectEnable": true,
       "_$child": [
         {
           "_$id": "tszxhwas",
           "_$prefab": "318e7576-4d76-475c-9f35-609a31eeaa3b",
+          "_$index": 1,
           "name": "soldier-icon",
           "active": true,
           "x": 0,
           "y": 0
         }
       ]
+    },
+    {
+      "_$id": "0hdypk6c",
+      "_$type": "Button",
+      "name": "close",
+      "x": 515,
+      "y": 3,
+      "width": 32,
+      "height": 32,
+      "_mouseState": 2,
+      "skin": "res://60a9086c-a9c2-4e01-a563-355c117b509e",
+      "label": "",
+      "labelSize": 20,
+      "labelAlign": "center",
+      "labelVAlign": "middle"
     }
   ]
 }

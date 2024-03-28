@@ -45,7 +45,7 @@
       "repeatX": 3,
       "spaceX": 23,
       "_mouseState": 2,
-      "selectEnable": false,
+      "selectEnable": true,
       "_$child": [
         {
           "_$id": "sgjz9qp0",
@@ -81,6 +81,7 @@
       "repeatX": 4,
       "repeatY": 3,
       "spaceX": 21,
+      "selectEnable": true,
       "_$child": [
         {
           "_$id": "tszxhwas",
@@ -91,6 +92,21 @@
           "y": 0
         }
       ]
+    },
+    {
+      "_$id": "r4kj9cv6",
+      "_$type": "Button",
+      "name": "close",
+      "x": 515,
+      "y": 3,
+      "width": 32,
+      "height": 32,
+      "_mouseState": 2,
+      "skin": "res://60a9086c-a9c2-4e01-a563-355c117b509e",
+      "label": "",
+      "labelSize": 20,
+      "labelAlign": "center",
+      "labelVAlign": "middle"
     }
   ]
 }

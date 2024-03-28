@@ -9,6 +9,7 @@ import { GoodsVo } from "../goods/goods-vo";
  */
 export class SoldierVo extends GoodsVo<SoldierRow, soldier.SoldierInfo> {
     public override refTable!: SoldierRow;
+    private _troopId: number | null = null;
 
     public override get iconUrl(): string {
         // throw new Error("Method not implemented.");
@@ -52,11 +53,23 @@ export class SoldierVo extends GoodsVo<SoldierRow, soldier.SoldierInfo> {
     }
 
     public get name(): string {
-        return "";
+        return app.service.table.item[this.refId].name;
     }
 
     protected override onGetNumber(): number {
         return app.service.bag.itemBag.get(this.id)?.goodsNumber || 0;
+    }
+
+    public set troopId(id: number | null) {
+        this._troopId = id;
+    }
+
+    public get troopId() {
+        return this._troopId;
+    }
+
+    public get pos() {
+        return this.ref.position;
     }
     //#endregion
 }
