@@ -152,7 +152,7 @@
           "_$id": "byak06ri",
           "_$prefab": "6dfd410b-62f0-4907-8974-a9e617108ff2",
           "name": "hero01",
-          "active": false,
+          "active": true,
           "layer": 0,
           "transform": {
             "localPosition": {
@@ -178,11 +178,6 @@
             "localPosition": {
               "_$type": "Vector3",
               "z": 0.8572572734097434
-            },
-            "localRotation": {
-              "_$type": "Quaternion",
-              "y": -0.5793878673584109,
-              "w": 0.8150519610171323
             }
           },
           "_$child": [

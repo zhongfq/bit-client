@@ -14,11 +14,14 @@
           "name": "进入",
           "speed": 1,
           "clipEnd": 1,
-          "x": 49,
+          "x": 50,
           "y": 120,
           "soloTransitions": [
             {
-              "id": "1"
+              "id": "1",
+              "exitByTime": true,
+              "transduration": 0,
+              "exitTime": 0.85
             }
           ]
         },
@@ -107,7 +110,7 @@
           "clipStart": 0,
           "clipEnd": 1,
           "x": 247.49149999999997,
-          "y": 97.29404,
+          "y": 96.29404,
           "clip": {
             "_$uuid": "183d9e4f-ceac-4b7b-8ec9-78993cbff6b5"
           },
@@ -128,14 +131,10 @@
           },
           "id": "0",
           "soloTransitions": [],
-          "_isLooping": 1
+          "_isLooping": 2
         }
       ],
-      "defaultStateName": "idle",
-      "playOnWake": true,
-      "blendingMode": 0,
-      "defaultWeight": 1
+      "defaultStateName": "idle"
     }
-  ],
-  "layerW": 150
+  ]
 }

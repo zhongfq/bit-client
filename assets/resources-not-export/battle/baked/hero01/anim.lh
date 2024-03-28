@@ -1,6 +1,6 @@
 {
   "_$ver": 1,
-  "_$id": "em58fr0p",
+  "_$id": "b30tg1if",
   "_$type": "Sprite3D",
   "name": "anim",
   "_$comp": [
@@ -21,7 +21,7 @@
   ],
   "_$child": [
     {
-      "_$id": "nvjq85mt",
+      "_$id": "c7ult5td",
       "_$type": "Sprite3D",
       "name": "BoneHorseCore",
       "transform": {
@@ -47,7 +47,7 @@
       },
       "_$child": [
         {
-          "_$id": "s5xnbaj4",
+          "_$id": "1w5wnz5i",
           "_$type": "Sprite3D",
           "name": "BoneHorse Pelvis",
           "transform": {
@@ -61,7 +61,7 @@
           },
           "_$child": [
             {
-              "_$id": "dw5kulu2",
+              "_$id": "duraov8c",
               "_$type": "Sprite3D",
               "name": "BoneHorse Spine",
               "transform": {
@@ -87,7 +87,7 @@
               },
               "_$child": [
                 {
-                  "_$id": "xme71n4d",
+                  "_$id": "l2z8cd9q",
                   "_$type": "Sprite3D",
                   "name": "BoneHero001 Core",
                   "transform": {
@@ -113,7 +113,7 @@
                   },
                   "_$child": [
                     {
-                      "_$id": "d1d2dps9",
+                      "_$id": "oe5ergh1",
                       "_$type": "Sprite3D",
                       "name": "BoneHero001 Pelvis",
                       "transform": {
@@ -133,7 +133,7 @@
                       },
                       "_$child": [
                         {
-                          "_$id": "p2yhatt7",
+                          "_$id": "fwg5lux4",
                           "_$type": "Sprite3D",
                           "name": "BoneHero001 Spine",
                           "transform": {
@@ -159,7 +159,7 @@
                           },
                           "_$child": [
                             {
-                              "_$id": "yece7a8q",
+                              "_$id": "vkay6gwj",
                               "_$type": "Sprite3D",
                               "name": "BoneHero001 Neck",
                               "transform": {
@@ -185,7 +185,7 @@
                               },
                               "_$child": [
                                 {
-                                  "_$id": "9sorcngd",
+                                  "_$id": "vhb2x4b3",
                                   "_$type": "Sprite3D",
                                   "name": "BoneHero001 L Clavicle",
                                   "transform": {
@@ -211,7 +211,7 @@
                                   },
                                   "_$child": [
                                     {
-                                      "_$id": "ei6ykyr2",
+                                      "_$id": "hpbuudtj",
                                       "_$type": "Sprite3D",
                                       "name": "BoneHero001 L UpperArm",
                                       "transform": {
@@ -237,7 +237,7 @@
                                       },
                                       "_$child": [
                                         {
-                                          "_$id": "uxmlice4",
+                                          "_$id": "intw8pqj",
                                           "_$type": "Sprite3D",
                                           "name": "BoneHero001 L Forearm",
                                           "transform": {
@@ -263,7 +263,7 @@
                                           },
                                           "_$child": [
                                             {
-                                              "_$id": "fli3pv8k",
+                                              "_$id": "4ln4wy38",
                                               "_$type": "Sprite3D",
                                               "name": "BoneHero001 L Hand",
                                               "transform": {
@@ -289,7 +289,7 @@
                                               },
                                               "_$child": [
                                                 {
-                                                  "_$id": "fqxut7z2",
+                                                  "_$id": "yypx193o",
                                                   "_$type": "Sprite3D",
                                                   "name": "Hero_Shield_01",
                                                   "transform": {
@@ -323,6 +323,7 @@
                                                     },
                                                     {
                                                       "_$type": "MeshRenderer",
+                                                      "receiveShadow": true,
                                                       "castShadow": true,
                                                       "sharedMaterials": [
                                                         {
@@ -342,7 +343,7 @@
                                   ]
                                 },
                                 {
-                                  "_$id": "nb9cqxun",
+                                  "_$id": "4o76h4f7",
                                   "_$type": "Sprite3D",
                                   "name": "BoneHero001 R Clavicle",
                                   "transform": {
@@ -368,7 +369,7 @@
                                   },
                                   "_$child": [
                                     {
-                                      "_$id": "offqm8u8",
+                                      "_$id": "c6mijd4s",
                                       "_$type": "Sprite3D",
                                       "name": "BoneHero001 R UpperArm",
                                       "transform": {
@@ -394,7 +395,7 @@
                                       },
                                       "_$child": [
                                         {
-                                          "_$id": "fcamh1dy",
+                                          "_$id": "d95jnylo",
                                           "_$type": "Sprite3D",
                                           "name": "BoneHero001 R Forearm",
                                           "transform": {
@@ -418,7 +419,7 @@
                                           },
                                           "_$child": [
                                             {
-                                              "_$id": "59g9fxyq",
+                                              "_$id": "pmtf2s1t",
                                               "_$type": "Sprite3D",
                                               "name": "BoneHero001 R Hand",
                                               "transform": {
@@ -438,7 +439,7 @@
                                               },
                                               "_$child": [
                                                 {
-                                                  "_$id": "2wkuk2jj",
+                                                  "_$id": "zxyo354e",
                                                   "_$type": "Sprite3D",
                                                   "name": "Hero_Weapon_01",
                                                   "transform": {
@@ -472,6 +473,7 @@
                                                     },
                                                     {
                                                       "_$type": "MeshRenderer",
+                                                      "receiveShadow": true,
                                                       "castShadow": true,
                                                       "sharedMaterials": [
                                                         {
@@ -505,7 +507,7 @@
       ]
     },
     {
-      "_$id": "yctgvqt3",
+      "_$id": "xgyfgwqk",
       "_$type": "Sprite3D",
       "name": "Hero_Body",
       "_$comp": [
@@ -518,6 +520,7 @@
         },
         {
           "_$type": "SimpleSkinnedMeshRenderer",
+          "receiveShadow": true,
           "castShadow": true,
           "sharedMaterials": [
             {
@@ -527,50 +530,50 @@
           ],
           "_bones": [
             {
-              "_$ref": "p2yhatt7"
+              "_$ref": "fwg5lux4"
             },
             {
-              "_$ref": "9sorcngd"
+              "_$ref": "vhb2x4b3"
             },
             {
-              "_$ref": "offqm8u8"
+              "_$ref": "c6mijd4s"
             },
             {
-              "_$ref": "nb9cqxun"
+              "_$ref": "4o76h4f7"
             },
             {
-              "_$ref": "eiepic01"
+              "_$ref": "v7ud0ne5"
             },
             {
-              "_$ref": "d1d2dps9"
+              "_$ref": "oe5ergh1"
             },
             {
-              "_$ref": "59g9fxyq"
+              "_$ref": "pmtf2s1t"
             },
             {
-              "_$ref": "fcamh1dy"
+              "_$ref": "d95jnylo"
             },
             {
-              "_$ref": "ua2wyjqc"
+              "_$ref": "6i6vy3rj"
             },
             {
-              "_$ref": "ei6ykyr2"
+              "_$ref": "hpbuudtj"
             },
             {
-              "_$ref": "fli3pv8k"
+              "_$ref": "4ln4wy38"
             },
             {
-              "_$ref": "uxmlice4"
+              "_$ref": "intw8pqj"
             },
             {
-              "_$ref": "yece7a8q"
+              "_$ref": "vkay6gwj"
             },
             {
-              "_$ref": "ykyl27n6"
+              "_$ref": "prqo1v7d"
             }
           ],
           "rootBone": {
-            "_$ref": "yctgvqt3"
+            "_$ref": "xgyfgwqk"
           },
           "localBounds": {
             "_$type": "Bounds",
@@ -590,7 +593,7 @@
       ]
     },
     {
-      "_$id": "l07kz0dn",
+      "_$id": "ar5ffe6h",
       "_$type": "Sprite3D",
       "name": "Hero_Horse",
       "_$comp": [
@@ -603,6 +606,7 @@
         },
         {
           "_$type": "SimpleSkinnedMeshRenderer",
+          "receiveShadow": true,
           "castShadow": true,
           "sharedMaterials": [
             {
@@ -612,74 +616,74 @@
           ],
           "_bones": [
             {
-              "_$ref": "dw5kulu2"
+              "_$ref": "duraov8c"
             },
             {
-              "_$ref": "s5xnbaj4"
+              "_$ref": "1w5wnz5i"
             },
             {
-              "_$ref": "7nb6tucv"
+              "_$ref": "wyzmzctx"
             },
             {
-              "_$ref": "ktdlhv2x"
+              "_$ref": "x96bu3mj"
             },
             {
-              "_$ref": "s2rd9n7u"
+              "_$ref": "m1agtt1w"
             },
             {
-              "_$ref": "g6m9jkal"
+              "_$ref": "avvhf1ew"
             },
             {
-              "_$ref": "uxdtfc06"
+              "_$ref": "avecjd6v"
             },
             {
-              "_$ref": "c9nfl50x"
+              "_$ref": "zexjvbv6"
             },
             {
-              "_$ref": "1g7f2pvn"
+              "_$ref": "4zzn7a57"
             },
             {
-              "_$ref": "zztghtxr"
+              "_$ref": "6wq2bpoy"
             },
             {
-              "_$ref": "156fx1es"
+              "_$ref": "afiqxfmx"
             },
             {
-              "_$ref": "bkfr43cg"
+              "_$ref": "s5nmjmns"
             },
             {
-              "_$ref": "4d6x5ar6"
+              "_$ref": "3d89ltpg"
             },
             {
-              "_$ref": "kvdqsawm"
+              "_$ref": "0btvgbvg"
             },
             {
-              "_$ref": "bjzketwx"
+              "_$ref": "e7qo9j67"
             },
             {
-              "_$ref": "632h8z4c"
+              "_$ref": "rayvgsm7"
             },
             {
-              "_$ref": "dmukv823"
+              "_$ref": "336q6q30"
             },
             {
-              "_$ref": "afbyjenx"
+              "_$ref": "v4e0vp49"
             },
             {
-              "_$ref": "q7ic3xuc"
+              "_$ref": "4fr9mzv8"
             },
             {
-              "_$ref": "u0g5nuyb"
+              "_$ref": "ypy7ktj1"
             },
             {
-              "_$ref": "o5og3td4"
+              "_$ref": "vgqbop8w"
             },
             {
-              "_$ref": "h3mrei49"
+              "_$ref": "whu2w1an"
             }
           ],
           "rootBone": {
-            "_$ref": "l07kz0dn"
+            "_$ref": "ar5ffe6h"
           },
           "localBounds": {
             "_$type": "Bounds",
