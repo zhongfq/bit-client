@@ -165,6 +165,10 @@ declare global {
             clone(): Sprite3D;
         }
 
+        interface UIComponent {
+            onClick(callback: Callback): void;
+        }
+
         interface Vector3 {
             clone(): Vector3;
             cloneTo(value: IVector3Like): IVector3Like;
@@ -221,6 +225,10 @@ Laya.Vector2.transformCoordinate = function (
 
 Laya.Vector2.distance = function (p1, p2) {
     return Math.sqrt((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2);
+};
+
+Laya.UIComponent.prototype.onClick = function (callback) {
+    this.on(Laya.Event.CLICK, callback);
 };
 
 Laya.Vector3.prototype.cloneFrom = function (value: IVector3Like) {

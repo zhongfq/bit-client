@@ -55,9 +55,16 @@ export class Loader {
             checker = type;
             type = undefined!;
         }
+        if (!checker) {
+            throw new Error("no checker fo load res");
+        }
         const res = Laya.loader.getRes(url, type) as T;
         if (res) {
-            return Promise.resolve(res);
+            if (checker()) {
+                return Promise.resolve(res);
+            } else {
+                console.warn(`context check failure: ${url}`);
+            }
         }
         return new Promise<T>((resolve) => {
             let arr = this._loadings.get(url);
