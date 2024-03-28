@@ -67,7 +67,7 @@
             {
               "id": "1",
               "exitByTime": true,
-              "transduration": 0.15,
+              "transduration": 0,
               "exitTime": 0.85
             }
           ]

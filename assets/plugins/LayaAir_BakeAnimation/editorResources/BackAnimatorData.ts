@@ -19,6 +19,7 @@ import Utils3D = Laya.Utils3D;
 import SimpleSkinnedMeshRenderer = Laya.SimpleSkinnedMeshRenderer;
 import { BakeAnimatorUtils } from './BakeAnimatorUtils';
 
+const TempMat: Matrix4x4 = new Matrix4x4();
 import * as fpath from 'path';
 import * as fs from "fs";
 
@@ -136,8 +137,8 @@ export class BackAnimatorData {
     private buildSocketBone() {
         let list: MeshRenderer[] = [];
         this.skinders.forEach((skiner) => {
-            this._keepNodeLists.push(skiner.owner as Sprite3D);
-            this.getAllComponent(skiner.rootBone, list, MeshRenderer)
+            list.push(skiner);
+            this.getAllComponent(skiner.rootBone, list, MeshRenderer);
         })
         let length = list.length;
         for (var i = 0; i < length; i++) {
@@ -352,11 +353,12 @@ export class BackAnimatorData {
         rootPath = fpath.relative(EditorEnv.assetsPath, rootPath);
         for (var i = 0, n = this.skinders.length; i < n; i++) {
             let skiner: SkinnedMeshRenderer = this.skinders[i];
+            (<Sprite3D>skiner.owner.parent).transform.worldMatrix.invert(TempMat);
             let skinSprite: Sprite3D = skiner.owner as Sprite3D;
-            skinSprite.transform.localMatrix = Matrix4x4.DEFAULT;
+            skinSprite.transform.localMatrix = TempMat;
 
             //@ts-ignore
-            skiner.localBounds._tranform(Matrix4x4.DEFAULT, skiner.localBounds);
+            skiner.localBounds._tranform(TempMat, skiner.localBounds);
             skiner.rootBone = skiner.owner as Sprite3D;
         }
 
