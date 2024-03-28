@@ -4,8 +4,8 @@
   "_$runtime": "res://30f23813-3ace-4869-b054-1a26af108305",
   "_$type": "Dialog",
   "name": "Dialog",
-  "width": 511,
-  "height": 753,
+  "width": 642,
+  "height": 995,
   "_mouseState": 2,
   "isModal": true,
   "_$comp": [
@@ -19,67 +19,57 @@
       "_$id": "2kdo09if",
       "_$type": "Image",
       "name": "Image",
-      "width": 511,
-      "height": 753,
+      "width": 642,
+      "height": 995,
       "left": 0,
       "right": 0,
       "top": 0,
       "bottom": 0,
-      "skin": "res://3225dc27-5bcb-446e-8b66-27df87624835",
-      "sizeGrid": "50,30,50,30,0",
-      "color": "#ffffff"
-    },
-    {
-      "_$id": "6ee7kogk",
-      "_$var": true,
-      "_$type": "Button",
-      "name": "btnClose",
-      "x": 470,
-      "y": 7,
-      "width": 32,
-      "height": 32,
-      "_mouseState": 2,
-      "right": 9,
-      "top": 7,
-      "skin": "res://60a9086c-a9c2-4e01-a563-355c117b509e",
-      "label": "",
-      "labelSize": 20,
-      "labelAlign": "center",
-      "labelVAlign": "middle"
-    },
-    {
-      "_$id": "vyoq14nb",
-      "_$type": "Label",
-      "name": "tips",
-      "x": 196,
-      "y": 10,
-      "width": 120,
-      "height": 28,
-      "top": 10,
-      "centerX": 0,
-      "text": "任务",
-      "fontSize": 20,
-      "color": "#FFFFFF",
-      "align": "center",
-      "valign": "middle",
-      "padding": "0,0,0,0"
-    },
-    {
-      "_$id": "b47bk0gr",
-      "_$var": true,
-      "_$type": "List",
-      "name": "listTask",
-      "x": 7,
-      "y": 56,
-      "width": 496,
-      "height": 681,
-      "visible": false,
-      "_mouseState": 2,
-      "repeatX": 1,
-      "repeatY": 6,
-      "spaceY": 5,
-      "scrollType": 2,
-      "selectEnable": true
+      "skin": "res://a1a57bfc-3221-4217-9054-ff243af7b0d6",
+      "sizeGrid": "125,133,120,88,0",
+      "color": "#ffffff",
+      "_$child": [
+        {
+          "_$id": "2e7veps6",
+          "_$type": "Image",
+          "name": "Image(1)",
+          "x": -7,
+          "y": -8,
+          "width": 260,
+          "height": 91,
+          "skin": "res://921a350e-f032-4c87-a6a8-70d23d869086",
+          "useSourceSize": true,
+          "color": "#ffffff",
+          "_$child": [
+            {
+              "_$id": "970ze2j9",
+              "_$type": "Image",
+              "name": "Image",
+              "x": 43,
+              "y": 23,
+              "width": 47,
+              "height": 42,
+              "centerY": -2,
+              "skin": "res://7f476c6d-5446-44cb-a858-8e77dc46b7b4",
+              "useSourceSize": true,
+              "color": "#ffffff"
+            },
+            {
+              "_$id": "8j3ked0p",
+              "_$type": "Image",
+              "name": "Image(1)",
+              "x": 95,
+              "y": 25,
+              "width": 74,
+              "height": 34,
+              "centerY": -4,
+              "skin": "res://0b909987-0825-454c-acca-e696d731b96f",
+              "useSourceSize": true,
+              "color": "#ffffff"
+            }
+          ]
+        }
+      ]
     },
     {
       "_$id": "gic96pqy",
@@ -87,11 +77,11 @@
       "_$var": true,
       "name": "listTaskNew",
       "active": true,
-      "x": 7,
-      "y": 55,
+      "x": 22,
+      "y": 108,
       "visible": true,
-      "width": 496,
-      "height": 682,
+      "width": 597,
+      "height": 842,
       "_$comp": [
         {
           "_$override": "bb264e76-1c01-47d4-a43d-7a59a75169b7",
@@ -102,6 +92,50 @@
             "_$type": "Prefab"
           },
           "cellNumY": 10
+        }
+      ]
+    },
+    {
+      "_$id": "31okb6zr",
+      "_$type": "Box",
+      "name": "Box",
+      "x": 321,
+      "y": 1093,
+      "width": 150,
+      "height": 144,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "_mouseState": 2,
+      "bottom": -170,
+      "centerX": 0,
+      "_$child": [
+        {
+          "_$id": "6ee7kogk",
+          "_$type": "Button",
+          "name": "close",
+          "x": 75,
+          "y": 72,
+          "width": 150,
+          "height": 144,
+          "anchorX": 0.5,
+          "anchorY": 0.5,
+          "_mouseState": 2,
+          "centerX": 0,
+          "centerY": 0,
+          "stateNum": 1,
+          "skin": "res://c31f5d66-72ba-4712-b7ee-8334c2f2f346",
+          "label": "",
+          "labelSize": 20,
+          "labelAlign": "center",
+          "labelVAlign": "middle",
+          "_$comp": [
+            {
+              "_$type": "542323df-0cff-4e4c-a3af-a9f57b3977f7",
+              "scriptPath": "../src/core/button/ButtonCommont.ts",
+              "sclaeX": 0.8,
+              "sclaeY": 0.8
+            }
+          ]
         }
       ]
     }

@@ -150,12 +150,10 @@ export class HomeMediator extends Mediator {
         }
     }
 
-    private _loadAddNode(url: string) {
+    private async _loadAddNode(url: string) {
         const checker = () => !this.owner.destroyed;
-        app.loader.loadPrefab(url, checker).then((prefab: Laya.Prefab) => {
-            this._currentBox = prefab.create();
-            this.owner.boxUI.addChild(this._currentBox);
-        });
+        this._currentBox = await app.loader.create(url, checker);
+        this.owner.boxUI.addChild(this._currentBox);
     }
 
     private _activatePveOrPvp(active: boolean) {

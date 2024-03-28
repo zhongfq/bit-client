@@ -6,8 +6,6 @@ import { VirtuallyListNewUI } from "../common/VirtuallyListNewUI";
  * resources/prefab/task/task.lh
  */
 export class TaskUIBase extends Laya.Dialog {
-    public btnClose!: Laya.Button;
-    public listTask!: Laya.List;
     public listTaskNew!: VirtuallyListNewUI;
 }
 

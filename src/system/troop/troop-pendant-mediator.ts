@@ -1,9 +1,5 @@
 import { app } from "../../app";
 import { Mediator } from "../../core/ui-mediator";
-import { TroopUI } from "../../ui-runtime/prefab/troop/TroopUI";
-import { SoldierVo } from "../../misc/vo/soldier/soldier-vo";
-import { SoldierConf } from "../../def/soldier";
-import { TroopItemUI } from "../../ui-runtime/prefab/troop/TroopItemUI";
 import proto, { troop } from "../../def/proto";
 import { SoldierIconUI } from "../../ui-runtime/prefab/icon/SoldierIconUI";
 import { ItemConf } from "../../def/item";
@@ -84,7 +80,10 @@ export class TroopPendantMediator extends Mediator {
             listData.push({ pendant: pendant });
         }
         this.owner.listTroopPendant.array = listData;
-        this.owner.listTroopPendant.selectedIndex = 0;
+        if (this.owner.listTroopPendant.selectedIndex == -1) {
+            this.owner.listTroopPendant.selectedIndex = this.owner.oepnData.idx - 1;
+        }
+        // this.owner.oepnData.pos;
         this._updatePendant();
     }
 

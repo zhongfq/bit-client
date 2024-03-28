@@ -13,7 +13,7 @@ interface TaskItemData {
     taskVo: TaskVo;
     isShowTips: boolean;
 }
-const itemNodeY = 28;
+const itemNodeY = 55;
 @regClass()
 export class TaskMediator extends Mediator {
     public declare owner: TaskUI;
@@ -41,20 +41,26 @@ export class TaskMediator extends Mediator {
         this.owner.listTaskNew.setRenderHandler((item: TaskItemBox, data: TaskItemData) => {
             if (data.isShowTips) {
                 item.boxInfo.y = itemNodeY;
-                item.height = 110 + itemNodeY;
+                item.height = 150 + itemNodeY;
                 item.labelTips.text = data.taskVo.tipsName;
+                item.imgTips.visible = true;
             } else {
-                item.height = 110;
-                item.labelTips.text = "";
+                item.height = 150;
+                item.imgTips.visible = false;
+                item.boxInfo.y = 0;
             }
 
-            // item.labelName.text = data.taskVo.name;
             item.labelDesc.text = data.taskVo.desc;
             if (data.taskVo.cmd?.finish) {
-                item.btnUse.label = "领取";
+                item.imgBtnTipsGo.visible = false;
+                item.imgBtnTipsUser.visible = true;
             } else {
-                item.btnUse.label = "前往";
+                item.imgBtnTipsGo.visible = true;
+                item.imgBtnTipsUser.visible = false;
             }
+
+            item.labelBarVal.text = `${data.taskVo.cmd?.num}/${data.taskVo.cmd?.max}`;
+            item.imgBar.value = (data.taskVo.cmd?.num || 0) / (data.taskVo.cmd?.max || 0);
             item.btnUse.on(Laya.Event.CLICK, () => {
                 const taskCmd = data.taskVo.cmd;
                 const ids: number[] = [];
@@ -71,8 +77,6 @@ export class TaskMediator extends Mediator {
                 }
                 app.service.task.requestReceiveReward({ taskIds: ids });
             });
-            // item.height = 127;
-            // const a = 1;
         });
     }
 

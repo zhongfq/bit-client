@@ -5,7 +5,7 @@ import { TroopPendantUIBase } from "./TroopPendantUI.generated";
 
 interface OpenData {
     soldierId: number;
-    pos: number;
+    idx: number;
 }
 
 @regClass()

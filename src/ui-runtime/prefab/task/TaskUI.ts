@@ -5,10 +5,5 @@ const { regClass } = Laya;
 
 @regClass()
 export class TaskUI extends TaskUIBase {
-    public override onAwake(): void {
-        this.listTask.array = [];
-        this.btnClose.on(Laya.Event.CLICK, () => {
-            this.close();
-        });
-    }
+    public override onAwake(): void {}
 }

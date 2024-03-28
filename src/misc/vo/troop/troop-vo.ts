@@ -77,10 +77,9 @@ export class TroopVo extends VO<any, troop.Troop> {
     public updatePendants(pos: number, pendantId: number) {
         let index = 0;
         for (const pendantInfo of (this._cmd as troop.Troop).pendants) {
-            const pendantRow = app.service.table.soldier.pendant[Number(pendantInfo.id)];
-            if (pendantRow.position == pos) {
+            if (pendantInfo.station == pos || pendantInfo.id == pendantId) {
                 this._cmd?.pendants.splice(index, 1);
-                break;
+                // break;
             }
             index++;
         }
