@@ -51,7 +51,7 @@
             }
           },
           "orthographicVerticalSize": 10,
-          "fieldOfView": 27,
+          "fieldOfView": 11,
           "nearPlane": 0.3,
           "farPlane": 1000,
           "clearFlag": 1,
@@ -108,7 +108,7 @@
           "_$id": "97neatsr",
           "_$prefab": "b868bac6-2a13-470d-b35b-e359b1b41c9a",
           "name": "bing-dao",
-          "active": true,
+          "active": false,
           "layer": 0,
           "transform": {
             "localPosition": {
@@ -130,7 +130,7 @@
           "_$id": "n6aq4k65",
           "_$prefab": "eb559588-bea9-4774-a732-497be1db0621",
           "name": "bing-gong",
-          "active": true,
+          "active": false,
           "layer": 0,
           "transform": {
             "localPosition": {
@@ -152,7 +152,7 @@
           "_$id": "byak06ri",
           "_$prefab": "6dfd410b-62f0-4907-8974-a9e617108ff2",
           "name": "hero01",
-          "active": true,
+          "active": false,
           "layer": 0,
           "transform": {
             "localPosition": {
@@ -171,48 +171,57 @@
           }
         },
         {
-          "_$id": "fjomd0p9",
-          "_$prefab": "e5bd0327-8a8b-4868-aa2b-9c294f2b49d9",
-          "name": "anim",
-          "active": true,
-          "layer": 0,
+          "_$id": "ttngt0rl",
+          "_$type": "Sprite3D",
+          "name": "bake",
           "transform": {
             "localPosition": {
               "_$type": "Vector3",
-              "x": -1.9450035494728084,
-              "y": 0,
-              "z": 0
+              "z": 0.8572572734097434
             },
             "localRotation": {
               "_$type": "Quaternion",
-              "x": 0,
-              "y": 0,
-              "z": 0,
-              "w": 1
+              "y": -0.5793878673584109,
+              "w": 0.8150519610171323
             }
-          }
-        },
-        {
-          "_$id": "99aq2t76",
-          "_$prefab": "e5bd0327-8a8b-4868-aa2b-9c294f2b49d9",
-          "name": "anim(1)",
-          "active": true,
-          "layer": 0,
-          "transform": {
-            "localPosition": {
-              "_$type": "Vector3",
-              "x": 2.2796684479100264,
-              "y": 0,
-              "z": 0
-            },
-            "localRotation": {
-              "_$type": "Quaternion",
-              "x": 0,
-              "y": 0,
-              "z": 0,
-              "w": 1
+          },
+          "_$child": [
+            {
+              "_$id": "xct5kehm",
+              "_$type": "Sprite3D",
+              "name": "hero01",
+              "_$child": [
+                {
+                  "_$id": "c2kuwre7",
+                  "_$prefab": "57553287-eff5-40c3-9a19-b4c27a2f7cd2",
+                  "name": "anim",
+                  "active": true,
+                  "layer": 0,
+                  "transform": {
+                    "localPosition": {
+                      "_$type": "Vector3",
+                      "x": 0,
+                      "y": 0,
+                      "z": 0
+                    },
+                    "localRotation": {
+                      "_$type": "Quaternion",
+                      "x": 0,
+                      "y": 0.7071067811865475,
+                      "z": 0,
+                      "w": 0.7071067811865476
+                    },
+                    "localScale": {
+                      "_$type": "Vector3",
+                      "x": 0.4,
+                      "y": 0.4,
+                      "z": 0.4
+                    }
+                  }
+                }
+              ]
             }
-          }
+          ]
         }
       ]
     }
