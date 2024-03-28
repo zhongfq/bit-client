@@ -1,0 +1,44 @@
+{
+  "_$ver": 1,
+  "_$id": "e2gs8fjo",
+  "_$runtime": "res://96ba3789-df45-4f1d-86cd-e16bcbdd6573",
+  "_$type": "Box",
+  "name": "Box",
+  "width": 180,
+  "height": 160,
+  "_mouseState": 2,
+  "_$child": [
+    {
+      "_$id": "yontw0nn",
+      "_$var": true,
+      "_$type": "Button",
+      "name": "btnMove",
+      "x": 8,
+      "y": 10,
+      "width": 158,
+      "height": 47,
+      "_mouseState": 2,
+      "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
+      "label": "移动",
+      "labelSize": 20,
+      "labelAlign": "center",
+      "labelVAlign": "middle"
+    },
+    {
+      "_$id": "de0i7kqe",
+      "_$var": true,
+      "_$type": "Button",
+      "name": "btnAttack",
+      "x": 10,
+      "y": 68,
+      "width": 160,
+      "height": 47,
+      "_mouseState": 2,
+      "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
+      "label": "攻击",
+      "labelSize": 20,
+      "labelAlign": "center",
+      "labelVAlign": "middle"
+    }
+  ]
+}

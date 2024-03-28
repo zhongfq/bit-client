@@ -1,5 +1,5 @@
-import { res } from "../../../misc/res";
-import { ImageBar } from "../../misc/ImageBar";
+import { res } from "../../../../misc/res";
+import { ImageBar } from "../../../misc/ImageBar";
 import { HeadInfoUIBase } from "./HeadInfoUI.generated";
 
 const { regClass } = Laya;
@@ -49,7 +49,7 @@ export class HeadInfoUI extends HeadInfoUIBase {
             this._avatar = this.getChildByName("avatar") as Laya.Image | undefined;
 
             if (this._data.style === HeadInfoStyle.ENEMY) {
-                const atlasPath = res.BATTLE_PVE_TROOP.slice(0, -6);
+                const atlasPath = res.battle.PVE_TROOP.slice(0, -6);
                 if (this._bg) {
                     this._bg.skin = `${atlasPath}/ui_fight_RoleInfoBg2.png`;
                 }

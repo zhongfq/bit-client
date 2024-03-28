@@ -21,7 +21,7 @@ export class HomeMonyeMediator extends Mediator {
     public initEvent() {
         this.owner.listMonye.renderHandler = new Laya.Handler(this, this._updateItem);
 
-        this.on(app.service.user, UserService.MONEY_UPDATE, () => {
+        this.$(app.service.user).on(UserService.MONEY_UPDATE, () => {
             this.updateInfo();
         });
     }

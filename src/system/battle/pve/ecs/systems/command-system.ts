@@ -4,7 +4,7 @@ import { Pool } from "../../../../../core/pool";
 import { tween } from "../../../../../core/tween/tween";
 import { BattleConf } from "../../../../../def/battle";
 import { res } from "../../../../../misc/res";
-import { HeadInfoStyle } from "../../../../../ui-runtime/prefab/battle/HeadInfoUI";
+import { HeadInfoStyle } from "../../../../../ui-runtime/prefab/battle/pve/HeadInfoUI";
 import { EventTrigger } from "../../../pve-server/ecs/components/event-component";
 import { ElementCreator, PveDef, UpdateHp, UpdateTruck } from "../../../pve-server/pve-defs";
 import { ICommandSender } from "../../../pve-server/pve-server";

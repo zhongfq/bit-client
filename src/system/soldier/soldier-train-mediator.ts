@@ -24,7 +24,7 @@ export class SoldierTrainMediator extends Mediator {
     //初始化UI事件监听
     private initUIEvent() {
         this.owner.listAttr.renderHandler = new Laya.Handler(this, this.updateItem);
-        this.on(app.service.soldier, SoldierService.SOLDIER_TRAIN_UPDATE, () => {
+        this.$(app.service.soldier).on(SoldierService.SOLDIER_TRAIN_UPDATE, () => {
             this._updateList();
         });
     }

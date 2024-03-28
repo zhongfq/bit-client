@@ -1,7 +1,7 @@
 import { app } from "../../../../../app";
 import * as ecs from "../../../../../core/ecs";
 import { WorldConf } from "../../../../../def/world";
-import { HeadInfoUI } from "../../../../../ui-runtime/prefab/battle/HeadInfoUI";
+import { HeadInfoUI } from "../../../../../ui-runtime/prefab/battle/pve/HeadInfoUI";
 import { Tilemap } from "../../../tilemap/tilemap";
 import { TMPropKey } from "../../../tilemap/tm-def";
 import { PvpContext } from "../../pvp-context";

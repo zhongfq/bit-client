@@ -8,7 +8,9 @@ import { CalcHeroDistance } from "../../btree/actions/calc-hero-distance";
 import { CalcSpawnDistance } from "../../btree/actions/calc-spawnpoint-distance";
 import { ClearStance } from "../../btree/actions/clear-stance";
 import { Collect } from "../../btree/actions/collect";
+import { CreateBullet } from "../../btree/actions/create-bullet";
 import { FollowHero } from "../../btree/actions/follow-hero";
+import { GetExeclData } from "../../btree/actions/get-execl-data";
 import { GetPos } from "../../btree/actions/get-pos";
 import { GetSkillTarget } from "../../btree/actions/get-skill-target";
 import { GetSkillTime } from "../../btree/actions/get-skill-time";
@@ -20,17 +22,16 @@ import { MoveToPos } from "../../btree/actions/move-to-pos";
 import { PlayAnim } from "../../btree/actions/play-anim";
 import { SetStance } from "../../btree/actions/set-stance";
 import { TowardToTarget } from "../../btree/actions/toward-to-target";
-import { TryLaunchSkill } from "../../btree/conditions/try-launch-skill";
 import { Wait } from "../../btree/actions/wait";
 import { FindOneTarget } from "../../btree/conditions/find-one-target";
 import { FindTargets } from "../../btree/conditions/find-targets";
 import { IsFreeStance } from "../../btree/conditions/is-free-stance";
 import { IsTroopFighting } from "../../btree/conditions/is-troop-fighting";
+import { TryLaunchSkill } from "../../btree/conditions/try-launch-skill";
 import { PveServer } from "../../pve-server";
 import { AiComponent, AiTreeEnv } from "../components/ai-component";
 import { ElementComponent } from "../components/element-component";
 import { LauncherComponent } from "../components/skill-component";
-import { CreateBullet } from "../../btree/actions/create-bullet";
 
 export class AiSystem extends ecs.System {
     public declare context: PveServer;
@@ -64,6 +65,7 @@ export class AiSystem extends ecs.System {
         this.context.registerProcess(SetStance);
         this.context.registerProcess(TowardToTarget);
         this.context.registerProcess(TryLaunchSkill);
+        this.context.registerProcess(GetExeclData);
         this.context.registerProcess(Wait);
 
         btreeCode.forEach((value) => this.context.registerCode(value.code, value.evaluator));

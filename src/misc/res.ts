@@ -28,5 +28,9 @@ export module res {
     export const BATTLE_HEAD_INFO2 = "resources/prefab/battle/pve-ui/head-info2.lh";
     export const BATTLE_HEAD_INFO3 = "resources/prefab/battle/pve-ui/head-info3.lh";
     export const BATTLE_ROLE_SHADOW = "resources/prefab/battle/pve-ui/role-shadow.lh";
-    export const BATTLE_PVE_TROOP = "resources/texture/battle/pve-troop.atlas";
+
+    export module battle {
+        export const PVP_ACTION_MENU = "resources/prefab/battle/pvp-ui/action-menu.lh";
+        export const PVE_TROOP = "resources/texture/battle/pve-troop.atlas";
+    }
 }

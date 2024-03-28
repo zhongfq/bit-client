@@ -20,7 +20,7 @@ export class HomeTaskMediator extends Mediator {
     }
 
     public initEvent() {
-        this.on(app.service.task, TaskService.TASK_UPDATE, () => {
+        this.$(app.service.task).on(TaskService.TASK_UPDATE, () => {
             this.updateInfo();
         });
         this.owner.on(Laya.Event.CLICK, this, () => {

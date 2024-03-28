@@ -47,7 +47,7 @@ export class SoldierSoldierMediator extends Mediator {
 
     //初始化UI事件监听
     private initUIEvent() {
-        this.on(app.service.soldier, SoldierService.SOLDIER_SOLDIER_UPDATE, () => {
+        this.$(app.service.soldier).on(SoldierService.SOLDIER_SOLDIER_UPDATE, () => {
             this.updateList();
         });
         this.owner.btnUpLv.on(Laya.Event.CLICK, () => {
@@ -69,7 +69,7 @@ export class SoldierSoldierMediator extends Mediator {
             }
         );
 
-        this.on(app.service.bag, BagService.ITEM_UPDATE, () => {
+        this.$(app.service.bag).on(BagService.ITEM_UPDATE, () => {
             this.updateList();
         });
     }

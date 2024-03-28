@@ -5,6 +5,7 @@ import proto from "../../../def/proto";
 import { errcode } from "../../../def/protocol";
 import { Event } from "../../../misc/event";
 import { res } from "../../../misc/res";
+import { ActionMenuUI } from "../../../ui-runtime/prefab/battle/pvp/ActionMenuUI";
 import { PvpUI } from "../../../ui-runtime/scene/PvpUI";
 import { ITMContext, TMMode } from "../tilemap/tm-def";
 import { TMElement, TMDebugElement, TMTileElemet } from "../tilemap/tm-element";
@@ -28,6 +29,8 @@ export class PvpContext extends Mediator implements ITMContext {
     private _ecs!: ecs.World;
     private _camera!: Laya.Camera;
 
+    private _actionMenu?: ActionMenuUI;
+
     public get scene() {
         return this.owner.scene;
     }
@@ -48,9 +51,8 @@ export class PvpContext extends Mediator implements ITMContext {
         return TMMode.PVP;
     }
 
-    public override onDestroy() {
-        this._ecs.destroy();
-        super.onDestroy();
+    public get contextChecker() {
+        return () => !this.owner.destroyed;
     }
 
     public onAddElement(element: TMElement): void {}
@@ -67,8 +69,9 @@ export class PvpContext extends Mediator implements ITMContext {
         this._ecs.addSystem(CameraSystem);
         this._ecs.addSystem(RenderSystem);
 
-        this.on(
-            app.service.gm,
+        this.autoDestroy(this._ecs);
+
+        this.$(app.service.gm).on(
             Event.TILEMAP_DEBUG_MODE_UPDATE,
             this._onTilemapDebugModeUpdate,
             this
@@ -175,6 +178,7 @@ export class PvpContext extends Mediator implements ITMContext {
                     console.log("no troop");
                     return;
                 }
+                // TOOD：判断当前tile的情况，显示菜单显项
                 app.service.pvp.requestTroopMoveTo(troop.eid, { x: currXZPos.x, y: currXZPos.z });
             } else {
                 const position = debugFocus.transform.position;
@@ -206,5 +210,13 @@ export class PvpContext extends Mediator implements ITMContext {
 
     public playAnim(eid: number, name: ElementAnimation) {
         this._ecs.getSystem(CommandSystem)?.playAnim(eid, name);
+    }
+
+    public async showActionMenu(tilePos: Laya.Vector3) {
+        if (!this._actionMenu) {
+            const checker = this.contextChecker;
+            this._actionMenu = await app.loader.create(res.battle.PVP_ACTION_MENU, checker);
+            this.autoDestroy(this._actionMenu);
+        }
     }
 }

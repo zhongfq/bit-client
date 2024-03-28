@@ -4,7 +4,7 @@ import {
     HeadInfoData,
     HeadInfoStyle,
     HeadInfoUI,
-} from "../../../../../ui-runtime/prefab/battle/HeadInfoUI";
+} from "../../../../../ui-runtime/prefab/battle/pve/HeadInfoUI";
 import { MovementComponent, TransformComponent } from "./movement-component";
 
 export class Renderable3D extends ecs.Component {

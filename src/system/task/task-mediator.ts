@@ -77,7 +77,7 @@ export class TaskMediator extends Mediator {
     }
 
     private initServiceEvent() {
-        this.on(app.service.task, TaskService.TASK_UPDATE, () => {
+        this.$(app.service.task).on(TaskService.TASK_UPDATE, () => {
             this.tlTaskData = [];
             this.tlTaskData.push({ taskVo: app.service.task.mainTask, isShowTips: true });
             let index = 0;

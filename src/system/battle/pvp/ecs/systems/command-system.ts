@@ -26,7 +26,7 @@ export class CommandSystem extends ecs.System {
     }
 
     private handle(op: number, callback: Callback) {
-        this.context.on(app.service.network, op, callback, this);
+        this.context.$(app.service.network).on(op, callback, this);
     }
 
     public override update(dt: number) {}

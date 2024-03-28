@@ -67,12 +67,6 @@ export class PveContext extends Mediator implements ITMContext {
         return TMMode.PVE;
     }
 
-    public override onDestroy() {
-        this._ecs.destroy();
-        this._pveServer.destroy();
-        super.onDestroy();
-    }
-
     public override onAwake() {
         this._ecs = new ecs.World(this);
         this._ecs.addSingletonComponent(CameraComponent);
@@ -87,10 +81,10 @@ export class PveContext extends Mediator implements ITMContext {
         this._ecs.addSystem(TruckCollectSystem);
         this._pveServer = new PveServer(this._ecs.getSystem(CommandSystem)!);
         this._sender = new CommandSender(this._pveServer);
+        this.autoDestroy(this._ecs, this._pveServer);
 
         this.owner.mapClickArea.on(Laya.Event.CLICK, this, this.onMapClickHandler);
-        this.on(
-            app.service.gm,
+        this.$(app.service.gm).on(
             Event.TILEMAP_DEBUG_MODE_UPDATE,
             this.onTilemapDebugModeUpdate,
             this
@@ -106,9 +100,9 @@ export class PveContext extends Mediator implements ITMContext {
 
     public override onUpdate() {
         this.owner.debug.graphics.clear();
-        super.onUpdate();
         this._pveServer.update(Laya.timer.delta / 1000);
         this._ecs.update(Laya.timer.delta / 1000);
+        super.onUpdate();
     }
 
     public obtainEid() {

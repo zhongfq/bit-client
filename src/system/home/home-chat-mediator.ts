@@ -24,7 +24,7 @@ export class HomeChatMediator extends Mediator {
             app.ui.show(ui.CHAT);
         });
 
-        this.on(app.service.chat, ChatService.CHAT_UPDATE, (data: ChatMsgVo) => {
+        this.$(app.service.chat).on(ChatService.CHAT_UPDATE, (data: ChatMsgVo) => {
             this.addMsg();
         });
     }

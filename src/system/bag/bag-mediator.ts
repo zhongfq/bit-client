@@ -28,7 +28,7 @@ export class BagMediator extends Mediator {
 
     //初始化Service事件监听
     public initServiceEvent() {
-        this.on(app.service.bag, BagService.ITEM_UPDATE, () => {
+        this.$(app.service.bag).on(BagService.ITEM_UPDATE, () => {
             this.updateList();
         });
     }

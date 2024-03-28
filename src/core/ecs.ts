@@ -12,6 +12,7 @@ type Timer = {
 };
 
 export class World {
+    private _destroyed: boolean = false;
     private _systems: System[];
     private _namedSystems: Map<Constructor<any>, System>;
     private _entities: Map<number, Entity>;
@@ -32,6 +33,10 @@ export class World {
         this._singletons = new Map();
     }
 
+    public get destroyed() {
+        return this._destroyed;
+    }
+
     public destroy() {
         for (const eid of Array.from(this._entities.keys())) {
             this.removeEntity(eid);
@@ -41,6 +46,7 @@ export class World {
         this._namedSystems.clear();
         this._entities.clear();
         this._components.clear();
+        this._destroyed = true;
     }
 
     public addSystem<T extends System>(cls: Constructor<T>) {

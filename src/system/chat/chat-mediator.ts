@@ -51,7 +51,7 @@ export class ChatMediator extends Mediator {
 
     //初始化Service事件监听
     public initServiceEvent() {
-        this.on(app.service.chat, ChatService.CHAT_UPDATE, (data: ChatMsgVo) => {
+        this.$(app.service.chat).on(ChatService.CHAT_UPDATE, (data: ChatMsgVo) => {
             // this.owner.listPanel.addData(data);
             // this.owner.listPanel.refreshScrollBar();
             this.owner.virtuallyList.addData(data);

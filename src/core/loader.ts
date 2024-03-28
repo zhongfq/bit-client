@@ -31,6 +31,11 @@ export class Loader {
         return this.load<Laya.Prefab>(url, Laya.Loader.HIERARCHY, checker);
     }
 
+    public async create<T extends Laya.Node>(url: string, checker: ContextChecker) {
+        const prefab = await this.loadPrefab(url, checker);
+        return prefab.create() as T;
+    }
+
     /**
      * 加载资源，并且有返回一定成功。
      * @param url 加载的资源。

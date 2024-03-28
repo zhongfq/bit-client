@@ -3,7 +3,7 @@ import {
     HeadInfoData,
     HeadInfoUI,
     HeadInfoStyle,
-} from "../../../../../ui-runtime/prefab/battle/HeadInfoUI";
+} from "../../../../../ui-runtime/prefab/battle/pve/HeadInfoUI";
 
 export class Renderable3D extends ecs.Component {
     public res: string = "";

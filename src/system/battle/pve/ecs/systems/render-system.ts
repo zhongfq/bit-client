@@ -1,7 +1,7 @@
 import { app } from "../../../../../app";
 import * as ecs from "../../../../../core/ecs";
 import { BattleConf } from "../../../../../def/battle";
-import { HeadInfoUI } from "../../../../../ui-runtime/prefab/battle/HeadInfoUI";
+import { HeadInfoUI } from "../../../../../ui-runtime/prefab/battle/pve/HeadInfoUI";
 import { TMPropKey } from "../../../tilemap/tm-def";
 import { TMUtil } from "../../../tilemap/tm-util";
 import { PveContext } from "../../pve-context";

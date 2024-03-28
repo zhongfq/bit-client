@@ -26,7 +26,7 @@ export class MailMediator extends Mediator {
         this.owner.listMail.renderHandler = new Laya.Handler(this, this.updateItem);
         this.owner.listMail.mouseHandler = new Laya.Handler(this, this.onListClick);
         this.owner.tabMenu.selectHandler = new Laya.Handler(this, this.onTabSelect);
-        this.on(app.service.mail, MailService.MAIL_UPDATE, () => {
+        this.$(app.service.mail).on(MailService.MAIL_UPDATE, () => {
             this.updateList();
         });
         this.owner.btnClose.on(Laya.Event.CLICK, () => {
